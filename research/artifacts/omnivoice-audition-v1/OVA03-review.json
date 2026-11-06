@@ -1,0 +1,77 @@
+{
+  "case": "OVA03",
+  "source_text": "У меня сегодня 2 вопроса, 5 идей и 21 свободная минута.",
+  "wav_sha256": "da2b9dffc21c8df4fcd98229fa0d93ae463f87a45e4c18c8ee6fa37923992048",
+  "asr_elapsed_seconds": 9.278153040912002,
+  "literal_transcript": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+  "asr_evidence": {
+    "schema_version": "rufren-speech-transcript-v1",
+    "request_id": "omnivoice-v1-asr-ova03",
+    "attempt_id": null,
+    "revision_id": null,
+    "asset_id": "omnivoice-v1-ova03",
+    "audio_sha256": "da2b9dffc21c8df4fcd98229fa0d93ae463f87a45e4c18c8ee6fa37923992048",
+    "original_audio": {
+      "sample_rate": 24000,
+      "channels": 1,
+      "frames": 109440,
+      "encoding": "pcm_s16le",
+      "bits": 16
+    },
+    "source_pcm_sha256": "22947c4e527aca9efc981bca7a55e2b96620d2b8f4ac7b75fb66392088a38ad2",
+    "source_pcm_hash_format": "interleaved-little-endian-f32-no-header-v1",
+    "span": {
+      "start_frame": 0,
+      "end_frame": 109440
+    },
+    "span_coordinate_system": "original_frames_half_open",
+    "derivative": {
+      "sample_rate": 16000,
+      "channels": 1,
+      "frames": 72960,
+      "pcm_sha256": "cb8a33486b1581db49ebcf218e63a24fc548a34e414241a5a8af8184079c4bff",
+      "pcm_hash_format": "little-endian-f32-no-header-v1",
+      "method": "arithmetic-channel-mean; scipy.signal.resample_poly default Kaiser5",
+      "scipy_version": "1.18.1",
+      "amplitude_normalization": false
+    },
+    "evidence_kind": "transcript_hypothesis",
+    "transcript": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+    "language": "ru",
+    "language_selection": "explicit_not_detected",
+    "target_conditioned": false,
+    "word_timestamps": null,
+    "word_alignment_status": "not_run",
+    "confidence": null,
+    "acoustic_assessment": null,
+    "provenance": {
+      "provider": "local_qwen3_asr",
+      "model": "mlx-community/Qwen3-ASR-1.7B-bf16",
+      "revision": "e1f6c266914abc5a46e8756e02580f834a6cf8a7",
+      "runtime": "mlx-audio==0.6.4",
+      "mlx_version": "0.32.4",
+      "manifest_sha256": "730f409412ed99134bc62b7989581fa8c42cf699b0c8ddd26846c4e2f2ea9801",
+      "worker_sha256": "874c736c9146fbd044a78e1882ca1052c8af5000acddb129a4c642744db6edd6",
+      "decoding": {
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "seed": 42,
+        "language": "Russian",
+        "hotwords": []
+      }
+    },
+    "timing": {
+      "started_at": "2026-11-06T18:48:30.780801+00:00",
+      "completed_at": "2026-11-06T18:48:39.650941+00:00",
+      "elapsed_seconds": 8.865,
+      "process_peak_rss_bytes": 4331618304,
+      "metal_peak_bytes": 5024221308
+    },
+    "usage": {
+      "prompt_tokens": 77,
+      "generation_tokens": 22
+    }
+  },
+  "human_listening": null,
+  "acoustic_correctness": null
+}

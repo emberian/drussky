@@ -1,0 +1,84 @@
+{
+  "schema": "rufren-omnivoice-audition-model-v1",
+  "model": "mlx-community/OmniVoice-bf16",
+  "revision": "8fb0b754cad788aaefec690cd55c207e8a628f85",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 1570,
+      "sha256": "34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930"
+    },
+    {
+      "path": "audio_tokenizer/config.json",
+      "bytes": 2531,
+      "sha256": "eefb20806f7104e77c9a5277c9df0f9bb8826b08eb1d4e8ab2b9829b6ef9fac1"
+    },
+    {
+      "path": "audio_tokenizer/model.safetensors",
+      "bytes": 402864930,
+      "sha256": "8ef745bfbabeb3bd9ebbdc69e7b6a05e43e191d0208dabfcf7adc42ca89c6580"
+    },
+    {
+      "path": "audio_tokenizer/preprocessor_config.json",
+      "bytes": 206,
+      "sha256": "ae61eea88558608ee2fa86d2aec9fce8d99a5ff75d09cb7651ccce21ae1d9084"
+    },
+    {
+      "path": "chat_template.jinja",
+      "bytes": 4168,
+      "sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "path": "config.json",
+      "bytes": 2238,
+      "sha256": "e2e13755cca29061b09d0c0c4b945e1a65179de8ec522de18e86794425f86c9f"
+    },
+    {
+      "path": "model.safetensors",
+      "bytes": 1225192351,
+      "sha256": "5768f3f1d11ee8b3ec31fe906e5d6f5934fdc397e3e5b818de85b70b0e1a2e7e"
+    },
+    {
+      "path": "tokenizer.json",
+      "bytes": 11423986,
+      "sha256": "408f669b7e2b045fdf54201d815bd364e6667dbd845115da81239c40bc6dcfd1"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "bytes": 533,
+      "sha256": "49f78845596a82bf15c83673794bdf9f76f812b11f60ab6a2239d9be65b00676"
+    }
+  ],
+  "total_bytes": 1639492513,
+  "upstream": "k2-fsa/OmniVoice",
+  "upstream_observed_revision": "c5fdb5ccb189668d56333f77ba2629f4cd7535f4",
+  "conversion_upstream_revision_verified": false,
+  "license_scope": "personal noncommercial research; upstream model card CC-BY-NC; retained codec notices",
+  "upstream_notices": {
+    "README.md": {
+      "sha256": "b5d645a1874baa96a460a0e3a7d5a262811d682d04ce235878a16d5fed287fd3",
+      "bytes": 9424
+    },
+    "audio_tokenizer/LICENSE": {
+      "sha256": "ac933dc084d119bd20401956b90d11ae87c248b2da62622cd580d82cdf2fa049",
+      "bytes": 9171
+    },
+    "audio_tokenizer/README.md": {
+      "sha256": "0336368f8274a5ed09f54cee8d56a851ecee96026d9f391a6735762c16608a60",
+      "bytes": 5174
+    }
+  },
+  "runtime_interpreter": "/Users/ember/dev/rufren/.local/qwen3-asr/venv/bin/python",
+  "runtime_usage": "existing locked ASR environment read-only; no pip mutation",
+  "setup_script_sha256": "ac421eeeb646b727b95f241b8470deb916f1c6d8c73208a3d5aae5b8ba986c1a",
+  "runtime_versions": {
+    "mlx": "0.32.4",
+    "tokenizers": "0.23.3",
+    "numpy": "2.5.4",
+    "safetensors": "0.8.0",
+    "mlx-audio": "0.6.4",
+    "transformers": "5.22.1",
+    "scipy": "1.18.1"
+  },
+  "full_private_manifest_sha256": "e04b3112a2abb6e741d4509620d2fca94d35811859bde7c4e05824bbb0d73ca5"
+}

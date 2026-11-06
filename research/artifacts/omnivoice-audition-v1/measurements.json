@@ -1,0 +1,53 @@
+{
+  "script_sha256": "5a0567375a5fe27bc4cc0200c68a5c6c16a2737384c5d43817de54bc84ed5b56",
+  "cases": {
+    "OVA01": {
+      "sha256": "043724bb0ec7ab206fa5a4769ad2e23d6cdb2f5a8e13ea3fe1d226c378618f3a",
+      "frames": 81600,
+      "peak": 0.91796875,
+      "full_scale_samples": 0,
+      "last20ms_rms_dbfs": -13.59293828027721,
+      "last20ms_peak": 0.53515625,
+      "last_sample": -0.000946044921875,
+      "source_word_count": 11,
+      "whole_clip_words_per_minute": 194.11764705882354,
+      "rate_note": "Whole-clip rate, not articulation rate; numbers counted as expected spoken words",
+      "expected_spoken_words": "Он дома, она у окна, оно открыто, а они пьют молоко.",
+      "literal_transcript": "Он дома, она у окна, оно открыто, а они пьют молоко.",
+      "lexical_differences": []
+    },
+    "OVA02": {
+      "sha256": "989a08c41ff22b2716d09b90fc500f882f33c9caf46ccb4374c2be5beab3eb6f",
+      "frames": 44160,
+      "peak": 0.81640625,
+      "full_scale_samples": 0,
+      "last20ms_rms_dbfs": -44.63803995724514,
+      "last20ms_peak": 0.0146484375,
+      "last_sample": 0.00128173828125,
+      "source_word_count": 5,
+      "whole_clip_words_per_minute": 163.04347826086956,
+      "rate_note": "Whole-clip rate, not articulation rate; numbers counted as expected spoken words",
+      "expected_spoken_words": "Это лук, а это люк.",
+      "literal_transcript": "Это лук, а это люк.",
+      "lexical_differences": []
+    },
+    "OVA03": {
+      "sha256": "da2b9dffc21c8df4fcd98229fa0d93ae463f87a45e4c18c8ee6fa37923992048",
+      "frames": 109440,
+      "peak": 0.8359375,
+      "full_scale_samples": 0,
+      "last20ms_rms_dbfs": -45.11865335567906,
+      "last20ms_peak": 0.015625,
+      "last_sample": -0.0010986328125,
+      "source_word_count": 12,
+      "whole_clip_words_per_minute": 157.8947368421053,
+      "rate_note": "Whole-clip rate, not articulation rate; numbers counted as expected spoken words",
+      "expected_spoken_words": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+      "literal_transcript": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+      "lexical_differences": []
+    }
+  },
+  "scope": "Descriptive fixed original recordings; ASR lexical screens are not phonetic grades",
+  "spectrogram": "20ms Hann,5ms hop,1024FFT,24kHz,2|STFT| sinusoid-relative dBFS,no normalization",
+  "lpc": "12kHz,30ms Hamming,preemphasis.97,orders12/14/16; candidate resonances, not confirmed formants"
+}

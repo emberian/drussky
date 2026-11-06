@@ -1,0 +1,79 @@
+{
+  "schema": "rufren-experimental-tts-v1",
+  "case": "OVA03",
+  "source_text": "У меня сегодня 2 вопроса, 5 идей и 21 свободная минута.",
+  "source_text_sha256": "d49ff2dab5bdb4ee23bae0fee59ed5c7fece129102e30a8f51645a9e03c7c127",
+  "synthesis_text": "У меня сегодня 2 вопроса, 5 идей и 21 свободная минута.",
+  "synthesis_text_sha256": "d49ff2dab5bdb4ee23bae0fee59ed5c7fece129102e30a8f51645a9e03c7c127",
+  "transform": "verbatim",
+  "wav_sha256": "da2b9dffc21c8df4fcd98229fa0d93ae463f87a45e4c18c8ee6fa37923992048",
+  "frames": 109440,
+  "sample_rate": 24000,
+  "channels": 1,
+  "duration_seconds": 4.56,
+  "provenance": {
+    "provider": "experimental_omnivoice_mlx",
+    "model": "mlx-community/OmniVoice-bf16",
+    "revision": "8fb0b754cad788aaefec690cd55c207e8a628f85",
+    "model_manifest_sha256": "e04b3112a2abb6e741d4509620d2fca94d35811859bde7c4e05824bbb0d73ca5",
+    "settings": {
+      "language": "ru",
+      "instruct": "female",
+      "num_steps": 32,
+      "guidance_scale": 2.0,
+      "class_temperature": 0.0,
+      "position_temperature": 5.0,
+      "layer_penalty_factor": 5.0,
+      "t_shift": 0.1
+    },
+    "seed": 42,
+    "voice_mode": "attribute voice design without reference; training language generalization unvalidated",
+    "runtime": {
+      "mlx-audio": "0.6.4",
+      "mlx": "0.32.4",
+      "numpy": "2.5.4"
+    },
+    "runtime_source_sha256": {
+      "tts/models/omnivoice/__init__.py": "3336d04865c890bb5c7b782edd79ae87f2b21de423fb1be6f0b72f9ff8e34a31",
+      "tts/models/omnivoice/backbone.py": "a2d15220c54eb3f43286f0f1fb376b761f68fdbfbc65375e5c6fdab3c339d4c1",
+      "tts/models/omnivoice/config.py": "461d06a99513deee3fa885254fa6daea3b1e7362a2d5bee6194994575dcbc6d5",
+      "tts/models/omnivoice/convert.py": "410ef8414b7ea1056b1f04011208c5712ac1885b407d14afa99654197d355d40",
+      "tts/models/omnivoice/duration.py": "31e4098e5258cc303392efda93848583305e55b7ca1c65eccd77685c001f597e",
+      "tts/models/omnivoice/generation.py": "aab740c16ed39d71fc98812ae8c82f0f97d3a3a152f6796faf5dfcf07b206c5c",
+      "tts/models/omnivoice/omnivoice.py": "d7fd2abf6cd8e06c3768de4d196f66023732af16cb0bf4fcb45a2c1e57f1883e",
+      "tts/models/omnivoice/utils.py": "dfaf464e622683b07ea8870bfbe9645815d1e9078baf8a6abb440f01d7397d3e",
+      "codec/models/higgs_audio/__init__.py": "c0f115edcf71a5c7ed9bb9159da79edde0850eea44de0b236a38aaed8c3ccece",
+      "codec/models/higgs_audio/config.py": "cdac7b8e7dfe866c99782a67077baf0913f7fa79f64710cb3c4eb00693d4e9a5",
+      "codec/models/higgs_audio/dac.py": "3dafd07b18c8707e18320d35a5abef62c19adf39824d7868d8f9d1bb74745143",
+      "codec/models/higgs_audio/higgs_audio.py": "88391a1162fb20b0ffc430bfc9d2206fd91554a4cb8a4e3fdaf516c22ce9a85e",
+      "codec/models/higgs_audio/semantic.py": "fea5801f8a8f62f5ffb5e86d39acf03c9d02641effb90ee2626b9de87e8456dc",
+      "tts/utils.py": "c0d471af6a687c602a7c9746b67b308d9280bb3f095b4e5e8e46aa343faab244",
+      "tts/models/base.py": "6fb902515978db0e5024b8fc4c7eea1a25902bf16eb7276170fd6e7cc1fccc70"
+    },
+    "audition_script_sha256": "44eb362fb37ef3631fe3a3ca00b71cc20f22ff48f30e3e42969b46e7a3a11ddf"
+  },
+  "timing": {
+    "model_load_seconds": null,
+    "model_already_loaded": true,
+    "generation_to_complete_wave_seconds": 2.2350081249605864,
+    "first_playable_audio_seconds": 2.2350081249605864,
+    "streaming": false,
+    "compute_seconds_per_audio_second": 0.4901333607369707,
+    "process_lifetime_peak_rss_bytes": 1945829376,
+    "metal_lifetime_peak_bytes": 2681236098
+  },
+  "signal": {
+    "emitted_float_peak": 0.8359375,
+    "emitted_out_of_range_samples": 0,
+    "pcm_conversion": "round(clip(x,-1,32767/32768)*32768) int16le",
+    "emitted_float_sha256": "552fc3ae4531eda88164a04d66049820549dc750a2d5909c9fbefa5495a8e80a"
+  },
+  "library_stats": {
+    "token_count": 114,
+    "reported_processing_time_seconds": 2.1540563106536865,
+    "reported_real_time_factor": 2.116936301733072,
+    "note": "Library RTF is audio/compute; use explicit compute/audio metric above"
+  },
+  "human_listening": null,
+  "acoustic_correctness": null
+}

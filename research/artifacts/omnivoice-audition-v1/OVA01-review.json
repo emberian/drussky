@@ -1,0 +1,77 @@
+{
+  "case": "OVA01",
+  "source_text": "Он дома, она у окна, оно открыто, а они пьют молоко.",
+  "wav_sha256": "043724bb0ec7ab206fa5a4769ad2e23d6cdb2f5a8e13ea3fe1d226c378618f3a",
+  "asr_elapsed_seconds": 11.357086916919798,
+  "literal_transcript": "Он дома, она у окна, оно открыто, а они пьют молоко.",
+  "asr_evidence": {
+    "schema_version": "rufren-speech-transcript-v1",
+    "request_id": "omnivoice-v1-asr-ova01",
+    "attempt_id": null,
+    "revision_id": null,
+    "asset_id": "omnivoice-v1-ova01",
+    "audio_sha256": "043724bb0ec7ab206fa5a4769ad2e23d6cdb2f5a8e13ea3fe1d226c378618f3a",
+    "original_audio": {
+      "sample_rate": 24000,
+      "channels": 1,
+      "frames": 81600,
+      "encoding": "pcm_s16le",
+      "bits": 16
+    },
+    "source_pcm_sha256": "fb73238f1a01825ea4aaf3f244bc297e1731341c300e43beb6046aa77a0ba6ea",
+    "source_pcm_hash_format": "interleaved-little-endian-f32-no-header-v1",
+    "span": {
+      "start_frame": 0,
+      "end_frame": 81600
+    },
+    "span_coordinate_system": "original_frames_half_open",
+    "derivative": {
+      "sample_rate": 16000,
+      "channels": 1,
+      "frames": 54400,
+      "pcm_sha256": "8066a9e4abea6ebc7713dd50f09fa459259e8c5c0541c549ae8c44e08ecebb58",
+      "pcm_hash_format": "little-endian-f32-no-header-v1",
+      "method": "arithmetic-channel-mean; scipy.signal.resample_poly default Kaiser5",
+      "scipy_version": "1.18.1",
+      "amplitude_normalization": false
+    },
+    "evidence_kind": "transcript_hypothesis",
+    "transcript": "Он дома, она у окна, оно открыто, а они пьют молоко.",
+    "language": "ru",
+    "language_selection": "explicit_not_detected",
+    "target_conditioned": false,
+    "word_timestamps": null,
+    "word_alignment_status": "not_run",
+    "confidence": null,
+    "acoustic_assessment": null,
+    "provenance": {
+      "provider": "local_qwen3_asr",
+      "model": "mlx-community/Qwen3-ASR-1.7B-bf16",
+      "revision": "e1f6c266914abc5a46e8756e02580f834a6cf8a7",
+      "runtime": "mlx-audio==0.6.4",
+      "mlx_version": "0.32.4",
+      "manifest_sha256": "730f409412ed99134bc62b7989581fa8c42cf699b0c8ddd26846c4e2f2ea9801",
+      "worker_sha256": "874c736c9146fbd044a78e1882ca1052c8af5000acddb129a4c642744db6edd6",
+      "decoding": {
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "seed": 42,
+        "language": "Russian",
+        "hotwords": []
+      }
+    },
+    "timing": {
+      "started_at": "2026-11-06T18:48:08.072882+00:00",
+      "completed_at": "2026-11-06T18:48:18.907378+00:00",
+      "elapsed_seconds": 10.828,
+      "process_peak_rss_bytes": 4302618624,
+      "metal_peak_bytes": 4998699124
+    },
+    "usage": {
+      "prompt_tokens": 62,
+      "generation_tokens": 24
+    }
+  },
+  "human_listening": null,
+  "acoustic_correctness": null
+}
