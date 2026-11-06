@@ -13,7 +13,7 @@ use rufren_core::*;
 use rufren_tutor::{TeacherRequest, TeacherResponse};
 use uuid::Uuid;
 
-const STYLE: &str = ".teacher-return-row {display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid var(--line)}.teacher-return-row strong,.teacher-return-row small {display:block;margin-top:6px}.teacher-return-row small {color:var(--muted)}.teacher-revisit-self-report {margin:12px 0}.teacher-revisit-self-report summary {min-height:44px;padding:10px 0;cursor:pointer}.teacher-return-pending {margin:16px 0;padding-bottom:16px}.teacher-return-screen .teacher-exercise {padding:8px 0}.teacher-return-screen .teacher-exercise > details > summary {min-height:44px;padding:10px 0}.teacher-return-screen .teacher-exercise > .text-button {min-height:44px}@media(max-width:600px){.teacher-return-row {align-items:stretch;flex-direction:column}}";
+const STYLE: &str = ".teacher-return-row {display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid var(--line)}.teacher-return-description {min-width:0;flex:1}.teacher-return-why {max-width:58ch;margin-top:8px}.teacher-return-why summary {cursor:pointer;min-height:44px;display:flex;align-items:center}.teacher-return-why p {margin:8px 0}.teacher-return-row strong,.teacher-return-row small {display:block;margin-top:6px}.teacher-return-row small {color:var(--muted)}.teacher-revisit-self-report {margin:12px 0}.teacher-revisit-self-report summary {min-height:44px;padding:10px 0;cursor:pointer}.teacher-return-pending {margin:16px 0;padding-bottom:16px}.teacher-return-screen .teacher-exercise {padding:8px 0}.teacher-return-screen .teacher-exercise > details > summary {min-height:44px;padding:10px 0}.teacher-return-screen .teacher-exercise > .text-button {min-height:44px}@media(max-width:600px){.teacher-return-row {align-items:stretch;flex-direction:column}}";
 
 fn task_title(title: &str) -> String {
     // A queue label must not supply Russian which might itself be the answer.
@@ -47,6 +47,107 @@ fn due_label(due: i64, now: i64) -> String {
     } else {
         let days = remaining.saturating_add(DAY_MS / 2) / DAY_MS;
         format!("In about {days} {}", if days == 1 { "day" } else { "days" })
+    }
+}
+
+// Use authored topic labels rather than provider-written questions or model text:
+// even an English prompt/title can give away a listening or retrieval answer.
+fn canonical_lesson_title(state: &AppState, answer: Option<&TeacherResponse>) -> String {
+    answer
+        .and_then(|answer| match &answer.request {
+            TeacherRequest::TeachLesson(request) => state.content.lesson(&request.lesson_id),
+            TeacherRequest::AnswerFeedback(_) => None,
+        })
+        .map(|lesson| task_title(&lesson.title))
+        .unwrap_or_else(|| "Saved Teacher lesson".into())
+}
+
+fn return_reason(evidence: TeacherRevisitEvidence) -> &'static str {
+    match evidence {
+        TeacherRevisitEvidence::GuidedSeed => {
+            "You saved your first response to this exercise. Its first return is planned about a day later."
+        }
+        TeacherRevisitEvidence::UnassistedSelfReport => {
+            "You reported remembering the last response, with no help recorded. Your own impression helped set this gap."
+        }
+        TeacherRevisitEvidence::AiCorrect => {
+            "Your AI teacher judged the last response correct, with no help recorded. This is a language judgment, separate from your own impression."
+        }
+        TeacherRevisitEvidence::ClearError => {
+            "You asked for another try, or your AI teacher flagged something to work on. A shorter gap gives you another opportunity."
+        }
+        TeacherRevisitEvidence::AnswerHelp => {
+            "Help was recorded for the last return, or you said you needed help. The next gap stays short."
+        }
+        TeacherRevisitEvidence::ReplayOnly => {
+            "The last return included a replay. That response is kept, and the gap has not grown from it."
+        }
+        TeacherRevisitEvidence::Unrated => {
+            "The last response has no reported recall or clear positive teacher judgment. It is kept without treating an unreported outcome as failure."
+        }
+        TeacherRevisitEvidence::ContestedAi => {
+            "Your AI teacher's saved judgments disagree. The plan stays cautious rather than choosing a favorable judgment."
+        }
+        TeacherRevisitEvidence::RecentRestudy => {
+            "You had recently practiced or seen this material before the last return. That response is kept without treating it as recall across the full gap."
+        }
+    }
+}
+
+fn planned_gap(library: &Library, state: &TeacherRevisitState) -> String {
+    let anchor = state
+        .last_attempt
+        .and_then(|id| library.events.get(&id))
+        .map_or(state.seed.occurred_at_ms, |event| event.recorded_at_ms);
+    let gap = state.due_at_ms.saturating_sub(anchor);
+    let duration = if gap < 60 * MINUTE_MS {
+        "less than an hour".into()
+    } else if gap < DAY_MS {
+        let hours = (gap + 30 * MINUTE_MS) / (60 * MINUTE_MS);
+        format!(
+            "about {hours} {}",
+            if hours == 1 { "hour" } else { "hours" }
+        )
+    } else {
+        let days = gap.saturating_add(DAY_MS / 2) / DAY_MS;
+        format!("about {days} {}", if days == 1 { "day" } else { "days" })
+    };
+    format!("Planned gap: {duration} after that response. You can return when it suits you.")
+}
+
+fn latest_recorded_support(
+    library: &Library,
+    entry: &crate::teacher_revisit::TeacherRevisitEntry,
+) -> Option<&'static str> {
+    let last_time = library
+        .events
+        .get(&entry.state.last_attempt?)?
+        .recorded_at_ms;
+    // last_attempt represents a co-timed group, not an evidence winner. Check
+    // all members of that latest group, while leaving older help in its history.
+    let current: Vec<_> = entry
+        .derived_support
+        .iter()
+        .filter(|support| {
+            library
+                .events
+                .get(&support.attempt_id)
+                .is_some_and(|event| event.recorded_at_ms == last_time)
+        })
+        .collect();
+    if current
+        .iter()
+        .any(|support| support.cue == Cue::ReferenceMaterial)
+    {
+        Some(
+            "Saved exposure history also shows reference material during that return. Your original response and own impression are kept.",
+        )
+    } else if current.iter().any(|support| support.cue == Cue::Replay) {
+        Some(
+            "Saved playback history also shows a replay during that return. Your original response and own impression are kept.",
+        )
+    } else {
+        None
     }
 }
 
@@ -116,14 +217,16 @@ pub(crate) fn TeacherReturns(app: Signal<AppState>, #[props(default)] expanded: 
             h2 {"Bring it back"}
             p {class:"quiet",if count==0 {"Your saved exercises will come back after a little time. You can also choose an early return."}else{{format!("{count} {} ready for another try.",if count==1 {"exercise is"}else{"exercises are"})}}}
             if let Err(problem)=&active {p {role:"alert","{problem}"}}
-            if let Some((answer,_))=pending {div {class:"teacher-return-pending",strong {"{response_title(answer)}"}
+            if let Some((answer,draft))=pending {div {class:"teacher-return-pending",strong {{format!("{} · Exercise {}",canonical_lesson_title(&state,Some(answer)),draft.index+1)}}
                 p {class:"quiet","Your unfinished return is kept on this device."}
                 button {class:"primary",onclick:move |_|act(app,|s|s.navigate(Page::Practice)),"Continue this return →"}
             }}
             for entry in queue.entries.iter().take(if show_all(){usize::MAX}else{3}) {
-                {let key=entry.key;let label=task_title(&entry.title);let due=entry.due;let stamp=due_label(entry.state.due_at_ms,now);let row=format!("return-{}-{}",key.document_id,key.practice_index);
+                {let key=entry.key;let label=canonical_lesson_title(&state,state.library.teacher_document(key.document_id).map(|document|&document.response));let ordinal=key.practice_index+1;let reason=return_reason(entry.state.last_evidence);let gap=planned_gap(&state.library,&entry.state);let support=latest_recorded_support(&state.library,entry);let due=entry.due;let stamp=due_label(entry.state.due_at_ms,now);let row=format!("return-{}-{}",key.document_id,key.practice_index);
                 rsx! {div {key:"{row}",class:"teacher-return-row","data-review-document":key.document_id.to_string(),"data-review-index":key.practice_index.to_string(),"data-review-due":entry.state.due_at_ms.to_string(),
-                    div {span {class:"tag","{entry.skill.label()}"}strong {"{label}"}small {"{stamp}"}}
+                    div {class:"teacher-return-description",span {class:"tag","{entry.skill.label()}"}strong {"{label} · Exercise {ordinal}"}small {"{stamp}"}
+                        details {class:"teacher-return-why",summary {"Why now?"}p {"{reason}"}p {class:"quiet","{gap}"}if let Some(support)=support {p {class:"quiet","{support}"}}}
+                    }
                     button {class:"secondary",onclick:move |_|act(app,|s|{s.start_teacher_revisit(key,now_ms())?;s.navigate(Page::Practice)}),if due {"Try this again →"}else{"Practice early →"}}
                 }}}
             }
@@ -191,6 +294,7 @@ pub(crate) fn TeacherReturn(
                     button {class:"secondary",disabled:busy,onclick:move |_|{let request=app.read().answer_feedback_request(attempt);send_teacher(app,request);},"Ask the teacher about this saved response →"}
                 }
                 if let Some(entry)=schedule {p {class:"quiet",role:"status","{due_label(entry.state.due_at_ms,now_ms())}. You can stop here or have another go now."}}
+                crate::daily_plan_view::SessionNext {app,disabled:busy}
                 div {class:"actions",
                     button {class:"primary",disabled:capture_busy(),onclick:move |_|act(app,|s|{s.clear_active_teacher_revisit()?;s.navigate(Page::Today)}),"Finish & return to Today"}
                     button {class:"secondary",disabled:busy,onclick:move |_|act(app,|s|{s.start_teacher_revisit(key,now_ms())?;Ok(())}),"Try again with a fresh response"}

@@ -50,6 +50,8 @@ pub(crate) struct TeacherRevisitEntry {
     pub due: bool,
     /// Derived from exact presentation facts; these are not rewritten learner-reported cues.
     pub derived_support: Vec<TeacherRevisitDerivedSupport>,
+    /// Validated exact-task observations, including derived support and as-of AI opinions.
+    pub observations: Vec<TeacherRevisitObservation>,
 }
 #[derive(Clone)]
 pub(crate) struct TeacherRevisitDerivedSupport {
@@ -575,6 +577,7 @@ impl AppState {
                     skill: task_skill(&document.response, key.practice_index).unwrap(),
                     due: state.is_due(now),
                     derived_support: derived_support.remove(&key).unwrap_or_default(),
+                    observations: observations.remove(&key).unwrap_or_default(),
                     state,
                 }),
                 Err(_) => {
@@ -642,7 +645,32 @@ impl AppState {
         key: TeacherRevisitKey,
         now: i64,
     ) -> Result<TeacherPracticeDraft> {
+        self.start_teacher_revisit_reserved(key, now, None)
+    }
+    /// Resume or create only this durably reserved session, never replace another unfinished one.
+    pub(crate) fn start_teacher_revisit_with_id(
+        &mut self,
+        key: TeacherRevisitKey,
+        now: i64,
+        session_id: Uuid,
+    ) -> Result<TeacherPracticeDraft> {
+        if session_id.is_nil() {
+            return Err("This return has an invalid practice identity.".into());
+        }
+        self.start_teacher_revisit_reserved(key, now, Some(session_id))
+    }
+    fn start_teacher_revisit_reserved(
+        &mut self,
+        key: TeacherRevisitKey,
+        now: i64,
+        session_id: Option<Uuid>,
+    ) -> Result<TeacherPracticeDraft> {
         self.refresh()?;
+        if session_id.is_some_and(|id| self.library.attempts().any(|(_, a)| a.session == id)) {
+            return Err(
+                "This reserved response is already saved. Its original work is kept.".into(),
+            );
+        }
         let entry = self
             .teacher_revisits(now)
             .entries
@@ -660,13 +688,16 @@ impl AppState {
             .get::<TeacherPracticeDraft>(&draft_key(key.document_id, key.practice_index))?
         {
             if saved.saved_attempt.is_none() {
+                if session_id.is_some_and(|id| id != saved.id) {
+                    return Err("This question already has a different unfinished response. Its draft is kept; resume it separately or leave this item for later.".into());
+                }
                 self.validate_teacher_revisit(&answer, &saved)?;
                 self.select_teacher_revisit(&saved)?;
                 return Ok(saved);
             }
         }
         let draft = TeacherPracticeDraft {
-            id: Uuid::new_v4(),
+            id: session_id.unwrap_or_else(Uuid::new_v4),
             source: key.document_id.to_string(),
             index: key.practice_index,
             response: String::new(),

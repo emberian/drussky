@@ -1,6 +1,8 @@
 mod asset_sync;
 mod audio_studio;
 mod coach;
+mod daily_plan;
+mod daily_plan_view;
 mod dialogue_audio;
 mod dialogue_audio_view;
 mod drafts;
@@ -14,6 +16,8 @@ mod learning;
 mod lessons;
 mod model;
 mod practice;
+mod progress;
+mod progress_view;
 mod recognition;
 mod recognition_view;
 mod speech_playback;
@@ -42,6 +46,7 @@ use audio_studio::{AudioStudio, StudioRecording};
 use exposure_view::PresentedRussian;
 use lessons::Lessons;
 use practice::Practice;
+use progress_view::Progress;
 use teacher_view::Teacher;
 #[cfg(not(target_arch = "wasm32"))]
 mod native_connection;
@@ -51,7 +56,7 @@ mod repository;
 use dioxus::prelude::*;
 use dioxus_core::spawn_forever;
 use model::*;
-use repository::{Result, now_ms, synchronize};
+use repository::{Result, synchronize};
 use rufren_core::*;
 
 const STYLE: &str = include_str!("style.css");
@@ -165,7 +170,12 @@ fn focus_page_heading() {
 fn Today(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
     let count = state.library.heads().len();
-    let attempts = state.library.attempts().count();
+    let now = repository::now_ms();
+    let attempts = state
+        .library
+        .attempts()
+        .filter(|(event, _)| event.recorded_at_ms <= now)
+        .count();
     let resume = state
         .active_teacher_revisit()
         .ok()
@@ -175,14 +185,22 @@ fn Today(mut app: Signal<AppState>) -> Element {
             .session
             .as_ref()
             .is_some_and(|s| s.phase != Phase::Complete);
+    let returning = resume || attempts > 0;
+    let finished = !resume
+        && state
+            .daily_plan(now)
+            .ok()
+            .flatten()
+            .is_some_and(|plan| !plan.items.is_empty() && plan.is_finished());
     rsx! {
-        section {class:"hero",div {class:"eyebrow","BEGIN WITH CURIOSITY"} h1 {"A little Russian." br {} em {"A bigger world."}}
-            p {class:"lede","A conversation with a friend. A sentence from another world. Start with something you want to understand."}
-            div {class:"actions",button {class:"primary",onclick:move |_|act(app,|s|s.begin()),if resume {"Continue your practice →"}else if count==0 {"Start with your teacher →"}else{"Review what’s ready →"}}
+        section {class:if returning {"hero hero-compact"}else{"hero"},div {class:"eyebrow","BEGIN WITH CURIOSITY"} h1 {if returning {"Your Russian, today."}else{"A little Russian." br {} em {"A bigger world."}}}
+            if !returning {p {class:"lede","A conversation with a friend. A sentence from another world. Start with something you want to understand."}}
+            div {class:"actions",button {class:"primary",onclick:move |_|act(app,|s|if finished {s.navigate(Page::Progress)}else{s.begin()}),if resume {"Continue your practice →"}else if finished {"See your practice →"}else if attempts==0 {"Start with your teacher →"}else{"Choose my next step →"}}
             button {class:"text-button",onclick:move |_|act(app,|s|s.new_passage()),"Add a passage"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Teacher)),"Ask your teacher"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Explore lessons"}}
-            div {class:"orbital",aria_hidden:"true",div {class:"orbit orbit-one"} div {class:"orbit orbit-two"} span {class:"star star-one","✦"} span {class:"star star-two","·"} span {class:"planet"}}
+            if !returning {div {class:"orbital",aria_hidden:"true",div {class:"orbit orbit-one"} div {class:"orbit orbit-two"} span {class:"star star-one","✦"} span {class:"star star-two","·"} span {class:"planet"}}}
         }
-        teacher_revisit_view::TeacherReturns {app}
+        daily_plan_view::DailyPractice {app}
+        details {class:"panel",summary {"Browse your saved Teacher returns"}teacher_revisit_view::TeacherReturns {app}}
         teacher_notebook_view::ContinueTeacher {app}
         drafts_view::PausedPractices {app}
         div {class:"section-heading",h2 {"Make it yours"}span {"Small steps, connected."}}
@@ -236,34 +254,6 @@ fn LibraryView(mut app: Signal<AppState>) -> Element {
     }
 }
 #[component]
-fn Progress(app: Signal<AppState>) -> Element {
-    let state = app.read().clone();
-    let mut attempts: Vec<_> = state.library.attempts().collect();
-    attempts.sort_by_key(|(event, _)| (event.recorded_at_ms, event.id));
-    let independent = attempts
-        .iter()
-        .filter(|(_, a)| a.cues.is_empty() && a.self_rating == SelfRating::Recalled)
-        .count();
-    rsx! {
-        div {class:"page-heading",div {div {class:"eyebrow","WHAT YOU'VE PRACTICED"}h1 {"Four ways into a language"}p {"A record of your practice, with room to grow in every direction."}}}
-        div {class:"cards four",for skill in Skill::ALL {div {class:"panel stat",span {class:"tag","{skill.label()}"}strong {"{attempts.iter().filter(|(_,a)|a.skill==skill).count()}"}p {"saved attempts"}}}}
-        section {class:"panel",h2 {"Remembering with and without support"}p {"Marked ‘I recalled it’ without a recorded hint: {independent}."}p {class:"quiet","These are your reflections, not proficiency scores. Listening and speaking require real audio practice. Counts describe activity; delayed use and specific feedback tell us more about what stays with you."}}
-        teacher_revisit_view::TeacherReturns {app,expanded:true}
-        section {class:"panel",h2 {"Recent practice"}
-            if attempts.is_empty() {p {class:"quiet","Your first practice will start this story."}}
-            for (event,attempt) in attempts.iter().rev().take(12) {div {class:"history-row",span {"{attempt.skill.label()}"}span {{state.library.revision(attempt.revision).map(|r|r.passage.title.as_str()).unwrap_or("Passage not available")}}small {if attempt.cues.is_empty(){"No hint"}else{"With a hint"} " · {relative_day(event.recorded_at_ms)}"}}}
-        }
-    }
-}
-fn relative_day(timestamp: i64) -> String {
-    let days = now_ms().saturating_sub(timestamp).max(0) / 86_400_000;
-    match days {
-        0 => "Within the last day".into(),
-        1 => "A day ago".into(),
-        n => format!("{n} days ago"),
-    }
-}
-#[component]
 fn Settings(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
     rsx! {
@@ -271,10 +261,7 @@ fn Settings(mut app: Signal<AppState>) -> Element {
         section {class:"panel",h2 {"How you like to learn"}
             div {class:"preference-row",input {id:"show-stress",r#type:"checkbox",checked:state.preferences.show_stress,onchange:move |e|act(app,|s|{s.preferences.show_stress=e.checked();s.save_preferences()})}label {r#for:"show-stress","Show stress marks in lesson references"}}
             div {class:"preference-row",input {id:"show-chunks",r#type:"checkbox",checked:state.preferences.chunked,onchange:move |e|act(app,|s|{s.preferences.chunked=e.checked();s.save_preferences()})}label {r#for:"show-chunks","Break lesson phrases into short chunks"}}
-            label {r#for:"review-skill","Skill for general passage reviews"}select {id:"review-skill",value:state.preferences.review_skill.label(),onchange:move |e|act(app,|s|{s.preferences.review_skill=match e.value().as_str(){"Writing"=>Skill::Writing,"Listening"=>Skill::Listening,"Speaking"=>Skill::Speaking,_=>Skill::Reading};s.save_preferences()}),
-                for skill in Skill::ALL {option {value:skill.label(),"{skill.label()}"}}
-            }
-            p {class:"quiet","Every practice stays untimed. General passage reviews use your chosen skill. Teacher exercises return in their original skill with their original question. Listening and speaking use saved audio."}
+            p {class:"quiet","Choose the size of your next short session on Today. It mixes returns across skills you’ve practiced, with a quiet option for reading and writing. Every practice stays untimed; Teacher exercises keep their original question and skill."}
         }
         workspace_view::SavedWindows {}
         div {class:"cards two",

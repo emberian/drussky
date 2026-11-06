@@ -27,6 +27,8 @@ mod teacher_dialogue;
 pub use teacher_dialogue::*;
 mod dialogue_audio;
 pub use dialogue_audio::*;
+mod practice_batch;
+pub use practice_batch::*;
 
 /// Current event encoding. Database migrations and transport compatibility are independent.
 pub const EVENT_VERSION: u32 = 5;

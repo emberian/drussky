@@ -156,6 +156,8 @@ a {
   overflow:hidden;
   min-height:388px
 }
+.hero.hero-compact {min-height:0;padding:24px 0 12px}
+.hero.hero-compact h1 {font-size:clamp(30px,4vw,42px);margin:16px 0}
 .eyebrow,.card-number {
   font-size:10px;
   letter-spacing:2px;

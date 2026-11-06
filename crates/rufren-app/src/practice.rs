@@ -17,7 +17,15 @@ pub(crate) fn Practice(app: Signal<AppState>) -> Element {
         Ok(Some((answer, snapshot))) => {
             rsx! {for session in [snapshot.id] {crate::teacher_revisit_view::TeacherReturn {key:"active-return-{session}",app,answer:answer.clone(),snapshot:snapshot.clone()}}}
         }
-        Ok(None) => rsx! {PassagePractice {app}},
+        Ok(None) => {
+            let session = app
+                .read()
+                .session
+                .as_ref()
+                .map(|s| s.id)
+                .unwrap_or_default();
+            rsx! {PassagePractice {key:"passage-practice-{session}",app}}
+        }
         Err(problem) => {
             rsx! {section {class:"panel",h1 {"Your saved return needs attention"}p {role:"alert","{problem}"}
                 p {"Your original task and response are kept. Sync or restore missing material before continuing."}
@@ -33,6 +41,17 @@ fn PassagePractice(mut app: Signal<AppState>) -> Element {
     let mut ready = use_signal(|| None::<String>);
     let mut capture_busy = use_signal(|| false);
     let state = app.read().clone();
+    let heading = format!(
+        "passage-practice-heading-{}",
+        state.session.as_ref().map(|s| s.id).unwrap_or_default()
+    );
+    let focus_heading = heading.clone();
+    use_effect(move || {
+        let id = serde_json::to_string(&focus_heading).expect("generated heading ID");
+        spawn(async move {
+            let _ = document::eval(&format!("await new Promise(requestAnimationFrame);const heading=document.getElementById({id});if(heading){{heading.focus({{preventScroll:true}});heading.scrollIntoView({{block:'start'}});}}")).await;
+        });
+    });
     let Some(session) = state.session.clone() else {
         return rsx! {div {class:"empty large",h1 {"One phrase at a time."}p {"Choose a lesson or return to a passage you want to remember."}button {class:"primary",onclick:move |_|act(app,|s|s.begin()),"Choose my next step →"}}};
     };
@@ -81,7 +100,7 @@ fn PassagePractice(mut app: Signal<AppState>) -> Element {
         AnswerSpec::CoachReview { example, .. } => example.clone(),
     });
     rsx! {
-        div {class:"page-heading",div {div {class:"eyebrow","{session.skill.label()} · AT YOUR PACE"}h1 {if session.phase==Phase::Retrieve {"Your turn"}else if let Some(plan)=&state.plan {if let Some(lesson)=plan.lesson_id.as_deref().and_then(|id|state.content.lesson(id)) {"{lesson.title}"}else{"{p.title}"}}else{"{p.title}"}}if session.phase!=Phase::Retrieve {p {"{p.source}"}}}}
+        div {class:"page-heading",div {div {class:"eyebrow","{session.skill.label()} · AT YOUR PACE"}h1 {id:heading.clone(),tabindex:"-1",if session.phase==Phase::Retrieve {"Your turn"}else if let Some(plan)=&state.plan {if let Some(lesson)=plan.lesson_id.as_deref().and_then(|id|state.content.lesson(id)) {"{lesson.title}"}else{"{p.title}"}}else{"{p.title}"}}if session.phase!=Phase::Retrieve {p {"{p.source}"}}}}
         ol {class:"steps",for (i,(phase,label)) in [(Phase::Encounter,"Meet"),(Phase::Retrieve,"Try"),(Phase::Reflect,"Reflect"),(Phase::Complete,"Keep")].into_iter().enumerate() {li {class:if session.phase==phase {"current"}else{""},aria_current:if session.phase==phase {"step"}else{"false"},span {"{i+1}"}"{label}"}}}
         section {class:"panel practice-panel",
             match session.phase {
@@ -132,6 +151,7 @@ fn PassagePractice(mut app: Signal<AppState>) -> Element {
                 Phase::Complete=>rsx! {
                     div {class:"completion-mark","✦"}h2 {"A little more familiar."}p {"Your response and the support you used are saved. Give it some time, then find out what stays with you."}
                     p {class:"quiet","{next_review(&state,session.revision,session.skill)}"}
+                    crate::daily_plan_view::SessionNext {app}
                     div {class:"actions",button {class:"primary",onclick:move |_|app.write().page=Page::Today,"Back to today"}button {class:"secondary",onclick:move |_|app.write().page=Page::Lessons,"Return to your lesson"}button {class:"text-button",onclick:move |_|app.write().page=Page::Teacher,"Get teacher feedback"}}
                 },
             }

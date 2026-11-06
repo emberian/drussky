@@ -170,6 +170,9 @@ impl AppState {
         })
     }
     pub(crate) fn navigate(&mut self, page: Page) -> Result<()> {
+        if page == Page::Practice {
+            self.reconcile_daily_plan(now_ms())?;
+        }
         if matches!(
             page,
             Page::Library | Page::Lessons | Page::Studio | Page::Teacher
@@ -196,6 +199,26 @@ impl AppState {
         Ok(())
     }
     pub(crate) fn start(&mut self, revision: Uuid, skill: Skill) -> Result<()> {
+        self.start_with_id(revision, skill, Uuid::new_v4())
+    }
+    /// A caller may durably reserve a session before exposing its practice.
+    pub(crate) fn start_with_id(
+        &mut self,
+        revision: Uuid,
+        skill: Skill,
+        session_id: Uuid,
+    ) -> Result<()> {
+        if session_id.is_nil()
+            || self
+                .library
+                .attempts()
+                .any(|(_, a)| a.session == session_id)
+        {
+            return Err(
+                "This practice identity is invalid or already completed. Its saved work is kept."
+                    .into(),
+            );
+        }
         let passage = self
             .library
             .revision(revision)
@@ -205,7 +228,7 @@ impl AppState {
         }
         self.archive_current()?;
         let session = Session {
-            id: Uuid::new_v4(),
+            id: session_id,
             revision,
             skill,
             phase: Phase::Encounter,
@@ -222,6 +245,7 @@ impl AppState {
     }
     pub(crate) fn begin(&mut self) -> Result<()> {
         self.refresh()?;
+        self.reconcile_daily_plan(now_ms())?;
         if self
             .active_teacher_revisit()?
             .is_some_and(|(_, draft)| draft.saved_attempt.is_none())
@@ -238,60 +262,33 @@ impl AppState {
             self.page = Page::Practice;
             return Ok(());
         }
-        if let Some(entry) = self
-            .teacher_revisits(now_ms())
-            .entries
-            .into_iter()
-            .find(|entry| entry.due)
-        {
-            self.start_teacher_revisit(entry.key, now_ms())?;
-            self.page = Page::Practice;
+        let now = now_ms();
+        let plan = self.prepare_daily_plan(now)?;
+        if let Some(index) = plan.next_ready_index() {
+            return self.start_daily_plan_item(index, now);
+        }
+        if !plan.items.is_empty() {
+            self.page = Page::Today;
             return Ok(());
         }
-        if self.library.heads().is_empty() {
+        if !self
+            .library
+            .attempts()
+            .any(|(event, _)| event.recorded_at_ms <= now)
+        {
             let id = self
-                .content
-                .lessons
-                .first()
-                .ok_or("The lesson pack is empty")?
-                .id
-                .clone();
+                .selected_lesson
+                .clone()
+                .or_else(|| self.content.lessons.first().map(|lesson| lesson.id.clone()))
+                .ok_or("The lesson pack is empty")?;
             self.choose_lesson(&id)?;
-            self.navigate(Page::Teacher)?;
-            return Ok(());
+            return self.navigate(Page::Teacher);
         }
-        if let Some(entry) =
-            SpacedReview.select(&self.library, now_ms(), &[self.preferences.review_skill])
-        {
-            self.start(entry.state.key.revision, entry.state.key.skill)?;
-            self.set_plan(None, None, SpacedReview.id())?;
-            if entry.state.attempts > 0 {
-                self.phase(Phase::Retrieve)?;
-            }
-            let context = PolicyContext {
-                session: self.session.as_ref().unwrap().id,
-                now_ms: now_ms(),
-                skills: vec![self.preferences.review_skill],
-                contrast_domain: None,
-            };
-            if let Some(decision) = SpacedReview
-                .decide(&self.library, &context)
-                .map_err(|e| e.to_string())?
-            {
-                self.repo.append(&[Event::new(
-                    self.device,
-                    now_ms(),
-                    Fact::TeachingDecisionRecorded(decision),
-                )
-                .map_err(|e| e.to_string())?])?;
-                self.refresh()?;
-            }
-            return Ok(());
-        }
-        self.page = Page::Lessons;
-        self.notice="Your scheduled reviews can rest for now. Explore a lesson, or choose a passage to practice freely.".into();
+        self.page = Page::Today;
+        self.notice = "No returns in this session. Explore a lesson, have a conversation, or choose a passage freely.".into();
         Ok(())
     }
+
     pub(crate) fn save_passage(&mut self, resolve: bool) -> Result<()> {
         self.save_editor_draft(resolve)
     }

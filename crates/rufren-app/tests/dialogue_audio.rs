@@ -11,6 +11,8 @@ mod editor_drafts;
 mod exposure;
 #[path = "../src/learning.rs"]
 mod learning;
+#[path = "../src/daily_plan.rs"]
+mod daily_plan;
 #[path = "../src/model.rs"]
 mod model;
 #[path = "../src/native_connection.rs"]
