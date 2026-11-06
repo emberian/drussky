@@ -351,7 +351,8 @@ async fn speech_generate(
                 | SpeechError::Authentication => StatusCode::SERVICE_UNAVAILABLE,
                 SpeechError::InvalidRequest
                 | SpeechError::UnsupportedStress
-                | SpeechError::AmbiguousStress => StatusCode::BAD_REQUEST,
+                | SpeechError::AmbiguousStress
+                | SpeechError::SpokenFormRequired => StatusCode::BAD_REQUEST,
                 SpeechError::BudgetExceeded | SpeechError::RateLimited => {
                     StatusCode::TOO_MANY_REQUESTS
                 }

@@ -1,0 +1,41 @@
+{
+  "request_id": "silero-stress-castle-v1",
+  "revision_id": null,
+  "source_text": "Это за́мок.",
+  "sha256": "3ce677ebdad80003b514c177abdb2eb7efbc7674a92acbc2abf2f80b8d51ebe4",
+  "sample_rate": 24000,
+  "channels": 1,
+  "frames": 23400,
+  "provenance": {
+    "kind": "ai_generated_speech",
+    "provider": "local_silero_tts",
+    "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+    "voice": "xenia",
+    "prompt_version": "rufren-silero-russian-stress-v1",
+    "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+    "synthesis_input": {
+      "source_text_sha256": "09e9ff7a0ad4e6f7ffa6b5153aed0e1aca5dff3c4ac0ef75b0446b3b8f92e5eb",
+      "synthesis_text": "Это з+амок.",
+      "synthesis_text_sha256": "aac5546c4a59a20a9a22062ea436197beebb5a9291b51727d00ff47235ae6fe7",
+      "transform": "pedagogical_acute_to_silero_plus",
+      "context": "explicit_stress"
+    }
+  },
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "estimated_micro_usd": 0,
+    "reserved_micro_usd": 0
+  },
+  "intended_meaning": "This is a castle.",
+  "generation_stats": {
+    "request_id": "silero-stress-castle-v1",
+    "duration_seconds": 0.975,
+    "generation_seconds": 0.873212,
+    "peak_amplitude": 0.541302502155304,
+    "clipped_samples": 0,
+    "clipped_fraction": 0.0,
+    "full_scale_fraction": 0.0
+  },
+  "review_status": "controlled_synthetic_comparator; pronunciation not certified"
+}

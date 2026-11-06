@@ -58,6 +58,14 @@ def required_assets(path):
                 references.append((fact['data']['asset_id'], fact['data']['asset']['sha256']))
             elif fact['kind'] in ('speech_transcribed', 'dialogue_speech_transcribed'):
                 references.append((fact['data']['asset_id'], fact['data']['audio_sha256']))
+            elif fact['kind'] == 'sound_trial_prepared':
+                references.extend((ref['asset_id'], ref['asset']['sha256']) for ref in fact['data']['references'])
+            elif fact['kind'] == 'sound_reference_played':
+                ref = fact['data']['reference']
+                references.append((ref['asset_id'], ref['asset']['sha256']))
+            elif fact['kind'] == 'sound_trial_completed' and fact['data']['response']['kind'] == 'speaking':
+                response = fact['data']['response']
+                references.append((response['asset_id'], response['asset']['sha256']))
     pending = {asset_id for asset_id, _ in references if asset_id not in records}
     if pending:
         # Facts may intentionally sync before (or without) recordings. This is an

@@ -1,9 +1,9 @@
 """Versioned conservative input-shape policy; no pronunciation certification."""
 import hashlib
 import re
+from generation_text import AMBIGUOUS
 
 ACUTE = "\u0301"
-AMBIGUOUS = frozenset(("замок", "мука", "плачу", "атлас", "орган", "духи", "ирис", "белки", "стрелки", "кружки", "стоит", "дороги", "вести", "пропасть", "село"))
 VOWELS = frozenset("аеёиоуыэюяАЕЁИОУЫЭЮЯ")
 
 

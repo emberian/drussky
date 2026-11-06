@@ -6,6 +6,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { notebookResponse, openLessonTools } = require('./test-teacher-notebook.cjs');
+const { CURRENT_PROTOCOL } = require('./qa-current-protocol.cjs');
 const { navigate, assertNavigation } = require('./qa-navigation.cjs');
 
 const APP = process.env.RUFREN_QA_URL || 'http://127.0.0.1:8091';
@@ -62,7 +63,7 @@ function replica() {
   const canonical = value => JSON.stringify(value, (_, v) => v && typeof v === 'object' && !Array.isArray(v)
     ? Object.fromEntries(Object.entries(v).sort(([a], [b]) => a.localeCompare(b))) : v);
   return { records, exchange(request) {
-    assert.equal(request.version, 5);
+    assert.equal(request.version, CURRENT_PROTOCOL);
     assert(request.relay === null || request.relay === relay);
     assert(Number.isSafeInteger(request.after) && request.after >= 0 && request.after <= records.length);
     assert(request.events.length <= 128);
@@ -71,7 +72,7 @@ function replica() {
       else { const copy = structuredClone(event); ids.set(copy.id, copy); records.push(copy); }
     }
     const page = records.slice(request.after, request.after + 128);
-    return { version: 5, relay, accepted: request.events.map(e => e.id), events: page,
+    return { version: CURRENT_PROTOCOL, relay, accepted: request.events.map(e => e.id), events: page,
       cursor: request.after + page.length, has_more: request.after + page.length < records.length };
   } };
 }
@@ -94,7 +95,7 @@ async function assertDurableUser(page, request) {
     && event.fact.data.request_id === request.request_id);
   assert.equal(matching.length, 1, 'A single immutable authored message exists before provider transport');
   assert.deepEqual(matching[0].fact.data, request, 'Transport uses the exact durably prepared message/context');
-  assert.equal(matching[0].version, 5);
+  assert.equal(matching[0].version, CURRENT_PROTOCOL);
 }
 
 function assertBounded(request) {
@@ -363,7 +364,7 @@ async function main() {
     const sceneLeaf = await page.locator('.teacher-dialogue').getAttribute('data-dialogue-leaf');
     await a.library();
     const expectedDialogues = {
-      protocol: 5, scope: 'Synthetic authored turns and exact UI branch/source reconstruction; no audio originals',
+      protocol: CURRENT_PROTOCOL, scope: 'Synthetic authored turns and exact UI branch/source reconstruction; no audio originals',
       source_document: alpha, other_lesson: beta, selected_thread: sceneRequest.thread_id, selected_leaf: sceneLeaf,
       selected_messages: await page.locator('.teacher-dialogue article[data-message-id]').evaluateAll(nodes => nodes.map(node => ({ id: node.dataset.messageId, role: node.dataset.dialogueRole, text: node.innerText }))),
       visible_saved_leaves: await page.locator('[data-open-dialogue-leaf]').evaluateAll(nodes => nodes.map(node => node.dataset.openDialogueLeaf).sort()),
@@ -382,7 +383,7 @@ async function main() {
     await b.page.locator(`article[data-message-id="${sceneRequest.request_id}"]`).waitFor();
     checkpoint('Synced immutable conversations reconstruct in an independent empty app; local unsent draft stays local and saved branch remains readable after offline reload');
     assert.deepEqual(audit.errors, []); assert.deepEqual(audit.forbidden, []); assert.deepEqual(auditB.errors, []); assert.deepEqual(auditB.forbidden, []);
-    const result = { ok: true, fixture: 'Synthetic Teacher/dialogue and in-memory protocol5 replica; no inference or main services', checks, layouts,
+    const result = { ok: true, fixture: 'Synthetic Teacher/dialogue and in-memory protocol6 replica; no inference or main services', checks, layouts,
       requests: [...audit.requests, ...auditB.requests], events: await facts(page), replica_events: store.records.length, errors: [...audit.errors, ...auditB.errors], forbidden: [...audit.forbidden, ...auditB.forbidden] };
     await fs.writeFile(path.join(OUTPUT, 'result.json'), JSON.stringify(result, null, 2));
     await fs.writeFile(path.join(OUTPUT, 'library.json'), JSON.stringify({ events: Object.fromEntries(result.events.map(event => [event.id, event])) }, null, 2));
@@ -400,7 +401,7 @@ async function main() {
   }
 }
 
-module.exports = { APP, RELAY, OUTPUT, QUESTIONS, status, dialogueResponse, replica, facts, assertBounded,
+module.exports = { CURRENT_PROTOCOL, APP, RELAY, OUTPUT, QUESTIONS, status, dialogueResponse, replica, facts, assertBounded,
   fixtureRoutes, navigate, assertNavigation, dialogueLesson, notebookResponse, openLessonTools,
   learningEvidence, assertDurableUser };
 

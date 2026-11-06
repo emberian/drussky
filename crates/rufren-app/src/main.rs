@@ -20,6 +20,8 @@ mod progress;
 mod progress_view;
 mod recognition;
 mod recognition_view;
+mod sound_focus;
+mod sound_focus_view;
 mod speech_playback;
 mod teacher;
 mod teacher_audio_practice;
@@ -185,7 +187,9 @@ fn Today(mut app: Signal<AppState>) -> Element {
             .session
             .as_ref()
             .is_some_and(|s| s.phase != Phase::Complete);
-    let returning = resume || attempts > 0;
+    let sound_resume = state.sound_focus_unfinished().unwrap_or(false);
+    let resume = resume || (sound_resume && state.sound_focus_is_selected().unwrap_or(false));
+    let returning = resume || sound_resume || attempts > 0;
     let finished = !resume
         && state
             .daily_plan(now)
@@ -200,6 +204,8 @@ fn Today(mut app: Signal<AppState>) -> Element {
             if !returning {div {class:"orbital",aria_hidden:"true",div {class:"orbit orbit-one"} div {class:"orbit orbit-two"} span {class:"star star-one","✦"} span {class:"star star-two","·"} span {class:"planet"}}}
         }
         daily_plan_view::DailyPractice {app}
+        ContinueSoundFocus {app}
+        PausedSoundFocus {app}
         details {class:"panel",summary {"Browse your saved Teacher returns"}teacher_revisit_view::TeacherReturns {app}}
         teacher_notebook_view::ContinueTeacher {app}
         drafts_view::PausedPractices {app}
@@ -213,10 +219,51 @@ fn Today(mut app: Signal<AppState>) -> Element {
     }
 }
 #[component]
+fn ContinueSoundFocus(app: Signal<AppState>) -> Element {
+    let state = app.read();
+    let loaded = state.sound_focus_draft();
+    match loaded {
+        Ok(Some(draft))
+            if !draft.historical && draft.phase != sound_focus::SoundFocusPhase::Finished =>
+        {
+            let session = draft.session_id;
+            rsx! {section {class:"panel","data-sound-continue":session.to_string(),
+                h2 {"Continue your sound practice"}p {"{draft.contrast.title}"}
+                p {class:"quiet","Your place, choices and recordings are kept."}
+                button {class:"secondary",onclick:move |_|act(app,|s|s.resume_sound_focus(session)),"Continue Sound Focus →"}
+            }}
+        }
+        Err(problem) => {
+            rsx! {section {class:"panel",h2 {"Your sound practice needs attention"}p {role:"alert","{problem}"}
+                button {class:"secondary",onclick:move |_|act(app,|s|s.navigate(Page::Settings)),"Open sync & backups"}
+            }}
+        }
+        _ => rsx! {},
+    }
+}
+#[component]
+fn PausedSoundFocus(app: Signal<AppState>) -> Element {
+    match app.read().paused_sound_focus() {
+        Ok(paused) if !paused.is_empty() => {
+            rsx! {section {class:"panel",h2 {"Other sound practice you paused"}
+                for (id,title) in paused {div {class:"history-row","data-sound-paused":id.to_string(),
+                    strong {"{title}"}button {class:"secondary",onclick:move |_|act(app,|s|s.resume_sound_focus(id)),"Resume this sound practice"}
+                }}
+            }}
+        }
+        Err(problem) => rsx! {p {role:"alert","{problem}"}},
+        _ => rsx! {},
+    }
+}
+#[component]
 fn LibraryView(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
     let d = state.editor.clone();
     let heads = state.library.heads();
+    let sound_reference = d
+        .parent
+        .and_then(|id| state.library.events.get(&id))
+        .is_some_and(is_sound_focus_reference);
     let conflicts =
         d.id.and_then(|id| heads.get(&id))
             .is_some_and(|v| v.len() > 1);
@@ -243,10 +290,14 @@ fn LibraryView(mut app: Signal<AppState>) -> Element {
                     if conflicts {button {class:"secondary",onclick:move |_|act(app,|s|s.save_passage(true)),"Resolve with this wording"}}
                 }
                 if let Some(revision)=d.parent {if !conflicts {div {class:"practice-options",p {"Practice the saved version"}
+                    if sound_reference {
+                        button {class:"secondary",onclick:move |_|act(app,|s|s.choose_lesson("ru.lesson.naming")),"Explore Sound Focus"}
+                    } else {
                     button {class:"secondary",onclick:move |_|act(app,|s|s.start(revision,Skill::Reading)),"Read for meaning"}
                     button {class:"secondary",onclick:move |_|act(app,|s|s.start(revision,Skill::Writing)),"Write from memory"}
                     button {class:"secondary",onclick:move |_|act(app,|s|s.start(revision,Skill::Listening)),"Listen for meaning"}
                     button {class:"secondary",onclick:move |_|act(app,|s|s.start(revision,Skill::Speaking)),"Speak from meaning"}
+                    }
                     button {class:"text-button",onclick:move |_|act(app,|s|s.open_studio(revision)),"Hear & explore the voice"}
                 }}}
             }
@@ -304,7 +355,42 @@ fn Studio(app: Signal<AppState>) -> Element {
         div {class:"page-heading",div {div {class:"eyebrow","LISTEN · NOTICE · TRY AGAIN"}h1 {"Find your Russian voice"}p {"Give a phrase a voice and keep your own attempts. Listen first; use the instruments to investigate a particular question."}}}
         if let Some(r)=revision {p {class:"quiet","Linked to: {r.passage.title}"}}
         AudioStudio {passage_id:revision.map(|r|r.passage.id.to_string()).unwrap_or_default(),revision_id:revision_id.map(|id|id.to_string()).unwrap_or_default(),russian:revision.map(|r|r.passage.russian.clone()).unwrap_or_default(),workspace_id:if cfg!(target_arch="wasm32") {String::new()}else{state.device.to_string()},on_region_played:move |played|act(app,|s|s.heard_region(played)),on_saved:move |record|act(app,|s|recording_saved(s,record)),generating_reference:state.speech_busy,on_generate_reference:move |_|{if let Some(id)=revision_id {generate_reference(app,id)}else{act(app,|s|{s.notice="Choose a passage or lesson phrase to give it a voice.".into();s.navigate(Page::Library)})}}}
+        if let Some(id)=revision_id {section {class:"panel",
+            h2 {"Work out how to say it"}p {"Ask your teacher to write numbers as spoken words, explain an ambiguous word, or mark its stress."}
+            button {class:"secondary",onclick:move |_|act(app,|s|prepare_spoken_wording_question(s,id)),"Ask how to say this"}
+        }}
     }
+}
+fn prepare_spoken_wording_question(state: &mut AppState, revision: uuid::Uuid) -> Result<()> {
+    use rufren_tutor::{DialogueAction, DialogueConfig, DialogueIntent};
+    let source = state
+        .library
+        .revision(revision)
+        .ok_or("Open or sync this source first.")?
+        .passage
+        .russian
+        .clone();
+    let question = format!(
+        "Help me say this Russian source aloud. Keep its meaning and explain any ambiguity. Give a separate short spoken wording with numbers written as correctly inflected Russian words and stress marks on ambiguous words. Explain your choices in English. Keep the original source unchanged.\n\nSource:\n{source}"
+    );
+    if question.len() > rufren_tutor::DIALOGUE_MAX_TEXT_BYTES {
+        return Err(
+            "Choose a shorter source phrase for this question. Your passage is kept.".into(),
+        );
+    }
+    teacher_dialogue_view::show_conversations(state)?;
+    let mut draft = state.new_dialogue(
+        DialogueConfig {
+            intent: DialogueIntent::Clarification,
+            topic: "How to say this source aloud".into(),
+            teacher_role: None,
+            learner_role: None,
+        },
+        DialogueAction::Ask,
+        None,
+    )?;
+    state.save_dialogue_draft(&mut draft, question)?;
+    Ok(())
 }
 fn generate_reference(mut app: Signal<AppState>, revision: uuid::Uuid) {
     if app.read().speech_busy {
@@ -395,6 +481,8 @@ fn recording_saved(s: &mut AppState, record: StudioRecording) -> Result<()> {
     let id = register_recording(s, &record)?;
     if record.role == "attempt"
         && !record.interrupted
+        && record.device.get("sound_focus_scope").is_none()
+        && record.device.get("dialogue_scope").is_none()
         && s.session.as_ref().is_some_and(|session| {
             session.revision == revision
                 && session.skill == Skill::Speaking

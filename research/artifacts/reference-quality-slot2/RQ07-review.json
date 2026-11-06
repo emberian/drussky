@@ -1,0 +1,92 @@
+{
+  "case": "RQ07",
+  "source_text": "У меня сегодня 2 вопроса, 5 идей и 21 свободная минута.",
+  "expected_spoken_words": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+  "sha256": "f194a2de0fae42ce3b0487ba4e0c9586ab9675184301862422c3a49503ad6d09",
+  "contract": "pass",
+  "transcript": "У меня сегодня два вопроса, пять идей и двадцать один свободная минута.",
+  "lexical_differences_from_expected_words": [
+    {
+      "kind": "substitution",
+      "expected_index": 9,
+      "heard_index": 9,
+      "expected": "одна",
+      "heard": "один",
+      "yo_spelling_ambiguity": false
+    }
+  ],
+  "lexical_status": "needs_postrecognition_review",
+  "note": "Literal transcript retained. Numeric glyphs can conceal spoken gender/inflection; never infer them from value alone.",
+  "target_contrast": "not_assessed_by_transcript",
+  "human_listening": null,
+  "tts_elapsed_seconds": 2.517312458017841,
+  "asr_elapsed_seconds": 4.953708916902542,
+  "asr_evidence": {
+    "schema_version": "rufren-speech-transcript-v1",
+    "request_id": "reference-quality-slot2-asr-rq07",
+    "attempt_id": null,
+    "revision_id": null,
+    "asset_id": "reference-quality-slot2-rq07",
+    "audio_sha256": "f194a2de0fae42ce3b0487ba4e0c9586ab9675184301862422c3a49503ad6d09",
+    "original_audio": {
+      "sample_rate": 24000,
+      "channels": 1,
+      "frames": 138240,
+      "encoding": "pcm_s16le",
+      "bits": 16
+    },
+    "source_pcm_sha256": "4d8a494f4fa2552c54d9a6b0331dfa674e73be4a1c9d5c7de38c25ab1da9117f",
+    "source_pcm_hash_format": "interleaved-little-endian-f32-no-header-v1",
+    "span": {
+      "start_frame": 0,
+      "end_frame": 138240
+    },
+    "span_coordinate_system": "original_frames_half_open",
+    "derivative": {
+      "sample_rate": 16000,
+      "channels": 1,
+      "frames": 92160,
+      "pcm_sha256": "7a015ea033d39e90866859aab466817badc371061d7db6fe18d3b950c9fd7575",
+      "pcm_hash_format": "little-endian-f32-no-header-v1",
+      "method": "arithmetic-channel-mean; scipy.signal.resample_poly default Kaiser5",
+      "scipy_version": "1.18.1",
+      "amplitude_normalization": false
+    },
+    "evidence_kind": "transcript_hypothesis",
+    "transcript": "У меня сегодня два вопроса, пять идей и двадцать один свободная минута.",
+    "language": "ru",
+    "language_selection": "explicit_not_detected",
+    "target_conditioned": false,
+    "word_timestamps": null,
+    "word_alignment_status": "not_run",
+    "confidence": null,
+    "acoustic_assessment": null,
+    "provenance": {
+      "provider": "local_qwen3_asr",
+      "model": "mlx-community/Qwen3-ASR-1.7B-bf16",
+      "revision": "e1f6c266914abc5a46e8756e02580f834a6cf8a7",
+      "runtime": "mlx-audio==0.6.4",
+      "mlx_version": "0.32.4",
+      "manifest_sha256": "730f409412ed99134bc62b7989581fa8c42cf699b0c8ddd26846c4e2f2ea9801",
+      "worker_sha256": "874c736c9146fbd044a78e1882ca1052c8af5000acddb129a4c642744db6edd6",
+      "decoding": {
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "seed": 42,
+        "language": "Russian",
+        "hotwords": []
+      }
+    },
+    "timing": {
+      "started_at": "2026-11-06T13:51:51.642515+00:00",
+      "completed_at": "2026-11-06T13:51:56.405769+00:00",
+      "elapsed_seconds": 4.76,
+      "process_peak_rss_bytes": 4336418816,
+      "metal_peak_bytes": 5049711188
+    },
+    "usage": {
+      "prompt_tokens": 93,
+      "generation_tokens": 22
+    }
+  }
+}

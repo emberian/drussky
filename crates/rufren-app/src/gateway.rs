@@ -48,6 +48,7 @@ fn public_problem(status: u16, body: &[u8]) -> String {
             400 => vec![
                 SpeechError::UnsupportedStress.to_string(),
                 SpeechError::AmbiguousStress.to_string(),
+                SpeechError::SpokenFormRequired.to_string(),
                 RecognitionError::HashMismatch.to_string(),
             ],
             409 => vec![RecognitionError::Cancelled.to_string()],
@@ -171,6 +172,7 @@ mod tests {
         for (status, message) in [
             (400, SpeechError::UnsupportedStress.to_string()),
             (400, SpeechError::AmbiguousStress.to_string()),
+            (400, SpeechError::SpokenFormRequired.to_string()),
             (400, RecognitionError::HashMismatch.to_string()),
             (409, RecognitionError::Cancelled.to_string()),
             (415, RecognitionError::UnsupportedAudio.to_string()),

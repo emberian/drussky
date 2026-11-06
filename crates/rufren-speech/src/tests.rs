@@ -171,6 +171,45 @@ async fn speech_invalid_and_oversized_uploads_never_reach_network() {
 }
 
 #[tokio::test]
+async fn speech_generation_preflight_keeps_network_and_reservations_untouched() {
+    let (service, mock, task) = service(
+        success(),
+        200,
+        Duration::ZERO,
+        Duration::from_secs(2),
+        DEFAULT_SESSION_BUDGET_MICRO_USD,
+    )
+    .await;
+    let before = service.status();
+    for text in [
+        "На двери висит замок, а на холме стоит старый замок.",
+        "Приве́т! Это замок.",
+        "Это за́мок, а это замок.",
+        "У меня 21 свободная минута.",
+    ] {
+        let input = SpeechRequest {
+            text: text.into(),
+            ..request()
+        };
+        assert!(matches!(
+            service.generate(&input).await,
+            Err(SpeechError::AmbiguousStress | SpeechError::SpokenFormRequired)
+        ));
+        assert_eq!(input.text, text);
+    }
+    let after = service.status();
+    assert_eq!(mock.calls.load(Ordering::SeqCst), 0);
+    assert_eq!(before.remaining_reservations, after.remaining_reservations);
+    assert_eq!(
+        before.remaining_budget_micro_usd,
+        after.remaining_budget_micro_usd
+    );
+    assert!(service.generate(&request()).await.is_ok());
+    assert_eq!(mock.calls.load(Ordering::SeqCst), 1);
+    task.abort();
+}
+
+#[tokio::test]
 async fn speech_auth_rate_and_upstream_errors_are_redacted_without_retry() {
     for status in [401, 403, 429, 500, 302] {
         let (service, mock, task) = service(

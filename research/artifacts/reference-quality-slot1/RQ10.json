@@ -1,0 +1,36 @@
+{
+  "request_id": "reference-quality-slot1-rq10",
+  "revision_id": null,
+  "source_text": "Для каждого натурального числа существует следующее число, которое на единицу больше.",
+  "sha256": "52471afe3adb55242515d04d658e9c3742d9dd631a2e43beb94770cb8737c9a6",
+  "sample_rate": 24000,
+  "channels": 1,
+  "frames": 151680,
+  "provenance": {
+    "kind": "ai_generated_speech",
+    "provider": "local_qwen3_tts",
+    "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-bf16@7d3824abff87e49756bb0f83fb5411de75d160c4",
+    "voice": "rufren-russian-warm-v1",
+    "prompt_version": "rufren-qwen-russian-v2",
+    "validation": "Local BF16 VoiceDesign; mlx-audio 0.6.4; seed 42; no human reference or learner pronunciation assessment; router rufren-local-russian-v1 selected contextual ordinary input by text shape, not a pronunciation judgment",
+    "synthesis_input": {
+      "source_text_sha256": "9c8fc2a20bcf4e6c607bea5ef54a6a098d7c4d1b3af875fbf7fd645c9f5a4258",
+      "synthesis_text": "Для каждого натурального числа существует следующее число, которое на единицу больше.",
+      "synthesis_text_sha256": "9c8fc2a20bcf4e6c607bea5ef54a6a098d7c4d1b3af875fbf7fd645c9f5a4258",
+      "transform": "verbatim",
+      "context": "ordinary_text"
+    }
+  },
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "estimated_micro_usd": 0,
+    "reserved_micro_usd": 0
+  },
+  "case": "RQ10",
+  "gateway_elapsed_seconds": 2.758412417024374,
+  "raw_artifacts": ".local/reference-quality/slot1/RQ10",
+  "contract": "pass",
+  "human_listening": null,
+  "acoustic_assessment": null
+}

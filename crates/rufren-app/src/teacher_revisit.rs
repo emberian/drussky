@@ -830,6 +830,7 @@ impl AppState {
         if saved.id != draft.id {
             return Err("This exact revisit session is unavailable.".into());
         }
+        self.select_ordinary_practice_surface()?;
         self.repo.set(
             "teacher_revisit_active",
             &ActiveRevisit {

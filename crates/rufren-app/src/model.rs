@@ -177,21 +177,24 @@ impl AppState {
             page,
             Page::Library | Page::Lessons | Page::Studio | Page::Teacher
         ) {
-            // A Teacher revisit has its own saved draft, separate from Session.
-            // Persist support before changing pages; a failed write keeps the
-            // learner here rather than silently losing the assistance record.
-            self.teacher_revisit_mark_active_support(Cue::ReferenceMaterial)?;
-            if let Some(mut session) = self.session.clone().filter(|s| s.phase == Phase::Retrieve) {
-                if !session.cues.contains(&Cue::ReferenceMaterial) {
-                    session.cues.push(Cue::ReferenceMaterial);
-                    self.repo.set("session", &Some(&session))?;
-                    self.session = Some(session);
-                    self.notice="Reference material opened. This response will retain that support in its practice record.".into();
-                }
-            }
+            self.note_reference_access()?;
         }
         self.refresh()?;
         self.page = page;
+        Ok(())
+    }
+    pub(crate) fn note_reference_access(&mut self) -> Result<()> {
+        // Persist assistance before a reference-bearing surface becomes visible.
+        self.sound_focus_mark_active_support(Cue::ReferenceMaterial)?;
+        self.teacher_revisit_mark_active_support(Cue::ReferenceMaterial)?;
+        if let Some(mut session) = self.session.clone().filter(|s| s.phase == Phase::Retrieve) {
+            if !session.cues.contains(&Cue::ReferenceMaterial) {
+                session.cues.push(Cue::ReferenceMaterial);
+                self.repo.set("session", &Some(&session))?;
+                self.session = Some(session);
+                self.notice="Reference material opened. This response will retain that support in its practice record.".into();
+            }
+        }
         Ok(())
     }
     pub(crate) fn refresh(&mut self) -> Result<()> {
@@ -208,6 +211,14 @@ impl AppState {
         skill: Skill,
         session_id: Uuid,
     ) -> Result<()> {
+        if self
+            .library
+            .events
+            .get(&revision)
+            .is_some_and(is_sound_focus_reference)
+        {
+            return Err("Open Sound Focus from its lesson to practice this contrast, or replay it from your sound history.".into());
+        }
         if session_id.is_nil()
             || self
                 .library
@@ -240,12 +251,20 @@ impl AppState {
         self.session = Some(session);
         self.set_plan(None, None, "free-practice-v1")?;
         self.clear_active_teacher_revisit()?;
+        self.select_ordinary_practice_surface()?;
         self.page = Page::Practice;
         Ok(())
     }
     pub(crate) fn begin(&mut self) -> Result<()> {
         self.refresh()?;
         self.reconcile_daily_plan(now_ms())?;
+        if self.sound_focus_is_selected()? && self.sound_focus_unfinished()? {
+            let draft = self
+                .sound_focus_draft()?
+                .ok_or("Your sound practice is unavailable.")?;
+            return self.resume_sound_focus(draft.session_id);
+        }
+        self.select_ordinary_practice_surface()?;
         if self
             .active_teacher_revisit()?
             .is_some_and(|(_, draft)| draft.saved_attempt.is_none())

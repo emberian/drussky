@@ -22,6 +22,7 @@ for _name in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "VEC
 os.environ.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1")
 
 from silero_frontend import synthesis_input, validate_request
+from generation_text import validate_generation_text
 from silero_model import (
     LICENSE, MAX_PCM_BYTES, MAX_REQUEST_BYTES, MAX_RESPONSE_BYTES, MAX_TEXT_BYTES,
     MAX_TEXT_CHARS, MODEL, MODEL_ID, MODEL_SHA256, RATE, SOURCE_REVISION,
@@ -76,6 +77,7 @@ def validate(payload):
     if not isinstance(payload, dict) or set(payload) != REQUEST_KEYS or payload.get("schema") != SCHEMA:
         raise InvalidInput("Unknown schema or fields")
     source = validate_request({"text": payload["source_text"], "request_id": payload["request_id"], "revision_id": payload["revision_id"]})
+    validate_generation_text(source["text"])
     digest = payload["source_text_sha256"]
     if (not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest)
             or hashlib.sha256(source["text"].encode("utf-8")).hexdigest() != digest):

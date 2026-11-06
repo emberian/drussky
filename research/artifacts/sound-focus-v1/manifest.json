@@ -1,0 +1,57 @@
+{
+  "format": "rufren-sound-focus-packaged-originals-v1",
+  "publication_id": "rufren-sound-focus-v1",
+  "published_at_ms": 1793923200000,
+  "time_semantics": "Assigned package publication epoch for deterministic import metadata; not an audio recording or synthesis timestamp.",
+  "provenance": "Existing synthetic originals copied or referenced without regeneration, cropping, resampling, normalization, or inference. Intended meanings are authored labels, not acoustic certification. Original synthesis metadata remains in each original_metadata_path.",
+  "originals": [
+    {
+      "member_id": "ru.sound.member.castle",
+      "member_version": "1",
+      "utterance_id": "ru.sound.utterance.castle.carrier",
+      "utterance_version": "1",
+      "source_text": "Это за́мок.",
+      "original_path": "research/artifacts/sound-focus-v1/castle-carrier-v1.wav",
+      "original_metadata_path": "research/artifacts/sound-focus-v1/castle-carrier-v1.json",
+      "original_sha256": "3ce677ebdad80003b514c177abdb2eb7efbc7674a92acbc2abf2f80b8d51ebe4",
+      "byte_length": 46844,
+      "origin_path": ".local/silero-tts/samples/silero-stress-castle-v1.wav",
+      "source_measurements": "research/artifacts/silero-stress-v1/measurements.json"
+    },
+    {
+      "member_id": "ru.sound.member.lock",
+      "member_version": "1",
+      "utterance_id": "ru.sound.utterance.lock.carrier",
+      "utterance_version": "1",
+      "source_text": "Это замо́к.",
+      "original_path": "research/artifacts/sound-focus-v1/lock-carrier-v1.wav",
+      "original_metadata_path": "research/artifacts/sound-focus-v1/lock-carrier-v1.json",
+      "original_sha256": "3f0198c2415844291042e3161e445520e6d9aad7aec0c6956596a8c1e2d0ec76",
+      "byte_length": 46244,
+      "origin_path": ".local/silero-tts/samples/silero-stress-lock-v1.wav",
+      "source_measurements": "research/artifacts/silero-stress-v1/measurements.json"
+    },
+    {
+      "member_id": "ru.sound.member.onion",
+      "member_version": "1",
+      "utterance_id": "ru.sound.utterance.onion.isolated",
+      "utterance_version": "1",
+      "source_text": "Лук.",
+      "original_path": "research/artifacts/reference-quality-slot1/RQ02.wav",
+      "original_metadata_path": "research/artifacts/reference-quality-slot1/RQ02.json",
+      "original_sha256": "bf19ea6c569402b083cd07050b8fa901530fc9a387154b18d83278088b496fd1",
+      "byte_length": 30044
+    },
+    {
+      "member_id": "ru.sound.member.hatch",
+      "member_version": "1",
+      "utterance_id": "ru.sound.utterance.hatch.isolated",
+      "utterance_version": "1",
+      "source_text": "Люк.",
+      "original_path": "research/artifacts/reference-quality-slot1/RQ03.wav",
+      "original_metadata_path": "research/artifacts/reference-quality-slot1/RQ03.json",
+      "original_sha256": "2cdd4b1197b6c638080b5e8a2a32438b0a7bcff4073999abbaac649d8d066669",
+      "byte_length": 31244
+    }
+  ]
+}

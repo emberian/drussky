@@ -1,0 +1,225 @@
+{
+  "script_sha256": "5752af58e9db0f88a7df22f45b7c167ae0281478badac2845be887fdb8e6eb26",
+  "scope": "Two exact synthetic words; descriptive signal comparison, no calibrated pronunciation classifier",
+  "methods": {
+    "spectrogram": "20 ms Hann, 5 ms hop, 1024 FFT, 24 kHz, 2|STFT| sinusoid-relative dBFS, no gain normalization",
+    "lpc": "12 kHz, 30 ms Hamming, preemphasis .97, autocorrelation orders 12/14/16; candidate poles, not confirmed formants",
+    "tracks_dependency_sha256": "139947302b4a9fe92400e1422d3d13935e645f0eb9984d3cbd9f217d5000bdca"
+  },
+  "cases": {
+    "RQ02": {
+      "sha256": "bf19ea6c569402b083cd07050b8fa901530fc9a387154b18d83278088b496fd1",
+      "frames": 15000,
+      "duration_seconds": 0.625,
+      "peak": 0.29547119140625,
+      "full_scale_samples": 0,
+      "descriptive_regions": {
+        "early_transition": {
+          "span_seconds": [
+            0.04,
+            0.09
+          ],
+          "candidate_second_pole": {
+            "12": {
+              "median_hz": 1048.698359144344,
+              "count": 11
+            },
+            "14": {
+              "median_hz": 1060.1120541485593,
+              "count": 11
+            },
+            "16": {
+              "median_hz": 1059.8466574095783,
+              "count": 11
+            }
+          },
+          "window_sensitivity": [
+            {
+              "window_shift_seconds": -0.01,
+              "order": 12,
+              "median_hz": 1054.883116031558
+            },
+            {
+              "window_shift_seconds": -0.01,
+              "order": 14,
+              "median_hz": 1063.815926156961
+            },
+            {
+              "window_shift_seconds": -0.01,
+              "order": 16,
+              "median_hz": 1066.3146488760813
+            },
+            {
+              "window_shift_seconds": 0,
+              "order": 12,
+              "median_hz": 1048.698359144344
+            },
+            {
+              "window_shift_seconds": 0,
+              "order": 14,
+              "median_hz": 1060.1120541485593
+            },
+            {
+              "window_shift_seconds": 0,
+              "order": 16,
+              "median_hz": 1059.8466574095783
+            },
+            {
+              "window_shift_seconds": 0.01,
+              "order": 12,
+              "median_hz": 1042.9475373848716
+            },
+            {
+              "window_shift_seconds": 0.01,
+              "order": 14,
+              "median_hz": 1050.7911816049448
+            },
+            {
+              "window_shift_seconds": 0.01,
+              "order": 16,
+              "median_hz": 1050.6741609722403
+            }
+          ]
+        },
+        "later_vowel": {
+          "span_seconds": [
+            0.18,
+            0.22
+          ],
+          "candidate_second_pole": {
+            "12": {
+              "median_hz": 741.5258293162503,
+              "count": 6
+            },
+            "14": {
+              "median_hz": 717.7053743187663,
+              "count": 9
+            },
+            "16": {
+              "median_hz": 708.5943236103408,
+              "count": 9
+            }
+          }
+        }
+      },
+      "targeted_replay": {
+        "path": "research/artifacts/reference-quality-slot1/RQ02-transition.wav",
+        "sha256": "3927d78e1b6630d979a58725354ecd1f4611e25a98dc28bd017c42520ffd1d9c",
+        "source_span": {
+          "start_frame": 360,
+          "end_frame": 5760
+        },
+        "coordinate_system": "original_frames_half_open",
+        "pcm_byte_exact": true,
+        "purpose": "Onset through vowel, excluding final closure/release; full word remains default"
+      }
+    },
+    "RQ03": {
+      "sha256": "2cdd4b1197b6c638080b5e8a2a32438b0a7bcff4073999abbaac649d8d066669",
+      "frames": 15600,
+      "duration_seconds": 0.65,
+      "peak": 0.334228515625,
+      "full_scale_samples": 0,
+      "descriptive_regions": {
+        "early_transition": {
+          "span_seconds": [
+            0.04,
+            0.09
+          ],
+          "candidate_second_pole": {
+            "12": {
+              "median_hz": 1833.0703554660508,
+              "count": 11
+            },
+            "14": {
+              "median_hz": 1843.062738800578,
+              "count": 11
+            },
+            "16": {
+              "median_hz": 1832.0144456566811,
+              "count": 11
+            }
+          },
+          "window_sensitivity": [
+            {
+              "window_shift_seconds": -0.01,
+              "order": 12,
+              "median_hz": 1823.7940397219431
+            },
+            {
+              "window_shift_seconds": -0.01,
+              "order": 14,
+              "median_hz": 1839.90768033332
+            },
+            {
+              "window_shift_seconds": -0.01,
+              "order": 16,
+              "median_hz": 1821.6563474740828
+            },
+            {
+              "window_shift_seconds": 0,
+              "order": 12,
+              "median_hz": 1833.0703554660508
+            },
+            {
+              "window_shift_seconds": 0,
+              "order": 14,
+              "median_hz": 1843.062738800578
+            },
+            {
+              "window_shift_seconds": 0,
+              "order": 16,
+              "median_hz": 1832.0144456566811
+            },
+            {
+              "window_shift_seconds": 0.01,
+              "order": 12,
+              "median_hz": 1902.8521674299845
+            },
+            {
+              "window_shift_seconds": 0.01,
+              "order": 14,
+              "median_hz": 1839.90768033332
+            },
+            {
+              "window_shift_seconds": 0.01,
+              "order": 16,
+              "median_hz": 1821.6563474740828
+            }
+          ]
+        },
+        "later_vowel": {
+          "span_seconds": [
+            0.18,
+            0.22
+          ],
+          "candidate_second_pole": {
+            "12": {
+              "median_hz": 800.0421606603949,
+              "count": 9
+            },
+            "14": {
+              "median_hz": 796.6218792439768,
+              "count": 9
+            },
+            "16": {
+              "median_hz": 787.4888543800885,
+              "count": 9
+            }
+          }
+        }
+      },
+      "targeted_replay": {
+        "path": "research/artifacts/reference-quality-slot1/RQ03-transition.wav",
+        "sha256": "0d670932938f7dc90da47091661e9620da6fc020f1ebb19c83af2d9b21c99505",
+        "source_span": {
+          "start_frame": 360,
+          "end_frame": 5760
+        },
+        "coordinate_system": "original_frames_half_open",
+        "pcm_byte_exact": true,
+        "purpose": "Onset through vowel, excluding final closure/release; full word remains default"
+      }
+    }
+  }
+}

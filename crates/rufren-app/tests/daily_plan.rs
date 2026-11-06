@@ -11,6 +11,8 @@ mod editor_drafts;
 mod exposure;
 #[path = "../src/learning.rs"]
 mod learning;
+#[path = "../src/sound_focus.rs"]
+mod sound_focus;
 #[path = "../src/model.rs"]
 mod model;
 #[path = "../src/native_connection.rs"]

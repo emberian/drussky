@@ -1,0 +1,41 @@
+{
+  "request_id": "silero-stress-lock-v1",
+  "revision_id": null,
+  "source_text": "Это замо́к.",
+  "sha256": "3f0198c2415844291042e3161e445520e6d9aad7aec0c6956596a8c1e2d0ec76",
+  "sample_rate": 24000,
+  "channels": 1,
+  "frames": 23100,
+  "provenance": {
+    "kind": "ai_generated_speech",
+    "provider": "local_silero_tts",
+    "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+    "voice": "xenia",
+    "prompt_version": "rufren-silero-russian-stress-v1",
+    "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+    "synthesis_input": {
+      "source_text_sha256": "2fecfa19e447266e8421aab400737b2ab1907c83e3a33d6f724cca9984d86e9a",
+      "synthesis_text": "Это зам+ок.",
+      "synthesis_text_sha256": "a326f9291b6a4194bca3b332f3725f239cc7e54c3e421926d3932224c1f0652a",
+      "transform": "pedagogical_acute_to_silero_plus",
+      "context": "explicit_stress"
+    }
+  },
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "estimated_micro_usd": 0,
+    "reserved_micro_usd": 0
+  },
+  "intended_meaning": "This is a lock.",
+  "generation_stats": {
+    "request_id": "silero-stress-lock-v1",
+    "duration_seconds": 0.9625,
+    "generation_seconds": 0.121659,
+    "peak_amplitude": 0.5038385987281799,
+    "clipped_samples": 0,
+    "clipped_fraction": 0.0,
+    "full_scale_fraction": 0.0
+  },
+  "review_status": "controlled_synthetic_comparator; pronunciation not certified"
+}

@@ -1,0 +1,36 @@
+{
+  "request_id": "reference-quality-slot2-rq07",
+  "revision_id": null,
+  "source_text": "У меня сегодня 2 вопроса, 5 идей и 21 свободная минута.",
+  "sha256": "f194a2de0fae42ce3b0487ba4e0c9586ab9675184301862422c3a49503ad6d09",
+  "sample_rate": 24000,
+  "channels": 1,
+  "frames": 138240,
+  "provenance": {
+    "kind": "ai_generated_speech",
+    "provider": "local_qwen3_tts",
+    "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-bf16@7d3824abff87e49756bb0f83fb5411de75d160c4",
+    "voice": "rufren-russian-warm-v1",
+    "prompt_version": "rufren-qwen-russian-v2",
+    "validation": "Local BF16 VoiceDesign; mlx-audio 0.6.4; seed 42; no human reference or learner pronunciation assessment; router rufren-local-russian-v1 selected contextual ordinary input by text shape, not a pronunciation judgment",
+    "synthesis_input": {
+      "source_text_sha256": "d49ff2dab5bdb4ee23bae0fee59ed5c7fece129102e30a8f51645a9e03c7c127",
+      "synthesis_text": "У меня сегодня 2 вопроса, 5 идей и 21 свободная минута.",
+      "synthesis_text_sha256": "d49ff2dab5bdb4ee23bae0fee59ed5c7fece129102e30a8f51645a9e03c7c127",
+      "transform": "verbatim",
+      "context": "ordinary_text"
+    }
+  },
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "estimated_micro_usd": 0,
+    "reserved_micro_usd": 0
+  },
+  "case": "RQ07",
+  "slot2_gateway_elapsed_seconds": 2.517312458017841,
+  "raw_artifacts": ".local/reference-quality/slot2/RQ07",
+  "slot2_tts_calls": 1,
+  "contract": "pass",
+  "human_listening": null
+}

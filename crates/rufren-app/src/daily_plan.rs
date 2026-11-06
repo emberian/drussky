@@ -472,6 +472,7 @@ impl AppState {
         // Detach even if its source has not synced yet. Validating a dangling
         // active pointer must not block this explicit pause; its draft is separate.
         self.clear_active_teacher_revisit()?;
+        self.select_ordinary_practice_surface()?;
         self.create_daily_plan(now)
     }
     pub(crate) fn skip_daily_plan_item(&mut self, index: usize) -> Result<()> {

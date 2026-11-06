@@ -1,0 +1,109 @@
+{
+  "source_sha256": "b2eba78877afec1cb6a038617bbc4f037b34f89afb1a0ac05a5b43d14893c476",
+  "script_sha256": "76866a483985447828ec18fc3426473e801801931772844f4b1a85c56b581863",
+  "tracks_dependency_sha256": "139947302b4a9fe92400e1422d3d13935e645f0eb9984d3cbd9f217d5000bdca",
+  "methods": {
+    "spectrogram": "24kHz;20ms Hann;5ms hop;1024FFT;2|STFT| sinusoid-relative dBFS;no normalization",
+    "rms": "20ms;5ms hop",
+    "f0": "YIN-style;80–400Hz;30ms fixed difference region;threshold .15;not probability",
+    "lpc": "12kHz;30ms Hamming;preemphasis.97;orders12/14/16;candidate poles not confirmed formants"
+  },
+  "frames": 119040,
+  "duration_seconds": 4.96,
+  "peak": 0.433135986328125,
+  "full_scale_samples": 0,
+  "human_listening": null,
+  "word_alignment": null,
+  "target_contrast_status": "suspect",
+  "stress_verdict": "Unresolved: both candidate words have short V1/long V2; intended context-driven stress reversal is not demonstrated",
+  "candidate_regions": {
+    "first_phrase_ending": {
+      "intended_meaning": "lock",
+      "replay": {
+        "path": "research/artifacts/reference-quality-slot2/RQ06-first_phrase_ending.wav",
+        "sha256": "f05d50a7743becddb67961c2de9f45545fb009a555b09f8157bf2d9f3937fb77",
+        "source_span": {
+          "start_frame": 24000,
+          "end_frame": 43200
+        },
+        "coordinate_system": "original_frames_half_open",
+        "pcm_byte_exact": true,
+        "localization": "source-guided padded phrase ending, not certified word alignment"
+      },
+      "candidate_vowels": [
+        {
+          "source_span": {
+            "start_frame": 25440,
+            "end_frame": 26640
+          },
+          "duration_ms": 50.0,
+          "boundary_sensitivity_ms": [
+            30.0,
+            70.0
+          ],
+          "boundary_sensitivity_note": "Independent ±10ms onset/offset perturbation, not a confidence interval",
+          "median_rms_dbfs": -21.368985033161536,
+          "median_f0_candidate_hz": 309.85868016373354
+        },
+        {
+          "source_span": {
+            "start_frame": 30000,
+            "end_frame": 36840
+          },
+          "duration_ms": 285.0,
+          "boundary_sensitivity_ms": [
+            265.0,
+            305.0
+          ],
+          "boundary_sensitivity_note": "Independent ±10ms onset/offset perturbation, not a confidence interval",
+          "median_rms_dbfs": -20.190533373589687,
+          "median_f0_candidate_hz": 232.71342647987763
+        }
+      ]
+    },
+    "second_phrase_ending": {
+      "intended_meaning": "castle",
+      "replay": {
+        "path": "research/artifacts/reference-quality-slot2/RQ06-second_phrase_ending.wav",
+        "sha256": "4ce2cb2a7dacd9a7d86da4b416ea0f5693e924dc6bea37c537a4ab08b9163d48",
+        "source_span": {
+          "start_frame": 98400,
+          "end_frame": 117600
+        },
+        "coordinate_system": "original_frames_half_open",
+        "pcm_byte_exact": true,
+        "localization": "source-guided padded phrase ending, not certified word alignment"
+      },
+      "candidate_vowels": [
+        {
+          "source_span": {
+            "start_frame": 101160,
+            "end_frame": 102120
+          },
+          "duration_ms": 40.0,
+          "boundary_sensitivity_ms": [
+            20.0,
+            60.0
+          ],
+          "boundary_sensitivity_note": "Independent ±10ms onset/offset perturbation, not a confidence interval",
+          "median_rms_dbfs": -30.307201114953465,
+          "median_f0_candidate_hz": 239.3694189951015
+        },
+        {
+          "source_span": {
+            "start_frame": 104040,
+            "end_frame": 111360
+          },
+          "duration_ms": 305.0,
+          "boundary_sensitivity_ms": [
+            285.0,
+            325.0
+          ],
+          "boundary_sensitivity_note": "Independent ±10ms onset/offset perturbation, not a confidence interval",
+          "median_rms_dbfs": -27.322049036904247,
+          "median_f0_candidate_hz": 178.8540497358968
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.sound-focus { max-width: 58rem; margin-inline: auto; }
+.sound-focus .sound-focus-heading { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: .5rem 1rem; }
+.sound-focus h1 { margin-block: .25rem .5rem; }
+.sound-focus h2 { margin-block: .5rem; }
+.sound-focus-models { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+.sound-focus-model { border: 1px solid var(--line); border-radius: .8rem; padding: 1rem; }
+.sound-focus-model .russian-display { font: 1.75rem/1.35 Georgia, "Times New Roman", serif; }
+.sound-focus-player { border-block: 1px solid var(--line); padding-block: .8rem; margin-block: .75rem; }
+.sound-focus-player h3 { margin: 0 0 .5rem; }
+.sound-focus .choice-list { margin-block: 1rem; }
+.sound-focus-feedback { padding: 1rem; background: var(--paper); border-left: 3px solid var(--olive-text); border-radius: .4rem; }
+.sound-focus-progress { color: var(--muted); font-size: .9rem; }
+.sound-focus .actions { flex-wrap: wrap; }
+.sound-focus textarea { width: 100%; min-height: 6rem; }
+.sound-focus details { margin-block: .75rem; }
+.sound-focus pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .8rem; color: var(--muted); }
+.sound-focus-speaking[data-sound-kept="false"] [data-action="advanced"] { display: none; }
+.sound-focus-speaking[data-sound-kept="true"] .audio-acquire,
+.sound-focus-speaking[data-sound-kept="true"] [data-library],
+.sound-focus-speaking[data-sound-kept="true"] label[for^="audio-library"],
+.sound-focus-speaking[data-sound-kept="true"] #audio-stop-recording { display: none; }
+.sound-focus .russian-display { margin-block: .5rem; }
+.sound-focus-history-trial { border-top: 1px solid var(--line); padding-block: 1rem; }
+.sound-focus-history-response { padding: .5rem 1rem; border-left: 3px solid var(--control-line); margin-block: .75rem; }
+@media(max-width: 620px){.sound-focus-models { grid-template-columns: minmax(0,1fr); }.sound-focus .panel { padding: 1rem; }.sound-focus-player .actions { gap: .5rem; }.sound-focus .choice-option { min-height: 44px; }}

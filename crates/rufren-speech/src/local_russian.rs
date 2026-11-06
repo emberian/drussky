@@ -12,6 +12,7 @@ pub(crate) enum Route {
 }
 
 pub(crate) fn route(text: &str) -> Result<Route, SpeechError> {
+    crate::generation_text::validate(text)?;
     // A literal plus is Silero control syntax, not supported authored speech.
     if text.contains('+') {
         return Err(SpeechError::InvalidRequest);
@@ -25,28 +26,8 @@ pub(crate) fn route(text: &str) -> Result<Route, SpeechError> {
         .filter(|word| !word.is_empty())
         .map(str::to_lowercase)
         .collect();
-    const AMBIGUOUS: &[&str] = &[
-        "замок",
-        "мука",
-        "плачу",
-        "атлас",
-        "орган",
-        "духи",
-        "ирис",
-        "белки",
-        "стрелки",
-        "кружки",
-        "стоит",
-        "дороги",
-        "вести",
-        "пропасть",
-        "село",
-    ];
-    // Word count and punctuation classify input shape, not semantic resolution.
+    // Shape selects a backend only after every known ambiguity is authored.
     let contextual = words.len() >= 8 && text.trim_end().ends_with(['.', '?', '!', '…']);
-    if !contextual && words.iter().any(|word| AMBIGUOUS.contains(&word.as_str())) {
-        return Err(SpeechError::AmbiguousStress);
-    }
     if !contextual {
         Ok(Route::RussianFrontend)
     } else {
@@ -112,10 +93,22 @@ mod tests {
                 .unwrap(),
             Route::ContextualQwen
         );
+        assert!(matches!(
+            route("На двери висит замок, а на холме стоит старый замок."),
+            Err(SpeechError::AmbiguousStress)
+        ));
         assert_eq!(
-            route("На двери висит замок, а на холме стоит старый замок.").unwrap(),
-            Route::ContextualQwen
+            route("На двери висит замо́к, а на холме стои́т старый за́мок.").unwrap(),
+            Route::ExplicitStress
         );
+        assert!(matches!(
+            route("Приве́т! Это замок."),
+            Err(SpeechError::AmbiguousStress)
+        ));
+        assert!(matches!(
+            route("Это за́мок, а это замок."),
+            Err(SpeechError::AmbiguousStress)
+        ));
         assert!(matches!(
             route("Это замок."),
             Err(SpeechError::AmbiguousStress)

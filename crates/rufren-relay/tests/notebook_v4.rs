@@ -3,7 +3,7 @@ use rufren_store::Store;
 use uuid::Uuid;
 
 #[tokio::test]
-async fn notebook_v4_and_current_dialogue_refuse_legacy_clients_before_mutation() {
+async fn notebook_v4_dialogue_v5_and_current_sound_refuse_legacy_clients_before_mutation() {
     let mut store = Store::open(":memory:").unwrap();
     let mut old: Vec<_> = (1..=4)
         .map(|version| {
@@ -18,14 +18,19 @@ async fn notebook_v4_and_current_dialogue_refuse_legacy_clients_before_mutation(
         "config":{"intent":"clarification","topic":"Synthetic current dialogue","teacher_role":null,"learner_role":null},
         "action":"ask","correction":"off","anchor":null,"ancestors":[],"omitted_parent_id":null,"omitted_count":0,"text":"A synthetic learner question."
     })).unwrap();
-    old.push(
-        Event::new(
-            Uuid::new_v4(),
-            5,
-            Fact::TeacherDialogueUserRecorded(request),
-        )
-        .unwrap(),
-    );
+    let mut dialogue = Event::new(
+        Uuid::new_v4(),
+        5,
+        Fact::TeacherDialogueUserRecorded(request),
+    )
+    .unwrap();
+    dialogue.version = 5;
+    old.push(dialogue);
+    let prepared = serde_json::from_str(include_str!(
+        "../../../scripts/platform/fixtures/sound-v6-prepared.json"
+    ))
+    .unwrap();
+    old.push(Event::new(Uuid::new_v4(), 6, Fact::SoundTrialPrepared(prepared)).unwrap());
     store.append(&old).unwrap();
     let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
     let endpoint = format!("http://{}", listener.local_addr().unwrap());
@@ -39,7 +44,7 @@ async fn notebook_v4_and_current_dialogue_refuse_legacy_clients_before_mutation(
     });
     let client = reqwest::Client::new();
     let rejected = starter(Uuid::new_v4(), 4);
-    for version in [3, 4] {
+    for version in [3, 4, 5] {
         for events in [vec![], vec![rejected.clone()]] {
             let response = client
                 .post(format!("{endpoint}/v1/sync"))
@@ -85,7 +90,7 @@ async fn notebook_v4_and_current_dialogue_refuse_legacy_clients_before_mutation(
     assert_eq!(current.version, SYNC_VERSION);
     assert_eq!(current.events, old);
     assert_eq!(
-        current.cursor, 5,
+        current.cursor, 6,
         "rejected uploads consumed no sequence/cursor"
     );
     assert!(!current.events.iter().any(|event| event.id == rejected.id));

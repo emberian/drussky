@@ -1,13 +1,14 @@
 use crate::exposure_view::PresentedRussian;
 use crate::{act, model::AppState};
 use dioxus::prelude::*;
-use rufren_content::{ExerciseKind, ResponseMode};
+use rufren_content::{ExerciseKind, LessonPracticeAction, ResponseMode};
 use rufren_core::{PresentationPurpose, Skill};
 
 #[component]
 pub(crate) fn Lessons(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
     let selected = state.lesson().cloned();
+    let mut preparing_sound = use_signal(|| None::<String>);
     rsx! {
         div {class:"page-heading", div {div {class:"eyebrow","FROM YOUR FIRST WORDS TO OTHER WORLDS"} h1 {"A path into Russian"}p {"Learn with your AI teacher, from your first exchange to ideas worth reading."}}}
         div {class:"lesson-layout",
@@ -46,13 +47,32 @@ pub(crate) fn Lessons(mut app: Signal<AppState>) -> Element {
                         }
                     }
                     section {class:"panel",h2 {"Try it in different ways"}p {class:"quiet","Try a short response with the AI teacher. Ask for a missing word, a simpler step, or one useful correction whenever you need it."}
-                        for exercise in state.content.lesson_exercises(&lesson) {
+                        match state.content.lesson_practice_actions(&lesson) {
+                            Ok(actions) => rsx! {
+                        for action in actions {match action {
+                            LessonPracticeAction::Exercise(exercise) => rsx! {
                             {let id=exercise.id.clone();rsx! {button {class:"exercise-choice",onclick:move |_|act(app,|s|s.start_exercise(&id)),
                                 span {class:"tag","{exercise_label(exercise.kind)}"}PresentedRussian {app,language:"en",text:exercise.instruction.clone(),purpose:PresentationPurpose::Instruction,strong {"{exercise.instruction}"}}
                                 if exercise.requires_audio {small {"Uses an AI speech model; a human voice is optional"}}
                                 else if exercise.response_mode==ResponseMode::Speech {small {"Try it aloud and compare your response"}}
                             }}}
+                        },
+                            LessonPracticeAction::SoundFocus(contrast) => {let id=contrast.id.clone();rsx! {
+                                button {class:"exercise-choice",disabled:preparing_sound.read().is_some(),onclick:move |_| {
+                                    let id=id.clone();preparing_sound.set(Some(id.clone()));
+                                    spawn(async move {
+                                        let result=crate::sound_focus_view::open_sound_focus(app,id).await;
+                                        preparing_sound.set(None);
+                                        if let Err(error)=result {app.write().notice=error;}
+                                    });
+                                },span {class:"tag","SOUND FOCUS"}strong {"{contrast.title}"}
+                                    small {if preparing_sound.read().as_deref()==Some(contrast.id.as_str()) {"Preparing sound practice…"}else{"Listen for meaning, then choose what you want to say."}}
+                                }
+                            }},
+                        }}                            },
+                            Err(error) => rsx! {p {role:"alert","Sound practice is unavailable: {error}"}},
                         }
+
                     }
                     section {class:"panel",h2 {"If it fits over a meal"}p {class:"quiet","An optional moment with your friend. No lesson preparation, recordings, or correction duties."}PresentedRussian {app,language:"en",text:lesson.conversation_invitation.clone(),purpose:PresentationPurpose::Instruction}h3 {"A fresh idea for the AI teacher"}PresentedRussian {app,language:"en",text:lesson.transfer_prompt.clone(),purpose:PresentationPurpose::Instruction}}
                 } else {

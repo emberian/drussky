@@ -54,6 +54,15 @@ pub struct DialogueRecorderScope {
     pub input_id: uuid::Uuid,
 }
 
+/// Originals produced for one explicit Sound Focus intention. This is a
+/// recording context, not an assessment or a pronunciation claim.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct SoundFocusRecorderScope {
+    pub session_id: uuid::Uuid,
+    pub intent_id: uuid::Uuid,
+    pub member_id: String,
+}
+
 /// Save one generated original, bound to the exact phrase revision and request.
 /// Network/provider configuration is owned by the shared gateway client.
 pub async fn save_generated_reference(
@@ -514,17 +523,21 @@ pub fn AudioStudio(
     #[props(default)] workspace_id: String,
     #[props(default)] on_region_played: EventHandler<StudioRegionPlayback>,
     #[props(default)] compact: bool,
+    #[props(default)] review_only: bool,
     #[props(default)] selected_asset_id: Option<String>,
     #[props(default)] on_selected: EventHandler<Option<StudioRecording>>,
     #[props(default)] on_recording_state: EventHandler<bool>,
     #[props(default)] dialogue_scope: Option<DialogueRecorderScope>,
+    #[props(default)] sound_focus_scope: Option<SoundFocusRecorderScope>,
+    #[props(default)] frozen_reference_asset_id: Option<String>,
+    #[props(default)] frozen_reference_hash: Option<String>,
 ) -> Element {
     let instance_id = use_hook(|| uuid::Uuid::new_v4().to_string());
     let effect_instance = instance_id.clone();
     let mut reference = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut attempt = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut error = use_signal(String::new);
-    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id,"compact":compact,"selected_asset_id":selected_asset_id,"dialogue_scope":dialogue_scope}).to_string();
+    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id,"compact":compact,"review_only":review_only,"selected_asset_id":selected_asset_id,"dialogue_scope":dialogue_scope,"sound_focus_scope":sound_focus_scope,"frozen_reference_asset_id":frozen_reference_asset_id,"frozen_reference_hash":frozen_reference_hash}).to_string();
     use_effect(move || {
         let script = format!(
             "const rufrenStudioRoot=document.getElementById('rufren-audio-studio');if(rufrenStudioRoot?.dataset.instance!=={})return;\n{}",
@@ -881,9 +894,13 @@ pub fn AudioSpeaking(
     #[props(default)] on_generate_reference: Option<EventHandler<()>>,
     #[props(default)] generating_reference: bool,
     #[props(default)] dialogue_scope: Option<DialogueRecorderScope>,
+    #[props(default)] sound_focus_scope: Option<SoundFocusRecorderScope>,
+    #[props(default)] frozen_reference_asset_id: Option<String>,
+    #[props(default)] frozen_reference_hash: Option<String>,
+    #[props(default)] review_only: bool,
     #[props(default)] workspace_id: String,
 ) -> Element {
-    rsx! {AudioStudio {passage_id,revision_id,workspace_id,compact:true,selected_asset_id,on_saved,on_selected,on_recording_state,on_reference_played,on_region_played,on_generate_reference,generating_reference,dialogue_scope}}
+    rsx! {AudioStudio {passage_id,revision_id,workspace_id,compact:true,review_only,selected_asset_id,on_saved,on_selected,on_recording_state,on_reference_played,on_region_played,on_generate_reference,generating_reference,dialogue_scope,sound_focus_scope,frozen_reference_asset_id,frozen_reference_hash}}
 }
 
 fn quality_summary(analysis: &AudioAnalysis) -> Element {
@@ -903,6 +920,11 @@ const root=typeof rufrenPlayerRoot==='undefined'?document.getElementById('rufren
 if(!root) throw Error('Reference player did not mount.');
 window.rufrenAudioPlayers ||= new Map();window.rufrenAudioPlayers.get(root.id)?.destroy();
 let alive=true,db,record,finish,url,prepareTimer,cancelPrepare,loadGeneration=0,playGeneration=0;
+// Completion is opt-in for blind Sound Focus trials. Ordinary players retain
+// their existing successful-start acknowledgment semantics.
+const playbackToken=root.dataset.playbackToken,expectedHash=root.dataset.expectedHash;
+const modelExample=root.dataset.playbackContext==='example';
+let activePlayback;
 const lifetime=new Promise(resolve=>finish=resolve);
 const status=root.querySelector('[data-practice-status]');
 const buttons=root.querySelectorAll('[data-practice-rate]'),picker=root.querySelector('[data-reference-select]'),sourceLabel=root.querySelector('[data-reference-source]');
@@ -910,7 +932,7 @@ const media=document.createElement('audio');media.preload='auto';media.hidden=tr
 const preservePitchKey=['preservesPitch','webkitPreservesPitch','mozPreservesPitch'].find(key=>key in media);
 if(preservePitchKey)media[preservePitchKey]=true;
 const send=value=>{if(alive)dioxus.send(value);};
-function stop(){playGeneration++;media.pause();try{media.currentTime=0;}catch(_){}}
+function stop(){playGeneration++;activePlayback=null;media.onended=null;media.pause();try{media.currentTime=0;}catch(_){}}
 function destroy(){if(!alive)return;alive=false;finish();cancelPrepare?.();clearTimeout(prepareTimer);stop();media.removeAttribute('src');media.load();media.remove();if(url)URL.revokeObjectURL(url);db?.close();root.removeEventListener('click',click);root.removeEventListener('change',change);window.removeEventListener('rufren-audio-assets-changed',assetsChanged);window.removeEventListener('pagehide',destroy);document.removeEventListener('visibilitychange',visibility);observer.disconnect();window.rufrenAudioPlayers.delete(root.id);}
 function visibility(){if(document.hidden)stop();}
 function click(event){
@@ -918,14 +940,22 @@ function click(event){
  if(button.dataset.practiceStop!==undefined){stop();status.textContent='Playback stopped.';return;}
  if(!button.dataset.practiceRate||!record)return;
  const rate=Number(button.dataset.practiceRate);
+ if(playbackToken!==undefined&&rate!==1){status.textContent='Listen at natural speed for this question.';return;}
  if(rate!==1&&!preservePitchKey){status.textContent='Pitch-preserving slower playback is unavailable here. Listen at natural speed.';return;}
  for(const [id,api]of window.rufrenAudioPlayers)if(id!==root.id)api.stop?.();
  window.rufrenAudioStudio?.stopPlayback?.();
  stop();const generation=playGeneration,load=loadGeneration,playedRecord=record;media.playbackRate=rate;if(preservePitchKey)media[preservePitchKey]=true;
+ const playbackId=crypto.randomUUID();const proof={id:playbackId,started:false,completed:false};activePlayback=proof;
+ const completed=()=>{
+  if(playbackToken===undefined||!alive||activePlayback!==proof||!proof.started||proof.completed||generation!==playGeneration||load!==loadGeneration||root.dataset.playbackToken!==playbackToken||!media.ended||media.playbackRate!==1||rate!==1)return;
+  proof.completed=true;const {blob,...recording}=playedRecord;status.textContent=modelExample?'Example played through.':'Playback finished. Choose the meaning you heard.';send({kind:'completed',recording,playback_token:playbackToken,playback_id:playbackId});
+ };
+ if(playbackToken!==undefined)media.onended=completed;
  // The original is verified and prepared before readiness; play stays in the click.
  media.play().then(()=>{
   if(!alive||generation!==playGeneration||load!==loadGeneration)return;
-  status.textContent=rate===1?'Playing the selected recording.':'Playing slowly, keeping voice pitch. Time stretching can add artifacts.';const {blob,...recording}=playedRecord;send({kind:'played',recording});
+  if(playbackToken!==undefined&&root.dataset.playbackToken!==playbackToken)return;
+  proof.started=true;status.textContent=rate===1?'Playing the selected recording.':'Playing slowly, keeping voice pitch. Time stretching can add artifacts.';const {blob,...recording}=playedRecord;send({kind:'played',recording,...(playbackToken===undefined?{}:{playback_token:playbackToken,playback_id:playbackId})});completed();
  }).catch(error=>{if(alive&&generation===playGeneration)status.textContent=`Playback could not start. Tap Listen again, or check this app’s audio permission. ${error.message}`;});
 }
 function change(event){if(event.target===picker){root.dataset.selectedReference=picker.value;prepare();}}
@@ -946,6 +976,7 @@ async function prepare(){
    selected=await new Promise((resolve,reject)=>{const r=db.transaction('assets').objectStore('assets').get(root.dataset.asset);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
    if(!selected)throw Error('This exact recording is not stored on this device. Sync recordings in Settings or restore an audio backup.');
    if(selected.asset_id!==root.dataset.asset)throw Error('The selected recording identity did not match. Existing audio was kept.');
+   if(expectedHash!==undefined&&selected.content_hash!==expectedHash)throw Error('This question’s exact audio identity did not match. Reopen its saved source.');
   }else{
    const records=await new Promise((resolve,reject)=>{const r=db.transaction('assets').objectStore('assets').getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
    const machine=r=>['ai_generated_speech','system_generated_speech'].includes(r.device?.provenance?.kind)?1:0;
@@ -967,7 +998,7 @@ async function prepare(){
    media.onerror=()=>{clearTimeout(prepareTimer);reject(Error('This device could not play the saved original. Import a WAV or MP3 reference.'));};
    media.src=url;media.load();
   }),lifetime.then(()=>{throw Error('Reference player closed.');}),cancellation.then(()=>{throw Error('Reference selection changed.');})]);
-  if(alive&&generation===loadGeneration){record=selected;if(sourceLabel)sourceLabel.textContent=referenceSource(record);buttons.forEach(b=>b.disabled=Number(b.dataset.practiceRate)!==1&&!preservePitchKey);const readyLabel=root.dataset.asset!==undefined?'Recording':'Reference';status.textContent=preservePitchKey?`${readyLabel} ready. Listen at natural speed, or replay slowly with voice pitch preserved.`:`${readyLabel} ready at natural speed. Pitch-preserving slow playback is unavailable here.`;send({kind:'ready',ready:true});}
+  if(alive&&generation===loadGeneration){record=selected;if(sourceLabel)sourceLabel.textContent=referenceSource(record);buttons.forEach(b=>b.disabled=Number(b.dataset.practiceRate)!==1&&!preservePitchKey);const readyLabel=root.dataset.asset!==undefined?'Recording':'Reference';status.textContent=modelExample?'Ready. Listen to the complete example.':playbackToken!==undefined?'Ready. Listen to the whole sound, then choose its meaning.':preservePitchKey?`${readyLabel} ready. Listen at natural speed, or replay slowly with voice pitch preserved.`:`${readyLabel} ready at natural speed. Pitch-preserving slow playback is unavailable here.`;send({kind:'ready',ready:true});}
  }catch(error){if(alive&&generation===loadGeneration){status.textContent=error.message;send({kind:'ready',ready:false});}}
 }
 await prepare();
@@ -981,6 +1012,10 @@ pub(crate) struct PracticeAudioEvent {
     pub(crate) ready: bool,
     #[serde(default)]
     pub(crate) recording: Option<StudioRecording>,
+    #[serde(default)]
+    pub(crate) playback_token: Option<String>,
+    #[serde(default)]
+    pub(crate) playback_id: Option<String>,
 }
 
 /// Audio-only playback for listening practice. No answer text is rendered.

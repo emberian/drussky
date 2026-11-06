@@ -53,6 +53,18 @@ class SileroGatewayContracts(unittest.TestCase):
         self.assertEqual(response["provenance"]["prompt_version"], "rufren-silero-automatic-v1")
         self.assertIn("put_stress_homo=true", response["provenance"]["validation"])
 
+    def test_generation_preflight_before_model_preserves_explicit_per_token_route(self):
+        model = FakeModel()
+        for source in ["На двери висит замок, а на холме стоит старый замок.", "Приве́т! Это замок.", "Это за́мок, а это замок.", "У меня 21 свободная минута."]:
+            with self.subTest(source=source), self.assertRaises(ValueError):
+                gateway.validate(payload(source, "automatic"))
+        self.assertEqual(model.seen, [])
+        source = "На двери висит замо́к, а на холме стои́т старый за́мок."
+        request = gateway.validate(payload(source))
+        response, _ = gateway.synthesize(request, loader=lambda: model)
+        self.assertEqual(response["source_text"], source)
+        self.assertEqual(model.seen[0][0], "На двери висит зам+ок, а на холме сто+ит старый з+амок.")
+
     def test_schema_hash_bindings_and_literal_engine_syntax_fail_before_model(self):
         base = payload()
         cases = [{**base, "source_text_sha256": "0" * 64}, {**base, "schema": "future"}, {**base, "file": "/etc/passwd"},

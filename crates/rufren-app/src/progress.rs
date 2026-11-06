@@ -13,6 +13,7 @@ const WEEK_MS: i64 = 7 * DAY_MS;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum ProgressTarget {
     Teacher(TeacherRevisitKey),
+    SoundFocus { block: Uuid },
     Passage { revision: Uuid, skill: Skill },
 }
 
@@ -48,6 +49,7 @@ pub(crate) struct RecentPractice {
     pub support: String,
     pub outcome: Option<String>,
     pub target: Option<ProgressTarget>,
+    pub sound_trial: Option<Uuid>,
 }
 
 #[derive(Clone)]
@@ -55,6 +57,15 @@ pub(crate) struct FuturePractice {
     pub occurred_at_ms: i64,
     pub skill: Skill,
     pub title: String,
+}
+
+#[derive(Clone)]
+pub(crate) struct SoundBlockHistory {
+    pub block: Uuid,
+    pub title: String,
+    pub completed: usize,
+    pub unfinished: usize,
+    pub incomplete: usize,
 }
 
 #[derive(Clone)]
@@ -66,6 +77,7 @@ pub(crate) struct ProgressSnapshot {
     pub future: Vec<FuturePractice>,
     pub recent_questions: usize,
     pub recent_scene_starts: usize,
+    pub sound_blocks: Vec<SoundBlockHistory>,
 }
 
 fn safe_title(title: &str, fallback: &str) -> String {
@@ -95,11 +107,9 @@ fn teacher_title(library: &Library, key: TeacherRevisitKey) -> String {
 
 fn generic_target(library: &Library, revision: Uuid, skill: Skill) -> Option<ProgressTarget> {
     let saved = library.revision(revision)?;
-    if library
-        .events
-        .get(&revision)
-        .is_some_and(is_teacher_generated_reference)
-        || saved.passage.translation.trim().is_empty()
+    if library.events.get(&revision).is_some_and(|event| {
+        is_teacher_generated_reference(event) || is_sound_focus_reference(event)
+    }) || saved.passage.translation.trim().is_empty()
         || library
             .heads()
             .get(&saved.passage.id)
@@ -108,6 +118,71 @@ fn generic_target(library: &Library, revision: Uuid, skill: Skill) -> Option<Pro
         return None;
     }
     Some(ProgressTarget::Passage { revision, skill })
+}
+
+#[derive(Clone)]
+struct SoundProgress {
+    trial: Uuid,
+    block: Uuid,
+    title: String,
+    incomplete: bool,
+    assisted: bool,
+    intended_match: Option<bool>,
+    mode: SoundTrialMode,
+}
+fn sound_progress(library: &Library) -> BTreeMap<Uuid, SoundProgress> {
+    let mut result = BTreeMap::<Uuid, SoundProgress>::new();
+    for trial in library.sound_trials() {
+        let title = library
+            .sound_prepared(trial.trial_id)
+            .map(|(_, prepared)| safe_title(&prepared.contrast.title, "Sound Focus"))
+            .unwrap_or_else(|| "Sound Focus".into());
+        let attempts: BTreeSet<_> = library
+            .sound_trial_completion(trial.trial_id)
+            .into_iter()
+            .map(|(_, completion)| completion.attempt)
+            .collect();
+        for attempt in attempts {
+            result
+                .entry(attempt)
+                .and_modify(|old| old.incomplete = true)
+                .or_insert(SoundProgress {
+                    trial: trial.trial_id,
+                    block: trial.block_id,
+                    title: format!("Sound Focus · {title}"),
+                    incomplete: trial.incomplete,
+                    assisted: trial.assisted,
+                    intended_match: trial.intended_match,
+                    mode: trial.mode,
+                });
+        }
+    }
+    result
+}
+
+fn sound_blocks(library: &Library) -> Vec<SoundBlockHistory> {
+    let mut blocks = BTreeMap::<Uuid, SoundBlockHistory>::new();
+    for trial in library.sound_trials() {
+        let title = library
+            .sound_prepared(trial.trial_id)
+            .map(|(_, prepared)| safe_title(&prepared.contrast.title, "Saved sound practice"))
+            .unwrap_or_else(|| "Saved sound practice".into());
+        let block = blocks.entry(trial.block_id).or_insert(SoundBlockHistory {
+            block: trial.block_id,
+            title,
+            completed: 0,
+            unfinished: 0,
+            incomplete: 0,
+        });
+        if library.sound_trial_completion(trial.trial_id).is_empty() {
+            block.unfinished += 1;
+        } else if trial.incomplete {
+            block.incomplete += 1;
+        } else {
+            block.completed += 1;
+        }
+    }
+    blocks.into_values().collect()
 }
 
 fn evidence_label(evidence: TeacherRevisitEvidence) -> &'static str {
@@ -242,6 +317,7 @@ fn project(library: &Library, queue: &TeacherRevisitQueue, now: i64) -> Progress
     let queue_keys: BTreeSet<_> = queue.entries.iter().map(|entry| entry.key).collect();
     let mut recent = Vec::new();
     let mut future = Vec::new();
+    let sounds = sound_progress(library);
     let mut attempts: Vec<_> = library.attempts().collect();
     attempts.sort_by_key(|(event, _)| (std::cmp::Reverse(event.recorded_at_ms), event.id));
     for (event, attempt) in attempts {
@@ -251,14 +327,27 @@ fn project(library: &Library, queue: &TeacherRevisitQueue, now: i64) -> Progress
         } else {
             None
         };
-        let title = origin
-            .as_ref()
-            .map(|o| teacher_title(library, o.key))
+        let sound = sounds.get(&event.id);
+        let sound_reserved = sound.is_some()
+            || attempt.policy.starts_with("sound-focus")
+            || library
+                .events
+                .get(&attempt.revision)
+                .is_some_and(is_sound_focus_reference);
+        let sound_complete = sound.is_some_and(|sound| !sound.incomplete);
+        let title = sound
+            .map(|sound| sound.title.clone())
+            .or_else(|| sound_reserved.then(|| "Sound Focus · saved response".into()))
             .unwrap_or_else(|| {
-                library
-                    .revision(attempt.revision)
-                    .map(|r| safe_title(&r.passage.title, "A saved passage"))
-                    .unwrap_or_else(|| "Saved practice".into())
+                origin
+                    .as_ref()
+                    .map(|o| teacher_title(library, o.key))
+                    .unwrap_or_else(|| {
+                        library
+                            .revision(attempt.revision)
+                            .map(|r| safe_title(&r.passage.title, "A saved passage"))
+                            .unwrap_or_else(|| "Saved practice".into())
+                    })
             });
         if event.recorded_at_ms > now {
             future.push(FuturePractice {
@@ -268,17 +357,23 @@ fn project(library: &Library, queue: &TeacherRevisitQueue, now: i64) -> Progress
             });
             continue;
         }
-        let target = origin
-            .as_ref()
-            .filter(|o| queue_keys.contains(&o.key))
-            .map(|o| ProgressTarget::Teacher(o.key))
-            .or_else(|| {
-                if attempt.policy.starts_with("teacher-") {
-                    None
-                } else {
-                    generic_target(library, attempt.revision, attempt.skill)
-                }
-            });
+        let target = if sound_reserved {
+            sound
+                .filter(|sound| !sound.incomplete)
+                .map(|sound| ProgressTarget::SoundFocus { block: sound.block })
+        } else {
+            origin
+                .as_ref()
+                .filter(|o| queue_keys.contains(&o.key))
+                .map(|o| ProgressTarget::Teacher(o.key))
+                .or_else(|| {
+                    if attempt.policy.starts_with("teacher-") {
+                        None
+                    } else {
+                        generic_target(library, attempt.revision, attempt.skill)
+                    }
+                })
+        };
         let activity = skills
             .iter_mut()
             .find(|s| s.skill == attempt.skill)
@@ -296,12 +391,18 @@ fn project(library: &Library, queue: &TeacherRevisitQueue, now: i64) -> Progress
                 cues.push(*cue);
             }
         }
-        let supported = !cues.is_empty() || attempt.self_rating == SelfRating::WithHelp;
-        activity.responses += 1;
-        activity.with_support += usize::from(supported);
-        activity.replayed += usize::from(cues.contains(&Cue::Replay));
-        activity.no_self_report += usize::from(attempt.self_rating == SelfRating::NotReported);
-        let support = if later_support.is_some() {
+        let supported = !cues.is_empty()
+            || attempt.self_rating == SelfRating::WithHelp
+            || sound.is_some_and(|sound| sound.assisted);
+        if !sound_reserved || sound_complete {
+            activity.responses += 1;
+            activity.with_support += usize::from(supported);
+            activity.replayed += usize::from(cues.contains(&Cue::Replay));
+            activity.no_self_report += usize::from(attempt.self_rating == SelfRating::NotReported);
+        }
+        let support = if sound_reserved && !sound_complete {
+            "Incomplete sound trial history; not counted as completed practice".into()
+        } else if later_support.is_some() {
             "Later recorded support also applies".into()
         } else if cues.contains(&Cue::Replay) && cues.iter().all(|c| *c == Cue::Replay) {
             "Reference replay recorded".into()
@@ -310,12 +411,30 @@ fn project(library: &Library, queue: &TeacherRevisitQueue, now: i64) -> Progress
         } else {
             "No help recorded on this response".into()
         };
-        let outcome = outcomes.get(&event.id).cloned().or_else(|| {
-            origin
-                .as_ref()
-                .filter(|o| !o.review)
-                .map(|_| "First lesson response".into())
-        });
+        let outcome = if sound_reserved {
+            sound
+                .filter(|sound| !sound.incomplete)
+                .map(|sound| match sound.mode {
+                    SoundTrialMode::Listening => {
+                        if sound.intended_match == Some(true) {
+                            "Choice matched the intended meaning; no phonetic grade".into()
+                        } else {
+                            "Choice differed from the intended meaning; no phonetic grade".into()
+                        }
+                    }
+                    SoundTrialMode::Speaking => {
+                        "Spoken response saved for the chosen meaning; no pronunciation grade"
+                            .into()
+                    }
+                })
+        } else {
+            outcomes.get(&event.id).cloned().or_else(|| {
+                origin
+                    .as_ref()
+                    .filter(|o| !o.review)
+                    .map(|_| "First lesson response".into())
+            })
+        };
         recent.push(RecentPractice {
             attempt_id: event.id,
             occurred_at_ms: event.recorded_at_ms,
@@ -324,6 +443,7 @@ fn project(library: &Library, queue: &TeacherRevisitQueue, now: i64) -> Progress
             support,
             outcome,
             target,
+            sound_trial: sound.map(|sound| sound.trial),
         });
     }
     // A due exact task is a useful next action; otherwise preserve a valid saved
@@ -364,6 +484,7 @@ fn project(library: &Library, queue: &TeacherRevisitQueue, now: i64) -> Progress
         future,
         recent_questions,
         recent_scene_starts,
+        sound_blocks: sound_blocks(library),
     }
 }
 
@@ -379,6 +500,7 @@ impl AppState {
                 self.start_teacher_revisit(key, now_ms())?;
                 self.navigate(Page::Practice)
             }
+            ProgressTarget::SoundFocus { block } => self.open_sound_focus_history(block),
             ProgressTarget::Passage { revision, skill } => {
                 if generic_target(&self.library, revision, skill).is_none() {
                     return Err("That passage has changed or needs its exact reference. Your saved practice is kept; open the library to choose a current version.".into());
@@ -432,6 +554,37 @@ mod tests {
         let id = event.id;
         library.merge(&[event]).unwrap();
         id
+    }
+    #[test]
+    fn reserved_sound_reference_without_companions_never_becomes_generic_practice() {
+        let definition = rufren_content::sound_contrasts().into_iter().next().unwrap();
+        let contrast: SoundContrastSnapshot =
+            serde_json::from_value(serde_json::to_value(definition).unwrap()).unwrap();
+        let reference = sound_reference_event(&contrast, &contrast.members[0].id).unwrap();
+        let revision = reference.id;
+        let mut library = Library::default();
+        library.merge(&[reference]).unwrap();
+        let id = attempt(&mut library, revision, DAY_MS, vec![]);
+        let snapshot = project(&library, &TeacherRevisitQueue::default(), 2 * DAY_MS);
+        assert!(generic_target(&library, revision, Skill::Writing).is_none());
+        assert_eq!(
+            snapshot
+                .skills
+                .iter()
+                .map(|skill| skill.responses)
+                .sum::<usize>(),
+            0
+        );
+        let raw = snapshot
+            .recent
+            .iter()
+            .find(|row| row.attempt_id == id)
+            .unwrap();
+        assert!(raw.target.is_none());
+        assert!(raw.outcome.is_none());
+        assert!(raw.support.contains("Incomplete sound trial history"));
+        assert!(snapshot.sound_blocks.is_empty());
+        assert_eq!(library.attempts().count(), 1);
     }
     #[test]
     fn progress_excludes_future_and_old_activity_without_losing_inspection() {

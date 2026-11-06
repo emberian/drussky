@@ -20,6 +20,25 @@ impl AppState {
         for explanation in &lesson.explanations {
             material.push_str(&format!("{}: {}\n", explanation.title, explanation.text));
         }
+        for action in self
+            .content
+            .lesson_practice_actions(lesson)
+            .map_err(|e| e.to_string())?
+        {
+            if let rufren_content::LessonPracticeAction::SoundFocus(contrast) = action {
+                material.push_str(&format!(
+                    "Sound Focus — {}: {}\n{}\n",
+                    contrast.title, contrast.teaching_note, contrast.detail_note
+                ));
+                for member in &contrast.members {
+                    material.push_str(&format!(
+                        "Exact sound example: {} — {}\n",
+                        member.utterance.text, member.utterance.meaning
+                    ));
+                }
+                material.push_str("Use the dedicated Sound Focus listening choices before production. For speaking, ask which meaning the learner intends before recording. These authored labels and written spellings do not certify the audio realization; do not give a phonetic or pronunciation grade from text or a transcript.\n");
+            }
+        }
         let summary = self.lesson_practice_summary()?;
         let learner_context = summary.provider_context().to_owned();
         let request = TeacherRequest::TeachLesson(LessonTeachingRequest {

@@ -29,11 +29,13 @@ mod dialogue_audio;
 pub use dialogue_audio::*;
 mod practice_batch;
 pub use practice_batch::*;
+mod sound_contrast;
+pub use sound_contrast::*;
 
 /// Current event encoding. Database migrations and transport compatibility are independent.
-pub const EVENT_VERSION: u32 = 5;
+pub const EVENT_VERSION: u32 = 6;
 pub const MIN_EVENT_VERSION: u32 = 1;
-pub const SYNC_VERSION: u32 = 5;
+pub const SYNC_VERSION: u32 = 6;
 /// Backward-compatible name for callers constructing events; never use for a DB schema.
 pub const SCHEMA_VERSION: u32 = EVENT_VERSION;
 pub const SYNC_BATCH: usize = 128;
@@ -169,6 +171,9 @@ pub enum Fact {
     DialogueAudioAttached(DialogueAudioAttachment),
     DialogueSpeechTranscribed(DialogueSpeechTranscription),
     DialogueTranscriptConfirmed(DialogueTranscriptConfirmation),
+    SoundTrialPrepared(SoundTrialPrepared),
+    SoundReferencePlayed(SoundReferencePlayed),
+    SoundTrialCompleted(SoundTrialCompleted),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
@@ -195,6 +200,9 @@ impl Event {
     }
     pub fn validate(&self) -> Result<(), Error> {
         let required = match &self.fact {
+            Fact::SoundTrialPrepared(_)
+            | Fact::SoundReferencePlayed(_)
+            | Fact::SoundTrialCompleted(_) => 6,
             Fact::TeacherDialogueUserRecorded(_)
             | Fact::TeacherDialogueReplyRecorded(_)
             | Fact::DialogueAudioAttached(_)
@@ -232,6 +240,9 @@ impl Event {
                 {
                     return Err(Error::Invalid("invalid passage or revision parents".into()));
                 }
+                if is_sound_focus_reference(self) {
+                    validate_sound_fact(self)?;
+                }
             }
             Fact::AttemptRecorded(a) => {
                 if a.session.is_nil()
@@ -261,6 +272,9 @@ impl Event {
             Fact::DialogueAudioAttached(_)
             | Fact::DialogueSpeechTranscribed(_)
             | Fact::DialogueTranscriptConfirmed(_) => validate_dialogue_audio_fact(self)?,
+            Fact::SoundTrialPrepared(_)
+            | Fact::SoundReferencePlayed(_)
+            | Fact::SoundTrialCompleted(_) => validate_sound_fact(self)?,
             _ => validate_learning_fact(self)?,
         }
         Ok(())
@@ -291,7 +305,9 @@ impl Library {
         validate_dialogue_audio_identities(&merged)?;
         validate_teacher_document_identities(&merged)?;
         validate_dialogue_graph(&merged)?;
+        validate_sound_identities(&merged)?;
         for event in merged.values() {
+            validate_sound_references(event, &merged)?;
             validate_dialogue_audio_references(event, &merged)?;
             validate_learning_references(event, &merged)?;
             if let Fact::PassageRevised(r) = &event.fact {

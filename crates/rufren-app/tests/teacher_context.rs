@@ -1,6 +1,8 @@
 //! Grounded context selection and bounded upload composition; no model/network calls.
 #![cfg(not(target_arch = "wasm32"))]
 #![allow(dead_code)]
+#[path = "../src/daily_plan.rs"]
+mod daily_plan;
 #[path = "../src/drafts.rs"]
 mod drafts;
 #[path = "../src/editor_drafts.rs"]
@@ -9,8 +11,6 @@ mod editor_drafts;
 mod exposure;
 #[path = "../src/learning.rs"]
 mod learning;
-#[path = "../src/daily_plan.rs"]
-mod daily_plan;
 #[path = "../src/model.rs"]
 mod model;
 #[path = "../src/native_connection.rs"]
@@ -21,6 +21,8 @@ mod native_http;
 mod recognition;
 #[path = "../src/repository.rs"]
 mod repository;
+#[path = "../src/sound_focus.rs"]
+mod sound_focus;
 #[path = "../src/teacher.rs"]
 mod teacher;
 #[path = "../src/teacher_audio_practice.rs"]
@@ -692,4 +694,86 @@ fn teacher_context_prepared_snapshot_matches_request_without_recomputing_later_h
         Some(actual.summary.provider_context()),
         second.learner_context.as_deref()
     );
+}
+
+#[test]
+fn naming_teacher_request_uses_active_sound_projection_with_exact_examples_and_fits_budget() {
+    let mut state = app();
+    state.choose_lesson("ru.lesson.naming").unwrap();
+    let request = state.lesson_teaching_request().unwrap();
+    request.validate().unwrap();
+    let TeacherRequest::TeachLesson(naming) = request else {
+        unreachable!()
+    };
+    assert!(naming.material.len() <= 8192);
+    eprintln!(
+        "Naming Teacher material: {} UTF-8 bytes / 8192",
+        naming.material.len()
+    );
+    let lesson = state.content.lesson("ru.lesson.naming").unwrap();
+    let actions = state.content.lesson_practice_actions(lesson).unwrap();
+    let sound: Vec<_> = actions
+        .iter()
+        .filter_map(|action| match action {
+            rufren_content::LessonPracticeAction::SoundFocus(contrast) => Some(contrast),
+            _ => None,
+        })
+        .collect();
+    assert_eq!(sound.len(), 2);
+    for contrast in sound {
+        assert!(naming.material.contains(&contrast.teaching_note));
+        assert!(naming.material.contains(&contrast.detail_note));
+        for member in &contrast.members {
+            assert!(naming.material.contains(&format!(
+                "Exact sound example: {} — {}",
+                member.utterance.text, member.utterance.meaning
+            )));
+        }
+        for retired in &contrast.retired_exercise_ids {
+            // Retiring a new action must not erase its old saved-task lookup.
+            let old = state.content.exercise(retired).unwrap();
+            assert!(!naming.material.contains(&old.instruction));
+            assert!(!actions.iter().any(|action| matches!(action,
+                rufren_content::LessonPracticeAction::Exercise(exercise) if exercise.id == *retired)));
+        }
+    }
+    for exact in ["Лук.", "Люк.", "Это за́мок.", "Это замо́к."] {
+        assert!(
+            naming.material.contains(exact),
+            "missing exact isolated/carrier utterance: {exact}"
+        );
+    }
+    assert!(
+        naming
+            .material
+            .contains("ask which meaning the learner intends before recording")
+    );
+    assert!(
+        naming
+            .material
+            .contains("written spellings do not certify the audio realization")
+    );
+    assert!(
+        naming
+            .material
+            .contains("do not give a phonetic or pronunciation grade from text or a transcript")
+    );
+
+    // A lesson without Sound Focus keeps its previous phrase/explanation material.
+    state.choose_lesson("ru.lesson.hello").unwrap();
+    let ordinary = state.lesson().unwrap();
+    let mut expected = String::new();
+    for phrase in state.content.lesson_phrases(ordinary) {
+        expected.push_str(&format!("{} — {}\n", phrase.stressed, phrase.translation));
+    }
+    for explanation in &ordinary.explanations {
+        expected.push_str(&format!("{}: {}\n", explanation.title, explanation.text));
+    }
+    let request = state.lesson_teaching_request().unwrap();
+    request.validate().unwrap();
+    let TeacherRequest::TeachLesson(hello) = request else {
+        unreachable!()
+    };
+    assert_eq!(hello.material, expected);
+    assert!(!hello.material.contains("Sound Focus"));
 }

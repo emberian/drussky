@@ -11,6 +11,8 @@ mod exposure;
 mod learning;
 #[path = "../src/daily_plan.rs"]
 mod daily_plan;
+#[path = "../src/sound_focus.rs"]
+mod sound_focus;
 #[path = "../src/model.rs"]
 mod model;
 #[path = "../src/native_connection.rs"]

@@ -1,0 +1,38 @@
+{
+  "request_id": "hybrid-gateway-greeting-v1",
+  "revision_id": "22222222-2222-4222-8222-222222222222",
+  "source_text": "Здравствуйте!",
+  "sha256": "1f431043b464123eb9a023fe2cd52ecaccdca6f15f8a42d82b4328202ed2b138",
+  "sample_rate": 24000,
+  "channels": 1,
+  "frames": 23400,
+  "provenance": {
+    "kind": "ai_generated_speech",
+    "provider": "local_silero_tts",
+    "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e;repo=e382298387332f2bf461fe6eadfde99104611b0c",
+    "voice": "xenia",
+    "prompt_version": "rufren-silero-automatic-v1",
+    "validation": "CPU2;seed=42;put_accent=true,put_stress_homo=true,put_yo=true,put_yo_homo=true,stress_single_vowel=true;peak_amplitude=0.76363492;clipped_samples=0;clipped_fraction=0;full_scale_fraction=0; actual API input recorded; acoustic correctness/stress not certified by ASR; router rufren-local-russian-v1 selected short/ambiguous Russian input; automatic stress is a model choice, not certified disambiguation",
+    "synthesis_input": {
+      "source_text_sha256": "92d6a4ecc0932cf01546d2935fe13ce8b839badfd28336e54b9072186c2241b5",
+      "synthesis_text": "Здравствуйте!",
+      "synthesis_text_sha256": "92d6a4ecc0932cf01546d2935fe13ce8b839badfd28336e54b9072186c2241b5",
+      "transform": "verbatim",
+      "context": "ordinary_text"
+    }
+  },
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "estimated_micro_usd": 0,
+    "reserved_micro_usd": 0
+  },
+  "gateway_elapsed_seconds": 3.830693,
+  "review_status": "public automatic-frontend gateway artifact; lexical/acoustic correctness not independently assessed",
+  "case": "RQ01",
+  "slot2_gateway_elapsed_seconds": null,
+  "raw_artifacts": ".local/reference-quality/slot2/RQ01",
+  "slot2_tts_calls": 0,
+  "contract": "pass",
+  "human_listening": null
+}

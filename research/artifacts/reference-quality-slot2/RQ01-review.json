@@ -1,0 +1,83 @@
+{
+  "case": "RQ01",
+  "source_text": "Здравствуйте!",
+  "expected_spoken_words": "Здравствуйте!",
+  "sha256": "1f431043b464123eb9a023fe2cd52ecaccdca6f15f8a42d82b4328202ed2b138",
+  "contract": "pass",
+  "transcript": "Здравствуйте.",
+  "lexical_differences_from_expected_words": [],
+  "lexical_status": "no_lexical_mismatch",
+  "note": "Literal transcript retained. Numeric glyphs can conceal spoken gender/inflection; never infer them from value alone.",
+  "target_contrast": "not_assessed_by_transcript",
+  "human_listening": null,
+  "tts_elapsed_seconds": null,
+  "asr_elapsed_seconds": 4.719389999983832,
+  "asr_evidence": {
+    "schema_version": "rufren-speech-transcript-v1",
+    "request_id": "reference-quality-slot2-asr-rq01",
+    "attempt_id": null,
+    "revision_id": null,
+    "asset_id": "reference-quality-slot2-rq01",
+    "audio_sha256": "1f431043b464123eb9a023fe2cd52ecaccdca6f15f8a42d82b4328202ed2b138",
+    "original_audio": {
+      "sample_rate": 24000,
+      "channels": 1,
+      "frames": 23400,
+      "encoding": "pcm_s16le",
+      "bits": 16
+    },
+    "source_pcm_sha256": "b388fad0277a5f3d23b126c67f32017519613127625d0386a1c6f7f1199b4fc0",
+    "source_pcm_hash_format": "interleaved-little-endian-f32-no-header-v1",
+    "span": {
+      "start_frame": 0,
+      "end_frame": 23400
+    },
+    "span_coordinate_system": "original_frames_half_open",
+    "derivative": {
+      "sample_rate": 16000,
+      "channels": 1,
+      "frames": 15600,
+      "pcm_sha256": "69f0941c3e90f8be30fd5c04f6898f3ad25716bdc25662bbf6a919d6cba668a0",
+      "pcm_hash_format": "little-endian-f32-no-header-v1",
+      "method": "arithmetic-channel-mean; scipy.signal.resample_poly default Kaiser5",
+      "scipy_version": "1.18.1",
+      "amplitude_normalization": false
+    },
+    "evidence_kind": "transcript_hypothesis",
+    "transcript": "Здравствуйте.",
+    "language": "ru",
+    "language_selection": "explicit_not_detected",
+    "target_conditioned": false,
+    "word_timestamps": null,
+    "word_alignment_status": "not_run",
+    "confidence": null,
+    "acoustic_assessment": null,
+    "provenance": {
+      "provider": "local_qwen3_asr",
+      "model": "mlx-community/Qwen3-ASR-1.7B-bf16",
+      "revision": "e1f6c266914abc5a46e8756e02580f834a6cf8a7",
+      "runtime": "mlx-audio==0.6.4",
+      "mlx_version": "0.32.4",
+      "manifest_sha256": "730f409412ed99134bc62b7989581fa8c42cf699b0c8ddd26846c4e2f2ea9801",
+      "worker_sha256": "874c736c9146fbd044a78e1882ca1052c8af5000acddb129a4c642744db6edd6",
+      "decoding": {
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "seed": 42,
+        "language": "Russian",
+        "hotwords": []
+      }
+    },
+    "timing": {
+      "started_at": "2026-11-06T13:51:23.409354+00:00",
+      "completed_at": "2026-11-06T13:51:27.938358+00:00",
+      "elapsed_seconds": 4.526,
+      "process_peak_rss_bytes": 4326424576,
+      "metal_peak_bytes": 4933685408
+    },
+    "usage": {
+      "prompt_tokens": 31,
+      "generation_tokens": 7
+    }
+  }
+}

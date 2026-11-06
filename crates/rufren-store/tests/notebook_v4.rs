@@ -47,24 +47,38 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
     )
     .unwrap();
     originals.push((archive, archive_json));
-    drop(raw);
-    let mut store = Store::open(&path).unwrap();
-    assert_eq!(store.library().unwrap().events.len(), 4);
     let request_id = Uuid::new_v4();
     let request = serde_json::from_value(serde_json::json!({
         "request_id":request_id,"thread_id":request_id,"parent_reply_id":null,
         "config":{"intent":"clarification","topic":"Synthetic current dialogue","teacher_role":null,"learner_role":null},
         "action":"ask","correction":"off","anchor":null,"ancestors":[],"omitted_parent_id":null,"omitted_count":0,"text":"Why does this ending change?"
     })).unwrap();
-    let new = Event::new(
+    let mut dialogue = Event::new(
         Uuid::new_v4(),
         5,
         Fact::TeacherDialogueUserRecorded(request),
     )
     .unwrap();
+    dialogue.version = 5; // Historical dialogue bytes remain5 under the current reader.
+    let dialogue_json = serde_json::to_string_pretty(&dialogue).unwrap();
+    raw.execute(
+        "INSERT INTO events(id,json) VALUES (?1,?2)",
+        rusqlite::params![dialogue.id.to_string(), &dialogue_json],
+    )
+    .unwrap();
+    originals.push((dialogue, dialogue_json));
+    drop(raw);
+    let mut store = Store::open(&path).unwrap();
+    assert_eq!(store.library().unwrap().events.len(), 5);
+    let prepared: SoundTrialPrepared = serde_json::from_str(include_str!(
+        "../../../scripts/platform/fixtures/sound-v6-prepared.json"
+    ))
+    .unwrap();
+    let trial_id = prepared.trial_id;
+    let new = Event::new(Uuid::new_v4(), 6, Fact::SoundTrialPrepared(prepared)).unwrap();
     assert_eq!(new.version, EVENT_VERSION);
-    assert!(new.version >= 5);
-    for version in [3, 4] {
+    assert!(new.version >= 6);
+    for version in [3, 4, 5] {
         assert!(
             store
                 .exchange(&SyncRequest {
@@ -75,7 +89,7 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
                 })
                 .is_err()
         );
-        assert_eq!(store.library().unwrap().events.len(), 4);
+        assert_eq!(store.library().unwrap().events.len(), 5);
         assert!(
             store.get::<Uuid>("relay").unwrap().is_none(),
             "old protocol refusal precedes identity/cursor/write processing"
@@ -91,7 +105,7 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
         .unwrap();
     assert_eq!(accepted.version, SYNC_VERSION);
     assert_eq!(accepted.accepted, vec![new.id]);
-    assert_eq!(accepted.events.len(), 5);
+    assert_eq!(accepted.events.len(), 6);
     drop(store);
     let reopened = Store::open(&path).unwrap();
     assert_eq!(reopened.library().unwrap().teacher_documents().len(), 1);
@@ -101,6 +115,13 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
             .library()
             .unwrap()
             .dialogue_user(request_id)
+            .is_some()
+    );
+    assert!(
+        reopened
+            .library()
+            .unwrap()
+            .sound_prepared(trial_id)
             .is_some()
     );
     drop(reopened);

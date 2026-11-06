@@ -12,6 +12,22 @@ use rufren_core::*;
 
 #[component]
 pub(crate) fn Practice(app: Signal<AppState>) -> Element {
+    match app.read().sound_focus_is_selected() {
+        Ok(true) => {
+            let session = app
+                .read()
+                .sound_focus_draft()
+                .ok()
+                .flatten()
+                .map(|d| d.session_id)
+                .unwrap_or_default();
+            return rsx! {crate::sound_focus_view::SoundFocusView {key:"sound-focus-{session}",app}};
+        }
+        Err(problem) => {
+            return rsx! {section {class:"panel",h1 {"Your practice needs attention"}p {role:"alert","{problem}"}}};
+        }
+        Ok(false) => {}
+    }
     let active = app.read().active_teacher_revisit();
     match active {
         Ok(Some((answer, snapshot))) => {

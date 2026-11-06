@@ -4,6 +4,12 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
 use unicode_normalization::UnicodeNormalization;
 
+pub mod sound_contrast;
+pub use sound_contrast::{
+    LessonPracticeAction, SoundContrastDefinition, SoundMemberDefinition, SoundTaskDefinition,
+    SoundUtteranceDefinition, SoundUtteranceKind, sound_contrast, sound_contrasts,
+};
+
 pub const SCHEMA_VERSION: u32 = 1;
 pub const EMBEDDED_JSON: &str = include_str!("../data/beginner-v1.json");
 

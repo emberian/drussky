@@ -71,7 +71,7 @@ pub(crate) fn Progress(app: Signal<AppState>) -> Element {
                         p {if activity.responses==1 {"completed response"}else{"completed responses"}}
                         p {class:"quiet","{activity.with_support} with recorded support · {activity.no_self_report} without a self-report"}
                         if let Some(target)=next {
-                            button {class:"text-button",onclick:move |_|open(app,target),"Revisit {skill.label()} →"}
+                            button {class:"text-button",onclick:move |_|open(app,target),if matches!(target,ProgressTarget::SoundFocus{..}) {"See this sound practice →"}else{"Revisit {skill.label()} →"}}
                         }else {button {class:"text-button",onclick:move |_|{act(app,|s|s.navigate(Page::Today));crate::focus_page_heading();},"Choose some practice →"}}
                     }
                 }}
@@ -101,16 +101,30 @@ pub(crate) fn Progress(app: Signal<AppState>) -> Element {
             if snapshot.recent.is_empty() {p {"No completed practice is recorded in the last seven days. Start small; earlier work remains saved."}}
             for row in snapshot.recent.iter().take(12) {
                 {let target=row.target;rsx! {
-                    div {class:"progress-practice-row","data-progress-attempt":row.attempt_id.to_string(),
+                    div {class:"progress-practice-row","data-progress-attempt":row.attempt_id.to_string(),"data-sound-trial":row.sound_trial.map(|id|id.to_string()).unwrap_or_default(),"data-sound-block":match target {Some(ProgressTarget::SoundFocus{block})=>block.to_string(),_=>String::new()},
                         div {span {class:"tag","{row.skill.label()}"}strong {"{row.title}"}
                             small {"{row.support} · {age(row.occurred_at_ms,now)}"}
                             if let Some(outcome)=&row.outcome {small {"{outcome}"}}
                         }
                         if let Some(target)=target {button {class:"secondary",onclick:move |_|open(app,target),
-                            match target {ProgressTarget::Teacher(_)=>"Return to this question →",ProgressTarget::Passage{..}=>"Practice this passage →"}
+                            match target {ProgressTarget::Teacher(_)=>"Return to this question →",ProgressTarget::Passage{..}=>"Practice this passage →",ProgressTarget::SoundFocus{..}=>"See this sound practice →"}
                         }}else {small {class:"quiet","Its saved evidence is kept. Sync or resolve the exact source before reopening it."}}
                     }
                 }}
+            }
+        }
+        if !snapshot.sound_blocks.is_empty() {
+            section {class:"panel progress-sound-history",aria_label:"Saved sound practice",
+                h2 {"Your sound practice"}
+                p {class:"quiet","Reopen the exact saved examples, plays, and responses. A prepared trial is setup, not a completed response."}
+                for block in &snapshot.sound_blocks {
+                    {let id=block.block;rsx! {div {class:"progress-practice-row","data-sound-block":id.to_string(),
+                        div {strong {"{block.title}"}small {"{block.completed} completed · {block.unfinished} unfinished"}
+                            if block.incomplete>0 {small {"{block.incomplete} saved responses need their complete trial history"}}
+                        }
+                        button {class:"secondary",onclick:move |_|open(app,ProgressTarget::SoundFocus{block:id}),"See this sound practice →"}
+                    }}}
+                }
             }
         }
         if snapshot.recent_questions+snapshot.recent_scene_starts>0 {

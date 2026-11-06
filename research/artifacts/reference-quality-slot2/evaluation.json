@@ -1,0 +1,159 @@
+{
+  "schema": "rufren-reference-quality-slot2-v1",
+  "authorization_scope": {
+    "tts_attempts": 4,
+    "asr_attempts": 5,
+    "retries": 0,
+    "downloads": 0,
+    "gpu_released": true
+  },
+  "human_listening": null,
+  "cases": [
+    {
+      "case": "RQ01",
+      "source_text": "Здравствуйте!",
+      "expected_spoken_words": "Здравствуйте!",
+      "path": "research/artifacts/reference-quality-slot2/RQ01.wav",
+      "sha256": "1f431043b464123eb9a023fe2cd52ecaccdca6f15f8a42d82b4328202ed2b138",
+      "sample_rate": 24000,
+      "frames": 23400,
+      "contract": "pass",
+      "literal_transcript": "Здравствуйте.",
+      "lexical_content": "usable_for_independent_lexical_recoverability",
+      "target_contrast": "not_applicable",
+      "human_listening": null,
+      "tts_elapsed_seconds": null,
+      "asr_elapsed_seconds": 4.719389999983832,
+      "signal": {
+        "peak": 0.76361083984375,
+        "full_scale_samples": 0
+      },
+      "teaching_use": "usable for complete lexical reference/replay; exact phonetic correctness unresolved"
+    },
+    {
+      "case": "RQ06",
+      "source_text": "На двери висит замок, а на холме стоит старый замок.",
+      "expected_spoken_words": "На двери висит замок, а на холме стоит старый замок.",
+      "path": "research/artifacts/reference-quality-slot2/RQ06.wav",
+      "sha256": "b2eba78877afec1cb6a038617bbc4f037b34f89afb1a0ac05a5b43d14893c476",
+      "sample_rate": 24000,
+      "frames": 119040,
+      "contract": "pass",
+      "literal_transcript": "На двери висит замок, а на холме стоит старый замок.",
+      "lexical_content": "usable_for_independent_lexical_recoverability",
+      "target_contrast": "suspect_contextual_stress_switch",
+      "human_listening": null,
+      "tts_elapsed_seconds": 2.1966299160849303,
+      "asr_elapsed_seconds": 5.064344000071287,
+      "signal": {
+        "peak": 0.433135986328125,
+        "full_scale_samples": 0
+      },
+      "teaching_use": "usable for complete lexical replay; exclude from scored lock/castle stress contrast",
+      "acoustic_evidence": "context-measurements.json",
+      "exact_stress_verdict": "unresolved; candidate V1 short/V2 long in both phrase endings"
+    },
+    {
+      "case": "RQ07",
+      "source_text": "У меня сегодня 2 вопроса, 5 идей и 21 свободная минута.",
+      "expected_spoken_words": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+      "path": "research/artifacts/reference-quality-slot2/RQ07.wav",
+      "sha256": "f194a2de0fae42ce3b0487ba4e0c9586ab9675184301862422c3a49503ad6d09",
+      "sample_rate": 24000,
+      "frames": 138240,
+      "contract": "pass",
+      "literal_transcript": "У меня сегодня два вопроса, пять идей и двадцать один свободная минута.",
+      "lexical_content": "suspect_gender_agreement_hypothesis",
+      "target_contrast": "not_applicable",
+      "human_listening": null,
+      "tts_elapsed_seconds": 2.517312458017841,
+      "asr_elapsed_seconds": 4.953708916902542,
+      "signal": {
+        "peak": 0.668548583984375,
+        "full_scale_samples": 0
+      },
+      "teaching_use": "retain_for_review; use authored spoken-number wording RQ08 for this intended reference",
+      "lexical_interpretation": {
+        "expected_value": 21,
+        "recognized_value": 21,
+        "expected_form": "одна",
+        "recognized_form": "один",
+        "numeric_orthography_only": false,
+        "phonetic_error_confirmed": false,
+        "repair_evidence": [
+          "RQ08 same-provider spelled-out control",
+          "RQ09 different-provider authored-stress control"
+        ]
+      }
+    },
+    {
+      "case": "RQ08",
+      "source_text": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+      "expected_spoken_words": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+      "path": "research/artifacts/reference-quality-slot2/RQ08.wav",
+      "sha256": "f387b980b4b98a91b81f299fbb07cab01a81ca4874f2197a1bc10599eea8ceaa",
+      "sample_rate": 24000,
+      "frames": 132480,
+      "contract": "pass",
+      "literal_transcript": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+      "lexical_content": "usable_for_independent_lexical_recoverability",
+      "target_contrast": "not_applicable",
+      "human_listening": null,
+      "tts_elapsed_seconds": 2.491250750143081,
+      "asr_elapsed_seconds": 4.900911665987223,
+      "signal": {
+        "peak": 0.514923095703125,
+        "full_scale_samples": 0
+      },
+      "teaching_use": "usable for complete lexical reference/replay; exact phonetic correctness unresolved"
+    },
+    {
+      "case": "RQ09",
+      "source_text": "У меня́ сего́дня два вопро́са, пять иде́й и два́дцать одна́ свобо́дная мину́та.",
+      "expected_spoken_words": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+      "path": "research/artifacts/reference-quality-slot2/RQ09.wav",
+      "sha256": "da717d15d9c70e49253bbcdffd9f40db25775f18354a4ef2253e25ec2f71dbae",
+      "sample_rate": 24000,
+      "frames": 93000,
+      "contract": "pass",
+      "literal_transcript": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+      "lexical_content": "usable_for_independent_lexical_recoverability",
+      "target_contrast": "not_applicable",
+      "human_listening": null,
+      "tts_elapsed_seconds": 3.8635025001131,
+      "asr_elapsed_seconds": 4.905212166951969,
+      "signal": {
+        "peak": 0.56170654296875,
+        "full_scale_samples": 0
+      },
+      "teaching_use": "usable for complete lexical reference/replay; exact phonetic correctness unresolved"
+    }
+  ],
+  "slot1_preservation": {
+    "evaluation_sha256": "5beffe481cebc5c3b7e1f684e34bfc32d6662fb40db74a10a425e5e9bfd9615e",
+    "all_manifest_artifacts_reverified_unchanged": true
+  },
+  "raw_artifacts": ".local/reference-quality/slot2/<case>/{attempt,tts-request,tts-response,asr-request,asr-response}.json and asr-stderr.log; RQ01 has reuse.json instead of new TTS",
+  "artifact_hashes": {
+    "RQ01-review.json": "5ec96ccec845424c0d096f7092d1f24e75a175870337605bddd5b791362c3ac8",
+    "RQ01.json": "298303131e993cf857dd57b4036cf2849932807520979f6fbc2d5ca7019ed409",
+    "RQ01.wav": "1f431043b464123eb9a023fe2cd52ecaccdca6f15f8a42d82b4328202ed2b138",
+    "RQ06-first_phrase_ending.wav": "f05d50a7743becddb67961c2de9f45545fb009a555b09f8157bf2d9f3937fb77",
+    "RQ06-review.json": "e4c443bf970a72e9253bf812630ee814966988f691b2e3e6dce7fca4455330f8",
+    "RQ06-second_phrase_ending.wav": "4ce2cb2a7dacd9a7d86da4b416ea0f5693e924dc6bea37c537a4ab08b9163d48",
+    "RQ06.json": "f770c5fc69f3a4b5697fc90b4f03be51a50d7cb801e86b2f77d2a37ccd005329",
+    "RQ06.wav": "b2eba78877afec1cb6a038617bbc4f037b34f89afb1a0ac05a5b43d14893c476",
+    "RQ07-review.json": "d67d24528f6f282e942ba8ec9e44f81a82370d9dcc62e7f21016396c7686c545",
+    "RQ07.json": "0c12eb3685fccb5b234f3a0dce3bb6781e9dd1fcbe56e99c41d58a4118699ae8",
+    "RQ07.wav": "f194a2de0fae42ce3b0487ba4e0c9586ab9675184301862422c3a49503ad6d09",
+    "RQ08-review.json": "09b59f1ffd667b797f63800877db4d3ab60224558063ff25e4e87976eba6184b",
+    "RQ08.json": "e86e3007969c3cfa7fd84be5982455f67fa9ac2bab8d7c396151364b3dce13d9",
+    "RQ08.wav": "f387b980b4b98a91b81f299fbb07cab01a81ca4874f2197a1bc10599eea8ceaa",
+    "RQ09-review.json": "a993bfb718e85f57137b80e5af56f931505e4d20d17ddae575e88f01e2608ccc",
+    "RQ09.json": "482fcb8aea8a90a2e42dd00c33e4e645aeb7c2a4da9c0fcccd9a11cc3c7e89fe",
+    "RQ09.wav": "da717d15d9c70e49253bbcdffd9f40db25775f18354a4ef2253e25ec2f71dbae",
+    "context-inspection.png": "72fe4bd609514457a9e06d48ecd7f1ddb1974707d3a9ea4253c558d1d44b4eb9",
+    "context-measurements.json": "9c92721c22b41fac882d02b9b980c7b4f052f34df0e9b58fe77c2b940935e63c",
+    "context-targets.png": "4e2902e01261d8b14b87a49820435d854f9a82d89c5d83c515133df93fdb192e"
+  }
+}

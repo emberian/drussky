@@ -270,6 +270,38 @@ async fn network_teacher_and_speech_require_auth_and_report_disabled() {
             .status(),
         503
     );
+    for (text, message) in [
+        (
+            "На двери висит замок, а на холме стоит старый замок.",
+            rufren_speech::SpeechError::AmbiguousStress.to_string(),
+        ),
+        (
+            "Приве́т! Это замок.",
+            rufren_speech::SpeechError::AmbiguousStress.to_string(),
+        ),
+        (
+            "У меня 21 свободная минута.",
+            rufren_speech::SpeechError::SpokenFormRequired.to_string(),
+        ),
+    ] {
+        let body = serde_json::json!({"request_id":"request-1","revision_id":null,"text":text});
+        let denied = client
+            .post(format!("{url}/api/speech/generate"))
+            .json(&body)
+            .send()
+            .await
+            .unwrap();
+        assert_eq!(denied.status(), 401);
+        let response = client
+            .post(format!("{url}/api/speech/generate"))
+            .bearer_auth(token)
+            .json(&body)
+            .send()
+            .await
+            .unwrap();
+        assert_eq!(response.status(), 400);
+        assert_eq!(response.text().await.unwrap(), message);
+    }
     server.abort();
 }
 

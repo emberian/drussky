@@ -147,3 +147,37 @@ Focused verification (coordinate with the workspace build owner):
 cargo test -p rufren-content --test content_lineage
 cargo test -p rufren-content --test content_contract
 ```
+
+## Sound Focus catalog
+
+`src/sound_contrast.rs` supplies standalone, serde-compatible authored definitions
+for hard/soft л and lexical stress, without a `.5` phrase-pack migration. Contrast,
+member, exact utterance, and identify/produce task each have an immutable ID/version.
+`SoundContrastDefinition` contains the safe English options, brief teaching notes,
+source links, and the three legacy actions retired from new discovery.
+
+Use `ContentPack::lesson_practice_actions(&lesson)` for **new** lesson actions and
+new AI-teacher material. It returns `LessonPracticeAction::SoundFocus` and
+`LessonPracticeAction::Exercise` through one projection. In the naming lesson,
+Sound Focus replaces new starts of `hear-soft`, `hear-stress`, and `say-contrast`;
+`mark-stress` remains a separate written task. Raw `exercise`, `lesson_exercises`,
+lesson membership, old answer specifications, and saved snapshots stay intact for
+history and resumption. The projection rejects a stale lesson or incompatible
+lexical reference instead of falling back to the retired flow.
+
+The new isolated utterances are exactly `Лук.` and `Люк.`. Their related `.07/.08`
+phrase IDs at `.3` are lexical provenance, not permission to attach isolated WAVs
+as recordings of `Это лук.` or `Это люк.`. The stress utterances are separately
+versioned exact `Это за́мок.` and `Это замо́к.` strings, related to `.09/.10@.3`.
+Core/app builders create sound-specific reference identities and bind actual
+recording events, assets, hashes, and displayed options in durable trials. Ordinary
+Russian text equality cannot distinguish the two stress members.
+
+The catalog labels intended meanings; it does not certify an audio realization.
+A first four-trial schedule, recorded intended meaning before production, playback
+acknowledgment, assistance, and evidence projection are core/app responsibilities.
+Tests for this seam are narrowly available with:
+
+```text
+cargo test -p rufren-content --test sound_contrast
+```

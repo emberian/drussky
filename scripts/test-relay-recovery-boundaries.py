@@ -108,6 +108,48 @@ class RecoveryBoundaries(unittest.TestCase):
             self.assertFalse(backup.with_suffix('.sqlite-wal').exists())
             self.assertFalse(backup.with_suffix('.sqlite-shm').exists())
 
+    def test_sound_nested_sources_and_spoken_originals_require_complete_verified_audio(self):
+        # These fixtures intentionally exercise only fields read by the backup
+        # tool; the separate real-client/Rust-reader acceptance validates full6 facts.
+        for kind in ('sound_trial_prepared', 'sound_reference_played', 'sound_trial_completed'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temporary:
+                folder = Path(temporary)
+                database, assets, digest = fixture(folder, register=False)
+                reference = dict(asset_id='take-a', asset=dict(sha256=digest))
+                second = dict(asset_id='take-b', asset=dict(sha256=digest))
+                data = ({'references': [reference, second]} if kind == 'sound_trial_prepared' else
+                        {'reference': reference} if kind == 'sound_reference_played' else
+                        {'response': {'kind': 'speaking', **reference}})
+                with sqlite3.connect(database) as connection:
+                    event = json.loads(connection.execute('SELECT json FROM events').fetchone()[0])
+                    event.update(version=6, fact=dict(kind=kind, data=data))
+                    connection.execute('UPDATE events SET json=?', (json.dumps(event),))
+                pending = invoke('backup', database, folder / 'pending.sqlite', '--assets', assets)
+                self.assertNotEqual(pending.returncode, 0)
+                self.assertIn('have not completed recording sync', pending.stderr)
+                self.assertFalse((folder / 'pending.sqlite.json').exists())
+                content = (assets / f'{digest}.blob').read_bytes()
+                with sqlite3.connect(database) as connection:
+                    for asset_id in ['take-a', 'take-b'] if kind == 'sound_trial_prepared' else ['take-a']:
+                        connection.execute('INSERT INTO metadata VALUES (?,?)', ('asset.record.' + asset_id,
+                            json.dumps(dict(asset_id=asset_id, content_hash=digest, byte_length=len(content)))))
+                backup, restored = folder / 'complete.sqlite', folder / 'restored.sqlite'
+                copied = invoke('backup', database, backup, '--assets', assets)
+                self.assertEqual(copied.returncode, 0, copied.stderr)
+                self.assertEqual(invoke('restore', backup, restored).returncode, 0)
+                self.assertEqual((folder / 'restored.sqlite.assets' / f'{digest}.blob').read_bytes(), content)
+                with sqlite3.connect(restored) as connection:
+                    self.assertEqual(json.loads(connection.execute('SELECT json FROM events').fetchone()[0]), event)
+                target = (data['references'][1] if kind == 'sound_trial_prepared' else
+                          data['reference'] if kind == 'sound_reference_played' else data['response'])
+                target['asset']['sha256'] = '0' * 64
+                with sqlite3.connect(database) as connection:
+                    connection.execute('UPDATE events SET json=?', (json.dumps(event),))
+                mismatch = invoke('backup', database, folder / 'mismatch.sqlite', '--assets', assets)
+                self.assertNotEqual(mismatch.returncode, 0)
+                self.assertIn('hash contradicts', mismatch.stderr)
+                self.assertFalse((folder / 'mismatch.sqlite.json').exists())
+
     def test_missing_committed_original_and_conflicting_reference_fail_closed(self):
         with tempfile.TemporaryDirectory() as temporary:
             folder = Path(temporary)

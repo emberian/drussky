@@ -1,0 +1,101 @@
+{
+  "schema": "rufren-reference-quality-slot1-v1",
+  "authorization_scope": {
+    "tts_attempts": 3,
+    "asr_attempts": 3,
+    "retries": 0,
+    "remaining_cases": "unexecuted; require separate slot"
+  },
+  "human_listening": null,
+  "cases": [
+    {
+      "case": "RQ02",
+      "source_text": "Лук.",
+      "path": "research/artifacts/reference-quality-slot1/RQ02.wav",
+      "sha256": "bf19ea6c569402b083cd07050b8fa901530fc9a387154b18d83278088b496fd1",
+      "sample_rate": 24000,
+      "frames": 15000,
+      "contract": "pass",
+      "lexical_content": "usable_for_independent_lexical_recoverability",
+      "target_contrast": "usable_for_guided_comparison_of_exact_pair",
+      "teaching_use": "labelled models, exact-example identification, then transfer; learner phonetics ungraded",
+      "unresolved": [
+        "native phonetic correctness",
+        "human listening verdict",
+        "generalization to other tokens/voices"
+      ],
+      "transcript": "Лук.",
+      "tts_elapsed_seconds": 4.125984583981335,
+      "asr_elapsed_seconds": 5.462197625078261
+    },
+    {
+      "case": "RQ03",
+      "source_text": "Люк.",
+      "path": "research/artifacts/reference-quality-slot1/RQ03.wav",
+      "sha256": "2cdd4b1197b6c638080b5e8a2a32438b0a7bcff4073999abbaac649d8d066669",
+      "sample_rate": 24000,
+      "frames": 15600,
+      "contract": "pass",
+      "lexical_content": "usable_for_independent_lexical_recoverability",
+      "target_contrast": "usable_for_guided_comparison_of_exact_pair",
+      "teaching_use": "labelled models, exact-example identification, then transfer; learner phonetics ungraded",
+      "unresolved": [
+        "native phonetic correctness",
+        "human listening verdict",
+        "generalization to other tokens/voices"
+      ],
+      "transcript": "Люк.",
+      "tts_elapsed_seconds": 3.75736525002867,
+      "asr_elapsed_seconds": 4.659412791952491
+    },
+    {
+      "case": "RQ10",
+      "source_text": "Для каждого натурального числа существует следующее число, которое на единицу больше.",
+      "path": "research/artifacts/reference-quality-slot1/RQ10.wav",
+      "sha256": "52471afe3adb55242515d04d658e9c3742d9dd631a2e43beb94770cb8737c9a6",
+      "sample_rate": 24000,
+      "frames": 151680,
+      "contract": "pass",
+      "lexical_content": "usable_for_independent_lexical_recoverability",
+      "target_contrast": "not_applicable",
+      "teaching_use": "complete mathematical reference and replay",
+      "unresolved": [
+        "prosodic naturalness",
+        "human listening verdict"
+      ],
+      "transcript": "Для каждого натурального числа существует следующее число, которое на единицу больше.",
+      "tts_elapsed_seconds": 2.758412417024374,
+      "asr_elapsed_seconds": 4.921261792071164
+    }
+  ],
+  "reused_verified": [
+    {
+      "path": ".local/silero-tts/samples/hybrid-gateway-greeting-v1.wav",
+      "sha256": "1f431043b464123eb9a023fe2cd52ecaccdca6f15f8a42d82b4328202ed2b138"
+    },
+    {
+      "path": ".local/silero-tts/samples/silero-stress-castle-v1.wav",
+      "sha256": "3ce677ebdad80003b514c177abdb2eb7efbc7674a92acbc2abf2f80b8d51ebe4"
+    },
+    {
+      "path": ".local/silero-tts/samples/silero-stress-lock-v1.wav",
+      "sha256": "3f0198c2415844291042e3161e445520e6d9aad7aec0c6956596a8c1e2d0ec76"
+    }
+  ],
+  "raw_artifacts": ".local/reference-quality/slot1/<case>/{attempt,tts-request,tts-response,asr-request,asr-response}.json and asr-stderr.log",
+  "artifact_hashes": {
+    "RQ02-review.json": "9db6a04ea799975d8f27601827aa9eae11a3e863e9c634f72ac47b40276d0660",
+    "RQ02-transition.wav": "3927d78e1b6630d979a58725354ecd1f4611e25a98dc28bd017c42520ffd1d9c",
+    "RQ02.json": "1748c9717a4f203ff63464927ea9c73d86a01a879355d7dec2724d7d817da0d7",
+    "RQ02.wav": "bf19ea6c569402b083cd07050b8fa901530fc9a387154b18d83278088b496fd1",
+    "RQ03-review.json": "bf860104bed69825273344da755e31d406d7063fdd3074123a70a016620e2287",
+    "RQ03-transition.wav": "0d670932938f7dc90da47091661e9620da6fc020f1ebb19c83af2d9b21c99505",
+    "RQ03.json": "78b48610a49aabb730bb808e14b18e3091c2721e63917da61a14da9c214b3beb",
+    "RQ03.wav": "2cdd4b1197b6c638080b5e8a2a32438b0a7bcff4073999abbaac649d8d066669",
+    "RQ10-review.json": "1efced3eb39c61e4dc20ff39fc6d3df1668f2dccc0c46352ad30b84ccff5cd93",
+    "RQ10.json": "15095e95def33ffb48fa7a04111687da7a129d5a2ecd2d269fd9a3d89b7f0fe9",
+    "RQ10.wav": "52471afe3adb55242515d04d658e9c3742d9dd631a2e43beb94770cb8737c9a6",
+    "lateral-comparison.png": "1819a5b69d8d0b1d6e8acd5941a3b4070ea3d061a53e536b39a2d75b107e103f",
+    "pair-measurements.json": "16cdb78b7055b1040db328590e5ef04711578da06254159789b524ca6d70371d"
+  }
+}

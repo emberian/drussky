@@ -1,0 +1,36 @@
+{
+  "request_id": "reference-quality-slot2-rq09",
+  "revision_id": null,
+  "source_text": "У меня́ сего́дня два вопро́са, пять иде́й и два́дцать одна́ свобо́дная мину́та.",
+  "sha256": "da717d15d9c70e49253bbcdffd9f40db25775f18354a4ef2253e25ec2f71dbae",
+  "sample_rate": 24000,
+  "channels": 1,
+  "frames": 93000,
+  "provenance": {
+    "kind": "ai_generated_speech",
+    "provider": "local_silero_tts",
+    "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e;repo=e382298387332f2bf461fe6eadfde99104611b0c",
+    "voice": "xenia",
+    "prompt_version": "rufren-silero-explicit-v1",
+    "validation": "CPU2;seed=42;put_accent=false,put_stress_homo=false,put_yo=false,put_yo_homo=false,stress_single_vowel=false;peak_amplitude=0.561709642;clipped_samples=0;clipped_fraction=0;full_scale_fraction=0; actual API input recorded; acoustic correctness/stress not certified by ASR; router rufren-local-russian-v1 selected authored explicit stress; audible stress remains unverified",
+    "synthesis_input": {
+      "source_text_sha256": "2e90aa016253d2a11c53393fc028739340d67c6a36c6ee8a957d475a2a1b642e",
+      "synthesis_text": "У мен+я сег+одня два вопр+оса, пять ид+ей и дв+адцать одн+а своб+одная мин+ута.",
+      "synthesis_text_sha256": "649b0e45412b0da8cc3f9497fa79fdbfc3cbe1d9cf7a6cd47d39b4972d2b8453",
+      "transform": "pedagogical_acute_to_silero_plus",
+      "context": "explicit_stress"
+    }
+  },
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "estimated_micro_usd": 0,
+    "reserved_micro_usd": 0
+  },
+  "case": "RQ09",
+  "slot2_gateway_elapsed_seconds": 3.8635025001131,
+  "raw_artifacts": ".local/reference-quality/slot2/RQ09",
+  "slot2_tts_calls": 1,
+  "contract": "pass",
+  "human_listening": null
+}

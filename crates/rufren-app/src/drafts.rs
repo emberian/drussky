@@ -109,6 +109,8 @@ impl AppState {
         self.repo.set("session", &Some(&record.session))?;
         self.session = Some(record.session);
         self.plan = record.plan;
+        self.clear_active_teacher_revisit()?;
+        self.select_ordinary_practice_surface()?;
         self.page = Page::Practice;
         self.notice = "Practice resumed with your response and support kept.".into();
         Ok(())

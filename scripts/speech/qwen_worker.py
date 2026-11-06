@@ -35,6 +35,7 @@ for name in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "VECL
 os.environ.update(HF_HOME=str(STATE / "hf-cache"), HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", HF_HUB_DISABLE_TELEMETRY="1")
 
 from qwen_frontend import UnsupportedStress, synthesis_input
+from generation_text import validate_generation_text
 
 ID = re.compile(r"[A-Za-z0-9_.:-]{1,128}\Z")
 
@@ -50,6 +51,7 @@ def validate(request):
             or not isinstance(request_id, str) or not ID.fullmatch(request_id)
             or revision_id is not None and (not isinstance(revision_id, str) or not ID.fullmatch(revision_id))):
         raise ValueError("Invalid short text or binding")
+    validate_generation_text(text)
     return {"text": text, "request_id": request_id, "revision_id": revision_id}
 
 

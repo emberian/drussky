@@ -96,6 +96,14 @@ class WorkerContracts(unittest.TestCase):
         except urllib.error.HTTPError as error:
             return error.code, json.load(error)
 
+    def test_worker_generation_preflight_rejects_before_fake_engine_admission(self):
+        for text in ["На двери висит замок, а на холме стоит старый замок.", "Приве́т! Это замок.", "Это за́мок, а это замок.", "У меня 21 свободная минута."]:
+            with self.subTest(text=text):
+                self.assertEqual(self.call(data={**self.request, "text": text})[0], 400)
+                self.assertEqual(self.engine.calls, 0)
+        self.assertEqual(self.call()[0], 200)
+        self.assertEqual(self.engine.calls, 1)
+
     def test_worker_auth_before_body_decode_and_status_does_not_load(self):
         self.engine.model = None; self.engine.prepared = False
         status, _ = self.call(data="invalid", token="wrong")

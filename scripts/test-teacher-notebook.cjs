@@ -3,6 +3,7 @@ const { chromium } = require(process.env.RUFREN_PLAYWRIGHT_MODULE || 'playwright
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { CURRENT_PROTOCOL } = require('./qa-current-protocol.cjs');
 const { navigate } = require('./qa-navigation.cjs');
 const { teacherResponse } = require('./test-teacher-oral.cjs');
 
@@ -151,7 +152,7 @@ async function main() {
     const beta = await flow.getAttribute('data-lesson-document'); assert.notEqual(beta, alpha);
     await input.fill('Черновик Beta: отдельный ответ');
     const lessons = (await documents()).filter(e => e.fact.data.response.request.mode === 'teach_lesson');
-    assert.equal(lessons.length, 2); assert(lessons.every(e => e.version === 5));
+    assert.equal(lessons.length, 2); assert(lessons.every(e => e.version === CURRENT_PROTOCOL));
     assert.equal((await events(page)).filter(e => e.fact.kind === 'attempt_recorded').length, 0, 'Navigation and saving documents are not completed practice');
     await openSaved('alpha notebook'); await step(1);
     assert.equal(await flow.getAttribute('data-lesson-document'), alpha); assert.equal(await input.getAttribute('id'), alphaField);

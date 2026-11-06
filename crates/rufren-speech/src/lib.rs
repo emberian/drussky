@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 mod local_russian;
 #[cfg(all(feature = "server", target_os = "macos"))]
 mod macos;
+mod generation_text;
 mod qwen_frontend;
 #[cfg(feature = "server")]
 mod qwen_local;
@@ -228,9 +229,11 @@ pub enum SpeechError {
     )]
     UnsupportedStress,
     #[error(
-        "This short phrase has an ambiguous Russian stress pattern. Add the intended stress mark (for example, за́мок or замо́к), or supply a full sentence that makes the meaning clear; no audio was generated"
+        "A known Russian stress ambiguity needs an intended stress mark on each occurrence, even in a full sentence (for example, за́мок or замо́к). Ask the AI teacher to help prepare marked wording, then review it before generating; no audio was generated"
     )]
     AmbiguousStress,
+    #[error("Russian reference text containing numeric glyphs needs explicit spoken wording. Keep the original and ask the AI teacher to write the numbers as inflected Russian words; review and select that wording before generating audio. No audio was generated")]
+    SpokenFormRequired,
     #[error("This relay process has used its speech generation budget")]
     BudgetExceeded,
     #[error("The speech provider rejected its API credential")]

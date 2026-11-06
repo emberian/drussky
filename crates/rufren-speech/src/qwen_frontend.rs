@@ -5,23 +5,6 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const ACUTE: char = '\u{301}';
-const AMBIGUOUS: &[&str] = &[
-    "замок",
-    "мука",
-    "плачу",
-    "атлас",
-    "орган",
-    "духи",
-    "ирис",
-    "белки",
-    "стрелки",
-    "кружки",
-    "стоит",
-    "дороги",
-    "вести",
-    "пропасть",
-    "село",
-];
 fn russian(c: char) -> bool {
     matches!(c, 'А'..='я' | 'Ё' | 'ё')
 }
@@ -79,7 +62,9 @@ pub(crate) fn input(text: &str) -> Result<SpeechSynthesisInput, SpeechError> {
             previous = Some(c);
         }
         let position = position.ok_or(SpeechError::UnsupportedStress)?;
-        if AMBIGUOUS.contains(&base.as_str()) || seen.get(&base).is_some_and(|p| *p != position) {
+        if crate::generation_text::known_ambiguous(&base)
+            || seen.get(&base).is_some_and(|p| *p != position)
+        {
             return Err(SpeechError::UnsupportedStress);
         }
         seen.insert(base, position);

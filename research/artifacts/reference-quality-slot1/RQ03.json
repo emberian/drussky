@@ -1,0 +1,36 @@
+{
+  "request_id": "reference-quality-slot1-rq03",
+  "revision_id": null,
+  "source_text": "Люк.",
+  "sha256": "2cdd4b1197b6c638080b5e8a2a32438b0a7bcff4073999abbaac649d8d066669",
+  "sample_rate": 24000,
+  "channels": 1,
+  "frames": 15600,
+  "provenance": {
+    "kind": "ai_generated_speech",
+    "provider": "local_silero_tts",
+    "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e;repo=e382298387332f2bf461fe6eadfde99104611b0c",
+    "voice": "xenia",
+    "prompt_version": "rufren-silero-automatic-v1",
+    "validation": "CPU2;seed=42;put_accent=true,put_stress_homo=true,put_yo=true,put_yo_homo=true,stress_single_vowel=true;peak_amplitude=0.334250599;clipped_samples=0;clipped_fraction=0;full_scale_fraction=0; actual API input recorded; acoustic correctness/stress not certified by ASR; router rufren-local-russian-v1 selected short ordinary Russian input; automatic stress is a model choice, not certified disambiguation",
+    "synthesis_input": {
+      "source_text_sha256": "c9bd8543907dc4c9fbe785a2db05c8ce0d304a8befe12cda26fa3adc6ddd3786",
+      "synthesis_text": "Люк.",
+      "synthesis_text_sha256": "c9bd8543907dc4c9fbe785a2db05c8ce0d304a8befe12cda26fa3adc6ddd3786",
+      "transform": "verbatim",
+      "context": "ordinary_text"
+    }
+  },
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "estimated_micro_usd": 0,
+    "reserved_micro_usd": 0
+  },
+  "case": "RQ03",
+  "gateway_elapsed_seconds": 3.75736525002867,
+  "raw_artifacts": ".local/reference-quality/slot1/RQ03",
+  "contract": "pass",
+  "human_listening": null,
+  "acoustic_assessment": null
+}

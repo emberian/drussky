@@ -332,6 +332,7 @@ impl SpeechService {
 
     pub async fn generate(&self, request: &SpeechRequest) -> Result<SpeechResponse, SpeechError> {
         request.validate()?;
+        crate::generation_text::validate(&request.text)?;
         let provider = self.provider.as_ref().ok_or(SpeechError::Disabled)?;
         if matches!(provider, Backend::Qwen(_)) {
             crate::qwen_frontend::input(&request.text)?;

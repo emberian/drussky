@@ -1,0 +1,95 @@
+{
+  "case": "RQ03",
+  "source_text": "Люк.",
+  "sha256": "2cdd4b1197b6c638080b5e8a2a32438b0a7bcff4073999abbaac649d8d066669",
+  "contract": "pass",
+  "lexical_content": "no_lexical_mismatch",
+  "transcript": "Люк.",
+  "lexical_differences": [],
+  "target_contrast": "pending_offline_analysis",
+  "human_listening": null,
+  "tts_elapsed_seconds": 3.75736525002867,
+  "asr_elapsed_seconds": 4.659412791952491,
+  "asr_evidence": {
+    "schema_version": "rufren-speech-transcript-v1",
+    "request_id": "reference-quality-asr-rq03",
+    "attempt_id": null,
+    "revision_id": null,
+    "asset_id": "reference-quality-slot1-rq03",
+    "audio_sha256": "2cdd4b1197b6c638080b5e8a2a32438b0a7bcff4073999abbaac649d8d066669",
+    "original_audio": {
+      "sample_rate": 24000,
+      "channels": 1,
+      "frames": 15600,
+      "encoding": "pcm_s16le",
+      "bits": 16
+    },
+    "source_pcm_sha256": "978f423bbc95bd5285f82b8ca35b88eea411dd808ff88a3404eef04f0067fa68",
+    "source_pcm_hash_format": "interleaved-little-endian-f32-no-header-v1",
+    "span": {
+      "start_frame": 0,
+      "end_frame": 15600
+    },
+    "span_coordinate_system": "original_frames_half_open",
+    "derivative": {
+      "sample_rate": 16000,
+      "channels": 1,
+      "frames": 10400,
+      "pcm_sha256": "723a332770593b66ac7b0cf1fe15ce0ba4378b77259ede5d23270c530ec75f72",
+      "pcm_hash_format": "little-endian-f32-no-header-v1",
+      "method": "arithmetic-channel-mean; scipy.signal.resample_poly default Kaiser5",
+      "scipy_version": "1.18.1",
+      "amplitude_normalization": false
+    },
+    "evidence_kind": "transcript_hypothesis",
+    "transcript": "Люк.",
+    "language": "ru",
+    "language_selection": "explicit_not_detected",
+    "target_conditioned": false,
+    "word_timestamps": null,
+    "word_alignment_status": "not_run",
+    "confidence": null,
+    "acoustic_assessment": null,
+    "provenance": {
+      "provider": "local_qwen3_asr",
+      "model": "mlx-community/Qwen3-ASR-1.7B-bf16",
+      "revision": "e1f6c266914abc5a46e8756e02580f834a6cf8a7",
+      "runtime": "mlx-audio==0.6.4",
+      "mlx_version": "0.32.4",
+      "manifest_sha256": "730f409412ed99134bc62b7989581fa8c42cf699b0c8ddd26846c4e2f2ea9801",
+      "worker_sha256": "874c736c9146fbd044a78e1882ca1052c8af5000acddb129a4c642744db6edd6",
+      "decoding": {
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "seed": 42,
+        "language": "Russian",
+        "hotwords": []
+      }
+    },
+    "timing": {
+      "started_at": "2026-11-06T13:45:21.231879+00:00",
+      "completed_at": "2026-11-06T13:45:25.706063+00:00",
+      "elapsed_seconds": 4.471,
+      "process_peak_rss_bytes": 4326129664,
+      "metal_peak_bytes": 4933685408
+    },
+    "usage": {
+      "prompt_tokens": 31,
+      "generation_tokens": 4
+    }
+  },
+  "reused_verified": [
+    {
+      "path": ".local/silero-tts/samples/hybrid-gateway-greeting-v1.wav",
+      "sha256": "1f431043b464123eb9a023fe2cd52ecaccdca6f15f8a42d82b4328202ed2b138"
+    },
+    {
+      "path": ".local/silero-tts/samples/silero-stress-castle-v1.wav",
+      "sha256": "3ce677ebdad80003b514c177abdb2eb7efbc7674a92acbc2abf2f80b8d51ebe4"
+    },
+    {
+      "path": ".local/silero-tts/samples/silero-stress-lock-v1.wav",
+      "sha256": "3f0198c2415844291042e3161e445520e6d9aad7aec0c6956596a8c1e2d0ec76"
+    }
+  ]
+}

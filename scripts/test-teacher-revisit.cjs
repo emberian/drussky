@@ -7,6 +7,7 @@ const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { CURRENT_PROTOCOL } = require('./qa-current-protocol.cjs');
 const { navigate } = require('./qa-navigation.cjs');
 const { teacherResponse, wavFixture, generatedVoice, recognizedWords } = require('./test-teacher-oral.cjs');
 const { openLessonTools } = require('./test-teacher-notebook.cjs');
@@ -77,7 +78,7 @@ function syntheticReplica() {
   return {
     records,
     exchange(request) {
-      assert.equal(request.version, 5);
+      assert.equal(request.version, CURRENT_PROTOCOL);
       assert(request.relay === null || request.relay === relay);
       assert(Number.isSafeInteger(request.after) && request.after >= 0 && request.after <= records.length);
       assert(request.events.length <= 128);
@@ -86,7 +87,7 @@ function syntheticReplica() {
         else { const saved = structuredClone(event); byID.set(event.id, saved); records.push(saved); }
       }
       const page = records.slice(request.after, request.after + 128);
-      return { version: 5, relay, accepted: request.events.map(event => event.id), events: page,
+      return { version: CURRENT_PROTOCOL, relay, accepted: request.events.map(event => event.id), events: page,
         cursor: request.after + page.length, has_more: request.after + page.length < records.length };
     },
   };
@@ -165,6 +166,10 @@ async function createDriver(browser, label, time, routeInstaller, audit, taskSpe
     await nav('Settings'); await nav('Today');
   };
   const allRows = async () => {
+    // Today keeps the full return catalogue behind one disclosure; the bounded
+    // daily session is a different workflow from this exact-task regression.
+    const browse = page.locator('details').filter({ has: page.locator(':scope > summary').filter({ hasText: 'Browse your saved Teacher returns' }) });
+    if (await browse.count() && !await browse.evaluate(node => node.open)) await browse.locator(':scope > summary').click();
     const more = page.getByRole('button', { name: 'Show all planned returns', exact: true });
     if (await more.count()) await more.click();
     return page.locator('.teacher-return-row');
@@ -273,7 +278,7 @@ async function consumerJourney(browser, audit, checks, drivers) {
   await source.jump(0); await a.page.locator('.teacher-lesson-current textarea').fill('Original unfinished lesson draft');
   const originalDraft = await a.page.evaluate(document => JSON.parse(window.rufrenLibrary.get(`rufren.v1.meta.teacher_practice:${document}:0`)), source.document);
   await a.now(SEED_TIME);
-  await a.page.getByRole('button',{name:'Review what’s ready',exact:false}).click();
+  await a.page.getByRole('button',{name:'Choose my next step',exact:false}).first().click();
   assert.equal(await a.page.locator('.practice-panel').count(),0,'Generated exercise references must not become generic wrong-skill passage practice');
   assert.equal(await a.screen.count(),0,'Completed guided work is scheduled later, not an immediately due review');
   await a.now(SEED_TIME + DAY - 1); await a.allRows();
@@ -285,7 +290,7 @@ async function consumerJourney(browser, audit, checks, drivers) {
   assert.equal(await b.page.locator('.teacher-return-row').count(), 4);
   checks.push('Four completed NotReported guided tasks seed exact-skill delayed rows; no immediate due or wrong generic skill');
 
-  await a.nav('Today');await a.page.getByRole('button',{name:'Review what’s ready',exact:false}).click();await a.screen.waitFor();
+  await a.open(0);
   assert.equal(await a.screen.getAttribute('data-active-review-index'),'0');
   assert.equal(await a.screen.getAttribute('data-active-review-document'),source.document);
   await a.page.waitForFunction(()=>document.activeElement?.textContent==='A fresh try');
@@ -327,6 +332,7 @@ async function consumerJourney(browser, audit, checks, drivers) {
   await a.screen.getByRole('button', { name: 'Pause & return to Today', exact: true }).click();
   await a.page.evaluate(async () => { await navigator.serviceWorker.ready; }); await a.page.waitForFunction(() => navigator.serviceWorker.controller !== null);
   const posts = audit.requests.length; await a.context.setOffline(true); await a.page.reload(); await a.page.locator('main.main h1').waitFor();
+  await a.allRows();
   await a.page.getByRole('button', { name: 'Continue this return', exact: false }).click(); await a.screen.waitFor();
   assert.equal(await a.screen.getAttribute('data-active-review-session'), writeSession);
   assert.equal(await a.screen.locator('textarea').first().inputValue(), TASKS[1].expected_response);

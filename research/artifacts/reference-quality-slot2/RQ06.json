@@ -1,0 +1,36 @@
+{
+  "request_id": "reference-quality-slot2-rq06",
+  "revision_id": null,
+  "source_text": "На двери висит замок, а на холме стоит старый замок.",
+  "sha256": "b2eba78877afec1cb6a038617bbc4f037b34f89afb1a0ac05a5b43d14893c476",
+  "sample_rate": 24000,
+  "channels": 1,
+  "frames": 119040,
+  "provenance": {
+    "kind": "ai_generated_speech",
+    "provider": "local_qwen3_tts",
+    "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-bf16@7d3824abff87e49756bb0f83fb5411de75d160c4",
+    "voice": "rufren-russian-warm-v1",
+    "prompt_version": "rufren-qwen-russian-v2",
+    "validation": "Local BF16 VoiceDesign; mlx-audio 0.6.4; seed 42; no human reference or learner pronunciation assessment; router rufren-local-russian-v1 selected contextual ordinary input by text shape, not a pronunciation judgment",
+    "synthesis_input": {
+      "source_text_sha256": "b2eb487f8e9e2690869df1b024aa9751f2c7d34384ba0dcc45d4b83bfc10ffeb",
+      "synthesis_text": "На двери висит замок, а на холме стоит старый замок.",
+      "synthesis_text_sha256": "b2eb487f8e9e2690869df1b024aa9751f2c7d34384ba0dcc45d4b83bfc10ffeb",
+      "transform": "verbatim",
+      "context": "ordinary_text"
+    }
+  },
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "estimated_micro_usd": 0,
+    "reserved_micro_usd": 0
+  },
+  "case": "RQ06",
+  "slot2_gateway_elapsed_seconds": 2.1966299160849303,
+  "raw_artifacts": ".local/reference-quality/slot2/RQ06",
+  "slot2_tts_calls": 1,
+  "contract": "pass",
+  "human_listening": null
+}
