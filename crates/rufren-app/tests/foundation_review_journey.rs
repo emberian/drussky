@@ -252,3 +252,136 @@ fn completed_actual_due_return_restores_course_and_keeps_exact_delayed_context()
         );
     }
 }
+
+#[test]
+fn previous_edition_due_return_keeps_exact_task_history_and_suspended_draft() {
+    use rufren_content::foundations::FOUNDATION_PREVIOUS_REVISION;
+    let mut a = app();
+    let task = reach_recall(&mut a);
+    answer(&mut a, &task);
+    let history: Vec<_> = a
+        .library
+        .events
+        .values()
+        .map(|e| (e.id, serde_json::to_vec(e).unwrap()))
+        .collect();
+    a.foundation_next(false).unwrap();
+    a.foundation_edit(vec!["unfinished earlier course answer".into()])
+        .unwrap();
+    let due = repository::now_ms() + 2 * DAY_MS;
+    a.foundation_start_review_at(&task.id, due).unwrap();
+    let mut active = a.foundation_state().unwrap();
+    active.revision = FOUNDATION_PREVIOUS_REVISION.into();
+    active.draft = vec!["unfinished return answer".into()];
+    let course = active.review_resume.as_mut().unwrap();
+    course.revision = FOUNDATION_PREVIOUS_REVISION.into();
+    let mut expected_course = serde_json::to_value(&**course).unwrap();
+    expected_course["revision"] = rufren_content::foundations().revision.into();
+    let return_session = active.session;
+    a.foundation_save(&active).unwrap();
+    let mut reopened = AppState::from_repository(a.repo.clone()).unwrap();
+    reopened.start_foundations().unwrap();
+    let restored = reopened.foundation_state().unwrap();
+    assert_eq!(restored.session, return_session);
+    assert_eq!(restored.step_id, task.id);
+    assert_eq!(restored.draft, vec!["unfinished return answer".to_string()]);
+    assert_eq!(
+        serde_json::to_value(&**restored.review_resume.as_ref().unwrap()).unwrap(),
+        expected_course
+    );
+    let prior = reopened.library.attempts().next().unwrap().1;
+    assert_eq!(
+        prior.revision,
+        uuid::Uuid::new_v5(
+            &uuid::Uuid::NAMESPACE_URL,
+            format!(
+                "rufren-foundation:{FOUNDATION_PREVIOUS_REVISION}:{}",
+                task.id
+            )
+            .as_bytes()
+        )
+    );
+    assert!(
+        reopened
+            .library
+            .review_start_for_session(
+                return_session,
+                ReviewTarget::Passage {
+                    revision: prior.revision,
+                    skill: prior.skill
+                }
+            )
+            .is_some()
+    );
+    reopened.foundation_next(true).unwrap();
+    assert_eq!(
+        serde_json::to_value(reopened.foundation_state().unwrap()).unwrap(),
+        expected_course
+    );
+    for (id, bytes) in history {
+        assert_eq!(
+            serde_json::to_vec(&reopened.library.events[&id]).unwrap(),
+            bytes
+        );
+    }
+}
+
+#[test]
+fn completed_previous_course_inside_old_return_resumes_first_alphabet_episode() {
+    use rufren_content::foundations::{FOUNDATION_PREVIOUS_REVISION, foundations_previous};
+    let mut a = app();
+    let task = reach_recall(&mut a);
+    answer(&mut a, &task);
+    a.foundation_next(false).unwrap();
+    a.foundation_start_review_at(&task.id, repository::now_ms() + 2 * DAY_MS)
+        .unwrap();
+    let mut active = a.foundation_state().unwrap();
+    active.revision = FOUNDATION_PREVIOUS_REVISION.into();
+    let old = foundations_previous();
+    let course = active.review_resume.as_mut().unwrap();
+    course.revision = FOUNDATION_PREVIOUS_REVISION.into();
+    course.episode = old.episodes.len() - 1;
+    let ending = old.episodes.last().unwrap();
+    course.episode_id = ending.id.clone();
+    course.step = ending.steps.len() - 1;
+    course.step_id = ending.steps.last().unwrap().id.clone();
+    course.step_revision = ending.steps.last().unwrap().revision.clone();
+    course.finished = true;
+    course.encounters.push("c6-end:encountered".into());
+    let encounters = course.encounters.clone();
+    let attempts = course.attempts.clone();
+    a.foundation_save(&active).unwrap();
+    let restored = a.foundation_state().unwrap();
+    assert_eq!(
+        restored.step_id, task.id,
+        "active due task is still the old exact task"
+    );
+    assert_eq!(restored.session, active.session);
+    let next = restored.review_resume.as_ref().unwrap();
+    assert_eq!(next.step_id, "a8-ya");
+    assert!(!next.finished);
+    assert_eq!(next.encounters, encounters);
+    assert_eq!(next.attempts, attempts);
+    a.foundation_next(true).unwrap();
+    assert_eq!(a.foundation_state().unwrap().step_id, "a8-ya");
+}
+
+#[test]
+fn invalid_suspended_edition_does_not_partially_save_an_upgrade() {
+    use rufren_content::foundations::FOUNDATION_PREVIOUS_REVISION;
+    let mut a = app();
+    let task = reach_recall(&mut a);
+    answer(&mut a, &task);
+    a.foundation_next(false).unwrap();
+    a.foundation_start_review_at(&task.id, repository::now_ms() + 2 * DAY_MS)
+        .unwrap();
+    let mut active = a.foundation_state().unwrap();
+    active.revision = FOUNDATION_PREVIOUS_REVISION.into();
+    active.review_resume.as_mut().unwrap().revision = "unavailable-edition".into();
+    a.foundation_save(&active).unwrap();
+    let saved = serde_json::to_vec(&active).unwrap();
+    assert!(a.foundation_state().is_err());
+    let retained: foundation::FoundationState =
+        a.repo.get("foundation_journey_v1").unwrap().unwrap();
+    assert_eq!(serde_json::to_vec(&retained).unwrap(), saved);
+}

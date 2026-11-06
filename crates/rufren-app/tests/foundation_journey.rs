@@ -50,7 +50,8 @@ use model::AppState;
 use repository::Repository;
 use rufren_content::FoundationAction;
 use rufren_content::foundations::{
-    FoundationRecallMode, foundation_step_pack_revision, foundations_legacy,
+    FOUNDATION_ORIGINAL_REVISION, FOUNDATION_PREVIOUS_REVISION, FoundationRecallMode,
+    foundation_step_pack_revision, foundations_legacy, foundations_previous,
 };
 use rufren_core::*;
 use std::rc::Rc;
@@ -154,6 +155,11 @@ fn all_episodes_can_be_practiced_without_microphone_or_teacher() {
     let mut a = app();
     a.start_foundations().unwrap();
     let mut turns = 0;
+    let step_count = rufren_content::foundations()
+        .episodes
+        .iter()
+        .map(|e| e.steps.len())
+        .sum::<usize>();
     while !a.foundation_state().unwrap().finished {
         let step = current(&a);
         for asset in &step.audio_ids {
@@ -186,7 +192,7 @@ fn all_episodes_can_be_practiced_without_microphone_or_teacher() {
         }
         a.foundation_next(false).unwrap();
         turns += 1;
-        assert!(turns < 80);
+        assert!(turns <= step_count);
     }
     assert_eq!(
         a.foundation_state().unwrap().episode,
@@ -506,4 +512,190 @@ fn cannot_yet_and_requested_model_do_not_fabricate_correct_recall() {
         .unwrap();
     assert!(response.cues.contains(&Cue::Coach));
     assert_eq!(response.self_rating, SelfRating::NotReported);
+}
+
+#[test]
+fn seven_episode_upgrade_preserves_every_unfinished_state_field() {
+    let mut a = app();
+    at_step(&mut a, "c5-window-write");
+    let mut old = a.foundation_state().unwrap();
+    old.revision = FOUNDATION_PREVIOUS_REVISION.into();
+    old.draft = vec!["ок".into()];
+    old.cues = vec![Cue::Coach, Cue::OriginalText];
+    old.revealed = true;
+    old.played = vec!["foundation-okno".into()];
+    old.cannot_yet = true;
+    old.attempts.push(uuid::Uuid::new_v5(
+        &uuid::Uuid::NAMESPACE_URL,
+        b"saved-old-attempt-reference",
+    ));
+    let mut expected = serde_json::to_value(&old).unwrap();
+    expected["revision"] = rufren_content::foundations().revision.into();
+    a.foundation_save(&old).unwrap();
+    let mut reopened = AppState::from_repository(a.repo.clone()).unwrap();
+    reopened.start_foundations().unwrap();
+    assert_eq!(
+        serde_json::to_value(reopened.foundation_state().unwrap()).unwrap(),
+        expected
+    );
+    assert_eq!(
+        foundation_step_pack_revision("c5-window-write"),
+        FOUNDATION_PREVIOUS_REVISION
+    );
+}
+
+#[test]
+fn completed_seven_episode_course_opens_alphabet_without_rewriting_completions() {
+    let mut a = app();
+    at_step(&mut a, "c6-end");
+    let mut old = a.foundation_state().unwrap();
+    old.revision = FOUNDATION_PREVIOUS_REVISION.into();
+    old.finished = true;
+    old.cannot_yet = true;
+    old.encounters.push("c6-end:encountered".into());
+    let encounters = old.encounters.clone();
+    let attempts = old.attempts.clone();
+    a.foundation_save(&old).unwrap();
+    let next = a.foundation_state().unwrap();
+    assert_eq!(next.step_id, "a8-ya");
+    assert_eq!(next.episode, 7);
+    assert_eq!(next.step, 0);
+    assert!(!next.finished && !next.cannot_yet);
+    assert_eq!(next.encounters, encounters);
+    assert_eq!(next.attempts, attempts);
+    assert_ne!(next.session, old.session);
+}
+
+#[test]
+fn every_old_authored_event_retains_frozen_bytes_and_source_edition() {
+    let a = app();
+    let state = a.foundation_state().unwrap();
+    let original = foundations_legacy();
+    let original_ids: std::collections::BTreeSet<_> = original
+        .episodes
+        .iter()
+        .flat_map(|e| &e.steps)
+        .map(|s| s.id.as_str())
+        .collect();
+    let frozen = foundations_previous();
+    let current = rufren_content::foundations();
+    for old in frozen.episodes.iter().flat_map(|e| &e.steps) {
+        let source_edition = if original_ids.contains(old.id.as_str()) {
+            FOUNDATION_ORIGINAL_REVISION
+        } else {
+            FOUNDATION_PREVIOUS_REVISION
+        };
+        let Some(russian) = old
+            .audio_ids
+            .first()
+            .and_then(|id| frozen.assets.iter().find(|a| &a.id == id))
+            .map(|a| a.spoken.clone())
+            .or_else(|| {
+                old.display
+                    .clone()
+                    .filter(|text| text.chars().any(|c| ('А'..='я').contains(&c)))
+            })
+        else {
+            continue;
+        };
+        let current_step = current
+            .episodes
+            .iter()
+            .flat_map(|e| &e.steps)
+            .find(|s| s.id == old.id)
+            .unwrap();
+        assert_eq!(
+            serde_json::to_vec(current_step).unwrap(),
+            serde_json::to_vec(old).unwrap()
+        );
+        let id = uuid::Uuid::new_v5(
+            &uuid::Uuid::NAMESPACE_URL,
+            format!("rufren-foundation:{source_edition}:{}", old.id).as_bytes(),
+        );
+        // This is the historical v8 envelope, independently resolved from the
+        // frozen .2 graph and original .1 membership, never the current resolver.
+        let expected = Event {
+            version: 8,
+            id,
+            device: uuid::Uuid::new_v5(&uuid::Uuid::NAMESPACE_URL, b"rufren-foundation-author-v1"),
+            recorded_at_ms: 0,
+            fact: Fact::PassageRevised(Revision {
+                passage: Passage {
+                    id,
+                    title: old.instruction.clone(),
+                    russian,
+                    translation: old.instruction.clone(),
+                    source: format!(
+                        "rufren-foundation-v1:{source_edition}:{}@{}",
+                        old.id, old.revision
+                    ),
+                    coach_reviewed: false,
+                },
+                parents: std::collections::BTreeSet::new(),
+            }),
+        };
+        assert_eq!(
+            serde_json::to_vec(&a.foundation_revision(&state, current_step).unwrap()).unwrap(),
+            serde_json::to_vec(&expected).unwrap(),
+            "historical source {} changed",
+            old.id
+        );
+    }
+}
+
+#[test]
+fn previous_edition_reserved_recall_recovers_same_partial_packet_once() {
+    let mut a = app();
+    at_step(&mut a, "c6-they-read");
+    let step = current(&a);
+    let FoundationAction::Recall { answer, .. } = &step.action else {
+        unreachable!()
+    };
+    a.foundation_edit(vec![answer.clone()]).unwrap();
+    a.foundation_submit(&step).unwrap();
+    let state = a.foundation_state().unwrap();
+    let attempt = *state.attempts.last().unwrap();
+    let events: Vec<_> = a
+        .library
+        .events
+        .values()
+        .filter(|e| match &e.fact {
+            Fact::AttemptRecorded(_) => e.id == attempt,
+            Fact::AttemptContextRecorded(c) => c.attempt == attempt,
+            Fact::CoachJudgmentRecorded(j) => j.attempt == attempt,
+            Fact::PassageRevised(_) => true,
+            _ => false,
+        })
+        .cloned()
+        .collect();
+    let mut reserved = serde_json::to_value(&state).unwrap();
+    reserved["revision"] = FOUNDATION_PREVIOUS_REVISION.into();
+    reserved["feedback"] = serde_json::Value::Null;
+    reserved["accepted"] = false.into();
+    reserved["attempts"] = serde_json::json!([]);
+    reserved["pending"] = serde_json::json!({"events": events, "feedback": state.feedback.unwrap(), "accepted": true});
+    let mut b = app();
+    let pending = serde_json::from_value(reserved).unwrap();
+    b.foundation_save(&pending).unwrap();
+    let original_attempt = a.library.events[&attempt].clone();
+    let original_bytes = serde_json::to_vec(&original_attempt).unwrap();
+    b.repo.append(&[original_attempt]).unwrap();
+    b.foundation_submit(&step).unwrap();
+    b.foundation_submit(&step).unwrap();
+    assert_eq!(b.library.attempts().count(), 1);
+    assert!(b.foundation_state().unwrap().pending.is_none());
+    assert_eq!(
+        serde_json::to_vec(&b.library.events[&attempt]).unwrap(),
+        original_bytes
+    );
+    let context = b.library.contexts(attempt);
+    assert_eq!(context.len(), 1);
+    assert_eq!(
+        context[0].1.content_revision.as_deref(),
+        Some(FOUNDATION_PREVIOUS_REVISION)
+    );
+    assert_eq!(
+        context[0].1.prompt.as_deref(),
+        Some(serde_json::to_string(&step).unwrap().as_str())
+    );
 }

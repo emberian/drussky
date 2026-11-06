@@ -1,0 +1,2251 @@
+{
+  "schema_version": 1,
+  "revision": "foundation-2026-11-06.2",
+  "editorial_notice": "AI-authored prepared learning material. Synthetic audio is a model for practice, not a native-speaker assessment. Introduced does not mean mastered.",
+  "assets": [
+    {
+      "id": "foundation-a",
+      "spoken": "а"
+    },
+    {
+      "id": "foundation-ma",
+      "spoken": "ма"
+    },
+    {
+      "id": "foundation-am",
+      "spoken": "ам"
+    },
+    {
+      "id": "foundation-da",
+      "spoken": "да"
+    },
+    {
+      "id": "foundation-net",
+      "spoken": "нет"
+    },
+    {
+      "id": "foundation-o",
+      "spoken": "о"
+    },
+    {
+      "id": "foundation-ka",
+      "spoken": "ка"
+    },
+    {
+      "id": "foundation-ta",
+      "spoken": "та"
+    },
+    {
+      "id": "foundation-kot",
+      "spoken": "кот"
+    },
+    {
+      "id": "foundation-tam",
+      "spoken": "там"
+    },
+    {
+      "id": "foundation-tam-kot",
+      "spoken": "Там кот."
+    },
+    {
+      "id": "foundation-na",
+      "spoken": "на"
+    },
+    {
+      "id": "foundation-on",
+      "spoken": "он"
+    },
+    {
+      "id": "foundation-ona",
+      "spoken": "она"
+    },
+    {
+      "id": "foundation-okno",
+      "spoken": "окно"
+    },
+    {
+      "id": "foundation-ono",
+      "spoken": "оно"
+    },
+    {
+      "id": "foundation-i",
+      "spoken": "и"
+    },
+    {
+      "id": "foundation-oni",
+      "spoken": "они"
+    },
+    {
+      "id": "foundation-ya",
+      "spoken": "я"
+    },
+    {
+      "id": "foundation-ty",
+      "spoken": "ты"
+    }
+  ],
+  "episodes": [
+    {
+      "id": "foundation-1",
+      "title": "Two letters, two sounds",
+      "goal": "Meet А and М, try two sound patterns, and hear yes/no.",
+      "steps": [
+        {
+          "id": "f1-a",
+          "instruction": "Russian uses a different alphabet. We will connect two letters to sounds. Play this vowel, then continue.",
+          "display": "А а",
+          "audio_ids": [
+            "foundation-a"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [
+            "А"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use the recording as your model. An English cue is the open vowel in “father” for many speakers; accents differ. Replay whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-m",
+          "instruction": "Play this syllable. Listen to its beginning, before the vowel.",
+          "display": "М м · ма",
+          "audio_ids": [
+            "foundation-ma"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "М"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "М represents the beginning sound in this recording; А represents its vowel. This is a whole syllable, not a consonant letter name. Optional: imitate the beginning, then the whole example."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-recognize-a",
+          "instruction": "Play the whole vowel. Which letter represents it?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "А а",
+                "feedback": "This vowel is represented by А. Listen again, then choose А."
+              },
+              {
+                "id": "1",
+                "text": "М м",
+                "feedback": "М represents the beginning of our other example. This whole vowel is А. Listen again."
+              }
+            ],
+            "correct_id": "0",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-recognize-m",
+          "instruction": "Play the syllable. Which letter represents its beginning, before the vowel?",
+          "display": null,
+          "audio_ids": [
+            "foundation-ma"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "А а",
+                "feedback": "А represents the vowel later in this syllable. Its beginning is represented by М. Replay the beginning."
+              },
+              {
+                "id": "1",
+                "text": "М м",
+                "feedback": "This example begins with the sound represented by М. Replay the beginning."
+              }
+            ],
+            "correct_id": "1",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-model-ma",
+          "instruction": "Listen to this practice syllable. Follow the letters from left to right.",
+          "display": "ма",
+          "audio_ids": [
+            "foundation-ma"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This is a sound pattern for practice, not new vocabulary. The recording models the whole syllable."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-build-ma",
+          "instruction": "Build the displayed practice syllable. Listen as you follow its letters.",
+          "display": "ма",
+          "audio_ids": [
+            "foundation-ma"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "а",
+              "м"
+            ],
+            "answer": [
+              "м",
+              "а"
+            ],
+            "feedback": [
+              "Position 1 uses М. Replay the whole syllable and follow its order.",
+              "Position 2 uses А. Replay the whole syllable and follow its order."
+            ],
+            "success": "You assembled it. Listen once more if you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-model-am",
+          "instruction": "Listen to this practice syllable. Follow the letters from left to right.",
+          "display": "ам",
+          "audio_ids": [
+            "foundation-am"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This is a sound pattern for practice, not new vocabulary. The recording models the whole syllable."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-build-am",
+          "instruction": "Build the displayed practice syllable. Listen as you follow its letters.",
+          "display": "ам",
+          "audio_ids": [
+            "foundation-am"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "а",
+              "м"
+            ],
+            "answer": [
+              "а",
+              "м"
+            ],
+            "feedback": [
+              "Position 1 uses А. Replay the whole syllable and follow its order.",
+              "Position 2 uses М. Replay the whole syllable and follow its order."
+            ],
+            "success": "You assembled it. Listen once more if you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-read-am",
+          "instruction": "Try reading this aloud or quietly. Then reveal the model and compare. You can skip this attempt.",
+          "display": "ам",
+          "audio_ids": [
+            "foundation-am"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "ам",
+            "note": "Listen and compare with your attempt. What sounds different? Replay as often as you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-hear-yes",
+          "instruction": "Play this whole spoken chunk. It means “yes”.",
+          "display": null,
+          "audio_ids": [
+            "foundation-da"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "yes"
+          ],
+          "audio_first_chunk": true,
+          "action": {
+            "kind": "present",
+            "note": "Its letters have not been taught. You only need to hear the chunk and its meaning; no reading is required."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-hear-no",
+          "instruction": "Play this whole spoken chunk. It means “no”.",
+          "display": null,
+          "audio_ids": [
+            "foundation-net"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "no"
+          ],
+          "audio_first_chunk": true,
+          "action": {
+            "kind": "present",
+            "note": "Its letters have not been taught. Listen for the whole chunk; no spelling is required."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-radio-yes",
+          "instruction": "Radio check: did the signal arrive? Listen to the reply. What does the reply mean?",
+          "display": null,
+          "audio_ids": [
+            "foundation-da"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "yes",
+            "no"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": true,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "Yes",
+                "feedback": "This reply means yes. Replay it, then choose Yes."
+              },
+              {
+                "id": "1",
+                "text": "No",
+                "feedback": "This reply means yes. Replay it, then choose Yes."
+              }
+            ],
+            "correct_id": "0",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-radio-no",
+          "instruction": "Radio check: did the signal arrive? Listen to the reply. What does the reply mean?",
+          "display": null,
+          "audio_ids": [
+            "foundation-net"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "yes",
+            "no"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": true,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "Yes",
+                "feedback": "This reply means no. Replay it, then choose No."
+              },
+              {
+                "id": "1",
+                "text": "No",
+                "feedback": "This reply means no. Replay it, then choose No."
+              }
+            ],
+            "correct_id": "1",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-end",
+          "instruction": "Pause, repeat, or continue whenever you are ready.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You practiced А, М, two sound patterns, and hearing yes/no. You can repeat or meet the next letters."
+          },
+          "revision": "1"
+        }
+      ]
+    },
+    {
+      "id": "foundation-2",
+      "title": "Read one real word",
+      "goal": "Add О, К and Т, then build and try reading the word for cat.",
+      "steps": [
+        {
+          "id": "f2-revisit",
+          "instruction": "Listen again. Which letter represents the beginning? You may replay the introduction.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ma"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "М м",
+                "feedback": "The beginning is represented by М. Replay ма and notice its beginning."
+              },
+              {
+                "id": "1",
+                "text": "А а",
+                "feedback": "А is its vowel. The beginning is represented by М. Replay ма."
+              }
+            ],
+            "correct_id": "0",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-o",
+          "instruction": "Play this vowel and notice its round sound.",
+          "display": "О о",
+          "audio_ids": [
+            "foundation-o"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [
+            "О"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "О has this sound in this stressed example. Its sound can change in other words; that is for a later encounter."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-k",
+          "instruction": "Play the syllable. Listen to its beginning, before the vowel.",
+          "display": "К к · ка",
+          "audio_ids": [
+            "foundation-ka"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "К"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "К represents the beginning of ка. The recording includes the vowel; it is not an isolated consonant."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-t",
+          "instruction": "Play the syllable. Listen to its beginning, before the vowel.",
+          "display": "Т т · та",
+          "audio_ids": [
+            "foundation-ta"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Т"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Т represents the beginning of та. Replay the whole syllable; optional imitation is welcome."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-cat",
+          "instruction": "This word means “cat”. Play the whole word and follow к → о → т.",
+          "display": "кот",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "cat"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The whole recording models the word. The three letters are already introduced."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-build-cat",
+          "instruction": "Build the word meaning “cat”. Replay the word whenever you like.",
+          "display": "cat",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "т",
+              "к",
+              "о",
+              "а"
+            ],
+            "answer": [
+              "к",
+              "о",
+              "т"
+            ],
+            "feedback": [
+              "The first letter is К. Listen to the beginning of the cat word.",
+              "The middle letter is О. Replay the vowel in the cat word.",
+              "The last letter is Т. Listen to the end of the cat word."
+            ],
+            "success": "You assembled it. Listen once more if you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-read-cat",
+          "instruction": "Try reading this aloud or quietly. Then reveal the model and compare. You can skip this attempt.",
+          "display": "кот",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "кот",
+            "note": "Listen and compare with your attempt. What sounds different? Replay as often as you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-radio-no",
+          "instruction": "Radio check: did the signal arrive? Listen to the reply. What does the reply mean?",
+          "display": null,
+          "audio_ids": [
+            "foundation-net"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "yes",
+            "no"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": true,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "Yes",
+                "feedback": "This reply means no. Replay it, then choose No."
+              },
+              {
+                "id": "1",
+                "text": "No",
+                "feedback": "This reply means no. Replay it, then choose No."
+              }
+            ],
+            "correct_id": "1",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-speak-cat",
+          "instruction": "Optional: say the word for cat, then compare with the recording. Skip freely.",
+          "display": "кот",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "speak",
+            "note": "Listen, try, and compare at your own pace. If recording is available, you can record yourself and listen back. You can also skip this."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-end",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You practiced А, М, О, К, Т and кот, meaning cat. Repeat the word or continue to a small message."
+          },
+          "revision": "1"
+        }
+      ]
+    },
+    {
+      "id": "foundation-3",
+      "title": "Send a small message",
+      "goal": "Add Д and describe a cat at a distant location.",
+      "steps": [
+        {
+          "id": "f3-revisit-cat",
+          "instruction": "Try reading this aloud or quietly. Then reveal the model and compare. You can skip this attempt.",
+          "display": "кот",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "кот",
+            "note": "Listen and compare with your attempt. What sounds different? Replay as often as you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-d",
+          "instruction": "Play the familiar “yes” chunk. Listen to its beginning before the vowel.",
+          "display": "Д д · да",
+          "audio_ids": [
+            "foundation-da"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Д"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Д represents the beginning of да. You have heard this whole chunk before; now both its written letters have been introduced."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-written-yes",
+          "instruction": "The spelling of the “yes” chunk is now available to read.",
+          "display": "да",
+          "audio_ids": [
+            "foundation-da"
+          ],
+          "requires_graphemes": [
+            "Д",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This is the same yes chunk. The no chunk remains listening practice; its letters are for later."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-there",
+          "instruction": "Scene: you stand in a doorway. The cat sits across the room under the far window. This word means “there”: that distant spot.",
+          "display": "там",
+          "audio_ids": [
+            "foundation-tam"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "there"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "In this scene, there means the spot under the far window where the cat sits."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-message",
+          "instruction": "Scene: you stand in a doorway; the cat sits across the room under the far window. Describe it: “There is a cat there.” Listen and follow the two words.",
+          "display": "Там кот.",
+          "audio_ids": [
+            "foundation-tam-kot"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "А",
+            "М",
+            "К",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "cat-there"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Там means there; кот means cat. A space separates the words. The first letter is capitalized; the period ends the message. This Russian message needs no separate word for “is”."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-build-message",
+          "instruction": "You stand in a doorway. The cat sits across the room under the far window. Assemble “There is a cat there.”",
+          "display": "Scene: you are at the doorway. The cat is across the room under the far window.",
+          "audio_ids": [
+            "foundation-tam-kot"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "А",
+            "М",
+            "К",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat",
+            "there",
+            "cat-there"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "кот.",
+              "Там"
+            ],
+            "answer": [
+              "Там",
+              "кот."
+            ],
+            "feedback": [
+              "Start with Там, meaning there: the spot under the far window. Replay the message and choose that first word.",
+              "Next use кот., meaning cat, with the period ending this message. Replay the second word."
+            ],
+            "success": "You assembled it. Listen once more if you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-build-there",
+          "instruction": "Optional: build the word meaning “there”. You can replay it whenever you like.",
+          "display": "there",
+          "audio_ids": [
+            "foundation-tam"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "there"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "м",
+              "т",
+              "а"
+            ],
+            "answer": [
+              "т",
+              "а",
+              "м"
+            ],
+            "feedback": [
+              "Begin with Т; replay the beginning.",
+              "The middle letter is А; replay the vowel.",
+              "Finish with М; listen to the end."
+            ],
+            "success": "You assembled it. Listen once more if you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-read-yes",
+          "instruction": "Try reading this aloud or quietly. Then reveal the model and compare. You can skip this attempt.",
+          "display": "да",
+          "audio_ids": [
+            "foundation-da"
+          ],
+          "requires_graphemes": [
+            "Д",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "yes"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "да",
+            "note": "Listen and compare with your attempt. What sounds different? Replay as often as you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-meaning-there",
+          "instruction": "Listen to the whole word. Which meaning did it have in our scene?",
+          "display": null,
+          "audio_ids": [
+            "foundation-tam"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "there",
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "There, at the indicated spot",
+                "feedback": "This is там: there, at the indicated spot. Replay it."
+              },
+              {
+                "id": "1",
+                "text": "Cat",
+                "feedback": "The cat word is different. This is там: there, at the indicated spot. Replay it."
+              }
+            ],
+            "correct_id": "0",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-speak-message",
+          "instruction": "Optional: say the small message and compare with its reference.",
+          "display": "Там кот.",
+          "audio_ids": [
+            "foundation-tam-kot"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "А",
+            "М",
+            "К",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat-there"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "speak",
+            "note": "Listen, try, and compare at your own pace. If recording is available, you can record yourself and listen back. You can also skip this."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-end",
+          "instruction": "Repeat, pause, or continue with more sound and script practice.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You practiced А, М, О, К, Т, Д and made a small message. Repeat it, take a break, or continue with more letters and short exchanges."
+          },
+          "revision": "1"
+        }
+      ]
+    },
+    {
+      "id": "foundation-4",
+      "title": "I and you, by ear",
+      "goal": "Hear two useful words for taking part yourself.",
+      "steps": [
+        {
+          "id": "c7-i-audio",
+          "revision": "1",
+          "instruction": "When you refer to yourself, the speaker, this whole word means “I”. Play it.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ya"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "i-speaker"
+          ],
+          "audio_first_chunk": true,
+          "introduces_samples": [
+            "ya-whole-chunk"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "Its new letter has not been introduced. Learn the spoken chunk and meaning now; no Russian script is required."
+          }
+        },
+        {
+          "id": "c7-you-audio",
+          "revision": "1",
+          "instruction": "You are speaking to one close friend. Play the whole Russian word meaning “you” for that friend.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ty"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "you-familiar-singular"
+          ],
+          "audio_first_chunk": true,
+          "introduces_samples": [
+            "ty-whole-chunk"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "This word addresses one familiar person. Russian has another form for more formal address or more than one listener; that will come later. Its new written letter has not been introduced, so this is listening and speaking only."
+          }
+        },
+        {
+          "id": "c7-i-listen",
+          "revision": "1",
+          "instruction": "Listen. Does this word refer to the speaker or to the familiar listener? Answer in English without looking at Russian spelling.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ya"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "i-speaker",
+            "you-familiar-singular"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": true,
+          "requires_samples": [
+            "ya-whole-chunk"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "I",
+            "accepted": [
+              "I",
+              "me",
+              "the speaker",
+              "myself"
+            ],
+            "feedback": [
+              {
+                "response": "you",
+                "feedback": "This chunk means I, the speaker. The familiar-listener chunk is different; replay this one first."
+              }
+            ],
+            "reveal": "This chunk means I: the person speaking.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c7-you-say",
+          "revision": "1",
+          "instruction": "You are talking directly to one close friend. What Russian word means “you” in that scene? Try saying it before listening.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ty"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "you-familiar-singular"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": true,
+          "requires_samples": [
+            "ty-whole-chunk"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "ты",
+            "accepted": [],
+            "feedback": [
+              {
+                "response": "i_chunk",
+                "feedback": "The I chunk refers to the speaker. Here you address your familiar listener. Listen to the familiar-listener reference."
+              }
+            ],
+            "reveal": "For this familiar one-person scene, listen to the reference chunk and compare with your attempt.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c7-personal-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You heard I and familiar you. Keep practicing them by ear while we meet more letters."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-5",
+      "title": "He and she, one letter at a time",
+      "goal": "Meet one new consonant, hear two useful words, and notice which part of a word is stressed.",
+      "steps": [
+        {
+          "id": "c4-return-cat",
+          "revision": "1",
+          "instruction": "What does this written word mean? Give its English meaning before revealing the recording.",
+          "display": "кот",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "reading_meaning",
+            "answer": "cat",
+            "accepted": [
+              "cat",
+              "a cat",
+              "the cat"
+            ],
+            "feedback": [],
+            "reveal": "кот means cat.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c4-n",
+          "revision": "1",
+          "instruction": "Play this practice syllable. Notice its beginning, before the vowel.",
+          "display": "Н н · на",
+          "audio_ids": [
+            "foundation-na"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Н"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "introduces_samples": [
+            "na",
+            "n-before-a"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "Н looks like English H, but its beginning sound here is like the beginning of English “no”. Follow the recording. The vowel А was introduced earlier. This syllable is practice, not new vocabulary."
+          }
+        },
+        {
+          "id": "c4-copy-na",
+          "revision": "1",
+          "instruction": "Build the displayed syllable, then listen as you follow its letters.",
+          "display": "на",
+          "audio_ids": [
+            "foundation-na"
+          ],
+          "requires_graphemes": [
+            "Н",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "na"
+          ],
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "а",
+              "н"
+            ],
+            "answer": [
+              "н",
+              "а"
+            ],
+            "feedback": [
+              "Start with Н, the beginning before the vowel.",
+              "Finish with А, the vowel."
+            ],
+            "success": "You assembled it. Replay as you follow the letters."
+          }
+        },
+        {
+          "id": "c4-he-audio",
+          "revision": "1",
+          "instruction": "In this scene we are talking about one man. Play the Russian word meaning “he”.",
+          "display": null,
+          "audio_ids": [
+            "foundation-on"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "he-person"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Listen to the whole word. Russian writing will appear next; no reading is needed here."
+          }
+        },
+        {
+          "id": "c4-he-script",
+          "revision": "1",
+          "instruction": "This is the word you just heard. Listen, then follow its letters.",
+          "display": "он",
+          "audio_ids": [
+            "foundation-on"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Н"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "he-person"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "n-before-a"
+          ],
+          "introduces_samples": [
+            "on",
+            "n-word-final"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "О carries the word’s vowel. Н is at the end; listen to that ending in the whole recording. The capital version is Он; both shapes of each letter have been introduced."
+          }
+        },
+        {
+          "id": "c4-she-audio",
+          "revision": "1",
+          "instruction": "Now we are talking about one woman. Play the Russian word meaning “she”.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "she-person"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This is a whole spoken word. Listen before looking at its spelling."
+          }
+        },
+        {
+          "id": "c4-stress",
+          "revision": "1",
+          "instruction": "Play the word for “she”. Notice that its final vowel is stronger.",
+          "display": "она́",
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Н",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "she-person"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "introduces_samples": [
+            "ona",
+            "ona-unstressed-o"
+          ],
+          "introduces_conventions": [
+            "stress-acute-annotation"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "The last syllable is stressed: stronger. The accent marks it for learning; ordinary spelling is она. The first о is unstressed, so it sounds different from our earlier stressed о. Listen to the whole word."
+          }
+        },
+        {
+          "id": "c4-read-she",
+          "revision": "1",
+          "instruction": "What does this written word mean? Give its English meaning before revealing the recording.",
+          "display": "она",
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Н",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "she-person"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "ona",
+            "ona-unstressed-o"
+          ],
+          "requires_conventions": [
+            "stress-acute-annotation"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "reading_meaning",
+            "answer": "she",
+            "accepted": [
+              "she"
+            ],
+            "feedback": [
+              {
+                "response": "he",
+                "feedback": "он was he. This word has the ending а: она, she."
+              }
+            ],
+            "reveal": "она means she in our one-woman scene. Listen and compare.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c4-read-aloud-she",
+          "revision": "1",
+          "instruction": "Try reading this aloud or quietly, then show the model to compare. You can skip.",
+          "display": "она",
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Н",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "she-person"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "ona",
+            "ona-unstressed-o"
+          ],
+          "requires_conventions": [
+            "stress-acute-annotation"
+          ],
+          "action": {
+            "kind": "read",
+            "reveal_text": "она",
+            "note": "Listen and compare. What sounds different? You can replay and try again."
+          }
+        },
+        {
+          "id": "c4-he-listen",
+          "revision": "1",
+          "instruction": "Listen. In our people scenes, what does this word mean? Say or type its English meaning.",
+          "display": null,
+          "audio_ids": [
+            "foundation-on"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "he-person",
+            "she-person"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "on"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "he",
+            "accepted": [
+              "he"
+            ],
+            "feedback": [
+              {
+                "response": "she",
+                "feedback": "The word you heard is он, he. The word for she in our other scene ends in а: она."
+              }
+            ],
+            "reveal": "This is он: he, referring to the man in our scene.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c4-she-say",
+          "revision": "1",
+          "instruction": "We are talking about the woman, not the speaker or listener. What Russian word means “she”? Try saying it before listening.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "she-person"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "ona",
+            "ona-unstressed-o"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "она",
+            "accepted": [],
+            "feedback": [
+              {
+                "response": "он",
+                "feedback": "он refers to the man in our first scene. For the woman, the reference is она́."
+              }
+            ],
+            "reveal": "The reference is она́. Listen, then compare with your attempt.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c4-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You met Н and practiced he and she. You also noticed a stronger syllable and an unstressed О in one word."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-6",
+      "title": "A window, and one kind of “it”",
+      "goal": "Read a new noun, then refer back to it with the Russian neuter pronoun.",
+      "steps": [
+        {
+          "id": "c5-window-audio",
+          "revision": "1",
+          "instruction": "Scene: a cat sits beside a window. Play the Russian word for the window.",
+          "display": null,
+          "audio_ids": [
+            "foundation-okno"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "window"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Play the example, then continue when you are ready."
+          }
+        },
+        {
+          "id": "c5-window-read",
+          "revision": "1",
+          "instruction": "Play the whole window word. Follow its four letters.",
+          "display": "окно́",
+          "audio_ids": [
+            "foundation-okno"
+          ],
+          "requires_graphemes": [
+            "О",
+            "К",
+            "Н"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "window"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "introduces_samples": [
+            "okno",
+            "okno-unstressed-o",
+            "kn-cluster"
+          ],
+          "requires_conventions": [
+            "stress-acute-annotation"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "The last о is stressed; the first is unstressed, as in она́. Hear К and Н together, without an extra vowel. Follow the whole word. Ordinary spelling is окно."
+          }
+        },
+        {
+          "id": "c5-neuter-meaning",
+          "revision": "1",
+          "instruction": "We have just named the window. Play the pronoun that can refer back to that window.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ono"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "window"
+          ],
+          "introduces_meanings": [
+            "it-neuter-window"
+          ],
+          "audio_first_chunk": false,
+          "introduces_conventions": [
+            "neuter-noun-reference"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "The Russian word for window is a neuter noun. This pronoun can refer back to it. Other noun classes use different pronouns; this is the window example."
+          }
+        },
+        {
+          "id": "c5-neuter-script",
+          "revision": "1",
+          "instruction": "Listen, then follow the spelling of the pronoun for our window.",
+          "display": "оно́",
+          "audio_ids": [
+            "foundation-ono"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Н"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "it-neuter-window",
+            "window"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "introduces_samples": [
+            "ono",
+            "ono-unstressed-o"
+          ],
+          "requires_conventions": [
+            "stress-acute-annotation",
+            "neuter-noun-reference"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "The last о is stressed; the first is unstressed. Listen to the whole word. Ordinary spelling is оно."
+          }
+        },
+        {
+          "id": "c5-pronoun-choice",
+          "revision": "1",
+          "instruction": "Listen to the pronoun for our window noun. Keep this particular example in mind.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ono"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "he-person",
+            "she-person",
+            "it-neuter-window",
+            "window"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_conventions": [
+            "neuter-noun-reference"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "Окно, window, is a neuter noun. Оно can refer back to it. Russian uses different pronouns for different noun classes; this is the window example."
+          }
+        },
+        {
+          "id": "c5-he-say",
+          "revision": "1",
+          "instruction": "Return to the man in our earlier scene. What Russian word means “he”? Say it before revealing the model.",
+          "display": null,
+          "audio_ids": [
+            "foundation-on"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "he-person"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "on"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "он",
+            "accepted": [],
+            "feedback": [
+              {
+                "response": "она",
+                "feedback": "она refers to the woman in our scene. For the man, use он."
+              },
+              {
+                "response": "оно",
+                "feedback": "оно was used for the neuter window noun. For the man in this scene, use он."
+              }
+            ],
+            "reveal": "The reference is он.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c5-keyboard-intro",
+          "revision": "1",
+          "instruction": "The letter keys enter your answer. Backspace removes the last letter. Next, try copying a short word with these keys.",
+          "display": "он",
+          "audio_ids": [],
+          "requires_graphemes": [
+            "О",
+            "Н"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "he-person"
+          ],
+          "introduces_meanings": [],
+          "introduces_conventions": [
+            "taught-letter-keyboard"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The Russian word stays visible for this first keyboard try. If tapping is difficult, you can ask for help or skip."
+          }
+        },
+        {
+          "id": "c5-keyboard",
+          "revision": "1",
+          "instruction": "Try this input control: tap О, then Н. Backspace removes the last letter.",
+          "display": "он",
+          "audio_ids": [],
+          "requires_graphemes": [
+            "О",
+            "Н"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "he-person"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "copy",
+            "answer": "он",
+            "keyboard": [
+              "А",
+              "М",
+              "О",
+              "К",
+              "Т",
+              "Д",
+              "Н"
+            ],
+            "note": "The same keys will be available for other words. Backspace removes the last letter. You can use a spoken answer or skip whenever typing is awkward."
+          },
+          "requires_conventions": [
+            "taught-letter-keyboard"
+          ]
+        },
+        {
+          "id": "c5-window-write",
+          "revision": "1",
+          "instruction": "Enter the Russian word for “window” from memory. Use the letter keyboard, or ask for help. The word and recording appear after your answer.",
+          "display": null,
+          "audio_ids": [
+            "foundation-okno"
+          ],
+          "requires_graphemes": [
+            "О",
+            "К",
+            "Н"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "window"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "okno",
+            "okno-unstressed-o",
+            "kn-cluster"
+          ],
+          "requires_conventions": [
+            "taught-letter-keyboard"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "окно",
+            "accepted": [
+              "окно",
+              "Окно"
+            ],
+            "feedback": [
+              {
+                "response": "оно",
+                "feedback": "оно is the pronoun used for the window noun. The noun meaning window is окно: it includes К."
+              }
+            ],
+            "reveal": "The spelling is окно. Replay окно́ and follow О К Н О.",
+            "keyboard": [
+              "А",
+              "М",
+              "О",
+              "К",
+              "Т",
+              "Д",
+              "Н"
+            ]
+          }
+        },
+        {
+          "id": "c5-window-read-return",
+          "revision": "1",
+          "instruction": "What does this written word mean? Give its English meaning before revealing the recording.",
+          "display": "окно",
+          "audio_ids": [
+            "foundation-okno"
+          ],
+          "requires_graphemes": [
+            "О",
+            "К",
+            "Н"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "window"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "okno"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "reading_meaning",
+            "answer": "window",
+            "accepted": [
+              "window",
+              "a window",
+              "the window"
+            ],
+            "feedback": [
+              {
+                "response": "it",
+                "feedback": "The noun is window. The separate pronoun for this neuter noun was оно, without К."
+              }
+            ],
+            "reveal": "окно means window.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c5-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You practiced окно, window, and оно referring back to that neuter noun. Next comes a word for more than one person."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-7",
+      "title": "They: more than one person",
+      "goal": "Meet one new vowel and hear how the consonant before it sounds in this word.",
+      "steps": [
+        {
+          "id": "c6-i",
+          "revision": "1",
+          "instruction": "Play this vowel and connect it with these letter shapes.",
+          "display": "И и",
+          "audio_ids": [
+            "foundation-i"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [
+            "И"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "introduces_samples": [
+            "i"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "The recording is the model. For many English speakers the vowel in “see” is a useful starting cue, though accents differ. И is a Russian letter; it is not the English letter N."
+          }
+        },
+        {
+          "id": "c6-they-audio",
+          "revision": "1",
+          "instruction": "Now two people stand together: the man and the woman. Play the Russian word meaning “they”.",
+          "display": null,
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "they-people"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Play the example, then continue when you are ready."
+          }
+        },
+        {
+          "id": "c6-ni-context",
+          "revision": "1",
+          "instruction": "Play the whole word. Notice its final vowel and the sound just before it.",
+          "display": "они́",
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Н",
+            "И"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "they-people"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "i",
+            "on"
+          ],
+          "introduces_samples": [
+            "oni",
+            "oni-unstressed-o",
+            "n-before-i-soft"
+          ],
+          "requires_conventions": [
+            "stress-acute-annotation"
+          ],
+          "action": {
+            "kind": "present",
+            "note": "The last syllable is stressed. The first о is unstressed, as before. Н sounds softer before и here than at the end of он. Follow the whole word; we will explore that difference later. Ordinary spelling is они."
+          }
+        },
+        {
+          "id": "c6-they-read",
+          "revision": "1",
+          "instruction": "What does this written word mean? Give its English meaning before revealing the recording.",
+          "display": "они",
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Н",
+            "И"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "they-people"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "oni",
+            "oni-unstressed-o",
+            "n-before-i-soft"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "reading_meaning",
+            "answer": "they",
+            "accepted": [
+              "they",
+              "the two people",
+              "those people"
+            ],
+            "feedback": [
+              {
+                "response": "he",
+                "feedback": "он refers to the one man. This word ends in И: они, they."
+              },
+              {
+                "response": "she",
+                "feedback": "она refers to the one woman. This word ends in И: они, they."
+              }
+            ],
+            "reveal": "они means they, referring to the two people together in our scene.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c6-read-aloud-they",
+          "revision": "1",
+          "instruction": "Try reading this aloud or quietly, then show the model to compare. You can skip.",
+          "display": "они",
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Н",
+            "И"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "they-people"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "oni",
+            "oni-unstressed-o",
+            "n-before-i-soft"
+          ],
+          "requires_conventions": [
+            "stress-acute-annotation"
+          ],
+          "action": {
+            "kind": "read",
+            "reveal_text": "они",
+            "note": "Listen and compare. What sounds different? You can replay and try again."
+          }
+        },
+        {
+          "id": "c6-she-write",
+          "revision": "1",
+          "instruction": "What Russian word means “she” for the woman in our scene? Enter it before revealing its spelling or recording.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Н",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "she-person"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "ona",
+            "ona-unstressed-o"
+          ],
+          "requires_conventions": [
+            "taught-letter-keyboard"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "она",
+            "accepted": [
+              "она",
+              "Она"
+            ],
+            "feedback": [
+              {
+                "response": "он",
+                "feedback": "он was he. For she in our scene, add the final А: она."
+              },
+              {
+                "response": "они",
+                "feedback": "они was they, for more than one person. Our one-woman word ends in А: она."
+              }
+            ],
+            "reveal": "The spelling is она. Listen to она́.",
+            "keyboard": [
+              "А",
+              "М",
+              "О",
+              "К",
+              "Т",
+              "Д",
+              "Н",
+              "И"
+            ]
+          }
+        },
+        {
+          "id": "c6-they-listen",
+          "revision": "1",
+          "instruction": "Listen without looking at the Russian spelling. In our people scenes, what does this word mean?",
+          "display": null,
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "he-person",
+            "she-person",
+            "they-people"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "oni"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "they",
+            "accepted": [
+              "they",
+              "the two people",
+              "those people"
+            ],
+            "feedback": [
+              {
+                "response": "he",
+                "feedback": "The recording is они, ending in И, for the two people. The one-man word was он."
+              },
+              {
+                "response": "she",
+                "feedback": "The recording is они, ending in И, for the two people. The one-woman word was она."
+              }
+            ],
+            "reveal": "This is они: they, the two people together.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c6-window-it-say",
+          "revision": "1",
+          "instruction": "We named the window in Russian. Say the pronoun that refers back to this neuter noun, then reveal the model.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ono"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "it-neuter-window",
+            "window"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "ono",
+            "ono-unstressed-o"
+          ],
+          "requires_conventions": [
+            "neuter-noun-reference"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "оно",
+            "accepted": [],
+            "feedback": [
+              {
+                "response": "он",
+                "feedback": "In this taught example, окно is neuter, so use оно. он was our word for the man."
+              },
+              {
+                "response": "она",
+                "feedback": "In this taught example, окно is neuter, so use оно. она was our word for the woman."
+              }
+            ],
+            "reveal": "For the neuter noun окно, the pronoun is оно́.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c7-they-say",
+          "revision": "1",
+          "instruction": "Back to our two people together. What Russian word means “they”? Try saying it before listening.",
+          "display": null,
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "they-people"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "requires_samples": [
+            "oni",
+            "oni-unstressed-o",
+            "n-before-i-soft"
+          ],
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "они",
+            "accepted": [],
+            "feedback": [
+              {
+                "response": "он",
+                "feedback": "он was one man. For both people together, the reference is они́."
+              },
+              {
+                "response": "она",
+                "feedback": "она was one woman. For both people together, the reference is они́."
+              }
+            ],
+            "reveal": "The reference is они́.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "c6-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You practiced И, they, and returns to earlier words. Continue with small new letter encounters and useful short exchanges."
+          }
+        }
+      ]
+    }
+  ],
+  "previous_revisions": [
+    "foundation-2026-11-06.1"
+  ]
+}

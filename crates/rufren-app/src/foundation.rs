@@ -4,9 +4,9 @@ use crate::{
     repository::{Result, now_ms},
 };
 use rufren_content::foundations::{
-    FoundationRecallMode, foundation_step_pack_revision, foundations_legacy,
+    FoundationRecallMode, foundation_step_pack_revision, foundations_edition,
 };
-use rufren_content::{FoundationAction, FoundationStep};
+use rufren_content::{FoundationAction, FoundationPack, FoundationStep};
 use rufren_core::*;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
@@ -122,6 +122,82 @@ pub(crate) struct FoundationPending {
     feedback: String,
     accepted: bool,
 }
+
+fn foundation_validate_cursor(s: &FoundationState, pack: &FoundationPack) -> Result<()> {
+    let episode = pack
+        .episodes
+        .get(s.episode)
+        .ok_or("Your saved foundation episode is unavailable; its progress is preserved.")?;
+    let step = episode
+        .steps
+        .get(s.step)
+        .ok_or("Your saved foundation step is unavailable; its progress is preserved.")?;
+    if s.episode_id != episode.id || s.step_id != step.id || s.step_revision != step.revision {
+        return Err(
+            "Your saved foundation task belongs to a different edition; its progress is preserved."
+                .into(),
+        );
+    }
+    Ok(())
+}
+
+/// Migrate a local copy completely before writing it. A return keeps both its
+/// active task and the exact suspended course; neither is silently discarded.
+fn foundation_upgrade_state(s: &mut FoundationState, pack: &FoundationPack) -> Result<bool> {
+    if s.version != 1 {
+        return Err(
+            "This saved foundation uses a different format. Your progress is preserved.".into(),
+        );
+    }
+    let mut changed = false;
+    if let Some(course) = s.review_resume.as_mut() {
+        if course.review_resume.is_some() {
+            return Err("Your saved recall return needs recovery. Its work is preserved.".into());
+        }
+        changed |= foundation_upgrade_state(course, pack)?;
+    }
+    if s.revision != pack.revision {
+        let old = foundations_edition(&s.revision)
+            .filter(|old| pack.is_append_only_extension_of(old))
+            .ok_or("This saved foundation uses a different edition. Your progress is preserved.")?;
+        foundation_validate_cursor(s, &old)?;
+        // Reserved immutable evidence is recovered on the same task. Only a
+        // genuinely completed older course moves to the first appended episode.
+        if s.finished {
+            let old_episode = &old.episodes[s.episode];
+            if s.pending.is_some()
+                || s.review_resume.is_some()
+                || s.episode + 1 != old.episodes.len()
+                || s.step + 1 != old_episode.steps.len()
+            {
+                return Err(
+                    "Your saved course ending needs recovery. Its work is preserved.".into(),
+                );
+            }
+            s.episode = old.episodes.len();
+            s.step = 0;
+            let next = &pack.episodes[s.episode];
+            s.episode_id = next.id.clone();
+            s.step_id = next.steps[0].id.clone();
+            s.step_revision = next.steps[0].revision.clone();
+            s.session = Uuid::new_v4();
+            s.finished = false;
+            s.draft.clear();
+            s.cues.clear();
+            s.played.clear();
+            s.feedback = None;
+            s.revealed = false;
+            s.accepted = false;
+            s.cannot_yet = false;
+            s.recording = None;
+        }
+        s.revision = pack.revision.clone();
+        changed = true;
+    }
+    foundation_validate_cursor(s, pack)?;
+    Ok(changed)
+}
+
 impl Default for FoundationState {
     fn default() -> Self {
         Self {
@@ -213,79 +289,8 @@ impl AppState {
     pub(crate) fn foundation_state(&self) -> Result<FoundationState> {
         let mut s: FoundationState = self.repo.get(KEY)?.unwrap_or_default();
         let pack = rufren_content::foundations();
-        if s.version != 1 {
-            return Err(
-                "This saved foundation uses a different format. Your progress is preserved.".into(),
-            );
-        }
-        if s.revision != pack.revision {
-            let old = foundations_legacy();
-            if s.revision != old.revision
-                || pack.episodes.len() <= old.episodes.len()
-                || pack.episodes[..old.episodes.len()] != old.episodes[..]
-            {
-                return Err(
-                    "This saved foundation uses a different edition. Your progress is preserved."
-                        .into(),
-                );
-            }
-            let Some(old_episode) = old.episodes.get(s.episode) else {
-                return Err(
-                    "Your saved foundation episode is unavailable; its progress is preserved."
-                        .into(),
-                );
-            };
-            let Some(old_step) = old_episode.steps.get(s.step) else {
-                return Err(
-                    "Your saved foundation step is unavailable; its progress is preserved.".into(),
-                );
-            };
-            if s.episode_id != old_episode.id
-                || s.step_id != old_step.id
-                || s.step_revision != old_step.revision
-            {
-                return Err("Your saved foundation task belongs to a different edition; its progress is preserved.".into());
-            }
-            // An unfinished packet is recovered unchanged before starting a later task.
-            if s.finished {
-                if s.pending.is_some()
-                    || s.episode + 1 != old.episodes.len()
-                    || s.step + 1 != old_episode.steps.len()
-                {
-                    return Err(
-                        "Your saved course ending needs recovery. Its work is preserved.".into(),
-                    );
-                }
-                s.episode = old.episodes.len();
-                s.step = 0;
-                s.episode_id = pack.episodes[s.episode].id.clone();
-                s.step_id = pack.episodes[s.episode].steps[0].id.clone();
-                s.step_revision = pack.episodes[s.episode].steps[0].revision.clone();
-                s.session = Uuid::new_v4();
-                s.finished = false;
-                s.draft.clear();
-                s.cues.clear();
-                s.played.clear();
-                s.feedback = None;
-                s.revealed = false;
-                s.accepted = false;
-                s.recording = None;
-            }
-            s.revision = pack.revision.clone();
+        if foundation_upgrade_state(&mut s, &pack)? {
             self.foundation_save(&s)?;
-        }
-        let Some(episode) = pack.episodes.get(s.episode) else {
-            return Err(
-                "Your saved foundation episode is unavailable; its progress is preserved.".into(),
-            );
-        };
-        let Some(step) = episode.steps.get(s.step) else {
-            return Err(
-                "Your saved foundation step is unavailable; its progress is preserved.".into(),
-            );
-        };
-        if episode.id != s.episode_id || step.id != s.step_id || step.revision != s.step_revision {
-            return Err("Your saved foundation task belongs to a different edition; its progress is preserved.".into());
         }
         Ok(s)
     }
@@ -450,10 +455,7 @@ impl AppState {
             let target: Vec<_> = answer.chars().collect();
             let given: Vec<_> = response.chars().collect();
             if given.len() > target.len() && given.iter().zip(&target).all(|(a, b)| a == b) {
-                format!(
-                    "The word ends after {} letters. Remove the extra letters, then compare with the model.",
-                    target.len()
-                )
+                "The reference ends here. Compare the extra characters with the saved model.".into()
             } else if let Some(index) = given
                 .iter()
                 .zip(&target)
@@ -468,7 +470,7 @@ impl AppState {
                 format!("Compare the ending with the model: {answer}.")
             }
         } else {
-            match mode{FoundationRecallMode::Spoken=>"Your speaking attempt is saved. Listen and compare your own voice with the reference.".into(),FoundationRecallMode::Written=>"Your spelling matches this word. Listen to its sound again if you like.".into(),_=>"Compare your meaning with the example below. Your wording can be different and still express the same idea.".into()}
+            match mode{FoundationRecallMode::Spoken=>"Your speaking attempt is saved. Listen and compare your own voice with the reference.".into(),FoundationRecallMode::Written=>"Your written response matches this reference. Listen to its sound again if you like.".into(),_=>"Compare your meaning with the example below. Your wording can be different and still express the same idea.".into()}
         };
         let now = now_ms();
         let attempt = Uuid::new_v4();
