@@ -1,0 +1,29 @@
+{
+  "schema": "rufren-omnivoice-duration-control-v1",
+  "calls": {
+    "tts": 1,
+    "asr": 1,
+    "retries": 0
+  },
+  "gpu_released": true,
+  "source_text": "Он дома, она у окна, оно открыто, а они пьют молоко.",
+  "baseline_sha256": "043724bb0ec7ab206fa5a4769ad2e23d6cdb2f5a8e13ea3fe1d226c378618f3a",
+  "candidate_sha256": "3bed1d92a6a1abcb43c578fe40fe0dc616b4cf62e7936868f53b15cbe98b4b46",
+  "only_requested_change": "duration_s=None -> 4.5",
+  "actual_duration_seconds": 4.52,
+  "lexical_screen": "all_expected_words_recovered_without_additions",
+  "literal_transcript": "Он дома, она у окна, оно открыто, а они пьют молоко.",
+  "ending_status": "lower_energy_longer_periodic_region_but_boundary_still_unresolved",
+  "last20ms_rms_difference_db": -8.805164685085224,
+  "phonetic_correctness": null,
+  "human_listening": null,
+  "live_provider_changed": false,
+  "original_artifacts_verified_unchanged": true,
+  "artifact_hashes": {
+    "OVA01-duration45-review.json": "67edea061e3fc16f24c56e1cbc0e599856f5de8e915ee1adf7fbceef8825a6a6",
+    "OVA01-duration45.json": "e992ab946537ab2f50dcb25e737edbdfc78baabfa6d34570631208dc7f8ff367",
+    "OVA01-duration45.wav": "3bed1d92a6a1abcb43c578fe40fe0dc616b4cf62e7936868f53b15cbe98b4b46",
+    "ending-comparison.png": "2a537b13b867d5797fecb1ba288387dd6194dc8f8a025be364bce1879cf79fc4",
+    "measurements.json": "f938253f832db0c091f50dc883ba018f0f63d1f3d2549e7b3f78410974f40c5e"
+  }
+}

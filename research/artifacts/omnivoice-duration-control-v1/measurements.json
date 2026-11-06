@@ -1,0 +1,72 @@
+{
+  "script_sha256": "3730b8e7734548b2da1e56924a72ce4185d33f9fd2bdf2678c8f8f72b5709bd0",
+  "scope": "Comparison of actual complete generated waveforms; no time stretching or silence padding",
+  "methods": {
+    "spectrogram": "20ms Hann,5ms hop,1024FFT,24kHz,2|STFT| dBFS,no gain normalization",
+    "end_metrics": "Unweighted original PCM RMS/peak in last20/50/100ms; measurements not speech/silence classifier"
+  },
+  "takes": {
+    "original": {
+      "source_path": "research/artifacts/omnivoice-audition-v1/OVA01.wav",
+      "sha256": "043724bb0ec7ab206fa5a4769ad2e23d6cdb2f5a8e13ea3fe1d226c378618f3a",
+      "frames": 81600,
+      "duration_seconds": 3.4,
+      "peak": 0.91796875,
+      "full_scale_samples": 0,
+      "last_sample": -0.000946044921875,
+      "ending_windows_ms": {
+        "20": {
+          "rms_dbfs": -13.59293828027721,
+          "peak": 0.53515625
+        },
+        "50": {
+          "rms_dbfs": -12.620958917110451,
+          "peak": 0.60546875
+        },
+        "100": {
+          "rms_dbfs": -14.33219220444559,
+          "peak": 0.60546875
+        }
+      },
+      "last_vowel_like_periodic_portion": {
+        "start_frame": 79800,
+        "end_frame": 81600,
+        "visible_duration_to_boundary_ms": 75.0,
+        "onset_sensitivity_ms": 10,
+        "offset_is_file_boundary": true,
+        "interpretation": "Exploratory visible interval, not full phoneme duration or proof of complete final vowel"
+      }
+    },
+    "duration45": {
+      "source_path": "research/artifacts/omnivoice-duration-control-v1/OVA01-duration45.wav",
+      "sha256": "3bed1d92a6a1abcb43c578fe40fe0dc616b4cf62e7936868f53b15cbe98b4b46",
+      "frames": 108480,
+      "duration_seconds": 4.52,
+      "peak": 0.8828125,
+      "full_scale_samples": 0,
+      "last_sample": 0.0206298828125,
+      "ending_windows_ms": {
+        "20": {
+          "rms_dbfs": -22.398102965362433,
+          "peak": 0.1865234375
+        },
+        "50": {
+          "rms_dbfs": -19.884693324776435,
+          "peak": 0.31640625
+        },
+        "100": {
+          "rms_dbfs": -16.573035898901203,
+          "peak": 0.462890625
+        }
+      },
+      "last_vowel_like_periodic_portion": {
+        "start_frame": 105000,
+        "end_frame": 108480,
+        "visible_duration_to_boundary_ms": 145.0,
+        "onset_sensitivity_ms": 10,
+        "offset_is_file_boundary": true,
+        "interpretation": "Exploratory visible interval, not full phoneme duration or proof of complete final vowel"
+      }
+    }
+  }
+}

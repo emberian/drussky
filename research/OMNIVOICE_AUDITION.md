@@ -36,6 +36,8 @@ Every take used language `ru`, supported attribute instruction `female`, seed **
 
 The narrow next repair experiment, **not run here**, is the same OVA01 source/style/seed/steps with one explicit longer duration, for example 4.5 seconds. Retain it as a new candidate and compare complete words, repetitions and the ending against the original; do not pad silence onto the old file and call the vowel fixed. This tests the duration-setting concern without changing the model or selecting a flattering seed. No broad install, retry or voice search is warranted by this first result.
 
+**Subsequent separate control:** the authorized [4.5-second request](OMNIVOICE_DURATION_CONTROL.md) produced a 4.52-second take, exact lexical recovery and a longer, lower-energy final periodic region. It still reaches the file boundary without clear trailing quiet, so the control is a partial improvement rather than a demonstrated truncation fix. This original three-take result set remains unchanged.
+
 ## Exact assets
 
 | Case | WAV | SHA-256 |
