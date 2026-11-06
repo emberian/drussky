@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Consistent online SQLite + verified original-audio backup; no secrets printed."""
 import argparse
+from contextlib import closing, contextmanager
 import hashlib
 import json
 import os
@@ -16,9 +17,14 @@ def digest(path):
         return hashlib.file_digest(source, 'sha256').hexdigest()
 
 
+@contextmanager
 def connection(path, mode):
     from urllib.parse import quote
-    return sqlite3.connect(f"file:{quote(str(path.resolve()))}?mode={mode}", uri=True)
+    database = sqlite3.connect(f"file:{quote(str(path.resolve()))}?mode={mode}", uri=True)
+    try:
+        yield database
+    finally:
+        database.close()
 
 
 def verify(path):
@@ -34,16 +40,31 @@ def verify(path):
 
 
 def required_assets(path):
-    result = {}
+    result, records, references = {}, {}, []
     with connection(path, 'ro') as db:
-        for (text,) in db.execute("SELECT json FROM metadata WHERE key >= 'asset.record.' AND key < 'asset.record/'"):
+        for row_key, text in db.execute("SELECT key,json FROM metadata WHERE key >= 'asset.record.' AND key < 'asset.record/'"):
             record = json.loads(text)
-            key, size = record['content_hash'], record['byte_length']
-            if not isinstance(key, str) or not re.fullmatch('[0-9a-f]{64}', key) or not isinstance(size, int) or not 0 < size <= 32 * 1024 * 1024:
+            key, size, asset_id = record['content_hash'], record['byte_length'], record['asset_id']
+            if (not isinstance(key, str) or not re.fullmatch('[0-9a-f]{64}', key)
+                    or type(size) is not int or not 0 < size <= 32 * 1024 * 1024
+                    or not isinstance(asset_id, str) or row_key != 'asset.record.' + asset_id):
                 raise ValueError('Invalid audio registry in database snapshot')
             if key in result and result[key] != size:
                 raise ValueError('Conflicting original audio byte lengths in snapshot')
-            result[key] = size
+            result[key], records[asset_id] = size, key
+        for (text,) in db.execute('SELECT json FROM events'):
+            fact = json.loads(text)['fact']
+            if fact['kind'] == 'recording_attached':
+                references.append((fact['data']['asset_id'], fact['data']['asset']['sha256']))
+            elif fact['kind'] == 'speech_transcribed':
+                references.append((fact['data']['asset_id'], fact['data']['audio_sha256']))
+    pending = {asset_id for asset_id, _ in references if asset_id not in records}
+    if pending:
+        # Facts may intentionally sync before (or without) recordings. This is an
+        # incomplete audio replica, not proof that the immutable facts are corrupt.
+        raise ValueError(f'Audio backup incomplete: {len(pending)} referenced recording(s) have not completed recording sync. Sync originals from their originating devices, then retry into a new destination; saved facts were kept')
+    if any(records[asset_id] != key for asset_id, key in references):
+        raise ValueError('Audio registry hash contradicts a recording/transcription reference in the snapshot')
     return dict(sorted(result.items()))
 
 
@@ -81,13 +102,17 @@ def verify_manifest(source, assets):
     if not path.exists():
         raise ValueError('Restore/verified backup requires the matching .json manifest')
     manifest = json.loads(path.read_text())
-    if manifest.get('format') != 'rufren-relay-sqlite' or manifest.get('version') not in (1, 2):
+    if manifest.get('format') != 'rufren-relay-sqlite' or type(manifest.get('version')) is not int or manifest.get('version') not in (1, 2):
         raise ValueError('Unsupported backup manifest format')
     if manifest['sha256'] != digest(source):
         raise ValueError('Backup SHA-256 does not match its manifest')
+    actual = verify(source)
+    for key in ['schema', 'event_count', 'cursor', 'relay']:
+        if key not in manifest or type(manifest[key]) is not type(actual[key]) or manifest[key] != actual[key]:
+            raise ValueError('Backup manifest metadata does not match its SQLite snapshot')
     required = required_assets(source)
     listed = manifest.get('assets', {})
-    if listed != required:
+    if (not isinstance(listed, dict) or any(type(size) is not int for size in listed.values()) or listed != required):
         raise ValueError('Backup manifest audio list does not match the SQLite snapshot')
     verify_assets(assets, required)
     return required
@@ -121,8 +146,19 @@ def main():
     descriptor = os.open(destination, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
     os.close(descriptor)
     try:
-        with connection(source, 'ro') as original, sqlite3.connect(destination) as copied:
+        with connection(source, 'ro') as original, closing(sqlite3.connect(destination)) as copied:
+            # Anchor one read transaction: facts and registry come from the same
+            # WAL snapshot while the live relay may keep appending transactions.
+            original.execute('BEGIN')
+            original.execute('SELECT COUNT(*) FROM sqlite_master').fetchone()
             original.backup(copied)
+            copied.commit()
+            # Finalize a self-contained transfer file before computing its digest.
+            # A connection context manager alone does not close a Python connection.
+            copied.execute('PRAGMA wal_checkpoint(TRUNCATE)').fetchone()
+            copied.execute('PRAGMA journal_mode=DELETE').fetchone()
+        with destination.open('rb') as finalized:
+            os.fsync(finalized.fileno())
         details = verify(destination)
         required = required_assets(destination)
         # Snapshot first, immutable bytes second: every manifest link refers to an already committed blob.
