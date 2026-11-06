@@ -133,15 +133,19 @@ pub(crate) fn TeacherProse(
     purpose: PresentationPurpose,
     #[props(default)] class: String,
     #[props(default = "ru".to_string())] language: String,
+    #[props(default)] session: Option<uuid::Uuid>,
+    #[props(default)] revision: Option<uuid::Uuid>,
 ) -> Element {
     let tree = parse(&text);
-    rsx! {div {class: "teacher-prose {class}", lang: language.clone(), {render_children(&tree.children, app, purpose, &language)}}}
+    rsx! {div {class: "teacher-prose {class}", lang: language.clone(), {render_children(&tree.children, app, purpose, &language, session, revision)}}}
 }
 fn render_children(
     nodes: &[Node],
     app: Signal<AppState>,
     purpose: PresentationPurpose,
     language: &str,
+    session: Option<uuid::Uuid>,
+    revision: Option<uuid::Uuid>,
 ) -> Element {
     let mut output = Vec::new();
     let mut at = 0;
@@ -156,10 +160,11 @@ fn render_children(
             // New visible content needs a fresh observer even if a saved answer
             // is replaced in the same position of a dynamic list.
             let key = format!("{start}:{text}");
-            output.push(rsx! {PresentedRussian {key: "{key}", app, text, purpose, language:language.to_owned(), p {for node in run {{render_inline(node)}}}}});
+            output.push(rsx! {PresentedRussian {key: "{key}", app, text, purpose, session, revision, language:language.to_owned(), p {for node in run {{render_inline(node)}}}}});
         } else {
             let node = &nodes[at];
-            let children = render_children(&node.children, app, purpose, language);
+            let children =
+                render_children(&node.children, app, purpose, language, session, revision);
             output.push(match node.kind {
                 Kind::List(Some(start)) => rsx! {ol {start: "{start}", {children}}},
                 Kind::List(None) => rsx! {ul {{children}}},

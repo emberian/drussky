@@ -4446,6 +4446,7 @@ dependencies = [
  "axum",
  "futures-util",
  "reqwest",
+ "rufren-speech",
  "serde",
  "serde_json",
  "tempfile",

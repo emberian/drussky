@@ -1,4 +1,7 @@
-use crate::{asset_sync, gateway, model::AppState, teacher_view::send_teacher};
+use crate::{
+    asset_sync, exposure_view::PresentedRussian, gateway, model::AppState,
+    teacher_view::send_teacher,
+};
 use dioxus::prelude::*;
 use rufren_core::*;
 use rufren_speech::{
@@ -59,14 +62,26 @@ fn TranscriptWords(mut app: Signal<AppState>, transcription: Uuid) -> Element {
     };
     let confirmations = state.library.transcript_confirmations(transcription);
     let field = format!("transcript-words-{transcription}");
+    let session = state
+        .library
+        .attempt(observation.attempt)
+        .map(|a| a.session);
+    let revision = Some(observation.revision);
     rsx! {
         section {class:"transcript-words",
             h3 {"The words it heard"}
             if observation.transcript.is_empty() {p {"No words were recognized. Replay the take, or try a shorter phrase."}}
-            else {blockquote {lang:"ru","{observation.transcript}"}}
+            else {PresentedRussian {app,text:observation.transcript.clone(),purpose:PresentationPurpose::Answer,session,revision,blockquote {"{observation.transcript}"}}}
+            for (event,confirmation) in &confirmations {
+                div {key:"confirmed-{event.id}",h4 {"Saved words to discuss"}
+                    PresentedRussian {app,text:confirmation.text.clone(),purpose:PresentationPurpose::Answer,session,revision,blockquote {"{confirmation.text}"}}
+                }
+            }
             if confirmations.len()>1 {p {"This transcript has different saved edits. Choose the words you want to discuss below."}}
             if let Err(error)=&initial {p {role:"alert","{error}"}}
             label {r#for:field.clone(),"Words to discuss · edit anything it misheard"}
+            // Editable drafts are learner input, not evidence of restudy. Only the
+            // independently visible hypothesis and saved adopted text are logged.
             textarea {id:field,lang:"ru",value:text(),disabled:state.teacher_busy,oninput:move |event| {
                 let value=event.value();
                 if value.len()>8192 {app.write().notice="Choose a shorter passage for one discussion.".into();return}

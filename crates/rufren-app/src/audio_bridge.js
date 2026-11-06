@@ -1,9 +1,11 @@
 // The renderer adapter owns device APIs and binary persistence; Rust owns analysis.
 // Bound to this mounted studio only. Explicit recording sync owns networking; no localStorage audio.
-const root = document.getElementById('rufren-audio-studio');
+const root = typeof rufrenStudioRoot==='undefined'?document.getElementById('rufren-audio-studio'):rufrenStudioRoot;
 if (!root) throw new Error('Speech studio did not mount.');
+const instanceId=root.dataset.instance||crypto.randomUUID();root.dataset.instance=instanceId;
 const previousExit = window.rufrenAudioStudio?.destroy();
 const config = JSON.parse(root.dataset.config);
+let compactAdvanced=!config.compact,choiceGeneration=0,pendingOperations=0;
 let alive = true, db, context, stream, processor, source, sink, capture, starting = false, finish;
 const lifetime = new Promise(resolve => finish = resolve);
 const yieldQueue = [], yieldChannel = typeof MessageChannel === 'function' ? new MessageChannel() : null;
@@ -29,16 +31,18 @@ function status(message, error = false) {
   const node = $('audio-status'); node.textContent = message; node.dataset.error = String(error);
 }
 function controls() {
-  root.querySelectorAll('[data-record]').forEach(b => { b.disabled = Boolean(capture || starting); });
+  root.querySelectorAll('[data-record]').forEach(b => { b.disabled = Boolean(capture || starting || pendingOperations); });
   $('audio-stop-recording').disabled = !(capture || starting);
-  root.querySelectorAll('[data-needs]').forEach(b => { b.disabled = !selected[b.dataset.needs] || !!capture || starting; });
-  $('audio-compare').disabled = !selected.reference || !selected.attempt || !!capture || starting;
-  root.querySelectorAll('input[type=file], select[data-library]').forEach(n => { n.disabled = !!capture || starting; });
+  root.querySelectorAll('[data-needs]').forEach(b => { b.disabled = !selected[b.dataset.needs] || !!capture || starting || !!pendingOperations; });
+  $('audio-compare').disabled = !selected.reference || !selected.attempt || !!capture || starting || !!pendingOperations;
+  root.querySelectorAll('input[type=file], select[data-library]').forEach(n => { n.disabled = !!capture || starting || !!pendingOperations; });
   regionControls();
 }
+function beginOperation(){pendingOperations++;emit({kind:'recording_state',active:true});controls();}
+function endOperation(){pendingOperations=Math.max(0,pendingOperations-1);emit({kind:'recording_state',active:!!(capture||starting||pendingOperations)});controls();}
 function mic(active, message = '') {
   $('audio-mic-status').textContent = active ? `● Microphone active ${message}` : (starting ? 'Requesting microphone…' : 'Microphone off');
-  $('audio-mic-status').dataset.active = String(active); controls();
+  $('audio-mic-status').dataset.active = String(active); controls();emit({kind:'recording_state',active:!!(capture||starting||pendingOperations)});
 }
 function failure(error) {
   const descriptions = {
@@ -141,13 +145,13 @@ function cueList(role, record) {
   }
 }
 async function selectRecord(role, record, buffer) {
-  if (!alive) return;
+  if (!alive) return false;
   const token=nextAnalysis(role,record);
   if (!buffer) {
     if (await digest(record.blob) !== record.content_hash) throw Error('This audio file failed its integrity check. The saved original was kept; restore it from your audio backup.');
     buffer = await (await audioContext(false)).decodeAudioData(await record.blob.arrayBuffer());
   }
-  if(!currentAnalysis(role,record.asset_id,token))return;
+  if(!currentAnalysis(role,record.asset_id,token))return false;
   selected[role] = record; root.setAttribute(`data-selected-${role}`,record.asset_id); clips.set(record.asset_id, {...clips.get(record.asset_id),record,buffer});
   delete analyses[role]; for(const kind of ['wave','spectrum','pitch']) {const canvas=$(`audio-${kind}-${role}`);canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);}
   $(`audio-from-${role}`).value = '0'; $(`audio-to-${role}`).value = buffer.duration.toFixed(3);
@@ -155,8 +159,10 @@ async function selectRecord(role, record, buffer) {
   $(`audio-library-${role}`).value = record.asset_id;
   const provenance=$(`audio-provenance-${role}`);if(provenance)provenance.textContent=sourceLabel(record);
   cueList(role,record); controls();
+  if(!compactAdvanced){status('Take ready. Replay it, record again, or choose a saved take.');return true;}
   status('Original available. Drawing sound instruments…');
   await sendPcm(role,record,buffer,token);
+  return currentAnalysis(role,record.asset_id,token);
 }
 async function audioMime(blob) {
   const bytes=new Uint8Array(await blob.slice(0,16).arrayBuffer());
@@ -189,6 +195,7 @@ async function saveAudio(role, blob, buffer, name, interrupted = false, device =
   await selectRecord(role,record,buffer);
   status(interrupted ? 'The interrupted take was saved. Listen for a cutoff before using it.' : 'Original audio saved on this device. Listen, choose a span, and try one useful change.');
 }
+function stopIndependentPlayers(){for(const api of window.rufrenAudioPlayers?.values()||[])api.stop?.();}
 function stopPlayback() {
   playGeneration++;
   for (const node of playing) { try { node.stop(); } catch (_) {} }
@@ -240,7 +247,7 @@ function playStretched(role,span,rate,loop,generation) {
   });
 }
 async function play(role, keep = false) {
-  const span=selection(role);if(!keep)stopPlayback();
+  const span=selection(role);if(!alive)return false;stopIndependentPlayers();if(!keep)stopPlayback();
   const generation=playGeneration,rate=Number($('audio-rate').value),loop=$('audio-loop').checked&&!keep;
   if(rate!==1)return playStretched(role,span,rate,loop,generation);
   const ctx=await audioContext();if(!alive||generation!==playGeneration)return false;
@@ -264,7 +271,8 @@ async function startRecording(role) {
   if (capture || starting) return;
   if (!crypto.subtle) throw Error('Secure audio storage needs HTTPS, localhost, or a supported native WebView. Import or record in a secure browser.');
   if (!navigator.mediaDevices?.getUserMedia) throw Error('Microphone capture is unavailable here. Use HTTPS or localhost in a browser, or import a recording. Native apps also need microphone permission in their host configuration.');
-  starting = true; const generation = ++requestGeneration; mic(false); stopPlayback();
+  if(role==='attempt'){choiceGeneration++;clearAttempt();}
+  starting = true; const generation = ++requestGeneration; mic(false); stopPlayback();stopIndependentPlayers();
   try {
     if (!db) await openDatabase();
     if (!alive || generation !== requestGeneration) return;
@@ -327,12 +335,12 @@ async function preserveExitTake(take) {
 }
 async function stopRecording(reason = '') {
   requestGeneration++; starting = false;
-  const take = capture; capture = null; releaseCapture(); mic(false);
+  const take = capture;if(take?.frames)beginOperation();capture = null; releaseCapture(); mic(false);
   if (!take) { status('Microphone stopped.'); return; }
   if (!take.frames) throw Error('No audio arrived from the microphone. Try again or import a recording.');
   const samples = takeSamples(take);
   const buffer = context.createBuffer(1,samples.length,take.sampleRate); buffer.copyToChannel(samples,0);
-  await keepWrite(saveAudio(take.role,wav(samples,take.sampleRate),buffer,`${take.role === 'reference' ? 'Reference' : 'My'} take`,!!reason && !reason.startsWith('The 30-second'),take.device));
+  try{await keepWrite(saveAudio(take.role,wav(samples,take.sampleRate),buffer,`${take.role === 'reference' ? 'Reference' : 'My'} take`,!!reason && !reason.startsWith('The 30-second'),take.device));}finally{endOperation();}
   if (reason) status(reason);
 }
 function preflightDuration(file) {
@@ -349,6 +357,8 @@ function preflightDuration(file) {
 }
 async function importFile(role,file) {
   if (!file) return;
+  if(role==='attempt'){choiceGeneration++;clearAttempt();}
+  beginOperation();try{
   stopPlayback();
   if (file.size > 32*1024*1024) throw Error('Choose an audio file smaller than 32 MB and at most 60 seconds long.');
   const ctx = await audioContext(false); status('Checking audio duration…');
@@ -361,6 +371,7 @@ async function importFile(role,file) {
   if (buffer.numberOfChannels > 8) throw Error('Choose a recording with at most eight audio channels.');
   if (buffer.duration > 60 || buffer.duration < 0.05) throw Error('Choose a phrase between 0.05 and 60 seconds long. The original file has not been changed.');
   await keepWrite(saveAudio(role,file,buffer,file.name));
+  }finally{endOperation();}
 }
 async function saveCue(role) {
   const span = selection(role), note = $(`audio-note-${role}`).value.trim();
@@ -458,14 +469,36 @@ const analyses = {};
 function click(event) {
   const button=event.target.closest('[data-action]'); if (!button || !root.contains(button)) return;
   const role=button.dataset.role;
-  const actions = {record:()=>startRecording(role),stop:()=>stopRecording(),play:()=>play(role),compare,stopPlayback:()=>{stopPlayback();status('Playback stopped.');},cue:()=>saveCue(role),download:()=>downloadClip(role),backup:exportAudio};
+  const actions = {advanced:toggleAdvanced,record:()=>startRecording(role),stop:()=>stopRecording(),play:()=>play(role),compare,stopPlayback:()=>{stopPlayback();status('Playback stopped.');},cue:()=>saveCue(role),download:()=>downloadClip(role),backup:exportAudio};
   if (actions[button.dataset.action]) Promise.resolve().then(actions[button.dataset.action]).catch(failure);
+}
+function clearAttempt(){
+  stopPlayback();selected.attempt=null;delete analyses.attempt;analysisTokens.attempt='';sourceGenerations.attempt='';root.setAttribute('data-selected-attempt','');
+  for(const kind of ['wave','spectrum','pitch']){const canvas=$(`audio-${kind}-attempt`);canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);}$('audio-from-attempt').value='0';$('audio-to-attempt').value='0';$('audio-cues-attempt').replaceChildren();
+  $('audio-library-attempt').value='';$('audio-name-attempt').textContent='No recording selected';$('audio-provenance-attempt').textContent='No source selected';
+  emit({kind:'source_clear',role:'attempt'});emit({kind:'selected',recording:null});controls();
+}
+function validAttempt(record){return record&&record.role==='attempt'&&record.passage_id===config.passage_id&&record.revision_id===config.revision_id;}
+async function chooseExisting(role,id){
+  const generation=++choiceGeneration;stopPlayback();if(role==='attempt')clearAttempt();if(!id)return;
+  beginOperation();
+  try{
+    const record=await storage('get',id);if(!alive||generation!==choiceGeneration)return;
+    if(!record||record.role!==role||record.passage_id!==config.passage_id||record.revision_id!==config.revision_id)throw Error('This recording does not belong to the current phrase. Choose its exact saved take.');
+    const prepared=await selectRecord(role,record);
+    if(prepared&&alive&&generation===choiceGeneration&&selected[role]?.asset_id===id&&role==='attempt'){if(record.interrupted)status('You selected a partial take. Replay it and check the cutoff before using it.');emit({kind:'selected',recording:metadata(record)});}
+  }finally{endOperation();}
+}
+async function toggleAdvanced(){
+  compactAdvanced=!compactAdvanced;root.dataset.advanced=String(compactAdvanced);
+  const button=root.querySelector('[data-action="advanced"]');button?.setAttribute('aria-expanded',String(compactAdvanced));if(button)button.textContent=compactAdvanced?'Hide sound tools':'Show sound tools';
+  if(compactAdvanced){for(const role of ['reference','attempt']){const record=selected[role];if(record)await selectRecord(role,record,clips.get(record.asset_id)?.buffer);}}
 }
 function change(event) {
   const node=event.target;
-  if (node.dataset.import) { importFile(node.dataset.import,node.files?.[0]).catch(failure).finally(()=>{node.value='';}); }
+  if (node.dataset.import) { const file=node.files?.[0];importFile(node.dataset.import,file).catch(failure).finally(()=>{node.value='';}); }
   if (node.dataset.restore !== undefined) { restoreAudio(node.files?.[0]).catch(failure).finally(()=>{node.value='';}); }
-  if (node.dataset.library && node.value) { stopPlayback(); storage('get',node.value).then(r=>selectRecord(node.dataset.library,r)).catch(failure); }
+  if (node.dataset.library) { chooseExisting(node.dataset.library,node.value).catch(failure); }
   if (['audio-floor','audio-frequency'].includes(node.id)){for (const [role,a] of Object.entries(analyses)) draw(role,a);drawRegions();}
 }
 // Independent A/B instrument state. No asset, note, or learning fact is mutated.
@@ -614,7 +647,7 @@ function drawRegions(){
     }
     for(const surface of root.querySelectorAll(`[data-region-surface="${role}"]`)){
       const left=(start-view.start)/view.duration*100,right=(end-view.start)/view.duration*100,highlight=surface.querySelector('[data-region-highlight]');highlight.style.left=`${Math.max(0,left)}%`;highlight.style.width=`${Math.max(0,Math.min(100,right)-Math.max(0,left))}%`;highlight.hidden=false;
-      for(const edge of ['start','end']){const handle=surface.querySelector(`[data-region-edge="${edge}"]`),frame=edge==='start'?state.span.start_frame:state.span.end_frame;handle.style.left=`${edge==='start'?left:right}%`;handle.setAttribute('aria-valuenow',String(frame));handle.setAttribute('aria-valuemax',String(state.source.metadata.frames));handle.setAttribute('aria-valuetext',`${frame} frames, ${(frame/state.source.metadata.sample_rate).toFixed(6)} seconds`);}
+      for(const edge of ['start','end']){const handle=surface.querySelector(`[data-region-edge="${edge}"]`),frame=edge==='start'?state.span.start_frame:state.span.end_frame;handle.style.left=`${edge==='start'?left:right}%`;handle.setAttribute('aria-valuenow',String(frame));handle.setAttribute('aria-valuemin',String(edge==='start'?0:state.span.start_frame+1));handle.setAttribute('aria-valuemax',String(edge==='start'?state.span.end_frame-1:state.source.metadata.frames));handle.setAttribute('aria-valuetext',`${frame} frames, ${(frame/state.source.metadata.sample_rate).toFixed(6)} seconds`);}
     }
   }
   for(const plot of root.querySelectorAll('.audio-region-plot[data-region-track="pitch"]'))plot.hidden=!$('audio-region-pitch').checked;
@@ -637,7 +670,7 @@ function regionTimeInput(input,frames){const role=input.dataset[frames?'regionFr
   if(!applyRegion(role,span))input.setAttribute('aria-invalid','true');
 }
 function pointerFrame(surface,event){const role=surface.dataset.regionSurface,state=regionSlots[role],canvas=surface.querySelector('canvas'),rect=canvas.getBoundingClientRect(),view=regionViewport(role),x=Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width));return Math.max(0,Math.min(state.source.metadata.frames,Math.round((view.start+x*view.duration)*state.source.metadata.sample_rate)));}
-function regionPointerDown(event){const surface=event.target.closest('[data-region-surface]');if(!surface||event.button!==0||regionDrag)return;const role=surface.dataset.regionSurface,state=regionSlots[role];if(!state.source)return;event.preventDefault();state.revision++;state.userVersion++;const edge=event.target.closest('[data-region-edge]')?.dataset.regionEdge;
+function regionPointerDown(event){const surface=event.target.closest('[data-region-surface]');if(!surface||event.button!==0||regionDrag)return;const role=surface.dataset.regionSurface,state=regionSlots[role];if(!state.source)return;event.preventDefault();state.revision++;state.userVersion++;const edge=event.target.closest('[data-region-edge]')?.dataset.regionEdge;if(edge)root.querySelector(`[data-region-surface="${role}"][data-region-kind="wave"] [data-region-edge="${edge}"]`)?.focus({preventScroll:true});
   const views=Object.fromEntries(REGION_ROLES.filter(r=>regionSlots[r].source&&regionSlots[r].span).map(r=>[r,regionViewport(r)]));
   regionDrag={role,surface,views,pointer:event.pointerId,edge,anchor:pointerFrame(surface,event),old:{...state.span},startX:event.clientX,moved:false};surface.setPointerCapture(event.pointerId);
 }
@@ -652,7 +685,7 @@ function regionKey(event){const handle=event.target.closest('[data-region-edge]'
 }
 function regionSelection(role){const state=regionSlots[role];if(!state?.source||!state.valid)throw Error('Choose a valid region first.');const buffer=clips.get(state.record.asset_id)?.buffer;if(!buffer)throw Error('Choose that recording again.');return {record:state.record,buffer,from:state.span.start_frame/state.source.metadata.sample_rate,to:state.span.end_frame/state.source.metadata.sample_rate,region:{source:state.source,span:{...state.span}}};}
 function emitPlayback(role,span,rate){if(isRegion(role)){const state=span.region;emit({kind:'region_played',role,recording:metadata(span.record),asset_id:span.record.asset_id,content_hash:span.record.content_hash,source_pcm_hash:state.source.metadata.content_hash,...state.span,sample_rate:state.source.metadata.sample_rate,playback_rate:rate});}else if(role==='reference')emit({kind:'reference_played'});}
-async function playRegion(role,keep=false){const span=regionSelection(role);if(!keep)stopPlayback();const generation=playGeneration,rate=Number($('audio-region-rate').value),loop=$('audio-region-loop').checked&&!keep;
+async function playRegion(role,keep=false){const span=regionSelection(role);if(!alive)return false;stopIndependentPlayers();if(!keep)stopPlayback();const generation=playGeneration,rate=Number($('audio-region-rate').value),loop=$('audio-region-loop').checked&&!keep;
   if(rate!==1)return playStretched(role,span,rate,loop,generation);const ctx=await audioContext();if(!alive||generation!==playGeneration)return false;
   const node=ctx.createBufferSource();node.buffer=span.buffer;node.connect(ctx.destination);node.loop=loop;node.loopStart=span.from;node.loopEnd=span.to;playing.push(node);
   return new Promise(resolve=>{let acknowledged=false,ackTimer;const beganAt=ctx.currentTime;
@@ -723,7 +756,7 @@ function destroy() {
   return exitPromise;
 }
 const observer = new MutationObserver(()=>{ if(!root.isConnected) destroy(); }); observer.observe(document.body,{childList:true,subtree:true});
-window.rufrenAudioStudio={destroy,yieldNow,importBytes};window.addEventListener('rufren-audio-assets-changed',assetsChanged); root.addEventListener('click',click); root.addEventListener('change',change);
+window.rufrenAudioStudio={instanceId,destroy:expected=>expected===undefined||expected===instanceId?destroy():Promise.resolve(),stopPlayback,yieldNow,importBytes};window.addEventListener('rufren-audio-assets-changed',assetsChanged); root.addEventListener('click',click); root.addEventListener('change',change);
 document.addEventListener('visibilitychange',visibility); window.addEventListener('pagehide',destroy);
 mic(false);
 if(!preservePitchKey){
@@ -735,7 +768,9 @@ try {
   const recovery=window.rufrenAudioRecovery||[];
   for(const record of [...recovery]){await storage('put',record);recovery.splice(recovery.indexOf(record),1);}
   await refreshLibrary();
+  if(config.selected_asset_id){const record=await storage('get',config.selected_asset_id);if(!validAttempt(record)){emit({kind:'selected',recording:null});throw Error('The exact response take is unavailable. Choose another saved take or record again.');}await selectRecord('attempt',record);}
   if(window.rufrenAudioExitError){status('The interrupted recording has been recovered on this device. Choose it from saved takes.');delete window.rufrenAudioExitError;}
+  else if(config.compact)status(selected.attempt?'Your exact saved take is ready to replay.':'Record a short response, then stop to keep it. You can also choose an existing take.');
   else status('Record or import a reference voice, then make your own attempt. Originals stay on this device.'); }
 catch(error) { failure(error); }
 emit({kind:'ready'});

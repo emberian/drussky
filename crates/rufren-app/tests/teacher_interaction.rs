@@ -21,6 +21,8 @@ mod recognition;
 mod repository;
 #[path = "../src/teacher.rs"]
 mod teacher;
+#[path = "../src/teacher_audio_practice.rs"]
+mod teacher_audio_practice;
 #[path = "../src/teacher_context.rs"]
 mod teacher_context;
 #[path = "../src/teacher_practice.rs"]
@@ -498,4 +500,90 @@ fn teacher_interaction_confirmed_words_cannot_cross_attempts_and_empty_asr_is_no
     let before = state.library.clone();
     assert!(state.keep_teacher_response(&request, &answer).is_err());
     assert_eq!(state.library, before);
+}
+
+#[test]
+fn teacher_interaction_latest_lesson_survives_feedback_reload_and_rejected_replacement() {
+    let mut state = app();
+    let first = lesson();
+    state.keep_teacher_response(&first.request, &first).unwrap();
+    assert_eq!(
+        state
+            .repo
+            .get::<TeacherResponse>("teacher_lesson_response")
+            .unwrap(),
+        Some(first.clone())
+    );
+    let mut draft = state.teacher_practice_draft(&first, 0).unwrap();
+    draft.response = "Я читаю книгу.".into();
+    let attempt = state.submit_teacher_practice(&first, &mut draft).unwrap();
+    let request = state.answer_feedback_request(attempt).unwrap();
+    let answer = feedback(&request);
+    state.keep_teacher_response(&request, &answer).unwrap();
+    let repo = state.repo.clone();
+    drop(state);
+    let mut state = AppState::from_repository(repo).unwrap();
+    assert_eq!(
+        state
+            .repo
+            .get::<TeacherResponse>("teacher_response")
+            .unwrap(),
+        Some(answer.clone()),
+        "feedback remains the current response"
+    );
+    assert_eq!(
+        state
+            .repo
+            .get::<TeacherResponse>("teacher_lesson_response")
+            .unwrap(),
+        Some(first.clone()),
+        "the complete exact lesson, including remaining exercises, survives reload"
+    );
+    let mut next = lesson();
+    next.provenance.response_id = "second-lesson-response".into();
+    next.content.practice[1].prompt = "Explain the new lesson's message.".into();
+    for rejection in ["echo", "content", "provenance"] {
+        let mut rejected = next.clone();
+        match rejection {
+            "echo" => rejected.request = first.request.clone(),
+            "content" => rejected.content.practice.clear(),
+            "provenance" => rejected.provenance.response_id.clear(),
+            _ => unreachable!(),
+        }
+        assert!(state
+            .keep_teacher_response(&next.request, &rejected)
+            .is_err());
+        assert_eq!(
+            state
+                .repo
+                .get::<TeacherResponse>("teacher_lesson_response")
+                .unwrap(),
+            Some(first.clone()),
+            "rejected {rejection} cannot replace the accepted lesson"
+        );
+        assert_eq!(
+            state
+                .repo
+                .get::<TeacherResponse>("teacher_response")
+                .unwrap(),
+            Some(answer.clone()),
+            "rejected {rejection} preserves the current response contract"
+        );
+    }
+    state.keep_teacher_response(&next.request, &next).unwrap();
+    assert_eq!(
+        state
+            .repo
+            .get::<TeacherResponse>("teacher_lesson_response")
+            .unwrap(),
+        Some(next.clone()),
+        "a newly accepted lesson replaces only the latest-lesson slot"
+    );
+    assert_eq!(
+        state
+            .repo
+            .get::<TeacherResponse>("teacher_response")
+            .unwrap(),
+        Some(next)
+    );
 }

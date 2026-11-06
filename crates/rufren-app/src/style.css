@@ -5,6 +5,8 @@
   font-synthesis:none;
   --green:#315e50;
   --line:#dddfd3;
+  --control-line:#75826f;
+  --focus-ring:#946729;
   --muted:#56685e;
   --olive-text:#5d6e56;
   --paper:#fffef9
@@ -28,8 +30,8 @@ button:disabled {
   opacity:.45;
   cursor:default
 }
-button:focus-visible,a:focus-visible {
-  outline:3px solid #be8b46;
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible {
+  outline:3px solid var(--focus-ring);
   outline-offset:4px
 }
 button {
@@ -46,6 +48,7 @@ a {
   min-height:100vh
 }
 .sidebar {
+  --focus-ring:#e4bb75;
   position:fixed;
   width:246px;
   inset:0 auto 0 0;
@@ -103,7 +106,8 @@ a {
 }
 .nav-item.active {
   background:#31564a;
-  color:#fff6da
+  color:#fff6da;
+  box-shadow:inset 3px 0 0 currentColor
 }
 .sidebar-bottom {
   margin-top:auto;
@@ -194,7 +198,7 @@ a {
   color:#f6f6e9
 }
 .secondary {
-  border-color:var(--line);
+  border-color:var(--control-line);
   background:var(--paper);
   color:var(--green)
 }
@@ -365,7 +369,8 @@ a {
 }
 .passage-card.selected {
   background:#ecefe3;
-  border-color:#8f9d86
+  border-color:var(--green);
+  box-shadow:inset 4px 0 0 var(--green)
 }
 .passage-card h3 {
   font:23px Georgia;
@@ -393,13 +398,12 @@ a {
 }
 input,textarea {
   width:100%;
-  border:1px solid var(--line);
+  border:1px solid var(--control-line);
   border-radius:5px;
   background:#fffefa;
   color:inherit;
   padding:12px;
-  font-size:13px;
-  outline-color:#869a7e
+  font-size:13px
 }
 input::placeholder,textarea::placeholder {
   color:var(--muted);
@@ -768,7 +772,7 @@ hr {
 .lesson-index{position:sticky;top:20px;max-height:85vh;overflow:auto;padding-right:5px}
 .lesson-index h2{font:20px Georgia;margin:20px 0 8px}.lesson-index p{font-size:12px;line-height:1.6}
 .lesson-link{display:block;width:100%;border:0;background:transparent;color:var(--green);text-align:left;border-radius:6px;padding:12px;margin:4px 0;font-size:12px;line-height:1.5;min-height:44px}
-.lesson-link.selected,.attempt-choice.selected,.choice-option.selected{background:#e7ecdb;border-color:#829a7c}
+.lesson-link.selected,.attempt-choice.selected,.choice-option.selected{background:#e7ecdb;border-color:var(--green);box-shadow:inset 4px 0 0 var(--green)}
 .draft-note{background:#f2f1e5;border-radius:5px;padding:12px;color:#646e58;font-size:12px!important}
 .dialogue-turn{display:grid;grid-template-columns:75px 1fr;gap:18px;padding:12px 0;border-bottom:1px solid var(--line)}
 .dialogue-turn p{margin:3px 0}.speaker{color:var(--olive-text);font-size:11px;padding-top:10px}
@@ -780,8 +784,8 @@ hr {
 .alphabet summary{cursor:pointer;font:22px Georgia;min-height:44px}.alphabet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.alphabet-grid article{padding:14px;background:#f0f2e6;border-radius:5px}.alphabet-grid strong{display:block;font:27px Georgia}.alphabet-grid span,.alphabet-grid small{font-size:12px;color:var(--muted)}
 .choice-list{border:0;padding:0;margin:20px 0}.choice-list legend{font-size:13px;color:var(--muted);margin-bottom:10px}.choice-option{display:block;width:100%;border:1px solid var(--line);border-radius:7px;background:#fffdf7;text-align:left;color:inherit;padding:16px;margin:10px 0;line-height:1.6}
 .authored-feedback,.coach-note,.feedback-history{background:#f0f3e8;padding:18px;border-radius:6px;margin:20px 0}.coach-note small{color:var(--muted)}
-select{font:inherit;padding:12px;width:100%;color:inherit;background:#fffdf8;border:1px solid var(--line);border-radius:5px;min-height:44px}
-input[type=range]{padding:5px 0}blockquote{margin:18px 0;padding:12px 20px;border-left:3px solid #8da17e;font:21px/1.6 Georgia}
+select{font:inherit;padding:12px;width:100%;color:inherit;background:#fffdf8;border:1px solid var(--control-line);border-radius:5px;min-height:44px}
+input[type=range]{padding:5px 0}blockquote{margin:18px 0;padding:12px 20px;border-left:3px solid #8da17e;font:21px/1.6 Georgia;overflow-wrap:anywhere}
 .preference-row{display:flex;align-items:center;gap:12px;margin:18px 0}.preference-row input[type=checkbox]{width:22px;height:22px}.preference-row label{margin:0;font-size:13px}
 .review-summary{margin-top:30px;padding:20px 0;border-top:1px solid var(--line);display:flex;gap:30px;color:var(--muted);font-size:13px}
 .teacher-explanation{white-space:pre-line;max-width:75ch}.teacher-answer{margin-top:24px}.teacher-correction{border-left:3px solid #8da17e;padding:2px 18px;margin:18px 0}.teacher-saved-feedback{margin:18px 0}.teacher-saved-feedback summary,.panel>summary{cursor:pointer;min-height:44px;line-height:1.6;padding:8px 0}.teacher-start .actions{margin-top:20px}

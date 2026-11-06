@@ -16,6 +16,8 @@ mod recognition;
 mod recognition_view;
 mod speech_playback;
 mod teacher;
+mod teacher_audio_practice;
+mod teacher_audio_practice_view;
 mod teacher_context;
 mod teacher_example_audio;
 mod teacher_examples;
@@ -153,7 +155,7 @@ fn LibraryView(mut app: Signal<AppState>) -> Element {
             section {class:"panel editor",h2 {if d.id.is_some() {"Your passage"}else{"Add something you love"}}
                 p {class:"quiet",if d.pending_save.is_some() {"A save was interrupted. Choose Save passage to finish it; your words are kept."}else{"Draft saved as you type on this device. Save passage to add this version to your library."}}
                 label {r#for:"passage-title","Title"}input {id:"passage-title",value:d.title,oninput:move |e|act(app,|s|s.update_editor(editor_drafts::EditorField::Title,e.value())),placeholder:"A line worth learning"}
-                label {r#for:"passage-russian","Russian text"}textarea {id:"passage-russian",lang:"ru",class:"russian-input",value:d.russian,oninput:move |e|act(app,|s|s.update_editor(editor_drafts::EditorField::Russian,e.value())),placeholder:"Русский текст…"}
+                label {r#for:"passage-russian","Russian text"}textarea {id:"passage-russian",lang:"ru",class:"russian-input",value:d.russian,oninput:move |e|act(app,|s|s.update_editor(editor_drafts::EditorField::Russian,e.value())),placeholder:"Russian text…"}
                 label {r#for:"passage-meaning","Meaning or translation"}textarea {id:"passage-meaning",value:d.translation,oninput:move |e|act(app,|s|s.update_editor(editor_drafts::EditorField::Translation,e.value())),placeholder:"What does it mean in this context?"}
                 label {r#for:"passage-source","Source or conversation note"}input {id:"passage-source",value:d.source,oninput:move |e|act(app,|s|s.update_editor(editor_drafts::EditorField::Source,e.value())),placeholder:"Book, author, conversation, or your own words"}
                 if conflicts {div {class:"notice",p {"This passage was edited in more than one place. Both versions are kept. Select a version to inspect it; resolve when this editor contains the wording you want."}}}
@@ -340,6 +342,37 @@ fn recording_saved(s: &mut AppState, record: StudioRecording) -> Result<()> {
         s.notice = "Recording kept in your local speech studio.".into();
         return Ok(());
     };
+    let id = register_recording(s, &record)?;
+    if record.role == "attempt"
+        && !record.interrupted
+        && s.session.as_ref().is_some_and(|session| {
+            session.revision == revision
+                && session.skill == Skill::Speaking
+                && session.phase == Phase::Retrieve
+        })
+    {
+        let Some(Fact::RecordingAttached(attachment)) = s.library.events.get(&id).map(|e| &e.fact)
+        else {
+            return Err("The saved take could not be linked. Select it again.".into());
+        };
+        let attachment = attachment.clone();
+        s.update_response(format!(
+            "Recorded response · {:.1} seconds",
+            record.duration_ms as f64 / 1000.0
+        ))?;
+        if let Some(mut plan) = s.plan.clone() {
+            plan.response_recording = Some(attachment);
+            s.repo.set("session_plan", &plan)?;
+            s.plan = Some(plan);
+        }
+    }
+    s.notice="Recording saved with its passage. The original audio stays on this device until you choose to sync recordings.".into();
+    Ok(())
+}
+
+/// Register one exact durable original without changing any active practice.
+fn register_recording(s: &mut AppState, record: &StudioRecording) -> Result<uuid::Uuid> {
+    let revision = uuid::Uuid::parse_str(&record.revision_id).map_err(|e| e.to_string())?;
     if s.library.revision(revision).is_none() {
         return Err(
             "Recording saved locally; its passage is not available for linking yet.".into(),
@@ -378,25 +411,8 @@ fn recording_saved(s: &mut AppState, record: StudioRecording) -> Result<()> {
         format!("audio:{}:{}", record.asset_id, record.role).as_bytes(),
     );
     event.device = uuid::Uuid::new_v5(&revision, b"audio-attachment-writer");
+    let id = event.id;
     s.repo.append(&[event])?;
     s.refresh()?;
-    if record.role == "attempt"
-        && s.session.as_ref().is_some_and(|session| {
-            session.revision == revision
-                && session.skill == Skill::Speaking
-                && session.phase == Phase::Retrieve
-        })
-    {
-        s.update_response(format!(
-            "Recorded response · {:.1} seconds",
-            record.duration_ms as f64 / 1000.0
-        ))?;
-        if let Some(mut plan) = s.plan.clone() {
-            plan.response_recording = Some(attachment);
-            s.repo.set("session_plan", &plan)?;
-            s.plan = Some(plan);
-        }
-    }
-    s.notice="Recording saved with its passage. The original audio stays on this device until you choose to sync recordings.".into();
-    Ok(())
+    Ok(id)
 }

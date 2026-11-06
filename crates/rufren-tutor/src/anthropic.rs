@@ -303,7 +303,7 @@ pub(crate) fn teacher_schema() -> Value {
     }]});
     schema["properties"]["practice"] = json!({"type":"array","items":{"type":"object","additionalProperties":false,
         "properties":{"prompt":text,"expected_response":nullable_text,"teaching_note":text,
-            "reference_russian":text,"reference_english":text,"skill":{"type":"string","enum":["reading","writing"]}},
+            "reference_russian":text,"reference_english":text,"skill":{"type":"string","enum":["reading","writing","listening","speaking"]}},
         "required":["prompt","expected_response","teaching_note","reference_russian","reference_english","skill"]}});
     schema["required"] = json!([
         "explanation",

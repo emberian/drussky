@@ -851,7 +851,7 @@ print({output:?})
         assert_eq!(response.provenance.response_id, "cli-generated-result-001");
         assert_eq!(
             response.provenance.prompt_version,
-            "rufren-ai-teacher-v3+cli-structured-v1"
+            "rufren-ai-teacher-v4+cli-structured-v1"
         );
         assert_eq!(
             response.provenance.review_status,

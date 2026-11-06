@@ -1,6 +1,6 @@
 use crate::{
     act,
-    audio_studio::{AudioPractice, AudioStudio},
+    audio_studio::{AudioPractice, AudioSpeaking, StudioRecording},
     exposure_view::PresentedRussian,
     generate_reference,
     model::{AppState, Page},
@@ -13,6 +13,7 @@ use rufren_core::*;
 #[component]
 pub(crate) fn Practice(mut app: Signal<AppState>) -> Element {
     let mut ready = use_signal(|| None::<String>);
+    let mut capture_busy = use_signal(|| false);
     let state = app.read().clone();
     let Some(session) = state.session.clone() else {
         return rsx! {div {class:"empty large",h1 {"One phrase at a time."}p {"Choose a lesson or return to a passage you want to remember."}button {class:"primary",onclick:move |_|act(app,|s|s.begin()),"Choose my next step →"}}};
@@ -44,7 +45,8 @@ pub(crate) fn Practice(mut app: Signal<AppState>) -> Element {
         });
     let has_audio = ready().as_deref() == Some(revision_id.as_str());
     let played = state.plan.as_ref().is_some_and(|p| p.reference_plays > 0);
-    let can_reflect = !session.draft.trim().is_empty() && (!audio_prompt || played);
+    let can_reflect =
+        !capture_busy() && !session.draft.trim().is_empty() && (!audio_prompt || played);
     let response_display = ex
         .as_ref()
         .and_then(|e| e.options.iter().find(|o| o.id == session.draft))
@@ -84,7 +86,7 @@ pub(crate) fn Practice(mut app: Signal<AppState>) -> Element {
                             for option in &ex.options {{let id=option.id.clone();rsx! {button {class:if session.draft==option.id {"choice-option selected"}else{"choice-option"},aria_pressed:session.draft==option.id,onclick:move |_|act(app,|s|s.update_response(id.clone())),"{option.text}"}}}}
                         }}
                     } else if speaking {
-                        AudioStudio {key:"speak-{session.id}",passage_id:p.id.to_string(),revision_id:revision_id.clone(),russian:String::new(),workspace_id:if cfg!(target_arch="wasm32") {String::new()}else{state.device.to_string()},on_region_played:move |played|act(app,|s|s.heard_region(played)),on_saved:move |record|act(app,|s|recording_saved(s,record)),on_reference_played:move |_|act(app,|s|s.heard_reference()),generating_reference:state.speech_busy,on_generate_reference:move |_|generate_reference(app,session.revision)}
+                        AudioSpeaking {key:"speak-{session.id}",passage_id:p.id.to_string(),revision_id:revision_id.clone(),selected_asset_id:state.plan.as_ref().and_then(|plan|plan.response_recording.as_ref()).map(|record|record.asset_id.clone()),workspace_id:if cfg!(target_arch="wasm32") {String::new()}else{state.device.to_string()},on_region_played:move |played|act(app,|s|s.heard_region(played)),on_saved:move |record|act(app,|s|recording_saved(s,record)),on_selected:move |record|act(app,|s|select_spoken_take(s,session.id,record)),on_recording_state:move |busy|capture_busy.set(busy),on_reference_played:move |_|act(app,|s|s.heard_reference()),generating_reference:state.speech_busy,on_generate_reference:move |_|generate_reference(app,session.revision)}
                         if !session.draft.is_empty() {p {class:"quiet","{session.draft}"}}
                     } else {
                         label {r#for:"practice-response",if writing {"Your words in Russian"}else{"What did you understand?"}}
@@ -118,6 +120,52 @@ pub(crate) fn Practice(mut app: Signal<AppState>) -> Element {
         }
     }
 }
+
+fn select_spoken_take(
+    state: &mut AppState,
+    session: uuid::Uuid,
+    record: Option<StudioRecording>,
+) -> crate::repository::Result<()> {
+    let active = state
+        .session
+        .as_ref()
+        .ok_or("Reopen your speaking practice to choose a take.")?;
+    if active.id != session || active.skill != Skill::Speaking || active.phase != Phase::Retrieve {
+        return Err("This take belongs to a different speaking practice.".into());
+    }
+    let (attachment, label) = if let Some(record) = record {
+        if record.role != "attempt" || record.revision_id != active.revision.to_string() {
+            return Err("Choose a response recorded for this passage.".into());
+        }
+        let id = crate::register_recording(state, &record)?;
+        let Some(Fact::RecordingAttached(attachment)) =
+            state.library.events.get(&id).map(|event| &event.fact)
+        else {
+            return Err("Reopen the saved take to select it.".into());
+        };
+        (
+            Some(attachment.clone()),
+            format!(
+                "Recorded response · {:.1} seconds{}",
+                record.duration_ms as f64 / 1000.0,
+                if record.interrupted {
+                    " · partial take"
+                } else {
+                    ""
+                }
+            ),
+        )
+    } else {
+        (None, String::new())
+    };
+    if let Some(mut plan) = state.plan.clone() {
+        plan.response_recording = attachment;
+        state.repo.set("session_plan", &plan)?;
+        state.plan = Some(plan);
+    }
+    state.update_response(label)
+}
+
 fn next_review(state: &AppState, revision: uuid::Uuid, skill: Skill) -> String {
     let now = crate::repository::now_ms();
     let review = SpacedReview.project(&state.library, ReviewKey { revision, skill }, now);

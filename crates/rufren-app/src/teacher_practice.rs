@@ -16,6 +16,16 @@ pub(crate) struct TeacherPracticeDraft {
     pub response: String,
     pub started_at_ms: i64,
     pub saved_attempt: Option<Uuid>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub audio: Option<crate::teacher_audio_practice::TeacherAudioDraft>,
+}
+impl TeacherPracticeDraft {
+    pub(crate) fn fork_saved_answer(&mut self) {
+        if self.saved_attempt.take().is_some() {
+            self.id = Uuid::new_v4();
+            self.started_at_ms = now_ms();
+        }
+    }
 }
 
 pub(crate) fn practice_source(answer: &TeacherResponse) -> String {
@@ -91,9 +101,18 @@ pub(crate) fn saved_teacher_practice_origin(
         return None;
     };
     let task = match a.skill {
-        Skill::Reading => TaskKind::MeaningRecall,
+        Skill::Reading | Skill::Listening => TaskKind::MeaningRecall,
         Skill::Writing => TaskKind::Composition,
-        _ => return None,
+        Skill::Speaking => TaskKind::FormRecall,
+    };
+    let policy_ok = match a.skill {
+        Skill::Reading | Skill::Writing => {
+            a.policy == "teacher-guided-text-v1" && a.cues == [Cue::ReferenceMaterial]
+        }
+        Skill::Listening | Skill::Speaking => {
+            a.policy == crate::teacher_audio_practice::TEACHER_AUDIO_POLICY
+                && crate::teacher_audio_practice::valid_submitted_audio(library, attempt, c)
+        }
     };
     if c.attempt != attempt
         || a.revision != revision
@@ -104,9 +123,8 @@ pub(crate) fn saved_teacher_practice_origin(
         || !r.parents.is_empty()
         || attempt != Uuid::new_v5(&a.session, b"attempt")
         || context != Uuid::new_v5(&a.session, b"context")
-        || a.policy != "teacher-guided-text-v1"
+        || !policy_ok
         || a.self_rating != SelfRating::NotReported
-        || a.cues != [Cue::ReferenceMaterial]
         || c.task != task
         || c.content_pack.is_some()
         || c.content_revision.is_some()
@@ -156,6 +174,7 @@ impl AppState {
             response: String::new(),
             started_at_ms: now_ms(),
             saved_attempt: None,
+            audio: None,
         })
     }
 
@@ -163,17 +182,88 @@ impl AppState {
         if draft.response.len() > 8192 || draft.id.is_nil() {
             return Err("Keep one answer under 8 KB; your earlier draft is still saved.".into());
         }
+        if let Some(audio) = &draft.audio {
+            audio.validate()?;
+        }
         self.repo.set(
             &format!("teacher_practice:{}:{}", draft.source, draft.index),
             draft,
         )
     }
 
+    pub(crate) fn teacher_practice_edit_response(
+        &self,
+        answer: &TeacherResponse,
+        draft: &mut TeacherPracticeDraft,
+        text: String,
+    ) -> Result<()> {
+        answer.request.validate().map_err(|e| e.to_string())?;
+        answer
+            .content
+            .validate_for(&answer.request)
+            .map_err(|e| e.to_string())?;
+        if draft.source != practice_source(answer) || draft.id.is_nil() || text.len() > 8192 {
+            return Err(
+                "This response does not match the saved teacher draft or its text budget.".into(),
+            );
+        }
+        let exercise = answer
+            .content
+            .practice
+            .get(draft.index)
+            .ok_or("This teacher exercise is unavailable.")?;
+        if exercise.skill == Some(TeacherSkill::Speaking) {
+            return Err("Choose a speaking recording; typed labels are not spoken words.".into());
+        }
+        if draft.response == text {
+            return Ok(());
+        }
+        let mut next = draft.clone();
+        next.fork_saved_answer();
+        next.response = text;
+        self.save_teacher_practice_draft(&next)?;
+        *draft = next;
+        Ok(())
+    }
+    pub(crate) fn teacher_practice_exercise_id(
+        &self,
+        answer: &TeacherResponse,
+        index: usize,
+        source: Uuid,
+        passage: Uuid,
+        context_id: Uuid,
+        attempt_id: Uuid,
+    ) -> String {
+        let legacy = format!("teacher:{passage}");
+        if self.library.events.get(&context_id).is_some_and(|e|matches!(&e.fact,Fact::AttemptContextRecorded(old) if old.attempt==attempt_id&&old.exercise_id.as_deref()==Some(legacy.as_str()))){return legacy;}
+        if let TeacherRequest::TeachLesson(lesson) = &answer.request {
+            if self.content.lesson(&lesson.lesson_id).is_some() {
+                let origin = TeacherPracticeOrigin {
+                    lesson_id: lesson.lesson_id.clone(),
+                    source,
+                    index,
+                };
+                let value = origin.encoded();
+                if TeacherPracticeOrigin::parse(&value).is_some() {
+                    return value;
+                }
+            }
+        }
+        legacy
+    }
     pub(crate) fn submit_teacher_practice(
         &mut self,
         answer: &TeacherResponse,
         draft: &mut TeacherPracticeDraft,
     ) -> Result<Uuid> {
+        if answer.content.practice.get(draft.index).is_some_and(|e| {
+            matches!(
+                e.skill,
+                Some(TeacherSkill::Listening | TeacherSkill::Speaking)
+            )
+        }) {
+            return self.submit_teacher_audio_practice(answer, draft);
+        }
         answer.request.validate().map_err(|e| e.to_string())?;
         answer
             .content
@@ -332,4 +422,56 @@ impl AppState {
         self.save_teacher_practice_draft(draft)?;
         Ok(attempt_id)
     }
+}
+
+pub(crate) fn teacher_reference_fact(
+    answer: &TeacherResponse,
+    index: usize,
+) -> Result<(Uuid, Uuid, Fact)> {
+    answer.request.validate().map_err(|e| e.to_string())?;
+    answer
+        .content
+        .validate_for(&answer.request)
+        .map_err(|e| e.to_string())?;
+    if answer.provenance.review_status != ReviewStatus::AiGeneratedTeaching
+        || answer.provenance.response_id.is_empty()
+    {
+        return Err("The teacher exercise is missing its source.".into());
+    }
+    let exercise = answer
+        .content
+        .practice
+        .get(index)
+        .ok_or("This teacher exercise is unavailable.")?;
+    let source = Uuid::parse_str(&practice_source(answer)).map_err(|e| e.to_string())?;
+    let passage = Uuid::new_v5(&source, index.to_string().as_bytes());
+    let revision = Uuid::new_v5(&passage, b"reference-v1");
+    let title = match &answer.request {
+        TeacherRequest::TeachLesson(lesson) => lesson.title.as_str(),
+        _ => "A teacher follow-up",
+    };
+    let fact = Fact::PassageRevised(Revision {
+        passage: Passage {
+            id: passage,
+            title: format!("{title} · practice {}", index + 1),
+            russian: exercise
+                .reference_russian
+                .clone()
+                .ok_or("This exercise needs its reference Russian")?,
+            translation: exercise
+                .reference_english
+                .clone()
+                .ok_or("This exercise needs its reference meaning")?,
+            source: format!(
+                "AI teacher exercise · {} · {} · {} · {}",
+                answer.provenance.provider,
+                answer.provenance.model,
+                answer.provenance.response_id,
+                index
+            ),
+            coach_reviewed: false,
+        },
+        parents: Default::default(),
+    });
+    Ok((source, revision, fact))
 }

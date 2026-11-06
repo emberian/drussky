@@ -16,8 +16,8 @@
 .audio-acquire button,.audio-acquire label { font-size:13px; padding:12px 15px }
 .audio-file { position:relative; display:inline-flex!important; align-items:center; justify-content:center; cursor:pointer; margin:0!important; font-weight:500!important; overflow:hidden }
 .audio-file input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; padding:0; margin:0 }
-.audio-file:focus-within { outline:3px solid #be8b46; outline-offset:3px }
-.audio-studio select { width:100%; padding:11px; border:1px solid var(--line); border-radius:6px; color:inherit; background:var(--paper); font:inherit; font-size:13px; min-width:0 }
+.audio-file:focus-within { outline:3px solid var(--focus-ring); outline-offset:3px }
+.audio-studio select { width:100%; padding:11px; border:1px solid var(--control-line); border-radius:6px; color:inherit; background:var(--paper); font:inherit; font-size:13px; min-width:0 }
 .audio-studio label { font-size:12px; line-height:1.5 }
 .audio-clip-name { font-size:12px; color:var(--muted); min-height:30px; overflow-wrap:anywhere }
 .audio-plot { margin:16px 0; min-width:0 }
@@ -60,7 +60,7 @@
 .audio-review-player { border:1px solid var(--line); border-radius:8px; padding:16px; margin:0 }
 .audio-review-player h3 { margin:0 0 15px; font-size:15px }
 .audio-source { font-size:11px!important; line-height:1.6!important; overflow-wrap:anywhere }
-.audio-practice select { max-width:100%; width:100%; padding:9px; border:1px solid var(--line); border-radius:6px; background:var(--paper); color:inherit; font:inherit; font-size:12px }
+.audio-practice select { max-width:100%; width:100%; padding:9px; border:1px solid var(--control-line); border-radius:6px; background:var(--paper); color:inherit; font:inherit; font-size:12px }
 .audio-region-lab>summary { display:flex; flex-wrap:wrap; align-items:center; gap:8px 18px; cursor:pointer; color:var(--green) }
 .audio-region-lab>summary h2 { margin:0; font-size:22px }
 .audio-region-lab>summary>span { font-size:12px; color:var(--muted) }
@@ -87,7 +87,7 @@
 .audio-region-handle span { background:#fffef9; border:1px solid currentColor; border-radius:4px; font-size:19px; line-height:29px; min-width:13px; box-shadow:0 1px 3px #0002 }
 .audio-region-handle:disabled { display:none }
 .audio-region-pane[data-region-slot=region_b] .audio-region-handle { color:#936632 }
-.audio-region-handle:focus-visible { outline:3px solid #be8b46; outline-offset:1px; border-radius:4px }
+.audio-region-handle:focus-visible { outline:3px solid var(--focus-ring); outline-offset:1px; border-radius:4px }
 .audio-region-boundaries { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px; margin:12px 0 }
 .audio-region-boundaries label { margin:0 }
 .audio-region-boundaries input { margin:5px 0 0; padding:9px; font:12px ui-monospace,SFMono-Regular,monospace; width:100%; min-width:0 }
@@ -107,3 +107,21 @@
   .audio-region-tools>button { flex:1 1 110px }
   .audio-region-tools>select { flex:1; min-width:0 }
 }
+/* Speaking practice starts with one take; the same mounted recorder owns its tools. */
+.audio-speaking-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px }
+.audio-speaking-heading h3 { margin:0; font:24px Georgia,serif }
+.audio-speaking[data-advanced=false] { gap:14px }
+.audio-speaking[data-advanced=false] .audio-tracks { grid-template-columns:minmax(0,1fr) }
+.audio-speaking[data-advanced=false] [data-track=reference],
+.audio-speaking[data-advanced=false] .audio-track-heading,
+.audio-speaking[data-advanced=false] .audio-track>p.quiet:not(.audio-source),
+.audio-speaking[data-advanced=false] .audio-plot,
+.audio-speaking[data-advanced=false] .audio-span>label,
+.audio-speaking[data-advanced=false] .audio-quality,
+.audio-speaking[data-advanced=false] .audio-details,
+.audio-speaking[data-advanced=false] .audio-region-lab,
+.audio-speaking[data-advanced=false] .audio-comparison,
+.audio-speaking[data-advanced=false] .audio-storage { display:none }
+.audio-speaking[data-advanced=false] .audio-acquire { margin:0 0 20px }
+.audio-speaking[data-advanced=false] .audio-span { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px }
+.audio-speaking[data-advanced=false] .audio-session-bar p { font-size:13px }

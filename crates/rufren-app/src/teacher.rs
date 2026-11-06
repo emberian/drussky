@@ -349,6 +349,11 @@ impl AppState {
             self.repo.append(&[event])?;
             self.refresh()?;
         }
+        // Feedback replaces the current view, but the lesson's remaining exercises stay
+        // available. Only fully validated lesson responses may replace this slot.
+        if matches!(expected, TeacherRequest::TeachLesson(_)) {
+            self.repo.set("teacher_lesson_response", response)?;
+        }
         self.repo.set("teacher_response", response)?;
         Ok(())
     }

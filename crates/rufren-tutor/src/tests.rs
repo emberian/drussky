@@ -333,6 +333,27 @@ fn teacher_content() -> Value {
     result
 }
 
+#[test]
+fn provider_teacher_schema_advertises_all_four_executable_skills() {
+    let schema = anthropic::teacher_schema();
+    let practice = &schema["properties"]["practice"]["items"];
+    assert_eq!(
+        practice["properties"]["skill"]["enum"],
+        json!(["reading", "writing", "listening", "speaking"])
+    );
+    let required = practice["required"].as_array().unwrap();
+    for field in [
+        "prompt",
+        "expected_response",
+        "teaching_note",
+        "reference_russian",
+        "reference_english",
+        "skill",
+    ] {
+        assert!(required.contains(&json!(field)));
+    }
+}
+
 #[tokio::test]
 async fn provider_teacher_binds_exact_answer_and_ai_provenance() {
     let (service, mock, task) = service(
@@ -353,7 +374,7 @@ async fn provider_teacher_binds_exact_answer_and_ai_provenance() {
         ReviewStatus::AiGeneratedTeaching
     );
     assert_eq!(result.provenance.response_id, "msg_mock_001");
-    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v3");
+    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v4");
     assert_eq!(
         result.content.feedback.unwrap().verdict,
         AiVerdict::PartlyCorrect

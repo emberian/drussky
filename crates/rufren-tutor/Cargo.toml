@@ -16,6 +16,7 @@ reqwest = { version = "0.12", default-features = false, features = ["json", "rus
 tokio = { version = "1", features = ["sync", "time", "process", "io-util", "fs", "macros"], optional = true }
 
 [dev-dependencies]
+rufren-speech = { workspace = true, default-features = false }
 tempfile = "3"
 futures-util = "0.3"
 axum = "0.8"

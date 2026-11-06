@@ -1,4 +1,6 @@
+use crate::{exposure_view::PresentedRussian, model::AppState, teacher_prose::TeacherProse};
 use dioxus::prelude::*;
+use rufren_core::PresentationPurpose;
 use rufren_tutor::{
     MAX_CONTEXT_BYTES, MAX_TEXT_BYTES, ReviewStatus, TutorExample, TutorRequest, TutorResponse,
     TutorStatus, TutorTask,
@@ -12,6 +14,7 @@ const RESPONSE_LIMIT: usize = 80 * 1024;
 /// The parent may persist responses through `on_response` and restore their JSON later.
 #[component]
 pub fn TutorView(
+    app: Signal<AppState>,
     endpoint: String,
     token: String,
     on_add: Option<EventHandler<TutorExample>>,
@@ -20,6 +23,7 @@ pub fn TutorView(
 ) -> Element {
     let mut text = use_signal(String::new);
     let mut context = use_signal(String::new);
+    let mut starter_example = use_signal(|| None::<String>);
     let mut task = use_signal(|| TutorTask::Explain);
     let mut status = use_signal(|| None::<TutorStatus>);
     let mut checked_connection = use_signal(|| None::<(String, String)>);
@@ -80,7 +84,9 @@ pub fn TutorView(
                 }}
                 label {r#for:"tutor-text","Your text or question"}
                 textarea {id:"tutor-text",class:"tutor-input",value:text(),disabled:busy,
-                    oninput:move |e|text.set(e.value()),placeholder:"Why does «Я иду в школу» use школу, but «Я в школе» uses школе?"}
+                    oninput:move |e|text.set(e.value()),placeholder:"Ask about a sentence or a pattern you noticed."}
+                if let Some(example)=starter_example() {PresentedRussian {app,language:"en",class:"quiet",text:example,purpose:PresentationPurpose::Reference}}
+                else {PresentedRussian {app,language:"en",class:"quiet",text:"For example: Why does «Я иду в школу» use школу, but «Я в школе» uses школе?",purpose:PresentationPurpose::Reference}}
                 div {class:if text_size>MAX_TEXT_BYTES {"tutor-count over"}else{"tutor-count"},"{text_size} / {MAX_TEXT_BYTES} bytes"}
                 details {class:"tutor-context", summary {"Add a little context"}
                     label {r#for:"tutor-context","What would help?"}
@@ -152,21 +158,21 @@ pub fn TutorView(
                         p {"A starting point to explore and check with your coach."}}
                     article {class:"panel tutor-answer",
                         h2 {"{task_title(&answer.task)}"}
-                        p {class:"tutor-prose","{answer.content.explanation}"}
+                        TeacherProse {app,language:"en",class:"tutor-prose",text:answer.content.explanation.clone(),purpose:PresentationPurpose::Instruction}
                         if !answer.content.examples.is_empty(){
                             div {class:"tutor-example-list",for (index,example) in answer.content.examples.iter().enumerate(){
                                 {let draft=example.clone();rsx!{
                                     section {class:"tutor-example",key:"{index}",
-                                        p {class:"tutor-russian",lang:"ru","{example.russian}"}
+                                        PresentedRussian {app,class:"tutor-russian",text:example.russian.clone(),purpose:PresentationPurpose::Instruction}
                                         p {class:"tutor-meaning","{example.english}"}
-                                        p {class:"quiet","{example.note}"}
+                                        TeacherProse {app,language:"en",class:"quiet",text:example.note.clone(),purpose:PresentationPurpose::Instruction}
                                         if let Some(callback)=on_add {button {class:"text-button",onclick:move |_|callback.call(draft.clone()),"Open as library draft →"}}
                                     }
                                 }}
                             }}
                         }
-                        div {class:"tutor-next-step",span {class:"eyebrow","TRY THIS NEXT"} p {"{answer.content.next_step}"}}
-                        if !answer.content.caveats.is_empty(){details {class:"tutor-caveats",summary {"Things to check"}ul {for caveat in &answer.content.caveats {li {"{caveat}"}}}}}
+                        div {class:"tutor-next-step",span {class:"eyebrow","TRY THIS NEXT"} TeacherProse {app,language:"en",text:answer.content.next_step.clone(),purpose:PresentationPurpose::Instruction}}
+                        if !answer.content.caveats.is_empty(){details {class:"tutor-caveats",summary {"Things to check"}ul {for caveat in &answer.content.caveats {li {TeacherProse {app,language:"en",text:caveat.clone(),purpose:PresentationPurpose::Instruction}}}}}}
                         footer {class:"tutor-answer-footer",
                             span {"{answer.provenance.provider} · {answer.provenance.model}"}
                             span {{match answer.usage.accounting { rufren_tutor::UsageAccounting::SubscriptionQuota=>format!("{} output tokens · subscription usage",answer.usage.output_tokens), rufren_tutor::UsageAccounting::ApiTokenEstimate=>format!("{} input + {} output tokens · estimated ${:.4}",answer.usage.input_tokens,answer.usage.output_tokens,answer.usage.estimated_micro_usd as f64/1_000_000.0) }}}
@@ -183,7 +189,7 @@ pub fn TutorView(
                                 (TutorTask::Explain,"Where, or where to?","Explain the difference between «Я в школе» and «Я иду в школу» with two short examples."),
                                 (TutorTask::WritingFeedback,"Find the words","I want to say “I’m learning Russian because I want to read stories.” My draft is «Я учу русский потому что я хочу читать истории». Explain any useful wording or punctuation suggestions."),
                                 (TutorTask::PrepareContent,"A little mathematics","Draft three very short beginner-friendly Russian sentences using “for every”, “there exists”, and “if … then”. Explain the meaning and flag terminology that a Russian mathematics reader should verify."),
-                            ]{button {class:"tutor-starter",disabled:busy,onclick:move |_|{task.set(starter_task.clone());text.set(prompt.into());},span {"{label}"}span {aria_hidden:"true","↗"}}}
+                            ]{button {class:"tutor-starter",disabled:busy,onclick:move |_|{task.set(starter_task.clone());text.set(prompt.into());starter_example.set(Some(prompt.into()));},span {"{label}"}span {aria_hidden:"true","↗"}}}
                         }
                         p {class:"tutor-welcome-note","Choosing a prompt only fills the text box. You decide when to send it."}
                     }

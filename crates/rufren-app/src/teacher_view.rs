@@ -16,6 +16,10 @@ use uuid::Uuid;
 
 #[component]
 pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
+    let mut returned_from = use_signal(|| None::<String>);
+    let mut history_for = use_signal(|| None::<String>);
+    let active_speaking = use_signal(|| None::<String>);
+    let capture_busy = use_signal(|| false);
     let state = app.read().clone();
     let mut attempts: Vec<_> = state.library.attempts().collect();
     attempts.sort_by_key(|(e, _)| std::cmp::Reverse(e.recorded_at_ms));
@@ -41,11 +45,35 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
         }
     });
     let status = availability.read().clone();
-    let answer = state
+    let latest_answer = state
         .repo
         .get::<TeacherResponse>("teacher_response")
         .ok()
         .flatten();
+    let saved_lesson = state
+        .repo
+        .get::<TeacherResponse>("teacher_lesson_response")
+        .ok()
+        .flatten()
+        .filter(|response| matches!(response.request, TeacherRequest::TeachLesson(_)));
+    let response_key = latest_answer
+        .as_ref()
+        .map(|response| response.provenance.response_id.clone())
+        .unwrap_or_else(|| "no-teacher-response".into());
+    let reviewing_history = history_for.read().as_deref() == Some(response_key.as_str());
+    let feedback_id = latest_answer
+        .as_ref()
+        .filter(|response| matches!(response.request, TeacherRequest::AnswerFeedback(_)))
+        .map(|response| response.provenance.response_id.clone());
+    let showing_lesson = feedback_id
+        .as_ref()
+        .is_some_and(|id| returned_from.read().as_ref() == Some(id))
+        && saved_lesson.is_some();
+    let answer = if showing_lesson {
+        saved_lesson.clone()
+    } else {
+        latest_answer.clone()
+    };
     let lesson = state.lesson().or_else(|| state.content.lessons.first());
     let recent_practice = state.lesson_practice_summary().ok();
     let prepared_context = answer.as_ref().and_then(|answer| match &answer.request {
@@ -77,7 +105,7 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
                     pre {class:"teacher-context-text","{recent.provider_context()}"}
                 }
             }
-            div {class:"actions",button {class:"primary",disabled:state.teacher_busy,onclick:move |_|{let request=app.read().lesson_teaching_request();send_teacher(app,request);},if state.teacher_busy {"Your teacher is thinking…"}else{"Teach me this lesson →"}}
+            div {class:"actions",button {class:"primary",disabled:state.teacher_busy || capture_busy(),onclick:move |_|{let request=app.read().lesson_teaching_request();send_teacher(app,request);},if state.teacher_busy {"Your teacher is thinking…"}else{"Teach me this lesson →"}}
                 button {class:"secondary",onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Open lesson & practice"}}
             p {class:"quiet","Start with a short explanation, try the words, then bring them into your next conversation."}
             match status {
@@ -88,6 +116,13 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
             button {class:"text-button",disabled:state.teacher_busy,onclick:move |_|availability.restart(),"Check connection again"}
         }
         if !attempts.is_empty() {
+            div {class:"actions teacher-history-toggle",
+                button {class:"secondary",aria_expanded:reviewing_history,disabled:capture_busy(),onclick:move |_|history_for.set(if reviewing_history {None}else{Some(response_key.clone())}),
+                    if reviewing_history {"Return to current teaching"}else{"Review saved practice"}
+                }
+            }
+        }
+        if reviewing_history && !attempts.is_empty() {
             section {class:"panel",
                 h2 {"Work with your answer"}
                 label {r#for:"teacher-attempt","Saved practice"}
@@ -95,7 +130,7 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
                     for (event,attempt) in attempts.iter().take(80) {option {value:event.id.to_string(),"{attempt.skill.label()} · "{state.library.revision(attempt.revision).map(|r|r.passage.title.as_str()).unwrap_or("Saved passage")}}}
                 }
                 if let Some((id,attempt))=current {
-                    blockquote {"{attempt.response}"}
+                    if attempt.skill!=Skill::Speaking {blockquote {"{attempt.response}"}}
                     if attempt.skill==Skill::Speaking {
                         for (recording_event,recording) in state.library.recordings(AnnotationTarget::Attempt(id)).into_iter().filter(|(_,a)|a.role==AudioRole::Attempt) {
                             div {key:"take-{recording_event.id}",class:"spoken-take",
@@ -118,7 +153,15 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
                 }
             }
         }
-        if let Some(answer)=answer {
+        if !reviewing_history {if let Some(id)=feedback_id {
+            if saved_lesson.is_some() {
+                div {class:"actions teacher-return",
+                    if showing_lesson {button {class:"secondary",disabled:capture_busy(),onclick:move |_|returned_from.set(None),"Read the latest feedback"}}
+                    else {button {class:"secondary",disabled:capture_busy(),onclick:move |_|returned_from.set(Some(id.clone())),"Return to your lesson & exercises →"}}
+                }
+            }
+        }}
+        if !reviewing_history {if let Some(answer)=answer {
             section {class:"panel teacher-answer",aria_label:"Your teacher’s response",
                 span {class:"tag","AI TEACHER"}
                 h2 {match &answer.request {TeacherRequest::TeachLesson(r)=>r.title.clone(),TeacherRequest::AnswerFeedback(_)=>"Working with your response".into()}}
@@ -137,7 +180,7 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
                 }}}}
                 if !answer.content.practice.is_empty() {h3 {"A small thing to try"}
                     for (index,_) in answer.content.practice.iter().enumerate() {
-                        TeacherPracticeForm {key:"{answer.provenance.response_id}-{index}",app,answer:answer.clone(),index}
+                        TeacherPracticeForm {key:"{answer.provenance.response_id}-{index}",app,answer:answer.clone(),index,active_speaking,capture_busy}
                     }
                 }
                 div {class:"hint",span {class:"tag","YOUR NEXT STEP"}TeacherProse {app,language:"en",text:answer.content.next_step.clone(),purpose:PresentationPurpose::Instruction}}
@@ -150,9 +193,9 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
                     }
                 }
             }
-        }
+        }}
         details {class:"panel",summary {"Ask a different question"}
-            TutorView {endpoint:state.endpoint.clone(),token:state.token.clone(),restored_response_json:free_answer,
+            TutorView {app,endpoint:state.endpoint.clone(),token:state.token.clone(),restored_response_json:free_answer,
                 on_response:move |response|act(app,|s|s.repo.set("tutor_response",&response)),
                 on_add:move |example: TutorExample|act(app,|s|s.keep_teacher_example(example))}
         }

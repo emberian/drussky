@@ -251,6 +251,8 @@ pub struct StudioRegionPlayback {
 struct BridgeEvent {
     kind: String,
     #[serde(default)]
+    active: bool,
+    #[serde(default)]
     role: String,
     #[serde(default)]
     sample_rate: u32,
@@ -458,15 +460,26 @@ pub fn AudioStudio(
     #[props(default)] generating_reference: bool,
     #[props(default)] workspace_id: String,
     #[props(default)] on_region_played: EventHandler<StudioRegionPlayback>,
+    #[props(default)] compact: bool,
+    #[props(default)] selected_asset_id: Option<String>,
+    #[props(default)] on_selected: EventHandler<Option<StudioRecording>>,
+    #[props(default)] on_recording_state: EventHandler<bool>,
 ) -> Element {
+    let instance_id = use_hook(|| uuid::Uuid::new_v4().to_string());
+    let effect_instance = instance_id.clone();
     let mut reference = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut attempt = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut error = use_signal(String::new);
-    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id}).to_string();
+    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id,"compact":compact,"selected_asset_id":selected_asset_id}).to_string();
     use_effect(move || {
+        let script = format!(
+            "const rufrenStudioRoot=document.getElementById('rufren-audio-studio');if(rufrenStudioRoot?.dataset.instance!=={})return;\n{}",
+            serde_json::to_string(&effect_instance).unwrap_or_default(),
+            BRIDGE
+        );
         spawn(async move {
             // Effects run after mounting. The long-lived eval keeps a bidirectional channel.
-            let mut bridge = document::eval(BRIDGE);
+            let mut bridge = document::eval(&script);
             let mut sources: HashMap<String, Rc<CachedSource>> = HashMap::new();
             let mut regions: HashMap<String, (String, RegionMetrics)> = HashMap::new();
             loop {
@@ -555,6 +568,11 @@ pub fn AudioStudio(
                     "source_clear" => {
                         sources.remove(&event.role);
                         regions.remove(&event.role);
+                        if event.role == "attempt" {
+                            attempt.set(None);
+                        } else if event.role == "reference" {
+                            reference.set(None);
+                        }
                     }
                     "region" => {
                         if !matches!(event.role.as_str(), "region_a" | "region_b") {
@@ -628,6 +646,8 @@ pub fn AudioStudio(
                             });
                         }
                     }
+                    "selected" => on_selected.call(event.recording),
+                    "recording_state" => on_recording_state.call(event.active),
                     "cue_saved" => {
                         if let Some(recording) = event.recording {
                             on_cue_saved.call(recording);
@@ -644,8 +664,10 @@ pub fn AudioStudio(
             }
         });
     });
-    use_drop(|| {
-        let _ = document::eval("window.rufrenAudioStudio?.destroy();");
+    let drop_instance = instance_id.clone();
+    use_drop(move || {
+        let token = serde_json::to_string(&drop_instance).unwrap_or_default();
+        let _ = document::eval(&format!("window.rufrenAudioStudio?.destroy({token});"));
     });
     let reference_analysis = reference.read().clone();
     let attempt_analysis = attempt.read().clone();
@@ -655,7 +677,8 @@ pub fn AudioStudio(
         .map(|(r, a)| compare(r, a));
     rsx! {
         style {"{STYLE}"}
-        section {id:"rufren-audio-studio",class:"audio-studio","data-config":config,
+        section {id:"rufren-audio-studio",class:if compact {"audio-studio audio-speaking"}else{"audio-studio"},"data-config":config,"data-instance":instance_id,"data-advanced":"false",
+            if compact {div {class:"audio-speaking-heading",h3 {"Your spoken response"}button {class:"text-button","data-action":"advanced",aria_expanded:"false","Show sound tools"}}}
             if !russian.is_empty() {div {class:"panel audio-passage",span {class:"tag","YOUR PHRASE"}p {class:"russian-display",lang:"ru","{russian}"}}}
             div {class:"panel audio-session-bar",
                 div {id:"audio-mic-status",class:"audio-mic",role:"status","data-active":"false","Microphone off"}
@@ -665,7 +688,7 @@ pub fn AudioStudio(
             }
             div {class:"audio-tracks",
                 for (role,title,description) in [("reference","Reference voice","Generate a Russian example, or add a voice you want to learn from."),("attempt","Your attempt","Say the same thought in your own voice.")] {
-                    section {class:"panel audio-track",aria_label:title,
+                    section {class:"panel audio-track","data-track":role,aria_label:title,
                         div {class:"audio-track-heading",div {span {class:"tag",if role=="reference" {"01 / LISTEN"}else{"02 / SPEAK"}}h2 {"{title}"}}span {class:"audio-track-mark",aria_hidden:"true",if role=="reference" {"A"}else{"B"}}}
                         p {class:"quiet","{description}"}
                         if role=="reference" {if let Some(generate)=on_generate_reference {button {class:"primary",disabled:generating_reference,onclick:move |_|generate.call(()),if generating_reference {"Generating reference…"}else{"Generate reference audio"}}}}
@@ -685,7 +708,8 @@ pub fn AudioStudio(
                         div {class:"audio-span",
                             label {r#for:"audio-from-{role}",{"Start (s)"} input {id:"audio-from-{role}",r#type:"number",min:"0",step:"0.01",initial_value:"0",inputmode:"decimal"}}
                             label {r#for:"audio-to-{role}",{"End (s)"} input {id:"audio-to-{role}",r#type:"number",min:"0",step:"0.01",initial_value:"0",inputmode:"decimal"}}
-                            button {class:"secondary",disabled:true,"data-needs":role,"data-action":"play","data-role":role,"▶ Play span"}
+                            button {class:"secondary",disabled:true,"data-needs":role,"data-action":"play","data-role":role,if compact {"▶ Replay my take"}else{"▶ Play span"}}
+                            if compact && role=="attempt" {button {class:"text-button","data-action":"stopPlayback","Stop playback"}}
                         }
                         if role=="reference" {if let Some(a)=reference_analysis.as_ref() {{quality_summary(a)}}}
                         else {if let Some(a)=attempt_analysis.as_ref() {{quality_summary(a)}}}
@@ -724,7 +748,7 @@ pub fn AudioStudio(
                                     div {class:"audio-region-surface","data-region-surface":slot,"data-region-kind":kind,
                                         canvas {id:"audio-{kind}-{slot}",width:"960",height:"180",role:"img",aria_label:"Region {label} {title}"}
                                         div {class:"audio-region-highlight","data-region-highlight":slot,aria_hidden:"true"}
-                                        for edge in ["start","end"] {button {class:"audio-region-handle",disabled:true,r#type:"button",role:"slider",tabindex:if kind=="wave"{0}else{-1},aria_hidden:if kind=="wave"{"false"}else{"true"},"data-region-edge":edge,"data-region-owner":slot,aria_label:"Region {label} {edge} boundary",aria_valuemin:"0",aria_valuemax:"0",aria_valuenow:"0",span {aria_hidden:"true","⋮"}}}
+                                        for edge in ["start","end"] {button {class:"audio-region-handle",disabled:true,r#type:"button",role:"slider",tabindex:if kind=="wave"{0}else{-1},aria_hidden:if kind=="wave"{"false"}else{"true"},"data-region-edge":edge,"data-region-owner":slot,aria_label:"Region {label} {edge} boundary",aria_describedby:"audio-region-help-{slot}",aria_valuemin:"0",aria_valuemax:"0",aria_valuenow:"0",span {aria_hidden:"true","⋮"}}}
                                     }
                                 }
                             }
@@ -735,7 +759,7 @@ pub fn AudioStudio(
                                 label {r#for:"audio-region-to-{slot}",{"End (seconds)"} input {id:"audio-region-to-{slot}",r#type:"number",min:"0",step:"0.001",initial_value:"0","data-region-seconds":slot}}
                             }
                             details {class:"audio-region-precise",summary {"Exact frame boundaries & keyboard help"}
-                                p {class:"quiet","Each boundary is a source PCM frame. End is exclusive. Focus a boundary handle, then use arrows to move one frame; Shift moves 10, Alt moves 100. Home and End move to the available edge."}
+                                p {id:"audio-region-help-{slot}",class:"quiet","Each boundary is a source PCM frame. End is exclusive. Focus a boundary handle, then use arrows to move one frame; Shift moves 10, Alt moves 100. Home and End move to the available edge."}
                                 div {class:"audio-region-boundaries",
                                     label {r#for:"audio-region-first-{slot}",{"Start frame"} input {id:"audio-region-first-{slot}",r#type:"number",min:"0",step:"1",initial_value:"0","data-region-frames":slot}}
                                     label {r#for:"audio-region-last-{slot}",{"End frame"} input {id:"audio-region-last-{slot}",r#type:"number",min:"1",step:"1",initial_value:"0","data-region-frames":slot}}
@@ -788,6 +812,25 @@ pub fn AudioStudio(
     }
 }
 
+/// One compact speaking editor at a time. Key by task/revision when its binding changes.
+/// Existing takes are selected explicitly; new originals arrive only through `on_saved`.
+#[component]
+pub fn AudioSpeaking(
+    passage_id: String,
+    revision_id: String,
+    on_saved: EventHandler<StudioRecording>,
+    #[props(default)] selected_asset_id: Option<String>,
+    #[props(default)] on_selected: EventHandler<Option<StudioRecording>>,
+    #[props(default)] on_recording_state: EventHandler<bool>,
+    #[props(default)] on_reference_played: EventHandler<()>,
+    #[props(default)] on_region_played: EventHandler<StudioRegionPlayback>,
+    #[props(default)] on_generate_reference: Option<EventHandler<()>>,
+    #[props(default)] generating_reference: bool,
+    #[props(default)] workspace_id: String,
+) -> Element {
+    rsx! {AudioStudio {passage_id,revision_id,workspace_id,compact:true,selected_asset_id,on_saved,on_selected,on_recording_state,on_reference_played,on_region_played,on_generate_reference,generating_reference}}
+}
+
 fn quality_summary(analysis: &AudioAnalysis) -> Element {
     let q = &analysis.quality;
     let clipped_percent = q.clipping_fraction * 100.0;
@@ -822,11 +865,12 @@ function click(event){
  const rate=Number(button.dataset.practiceRate);
  if(rate!==1&&!preservePitchKey){status.textContent='Pitch-preserving slower playback is unavailable here. Listen at natural speed.';return;}
  for(const [id,api]of window.rufrenAudioPlayers)if(id!==root.id)api.stop?.();
- stop();const generation=playGeneration;media.playbackRate=rate;if(preservePitchKey)media[preservePitchKey]=true;
+ window.rufrenAudioStudio?.stopPlayback?.();
+ stop();const generation=playGeneration,load=loadGeneration,playedRecord=record;media.playbackRate=rate;if(preservePitchKey)media[preservePitchKey]=true;
  // The original is verified and prepared before readiness; play stays in the click.
  media.play().then(()=>{
-  if(!alive||generation!==playGeneration)return;
-  status.textContent=rate===1?'Playing the selected recording.':'Playing slowly, keeping voice pitch. Time stretching can add artifacts.';send({kind:'played'});
+  if(!alive||generation!==playGeneration||load!==loadGeneration)return;
+  status.textContent=rate===1?'Playing the selected recording.':'Playing slowly, keeping voice pitch. Time stretching can add artifacts.';const {blob,...recording}=playedRecord;send({kind:'played',recording});
  }).catch(error=>{if(alive&&generation===playGeneration)status.textContent=`Playback could not start. Tap Listen again, or check this app’s audio permission. ${error.message}`;});
 }
 function change(event){if(event.target===picker){root.dataset.selectedReference=picker.value;prepare();}}
@@ -852,7 +896,7 @@ async function prepare(){
    const machine=r=>['ai_generated_speech','system_generated_speech'].includes(r.device?.provenance?.kind)?1:0;
    const references=records.filter(r=>r.role==='reference'&&r.revision_id===root.dataset.revision&&!r.interrupted).sort((a,b)=>machine(b)-machine(a)||b.created_at_ms-a.created_at_ms);
    selected=references.find(r=>r.asset_id===root.dataset.selectedReference)||references[0];
-   if(picker){picker.replaceChildren(...references.map(r=>new Option(`${referenceSource(r)} · ${r.name}`,r.asset_id)));picker.disabled=!references.length;if(selected)picker.value=selected.asset_id;}
+   if(picker){picker.replaceChildren(...references.map((r,i)=>new Option(root.dataset.hideReferenceName==='true'?`${referenceSource(r)} · Voice ${i+1} · ${(r.duration_ms/1000).toFixed(1)}s`:`${referenceSource(r)} · ${r.name}`,r.asset_id)));picker.disabled=!references.length;if(selected)picker.value=selected.asset_id;}
    if(!selected)throw Error('Generate reference audio for this phrase. You can also sync an existing reference or add a provided voice in the speech studio.');
   }
   if(!(selected.blob instanceof Blob)||selected.byte_length!==selected.blob.size||!/^[0-9a-f]{64}$/.test(selected.content_hash))throw Error('The stored audio metadata is invalid. Restore the original from an audio backup.');
@@ -880,6 +924,8 @@ pub(crate) struct PracticeAudioEvent {
     pub(crate) kind: String,
     #[serde(default)]
     pub(crate) ready: bool,
+    #[serde(default)]
+    pub(crate) recording: Option<StudioRecording>,
 }
 
 /// Audio-only playback for listening practice. No answer text is rendered.
@@ -888,16 +934,33 @@ pub fn AudioPractice(
     revision_id: String,
     on_played: EventHandler<()>,
     on_ready: EventHandler<bool>,
+    #[props(default)] on_played_recording: EventHandler<StudioRecording>,
     #[props(default)] on_generate: Option<EventHandler<()>>,
     #[props(default)] generating: bool,
+    #[props(default)] instance_id: Option<String>,
 ) -> Element {
+    let element_id = use_hook(|| {
+        instance_id
+            .filter(|id| !id.is_empty())
+            .unwrap_or_else(|| "rufren-audio-practice".into())
+    });
+    let voice_id = format!("{element_id}-reference-voice");
     let mut error = use_signal(String::new);
+    let effect_id = element_id.clone();
     use_effect(move || {
+        let script = format!(
+            "const rufrenPlayerRoot=document.getElementById({});\n{}",
+            serde_json::to_string(&effect_id).unwrap_or_default(),
+            PRACTICE_BRIDGE
+        );
         spawn(async move {
-            let mut bridge = document::eval(PRACTICE_BRIDGE);
+            let mut bridge = document::eval(&script);
             while let Ok(event) = bridge.recv::<PracticeAudioEvent>().await {
                 if event.kind == "played" {
                     on_played.call(());
+                    if let Some(recording) = event.recording {
+                        on_played_recording.call(recording);
+                    }
                 } else if event.kind == "ready" {
                     on_ready.call(event.ready);
                 }
@@ -907,15 +970,17 @@ pub fn AudioPractice(
             );
         });
     });
-    use_drop(|| {
-        let _ = document::eval("window.rufrenAudioPractice?.destroy();");
+    let drop_id = element_id.clone();
+    use_drop(move || {
+        let id = serde_json::to_string(&drop_id).unwrap_or_default();
+        let _ = document::eval(&format!("window.rufrenAudioPlayers?.get({id})?.destroy();"));
     });
     rsx! {
         style {"{STYLE}"}
-        section {id:"rufren-audio-practice",class:"audio-practice","data-revision":revision_id,aria_label:"Listen to the reference voice",
+        section {id:element_id,class:"audio-practice","data-revision":revision_id,"data-hide-reference-name":"true",aria_label:"Listen to the reference voice",
             if let Some(generate)=on_generate {button {class:"secondary",disabled:generating,onclick:move |_|generate.call(()),if generating {"Generating reference…"}else{"Generate reference audio"}}}
-            label {r#for:"practice-reference-voice","Reference voice"}
-            select {id:"practice-reference-voice",disabled:true,"data-reference-select":"true"}
+            label {r#for:voice_id.clone(),"Reference voice"}
+            select {id:voice_id,disabled:true,"data-reference-select":"true"}
             p {class:"quiet audio-source","data-reference-source":"true"}
             div {class:"actions",
                 button {class:"primary",disabled:true,"data-practice-rate":"1","▶ Listen / replay"}

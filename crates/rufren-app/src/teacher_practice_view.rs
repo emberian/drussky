@@ -1,12 +1,31 @@
 use crate::exposure_view::PresentedRussian;
-use crate::{model::AppState, teacher_view::send_teacher};
+use crate::{model::AppState, teacher_prose::TeacherProse, teacher_view::send_teacher};
 use dioxus::prelude::*;
 use rufren_core::PresentationPurpose;
 use rufren_tutor::{TeacherResponse, TeacherSkill};
-use uuid::Uuid;
 
 #[component]
 pub(crate) fn TeacherPractice(
+    app: Signal<AppState>,
+    answer: TeacherResponse,
+    index: usize,
+    active_speaking: Signal<Option<String>>,
+    capture_busy: Signal<bool>,
+) -> Element {
+    if answer.content.practice.get(index).is_some_and(|exercise| {
+        matches!(
+            exercise.skill,
+            Some(TeacherSkill::Listening | TeacherSkill::Speaking)
+        )
+    }) {
+        rsx! {crate::teacher_audio_practice_view::TeacherAudioPractice {app,answer,index,active_speaking,capture_busy}}
+    } else {
+        rsx! {TextTeacherPractice {app,answer,index}}
+    }
+}
+
+#[component]
+fn TextTeacherPractice(
     mut app: Signal<AppState>,
     answer: TeacherResponse,
     index: usize,
@@ -29,9 +48,10 @@ pub(crate) fn TeacherPractice(
     let field = format!("teacher-practice-{}-{index}", snapshot.source);
     let busy = app.read().teacher_busy;
     let answer_for_submit = answer.clone();
+    let answer_for_edit = answer.clone();
     rsx! {
         article {class:"phrase-study teacher-exercise",
-            p {"{exercise.prompt}"}
+            TeacherProse {app,language:"en",text:exercise.prompt.clone(),purpose:PresentationPurpose::TaskInput,session:Some(snapshot.id)}
             if exercise.skill==Some(TeacherSkill::Reading) {
                 if let Some(text)=&exercise.reference_russian {PresentedRussian {app,class:"dialogue-russian",text:text.clone(),purpose:PresentationPurpose::TaskInput,session:Some(snapshot.id)}}
             }
@@ -40,9 +60,7 @@ pub(crate) fn TeacherPractice(
                 textarea {id:field, value:snapshot.response.clone(), disabled:busy, placeholder:"Try a short answer. Your draft is kept.",
                     oninput:move |event| {
                         let Some(mut next)=draft.read().clone() else{return};
-                        if next.saved_attempt.take().is_some() {next.id=Uuid::new_v4();}
-                        next.response=event.value();
-                        let result=app.read().save_teacher_practice_draft(&next);
+                        let result=app.read().teacher_practice_edit_response(&answer_for_edit,&mut next,event.value());
                         match result {Ok(())=>draft.set(Some(next)),Err(error)=>app.write().notice=error}
                     }
                 }
@@ -64,7 +82,7 @@ pub(crate) fn TeacherPractice(
             }
             details {summary {"Show an example and explanation"}
                 if let Some(example)=&exercise.expected_response {PresentedRussian {app,text:example.clone(),purpose:PresentationPurpose::Answer,session:Some(snapshot.id)}}
-                p {"{exercise.teaching_note}"}
+                TeacherProse {app,language:"en",text:exercise.teaching_note.clone(),purpose:PresentationPurpose::Instruction,session:Some(snapshot.id)}
             }
         }
     }
