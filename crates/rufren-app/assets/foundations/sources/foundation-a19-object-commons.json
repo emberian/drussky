@@ -1,0 +1,108 @@
+{
+  "ordinary_spelling": "объект",
+  "binding_ids": [
+    "foundation-a19-object"
+  ],
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82.ogg",
+  "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Ru-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "original_file": "объект.ogg",
+  "wav_file": "объект.wav",
+  "commons_sha1": "f9b6db5ebb83e6595758f3581ecde008f8b382b2",
+  "source_metadata": {
+    "DateTime": {
+      "value": "2016-12-23 12:31:20",
+      "source": "mediawiki-metadata",
+      "hidden": ""
+    },
+    "ObjectName": {
+      "value": "Ru-объект",
+      "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+      "value": 1.2,
+      "source": "extension",
+      "hidden": ""
+    },
+    "Categories": {
+      "value": "GFDL|Russian pronunciation|License migration redundant|Uploaded with VicuñaUploader|Items with VRTS permission confirmed",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "Assessments": {
+      "value": "",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "ImageDescription": {
+      "value": "russian pronunciation of the word \"объект\".",
+      "source": "commons-desc-page"
+    },
+    "DateTimeOriginal": {
+      "value": "2016",
+      "source": "commons-desc-page"
+    },
+    "Credit": {
+      "value": "<a rel=\"nofollow\" class=\"external text\" href=\"http://ru.forvo.com/word/%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82\">Forvo</a>",
+      "source": "commons-desc-page"
+    },
+    "Artist": {
+      "value": "<a rel=\"nofollow\" class=\"external text\" href=\"http://ru.forvo.com/user/1640max/\">1640max</a>",
+      "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+      "value": "CC BY-SA 4.0",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "UsageTerms": {
+      "value": "Creative Commons Attribution-Share Alike 4.0",
+      "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+      "value": "true",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "Attribution": {
+      "value": "<a rel=\"nofollow\" class=\"external text\" href=\"http://forvo.com/user/1640max/\">1640max</a>",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "LicenseUrl": {
+      "value": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "commons-desc-page"
+    },
+    "Copyrighted": {
+      "value": "True",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "Restrictions": {
+      "value": "",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "License": {
+      "value": "cc-by-sa-4.0",
+      "source": "commons-templates",
+      "hidden": ""
+    }
+  },
+  "credit": "<a rel=\"nofollow\" class=\"external text\" href=\"http://ru.forvo.com/user/1640max/\">1640max</a>",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "status": "candidate_source_identified_not_independent_phonetic_certification",
+  "original_sha256": "c260393050d9191423b7ba7cdcb4198df3985ababfb9fd4220a2722a527e03e1",
+  "original_bytes": 12422,
+  "wav_sha256": "0f740b60c1c66472dcbd1c9bca6d02c29c628a1cfdbd9dc91b39fe159fc96d17",
+  "credit_plaintext": "1640max",
+  "pcm": {
+    "frames": 31104,
+    "sample_rate": 44100,
+    "channels": 2,
+    "duration_seconds": 0.7053061224489796,
+    "peak": 20661,
+    "full_scale_samples": 0
+  },
+  "transform": "ffmpeg decode Ogg Vorbis to PCM16; no trim, gain, resample or channel change; strip metadata; original untouched"
+}

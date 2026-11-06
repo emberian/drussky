@@ -1,6 +1,6 @@
 # Prepared foundation references
 
-Twenty finite offline WAV references ship with per-asset provenance in `manifest.json`. **а, о, кот and all nine continuation words are licensed human recordings; eight introductory models are synthetic.** Playback embeds WAV bytes and needs no speech provider or account.
+112 finite offline WAV references ship with per-asset provenance in `manifest.json`: 27 licensed human recordings and 85 synthetic references. The original twenty retain their entries and audio bytes; the alphabet construction extension adds 15 human and 77 synthetic whole utterances. Playback embeds WAV bytes and needs no speech provider or account.
 
 ## Human recording credits
 
@@ -12,7 +12,7 @@ Original Ogg Vorbis files and Commons metadata are retained in `sources/`; SHA1 
 
 ## Synthetic reference credits
 
-The other eight files use pinned Silero `v5_6_ru`, Xenia voice, official model revision `e382298387332f2bf461fe6eadfde99104611b0c`, SHA-256 `04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e`, **CC-BY-NC-SA-4.0**. They were generated locally with the bounded CPU worker, with no voice cloning, carrier words, trimming, gain, resampling or splicing. Contextual ма, ка, та model consonant beginnings; no consonant glyph was synthesized as a phoneme. Practice syllables are not vocabulary.
+The eight introductory synthetic files and 77 alphabet extension files use pinned Silero `v5_6_ru`, Xenia voice, official model revision `e382298387332f2bf461fe6eadfde99104611b0c`, SHA-256 `04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e`, **CC-BY-NC-SA-4.0**. They were generated locally with the bounded CPU worker, with no voice cloning, carrier words, trimming, gain, resampling or splicing. Contextual ма, ка, та model consonant beginnings; no consonant glyph was synthesized as a phoneme. Practice syllables are not vocabulary.
 
 An initial eleven-item synthetic set passed byte/signal checks but an independent ASR probe and spectral comparison raised questions about isolated о. Human а/о/кот replaced those three originals rather than shipping the doubtful isolated-vowel baseline. Previous synthetic originals, original manifest, probe and spectral evidence remain in `research/artifacts/foundations-v1/`; the old probe does **not** describe the replacement human files. No additional model calls were made for replacement.
 
@@ -29,3 +29,13 @@ The nine whole-word models retain exact source bytes and Commons SHA1 identities
 Exact per-word source links are in the manifest and in-app Audio credits. Changes: Ogg Vorbis decoded to PCM16 WAV, without gain, trim, sample-rate or channel changes. This adds no lossy codec; PCM quantization is explicit. No endorsement is implied.
 
 The continuation is a mixture of source speakers and recording sessions. In particular оно comes from another named speaker and is a shorter clip; do not imply a single consistent tutor voice. Source descriptions and dictionary stress make these a stronger bounded lexical baseline than unreviewed synthesis; they do not constitute independent native-listener certification of stress, reduction or consonant softness. No inference was run for this continuation.
+
+## Alphabet construction extension
+
+The 92 additional targets are complete source utterances, copied byte for byte from their prepared WAVs. No trimming, cropping, splicing, gain, resampling or channel conversion was applied during installation. Human хор retains its source stereo channels. Rejected synthetic first takes for хор, ла and ра remain only in ignored local preparation storage; the shipped bindings use licensed human recordings.
+
+Every human entry retains an original Ogg, its SHA-256 and Commons SHA1, a canonical per-asset Commons/preparation metadata JSON in `sources/`, attribution, source links, license and recorded decoding transformation. The 15 additions are э, у, ё, ю, лук, люк, соль, мёд, чай, щи, что, объект, хор, ла and ра. Their exact individual credits are in the manifest and generated in-app catalog. This is a mixture of source speakers and sessions, with no independent certification of speaker nativeness or phonemic quality.
+
+Synthetic entries retain pinned model/runtime identity, actual synthesis text and input hashes, generation measurements and requested review checks. Their `review` fields retain recognition observations only when bound to the exact shipped WAV hash. ASR matches do not certify pronunciation; discrepancies remain unresolved lexical observations rather than phonetic pass/fail results. In particular, isolated моё, vowel/glide examples and the human лук/люк contrast must be read with the targeted acoustic observations in `research/artifacts/alphabet-audio-review-v1/REVIEW.md`. Those observations do not establish a native-listener verdict or a learner score. The relatively weak isolated у selection remains unresolved.
+
+Run `scripts/generate-foundation-audio-catalog.py` after changing prepared assets, and use `--check` to verify the checked-in Rust catalog. This performs integrity/provenance checks only; it makes no inference calls and does not transform audio.

@@ -1,0 +1,103 @@
+{
+  "ordinary_spelling": "хор",
+  "binding_ids": [
+    "foundation-a15-choir"
+  ],
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%85%D0%BE%D1%80.ogg",
+  "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Ru-%D1%85%D0%BE%D1%80.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "original_file": "хор.ogg",
+  "wav_file": "хор.wav",
+  "commons_sha1": "c8214ee90695056a5456634a1e51aa39c72502bb",
+  "source_metadata": {
+    "DateTime": {
+      "value": "2016-11-12 15:26:45",
+      "source": "mediawiki-metadata",
+      "hidden": ""
+    },
+    "ObjectName": {
+      "value": "Ru-хор",
+      "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+      "value": 1.2,
+      "source": "extension",
+      "hidden": ""
+    },
+    "Categories": {
+      "value": "Russian pronunciation|Х слог",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "Assessments": {
+      "value": "",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "ImageDescription": {
+      "value": "the russian pronunciation — Ru-хор.ogg",
+      "source": "commons-desc-page"
+    },
+    "DateTimeOriginal": {
+      "value": "2000-01-01",
+      "source": "commons-desc-page"
+    },
+    "Credit": {
+      "value": "free open public sources",
+      "source": "commons-desc-page"
+    },
+    "Artist": {
+      "value": "Aleksey Pogrebnoj-Alexandroff",
+      "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+      "value": "CC BY-SA 3.0",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "UsageTerms": {
+      "value": "Creative Commons Attribution-Share Alike 3.0",
+      "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+      "value": "true",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "LicenseUrl": {
+      "value": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "commons-desc-page"
+    },
+    "Copyrighted": {
+      "value": "True",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "Restrictions": {
+      "value": "",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "License": {
+      "value": "cc-by-sa-3.0",
+      "source": "commons-templates",
+      "hidden": ""
+    }
+  },
+  "credit": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "status": "candidate_unreviewed",
+  "original_sha256": "2b73b1bc6778ddbdee8031a48085ca0909c6b85a478919e64a23faedeb8aa6d0",
+  "original_bytes": 35015,
+  "wav_sha256": "80aadfafd0a8f3f9379b0fb5d6bc698b79175786c16cff36160f1d6a8a7eb031",
+  "credit_plaintext": "Aleksey Pogrebnoj-Alexandroff",
+  "pcm": {
+    "frames": 43479,
+    "sample_rate": 48000,
+    "channels": 2,
+    "duration_seconds": 0.9058125,
+    "peak": 25472,
+    "full_scale_samples": 0
+  },
+  "transform": "ffmpeg decode Ogg Vorbis to PCM16; no trim, gain, resample or channel change; strip metadata; original untouched"
+}

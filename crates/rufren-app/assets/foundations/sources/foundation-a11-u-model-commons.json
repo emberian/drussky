@@ -1,0 +1,103 @@
+{
+  "ordinary_spelling": "у",
+  "binding_ids": [
+    "foundation-a11-u-model"
+  ],
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-21-%D0%B1%D1%83%D0%BA%D0%B2%D0%B0-%D0%A3.ogg",
+  "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Ru-21-%D0%B1%D1%83%D0%BA%D0%B2%D0%B0-%D0%A3.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "original_file": "у.ogg",
+  "wav_file": "у.wav",
+  "commons_sha1": "33852833290869e113b661f5be349550926d778d",
+  "source_metadata": {
+    "DateTime": {
+      "value": "2013-03-13 23:31:37",
+      "source": "mediawiki-metadata",
+      "hidden": ""
+    },
+    "ObjectName": {
+      "value": "Ru-21-буква-У",
+      "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+      "value": 1.2,
+      "source": "extension",
+      "hidden": ""
+    },
+    "Categories": {
+      "value": "Self-published work|Pronunciation of Russian alphabet|У звук",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "Assessments": {
+      "value": "",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "ImageDescription": {
+      "value": "The modern Russian alphabet is used since 1918. The names of the letters and numbers.",
+      "source": "commons-desc-page"
+    },
+    "DateTimeOriginal": {
+      "value": "1918",
+      "source": "commons-desc-page"
+    },
+    "Credit": {
+      "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+      "source": "commons-desc-page"
+    },
+    "Artist": {
+      "value": "<a href=\"//commons.wikimedia.org/wiki/User:Cherus\" title=\"User:Cherus\">Cherus</a>",
+      "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+      "value": "CC BY-SA 3.0",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "UsageTerms": {
+      "value": "Creative Commons Attribution-Share Alike 3.0",
+      "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+      "value": "true",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "LicenseUrl": {
+      "value": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "commons-desc-page"
+    },
+    "Copyrighted": {
+      "value": "True",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "Restrictions": {
+      "value": "",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "License": {
+      "value": "cc-by-sa-3.0",
+      "source": "commons-templates",
+      "hidden": ""
+    }
+  },
+  "credit": "<a href=\"//commons.wikimedia.org/wiki/User:Cherus\" title=\"User:Cherus\">Cherus</a>",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "status": "candidate_source_identified_not_independent_phonetic_certification",
+  "original_sha256": "ad542bc5581ec3439c04512240caf43945b0349b56a555073c2adeec55116776",
+  "wav_sha256": "5aab870b2d7801444dd3a8c066ea88885c389af41473979949b1f7283cac46dd",
+  "original_bytes": 18893,
+  "pcm": {
+    "frames": 99072,
+    "sample_rate": 44100,
+    "channels": 1,
+    "duration_seconds": 2.246530612244898,
+    "peak": 4396,
+    "full_scale_samples": 0
+  },
+  "transform": "ffmpeg decode Ogg Vorbis to PCM16; no trim, gain, resample or channel change; strip metadata; original untouched",
+  "credit_plaintext": "Cherus"
+}

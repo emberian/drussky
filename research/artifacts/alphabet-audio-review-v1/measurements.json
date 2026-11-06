@@ -1,0 +1,696 @@
+{
+  "scope": "Descriptive acoustic review only. Active intervals are level gates, not phone boundaries; LPC poles are candidate resonances, not phonetic labels.",
+  "cases": {
+    "у": {
+      "path": ".local/alphabet-audio-source-review/у.wav",
+      "sha256": "5aab870b2d7801444dd3a8c066ea88885c389af41473979949b1f7283cac46dd",
+      "rate": 44100,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 2.246530612244898,
+      "peak": 0.1341552734375,
+      "active_level_gate_intervals": [
+        [
+          0.21,
+          0.535
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/vowels-0-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.22499999999999998,
+            0.275
+          ],
+          "pole2_by_order": {
+            "12": 2500.0241263818857,
+            "14": 580.436448790386,
+            "16": 585.6452024044742
+          }
+        },
+        "following": {
+          "seconds": [
+            0.31,
+            0.39
+          ],
+          "pole2_by_order": {
+            "12": 2936.966564324652,
+            "14": 533.719226608297,
+            "16": 551.3363602311
+          }
+        },
+        "late": {
+          "seconds": [
+            0.43500000000000005,
+            0.505
+          ],
+          "pole2_by_order": {
+            "12": 2826.431992806931,
+            "14": 789.3881509631672,
+            "16": 565.2099343772865
+          }
+        }
+      }
+    },
+    "ю": {
+      "path": ".local/alphabet-audio-source-review/ю.wav",
+      "sha256": "e9468271ab1d36e51940955747ddec699f550705c3842e50302c32ca73f75cfd",
+      "rate": 44100,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 1.6457142857142857,
+      "peak": 0.228851318359375,
+      "active_level_gate_intervals": [
+        [
+          0.14,
+          0.515
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/vowels-1-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.15499999999999997,
+            0.205
+          ],
+          "pole2_by_order": {
+            "12": 2317.959810803182,
+            "14": 2226.056824626396,
+            "16": 2276.89710422345
+          }
+        },
+        "following": {
+          "seconds": [
+            0.24,
+            0.31999999999999995
+          ],
+          "pole2_by_order": {
+            "12": 2280.651127264565,
+            "14": 1551.6338012339033,
+            "16": 1520.5432250092786
+          }
+        },
+        "late": {
+          "seconds": [
+            0.41500000000000004,
+            0.485
+          ],
+          "pole2_by_order": {
+            "12": 2439.8319575779738,
+            "14": 756.8839590682958,
+            "16": 740.9568876275621
+          }
+        }
+      }
+    },
+    "ё": {
+      "path": ".local/alphabet-audio-source-review/ё.wav",
+      "sha256": "3d60151a4fccc2c6119db7dbb445ee90e28124cac5314b84a67e049ad41e23c5",
+      "rate": 22050,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 0.7577324263038548,
+      "peak": 0.358642578125,
+      "active_level_gate_intervals": [
+        [
+          0.11,
+          0.52
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/vowels-2-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.125,
+            0.175
+          ],
+          "pole2_by_order": {
+            "12": 2175.3330014386506,
+            "14": 2174.5454751512084,
+            "16": 2200.391952260143
+          }
+        },
+        "following": {
+          "seconds": [
+            0.21000000000000002,
+            0.29
+          ],
+          "pole2_by_order": {
+            "12": 3055.790212089839,
+            "14": 2208.0091370435202,
+            "16": 2180.3632289279158
+          }
+        },
+        "late": {
+          "seconds": [
+            0.42000000000000004,
+            0.49
+          ],
+          "pole2_by_order": {
+            "12": 934.4384763636247,
+            "14": 925.6763359668967,
+            "16": 949.7619107998692
+          }
+        }
+      }
+    },
+    "э": {
+      "path": ".local/alphabet-audio-source-review/э.wav",
+      "sha256": "eb46c2f5ada8b7de5da23fc73f8d20d1177b58d6ef67ee7dab29059fd0a7f867",
+      "rate": 44100,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 0.45374149659863944,
+      "peak": 0.39093017578125,
+      "active_level_gate_intervals": [
+        [
+          0.04,
+          0.375
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/vowels-3-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.055,
+            0.10500000000000001
+          ],
+          "pole2_by_order": {
+            "12": 2376.6197918698986,
+            "14": 2378.0883573781325,
+            "16": 2350.5798985089887
+          }
+        },
+        "following": {
+          "seconds": [
+            0.14,
+            0.22
+          ],
+          "pole2_by_order": {
+            "12": 2455.5208180468358,
+            "14": 2398.7171213105357,
+            "16": 2382.510149679065
+          }
+        },
+        "late": {
+          "seconds": [
+            0.275,
+            0.345
+          ],
+          "pole2_by_order": {
+            "12": 2376.240621701278,
+            "14": 2320.458902489281,
+            "16": 2304.7792721174515
+          }
+        }
+      }
+    },
+    "а": {
+      "path": "crates/rufren-app/assets/foundations/foundation-a.wav",
+      "sha256": "f40c69948231d47fd2636752370f2e9175a91f91db7456136b6b31446f9fdc33",
+      "rate": 44100,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 0.9404081632653061,
+      "peak": 0.770263671875,
+      "active_level_gate_intervals": [
+        [
+          0.34,
+          0.64
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/vowels-4-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.355,
+            0.40499999999999997
+          ],
+          "pole2_by_order": {
+            "12": 2740.8671749007754,
+            "14": 1367.9380619119272,
+            "16": 1367.4242425493658
+          }
+        },
+        "following": {
+          "seconds": [
+            0.43999999999999995,
+            0.52
+          ],
+          "pole2_by_order": {
+            "12": 1261.6777036572987,
+            "14": 1328.3580113109078,
+            "16": 1330.3505691032888
+          }
+        },
+        "late": {
+          "seconds": [
+            0.54,
+            0.61
+          ],
+          "pole2_by_order": {
+            "12": 1492.7334964229633,
+            "14": 1477.4690438251914,
+            "16": 1410.688096294886
+          }
+        }
+      }
+    },
+    "о": {
+      "path": "crates/rufren-app/assets/foundations/foundation-o.wav",
+      "sha256": "5937267711f4f6f0212690e30dd04870e2e3aaee2dcfbb4e69b3b7a0fa52281f",
+      "rate": 44000,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 1.0,
+      "peak": 0.89263916015625,
+      "active_level_gate_intervals": [
+        [
+          0.3,
+          0.56
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/vowels-5-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.315,
+            0.365
+          ],
+          "pole2_by_order": {
+            "12": 804.7446435026566,
+            "14": 746.5774969880141,
+            "16": 771.8228914088587
+          }
+        },
+        "following": {
+          "seconds": [
+            0.4,
+            0.48
+          ],
+          "pole2_by_order": {
+            "12": 778.1541428167603,
+            "14": 773.3391649316106,
+            "16": 799.6733969283637
+          }
+        },
+        "late": {
+          "seconds": [
+            0.4600000000000001,
+            0.53
+          ],
+          "pole2_by_order": {
+            "12": 743.7104139479382,
+            "14": 752.5995923163184,
+            "16": 785.1072125277185
+          }
+        }
+      }
+    },
+    "и": {
+      "path": "crates/rufren-app/assets/foundations/foundation-i.wav",
+      "sha256": "7e33422f2b03b0113a907ce4ff004fa7e60627a85656c3e32ebe4096849dc428",
+      "rate": 44100,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 0.9142857142857143,
+      "peak": 0.77557373046875,
+      "active_level_gate_intervals": [
+        [
+          0.37,
+          0.595
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/vowels-6-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.385,
+            0.435
+          ],
+          "pole2_by_order": {
+            "12": 2772.844110649806,
+            "14": 2753.3102392232913,
+            "16": 2809.1968877360064
+          }
+        },
+        "following": {
+          "seconds": [
+            0.47,
+            0.55
+          ],
+          "pole2_by_order": {
+            "12": 2842.3206615110707,
+            "14": 2824.6625745161787,
+            "16": 2799.848341114148
+          }
+        },
+        "late": {
+          "seconds": [
+            0.495,
+            0.565
+          ],
+          "pole2_by_order": {
+            "12": 2821.9008028004832,
+            "14": 2801.952345843209,
+            "16": 2775.056988256176
+          }
+        }
+      }
+    },
+    "лук": {
+      "path": ".local/alphabet-audio-source-review/лук.wav",
+      "sha256": "bbb9ba2da2dcab093fb22fe00dfc91e49e4065f10963abc08644008660d88c82",
+      "rate": 44100,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 1.0971428571428572,
+      "peak": 0.745819091796875,
+      "active_level_gate_intervals": [
+        [
+          0.345,
+          0.615
+        ],
+        [
+          0.71,
+          0.8
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/laterals-0-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.36,
+            0.41
+          ],
+          "pole2_by_order": {
+            "12": 863.3382119983374,
+            "14": 866.9222354172122,
+            "16": 903.9730639478436
+          }
+        },
+        "following": {
+          "seconds": [
+            0.44499999999999995,
+            0.5249999999999999
+          ],
+          "pole2_by_order": {
+            "12": 741.7442754017377,
+            "14": 737.8887447124719,
+            "16": 780.7982258312413
+          }
+        },
+        "late": {
+          "seconds": [
+            0.7000000000000001,
+            0.77
+          ],
+          "pole2_by_order": {
+            "12": 2919.812198925766,
+            "14": 2541.5144163330156,
+            "16": 2633.0943742740874
+          }
+        }
+      }
+    },
+    "люк": {
+      "path": ".local/alphabet-audio-source-review/люк.wav",
+      "sha256": "334b8ef34abe2baa8befba7383cd996c2fbc18bb2fe34189a24ff9b880d5b8c5",
+      "rate": 44100,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 2,
+      "duration": 0.7314285714285714,
+      "peak": 0.76849365234375,
+      "active_level_gate_intervals": [
+        [
+          0.03,
+          0.235
+        ],
+        [
+          0.61,
+          0.64
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/laterals-1-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.045,
+            0.095
+          ],
+          "pole2_by_order": {
+            "12": 3051.2340150949863,
+            "14": 1656.2595294409753,
+            "16": 1643.5023448193174
+          }
+        },
+        "following": {
+          "seconds": [
+            0.13,
+            0.21
+          ],
+          "pole2_by_order": {
+            "12": 1252.0169758828977,
+            "14": 984.5728172828527,
+            "16": 992.5101869846964
+          }
+        },
+        "late": {
+          "seconds": [
+            0.54,
+            0.61
+          ],
+          "pole2_by_order": {
+            "12": null,
+            "14": null,
+            "16": null
+          }
+        }
+      }
+    },
+    "RQ02 Лук": {
+      "path": "research/artifacts/reference-quality-slot1/RQ02.wav",
+      "sha256": "bf19ea6c569402b083cd07050b8fa901530fc9a387154b18d83278088b496fd1",
+      "rate": 24000,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 0.625,
+      "peak": 0.29547119140625,
+      "active_level_gate_intervals": [
+        [
+          0.01,
+          0.215
+        ],
+        [
+          0.28,
+          0.32
+        ],
+        [
+          0.32,
+          0.355
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/laterals-2-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.025,
+            0.075
+          ],
+          "pole2_by_order": {
+            "12": 1057.026820776722,
+            "14": 1065.6573435609432,
+            "16": 1068.2803783492272
+          }
+        },
+        "following": {
+          "seconds": [
+            0.11,
+            0.19
+          ],
+          "pole2_by_order": {
+            "12": 808.0351593723185,
+            "14": 805.2292111889151,
+            "16": 780.797047144453
+          }
+        },
+        "late": {
+          "seconds": [
+            0.255,
+            0.32499999999999996
+          ],
+          "pole2_by_order": {
+            "12": 1067.9407245760071,
+            "14": 1078.5897610384366,
+            "16": 1047.863400008203
+          }
+        }
+      }
+    },
+    "RQ03 Люк": {
+      "path": "research/artifacts/reference-quality-slot1/RQ03.wav",
+      "sha256": "2cdd4b1197b6c638080b5e8a2a32438b0a7bcff4073999abbaac649d8d066669",
+      "rate": 24000,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 0.65,
+      "peak": 0.334228515625,
+      "active_level_gate_intervals": [
+        [
+          0.015,
+          0.235
+        ],
+        [
+          0.295,
+          0.34
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/laterals-3-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.03,
+            0.08
+          ],
+          "pole2_by_order": {
+            "12": 1823.7940397219431,
+            "14": 1839.90768033332,
+            "16": 1821.6563474740828
+          }
+        },
+        "following": {
+          "seconds": [
+            0.115,
+            0.195
+          ],
+          "pole2_by_order": {
+            "12": 1215.986200027111,
+            "14": 1214.3651963857421,
+            "16": 1157.8537579572383
+          }
+        },
+        "late": {
+          "seconds": [
+            0.24000000000000002,
+            0.31
+          ],
+          "pole2_by_order": {
+            "12": 1087.8106979368804,
+            "14": 1066.3382479850677,
+            "16": 1039.8270349039235
+          }
+        }
+      }
+    },
+    "моё": {
+      "path": ".local/alphabet-audio-preparation/silero-first-takes-v1/foundation-a17-my-n.wav",
+      "sha256": "d3ba5f3cbd9e998e85336f95562ca2f7bef5b77c7de257f210286717fe3ca944",
+      "rate": 24000,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 0.5125,
+      "peak": 0.35626220703125,
+      "active_level_gate_intervals": [
+        [
+          0.04,
+          0.485
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/my-0-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.055,
+            0.10500000000000001
+          ],
+          "pole2_by_order": {
+            "12": 1528.3103111711957,
+            "14": 1546.5833693332227,
+            "16": 1493.4142286012516
+          }
+        },
+        "following": {
+          "seconds": [
+            0.14,
+            0.22
+          ],
+          "pole2_by_order": {
+            "12": 2263.9104484755153,
+            "14": 2069.1597857052434,
+            "16": 1975.0364453465572
+          }
+        },
+        "late": {
+          "seconds": [
+            0.385,
+            0.45499999999999996
+          ],
+          "pole2_by_order": {
+            "12": 1276.9222034443665,
+            "14": 1295.2177746807456,
+            "16": 1042.7900303813167
+          }
+        }
+      }
+    },
+    "моё окно": {
+      "path": ".local/alphabet-audio-preparation/silero-first-takes-v1/foundation-a17-my-window.wav",
+      "sha256": "d6251baf2737a587a48c264551babf7a5f54859bfe7dca7e5db3f328b45c8bbf",
+      "rate": 24000,
+      "analysis_channels": "mean of source channels",
+      "source_channels": 1,
+      "duration": 0.7,
+      "peak": 0.661865234375,
+      "active_level_gate_intervals": [
+        [
+          0.035,
+          0.305
+        ],
+        [
+          0.335,
+          0.385
+        ],
+        [
+          0.41,
+          0.67
+        ]
+      ],
+      "candidate_poles_file": ".local/alphabet-audio-preparation/acoustic-review-v1/my-1-poles.tsv",
+      "descriptive_windows": {
+        "onset": {
+          "seconds": [
+            0.049999999999999996,
+            0.1
+          ],
+          "pole2_by_order": {
+            "12": 1377.1920770656996,
+            "14": 1430.6707097639994,
+            "16": 1458.5612562119097
+          }
+        },
+        "following": {
+          "seconds": [
+            0.135,
+            0.215
+          ],
+          "pole2_by_order": {
+            "12": 1489.7634599904918,
+            "14": 1496.6671139691427,
+            "16": 1501.6036869330048
+          }
+        },
+        "late": {
+          "seconds": [
+            0.5700000000000001,
+            0.64
+          ],
+          "pole2_by_order": {
+            "12": 1389.962522775831,
+            "14": 1321.0291495252077,
+            "16": 1286.0445861507674
+          }
+        }
+      }
+    }
+  }
+}

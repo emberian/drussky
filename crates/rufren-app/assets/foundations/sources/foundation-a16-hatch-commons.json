@@ -1,0 +1,108 @@
+{
+  "ordinary_spelling": "люк",
+  "binding_ids": [
+    "foundation-a16-hatch"
+  ],
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%8E%D0%BA.ogg",
+  "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Ru-%D0%BB%D1%8E%D0%BA.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "original_file": "люк.ogg",
+  "wav_file": "люк.wav",
+  "commons_sha1": "1808e1539f90039c8d7c47b3bbbc496055f4c3a5",
+  "source_metadata": {
+    "DateTime": {
+      "value": "2016-12-03 12:04:34",
+      "source": "mediawiki-metadata",
+      "hidden": ""
+    },
+    "ObjectName": {
+      "value": "Ru-люк",
+      "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+      "value": 1.2,
+      "source": "extension",
+      "hidden": ""
+    },
+    "Categories": {
+      "value": "GFDL|Russian pronunciation|License migration redundant|Uploaded with VicuñaUploader|Items with VRTS permission confirmed",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "Assessments": {
+      "value": "",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "ImageDescription": {
+      "value": "russian pronunciation of the word \"люк\".",
+      "source": "commons-desc-page"
+    },
+    "DateTimeOriginal": {
+      "value": "2016",
+      "source": "commons-desc-page"
+    },
+    "Credit": {
+      "value": "<a rel=\"nofollow\" class=\"external text\" href=\"http://ru.forvo.com/word/%D0%BB%D1%8E%D0%BA\">Forvo</a>",
+      "source": "commons-desc-page"
+    },
+    "Artist": {
+      "value": "<a rel=\"nofollow\" class=\"external text\" href=\"http://ru.forvo.com/user/1640max/\">1640max</a>",
+      "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+      "value": "CC BY-SA 4.0",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "UsageTerms": {
+      "value": "Creative Commons Attribution-Share Alike 4.0",
+      "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+      "value": "true",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "Attribution": {
+      "value": "<a rel=\"nofollow\" class=\"external text\" href=\"http://forvo.com/user/1640max/\">1640max</a>",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "LicenseUrl": {
+      "value": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "commons-desc-page"
+    },
+    "Copyrighted": {
+      "value": "True",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "Restrictions": {
+      "value": "",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "License": {
+      "value": "cc-by-sa-4.0",
+      "source": "commons-templates",
+      "hidden": ""
+    }
+  },
+  "credit": "<a rel=\"nofollow\" class=\"external text\" href=\"http://ru.forvo.com/user/1640max/\">1640max</a>",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "status": "candidate_source_identified_not_independent_phonetic_certification",
+  "original_sha256": "802597d4cff045dabc9c64968b68abb4e2b19bf3ff2e913564bf7da4504ff598",
+  "original_bytes": 16959,
+  "wav_sha256": "334b8ef34abe2baa8befba7383cd996c2fbc18bb2fe34189a24ff9b880d5b8c5",
+  "credit_plaintext": "1640max",
+  "pcm": {
+    "frames": 32256,
+    "sample_rate": 44100,
+    "channels": 2,
+    "duration_seconds": 0.7314285714285714,
+    "peak": 25182,
+    "full_scale_samples": 0
+  },
+  "transform": "ffmpeg decode Ogg Vorbis to PCM16; no trim, gain, resample or channel change; strip metadata; original untouched"
+}

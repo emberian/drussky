@@ -1,0 +1,95 @@
+{
+  "ordinary_spelling": "чай",
+  "binding_ids": [
+    "foundation-a18-tea"
+  ],
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B0%D0%B9.ogg",
+  "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Ru-%D1%87%D0%B0%D0%B9.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "original_file": "чай.ogg",
+  "wav_file": "чай.wav",
+  "commons_sha1": "0d41434f1f2f6eda7d28860f9058b97c78a357ec",
+  "source_metadata": {
+    "DateTime": {
+      "value": "2007-07-07 13:23:42",
+      "source": "mediawiki-metadata",
+      "hidden": ""
+    },
+    "ObjectName": {
+      "value": "Ru-чай",
+      "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+      "value": 1.2,
+      "source": "extension",
+      "hidden": ""
+    },
+    "Categories": {
+      "value": "Russian pronunciation|Tea of Russia|Files with no machine-readable author|Media lacking author information|Tea pronunciation files",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "Assessments": {
+      "value": "",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "ImageDescription": {
+      "value": "Russian pronunciation of чай",
+      "source": "commons-desc-page"
+    },
+    "Credit": {
+      "value": "Audio sample provided by <a href=\"//commons.wikimedia.org/wiki/Commons:Shtooka\" title=\"Commons:Shtooka\">The Shtooka Project</a>.",
+      "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+      "value": "CC BY 2.0 fr",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "UsageTerms": {
+      "value": "Creative Commons Attribution 2.0 fr",
+      "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+      "value": "true",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "LicenseUrl": {
+      "value": "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+      "source": "commons-desc-page"
+    },
+    "Copyrighted": {
+      "value": "True",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "Restrictions": {
+      "value": "",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "License": {
+      "value": "cc-by-2.0-fr",
+      "source": "commons-templates",
+      "hidden": ""
+    }
+  },
+  "credit": "Audio sample provided by <a href=\"//commons.wikimedia.org/wiki/Commons:Shtooka\" title=\"Commons:Shtooka\">The Shtooka Project</a>.",
+  "license": "CC BY 2.0 fr",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+  "status": "candidate_source_identified_not_independent_phonetic_certification",
+  "original_sha256": "9253478a56d1ca9a430b8df6d3f7cc53a8a94f10fc854dddaa7ac860c5a73bd1",
+  "original_bytes": 12943,
+  "wav_sha256": "83c477df815c50a9eafe15164c18d62b63136dca9a1ce813ebc1329c2fe3c30f",
+  "credit_plaintext": "Audio sample provided by The Shtooka Project.",
+  "pcm": {
+    "frames": 40320,
+    "sample_rate": 44100,
+    "channels": 1,
+    "duration_seconds": 0.9142857142857143,
+    "peak": 25312,
+    "full_scale_samples": 0
+  },
+  "transform": "ffmpeg decode Ogg Vorbis to PCM16; no trim, gain, resample or channel change; strip metadata; original untouched"
+}

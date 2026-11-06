@@ -1,0 +1,95 @@
+{
+  "ordinary_spelling": "что",
+  "binding_ids": [
+    "foundation-a19-what"
+  ],
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D1%82%D0%BE.ogg",
+  "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Ru-%D1%87%D1%82%D0%BE.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "original_file": "что.ogg",
+  "wav_file": "что.wav",
+  "commons_sha1": "625a50faa111b468a76bed7f7428eb79344e292e",
+  "source_metadata": {
+    "DateTime": {
+      "value": "2007-07-07 13:51:49",
+      "source": "mediawiki-metadata",
+      "hidden": ""
+    },
+    "ObjectName": {
+      "value": "Ru-что",
+      "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+      "value": 1.2,
+      "source": "extension",
+      "hidden": ""
+    },
+    "Categories": {
+      "value": "Russian pronunciation|Files with no machine-readable author|Media lacking author information",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "Assessments": {
+      "value": "",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "ImageDescription": {
+      "value": "Russian pronunciation of что",
+      "source": "commons-desc-page"
+    },
+    "Credit": {
+      "value": "Audio sample provided by <a href=\"//commons.wikimedia.org/wiki/Commons:Shtooka\" title=\"Commons:Shtooka\">The Shtooka Project</a>.",
+      "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+      "value": "CC BY 2.0 fr",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "UsageTerms": {
+      "value": "Creative Commons Attribution 2.0 fr",
+      "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+      "value": "true",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "LicenseUrl": {
+      "value": "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+      "source": "commons-desc-page"
+    },
+    "Copyrighted": {
+      "value": "True",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "Restrictions": {
+      "value": "",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "License": {
+      "value": "cc-by-2.0-fr",
+      "source": "commons-templates",
+      "hidden": ""
+    }
+  },
+  "credit": "Audio sample provided by <a href=\"//commons.wikimedia.org/wiki/Commons:Shtooka\" title=\"Commons:Shtooka\">The Shtooka Project</a>.",
+  "license": "CC BY 2.0 fr",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+  "status": "candidate_source_identified_not_independent_phonetic_certification",
+  "original_sha256": "45cd80ad63259a6fcfa48c124c2088bbdec005a12de13d3ec52acfc138f3e5d3",
+  "original_bytes": 13449,
+  "wav_sha256": "0a62747f491c9d806a546270afa837677cd75a678680d3f98b998d7c04efe4bc",
+  "credit_plaintext": "Audio sample provided by The Shtooka Project.",
+  "pcm": {
+    "frames": 41472,
+    "sample_rate": 44100,
+    "channels": 1,
+    "duration_seconds": 0.9404081632653061,
+    "peak": 21589,
+    "full_scale_samples": 0
+  },
+  "transform": "ffmpeg decode Ogg Vorbis to PCM16; no trim, gain, resample or channel change; strip metadata; original untouched"
+}

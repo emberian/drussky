@@ -1,0 +1,103 @@
+{
+  "ordinary_spelling": "ра",
+  "binding_ids": [
+    "foundation-a11-r-model"
+  ],
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%B0.ogg",
+  "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/46/Ru-%D1%80%D0%B0.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "original_file": "ра.ogg",
+  "wav_file": "ра.wav",
+  "commons_sha1": "cfb4d8926a9b56014e58f82a4f89e27ea3205db0",
+  "source_metadata": {
+    "DateTime": {
+      "value": "2015-05-26 10:19:38",
+      "source": "mediawiki-metadata",
+      "hidden": ""
+    },
+    "ObjectName": {
+      "value": "Ru-ра",
+      "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+      "value": 1.2,
+      "source": "extension",
+      "hidden": ""
+    },
+    "Categories": {
+      "value": "Russian pronunciation|Р слог",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "Assessments": {
+      "value": "",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "ImageDescription": {
+      "value": "the russian pronunciation — Ru-ра.ogg",
+      "source": "commons-desc-page"
+    },
+    "DateTimeOriginal": {
+      "value": "2000-01-01",
+      "source": "commons-desc-page"
+    },
+    "Credit": {
+      "value": "open free cources",
+      "source": "commons-desc-page"
+    },
+    "Artist": {
+      "value": "Pogrebnoj-Alexandroff",
+      "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+      "value": "CC BY-SA 3.0",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "UsageTerms": {
+      "value": "Creative Commons Attribution-Share Alike 3.0",
+      "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+      "value": "true",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "LicenseUrl": {
+      "value": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "commons-desc-page"
+    },
+    "Copyrighted": {
+      "value": "True",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "Restrictions": {
+      "value": "",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "License": {
+      "value": "cc-by-sa-3.0",
+      "source": "commons-templates",
+      "hidden": ""
+    }
+  },
+  "credit": "Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "status": "candidate_unreviewed",
+  "original_sha256": "eb9eb0bd75d3872c86e1fc4c6c41092b0f8dfeaf1be4e5dc4f446346a2796a4f",
+  "original_bytes": 8663,
+  "wav_sha256": "02f21d86ade0fd25303a88e018232672a60e928e6f5bb1eb571d39f5e1598361",
+  "credit_plaintext": "Pogrebnoj-Alexandroff",
+  "pcm": {
+    "frames": 19675,
+    "sample_rate": 44100,
+    "channels": 1,
+    "duration_seconds": 0.44614512471655327,
+    "peak": 13447,
+    "full_scale_samples": 0
+  },
+  "transform": "ffmpeg decode Ogg Vorbis to PCM16; no trim, gain, resample or channel change; strip metadata; original untouched"
+}

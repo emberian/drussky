@@ -1,0 +1,87 @@
+{
+  "ordinary_spelling": "мёд",
+  "binding_ids": [
+    "foundation-a16-honey"
+  ],
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D1%91%D0%B4.ogg",
+  "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Ru-%D0%BC%D1%91%D0%B4.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "original_file": "мёд.ogg",
+  "wav_file": "мёд.wav",
+  "commons_sha1": "860eb447e4758e1d746cb2ac2b3f4dc61b1483ef",
+  "source_metadata": {
+    "DateTime": {
+      "value": "2007-07-07 14:18:15",
+      "source": "mediawiki-metadata",
+      "hidden": ""
+    },
+    "ObjectName": {
+      "value": "Ru-мёд",
+      "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+      "value": 1.2,
+      "source": "extension",
+      "hidden": ""
+    },
+    "Categories": {
+      "value": "Honey|Russian pronunciation|Files with no machine-readable author|Files with no machine-readable source|Media missing infobox template",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "Assessments": {
+      "value": "",
+      "source": "commons-categories",
+      "hidden": ""
+    },
+    "LicenseShortName": {
+      "value": "CC BY 2.0 fr",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "UsageTerms": {
+      "value": "Creative Commons Attribution 2.0 fr",
+      "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+      "value": "true",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "LicenseUrl": {
+      "value": "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+      "source": "commons-desc-page"
+    },
+    "Copyrighted": {
+      "value": "True",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "Restrictions": {
+      "value": "",
+      "source": "commons-desc-page",
+      "hidden": ""
+    },
+    "License": {
+      "value": "cc-by-2.0-fr",
+      "source": "commons-templates",
+      "hidden": ""
+    }
+  },
+  "credit": "The Shtooka Project; individual speaker unreported (page wikitext)",
+  "license": "CC BY 2.0 fr",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+  "status": "candidate_source_identified_not_independent_phonetic_certification",
+  "original_sha256": "50015a410e9c49b86fdbe474c99420f6f7fb333573a3dede5eb68a5932455fb7",
+  "original_bytes": 14308,
+  "wav_sha256": "b5889b73daead02172cef9ff56bf359aee2bd9b1c56c73b98db74861f2ec062d",
+  "credit_plaintext": "The Shtooka Project; individual speaker unreported (page wikitext)",
+  "pcm": {
+    "frames": 48384,
+    "sample_rate": 44100,
+    "channels": 1,
+    "duration_seconds": 1.0971428571428572,
+    "peak": 25337,
+    "full_scale_samples": 0
+  },
+  "transform": "ffmpeg decode Ogg Vorbis to PCM16; no trim, gain, resample or channel change; strip metadata; original untouched"
+}
