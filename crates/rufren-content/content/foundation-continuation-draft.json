@@ -1,0 +1,2326 @@
+{
+  "schema": "rufren-foundation-continuation-editorial-draft-v1",
+  "revision": "continuation-2026-11-06.1",
+  "status": "AI-authored editorial draft, not embedded or playable. New audio is unprepared. No learning outcome is claimed.",
+  "entry_inventory": {
+    "graphemes": [
+      "А",
+      "М",
+      "О",
+      "К",
+      "Т",
+      "Д"
+    ],
+    "meanings": [
+      "yes",
+      "no",
+      "cat",
+      "there",
+      "cat-there"
+    ],
+    "samples": [
+      "stressed-o",
+      "a",
+      "ma",
+      "am",
+      "da",
+      "ka",
+      "ta",
+      "kot",
+      "tam"
+    ],
+    "conventions": [
+      "capital-lowercase-pairs",
+      "word-space",
+      "sentence-period"
+    ]
+  },
+  "delivery_requirements": [
+    "Do not activate until all new clips are prepared and actual words, stress and consonant context checked.",
+    "Preserve first response before showing model or correction. Repair retry keeps its own assistance flag and does not overwrite the first response.",
+    "One immediate action per card; replay/help/skip always available. A missing prerequisite opens its introduction rather than inferring knowledge.",
+    "audio_only meaning cards hide Russian script, including accessibility labels that would reveal an answer.",
+    "A reading or production task starts with its answer-bearing model hidden. Reopening restores revealed aids and unfinished response exactly; audio stays stopped.",
+    "Keyboard is an input support. A learner may know a word but need keyboard help; offer spoken response or skip without judging language recall wrong.",
+    "English free responses accept authored paraphrases; unmatched responses need review, not an automatic comprehension rejection.",
+    "These are first encounters and immediate returns. Only a later scheduler-due clean encounter is a spaced review."
+  ],
+  "new_audio_inventory": [
+    {
+      "id": "foundation-na",
+      "spoken": "на",
+      "stress_annotation": "на́",
+      "teaching_span": "whole practice syllable; Н at the beginning",
+      "prepared": false,
+      "source_requirement": "Prepared whole synthetic or human model; verify no carrier words, actual lexical stress and consonant context. Never synthesize isolated consonant names as sound models."
+    },
+    {
+      "id": "foundation-on",
+      "spoken": "он",
+      "stress_annotation": "о́н",
+      "teaching_span": "whole stressed monosyllable",
+      "prepared": false,
+      "source_requirement": "Prepared whole synthetic or human model; verify no carrier words, actual lexical stress and consonant context. Never synthesize isolated consonant names as sound models."
+    },
+    {
+      "id": "foundation-ona",
+      "spoken": "она",
+      "stress_annotation": "она́",
+      "teaching_span": "two syllables, stress on final а; first written о is unstressed",
+      "prepared": false,
+      "source_requirement": "Prepared whole synthetic or human model; verify no carrier words, actual lexical stress and consonant context. Never synthesize isolated consonant names as sound models."
+    },
+    {
+      "id": "foundation-okno",
+      "spoken": "окно",
+      "stress_annotation": "окно́",
+      "teaching_span": "two syllables, stress on final о; first written о is unstressed",
+      "prepared": false,
+      "source_requirement": "Prepared whole synthetic or human model; verify no carrier words, actual lexical stress and consonant context. Never synthesize isolated consonant names as sound models."
+    },
+    {
+      "id": "foundation-ono",
+      "spoken": "оно",
+      "stress_annotation": "оно́",
+      "teaching_span": "two syllables, stress on final о; first written о is unstressed",
+      "prepared": false,
+      "source_requirement": "Prepared whole synthetic or human model; verify no carrier words, actual lexical stress and consonant context. Never synthesize isolated consonant names as sound models."
+    },
+    {
+      "id": "foundation-i",
+      "spoken": "и",
+      "stress_annotation": "и́",
+      "teaching_span": "whole stressed vowel",
+      "prepared": false,
+      "source_requirement": "Prepared whole synthetic or human model; verify no carrier words, actual lexical stress and consonant context. Never synthesize isolated consonant names as sound models."
+    },
+    {
+      "id": "foundation-oni",
+      "spoken": "они",
+      "stress_annotation": "они́",
+      "teaching_span": "two syllables, stress on final и; first о unstressed; Н softened before И",
+      "prepared": false,
+      "source_requirement": "Prepared whole synthetic or human model; verify no carrier words, actual lexical stress and consonant context. Never synthesize isolated consonant names as sound models."
+    },
+    {
+      "id": "foundation-ya",
+      "spoken": "я",
+      "stress_annotation": "я́",
+      "teaching_span": "audio-first whole chunk, script hidden",
+      "prepared": false,
+      "source_requirement": "Prepared whole synthetic or human model; verify no carrier words, actual lexical stress and consonant context. Never synthesize isolated consonant names as sound models."
+    },
+    {
+      "id": "foundation-ty",
+      "spoken": "ты",
+      "stress_annotation": "ты́",
+      "teaching_span": "audio-first whole chunk, script hidden",
+      "prepared": false,
+      "source_requirement": "Prepared whole synthetic or human model; verify no carrier words, actual lexical stress and consonant context. Never synthesize isolated consonant names as sound models."
+    }
+  ],
+  "episodes": [
+    {
+      "id": "foundation-4-draft",
+      "title": "He and she, one letter at a time",
+      "goal": "Meet Н, hear two useful words, and notice which part of a word is stressed.",
+      "steps": [
+        {
+          "id": "c4-return-cat",
+          "revision": "1",
+          "mode": "reading_meaning_recall",
+          "instruction": "What does this written word mean? Give its English meaning before revealing the recording.",
+          "visible_script": "кот",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires": {
+            "graphemes": [
+              "К",
+              "О",
+              "Т"
+            ],
+            "meanings": [
+              "cat"
+            ],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "accepted_english_paraphrases": [
+              "cat",
+              "a cat",
+              "the cat"
+            ],
+            "unmatched": "needs_review",
+            "matching": "case/punctuation/space tolerant; aliases are examples, not an exhaustive semantic boundary"
+          },
+          "feedback": {
+            "on_reveal": "кот means cat.",
+            "specific_wrong_responses": {},
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c4-n",
+          "revision": "1",
+          "mode": "sound_shape",
+          "instruction": "Play this practice syllable. Notice its beginning, before the vowel.",
+          "visible_script": "Н н · на",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-na"
+          ],
+          "requires": {
+            "graphemes": [
+              "А"
+            ],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [
+              "Н"
+            ],
+            "meanings": [],
+            "samples": [
+              "na",
+              "n-before-a"
+            ],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "Н looks like English H, but its beginning sound here is like the beginning of English “no”. Follow the recording. The vowel А was introduced earlier. This syllable is practice, not new vocabulary.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c4-copy-na",
+          "revision": "1",
+          "mode": "supported_copy",
+          "instruction": "Build the displayed syllable, then listen as you follow its letters.",
+          "visible_script": "на",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-na"
+          ],
+          "requires": {
+            "graphemes": [
+              "Н",
+              "А"
+            ],
+            "meanings": [],
+            "samples": [
+              "na"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": {
+            "tiles": [
+              "а",
+              "н"
+            ],
+            "sequence": [
+              "н",
+              "а"
+            ]
+          },
+          "feedback": {
+            "on_reveal": "The first letter is Н and the second is А. Replay the whole syllable.",
+            "specific_wrong_responses": {
+              "first_a": "Start with Н: notice the beginning before the vowel.",
+              "last_n": "Finish with А, the vowel."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c4-he-audio",
+          "revision": "1",
+          "mode": "audio_meaning",
+          "instruction": "In this scene we are talking about one man. Play the Russian word meaning “he”.",
+          "visible_script": null,
+          "visible_context": "One man, alone, is the person being discussed. He is not the speaker or listener.",
+          "audio_ids": [
+            "foundation-on"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [
+              "he-person"
+            ],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "Listen to the whole word. Russian writing will appear next; no reading is needed here.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c4-he-script",
+          "revision": "1",
+          "mode": "guided_read",
+          "instruction": "This is the word you just heard. Listen, then follow its letters.",
+          "visible_script": "он",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-on"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "Н"
+            ],
+            "meanings": [
+              "he-person"
+            ],
+            "samples": [
+              "stressed-o",
+              "n-before-a"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [
+              "on",
+              "n-word-final"
+            ],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "О carries the word’s vowel. Н is at the end; listen to that ending in the whole recording. The capital version is Он; both shapes of each letter have been introduced.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c4-she-audio",
+          "revision": "1",
+          "mode": "audio_meaning",
+          "instruction": "Now we are talking about one woman. Play the Russian word meaning “she”.",
+          "visible_script": null,
+          "visible_context": "One woman, alone, is the person being discussed. She is not the speaker or listener.",
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [
+              "she-person"
+            ],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "This is a whole spoken word. Listen before looking at its spelling.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c4-stress",
+          "revision": "1",
+          "mode": "sound_convention",
+          "instruction": "Play the word for “she”. Notice that its final vowel is stronger.",
+          "visible_script": "она́ · ordinary spelling: она",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "Н",
+              "А"
+            ],
+            "meanings": [
+              "she-person"
+            ],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [
+              "ona",
+              "ona-unstressed-o"
+            ],
+            "conventions": [
+              "stress-acute-annotation"
+            ]
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "The small mark above а shows stress: the stronger syllable. It is a teaching mark; ordinary Russian usually writes она without it. In this word the first written о is unstressed and does not sound like the stressed о model from before. Follow the whole recording rather than substituting the earlier stressed О sound. This is a note about this example, not a rule for every О.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c4-read-she",
+          "revision": "1",
+          "mode": "reading_meaning_recall",
+          "instruction": "What does this written word mean? Give its English meaning before revealing the recording.",
+          "visible_script": "она",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "Н",
+              "А"
+            ],
+            "meanings": [
+              "she-person"
+            ],
+            "samples": [
+              "ona",
+              "ona-unstressed-o"
+            ],
+            "conventions": [
+              "stress-acute-annotation"
+            ]
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "accepted_english_paraphrases": [
+              "she"
+            ],
+            "unmatched": "needs_review",
+            "matching": "case/punctuation/space tolerant; aliases are examples, not an exhaustive semantic boundary"
+          },
+          "feedback": {
+            "on_reveal": "она means she in our one-woman scene. Listen and compare.",
+            "specific_wrong_responses": {
+              "he": "он was he. This word has the ending а: она, she."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c4-read-aloud-she",
+          "revision": "1",
+          "mode": "unmodeled_reading_attempt",
+          "instruction": "Try reading this written word aloud or quietly before hearing the model. Save your attempt, or choose “I tried quietly”, then compare.",
+          "visible_script": "она",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "Н",
+              "А"
+            ],
+            "meanings": [
+              "she-person"
+            ],
+            "samples": [
+              "ona",
+              "ona-unstressed-o"
+            ],
+            "conventions": [
+              "stress-acute-annotation"
+            ]
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "reference_hidden": "она",
+            "assessment": "Attempted decoding and learner self-comparison; a recorded attempt can later receive informed review. A transcript match is not a pronunciation score."
+          },
+          "feedback": {
+            "on_reveal": "Listen and compare. What sounds different? You can replay and try again.",
+            "specific_wrong_responses": {},
+            "unmatched": "Offer the whole model and the sample-specific stress/context reminder."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c4-read-she"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c4-he-listen",
+          "revision": "1",
+          "mode": "listening_meaning_recall",
+          "instruction": "Listen. In our people scenes, what does this word mean? Say or type its English meaning.",
+          "visible_script": null,
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-on"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [
+              "he-person",
+              "she-person"
+            ],
+            "samples": [
+              "on"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": {
+            "accepted_english_paraphrases": [
+              "he"
+            ],
+            "unmatched": "needs_review",
+            "matching": "case/punctuation/space tolerant; aliases are examples, not an exhaustive semantic boundary"
+          },
+          "feedback": {
+            "on_reveal": "This is он: he, referring to the man in our scene.",
+            "specific_wrong_responses": {
+              "she": "The word you heard is он, he. The word for she in our other scene ends in а: она."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c4-stress",
+            "c4-read-she"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c4-she-say",
+          "revision": "1",
+          "mode": "spoken_recall",
+          "instruction": "We are talking about the woman, not the speaker or listener. What Russian word means “she”? Try saying it before listening.",
+          "visible_script": null,
+          "visible_context": "One woman is being discussed.",
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [
+              "she-person"
+            ],
+            "samples": [
+              "ona",
+              "ona-unstressed-o"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "reference_hidden": "она",
+            "accepted_written_variants": [
+              "она",
+              "Она"
+            ],
+            "ignore_terminal_punctuation": true,
+            "require_stress_marks": false,
+            "spoken_evaluation": "Save audio or self-reported attempt before reference. Let learner compare; no automatic pronunciation pass from transcription."
+          },
+          "feedback": {
+            "on_reveal": "The reference is она́. Listen, then compare with your attempt.",
+            "specific_wrong_responses": {
+              "он": "он refers to the man in our first scene. For the woman, the reference is она́."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c4-he-listen"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c4-end",
+          "revision": "1",
+          "mode": "summary",
+          "instruction": "Pause, repeat, or continue.",
+          "visible_script": null,
+          "visible_context": null,
+          "audio_ids": [],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "You met Н and practiced he and she. You also noticed a stronger syllable and an unstressed О in one word.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        }
+      ]
+    },
+    {
+      "id": "foundation-5-draft",
+      "title": "A window, and one kind of “it”",
+      "goal": "Read a new noun, then refer back to it with the Russian neuter pronoun.",
+      "steps": [
+        {
+          "id": "c5-window-audio",
+          "revision": "1",
+          "mode": "audio_meaning",
+          "instruction": "Scene: a cat sits beside a window. Play the Russian word for the window.",
+          "visible_script": null,
+          "visible_context": "A window: the glass opening in the wall. We are naming the window, not the cat.",
+          "audio_ids": [
+            "foundation-okno"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [
+              "window"
+            ],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": null,
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c5-window-read",
+          "revision": "1",
+          "mode": "guided_read",
+          "instruction": "Play the whole window word. Follow its four letters.",
+          "visible_script": "окно́ · ordinary spelling: окно",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-okno"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "К",
+              "Н"
+            ],
+            "meanings": [
+              "window"
+            ],
+            "samples": [],
+            "conventions": [
+              "stress-acute-annotation"
+            ]
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [
+              "okno",
+              "okno-unstressed-o",
+              "kn-cluster"
+            ],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "The final О is stressed. The first О is unstressed, as the first О was in она́. К and Н are next to each other: listen to them together in the whole word, without inserting another vowel. Try the whole word after the recording.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c5-neuter-meaning",
+          "revision": "1",
+          "mode": "audio_meaning",
+          "instruction": "We have just named the window. Play the pronoun that can refer back to that window.",
+          "visible_script": null,
+          "visible_context": "We are referring to the Russian noun meaning window, not to a person.",
+          "audio_ids": [
+            "foundation-ono"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [
+              "window"
+            ],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [
+              "it-neuter-window"
+            ],
+            "samples": [],
+            "conventions": [
+              "neuter-noun-reference"
+            ]
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "Russian nouns have grammatical classes. The noun for window belongs to the neuter class, so its pronoun is the one in this recording. English “it” does not select the same Russian pronoun for every object. Here we are learning the window example, not a universal translation of it.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c5-neuter-script",
+          "revision": "1",
+          "mode": "guided_read",
+          "instruction": "Listen, then follow the spelling of the pronoun for our window.",
+          "visible_script": "оно́ · ordinary spelling: оно",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-ono"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "Н"
+            ],
+            "meanings": [
+              "it-neuter-window",
+              "window"
+            ],
+            "samples": [],
+            "conventions": [
+              "stress-acute-annotation",
+              "neuter-noun-reference"
+            ]
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [
+              "ono",
+              "ono-unstressed-o"
+            ],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "The final О is stressed; the first is unstressed. Listen to the whole word. We have not taught how every noun chooses a pronoun; remember the window example for now.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c5-pronoun-choice",
+          "revision": "1",
+          "mode": "context_understanding_check",
+          "instruction": "We named the window using the Russian noun you learned. Which meaning fits this pronoun in that context?",
+          "visible_script": null,
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-ono"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [
+              "he-person",
+              "she-person",
+              "it-neuter-window",
+              "window"
+            ],
+            "samples": [],
+            "conventions": [
+              "neuter-noun-reference"
+            ]
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": {
+            "correct_id": "window"
+          },
+          "feedback": {},
+          "note": "This choice practices the taught window example. Later we will add nouns from other grammatical classes.",
+          "options": [
+            {
+              "id": "woman",
+              "text": "She, the woman",
+              "feedback": "In this context we refer to the window, not the woman. The window noun is neuter: оно."
+            },
+            {
+              "id": "window",
+              "text": "It, referring back to the window noun",
+              "feedback": "Yes: in this example оно refers back to the neuter window noun."
+            },
+            {
+              "id": "every-it",
+              "text": "Any English “it”, whatever the object",
+              "feedback": "Russian does not use one pronoun for every English it. Here оно goes with the neuter noun for window."
+            }
+          ],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false,
+          "assessment_boundary": "This English context check explains the noun/pronoun link. It is solvable from the visible English scene and contributes no listening, independent decoding or spoken recall evidence."
+        },
+        {
+          "id": "c5-he-say",
+          "revision": "1",
+          "mode": "spoken_recall",
+          "instruction": "Return to the man in our earlier scene. What Russian word means “he”? Say it before revealing the model.",
+          "visible_script": null,
+          "visible_context": "One man, not the speaker or listener, is being discussed.",
+          "audio_ids": [
+            "foundation-on"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [
+              "he-person"
+            ],
+            "samples": [
+              "on"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "reference_hidden": "он",
+            "accepted_written_variants": [
+              "он",
+              "Он"
+            ],
+            "ignore_terminal_punctuation": true,
+            "require_stress_marks": false,
+            "spoken_evaluation": "Save audio or self-reported attempt before reference. Let learner compare; no automatic pronunciation pass from transcription."
+          },
+          "feedback": {
+            "on_reveal": "The reference is он.",
+            "specific_wrong_responses": {
+              "она": "она refers to the woman in our scene. For the man, use он.",
+              "оно": "оно was used for the neuter window noun. For the man in this scene, use он."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c5-window-audio",
+            "c5-window-read",
+            "c5-neuter-meaning",
+            "c5-neuter-script"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c5-keyboard",
+          "revision": "1",
+          "mode": "input_demonstration",
+          "instruction": "Try this input control: tap О, then Н. Backspace removes the last letter.",
+          "visible_script": "он",
+          "visible_context": null,
+          "audio_ids": [],
+          "requires": {
+            "graphemes": [
+              "О",
+              "Н"
+            ],
+            "meanings": [
+              "he-person"
+            ],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": [
+              "taught-letter-keyboard"
+            ]
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": {
+            "keyboard": [
+              "А",
+              "М",
+              "О",
+              "К",
+              "Т",
+              "Д",
+              "Н"
+            ],
+            "copy_target": "он",
+            "input_help": "This is a keyboard demonstration, not a recall check. Offer spoken response or skip if tapping is awkward."
+          },
+          "feedback": {
+            "on_reveal": "You can use this same keyboard for later words.",
+            "specific_wrong_responses": {
+              "latin_H": "Use the Cyrillic Н key from this keyboard; it looks like H but belongs to the Russian word."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c5-window-write",
+          "revision": "1",
+          "mode": "written_recall",
+          "instruction": "What is the Russian word for “window”? Enter it from memory. The whole taught-letter keyboard is available; the word and audio stay hidden until you answer or ask for help.",
+          "visible_script": null,
+          "visible_context": "The glass opening in the wall, not the cat beside it.",
+          "audio_ids": [
+            "foundation-okno"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "К",
+              "Н"
+            ],
+            "meanings": [
+              "window"
+            ],
+            "samples": [
+              "okno",
+              "okno-unstressed-o",
+              "kn-cluster"
+            ],
+            "conventions": [
+              "taught-letter-keyboard"
+            ]
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "reference_hidden": "окно",
+            "accepted_written_variants": [
+              "окно",
+              "Окно"
+            ],
+            "ignore_terminal_punctuation": true,
+            "require_stress_marks": false,
+            "spoken_evaluation": "Save audio or self-reported attempt before reference. Let learner compare; no automatic pronunciation pass from transcription.",
+            "keyboard": [
+              "А",
+              "М",
+              "О",
+              "К",
+              "Т",
+              "Д",
+              "Н"
+            ],
+            "alternative": "I know the sound but need keyboard help → offer spoken attempt or input demonstration; do not mark language recall wrong."
+          },
+          "feedback": {
+            "on_reveal": "The spelling is окно. Replay окно́ and follow О К Н О.",
+            "specific_wrong_responses": {
+              "оно": "оно is the pronoun used for the window noun. The noun meaning window is окно: it includes К."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c5-window-read-return",
+          "revision": "1",
+          "mode": "reading_meaning_recall",
+          "instruction": "What does this written word mean? Give its English meaning before revealing the recording.",
+          "visible_script": "окно",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-okno"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "К",
+              "Н"
+            ],
+            "meanings": [
+              "window"
+            ],
+            "samples": [
+              "okno"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "accepted_english_paraphrases": [
+              "window",
+              "a window",
+              "the window"
+            ],
+            "unmatched": "needs_review",
+            "matching": "case/punctuation/space tolerant; aliases are examples, not an exhaustive semantic boundary"
+          },
+          "feedback": {
+            "on_reveal": "окно means window.",
+            "specific_wrong_responses": {
+              "it": "The noun is window. The separate pronoun for this neuter noun was оно, without К."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c5-neuter-meaning",
+            "c5-neuter-script",
+            "c5-pronoun-choice",
+            "c5-he-say",
+            "c5-keyboard"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c5-end",
+          "revision": "1",
+          "mode": "summary",
+          "instruction": "Pause, repeat, or continue.",
+          "visible_script": null,
+          "visible_context": null,
+          "audio_ids": [],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "You practiced окно, window, and оно referring back to that neuter noun. Next comes a word for more than one person.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        }
+      ]
+    },
+    {
+      "id": "foundation-6-draft",
+      "title": "They: more than one person",
+      "goal": "Meet И and hear how Н changes in this particular word.",
+      "steps": [
+        {
+          "id": "c6-i",
+          "revision": "1",
+          "mode": "sound_shape",
+          "instruction": "Play this vowel and connect it with these letter shapes.",
+          "visible_script": "И и",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-i"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [
+              "И"
+            ],
+            "meanings": [],
+            "samples": [
+              "i"
+            ],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "The recording is the model. For many English speakers the vowel in “see” is a useful starting cue, though accents differ. И is a Russian letter; it is not the English letter N.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c6-they-audio",
+          "revision": "1",
+          "mode": "audio_meaning",
+          "instruction": "Now two people stand together: the man and the woman. Play the Russian word meaning “they”.",
+          "visible_script": null,
+          "visible_context": "Two people are being discussed together. Neither is the speaker or listener.",
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [
+              "they-people"
+            ],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": null,
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c6-ni-context",
+          "revision": "1",
+          "mode": "sound_context",
+          "instruction": "Play the whole word. Notice its final vowel and the sound just before it.",
+          "visible_script": "они́ · ordinary spelling: они",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "Н",
+              "И"
+            ],
+            "meanings": [
+              "they-people"
+            ],
+            "samples": [
+              "i",
+              "on"
+            ],
+            "conventions": [
+              "stress-acute-annotation"
+            ]
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [
+              "oni",
+              "oni-unstressed-o",
+              "n-before-i-soft"
+            ],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "The final И is stressed. The first О is unstressed, as in our earlier two-syllable samples. Before И here, Н has a softened sound: follow the recording’s ending, rather than copying the final Н of он unchanged. You can imitate the whole word. We will explore this sound difference more later; there is no contrast test here.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c6-they-read",
+          "revision": "1",
+          "mode": "reading_meaning_recall",
+          "instruction": "What does this written word mean? Give its English meaning before revealing the recording.",
+          "visible_script": "они",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "Н",
+              "И"
+            ],
+            "meanings": [
+              "they-people"
+            ],
+            "samples": [
+              "oni",
+              "oni-unstressed-o",
+              "n-before-i-soft"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "accepted_english_paraphrases": [
+              "they",
+              "the two people",
+              "those people"
+            ],
+            "unmatched": "needs_review",
+            "matching": "case/punctuation/space tolerant; aliases are examples, not an exhaustive semantic boundary"
+          },
+          "feedback": {
+            "on_reveal": "они means they, referring to the two people together in our scene.",
+            "specific_wrong_responses": {
+              "he": "он refers to the one man. This word ends in И: они, they.",
+              "she": "она refers to the one woman. This word ends in И: они, they."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c6-read-aloud-they",
+          "revision": "1",
+          "mode": "unmodeled_reading_attempt",
+          "instruction": "Try reading this written word aloud or quietly before hearing the model. Save your attempt, or choose “I tried quietly”, then compare.",
+          "visible_script": "они",
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "Н",
+              "И"
+            ],
+            "meanings": [
+              "they-people"
+            ],
+            "samples": [
+              "oni",
+              "oni-unstressed-o",
+              "n-before-i-soft"
+            ],
+            "conventions": [
+              "stress-acute-annotation"
+            ]
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "reference_hidden": "они",
+            "assessment": "Attempted decoding and learner self-comparison; a recorded attempt can later receive informed review. A transcript match is not a pronunciation score."
+          },
+          "feedback": {
+            "on_reveal": "Listen and compare. What sounds different? You can replay and try again.",
+            "specific_wrong_responses": {},
+            "unmatched": "Offer the whole model and the sample-specific stress/context reminder."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c6-they-read"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "visible",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c6-she-write",
+          "revision": "1",
+          "mode": "written_recall",
+          "instruction": "What Russian word means “she” for the woman in our scene? Enter it before revealing its spelling or recording.",
+          "visible_script": null,
+          "visible_context": "One woman, not the speaker or listener.",
+          "audio_ids": [
+            "foundation-ona"
+          ],
+          "requires": {
+            "graphemes": [
+              "О",
+              "Н",
+              "А"
+            ],
+            "meanings": [
+              "she-person"
+            ],
+            "samples": [
+              "ona",
+              "ona-unstressed-o"
+            ],
+            "conventions": [
+              "taught-letter-keyboard"
+            ]
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "reference_hidden": "она",
+            "accepted_written_variants": [
+              "она",
+              "Она"
+            ],
+            "ignore_terminal_punctuation": true,
+            "require_stress_marks": false,
+            "spoken_evaluation": "Save audio or self-reported attempt before reference. Let learner compare; no automatic pronunciation pass from transcription.",
+            "keyboard": [
+              "А",
+              "М",
+              "О",
+              "К",
+              "Т",
+              "Д",
+              "Н",
+              "И"
+            ]
+          },
+          "feedback": {
+            "on_reveal": "The spelling is она. Listen to она́.",
+            "specific_wrong_responses": {
+              "он": "он was he. For she in our scene, add the final А: она.",
+              "они": "они was they, for more than one person. Our one-woman word ends in А: она."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c5-end",
+            "c6-i",
+            "c6-they-audio",
+            "c6-ni-context"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c6-they-listen",
+          "revision": "1",
+          "mode": "listening_meaning_recall",
+          "instruction": "Listen without looking at the Russian spelling. In our people scenes, what does this word mean?",
+          "visible_script": null,
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [
+              "he-person",
+              "she-person",
+              "they-people"
+            ],
+            "samples": [
+              "oni"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": {
+            "accepted_english_paraphrases": [
+              "they",
+              "the two people",
+              "those people"
+            ],
+            "unmatched": "needs_review",
+            "matching": "case/punctuation/space tolerant; aliases are examples, not an exhaustive semantic boundary"
+          },
+          "feedback": {
+            "on_reveal": "This is они: they, the two people together.",
+            "specific_wrong_responses": {
+              "he": "The recording is они, ending in И, for the two people. The one-man word was он.",
+              "she": "The recording is они, ending in И, for the two people. The one-woman word was она."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c6-they-read",
+            "c6-she-write"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c6-window-it-say",
+          "revision": "1",
+          "mode": "spoken_recall",
+          "instruction": "We named the window using its Russian noun. Which Russian pronoun can refer back to that neuter noun? Try saying it before the model appears.",
+          "visible_script": null,
+          "visible_context": "Refer back to the window noun you learned, not to the man or woman.",
+          "audio_ids": [
+            "foundation-ono"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [
+              "it-neuter-window",
+              "window"
+            ],
+            "samples": [
+              "ono",
+              "ono-unstressed-o"
+            ],
+            "conventions": [
+              "neuter-noun-reference"
+            ]
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "reference_hidden": "оно",
+            "accepted_written_variants": [
+              "оно",
+              "Оно"
+            ],
+            "ignore_terminal_punctuation": true,
+            "require_stress_marks": false,
+            "spoken_evaluation": "Save audio or self-reported attempt before reference. Let learner compare; no automatic pronunciation pass from transcription."
+          },
+          "feedback": {
+            "on_reveal": "For the neuter noun окно, the pronoun is оно́.",
+            "specific_wrong_responses": {
+              "он": "In this taught example, окно is neuter, so use оно. он was our word for the man.",
+              "она": "In this taught example, окно is neuter, so use оно. она was our word for the woman."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c6-i",
+            "c6-they-audio",
+            "c6-ni-context",
+            "c6-they-read",
+            "c6-she-write",
+            "c6-they-listen"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c6-end",
+          "revision": "1",
+          "mode": "summary",
+          "instruction": "Pause, repeat, or continue.",
+          "visible_script": null,
+          "visible_context": null,
+          "audio_ids": [],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "You met И and practiced he, she, they, and the pronoun for our window example. Next, hear two words for taking part yourself.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        }
+      ]
+    },
+    {
+      "id": "foundation-7-draft",
+      "title": "I and you, before their letters",
+      "goal": "Hear two personally useful words now; their new letters will come later.",
+      "steps": [
+        {
+          "id": "c7-i-audio",
+          "revision": "1",
+          "mode": "audio_first_chunk",
+          "instruction": "When you refer to yourself, the speaker, this whole word means “I”. Play it.",
+          "visible_script": null,
+          "visible_context": "You point to yourself while you are the speaker.",
+          "audio_ids": [
+            "foundation-ya"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [
+              "i-speaker"
+            ],
+            "samples": [
+              "ya-whole-chunk"
+            ],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "Its new letter has not been introduced. Learn the spoken chunk and meaning now; no Russian script is required.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": true,
+          "script_reveal_policy": "Never show the reference spelling in this encounter; its new letter has not been taught. Play audio for comparison.",
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c7-you-audio",
+          "revision": "1",
+          "mode": "audio_first_chunk",
+          "instruction": "You are speaking to one close friend. Play the whole Russian word meaning “you” for that friend.",
+          "visible_script": null,
+          "visible_context": "One familiar listener, your close friend, is being addressed directly.",
+          "audio_ids": [
+            "foundation-ty"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [
+              "you-familiar-singular"
+            ],
+            "samples": [
+              "ty-whole-chunk"
+            ],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "This word addresses one familiar person. Russian has another form for more formal address or more than one listener; that will come later. Its new written letter has not been introduced, so this is listening and speaking only.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": true,
+          "script_reveal_policy": "Never show the reference spelling in this encounter; its new letter has not been taught. Play audio for comparison.",
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        },
+        {
+          "id": "c7-i-listen",
+          "revision": "1",
+          "mode": "listening_meaning_recall",
+          "instruction": "Listen. Does this word refer to the speaker or to the familiar listener? Answer in English without looking at Russian spelling.",
+          "visible_script": null,
+          "visible_context": null,
+          "audio_ids": [
+            "foundation-ya"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [
+              "i-speaker",
+              "you-familiar-singular"
+            ],
+            "samples": [
+              "ya-whole-chunk"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": {
+            "accepted_english_paraphrases": [
+              "I",
+              "me",
+              "the speaker",
+              "myself"
+            ],
+            "unmatched": "needs_review",
+            "matching": "case/punctuation/space tolerant; aliases are examples, not an exhaustive semantic boundary"
+          },
+          "feedback": {
+            "on_reveal": "This chunk means I: the person speaking.",
+            "specific_wrong_responses": {
+              "you": "This chunk means I, the speaker. The familiar-listener chunk is different; replay this one first."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c7-you-audio"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": true,
+          "script_reveal_policy": "Never show the reference spelling in this encounter; its new letter has not been taught. Play audio for comparison.",
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c7-they-say",
+          "revision": "1",
+          "mode": "spoken_recall",
+          "instruction": "Back to our two people together. What Russian word means “they”? Try saying it before listening.",
+          "visible_script": null,
+          "visible_context": "The man and woman are being discussed together, not addressed.",
+          "audio_ids": [
+            "foundation-oni"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [
+              "they-people"
+            ],
+            "samples": [
+              "oni",
+              "oni-unstressed-o",
+              "n-before-i-soft"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "reference_hidden": "они",
+            "accepted_written_variants": [
+              "они",
+              "Они"
+            ],
+            "ignore_terminal_punctuation": true,
+            "require_stress_marks": false,
+            "spoken_evaluation": "Save audio or self-reported attempt before reference. Let learner compare; no automatic pronunciation pass from transcription."
+          },
+          "feedback": {
+            "on_reveal": "The reference is они́.",
+            "specific_wrong_responses": {
+              "он": "он was one man. For both people together, the reference is они́.",
+              "она": "она was one woman. For both people together, the reference is они́."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c7-i-audio",
+            "c7-you-audio",
+            "c7-i-listen"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c7-you-say",
+          "revision": "1",
+          "mode": "spoken_recall",
+          "instruction": "You are talking directly to one close friend. What Russian word means “you” in that scene? Say it before listening.",
+          "visible_script": null,
+          "visible_context": "One familiar listener, addressed directly.",
+          "audio_ids": [
+            "foundation-ty"
+          ],
+          "requires": {
+            "graphemes": [],
+            "meanings": [
+              "you-familiar-singular"
+            ],
+            "samples": [
+              "ty-whole-chunk"
+            ],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": true,
+          "answer": {
+            "reference_hidden": "ты",
+            "accepted_written_variants": [
+              "ты",
+              "Ты"
+            ],
+            "ignore_terminal_punctuation": true,
+            "require_stress_marks": false,
+            "spoken_evaluation": "Save audio or self-reported attempt before reference. Let learner compare; no automatic pronunciation pass from transcription."
+          },
+          "feedback": {
+            "on_reveal": "For this familiar one-person scene, listen to the reference chunk and compare with your attempt.",
+            "specific_wrong_responses": {
+              "i_chunk": "The I chunk refers to the speaker. Here you address your familiar listener. Listen to the familiar-listener reference."
+            },
+            "unmatched": "Keep the response. Offer the model and a brief explanation; do not invent a diagnosis."
+          },
+          "note": null,
+          "options": [],
+          "return_after": [
+            "c7-i-listen",
+            "c7-they-say"
+          ],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": true,
+          "script_reveal_policy": "Never show the reference spelling in this encounter; its new letter has not been taught. Play audio for comparison.",
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "answer_model_hidden",
+            "answer_or_english_gloss": "hidden",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": true
+        },
+        {
+          "id": "c7-end",
+          "revision": "1",
+          "mode": "summary",
+          "instruction": "Pause, repeat, or continue.",
+          "visible_script": null,
+          "visible_context": null,
+          "audio_ids": [],
+          "requires": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "introduces": {
+            "graphemes": [],
+            "meanings": [],
+            "samples": [],
+            "conventions": []
+          },
+          "model_hidden_until_response_or_help": false,
+          "answer": null,
+          "feedback": {},
+          "note": "You can now practice I and familiar you by ear, alongside he, she, they and the window example. Next we will teach the new letters inside I and you, then use these words in small exchanges.",
+          "options": [],
+          "return_after": [],
+          "implementation_status": "draft_only_not_wired",
+          "audio_first_chunk": false,
+          "initial_visibility": {
+            "russian_script": "hidden",
+            "audio": "stimulus_available",
+            "answer_or_english_gloss": "as_authored",
+            "expected_answer_metadata": "never_render_before_submission_or_help"
+          },
+          "answer_hidden_until_response_or_help": false
+        }
+      ]
+    }
+  ],
+  "recall_map": [
+    {
+      "step_id": "c4-return-cat",
+      "target_id": "cat",
+      "target_revision": "continuation-2026-11-06.1/cat/1",
+      "skill": "reading",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "Russian script only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c4-read-she",
+      "target_id": "she-person",
+      "target_revision": "continuation-2026-11-06.1/she-person/1",
+      "skill": "reading",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "Russian script only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c4-he-listen",
+      "target_id": "he-person",
+      "target_revision": "continuation-2026-11-06.1/he-person/1",
+      "skill": "listening",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "audio only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c4-she-say",
+      "target_id": "she-person",
+      "target_revision": "continuation-2026-11-06.1/she-person/1",
+      "skill": "speaking",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "English meaning/context only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c5-he-say",
+      "target_id": "he-person",
+      "target_revision": "continuation-2026-11-06.1/he-person/1",
+      "skill": "speaking",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "English meaning/context only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c5-window-write",
+      "target_id": "window",
+      "target_revision": "continuation-2026-11-06.1/window/1",
+      "skill": "writing",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "English meaning/context only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c5-window-read-return",
+      "target_id": "window",
+      "target_revision": "continuation-2026-11-06.1/window/1",
+      "skill": "reading",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "Russian script only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c6-they-read",
+      "target_id": "they-people",
+      "target_revision": "continuation-2026-11-06.1/they-people/1",
+      "skill": "reading",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "Russian script only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c6-she-write",
+      "target_id": "she-person",
+      "target_revision": "continuation-2026-11-06.1/she-person/1",
+      "skill": "writing",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "English meaning/context only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c6-they-listen",
+      "target_id": "they-people",
+      "target_revision": "continuation-2026-11-06.1/they-people/1",
+      "skill": "listening",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "audio only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c6-window-it-say",
+      "target_id": "it-neuter-window",
+      "target_revision": "continuation-2026-11-06.1/it-neuter-window/1",
+      "skill": "speaking",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "English meaning/context only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c7-i-listen",
+      "target_id": "i-speaker",
+      "target_revision": "continuation-2026-11-06.1/i-speaker/1",
+      "skill": "listening",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "audio only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c7-they-say",
+      "target_id": "they-people",
+      "target_revision": "continuation-2026-11-06.1/they-people/1",
+      "skill": "speaking",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "English meaning/context only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c7-you-say",
+      "target_id": "you-familiar-singular",
+      "target_revision": "continuation-2026-11-06.1/you-familiar-singular/1",
+      "skill": "speaking",
+      "initial_classification": "independent_attempt_only_if_no_answer_bearing_aid_revealed",
+      "visible_stimulus": "English meaning/context only",
+      "repair": "Preserve this first response; reveal the specific explanation/model; any retry is assisted.",
+      "future_review": "Bind target revision to a stable UUID and exact Skill ReviewKey. Schedule a fresh hidden-model task only when the existing engine marks that exact key due; immediate repairs do not advance spacing."
+    },
+    {
+      "step_id": "c4-read-aloud-she",
+      "target_id": "she-person-decoding",
+      "target_revision": "continuation-2026-11-06.1/c4-read-aloud-she/1",
+      "skill": "reading",
+      "initial_classification": "attempted_decoding_self_comparison_not_automatic_success",
+      "visible_stimulus": "Russian script only; recording and English meaning hidden",
+      "repair": "Save attempt first, then reveal model. Repetition after model is assisted.",
+      "future_review": "Exact reading task revision and Skill ReviewKey; self-report remains distinct from reviewed unassisted evidence."
+    },
+    {
+      "step_id": "c6-read-aloud-they",
+      "target_id": "they-people-decoding",
+      "target_revision": "continuation-2026-11-06.1/c6-read-aloud-they/1",
+      "skill": "reading",
+      "initial_classification": "attempted_decoding_self_comparison_not_automatic_success",
+      "visible_stimulus": "Russian script only; recording and English meaning hidden",
+      "repair": "Save attempt first, then reveal model. Repetition after model is assisted.",
+      "future_review": "Exact reading task revision and Skill ReviewKey; self-report remains distinct from reviewed unassisted evidence."
+    }
+  ],
+  "future_course_notes": [
+    "Introduce Я and Ы explicitly before reading or spelling я or ты. Their audio-first meanings do not establish script knowledge.",
+    "Continue with I/you script, more useful verbs and short exchanges; this draft covers only a next slice, not the whole course.",
+    "Later demonstrate masculine/feminine noun reference with inanimate nouns before generalizing он/она beyond the taught people contexts.",
+    "Teach formal/plural вы separately. The ты sample here addresses one familiar person.",
+    "Keep softness, other vowel contexts and connected speech in later small encounters; these sample notes are not complete pronunciation rules."
+  ],
+  "recall_map_notes": {
+    "existing_engine": "crates/rufren-core/src/review.rs ReviewKey{revision UUID,skill}; future integration only, no new events written by this draft.",
+    "target_identity": "Map stable target_id + target_revision to a deterministic revision UUID during integration; preserve separate Skill keys.",
+    "recognition_and_copy": "meaning_recognition and supported_copy never seed independent production success. A hidden-model attempt can remain a self-report or needs-review; task completion alone is not recall evidence.",
+    "replay": "In listening tasks replay is the stimulus, not the answer. In spoken/written/reading retrieval, revealing the reference before a response makes that attempt assisted.",
+    "timing": "return_after lists intervening authored activities, not elapsed time. It does not claim spacing. Existing scheduler decides later due encounters."
+  },
+  "implementation_status": {
+    "embedded": false,
+    "live_actions_implemented": false,
+    "new_audio_prepared": false,
+    "blocked_on": [
+      "Editorial review of actual draft",
+      "Prepare and check all nine new audio models",
+      "Implement each new response mode and exact target/skill review binding",
+      "Rendered and offline learner walkthrough before activation"
+    ]
+  },
+  "optional_entry_routes": [
+    {
+      "id": "personal-audio-early",
+      "title": "Start with I and familiar you by ear",
+      "available_after": "foundation-1; no additional script required",
+      "steps": [
+        "c7-i-audio",
+        "c7-you-audio",
+        "c7-i-listen",
+        "c7-you-say"
+      ],
+      "route_note": "Offer alongside, or before, the third-person script path. Do not require window/neuter terminology. This short route does not include c7-they-say; its original return_after ordering is a full-path suggestion, not a prerequisite or elapsed spacing claim.",
+      "assessment": "Initial exposure and immediate attempts only; later clean scheduled retrieval remains separate."
+    }
+  ]
+}
