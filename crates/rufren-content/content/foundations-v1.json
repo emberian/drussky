@@ -1,0 +1,997 @@
+{
+  "schema_version": 1,
+  "revision": "foundation-2026-11-06.1",
+  "editorial_notice": "AI-authored prepared learning material. Synthetic audio is a model for practice, not a native-speaker assessment. Introduced does not mean mastered.",
+  "assets": [
+    {
+      "id": "foundation-a",
+      "spoken": "а"
+    },
+    {
+      "id": "foundation-ma",
+      "spoken": "ма"
+    },
+    {
+      "id": "foundation-am",
+      "spoken": "ам"
+    },
+    {
+      "id": "foundation-da",
+      "spoken": "да"
+    },
+    {
+      "id": "foundation-net",
+      "spoken": "нет"
+    },
+    {
+      "id": "foundation-o",
+      "spoken": "о"
+    },
+    {
+      "id": "foundation-ka",
+      "spoken": "ка"
+    },
+    {
+      "id": "foundation-ta",
+      "spoken": "та"
+    },
+    {
+      "id": "foundation-kot",
+      "spoken": "кот"
+    },
+    {
+      "id": "foundation-tam",
+      "spoken": "там"
+    },
+    {
+      "id": "foundation-tam-kot",
+      "spoken": "Там кот."
+    }
+  ],
+  "episodes": [
+    {
+      "id": "foundation-1",
+      "title": "Two letters, two sounds",
+      "goal": "Meet А and М, try two sound patterns, and hear yes/no.",
+      "steps": [
+        {
+          "id": "f1-a",
+          "instruction": "Russian uses a different alphabet. We will connect two letters to sounds. Play this vowel, then continue.",
+          "display": "А а",
+          "audio_ids": [
+            "foundation-a"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [
+            "А"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use the recording as your model. An English cue is the open vowel in “father” for many speakers; accents differ. Replay whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-m",
+          "instruction": "Play this syllable. Listen to its beginning, before the vowel.",
+          "display": "М м · ма",
+          "audio_ids": [
+            "foundation-ma"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "М"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "М represents the beginning sound in this recording; А represents its vowel. This is a whole syllable, not a consonant letter name. Optional: imitate the beginning, then the whole example."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-recognize-a",
+          "instruction": "Play the whole vowel. Which letter represents it?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "А а",
+                "feedback": "This vowel is represented by А. Listen again, then choose А."
+              },
+              {
+                "id": "1",
+                "text": "М м",
+                "feedback": "М represents the beginning of our other example. This whole vowel is А. Listen again."
+              }
+            ],
+            "correct_id": "0",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-recognize-m",
+          "instruction": "Play the syllable. Which letter represents its beginning, before the vowel?",
+          "display": null,
+          "audio_ids": [
+            "foundation-ma"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "А а",
+                "feedback": "А represents the vowel later in this syllable. Its beginning is represented by М. Replay the beginning."
+              },
+              {
+                "id": "1",
+                "text": "М м",
+                "feedback": "This example begins with the sound represented by М. Replay the beginning."
+              }
+            ],
+            "correct_id": "1",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-model-ma",
+          "instruction": "Listen to this practice syllable. Follow the letters from left to right.",
+          "display": "ма",
+          "audio_ids": [
+            "foundation-ma"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This is a sound pattern for practice, not new vocabulary. The recording models the whole syllable."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-build-ma",
+          "instruction": "Build the displayed practice syllable. Listen as you follow its letters.",
+          "display": "ма",
+          "audio_ids": [
+            "foundation-ma"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "а",
+              "м"
+            ],
+            "answer": [
+              "м",
+              "а"
+            ],
+            "feedback": [
+              "Position 1 uses М. Replay the whole syllable and follow its order.",
+              "Position 2 uses А. Replay the whole syllable and follow its order."
+            ],
+            "success": "You assembled it. Listen once more if you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-model-am",
+          "instruction": "Listen to this practice syllable. Follow the letters from left to right.",
+          "display": "ам",
+          "audio_ids": [
+            "foundation-am"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This is a sound pattern for practice, not new vocabulary. The recording models the whole syllable."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-build-am",
+          "instruction": "Build the displayed practice syllable. Listen as you follow its letters.",
+          "display": "ам",
+          "audio_ids": [
+            "foundation-am"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "а",
+              "м"
+            ],
+            "answer": [
+              "а",
+              "м"
+            ],
+            "feedback": [
+              "Position 1 uses А. Replay the whole syllable and follow its order.",
+              "Position 2 uses М. Replay the whole syllable and follow its order."
+            ],
+            "success": "You assembled it. Listen once more if you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-read-am",
+          "instruction": "Try reading this aloud or quietly. Then reveal the model and compare. You can skip this attempt.",
+          "display": "ам",
+          "audio_ids": [
+            "foundation-am"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "ам",
+            "note": "Listen and compare with your attempt. What sounds different? Replay as often as you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-hear-yes",
+          "instruction": "Play this whole spoken chunk. It means “yes”.",
+          "display": null,
+          "audio_ids": [
+            "foundation-da"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "yes"
+          ],
+          "audio_first_chunk": true,
+          "action": {
+            "kind": "present",
+            "note": "Its letters have not been taught. You only need to hear the chunk and its meaning; no reading is required."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-hear-no",
+          "instruction": "Play this whole spoken chunk. It means “no”.",
+          "display": null,
+          "audio_ids": [
+            "foundation-net"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "no"
+          ],
+          "audio_first_chunk": true,
+          "action": {
+            "kind": "present",
+            "note": "Its letters have not been taught. Listen for the whole chunk; no spelling is required."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-radio-yes",
+          "instruction": "Radio check: did the signal arrive? Listen to the reply. What does the reply mean?",
+          "display": null,
+          "audio_ids": [
+            "foundation-da"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "yes",
+            "no"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": true,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "Yes",
+                "feedback": "This reply means yes. Replay it, then choose Yes."
+              },
+              {
+                "id": "1",
+                "text": "No",
+                "feedback": "This reply means yes. Replay it, then choose Yes."
+              }
+            ],
+            "correct_id": "0",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-radio-no",
+          "instruction": "Radio check: did the signal arrive? Listen to the reply. What does the reply mean?",
+          "display": null,
+          "audio_ids": [
+            "foundation-net"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "yes",
+            "no"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": true,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "Yes",
+                "feedback": "This reply means no. Replay it, then choose No."
+              },
+              {
+                "id": "1",
+                "text": "No",
+                "feedback": "This reply means no. Replay it, then choose No."
+              }
+            ],
+            "correct_id": "1",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f1-end",
+          "instruction": "Pause, repeat, or continue whenever you are ready.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You practiced А, М, two sound patterns, and hearing yes/no. You can repeat or meet the next letters."
+          },
+          "revision": "1"
+        }
+      ]
+    },
+    {
+      "id": "foundation-2",
+      "title": "Read one real word",
+      "goal": "Add О, К and Т, then build and try reading the word for cat.",
+      "steps": [
+        {
+          "id": "f2-revisit",
+          "instruction": "Listen again. Which letter represents the beginning? You may replay the introduction.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ma"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "М м",
+                "feedback": "The beginning is represented by М. Replay ма and notice its beginning."
+              },
+              {
+                "id": "1",
+                "text": "А а",
+                "feedback": "А is its vowel. The beginning is represented by М. Replay ма."
+              }
+            ],
+            "correct_id": "0",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-o",
+          "instruction": "Play this vowel and notice its round sound.",
+          "display": "О о",
+          "audio_ids": [
+            "foundation-o"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [
+            "О"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "О has this sound in this stressed example. Its sound can change in other words; that is for a later encounter."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-k",
+          "instruction": "Play the syllable. Listen to its beginning, before the vowel.",
+          "display": "К к · ка",
+          "audio_ids": [
+            "foundation-ka"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "К"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "К represents the beginning of ка. The recording includes the vowel; it is not an isolated consonant."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-t",
+          "instruction": "Play the syllable. Listen to its beginning, before the vowel.",
+          "display": "Т т · та",
+          "audio_ids": [
+            "foundation-ta"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Т"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Т represents the beginning of та. Replay the whole syllable; optional imitation is welcome."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-cat",
+          "instruction": "This word means “cat”. Play the whole word and follow к → о → т.",
+          "display": "кот",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "cat"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The whole recording models the word. The three letters are already introduced."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-build-cat",
+          "instruction": "Build the word meaning “cat”. Replay the word whenever you like.",
+          "display": "cat",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "т",
+              "к",
+              "о",
+              "а"
+            ],
+            "answer": [
+              "к",
+              "о",
+              "т"
+            ],
+            "feedback": [
+              "The first letter is К. Listen to the beginning of the cat word.",
+              "The middle letter is О. Replay the vowel in the cat word.",
+              "The last letter is Т. Listen to the end of the cat word."
+            ],
+            "success": "You assembled it. Listen once more if you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-read-cat",
+          "instruction": "Try reading this aloud or quietly. Then reveal the model and compare. You can skip this attempt.",
+          "display": "кот",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "кот",
+            "note": "Listen and compare with your attempt. What sounds different? Replay as often as you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-radio-no",
+          "instruction": "Radio check: did the signal arrive? Listen to the reply. What does the reply mean?",
+          "display": null,
+          "audio_ids": [
+            "foundation-net"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "yes",
+            "no"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": true,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "Yes",
+                "feedback": "This reply means no. Replay it, then choose No."
+              },
+              {
+                "id": "1",
+                "text": "No",
+                "feedback": "This reply means no. Replay it, then choose No."
+              }
+            ],
+            "correct_id": "1",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-speak-cat",
+          "instruction": "Optional: say the word for cat, then compare with the recording. Skip freely.",
+          "display": "кот",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "speak",
+            "note": "Listen, try, and compare at your own pace. If recording is available, you can record yourself and listen back. You can also skip this."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f2-end",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You practiced А, М, О, К, Т and кот, meaning cat. Repeat the word or continue to a small message."
+          },
+          "revision": "1"
+        }
+      ]
+    },
+    {
+      "id": "foundation-3",
+      "title": "Send a small message",
+      "goal": "Add Д and describe a cat at a distant location.",
+      "steps": [
+        {
+          "id": "f3-revisit-cat",
+          "instruction": "Try reading this aloud or quietly. Then reveal the model and compare. You can skip this attempt.",
+          "display": "кот",
+          "audio_ids": [
+            "foundation-kot"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "кот",
+            "note": "Listen and compare with your attempt. What sounds different? Replay as often as you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-d",
+          "instruction": "Play the familiar “yes” chunk. Listen to its beginning before the vowel.",
+          "display": "Д д · да",
+          "audio_ids": [
+            "foundation-da"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Д"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Д represents the beginning of да. You have heard this whole chunk before; now both its written letters have been introduced."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-written-yes",
+          "instruction": "The spelling of the “yes” chunk is now available to read.",
+          "display": "да",
+          "audio_ids": [
+            "foundation-da"
+          ],
+          "requires_graphemes": [
+            "Д",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This is the same yes chunk. The no chunk remains listening practice; its letters are for later."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-there",
+          "instruction": "Scene: you stand in a doorway. The cat sits across the room under the far window. This word means “there”: that distant spot.",
+          "display": "там",
+          "audio_ids": [
+            "foundation-tam"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "there"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "In this scene, there means the spot under the far window where the cat sits."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-message",
+          "instruction": "Scene: you stand in a doorway; the cat sits across the room under the far window. Describe it: “There is a cat there.” Listen and follow the two words.",
+          "display": "Там кот.",
+          "audio_ids": [
+            "foundation-tam-kot"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "А",
+            "М",
+            "К",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "cat-there"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Там means there; кот means cat. A space separates the words. The first letter is capitalized; the period ends the message. This Russian message needs no separate word for “is”."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-build-message",
+          "instruction": "You stand in a doorway. The cat sits across the room under the far window. Assemble “There is a cat there.”",
+          "display": "Scene: you are at the doorway. The cat is across the room under the far window.",
+          "audio_ids": [
+            "foundation-tam-kot"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "А",
+            "М",
+            "К",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat",
+            "there",
+            "cat-there"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "кот.",
+              "Там"
+            ],
+            "answer": [
+              "Там",
+              "кот."
+            ],
+            "feedback": [
+              "Start with Там, meaning there: the spot under the far window. Replay the message and choose that first word.",
+              "Next use кот., meaning cat, with the period ending this message. Replay the second word."
+            ],
+            "success": "You assembled it. Listen once more if you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-build-there",
+          "instruction": "Optional: build the word meaning “there”. You can replay it whenever you like.",
+          "display": "there",
+          "audio_ids": [
+            "foundation-tam"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "А",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "there"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "м",
+              "т",
+              "а"
+            ],
+            "answer": [
+              "т",
+              "а",
+              "м"
+            ],
+            "feedback": [
+              "Begin with Т; replay the beginning.",
+              "The middle letter is А; replay the vowel.",
+              "Finish with М; listen to the end."
+            ],
+            "success": "You assembled it. Listen once more if you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-read-yes",
+          "instruction": "Try reading this aloud or quietly. Then reveal the model and compare. You can skip this attempt.",
+          "display": "да",
+          "audio_ids": [
+            "foundation-da"
+          ],
+          "requires_graphemes": [
+            "Д",
+            "А"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "yes"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "да",
+            "note": "Listen and compare with your attempt. What sounds different? Replay as often as you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-meaning-there",
+          "instruction": "Listen to the whole word. Which meaning did it have in our scene?",
+          "display": null,
+          "audio_ids": [
+            "foundation-tam"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "there",
+            "cat"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "choose",
+            "options": [
+              {
+                "id": "0",
+                "text": "There, at the indicated spot",
+                "feedback": "This is там: there, at the indicated spot. Replay it."
+              },
+              {
+                "id": "1",
+                "text": "Cat",
+                "feedback": "The cat word is different. This is там: there, at the indicated spot. Replay it."
+              }
+            ],
+            "correct_id": "0",
+            "success": "Yes. You matched this example. Replay it whenever you like."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-speak-message",
+          "instruction": "Optional: say the small message and compare with its reference.",
+          "display": "Там кот.",
+          "audio_ids": [
+            "foundation-tam-kot"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "А",
+            "М",
+            "К",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "cat-there"
+          ],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "speak",
+            "note": "Listen, try, and compare at your own pace. If recording is available, you can record yourself and listen back. You can also skip this."
+          },
+          "revision": "1"
+        },
+        {
+          "id": "f3-end",
+          "instruction": "Repeat, pause, or continue with more sound and script practice.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You practiced А, М, О, К, Т, Д and made a small message. Repeat it, take a break, or continue with more letters and short exchanges."
+          },
+          "revision": "1"
+        }
+      ]
+    }
+  ]
+}

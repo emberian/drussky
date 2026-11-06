@@ -13,7 +13,7 @@ pub(crate) fn Lessons(mut app: Signal<AppState>) -> Element {
     let selected = state.lesson().cloned();
     let mut query = use_signal(String::new);
     let needle = query().trim().to_lowercase();
-    let mut detail_open = use_signal(|| false);
+    let detail_open = state.page == Page::LessonDetail;
     let mut focus_request = use_signal(|| None::<String>);
     use_effect(move || {
         let Some(target) = focus_request() else {
@@ -36,27 +36,29 @@ pub(crate) fn Lessons(mut app: Signal<AppState>) -> Element {
     let mut preparing_sound = use_signal(|| None::<String>);
     rsx! {
         style {".lesson-link strong,.lesson-link small {{display:block}}.lesson-link small {{margin-top:4px;font-size:12px;font-weight:400;line-height:1.4;color:var(--muted)}}.lesson-index input {{width:100%;margin-bottom:16px}}"}
-        div {class:if detail_open() {"page-heading lesson-catalog-heading detail-open"}else{"page-heading lesson-catalog-heading"}, div {h1 {"Learn"}p {"Choose something you want to understand. Your AI teacher will help you read, listen, write, and speak."}}}
-        div {class:if detail_open() {"lesson-layout detail-open"}else{"lesson-layout"},
+        div {class:if detail_open {"page-heading lesson-catalog-heading detail-open"}else{"page-heading lesson-catalog-heading"}, div {h1 {"Learn"}p {"Begin with sounds and letters, then explore Russian at your own pace."}}}
+        if !detail_open {section {class:"panel foundation-entry",h2 {"Sounds & letters"}p {"A prepared introduction from zero: hear your first sounds, meet six Cyrillic letters, and build a short message. Audio is included."}button {class:"primary",onclick:move |_|act(app,|s|s.start_foundations()),if state.foundation_has_started(){"Return to sounds & letters"}else{"Start sounds & letters"}}}
+        h2 {"Explore by topic"}p {class:"quiet","These {state.content.lessons.len()} prepared topic lessons include full Russian text and English explanations. They are a reference to explore; they do not yet form a gradual course through the alphabet."}}
+        div {class:if detail_open {"lesson-layout detail-open"}else{"lesson-layout"},
             aside {class:"lesson-index",aria_label:"Lesson sequence",
                 label {r#for:"lesson-search","Find a lesson"}
                 input {id:"lesson-search",r#type:"search",placeholder:"Search topics or goals",value:query(),oninput:move |event|query.set(event.value())}
                 if !state.content.lessons.iter().any(|l|format!("{} {}",l.title,l.goal).to_lowercase().contains(&needle)) {p {"No lessons match this search."}}
                 for unit in state.content.units.iter().filter(|unit|unit.lesson_ids.iter().any(|id|state.content.lesson(id).is_some_and(|l|format!("{} {}",l.title,l.goal).to_lowercase().contains(&needle)))) {section {h2 {"{unit.title}"}p {class:"quiet","{unit.description}"}
                     for id in &unit.lesson_ids {if let Some(lesson)=state.content.lesson(id).filter(|l|format!("{} {}",l.title,l.goal).to_lowercase().contains(&needle)) {
-                        {let id=id.clone();rsx! {button {class:if state.selected_lesson.as_deref()==Some(id.as_str()) {"lesson-link selected"}else{"lesson-link"},aria_pressed:state.selected_lesson.as_deref()==Some(id.as_str()),onclick:move |_| {let result=app.write().choose_lesson(&id);match result {Ok(())=>{detail_open.set(true);focus_request.set(Some("detail".into()));},Err(error)=>app.write().notice=error,}}, strong {"{lesson.title}"} small {"{lesson.goal}"}}}}
+                        {let id=id.clone();rsx! {button {class:if state.selected_lesson.as_deref()==Some(id.as_str()) {"lesson-link selected"}else{"lesson-link"},aria_pressed:state.selected_lesson.as_deref()==Some(id.as_str()),onclick:move |_| {let result=app.write().choose_lesson(&id);match result {Ok(())=>{focus_request.set(Some("detail".into()));},Err(error)=>app.write().notice=error,}}, strong {"{lesson.title}"} small {"{lesson.goal}"}}}}
                     }}
                 }}
             }
             div {class:"lesson-body",
-                button {class:"text-button lesson-catalog-back",onclick:move |_|{detail_open.set(false);focus_request.set(Some("list".into()));},"← Back to lessons"}
+                button {class:"text-button lesson-catalog-back",onclick:move |_|{act(app, |s| s.navigate(Page::Lessons));focus_request.set(Some("list".into()));},"← Back to lessons"}
                 if let Some(lesson)=selected {
                     section {class:"panel",span {class:"tag","LESSON"}h2 {id:"lesson-detail-heading",tabindex:"-1","{lesson.title}"}p {class:"lesson-goal","{lesson.goal}"}
-                        p {class:"draft-note","AI-authored learning material · editorial draft. Hear an AI speech model, explore the pattern, and try a short response at your own pace."}
-                        div {class:"actions",button {class:"primary",onclick:move |_|act(app,|s|{s.repo.set("teacher_surface", &"lessons")?;s.navigate(Page::Teacher)}),"Learn with the AI teacher →"}
+                        p {class:"quiet","Read the conversation, notice the pattern, then try a short exercise. The lesson is ready to use."}
+                        div {class:"actions",button {class:"primary",onclick:{let id=lesson.id.clone();move |_|act(app,|s|{let lesson=s.content.lesson(&id).ok_or("Lesson unavailable")?;let exercise=s.content.lesson_practice_actions(lesson).map_err(|error|error.to_string())?.into_iter().find_map(|action|match action {LessonPracticeAction::Exercise(exercise)=>Some(exercise.id.clone()),_=>None}).ok_or("No exercise in this lesson")?;s.start_exercise(&exercise)})},"Try the first exercise →"}
                         button {class:"secondary",onclick:{let id=lesson.id.clone();move |_|act(app,|s|{s.import_lesson(&id)?;s.notice="Lesson phrases added to your library for listening, practice, and your own notes.".into();Ok(())})},"Keep these phrases"}}
                     }
-                    section {class:"panel",h2 {"{lesson.dialogue.title}"}PresentedRussian {app,language:"en",class:"quiet",text:lesson.dialogue.situation.clone(),purpose:PresentationPurpose::Instruction}
+                    section {class:"panel",h2 {"Read: {lesson.dialogue.title}"}PresentedRussian {app,language:"en",class:"quiet",text:lesson.dialogue.situation.clone(),purpose:PresentationPurpose::Instruction}
                         for turn in &lesson.dialogue.turns {if let Some(phrase)=state.content.phrase(&turn.phrase_id) {
                             div {class:"dialogue-turn",span {class:"speaker","{turn.speaker}"}div {PresentedRussian {key:"dialogue-{lesson.id}-{phrase.id}",app,class:"dialogue-russian",text:if state.preferences.show_stress {phrase.stressed.clone()}else{phrase.russian.clone()},purpose:PresentationPurpose::Instruction}p {class:"quiet","{phrase.translation}"}}}
                         }}
@@ -77,7 +79,7 @@ pub(crate) fn Lessons(mut app: Signal<AppState>) -> Element {
                             }}}
                         }
                     }
-                    section {class:"panel",h2 {"Try it in different ways"}p {class:"quiet","Try a short response with the AI teacher. Ask for a missing word, a simpler step, or one useful correction whenever you need it."}
+                    section {class:"panel",h2 {"Try it in different ways"}p {class:"quiet","Choose a prepared exercise. You can return to the conversation whenever you need it."}
                         match state.content.lesson_practice_actions(&lesson) {
                             Ok(actions) => rsx! {
                         for action in actions {match action {
@@ -105,10 +107,9 @@ pub(crate) fn Lessons(mut app: Signal<AppState>) -> Element {
                         }
 
                     }
-                    details {class:"panel",summary {"Optional conversation beyond the lesson"}p {class:"quiet","An optional moment with your friend. No lesson preparation, recordings, or correction duties."}PresentedRussian {app,language:"en",text:lesson.conversation_invitation.clone(),purpose:PresentationPurpose::Instruction}h3 {"A fresh idea for the AI teacher"}PresentedRussian {app,language:"en",text:lesson.transfer_prompt.clone(),purpose:PresentationPurpose::Instruction}}
                 } else {
-                    section {class:"panel empty",h2 {"Start with a conversation."}p {"Open the first lesson with your AI teacher. You can hear, read, and try one useful phrase before learning the whole alphabet."}
-                        button {class:"primary",onclick:move |_|act(app,|s|{let id=s.content.lessons.first().ok_or("No first lesson")?.id.clone();s.choose_lesson(&id)}),"Open the first lesson →"}}
+                    section {class:"panel empty",h2 {"Choose a topic to explore."}p {"For a guided beginning, start with Sounds & letters above."}
+                        button {class:"primary",onclick:move |_|act(app,|s|{let id=s.content.lessons.first().ok_or("No first lesson")?.id.clone();s.choose_lesson(&id)}),"Explore greetings →"}}
                 }
                 details {class:"panel alphabet",summary {"Cyrillic reference · letters, sounds, and examples"}
                     p {class:"quiet","A letter’s name and its sound in a word are different things. Listen to the AI speech model and use this panel when a letter catches your attention."}

@@ -106,7 +106,10 @@ def promote(stage_path, activation_path, web_build, accepted_relay_path=None):
         raise ValueError('Strict live artifact/TLS compatibility preflight incomplete')
     capabilities = shared.authenticated_statuses(protocol)
     status = native.read(native.TASK / 'status.json')
-    status.update(stage='waiting-for-user-apple-agreement', updated_at=native.now(),
+    # Selection does not install the candidate or invalidate an accepted Apple agreement.
+    agreement_accepted = status.get('apple_agreement_accepted') is True
+    selected_stage = 'selected-native-update-awaiting-install' if agreement_accepted else 'waiting-for-user-apple-agreement'
+    status.update(stage=selected_stage, updated_at=native.now(),
         artifact=ios['app'], frozen_manifest=str(ios_path),
         native_mac_artifact_receipt=str(mac_path), active_relay_protocol=protocol,
         device_artifact_protocol=protocol, teacher_prompt_version=ios['teacher_prompt_version'],
@@ -117,7 +120,8 @@ def promote(stage_path, activation_path, web_build, accepted_relay_path=None):
         candidate_native_mac_artifact_receipt=str(mac_path), candidate_data_protocol=protocol,
         candidate_teacher_prompt=ios['teacher_prompt_version'], candidate_dialogue_prompt=ios['dialogue_prompt_version'],
         relay_protocol_verified_at=native.now(),
-        error='Accepted same-protocol native/server pairing selected. Existing Apple PLA and native UI boundaries remain pending; no device/account action.')
+        candidate_device_installed=False,
+        error=None if agreement_accepted else 'Accepted native/server pairing selected. Apple agreement acceptance is still required before signing.')
     native.write(folder / 'live-preflight.json', preflight)
     native.write(native.TASK / f'frozen-artifact-v{protocol}.json', ios)
     native.write(native.TASK / 'frozen-artifact.json', ios)

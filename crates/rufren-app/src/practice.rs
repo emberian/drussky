@@ -232,8 +232,14 @@ fn next_review(state: &AppState, revision: uuid::Uuid, skill: Skill) -> String {
     }
     let now = crate::repository::now_ms();
     let review = SpacedReview.project(&state.library, ReviewKey { revision, skill }, now);
-    let timing = state.review_timing(PracticeBatchKey::Passage { revision, skill }, review.due_at_ms, now);
-    if timing.paused { return "Automatic returns for this task are paused. Your response is saved.".into(); }
+    let timing = state.review_timing(
+        PracticeBatchKey::Passage { revision, skill },
+        review.due_at_ms,
+        now,
+    );
+    if timing.paused {
+        return "Automatic returns for this task are paused. Your response is saved.".into();
+    }
     let Some(due) = timing.effective_due_at_ms else {
         return "Some saved timing history is still missing. Your response is saved.".into();
     };

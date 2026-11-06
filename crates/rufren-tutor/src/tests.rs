@@ -374,7 +374,7 @@ async fn provider_teacher_binds_exact_answer_and_ai_provenance() {
         ReviewStatus::AiGeneratedTeaching
     );
     assert_eq!(result.provenance.response_id, "msg_mock_001");
-    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v7");
+    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v8");
     assert_eq!(
         result.content.feedback.unwrap().verdict,
         AiVerdict::PartlyCorrect
@@ -510,7 +510,7 @@ async fn provider_teacher_revisit_keeps_historical_task_bytes_and_current_attemp
     .await;
     let result = service.teach(&request).await.unwrap();
     assert_eq!(result.request, request);
-    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v7");
+    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v8");
     let seen = mock.seen.lock().unwrap();
     // The provider receives the exact historical data, with the same server policy
     // used by CLI teaching. This checks transport/context precedence, not model truth.
@@ -634,7 +634,7 @@ async fn provider_dialogue_targeted_help_preserves_prior_line_and_scoped_instruc
     .await;
     let response = service.dialogue(&request).await.unwrap();
     assert_eq!(response.request, request);
-    assert_eq!(response.provenance.prompt_version, "rufren-ai-dialogue-v5");
+    assert_eq!(response.provenance.prompt_version, "rufren-ai-dialogue-v6");
     let seen = mock.seen.lock().unwrap();
     assert_eq!(seen[1].1["messages"][0]["content"], exact_input);
     let system = seen[1].1["system"].as_str().unwrap();
@@ -674,7 +674,7 @@ async fn provider_dialogue_reader_anchor_preserves_original_and_current_meaning_
     .await;
     let result = service.dialogue(&request).await.unwrap();
     assert_eq!(result.request, request);
-    assert_eq!(result.provenance.prompt_version, "rufren-ai-dialogue-v5");
+    assert_eq!(result.provenance.prompt_version, "rufren-ai-dialogue-v6");
     assert!(result.content.correction.is_none());
     let seen = mock.seen.lock().unwrap();
     // Source and current interpretation remain task data in both preflight and generation.
@@ -709,7 +709,7 @@ async fn provider_dialogue_exact_binding_and_budget_shared_with_teaching() {
     let request = dialogue_request();
     let result = service.dialogue(&request).await.unwrap();
     assert_eq!(result.request, request);
-    assert_eq!(result.provenance.prompt_version, "rufren-ai-dialogue-v5");
+    assert_eq!(result.provenance.prompt_version, "rufren-ai-dialogue-v6");
     assert_eq!(
         service.status().dialogue,
         Some(DialogueCapability::ThreadedV1)

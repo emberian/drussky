@@ -122,6 +122,7 @@ fn LessonCursor(
     });
     let cursor = use_signal(|| initial);
     let problem = use_signal(String::new);
+    let mut outline_open = use_signal(|| false);
     let mut focus_request = use_signal(|| None::<usize>);
     use_effect(move || {
         let Some(target) = focus_request() else {
@@ -169,17 +170,17 @@ fn LessonCursor(
             if let Err(error)=&*cursor.read() {p {class:"teacher-lesson-error",role:"alert","{error} Choose a step to continue; your saved place has not been reset."}}
             if !problem.read().is_empty() {p {class:"teacher-lesson-error",role:"alert","{problem}"}}
             div {class:"teacher-lesson-layout",
-                nav {class:"teacher-lesson-outline",aria_label:"Lesson outline",
-                    h3 {"In this lesson"}
+                button {class:"text-button teacher-outline-toggle",disabled:busy,aria_expanded:outline_open(),aria_controls:format!("lesson-outline-{document}"),onclick:move |_|outline_open.toggle(),if outline_open() {"▾ "}else{"▸ "}"Lesson steps"}
+                if outline_open() {nav {id:format!("lesson-outline-{document}"),class:"teacher-lesson-outline",aria_label:"Lesson outline",
                     ol {
                         for (index,step) in steps.iter().enumerate() {
-                            li {key:"outline-{index}",button {class:"teacher-step-row",aria_current:if position==Some(index) {"step"}else{"false"},disabled:busy,onclick:move |_|change_place(app,cursor,problem,active_speaking,capture_busy,document,count,Some(index),false,focus_request),
+                            li {key:"outline-{index}",button {class:"teacher-step-row",aria_current:if position==Some(index) {"step"}else{"false"},disabled:busy,onclick:move |_|{change_place(app,cursor,problem,active_speaking,capture_busy,document,count,Some(index),false,focus_request);if cursor.read().as_ref().ok()==Some(&index) {outline_open.set(false);}},
                                 span {aria_hidden:"true","{index+1}"}PresentedRussian {app,text:step.goal.clone(),language:"en",purpose:PresentationPurpose::Reference,strong {"{step.goal}"}}
                             }}
                         }
                     }
-                    button {class:"text-button",aria_current:if position==Some(count) {"step"}else{"false"},disabled:busy,onclick:move |_|change_place(app,cursor,problem,active_speaking,capture_busy,document,count,Some(count),false,focus_request),"Finish for now"}
-                }
+                    button {class:"text-button",aria_current:if position==Some(count) {"step"}else{"false"},disabled:busy,onclick:move |_|{change_place(app,cursor,problem,active_speaking,capture_busy,document,count,Some(count),false,focus_request);if cursor.read().as_ref().ok()==Some(&count) {outline_open.set(false);}},"Finish for now"}
+                }}
                 div {class:"teacher-lesson-content",
             if let Some(step)=current {
                 for step in [step.clone()] {

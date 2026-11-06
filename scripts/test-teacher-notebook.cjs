@@ -106,10 +106,12 @@ async function main() {
     const rect = heading.getBoundingClientRect(); return rect.top >= 0 && rect.bottom <= innerHeight;
   });
   const jump = async position => {
+    const toggle=flow.getByRole('button',{name:'Lesson steps',exact:false});
+    if(await toggle.getAttribute('aria-expanded')!=='true') await toggle.click();
     const row = flow.locator('.teacher-step-row').nth(position);
     await row.click(); await step(position); await focusedStep();
-    assert.equal(await row.getAttribute('aria-current'), 'step');
-    assert.equal(await flow.getByRole('combobox').count(), 0, 'Lesson outline remains visible without opening a select');
+    assert.equal(await toggle.getAttribute('aria-expanded'),'false','Choosing a step restores full-width learning content');
+    assert.equal(await flow.getByRole('combobox').count(), 0, 'Optional outline uses explicit rows rather than a select');
   };
   const start = async index => {
     await nav('Lessons');
@@ -139,7 +141,8 @@ async function main() {
     const panel = page.locator('details.teacher-start');
     if (await panel.getAttribute('open') === null) await panel.locator(':scope > summary').click();
     await page.getByRole('button', { name: 'Teach me this lesson', exact: false }).click(); await step(0);
-    assert.equal(await flow.locator('.teacher-step-row[aria-current="step"]').count(), 1);
+    assert.equal(await flow.getByRole('button',{name:'Lesson steps',exact:false}).getAttribute('aria-expanded'),'false','Lesson steps start collapsed');
+    assert.equal(await flow.locator('.teacher-step-row').count(),0,'Closed outline does not crowd learning content');
   };
   const openSaved = async query => {
     await openLessonTools(page);

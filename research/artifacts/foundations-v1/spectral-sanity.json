@@ -1,0 +1,42 @@
+{
+  "method": "60ms Hann window; 16384 FFT; no gain, 24k original audio; descriptive spectral comparison only",
+  "limitation": "Not formant estimates or vowel correctness. Synthetic models, short windows, harmonics and context can bias results.",
+  "results": [
+    {
+      "id": "foundation-a",
+      "selected_window_original_frames": [
+        1654,
+        3094
+      ],
+      "selection": "highest-RMS 60ms window; exploratory, not aligned phoneme",
+      "power_300_800_over_800_1500_db": -11.571900467444623,
+      "spectral_centroid_250_2500_hz": 1083.4589906908523
+    },
+    {
+      "id": "foundation-o",
+      "selected_window_original_frames": [
+        1736,
+        3176
+      ],
+      "selection": "highest-RMS 60ms window; exploratory, not aligned phoneme",
+      "power_300_800_over_800_1500_db": -10.805831297566984,
+      "spectral_centroid_250_2500_hz": 1083.1137974113308
+    },
+    {
+      "id": "foundation-kot",
+      "selected_window_original_frames": [
+        393,
+        1833
+      ],
+      "selection": "highest-RMS 60ms window; exploratory, not aligned phoneme",
+      "power_300_800_over_800_1500_db": 13.547413485804212,
+      "spectral_centroid_250_2500_hz": 549.4287858201526
+    }
+  ],
+  "a_o_waveform_comparison": {
+    "maximum_cross_correlation_lag_frames": -697,
+    "overlap_frames": 5903,
+    "pearson_correlation_on_overlap": 0.555636228395826,
+    "limitation": "Waveform resemblance flag; does not identify spoken vowel."
+  }
+}

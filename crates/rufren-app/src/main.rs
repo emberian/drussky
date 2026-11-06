@@ -11,6 +11,9 @@ mod editor_drafts;
 mod editor_drafts_view;
 mod exposure;
 mod exposure_view;
+mod foundation;
+mod foundation_audio;
+mod foundation_view;
 mod gateway;
 mod learning;
 mod lessons;
@@ -136,10 +139,10 @@ fn Shell(initial: AppState) -> Element {
             }
             main {class:"main",
                 header {class:"topbar",span {"Rufren"} span {class:"quiet","{destination}"}}
-                navigation::SecondaryNavigation {app,compact:true}
+                if state.page != Page::Foundations {navigation::SecondaryNavigation {app,compact:true}}
                 if !state.notice.is_empty() {div {class:"notice",role:"status",span {"{state.notice}"} button {aria_label:"Dismiss message",onclick:move |_|app.write().notice.clear(),"×"}}}
                 match state.page {
-                    Page::Today=>rsx!{Today {app}},Page::Lessons=>rsx!{Lessons {app}},Page::Teacher=>rsx!{Teacher {app}},Page::Library=>rsx!{LibraryView {app}},Page::Practice=>rsx!{Practice {app}},
+                    Page::Today=>rsx!{Today {app}},Page::Foundations=>rsx!{foundation_view::Foundations {app}},Page::Lessons | Page::LessonDetail=>rsx!{Lessons {app}},Page::Teacher=>rsx!{Teacher {app}},Page::Library=>rsx!{LibraryView {app}},Page::Practice=>rsx!{Practice {app}},
                     Page::Reader=>rsx!{reader_view::ReaderView {app}},Page::Studio=>rsx!{Studio {app}},Page::Progress=>rsx!{Progress {app}},Page::Settings=>rsx!{Settings {app}},
                 }
             }
@@ -156,7 +159,18 @@ fn focus_page_heading() {
 #[component]
 fn Today(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
-    let count = state.library.heads().len();
+    let count = state
+        .library
+        .heads()
+        .values()
+        .filter(|ids| {
+            !ids.iter().all(|id| {
+                state.library.events.get(id).is_some_and(|event| {
+                    is_reader_audio_reference(event) || is_foundation_reference(event)
+                })
+            })
+        })
+        .count();
     let now = repository::now_ms();
     let attempts = state
         .library
@@ -176,12 +190,16 @@ fn Today(mut app: Signal<AppState>) -> Element {
     let resume = resume || (sound_resume && state.sound_focus_is_selected().unwrap_or(false));
     let teaching = teacher_notebook_view::unfinished_lesson(&state);
     let teaching_id = teaching.as_ref().map(|entry| entry.document_id);
-    let resume_teaching = !resume && teaching_id.is_some();
+    let foundation = state.foundation_state();
+    let foundation_started = state.foundation_has_started();
+    let foundation_ready = foundation.as_ref().is_ok_and(|s| !s.finished);
+    let foundation_primary = !resume && foundation_ready;
     let teaching_title = teaching
         .as_ref()
         .map(teacher_notebook_view::title)
         .unwrap_or_default();
-    let returning = resume || sound_resume || teaching.is_some() || attempts > 0;
+    let returning =
+        resume || sound_resume || teaching.is_some() || attempts > 0 || foundation_started;
     let teacher_returns = state.teacher_revisits(now);
     let show_teacher_returns =
         !teacher_returns.entries.is_empty() || !teacher_returns.diagnostics.is_empty();
@@ -190,26 +208,27 @@ fn Today(mut app: Signal<AppState>) -> Element {
         .iter()
         .any(|entry| entry.state.attempts > 0);
     let finished = !resume
-        && !resume_teaching
+        && !foundation_primary
         && state
             .daily_plan(now)
             .ok()
             .flatten()
             .is_some_and(|plan| !plan.items.is_empty() && plan.is_finished());
     rsx! {
-        section {class:if resume_teaching {"hero hero-compact teacher-resume"}else{"hero hero-compact"},
+        section {class:"hero hero-compact",
             div {class:"eyebrow","YOUR RUSSIAN, AT YOUR PACE"}
             h1 {if returning {"Welcome back."}else{"Make yourself at home."}}
-            p {class:"lede","A conversation, a passage, a little practice. Follow what interests you."}
-            if resume_teaching {p {class:"quiet","Continue " PresentedRussian {app,text:teaching_title.clone(),language:"en",inline:true,purpose:PresentationPurpose::Instruction} ". Your place and unfinished response are kept."}}
+            p {class:"lede",if foundation_primary {"Start with a sound, meet its letters, and try a little Russian. Everything you need for these first steps is already here."}else{"A conversation, a passage, a little practice. Follow what interests you."}}
             div {class:"actions",
                 button {id:"today-primary",class:"primary",onclick:move |_|act(app,|s|{
-                    if resume {s.begin()}else if let Some(id)=teaching_id {s.navigate(Page::Teacher)?;s.select_teacher_document(id)?;s.repo.set("teacher_surface",&"lessons")}else if finished {s.navigate(Page::Progress)}else{s.begin()}
-                }),if resume {"Continue learning"}else if resume_teaching {"Continue this lesson"}else if finished {"See your progress"}else if attempts==0 {"Start learning"}else{"Continue learning"}}
+                    if resume {s.begin()}else if foundation_primary {s.start_foundations()}else if finished {s.navigate(Page::Progress)}else{s.begin()}
+                }),if resume {"Continue learning"}else if foundation_primary && foundation_started {"Continue sounds & letters"}else if foundation_primary {"Start sounds & letters"}else if finished {"See your progress"}else{"Continue learning"}}
                 button {class:"secondary",onclick:move |_|act(app,|s|navigation::open(s,navigation::Destination::Talk)),"Let’s talk"}
                 button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Reader)),"Find something to read"}
             }
         }
+        if let Err(problem)=foundation {p {role:"alert","{problem}"}}
+        if let Some(id)=teaching_id {section {class:"panel",h2 {"Your saved AI lesson"}p {PresentedRussian {app,text:teaching_title,language:"en",inline:true,purpose:PresentationPurpose::Instruction}}button {class:"secondary",onclick:move |_|act(app,|s|{s.navigate(Page::Teacher)?;s.select_teacher_document(id)?;s.repo.set("teacher_surface",&"lessons")}),"Return to this AI lesson"}}}
         details {class:"today-session",summary {"Your practice session"}daily_plan_view::DailyPractice {app}}
         ContinueSoundFocus {app}
         PausedSoundFocus {app}
@@ -266,11 +285,9 @@ fn LibraryView(mut app: Signal<AppState>) -> Element {
         .into_iter()
         .filter(|(_, revisions)| {
             !revisions.iter().all(|id| {
-                state
-                    .library
-                    .events
-                    .get(id)
-                    .is_some_and(is_reader_audio_reference)
+                state.library.events.get(id).is_some_and(|event| {
+                    is_reader_audio_reference(event) || is_foundation_reference(event)
+                })
             })
         })
         .collect();

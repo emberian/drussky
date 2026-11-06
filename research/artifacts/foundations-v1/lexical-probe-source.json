@@ -1,0 +1,74 @@
+{
+  "purpose": "independent transcript hypothesis; not phonemic certification",
+  "transform": "original PCM concatenation in manifest order, 12000 silent frames after every asset; no gain or resampling",
+  "sample_rate": 24000,
+  "sha256": "f147cd83775ffabaf67bde27e6e231e243a6cc33f58154d766e4682ae6d7cba2",
+  "spans": [
+    {
+      "asset_id": "foundation-a",
+      "original_wav_sha256": "c17754d61f88343bc3d96708d609a216b44552534aa586be2bd0341aada37f2c",
+      "start_frame": 0,
+      "end_frame": 6900
+    },
+    {
+      "asset_id": "foundation-ma",
+      "original_wav_sha256": "3d2773f74b4f6d49e23dd06a2402b91ac3f24d1edee6d420a9f88e5c4cb1e21f",
+      "start_frame": 18900,
+      "end_frame": 26700
+    },
+    {
+      "asset_id": "foundation-am",
+      "original_wav_sha256": "d6632507d155bd14ebff92c4f464728e062454f6c74aa76f7fe99a5ac1b413c5",
+      "start_frame": 38700,
+      "end_frame": 47400
+    },
+    {
+      "asset_id": "foundation-da",
+      "original_wav_sha256": "293db201951b44827d58242ea7d5de8d4752c14b0c0752233d48a41ec87cb10d",
+      "start_frame": 59400,
+      "end_frame": 67200
+    },
+    {
+      "asset_id": "foundation-net",
+      "original_wav_sha256": "0aabe91b33e467d977afc438c210e24c1b6ff59a53132d9a08cade0367ca9de1",
+      "start_frame": 79200,
+      "end_frame": 88200
+    },
+    {
+      "asset_id": "foundation-o",
+      "original_wav_sha256": "49b17c193c0a3ab71913cc644bc4199c56ebf3a10661a1aba4241ce8b8b13914",
+      "start_frame": 100200,
+      "end_frame": 106800
+    },
+    {
+      "asset_id": "foundation-ka",
+      "original_wav_sha256": "23f73d35601133db5f896dad2668f39ebea35c7c9a12e9df32a229bddc208968",
+      "start_frame": 118800,
+      "end_frame": 125700
+    },
+    {
+      "asset_id": "foundation-ta",
+      "original_wav_sha256": "e0e2da558d3141884213c4c17675a2f1deef3e631514b7493976d36afb362d9d",
+      "start_frame": 137700,
+      "end_frame": 144300
+    },
+    {
+      "asset_id": "foundation-kot",
+      "original_wav_sha256": "a4e7edd339bd2e1929e1bdae08b47bbd807954307a945ded36b8926f5bfcbeec",
+      "start_frame": 156300,
+      "end_frame": 163800
+    },
+    {
+      "asset_id": "foundation-tam",
+      "original_wav_sha256": "87e448d80bed2ed2ba13612bf0902e27b8492145df8aa7b0e59876722c4923b3",
+      "start_frame": 175800,
+      "end_frame": 183600
+    },
+    {
+      "asset_id": "foundation-tam-kot",
+      "original_wav_sha256": "e7d7e5e3253fd0e76a25243da4ff78d2487fa60845198dd34050d79d4f47ae62",
+      "start_frame": 195600,
+      "end_frame": 212700
+    }
+  ]
+}

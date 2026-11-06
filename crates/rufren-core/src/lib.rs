@@ -492,6 +492,7 @@ pub fn is_reserved_practice_reference(event: &Event) -> bool {
     is_teacher_generated_reference(event)
         || is_sound_focus_reference(event)
         || is_reader_audio_reference(event)
+        || is_foundation_reference(event)
 }
 
 pub trait TeachingPolicy {
@@ -539,4 +540,9 @@ pub fn starter(device: Uuid, now: i64) -> Event {
         }),
     )
     .expect("valid built-in passage")
+}
+
+/// Authored foundation targets are source anchors for task evidence, not Notebook phrases.
+pub fn is_foundation_reference(event: &Event) -> bool {
+    matches!(&event.fact,Fact::PassageRevised(r) if r.passage.source.starts_with("rufren-foundation-v1:"))
 }

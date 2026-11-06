@@ -17,10 +17,10 @@ async (page)=>{
  const readerB={reader_selection:'reader-b',reader_import_draft:{title:'Import B',original:'Текст Б.'},'reader_state:shared':{chunk_id:'chunk-b',response:'Thought B',translation_open:false}};
  const readerD={reader_selection:'reader-d',reader_import_draft:{title:'Import D',original:'Текст Д.'},'reader_state:shared':{chunk_id:'chunk-d',response:'Thought D',translation_open:true}};
  const checkReader=async(target,expected)=>{for(const key of Object.keys(readerA))if(JSON.stringify(await get(target,key))!==JSON.stringify(expected?.[key]??null))throw Error('Reader place, help or unfinished text crossed workspace boundaries: '+key);};
- const dailyA={'review_start_pending:shared':{session:'pending-a',reason:'Choice A'},daily_plan_active:{id:'synthetic-plan-a',items:['reading-a']},daily_plan_settings:{max_items:2,include_new:true}};
- const dailyB={'review_start_pending:shared':{session:'pending-b',reason:'Choice B'},daily_plan_active:{id:'synthetic-plan-b',items:['listening-b','writing-b']},daily_plan_settings:{max_items:4,include_new:false}};
- const dailyD={'review_start_pending:shared':{session:'pending-d',reason:'Choice D'},daily_plan_active:{id:'synthetic-plan-duplicate',items:['speaking-duplicate']},daily_plan_settings:{max_items:1,include_new:true}};
- const checkDaily=async(target,expected)=>{for(const key of ['daily_plan_active','daily_plan_settings','review_start_pending:shared'])if(JSON.stringify(await get(target,key))!==JSON.stringify(expected?.[key]??null))throw Error('Daily plan or settings crossed workspace boundaries: '+key);};
+ const dailyA={foundation_journey_v1:{session:'foundation-a',step:2,draft:['A']},'review_start_pending:shared':{session:'pending-a',reason:'Choice A'},daily_plan_active:{id:'synthetic-plan-a',items:['reading-a']},daily_plan_settings:{max_items:2,include_new:true}};
+ const dailyB={foundation_journey_v1:{session:'foundation-b',step:2,draft:['B']},'review_start_pending:shared':{session:'pending-b',reason:'Choice B'},daily_plan_active:{id:'synthetic-plan-b',items:['listening-b','writing-b']},daily_plan_settings:{max_items:4,include_new:false}};
+ const dailyD={foundation_journey_v1:{session:'foundation-d',step:2,draft:['D']},'review_start_pending:shared':{session:'pending-d',reason:'Choice D'},daily_plan_active:{id:'synthetic-plan-duplicate',items:['speaking-duplicate']},daily_plan_settings:{max_items:1,include_new:true}};
+ const checkDaily=async(target,expected)=>{for(const key of ['foundation_journey_v1','daily_plan_active','daily_plan_settings','review_start_pending:shared'])if(JSON.stringify(await get(target,key))!==JSON.stringify(expected?.[key]??null))throw Error('Daily plan or settings crossed workspace boundaries: '+key);};
  try{
   const migration=await page.context().browser().newContext();
   try{

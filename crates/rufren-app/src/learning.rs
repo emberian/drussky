@@ -119,7 +119,7 @@ impl AppState {
         }
         self.repo.set("selected_lesson", &id)?;
         self.selected_lesson = Some(id.into());
-        self.navigate(Page::Lessons)
+        self.navigate(Page::LessonDetail)
     }
     pub(crate) fn lesson(&self) -> Option<&Lesson> {
         self.selected_lesson

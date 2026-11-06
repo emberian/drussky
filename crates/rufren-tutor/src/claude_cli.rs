@@ -877,7 +877,7 @@ print({output:?})
         assert_eq!(response.provenance.response_id, "cli-generated-result-001");
         assert_eq!(
             response.provenance.prompt_version,
-            "rufren-ai-teacher-v7+cli-structured-v1"
+            "rufren-ai-teacher-v8+cli-structured-v1"
         );
         assert_eq!(
             response.provenance.review_status,
@@ -952,7 +952,7 @@ print({output:?})
         assert_eq!(response.request, request);
         assert_eq!(
             response.provenance.prompt_version,
-            "rufren-ai-dialogue-v5+cli-structured-v1"
+            "rufren-ai-dialogue-v6+cli-structured-v1"
         );
         assert_eq!(
             response.usage.accounting,

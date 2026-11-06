@@ -5,6 +5,9 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
 use unicode_normalization::UnicodeNormalization;
 
+pub mod foundations;
+pub use foundations::{foundations, FoundationAction, FoundationAsset, FoundationChoice, FoundationEpisode, FoundationPack, FoundationStep, FOUNDATION_JSON};
+
 pub mod sound_contrast;
 pub use sound_contrast::{
     LessonPracticeAction, SoundContrastDefinition, SoundMemberDefinition, SoundTaskDefinition,

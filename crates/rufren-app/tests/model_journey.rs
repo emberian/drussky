@@ -797,3 +797,42 @@ fn model_journey_saved_choice_question_survives_next_task_and_sync_without_local
         chosen_id
     );
 }
+
+#[test]
+fn start_learning_opens_embedded_lesson_without_teacher_work() {
+    let mut state = memory_app();
+    state.endpoint = "http://127.0.0.1:1".into();
+    state.begin().unwrap();
+    assert!(state.page == model::Page::LessonDetail);
+    let lesson = state.lesson().unwrap();
+    assert_eq!(lesson.id, state.content.lessons[0].id);
+    let exercise = state
+        .content
+        .lesson_practice_actions(lesson)
+        .unwrap()
+        .into_iter()
+        .find_map(|action| match action {
+            rufren_content::LessonPracticeAction::Exercise(exercise) => Some(exercise.id.clone()),
+            _ => None,
+        })
+        .unwrap();
+    assert!(!state.teacher_busy);
+    state.start_exercise(&exercise).unwrap();
+    assert!(state.page == model::Page::Practice);
+    let session = state.session.as_ref().unwrap().id;
+    state.navigate(model::Page::Today).unwrap();
+    state.begin().unwrap();
+    assert!(state.page == model::Page::Practice);
+    assert_eq!(state.session.as_ref().unwrap().id, session);
+}
+
+#[test]
+fn start_learning_keeps_selected_prepared_lesson() {
+    let mut state = memory_app();
+    let id = state.content.lessons[3].id.clone();
+    state.choose_lesson(&id).unwrap();
+    let mut restored = AppState::from_repository(state.repo.clone()).unwrap();
+    restored.begin().unwrap();
+    assert!(restored.page == model::Page::LessonDetail);
+    assert_eq!(restored.lesson().unwrap().id, id);
+}

@@ -1,0 +1,701 @@
+{
+  "format": "rufren-foundation-audio-v1",
+  "created_at": "2026-11-06T17:54:16.856104+00:00",
+  "status": "prepared synthetic reference; lexical/phonemic naturalness not independently certified",
+  "assets": [
+    {
+      "id": "foundation-a",
+      "file": "foundation-a.wav",
+      "spoken": "а",
+      "display_text": "а",
+      "teaching_span": "whole spoken target",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 13844,
+      "source_response": {
+        "request_id": "foundation-a",
+        "revision_id": "foundation-v1",
+        "source_text": "а",
+        "sha256": "c17754d61f88343bc3d96708d609a216b44552534aa586be2bd0341aada37f2c",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 6900,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "823c4eb3e895adc925a755d89cea1c6c46954c999d23604e0091788b75496159",
+            "synthesis_text": "а",
+            "synthesis_text_sha256": "823c4eb3e895adc925a755d89cea1c6c46954c999d23604e0091788b75496159",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-a",
+        "duration_seconds": 0.2875,
+        "generation_seconds": 0.849967,
+        "peak_amplitude": 0.6493264436721802,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 21276,
+        "rms_dbfs": -19.11,
+        "full_scale_samples": 0,
+        "frames": 6900,
+        "all_frames_decoded": true
+      }
+    },
+    {
+      "id": "foundation-ma",
+      "file": "foundation-ma.wav",
+      "spoken": "ма",
+      "display_text": "ма",
+      "teaching_span": "initial м in ма; whole syllable also used",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 15644,
+      "source_response": {
+        "request_id": "foundation-ma",
+        "revision_id": "foundation-v1",
+        "source_text": "ма",
+        "sha256": "3d2773f74b4f6d49e23dd06a2402b91ac3f24d1edee6d420a9f88e5c4cb1e21f",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 7800,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "33cdb77bd411e09b51a09a3adea882dfc40b609e83148ad41dcca335db41ce21",
+            "synthesis_text": "ма",
+            "synthesis_text_sha256": "33cdb77bd411e09b51a09a3adea882dfc40b609e83148ad41dcca335db41ce21",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-ma",
+        "duration_seconds": 0.325,
+        "generation_seconds": 0.448167,
+        "peak_amplitude": 0.45590925216674805,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 14939,
+        "rms_dbfs": -21.94,
+        "full_scale_samples": 0,
+        "frames": 7800,
+        "all_frames_decoded": true
+      }
+    },
+    {
+      "id": "foundation-am",
+      "file": "foundation-am.wav",
+      "spoken": "ам",
+      "display_text": "ам",
+      "teaching_span": "whole spoken target",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 17444,
+      "source_response": {
+        "request_id": "foundation-am",
+        "revision_id": "foundation-v1",
+        "source_text": "ам",
+        "sha256": "d6632507d155bd14ebff92c4f464728e062454f6c74aa76f7fe99a5ac1b413c5",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 8700,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "7fa4a8d975c298fdcb82dc66a3847d07ffd53f7876860fc30549c74541f0e73d",
+            "synthesis_text": "ам",
+            "synthesis_text_sha256": "7fa4a8d975c298fdcb82dc66a3847d07ffd53f7876860fc30549c74541f0e73d",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-am",
+        "duration_seconds": 0.3625,
+        "generation_seconds": 0.827579,
+        "peak_amplitude": 0.6429651975631714,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 21068,
+        "rms_dbfs": -20.94,
+        "full_scale_samples": 0,
+        "frames": 8700,
+        "all_frames_decoded": true
+      }
+    },
+    {
+      "id": "foundation-da",
+      "file": "foundation-da.wav",
+      "spoken": "да",
+      "display_text": "да",
+      "teaching_span": "whole yes chunk; initial д introduced in episode 3",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 15644,
+      "source_response": {
+        "request_id": "foundation-da",
+        "revision_id": "foundation-v1",
+        "source_text": "да",
+        "sha256": "293db201951b44827d58242ea7d5de8d4752c14b0c0752233d48a41ec87cb10d",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 7800,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "cdc5ed90cb4b9a7540b24d1c45c23c851930c98b07b6885667114c9f95fb0a12",
+            "synthesis_text": "да",
+            "synthesis_text_sha256": "cdc5ed90cb4b9a7540b24d1c45c23c851930c98b07b6885667114c9f95fb0a12",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-da",
+        "duration_seconds": 0.325,
+        "generation_seconds": 0.502526,
+        "peak_amplitude": 0.5562607049942017,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 18227,
+        "rms_dbfs": -20.94,
+        "full_scale_samples": 0,
+        "frames": 7800,
+        "all_frames_decoded": true
+      }
+    },
+    {
+      "id": "foundation-net",
+      "file": "foundation-net.wav",
+      "spoken": "нет",
+      "display_text": "нет",
+      "teaching_span": "whole spoken target",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 18044,
+      "source_response": {
+        "request_id": "foundation-net",
+        "revision_id": "foundation-v1",
+        "source_text": "нет",
+        "sha256": "0aabe91b33e467d977afc438c210e24c1b6ff59a53132d9a08cade0367ca9de1",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 9000,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "dc9337ff5b423e6828cd8f164d022d3a02b4efeaf7a0d2f60eaa032b7d9dcd3f",
+            "synthesis_text": "нет",
+            "synthesis_text_sha256": "dc9337ff5b423e6828cd8f164d022d3a02b4efeaf7a0d2f60eaa032b7d9dcd3f",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-net",
+        "duration_seconds": 0.375,
+        "generation_seconds": 0.511444,
+        "peak_amplitude": 0.34338828921318054,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 11252,
+        "rms_dbfs": -27.38,
+        "full_scale_samples": 0,
+        "frames": 9000,
+        "all_frames_decoded": true
+      }
+    },
+    {
+      "id": "foundation-o",
+      "file": "foundation-o.wav",
+      "spoken": "о",
+      "display_text": "о",
+      "teaching_span": "whole spoken target",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 13244,
+      "source_response": {
+        "request_id": "foundation-o",
+        "revision_id": "foundation-v1",
+        "source_text": "о",
+        "sha256": "49b17c193c0a3ab71913cc644bc4199c56ebf3a10661a1aba4241ce8b8b13914",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 6600,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "50338c005c41fb4e6e6b74c9f7f8d0f56ae08517102498639f8a610b06cd9859",
+            "synthesis_text": "о",
+            "synthesis_text_sha256": "50338c005c41fb4e6e6b74c9f7f8d0f56ae08517102498639f8a610b06cd9859",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-o",
+        "duration_seconds": 0.275,
+        "generation_seconds": 0.389635,
+        "peak_amplitude": 0.4936140179634094,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 16174,
+        "rms_dbfs": -20.13,
+        "full_scale_samples": 0,
+        "frames": 6600,
+        "all_frames_decoded": true
+      }
+    },
+    {
+      "id": "foundation-ka",
+      "file": "foundation-ka.wav",
+      "spoken": "ка",
+      "display_text": "ка",
+      "teaching_span": "initial к in ка",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 13844,
+      "source_response": {
+        "request_id": "foundation-ka",
+        "revision_id": "foundation-v1",
+        "source_text": "ка",
+        "sha256": "23f73d35601133db5f896dad2668f39ebea35c7c9a12e9df32a229bddc208968",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 6900,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "17da69e30fdac48644fb89a63706dbb008e430b62e2c36cc3960ea61811b1da5",
+            "synthesis_text": "ка",
+            "synthesis_text_sha256": "17da69e30fdac48644fb89a63706dbb008e430b62e2c36cc3960ea61811b1da5",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-ka",
+        "duration_seconds": 0.2875,
+        "generation_seconds": 0.50896,
+        "peak_amplitude": 0.5011491775512695,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 16421,
+        "rms_dbfs": -20.36,
+        "full_scale_samples": 0,
+        "frames": 6900,
+        "all_frames_decoded": true
+      }
+    },
+    {
+      "id": "foundation-ta",
+      "file": "foundation-ta.wav",
+      "spoken": "та",
+      "display_text": "та",
+      "teaching_span": "initial т in та",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 13244,
+      "source_response": {
+        "request_id": "foundation-ta",
+        "revision_id": "foundation-v1",
+        "source_text": "та",
+        "sha256": "e0e2da558d3141884213c4c17675a2f1deef3e631514b7493976d36afb362d9d",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 6600,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "9a5e1719011675a2d71f79747a9a618f415bdccc02234f2007c3870b0338c403",
+            "synthesis_text": "та",
+            "synthesis_text_sha256": "9a5e1719011675a2d71f79747a9a618f415bdccc02234f2007c3870b0338c403",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-ta",
+        "duration_seconds": 0.275,
+        "generation_seconds": 0.4256,
+        "peak_amplitude": 0.46791452169418335,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 15332,
+        "rms_dbfs": -19.84,
+        "full_scale_samples": 0,
+        "frames": 6600,
+        "all_frames_decoded": true
+      }
+    },
+    {
+      "id": "foundation-kot",
+      "file": "foundation-kot.wav",
+      "spoken": "кот",
+      "display_text": "кот",
+      "teaching_span": "whole spoken target",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 15044,
+      "source_response": {
+        "request_id": "foundation-kot",
+        "revision_id": "foundation-v1",
+        "source_text": "кот",
+        "sha256": "a4e7edd339bd2e1929e1bdae08b47bbd807954307a945ded36b8926f5bfcbeec",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 7500,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "77095ebdd157b8410550b35798f39c5c0c6085580f5f35777865fd4179aa2599",
+            "synthesis_text": "кот",
+            "synthesis_text_sha256": "77095ebdd157b8410550b35798f39c5c0c6085580f5f35777865fd4179aa2599",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-kot",
+        "duration_seconds": 0.3125,
+        "generation_seconds": 0.438546,
+        "peak_amplitude": 0.42442750930786133,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 13907,
+        "rms_dbfs": -26.54,
+        "full_scale_samples": 0,
+        "frames": 7500,
+        "all_frames_decoded": true
+      }
+    },
+    {
+      "id": "foundation-tam",
+      "file": "foundation-tam.wav",
+      "spoken": "там",
+      "display_text": "там",
+      "teaching_span": "whole spoken target",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 15644,
+      "source_response": {
+        "request_id": "foundation-tam",
+        "revision_id": "foundation-v1",
+        "source_text": "там",
+        "sha256": "87e448d80bed2ed2ba13612bf0902e27b8492145df8aa7b0e59876722c4923b3",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 7800,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "5fc41460262c5978a9d2ef8a7d2b2f1207f0ac54d7ac527b7e0d8123bc9b7e42",
+            "synthesis_text": "там",
+            "synthesis_text_sha256": "5fc41460262c5978a9d2ef8a7d2b2f1207f0ac54d7ac527b7e0d8123bc9b7e42",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-tam",
+        "duration_seconds": 0.325,
+        "generation_seconds": 0.479873,
+        "peak_amplitude": 0.8843202590942383,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 28977,
+        "rms_dbfs": -20.47,
+        "full_scale_samples": 0,
+        "frames": 7800,
+        "all_frames_decoded": true
+      }
+    },
+    {
+      "id": "foundation-tam-kot",
+      "file": "foundation-tam-kot.wav",
+      "spoken": "Там кот.",
+      "display_text": "Там кот.",
+      "teaching_span": "whole spoken target",
+      "encoding": "RIFF/WAVE PCM16 little-endian mono",
+      "byte_length": 34244,
+      "source_response": {
+        "request_id": "foundation-tam-kot",
+        "revision_id": "foundation-v1",
+        "source_text": "Там кот.",
+        "sha256": "e7d7e5e3253fd0e76a25243da4ff78d2487fa60845198dd34050d79d4f47ae62",
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 17100,
+        "provenance": {
+          "kind": "ai_generated_speech",
+          "provider": "local_silero_tts",
+          "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+          "voice": "xenia",
+          "prompt_version": "rufren-silero-russian-stress-v1",
+          "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+          "synthesis_input": {
+            "source_text_sha256": "2c353daaeb41ede9e573c7ffa94f85ffcbf6cabc0a5e8706f02675d0f94adb04",
+            "synthesis_text": "Там кот.",
+            "synthesis_text_sha256": "2c353daaeb41ede9e573c7ffa94f85ffcbf6cabc0a5e8706f02675d0f94adb04",
+            "transform": "verbatim",
+            "context": "ordinary_text"
+          }
+        },
+        "usage": {
+          "input_tokens": null,
+          "output_tokens": null,
+          "estimated_micro_usd": 0,
+          "reserved_micro_usd": 0
+        }
+      },
+      "measurements": {
+        "request_id": "foundation-tam-kot",
+        "duration_seconds": 0.7125,
+        "generation_seconds": 0.400678,
+        "peak_amplitude": 0.40102240443229675,
+        "clipped_samples": 0,
+        "clipped_fraction": 0.0,
+        "full_scale_fraction": 0.0
+      },
+      "runtime": {
+        "runtime": "torch==2.15.0",
+        "device": "cpu",
+        "threads": 2,
+        "model_license": "CC-BY-NC-SA-4.0",
+        "model_source_revision": "e382298387332f2bf461fe6eadfde99104611b0c"
+      },
+      "transforms": [],
+      "independent_pcm_check": {
+        "peak_pcm16": 13140,
+        "rms_dbfs": -27.17,
+        "full_scale_samples": 0,
+        "frames": 17100,
+        "all_frames_decoded": true
+      }
+    }
+  ],
+  "preparation_script_sha256": "171eb6f37802490a087a5285a622c610bbc6807110b014693c4b0c8656af44be"
+}

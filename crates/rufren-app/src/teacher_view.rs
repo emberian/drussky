@@ -113,23 +113,25 @@ fn TeacherLessons(mut app: Signal<AppState>) -> Element {
                 })
                 .map(|entry| entry.document_id)
         });
-    let supports_guided = status.as_ref().is_some_and(|status| {
+    // Only a successful capability reply can select the older lesson contract.
+    // A failed check must not silently remove the requested guided sequence.
+    let legacy_lessons = status.as_ref().is_some_and(|status| {
         status
             .as_ref()
-            .is_ok_and(|status| status.lesson_flow == Some(LessonFlowCapability::GuidedV1))
+            .is_ok_and(|status| status.lesson_flow != Some(LessonFlowCapability::GuidedV1))
     });
+    let needs_connection = state.endpoint.trim().is_empty() || state.token.trim().is_empty();
+    let checking_connection = !needs_connection && status.is_none();
     let lesson = state.lesson().or_else(|| state.content.lessons.first());
-    let starting_selected = answer.as_ref().is_none_or(|answer| match &answer.request {
-        TeacherRequest::TeachLesson(request) => {
-            lesson.is_some_and(|lesson| lesson.id != request.lesson_id)
-        }
-        _ => false,
-    });
-    let recent_practice = state.lesson_practice_summary().ok();
-    let prepared_context = answer.as_ref().and_then(|answer| match &answer.request {
-        TeacherRequest::TeachLesson(request) => request.learner_context.clone(),
-        _ => None,
-    });
+    let generating_lesson = state.teacher_busy
+        && matches!(
+            state
+                .repo
+                .get::<TeacherRequest>("teacher_request")
+                .ok()
+                .flatten(),
+            Some(TeacherRequest::TeachLesson(_))
+        );
     let free_answer = state
         .repo
         .get::<TutorResponse>("tutor_response")
@@ -139,26 +141,25 @@ fn TeacherLessons(mut app: Signal<AppState>) -> Element {
     let history_key = response_key.clone();
     let management = rsx! {
         div {class:"teacher-workspace-actions actions",
-            button {class:"secondary",disabled:state.teacher_busy || state.speech_busy || capture_busy(),onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Browse lessons"}
+            button {class:"primary",disabled:state.speech_busy || capture_busy(),onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Browse prepared lessons"}
             TeacherNotebook {app,disabled:state.teacher_busy || state.speech_busy || capture_busy(),on_selected:move |_|history_for.set(None)}
         }
-        details {class:"teacher-start",open:starting_selected,
-            summary {if answer.is_some(){"Start a new teaching session"}else{"Begin with your teacher"}}
+        details {class:"teacher-start",open:generating_lesson,
+            summary {"Generate a new AI lesson"}
+            p {"Optional: ask the AI to create a fresh lesson on this topic. The prepared curriculum is ready to use without generating a lesson."}
             if let Some(lesson)=lesson {h2 {"{lesson.title}"}p {class:"lesson-goal","{lesson.goal}"}}
-            div {class:"actions",button {class:"primary",disabled:state.teacher_busy || state.speech_busy || capture_busy(),onclick:move |_|{let mut request=app.read().lesson_teaching_request();if !supports_guided {if let Ok(TeacherRequest::TeachLesson(lesson))=&mut request {lesson.lesson_flow=None;}}send_teacher(app,request);},if state.teacher_busy {"Your teacher is thinking…"}else{"Teach me this lesson →"}}}
-            details {class:"teacher-connection",
-                summary {"Connection and lesson context"}
-                if let Some(recent)=recent_practice {
-                    p {class:"quiet","Includes {recent.observations.len()} recent saved responses."}
-                    PresentedRussian {app,text:recent.provider_context(),language:"en",purpose:PresentationPurpose::Instruction,pre {class:"teacher-context-text","{recent.provider_context()}"}}
+            if needs_connection {
+                p {"Connect your AI teacher to generate a new lesson."}
+                button {class:"primary",onclick:move |_|act(app,|s|s.navigate(Page::Settings)),"Connect your teacher →"}
+            } else {
+                div {class:"actions",button {class:"secondary",disabled:state.teacher_busy || state.speech_busy || capture_busy() || checking_connection,onclick:move |_|{let mut request=app.read().lesson_teaching_request();if legacy_lessons {if let Ok(TeacherRequest::TeachLesson(lesson))=&mut request {lesson.lesson_flow=None;}}send_teacher(app,request);},if generating_lesson {"Generating your AI lesson…"}else if state.teacher_busy {"Your teacher is working…"}else if checking_connection {"Connecting to your teacher…"}else{"Generate a new AI lesson →"}}}
+                match &status {
+                    Some(Err(problem))=>rsx! {p {class:"quiet",role:"status","{problem}"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Settings)),"Teacher connection →"}},
+                    Some(Ok(status)) if !status.enabled=>rsx! {p {class:"quiet",role:"status","{status.message}"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Settings)),"Teacher connection →"}},
+                    _=>rsx! {},
                 }
-                match status {
-                    Some(Ok(status))=>rsx! {p {class:"quiet",role:"status",if status.enabled {"Ready" if let Some(model)=&status.model {" · {model}"}}else{"{status.message}"}}},
-                    Some(Err(problem))=>rsx! {p {class:"quiet",role:"status","{problem}"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Settings)),"Open teacher connection"}},
-                    None=>rsx! {p {class:"quiet",role:"status","Checking your teacher connection…"}},
-                }
-                button {class:"text-button",disabled:state.teacher_busy,onclick:move |_|availability.restart(),"Check connection again"}
             }
+            button {class:"text-button",disabled:state.teacher_busy || needs_connection,onclick:move |_|availability.restart(),"Check connection again"}
         }
         if !attempts.is_empty() {
             div {class:"actions teacher-history-toggle",
@@ -171,7 +172,7 @@ fn TeacherLessons(mut app: Signal<AppState>) -> Element {
     rsx! {
         style {"{TEACHER_STYLE}"}
         style {".teacher-compact-heading {{margin-bottom:12px}}.teacher-compact-heading h1 {{font-size:1.75rem;margin:0}}.teacher-context-action {{margin:8px 0}}"}
-        div {class:"page-heading teacher-compact-heading",h1 {"Learn with your teacher"}}
+        div {class:"page-heading teacher-compact-heading",h1 {"AI lessons & feedback"}}
         {management}
         if let Err(problem)=selected_document {p {role:"alert","{problem}"}}
         if reviewing_history && !attempts.is_empty() {
@@ -242,13 +243,7 @@ fn TeacherLessons(mut app: Signal<AppState>) -> Element {
 
                 }
                 if !matches!(answer.request,TeacherRequest::TeachLesson(_)) && !answer.content.caveats.is_empty() {details {summary {"Nuance and uncertainty"}ul {for caveat in &answer.content.caveats {li {TeacherProse {app,language:"en",text:caveat.clone(),purpose:PresentationPurpose::Instruction}}}}}}
-                p {class:"quiet","{answer.provenance.model} · AI-generated teaching"}
-                if let Some(prepared)=prepared_context {
-                    details {class:"teacher-context-preview",
-                        summary {"Practice used in this explanation"}
-                        PresentedRussian {app,text:prepared.clone(),language:"en",purpose:PresentationPurpose::Instruction,pre {class:"teacher-context-text","{prepared}"}}
-                    }
-                }
+                p {class:"quiet","AI-generated lesson or feedback"}
             }
         }}
         if let Some(earlier)=free_answer {details {class:"panel",summary {"Earlier one-off answer"}
@@ -257,7 +252,7 @@ fn TeacherLessons(mut app: Signal<AppState>) -> Element {
             for example in &earlier.content.examples {PresentedRussian {app,text:example.russian.clone(),purpose:PresentationPurpose::Reference}TeacherProse {app,language:"en",text:example.english.clone(),purpose:PresentationPurpose::Reference}TeacherProse {app,language:"en",text:example.note.clone(),purpose:PresentationPurpose::Instruction}}
             TeacherProse {app,language:"en",text:earlier.content.next_step.clone(),purpose:PresentationPurpose::Instruction}
             for caveat in &earlier.content.caveats {TeacherProse {app,language:"en",text:caveat.clone(),purpose:PresentationPurpose::Instruction}}
-            p {class:"quiet","{earlier.provenance.model} · Earlier AI suggestion"}
+            p {class:"quiet","Earlier AI suggestion"}
         }}
         details {class:"panel",summary {"Optional notes from a conversation"}crate::coach::ConversationNotes {app}}
     }

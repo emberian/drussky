@@ -238,7 +238,11 @@ async function seedGuided(driver, audit, indices = [0, 1, 2, 3]) {
   const jump = async index => {
     const legacySelect = flow.getByRole('combobox', { name: 'Go to a step', exact: true });
     if (await legacySelect.count()) await legacySelect.selectOption(String(index));
-    else await flow.getByRole('navigation', { name: 'Lesson outline', exact: true }).locator('.teacher-step-row').nth(index).click();
+    else {
+      const toggle=flow.getByRole('button',{name:'Lesson steps',exact:false});
+      if(await toggle.count() && await toggle.getAttribute('aria-expanded')!=='true') await toggle.click();
+      await flow.getByRole('navigation', { name: 'Lesson outline', exact: true }).locator('.teacher-step-row').nth(index).click();
+    }
     await page.waitForFunction(index => document.querySelector('.teacher-lesson-flow')?.dataset.lessonStep === String(index), index); };
   for (const index of indices) {
     await jump(index); const exercise = page.locator('.teacher-lesson-current .teacher-exercise');

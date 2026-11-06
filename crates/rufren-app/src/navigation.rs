@@ -118,7 +118,8 @@ pub(crate) fn PrimaryNavigation(app: Signal<AppState>, compact: bool) -> Element
 fn page_key(page: Page) -> &'static str {
     match page {
         Page::Today => "today",
-        Page::Lessons => "lessons",
+        Page::Lessons | Page::LessonDetail => "lessons",
+        Page::Foundations => "foundations",
         Page::Teacher => "teacher",
         Page::Reader => "reader",
         Page::Library => "library",
@@ -139,7 +140,7 @@ pub(crate) fn SecondaryNavigation(app: Signal<AppState>, compact: bool) -> Eleme
     rsx! {div {class:if compact {"context-navigation"}else{"sidebar-sections"},
         if learn {nav {aria_label:"Learning",h2 {"Learn"}
             if compact {button {id:"context-lessons",class:if page==Page::Lessons {"context-link active"}else{"context-link"},aria_current:if page==Page::Lessons {"page"}else{"false"},onclick:move |_|go_page(app,Page::Lessons),"Lessons"}}
-            button {id:if compact {"context-teacher"}else{"tools-teacher"},class:if page==Page::Teacher && selected==Destination::Learn {"context-link active"}else{"context-link"},aria_current:if page==Page::Teacher && selected==Destination::Learn {"page"}else{"false"},onclick:move |_|go_teacher(app),"With your teacher"}
+            button {id:if compact {"context-teacher"}else{"tools-teacher"},class:if page==Page::Teacher && selected==Destination::Learn {"context-link active"}else{"context-link"},aria_current:if page==Page::Teacher && selected==Destination::Learn {"page"}else{"false"},onclick:move |_|go_teacher(app),"AI lessons & feedback"}
             for (target,label) in [(Page::Practice,"Practice"),(Page::Studio,"Speech studio")] {button {id:format!("{}-{}",if compact {"context"}else{"tools"},page_key(target)),class:if page==target {"context-link active"}else{"context-link"},aria_current:if page==target {"page"}else{"false"},onclick:move |_|go_page(app,target),"{label}"}}
         }}
         if notebook {nav {aria_label:"Notebook",h2 {"Notebook"}

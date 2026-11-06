@@ -9,6 +9,8 @@ use uuid::Uuid;
 pub(crate) enum Page {
     Today,
     Lessons,
+    LessonDetail,
+    Foundations,
     Reader,
     Library,
     Practice,
@@ -32,7 +34,8 @@ impl Page {
     pub(crate) fn label(self) -> &'static str {
         match self {
             Self::Today => "Today",
-            Self::Lessons => "Lessons",
+            Self::Lessons | Self::LessonDetail => "Lessons",
+            Self::Foundations => "Foundations",
             Self::Reader => "Reader",
             Self::Library => "Library",
             Self::Practice => "Practice",
@@ -45,7 +48,8 @@ impl Page {
     pub(crate) fn icon(self) -> &'static str {
         match self {
             Self::Today => "◌",
-            Self::Lessons => "✦",
+            Self::Lessons | Self::LessonDetail => "✦",
+            Self::Foundations => "✦",
             Self::Reader => "☷",
             Self::Library => "▤",
             Self::Practice => "↗",
@@ -194,7 +198,12 @@ impl AppState {
         }
         if matches!(
             page,
-            Page::Library | Page::Lessons | Page::Reader | Page::Studio | Page::Teacher
+            Page::Library
+                | Page::Lessons
+                | Page::LessonDetail
+                | Page::Reader
+                | Page::Studio
+                | Page::Teacher
         ) {
             self.note_reference_access()?;
         }
@@ -365,22 +374,13 @@ impl AppState {
             self.page = Page::Today;
             return Ok(());
         }
-        if !self
-            .library
-            .attempts()
-            .any(|(event, _)| event.recorded_at_ms <= now)
-        {
-            let id = self
-                .selected_lesson
-                .clone()
-                .or_else(|| self.content.lessons.first().map(|lesson| lesson.id.clone()))
-                .ok_or("The lesson pack is empty")?;
-            self.choose_lesson(&id)?;
-            return self.navigate(Page::Teacher);
-        }
-        self.page = Page::Today;
-        self.notice = "No returns in this session. Explore a lesson, have a conversation, or choose a passage freely.".into();
-        Ok(())
+        let id = self
+            .selected_lesson
+            .clone()
+            .filter(|id| self.content.lesson(id).is_some())
+            .or_else(|| self.content.lessons.first().map(|lesson| lesson.id.clone()))
+            .ok_or("The lesson pack is empty")?;
+        self.choose_lesson(&id)
     }
 
     pub(crate) fn save_passage(&mut self, resolve: bool) -> Result<()> {
