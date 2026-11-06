@@ -111,6 +111,42 @@ class IdentityTests(unittest.TestCase):
         self.assertEqual(set(tree.collect()), {20})
         self.assertIn(20, tree.owned)
 
+    def test_waitid_terminal_observation_overrides_stale_live_libproc(self):
+        m = Monitor([row(10), row(20, 1)])
+        tree = bounded.ProcessTree(m, 10)
+        # libproc still reports the root as live after waitid sees its exit.
+        m.unreaped_exit = lambda pid: pid == 10
+        root = Root(m)
+        polled = []
+        def poll():
+            # Descendants must be discovered before releasing the root PID.
+            self.assertIn(20, tree.owned)
+            polled.append(True)
+            root.returncode = 7
+            return 7
+        root.poll = poll
+        self.assertEqual(set(tree.collect()), {20})
+        self.assertEqual(bounded.poll_root(tree, root), 7)
+        self.assertEqual(polled, [True])
+
+    def test_terminal_observation_never_invents_a_command_exit(self):
+        m = Monitor([row(10)])
+        tree = bounded.ProcessTree(m, 10)
+        m.unreaped_exit = lambda pid: True
+        root = Root(m)
+        # WNOWAIT proves termination, but only Popen's waitpid gives the code.
+        root.poll = lambda: None
+        self.assertIsNone(bounded.poll_root(tree, root))
+        self.assertIsNone(root.returncode)
+
+    def test_live_root_usage_loss_still_fails_closed(self):
+        m = Monitor([row(10)])
+        tree = bounded.ProcessTree(m, 10)
+        m.usage_hook = lambda pid: None
+        with self.assertRaisesRegex(RuntimeError, "Lost footprint measurement for live owned process 10"):
+            tree.collect()
+        self.assertIsNone(bounded.poll_root(tree, Root(m)))
+
     def test_live_usage_loss_fails_closed_but_keeps_child_for_cleanup(self):
         m = Monitor([row(10), row(20, 10)])
         tree = bounded.ProcessTree(m, 10)

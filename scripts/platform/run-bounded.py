@@ -145,8 +145,11 @@ class ProcessTree:
 
     def verified_identity(self, expected):
         row = self.monitor.identity(expected["pid"])
-        if row is None and expected["pid"] == self.root_pid and self.monitor.unreaped_exit(self.root_pid):
-            # macOS libproc omits zombies. WNOWAIT confirms our unreaped child
+        if (expected["pid"] == self.root_pid
+                and (row is None or same_identity(row, expected))
+                and self.monitor.unreaped_exit(self.root_pid)):
+            # macOS libproc can omit zombies or briefly report their old live
+            # status. WNOWAIT confirms our unreaped child
             # still reserves this exact PID, so its original group is safe to
             # discover before Popen releases the child identity.
             return {**expected, "status": 5}
