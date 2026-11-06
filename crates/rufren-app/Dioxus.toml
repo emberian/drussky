@@ -1,0 +1,9 @@
+[application]
+name = "Rufren"
+default_platform = "web"
+
+[web.app]
+title = "Rufren — Russian, your way"
+
+[web.watcher]
+watch_path = ["src"]
