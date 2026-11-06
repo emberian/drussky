@@ -84,3 +84,7 @@ Remaining work includes auditioning all 92 exact recordings and their contrasts,
 ## Integration review
 
 Root reran the structural audit after editorial changes; it still passes. A static chart of all 25 new upper/lowercase pairs was rendered to `.local/alphabet-glyph-review/draft.png` and visually inspected: the pairs were identifiable and unclipped as unjoined printed forms. This does not validate stroke order, cursive, native rendering or learning. The continuation remains outside the embedded runtime pack, with 92 audio models still to prepare and review.
+
+## Runtime integration status
+
+The source candidate now appends these 14 episodes to the exact frozen `.2` edition, with introduced-in-edition identities and migration of active/suspended cursors. It includes all 92 prepared audio models, 89 added writing tasks and versioned full-alphabet print paths. This supersedes the earlier integration TODO descriptions above; the signed inline-writing/alphabet QA build is now installed in place on the iPad (reference web `2134334f0ea15d391d86`). Host course and migration checks pass. Catalog/source validation, independent ASR and targeted acoustic inspection are separate from listening quality certification; see [audio source review](ALPHABET_AUDIO_SOURCE_REVIEW.md). Full new-course browser/device acceptance remains open.
