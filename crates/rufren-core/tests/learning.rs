@@ -98,8 +98,8 @@ fn learning_legacy_events_remain_byte_identical_and_v2_cannot_hide_in_v1() {
     let mut newer = context(a.id, true, None);
     newer.version = 1;
     assert!(matches!(library.merge(&[newer]), Err(Error::Version(1))));
-    assert_eq!(EVENT_VERSION, 7);
-    assert_eq!(SYNC_VERSION, 7);
+    assert_eq!(EVENT_VERSION, 8);
+    assert_eq!(SYNC_VERSION, 8);
 }
 
 #[test]

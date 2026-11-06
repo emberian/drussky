@@ -48,6 +48,7 @@ pub(crate) struct TeacherRevisitEntry {
     pub skill: Skill,
     pub state: TeacherRevisitState,
     pub due: bool,
+    pub timing: ReviewTimingState,
     /// Derived from exact presentation facts; these are not rewritten learner-reported cues.
     pub derived_support: Vec<TeacherRevisitDerivedSupport>,
     /// Validated exact-task observations, including derived support and as-of AI opinions.
@@ -553,33 +554,51 @@ impl AppState {
                     });
             }
         }
+        let cadence: BTreeMap<_, _> = self
+            .library
+            .attempts()
+            .filter(|(e, _)| e.recorded_at_ms <= now)
+            .map(|(e, a)| (e.id, self.review_cadence_for_attempt(e, a)))
+            .collect();
         for (key, mut candidates) in seeds {
             candidates.sort_by_key(|s| (s.occurred_at_ms, s.attempt_id));
             let seed = candidates[0];
             let Some(document) = self.library.teacher_document(key.document_id) else {
                 continue;
             };
-            match TeacherRevisitPolicy.project(
+            match TeacherRevisitPolicy.project_with_cadence(
                 key,
                 seed,
                 observations.get(&key).map_or(&[], Vec::as_slice),
                 now,
+                &cadence,
             ) {
-                Ok(state) => queue.entries.push(TeacherRevisitEntry {
-                    key,
-                    title: match &document.response.request {
-                        TeacherRequest::TeachLesson(r) => r.title.clone(),
-                        _ => "A saved teacher follow-up".into(),
-                    },
-                    prompt: document.response.content.practice[key.practice_index]
-                        .prompt
-                        .clone(),
-                    skill: task_skill(&document.response, key.practice_index).unwrap(),
-                    due: state.is_due(now),
-                    derived_support: derived_support.remove(&key).unwrap_or_default(),
-                    observations: observations.remove(&key).unwrap_or_default(),
-                    state,
-                }),
+                Ok(state) => {
+                    let timing = self.review_timing(
+                        PracticeBatchKey::Teacher {
+                            document_id: key.document_id,
+                            practice_index: key.practice_index,
+                        },
+                        state.due_at_ms,
+                        now,
+                    );
+                    queue.entries.push(TeacherRevisitEntry {
+                        key,
+                        title: match &document.response.request {
+                            TeacherRequest::TeachLesson(r) => r.title.clone(),
+                            _ => "A saved teacher follow-up".into(),
+                        },
+                        prompt: document.response.content.practice[key.practice_index]
+                            .prompt
+                            .clone(),
+                        skill: task_skill(&document.response, key.practice_index).unwrap(),
+                        due: timing.is_due(now),
+                        timing,
+                        derived_support: derived_support.remove(&key).unwrap_or_default(),
+                        observations: observations.remove(&key).unwrap_or_default(),
+                        state,
+                    });
+                }
                 Err(_) => {
                     if queue.diagnostics.len() < 8 {
                         queue.diagnostics.push("A revisit's timing/evidence is inconsistent; its original facts are preserved for review.".into());
@@ -595,9 +614,13 @@ impl AppState {
         {
             queue.diagnostics.push("Recorded target exposure during a past return qualifies its planned gap conservatively. Its saved response and self-report are unchanged.".into());
         }
-        queue
-            .entries
-            .sort_by_key(|e| (!e.due, e.state.due_at_ms, e.key));
+        queue.entries.sort_by_key(|e| {
+            (
+                !e.due,
+                e.timing.effective_due_at_ms.unwrap_or(i64::MAX),
+                e.key,
+            )
+        });
         queue.diagnostics.sort();
         queue.diagnostics.dedup();
         queue
@@ -665,6 +688,7 @@ impl AppState {
         now: i64,
         session_id: Option<Uuid>,
     ) -> Result<TeacherPracticeDraft> {
+        self.flush_pending_reader_edits()?;
         self.refresh()?;
         if session_id.is_some_and(|id| self.library.attempts().any(|(_, a)| a.session == id)) {
             return Err(
@@ -692,6 +716,13 @@ impl AppState {
                     return Err("This question already has a different unfinished response. Its draft is kept; resume it separately or leave this item for later.".into());
                 }
                 self.validate_teacher_revisit(&answer, &saved)?;
+                self.recover_pending_review_start(
+                    saved.id,
+                    PracticeBatchKey::Teacher {
+                        document_id: key.document_id,
+                        practice_index: key.practice_index,
+                    },
+                )?;
                 self.select_teacher_revisit(&saved)?;
                 return Ok(saved);
             }
@@ -714,8 +745,29 @@ impl AppState {
             }),
         };
         self.validate_teacher_revisit(&answer, &draft)?;
+        let target = PracticeBatchKey::Teacher {
+            document_id: key.document_id,
+            practice_index: key.practice_index,
+        };
+        let reason = if entry.due {
+            "You chose this available exact Teacher return."
+        } else {
+            "You explicitly chose this exact Teacher task outside its suggested timing."
+        };
+        let evidence_ids = self.library.events.keys().copied().collect();
+        let decision = self.prepare_review_start(
+            draft.id,
+            target,
+            entry.state.due_at_ms,
+            now,
+            now,
+            TEACHER_REVISIT_POLICY_ID,
+            reason,
+            evidence_ids,
+        )?;
         self.repo
             .set(&teacher_revisit_storage_key(&draft)?, &draft)?;
+        self.record_review_start(&decision)?;
         self.select_teacher_revisit(&draft)?;
         Ok(draft)
     }

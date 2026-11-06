@@ -37,7 +37,12 @@ async fn notebook_dialogue_sound_and_current_reader_refuse_legacy_clients_before
         "../../../scripts/platform/fixtures/reader-v7-definition.json"
     ))
     .unwrap();
-    old.push(reader_document_event(&definition).unwrap());
+    let mut reader = reader_document_event(&definition).unwrap();
+    reader.version = 7; // Frozen Reader bytes remain7 after the timing protocol cutover.
+    old.push(reader);
+    old.push(Event::new(Uuid::new_v4(), 8, Fact::ReviewCadenceChanged(ReviewCadenceChange {
+        parents: Default::default(), cadence: ReviewCadence::MoreOften,
+    })).unwrap());
     store.append(&old).unwrap();
     let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
     let endpoint = format!("http://{}", listener.local_addr().unwrap());

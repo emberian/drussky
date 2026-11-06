@@ -201,11 +201,9 @@ fn teacher_revisit_recent_reference_exposure_is_a_delay_qualifier_without_fake_c
     assert_eq!(s.ai_correct_advances, 0);
     assert!(o.cues.is_empty());
     o.prior_target_exposure_at_ms = Some(DAY_MS + 1);
-    assert!(
-        TeacherRevisitPolicy
-            .project(key, seed, &[o], 2 * DAY_MS)
-            .is_err()
-    );
+    assert!(TeacherRevisitPolicy
+        .project(key, seed, &[o], 2 * DAY_MS)
+        .is_err());
 }
 
 #[test]
@@ -272,11 +270,9 @@ fn teacher_revisit_future_and_duplicate_occurrences_do_not_add_spacing_successes
     assert_eq!(s.self_report_advances, 1);
     let mut collision = first.clone();
     collision.self_rating = SelfRating::Again;
-    assert!(
-        TeacherRevisitPolicy
-            .project(key, seed, &[first, collision], DAY_MS)
-            .is_err()
-    );
+    assert!(TeacherRevisitPolicy
+        .project(key, seed, &[first, collision], DAY_MS)
+        .is_err());
 }
 
 #[test]
@@ -404,9 +400,133 @@ fn teacher_revisit_early_retrieval_cannot_become_delayed_by_finishing_after_due(
     assert_eq!(mixed.due_at_ms, DAY_MS);
 
     early.started_at_ms = finished + 1;
-    assert!(
-        TeacherRevisitPolicy
-            .project(key, seed, &[early], finished)
-            .is_err()
+    assert!(TeacherRevisitPolicy
+        .project(key, seed, &[early], finished)
+        .is_err());
+}
+
+#[test]
+fn pinned_cadence_changes_future_assignments_without_reinterpreting_previous_delay() {
+    use std::collections::BTreeMap;
+    let key = key();
+    let seed = seed();
+    let first = observation(DAY_MS, SelfRating::Recalled, vec![], None);
+    let early = observation(3 * DAY_MS, SelfRating::Recalled, vec![], None);
+    let later = observation(7 * DAY_MS, SelfRating::Recalled, vec![], None);
+    let profiles = BTreeMap::from([
+        (first.attempt_id, ReviewCadence::MoreSpace),
+        (early.attempt_id, ReviewCadence::MoreOften),
+        (later.attempt_id, ReviewCadence::MoreOften),
+    ]);
+    let assigned = TeacherRevisitPolicy
+        .project_with_cadence(key, seed, &[first.clone()], DAY_MS, &profiles)
+        .unwrap();
+    assert_eq!(assigned.interval_ms, 6 * DAY_MS);
+    assert_eq!(assigned.due_at_ms, 7 * DAY_MS);
+    // A newly chosen short profile cannot turn two days into the six days actually assigned.
+    let pending = TeacherRevisitPolicy
+        .project_with_cadence(key, seed, &[first.clone(), early], 3 * DAY_MS, &profiles)
+        .unwrap();
+    assert_eq!(pending.due_at_ms, assigned.due_at_ms);
+    assert_eq!(pending.self_report_advances, 1);
+    let next = TeacherRevisitPolicy
+        .project_with_cadence(key, seed, &[first, later], 7 * DAY_MS, &profiles)
+        .unwrap();
+    assert_eq!(next.self_report_advances, 2);
+    assert_eq!(next.interval_ms, 7 * DAY_MS / 2);
+    assert_eq!(next.due_at_ms, 7 * DAY_MS + 7 * DAY_MS / 2);
+}
+
+#[test]
+fn cadence_uses_actual_previous_assignment_for_restudied_delay() {
+    use std::collections::BTreeMap;
+    let seed = seed();
+    let mut response = observation(2 * DAY_MS, SelfRating::Recalled, vec![], None);
+    response.prior_target_exposure_at_ms = Some(DAY_MS);
+    let profiles = BTreeMap::from([
+        (seed.attempt_id, ReviewCadence::MoreSpace),
+        (response.attempt_id, ReviewCadence::MoreOften),
+    ]);
+    let state = TeacherRevisitPolicy
+        .project_with_cadence(key(), seed, &[response], 2 * DAY_MS, &profiles)
+        .unwrap();
+    assert_eq!(state.last_evidence, TeacherRevisitEvidence::RecentRestudy);
+    assert_eq!(state.self_report_advances, 0);
+    assert_eq!(state.interval_ms, 2 * DAY_MS);
+}
+
+#[test]
+fn standard_cadence_preserves_serialized_projection_and_unrelated_choices_do_nothing() {
+    use std::collections::BTreeMap;
+    let key = key();
+    let seed = seed();
+    let observations = vec![
+        observation(DAY_MS, SelfRating::Recalled, vec![], None),
+        observation(4 * DAY_MS, SelfRating::NotReported, vec![], None),
+    ];
+    let expected = TeacherRevisitPolicy
+        .project(key, seed, &observations, 4 * DAY_MS)
+        .unwrap();
+    let profiles = BTreeMap::from([
+        (seed.attempt_id, ReviewCadence::Standard),
+        (observations[0].attempt_id, ReviewCadence::Standard),
+        (Uuid::new_v4(), ReviewCadence::MoreSpace),
+    ]);
+    let actual = TeacherRevisitPolicy
+        .project_with_cadence(key, seed, &observations, 4 * DAY_MS, &profiles)
+        .unwrap();
+    assert_eq!(
+        serde_json::to_vec(&expected).unwrap(),
+        serde_json::to_vec(&actual).unwrap()
     );
+}
+
+#[test]
+fn cadence_interval_bounds_cover_negative_and_saturating_input() {
+    for cadence in [
+        ReviewCadence::MoreOften,
+        ReviewCadence::Standard,
+        ReviewCadence::MoreSpace,
+    ] {
+        assert_eq!(cadence.scale_interval_ms(i64::MIN), 10 * MINUTE_MS);
+        assert_eq!(cadence.scale_interval_ms(i64::MAX), 120 * DAY_MS);
+    }
+    let seed = TeacherRevisitSeed {
+        occurred_at_ms: i64::MAX - DAY_MS,
+        ..seed()
+    };
+    let profiles = std::collections::BTreeMap::from([(seed.attempt_id, ReviewCadence::MoreSpace)]);
+    let state = TeacherRevisitPolicy
+        .project_with_cadence(key(), seed, &[], i64::MAX, &profiles)
+        .unwrap();
+    assert_eq!(state.due_at_ms, i64::MAX);
+}
+
+#[test]
+fn open_response_keeps_start_qualification_and_cotimed_profiles_are_conservative() {
+    use std::collections::BTreeMap;
+    let seed = seed();
+    let mut opened = observation(3 * DAY_MS, SelfRating::Recalled, vec![], None);
+    opened.started_at_ms = DAY_MS;
+    let profiles = BTreeMap::from([
+        (seed.attempt_id, ReviewCadence::MoreSpace),
+        (opened.attempt_id, ReviewCadence::MoreOften),
+    ]);
+    let state = TeacherRevisitPolicy
+        .project_with_cadence(key(), seed, &[opened], 3 * DAY_MS, &profiles)
+        .unwrap();
+    assert_eq!(state.self_report_advances, 0);
+    assert_eq!(state.due_at_ms, 2 * DAY_MS);
+    let a = observation(2 * DAY_MS, SelfRating::Recalled, vec![], None);
+    let b = observation(2 * DAY_MS, SelfRating::Again, vec![], None);
+    let profiles = BTreeMap::from([
+        (a.attempt_id, ReviewCadence::MoreSpace),
+        (b.attempt_id, ReviewCadence::MoreOften),
+    ]);
+    let state = TeacherRevisitPolicy
+        .project_with_cadence(key(), seed, &[a, b], 2 * DAY_MS, &profiles)
+        .unwrap();
+    assert_eq!(state.self_report_advances, 0);
+    assert_eq!(state.last_evidence, TeacherRevisitEvidence::ClearError);
+    assert_eq!(state.interval_ms, DAY_MS / 2);
 }

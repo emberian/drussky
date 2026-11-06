@@ -271,7 +271,7 @@ fn teacher_archive_event4_does_not_rewrite_old123_json_or_optional_teacher_field
     for event in old {
         assert_eq!(library.events.get(&event.id).unwrap(), &event);
     }
-    assert_eq!((EVENT_VERSION, SYNC_VERSION, SCHEMA_VERSION), (7, 7, 7));
+    assert_eq!((EVENT_VERSION, SYNC_VERSION, SCHEMA_VERSION), (8, 8, 8));
 }
 
 #[test]

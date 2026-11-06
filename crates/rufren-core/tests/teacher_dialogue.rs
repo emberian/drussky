@@ -355,7 +355,7 @@ fn dialogue_v5_gates_new_fact_but_preserves_actual_legacy_v4_archive_bytes() {
     let mut l = Library::default();
     l.merge(&[restored.clone(), event]).unwrap();
     assert_eq!(l.events[&restored.id], restored);
-    assert_eq!((EVENT_VERSION, SYNC_VERSION), (7, 7));
+    assert_eq!((EVENT_VERSION, SYNC_VERSION), (8, 8));
 }
 
 #[test]

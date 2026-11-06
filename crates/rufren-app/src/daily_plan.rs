@@ -295,7 +295,7 @@ impl AppState {
                         practice_index: e.key.practice_index,
                     },
                     skill: e.skill,
-                    due_at_ms: e.state.due_at_ms,
+                    due_at_ms: e.timing.effective_due_at_ms.unwrap_or(e.state.due_at_ms),
                     last_skill_practice_ms: last_skill.get(&e.skill).copied(),
                     last_source_practice_ms: last_source
                         .get(&PracticeBatchSource::Teacher)
@@ -307,8 +307,16 @@ impl AppState {
         for e in SpacedReview
             .queue(&self.library, now, &Skill::ALL)
             .into_iter()
-            .filter(|e| e.due && e.state.attempts > 0)
+            .filter(|e| e.state.attempts > 0)
         {
+            let target = PracticeBatchKey::Passage {
+                revision: e.state.key.revision,
+                skill: e.state.key.skill,
+            };
+            let timing = self.review_timing(target, e.state.due_at_ms, now);
+            if !timing.is_due(now) {
+                continue;
+            }
             let Some(revision) = self.library.revision(e.state.key.revision) else {
                 continue;
             };
@@ -322,7 +330,7 @@ impl AppState {
                         skill: e.state.key.skill,
                     },
                     skill: e.state.key.skill,
-                    due_at_ms: e.state.due_at_ms,
+                    due_at_ms: timing.effective_due_at_ms.unwrap_or(e.state.due_at_ms),
                     last_skill_practice_ms: last_skill.get(&e.state.key.skill).copied(),
                     last_source_practice_ms: last_source
                         .get(&PracticeBatchSource::Passage)
@@ -632,6 +640,46 @@ impl AppState {
                 .any(|(c, _)| c.key == item.key)
         {
             return Err("The planned return changed before it could start. Its place is kept; skip it or inspect the updated source.".into());
+        }
+        if !existing {
+            let baseline = match item.key {
+                PracticeBatchKey::Passage { revision, skill } => {
+                    SpacedReview
+                        .project(&self.library, ReviewKey { revision, skill }, now)
+                        .due_at_ms
+                }
+                PracticeBatchKey::Teacher {
+                    document_id,
+                    practice_index,
+                } => {
+                    self.teacher_revisits(now)
+                        .entries
+                        .into_iter()
+                        .find(|e| {
+                            e.key
+                                == TeacherRevisitKey {
+                                    document_id,
+                                    practice_index,
+                                }
+                        })
+                        .ok_or("The exact scheduled Teacher task is unavailable.")?
+                        .state
+                        .due_at_ms
+                }
+            };
+            let evidence = self.library.events.keys().copied().collect();
+            self.prepare_review_start(
+                session,
+                item.key,
+                baseline,
+                now,
+                now,
+                PRACTICE_BATCH_POLICY_ID,
+                &format!("From your short session: {}", item.reason),
+                evidence,
+            )?;
+        } else {
+            self.recover_pending_review_start(session, item.key)?;
         }
         match item.key {
             PracticeBatchKey::Teacher {

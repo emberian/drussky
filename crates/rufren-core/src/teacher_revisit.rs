@@ -110,6 +110,24 @@ impl TeacherRevisitPolicy {
         observations: &[TeacherRevisitObservation],
         now_ms: i64,
     ) -> Result<TeacherRevisitState, Error> {
+        self.project_with_cadence(key, seed, observations, now_ms, &BTreeMap::new())
+    }
+    /// Cadence is pinned at each actual start. Missing entries preserve legacy baseline timing.
+    pub fn project_with_cadence(
+        &self,
+        key: TeacherRevisitKey,
+        seed: TeacherRevisitSeed,
+        observations: &[TeacherRevisitObservation],
+        now_ms: i64,
+        cadence: &BTreeMap<Uuid, ReviewCadence>,
+    ) -> Result<TeacherRevisitState, Error> {
+        let interval = |attempt, baseline| {
+            cadence
+                .get(&attempt)
+                .copied()
+                .unwrap_or_default()
+                .scale_interval_ms(baseline)
+        };
         let invalid = || Error::Invalid("invalid exact-task revisit observations".into());
         if key.document_id.is_nil()
             || key.practice_index >= 4
@@ -162,8 +180,10 @@ impl TeacherRevisitPolicy {
             key,
             policy: self.id().into(),
             seed,
-            due_at_ms: seed.occurred_at_ms.saturating_add(DAY_MS),
-            interval_ms: DAY_MS,
+            due_at_ms: seed
+                .occurred_at_ms
+                .saturating_add(interval(seed.attempt_id, DAY_MS)),
+            interval_ms: interval(seed.attempt_id, DAY_MS),
             rung: 0,
             completed_returns: 0,
             self_report_advances: 0,
@@ -187,6 +207,14 @@ impl TeacherRevisitPolicy {
                 s.ignored_future_attempts += group.len();
                 continue;
             }
+            // Simultaneous starts cannot establish causal order or select a favorable profile.
+            let group_interval = |baseline| {
+                group
+                    .iter()
+                    .map(|o| interval(o.attempt_id, baseline))
+                    .min()
+                    .unwrap()
+            };
             let mut classified = Vec::new();
             for o in &group {
                 let mut seen = BTreeSet::new();
@@ -257,8 +285,8 @@ impl TeacherRevisitPolicy {
                     )
                 {
                     s.rung = 0;
-                    s.interval_ms = DAY_MS;
-                    s.due_at_ms = s.due_at_ms.min(time.saturating_add(DAY_MS));
+                    s.interval_ms = group_interval(DAY_MS);
+                    s.due_at_ms = s.due_at_ms.min(time.saturating_add(s.interval_ms));
                     s.early_error_rechecks += 1;
                     s.last_attempt = Some(group[0].attempt_id);
                     s.last_evidence = evidence;
@@ -284,7 +312,7 @@ impl TeacherRevisitPolicy {
                 TeacherRevisitEvidence::AiCorrect
                 | TeacherRevisitEvidence::UnassistedSelfReport => {
                     s.rung = (s.rung + 1).min(RETURN_STEPS.len() - 1);
-                    s.interval_ms = RETURN_STEPS[s.rung];
+                    s.interval_ms = group_interval(RETURN_STEPS[s.rung]);
                     if evidence == TeacherRevisitEvidence::AiCorrect {
                         s.ai_correct_advances += 1;
                     } else {
@@ -293,12 +321,12 @@ impl TeacherRevisitPolicy {
                 }
                 TeacherRevisitEvidence::ClearError | TeacherRevisitEvidence::AnswerHelp => {
                     s.rung = 0;
-                    s.interval_ms = DAY_MS;
+                    s.interval_ms = group_interval(DAY_MS);
                 }
                 _ => {}
             }
             let delay = if evidence == TeacherRevisitEvidence::ContestedAi {
-                DAY_MS.min(s.interval_ms)
+                group_interval(DAY_MS).min(s.interval_ms)
             } else {
                 s.interval_ms
             };

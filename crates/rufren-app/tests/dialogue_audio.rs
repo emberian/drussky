@@ -19,6 +19,8 @@ mod sound_focus;
 mod reader;
 #[path = "../src/model.rs"]
 mod model;
+#[path = "../src/review_timing.rs"]
+mod review_timing;
 #[path = "../src/native_connection.rs"]
 mod native_connection;
 #[path = "../src/native_http.rs"]

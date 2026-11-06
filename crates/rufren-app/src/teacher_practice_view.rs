@@ -36,7 +36,7 @@ fn TextTeacherPractice(
         if review {
             app.read().teacher_revisit_draft(&answer, index)
         } else {
-            app.read().teacher_practice_draft(&answer, index)
+            app.write().teacher_practice_draft(&answer, index)
         }
     });
     let mut revealed = use_signal(|| false);
@@ -74,7 +74,7 @@ fn TextTeacherPractice(
                 textarea {id:field, value:snapshot.response.clone(), disabled:(busy && !review) || saved, placeholder:"Try a short answer. Your draft is kept.",
                     oninput:move |event| {
                         let Some(mut next)=draft.read().clone() else{return};
-                        let result=app.read().teacher_practice_edit_response(&answer_for_edit,&mut next,event.value());
+                        let result=app.write().teacher_practice_edit_response(&answer_for_edit,&mut next,event.value());
                         match result {Ok(())=>draft.set(Some(next)),Err(error)=>app.write().notice=error}
                     }
                 }

@@ -97,11 +97,19 @@ impl AppState {
     }
 
     pub(crate) fn resume_practice(&mut self, id: Uuid) -> Result<()> {
+        self.flush_pending_reader_edits()?;
         let record = self
             .paused_practices()?
             .into_iter()
             .find(|r| r.session.id == id)
             .ok_or("That practice is already active, finished, or unavailable.")?;
+        self.recover_pending_review_start(
+            id,
+            rufren_core::PracticeBatchKey::Passage {
+                revision: record.session.revision,
+                skill: record.session.skill,
+            },
+        )?;
         self.archive_current()?;
         // Keep the archived copies after resuming. If either active metadata write
         // fails, both drafts are still recoverable through the index on reopen.

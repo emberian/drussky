@@ -32,24 +32,6 @@ fn response_title(answer: &TeacherResponse) -> String {
         TeacherRequest::AnswerFeedback(_) => "A follow-up with your teacher".into(),
     }
 }
-fn due_label(due: i64, now: i64) -> String {
-    let remaining = due.saturating_sub(now);
-    if remaining <= 0 {
-        "Ready to revisit".into()
-    } else if remaining < 60 * MINUTE_MS {
-        "In less than an hour".into()
-    } else if remaining < DAY_MS {
-        let hours = (remaining + 30 * MINUTE_MS) / (60 * MINUTE_MS);
-        format!(
-            "In about {hours} {}",
-            if hours == 1 { "hour" } else { "hours" }
-        )
-    } else {
-        let days = remaining.saturating_add(DAY_MS / 2) / DAY_MS;
-        format!("In about {days} {}", if days == 1 { "day" } else { "days" })
-    }
-}
-
 // Use authored topic labels rather than provider-written questions or model text:
 // even an English prompt/title can give away a listening or retrieval answer.
 fn canonical_lesson_title(state: &AppState, answer: Option<&TeacherResponse>) -> String {
@@ -65,7 +47,7 @@ fn canonical_lesson_title(state: &AppState, answer: Option<&TeacherResponse>) ->
 fn return_reason(evidence: TeacherRevisitEvidence) -> &'static str {
     match evidence {
         TeacherRevisitEvidence::GuidedSeed => {
-            "You saved your first response to this exercise. Its first return is planned about a day later."
+            "You saved your first response to this exercise. This is its first planned return."
         }
         TeacherRevisitEvidence::UnassistedSelfReport => {
             "You reported remembering the last response, with no help recorded. Your own impression helped set this gap."
@@ -195,7 +177,22 @@ pub(crate) fn TeacherReturns(app: Signal<AppState>, #[props(default)] expanded: 
         }
     });
     let now = clock();
-    let queue = state.teacher_revisits(now);
+    let mut queue = state.teacher_revisits(now);
+    // Browsing is a stable place to make choices. Availability still orders the
+    // scheduling queue, but a timing edit must not move the row being edited.
+    queue.entries.sort_by_cached_key(|entry| {
+        (
+            canonical_lesson_title(
+                &state,
+                state
+                    .library
+                    .teacher_document(entry.key.document_id)
+                    .map(|d| &d.response),
+            ),
+            entry.key.document_id,
+            entry.key.practice_index,
+        )
+    });
     let active = state.active_teacher_revisit();
     let pending = active
         .as_ref()
@@ -222,18 +219,19 @@ pub(crate) fn TeacherReturns(app: Signal<AppState>, #[props(default)] expanded: 
                 button {class:"primary",onclick:move |_|act(app,|s|s.navigate(Page::Practice)),"Continue this return →"}
             }}
             for entry in queue.entries.iter().take(if show_all(){usize::MAX}else{3}) {
-                {let key=entry.key;let label=canonical_lesson_title(&state,state.library.teacher_document(key.document_id).map(|document|&document.response));let ordinal=key.practice_index+1;let reason=return_reason(entry.state.last_evidence);let gap=planned_gap(&state.library,&entry.state);let support=latest_recorded_support(&state.library,entry);let due=entry.due;let stamp=due_label(entry.state.due_at_ms,now);let row=format!("return-{}-{}",key.document_id,key.practice_index);
-                rsx! {div {key:"{row}",class:"teacher-return-row","data-review-document":key.document_id.to_string(),"data-review-index":key.practice_index.to_string(),"data-review-due":entry.state.due_at_ms.to_string(),
+                {let key=entry.key;let label=canonical_lesson_title(&state,state.library.teacher_document(key.document_id).map(|document|&document.response));let ordinal=key.practice_index+1;let reason=return_reason(entry.state.last_evidence);let gap=planned_gap(&state.library,&entry.state);let support=latest_recorded_support(&state.library,entry);let due=entry.due;let stamp=crate::review_timing_view::timing_label(entry.timing.effective_due_at_ms,entry.timing.paused,now);let row=format!("return-{}-{}",key.document_id,key.practice_index);
+                rsx! {div {key:"{row}",class:"teacher-return-row","data-review-document":key.document_id.to_string(),"data-review-index":key.practice_index.to_string(),"data-review-due":entry.timing.effective_due_at_ms.map(|t|t.to_string()).unwrap_or_default(),"data-review-baseline-due":entry.state.due_at_ms.to_string(),
                     div {class:"teacher-return-description",span {class:"tag","{entry.skill.label()}"}strong {"{label} · Exercise {ordinal}"}small {"{stamp}"}
                         details {class:"teacher-return-why",summary {"Why now?"}p {"{reason}"}p {class:"quiet","{gap}"}if let Some(support)=support {p {class:"quiet","{support}"}}}
+                        crate::review_timing_view::TaskTimingControls {app,target:PracticeBatchKey::Teacher {document_id:key.document_id,practice_index:key.practice_index},baseline_due_at_ms:entry.state.due_at_ms,now}
                     }
                     button {class:"secondary",onclick:move |_|act(app,|s|{s.start_teacher_revisit(key,now_ms())?;s.navigate(Page::Practice)}),if due {"Try this again →"}else{"Practice early →"}}
                 }}}
             }
             if queue.entries.len()>3 && !show_all(){button {class:"text-button",onclick:move |_|show_all.set(true),"Show all planned returns"}}
             details {summary {"How these returns are planned"}
-                p {"The first saved response comes back about a day later. Later gaps can grow after a response given without help, based on your own report of recall or your AI teacher's judgment that it was correct. Those are different kinds of evidence; neither is a proficiency score."}
-                p {class:"quiet","Help and difficulty bring the task back sooner. Replays and recent restudy can hold the gap. An outcome you leave unreported is never treated as failure. The fixed 1, 3, 7, 14, 30, 60 and 120 day steps are a starting design, not a measured optimum for you."}
+                p {"Return gaps use the timing preference chosen when you start a response. Later gaps can grow after a response given without help, based on your own report of recall or your AI teacher's judgment that it was correct. Those are different kinds of evidence; neither is a proficiency score."}
+                p {class:"quiet","Help and difficulty bring the task back sooner. Replays and recent restudy can hold the gap. An outcome you leave unreported is never treated as failure. The standard 1, 3, 7, 14, 30, 60 and 120 day steps are adjustable starting choices, not a measured optimum for you."}
             }
             if !queue.diagnostics.is_empty(){details {summary {"Some saved tasks need attention"}ul {for problem in &queue.diagnostics {li {"{problem}"}}}}}
         }
@@ -293,7 +291,8 @@ pub(crate) fn TeacherReturn(
                 else if answer.content.practice[key.practice_index].skill!=Some(rufren_tutor::TeacherSkill::Speaking) {
                     button {class:"secondary",disabled:busy,onclick:move |_|{let request=app.read().answer_feedback_request(attempt);send_teacher(app,request);},"Ask the teacher about this saved response →"}
                 }
-                if let Some(entry)=schedule {p {class:"quiet",role:"status","{due_label(entry.state.due_at_ms,now_ms())}. You can stop here or have another go now."}}
+                if let Some(entry)=schedule {p {class:"quiet",role:"status","{crate::review_timing_view::timing_label(entry.timing.effective_due_at_ms,entry.timing.paused,now_ms())}. You can stop here or have another go now."}}
+                crate::review_timing_view::ReviewStartDetails {app,session:snapshot.id,target:PracticeBatchKey::Teacher {document_id:key.document_id,practice_index:key.practice_index}}
                 crate::daily_plan_view::SessionNext {app,disabled:busy}
                 div {class:"actions",
                     button {class:"primary",disabled:capture_busy(),onclick:move |_|act(app,|s|{s.clear_active_teacher_revisit()?;s.navigate(Page::Today)}),"Finish & return to Today"}

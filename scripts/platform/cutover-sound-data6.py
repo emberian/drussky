@@ -2,7 +2,7 @@
 """Plan or execute a receipt-pinned private relay transition.
 
 The historical default remains5→6 Sound; --transition-profile reader-data7 selects
-6→7 Reader with Teacher6/dialogue4. Default plan changes nothing. Execute requires explicit accepted relay/native/
+6→7 Reader with Teacher6/dialogue4; review-timing-data8 selects7→8 with the same policies. Default plan changes nothing. Execute requires explicit accepted relay/native/
 consumer receipts and an immutable rollback binary. It stops only the recorded
 relay, verifies a quiescent SQLite+original-audio backup, and preserves TLS,
 configuration and artifact aliases. Failure may restart the old binary only when
@@ -30,6 +30,8 @@ ROOT, FOLDER, services, preflight = prior.ROOT, prior.FOLDER, prior.services, pr
 DEFAULT_PROFILE = 'sound-data6'
 TRANSITIONS = {
     DEFAULT_PROFILE: {'from': 5, 'to': 6, 'consumer': 'sound'},
+    'review-timing-data8': {'from': 7, 'to': 8, 'consumer': 'timing',
+                          'teacher': 'rufren-ai-teacher-v6', 'dialogue': 'rufren-ai-dialogue-v4'},
     'reader-data7': {'from': 6, 'to': 7, 'consumer': 'reader',
                      'teacher': 'rufren-ai-teacher-v6', 'dialogue': 'rufren-ai-dialogue-v4'},
 }
@@ -117,8 +119,8 @@ def accepted_candidate(path, native_path, transition_profile=DEFAULT_PROFILE):
     accepted = json.loads(path.read_text())
     if accepted.get('accepted') is not True or type(accepted.get('data_protocol')) is not int or accepted['data_protocol'] != target:
         raise ValueError(f'Root acceptance must explicitly select data protocol{target}')
-    if profile['consumer'] == 'reader' and (accepted.get('teacher_prompt_version') != profile['teacher'] or accepted.get('dialogue_prompt_version') != profile['dialogue']):
-        raise ValueError('Reader transition requires exact Teacher6/dialogue4 policy identities')
+    if profile['consumer'] in ('reader', 'timing') and (accepted.get('teacher_prompt_version') != profile['teacher'] or accepted.get('dialogue_prompt_version') != profile['dialogue']):
+        raise ValueError('Selected transition requires exact Teacher6/dialogue4 policy identities')
     executable = Path(accepted['relay_executable']).resolve(strict=True)
     if executable.is_relative_to(ROOT / 'target') or prior.digest(executable) != accepted['relay_executable_sha256']:
         raise ValueError('Candidate must be an accepted immutable executable outside target/')
@@ -132,7 +134,7 @@ def accepted_candidate(path, native_path, transition_profile=DEFAULT_PROFILE):
     shared = shared_source_hashes(source['source_sha256'])
     if not shared or accepted['relay_source_sha256'] != shared:
         raise ValueError('Accepted relay and frozen native shared-source identities differ')
-    if profile['consumer'] == 'reader':
+    if profile['consumer'] in ('reader', 'timing'):
         build = pinned_json(accepted['relay_build_receipt'], accepted['relay_build_receipt_sha256'])
         if (Path(build['binary']).resolve(strict=True) != executable
                 or build.get('binary_sha256') != accepted['relay_executable_sha256']
@@ -142,7 +144,7 @@ def accepted_candidate(path, native_path, transition_profile=DEFAULT_PROFILE):
                 or shared_source_hashes(build['source_sha256']) != shared
                 or build.get('prompt_source_sha256') != accepted['dialogue_prompt_source_sha256']
                 or prior.digest(Path(build['prompt_source'])) != build['prompt_source_sha256']):
-            raise ValueError('Reader candidate build receipt differs from the actual accepted binary/shared sources/policy')
+            raise ValueError('Selected candidate build receipt differs from the actual accepted binary/shared sources/policy')
     workers = worker_source_fingerprint()
     if (accepted.get('worker_sources_reviewed') is not True
             or accepted.get('worker_source_scope') != 'files-only'
@@ -158,9 +160,14 @@ def accepted_candidate(path, native_path, transition_profile=DEFAULT_PROFILE):
             or consumer.get('coherent_snapshot_restored') is not True
             or consumer.get('legacy_protocol_refused') is not True
             or consumer.get('owned_service_stopped') is not True
-            or type(consumer.get('original_take_records')) is not int or consumer['original_take_records'] < 1
-            or not consumer.get('played_original_asset_ids')):
-        raise ValueError('Accepted consumer must prove matching protocol/binary/web, originals, coherent restore, legacy refusal and playback')
+            or type(consumer.get('original_take_records')) is not int or consumer['original_take_records'] < 0
+            or not isinstance(consumer.get('played_original_asset_ids'), list)):
+        raise ValueError('Accepted consumer must prove matching protocol/binary/web, coherent restore and legacy refusal')
+    if profile['consumer'] != 'timing' and (consumer['original_take_records'] < 1 or not consumer['played_original_asset_ids']):
+        raise ValueError('Historical Sound/Reader consumers require originals and actual playback')
+    if profile['consumer'] == 'timing':
+        validate_timing_receipts(accepted, consumer)
+        return accepted, executable
     if profile['consumer'] == 'sound':
         if (type(consumer.get('sound_trials')) is not int or consumer['sound_trials'] < 1
                 or type(consumer.get('sound_completed_trials')) is not int or consumer['sound_completed_trials'] < 1
@@ -179,6 +186,83 @@ def accepted_candidate(path, native_path, transition_profile=DEFAULT_PROFILE):
                 or not any(len({path.get('chunk_id') for path in reader['dialogues'] if path.get('document_id') == document.get('document_id')}) >= 2 for document in reader['documents'])):
             raise ValueError('Reader consumer must restore authored/custom originals, exact excerpts, distinct chunk anchors, local-state isolation and voice')
     return accepted, executable
+
+
+def validate_timing_receipts(accepted, consumer):
+    """Bind restored timing observations to a pinned, actual two-client UI producer."""
+    producer = pinned_json(accepted['producer_receipt'], accepted['producer_receipt_sha256'])
+    timing = consumer.get('empty_app_timing')
+    if (producer.get('ok') is not True or producer.get('errors') != [] or producer.get('forbidden') != []
+            or not isinstance(producer.get('checks'), list) or not producer['checks']
+            or consumer.get('mode') != 'timing' or consumer.get('inference_calls') != 0
+            or consumer.get('forbidden_requests') != 0 or consumer.get('errors') != []
+            or consumer.get('compact_event_json_identical') is not True
+            or consumer.get('retry_cursor_unchanged') is not True
+            or not isinstance(timing, dict)):
+        raise ValueError('Timing needs pinned actual producer and exact inference-free restored consumer')
+    events = producer.get('events')
+    if not isinstance(events, list) or not events or any(not isinstance(event, dict) for event in events):
+        raise ValueError('Timing producer has no immutable event observations')
+    source_hash = hashlib.sha256(json.dumps(events, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
+    if consumer.get('timing_source_events_sha256') != source_hash:
+        raise ValueError('Restored timing history differs from the actual producer event bytes')
+    by_id = {event['id']: event for event in events}
+    if len(by_id) != len(events) or consumer.get('events') != len(events):
+        raise ValueError('Timing producer/consumer event identities differ')
+    starts, tasks, cadence, proof = (timing.get(key) for key in ('starts', 'tasks', 'cadence', 'producer_checks'))
+    if (not isinstance(starts, list) or not starts or not isinstance(tasks, list) or not tasks
+            or not isinstance(cadence, dict) or not isinstance(proof, dict)):
+        raise ValueError('Timing restored cadence, exact task states and immutable starts are required')
+    observed_starts = []
+    for start in starts:
+        if not isinstance(start, dict):
+            raise ValueError('Malformed restored start')
+        event = by_id.get(start.get('event_id'), {})
+        snapshot = {key: value for key, value in start.items() if key != 'event_id'}
+        if event.get('fact') != {'kind': 'review_started', 'data': snapshot}:
+            raise ValueError('Restored immutable start differs from the producer event')
+        observed_starts.append(event)
+    if (producer.get('starts') != observed_starts
+            or {event['id'] for event in observed_starts} != {event['id'] for event in events if event.get('fact', {}).get('kind') == 'review_started'}):
+        raise ValueError('Restored starts omit or change producer pinned start observations')
+    for key, kind in [('divergent_cadence_ids', 'review_cadence_changed'), ('divergent_timing_ids', 'review_timing_changed')]:
+        ids = proof.get(key)
+        if not isinstance(ids, list) or len(ids) != 2 or len(set(ids)) != 2:
+            raise ValueError('Timing must retain both divergent causal choices')
+        pair = [by_id.get(id, {}) for id in ids]
+        if any(event.get('fact', {}).get('kind') != kind for event in pair) or pair[0].get('device') == pair[1].get('device'):
+            raise ValueError('Timing divergent choices must come from two actual producer clients')
+        a, b = [event['fact']['data'] for event in pair]
+        if ids[0] in b['parents'] or ids[1] in a['parents']:
+            raise ValueError('Timing choices were sequential rather than independent causal branches')
+        if kind == 'review_cadence_changed' and a['cadence'] == b['cadence']:
+            raise ValueError('Timing cadence fixture has no conflicting preferences')
+        if kind == 'review_timing_changed' and (a['target'] != b['target'] or a['action'] == b['action']):
+            raise ValueError('Timing fixture must conflict on the same exact task')
+    late = proof.get('late_arrival_ids')
+    prior_ids = proof.get('prior_start_event_ids')
+    if (not isinstance(prior_ids, list) or not prior_ids
+            or any(id not in {start['event_id'] for start in starts} for id in prior_ids)
+            or not isinstance(late, list) or not late or any(id not in by_id for id in late)
+            or any(id in start.get('evidence_ids', []) for id in late for start in starts if start['event_id'] in prior_ids)):
+        raise ValueError('Late history must survive without rewriting earlier start evidence')
+    if not any(by_id[id]['fact']['kind'] in ('passage_revised', 'reader_document_recorded', 'teacher_document_recorded', 'stimulus_presented', 'attempt_context_recorded') for id in late):
+        raise ValueError('Timing recovery needs actual late source/support history, not only a later preference')
+    resumed = proof.get('paused_draft_resumed', {})
+    if (not resumed.get('before') or resumed.get('before') != resumed.get('after')
+            or producer.get('draft') != resumed['before']
+            or not any(start.get('session') == resumed.get('session') for start in starts)):
+        raise ValueError('Timing producer must resume the original pinned unfinished response')
+    for state in [cadence, *tasks]:
+        if (not isinstance(state, dict) or not isinstance(state.get('heads'), list)
+                or any(type(state.get(key)) is not bool for key in ('conflicted', 'pending'))):
+            raise ValueError('Restored timing state is missing explicit causal heads/conflict status')
+    if any(type(task.get('paused')) is not bool or not isinstance(task.get('target'), dict) or 'effective_due_at_ms' not in task
+           or (task.get('effective_due_at_ms') is not None and type(task['effective_due_at_ms']) is not int)
+           for task in tasks):
+        raise ValueError('Restored exact task due/paused states are malformed')
+    if consumer['original_take_records'] and not consumer['played_original_asset_ids']:
+        raise ValueError('Timing fixture with originals must retain actual playback evidence')
 
 
 def authenticated_statuses(expected_protocol):

@@ -15,6 +15,18 @@ const STEPS: [i64; 8] = [
     120 * DAY_MS,
 ];
 
+impl ReviewCadence {
+    /// Product timing presets, bounded independently of timestamp arithmetic.
+    pub fn scale_interval_ms(self, baseline: i64) -> i64 {
+        let scaled = match self {
+            Self::MoreOften => baseline / 2,
+            Self::Standard => baseline,
+            Self::MoreSpace => baseline.saturating_mul(2),
+        };
+        scaled.clamp(10 * MINUTE_MS, 120 * DAY_MS)
+    }
+}
+
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(deny_unknown_fields)]
 pub struct ReviewKey {
@@ -95,6 +107,70 @@ impl SpacedReview {
             .filter(|(_, a)| a.revision == key.revision && a.skill == key.skill)
             .collect();
         observations.sort_by_key(|(e, _)| (e.recorded_at_ms, e.id));
+        // Legacy histories retain their original ordering. New co-timed starts have no
+        // causal UUID order: one conservative observation assigns the group's next gap.
+        let target = ReviewTarget::Passage {
+            revision: key.revision,
+            skill: key.skill,
+        };
+        let start_for = |event: &Event, attempt: &Attempt| {
+            library
+                .review_start_for_session(attempt.session, target)
+                .filter(|start| start.started_at_ms <= event.recorded_at_ms)
+        };
+        let mut grouped = BTreeMap::<i64, Vec<_>>::new();
+        for &(event, attempt) in &observations {
+            grouped
+                .entry(event.recorded_at_ms)
+                .or_default()
+                .push((event, attempt));
+        }
+        let mut assignments = BTreeMap::new();
+        let mut previous_completion: Option<i64> = None;
+        for (time, group) in grouped {
+            if group.iter().any(|(e, a)| start_for(e, a).is_some()) {
+                let representative = group
+                    .iter()
+                    .min_by_key(|(e, a)| {
+                        let priority = match self.evidence(library, e.id, a) {
+                            ReviewEvidence::Again | ReviewEvidence::CoachCorrection => 0,
+                            ReviewEvidence::ContestedJudgment => 1,
+                            ReviewEvidence::Assisted => 2,
+                            ReviewEvidence::NotReported => 3,
+                            _ => 4,
+                        };
+                        (priority, e.id)
+                    })
+                    .unwrap()
+                    .0
+                    .id;
+                let cadence = group
+                    .iter()
+                    .map(|(e, a)| start_for(e, a).map(|s| s.cadence).unwrap_or_default())
+                    .min_by_key(|c| match c {
+                        ReviewCadence::MoreOften => 0,
+                        ReviewCadence::Standard => 1,
+                        ReviewCadence::MoreSpace => 2,
+                    })
+                    .unwrap();
+                let earliest_start = group
+                    .iter()
+                    .map(|(e, a)| {
+                        start_for(e, a)
+                            .map(|s| s.started_at_ms)
+                            .unwrap_or(e.recorded_at_ms)
+                    })
+                    .min()
+                    .unwrap();
+                for (event, _) in &group {
+                    assignments.insert(
+                        event.id,
+                        (representative, cadence, earliest_start, previous_completion),
+                    );
+                }
+            }
+            previous_completion = Some(time);
+        }
         let mut level = 0usize;
         let mut scheduled_from = None;
         for (event, attempt) in observations {
@@ -102,11 +178,16 @@ impl SpacedReview {
                 state.ignored_future_attempts += 1;
                 continue;
             }
+            let assignment = assignments.get(&event.id);
+            let cadence = assignment.map(|a| a.1).unwrap_or_default();
+            let started_at_ms = assignment.map(|a| a.2).unwrap_or(event.recorded_at_ms);
             let evidence = self.evidence(library, event.id, attempt);
             let first = state.interval_ms == 0;
             state.attempts += 1;
             state.last_attempt_ms = Some(event.recorded_at_ms);
-            state.last_evidence = Some(evidence);
+            if assignment.is_none_or(|a| a.0 == event.id) {
+                state.last_evidence = Some(evidence);
+            }
             let success = matches!(
                 evidence,
                 ReviewEvidence::UnassistedSelfReport | ReviewEvidence::CoachConfirmedUnassisted
@@ -120,33 +201,41 @@ impl SpacedReview {
             if !attempt.cues.is_empty() || attempt.self_rating == SelfRating::WithHelp {
                 state.assisted_attempts += 1;
             }
-            if evidence == ReviewEvidence::NotReported {
+            if evidence == ReviewEvidence::NotReported
+                || assignment.is_some_and(|a| a.0 != event.id)
+            {
                 continue;
             }
             if success {
                 if first {
                     level = 1;
-                    state.interval_ms = STEPS[level];
+                    state.interval_ms = cadence.scale_interval_ms(STEPS[level]);
                     state.due_at_ms = event.recorded_at_ms.saturating_add(state.interval_ms);
                     scheduled_from = Some(event.recorded_at_ms);
-                } else if event.recorded_at_ms >= state.due_at_ms
-                    && scheduled_from.is_none_or(|time| event.recorded_at_ms > time)
+                } else if started_at_ms >= state.due_at_ms
+                    && assignment.is_none_or(|a| {
+                        a.3.is_none_or(|previous| {
+                            started_at_ms.saturating_sub(previous) >= state.interval_ms
+                        })
+                    })
+                    && scheduled_from.is_none_or(|time| started_at_ms > time)
                 {
                     // Only retrieval at/after the scheduled delay advances the ladder.
                     level = (level + 1).min(STEPS.len() - 1);
                     state.successful_spaced_reviews += 1;
-                    state.interval_ms = STEPS[level];
+                    state.interval_ms = cadence.scale_interval_ms(STEPS[level]);
                     state.due_at_ms = event.recorded_at_ms.saturating_add(state.interval_ms);
                     scheduled_from = Some(event.recorded_at_ms);
                 }
                 // Early repeated success does not postpone an already scheduled review.
             } else {
                 level = 0;
-                state.interval_ms = if evidence == ReviewEvidence::Assisted {
-                    30 * MINUTE_MS
-                } else {
-                    STEPS[0]
-                };
+                state.interval_ms =
+                    cadence.scale_interval_ms(if evidence == ReviewEvidence::Assisted {
+                        30 * MINUTE_MS
+                    } else {
+                        STEPS[0]
+                    });
                 let retry = event.recorded_at_ms.saturating_add(state.interval_ms);
                 // Repeated immediate attempts cannot push a retry endlessly into the future.
                 state.due_at_ms = if first || event.recorded_at_ms >= state.due_at_ms {

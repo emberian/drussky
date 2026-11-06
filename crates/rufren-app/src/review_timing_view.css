@@ -1,0 +1,14 @@
+.review-timing {margin-top:8px;max-width:62ch}
+.review-timing > summary,.review-timing-details > summary {cursor:pointer;min-height:44px;padding:10px 0;line-height:1.5}
+.review-timing p {margin:8px 0}
+.review-timing-status {font-weight:600}
+.review-timing-actions {display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}
+.review-timing-actions button {min-height:44px}
+.review-cadence select {max-width:28rem}
+.review-cadence .quiet {max-width:65ch}
+@media(max-width:600px){.review-timing-actions {align-items:stretch}.review-timing-actions button {flex:1 1 10rem}}
+.passage-return-row {display:flex;justify-content:space-between;gap:18px;border-top:1px solid var(--line);padding:16px 0}
+.passage-return-description {min-width:0;flex:1}
+.passage-return-description h3 {font-size:1rem;margin:8px 0}
+.passage-return-row > .actions {align-self:flex-start;flex-wrap:wrap}
+@media(max-width:600px){.passage-return-row {flex-direction:column;gap:6px}.passage-return-row > .actions {align-self:stretch}}

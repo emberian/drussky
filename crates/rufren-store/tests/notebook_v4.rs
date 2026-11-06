@@ -81,6 +81,19 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
     )
     .unwrap();
     originals.push((sound, sound_json));
+    let definition: ReaderDefinition = serde_json::from_str(include_str!(
+        "../../../scripts/platform/fixtures/reader-v7-definition.json"
+    ))
+    .unwrap();
+    let mut reader = reader_document_event(&definition).unwrap();
+    reader.version = 7;
+    let reader_json = serde_json::to_string_pretty(&reader).unwrap();
+    raw.execute(
+        "INSERT INTO events(id,json) VALUES (?1,?2)",
+        rusqlite::params![reader.id.to_string(), &reader_json],
+    )
+    .unwrap();
+    originals.push((reader, reader_json));
     drop(raw);
     let mut store = Store::open(&path).unwrap();
     assert_eq!(store.library().unwrap().events.len(), originals.len());
@@ -88,9 +101,19 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
         "../../../scripts/platform/fixtures/reader-v7-definition.json"
     ))
     .unwrap();
-    let new = reader_document_event(&definition).unwrap();
+    let reader = reader_document_event(&definition).unwrap();
+    assert_eq!(reader.version, 7, "deterministic Reader identity retains its v7 envelope");
+    let new = Event::new(
+        Uuid::new_v4(),
+        8,
+        Fact::ReviewCadenceChanged(ReviewCadenceChange {
+            parents: Default::default(),
+            cadence: ReviewCadence::MoreOften,
+        }),
+    )
+    .unwrap();
     assert_eq!(new.version, EVENT_VERSION);
-    assert!(new.version >= 7);
+    assert_eq!(new.version, 8);
     for version in 3..SYNC_VERSION {
         assert!(
             store
@@ -134,7 +157,7 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
         reopened
             .library()
             .unwrap()
-            .reader_document(new.id)
+            .reader_document(reader.id)
             .unwrap()
             .definition,
         definition

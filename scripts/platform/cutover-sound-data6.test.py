@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Isolated receipt/history guards; never start services or access private data."""
+import copy
 import importlib.util
 import json
 from contextlib import closing
@@ -51,6 +52,17 @@ class HistoryGuard(unittest.TestCase):
             db.execute('UPDATE events SET json=?', (json.dumps({'version': True}),))
         with self.assertRaises(ValueError):
             cutover.logical_database(self.path)
+
+    def test_timing_rollback7_requires_unchanged_history_without8(self):
+        with closing(sqlite3.connect(self.path)) as db, db:
+            db.execute('UPDATE events SET json=?', (json.dumps({'version': 7}),))
+        seven = cutover.logical_database(self.path, 8)
+        self.assertTrue(cutover.rollback_is_safe(seven, seven, 7))
+        with closing(sqlite3.connect(self.path)) as db, db:
+            db.execute('INSERT INTO events VALUES(2,?,?)', ('new-eight', json.dumps({'version': 8})))
+        eight = cutover.logical_database(self.path, 8)
+        self.assertFalse(cutover.rollback_is_safe(seven, eight, 7))
+        self.assertFalse(cutover.rollback_is_safe(eight, eight, 7))
 
     def test_pending_originals_have_actionable_safe_backup_failure(self):
         with closing(sqlite3.connect(self.path)) as db, db:
@@ -266,10 +278,112 @@ class ReaderReceiptGuard(unittest.TestCase):
             self.check()
 
 
+class TimingReceiptGuard(unittest.TestCase):
+    def setUp(self):
+        ReaderReceiptGuard.setUp(self)
+        self.value['data_protocol'] = 8
+        self.build_value.update(event_version=8, sync_version=8)
+        self.producer = self.root / 'producer.json'
+        target = {'kind': 'teacher', 'document_id': 'synthetic-document', 'practice_index': 0}
+        def event(id, device, kind, data):
+            return {'id': id, 'device': device, 'fact': {'kind': kind, 'data': data}}
+        snapshot = {'session': 'original-session', 'target': target, 'evidence_ids': ['known-source']}
+        self.producer_value = {'ok': True, 'errors': [], 'forbidden': [], 'checks': ['actual UI assertions'],
+            'draft': 'unfinished original response', 'starts': [event('start', 'A', 'review_started', snapshot)],
+            'events': [event('ca', 'A', 'review_cadence_changed', {'parents': [], 'cadence': 'more_often'}),
+                       event('cb', 'B', 'review_cadence_changed', {'parents': [], 'cadence': 'more_space'}),
+                       event('ta', 'A', 'review_timing_changed', {'parents': [], 'target': target, 'action': {'kind': 'pause'}}),
+                       event('tb', 'B', 'review_timing_changed', {'parents': [], 'target': target, 'action': {'kind': 'available_at', 'at_ms': 50}}),
+                       event('late', 'B', 'passage_revised', {}), event('start', 'A', 'review_started', snapshot)]}
+        self.value['producer_receipt'] = str(self.producer)
+        self.consumer_value.update(timing_source_events_sha256=cutover.hashlib.sha256(json.dumps(self.producer_value['events'], ensure_ascii=False, separators=(',', ':')).encode()).hexdigest(), protocol=8, mode='timing', original_take_records=0, played_original_asset_ids=[],
+            inference_calls=0, forbidden_requests=0, errors=[], compact_event_json_identical=True,
+            retry_cursor_unchanged=True, events=len(self.producer_value['events']), empty_app_timing={
+                'starts': [{'event_id': 'start', **snapshot}],
+                'cadence': {'heads': ['ca', 'cb'], 'conflicted': True, 'pending': False, 'selected': 'choose'},
+                'tasks': [{'target': target, 'heads': ['ta', 'tb'], 'conflicted': True, 'pending': False, 'paused': True, 'effective_due_at_ms': None}],
+                'producer_checks': {'divergent_cadence_ids': ['ca', 'cb'], 'divergent_timing_ids': ['ta', 'tb'],
+                    'paused_draft_resumed': {'session': 'original-session', 'before': 'unfinished original response', 'after': 'unfinished original response'},
+                    'late_arrival_ids': ['late'], 'prior_start_event_ids': ['start']}})
+
+    def tearDown(self):
+        ReceiptGuard.tearDown(self)
+
+    def write(self):
+        self.consumer_value['timing_source_events_sha256'] = cutover.hashlib.sha256(json.dumps(self.producer_value['events'], ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
+        self.producer.write_text(json.dumps(self.producer_value))
+        self.value['producer_receipt_sha256'] = cutover.prior.digest(self.producer)
+        ReaderReceiptGuard.write(self)
+
+    def check(self):
+        with patch.object(cutover.preflight, 'artifact', return_value={'source_evidence': str(self.source)}), \
+                patch.object(cutover, 'worker_source_fingerprint', return_value={'scripts/speech/synthetic.py': 'worker-source'}):
+            return cutover.accepted_candidate(self.accepted, self.native, 'review-timing-data8')
+
+    def test_explicit_timing_profile_allows_text_only_with_exact_pinned_producer(self):
+        self.write()
+        self.assertEqual(self.check()[1], self.binary.resolve())
+        self.producer.write_text('{}')
+        with self.assertRaises(ValueError):
+            self.check()
+
+    def test_timing_cannot_reuse_reader7_or_sound6_profile(self):
+        self.write()
+        for profile in ['reader-data7', 'sound-data6']:
+            with self.assertRaises(ValueError):
+                cutover.accepted_candidate(self.accepted, self.native, profile)
+
+    def test_missing_restore_starts_conflicts_or_changed_draft_refuse(self):
+        original = copy.deepcopy(self.consumer_value)
+        for key, value in [('starts', []), ('tasks', []), ('producer_checks', {}), ('cadence', {})]:
+            with self.subTest(key=key):
+                self.consumer_value = copy.deepcopy(original)
+                self.consumer_value['empty_app_timing'][key] = value
+                self.write()
+                with self.assertRaises((ValueError, KeyError)):
+                    self.check()
+        self.consumer_value = copy.deepcopy(original)
+        self.consumer_value['empty_app_timing']['starts'][0]['session'] = 'replacement-session'
+        self.write()
+        with self.assertRaises(ValueError):
+            self.check()
+
+    def test_same_device_or_late_evidence_rewrite_refuse(self):
+        self.producer_value['events'][1]['device'] = 'A'
+        self.write()
+        with self.assertRaises(ValueError):
+            self.check()
+        self.producer_value['events'][1]['device'] = 'B'
+        self.consumer_value['empty_app_timing']['starts'][0]['evidence_ids'].append('late')
+        self.write()
+        with self.assertRaises(ValueError):
+            self.check()
+
+    def test_later_generic_start_may_observe_the_late_source(self):
+        event = copy.deepcopy(self.producer_value['starts'][0])
+        event['id'] = 'later-generic-start'
+        event['fact']['data'].update(session='generic-session', evidence_ids=['known-source', 'late'])
+        self.producer_value['events'].append(event)
+        self.producer_value['starts'].append(event)
+        self.consumer_value['events'] += 1
+        self.consumer_value['empty_app_timing']['starts'].append({'event_id': event['id'], **event['fact']['data']})
+        self.write()
+        self.assertEqual(self.check()[1], self.binary.resolve())
+
+    def test_wrong_policy_or_build8_identity_refuses(self):
+        for key, value in [('event_version', 7), ('sync_version', 7), ('teacher_policy', 'wrong-policy')]:
+            previous = self.build_value[key]
+            self.build_value[key] = value
+            self.write()
+            with self.assertRaises(ValueError):
+                self.check()
+            self.build_value[key] = previous
+
+
 class TransitionPlan(unittest.TestCase):
     def test_both_plans_are_explicit_and_default_is_historical_sound(self):
         script = Path(__file__).with_name('cutover-sound-data6.py')
-        for arguments, before, after in [([], 5, 6), (['--transition-profile', 'reader-data7'], 6, 7)]:
+        for arguments, before, after in [([], 5, 6), (['--transition-profile', 'reader-data7'], 6, 7), (['--transition-profile', 'review-timing-data8'], 7, 8)]:
             result = subprocess.run([sys.executable, str(script), 'plan', *arguments], capture_output=True, text=True, check=True)
             value = json.loads(result.stdout)
             self.assertEqual((value['from_protocol'], value['to_protocol']), (before, after))

@@ -23,6 +23,8 @@ mod reader_audio;
 mod reader_view;
 mod recognition;
 mod recognition_view;
+mod review_timing;
+mod review_timing_view;
 mod sound_focus;
 mod sound_focus_view;
 mod speech_playback;
@@ -209,7 +211,8 @@ fn Today(mut app: Signal<AppState>) -> Element {
         daily_plan_view::DailyPractice {app}
         ContinueSoundFocus {app}
         PausedSoundFocus {app}
-        details {class:"panel",summary {"Browse your saved Teacher returns"}teacher_revisit_view::TeacherReturns {app}}
+        details {class:"panel",summary {"Browse your saved Teacher returns"}teacher_revisit_view::TeacherReturns {app,expanded:true}}
+        details {class:"panel",summary {"Browse your saved passage returns"}review_timing_view::PassageReturns {app}}
         teacher_notebook_view::ContinueTeacher {app}
         drafts_view::PausedPractices {app}
         div {class:"section-heading",h2 {"Make it yours"}span {"Small steps, connected."}}
@@ -323,6 +326,7 @@ fn Settings(mut app: Signal<AppState>) -> Element {
             div {class:"preference-row",input {id:"show-chunks",r#type:"checkbox",checked:state.preferences.chunked,onchange:move |e|act(app,|s|{s.preferences.chunked=e.checked();s.save_preferences()})}label {r#for:"show-chunks","Break lesson phrases into short chunks"}}
             p {class:"quiet","Choose the size of your next short session on Today. It mixes returns across skills you’ve practiced, with a quiet option for reading and writing. Every practice stays untimed; Teacher exercises keep their original question and skill."}
         }
+        review_timing_view::ReviewTimingSettings {app}
         workspace_view::SavedWindows {}
         div {class:"cards two",
             section {class:"panel",h2 {"Connect your devices"}p {"Passages, practice, and teacher feedback sync through your private relay. Choose separately whether to transfer recordings; model API credentials stay on the relay."}

@@ -329,7 +329,7 @@ impl AppState {
             return Err("Choose a complete reference recording for this listening input.".into());
         }
         let mut next = draft.clone();
-        next.fork_saved_answer();
+        self.fork_teacher_answer_for_edit(answer, &mut next)?;
         let audio = next.audio.as_mut().unwrap();
         let review = next.review.is_some();
         let audio_family = format!("teacher-oral-reference:{}", binding.revision_id);
@@ -462,7 +462,7 @@ impl AppState {
             return Ok(());
         }
         let mut next = draft.clone();
-        next.fork_saved_answer();
+        self.fork_teacher_answer_for_edit(answer, &mut next)?;
         next.audio.as_mut().unwrap().selected_recording = Some(selected);
         next.response = format!(
             "Selected spoken recording · {}{}",
@@ -491,7 +491,7 @@ impl AppState {
             return Ok(());
         }
         let mut next = draft.clone();
-        next.fork_saved_answer();
+        self.fork_teacher_answer_for_edit(answer, &mut next)?;
         next.audio.as_mut().unwrap().selected_recording = None;
         next.response.clear();
         self.save_teacher_practice_draft(&next)?;
@@ -516,7 +516,7 @@ impl AppState {
             return Ok(());
         }
         let mut next = draft.clone();
-        next.fork_saved_answer();
+        self.fork_teacher_answer_for_edit(answer, &mut next)?;
         next.audio.as_mut().unwrap().cues.push(cue);
         sync_review_cues(&mut next);
         self.save_teacher_practice_draft(&next)?;

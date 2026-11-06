@@ -635,6 +635,9 @@ mod tests {
                 prompt: "Synthetic question".into(),
                 skill: Skill::Writing,
                 due: true,
+                timing: ReviewTimingPolicy.project(&library, PracticeBatchKey::Teacher {
+                    document_id: key.document_id, practice_index: key.practice_index,
+                }, state.due_at_ms, now, &Default::default()),
                 state,
                 observations: vec![],
                 derived_support: vec![crate::teacher_revisit::TeacherRevisitDerivedSupport {
@@ -683,6 +686,9 @@ mod tests {
                 prompt: "Synthetic question".into(),
                 skill: Skill::Writing,
                 due: state.is_due(now),
+                timing: ReviewTimingPolicy.project(&Library::default(), PracticeBatchKey::Teacher {
+                    document_id: key.document_id, practice_index: key.practice_index,
+                }, state.due_at_ms, now, &Default::default()),
                 state,
                 observations,
                 derived_support: vec![],

@@ -14,6 +14,8 @@ pub use speech_facts::*;
 mod learner;
 mod learning_facts;
 mod review;
+mod review_timing;
+pub use review_timing::*;
 mod teaching;
 pub use learner::*;
 pub use learning_facts::*;
@@ -35,9 +37,9 @@ mod reader;
 pub use reader::*;
 
 /// Current event encoding. Database migrations and transport compatibility are independent.
-pub const EVENT_VERSION: u32 = 7;
+pub const EVENT_VERSION: u32 = 8;
 pub const MIN_EVENT_VERSION: u32 = 1;
-pub const SYNC_VERSION: u32 = 7;
+pub const SYNC_VERSION: u32 = 8;
 /// Backward-compatible name for callers constructing events; never use for a DB schema.
 pub const SCHEMA_VERSION: u32 = EVENT_VERSION;
 pub const SYNC_BATCH: usize = 128;
@@ -178,6 +180,9 @@ pub enum Fact {
     SoundTrialCompleted(SoundTrialCompleted),
     ReaderDocumentRecorded(ReaderDocument),
     ReaderExcerptLinked(ReaderExcerptLink),
+    ReviewCadenceChanged(ReviewCadenceChange),
+    ReviewTimingChanged(ReviewTimingChange),
+    ReviewStarted(ReviewStartDecision),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
@@ -204,6 +209,9 @@ impl Event {
     }
     pub fn validate(&self) -> Result<(), Error> {
         let required = match &self.fact {
+            Fact::ReviewCadenceChanged(_)
+            | Fact::ReviewTimingChanged(_)
+            | Fact::ReviewStarted(_) => 8,
             Fact::ReaderDocumentRecorded(_) | Fact::ReaderExcerptLinked(_) => 7,
             Fact::TeacherDialogueUserRecorded(r)
                 if r.anchor
@@ -301,6 +309,9 @@ impl Event {
             Fact::ReaderDocumentRecorded(_) | Fact::ReaderExcerptLinked(_) => {
                 validate_reader_fact(self)?
             }
+            Fact::ReviewCadenceChanged(_)
+            | Fact::ReviewTimingChanged(_)
+            | Fact::ReviewStarted(_) => validate_review_timing_fact(self)?,
             _ => validate_learning_fact(self)?,
         }
         Ok(())
@@ -338,6 +349,7 @@ impl Library {
             validate_sound_references(event, &merged)?;
             validate_dialogue_audio_references(event, &merged)?;
             validate_learning_references(event, &merged)?;
+            validate_review_timing_references(event, &merged)?;
             if let Fact::PassageRevised(r) = &event.fact {
                 for parent in &r.parents {
                     if let Some(p) = merged.get(parent) {
@@ -389,6 +401,11 @@ impl Library {
                 }
                 if let Some(event) = merged.get(&id) {
                     stack.extend(learning_parents(&event.fact).iter().map(|p| (*p, false)));
+                    stack.extend(
+                        review_timing_parents(&event.fact)
+                            .iter()
+                            .map(|p| (*p, false)),
+                    );
                 }
             }
         }

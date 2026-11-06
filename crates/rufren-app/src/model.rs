@@ -181,6 +181,15 @@ impl AppState {
     pub(crate) fn navigate(&mut self, page: Page) -> Result<()> {
         self.flush_pending_reader_edits()?;
         if page == Page::Practice {
+            if let Some(session) = self.session.clone() {
+                self.recover_pending_review_start(
+                    session.id,
+                    PracticeBatchKey::Passage {
+                        revision: session.revision,
+                        skill: session.skill,
+                    },
+                )?;
+            }
             self.reconcile_daily_plan(now_ms())?;
         }
         if matches!(
@@ -222,6 +231,7 @@ impl AppState {
         session_id: Uuid,
     ) -> Result<()> {
         self.flush_pending_reader_edits()?;
+        self.refresh()?;
         if self
             .library
             .events
@@ -256,6 +266,37 @@ impl AppState {
         if passage.passage.translation.trim().is_empty() {
             return Err("Add the passage’s meaning before practicing, so you have something to compare your response with.".into());
         }
+        let now = now_ms();
+        let target = PracticeBatchKey::Passage { revision, skill };
+        let baseline = SpacedReview.project(&self.library, ReviewKey { revision, skill }, now);
+        let timing = self.review_timing(target, baseline.due_at_ms, now);
+        let reason = if timing.paused || timing.pending || !timing.is_due(now) {
+            "You explicitly chose this passage outside its current automatic review availability."
+        } else {
+            "You explicitly chose this saved passage and skill."
+        };
+        let evidence = self.library.events.keys().copied().collect();
+        // Explicit general practice of a generated reference stays separate from its exact
+        // Teacher question. It must not acquire that question's timing or consume its intent.
+        let decision = if self
+            .library
+            .events
+            .get(&revision)
+            .is_some_and(is_teacher_generated_reference)
+        {
+            None
+        } else {
+            Some(self.prepare_review_start(
+                session_id,
+                target,
+                baseline.due_at_ms,
+                now,
+                now,
+                "free-practice-v1",
+                reason,
+                evidence,
+            )?)
+        };
         self.archive_current()?;
         let session = Session {
             id: session_id,
@@ -268,6 +309,12 @@ impl AppState {
         self.repo.set("session", &Some(&session))?;
         self.plan = None;
         self.session = Some(session);
+        if let Some(decision) = decision {
+            if let Err(problem) = self.record_review_start(&decision) {
+                self.page = Page::Today;
+                return Err(problem);
+            }
+        }
         self.set_plan(None, None, "free-practice-v1")?;
         self.clear_active_teacher_revisit()?;
         self.select_ordinary_practice_surface()?;
@@ -298,6 +345,14 @@ impl AppState {
             .as_ref()
             .is_some_and(|s| s.phase != Phase::Complete)
         {
+            let session = self.session.clone().unwrap();
+            self.recover_pending_review_start(
+                session.id,
+                PracticeBatchKey::Passage {
+                    revision: session.revision,
+                    skill: session.skill,
+                },
+            )?;
             self.page = Page::Practice;
             return Ok(());
         }

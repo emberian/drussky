@@ -156,7 +156,7 @@ pub(crate) fn saved_teacher_practice_origin(
 
 impl AppState {
     pub(crate) fn teacher_practice_draft(
-        &self,
+        &mut self,
         answer: &TeacherResponse,
         index: usize,
     ) -> Result<TeacherPracticeDraft> {
@@ -171,9 +171,16 @@ impl AppState {
             {
                 return Err("This saved draft belongs to a different teacher exercise.".into());
             }
+            self.recover_pending_review_start(
+                saved.id,
+                PracticeBatchKey::Teacher {
+                    document_id: teacher_document_id(answer),
+                    practice_index: index,
+                },
+            )?;
             return Ok(saved);
         }
-        Ok(TeacherPracticeDraft {
+        let draft = TeacherPracticeDraft {
             id: Uuid::new_v4(),
             source,
             index,
@@ -182,7 +189,60 @@ impl AppState {
             saved_attempt: None,
             audio: None,
             review: None,
-        })
+        };
+        // A durable intent pins this new start before exposing any response controls.
+        let target = PracticeBatchKey::Teacher {
+            document_id: teacher_document_id(answer),
+            practice_index: index,
+        };
+        let decision = self.prepare_review_start(
+            draft.id,
+            target,
+            draft.started_at_ms,
+            draft.started_at_ms,
+            draft.started_at_ms,
+            "teacher-guided-v1",
+            "You chose a new Teacher exercise. Its initial cadence is pinned before practice.",
+            self.library.events.keys().copied().collect(),
+        )?;
+        self.save_teacher_practice_draft(&draft)?;
+        self.record_review_start(&decision)?;
+        Ok(draft)
+    }
+
+    /// Fork a completed guided answer before accepting a new response or support action.
+    pub(crate) fn fork_teacher_answer_for_edit(
+        &mut self,
+        answer: &TeacherResponse,
+        draft: &mut TeacherPracticeDraft,
+    ) -> Result<()> {
+        if draft.saved_attempt.is_none() {
+            return Ok(());
+        }
+        let stored = self.teacher_practice_draft(answer, draft.index)?;
+        if stored.id != draft.id && stored.saved_attempt.is_none() {
+            return Err("This task already has a newer unfinished response. Reopen it to continue; its draft was kept.".into());
+        }
+        let mut next = draft.clone();
+        next.fork_saved_answer();
+        let target = PracticeBatchKey::Teacher {
+            document_id: teacher_document_id(answer),
+            practice_index: next.index,
+        };
+        let decision = self.prepare_review_start(
+            next.id,
+            target,
+            next.started_at_ms,
+            next.started_at_ms,
+            next.started_at_ms,
+            "teacher-guided-v1",
+            "You chose to try this Teacher exercise again with a fresh response.",
+            self.library.events.keys().copied().collect(),
+        )?;
+        self.save_teacher_practice_draft(&next)?;
+        self.record_review_start(&decision)?;
+        *draft = next;
+        Ok(())
     }
 
     pub(crate) fn save_teacher_practice_draft(&self, draft: &TeacherPracticeDraft) -> Result<()> {
@@ -209,7 +269,7 @@ impl AppState {
     }
 
     pub(crate) fn teacher_practice_edit_response(
-        &self,
+        &mut self,
         answer: &TeacherResponse,
         draft: &mut TeacherPracticeDraft,
         text: String,
@@ -242,7 +302,7 @@ impl AppState {
             return Ok(());
         }
         let mut next = draft.clone();
-        next.fork_saved_answer();
+        self.fork_teacher_answer_for_edit(answer, &mut next)?;
         next.response = text;
         self.save_teacher_practice_draft(&next)?;
         *draft = if next.review.is_some() {

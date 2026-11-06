@@ -167,6 +167,7 @@ fn PassagePractice(mut app: Signal<AppState>) -> Element {
                 Phase::Complete=>rsx! {
                     div {class:"completion-mark","✦"}h2 {"A little more familiar."}p {"Your response and the support you used are saved. Give it some time, then find out what stays with you."}
                     p {class:"quiet","{next_review(&state,session.revision,session.skill)}"}
+                    crate::review_timing_view::ReviewStartDetails {app,session:session.id,target:PracticeBatchKey::Passage {revision:session.revision,skill:session.skill}}
                     crate::daily_plan_view::SessionNext {app}
                     div {class:"actions",button {class:"primary",onclick:move |_|app.write().page=Page::Today,"Back to today"}button {class:"secondary",onclick:move |_|app.write().page=Page::Lessons,"Return to your lesson"}button {class:"text-button",onclick:move |_|app.write().page=Page::Teacher,"Get teacher feedback"}}
                 },
@@ -231,7 +232,12 @@ fn next_review(state: &AppState, revision: uuid::Uuid, skill: Skill) -> String {
     }
     let now = crate::repository::now_ms();
     let review = SpacedReview.project(&state.library, ReviewKey { revision, skill }, now);
-    let minutes = (review.due_at_ms.saturating_sub(now).max(0) + 59_999) / 60_000;
+    let timing = state.review_timing(PracticeBatchKey::Passage { revision, skill }, review.due_at_ms, now);
+    if timing.paused { return "Automatic returns for this task are paused. Your response is saved.".into(); }
+    let Some(due) = timing.effective_due_at_ms else {
+        return "Some saved timing history is still missing. Your response is saved.".into();
+    };
+    let minutes = due.saturating_sub(now).max(0).saturating_add(59_999) / 60_000;
     if minutes < 60 {
         format!("Suggested revisit in about {minutes} minutes.")
     } else if minutes < 1440 {
