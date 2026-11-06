@@ -312,3 +312,94 @@ fn bounded_evidence_and_unavailable_start_preserve_the_issued_scope() {
     s.evidence_total_count = 511;
     assert!(event(21, Fact::ReviewStarted(s)).validate().is_err());
 }
+
+#[test]
+fn foundation_owner_can_pin_a_start_while_other_reserved_artifacts_stay_excluded() {
+    let reference = |source: &str| {
+        let mut e = starter(id(999), 0);
+        e.id = id(1);
+        if let Fact::PassageRevised(r) = &mut e.fact {
+            r.passage.source = source.into();
+        }
+        e
+    };
+    let mut foundation = Library::default();
+    foundation
+        .merge(&[reference("rufren-foundation-v1:foundations.2:f4-meaning@1")])
+        .unwrap();
+    foundation
+        .merge(&[event(20, Fact::ReviewStarted(start(30, &[])))])
+        .unwrap();
+    assert!(foundation
+        .review_start_for_session(id(30), target())
+        .is_some());
+    // The start allowance does not expose foundation references in the generic review queue.
+    assert!(SpacedReview
+        .queue(&foundation, 100, &[Skill::Reading])
+        .is_empty());
+    assert!(foundation
+        .merge(&[timing(21, &[], ReviewTimingAction::Pause)])
+        .is_err());
+    let (passage, revision) = sound_reference_identity("ru.test.sound", "1");
+    let mut sound = reference("Rufren Sound Focus reference · ru.test.sound@1");
+    sound.id = revision;
+    sound.device = Uuid::new_v5(&passage, b"sound-reference-writer");
+    if let Fact::PassageRevised(r) = &mut sound.fact {
+        r.passage.id = passage;
+        r.passage.title = "Sound Focus reference".into();
+    }
+    let original = "Тень.";
+    let definition = ReaderDefinition {
+        id: "ru.test.reader".into(),
+        version: "1".into(),
+        title: "A short reading".into(),
+        original: original.into(),
+        original_sha256: reader_text_sha256(original),
+        source: ReaderSource {
+            kind: ReaderSourceKind::AiAuthored,
+            title: "Test".into(),
+            author: "AI".into(),
+            edition: "1".into(),
+            url: None,
+            rights: "Original test text".into(),
+            provenance: "Test fixture".into(),
+        },
+        help_provenance: "Test support".into(),
+        chunks: vec![ReaderChunk {
+            id: "chunk-1".into(),
+            span: TextSpan {
+                start: 0,
+                end: original.len(),
+            },
+            text: original.into(),
+            stress: None,
+            translation: Some("Shadow.".into()),
+            glosses: vec![],
+            grammar_notes: vec![],
+            prompts: vec![],
+        }],
+    };
+    let document = reader_document(&definition).unwrap();
+    let (reader, link) =
+        reader_reference_events(&document, "chunk-1", ReaderTextLayer::Original).unwrap();
+    for (artifact, additional) in [
+        (reference("AI teacher exercise · reserved"), vec![]),
+        (sound, vec![]),
+        (
+            reader,
+            vec![reader_document_event(&definition).unwrap(), link],
+        ),
+    ] {
+        let mut library = Library::default();
+        library.merge(&additional).unwrap();
+        library.merge(&[artifact.clone()]).unwrap();
+        let mut decision = start(30, &[]);
+        decision.target = ReviewTarget::Passage {
+            revision: artifact.id,
+            skill: Skill::Reading,
+        };
+        assert!(library
+            .merge(&[event(20, Fact::ReviewStarted(decision))])
+            .is_err());
+    }
+}

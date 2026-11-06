@@ -1,3 +1,4 @@
+mod apple_export;
 mod asset_sync;
 mod audio_studio;
 mod coach;
@@ -13,6 +14,7 @@ mod exposure;
 mod exposure_view;
 mod foundation;
 mod foundation_audio;
+mod foundation_review;
 mod foundation_view;
 mod gateway;
 mod learning;
@@ -77,7 +79,7 @@ fn main() {
     dioxus::LaunchBuilder::desktop()
         .with_cfg(
             dioxus::desktop::Config::new()
-                .with_window(dioxus::desktop::WindowBuilder::new().with_title("Rufren")),
+                .with_window(dioxus::desktop::WindowBuilder::new().with_title("Drussky")),
         )
         .launch(App);
     #[cfg(not(all(feature = "desktop", not(target_arch = "wasm32"))))]
@@ -118,7 +120,7 @@ fn App() -> Element {
         }
         Some(Ok(state)) => rsx! {Shell {initial:state}},
         Some(Err(error)) => rsx! {
-            style {"{STYLE}"} main {class:"fatal",h1 {"Your notebook could not be opened."} p {"{error}"} p {"Your saved data has not been replaced. Restore access to storage and reopen Rufren."}}
+            style {"{STYLE}"} main {class:"fatal",h1 {"Your notebook could not be opened."} p {"{error}"} p {"Your saved data has not been replaced. Restore access to storage and reopen Drussky."}}
         },
     }
 }
@@ -132,13 +134,13 @@ fn Shell(initial: AppState) -> Element {
         style {"{FEEDBACK_STYLE}"}
         div {class:"shell",
             aside {class:"sidebar",
-                a {class:"brand",href:"#",onclick:move |event|{event.prevent_default();act(app,|s|navigation::open(s,navigation::Destination::Today));}, span {class:"brand-mark","р"} strong {"rufren"}}
+                a {class:"brand",href:"#",onclick:move |event|{event.prevent_default();act(app,|s|navigation::open(s,navigation::Destination::Today));}, span {class:"brand-mark","р"} strong {"Drussky"}}
                 navigation::PrimaryNavigation {app,compact:false}
                 navigation::SecondaryNavigation {app,compact:false}
                 div {class:"sidebar-bottom",span {class:"status-dot"} "On this device"}
             }
             main {class:"main",
-                header {class:"topbar",span {"Rufren"} span {class:"quiet","{destination}"}}
+                header {class:"topbar",span {"Drussky"} span {class:"quiet","{destination}"}}
                 if state.page != Page::Foundations {navigation::SecondaryNavigation {app,compact:true}}
                 if !state.notice.is_empty() {div {class:"notice",role:"status",span {"{state.notice}"} button {aria_label:"Dismiss message",onclick:move |_|app.write().notice.clear(),"×"}}}
                 match state.page {
@@ -193,6 +195,14 @@ fn Today(mut app: Signal<AppState>) -> Element {
     let foundation = state.foundation_state();
     let foundation_started = state.foundation_has_started();
     let foundation_ready = foundation.as_ref().is_ok_and(|s| !s.finished);
+    let foundation_review_active = foundation
+        .as_ref()
+        .is_ok_and(|s| s.review_resume.is_some());
+    let foundation_returns = if foundation_review_active {
+        Vec::new()
+    } else {
+        state.foundation_review_queue(now)
+    };
     let foundation_primary = !resume && foundation_ready;
     let teaching_title = teaching
         .as_ref()
@@ -218,16 +228,27 @@ fn Today(mut app: Signal<AppState>) -> Element {
         section {class:"hero hero-compact",
             div {class:"eyebrow","YOUR RUSSIAN, AT YOUR PACE"}
             h1 {if returning {"Welcome back."}else{"Make yourself at home."}}
-            p {class:"lede",if foundation_primary {"Start with a sound, meet its letters, and try a little Russian. Everything you need for these first steps is already here."}else{"A conversation, a passage, a little practice. Follow what interests you."}}
+            p {class:"lede",if foundation_review_active {"Try a familiar word, then compare with its model. Your place in the course is kept."}else if foundation_primary {"Start with a sound, meet its letters, and try a little Russian. Everything you need for these first steps is already here."}else{"A conversation, a passage, a little practice. Follow what interests you."}}
             div {class:"actions",
                 button {id:"today-primary",class:"primary",onclick:move |_|act(app,|s|{
                     if resume {s.begin()}else if foundation_primary {s.start_foundations()}else if finished {s.navigate(Page::Progress)}else{s.begin()}
-                }),if resume {"Continue learning"}else if foundation_primary && foundation_started {"Continue sounds & letters"}else if foundation_primary {"Start sounds & letters"}else if finished {"See your progress"}else{"Continue learning"}}
+                }),if resume {"Continue learning"}else if foundation_primary && foundation_review_active {"Continue recall practice"}else if foundation_primary && foundation_started {"Continue sounds & letters"}else if foundation_primary {"Start sounds & letters"}else if finished {"See your progress"}else{"Continue learning"}}
                 button {class:"secondary",onclick:move |_|act(app,|s|navigation::open(s,navigation::Destination::Talk)),"Let’s talk"}
                 button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Reader)),"Find something to read"}
             }
         }
         if let Err(problem)=foundation {p {role:"alert","{problem}"}}
+        if !foundation_returns.is_empty() {
+            section {class:"panel",id:"foundation-returns",
+                h2 {"A little recall practice"}
+                p {"Return to a few words you have met. Try first, then listen or look again."}
+                div {class:"actions",
+                    for entry in foundation_returns {
+                        button {class:"secondary",onclick:move |_|act(app,|s|s.foundation_start_review(&entry.step_id)),"{entry.label}"}
+                    }
+                }
+            }
+        }
         if let Some(id)=teaching_id {section {class:"panel",h2 {"Your saved AI lesson"}p {PresentedRussian {app,text:teaching_title,language:"en",inline:true,purpose:PresentationPurpose::Instruction}}button {class:"secondary",onclick:move |_|act(app,|s|{s.navigate(Page::Teacher)?;s.select_teacher_document(id)?;s.repo.set("teacher_surface",&"lessons")}),"Return to this AI lesson"}}}
         details {class:"today-session",summary {"Your practice session"}daily_plan_view::DailyPractice {app}}
         ContinueSoundFocus {app}
@@ -356,7 +377,7 @@ fn Settings(mut app: Signal<AppState>) -> Element {
                 label {r#for:"sync-url","Sync URL"}input {id:"sync-url",value:state.endpoint,oninput:move |e|app.write().endpoint=e.value(),placeholder:"https://your-sync-host"}
                 div {class:"preference-row",input {id:"sync-recordings",r#type:"checkbox",checked:state.preferences.sync_recordings,disabled:state.syncing,onchange:move |e|act(app,|s|{s.preferences.sync_recordings=e.checked();s.save_preferences()})}label {r#for:"sync-recordings","Include original recordings and timed cues"}}
                 label {r#for:"sync-key","Private connection key"}input {id:"sync-key",r#type:"password",autocomplete:"off",value:state.token,oninput:move |e|app.write().token=e.value()}
-                if cfg!(target_arch="wasm32") {p {class:"quiet","This browser keeps the key in memory until you close Rufren."}}else{p {class:"quiet","The installed connection stays in this device’s Keychain. Disconnect removes it."}}
+                if cfg!(target_arch="wasm32") {p {class:"quiet","This browser keeps the key in memory until you close Drussky."}}else{p {class:"quiet","The installed connection stays in this device’s Keychain. Disconnect removes it."}}
                 div {class:"actions",button {class:"primary",disabled:state.syncing,onclick:move |_|{
                     let snapshot=app.read().clone();app.write().syncing=true;
                     spawn_forever(async move {let result=async {synchronize(snapshot.repo.clone(),snapshot.endpoint.clone(),snapshot.token.clone()).await?;

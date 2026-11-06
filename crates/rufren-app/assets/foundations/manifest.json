@@ -629,6 +629,435 @@
         "frames": 17100,
         "all_frames_decoded": true
       }
+    },
+    {
+      "id": "foundation-i",
+      "file": "foundation-i.wav",
+      "spoken": "и",
+      "display_text": "и",
+      "authored_stress": "и́",
+      "teaching_span": "whole spoken word",
+      "encoding": "RIFF/WAVE PCM16 little-endian",
+      "byte_length": 80718,
+      "source_response": {
+        "sha256": "7e33422f2b03b0113a907ce4ff004fa7e60627a85656c3e32ebe4096849dc428",
+        "frames": 40320,
+        "sample_rate": 44100,
+        "channels": 1
+      },
+      "provenance": {
+        "kind": "human_recording",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Ru-и.ogg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Ru-%D0%B8.ogg",
+        "original_file": "sources/foundation-i.ogg",
+        "original_sha256": "e164905141b5f31468c8792df2e5727e9e99af2c0f17331c76359c6f6a760d7f",
+        "commons_sha1": "f0e9a3fe005fa2f0723766b6327f465a5d8c20ac",
+        "credit": "The Shtooka Project; individual speaker not identified on source page",
+        "license": "CC BY 2.0 fr",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+        "source_metadata": "sources/commons-continuation-imageinfo.json"
+      },
+      "transforms": [
+        {
+          "method": "ffmpeg decode Ogg Vorbis to PCM16 WAV; no trimming, gain, sample-rate or channel change",
+          "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "note": "Vorbis original is lossy; no additional lossy codec; float-to-PCM16 quantization explicit."
+        }
+      ],
+      "measurements": {
+        "duration_seconds": 0.9142857142857143,
+        "peak_pcm16": 25414,
+        "full_scale_samples": 0
+      },
+      "review": {
+        "source_lexical_identity": "File:Ru-и.ogg",
+        "expected_stress": "и́",
+        "quality_limit": "Source identifies whole Russian lexical item; not independent perceptual certification. No ASR or synthesis run for this continuation.",
+        "lexical_stress_reference": "https://en.wiktionary.org/wiki/и#Russian",
+        "pronunciation_target": "Whole word; no concatenation, carrier words or cropped phonemes. Single syllable; stressed isolated citation form."
+      }
+    },
+    {
+      "id": "foundation-na",
+      "file": "foundation-na.wav",
+      "spoken": "на",
+      "display_text": "на",
+      "authored_stress": "на́",
+      "teaching_span": "initial н in на; whole word also used",
+      "encoding": "RIFF/WAVE PCM16 little-endian",
+      "byte_length": 96878,
+      "source_response": {
+        "sha256": "a119e619ad82df4fb473b591dc98e212ddc29775b6a2ce11b5ae50640e32f8a4",
+        "frames": 48400,
+        "sample_rate": 44000,
+        "channels": 1
+      },
+      "provenance": {
+        "kind": "human_recording",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Ru-на.ogg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Ru-%D0%BD%D0%B0.ogg",
+        "original_file": "sources/foundation-na.ogg",
+        "original_sha256": "83129692f3619fea7e6a61b4e0b331cc79019fade9f7fb8668e9cd21922851e4",
+        "commons_sha1": "16e79ebe21db29f43a14afa41a366d74d751a091",
+        "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+        "license": "CC BY 3.0 us",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+        "source_metadata": "sources/commons-continuation-imageinfo.json"
+      },
+      "transforms": [
+        {
+          "method": "ffmpeg decode Ogg Vorbis to PCM16 WAV; no trimming, gain, sample-rate or channel change",
+          "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "note": "Vorbis original is lossy; no additional lossy codec; float-to-PCM16 quantization explicit."
+        }
+      ],
+      "measurements": {
+        "duration_seconds": 1.1,
+        "peak_pcm16": 29364,
+        "full_scale_samples": 0
+      },
+      "review": {
+        "source_lexical_identity": "File:Ru-на.ogg",
+        "expected_stress": "на́",
+        "quality_limit": "Source identifies whole Russian lexical item; not independent perceptual certification. No ASR or synthesis run for this continuation.",
+        "lexical_stress_reference": "https://en.wiktionary.org/wiki/на#Russian",
+        "pronunciation_target": "Whole word; no concatenation, carrier words or cropped phonemes. Single syllable; stressed isolated citation form."
+      }
+    },
+    {
+      "id": "foundation-okno",
+      "file": "foundation-okno.wav",
+      "spoken": "окно",
+      "display_text": "окно",
+      "authored_stress": "окно́",
+      "teaching_span": "whole spoken word",
+      "encoding": "RIFF/WAVE PCM16 little-endian",
+      "byte_length": 92238,
+      "source_response": {
+        "sha256": "95f0fdeec2ef2c750ed8e73f88af557588fa4fb2f84dee511573894fb017fc64",
+        "frames": 46080,
+        "sample_rate": 44100,
+        "channels": 1
+      },
+      "provenance": {
+        "kind": "human_recording",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Ru-окно.ogg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Ru-%D0%BE%D0%BA%D0%BD%D0%BE.ogg",
+        "original_file": "sources/foundation-okno.ogg",
+        "original_sha256": "9f9ad838f03b45e3cf3a21806c0a36867e9cbb3108b8664528153a846fbd057d",
+        "commons_sha1": "a582a394f1550984616f28363c25a9332e8eac8b",
+        "credit": "The Shtooka Project; individual speaker not identified on source page",
+        "license": "CC BY 2.0 fr",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+        "source_metadata": "sources/commons-continuation-imageinfo.json"
+      },
+      "transforms": [
+        {
+          "method": "ffmpeg decode Ogg Vorbis to PCM16 WAV; no trimming, gain, sample-rate or channel change",
+          "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "note": "Vorbis original is lossy; no additional lossy codec; float-to-PCM16 quantization explicit."
+        }
+      ],
+      "measurements": {
+        "duration_seconds": 1.0448979591836736,
+        "peak_pcm16": 24822,
+        "full_scale_samples": 0
+      },
+      "review": {
+        "source_lexical_identity": "File:Ru-окно.ogg",
+        "expected_stress": "окно́",
+        "quality_limit": "Source identifies whole Russian lexical item; not independent perceptual certification. No ASR or synthesis run for this continuation.",
+        "lexical_stress_reference": "https://en.wiktionary.org/wiki/окно#Russian",
+        "pronunciation_target": "Whole word; no concatenation, carrier words or cropped phonemes. Unstressed initial о reduced; final stressed vowel."
+      }
+    },
+    {
+      "id": "foundation-on",
+      "file": "foundation-on.wav",
+      "spoken": "он",
+      "display_text": "он",
+      "authored_stress": "о́н",
+      "teaching_span": "whole spoken word",
+      "encoding": "RIFF/WAVE PCM16 little-endian",
+      "byte_length": 80718,
+      "source_response": {
+        "sha256": "78b044db3acda8d536fd394132fa5d56581a01fca2c1629768c4248f11efc189",
+        "frames": 40320,
+        "sample_rate": 44100,
+        "channels": 1
+      },
+      "provenance": {
+        "kind": "human_recording",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Ru-он.ogg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Ru-%D0%BE%D0%BD.ogg",
+        "original_file": "sources/foundation-on.ogg",
+        "original_sha256": "279aa4ee5badef89c15c57a0152961eb63054277dee91163dca997760f165ab5",
+        "commons_sha1": "9603207d84577b1c7579628396cd936f2c2d8dd9",
+        "credit": "The Shtooka Project; individual speaker not identified on source page",
+        "license": "CC BY 2.0 fr",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+        "source_metadata": "sources/commons-continuation-imageinfo.json"
+      },
+      "transforms": [
+        {
+          "method": "ffmpeg decode Ogg Vorbis to PCM16 WAV; no trimming, gain, sample-rate or channel change",
+          "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "note": "Vorbis original is lossy; no additional lossy codec; float-to-PCM16 quantization explicit."
+        }
+      ],
+      "measurements": {
+        "duration_seconds": 0.9142857142857143,
+        "peak_pcm16": 25560,
+        "full_scale_samples": 0
+      },
+      "review": {
+        "source_lexical_identity": "File:Ru-он.ogg",
+        "expected_stress": "о́н",
+        "quality_limit": "Source identifies whole Russian lexical item; not independent perceptual certification. No ASR or synthesis run for this continuation.",
+        "lexical_stress_reference": "https://en.wiktionary.org/wiki/он#Russian",
+        "pronunciation_target": "Whole word; no concatenation, carrier words or cropped phonemes. Single syllable; stressed isolated citation form."
+      }
+    },
+    {
+      "id": "foundation-ona",
+      "file": "foundation-ona.wav",
+      "spoken": "она",
+      "display_text": "она",
+      "authored_stress": "она́",
+      "teaching_span": "whole spoken word",
+      "encoding": "RIFF/WAVE PCM16 little-endian",
+      "byte_length": 110078,
+      "source_response": {
+        "sha256": "36acc6570fd8364513db7be5f02a734d7850ca0aeaae83e59a1fc4c2a6557f69",
+        "frames": 55000,
+        "sample_rate": 44000,
+        "channels": 1
+      },
+      "provenance": {
+        "kind": "human_recording",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Ru-она.ogg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Ru-%D0%BE%D0%BD%D0%B0.ogg",
+        "original_file": "sources/foundation-ona.ogg",
+        "original_sha256": "b7f13082f94c0ff1d72fd00fec6adacb57deb9209e5aa607c7a35639310621d8",
+        "commons_sha1": "7f6b75a4143bf7e9a719453a4943f6c5880eb58f",
+        "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+        "license": "CC BY 3.0 us",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+        "source_metadata": "sources/commons-continuation-imageinfo.json"
+      },
+      "transforms": [
+        {
+          "method": "ffmpeg decode Ogg Vorbis to PCM16 WAV; no trimming, gain, sample-rate or channel change",
+          "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "note": "Vorbis original is lossy; no additional lossy codec; float-to-PCM16 quantization explicit."
+        }
+      ],
+      "measurements": {
+        "duration_seconds": 1.25,
+        "peak_pcm16": 28204,
+        "full_scale_samples": 0
+      },
+      "review": {
+        "source_lexical_identity": "File:Ru-она.ogg",
+        "expected_stress": "она́",
+        "quality_limit": "Source identifies whole Russian lexical item; not independent perceptual certification. No ASR or synthesis run for this continuation.",
+        "lexical_stress_reference": "https://en.wiktionary.org/wiki/она#Russian",
+        "pronunciation_target": "Whole word; no concatenation, carrier words or cropped phonemes. Unstressed initial о reduced; final stressed vowel."
+      }
+    },
+    {
+      "id": "foundation-oni",
+      "file": "foundation-oni.wav",
+      "spoken": "они",
+      "display_text": "они",
+      "authored_stress": "они́",
+      "teaching_span": "whole spoken word",
+      "encoding": "RIFF/WAVE PCM16 little-endian",
+      "byte_length": 114478,
+      "source_response": {
+        "sha256": "8671863b5c937418186892bd392d78abc79a175d3e8d5d3141796748bb0dd098",
+        "frames": 57200,
+        "sample_rate": 44000,
+        "channels": 1
+      },
+      "provenance": {
+        "kind": "human_recording",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Ru-они.ogg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/46/Ru-%D0%BE%D0%BD%D0%B8.ogg",
+        "original_file": "sources/foundation-oni.ogg",
+        "original_sha256": "255d0b8119c29902d50b98e8ddd5cfa7313096a8d31be6bce27c7a041d602efe",
+        "commons_sha1": "3e5d880fe3b0e15eea9e52dd4707c1b102ae5b11",
+        "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+        "license": "CC BY 3.0 us",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+        "source_metadata": "sources/commons-continuation-imageinfo.json"
+      },
+      "transforms": [
+        {
+          "method": "ffmpeg decode Ogg Vorbis to PCM16 WAV; no trimming, gain, sample-rate or channel change",
+          "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "note": "Vorbis original is lossy; no additional lossy codec; float-to-PCM16 quantization explicit."
+        }
+      ],
+      "measurements": {
+        "duration_seconds": 1.3,
+        "peak_pcm16": 30255,
+        "full_scale_samples": 0
+      },
+      "review": {
+        "source_lexical_identity": "File:Ru-они.ogg",
+        "expected_stress": "они́",
+        "quality_limit": "Source identifies whole Russian lexical item; not independent perceptual certification. No ASR or synthesis run for this continuation.",
+        "lexical_stress_reference": "https://en.wiktionary.org/wiki/они#Russian",
+        "pronunciation_target": "Whole word; no concatenation, carrier words or cropped phonemes. Unstressed initial о reduced; final stressed vowel; н softened before и."
+      }
+    },
+    {
+      "id": "foundation-ono",
+      "file": "foundation-ono.wav",
+      "spoken": "оно",
+      "display_text": "оно",
+      "authored_stress": "оно́",
+      "teaching_span": "whole spoken word",
+      "encoding": "RIFF/WAVE PCM16 little-endian",
+      "byte_length": 87630,
+      "source_response": {
+        "sha256": "220b858dabdc0c4d50c97a6d032993bf66be6fa5a0f653a05421351e87226358",
+        "frames": 21888,
+        "sample_rate": 44100,
+        "channels": 2
+      },
+      "provenance": {
+        "kind": "human_recording",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Ru-оно.ogg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Ru-%D0%BE%D0%BD%D0%BE.ogg",
+        "original_file": "sources/foundation-ono.ogg",
+        "original_sha256": "322b95de8840332cc8b36e616cf945796b123abbc05ca551cb594383a4eda925",
+        "commons_sha1": "3f5ed6b9417299e4502c907b08e382803904ddea",
+        "credit": "1640max / Forvo",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source_metadata": "sources/commons-continuation-imageinfo.json",
+        "permission_evidence": {
+          "commons_template": "Forvo-1640max",
+          "VRT_permission_confirmed": true,
+          "ticket": "2016092010020528",
+          "source_snapshot": "sources/commons-ono-permission-page.json"
+        }
+      },
+      "transforms": [
+        {
+          "method": "ffmpeg decode Ogg Vorbis to PCM16 WAV; no trimming, gain, sample-rate or channel change",
+          "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "note": "Vorbis original is lossy; no additional lossy codec; float-to-PCM16 quantization explicit."
+        }
+      ],
+      "measurements": {
+        "duration_seconds": 0.4963265306122449,
+        "peak_pcm16": 19833,
+        "full_scale_samples": 0
+      },
+      "review": {
+        "source_lexical_identity": "File:Ru-оно.ogg",
+        "expected_stress": "оно́",
+        "quality_limit": "Source identifies whole Russian lexical item; not independent perceptual certification. No ASR or synthesis run for this continuation.",
+        "lexical_stress_reference": "https://en.wiktionary.org/wiki/оно#Russian",
+        "pronunciation_target": "Whole word; no concatenation, carrier words or cropped phonemes. Unstressed initial о reduced; final stressed vowel."
+      }
+    },
+    {
+      "id": "foundation-ty",
+      "file": "foundation-ty.wav",
+      "spoken": "ты",
+      "display_text": "ты",
+      "authored_stress": "ты́",
+      "teaching_span": "whole spoken word",
+      "encoding": "RIFF/WAVE PCM16 little-endian",
+      "byte_length": 88078,
+      "source_response": {
+        "sha256": "0e4ba93275f270afe135159004583acd14b7be8fe25956aa2f9c28ab8a3d8e01",
+        "frames": 44000,
+        "sample_rate": 44000,
+        "channels": 1
+      },
+      "provenance": {
+        "kind": "human_recording",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Ru-ты.ogg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/08/Ru-%D1%82%D1%8B.ogg",
+        "original_file": "sources/foundation-ty.ogg",
+        "original_sha256": "5432ffe1d5b4346b8cda242b7c5501b97c62e4d7483433dd8155e7f1050a5648",
+        "commons_sha1": "8e737fe6202aea22e5da055d62643037ce3f7617",
+        "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+        "license": "CC BY 3.0 us",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+        "source_metadata": "sources/commons-continuation-imageinfo.json"
+      },
+      "transforms": [
+        {
+          "method": "ffmpeg decode Ogg Vorbis to PCM16 WAV; no trimming, gain, sample-rate or channel change",
+          "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "note": "Vorbis original is lossy; no additional lossy codec; float-to-PCM16 quantization explicit."
+        }
+      ],
+      "measurements": {
+        "duration_seconds": 1.0,
+        "peak_pcm16": 29137,
+        "full_scale_samples": 0
+      },
+      "review": {
+        "source_lexical_identity": "File:Ru-ты.ogg",
+        "expected_stress": "ты́",
+        "quality_limit": "Source identifies whole Russian lexical item; not independent perceptual certification. No ASR or synthesis run for this continuation.",
+        "lexical_stress_reference": "https://en.wiktionary.org/wiki/ты#Russian",
+        "pronunciation_target": "Whole word; no concatenation, carrier words or cropped phonemes. Single syllable; stressed isolated citation form."
+      }
+    },
+    {
+      "id": "foundation-ya",
+      "file": "foundation-ya.wav",
+      "spoken": "я",
+      "display_text": "я",
+      "authored_stress": "я́",
+      "teaching_span": "whole spoken word",
+      "encoding": "RIFF/WAVE PCM16 little-endian",
+      "byte_length": 101278,
+      "source_response": {
+        "sha256": "9c8205d614b24289356d58656336553a67f27982b1bd80086310c43aa0cdb4b1",
+        "frames": 50600,
+        "sample_rate": 44000,
+        "channels": 1
+      },
+      "provenance": {
+        "kind": "human_recording",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Ru-я.ogg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Ru-%D1%8F.ogg",
+        "original_file": "sources/foundation-ya.ogg",
+        "original_sha256": "b71f46c4ada22bd112e795074855891170031ec15e19478eaf6092ab4d2cf3d8",
+        "commons_sha1": "350aa47c6eef7240442aba535c656d3d166b250a",
+        "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+        "license": "CC BY 3.0 us",
+        "license_url": "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+        "source_metadata": "sources/commons-continuation-imageinfo.json"
+      },
+      "transforms": [
+        {
+          "method": "ffmpeg decode Ogg Vorbis to PCM16 WAV; no trimming, gain, sample-rate or channel change",
+          "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "note": "Vorbis original is lossy; no additional lossy codec; float-to-PCM16 quantization explicit."
+        }
+      ],
+      "measurements": {
+        "duration_seconds": 1.15,
+        "peak_pcm16": 28342,
+        "full_scale_samples": 0
+      },
+      "review": {
+        "source_lexical_identity": "File:Ru-я.ogg",
+        "expected_stress": "я́",
+        "quality_limit": "Source identifies whole Russian lexical item; not independent perceptual certification. No ASR or synthesis run for this continuation.",
+        "lexical_stress_reference": "https://en.wiktionary.org/wiki/я#Russian",
+        "pronunciation_target": "Whole word; no concatenation, carrier words or cropped phonemes. Single syllable; stressed isolated citation form."
+      }
     }
   ],
   "preparation_script_sha256": "23b781acb0be486d4aa94d49ec3111de76b7ab4565b382c875e228e161acd4a3",

@@ -3367,6 +3367,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d87d638e33c06f577498cbcc50491496a3ed4246998a7fbba7ccb98b1e7eab22"
 dependencies = [
  "bitflags 2.13.2",
+ "block2",
  "objc2",
  "objc2-core-foundation",
  "objc2-foundation",
@@ -4339,10 +4340,16 @@ name = "rufren-app"
 version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
+ "block2",
  "dioxus",
  "dioxus-ssr",
  "directories",
  "js-sys",
+ "objc2",
+ "objc2-app-kit",
+ "objc2-foundation",
+ "objc2-ui-kit",
+ "objc2-web-kit",
  "pulldown-cmark",
  "reqwest",
  "rufren-audio",

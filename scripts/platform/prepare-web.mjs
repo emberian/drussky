@@ -22,7 +22,7 @@ export async function prepareWeb(output) {
   const head = `<!-- rufren-pwa:start -->
     <meta name="theme-color" content="#203e3b">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Rufren">
+    <meta name="apple-mobile-web-app-title" content="Drussky">
     <link rel="manifest" href="./manifest.webmanifest">
     <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
     <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">

@@ -404,26 +404,39 @@ async function saveCue(role) {
   await storage('put',record); selected[role] = record; clips.get(record.asset_id).record = record;
   cueList(role,record); $(`audio-note-${role}`).value = ''; emit({kind:'cue_saved',recording:metadata(record)}); status('Cue saved with this exact audio span.');
 }
-function download(blob,name) {
-  const url = URL.createObjectURL(blob), link = document.createElement('a'); link.href = url; link.download = name; link.click();
-  setTimeout(() => URL.revokeObjectURL(url),30000);
+async function download(blob,name) {
+  if(capture||starting||pendingOperations)throw Error('Stop the recording or finish the current audio operation before exporting.');
+  const safe=Array.from(String(name).split(/[\\/]/).at(-1).replace(/[\x00-\x1f\x7f<>:"|?*]/g,'_').replace(/^\.+/,'').trim()).slice(0,80).join('')||'rufren-export';
+  beginOperation();status('Preparing export…');
+  try{
+    if(!window.rufrenFileExports){
+      if(config.native_exports)throw Error('The native export adapter is unavailable. Reopen the speech studio. Your original is kept.');
+      const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=safe;link.click();setTimeout(()=>URL.revokeObjectURL(url),30000);
+      return {status:'requested',message:'Download requested. Check your browser’s downloads for '+safe+'.'};
+    }
+    return await window.rufrenFileExports.save(blob,safe,{native:!!config.native_exports,post:request=>{if(!alive)return false;emit({kind:'export_file',export_request:request});return true;}});
+  }finally{if(alive)endOperation();else pendingOperations=Math.max(0,pendingOperations-1);}
 }
 async function downloadClip(role) {
   const record = selected[role]; if (!record) return;
-  download(record.blob,record.name.includes('.') ? record.name : `rufren-${role}-${record.created_at_ms}.wav`);
+  if(await digest(record.blob)!==record.content_hash)throw Error('This original failed its integrity check. Restore or sync a verified copy before exporting.');
+  const result=await download(record.blob.slice(0,record.blob.size,record.mime_type),record.name.includes('.') ? record.name : `rufren-${role}-${record.created_at_ms}.wav`);status(result.message,result.status==='failed');
 }
 async function exportAudio() {
   const records = await storage('all');
   if (!records.length) throw Error('There are no saved recordings to export yet.');
   // A self-contained JSON backup is deliberately separate from passage/event sync.
-  const assets = [];
+  const assets = [];let expectedSize=64;
   for (const record of records) {
+    expectedSize+=Math.ceil(record.byte_length/3)*4+new TextEncoder().encode(JSON.stringify(metadata(record))).length+32;
+    if(expectedSize>150*1024*1024)throw Error('This audio backup exceeds 150 MiB. Sync your originals or export individual recordings instead.');
+    if(record.blob.size!==record.byte_length||await digest(record.blob)!==record.content_hash)throw Error('A saved original failed its integrity check. Its existing bytes were kept; sync or restore a verified copy before exporting.');
     const bytes = new Uint8Array(await record.blob.arrayBuffer()); let binary = '';
     for (let i=0;i<bytes.length;i+=16384) binary += String.fromCharCode(...bytes.subarray(i,i+16384));
     assets.push({...metadata(record),data_base64:btoa(binary)});
   }
-  download(new Blob([JSON.stringify({format:'rufren-audio-v1',assets})],{type:'application/json'}),`rufren-audio-${new Date().toISOString().slice(0,10)}.json`);
-  status('Audio backup prepared. It includes originals and timed cues, separately from your notebook backup.');
+  const result=await download(new Blob([JSON.stringify({format:'rufren-audio-v1',assets})],{type:'application/json'}),`rufren-audio-${new Date().toISOString().slice(0,10)}.json`);
+  status(result.message,result.status==='failed');
 }
 function validBackupMetadata(asset) {
   const {data_base64,...fields}=asset;
@@ -718,7 +731,7 @@ async function playRegion(role,keep=false){const span=regionSelection(role);if(!
     if(loop)node.start(0,span.from);else node.start(0,span.from,span.to-span.from);ackTimer=setTimeout(acknowledge,0);status(`Playing selected region ${role==='region_a'?'A':'B'} at natural speed.`);});
 }
 async function compareRegions(){stopPlayback();const generation=playGeneration;if(!await playRegion('region_a',true)||generation!==playGeneration)return;await new Promise(r=>setTimeout(r,300));if(alive&&generation===playGeneration)await playRegion('region_b',true);}
-function exportRegion(role){const state=regionSlots[role];if(!state.source||!state.valid)return;download(new Blob([JSON.stringify({format:'rufren-region-selection-v1',asset_id:state.record.asset_id,original_byte_sha256:state.record.content_hash,source_pcm:state.source.metadata,source_kind:state.source.kind,span:state.span,start_seconds:state.span.start_frame/state.source.metadata.sample_rate,end_seconds:state.span.end_frame/state.source.metadata.sample_rate},null,2)],{type:'application/json'}),`rufren-region-${role==='region_a'?'A':'B'}.json`);}
+async function exportRegion(role){const state=regionSlots[role];if(!state.source||!state.valid)return;const result=await download(new Blob([JSON.stringify({format:'rufren-region-selection-v1',asset_id:state.record.asset_id,original_byte_sha256:state.record.content_hash,source_pcm:state.source.metadata,source_kind:state.source.kind,span:state.span,start_seconds:state.span.start_frame/state.source.metadata.sample_rate,end_seconds:state.span.end_frame/state.source.metadata.sample_rate},null,2)],{type:'application/json'}),`rufren-region-${role==='region_a'?'A':'B'}.json`);status(result.message,result.status==='failed');}
 function clearRegion(role){const state=regionSlots[role];if(!state)return;stopPlayback();persistRegionFocus(role,true);clearTimeout(state.timer);Object.assign(state,{record:null,source:null,analysis:null,span:null,metrics:null,valid:false,token:'',request:''});delete selected[role];analysisTokens[role]='';sourceGenerations[role]='';root.setAttribute(`data-selected-${role}`,'');root.setAttribute(`data-analysis-request-${role}`,'');root.setAttribute(`data-region-request-${role}`,'');$(`audio-region-identity-${role}`).textContent='No source selected';$(`audio-region-range-${role}`).textContent='';$(`audio-region-metrics-${role}`).textContent='Choose a recording to measure a region.';for(const kind of ['wave','spectrum','pitch']){const c=$(`audio-${kind}-${role}`);c.getContext('2d').clearRect(0,0,c.width,c.height);}for(const e of root.querySelectorAll(`[data-region-highlight="${role}"]`))e.hidden=true;emit({kind:'source_clear',role});regionControls();updateRegionComparison();persistRegionPair();}
 function regionEditing(event){const role=event.target.dataset?.regionFrames||event.target.dataset?.regionSeconds||event.target.dataset?.regionOwner||event.target.dataset?.regionSource;const state=regionSlots[role];if(state){state.revision++;state.userVersion++;}}
 async function regionAction(event){
@@ -727,7 +740,7 @@ async function regionAction(event){
   if(['audio-region-zoom','audio-region-pitch'].includes(event.target.id)){drawRegions();return;}
 }
 async function regionClick(event){const play=event.target.closest('[data-region-play]'),exporter=event.target.closest('[data-region-export]'),button=event.target.closest('[data-region-action]');
-  if(play){await playRegion(play.dataset.regionPlay);return;}if(exporter){exportRegion(exporter.dataset.regionExport);return;}if(!button)return;
+  if(play){await playRegion(play.dataset.regionPlay);return;}if(exporter){await exportRegion(exporter.dataset.regionExport);return;}if(!button)return;
   const action=button.dataset.regionAction;if(action==='compare')await compareRegions();
   if(action==='copy-a'&&regionSlots.region_a.record){regionSlots.region_b.userVersion++;await loadRegion('region_b',regionSlots.region_a.record.asset_id);}
   if(action==='use-current'){for(const role of REGION_ROLES)regionSlots[role].userVersion++;if(selected.reference)await loadRegion('region_a',selected.reference.asset_id);if(selected.attempt||selected.reference)await loadRegion('region_b',(selected.attempt||selected.reference).asset_id);}

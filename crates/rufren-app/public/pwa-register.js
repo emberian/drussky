@@ -15,7 +15,7 @@
     note.id = "rufren-update";
     note.setAttribute("role", "status");
     note.style.cssText = "position:fixed;bottom:1rem;left:1rem;right:1rem;max-width:36rem;margin:auto;padding:1rem;border-radius:1rem;background:#203e3b;color:#faf5e9;box-shadow:0 4px 24px #0003;z-index:1000;font:1rem/1.5 system-ui";
-    note.append("An update is ready. Close all Rufren windows and reopen when you’re ready.");
+    note.append("An update is ready. Close all Drussky windows and reopen when you’re ready.");
     const dismiss = document.createElement("button");
     dismiss.type = "button";
     dismiss.textContent = "Dismiss";

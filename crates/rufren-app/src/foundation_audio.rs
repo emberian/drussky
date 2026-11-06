@@ -20,7 +20,16 @@ pub(crate) fn bytes(asset_id: &str) -> Option<&'static [u8]> {
         "foundation-ta",
         "foundation-kot",
         "foundation-tam",
-        "foundation-tam-kot"
+        "foundation-tam-kot",
+        "foundation-i",
+        "foundation-na",
+        "foundation-okno",
+        "foundation-on",
+        "foundation-ona",
+        "foundation-oni",
+        "foundation-ono",
+        "foundation-ty",
+        "foundation-ya",
     )
 }
 
@@ -35,19 +44,158 @@ pub(crate) struct AudioCredits {
 
 pub(crate) fn credits(asset_id: &str) -> AudioCredits {
     let (title, credit, source_url, license, license_url) = match asset_id {
-        "foundation-a" => ("Human recording: а", "The Shtooka Project; individual speaker not identified", "https://commons.wikimedia.org/wiki/File:Ru-а.ogg", "CC BY 2.0 France", "https://creativecommons.org/licenses/by/2.0/fr/"),
-        "foundation-o" => ("Human recording: о", "Сергей Сахно, Vion Nicolas / The Shtooka Project", "https://commons.wikimedia.org/wiki/File:Ru-о.ogg", "CC BY 3.0 United States", "https://creativecommons.org/licenses/by/3.0/us/"),
-        "foundation-kot" => ("Human recording: кот", "The Shtooka Project; individual speaker not identified", "https://commons.wikimedia.org/wiki/File:Ru-кот.ogg", "CC BY 2.0 France", "https://creativecommons.org/licenses/by/2.0/fr/"),
-        _ => ("Synthetic reference", "Silero v5_6_ru, Xenia voice", "https://github.com/snakers4/silero-models", "CC BY-NC-SA 4.0", "https://creativecommons.org/licenses/by-nc-sa/4.0/"),
+        "foundation-a" => (
+            "Human recording: а",
+            "The Shtooka Project; individual speaker not identified",
+            "https://commons.wikimedia.org/wiki/File:Ru-а.ogg",
+            "CC BY 2.0 France",
+            "https://creativecommons.org/licenses/by/2.0/fr/",
+        ),
+        "foundation-o" => (
+            "Human recording: о",
+            "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+            "https://commons.wikimedia.org/wiki/File:Ru-о.ogg",
+            "CC BY 3.0 United States",
+            "https://creativecommons.org/licenses/by/3.0/us/",
+        ),
+        "foundation-kot" => (
+            "Human recording: кот",
+            "The Shtooka Project; individual speaker not identified",
+            "https://commons.wikimedia.org/wiki/File:Ru-кот.ogg",
+            "CC BY 2.0 France",
+            "https://creativecommons.org/licenses/by/2.0/fr/",
+        ),
+        "foundation-i" => (
+            "Human recording: и",
+            "The Shtooka Project; individual speaker not identified on source page",
+            "https://commons.wikimedia.org/wiki/File:Ru-и.ogg",
+            "CC BY 2.0 fr",
+            "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+        ),
+        "foundation-na" => (
+            "Human recording: на",
+            "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+            "https://commons.wikimedia.org/wiki/File:Ru-на.ogg",
+            "CC BY 3.0 us",
+            "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+        ),
+        "foundation-okno" => (
+            "Human recording: окно",
+            "The Shtooka Project; individual speaker not identified on source page",
+            "https://commons.wikimedia.org/wiki/File:Ru-окно.ogg",
+            "CC BY 2.0 fr",
+            "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+        ),
+        "foundation-on" => (
+            "Human recording: он",
+            "The Shtooka Project; individual speaker not identified on source page",
+            "https://commons.wikimedia.org/wiki/File:Ru-он.ogg",
+            "CC BY 2.0 fr",
+            "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+        ),
+        "foundation-ona" => (
+            "Human recording: она",
+            "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+            "https://commons.wikimedia.org/wiki/File:Ru-она.ogg",
+            "CC BY 3.0 us",
+            "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+        ),
+        "foundation-oni" => (
+            "Human recording: они",
+            "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+            "https://commons.wikimedia.org/wiki/File:Ru-они.ogg",
+            "CC BY 3.0 us",
+            "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+        ),
+        "foundation-ono" => (
+            "Human recording: оно",
+            "1640max / Forvo",
+            "https://commons.wikimedia.org/wiki/File:Ru-оно.ogg",
+            "CC BY-SA 4.0",
+            "https://creativecommons.org/licenses/by-sa/4.0",
+        ),
+        "foundation-ty" => (
+            "Human recording: ты",
+            "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+            "https://commons.wikimedia.org/wiki/File:Ru-ты.ogg",
+            "CC BY 3.0 us",
+            "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+        ),
+        "foundation-ya" => (
+            "Human recording: я",
+            "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+            "https://commons.wikimedia.org/wiki/File:Ru-я.ogg",
+            "CC BY 3.0 us",
+            "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+        ),
+        _ => (
+            "Synthetic reference",
+            "Silero v5_6_ru, Xenia voice",
+            "https://github.com/snakers4/silero-models",
+            "CC BY-NC-SA 4.0",
+            "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        ),
     };
-    AudioCredits { title, credit, source_url, license, license_url, changes: if matches!(asset_id, "foundation-a" | "foundation-o" | "foundation-kot") { "Decoded original Ogg Vorbis to PCM16 WAV; no trimming, gain, rate or channel change." } else { "Generated locally; original unmodified PCM16 WAV." } }
+    AudioCredits {
+        title,
+        credit,
+        source_url,
+        license,
+        license_url,
+        changes: if matches!(
+            asset_id,
+            "foundation-a"
+                | "foundation-o"
+                | "foundation-kot"
+                | "foundation-i"
+                | "foundation-na"
+                | "foundation-okno"
+                | "foundation-on"
+                | "foundation-ona"
+                | "foundation-oni"
+                | "foundation-ono"
+                | "foundation-ty"
+                | "foundation-ya"
+        ) {
+            "Decoded original Ogg Vorbis to PCM16 WAV; no trimming, gain, rate or channel change."
+        } else {
+            "Generated locally; original unmodified PCM16 WAV."
+        },
+    }
 }
 
 /// Credit for the exact bundled reference; source/license URLs live in the manifest.
 pub(crate) fn attribution(asset_id: &str) -> &'static str {
     match asset_id {
         "foundation-o" => "Human recording: Сергей Сахно, Vion Nicolas / Shtooka — CC BY 3.0 US",
-        "foundation-a" | "foundation-kot" => "Human recording: Shtooka Project — CC BY 2.0 FR (speaker not named)",
+        "foundation-a" | "foundation-kot" => {
+            "Human recording: Shtooka Project — CC BY 2.0 FR (speaker not named)"
+        }
+        "foundation-i" => {
+            "Human recording: The Shtooka Project; individual speaker not identified on source page — CC BY 2.0 fr"
+        }
+        "foundation-na" => {
+            "Human recording: Сергей Сахно, Vion Nicolas / The Shtooka Project — CC BY 3.0 us"
+        }
+        "foundation-okno" => {
+            "Human recording: The Shtooka Project; individual speaker not identified on source page — CC BY 2.0 fr"
+        }
+        "foundation-on" => {
+            "Human recording: The Shtooka Project; individual speaker not identified on source page — CC BY 2.0 fr"
+        }
+        "foundation-ona" => {
+            "Human recording: Сергей Сахно, Vion Nicolas / The Shtooka Project — CC BY 3.0 us"
+        }
+        "foundation-oni" => {
+            "Human recording: Сергей Сахно, Vion Nicolas / The Shtooka Project — CC BY 3.0 us"
+        }
+        "foundation-ono" => "Human recording: 1640max / Forvo — CC BY-SA 4.0",
+        "foundation-ty" => {
+            "Human recording: Сергей Сахно, Vion Nicolas / The Shtooka Project — CC BY 3.0 us"
+        }
+        "foundation-ya" => {
+            "Human recording: Сергей Сахно, Vion Nicolas / The Shtooka Project — CC BY 3.0 us"
+        }
         _ => "Synthetic reference: Silero v5_6_ru, Xenia voice — CC BY-NC-SA 4.0",
     }
 }
@@ -64,6 +212,15 @@ pub(crate) fn duration_seconds(asset_id: &str) -> Option<f64> {
         "foundation-ka" => Some(0.2875),
         "foundation-kot" => Some(43776.0 / 44100.0),
         "foundation-tam-kot" => Some(0.7125),
+        "foundation-i" => Some(40320.0 / 44100.0),
+        "foundation-na" => Some(48400.0 / 44000.0),
+        "foundation-okno" => Some(46080.0 / 44100.0),
+        "foundation-on" => Some(40320.0 / 44100.0),
+        "foundation-ona" => Some(55000.0 / 44000.0),
+        "foundation-oni" => Some(57200.0 / 44000.0),
+        "foundation-ono" => Some(21888.0 / 44100.0),
+        "foundation-ty" => Some(44000.0 / 44000.0),
+        "foundation-ya" => Some(50600.0 / 44000.0),
         _ => None,
     }
 }

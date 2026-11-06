@@ -171,3 +171,44 @@ fn pinned_generic_cotimed_conflicts_choose_conservative_evidence_and_interval() 
         bytes
     );
 }
+
+#[test]
+fn explicit_criterion_channel_preserves_missing_raw_self_report_and_default_projection() {
+    let (mut library, key) = fixture();
+    let id = pinned(
+        &mut library,
+        key.revision,
+        0,
+        0,
+        ReviewCadence::Standard,
+        SelfRating::NotReported,
+    );
+    let baseline = SpacedReview.project(&library, key, 0);
+    let unchanged =
+        SpacedReview.project_with_evidence(&library, key, 0, SPACED_POLICY_ID, |id, a| {
+            SpacedReview.evidence(&library, id, a)
+        });
+    assert_eq!(
+        serde_json::to_vec(&baseline).unwrap(),
+        serde_json::to_vec(&unchanged).unwrap()
+    );
+    let criterion = SpacedReview.project_with_evidence(
+        &library,
+        key,
+        0,
+        "exact-authored-response-v1",
+        |_, _| ReviewEvidence::CoachConfirmedUnassisted,
+    );
+    assert_eq!(criterion.interval_ms, DAY_MS);
+    assert_eq!(criterion.unassisted_self_reports, 0);
+    assert_eq!(criterion.coach_confirmed_unassisted, 1);
+    assert_eq!(
+        library
+            .attempts()
+            .find(|(e, _)| e.id == id)
+            .unwrap()
+            .1
+            .self_rating,
+        SelfRating::NotReported
+    );
+}

@@ -340,6 +340,8 @@ struct BridgeEvent {
     end_frame: u64,
     #[serde(default)]
     playback_rate: f64,
+    #[serde(default)]
+    export_request: Option<crate::apple_export::ExportRequest>,
 }
 
 struct CachedSource {
@@ -537,11 +539,12 @@ pub fn AudioStudio(
     let mut reference = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut attempt = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut error = use_signal(String::new);
-    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id,"compact":compact,"review_only":review_only,"selected_asset_id":selected_asset_id,"dialogue_scope":dialogue_scope,"sound_focus_scope":sound_focus_scope,"frozen_reference_asset_id":frozen_reference_asset_id,"frozen_reference_hash":frozen_reference_hash}).to_string();
+    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id,"compact":compact,"review_only":review_only,"selected_asset_id":selected_asset_id,"dialogue_scope":dialogue_scope,"sound_focus_scope":sound_focus_scope,"frozen_reference_asset_id":frozen_reference_asset_id,"frozen_reference_hash":frozen_reference_hash,"native_exports":crate::apple_export::supported()}).to_string();
     use_effect(move || {
         let script = format!(
-            "const rufrenStudioRoot=document.getElementById('rufren-audio-studio');if(rufrenStudioRoot?.dataset.instance!=={})return;\n{}",
+            "const rufrenStudioRoot=document.getElementById('rufren-audio-studio');if(rufrenStudioRoot?.dataset.instance!=={})return;\n{}\n{}",
             serde_json::to_string(&effect_instance).unwrap_or_default(),
+            crate::apple_export::JAVASCRIPT,
             BRIDGE
         );
         spawn(async move {
@@ -715,6 +718,11 @@ pub fn AudioStudio(
                     }
                     "selected" => on_selected.call(event.recording),
                     "recording_state" => on_recording_state.call(event.active),
+                    "export_file" => {
+                        if let Some(request) = event.export_request {
+                            crate::apple_export::start_export(request);
+                        }
+                    }
                     "cue_saved" => {
                         if let Some(recording) = event.recording {
                             on_cue_saved.call(recording);

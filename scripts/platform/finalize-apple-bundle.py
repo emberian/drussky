@@ -29,8 +29,8 @@ for bundle in candidates:
 if len(matches) != 1:
     raise SystemExit(f"Expected one Rufren app in {args.output}; found {len(matches)}. Pass the exact newly built .app path.")
 bundle, metadata, info = matches[0]
-info["CFBundleDisplayName"] = "Rufren"
-info["CFBundleName"] = "Rufren"
+info["CFBundleDisplayName"] = "Drussky"
+info["CFBundleName"] = "Drussky"
 if args.platform == "macos":
     icon = Path(__file__).resolve().parents[2] / "crates/rufren-app/platform/apple/icon.icns"
     if not icon.is_file():

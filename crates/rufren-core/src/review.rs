@@ -88,9 +88,23 @@ impl SpacedReview {
         "Engineering baseline: fixed bounded intervals, separate exact revision and skill; self-reports are not correctness. Motivated by spacing/retrieval evidence E1–E2 and O1; these intervals and adaptation rules have not been validated for Rufren."
     }
     pub fn project(&self, library: &Library, key: ReviewKey, now_ms: i64) -> ReviewState {
+        self.project_with_evidence(library, key, now_ms, self.id(), |id, attempt| {
+            self.evidence(library, id, attempt)
+        })
+    }
+    /// Reuse the bounded interval policy with an explicitly named observation channel.
+    /// The resolver must preserve missing outcomes and assistance; it never changes facts.
+    pub fn project_with_evidence(
+        &self,
+        library: &Library,
+        key: ReviewKey,
+        now_ms: i64,
+        policy_id: &str,
+        evidence: impl Fn(Uuid, &Attempt) -> ReviewEvidence,
+    ) -> ReviewState {
         let mut state = ReviewState {
             key,
-            policy: self.id().into(),
+            policy: policy_id.into(),
             attempts: 0,
             unassisted_self_reports: 0,
             coach_confirmed_unassisted: 0,
@@ -132,7 +146,7 @@ impl SpacedReview {
                 let representative = group
                     .iter()
                     .min_by_key(|(e, a)| {
-                        let priority = match self.evidence(library, e.id, a) {
+                        let priority = match evidence(e.id, a) {
                             ReviewEvidence::Again | ReviewEvidence::CoachCorrection => 0,
                             ReviewEvidence::ContestedJudgment => 1,
                             ReviewEvidence::Assisted => 2,
@@ -181,7 +195,7 @@ impl SpacedReview {
             let assignment = assignments.get(&event.id);
             let cadence = assignment.map(|a| a.1).unwrap_or_default();
             let started_at_ms = assignment.map(|a| a.2).unwrap_or(event.recorded_at_ms);
-            let evidence = self.evidence(library, event.id, attempt);
+            let evidence = evidence(event.id, attempt);
             let first = state.interval_ms == 0;
             state.attempts += 1;
             state.last_attempt_ms = Some(event.recorded_at_ms);

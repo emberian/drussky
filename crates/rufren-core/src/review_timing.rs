@@ -303,8 +303,12 @@ pub(crate) fn validate_review_timing_references(
         match target {
             ReviewTarget::Passage { revision, .. } => {
                 if let Some(e) = events.get(&revision) {
+                    // Foundation's owning workflow pins an exact authored recall start.
+                    // Reserved artifacts remain unavailable to generic timing overrides.
+                    let foundation_start =
+                        matches!(event.fact, Fact::ReviewStarted(_)) && is_foundation_reference(e);
                     if !matches!(e.fact, Fact::PassageRevised(_))
-                        || is_reserved_practice_reference(e)
+                        || (is_reserved_practice_reference(e) && !foundation_start)
                     {
                         return Err(invalid());
                     }

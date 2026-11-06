@@ -44,9 +44,14 @@ mod teacher_revisit;
 
 #[path = "../src/foundation.rs"]
 mod foundation;
+#[path = "../src/foundation_review.rs"]
+mod foundation_review;
 use model::AppState;
 use repository::Repository;
 use rufren_content::FoundationAction;
+use rufren_content::foundations::{
+    FoundationRecallMode, foundation_step_pack_revision, foundations_legacy,
+};
 use rufren_core::*;
 use std::rc::Rc;
 fn app() -> AppState {
@@ -164,13 +169,29 @@ fn all_episodes_can_be_practiced_without_microphone_or_teacher() {
                 a.foundation_submit(&step).unwrap()
             }
             FoundationAction::Read { .. } => a.foundation_read_try(&step).unwrap(),
+            FoundationAction::Copy { answer, .. } => {
+                a.foundation_edit(vec![answer.clone()]).unwrap();
+                a.foundation_submit(&step).unwrap()
+            }
+            FoundationAction::Recall { answer, mode, .. } => {
+                a.foundation_edit(vec![if matches!(mode, FoundationRecallMode::Spoken) {
+                    "I tried aloud (self-report).".into()
+                } else {
+                    answer.clone()
+                }])
+                .unwrap();
+                a.foundation_submit(&step).unwrap()
+            }
             _ => (),
         }
         a.foundation_next(false).unwrap();
         turns += 1;
         assert!(turns < 80);
     }
-    assert_eq!(a.foundation_state().unwrap().episode, 2);
+    assert_eq!(
+        a.foundation_state().unwrap().episode,
+        rufren_content::foundations().episodes.len() - 1
+    );
     assert!(a.library.attempts().count() > 8);
     for (_, attempt) in a.library.attempts() {
         assert_eq!(attempt.self_rating, SelfRating::NotReported);
@@ -205,7 +226,7 @@ fn all_episodes_can_be_practiced_without_microphone_or_teacher() {
 }
 
 #[test]
-fn reserved_packet_recovers_a_partial_append_with_identical_events() {
+fn old_pack_reserved_packet_migrates_and_recovers_partial_append_identically() {
     let mut a = app();
     a.start_foundations().unwrap();
     while !matches!(current(&a).action, FoundationAction::Choose { .. }) {
@@ -239,6 +260,7 @@ fn reserved_packet_recovers_a_partial_append_with_identical_events() {
     reserved["pending"] =
         serde_json::json!({"events":events,"feedback":state.feedback.unwrap(),"accepted":true});
     reserved["attempts"] = serde_json::json!([]);
+    reserved["revision"] = foundations_legacy().revision.into();
     let mut b = app();
     let pending: foundation::FoundationState = serde_json::from_value(reserved).unwrap();
     b.foundation_save(&pending).unwrap();
@@ -264,7 +286,12 @@ fn optional_recording_resolves_its_authored_russian_reference() {
     let step = current(&a);
     let revision = uuid::Uuid::new_v5(
         &uuid::Uuid::NAMESPACE_URL,
-        format!("rufren-foundation:{}:{}", state.revision, step.id).as_bytes(),
+        format!(
+            "rufren-foundation:{}:{}",
+            foundation_step_pack_revision(&step.id),
+            step.id
+        )
+        .as_bytes(),
     );
     let metadata:AudioRecordMetadata=serde_json::from_value(serde_json::json!({"asset_id":"foundation-test-take","content_hash":"a".repeat(64),"role":"attempt","name":"Test original","passage_id":revision.to_string(),"revision_id":revision.to_string(),"duration_ms":1000,"sample_rate":16000,"channels":1,"frames":16000,"byte_length":32044,"created_at_ms":repository::now_ms(),"mime_type":"audio/wav"})).unwrap();
     a.foundation_save_recording(metadata.clone()).unwrap();
@@ -279,4 +306,204 @@ fn optional_recording_resolves_its_authored_russian_reference() {
             .len(),
         1
     );
+}
+
+fn at_step(a: &mut AppState, id: &str) {
+    a.start_foundations().unwrap();
+    let pack = rufren_content::foundations();
+    let mut state = a.foundation_state().unwrap();
+    let (ei, si, episode, step) = pack
+        .episodes
+        .iter()
+        .enumerate()
+        .find_map(|(ei, e)| {
+            e.steps
+                .iter()
+                .enumerate()
+                .find(|(_, s)| s.id == id)
+                .map(|(si, s)| (ei, si, e, s))
+        })
+        .expect("authored step");
+    state.episode = ei;
+    state.step = si;
+    state.episode_id = episode.id.clone();
+    state.step_id = step.id.clone();
+    state.step_revision = step.revision.clone();
+    state.session = uuid::Uuid::new_v4();
+    state.finished = false;
+    state.draft.clear();
+    state.cues.clear();
+    state.played.clear();
+    state.feedback = None;
+    state.accepted = false;
+    state.revealed = false;
+    state.pending = None;
+    state.cannot_yet = false;
+    // Prior encounters keep this test about the target retrieval rather than skipped prerequisites.
+    state.encounters = pack
+        .episodes
+        .iter()
+        .take(ei + 1)
+        .enumerate()
+        .flat_map(|(index, e)| {
+            e.steps
+                .iter()
+                .take(if index == ei { si } else { e.steps.len() })
+        })
+        .map(|s| format!("{}:encountered", s.id))
+        .collect();
+    a.foundation_save(&state).unwrap();
+}
+#[test]
+fn append_only_upgrade_preserves_exact_old_draft_aids_and_original_source() {
+    let mut a = app();
+    at_step(&mut a, "f1-build-am");
+    let mut old = a.foundation_state().unwrap();
+    old.revision = foundations_legacy().revision;
+    old.draft = vec!["а".into()];
+    old.cues = vec![Cue::Coach];
+    old.revealed = true;
+    let session = old.session;
+    a.foundation_save(&old).unwrap();
+    let resumed = a.foundation_state().unwrap();
+    assert_eq!(resumed.session, session);
+    assert_eq!(resumed.draft, old.draft);
+    assert_eq!(resumed.cues, old.cues);
+    assert!(resumed.revealed);
+    assert_eq!(resumed.step_id, "f1-build-am");
+    assert_eq!(resumed.revision, rufren_content::foundations().revision);
+    let step = current(&a);
+    assert_eq!(
+        a.foundation_revision(&resumed, &step).unwrap().id,
+        uuid::Uuid::new_v5(
+            &uuid::Uuid::NAMESPACE_URL,
+            format!("rufren-foundation:{}:{}", old.revision, step.id).as_bytes()
+        )
+    );
+    let mut invalid = resumed;
+    invalid.revision = "unknown-future-edition".into();
+    a.foundation_save(&invalid).unwrap();
+    assert!(a.foundation_state().is_err());
+    assert_eq!(
+        a.repo
+            .get::<foundation::FoundationState>("foundation_journey_v1")
+            .unwrap()
+            .unwrap()
+            .revision,
+        "unknown-future-edition"
+    );
+}
+#[test]
+fn completed_original_course_opens_first_new_episode_without_erasing_history() {
+    let mut a = app();
+    at_step(&mut a, "f3-end");
+    let mut old = a.foundation_state().unwrap();
+    old.revision = foundations_legacy().revision;
+    old.finished = true;
+    old.encounters.push("f3-end:encountered".into());
+    let encounters = old.encounters.clone();
+    a.foundation_save(&old).unwrap();
+    let next = a.foundation_state().unwrap();
+    assert_eq!(next.episode, 3);
+    assert_eq!(next.step, 0);
+    assert!(!next.finished);
+    assert_eq!(next.encounters, encounters);
+    assert_eq!(
+        next.step_id,
+        rufren_content::foundations().episodes[3].steps[0].id
+    );
+}
+#[test]
+fn hidden_model_meaning_recall_preserves_paraphrase_without_false_rejection() {
+    let mut a = app();
+    let pack = rufren_content::foundations();
+    let step = pack
+        .episodes
+        .iter()
+        .flat_map(|e| &e.steps)
+        .find(|s| {
+            matches!(
+                s.action,
+                FoundationAction::Recall {
+                    mode: FoundationRecallMode::ListeningMeaning,
+                    ..
+                }
+            )
+        })
+        .unwrap()
+        .clone();
+    at_step(&mut a, &step.id);
+    assert!(!a.foundation_state().unwrap().revealed);
+    a.foundation_replayed(&step.audio_ids[0]).unwrap();
+    assert!(
+        a.foundation_state().unwrap().cues.is_empty(),
+        "first listening input is not replay help"
+    );
+    let paraphrase = "I understand it as referring to the person being spoken about";
+    a.foundation_edit(vec![paraphrase.into()]).unwrap();
+    a.foundation_submit(&step).unwrap();
+    let state = a.foundation_state().unwrap();
+    assert!(state.revealed);
+    let attempt = *state.attempts.last().unwrap();
+    assert_eq!(
+        a.library
+            .attempts()
+            .find(|(e, _)| e.id == attempt)
+            .unwrap()
+            .1
+            .response,
+        paraphrase
+    );
+    assert!(
+        !a.library
+            .events
+            .values()
+            .any(|e| matches!(&e.fact,Fact::CoachJudgmentRecorded(j) if j.attempt==attempt)),
+        "unlisted English paraphrase is for self-comparison, never finite-list rejection"
+    );
+}
+#[test]
+fn cannot_yet_and_requested_model_do_not_fabricate_correct_recall() {
+    let mut a = app();
+    let step = rufren_content::foundations()
+        .episodes
+        .into_iter()
+        .flat_map(|e| e.steps)
+        .find(|s| {
+            matches!(
+                s.action,
+                FoundationAction::Recall {
+                    mode: FoundationRecallMode::Written,
+                    ..
+                }
+            )
+        })
+        .unwrap();
+    at_step(&mut a, &step.id);
+    a.foundation_cannot_yet(&step).unwrap();
+    let first = a.foundation_state().unwrap();
+    assert!(first.revealed);
+    assert!(!first.accepted);
+    let attempt = *first.attempts.last().unwrap();
+    assert!(
+        !a.library
+            .events
+            .values()
+            .any(|e| matches!(&e.fact,Fact::CoachJudgmentRecorded(j) if j.attempt==attempt))
+    );
+    a.foundation_retry().unwrap();
+    let FoundationAction::Recall { answer, .. } = &step.action else {
+        unreachable!()
+    };
+    a.foundation_edit(vec![answer.clone()]).unwrap();
+    a.foundation_submit(&step).unwrap();
+    let second = a.foundation_state().unwrap();
+    assert_eq!(second.attempts.len(), 2);
+    let (_, response) = a
+        .library
+        .attempts()
+        .find(|(e, _)| e.id == second.attempts[1])
+        .unwrap();
+    assert!(response.cues.contains(&Cue::Coach));
+    assert_eq!(response.self_rating, SelfRating::NotReported);
 }

@@ -16,7 +16,7 @@ with metadata.open("rb") as file:
     info = plistlib.load(file)
 assert info.get("CFBundleIdentifier") == args.identifier, "Unexpected bundle identity"
 if args.identifier == "town.lunar.rufren":
-    assert info.get("CFBundleDisplayName") == "Rufren", "Run finalize-apple-bundle.py to set the app's display name"
+    assert info.get("CFBundleDisplayName") == "Drussky", "Run finalize-apple-bundle.py to set the app's display name"
 if args.platform == "macos":
     assert (args.bundle / "Contents/Resources" / info.get("CFBundleIconFile", "icon.icns")).is_file(), "Native app icon is missing; run finalize-apple-bundle.py"
 assert info.get("NSMicrophoneUsageDescription"), "Missing microphone purpose string"
