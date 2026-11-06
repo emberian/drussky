@@ -1,0 +1,691 @@
+[
+  {
+    "id": "foundation-hand-print-a",
+    "revision": "1",
+    "foundation_step_id": "f1-a",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-a",
+    "target": "А",
+    "meaning": null,
+    "requires_graphemes": [
+      "А"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f1-a"
+    ],
+    "required_models": [
+      "А"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Keep the two sloping strokes balanced; add the crossbar.",
+    "script_note": "This task requests uppercase. The sound alone does not tell you the case.",
+    "model_help": "Compare the sloping strokes and the crossbar with the printed model.",
+    "say_instruction": "Say the vowel after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-m",
+    "revision": "1",
+    "foundation_step_id": "f1-m",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-ma",
+    "target": "М",
+    "meaning": null,
+    "requires_graphemes": [
+      "А",
+      "М"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f1-m"
+    ],
+    "required_models": [
+      "М"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Keep the outer strokes upright and the middle joins clear.",
+    "script_note": "Write the uppercase letter for the beginning of the syllable, before its vowel.",
+    "model_help": "Compare the two outer strokes and the middle with the model.",
+    "say_instruction": "Repeat the whole syllable from the recording, not a consonant letter name.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-ma",
+    "revision": "1",
+    "foundation_step_id": "f1-model-ma",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-ma",
+    "target": "ма",
+    "meaning": null,
+    "requires_graphemes": [
+      "А",
+      "М"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f1-model-ma"
+    ],
+    "required_models": [
+      "М",
+      "А"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Keep both letters on one line, grouped as one short pattern.",
+    "script_note": "This is a practice syllable, not new vocabulary. Simple unjoined printed forms are welcome.",
+    "model_help": "Compare the order of the two letters with the model.",
+    "say_instruction": "Repeat the whole practice syllable after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-am",
+    "revision": "1",
+    "foundation_step_id": "f1-model-am",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-am",
+    "target": "ам",
+    "meaning": null,
+    "requires_graphemes": [
+      "А",
+      "М"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f1-model-am"
+    ],
+    "required_models": [
+      "А",
+      "М"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Keep both letters on one line, grouped as one short pattern.",
+    "script_note": "This is a practice syllable, not new vocabulary. It has the reverse order from the earlier pattern.",
+    "model_help": "Compare the beginning and the ending with the model.",
+    "say_instruction": "Repeat the whole practice syllable after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-o",
+    "revision": "1",
+    "foundation_step_id": "f2-o",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-o",
+    "target": "О",
+    "meaning": null,
+    "requires_graphemes": [
+      "О"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f2-o"
+    ],
+    "required_models": [
+      "О"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Make a comfortable closed oval.",
+    "script_note": "This task requests uppercase. This recording models the stressed vowel; written О can sound different in other words.",
+    "model_help": "Compare the oval and its closure with the model.",
+    "say_instruction": "Say this vowel after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-k",
+    "revision": "1",
+    "foundation_step_id": "f2-k",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-ka",
+    "target": "К",
+    "meaning": null,
+    "requires_graphemes": [
+      "А",
+      "К"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f2-k"
+    ],
+    "required_models": [
+      "К"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Keep the main stroke upright and the two arms distinct.",
+    "script_note": "Write the uppercase letter for the beginning of the syllable, before its vowel.",
+    "model_help": "Compare where the two arms meet the upright stroke.",
+    "say_instruction": "Repeat the whole syllable from the recording, not a consonant letter name.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-t",
+    "revision": "1",
+    "foundation_step_id": "f2-t",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-ta",
+    "target": "Т",
+    "meaning": null,
+    "requires_graphemes": [
+      "А",
+      "Т"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f2-t"
+    ],
+    "required_models": [
+      "Т"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Keep the top bar clear, with the upright stroke beneath it.",
+    "script_note": "Write the uppercase letter for the beginning of the syllable, before its vowel.",
+    "model_help": "Compare the top bar and the upright stroke with the model.",
+    "say_instruction": "Repeat the whole syllable from the recording, not a consonant letter name.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-kot",
+    "revision": "1",
+    "foundation_step_id": "f2-cat",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-kot",
+    "target": "кот",
+    "meaning": "cat",
+    "requires_graphemes": [
+      "К",
+      "О",
+      "Т"
+    ],
+    "requires_meanings": [
+      "cat"
+    ],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f2-cat"
+    ],
+    "required_models": [
+      "К",
+      "О",
+      "Т"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Group the three printed letters as one word.",
+    "script_note": "Use unjoined printed forms. Lowercase printed т may look different from cursive handwriting; cursive is not required.",
+    "model_help": "Compare the first letter, middle vowel and final letter with the model.",
+    "say_instruction": "Say the whole word meaning cat after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-d",
+    "revision": "1",
+    "foundation_step_id": "f3-d",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-da",
+    "target": "Д",
+    "meaning": null,
+    "requires_graphemes": [
+      "А",
+      "Д"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f3-d"
+    ],
+    "required_models": [
+      "Д"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Leave room beneath the main shape for its two small feet.",
+    "script_note": "Write the uppercase letter for the beginning of the word, before its vowel. Use the unjoined print model.",
+    "model_help": "Compare the main shape and its two feet with the model.",
+    "say_instruction": "Repeat the whole word from the recording, not a consonant letter name.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-da",
+    "revision": "1",
+    "foundation_step_id": "f3-written-yes",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-da",
+    "target": "да",
+    "meaning": "yes",
+    "requires_graphemes": [
+      "Д",
+      "А"
+    ],
+    "requires_meanings": [
+      "yes"
+    ],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f1-hear-yes",
+      "f3-written-yes"
+    ],
+    "required_models": [
+      "Д",
+      "А"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Keep the two printed letters grouped as one word.",
+    "script_note": "Use the unjoined printed model. A simple one-storey handwritten а is welcome even if a book font draws а differently.",
+    "model_help": "Compare the first letter and the following vowel with the model.",
+    "say_instruction": "Say the whole word meaning yes after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-tam",
+    "revision": "1",
+    "foundation_step_id": "f3-there",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-tam",
+    "target": "там",
+    "meaning": "there, the distant spot under the far window",
+    "requires_graphemes": [
+      "Т",
+      "А",
+      "М"
+    ],
+    "requires_meanings": [
+      "there"
+    ],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f3-there"
+    ],
+    "required_models": [
+      "Т",
+      "А",
+      "М"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Keep the three printed letters on one line.",
+    "script_note": "Use unjoined print. A simple one-storey handwritten а is welcome.",
+    "model_help": "Compare the three letters in their spoken order with the model.",
+    "say_instruction": "Say the whole word for the distant spot after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-tam-kot",
+    "revision": "1",
+    "foundation_step_id": "f3-message",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.1",
+    "audio_id": "foundation-tam-kot",
+    "target": "Там кот.",
+    "meaning": "There is a cat there.",
+    "requires_graphemes": [
+      "Т",
+      "А",
+      "М",
+      "К",
+      "О"
+    ],
+    "requires_meanings": [
+      "there",
+      "cat",
+      "cat-there"
+    ],
+    "requires_samples": [],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "f3-message"
+    ],
+    "required_models": [
+      "Т",
+      "А",
+      "М",
+      "К",
+      "О"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Write two word groups with a clear space, then finish with a period.",
+    "script_note": "Begin with a capital letter. Keep a larger gap between words than between letters. Use clear unjoined print.",
+    "model_help": "Compare the capital, the space between the words and the final period.",
+    "say_instruction": "Say the whole message after the recording.",
+    "grammar_note": "Там says where; кот names what is there. In this present-time message Russian needs no separate word for “is”."
+  },
+  {
+    "id": "foundation-hand-print-on",
+    "revision": "1",
+    "foundation_step_id": "c4-he-script",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.2",
+    "audio_id": "foundation-on",
+    "target": "он",
+    "meaning": "he, the man being discussed",
+    "requires_graphemes": [
+      "О",
+      "Н"
+    ],
+    "requires_meanings": [
+      "he-person"
+    ],
+    "requires_samples": [
+      "n-before-a",
+      "on",
+      "n-word-final"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "c4-he-script"
+    ],
+    "required_models": [
+      "О",
+      "Н"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Keep the two printed letters grouped as one word.",
+    "script_note": "Use unjoined print and the ordinary spelling.",
+    "model_help": "Compare the beginning vowel and the final letter with the model.",
+    "say_instruction": "Say the whole word for the man in our scene after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-ona",
+    "revision": "1",
+    "foundation_step_id": "c4-stress",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.2",
+    "audio_id": "foundation-ona",
+    "target": "она",
+    "meaning": "she, the woman being discussed",
+    "requires_graphemes": [
+      "О",
+      "Н",
+      "А"
+    ],
+    "requires_meanings": [
+      "she-person"
+    ],
+    "requires_samples": [
+      "ona",
+      "ona-unstressed-o"
+    ],
+    "requires_conventions": [
+      "stress-acute-annotation"
+    ],
+    "prerequisite_step_ids": [
+      "c4-stress"
+    ],
+    "required_models": [
+      "О",
+      "Н",
+      "А"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Keep the three printed letters grouped as one word.",
+    "script_note": "Write ordinary spelling without the teaching stress mark. The last syllable is stressed; follow the whole recording.",
+    "model_help": "Compare all three letters; then listen to the final stressed vowel.",
+    "say_instruction": "Say the whole word for the woman in our scene after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-okno",
+    "revision": "1",
+    "foundation_step_id": "c5-window-read",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.2",
+    "audio_id": "foundation-okno",
+    "target": "окно",
+    "meaning": "window",
+    "requires_graphemes": [
+      "О",
+      "К",
+      "Н"
+    ],
+    "requires_meanings": [
+      "window"
+    ],
+    "requires_samples": [
+      "okno",
+      "okno-unstressed-o",
+      "kn-cluster"
+    ],
+    "requires_conventions": [
+      "stress-acute-annotation"
+    ],
+    "prerequisite_step_ids": [
+      "c5-window-read"
+    ],
+    "required_models": [
+      "О",
+      "К",
+      "Н"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Give all four printed letters room within one word group.",
+    "script_note": "Write ordinary spelling without a stress mark. Hear the middle consonants together, without adding a vowel.",
+    "model_help": "Compare the order of the four letters and listen to the whole word.",
+    "say_instruction": "Say the whole word meaning window after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-ono",
+    "revision": "1",
+    "foundation_step_id": "c5-neuter-script",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.2",
+    "audio_id": "foundation-ono",
+    "target": "оно",
+    "meaning": "it, referring back to the neuter Russian noun for window",
+    "requires_graphemes": [
+      "О",
+      "Н"
+    ],
+    "requires_meanings": [
+      "it-neuter-window",
+      "window"
+    ],
+    "requires_samples": [
+      "ono",
+      "ono-unstressed-o"
+    ],
+    "requires_conventions": [
+      "stress-acute-annotation",
+      "neuter-noun-reference"
+    ],
+    "prerequisite_step_ids": [
+      "c5-window-read",
+      "c5-neuter-script"
+    ],
+    "required_models": [
+      "О",
+      "Н"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Keep the three printed letters grouped as one word.",
+    "script_note": "Write ordinary spelling without the teaching stress mark. This is the pronoun for the window example, not every English it.",
+    "model_help": "Compare the first and last vowel shapes; listen to where the stress falls.",
+    "say_instruction": "Say the pronoun for our neuter window noun after the recording.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-oni",
+    "revision": "1",
+    "foundation_step_id": "c6-ni-context",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.2",
+    "audio_id": "foundation-oni",
+    "target": "они",
+    "meaning": "they, the people being discussed together",
+    "requires_graphemes": [
+      "О",
+      "Н",
+      "И"
+    ],
+    "requires_meanings": [
+      "they-people"
+    ],
+    "requires_samples": [
+      "i",
+      "on",
+      "oni",
+      "oni-unstressed-o",
+      "n-before-i-soft"
+    ],
+    "requires_conventions": [
+      "stress-acute-annotation"
+    ],
+    "prerequisite_step_ids": [
+      "c6-ni-context"
+    ],
+    "required_models": [
+      "О",
+      "Н",
+      "И"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Keep the three printed letters grouped as one word.",
+    "script_note": "Write ordinary spelling without the teaching stress mark. The middle sound is softened before the final vowel here; follow the whole word.",
+    "model_help": "Compare the final letter with the model; listen to the whole ending.",
+    "say_instruction": "Say the whole word for the people together after the recording.",
+    "grammar_note": null
+  }
+]

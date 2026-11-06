@@ -1,6 +1,6 @@
 # PencilKit writing activity in the Rust app
 
-Decision proposal, 2026-11-06. Research/source inspection only: no application changes, builds, model calls, signing changes or device changes were made. One Kagi query through `/Users/ember/swarm/research.py` located the Apple PencilKit/delegate documentation and published Rust bindings; those primary sources, the actual crate source, installed SDK and current shell were then inspected. This establishes integration feasibility, not measured latency or Russian recognition quality.
+Decision proposal, 2026-11-06. The initial research pass used source inspection only, with no application changes, builds, model calls, signing changes or device changes. The subsequently authorized adapter implementation is described below; physical acceptance remains outstanding. One Kagi query through `/Users/ember/swarm/research.py` located the Apple PencilKit/delegate documentation and published Rust bindings; those primary sources, the actual crate source, installed SDK and current shell were then inspected. This establishes integration feasibility, not measured latency or Russian recognition quality.
 
 ## Recommendation
 
@@ -54,3 +54,8 @@ Before shipping, in the repository's single build slot:
 2. On the actual iPad/Pencil, write whole words and a phrase, rest the palm, erase, undo/redo, zoom/pan, rotate and use split view. Paper must stay stable and native drawing remain responsive; simulator mouse input cannot establish Pencil latency/palm behavior.
 3. Exercise fast pen-up→Done, delayed drawing callbacks, interrupted strokes, undo during autosave, failed/full-disk saves, duplicate/stale acks, route change and background/kill/relaunch. Reopen archive and portable preview from the acknowledged hashes; no late original may be lost or attributed to a new task.
 4. Complete both hear→write→compare→say and see→copy→say with real audio callbacks, model reveal chronology and a separate retry. Restore on another client with the archive retained and a useful portable ink view. Then evaluate independent Russian recognition on actual words/phrases before presenting it as useful feedback.
+
+
+## Authorized implementation checkpoint
+
+The source slice now exists in `handwriting_native.rs`, `handwriting_native_ios.rs` and `pencilkit_bindings.rs`, with eight pure transport/binding-validation tests in `tests/native_handwriting.rs`. It uses iOS-only manifest features, exact bundled WAV bytes through native AVAudioPlayer, revisioned archive/control-point checkpoints (batched rather than every drawing frame), app-private atomic recovery journals with a resign-active checkpoint, explicit comparison resume and a pause-before-navigation API. The flow owner integrates its callback into the Rust UI actor; Rust must reject any unmet task/cue preconditions through a failed checkpoint acknowledgement **before** native comparison reveals the model. System-font models are labelled “Printed example,” not represented as the authored hand-printing/stroke-order demonstration. Compilation, native simulator interaction and physical Pencil acceptance are separate checks; this source checkpoint does not establish them.

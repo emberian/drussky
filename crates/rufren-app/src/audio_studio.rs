@@ -12,6 +12,167 @@ use std::{collections::HashMap, rc::Rc};
 const BRIDGE: &str = include_str!("audio_bridge.js");
 const STYLE: &str = include_str!("audio_studio.css");
 
+/// Standalone JSON export, including on pages which never mounted AudioStudio.
+/// Native success means save/share completed; browser success means the download
+/// request was handed to the browser, which cannot confirm a filesystem save.
+/// Cancellation returns the stable neutral message below, distinct from failure.
+pub async fn export_json(text: String, filename: String) -> Result<(), String> {
+    use std::{
+        future::{Future, poll_fn},
+        task::Poll,
+    };
+    if text.is_empty() || text.len() as u64 > crate::apple_export::MAX_EXPORT_BYTES {
+        return Err("Choose a JSON export under 150 MiB. Your original is kept.".into());
+    }
+    serde_json::from_str::<serde_json::Value>(&text)
+        .map_err(|error| format!("The export is not valid JSON: {error}"))?;
+    let filename = json_export_filename(&filename);
+    let byte_length = text.len() as u64;
+    let hash = format!("{:x}", Sha256::digest(text.as_bytes()));
+    let native = crate::apple_export::supported();
+    let payload = serde_json::json!({"text":text,"filename":filename,"byte_length":byte_length,"sha256":hash,"native":native});
+    let script = format!(
+        "const payload={payload};\n{}\n{}",
+        crate::apple_export::JAVASCRIPT,
+        include_str!("json_export.js")
+    );
+    let mut bridge = document::eval(&script);
+    let joined = bridge;
+    let mut completion = Box::pin(async move {
+        joined
+            .join::<JsonExportOutcome>()
+            .await
+            .map_err(|error| format!("The export could not finish: {error}"))
+    });
+    enum Step {
+        Request(Result<JsonExportRequest, String>),
+        Finished(Result<JsonExportOutcome, String>),
+    }
+    let outcome = loop {
+        let mut incoming = Box::pin(async {
+            bridge
+                .recv::<JsonExportRequest>()
+                .await
+                .map_err(|error| format!("The export connection closed: {error}"))
+        });
+        let next = poll_fn(|cx| {
+            if let Poll::Ready(result) = completion.as_mut().poll(cx) {
+                return Poll::Ready(Step::Finished(result));
+            }
+            incoming.as_mut().poll(cx).map(Step::Request)
+        })
+        .await;
+        drop(incoming);
+        match next {
+            Step::Finished(result) => break result?,
+            Step::Request(result) => {
+                let request = result?.export_request;
+                if !native
+                    || request.name != filename
+                    || request.mime_type != "application/json"
+                    || request.byte_length != byte_length
+                    || request.sha256 != hash
+                {
+                    let result = serde_json::json!({"request_id":request.request_id,"status":"failed","message":"The export request differs from the exact JSON original. Your original is kept."});
+                    let _ =
+                        document::eval(&format!("window.rufrenFileExports?.complete({result});"));
+                } else {
+                    crate::apple_export::start_export(request);
+                }
+            }
+        }
+    };
+    json_export_result(native, outcome)
+}
+
+#[derive(Deserialize)]
+struct JsonExportRequest {
+    export_request: crate::apple_export::ExportRequest,
+}
+#[derive(Deserialize)]
+struct JsonExportOutcome {
+    status: String,
+    #[serde(default)]
+    message: String,
+}
+
+fn json_export_filename(filename: &str) -> String {
+    let leaf = filename.rsplit(['/', '\\']).next().unwrap_or_default();
+    let clean: String = leaf
+        .chars()
+        .map(|c| {
+            if c.is_control() || "<>:\"|?*".contains(c) {
+                '_'
+            } else {
+                c
+            }
+        })
+        .collect();
+    let clean = clean
+        .trim()
+        .trim_start_matches('.')
+        .trim_end_matches(['.', ' ']);
+    let stem = clean
+        .strip_suffix(".json")
+        .or_else(|| clean.strip_suffix(".JSON"))
+        .unwrap_or(clean);
+    let stem: String = stem.chars().take(75).collect();
+    format!(
+        "{}.json",
+        if stem.trim().is_empty() {
+            "export"
+        } else {
+            stem.as_str()
+        }
+    )
+}
+fn json_export_result(native: bool, outcome: JsonExportOutcome) -> Result<(), String> {
+    match outcome.status.as_str(){
+        "saved"|"shared" if native=>Ok(()),
+        "requested" if !native=>Ok(()),
+        "cancelled"=>Err("Export cancelled. Your original is kept.".into()),
+        "failed"=>Err(if outcome.message.is_empty(){"The export could not be completed. Your original is kept.".into()}else{outcome.message}),
+        _=>Err("The export did not report a completed save, share, or browser download request. Your original is kept.".into()),
+    }
+}
+
+#[cfg(test)]
+mod json_export_tests {
+    use super::*;
+    #[test]
+    fn json_export_names_are_portable_leaf_names_with_json_extension() {
+        assert_eq!(
+            json_export_filename("/tmp/../ink:study?.json"),
+            "ink_study_.json"
+        );
+        assert_eq!(
+            json_export_filename("C:\\private\\.ink\nnotes.JSON"),
+            "ink_notes.json"
+        );
+        assert_eq!(json_export_filename("../"), "export.json");
+        let name = json_export_filename(&"😀".repeat(100));
+        assert!(name.encode_utf16().count() <= 180);
+        assert!(!name.contains('/'));
+        assert!(name.ends_with(".json"));
+    }
+    #[test]
+    fn json_export_requires_platform_terminal_status_and_keeps_cancel_neutral() {
+        let outcome = |status: &str| JsonExportOutcome {
+            status: status.into(),
+            message: String::new(),
+        };
+        assert!(json_export_result(true, outcome("saved")).is_ok());
+        assert!(json_export_result(true, outcome("shared")).is_ok());
+        assert!(json_export_result(true, outcome("requested")).is_err());
+        assert!(json_export_result(true, outcome("prepared")).is_err());
+        assert!(json_export_result(false, outcome("requested")).is_ok());
+        assert_eq!(
+            json_export_result(true, outcome("cancelled")).unwrap_err(),
+            "Export cancelled. Your original is kept."
+        );
+    }
+}
+
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
 pub struct StudioAnnotation {
     pub start_seconds: f64,
@@ -61,6 +222,19 @@ pub struct SoundFocusRecorderScope {
     pub session_id: uuid::Uuid,
     pub intent_id: uuid::Uuid,
     pub member_id: String,
+}
+
+/// A local voice original associated with an exact web/native writing artifact.
+/// This metadata is not an Attempt or a claim that ink is synchronized.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct WritingRecorderScope {
+    pub run_id: uuid::Uuid,
+    pub round_id: uuid::Uuid,
+    pub ink_original_id: uuid::Uuid,
+    pub ink_sha256: String,
+    pub ink_format: String,
+    pub task_id: String,
+    pub task_revision: String,
 }
 
 /// Save one generated original, bound to the exact phrase revision and request.
@@ -527,10 +701,12 @@ pub fn AudioStudio(
     #[props(default)] compact: bool,
     #[props(default)] review_only: bool,
     #[props(default)] selected_asset_id: Option<String>,
+    #[props(default)] selected_content_hash: Option<String>,
     #[props(default)] on_selected: EventHandler<Option<StudioRecording>>,
     #[props(default)] on_recording_state: EventHandler<bool>,
     #[props(default)] dialogue_scope: Option<DialogueRecorderScope>,
     #[props(default)] sound_focus_scope: Option<SoundFocusRecorderScope>,
+    #[props(default)] writing_scope: Option<WritingRecorderScope>,
     #[props(default)] frozen_reference_asset_id: Option<String>,
     #[props(default)] frozen_reference_hash: Option<String>,
 ) -> Element {
@@ -539,7 +715,7 @@ pub fn AudioStudio(
     let mut reference = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut attempt = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut error = use_signal(String::new);
-    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id,"compact":compact,"review_only":review_only,"selected_asset_id":selected_asset_id,"dialogue_scope":dialogue_scope,"sound_focus_scope":sound_focus_scope,"frozen_reference_asset_id":frozen_reference_asset_id,"frozen_reference_hash":frozen_reference_hash,"native_exports":crate::apple_export::supported()}).to_string();
+    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id,"compact":compact,"review_only":review_only,"selected_asset_id":selected_asset_id,"selected_content_hash":selected_content_hash,"dialogue_scope":dialogue_scope,"sound_focus_scope":sound_focus_scope,"writing_scope":writing_scope,"frozen_reference_asset_id":frozen_reference_asset_id,"frozen_reference_hash":frozen_reference_hash,"native_exports":crate::apple_export::supported()}).to_string();
     use_effect(move || {
         let script = format!(
             "const rufrenStudioRoot=document.getElementById('rufren-audio-studio');if(rufrenStudioRoot?.dataset.instance!=={})return;\n{}\n{}",
@@ -769,7 +945,7 @@ pub fn AudioStudio(
                         if role=="reference" {if let Some(generate)=on_generate_reference {button {class:"primary",disabled:generating_reference,onclick:move |_|generate.call(()),if generating_reference {"Generating reference…"}else{"Generate reference audio"}}}}
                         div {class:"audio-acquire",
                             button {class:"primary","data-action":"record","data-role":role,"data-record":"true",if role=="reference" {"● Record another voice"}else{if dialogue_scope.is_some(){"● Record my message"}else{"● Record my attempt"}}}
-                            label {class:"secondary audio-file",r#for:"audio-import-{role}",{if dialogue_scope.is_some(){"Import WAV"}else{"Import audio"}} input {id:"audio-import-{role}",name:"audio-import-{role}",onchange:move |event|import_native_file(event,role,error),r#type:"file",accept:if dialogue_scope.is_some(){"audio/wav,.wav"}else{"audio/*,.wav,.mp3,.m4a,.ogg,.flac"},"data-import":role}}
+                            if writing_scope.is_none(){label {class:"secondary audio-file",r#for:"audio-import-{role}",{if dialogue_scope.is_some(){"Import WAV"}else{"Import audio"}} input {id:"audio-import-{role}",name:"audio-import-{role}",onchange:move |event|import_native_file(event,role,error),r#type:"file",accept:if dialogue_scope.is_some(){"audio/wav,.wav"}else{"audio/*,.wav,.mp3,.m4a,.ogg,.flac"},"data-import":role}}}
                         }
                         label {r#for:"audio-library-{role}",if dialogue_scope.is_some(){"Saved takes for this message"}else{"Saved takes for this phrase"}}
                         select {id:"audio-library-{role}","data-library":role,aria_label:"Saved {title}"}
@@ -895,6 +1071,7 @@ pub fn AudioSpeaking(
     revision_id: String,
     on_saved: EventHandler<StudioRecording>,
     #[props(default)] selected_asset_id: Option<String>,
+    #[props(default)] selected_content_hash: Option<String>,
     #[props(default)] on_selected: EventHandler<Option<StudioRecording>>,
     #[props(default)] on_recording_state: EventHandler<bool>,
     #[props(default)] on_reference_played: EventHandler<()>,
@@ -903,12 +1080,13 @@ pub fn AudioSpeaking(
     #[props(default)] generating_reference: bool,
     #[props(default)] dialogue_scope: Option<DialogueRecorderScope>,
     #[props(default)] sound_focus_scope: Option<SoundFocusRecorderScope>,
+    #[props(default)] writing_scope: Option<WritingRecorderScope>,
     #[props(default)] frozen_reference_asset_id: Option<String>,
     #[props(default)] frozen_reference_hash: Option<String>,
     #[props(default)] review_only: bool,
     #[props(default)] workspace_id: String,
 ) -> Element {
-    rsx! {AudioStudio {passage_id,revision_id,workspace_id,compact:true,review_only,selected_asset_id,on_saved,on_selected,on_recording_state,on_reference_played,on_region_played,on_generate_reference,generating_reference,dialogue_scope,sound_focus_scope,frozen_reference_asset_id,frozen_reference_hash}}
+    rsx! {AudioStudio {passage_id,revision_id,workspace_id,compact:true,review_only,selected_asset_id,selected_content_hash,on_saved,on_selected,on_recording_state,on_reference_played,on_region_played,on_generate_reference,generating_reference,dialogue_scope,sound_focus_scope,writing_scope,frozen_reference_asset_id,frozen_reference_hash}}
 }
 
 fn quality_summary(analysis: &AudioAnalysis) -> Element {
@@ -1118,6 +1296,7 @@ pub fn AudioReview(
 pub(crate) fn AudioReviewPlayer(
     asset_id: String,
     label: String,
+    #[props(default)] expected_hash: Option<String>,
     #[props(default)] on_played: EventHandler<StudioRecording>,
 ) -> Element {
     let element_id = use_hook(|| format!("rufren-audio-review-{}", uuid::Uuid::new_v4()));
@@ -1151,7 +1330,7 @@ pub(crate) fn AudioReviewPlayer(
     });
     rsx! {
         style {"{STYLE}"}
-        div {id:element_id,class:"audio-practice audio-review-player","data-asset":asset_id,
+        div {id:element_id,class:"audio-practice audio-review-player","data-asset":asset_id,"data-expected-hash":expected_hash,
             h3 {"{label}"}
             div {class:"actions",
                 button {class:"primary",disabled:true,"data-practice-rate":"1","▶ Play this recording"}

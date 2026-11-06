@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
 use unicode_normalization::UnicodeNormalization;
 
+pub mod handwriting_tasks;
 pub mod foundations;
 pub use foundations::{foundations, FoundationAction, FoundationAsset, FoundationChoice, FoundationEpisode, FoundationPack, FoundationStep, FOUNDATION_JSON};
 

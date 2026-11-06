@@ -3,10 +3,14 @@
 const root = typeof rufrenStudioRoot==='undefined'?document.getElementById('rufren-audio-studio'):rufrenStudioRoot;
 if (!root) throw new Error('Speech studio did not mount.');
 const instanceId=root.dataset.instance||crypto.randomUUID();root.dataset.instance=instanceId;
-const previousExit = window.rufrenAudioStudio?.destroy();
+const previousExit = window.rufrenAudioStudio?.destroy() || window.rufrenAudioExit;
 const config = JSON.parse(root.dataset.config);
 if(config.sound_focus_scope){const s=config.sound_focus_scope,uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-  if(config.dialogue_scope||!uuid.test(s.session_id)||!uuid.test(s.intent_id)||typeof s.member_id!=='string'||!s.member_id||s.member_id.length>256||!config.frozen_reference_asset_id)throw Error('This recording needs its exact Sound Focus intention and model.');
+  if(config.dialogue_scope||config.writing_scope||!uuid.test(s.session_id)||!uuid.test(s.intent_id)||typeof s.member_id!=='string'||!s.member_id||s.member_id.length>256||!config.frozen_reference_asset_id)throw Error('This recording needs its exact Sound Focus intention and model.');
+}
+const writingFields=['run_id','round_id','ink_original_id','ink_sha256','ink_format','task_id','task_revision'];
+if(config.writing_scope){const s=config.writing_scope,uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  if(config.dialogue_scope||config.sound_focus_scope||config.passage_id||config.revision_id||!['run_id','round_id','ink_original_id'].every(key=>uuid.test(s[key]))||!/^[0-9a-f]{64}$/.test(s.ink_sha256)||!['ink_format','task_id','task_revision'].every(key=>typeof s[key]==='string'&&s[key].length>0&&s[key].length<=256))throw Error('This recording needs its exact saved drawing and writing task.');
 }
 let compactAdvanced=!config.compact,choiceGeneration=0,pendingOperations=0;
 let alive = true, db, context, stream, processor, source, sink, capture, starting = false, finish;
@@ -23,6 +27,27 @@ let exitPromise;
 function keepWrite(promise){pendingWrites.add(promise);promise.then(()=>pendingWrites.delete(promise),()=>pendingWrites.delete(promise));return promise;}
 let requestGeneration = 0, timer, workletUrl, workletLoaded = false, playing = [], playGeneration = 0;
 const clips = new Map(), selected = {reference: null, attempt: null};
+// A decoded clip is a working set, never a second recording library. Pending
+// decodes/exports own their local buffers; only selected and sounding takes stay
+// in this cache. The persisted original is never removed here.
+function pruneClips(){
+  const keep=new Set(Object.values(selected).map(record=>record?.asset_id).filter(Boolean));
+  for(const playback of playing)if(playback.assetId)keep.add(playback.assetId);
+  for(const [id,clip]of clips)if(!alive||!keep.has(id)){
+    if(clip.playback_url){
+      if(stretchPlayer.src===clip.playback_url){stretchPlayer.pause();stretchPlayer.removeAttribute('src');stretchPlayer.load();}
+      URL.revokeObjectURL(clip.playback_url);
+    }
+    clips.delete(id);
+  }
+}
+function releaseStudioMemory(){
+  for(const role of Object.keys(selected))delete selected[role];
+  for(const role of Object.keys(analyses))delete analyses[role];
+  for(const state of Object.values(regionSlots))Object.assign(state,{record:null,source:null,analysis:null,span:null,metrics:null});
+  regionDrag=null;focusTimers.clear();pruneClips();
+  if(window.rufrenAudioStudio?.instanceId===instanceId)delete window.rufrenAudioStudio;
+}
 // One persistent media element retains Apple's user activation across an A/B pair.
 const stretchPlayer=document.createElement('audio');stretchPlayer.preload='auto';stretchPlayer.hidden=true;stretchPlayer.setAttribute('data-studio-stretch','true');root.append(stretchPlayer);
 const preservePitchKey=['preservesPitch','webkitPreservesPitch','mozPreservesPitch'].find(key=>key in stretchPlayer);
@@ -106,6 +131,9 @@ function sourceLabel(record) {
 function recordMatchesScope(record){
   const scope=record.device?.dialogue_scope;
   const sound=record.device?.sound_focus_scope;
+  const writing=record.device?.writing_scope;
+  if(config.writing_scope)return !scope&&!sound&&writing?.origin==='microphone_capture'&&record.role==='attempt'&&record.passage_id===''&&record.revision_id===''&&writingFields.every(key=>writing?.[key]===config.writing_scope[key]);
+  if(writing)return false;
   if(config.sound_focus_scope){
     if(record.role==='reference')return record.asset_id===config.frozen_reference_asset_id&&(!config.frozen_reference_hash||record.content_hash===config.frozen_reference_hash)&&!scope&&!sound;
     const expected=config.sound_focus_scope;
@@ -166,10 +194,12 @@ async function selectRecord(role, record, buffer) {
   const token=nextAnalysis(role,record);
   if (!buffer) {
     if (await digest(record.blob) !== record.content_hash) throw Error('This audio file failed its integrity check. The saved original was kept; restore it from your audio backup.');
-    buffer = await (await audioContext(false)).decodeAudioData(await record.blob.arrayBuffer());
+    if(!currentAnalysis(role,record.asset_id,token))return false;
+    const ctx=await audioContext(false);if(!currentAnalysis(role,record.asset_id,token))return false;
+    buffer = await ctx.decodeAudioData(await record.blob.arrayBuffer());
   }
   if(!currentAnalysis(role,record.asset_id,token))return false;
-  selected[role] = record; root.setAttribute(`data-selected-${role}`,record.asset_id); clips.set(record.asset_id, {...clips.get(record.asset_id),record,buffer});
+  selected[role] = record; root.setAttribute(`data-selected-${role}`,record.asset_id); clips.set(record.asset_id, {...clips.get(record.asset_id),record,buffer});pruneClips();
   delete analyses[role]; for(const kind of ['wave','spectrum','pitch']) {const canvas=$(`audio-${kind}-${role}`);canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);}
   $(`audio-from-${role}`).value = '0'; $(`audio-to-${role}`).value = buffer.duration.toFixed(3);
   $(`audio-name-${role}`).textContent = clipLabel(record,buffer);
@@ -201,12 +231,12 @@ async function makeRecord(role,blob,info,name,interrupted=false,device={},origin
   return {asset_id,content_hash,role,name,passage_id:config.passage_id,revision_id:config.revision_id,
     duration_ms:Math.round(info.duration*1000),sample_rate:info.sampleRate,channels:info.numberOfChannels,frames:info.length,
     byte_length:blob.size,created_at_ms:Date.now(),mime_type:await audioMime(blob),
-    interrupted,device:{...device,source_mime_type:blob.type,...(config.dialogue_scope?{dialogue_scope:config.dialogue_scope}:{}),...(config.sound_focus_scope?{sound_focus_scope:{...config.sound_focus_scope,origin}}:{})},annotations:[],blob};
+    interrupted,device:{...device,source_mime_type:blob.type,...(config.dialogue_scope?{dialogue_scope:config.dialogue_scope}:{}),...(config.sound_focus_scope?{sound_focus_scope:{...config.sound_focus_scope,origin}}:{}),...(config.writing_scope?{writing_scope:{...config.writing_scope,origin}}:{})},annotations:[],blob};
 }
 async function saveAudio(role, blob, buffer, name, interrupted = false, device = {},origin='imported_audio') {
   const record=await makeRecord(role,blob,buffer,name,interrupted,device,origin),asset_id=record.asset_id;
   // Keep a downloadable in-memory take even when persistence fails.
-  clips.set(asset_id,{record,buffer}); selected[role] = record; controls();
+  if(alive){clips.set(asset_id,{record,buffer});selected[role]=record;pruneClips();controls();}
   try { await storage('put',record); emit({kind:'saved',recording:metadata(record)}); await refreshLibrary(); }
   catch (error) { if(!alive)(window.rufrenAudioRecovery ||= []).push(record);await selectRecord(role,record,buffer);throw error; }
   await selectRecord(role,record,buffer);
@@ -216,7 +246,7 @@ function stopIndependentPlayers(){for(const api of window.rufrenAudioPlayers?.va
 function stopPlayback() {
   playGeneration++;
   for (const node of playing) { try { node.stop(); } catch (_) {} }
-  playing = [];
+  playing = [];pruneClips();
 }
 function selection(role) {
   const record = selected[role]; if (!record) throw Error(`Add a ${role === 'reference' ? 'reference voice' : 'learner attempt'} first.`);
@@ -231,11 +261,11 @@ function playStretched(role,span,rate,loop,generation) {
   const media=stretchPlayer;
   return new Promise((resolve,reject)=>{
     let done=false,tick,started=false;
-    const handle={stop:()=>finish(false)};playing.push(handle);
+    const handle={assetId:span.record.asset_id,stop:()=>finish(false)};playing.push(handle);
     function finish(ok,error) {
       if(done)return;done=true;clearTimeout(tick);media.pause();
       media.onloadedmetadata=media.onplaying=media.ontimeupdate=media.onended=media.onerror=null;
-      playing=playing.filter(node=>node!==handle);
+      playing=playing.filter(node=>node!==handle);pruneClips();
       if(error)reject(error);else resolve(ok&&generation===playGeneration);
     }
     function seek(){try{media.currentTime=span.from;media.playbackRate=rate;media[preservePitchKey]=true;}catch(error){finish(false,Error(`This device could not seek to the selected audio span: ${error.message}`));}}
@@ -269,10 +299,10 @@ async function play(role, keep = false) {
   if(rate!==1)return playStretched(role,span,rate,loop,generation);
   const ctx=await audioContext();if(!alive||generation!==playGeneration)return false;
   const node=ctx.createBufferSource();node.buffer=span.buffer;node.playbackRate.value=1;
-  node.connect(ctx.destination);node.loop=loop;node.loopStart=span.from;node.loopEnd=span.to;playing.push(node);
+  node.connect(ctx.destination);node.loop=loop;node.loopStart=span.from;node.loopEnd=span.to;node.assetId=span.record.asset_id;playing.push(node);
   status(`${loop?'Looping':'Playing'} ${role==='reference'?'reference voice':'your attempt'} at natural speed.`);
   return new Promise(resolve=>{
-    node.onended=()=>{playing=playing.filter(n=>n!==node);resolve(generation===playGeneration);};
+    node.onended=()=>{node.onended=null;node.disconnect();node.buffer=null;playing=playing.filter(n=>n!==node);pruneClips();resolve(generation===playGeneration);};
     if(loop)node.start(0,span.from);else node.start(0,span.from,span.to-span.from);
     emitPlayback(role,span,rate);
   });
@@ -285,6 +315,7 @@ async function compare() {
   await play('attempt',true);
 }
 async function startRecording(role) {
+  if(config.writing_scope&&role!=='attempt')throw Error('Use the prepared word model and record your own voice.');
   if(config.review_only)throw Error('This saved response is kept. Start a new sound practice to make another take.');
   if(config.frozen_reference_asset_id&&role==='reference')throw Error('This comparison keeps its exact saved model. Record your own take instead.');
   if (capture || starting) return;
@@ -375,6 +406,7 @@ function preflightDuration(file) {
   });
 }
 async function importFile(role,file) {
+  if(config.writing_scope)throw Error('Record a new voice take for this exact drawing. Other originals are kept separately.');
   if(config.review_only)throw Error('This saved response is kept. Start a new sound practice to import another take.');
   if(config.frozen_reference_asset_id&&role==='reference')throw Error('This comparison keeps its exact saved model. Import your own take instead.');
   if (!file) return;
@@ -401,7 +433,7 @@ async function saveCue(role) {
   if((span.record.annotations||[]).length>=256)throw Error('This recording already has 256 cues. Keep the next observation with a new take.');
   const record = {...span.record,annotations:[...(span.record.annotations || []),{start_seconds:span.from,end_seconds:span.to,note,created_at_ms:Date.now()}]};
   if(new TextEncoder().encode(JSON.stringify(metadata(record))).length>96*1024)throw Error('This recording’s cue notebook is full. Keep the next observation with a new take.');
-  await storage('put',record); selected[role] = record; clips.get(record.asset_id).record = record;
+  await storage('put',record);if(!alive||selected[role]?.asset_id!==record.asset_id)return;selected[role]=record;const clip=clips.get(record.asset_id);if(clip)clip.record=record;
   cueList(role,record); $(`audio-note-${role}`).value = ''; emit({kind:'cue_saved',recording:metadata(record)}); status('Cue saved with this exact audio span.');
 }
 async function download(blob,name) {
@@ -507,7 +539,7 @@ function click(event) {
   if (actions[button.dataset.action]) Promise.resolve().then(actions[button.dataset.action]).catch(failure);
 }
 function clearAttempt(){
-  stopPlayback();selected.attempt=null;delete analyses.attempt;analysisTokens.attempt='';sourceGenerations.attempt='';root.setAttribute('data-selected-attempt','');
+  stopPlayback();selected.attempt=null;pruneClips();delete analyses.attempt;analysisTokens.attempt='';sourceGenerations.attempt='';root.setAttribute('data-selected-attempt','');
   for(const kind of ['wave','spectrum','pitch']){const canvas=$(`audio-${kind}-attempt`);canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);}$('audio-from-attempt').value='0';$('audio-to-attempt').value='0';$('audio-cues-attempt').replaceChildren();
   $('audio-library-attempt').value='';$('audio-name-attempt').textContent='No recording selected';$('audio-provenance-attempt').textContent='No source selected';
   emit({kind:'source_clear',role:'attempt'});emit({kind:'selected',recording:null});controls();
@@ -547,7 +579,7 @@ if(!regionWorkspace)try{regionWorkspace=sessionStorage.getItem('rufren.workspace
 const regionLab=$('audio-region-lab');
 function isRegion(role){return REGION_ROLES.includes(role);}
 function nextAnalysis(role,record){
-  const token=`${Date.now()}-${++sourceCounter}`;analysisTokens[role]=token;sourceGenerations[role]=token;selected[role]=record;
+  const token=`${Date.now()}-${++sourceCounter}`;analysisTokens[role]=token;sourceGenerations[role]=token;selected[role]=record;pruneClips();
   root.setAttribute(`data-selected-${role}`,record.asset_id);root.setAttribute(`data-analysis-request-${role}`,token);
   return token;
 }
@@ -563,7 +595,7 @@ async function sendPcm(role,record,buffer,token,decoded=false){
 function regionSourceList(records){
   if(!regionLab)return;
   for(const role of REGION_ROLES){const picker=$(`audio-region-source-${role}`),value=regionSlots[role].record?.asset_id||selected[role]?.asset_id||'';picker.replaceChildren(new Option('Choose a saved recording…',''));
-    for(const record of records.filter(record=>config.dialogue_scope||config.sound_focus_scope?recordMatchesScope(record):!record.device?.dialogue_scope&&!record.device?.sound_focus_scope).sort((a,b)=>b.created_at_ms-a.created_at_ms))picker.add(new Option(`${sourceLabel(record)} · ${record.name} · ${(record.duration_ms/1000).toFixed(2)} s`,record.asset_id));picker.value=value;
+    for(const record of records.filter(record=>config.dialogue_scope||config.sound_focus_scope||config.writing_scope?recordMatchesScope(record):!record.device?.dialogue_scope&&!record.device?.sound_focus_scope&&!record.device?.writing_scope).sort((a,b)=>b.created_at_ms-a.created_at_ms))picker.add(new Option(`${sourceLabel(record)} · ${record.name} · ${(record.duration_ms/1000).toFixed(2)} s`,record.asset_id));picker.value=value;
   }
 }
 async function loadRegion(role,id,preset){
@@ -571,7 +603,7 @@ async function loadRegion(role,id,preset){
   stopPlayback();const state=regionSlots[role];persistRegionFocus(role,true);clearTimeout(state.timer);
   // Invalidate the visible source at intent time, before even reading metadata.
   // An older IDB completion must never reopen its controls or overwrite a newer pick.
-  const token=`${Date.now()}-${++sourceCounter}`;analysisTokens[role]=token;sourceGenerations[role]=token;selected[role]={asset_id:id};
+  const token=`${Date.now()}-${++sourceCounter}`;analysisTokens[role]=token;sourceGenerations[role]=token;selected[role]={asset_id:id};pruneClips();
   root.setAttribute(`data-selected-${role}`,id);root.setAttribute(`data-analysis-request-${role}`,token);root.setAttribute(`data-region-request-${role}`,'');
   Object.assign(state,{record:null,source:null,analysis:null,span:null,metrics:null,token,request:'',revision:0,valid:false,preset,renderKey:''});
   const range=$(`audio-region-range-${role}`);range.textContent='';for(const key of Object.keys(range.dataset))delete range.dataset[key];
@@ -581,19 +613,21 @@ async function loadRegion(role,id,preset){
   regionControls();updateRegionComparison();emit({kind:'source_clear',role});
   try{
     const record=await storage('get',id);if(!currentAnalysis(role,id,token))return;
-    if(record&&(config.dialogue_scope||config.sound_focus_scope?!recordMatchesScope(record):record.device?.dialogue_scope||record.device?.sound_focus_scope))throw Error('Choose a recording from this audio context.');
+    if(record&&(config.dialogue_scope||config.sound_focus_scope||config.writing_scope?!recordMatchesScope(record):record.device?.dialogue_scope||record.device?.sound_focus_scope||record.device?.writing_scope))throw Error('Choose a recording from this audio context.');
     if(!record)throw Error('That recording is not available on this device. Sync or restore its original.');
     state.record=record;selected[role]=record;$(`audio-region-source-${role}`).value=id;
     $(`audio-region-identity-${role}`).textContent=`${record.name} · checking the original…`;
     if(await digest(record.blob)!==record.content_hash)throw Error('The selected original failed its integrity check. Existing files were kept.');
-    const buffer=clips.get(id)?.buffer||await(await audioContext(false)).decodeAudioData(await record.blob.arrayBuffer());
     if(!currentAnalysis(role,id,token))return;
-    clips.set(id,{...clips.get(id),record,buffer});await sendPcm(role,record,buffer,token);persistRegionPair();
+    let buffer=clips.get(id)?.buffer;
+    if(!buffer){const ctx=await audioContext(false);if(!currentAnalysis(role,id,token))return;buffer=await ctx.decodeAudioData(await record.blob.arrayBuffer());}
+    if(!currentAnalysis(role,id,token))return;
+    clips.set(id,{...clips.get(id),record,buffer});pruneClips();await sendPcm(role,record,buffer,token);persistRegionPair();
   }catch(error){if(currentAnalysis(role,id,token)){$(`audio-region-metrics-${role}`).textContent=error.message;regionControls();throw error;}}
 }
 
 function focusKey(role,state){const m=state.source?.metadata;return JSON.stringify(['region-focus-v1',regionWorkspace,role,state.record?.asset_id,state.record?.content_hash,m?.content_hash,m?.sample_rate,m?.frames]);}
-function pairKey(){const key=['region-pair-v1',regionWorkspace,config.passage_id,config.revision_id];if(config.dialogue_scope)key.push(config.dialogue_scope.thread_id,config.dialogue_scope.input_id);if(config.sound_focus_scope)key.push(config.sound_focus_scope.session_id,config.sound_focus_scope.intent_id,config.sound_focus_scope.member_id);return JSON.stringify(key);}
+function pairKey(){const key=['region-pair-v1',regionWorkspace,config.passage_id,config.revision_id];if(config.dialogue_scope)key.push(config.dialogue_scope.thread_id,config.dialogue_scope.input_id);if(config.sound_focus_scope)key.push(config.sound_focus_scope.session_id,config.sound_focus_scope.intent_id,config.sound_focus_scope.member_id);if(config.writing_scope)for(const field of writingFields)key.push(config.writing_scope[field]);return JSON.stringify(key);}
 async function focusDb(){
   if(!regionWorkspace)return null;
   if(focusDatabase)return focusDatabase;if(focusOpening)return focusOpening;
@@ -724,15 +758,15 @@ function regionSelection(role){const state=regionSlots[role];if(!state?.source||
 function emitPlayback(role,span,rate){if(isRegion(role)){const state=span.region;emit({kind:'region_played',role,recording:metadata(span.record),asset_id:span.record.asset_id,content_hash:span.record.content_hash,source_pcm_hash:state.source.metadata.content_hash,...state.span,sample_rate:state.source.metadata.sample_rate,playback_rate:rate});}else if(role==='reference')emit({kind:'reference_played'});}
 async function playRegion(role,keep=false){const span=regionSelection(role);if(!alive)return false;stopIndependentPlayers();if(!keep)stopPlayback();const generation=playGeneration,rate=Number($('audio-region-rate').value),loop=$('audio-region-loop').checked&&!keep;
   if(rate!==1)return playStretched(role,span,rate,loop,generation);const ctx=await audioContext();if(!alive||generation!==playGeneration)return false;
-  const node=ctx.createBufferSource();node.buffer=span.buffer;node.connect(ctx.destination);node.loop=loop;node.loopStart=span.from;node.loopEnd=span.to;playing.push(node);
+  const node=ctx.createBufferSource();node.buffer=span.buffer;node.connect(ctx.destination);node.loop=loop;node.loopStart=span.from;node.loopEnd=span.to;node.assetId=span.record.asset_id;playing.push(node);
   return new Promise(resolve=>{let acknowledged=false,ackTimer;const beganAt=ctx.currentTime;
     const acknowledge=()=>{if(acknowledged||!alive||generation!==playGeneration)return;if(ctx.state==='running'&&ctx.currentTime>beganAt){acknowledged=true;emitPlayback(role,span,1);}else ackTimer=setTimeout(acknowledge,5);};
-    node.onended=()=>{clearTimeout(ackTimer);acknowledge();playing=playing.filter(n=>n!==node);resolve(generation===playGeneration);};
+    node.onended=()=>{clearTimeout(ackTimer);acknowledge();node.onended=null;node.disconnect();node.buffer=null;playing=playing.filter(n=>n!==node);pruneClips();resolve(generation===playGeneration);};
     if(loop)node.start(0,span.from);else node.start(0,span.from,span.to-span.from);ackTimer=setTimeout(acknowledge,0);status(`Playing selected region ${role==='region_a'?'A':'B'} at natural speed.`);});
 }
 async function compareRegions(){stopPlayback();const generation=playGeneration;if(!await playRegion('region_a',true)||generation!==playGeneration)return;await new Promise(r=>setTimeout(r,300));if(alive&&generation===playGeneration)await playRegion('region_b',true);}
 async function exportRegion(role){const state=regionSlots[role];if(!state.source||!state.valid)return;const result=await download(new Blob([JSON.stringify({format:'rufren-region-selection-v1',asset_id:state.record.asset_id,original_byte_sha256:state.record.content_hash,source_pcm:state.source.metadata,source_kind:state.source.kind,span:state.span,start_seconds:state.span.start_frame/state.source.metadata.sample_rate,end_seconds:state.span.end_frame/state.source.metadata.sample_rate},null,2)],{type:'application/json'}),`rufren-region-${role==='region_a'?'A':'B'}.json`);status(result.message,result.status==='failed');}
-function clearRegion(role){const state=regionSlots[role];if(!state)return;stopPlayback();persistRegionFocus(role,true);clearTimeout(state.timer);Object.assign(state,{record:null,source:null,analysis:null,span:null,metrics:null,valid:false,token:'',request:''});delete selected[role];analysisTokens[role]='';sourceGenerations[role]='';root.setAttribute(`data-selected-${role}`,'');root.setAttribute(`data-analysis-request-${role}`,'');root.setAttribute(`data-region-request-${role}`,'');$(`audio-region-identity-${role}`).textContent='No source selected';$(`audio-region-range-${role}`).textContent='';$(`audio-region-metrics-${role}`).textContent='Choose a recording to measure a region.';for(const kind of ['wave','spectrum','pitch']){const c=$(`audio-${kind}-${role}`);c.getContext('2d').clearRect(0,0,c.width,c.height);}for(const e of root.querySelectorAll(`[data-region-highlight="${role}"]`))e.hidden=true;emit({kind:'source_clear',role});regionControls();updateRegionComparison();persistRegionPair();}
+function clearRegion(role){const state=regionSlots[role];if(!state)return;stopPlayback();persistRegionFocus(role,true);clearTimeout(state.timer);Object.assign(state,{record:null,source:null,analysis:null,span:null,metrics:null,valid:false,token:'',request:''});delete selected[role];pruneClips();analysisTokens[role]='';sourceGenerations[role]='';root.setAttribute(`data-selected-${role}`,'');root.setAttribute(`data-analysis-request-${role}`,'');root.setAttribute(`data-region-request-${role}`,'');$(`audio-region-identity-${role}`).textContent='No source selected';$(`audio-region-range-${role}`).textContent='';$(`audio-region-metrics-${role}`).textContent='Choose a recording to measure a region.';for(const kind of ['wave','spectrum','pitch']){const c=$(`audio-${kind}-${role}`);c.getContext('2d').clearRect(0,0,c.width,c.height);}for(const e of root.querySelectorAll(`[data-region-highlight="${role}"]`))e.hidden=true;emit({kind:'source_clear',role});regionControls();updateRegionComparison();persistRegionPair();}
 function regionEditing(event){const role=event.target.dataset?.regionFrames||event.target.dataset?.regionSeconds||event.target.dataset?.regionOwner||event.target.dataset?.regionSource;const state=regionSlots[role];if(state){state.revision++;state.userVersion++;}}
 async function regionAction(event){
   const picker=event.target.closest('[data-region-source]');if(picker){regionSlots[picker.dataset.regionSource].userVersion++;if(picker.value)await loadRegion(picker.dataset.regionSource,picker.value);else clearRegion(picker.dataset.regionSource);return;}
@@ -782,7 +816,7 @@ function destroy() {
   alive=false;finish();yieldQueue.splice(0).forEach(resolve=>resolve());yieldChannel?.port1.close();yieldChannel?.port2.close();
   releaseCapture();stopPlayback();
   const write=preserveExitTake(take),regionWrite=shutdownRegions();
-  stretchPlayer.pause();stretchPlayer.removeAttribute('src');stretchPlayer.load();stretchPlayer.remove();for(const clip of clips.values())if(clip.playback_url)URL.revokeObjectURL(clip.playback_url);
+  stretchPlayer.pause();stretchPlayer.removeAttribute('src');stretchPlayer.load();stretchPlayer.remove();releaseStudioMemory();
   root.removeEventListener('click',click);root.removeEventListener('change',change);window.removeEventListener('rufren-audio-assets-changed',assetsChanged);document.removeEventListener('visibilitychange',visibility);
   window.removeEventListener('pagehide',destroy);observer.disconnect();context?.close().catch(()=>{});
   exitPromise=Promise.allSettled([...pendingWrites,write,regionWrite]).then(results=>{
@@ -790,6 +824,10 @@ function destroy() {
     const failed=results.find(r=>r.status==='rejected');
     if(failed)window.rufrenAudioExitError='An unfinished recording could not be saved. Reopen the speech studio to retry while this app remains open.';
   });
+  // Keep only unfinished persistence discoverable across a rapid remount, not
+  // the destroyed adapter closure or its decoded working set.
+  window.rufrenAudioExit=exitPromise;
+  exitPromise.then(()=>{if(window.rufrenAudioExit===exitPromise)delete window.rufrenAudioExit;});
   return exitPromise;
 }
 const observer = new MutationObserver(()=>{ if(!root.isConnected) destroy(); }); observer.observe(document.body,{childList:true,subtree:true});
@@ -806,15 +844,16 @@ try {
   for(const record of [...recovery]){await storage('put',record);recovery.splice(recovery.indexOf(record),1);}
   await refreshLibrary();
   if(config.frozen_reference_asset_id){const record=await storage('get',config.frozen_reference_asset_id);if(!record||record.role!=='reference'||!recordMatchesScope(record))throw Error('This exact model is unavailable. Restore its original before comparing.');await selectRecord('reference',record);}
-  if(config.selected_asset_id){const record=await storage('get',config.selected_asset_id);if(!validAttempt(record)){emit({kind:'selected',recording:null});throw Error('The exact response take is unavailable. Choose another saved take or record again.');}await selectRecord('attempt',record);}
+  if(config.selected_asset_id){const record=await storage('get',config.selected_asset_id);if(!validAttempt(record)||(config.selected_content_hash&&record.content_hash!==config.selected_content_hash)){emit({kind:'selected',recording:null});throw Error('The exact response take is unavailable. Choose another saved take or record again.');}await selectRecord('attempt',record);}
   if(window.rufrenAudioExitError){status('The interrupted recording has been recovered on this device. Choose it from saved takes.');delete window.rufrenAudioExitError;}
   else if(config.compact)status(selected.attempt?'Your exact saved take is ready to replay.':'Record a short response, then stop to keep it. You can also choose an existing take.');
   else status('Record or import a reference voice, then make your own attempt. Originals stay on this device.'); }
 catch(error) { failure(error); }
 emit({kind:'ready'});
+async function receiveMessages(){
 while (alive) {
-  const message=await Promise.race([dioxus.recv(),lifetime.then(()=>null)]);
-  if(!message)break;
+  const message=await dioxus.recv();
+  if(!alive||!message)break;
   if(message.kind==='request_decoded'){const role=message.role,record=selected[role],buffer=record&&clips.get(record.asset_id)?.buffer;if(record&&buffer&&currentAnalysis(role,message.asset_id,message.request_id))await sendPcm(role,record,buffer,message.request_id,true);continue;}
   if(message.kind==='region_metrics'){regionMetrics(message);continue;}
   if(message.kind==='region_comparison'){regionComparison(message);continue;}
@@ -832,3 +871,8 @@ while (alive) {
     if(isRegion(message.role))await acceptRegionSource(message);else{analyses[message.role]=message.analysis;draw(message.role,message.analysis);}
   }
 }
+}
+// One cancellation subscription for the entire receive loop. A late receive
+// exits without touching a destroyed view; interrupted writes have their own
+// pendingWrites/exitPromise lifetime above.
+await Promise.race([receiveMessages(),lifetime]);

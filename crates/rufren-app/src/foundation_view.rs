@@ -53,6 +53,34 @@ pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
     let replay_ids = step.audio_ids.clone();
     let can_answer = replay_ids.is_empty() || replay_ids.iter().any(|id| s.played.contains(id));
     let support_step = step.clone();
+    let writing_task = rufren_content::handwriting_tasks::handwriting_task_for_step(&step.id);
+    let writing_available =
+        writing_task.is_some() && step.audio_ids.iter().all(|id| s.played.contains(id));
+    let writing_label = writing_task
+        .as_ref()
+        .map(|t| match t.layout {
+            rufren_content::handwriting_tasks::FoundationHandwritingLayout::LetterBox => {
+                "Write this letter"
+            }
+            rufren_content::handwriting_tasks::FoundationHandwritingLayout::PhraseLine => {
+                "Write and say this message"
+            }
+            _ => {
+                if t.meaning.is_some() {
+                    "Write and say this word"
+                } else {
+                    "Write and say this sound pattern"
+                }
+            }
+        })
+        .unwrap_or("Write and say");
+    let writing_complete = app.read().handwriting_course_complete(session);
+    let writing_started = app
+        .read()
+        .handwriting_for_course(session)
+        .ok()
+        .flatten()
+        .is_some();
     let refreshers = crate::foundation::foundation_missing_intros(&s, &step);
     let draft_text = match &step.action {
         FoundationAction::Choose { options, .. } => s
@@ -121,6 +149,7 @@ pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
         }
 
        }
+       if writing_available {button {class:if writing_complete{"secondary"}else{"primary"},onclick:move |_|foundation_act(app,session,|a|a.open_handwriting()),if writing_complete{"Write and say it again"}else if writing_started{"Continue writing and speaking"}else{"{writing_label}"}}}
        if !audio_error().is_empty(){p {role:"alert","{audio_error}"}p {"Retry Listen, or Skip for now. Skipping does not count as listening practice."}}
        match &step.action {
         FoundationAction::Choose{options,..}=>rsx!{
@@ -192,7 +221,7 @@ pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
        }
        if pending {button {onclick:move |_|foundation_act(app,session,|a|a.foundation_submit(&support_step)),"Retry saving this response"}p {"Your original response is reserved. Feedback appears after it is safely saved."}}
        if (is_recall&&feedback.is_some())||(!is_recall&&!matches!(step.action,FoundationAction::Choose{..}|FoundationAction::Blend{..}|FoundationAction::Copy{..}))||s.accepted {
-        button {class:"primary",disabled:pending||playing().is_some()||(matches!(step.action,FoundationAction::Present{..})&&!can_answer)||(is_read&&!s.revealed),onclick:move |_|foundation_act(app,session,|a|{crate::foundation_audio::stop();a.foundation_next(false)}),if s.review_resume.is_some(){"Back to my course"}else if matches!(step.action,FoundationAction::Complete{..}){"Next episode"}else{"Continue"}}
+        button {class:if writing_available&&!writing_complete{"secondary"}else{"primary"},disabled:pending||playing().is_some()||(matches!(step.action,FoundationAction::Present{..})&&!can_answer)||(is_read&&!s.revealed),onclick:move |_|foundation_act(app,session,|a|{crate::foundation_audio::stop();a.foundation_next(false)}),if s.review_resume.is_some(){"Back to my course"}else if matches!(step.action,FoundationAction::Complete{..}){"Next episode"}else{"Continue"}}
        }
        if matches!(step.action,FoundationAction::Complete{..}){button {class:"secondary",onclick:move |_|foundation_act(app,session,|a|a.foundation_repeat_episode()),"Repeat this episode"}}
        details {

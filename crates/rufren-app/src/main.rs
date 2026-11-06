@@ -17,6 +17,9 @@ mod foundation_audio;
 mod foundation_review;
 mod foundation_view;
 mod gateway;
+mod handwriting;
+mod handwriting_native;
+mod handwriting_view;
 mod learning;
 mod lessons;
 mod model;
@@ -55,6 +58,7 @@ mod teacher_revisit_view;
 mod teacher_view;
 mod tutor_view;
 mod workspace_view;
+mod writing_speech;
 use audio_studio::{AudioStudio, StudioRecording};
 use exposure_view::PresentedRussian;
 use lessons::Lessons;
@@ -134,17 +138,17 @@ fn Shell(initial: AppState) -> Element {
         style {"{FEEDBACK_STYLE}"}
         div {class:"shell",
             aside {class:"sidebar",
-                a {class:"brand",href:"#",onclick:move |event|{event.prevent_default();act(app,|s|navigation::open(s,navigation::Destination::Today));}, span {class:"brand-mark","р"} strong {"Drussky"}}
+                a {class:"brand",href:"#",onclick:move |event|{event.prevent_default();handwriting_view::nav_act(app,|s|navigation::open(s,navigation::Destination::Today));}, span {class:"brand-mark","р"} strong {"Drussky"}}
                 navigation::PrimaryNavigation {app,compact:false}
                 navigation::SecondaryNavigation {app,compact:false}
                 div {class:"sidebar-bottom",span {class:"status-dot"} "On this device"}
             }
             main {class:"main",
                 header {class:"topbar",span {"Drussky"} span {class:"quiet","{destination}"}}
-                if state.page != Page::Foundations {navigation::SecondaryNavigation {app,compact:true}}
+                if !matches!(state.page,Page::Foundations|Page::Handwriting) {navigation::SecondaryNavigation {app,compact:true}}
                 if !state.notice.is_empty() {div {class:"notice",role:"status",span {"{state.notice}"} button {aria_label:"Dismiss message",onclick:move |_|app.write().notice.clear(),"×"}}}
                 match state.page {
-                    Page::Today=>rsx!{Today {app}},Page::Foundations=>rsx!{foundation_view::Foundations {app}},Page::Lessons | Page::LessonDetail=>rsx!{Lessons {app}},Page::Teacher=>rsx!{Teacher {app}},Page::Library=>rsx!{LibraryView {app}},Page::Practice=>rsx!{Practice {app}},
+                    Page::Today=>rsx!{Today {app}},Page::Foundations=>rsx!{foundation_view::Foundations {app}},Page::Handwriting=>rsx!{handwriting_view::Writing {app}},Page::Lessons | Page::LessonDetail=>rsx!{Lessons {app}},Page::Teacher=>rsx!{Teacher {app}},Page::Library=>rsx!{LibraryView {app}},Page::Practice=>rsx!{Practice {app}},
                     Page::Reader=>rsx!{reader_view::ReaderView {app}},Page::Studio=>rsx!{Studio {app}},Page::Progress=>rsx!{Progress {app}},Page::Settings=>rsx!{Settings {app}},
                 }
             }
@@ -195,14 +199,13 @@ fn Today(mut app: Signal<AppState>) -> Element {
     let foundation = state.foundation_state();
     let foundation_started = state.foundation_has_started();
     let foundation_ready = foundation.as_ref().is_ok_and(|s| !s.finished);
-    let foundation_review_active = foundation
-        .as_ref()
-        .is_ok_and(|s| s.review_resume.is_some());
+    let foundation_review_active = foundation.as_ref().is_ok_and(|s| s.review_resume.is_some());
     let foundation_returns = if foundation_review_active {
         Vec::new()
     } else {
         state.foundation_review_queue(now)
     };
+    let writing_resume = state.handwriting_resume_available();
     let foundation_primary = !resume && foundation_ready;
     let teaching_title = teaching
         .as_ref()
@@ -231,8 +234,8 @@ fn Today(mut app: Signal<AppState>) -> Element {
             p {class:"lede",if foundation_review_active {"Try a familiar word, then compare with its model. Your place in the course is kept."}else if foundation_primary {"Start with a sound, meet its letters, and try a little Russian. Everything you need for these first steps is already here."}else{"A conversation, a passage, a little practice. Follow what interests you."}}
             div {class:"actions",
                 button {id:"today-primary",class:"primary",onclick:move |_|act(app,|s|{
-                    if resume {s.begin()}else if foundation_primary {s.start_foundations()}else if finished {s.navigate(Page::Progress)}else{s.begin()}
-                }),if resume {"Continue learning"}else if foundation_primary && foundation_review_active {"Continue recall practice"}else if foundation_primary && foundation_started {"Continue sounds & letters"}else if foundation_primary {"Start sounds & letters"}else if finished {"See your progress"}else{"Continue learning"}}
+                    if resume {s.begin()}else if writing_resume {s.resume_handwriting()}else if foundation_primary {s.start_foundations()}else if finished {s.navigate(Page::Progress)}else{s.begin()}
+                }),if resume {"Continue learning"}else if writing_resume {"Continue writing and speaking"}else if foundation_primary && foundation_review_active {"Continue recall practice"}else if foundation_primary && foundation_started {"Continue sounds & letters"}else if foundation_primary {"Start sounds & letters"}else if finished {"See your progress"}else{"Continue learning"}}
                 button {class:"secondary",onclick:move |_|act(app,|s|navigation::open(s,navigation::Destination::Talk)),"Let’s talk"}
                 button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Reader)),"Find something to read"}
             }

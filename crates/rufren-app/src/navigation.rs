@@ -1,6 +1,6 @@
 //! Shared destinations for the sidebar and compact navigation.
 use crate::{
-    act, focus_page_heading,
+    focus_page_heading,
     model::{AppState, Page},
     repository::Result,
 };
@@ -70,21 +70,21 @@ pub(crate) fn open(state: &mut AppState, destination: Destination) -> Result<()>
     }
 }
 fn go(app: Signal<AppState>, destination: Destination) {
-    act(app, |state| {
+    crate::handwriting_view::nav_act(app, move |state| {
         open(state, destination)?;
         focus_page_heading();
         Ok(())
     });
 }
 fn go_page(app: Signal<AppState>, page: Page) {
-    act(app, |state| {
+    crate::handwriting_view::nav_act(app, move |state| {
         state.navigate(page)?;
         focus_page_heading();
         Ok(())
     });
 }
 fn go_teacher(app: Signal<AppState>) {
-    act(app, |state| {
+    crate::handwriting_view::nav_act(app, move |state| {
         state.navigate(Page::Teacher)?;
         state.repo.set("teacher_surface", &"lessons")?;
         focus_page_heading();
@@ -120,6 +120,7 @@ fn page_key(page: Page) -> &'static str {
         Page::Today => "today",
         Page::Lessons | Page::LessonDetail => "lessons",
         Page::Foundations => "foundations",
+        Page::Handwriting => "handwriting",
         Page::Teacher => "teacher",
         Page::Reader => "reader",
         Page::Library => "library",
@@ -140,6 +141,7 @@ pub(crate) fn SecondaryNavigation(app: Signal<AppState>, compact: bool) -> Eleme
     rsx! {div {class:if compact {"context-navigation"}else{"sidebar-sections"},
         if learn {nav {aria_label:"Learning",h2 {"Learn"}
             if compact {button {id:"context-lessons",class:if page==Page::Lessons {"context-link active"}else{"context-link"},aria_current:if page==Page::Lessons {"page"}else{"false"},onclick:move |_|go_page(app,Page::Lessons),"Lessons"}}
+            button {id:if compact{"context-writing"}else{"tools-writing"},class:if page==Page::Handwriting{"context-link active"}else{"context-link"},onclick:move |_|crate::handwriting_view::nav_act(app,|a|a.open_writing_catalog()),"Write and say"}
             button {id:if compact {"context-teacher"}else{"tools-teacher"},class:if page==Page::Teacher && selected==Destination::Learn {"context-link active"}else{"context-link"},aria_current:if page==Page::Teacher && selected==Destination::Learn {"page"}else{"false"},onclick:move |_|go_teacher(app),"AI lessons & feedback"}
             for (target,label) in [(Page::Practice,"Practice"),(Page::Studio,"Speech studio")] {button {id:format!("{}-{}",if compact {"context"}else{"tools"},page_key(target)),class:if page==target {"context-link active"}else{"context-link"},aria_current:if page==target {"page"}else{"false"},onclick:move |_|go_page(app,target),"{label}"}}
         }}

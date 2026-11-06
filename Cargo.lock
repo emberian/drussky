@@ -3361,6 +3361,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "objc2-pencil-kit"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "53adc0b6b09cca049052547bcb9029fac7efe84d83d0cafacfee8ed4a69dc477"
+dependencies = [
+ "objc2",
+ "objc2-core-foundation",
+ "objc2-foundation",
+]
+
+[[package]]
 name = "objc2-ui-kit"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4347,7 +4358,9 @@ dependencies = [
  "js-sys",
  "objc2",
  "objc2-app-kit",
+ "objc2-core-foundation",
  "objc2-foundation",
+ "objc2-pencil-kit",
  "objc2-ui-kit",
  "objc2-web-kit",
  "pulldown-cmark",
