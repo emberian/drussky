@@ -1,0 +1,3963 @@
+[
+  {
+    "id": "foundation-hand-print-a8-ya",
+    "revision": "1",
+    "foundation_step_id": "a8-ya",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-ya",
+    "target": "Я",
+    "meaning": null,
+    "requires_graphemes": [
+      "Я"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a8-ya-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a8-ya"
+    ],
+    "required_models": [
+      "Я"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests uppercase.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a8-ya-word",
+    "revision": "1",
+    "foundation_step_id": "a8-ya-word",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-ya",
+    "target": "я",
+    "meaning": "I, the speaker",
+    "requires_graphemes": [
+      "Я"
+    ],
+    "requires_meanings": [
+      "a8-ya-word"
+    ],
+    "requires_samples": [
+      "a8-ya-word-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a8-ya-word"
+    ],
+    "required_models": [
+      "Я"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a8-ty-word",
+    "revision": "1",
+    "foundation_step_id": "a8-ty-word",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-ty",
+    "target": "ты",
+    "meaning": "you, one familiar listener",
+    "requires_graphemes": [
+      "Т",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a8-ty-word"
+    ],
+    "requires_samples": [
+      "a8-ty-word-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a8-ty-word"
+    ],
+    "required_models": [
+      "Т",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a8-i-there",
+    "revision": "1",
+    "foundation_step_id": "a8-i-there",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a8-i-there",
+    "target": "Я там.",
+    "meaning": "I am there",
+    "requires_graphemes": [
+      "А",
+      "М",
+      "Т",
+      "Я"
+    ],
+    "requires_meanings": [
+      "a8-i-there"
+    ],
+    "requires_samples": [
+      "a8-i-there-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a8-i-there"
+    ],
+    "required_models": [
+      "А",
+      "М",
+      "Т",
+      "Я"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a8-you-there",
+    "revision": "1",
+    "foundation_step_id": "a8-you-there",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a8-you-there",
+    "target": "Ты там.",
+    "meaning": "You are there, to one familiar listener",
+    "requires_graphemes": [
+      "А",
+      "М",
+      "Т",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a8-you-there"
+    ],
+    "requires_samples": [
+      "a8-you-there-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a8-you-there"
+    ],
+    "required_models": [
+      "А",
+      "М",
+      "Т",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a9-eh",
+    "revision": "1",
+    "foundation_step_id": "a9-eh",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a9-eh-model",
+    "target": "Э",
+    "meaning": null,
+    "requires_graphemes": [
+      "Э"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a9-eh-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a9-eh"
+    ],
+    "required_models": [
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests uppercase.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a9-no-script",
+    "revision": "1",
+    "foundation_step_id": "a9-no-script",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-net",
+    "target": "нет",
+    "meaning": "no",
+    "requires_graphemes": [
+      "Е",
+      "Н",
+      "Т"
+    ],
+    "requires_meanings": [
+      "a9-no-script"
+    ],
+    "requires_samples": [
+      "a9-no-script-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a9-no-script"
+    ],
+    "required_models": [
+      "Е",
+      "Н",
+      "Т"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a9-this",
+    "revision": "1",
+    "foundation_step_id": "a9-this",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a9-this",
+    "target": "это",
+    "meaning": "this is, when identifying something",
+    "requires_graphemes": [
+      "О",
+      "Т",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a9-this"
+    ],
+    "requires_samples": [
+      "a9-this-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a9-this"
+    ],
+    "required_models": [
+      "О",
+      "Т",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "In this naming use, the same word works before different noun genders. The first vowel is stressed: э́то. The final written О is unstressed; follow the whole model rather than giving both vowels equal weight."
+  },
+  {
+    "id": "foundation-hand-print-a9-this-cat",
+    "revision": "1",
+    "foundation_step_id": "a9-this-cat",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a9-this-cat",
+    "target": "Это кот.",
+    "meaning": "This is a cat",
+    "requires_graphemes": [
+      "К",
+      "О",
+      "Т",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a9-this-cat"
+    ],
+    "requires_samples": [
+      "a9-this-cat-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a9-this-cat"
+    ],
+    "required_models": [
+      "К",
+      "О",
+      "Т",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a9-this-window",
+    "revision": "1",
+    "foundation_step_id": "a9-this-window",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a9-this-window",
+    "target": "Это окно.",
+    "meaning": "This is a window",
+    "requires_graphemes": [
+      "К",
+      "Н",
+      "О",
+      "Т",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a9-this-window"
+    ],
+    "requires_samples": [
+      "a9-this-window-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a9-this-window"
+    ],
+    "required_models": [
+      "К",
+      "Н",
+      "О",
+      "Т",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a10-s",
+    "revision": "1",
+    "foundation_step_id": "a10-s",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a10-s-model",
+    "target": "С",
+    "meaning": null,
+    "requires_graphemes": [
+      "С"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a10-s-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a10-s"
+    ],
+    "required_models": [
+      "С"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a10-l",
+    "revision": "1",
+    "foundation_step_id": "a10-l",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a10-l-model",
+    "target": "Л",
+    "meaning": null,
+    "requires_graphemes": [
+      "Л"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a10-l-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a10-l"
+    ],
+    "required_models": [
+      "Л"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a10-juice",
+    "revision": "1",
+    "foundation_step_id": "a10-juice",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a10-juice",
+    "target": "сок",
+    "meaning": "juice",
+    "requires_graphemes": [
+      "К",
+      "О",
+      "С"
+    ],
+    "requires_meanings": [
+      "a10-juice"
+    ],
+    "requires_samples": [
+      "a10-juice-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a10-juice"
+    ],
+    "required_models": [
+      "К",
+      "О",
+      "С"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a10-table",
+    "revision": "1",
+    "foundation_step_id": "a10-table",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a10-table",
+    "target": "стол",
+    "meaning": "table",
+    "requires_graphemes": [
+      "Л",
+      "О",
+      "С",
+      "Т"
+    ],
+    "requires_meanings": [
+      "a10-table"
+    ],
+    "requires_samples": [
+      "a10-table-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a10-table"
+    ],
+    "required_models": [
+      "Л",
+      "О",
+      "С",
+      "Т"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a10-this-table",
+    "revision": "1",
+    "foundation_step_id": "a10-this-table",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a10-this-table",
+    "target": "Это стол.",
+    "meaning": "This is a table",
+    "requires_graphemes": [
+      "Л",
+      "О",
+      "С",
+      "Т",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a10-this-table"
+    ],
+    "requires_samples": [
+      "a10-this-table-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a10-this-table"
+    ],
+    "required_models": [
+      "Л",
+      "О",
+      "С",
+      "Т",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a11-r",
+    "revision": "1",
+    "foundation_step_id": "a11-r",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a11-r-model",
+    "target": "Р",
+    "meaning": null,
+    "requires_graphemes": [
+      "Р"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a11-r-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a11-r"
+    ],
+    "required_models": [
+      "Р"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a11-u",
+    "revision": "1",
+    "foundation_step_id": "a11-u",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a11-u-model",
+    "target": "У",
+    "meaning": null,
+    "requires_graphemes": [
+      "У"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a11-u-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a11-u"
+    ],
+    "required_models": [
+      "У"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests uppercase.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a11-hand",
+    "revision": "1",
+    "foundation_step_id": "a11-hand",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a11-hand",
+    "target": "рука",
+    "meaning": "hand or arm",
+    "requires_graphemes": [
+      "А",
+      "К",
+      "Р",
+      "У"
+    ],
+    "requires_meanings": [
+      "a11-hand"
+    ],
+    "requires_samples": [
+      "a11-hand-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a11-hand"
+    ],
+    "required_models": [
+      "А",
+      "К",
+      "Р",
+      "У"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "The last vowel is stressed: рука́. This noun can mean hand or arm. Look at your own hand as you listen, then say the word."
+  },
+  {
+    "id": "foundation-hand-print-a11-here",
+    "revision": "1",
+    "foundation_step_id": "a11-here",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a11-here",
+    "target": "тут",
+    "meaning": "here",
+    "requires_graphemes": [
+      "Т",
+      "У"
+    ],
+    "requires_meanings": [
+      "a11-here"
+    ],
+    "requires_samples": [
+      "a11-here-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a11-here"
+    ],
+    "required_models": [
+      "Т",
+      "У"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a11-i-here",
+    "revision": "1",
+    "foundation_step_id": "a11-i-here",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a11-i-here",
+    "target": "Я тут.",
+    "meaning": "I am here",
+    "requires_graphemes": [
+      "Т",
+      "У",
+      "Я"
+    ],
+    "requires_meanings": [
+      "a11-i-here"
+    ],
+    "requires_samples": [
+      "a11-i-here-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a11-i-here"
+    ],
+    "required_models": [
+      "Т",
+      "У",
+      "Я"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a11-you-here",
+    "revision": "1",
+    "foundation_step_id": "a11-you-here",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a11-you-here",
+    "target": "Ты тут.",
+    "meaning": "You are here, to one familiar listener",
+    "requires_graphemes": [
+      "Т",
+      "У",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a11-you-here"
+    ],
+    "requires_samples": [
+      "a11-you-here-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a11-you-here"
+    ],
+    "required_models": [
+      "Т",
+      "У",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a12-v",
+    "revision": "1",
+    "foundation_step_id": "a12-v",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a12-v-model",
+    "target": "В",
+    "meaning": null,
+    "requires_graphemes": [
+      "В"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a12-v-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a12-v"
+    ],
+    "required_models": [
+      "В"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a12-we",
+    "revision": "1",
+    "foundation_step_id": "a12-we",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a12-we",
+    "target": "мы",
+    "meaning": "we, including the speaker",
+    "requires_graphemes": [
+      "М",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a12-we"
+    ],
+    "requires_samples": [
+      "a12-we-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a12-we"
+    ],
+    "required_models": [
+      "М",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a12-you",
+    "revision": "1",
+    "foundation_step_id": "a12-you",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a12-you",
+    "target": "вы",
+    "meaning": "you, plural or polite singular",
+    "requires_graphemes": [
+      "В",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a12-you"
+    ],
+    "requires_samples": [
+      "a12-you-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a12-you"
+    ],
+    "required_models": [
+      "В",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a12-we-here",
+    "revision": "1",
+    "foundation_step_id": "a12-we-here",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a12-we-here",
+    "target": "Мы тут.",
+    "meaning": "We are here",
+    "requires_graphemes": [
+      "М",
+      "Т",
+      "У",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a12-we-here"
+    ],
+    "requires_samples": [
+      "a12-we-here-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a12-we-here"
+    ],
+    "required_models": [
+      "М",
+      "Т",
+      "У",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a12-you-there",
+    "revision": "1",
+    "foundation_step_id": "a12-you-there",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a12-you-there",
+    "target": "Вы там.",
+    "meaning": "You are there, plural or polite",
+    "requires_graphemes": [
+      "А",
+      "В",
+      "М",
+      "Т",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a12-you-there"
+    ],
+    "requires_samples": [
+      "a12-you-there-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a12-you-there"
+    ],
+    "required_models": [
+      "А",
+      "В",
+      "М",
+      "Т",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a12-water",
+    "revision": "1",
+    "foundation_step_id": "a12-water",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a12-water",
+    "target": "вода",
+    "meaning": "water",
+    "requires_graphemes": [
+      "А",
+      "В",
+      "Д",
+      "О"
+    ],
+    "requires_meanings": [
+      "a12-water"
+    ],
+    "requires_samples": [
+      "a12-water-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a12-water"
+    ],
+    "required_models": [
+      "А",
+      "В",
+      "Д",
+      "О"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a13-b",
+    "revision": "1",
+    "foundation_step_id": "a13-b",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a13-b-model",
+    "target": "Б",
+    "meaning": null,
+    "requires_graphemes": [
+      "Б"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a13-b-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a13-b"
+    ],
+    "required_models": [
+      "Б"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a13-p",
+    "revision": "1",
+    "foundation_step_id": "a13-p",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a13-p-model",
+    "target": "П",
+    "meaning": null,
+    "requires_graphemes": [
+      "П"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a13-p-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a13-p"
+    ],
+    "required_models": [
+      "П"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a13-dad",
+    "revision": "1",
+    "foundation_step_id": "a13-dad",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a13-dad",
+    "target": "папа",
+    "meaning": "dad",
+    "requires_graphemes": [
+      "А",
+      "П"
+    ],
+    "requires_meanings": [
+      "a13-dad"
+    ],
+    "requires_samples": [
+      "a13-dad-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a13-dad"
+    ],
+    "required_models": [
+      "А",
+      "П"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a13-robot",
+    "revision": "1",
+    "foundation_step_id": "a13-robot",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a13-robot",
+    "target": "робот",
+    "meaning": "robot",
+    "requires_graphemes": [
+      "Б",
+      "О",
+      "Р",
+      "Т"
+    ],
+    "requires_meanings": [
+      "a13-robot"
+    ],
+    "requires_samples": [
+      "a13-robot-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a13-robot"
+    ],
+    "required_models": [
+      "Б",
+      "О",
+      "Р",
+      "Т"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "The first vowel is stressed: ро́бот; the second written О is unstressed. This noun is grammatically masculine. That is a property of the noun, separate from the identity of the machine."
+  },
+  {
+    "id": "foundation-hand-print-a13-this-robot",
+    "revision": "1",
+    "foundation_step_id": "a13-this-robot",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a13-this-robot",
+    "target": "Это робот.",
+    "meaning": "This is a robot",
+    "requires_graphemes": [
+      "Б",
+      "О",
+      "Р",
+      "Т",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a13-this-robot"
+    ],
+    "requires_samples": [
+      "a13-this-robot-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a13-this-robot"
+    ],
+    "required_models": [
+      "Б",
+      "О",
+      "Р",
+      "Т",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Keep the naming word, then name the robot. Listen once, pause, and say the complete short sentence."
+  },
+  {
+    "id": "foundation-hand-print-a13-robot-he",
+    "revision": "1",
+    "foundation_step_id": "a13-robot-he",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a13-robot-he",
+    "target": "Он тут.",
+    "meaning": "It, the robot, is here",
+    "requires_graphemes": [
+      "Н",
+      "О",
+      "Т",
+      "У"
+    ],
+    "requires_meanings": [
+      "a13-robot-he"
+    ],
+    "requires_samples": [
+      "a13-robot-he-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a13-robot-he"
+    ],
+    "required_models": [
+      "Н",
+      "О",
+      "Т",
+      "У"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a14-z",
+    "revision": "1",
+    "foundation_step_id": "a14-z",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a14-z-model",
+    "target": "З",
+    "meaning": null,
+    "requires_graphemes": [
+      "З"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a14-z-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a14-z"
+    ],
+    "required_models": [
+      "З"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a14-g",
+    "revision": "1",
+    "foundation_step_id": "a14-g",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a14-g-model",
+    "target": "Г",
+    "meaning": null,
+    "requires_graphemes": [
+      "Г"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a14-g-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a14-g"
+    ],
+    "required_models": [
+      "Г"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a14-sound",
+    "revision": "1",
+    "foundation_step_id": "a14-sound",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a14-sound",
+    "target": "звук",
+    "meaning": "sound",
+    "requires_graphemes": [
+      "В",
+      "З",
+      "К",
+      "У"
+    ],
+    "requires_meanings": [
+      "a14-sound"
+    ],
+    "requires_samples": [
+      "a14-sound-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a14-sound"
+    ],
+    "required_models": [
+      "В",
+      "З",
+      "К",
+      "У"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a14-book",
+    "revision": "1",
+    "foundation_step_id": "a14-book",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a14-book",
+    "target": "книга",
+    "meaning": "book",
+    "requires_graphemes": [
+      "А",
+      "Г",
+      "И",
+      "К",
+      "Н"
+    ],
+    "requires_meanings": [
+      "a14-book"
+    ],
+    "requires_samples": [
+      "a14-book-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a14-book"
+    ],
+    "required_models": [
+      "А",
+      "Г",
+      "И",
+      "К",
+      "Н"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a14-this-book",
+    "revision": "1",
+    "foundation_step_id": "a14-this-book",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a14-this-book",
+    "target": "Это книга.",
+    "meaning": "This is a book",
+    "requires_graphemes": [
+      "А",
+      "Г",
+      "И",
+      "К",
+      "Н",
+      "О",
+      "Т",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a14-this-book"
+    ],
+    "requires_samples": [
+      "a14-this-book-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a14-this-book"
+    ],
+    "required_models": [
+      "А",
+      "Г",
+      "И",
+      "К",
+      "Н",
+      "О",
+      "Т",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Keep the naming word, then name the book. This naming frame stays the same with a feminine noun."
+  },
+  {
+    "id": "foundation-hand-print-a14-book-she",
+    "revision": "1",
+    "foundation_step_id": "a14-book-she",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a14-book-she",
+    "target": "Она тут.",
+    "meaning": "It, the book, is here",
+    "requires_graphemes": [
+      "А",
+      "Н",
+      "О",
+      "Т",
+      "У"
+    ],
+    "requires_meanings": [
+      "a14-book-she"
+    ],
+    "requires_samples": [
+      "a14-book-she-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a14-book-she"
+    ],
+    "required_models": [
+      "А",
+      "Н",
+      "О",
+      "Т",
+      "У"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a15-h",
+    "revision": "1",
+    "foundation_step_id": "a15-h",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a15-h-model",
+    "target": "Х",
+    "meaning": null,
+    "requires_graphemes": [
+      "Х"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a15-h-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a15-h"
+    ],
+    "required_models": [
+      "Х"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a15-choir",
+    "revision": "1",
+    "foundation_step_id": "a15-choir",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a15-choir",
+    "target": "хор",
+    "meaning": "choir",
+    "requires_graphemes": [
+      "О",
+      "Р",
+      "Х"
+    ],
+    "requires_meanings": [
+      "a15-choir"
+    ],
+    "requires_samples": [
+      "a15-choir-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a15-choir"
+    ],
+    "required_models": [
+      "О",
+      "Р",
+      "Х"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a15-zh",
+    "revision": "1",
+    "foundation_step_id": "a15-zh",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a15-zh-model",
+    "target": "Ж",
+    "meaning": null,
+    "requires_graphemes": [
+      "Ж"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a15-zh-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a15-zh"
+    ],
+    "required_models": [
+      "Ж"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a15-beetle",
+    "revision": "1",
+    "foundation_step_id": "a15-beetle",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a15-beetle",
+    "target": "жук",
+    "meaning": "beetle",
+    "requires_graphemes": [
+      "Ж",
+      "К",
+      "У"
+    ],
+    "requires_meanings": [
+      "a15-beetle"
+    ],
+    "requires_samples": [
+      "a15-beetle-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a15-beetle"
+    ],
+    "required_models": [
+      "Ж",
+      "К",
+      "У"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a15-sh",
+    "revision": "1",
+    "foundation_step_id": "a15-sh",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a15-sh-model",
+    "target": "Ш",
+    "meaning": null,
+    "requires_graphemes": [
+      "Ш"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a15-sh-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a15-sh"
+    ],
+    "required_models": [
+      "Ш"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a15-ball",
+    "revision": "1",
+    "foundation_step_id": "a15-ball",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a15-ball",
+    "target": "шар",
+    "meaning": "ball or sphere",
+    "requires_graphemes": [
+      "А",
+      "Р",
+      "Ш"
+    ],
+    "requires_meanings": [
+      "a15-ball"
+    ],
+    "requires_samples": [
+      "a15-ball-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a15-ball"
+    ],
+    "required_models": [
+      "А",
+      "Р",
+      "Ш"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Imagine a round ball. This noun can mean ball in everyday speech and sphere in mathematics."
+  },
+  {
+    "id": "foundation-hand-print-a15-noise",
+    "revision": "1",
+    "foundation_step_id": "a15-noise",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a15-noise",
+    "target": "шум",
+    "meaning": "noise",
+    "requires_graphemes": [
+      "М",
+      "У",
+      "Ш"
+    ],
+    "requires_meanings": [
+      "a15-noise"
+    ],
+    "requires_samples": [
+      "a15-noise-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a15-noise"
+    ],
+    "required_models": [
+      "М",
+      "У",
+      "Ш"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a16-yo",
+    "revision": "1",
+    "foundation_step_id": "a16-yo",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a16-yo-model",
+    "target": "Ё",
+    "meaning": null,
+    "requires_graphemes": [
+      "Ё"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a16-yo-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a16-yo"
+    ],
+    "required_models": [
+      "Ё"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests uppercase.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a16-honey",
+    "revision": "1",
+    "foundation_step_id": "a16-honey",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a16-honey",
+    "target": "мёд",
+    "meaning": "honey",
+    "requires_graphemes": [
+      "Ё",
+      "Д",
+      "М"
+    ],
+    "requires_meanings": [
+      "a16-honey"
+    ],
+    "requires_samples": [
+      "a16-honey-sample"
+    ],
+    "requires_conventions": [
+      "a16-final-devoicing-example"
+    ],
+    "prerequisite_step_ids": [
+      "a16-honey"
+    ],
+    "required_models": [
+      "Ё",
+      "Д",
+      "М"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a16-yu",
+    "revision": "1",
+    "foundation_step_id": "a16-yu",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a16-yu-model",
+    "target": "Ю",
+    "meaning": null,
+    "requires_graphemes": [
+      "Ю"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a16-yu-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a16-yu"
+    ],
+    "required_models": [
+      "Ю"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests uppercase.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a16-onion",
+    "revision": "1",
+    "foundation_step_id": "a16-onion",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a16-onion",
+    "target": "лук",
+    "meaning": "onion",
+    "requires_graphemes": [
+      "К",
+      "Л",
+      "У"
+    ],
+    "requires_meanings": [
+      "a16-onion"
+    ],
+    "requires_samples": [
+      "a16-onion-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a16-onion"
+    ],
+    "required_models": [
+      "К",
+      "Л",
+      "У"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a16-hatch",
+    "revision": "1",
+    "foundation_step_id": "a16-hatch",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a16-hatch",
+    "target": "люк",
+    "meaning": "hatch",
+    "requires_graphemes": [
+      "К",
+      "Л",
+      "Ю"
+    ],
+    "requires_meanings": [
+      "a16-hatch"
+    ],
+    "requires_samples": [
+      "a16-hatch-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a16-hatch"
+    ],
+    "required_models": [
+      "К",
+      "Л",
+      "Ю"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "A hatch is an opening with a cover, for example in a spacecraft. Compare its first consonant with the hard beginning of лук: in люк the middle of the tongue rises toward the roof of the mouth while making Л. Say each whole word, without adding another syllable."
+  },
+  {
+    "id": "foundation-hand-print-a17-my-m",
+    "revision": "1",
+    "foundation_step_id": "a17-my-m",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a17-my-m",
+    "target": "мой",
+    "meaning": "my, with a masculine noun",
+    "requires_graphemes": [
+      "Й",
+      "М",
+      "О"
+    ],
+    "requires_meanings": [
+      "a17-my-m"
+    ],
+    "requires_samples": [
+      "a17-my-m-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a17-my-m"
+    ],
+    "required_models": [
+      "Й",
+      "М",
+      "О"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a17-salt",
+    "revision": "1",
+    "foundation_step_id": "a17-salt",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a17-salt",
+    "target": "соль",
+    "meaning": "salt",
+    "requires_graphemes": [
+      "Л",
+      "О",
+      "С",
+      "Ь"
+    ],
+    "requires_meanings": [
+      "a17-salt"
+    ],
+    "requires_samples": [
+      "a17-salt-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a17-salt"
+    ],
+    "required_models": [
+      "Л",
+      "О",
+      "С",
+      "Ь"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a17-my-f",
+    "revision": "1",
+    "foundation_step_id": "a17-my-f",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a17-my-f",
+    "target": "моя",
+    "meaning": "my, with a feminine noun",
+    "requires_graphemes": [
+      "М",
+      "О",
+      "Я"
+    ],
+    "requires_meanings": [
+      "a17-my-f"
+    ],
+    "requires_samples": [
+      "a17-my-f-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a17-my-f"
+    ],
+    "required_models": [
+      "М",
+      "О",
+      "Я"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Use this form with a feminine noun such as book. The final vowel is stressed: моя́. Here Я follows a vowel and begins with a short glide into the stressed vowel, as it did at the start of я."
+  },
+  {
+    "id": "foundation-hand-print-a17-my-n",
+    "revision": "1",
+    "foundation_step_id": "a17-my-n",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a17-my-n",
+    "target": "моё",
+    "meaning": "my, with a neuter noun",
+    "requires_graphemes": [
+      "Ё",
+      "М",
+      "О"
+    ],
+    "requires_meanings": [
+      "a17-my-n"
+    ],
+    "requires_samples": [
+      "a17-my-n-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a17-my-n"
+    ],
+    "required_models": [
+      "Ё",
+      "М",
+      "О"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Use this form with a neuter noun such as window. Here Ё follows a vowel and begins with a short glide into the stressed vowel. Keep its two dots in writing."
+  },
+  {
+    "id": "foundation-hand-print-a17-my-cat",
+    "revision": "1",
+    "foundation_step_id": "a17-my-cat",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a17-my-cat",
+    "target": "мой кот",
+    "meaning": "my cat",
+    "requires_graphemes": [
+      "Й",
+      "К",
+      "М",
+      "О",
+      "Т"
+    ],
+    "requires_meanings": [
+      "a17-my-cat"
+    ],
+    "requires_samples": [
+      "a17-my-cat-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a17-my-cat"
+    ],
+    "required_models": [
+      "Й",
+      "К",
+      "М",
+      "О",
+      "Т"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a17-my-book",
+    "revision": "1",
+    "foundation_step_id": "a17-my-book",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a17-my-book",
+    "target": "моя книга",
+    "meaning": "my book",
+    "requires_graphemes": [
+      "А",
+      "Г",
+      "И",
+      "К",
+      "М",
+      "Н",
+      "О",
+      "Я"
+    ],
+    "requires_meanings": [
+      "a17-my-book"
+    ],
+    "requires_samples": [
+      "a17-my-book-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a17-my-book"
+    ],
+    "required_models": [
+      "А",
+      "Г",
+      "И",
+      "К",
+      "М",
+      "Н",
+      "О",
+      "Я"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a17-my-window",
+    "revision": "1",
+    "foundation_step_id": "a17-my-window",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a17-my-window",
+    "target": "моё окно",
+    "meaning": "my window",
+    "requires_graphemes": [
+      "Ё",
+      "К",
+      "М",
+      "Н",
+      "О"
+    ],
+    "requires_meanings": [
+      "a17-my-window"
+    ],
+    "requires_samples": [
+      "a17-my-window-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a17-my-window"
+    ],
+    "required_models": [
+      "Ё",
+      "К",
+      "М",
+      "Н",
+      "О"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a18-ts",
+    "revision": "1",
+    "foundation_step_id": "a18-ts",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a18-ts-model",
+    "target": "Ц",
+    "meaning": null,
+    "requires_graphemes": [
+      "Ц"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a18-ts-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a18-ts"
+    ],
+    "required_models": [
+      "Ц"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a18-circus",
+    "revision": "1",
+    "foundation_step_id": "a18-circus",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a18-circus",
+    "target": "цирк",
+    "meaning": "circus",
+    "requires_graphemes": [
+      "И",
+      "К",
+      "Р",
+      "Ц"
+    ],
+    "requires_meanings": [
+      "a18-circus"
+    ],
+    "requires_samples": [
+      "a18-circus-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a18-circus"
+    ],
+    "required_models": [
+      "И",
+      "К",
+      "Р",
+      "Ц"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Ц stays hard here even though the next written letter is И. The vowel has the quality taught with Ы. Listen to the whole word; keep the spelling цирк."
+  },
+  {
+    "id": "foundation-hand-print-a18-ch",
+    "revision": "1",
+    "foundation_step_id": "a18-ch",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a18-ch-model",
+    "target": "Ч",
+    "meaning": null,
+    "requires_graphemes": [
+      "Ч"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a18-ch-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a18-ch"
+    ],
+    "required_models": [
+      "Ч"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a18-tea",
+    "revision": "1",
+    "foundation_step_id": "a18-tea",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a18-tea",
+    "target": "чай",
+    "meaning": "tea",
+    "requires_graphemes": [
+      "А",
+      "Й",
+      "Ч"
+    ],
+    "requires_meanings": [
+      "a18-tea"
+    ],
+    "requires_samples": [
+      "a18-tea-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a18-tea"
+    ],
+    "required_models": [
+      "А",
+      "Й",
+      "Ч"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a18-shch",
+    "revision": "1",
+    "foundation_step_id": "a18-shch",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a18-shch-model",
+    "target": "Щ",
+    "meaning": null,
+    "requires_graphemes": [
+      "Щ"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a18-shch-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a18-shch"
+    ],
+    "required_models": [
+      "Щ"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a18-soup",
+    "revision": "1",
+    "foundation_step_id": "a18-soup",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a18-soup",
+    "target": "щи",
+    "meaning": "cabbage soup",
+    "requires_graphemes": [
+      "И",
+      "Щ"
+    ],
+    "requires_meanings": [
+      "a18-soup"
+    ],
+    "requires_samples": [
+      "a18-soup-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a18-soup"
+    ],
+    "required_models": [
+      "И",
+      "Щ"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a19-f",
+    "revision": "1",
+    "foundation_step_id": "a19-f",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a19-f-model",
+    "target": "Ф",
+    "meaning": null,
+    "requires_graphemes": [
+      "Ф"
+    ],
+    "requires_meanings": [],
+    "requires_samples": [
+      "a19-f-sound"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a19-f"
+    ],
+    "required_models": [
+      "Ф"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "initial_segment_of_syllable",
+    "case": "uppercase",
+    "layout": "letter_box",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "Write the letter for the beginning of the syllable you hear. The audio models the whole syllable. Use the requested uppercase form.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen again, then say the whole syllable, including its vowel. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a19-fact",
+    "revision": "1",
+    "foundation_step_id": "a19-fact",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a19-fact",
+    "target": "факт",
+    "meaning": "fact",
+    "requires_graphemes": [
+      "А",
+      "К",
+      "Т",
+      "Ф"
+    ],
+    "requires_meanings": [
+      "a19-fact"
+    ],
+    "requires_samples": [
+      "a19-fact-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a19-fact"
+    ],
+    "required_models": [
+      "А",
+      "К",
+      "Т",
+      "Ф"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a19-object",
+    "revision": "1",
+    "foundation_step_id": "a19-object",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a19-object",
+    "target": "объект",
+    "meaning": "object",
+    "requires_graphemes": [
+      "Б",
+      "Е",
+      "К",
+      "О",
+      "Т",
+      "Ъ"
+    ],
+    "requires_meanings": [
+      "a19-object"
+    ],
+    "requires_samples": [
+      "a19-object-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a19-object"
+    ],
+    "required_models": [
+      "Б",
+      "Е",
+      "К",
+      "О",
+      "Т",
+      "Ъ"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a19-what",
+    "revision": "1",
+    "foundation_step_id": "a19-what",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a19-what",
+    "target": "что",
+    "meaning": "what",
+    "requires_graphemes": [
+      "О",
+      "Т",
+      "Ч"
+    ],
+    "requires_meanings": [
+      "a19-what"
+    ],
+    "requires_samples": [
+      "a19-what-sample"
+    ],
+    "requires_conventions": [
+      "a19-chto-exception"
+    ],
+    "prerequisite_step_ids": [
+      "a19-what"
+    ],
+    "required_models": [
+      "О",
+      "Т",
+      "Ч"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a19-what-this",
+    "revision": "1",
+    "foundation_step_id": "a19-what-this",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a19-what-this",
+    "target": "Что это?",
+    "meaning": "What is this?",
+    "requires_graphemes": [
+      "О",
+      "Т",
+      "Ч",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a19-what-this"
+    ],
+    "requires_samples": [
+      "a19-what-this-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a19-what-this"
+    ],
+    "required_models": [
+      "О",
+      "Т",
+      "Ч",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": null
+  },
+  {
+    "id": "foundation-hand-print-a19-this-object",
+    "revision": "1",
+    "foundation_step_id": "a19-this-object",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a19-this-object",
+    "target": "Это объект.",
+    "meaning": "This is an object",
+    "requires_graphemes": [
+      "Б",
+      "Е",
+      "К",
+      "О",
+      "Т",
+      "Ъ",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a19-this-object"
+    ],
+    "requires_samples": [
+      "a19-this-object-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a19-this-object"
+    ],
+    "required_models": [
+      "Б",
+      "Е",
+      "К",
+      "О",
+      "Т",
+      "Ъ",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "This is a formal word for an object, for example something being studied or discussed. For an everyday item, Russian also has other words. Here, keep the naming frame and the taught noun together."
+  },
+  {
+    "id": "foundation-hand-print-a20-i-read",
+    "revision": "1",
+    "foundation_step_id": "a20-i-read",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-i-read",
+    "target": "Я читаю.",
+    "meaning": "I read or I am reading",
+    "requires_graphemes": [
+      "А",
+      "И",
+      "Т",
+      "Ч",
+      "Ю",
+      "Я"
+    ],
+    "requires_meanings": [
+      "a20-i-read"
+    ],
+    "requires_samples": [
+      "a20-i-read-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-i-read"
+    ],
+    "required_models": [
+      "А",
+      "И",
+      "Т",
+      "Ч",
+      "Ю",
+      "Я"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "This form can mean I read or I am reading. The verb has the part чита- plus the speaker ending -ю. The stress stays on а: чита́ю. Here Ю follows a vowel and begins with a short glide."
+  },
+  {
+    "id": "foundation-hand-print-a20-you-read",
+    "revision": "1",
+    "foundation_step_id": "a20-you-read",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-you-read",
+    "target": "Ты читаешь.",
+    "meaning": "You read or you are reading, one familiar listener",
+    "requires_graphemes": [
+      "А",
+      "Е",
+      "И",
+      "Т",
+      "Ч",
+      "Ш",
+      "Ы",
+      "Ь"
+    ],
+    "requires_meanings": [
+      "a20-you-read"
+    ],
+    "requires_samples": [
+      "a20-you-read-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-you-read"
+    ],
+    "required_models": [
+      "А",
+      "Е",
+      "И",
+      "Т",
+      "Ч",
+      "Ш",
+      "Ы",
+      "Ь"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "For one familiar listener, use чита- plus -ешь: чита́ешь. Е follows a vowel here, with a short glide before its unstressed vowel. Final Ь is part of this verb ending; it does not soften the normally hard Ш."
+  },
+  {
+    "id": "foundation-hand-print-a20-he-reads",
+    "revision": "1",
+    "foundation_step_id": "a20-he-reads",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-he-reads",
+    "target": "Он читает.",
+    "meaning": "He reads or he is reading",
+    "requires_graphemes": [
+      "А",
+      "Е",
+      "И",
+      "Н",
+      "О",
+      "Т",
+      "Ч"
+    ],
+    "requires_meanings": [
+      "a20-he-reads"
+    ],
+    "requires_samples": [
+      "a20-he-reads-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-he-reads"
+    ],
+    "required_models": [
+      "А",
+      "Е",
+      "И",
+      "Н",
+      "О",
+      "Т",
+      "Ч"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Use чита- plus -ет for he, she or a neuter it: чита́ет. The pronoun changes with the referent; this present-tense verb form stays the same."
+  },
+  {
+    "id": "foundation-hand-print-a20-we-read",
+    "revision": "1",
+    "foundation_step_id": "a20-we-read",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-we-read",
+    "target": "Мы читаем.",
+    "meaning": "We read or we are reading",
+    "requires_graphemes": [
+      "А",
+      "Е",
+      "И",
+      "М",
+      "Т",
+      "Ч",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a20-we-read"
+    ],
+    "requires_samples": [
+      "a20-we-read-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-we-read"
+    ],
+    "required_models": [
+      "А",
+      "Е",
+      "И",
+      "М",
+      "Т",
+      "Ч",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "For a group including the speaker, use чита- plus -ем: чита́ем. Compare the last part with the speaker form you heard earlier."
+  },
+  {
+    "id": "foundation-hand-print-a20-you-pl-read",
+    "revision": "1",
+    "foundation_step_id": "a20-you-pl-read",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-you-pl-read",
+    "target": "Вы читаете.",
+    "meaning": "You read or you are reading, plural or polite",
+    "requires_graphemes": [
+      "А",
+      "В",
+      "Е",
+      "И",
+      "Т",
+      "Ч",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a20-you-pl-read"
+    ],
+    "requires_samples": [
+      "a20-you-pl-read-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-you-pl-read"
+    ],
+    "required_models": [
+      "А",
+      "В",
+      "Е",
+      "И",
+      "Т",
+      "Ч",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "For several listeners or one polite addressee, use чита- plus -ете: чита́ете. This has one more vowel syllable at the end than the we form."
+  },
+  {
+    "id": "foundation-hand-print-a20-they-read",
+    "revision": "1",
+    "foundation_step_id": "a20-they-read",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-they-read",
+    "target": "Они читают.",
+    "meaning": "They read or they are reading",
+    "requires_graphemes": [
+      "А",
+      "И",
+      "Н",
+      "О",
+      "Т",
+      "Ч",
+      "Ю"
+    ],
+    "requires_meanings": [
+      "a20-they-read"
+    ],
+    "requires_samples": [
+      "a20-they-read-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-they-read"
+    ],
+    "required_models": [
+      "А",
+      "И",
+      "Н",
+      "О",
+      "Т",
+      "Ч",
+      "Ю"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "For they, use чита- plus -ют: чита́ют. Compare the end with the speaker form: чита́ю. The final Т belongs to the they form."
+  },
+  {
+    "id": "foundation-hand-print-a20-i-think",
+    "revision": "1",
+    "foundation_step_id": "a20-i-think",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-i-think",
+    "target": "Я думаю.",
+    "meaning": "I think or I am thinking",
+    "requires_graphemes": [
+      "А",
+      "Д",
+      "М",
+      "У",
+      "Ю",
+      "Я"
+    ],
+    "requires_meanings": [
+      "a20-i-think"
+    ],
+    "requires_samples": [
+      "a20-i-think-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-i-think"
+    ],
+    "required_models": [
+      "А",
+      "Д",
+      "М",
+      "У",
+      "Ю",
+      "Я"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "The thinking verb uses дума- in these forms, with the same endings as the reading verb. For I, add -ю: ду́маю. Its stress stays on у. You can keep the ending while changing the verb part."
+  },
+  {
+    "id": "foundation-hand-print-a20-you-think",
+    "revision": "1",
+    "foundation_step_id": "a20-you-think",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-you-think",
+    "target": "Ты думаешь.",
+    "meaning": "You think or you are thinking, one familiar listener",
+    "requires_graphemes": [
+      "А",
+      "Д",
+      "Е",
+      "М",
+      "Т",
+      "У",
+      "Ш",
+      "Ы",
+      "Ь"
+    ],
+    "requires_meanings": [
+      "a20-you-think"
+    ],
+    "requires_samples": [
+      "a20-you-think-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-you-think"
+    ],
+    "required_models": [
+      "А",
+      "Д",
+      "Е",
+      "М",
+      "Т",
+      "У",
+      "Ш",
+      "Ы",
+      "Ь"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "For one familiar listener, use дума- plus -ешь: ду́маешь. Compare its ending with чита́ешь. Keep Ь in writing; Ш remains hard."
+  },
+  {
+    "id": "foundation-hand-print-a20-he-thinks",
+    "revision": "1",
+    "foundation_step_id": "a20-he-thinks",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-he-thinks",
+    "target": "Он думает.",
+    "meaning": "He thinks or he is thinking",
+    "requires_graphemes": [
+      "А",
+      "Д",
+      "Е",
+      "М",
+      "Н",
+      "О",
+      "Т",
+      "У"
+    ],
+    "requires_meanings": [
+      "a20-he-thinks"
+    ],
+    "requires_samples": [
+      "a20-he-thinks-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-he-thinks"
+    ],
+    "required_models": [
+      "А",
+      "Д",
+      "Е",
+      "М",
+      "Н",
+      "О",
+      "Т",
+      "У"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Use дума- plus -ет for he, she or a neuter it: ду́мает. The ending matches the corresponding reading form."
+  },
+  {
+    "id": "foundation-hand-print-a20-we-think",
+    "revision": "1",
+    "foundation_step_id": "a20-we-think",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-we-think",
+    "target": "Мы думаем.",
+    "meaning": "We think or we are thinking",
+    "requires_graphemes": [
+      "А",
+      "Д",
+      "Е",
+      "М",
+      "У",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a20-we-think"
+    ],
+    "requires_samples": [
+      "a20-we-think-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-we-think"
+    ],
+    "required_models": [
+      "А",
+      "Д",
+      "Е",
+      "М",
+      "У",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "For a group including the speaker, use дума- plus -ем: ду́маем. Compare the ending with чита́ем."
+  },
+  {
+    "id": "foundation-hand-print-a20-you-pl-think",
+    "revision": "1",
+    "foundation_step_id": "a20-you-pl-think",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-you-pl-think",
+    "target": "Вы думаете.",
+    "meaning": "You think or you are thinking, plural or polite",
+    "requires_graphemes": [
+      "А",
+      "В",
+      "Д",
+      "Е",
+      "М",
+      "Т",
+      "У",
+      "Ы"
+    ],
+    "requires_meanings": [
+      "a20-you-pl-think"
+    ],
+    "requires_samples": [
+      "a20-you-pl-think-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-you-pl-think"
+    ],
+    "required_models": [
+      "А",
+      "В",
+      "Д",
+      "Е",
+      "М",
+      "Т",
+      "У",
+      "Ы"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "For several listeners or one polite addressee, use дума- plus -ете: ду́маете. Compare the ending with чита́ете."
+  },
+  {
+    "id": "foundation-hand-print-a20-they-think",
+    "revision": "1",
+    "foundation_step_id": "a20-they-think",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a20-they-think",
+    "target": "Они думают.",
+    "meaning": "They think or they are thinking",
+    "requires_graphemes": [
+      "А",
+      "Д",
+      "И",
+      "М",
+      "Н",
+      "О",
+      "Т",
+      "У",
+      "Ю"
+    ],
+    "requires_meanings": [
+      "a20-they-think"
+    ],
+    "requires_samples": [
+      "a20-they-think-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a20-they-think"
+    ],
+    "required_models": [
+      "А",
+      "Д",
+      "И",
+      "М",
+      "Н",
+      "О",
+      "Т",
+      "У",
+      "Ю"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "For they, use дума- plus -ют: ду́мают. Compare with your earlier choice, then say the complete sentence."
+  },
+  {
+    "id": "foundation-hand-print-a21-number",
+    "revision": "1",
+    "foundation_step_id": "a21-number",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a21-number",
+    "target": "число",
+    "meaning": "number",
+    "requires_graphemes": [
+      "И",
+      "Л",
+      "О",
+      "С",
+      "Ч"
+    ],
+    "requires_meanings": [
+      "a21-number"
+    ],
+    "requires_samples": [
+      "a21-number-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a21-number"
+    ],
+    "required_models": [
+      "И",
+      "Л",
+      "О",
+      "С",
+      "Ч"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "This noun is grammatically neuter. It names a mathematical number. Stress the last vowel: число́; keep the two middle consonants together."
+  },
+  {
+    "id": "foundation-hand-print-a21-one",
+    "revision": "1",
+    "foundation_step_id": "a21-one",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a21-one",
+    "target": "один",
+    "meaning": "one",
+    "requires_graphemes": [
+      "Д",
+      "И",
+      "Н",
+      "О"
+    ],
+    "requires_meanings": [
+      "a21-one"
+    ],
+    "requires_samples": [
+      "a21-one-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a21-one"
+    ],
+    "required_models": [
+      "Д",
+      "И",
+      "Н",
+      "О"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "word_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Stress the last vowel: оди́н. This is the masculine form of one. Here it names the number itself; its other counting and agreement uses can come later."
+  },
+  {
+    "id": "foundation-hand-print-a21-one-number",
+    "revision": "1",
+    "foundation_step_id": "a21-one-number",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a21-one-number",
+    "target": "Один — это число.",
+    "meaning": "One is a number",
+    "requires_graphemes": [
+      "Д",
+      "И",
+      "Л",
+      "Н",
+      "О",
+      "С",
+      "Т",
+      "Ч",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a21-one-number"
+    ],
+    "requires_samples": [
+      "a21-one-number-sample"
+    ],
+    "requires_conventions": [
+      "dash-reading-punctuation"
+    ],
+    "prerequisite_step_ids": [
+      "a21-one-number"
+    ],
+    "required_models": [
+      "Д",
+      "И",
+      "Л",
+      "Н",
+      "О",
+      "С",
+      "Т",
+      "Ч",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "This identifies one as a number. The dash links the named number to its description. Pause briefly there if useful; do not say a separate word for the dash."
+  },
+  {
+    "id": "foundation-hand-print-a21-maybe",
+    "revision": "1",
+    "foundation_step_id": "a21-maybe",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a21-maybe",
+    "target": "может быть",
+    "meaning": "perhaps or maybe",
+    "requires_graphemes": [
+      "Б",
+      "Е",
+      "Ж",
+      "М",
+      "О",
+      "Т",
+      "Ы",
+      "Ь"
+    ],
+    "requires_meanings": [
+      "a21-maybe"
+    ],
+    "requires_samples": [
+      "a21-maybe-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a21-maybe"
+    ],
+    "required_models": [
+      "Б",
+      "Е",
+      "Ж",
+      "М",
+      "О",
+      "Т",
+      "Ы",
+      "Ь"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "lowercase",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "This whole expression means perhaps or maybe. Stress the first syllable of the first word. You can use it as a short answer when you are unsure."
+  },
+  {
+    "id": "foundation-hand-print-a21-fact-question",
+    "revision": "1",
+    "foundation_step_id": "a21-fact-question",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a21-fact-question",
+    "target": "Это факт?",
+    "meaning": "Is this a fact?",
+    "requires_graphemes": [
+      "А",
+      "К",
+      "О",
+      "Т",
+      "Ф",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a21-fact-question"
+    ],
+    "requires_samples": [
+      "a21-fact-question-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a21-fact-question"
+    ],
+    "required_models": [
+      "А",
+      "К",
+      "О",
+      "Т",
+      "Ф",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "The naming frame becomes a question without adding an English-style helping verb. Listen to the whole question. To leave the answer open, you can use the earlier expression for maybe."
+  },
+  {
+    "id": "foundation-hand-print-a21-fiction-scene",
+    "revision": "1",
+    "foundation_step_id": "a21-fiction-scene",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a21-fiction-scene",
+    "target": "Это книга. Я читаю.",
+    "meaning": "This is a book. I am reading.",
+    "requires_graphemes": [
+      "А",
+      "Г",
+      "И",
+      "К",
+      "Н",
+      "О",
+      "Т",
+      "Ч",
+      "Э",
+      "Ю",
+      "Я"
+    ],
+    "requires_meanings": [
+      "a21-fiction-scene"
+    ],
+    "requires_samples": [
+      "a21-fiction-scene-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a21-fiction-scene"
+    ],
+    "required_models": [
+      "А",
+      "Г",
+      "И",
+      "К",
+      "Н",
+      "О",
+      "Т",
+      "Ч",
+      "Э",
+      "Ю",
+      "Я"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Imagine opening a book. Read the first sentence, pause, then read the second. You can keep the English meaning nearby."
+  },
+  {
+    "id": "foundation-hand-print-a21-robot-scene",
+    "revision": "1",
+    "foundation_step_id": "a21-robot-scene",
+    "foundation_step_revision": "1",
+    "source_pack_revision": "foundation-2026-11-06.3",
+    "audio_id": "foundation-a21-robot-scene",
+    "target": "Это робот. Он думает.",
+    "meaning": "This is a robot. It is thinking.",
+    "requires_graphemes": [
+      "А",
+      "Б",
+      "Д",
+      "Е",
+      "М",
+      "Н",
+      "О",
+      "Р",
+      "Т",
+      "У",
+      "Э"
+    ],
+    "requires_meanings": [
+      "a21-robot-scene"
+    ],
+    "requires_samples": [
+      "a21-robot-scene-sample"
+    ],
+    "requires_conventions": [],
+    "prerequisite_step_ids": [
+      "a21-robot-scene"
+    ],
+    "required_models": [
+      "А",
+      "Б",
+      "Д",
+      "Е",
+      "М",
+      "Н",
+      "О",
+      "Р",
+      "Т",
+      "У",
+      "Э"
+    ],
+    "sequence": "see_copy_hear_say",
+    "sequences": [
+      "see_copy_hear_say",
+      "hear_write_compare_say"
+    ],
+    "input_focus": "whole_target",
+    "case": "sentence",
+    "layout": "phrase_line",
+    "formation_hint": "Use the demonstrated unjoined printed forms. Keep letter order and a clear baseline; keep any word spaces.",
+    "script_note": "The written model is ordinary spelling. Stress support belongs beside it, not inside the handwriting target. This task requests the displayed case and punctuation.",
+    "model_help": "Save your first try, then compare one letter or word at a time. Replay the sound or reveal the model when useful.",
+    "say_instruction": "Listen to the whole model, then say the same word or message. Replay or skip speaking if you prefer.",
+    "grammar_note": "Imagine a robot in a story. The first sentence introduces it; the second says it is thinking. Он refers back to the masculine noun робот."
+  }
+]

@@ -1,0 +1,2498 @@
+{
+  "schema_version": 1,
+  "editorial_revision": "alphabet-construction-bindings-2026-11-06.2",
+  "source_pack_revision": "foundation-2026-11-06.3",
+  "depends_on_revision": "foundation-2026-11-06.2",
+  "status": "draft_not_embedded_no_recordings",
+  "merge": "Append new assets and episodes to the exact .2 prefix. Keep every existing item payload and source identity. Bind every new step to .3 regardless of future catalog editions.",
+  "audio_requests": [
+    {
+      "id": "foundation-a8-i-there",
+      "ordinary_spelling": "Я там.",
+      "marked_stress_request": "Я там.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a8-you-there",
+      "ordinary_spelling": "Ты там.",
+      "marked_stress_request": "Ты там.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a9-e-model",
+      "ordinary_spelling": "не",
+      "marked_stress_request": "не",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants. Treat не as one stressed practice syllable with soft Н; do not reduce it as an unstressed negative particle.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Single stressed practice syllable with soft Н, not a reduced unstressed negative particle or the letter name эн."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a9-eh-model",
+      "ordinary_spelling": "э",
+      "marked_stress_request": "э",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "One stressed vowel without an initial glide."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a9-this",
+      "ordinary_spelling": "это",
+      "marked_stress_request": "э́то",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: э́то: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a9-this-cat",
+      "ordinary_spelling": "Это кот.",
+      "marked_stress_request": "Э́то кот.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Э́то: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a9-this-window",
+      "ordinary_spelling": "Это окно.",
+      "marked_stress_request": "Э́то окно́.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Э́то: syllable 1 of 2; окно́: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "Final vowel stressed, initial written О reduced; no extra vowel in КН.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a10-s-model",
+      "ordinary_spelling": "са",
+      "marked_stress_request": "са",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Hard voiceless С followed by the vowel; not the letter name эс."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a10-l-model",
+      "ordinary_spelling": "ла",
+      "marked_stress_request": "ла",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Hard Л followed by the vowel; retain this contrast for the later люк model."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a10-juice",
+      "ordinary_spelling": "сок",
+      "marked_stress_request": "сок",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a10-table",
+      "ordinary_spelling": "стол",
+      "marked_stress_request": "стол",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep initial СТ together without an inserted vowel."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a10-this-table",
+      "ordinary_spelling": "Это стол.",
+      "marked_stress_request": "Э́то стол.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Э́то: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "Keep initial СТ together without an inserted vowel.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a11-r-model",
+      "ordinary_spelling": "ра",
+      "marked_stress_request": "ра",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Tongue-tip Russian Р in a whole syllable, not the letter name эр."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a11-u-model",
+      "ordinary_spelling": "у",
+      "marked_stress_request": "у",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "One stressed vowel; no initial glide."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a11-hand",
+      "ordinary_spelling": "рука",
+      "marked_stress_request": "рука́",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: рука́: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final А stressed; retain both syllables."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a11-here",
+      "ordinary_spelling": "тут",
+      "marked_stress_request": "тут",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a11-i-here",
+      "ordinary_spelling": "Я тут.",
+      "marked_stress_request": "Я тут.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a11-you-here",
+      "ordinary_spelling": "Ты тут.",
+      "marked_stress_request": "Ты тут.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a12-v-model",
+      "ordinary_spelling": "ва",
+      "marked_stress_request": "ва",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Voiced В followed by the vowel; not the letter name вэ."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a12-we",
+      "ordinary_spelling": "мы",
+      "marked_stress_request": "мы",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a12-you",
+      "ordinary_spelling": "вы",
+      "marked_stress_request": "вы",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a12-we-here",
+      "ordinary_spelling": "Мы тут.",
+      "marked_stress_request": "Мы тут.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a12-you-there",
+      "ordinary_spelling": "Вы там.",
+      "marked_stress_request": "Вы там.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a12-water",
+      "ordinary_spelling": "вода",
+      "marked_stress_request": "вода́",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: вода́: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final А stressed, first written О unstressed and reduced."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a13-b-model",
+      "ordinary_spelling": "ба",
+      "marked_stress_request": "ба",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Voiced Б followed by the vowel; compare its onset with па."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a13-p-model",
+      "ordinary_spelling": "па",
+      "marked_stress_request": "па",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Voiceless П followed by the vowel; compare its onset with ба."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a13-dad",
+      "ordinary_spelling": "папа",
+      "marked_stress_request": "па́па",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: па́па: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "First А stressed; final А unstressed, not equally stressed syllables."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a13-robot",
+      "ordinary_spelling": "робот",
+      "marked_stress_request": "ро́бот",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: ро́бот: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "First О stressed; second written О reduced."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a13-this-robot",
+      "ordinary_spelling": "Это робот.",
+      "marked_stress_request": "Э́то ро́бот.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Э́то: syllable 1 of 2; ро́бот: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "First О stressed; second written О reduced.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a13-robot-he",
+      "ordinary_spelling": "Он тут.",
+      "marked_stress_request": "Он тут.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a14-z-model",
+      "ordinary_spelling": "за",
+      "marked_stress_request": "за",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Voiced З followed by the vowel; not the letter name зэ."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a14-g-model",
+      "ordinary_spelling": "га",
+      "marked_stress_request": "га",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Hard Г followed by the vowel; not the letter name гэ."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a14-sound",
+      "ordinary_spelling": "звук",
+      "marked_stress_request": "звук",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep the initial ЗВ cluster without inserting a vowel."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a14-book",
+      "ordinary_spelling": "книга",
+      "marked_stress_request": "кни́га",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: кни́га: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "First syllable stressed; initial КН cluster and soft Н before И, without an inserted vowel."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a14-this-book",
+      "ordinary_spelling": "Это книга.",
+      "marked_stress_request": "Э́то кни́га.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Э́то: syllable 1 of 2; кни́га: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "First syllable stressed; initial КН cluster and soft Н before И, without an inserted vowel.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a14-book-she",
+      "ordinary_spelling": "Она тут.",
+      "marked_stress_request": "Она́ тут.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Она́: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final А stressed, first written О reduced.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a15-h-model",
+      "ordinary_spelling": "ха",
+      "marked_stress_request": "ха",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Voiceless back-of-mouth friction onset, not English h or the spoken letter sequence икс-а."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a15-choir",
+      "ordinary_spelling": "хор",
+      "marked_stress_request": "хор",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Back-of-mouth friction at Х; do not replace it with ordinary English h."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a15-zh-model",
+      "ordinary_spelling": "жа",
+      "marked_stress_request": "жа",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Normally hard voiced Ж followed by the vowel; compare with ша."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a15-beetle",
+      "ordinary_spelling": "жук",
+      "marked_stress_request": "жук",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Normally hard voiced Ж onset."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a15-sh-model",
+      "ordinary_spelling": "ша",
+      "marked_stress_request": "ша",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Normally hard voiceless Ш followed by the vowel; compare with жа and later ща."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a15-ball",
+      "ordinary_spelling": "шар",
+      "marked_stress_request": "шар",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Normally hard Ш onset."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a15-noise",
+      "ordinary_spelling": "шум",
+      "marked_stress_request": "шум",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Normally hard Ш onset."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a16-yo-model",
+      "ordinary_spelling": "ё",
+      "marked_stress_request": "ё",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial glide into the stressed vowel; no added carrier or second syllable."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a16-honey",
+      "ordinary_spelling": "мёд",
+      "marked_stress_request": "мёд",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Soft М before stressed Ё; final written Д is voiceless in isolation."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a16-yu-model",
+      "ordinary_spelling": "ю",
+      "marked_stress_request": "ю",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial glide into the stressed vowel; no added carrier or second syllable."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a16-onion",
+      "ordinary_spelling": "лук",
+      "marked_stress_request": "лук",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Hard Л onset in the onion model; compare with люк."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a16-hatch",
+      "ordinary_spelling": "люк",
+      "marked_stress_request": "люк",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Soft Л onset in the hatch model; compare with лук."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a17-j-model",
+      "ordinary_spelling": "ой",
+      "marked_stress_request": "ой",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "One syllable with a final glide, not a second vowel syllable."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a17-my-m",
+      "ordinary_spelling": "мой",
+      "marked_stress_request": "мой",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "One syllable ending in the Й glide."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a17-salt",
+      "ordinary_spelling": "соль",
+      "marked_stress_request": "соль",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Soft final Л with no added syllable or separately spoken sign."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a17-my-f",
+      "ordinary_spelling": "моя",
+      "marked_stress_request": "моя́",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: моя́: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final Я stressed and preceded by the glide after a vowel; first written О reduced."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a17-my-n",
+      "ordinary_spelling": "моё",
+      "marked_stress_request": "моё",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: моё: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Ё stressed and preceded by the glide after a vowel; first written О reduced."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a17-my-cat",
+      "ordinary_spelling": "мой кот",
+      "marked_stress_request": "мой кот",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "One syllable ending in the Й glide."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a17-my-book",
+      "ordinary_spelling": "моя книга",
+      "marked_stress_request": "моя́ кни́га",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: моя́: syllable 2 of 2; кни́га: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final Я stressed and preceded by the glide after a vowel; first written О reduced.",
+        "First syllable stressed; initial КН cluster and soft Н before И, without an inserted vowel."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a17-my-window",
+      "ordinary_spelling": "моё окно",
+      "marked_stress_request": "моё окно́",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: моё: syllable 2 of 2; окно́: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Ё stressed and preceded by the glide after a vowel; first written О reduced.",
+        "Final vowel stressed, initial written О reduced; no extra vowel in КН."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a18-ts-model",
+      "ordinary_spelling": "ца",
+      "marked_stress_request": "ца",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "One affricate onset followed by the vowel, not a two-syllable letter-name sequence."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a18-circus",
+      "ordinary_spelling": "цирк",
+      "marked_stress_request": "цирк",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Hard Ц despite written И; the following vowel has Ы quality."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a18-ch-model",
+      "ordinary_spelling": "ча",
+      "marked_stress_request": "ча",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Normally soft Ч even before written А; retain its contrast with hard Ц."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a18-tea",
+      "ordinary_spelling": "чай",
+      "marked_stress_request": "чай",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Normally soft Ч onset and final Й glide; one syllable."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a18-shch-model",
+      "ordinary_spelling": "ща",
+      "marked_stress_request": "ща",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Long soft fricative onset, distinct from hard Ш; no inserted vowel or letter-name substitution."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a18-soup",
+      "ordinary_spelling": "щи",
+      "marked_stress_request": "щи",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Long soft Щ onset, distinct from hard Ш."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a19-f-model",
+      "ordinary_spelling": "фа",
+      "marked_stress_request": "фа",
+      "purpose": "sound/shape example; syllable is not vocabulary",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Voiceless Ф followed by the vowel; compare its onset with ва."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a19-fact",
+      "ordinary_spelling": "факт",
+      "marked_stress_request": "факт",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Retain final КТ cluster without inserting a vowel."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a19-object",
+      "ordinary_spelling": "объект",
+      "marked_stress_request": "объе́кт",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: объе́кт: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Stress Е and preserve the glide after Ъ. The reference dictionary admits both hard and soft Б before the glide; do not reject one solely for that difference."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a19-what",
+      "ordinary_spelling": "что",
+      "marked_stress_request": "что",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: a single vowel syllable in each word or practice syllable. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "The word begins with the normally hard Ш sound in the standard target, despite written Ч."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a19-what-this",
+      "ordinary_spelling": "Что это?",
+      "marked_stress_request": "Что э́то?",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: э́то: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "The word begins with the normally hard Ш sound in the standard target, despite written Ч.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "A complete natural question, with its question contour preserved; not a declarative utterance with question punctuation only in metadata."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a19-this-object",
+      "ordinary_spelling": "Это объект.",
+      "marked_stress_request": "Э́то объе́кт.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Э́то: syllable 1 of 2; объе́кт: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "Stress Е and preserve the glide after Ъ. The reference dictionary admits both hard and soft Б before the glide; do not reject one solely for that difference.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-i-read",
+      "ordinary_spelling": "Я читаю.",
+      "marked_stress_request": "Я чита́ю.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: чита́ю: syllable 2 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep stress on А in the reading verb; soft Ч, reduced initial unstressed vowel, and the complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-you-read",
+      "ordinary_spelling": "Ты читаешь.",
+      "marked_stress_request": "Ты чита́ешь.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: чита́ешь: syllable 2 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep stress on А in the reading verb; soft Ч, reduced initial unstressed vowel, and the complete person ending.",
+        "Final written Ь is grammatical here: Ш stays hard; no added vowel or softened-Щ substitution.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-he-reads",
+      "ordinary_spelling": "Он читает.",
+      "marked_stress_request": "Он чита́ет.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: чита́ет: syllable 2 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep stress on А in the reading verb; soft Ч, reduced initial unstressed vowel, and the complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-we-read",
+      "ordinary_spelling": "Мы читаем.",
+      "marked_stress_request": "Мы чита́ем.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: чита́ем: syllable 2 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep stress on А in the reading verb; soft Ч, reduced initial unstressed vowel, and the complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-you-pl-read",
+      "ordinary_spelling": "Вы читаете.",
+      "marked_stress_request": "Вы чита́ете.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: чита́ете: syllable 2 of 4. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep stress on А in the reading verb; soft Ч, reduced initial unstressed vowel, and the complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-they-read",
+      "ordinary_spelling": "Они читают.",
+      "marked_stress_request": "Они́ чита́ют.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Они́: syllable 2 of 2; чита́ют: syllable 2 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final И stressed, first written О reduced; soft Н before И.",
+        "Keep stress on А in the reading verb; soft Ч, reduced initial unstressed vowel, and the complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-i-think",
+      "ordinary_spelling": "Я думаю.",
+      "marked_stress_request": "Я ду́маю.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: ду́маю: syllable 1 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep stress on У in the thinking verb and preserve its complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-you-think",
+      "ordinary_spelling": "Ты думаешь.",
+      "marked_stress_request": "Ты ду́маешь.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: ду́маешь: syllable 1 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep stress on У in the thinking verb and preserve its complete person ending.",
+        "Final written Ь is grammatical here: Ш stays hard; no added vowel or softened-Щ substitution.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-he-thinks",
+      "ordinary_spelling": "Он думает.",
+      "marked_stress_request": "Он ду́мает.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: ду́мает: syllable 1 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep stress on У in the thinking verb and preserve its complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-we-think",
+      "ordinary_spelling": "Мы думаем.",
+      "marked_stress_request": "Мы ду́маем.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: ду́маем: syllable 1 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep stress on У in the thinking verb and preserve its complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-you-pl-think",
+      "ordinary_spelling": "Вы думаете.",
+      "marked_stress_request": "Вы ду́маете.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: ду́маете: syllable 1 of 4. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Keep stress on У in the thinking verb and preserve its complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-they-think",
+      "ordinary_spelling": "Они думают.",
+      "marked_stress_request": "Они́ ду́мают.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Они́: syllable 2 of 2; ду́мают: syllable 1 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final И stressed, first written О reduced; soft Н before И.",
+        "Keep stress on У in the thinking verb and preserve its complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a21-number",
+      "ordinary_spelling": "число",
+      "marked_stress_request": "число́",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: число́: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final О stressed, soft Ч onset; no vowel inserted inside СЛ."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a21-one",
+      "ordinary_spelling": "один",
+      "marked_stress_request": "оди́н",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: оди́н: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final И stressed, first written О reduced; soft Д before И."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a21-one-number",
+      "ordinary_spelling": "Один — это число.",
+      "marked_stress_request": "Оди́н — э́то число́.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Оди́н: syllable 2 of 2; э́то: syllable 1 of 2; число́: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final И stressed, first written О reduced; soft Д before И.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "Final О stressed, soft Ч onset; no vowel inserted inside СЛ.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a21-maybe",
+      "ordinary_spelling": "может быть",
+      "marked_stress_request": "мо́жет быть",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: мо́жет: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "First О stressed, normally hard Ж; unstressed Е must not turn into the isolated stressed Е model.",
+        "Soft final Т; no separately spoken Ь."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a21-fact-question",
+      "ordinary_spelling": "Это факт?",
+      "marked_stress_request": "Э́то факт?",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Э́то: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "Retain final КТ cluster without inserting a vowel.",
+        "A complete natural question, with its question contour preserved; not a declarative utterance with question punctuation only in metadata."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a21-fiction-scene",
+      "ordinary_spelling": "Это книга. Я читаю.",
+      "marked_stress_request": "Э́то кни́га. Я чита́ю.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Э́то: syllable 1 of 2; кни́га: syllable 1 of 2; чита́ю: syllable 2 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "First syllable stressed; initial КН cluster and soft Н before И, without an inserted vowel.",
+        "Keep stress on А in the reading verb; soft Ч, reduced initial unstressed vowel, and the complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a21-robot-scene",
+      "ordinary_spelling": "Это робот. Он думает.",
+      "marked_stress_request": "Э́то ро́бот. Он ду́мает.",
+      "purpose": "whole meaningful word or message",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Э́то: syllable 1 of 2; ро́бот: syllable 1 of 2; ду́мает: syllable 1 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "First О stressed; second written О reduced.",
+        "Keep stress on У in the thinking verb and preserve its complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a12-compose-they-here",
+      "ordinary_spelling": "Они тут.",
+      "marked_stress_request": "Они́ тут.",
+      "purpose": "hidden reference for first constructed combination; never stimulus before response",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Они́: syllable 2 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final И stressed, first written О reduced; soft Н before И.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a17-compose-my-robot",
+      "ordinary_spelling": "мой робот",
+      "marked_stress_request": "мой ро́бот",
+      "purpose": "hidden reference for first constructed combination; never stimulus before response",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: ро́бот: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "One syllable ending in the Й glide.",
+        "First О stressed; second written О reduced."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-compose-she-reads",
+      "ordinary_spelling": "Она читает.",
+      "marked_stress_request": "Она́ чита́ет.",
+      "purpose": "hidden reference for first constructed combination; never stimulus before response",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Она́: syllable 2 of 2; чита́ет: syllable 2 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final А stressed, first written О reduced.",
+        "Keep stress on А in the reading verb; soft Ч, reduced initial unstressed vowel, and the complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a20-compose-she-thinks",
+      "ordinary_spelling": "Она думает.",
+      "marked_stress_request": "Она́ ду́мает.",
+      "purpose": "hidden reference for first constructed combination; never stimulus before response",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Она́: syllable 2 of 2; ду́мает: syllable 1 of 3. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Final А stressed, first written О reduced.",
+        "Keep stress on У in the thinking verb and preserve its complete person ending.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    },
+    {
+      "id": "foundation-a21-compose-sphere",
+      "ordinary_spelling": "Это шар.",
+      "marked_stress_request": "Э́то шар.",
+      "purpose": "hidden reference for first constructed combination; never stimulus before response",
+      "preparation_status": "unprepared_editorial_request_no_audio_bytes",
+      "generation_instruction": "Produce only the exact Russian target at an ordinary clear teaching pace. Preserve the requested stress and sentence type. No English, carrier sentence, spoken punctuation, or letter-name substitution. Keep a natural complete utterance; do not splice or crop consonants.",
+      "auditory_checks": [
+        "Exact target and no added words",
+        "Correct intended stress, complete onset and ending",
+        "Whole model is intelligible without reading its spelling",
+        "Lexical stress: Э́то: syllable 1 of 2. Stress annotations specify lexical position, not equal sentence emphasis on every word.",
+        "Initial Э has no glide; reduce the unstressed final written О naturally.",
+        "Normally hard Ш onset.",
+        "Complete sentence ending; neutral statement rhythm rather than isolated word-by-word list delivery."
+      ],
+      "provenance": null
+    }
+  ],
+  "reused_audio_ids": [
+    "foundation-net",
+    "foundation-ty",
+    "foundation-ya"
+  ],
+  "recall_bindings": [
+    {
+      "step_id": "a8-i-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a8-ya-word",
+      "reference_source_step_id": "a8-ya-word",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-ya",
+      "russian_reference": "я",
+      "meaning": "I, the speaker",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a8-you-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a8-ty-word",
+      "reference_source_step_id": "a8-ty-word",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-ty",
+      "russian_reference": "ты",
+      "meaning": "you, one familiar listener",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a8-i-there-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a8-i-there",
+      "reference_source_step_id": "a8-i-there",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a8-i-there",
+      "russian_reference": "Я там.",
+      "meaning": "I am there",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a9-no-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a9-no-script",
+      "reference_source_step_id": "a9-no-script",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-net",
+      "russian_reference": "нет",
+      "meaning": "no",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a9-this-window-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a9-this-window",
+      "reference_source_step_id": "a9-this-window",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a9-this-window",
+      "russian_reference": "Это окно.",
+      "meaning": "This is a window",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a9-this-cat-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a9-this-cat",
+      "reference_source_step_id": "a9-this-cat",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a9-this-cat",
+      "russian_reference": "Это кот.",
+      "meaning": "This is a cat",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a10-juice-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a10-juice",
+      "reference_source_step_id": "a10-juice",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a10-juice",
+      "russian_reference": "сок",
+      "meaning": "juice",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a10-table-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a10-table",
+      "reference_source_step_id": "a10-table",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a10-table",
+      "russian_reference": "стол",
+      "meaning": "table",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a10-identify-table",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a10-this-table",
+      "reference_source_step_id": "a10-this-table",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a10-this-table",
+      "russian_reference": "Это стол.",
+      "meaning": "This is a table",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a11-location-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a11-here",
+      "reference_source_step_id": "a11-here",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a11-here",
+      "russian_reference": "тут",
+      "meaning": "here",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a11-hand-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a11-hand",
+      "reference_source_step_id": "a11-hand",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a11-hand",
+      "russian_reference": "рука",
+      "meaning": "hand or arm",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a11-you-here-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a11-you-here",
+      "reference_source_step_id": "a11-you-here",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a11-you-here",
+      "russian_reference": "Ты тут.",
+      "meaning": "You are here, to one familiar listener",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a12-we-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a12-we",
+      "reference_source_step_id": "a12-we",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a12-we",
+      "russian_reference": "мы",
+      "meaning": "we, including the speaker",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a12-you-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a12-you",
+      "reference_source_step_id": "a12-you",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a12-you",
+      "russian_reference": "вы",
+      "meaning": "you, plural or polite singular",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a12-we-here-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a12-we-here",
+      "reference_source_step_id": "a12-we-here",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a12-we-here",
+      "russian_reference": "Мы тут.",
+      "meaning": "We are here",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a13-robot-read",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a13-robot",
+      "reference_source_step_id": "a13-robot",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a13-robot",
+      "russian_reference": "робот",
+      "meaning": "robot",
+      "skill": "reading",
+      "kind": "reading_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a13-dad-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a13-dad",
+      "reference_source_step_id": "a13-dad",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a13-dad",
+      "russian_reference": "папа",
+      "meaning": "dad",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a13-robot-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a13-robot",
+      "reference_source_step_id": "a13-robot",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a13-robot",
+      "russian_reference": "робот",
+      "meaning": "robot",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a13-robot-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a13-this-robot",
+      "reference_source_step_id": "a13-this-robot",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a13-this-robot",
+      "russian_reference": "Это робот.",
+      "meaning": "This is a robot",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a14-book-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a14-book",
+      "reference_source_step_id": "a14-book",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a14-book",
+      "russian_reference": "книга",
+      "meaning": "book",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a14-sound-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a14-sound",
+      "reference_source_step_id": "a14-sound",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a14-sound",
+      "russian_reference": "звук",
+      "meaning": "sound",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a14-book-reference",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a14-book-she",
+      "reference_source_step_id": "a14-book-she",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a14-book-she",
+      "russian_reference": "Она тут.",
+      "meaning": "It, the book, is here",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a15-choir-read",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a15-choir",
+      "reference_source_step_id": "a15-choir",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a15-choir",
+      "russian_reference": "хор",
+      "meaning": "choir",
+      "skill": "reading",
+      "kind": "reading_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a15-beetle-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a15-beetle",
+      "reference_source_step_id": "a15-beetle",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a15-beetle",
+      "russian_reference": "жук",
+      "meaning": "beetle",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a15-ball-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a15-ball",
+      "reference_source_step_id": "a15-ball",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a15-ball",
+      "russian_reference": "шар",
+      "meaning": "ball or sphere",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a15-noise-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a15-noise",
+      "reference_source_step_id": "a15-noise",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a15-noise",
+      "russian_reference": "шум",
+      "meaning": "noise",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a16-honey-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a16-honey",
+      "reference_source_step_id": "a16-honey",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a16-honey",
+      "russian_reference": "мёд",
+      "meaning": "honey",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a16-hatch-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a16-hatch",
+      "reference_source_step_id": "a16-hatch",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a16-hatch",
+      "russian_reference": "люк",
+      "meaning": "hatch",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a16-onion-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a16-onion",
+      "reference_source_step_id": "a16-onion",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a16-onion",
+      "russian_reference": "лук",
+      "meaning": "onion",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a17-salt-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a17-salt",
+      "reference_source_step_id": "a17-salt",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a17-salt",
+      "russian_reference": "соль",
+      "meaning": "salt",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a17-my-window-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a17-my-window",
+      "reference_source_step_id": "a17-my-window",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a17-my-window",
+      "russian_reference": "моё окно",
+      "meaning": "my window",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a18-tea-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a18-tea",
+      "reference_source_step_id": "a18-tea",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a18-tea",
+      "russian_reference": "чай",
+      "meaning": "tea",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a18-tea-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a18-tea",
+      "reference_source_step_id": "a18-tea",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a18-tea",
+      "russian_reference": "чай",
+      "meaning": "tea",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a18-soup-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a18-soup",
+      "reference_source_step_id": "a18-soup",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a18-soup",
+      "russian_reference": "щи",
+      "meaning": "cabbage soup",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a19-object-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a19-object",
+      "reference_source_step_id": "a19-object",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a19-object",
+      "russian_reference": "объект",
+      "meaning": "object",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a19-question-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a19-what-this",
+      "reference_source_step_id": "a19-what-this",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a19-what-this",
+      "russian_reference": "Что это?",
+      "meaning": "What is this?",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a19-question-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a19-what-this",
+      "reference_source_step_id": "a19-what-this",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a19-what-this",
+      "russian_reference": "Что это?",
+      "meaning": "What is this?",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a20-they-read-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a20-they-read",
+      "reference_source_step_id": "a20-they-read",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a20-they-read",
+      "russian_reference": "Они читают.",
+      "meaning": "They read or they are reading",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a20-we-read-write",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a20-we-read",
+      "reference_source_step_id": "a20-we-read",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a20-we-read",
+      "russian_reference": "Мы читаем.",
+      "meaning": "We read or we are reading",
+      "skill": "writing",
+      "kind": "written",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a20-you-think-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a20-you-think",
+      "reference_source_step_id": "a20-you-think",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a20-you-think",
+      "russian_reference": "Ты думаешь.",
+      "meaning": "You think or you are thinking, one familiar listener",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a20-i-read-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a20-i-read",
+      "reference_source_step_id": "a20-i-read",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a20-i-read",
+      "russian_reference": "Я читаю.",
+      "meaning": "I read or I am reading",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a21-philosophy-listen",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a21-fact-question",
+      "reference_source_step_id": "a21-fact-question",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a21-fact-question",
+      "russian_reference": "Это факт?",
+      "meaning": "Is this a fact?",
+      "skill": "listening",
+      "kind": "listening_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a21-fiction-read",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a21-fiction-scene",
+      "reference_source_step_id": "a21-fiction-scene",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a21-fiction-scene",
+      "russian_reference": "Это книга. Я читаю.",
+      "meaning": "This is a book. I am reading.",
+      "skill": "reading",
+      "kind": "reading_meaning",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a21-scifi-say",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-family:a21-robot-scene",
+      "reference_source_step_id": "a21-robot-scene",
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a21-robot-scene",
+      "russian_reference": "Это робот. Он думает.",
+      "meaning": "This is a robot. It is thinking.",
+      "skill": "speaking",
+      "kind": "spoken",
+      "review_identity": "Exact source pack revision + task step ID + task revision + skill. A sibling task or modality is not the same ReviewKey.",
+      "assessment": "A response before answer-bearing help is an attempt; automatic exact-match spelling/meaning is bounded to this answer contract. Speech remains unassessed acoustic evidence.",
+      "support_policy": "Listening replay supplies the stimulus. For every other recall mode the audio/meaning/reference is hidden until response or explicit help. Keyboard is an authored constraint, so written evidence remains constrained production.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false
+    },
+    {
+      "step_id": "a12-compose-they-here",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-construction:a12-compose-they-here",
+      "reference_source_step_ids": [
+        "c6-ni-context",
+        "a11-here"
+      ],
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a12-compose-they-here",
+      "russian_reference": "Они тут.",
+      "skill": "writing",
+      "kind": "construct_from_taught_parts",
+      "required_meanings": [
+        "they-people",
+        "a11-here"
+      ],
+      "review_identity": "Exact source pack revision + task step ID + revision + skill; keep component outcomes separate.",
+      "assessment": "Constrained authored spelling/form match for writing, or saved attempt/self-comparison for speech. Do not grade all component features from this one response.",
+      "support_policy": "No complete exact message is presented earlier in this pack. Hide this model and reference until response/help. Earlier component models are allowed teaching, and revealing this answer makes the attempt assisted.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false,
+      "editorial_combination_not_presented_earlier": true,
+      "novelty_limit": "A host must check the actual exposure log before calling this new or withheld for a particular learner."
+    },
+    {
+      "step_id": "a17-compose-my-robot",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-construction:a17-compose-my-robot",
+      "reference_source_step_ids": [
+        "a17-my-m",
+        "a13-robot"
+      ],
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a17-compose-my-robot",
+      "russian_reference": "мой робот",
+      "skill": "writing",
+      "kind": "construct_from_taught_parts",
+      "required_meanings": [
+        "a17-my-m",
+        "a13-robot"
+      ],
+      "review_identity": "Exact source pack revision + task step ID + revision + skill; keep component outcomes separate.",
+      "assessment": "Constrained authored spelling/form match for writing, or saved attempt/self-comparison for speech. Do not grade all component features from this one response.",
+      "support_policy": "No complete exact message is presented earlier in this pack. Hide this model and reference until response/help. Earlier component models are allowed teaching, and revealing this answer makes the attempt assisted.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false,
+      "editorial_combination_not_presented_earlier": true,
+      "novelty_limit": "A host must check the actual exposure log before calling this new or withheld for a particular learner."
+    },
+    {
+      "step_id": "a20-compose-she-reads",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-construction:a20-compose-she-reads",
+      "reference_source_step_ids": [
+        "c4-stress",
+        "a20-he-reads"
+      ],
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a20-compose-she-reads",
+      "russian_reference": "Она читает.",
+      "skill": "writing",
+      "kind": "construct_from_taught_parts",
+      "required_meanings": [
+        "she-person",
+        "a20-he-reads"
+      ],
+      "review_identity": "Exact source pack revision + task step ID + revision + skill; keep component outcomes separate.",
+      "assessment": "Constrained authored spelling/form match for writing, or saved attempt/self-comparison for speech. Do not grade all component features from this one response.",
+      "support_policy": "No complete exact message is presented earlier in this pack. Hide this model and reference until response/help. Earlier component models are allowed teaching, and revealing this answer makes the attempt assisted.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false,
+      "editorial_combination_not_presented_earlier": true,
+      "novelty_limit": "A host must check the actual exposure log before calling this new or withheld for a particular learner."
+    },
+    {
+      "step_id": "a20-compose-she-thinks",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-construction:a20-compose-she-thinks",
+      "reference_source_step_ids": [
+        "c4-stress",
+        "a20-he-thinks"
+      ],
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a20-compose-she-thinks",
+      "russian_reference": "Она думает.",
+      "skill": "speaking",
+      "kind": "construct_from_taught_parts",
+      "required_meanings": [
+        "she-person",
+        "a20-he-thinks"
+      ],
+      "review_identity": "Exact source pack revision + task step ID + revision + skill; keep component outcomes separate.",
+      "assessment": "Constrained authored spelling/form match for writing, or saved attempt/self-comparison for speech. Do not grade all component features from this one response.",
+      "support_policy": "No complete exact message is presented earlier in this pack. Hide this model and reference until response/help. Earlier component models are allowed teaching, and revealing this answer makes the attempt assisted.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false,
+      "editorial_combination_not_presented_earlier": true,
+      "novelty_limit": "A host must check the actual exposure log before calling this new or withheld for a particular learner."
+    },
+    {
+      "step_id": "a21-compose-sphere",
+      "step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "family_id": "foundation-construction:a21-compose-sphere",
+      "reference_source_step_ids": [
+        "a9-this",
+        "a15-ball"
+      ],
+      "reference_source_step_revision": "1",
+      "reference_audio_id": "foundation-a21-compose-sphere",
+      "russian_reference": "Это шар.",
+      "skill": "speaking",
+      "kind": "construct_from_taught_parts",
+      "required_meanings": [
+        "a9-this",
+        "a15-ball"
+      ],
+      "review_identity": "Exact source pack revision + task step ID + revision + skill; keep component outcomes separate.",
+      "assessment": "Constrained authored spelling/form match for writing, or saved attempt/self-comparison for speech. Do not grade all component features from this one response.",
+      "support_policy": "No complete exact message is presented earlier in this pack. Hide this model and reference until response/help. Earlier component models are allowed teaching, and revealing this answer makes the attempt assisted.",
+      "first_encounter_delayed_probe": false,
+      "novel_context": false,
+      "editorial_combination_not_presented_earlier": true,
+      "novelty_limit": "A host must check the actual exposure log before calling this new or withheld for a particular learner."
+    }
+  ],
+  "letter_introduction_steps": {
+    "Я": "a8-ya",
+    "Ы": "a8-y",
+    "Е": "a9-e",
+    "Э": "a9-eh",
+    "С": "a10-s",
+    "Л": "a10-l",
+    "Р": "a11-r",
+    "У": "a11-u",
+    "В": "a12-v",
+    "Б": "a13-b",
+    "П": "a13-p",
+    "З": "a14-z",
+    "Г": "a14-g",
+    "Х": "a15-h",
+    "Ж": "a15-zh",
+    "Ш": "a15-sh",
+    "Ё": "a16-yo",
+    "Ю": "a16-yu",
+    "Й": "a17-j",
+    "Ь": "a17-soft-sign",
+    "Ц": "a18-ts",
+    "Ч": "a18-ch",
+    "Щ": "a18-shch",
+    "Ф": "a19-f",
+    "Ъ": "a19-hard-sign"
+  },
+  "handwriting_registry_file": "alphabet-construction-handwriting-v1.json",
+  "glyph_model_file": "alphabet-construction-glyphs-v1.json",
+  "review_limits": "First authored encounters are never delayed probes. A changed scene is only a transfer probe if actually withheld from this learner. A successful tile selection cannot credit free writing, speaking or sibling skills.",
+  "source_identity_warning": "The current two-way legacy/current resolver and .1-only resume migration are insufficient for a third edition. Preserve all .2 identities and .2 cursors before append.",
+  "inventory": {
+    "episodes": 14,
+    "steps": 171,
+    "new_audio_requests": 92,
+    "writing_tasks": 89,
+    "new_letters": 25,
+    "recall_tasks": 49
+  }
+}

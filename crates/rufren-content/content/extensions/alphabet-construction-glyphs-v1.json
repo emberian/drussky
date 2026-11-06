@@ -1,0 +1,753 @@
+{
+  "schema_version": 1,
+  "model_family": "unjoined_hand_printed",
+  "model_version": "hand-printed-alphabet-draft-v1",
+  "status": "authored_vector_draft_not_runtime_model",
+  "coordinates": {
+    "unit_box": [
+      0,
+      0,
+      84,
+      120
+    ],
+    "cap_top": 12,
+    "lowercase_top": 39,
+    "baseline": 88,
+    "descenders_may_reach": 119,
+    "note": "Matches existing 100-unit path coordinates, including dots/breves above cap height and descenders below baseline. Integrating layouts must allow full extents rather than clipping to 12..88 guides."
+  },
+  "scope": "One legible printed form and suggested stroke order per case. Not a standard cursive model, recognizer, or grading rubric. Learner variants need comparison, not rejection for differing stroke order.",
+  "preservation": "Do not reinterpret old originals under this model version. Existing hand-printed-six-v2 originals keep their model identity and points. New glyph availability can be added while preserving historic renderers/decoders.",
+  "glyphs": [
+    {
+      "glyph": "Я",
+      "base_letter": "Я",
+      "case": "uppercase",
+      "source_step_id": "a8-ya",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M68 88 L68 12 L42 12 C8 12 8 49 42 49 L68 49",
+        "M42 49 L12 88"
+      ],
+      "formation_hint": "Make a right upright, a bowl on its upper left, and a diagonal leg down to the left.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "я",
+      "base_letter": "Я",
+      "case": "lowercase",
+      "source_step_id": "a8-ya",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M65 88 L65 39 L40 39 C13 39 13 65 40 65 L65 65",
+        "M40 65 L16 88"
+      ],
+      "formation_hint": "Make the smaller right upright, a bowl on its upper left, and a diagonal leg down to the left.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Ы",
+      "base_letter": "Ы",
+      "case": "uppercase",
+      "source_step_id": "a8-y",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M12 12 L12 88 L34 88 C64 88 64 51 34 51 L12 51",
+        "M72 12 L72 88"
+      ],
+      "formation_hint": "Keep the left bowl and separate right upright within one letter.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "ы",
+      "base_letter": "Ы",
+      "case": "lowercase",
+      "source_step_id": "a8-y",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M12 39 L12 88 L31 88 C55 88 55 62 31 62 L12 62",
+        "M70 39 L70 88"
+      ],
+      "formation_hint": "Keep the left bowl and separate right upright within one letter.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Е",
+      "base_letter": "Е",
+      "case": "uppercase",
+      "source_step_id": "a9-e",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M68 12 L15 12 L15 88 L68 88",
+        "M15 50 L59 50"
+      ],
+      "formation_hint": "Join a left upright to three horizontal arms: top, middle, bottom.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "е",
+      "base_letter": "Е",
+      "case": "lowercase",
+      "source_step_id": "a9-e",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M16 63 L67 63 C67 28 16 28 16 63 C16 89 49 98 67 80"
+      ],
+      "formation_hint": "Begin with the middle bar, curve around the left side, and leave the lower curve open on the right.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Э",
+      "base_letter": "Э",
+      "case": "uppercase",
+      "source_step_id": "a9-eh",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M16 25 C54 -3 76 22 76 50 C76 78 54 103 16 75",
+        "M38 50 L76 50"
+      ],
+      "formation_hint": "Open the curved form to the left and keep its middle bar visible.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "э",
+      "base_letter": "Э",
+      "case": "lowercase",
+      "source_step_id": "a9-eh",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M16 47 C45 26 70 43 70 64 C70 87 46 101 16 81",
+        "M38 64 L70 64"
+      ],
+      "formation_hint": "Open the curved form to the left and keep its middle bar visible.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "С",
+      "base_letter": "С",
+      "case": "uppercase",
+      "source_step_id": "a10-s",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M69 24 C43 -4 12 17 12 50 C12 83 43 104 69 76"
+      ],
+      "formation_hint": "Leave the curved form open on the right.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "с",
+      "base_letter": "С",
+      "case": "lowercase",
+      "source_step_id": "a10-s",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M64 47 C43 27 15 41 15 64 C15 89 43 102 64 80"
+      ],
+      "formation_hint": "Leave the curved form open on the right.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Л",
+      "base_letter": "Л",
+      "case": "uppercase",
+      "source_step_id": "a10-l",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M9 88 L33 14 L68 14 L68 88"
+      ],
+      "formation_hint": "Keep the sloping left side distinct from the upright right side.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "л",
+      "base_letter": "Л",
+      "case": "lowercase",
+      "source_step_id": "a10-l",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M12 88 L32 39 L65 39 L65 88"
+      ],
+      "formation_hint": "Keep the sloping left side distinct from the upright right side.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Р",
+      "base_letter": "Р",
+      "case": "uppercase",
+      "source_step_id": "a11-r",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M15 88 L15 12 L43 12 C81 12 81 52 43 52 L15 52"
+      ],
+      "formation_hint": "Keep the upright on the left and the closed bowl on its upper right.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "р",
+      "base_letter": "Р",
+      "case": "lowercase",
+      "source_step_id": "a11-r",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M17 108 L17 39",
+        "M17 48 C45 24 69 42 69 64 C69 88 45 104 17 80"
+      ],
+      "formation_hint": "Keep the upright on the left, extending below the baseline, and the bowl to its right.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "У",
+      "base_letter": "У",
+      "case": "uppercase",
+      "source_step_id": "a11-u",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M12 12 L42 58 L70 12",
+        "M42 58 L23 88"
+      ],
+      "formation_hint": "Join the upper sloping strokes, then extend the diagonal tail down to the baseline.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "у",
+      "base_letter": "У",
+      "case": "lowercase",
+      "source_step_id": "a11-u",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M13 39 L40 87",
+        "M68 39 L35 108 C30 119 23 119 16 114"
+      ],
+      "formation_hint": "Join the sloping strokes; continue the right stroke down below the baseline and curve its tip left.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "В",
+      "base_letter": "В",
+      "case": "uppercase",
+      "source_step_id": "a12-v",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M15 88 L15 12 L42 12 C77 12 77 48 42 48 L15 48",
+        "M42 48 C82 48 82 88 42 88 L15 88"
+      ],
+      "formation_hint": "Keep both bowls visible, one above the other.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "в",
+      "base_letter": "В",
+      "case": "lowercase",
+      "source_step_id": "a12-v",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M17 88 L17 39 L40 39 C68 39 68 62 40 62 L17 62",
+        "M40 62 C72 62 72 88 40 88 L17 88"
+      ],
+      "formation_hint": "Keep both bowls visible, one above the other.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Б",
+      "base_letter": "Б",
+      "case": "uppercase",
+      "source_step_id": "a13-b",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M68 12 L15 12 L15 88 L42 88 C82 88 82 49 42 49 L15 49"
+      ],
+      "formation_hint": "Keep the top horizontal arm, left upright and lower bowl distinct.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "б",
+      "base_letter": "Б",
+      "case": "lowercase",
+      "source_step_id": "a13-b",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M65 15 C49 26 23 10 18 52",
+        "M18 55 C28 29 68 36 68 64 C68 95 15 101 16 64 C16 61 17 58 18 55"
+      ],
+      "formation_hint": "Begin the upper curved stroke, then make the rounded lower bowl.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "П",
+      "base_letter": "П",
+      "case": "uppercase",
+      "source_step_id": "a13-p",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M15 88 L15 12 L69 12 L69 88"
+      ],
+      "formation_hint": "Connect two upright sides with a top bar.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "п",
+      "base_letter": "П",
+      "case": "lowercase",
+      "source_step_id": "a13-p",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M17 88 L17 39 L65 39 L65 88"
+      ],
+      "formation_hint": "Connect two upright sides with a top bar.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "З",
+      "base_letter": "З",
+      "case": "uppercase",
+      "source_step_id": "a14-z",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M15 24 C37 -1 72 14 69 34 C68 47 54 50 39 50",
+        "M39 50 C79 50 82 85 48 90 C32 93 20 84 12 76"
+      ],
+      "formation_hint": "Keep two right-facing curves; this is a letter, not a numeral in this task.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "з",
+      "base_letter": "З",
+      "case": "lowercase",
+      "source_step_id": "a14-z",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M17 47 C34 29 63 37 63 51 C63 60 53 64 39 64",
+        "M39 64 C73 64 74 87 46 91 C32 93 23 86 16 80"
+      ],
+      "formation_hint": "Keep two right-facing curves; this is a letter, not a numeral in this task.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Г",
+      "base_letter": "Г",
+      "case": "uppercase",
+      "source_step_id": "a14-g",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M15 88 L15 12 L69 12"
+      ],
+      "formation_hint": "Use a top arm and a left upright.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "г",
+      "base_letter": "Г",
+      "case": "lowercase",
+      "source_step_id": "a14-g",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M17 88 L17 39 L65 39"
+      ],
+      "formation_hint": "Use a top arm and a left upright.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Х",
+      "base_letter": "Х",
+      "case": "uppercase",
+      "source_step_id": "a15-h",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M12 12 L70 88",
+        "M70 12 L12 88"
+      ],
+      "formation_hint": "Cross two sloping strokes.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "х",
+      "base_letter": "Х",
+      "case": "lowercase",
+      "source_step_id": "a15-h",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M15 39 L65 88",
+        "M65 39 L15 88"
+      ],
+      "formation_hint": "Cross two sloping strokes.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Ж",
+      "base_letter": "Ж",
+      "case": "uppercase",
+      "source_step_id": "a15-zh",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M41 12 L41 88",
+        "M8 12 L41 50 L74 12",
+        "M8 88 L41 50 L74 88"
+      ],
+      "formation_hint": "Keep the middle upright and the four side arms distinct.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "ж",
+      "base_letter": "Ж",
+      "case": "lowercase",
+      "source_step_id": "a15-zh",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M40 39 L40 88",
+        "M10 39 L40 64 L70 39",
+        "M10 88 L40 64 L70 88"
+      ],
+      "formation_hint": "Keep the middle upright and the four side arms distinct.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Ш",
+      "base_letter": "Ш",
+      "case": "uppercase",
+      "source_step_id": "a15-sh",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M12 12 L12 88 L42 88 L42 12",
+        "M42 88 L72 88 L72 12"
+      ],
+      "formation_hint": "Join three uprights at the baseline.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "ш",
+      "base_letter": "Ш",
+      "case": "lowercase",
+      "source_step_id": "a15-sh",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M13 39 L13 88 L40 88 L40 39",
+        "M40 88 L67 88 L67 39"
+      ],
+      "formation_hint": "Join three uprights at the baseline.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Ё",
+      "base_letter": "Ё",
+      "case": "uppercase",
+      "source_step_id": "a16-yo",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M68 18 L15 18 L15 88 L68 88",
+        "M15 53 L59 53",
+        "M28 5 L30 5",
+        "M53 5 L55 5"
+      ],
+      "formation_hint": "Keep both dots above the corresponding Е form.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "ё",
+      "base_letter": "Ё",
+      "case": "lowercase",
+      "source_step_id": "a16-yo",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M16 63 L67 63 C67 28 16 28 16 63 C16 89 49 98 67 80",
+        "M29 23 L31 23",
+        "M52 23 L54 23"
+      ],
+      "formation_hint": "Keep both dots above the corresponding Е form.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Ю",
+      "base_letter": "Ю",
+      "case": "uppercase",
+      "source_step_id": "a16-yu",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M12 12 L12 88",
+        "M12 50 L35 50",
+        "M57 12 C27 12 27 88 57 88 C87 88 87 12 57 12"
+      ],
+      "formation_hint": "Keep the left upright joined to the oval at mid-height.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "ю",
+      "base_letter": "Ю",
+      "case": "lowercase",
+      "source_step_id": "a16-yu",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M13 39 L13 88",
+        "M13 64 L34 64",
+        "M55 39 C27 39 27 89 55 89 C83 89 83 39 55 39"
+      ],
+      "formation_hint": "Keep the left upright joined to the oval at mid-height.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Й",
+      "base_letter": "Й",
+      "case": "uppercase",
+      "source_step_id": "a17-j",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M15 20 L15 88 L69 20 L69 88",
+        "M28 4 C33 14 51 14 56 4"
+      ],
+      "formation_hint": "Add the breve above И; it is not a dot or an acute stress annotation.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "й",
+      "base_letter": "Й",
+      "case": "lowercase",
+      "source_step_id": "a17-j",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M17 39 L17 88 L65 39 L65 88",
+        "M27 22 C32 32 50 32 55 22"
+      ],
+      "formation_hint": "Add the breve above И; it is not a dot or an acute stress annotation.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Ь",
+      "base_letter": "Ь",
+      "case": "uppercase",
+      "source_step_id": "a17-soft-sign",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M17 12 L17 88 L42 88 C82 88 82 49 42 49 L17 49"
+      ],
+      "formation_hint": "Keep one upright and its lower bowl. There is no upper top arm.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "ь",
+      "base_letter": "Ь",
+      "case": "lowercase",
+      "source_step_id": "a17-soft-sign",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M17 39 L17 88 L40 88 C72 88 72 62 40 62 L17 62"
+      ],
+      "formation_hint": "Keep one upright and its lower bowl. There is no upper top arm.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Ц",
+      "base_letter": "Ц",
+      "case": "uppercase",
+      "source_step_id": "a18-ts",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M15 12 L15 88 L69 88 L69 12",
+        "M69 88 L76 88 L76 106"
+      ],
+      "formation_hint": "Join the two uprights at the bottom and retain the small right descender.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "ц",
+      "base_letter": "Ц",
+      "case": "lowercase",
+      "source_step_id": "a18-ts",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M17 39 L17 88 L65 88 L65 39",
+        "M65 88 L73 88 L73 103"
+      ],
+      "formation_hint": "Join the two uprights at the bottom and retain the small right descender.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Ч",
+      "base_letter": "Ч",
+      "case": "uppercase",
+      "source_step_id": "a18-ch",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M15 12 L15 43 C15 61 45 61 69 45",
+        "M69 12 L69 88"
+      ],
+      "formation_hint": "Connect the left curved shoulder to the right upright.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "ч",
+      "base_letter": "Ч",
+      "case": "lowercase",
+      "source_step_id": "a18-ch",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M17 39 L17 59 C17 72 43 72 65 59",
+        "M65 39 L65 88"
+      ],
+      "formation_hint": "Connect the left curved shoulder to the right upright.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Щ",
+      "base_letter": "Щ",
+      "case": "uppercase",
+      "source_step_id": "a18-shch",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M12 12 L12 88 L42 88 L42 12",
+        "M42 88 L72 88 L72 12",
+        "M72 88 L79 88 L79 106"
+      ],
+      "formation_hint": "Use the three-upright shape plus the right descender.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "щ",
+      "base_letter": "Щ",
+      "case": "lowercase",
+      "source_step_id": "a18-shch",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M13 39 L13 88 L40 88 L40 39",
+        "M40 88 L67 88 L67 39",
+        "M67 88 L75 88 L75 103"
+      ],
+      "formation_hint": "Use the three-upright shape plus the right descender.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Ф",
+      "base_letter": "Ф",
+      "case": "uppercase",
+      "source_step_id": "a19-f",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M42 23 C0 23 0 78 42 78 C84 78 84 23 42 23",
+        "M42 6 L42 96"
+      ],
+      "formation_hint": "Pass the upright through the middle loop; allow its ends to extend above and below the loop.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "ф",
+      "base_letter": "Ф",
+      "case": "lowercase",
+      "source_step_id": "a19-f",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M41 41 C4 19 4 105 41 84 C78 105 78 19 41 41",
+        "M41 20 L41 111"
+      ],
+      "formation_hint": "Pass the long upright through the smaller loop, extending below the baseline.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "Ъ",
+      "base_letter": "Ъ",
+      "case": "uppercase",
+      "source_step_id": "a19-hard-sign",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M8 12 L28 12 L28 88 L47 88 C83 88 83 49 47 49 L28 49"
+      ],
+      "formation_hint": "Keep the short left top arm and the lower bowl; distinguish it from Ь.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    },
+    {
+      "glyph": "ъ",
+      "base_letter": "Ъ",
+      "case": "lowercase",
+      "source_step_id": "a19-hard-sign",
+      "source_step_revision": "1",
+      "source_pack_revision": "foundation-2026-11-06.3",
+      "path_commands": [
+        "M10 39 L28 39 L28 88 L46 88 C75 88 75 62 46 62 L28 62"
+      ],
+      "formation_hint": "Keep the short left top arm and the lower bowl; distinguish it from Ь.",
+      "review_status": "editorial_draft_not_rendered_or_native_validated"
+    }
+  ],
+  "punctuation_additions": [
+    {
+      "glyph": "?",
+      "path_commands": [
+        "M20 25 C20 2 66 2 66 29 C66 46 43 47 43 65",
+        "M42 86 L44 86"
+      ]
+    },
+    {
+      "glyph": "—",
+      "path_commands": [
+        "M8 62 L75 62"
+      ]
+    }
+  ],
+  "existing_models_reused": [
+    "А",
+    "а",
+    "М",
+    "м",
+    "О",
+    "о",
+    "К",
+    "к",
+    "Т",
+    "т",
+    "Д",
+    "д",
+    "Н",
+    "н",
+    "И",
+    "и",
+    ".",
+    " "
+  ],
+  "required_followup": "Render upper/lowercase sheets and long-message layouts, check descenders/breves/dots and PencilKit/browser fidelity, then integrate a versioned model registry. No render or device check was run by the content author."
+}

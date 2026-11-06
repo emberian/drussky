@@ -1,0 +1,6368 @@
+{
+  "schema_version": 1,
+  "revision": "foundation-2026-11-06.3",
+  "previous_revisions": [
+    "foundation-2026-11-06.1",
+    "foundation-2026-11-06.2"
+  ],
+  "editorial_notice": "AI-authored editorial continuation draft. Append-only candidate; not embedded or audio-ready. All audio requests are unprepared. Coverage and task completion do not establish learning or pronunciation accuracy.",
+  "assets": [
+    {
+      "id": "foundation-a8-i-there",
+      "spoken": "Я там."
+    },
+    {
+      "id": "foundation-a8-you-there",
+      "spoken": "Ты там."
+    },
+    {
+      "id": "foundation-a9-e-model",
+      "spoken": "не"
+    },
+    {
+      "id": "foundation-a9-eh-model",
+      "spoken": "э"
+    },
+    {
+      "id": "foundation-a9-this",
+      "spoken": "это"
+    },
+    {
+      "id": "foundation-a9-this-cat",
+      "spoken": "Это кот."
+    },
+    {
+      "id": "foundation-a9-this-window",
+      "spoken": "Это окно."
+    },
+    {
+      "id": "foundation-a10-s-model",
+      "spoken": "са"
+    },
+    {
+      "id": "foundation-a10-l-model",
+      "spoken": "ла"
+    },
+    {
+      "id": "foundation-a10-juice",
+      "spoken": "сок"
+    },
+    {
+      "id": "foundation-a10-table",
+      "spoken": "стол"
+    },
+    {
+      "id": "foundation-a10-this-table",
+      "spoken": "Это стол."
+    },
+    {
+      "id": "foundation-a11-r-model",
+      "spoken": "ра"
+    },
+    {
+      "id": "foundation-a11-u-model",
+      "spoken": "у"
+    },
+    {
+      "id": "foundation-a11-hand",
+      "spoken": "рука"
+    },
+    {
+      "id": "foundation-a11-here",
+      "spoken": "тут"
+    },
+    {
+      "id": "foundation-a11-i-here",
+      "spoken": "Я тут."
+    },
+    {
+      "id": "foundation-a11-you-here",
+      "spoken": "Ты тут."
+    },
+    {
+      "id": "foundation-a12-v-model",
+      "spoken": "ва"
+    },
+    {
+      "id": "foundation-a12-we",
+      "spoken": "мы"
+    },
+    {
+      "id": "foundation-a12-you",
+      "spoken": "вы"
+    },
+    {
+      "id": "foundation-a12-we-here",
+      "spoken": "Мы тут."
+    },
+    {
+      "id": "foundation-a12-you-there",
+      "spoken": "Вы там."
+    },
+    {
+      "id": "foundation-a12-water",
+      "spoken": "вода"
+    },
+    {
+      "id": "foundation-a13-b-model",
+      "spoken": "ба"
+    },
+    {
+      "id": "foundation-a13-p-model",
+      "spoken": "па"
+    },
+    {
+      "id": "foundation-a13-dad",
+      "spoken": "папа"
+    },
+    {
+      "id": "foundation-a13-robot",
+      "spoken": "робот"
+    },
+    {
+      "id": "foundation-a13-this-robot",
+      "spoken": "Это робот."
+    },
+    {
+      "id": "foundation-a13-robot-he",
+      "spoken": "Он тут."
+    },
+    {
+      "id": "foundation-a14-z-model",
+      "spoken": "за"
+    },
+    {
+      "id": "foundation-a14-g-model",
+      "spoken": "га"
+    },
+    {
+      "id": "foundation-a14-sound",
+      "spoken": "звук"
+    },
+    {
+      "id": "foundation-a14-book",
+      "spoken": "книга"
+    },
+    {
+      "id": "foundation-a14-this-book",
+      "spoken": "Это книга."
+    },
+    {
+      "id": "foundation-a14-book-she",
+      "spoken": "Она тут."
+    },
+    {
+      "id": "foundation-a15-h-model",
+      "spoken": "ха"
+    },
+    {
+      "id": "foundation-a15-choir",
+      "spoken": "хор"
+    },
+    {
+      "id": "foundation-a15-zh-model",
+      "spoken": "жа"
+    },
+    {
+      "id": "foundation-a15-beetle",
+      "spoken": "жук"
+    },
+    {
+      "id": "foundation-a15-sh-model",
+      "spoken": "ша"
+    },
+    {
+      "id": "foundation-a15-ball",
+      "spoken": "шар"
+    },
+    {
+      "id": "foundation-a15-noise",
+      "spoken": "шум"
+    },
+    {
+      "id": "foundation-a16-yo-model",
+      "spoken": "ё"
+    },
+    {
+      "id": "foundation-a16-honey",
+      "spoken": "мёд"
+    },
+    {
+      "id": "foundation-a16-yu-model",
+      "spoken": "ю"
+    },
+    {
+      "id": "foundation-a16-onion",
+      "spoken": "лук"
+    },
+    {
+      "id": "foundation-a16-hatch",
+      "spoken": "люк"
+    },
+    {
+      "id": "foundation-a17-j-model",
+      "spoken": "ой"
+    },
+    {
+      "id": "foundation-a17-my-m",
+      "spoken": "мой"
+    },
+    {
+      "id": "foundation-a17-salt",
+      "spoken": "соль"
+    },
+    {
+      "id": "foundation-a17-my-f",
+      "spoken": "моя"
+    },
+    {
+      "id": "foundation-a17-my-n",
+      "spoken": "моё"
+    },
+    {
+      "id": "foundation-a17-my-cat",
+      "spoken": "мой кот"
+    },
+    {
+      "id": "foundation-a17-my-book",
+      "spoken": "моя книга"
+    },
+    {
+      "id": "foundation-a17-my-window",
+      "spoken": "моё окно"
+    },
+    {
+      "id": "foundation-a18-ts-model",
+      "spoken": "ца"
+    },
+    {
+      "id": "foundation-a18-circus",
+      "spoken": "цирк"
+    },
+    {
+      "id": "foundation-a18-ch-model",
+      "spoken": "ча"
+    },
+    {
+      "id": "foundation-a18-tea",
+      "spoken": "чай"
+    },
+    {
+      "id": "foundation-a18-shch-model",
+      "spoken": "ща"
+    },
+    {
+      "id": "foundation-a18-soup",
+      "spoken": "щи"
+    },
+    {
+      "id": "foundation-a19-f-model",
+      "spoken": "фа"
+    },
+    {
+      "id": "foundation-a19-fact",
+      "spoken": "факт"
+    },
+    {
+      "id": "foundation-a19-object",
+      "spoken": "объект"
+    },
+    {
+      "id": "foundation-a19-what",
+      "spoken": "что"
+    },
+    {
+      "id": "foundation-a19-what-this",
+      "spoken": "Что это?"
+    },
+    {
+      "id": "foundation-a19-this-object",
+      "spoken": "Это объект."
+    },
+    {
+      "id": "foundation-a20-i-read",
+      "spoken": "Я читаю."
+    },
+    {
+      "id": "foundation-a20-you-read",
+      "spoken": "Ты читаешь."
+    },
+    {
+      "id": "foundation-a20-he-reads",
+      "spoken": "Он читает."
+    },
+    {
+      "id": "foundation-a20-we-read",
+      "spoken": "Мы читаем."
+    },
+    {
+      "id": "foundation-a20-you-pl-read",
+      "spoken": "Вы читаете."
+    },
+    {
+      "id": "foundation-a20-they-read",
+      "spoken": "Они читают."
+    },
+    {
+      "id": "foundation-a20-i-think",
+      "spoken": "Я думаю."
+    },
+    {
+      "id": "foundation-a20-you-think",
+      "spoken": "Ты думаешь."
+    },
+    {
+      "id": "foundation-a20-he-thinks",
+      "spoken": "Он думает."
+    },
+    {
+      "id": "foundation-a20-we-think",
+      "spoken": "Мы думаем."
+    },
+    {
+      "id": "foundation-a20-you-pl-think",
+      "spoken": "Вы думаете."
+    },
+    {
+      "id": "foundation-a20-they-think",
+      "spoken": "Они думают."
+    },
+    {
+      "id": "foundation-a21-number",
+      "spoken": "число"
+    },
+    {
+      "id": "foundation-a21-one",
+      "spoken": "один"
+    },
+    {
+      "id": "foundation-a21-one-number",
+      "spoken": "Один — это число."
+    },
+    {
+      "id": "foundation-a21-maybe",
+      "spoken": "может быть"
+    },
+    {
+      "id": "foundation-a21-fact-question",
+      "spoken": "Это факт?"
+    },
+    {
+      "id": "foundation-a21-fiction-scene",
+      "spoken": "Это книга. Я читаю."
+    },
+    {
+      "id": "foundation-a21-robot-scene",
+      "spoken": "Это робот. Он думает."
+    },
+    {
+      "id": "foundation-a12-compose-they-here",
+      "spoken": "Они тут."
+    },
+    {
+      "id": "foundation-a17-compose-my-robot",
+      "spoken": "мой робот"
+    },
+    {
+      "id": "foundation-a20-compose-she-reads",
+      "spoken": "Она читает."
+    },
+    {
+      "id": "foundation-a20-compose-she-thinks",
+      "spoken": "Она думает."
+    },
+    {
+      "id": "foundation-a21-compose-sphere",
+      "spoken": "Это шар."
+    }
+  ],
+  "episodes": [
+    {
+      "id": "foundation-8",
+      "title": "Write I and familiar you",
+      "goal": "Connect the already-heard pronouns to Я and Ы; change who a short message refers to.",
+      "steps": [
+        {
+          "id": "a8-ya",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Я я · я",
+          "audio_ids": [
+            "foundation-ya"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [
+            "Я"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a8-ya-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This is the already-heard word for the speaker: I. Its beginning has a short glide into the vowel, roughly like the start of English yes. Listen and say the complete Russian word."
+          }
+        },
+        {
+          "id": "a8-y",
+          "revision": "1",
+          "instruction": "Play familiar you. Notice the vowel after the first consonant.",
+          "display": "Ы ы · ты",
+          "audio_ids": [
+            "foundation-ty"
+          ],
+          "requires_graphemes": [
+            "Т"
+          ],
+          "introduces_graphemes": [
+            "Ы"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a8-y-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Ы represents the vowel in this example. Compare the complete word with its recording. English spelling is not a reliable pronunciation model."
+          }
+        },
+        {
+          "id": "a8-ya-word",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: I, the speaker.",
+          "display": "я",
+          "audio_ids": [
+            "foundation-ya"
+          ],
+          "requires_graphemes": [
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "i-speaker"
+          ],
+          "introduces_meanings": [
+            "a8-ya-word"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a8-ya-word-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The meaning is familiar from the earlier audio-only activity; this encounter connects it to writing."
+          }
+        },
+        {
+          "id": "a8-ty-word",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: you, one familiar listener.",
+          "display": "ты",
+          "audio_ids": [
+            "foundation-ty"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "you-familiar-singular"
+          ],
+          "introduces_meanings": [
+            "a8-ty-word"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a8-ty-word-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use this to one familiar person. Formal and plural you will come separately."
+          }
+        },
+        {
+          "id": "a8-i-there",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: I am there.",
+          "display": "Я там.",
+          "audio_ids": [
+            "foundation-a8-i-there"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М",
+            "Т",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-ya-word",
+            "there"
+          ],
+          "introduces_meanings": [
+            "a8-i-there"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a8-i-there-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Keep the location visible in your imagined scene. In this present location statement Russian uses no separate word for am. Capitalization, a space and the period follow the earlier message."
+          }
+        },
+        {
+          "id": "a8-you-there",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: You are there, to one familiar listener.",
+          "display": "Ты там.",
+          "audio_ids": [
+            "foundation-a8-you-there"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М",
+            "Т",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-ty-word",
+            "there"
+          ],
+          "introduces_meanings": [
+            "a8-you-there"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a8-you-there-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Only the person changed. Keep the place and the rest of the message the same."
+          }
+        },
+        {
+          "id": "a8-change-person",
+          "revision": "1",
+          "instruction": "Tell one familiar listener: you are there.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a8-you-there"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М",
+            "Т",
+            "Ы",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-you-there"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a8-you-there-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "Я",
+              "Ты",
+              "там."
+            ],
+            "answer": [
+              "Ты",
+              "там."
+            ],
+            "feedback": [
+              "Choose the familiar listener, not the speaker.",
+              "Keep the location after the pronoun."
+            ],
+            "success": "Ты там. — You are there, to one familiar listener. Compare the parts, then try saying the complete word or message."
+          }
+        },
+        {
+          "id": "a8-i-write",
+          "revision": "1",
+          "instruction": "Write the Russian word for I, the speaker.",
+          "display": null,
+          "audio_ids": [
+            "foundation-ya"
+          ],
+          "requires_graphemes": [
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-ya-word"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a8-ya-word-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "я",
+            "accepted": [
+              "я"
+            ],
+            "feedback": [],
+            "reveal": "я — I, the speaker. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "я"
+            ]
+          }
+        },
+        {
+          "id": "a8-you-listen",
+          "revision": "1",
+          "instruction": "Listen. Who does this word address?",
+          "display": null,
+          "audio_ids": [
+            "foundation-ty"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-ty-word"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a8-ty-word-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "you, one familiar listener",
+            "accepted": [
+              "you",
+              "one familiar listener",
+              "you, one familiar listener"
+            ],
+            "feedback": [
+              {
+                "response": "I",
+                "feedback": "That refers to the speaker. This recording addresses one familiar listener."
+              }
+            ],
+            "reveal": "ты — you, one familiar listener. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a8-i-there-say",
+          "revision": "1",
+          "instruction": "Imagine pointing to your own position on a map. Say: I am there.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a8-i-there"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М",
+            "Т",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-i-there"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a8-i-there-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Я там.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Я там. — I am there. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a8-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You connected the earlier I and familiar-you words with writing and changed the person in a short message. Repeat a word, try writing it, or continue."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-9",
+      "title": "No, and this is",
+      "goal": "Meet Е and Э, read the earlier no chunk, and identify objects with a reusable frame.",
+      "steps": [
+        {
+          "id": "a9-e",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Е е · не",
+          "audio_ids": [
+            "foundation-a9-e-model"
+          ],
+          "requires_graphemes": [
+            "Н"
+          ],
+          "introduces_graphemes": [
+            "Е"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a9-e-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Listen to the whole practice syllable. Here Е follows Н: the consonant is soft, with the middle of the tongue raised toward the roof of the mouth as you make it. Soft does not mean quieter. Try the whole syllable; do not add a separate extra syllable."
+          }
+        },
+        {
+          "id": "a9-eh",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Э э · э",
+          "audio_ids": [
+            "foundation-a9-eh-model"
+          ],
+          "requires_graphemes": [
+            "Я"
+          ],
+          "introduces_graphemes": [
+            "Э"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a9-eh-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This stressed vowel model begins without the glide heard at the beginning of я. Letter names and sounds in words are different things; use these recordings as word/syllable models."
+          }
+        },
+        {
+          "id": "a9-no-script",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: no.",
+          "display": "нет",
+          "audio_ids": [
+            "foundation-net"
+          ],
+          "requires_graphemes": [
+            "Е",
+            "Н",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "no"
+          ],
+          "introduces_meanings": [
+            "a9-no-script"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a9-no-script-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This word was heard earlier. Now all its letters have been introduced. The consonant before Е is softened in the model; listen to the whole word."
+          }
+        },
+        {
+          "id": "a9-this",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: this is, when identifying something.",
+          "display": "это",
+          "audio_ids": [
+            "foundation-a9-this"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a9-this"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a9-this-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "In this naming use, the same word works before different noun genders. The first vowel is stressed: э́то. The final written О is unstressed; follow the whole model rather than giving both vowels equal weight."
+          }
+        },
+        {
+          "id": "a9-this-cat",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: This is a cat.",
+          "display": "Это кот.",
+          "audio_ids": [
+            "foundation-a9-this-cat"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this",
+            "cat"
+          ],
+          "introduces_meanings": [
+            "a9-this-cat"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a9-this-cat-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Two words express one identification. This is a frame you can keep while changing the noun."
+          }
+        },
+        {
+          "id": "a9-this-window",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: This is a window.",
+          "display": "Это окно.",
+          "audio_ids": [
+            "foundation-a9-this-window"
+          ],
+          "requires_graphemes": [
+            "К",
+            "Н",
+            "О",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this",
+            "window"
+          ],
+          "introduces_meanings": [
+            "a9-this-window"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a9-this-window-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The introduction stays the same. The ending vowel of window is stressed; the two written O letters do not sound identical here."
+          }
+        },
+        {
+          "id": "a9-substitute-noun",
+          "revision": "1",
+          "instruction": "Identify the window: this is a window.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a9-this-window"
+          ],
+          "requires_graphemes": [
+            "К",
+            "Н",
+            "О",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this-window"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a9-this-window-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "Это",
+              "кот.",
+              "окно."
+            ],
+            "answer": [
+              "Это",
+              "окно."
+            ],
+            "feedback": [
+              "Start with the identification frame.",
+              "Choose window for this scene."
+            ],
+            "success": "Это окно. — This is a window. Compare the parts, then try saying the complete word or message."
+          }
+        },
+        {
+          "id": "a9-no-write",
+          "revision": "1",
+          "instruction": "Write the earlier Russian word for no.",
+          "display": null,
+          "audio_ids": [
+            "foundation-net"
+          ],
+          "requires_graphemes": [
+            "Е",
+            "Н",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-no-script"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a9-no-script-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "нет",
+            "accepted": [
+              "нет"
+            ],
+            "feedback": [],
+            "reveal": "нет — no. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "е",
+              "н",
+              "т"
+            ]
+          }
+        },
+        {
+          "id": "a9-this-window-listen",
+          "revision": "1",
+          "instruction": "Listen to this identification. What is being identified?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a9-this-window"
+          ],
+          "requires_graphemes": [
+            "К",
+            "Н",
+            "О",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this-window"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a9-this-window-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "This is a window",
+            "accepted": [
+              "a window",
+              "window",
+              "this is a window"
+            ],
+            "feedback": [
+              {
+                "response": "cat",
+                "feedback": "The recording identifies a window. Keep the original answer, then compare with the model."
+              }
+            ],
+            "reveal": "Это окно. — This is a window. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a9-this-cat-say",
+          "revision": "1",
+          "instruction": "You are introducing a cat in a picture. Say: this is a cat.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a9-this-cat"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this-cat"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a9-this-cat-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Это кот.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Это кот. — This is a cat. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a9-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You met Е and Э, wrote the earlier no word, and used the same naming frame with a cat and a window."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-10",
+      "title": "Sounds that look familiar",
+      "goal": "Meet С and Л, then hear, write and describe familiar objects.",
+      "steps": [
+        {
+          "id": "a10-s",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "С с · са",
+          "audio_ids": [
+            "foundation-a10-s-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "С"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a10-s-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Notice the beginning of the syllable. This Cyrillic shape represents an s-like sound here, not the usual English sound of C."
+          }
+        },
+        {
+          "id": "a10-l",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Л л · ла",
+          "audio_ids": [
+            "foundation-a10-l-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Л"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a10-l-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Notice the beginning, then imitate the whole syllable. This is a hard consonant context; a contrasting soft context will come with another word."
+          }
+        },
+        {
+          "id": "a10-juice",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: juice.",
+          "display": "сок",
+          "audio_ids": [
+            "foundation-a10-juice"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "С"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a10-juice"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a10-juice-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "All three letters are taught. Use the whole recording; do not pronounce consonant letter names in sequence."
+          }
+        },
+        {
+          "id": "a10-table",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: table.",
+          "display": "стол",
+          "audio_ids": [
+            "foundation-a10-table"
+          ],
+          "requires_graphemes": [
+            "Л",
+            "О",
+            "С",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a10-table"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a10-table-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The first two consonants form a cluster. Listen for them together without adding an extra vowel between them."
+          }
+        },
+        {
+          "id": "a10-this-table",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: This is a table.",
+          "display": "Это стол.",
+          "audio_ids": [
+            "foundation-a10-this-table"
+          ],
+          "requires_graphemes": [
+            "Л",
+            "О",
+            "С",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this",
+            "a10-table"
+          ],
+          "introduces_meanings": [
+            "a10-this-table"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a10-this-table-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Listen to the whole example. You can copy it or say it with the model; trying it is not a pronunciation grade."
+          }
+        },
+        {
+          "id": "a10-table-letters",
+          "revision": "1",
+          "instruction": "Build table from taught letters.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a10-table"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Л",
+            "О",
+            "С",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a10-table"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a10-table-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "с",
+              "о",
+              "т",
+              "л",
+              "а"
+            ],
+            "answer": [
+              "с",
+              "т",
+              "о",
+              "л"
+            ],
+            "feedback": [
+              "Start with the s-like consonant.",
+              "Keep the second consonant before the vowel.",
+              "The vowel follows the two-consonant beginning.",
+              "Finish with the last consonant."
+            ],
+            "success": "стол — table. Compare the parts, then try saying the complete word or message."
+          }
+        },
+        {
+          "id": "a10-read-table",
+          "revision": "1",
+          "instruction": "Try reading the spelling aloud before revealing its model.",
+          "display": "стол",
+          "audio_ids": [
+            "foundation-a10-table"
+          ],
+          "requires_graphemes": [
+            "Л",
+            "О",
+            "С",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a10-table"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a10-table-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "стол — table",
+            "note": "Try first, then listen. Compare one part at a time; you can replay and make another try."
+          }
+        },
+        {
+          "id": "a10-juice-listen",
+          "revision": "1",
+          "instruction": "Listen to one object word. What does it mean?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a10-juice"
+          ],
+          "requires_graphemes": [
+            "К",
+            "О",
+            "С"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a10-juice"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a10-juice-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "juice",
+            "accepted": [
+              "juice",
+              "some juice"
+            ],
+            "feedback": [],
+            "reveal": "сок — juice. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a10-table-write",
+          "revision": "1",
+          "instruction": "Write the word for table.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a10-table"
+          ],
+          "requires_graphemes": [
+            "Л",
+            "О",
+            "С",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a10-table"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a10-table-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "стол",
+            "accepted": [
+              "стол"
+            ],
+            "feedback": [],
+            "reveal": "стол — table. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "л",
+              "о",
+              "с",
+              "т"
+            ]
+          }
+        },
+        {
+          "id": "a10-identify-table",
+          "revision": "1",
+          "instruction": "Name a table using the identification frame.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a10-this-table"
+          ],
+          "requires_graphemes": [
+            "Л",
+            "О",
+            "С",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a10-this-table"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a10-this-table-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Это стол.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Это стол. — This is a table. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a10-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [
+            "Л",
+            "С"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You met С and Л, kept a consonant cluster together and practiced two useful object words."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-11",
+      "title": "Here, there, a hand",
+      "goal": "Meet Р and У, name a hand or arm, and contrast here with there.",
+      "steps": [
+        {
+          "id": "a11-r",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Р р · ра",
+          "audio_ids": [
+            "foundation-a11-r-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Р"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a11-r-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This Cyrillic shape represents the consonant at the beginning of the model, not English P. Listen to the tongue-tip sound and try the whole syllable; one attempt need not match it yet."
+          }
+        },
+        {
+          "id": "a11-u",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "У у · у",
+          "audio_ids": [
+            "foundation-a11-u-model"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [
+            "У"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a11-u-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Listen to the stressed vowel. Its printed shape is not an English Y pronunciation cue."
+          }
+        },
+        {
+          "id": "a11-hand",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: hand or arm.",
+          "display": "рука",
+          "audio_ids": [
+            "foundation-a11-hand"
+          ],
+          "requires_graphemes": [
+            "А",
+            "К",
+            "Р",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a11-hand"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a11-hand-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The last vowel is stressed: рука́. This noun can mean hand or arm. Look at your own hand as you listen, then say the word."
+          }
+        },
+        {
+          "id": "a11-here",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: here.",
+          "display": "тут",
+          "audio_ids": [
+            "foundation-a11-here"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a11-here"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a11-here-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Imagine the location next to the speaker. The earlier location word points there; this one points here."
+          }
+        },
+        {
+          "id": "a11-i-here",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: I am here.",
+          "display": "Я тут.",
+          "audio_ids": [
+            "foundation-a11-i-here"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "У",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-ya-word",
+            "a11-here"
+          ],
+          "introduces_meanings": [
+            "a11-i-here"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a11-i-here-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Listen to the whole example. You can copy it or say it with the model; trying it is not a pronunciation grade."
+          }
+        },
+        {
+          "id": "a11-you-here",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: You are here, to one familiar listener.",
+          "display": "Ты тут.",
+          "audio_ids": [
+            "foundation-a11-you-here"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "У",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-ty-word",
+            "a11-here"
+          ],
+          "introduces_meanings": [
+            "a11-you-here"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a11-you-here-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Listen to the whole example. You can copy it or say it with the model; trying it is not a pronunciation grade."
+          }
+        },
+        {
+          "id": "a11-choose-location",
+          "revision": "1",
+          "instruction": "You stand next to the marker. Say: I am here.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a11-i-here"
+          ],
+          "requires_graphemes": [
+            "А",
+            "М",
+            "Т",
+            "У",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a11-i-here"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a11-i-here-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "Я",
+              "там.",
+              "тут."
+            ],
+            "answer": [
+              "Я",
+              "тут."
+            ],
+            "feedback": [
+              "Choose the speaker.",
+              "Choose here, next to the speaker."
+            ],
+            "success": "Я тут. — I am here. Compare the parts, then try saying the complete word or message."
+          }
+        },
+        {
+          "id": "a11-location-listen",
+          "revision": "1",
+          "instruction": "Listen. Is the location here or there?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a11-here"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a11-here"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a11-here-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "here",
+            "accepted": [
+              "here"
+            ],
+            "feedback": [
+              {
+                "response": "there",
+                "feedback": "This word means here. The earlier there word points farther from the speaker."
+              }
+            ],
+            "reveal": "тут — here. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a11-hand-write",
+          "revision": "1",
+          "instruction": "Look at your hand. Write the Russian word that can mean hand or arm.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a11-hand"
+          ],
+          "requires_graphemes": [
+            "А",
+            "К",
+            "Р",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a11-hand"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a11-hand-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "рука",
+            "accepted": [
+              "рука"
+            ],
+            "feedback": [],
+            "reveal": "рука — hand or arm. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "а",
+              "к",
+              "р",
+              "у"
+            ]
+          }
+        },
+        {
+          "id": "a11-you-here-say",
+          "revision": "1",
+          "instruction": "Say to one familiar listener beside you: you are here.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a11-you-here"
+          ],
+          "requires_graphemes": [
+            "Т",
+            "У",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a11-you-here"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a11-you-here-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Ты тут.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Ты тут. — You are here, to one familiar listener. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a11-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [
+            "Р",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You met Р and У, learned one noun and contrasted here with there. Later returns can change the scene while retaining the same meaning."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-12",
+      "title": "We, and a different you",
+      "goal": "Meet В, add we and formal/plural you, and distinguish person from location.",
+      "steps": [
+        {
+          "id": "a12-v",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "В в · ва",
+          "audio_ids": [
+            "foundation-a12-v-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "В"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a12-v-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Notice the beginning of the syllable. This Cyrillic shape represents a v-like sound in this example, not English B."
+          }
+        },
+        {
+          "id": "a12-we",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: we, including the speaker.",
+          "display": "мы",
+          "audio_ids": [
+            "foundation-a12-we"
+          ],
+          "requires_graphemes": [
+            "М",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a12-we"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a12-we-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The vowel is the same taught vowel letter seen in familiar you. Listen again rather than borrowing the English word me."
+          }
+        },
+        {
+          "id": "a12-you",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: you, plural or polite singular.",
+          "display": "вы",
+          "audio_ids": [
+            "foundation-a12-you"
+          ],
+          "requires_graphemes": [
+            "В",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a12-you"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a12-you-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This one form can address several people, or one person politely. A single audio token does not tell you which social situation the speaker intends."
+          }
+        },
+        {
+          "id": "a12-we-here",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: We are here.",
+          "display": "Мы тут.",
+          "audio_ids": [
+            "foundation-a12-we-here"
+          ],
+          "requires_graphemes": [
+            "М",
+            "Т",
+            "У",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a12-we",
+            "a11-here"
+          ],
+          "introduces_meanings": [
+            "a12-we-here"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a12-we-here-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The group includes the speaker. No separate present-tense word for are is needed in this location statement."
+          }
+        },
+        {
+          "id": "a12-you-there",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: You are there, plural or polite.",
+          "display": "Вы там.",
+          "audio_ids": [
+            "foundation-a12-you-there"
+          ],
+          "requires_graphemes": [
+            "А",
+            "В",
+            "М",
+            "Т",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a12-you",
+            "there"
+          ],
+          "introduces_meanings": [
+            "a12-you-there"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a12-you-there-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Keep the chosen address form separate from the location. Use the scene to decide whom you address."
+          }
+        },
+        {
+          "id": "a12-water",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: water.",
+          "display": "вода",
+          "audio_ids": [
+            "foundation-a12-water"
+          ],
+          "requires_graphemes": [
+            "А",
+            "В",
+            "Д",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a12-water"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a12-water-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The final vowel is stressed. The written O is unstressed; compare it with the earlier stressed O model without treating the spelling as an acoustic measurement."
+          }
+        },
+        {
+          "id": "a12-person",
+          "revision": "1",
+          "instruction": "Tell someone about your own group beside the marker: we are here.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a12-we-here"
+          ],
+          "requires_graphemes": [
+            "А",
+            "В",
+            "М",
+            "Т",
+            "У",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a12-we-here"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a12-we-here-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "Мы",
+              "Вы",
+              "тут.",
+              "там."
+            ],
+            "answer": [
+              "Мы",
+              "тут."
+            ],
+            "feedback": [
+              "Choose the group including the speaker.",
+              "Choose here."
+            ],
+            "success": "Мы тут. — We are here. Compare the parts, then try saying the complete word or message."
+          }
+        },
+        {
+          "id": "a12-we-listen",
+          "revision": "1",
+          "instruction": "Listen. Does the word include the speaker?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a12-we"
+          ],
+          "requires_graphemes": [
+            "М",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a12-we"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a12-we-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "we, including the speaker",
+            "accepted": [
+              "we",
+              "we, including the speaker",
+              "a group including the speaker"
+            ],
+            "feedback": [],
+            "reveal": "мы — we, including the speaker. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a12-you-write",
+          "revision": "1",
+          "instruction": "Write you for several listeners or one polite addressee.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a12-you"
+          ],
+          "requires_graphemes": [
+            "В",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a12-you"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a12-you-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "вы",
+            "accepted": [
+              "вы"
+            ],
+            "feedback": [],
+            "reveal": "вы — you, plural or polite singular. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "в",
+              "ы"
+            ]
+          }
+        },
+        {
+          "id": "a12-we-here-say",
+          "revision": "1",
+          "instruction": "Your group has arrived beside the marker. Say: we are here.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a12-we-here"
+          ],
+          "requires_graphemes": [
+            "М",
+            "Т",
+            "У",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a12-we-here"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a12-we-here-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Мы тут.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Мы тут. — We are here. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a12-compose-they-here",
+          "revision": "1",
+          "instruction": "Use the taught they word and here word to write: they are here. Try before revealing a complete model.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a12-compose-they-here"
+          ],
+          "requires_graphemes": [
+            "И",
+            "Н",
+            "О",
+            "Т",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "they-people",
+            "a11-here"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [
+            "taught-letter-keyboard"
+          ],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "Они тут.",
+            "accepted": [
+              "Они тут."
+            ],
+            "feedback": [],
+            "reveal": "Они тут. — They are here. Они names the people; тут gives their location. Compare both parts with your attempt.",
+            "keyboard": [
+              " ",
+              ".",
+              "и",
+              "н",
+              "о",
+              "т",
+              "у"
+            ]
+          }
+        },
+        {
+          "id": "a12-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You practiced we, familiar you, and plural or polite you. Keep the listener or group in mind as you choose a form."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-13",
+      "title": "A father, a robot",
+      "goal": "Meet Б and П; compare initial consonants and extend pronoun reference beyond people.",
+      "steps": [
+        {
+          "id": "a13-b",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Б б · ба",
+          "audio_ids": [
+            "foundation-a13-b-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Б"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a13-b-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Listen to the beginning of the whole syllable. Later compare its voiced beginning with the next model; do not add a separate vowel to an isolated consonant."
+          }
+        },
+        {
+          "id": "a13-p",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "П п · па",
+          "audio_ids": [
+            "foundation-a13-p-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "П"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a13-p-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Compare the beginnings of ба and па: with ба the voice vibrates; with па it does not during the initial consonant. Lightly touch your throat if useful, then say each complete syllable."
+          }
+        },
+        {
+          "id": "a13-dad",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: dad.",
+          "display": "папа",
+          "audio_ids": [
+            "foundation-a13-dad"
+          ],
+          "requires_graphemes": [
+            "А",
+            "П"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a13-dad"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a13-dad-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The first vowel is stressed. The same consonant appears twice."
+          }
+        },
+        {
+          "id": "a13-robot",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: robot.",
+          "display": "робот",
+          "audio_ids": [
+            "foundation-a13-robot"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "О",
+            "Р",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a13-robot"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a13-robot-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The first vowel is stressed: ро́бот; the second written О is unstressed. This noun is grammatically masculine. That is a property of the noun, separate from the identity of the machine."
+          }
+        },
+        {
+          "id": "a13-this-robot",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: This is a robot.",
+          "display": "Это робот.",
+          "audio_ids": [
+            "foundation-a13-this-robot"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "О",
+            "Р",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this",
+            "a13-robot"
+          ],
+          "introduces_meanings": [
+            "a13-this-robot"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a13-this-robot-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Keep the naming word, then name the robot. Listen once, pause, and say the complete short sentence."
+          }
+        },
+        {
+          "id": "a13-robot-he",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: It, the robot, is here.",
+          "display": "Он тут.",
+          "audio_ids": [
+            "foundation-a13-robot-he"
+          ],
+          "requires_graphemes": [
+            "Н",
+            "О",
+            "Т",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "he-person",
+            "a13-robot",
+            "a11-here"
+          ],
+          "introduces_meanings": [
+            "a13-robot-he"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a13-robot-he-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "In this robot scene the masculine pronoun refers back to the masculine noun. Earlier the same pronoun referred to a man; English translation depends on the referent."
+          }
+        },
+        {
+          "id": "a13-robot-read",
+          "revision": "1",
+          "instruction": "What does the written noun mean?",
+          "display": "робот",
+          "audio_ids": [
+            "foundation-a13-robot"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "О",
+            "Р",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a13-robot"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a13-robot-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "reading_meaning",
+            "answer": "robot",
+            "accepted": [
+              "robot",
+              "a robot"
+            ],
+            "feedback": [],
+            "reveal": "робот — robot. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a13-dad-listen",
+          "revision": "1",
+          "instruction": "What does the recording mean?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a13-dad"
+          ],
+          "requires_graphemes": [
+            "А",
+            "П"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a13-dad"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a13-dad-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "dad",
+            "accepted": [
+              "dad",
+              "father",
+              "a dad"
+            ],
+            "feedback": [],
+            "reveal": "папа — dad. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a13-robot-write",
+          "revision": "1",
+          "instruction": "Write the word for robot.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a13-robot"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "О",
+            "Р",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a13-robot"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a13-robot-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "робот",
+            "accepted": [
+              "робот"
+            ],
+            "feedback": [],
+            "reveal": "робот — robot. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "б",
+              "о",
+              "р",
+              "т"
+            ]
+          }
+        },
+        {
+          "id": "a13-robot-say",
+          "revision": "1",
+          "instruction": "Introduce a robot using the identification frame.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a13-this-robot"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "О",
+            "Р",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a13-this-robot"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a13-this-robot-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Это робот.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Это робот. — This is a robot. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a13-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [
+            "Б",
+            "П"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You met Б and П and saw masculine reference to a machine. A noun gender and a real-world gender are different things."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-14",
+      "title": "A book and a sound",
+      "goal": "Meet З and Г; use feminine noun reference and keep challenging clusters in whole words.",
+      "steps": [
+        {
+          "id": "a14-z",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "З з · за",
+          "audio_ids": [
+            "foundation-a14-z-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "З"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a14-z-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Listen to the beginning. The printed shape can resemble the numeral three, but it is a Cyrillic letter."
+          }
+        },
+        {
+          "id": "a14-g",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Г г · га",
+          "audio_ids": [
+            "foundation-a14-g-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Г"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a14-g-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Notice the beginning of this complete syllable. Keep the whole model available rather than assembling a word from letter names."
+          }
+        },
+        {
+          "id": "a14-sound",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: sound.",
+          "display": "звук",
+          "audio_ids": [
+            "foundation-a14-sound"
+          ],
+          "requires_graphemes": [
+            "В",
+            "З",
+            "К",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a14-sound"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a14-sound-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The beginning has two consonants. Listen to their order without adding a vowel between them."
+          }
+        },
+        {
+          "id": "a14-book",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: book.",
+          "display": "книга",
+          "audio_ids": [
+            "foundation-a14-book"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Г",
+            "И",
+            "К",
+            "Н"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a14-book"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a14-book-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This noun is grammatically feminine. The consonant before И is softened in this word, as in the earlier taught context; imitate the whole word."
+          }
+        },
+        {
+          "id": "a14-this-book",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: This is a book.",
+          "display": "Это книга.",
+          "audio_ids": [
+            "foundation-a14-this-book"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Г",
+            "И",
+            "К",
+            "Н",
+            "О",
+            "Т",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this",
+            "a14-book"
+          ],
+          "introduces_meanings": [
+            "a14-this-book"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a14-this-book-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Keep the naming word, then name the book. This naming frame stays the same with a feminine noun."
+          }
+        },
+        {
+          "id": "a14-book-she",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: It, the book, is here.",
+          "display": "Она тут.",
+          "audio_ids": [
+            "foundation-a14-book-she"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Н",
+            "О",
+            "Т",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "she-person",
+            "a14-book",
+            "a11-here"
+          ],
+          "introduces_meanings": [
+            "a14-book-she"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a14-book-she-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Here the feminine pronoun refers to the feminine noun book. The book is not a female person. Contrast the robot, book and neuter window examples without making a universal ending rule yet."
+          }
+        },
+        {
+          "id": "a14-book-listen",
+          "revision": "1",
+          "instruction": "What object does the recording name?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a14-book"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Г",
+            "И",
+            "К",
+            "Н"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a14-book"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a14-book-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "book",
+            "accepted": [
+              "book",
+              "a book"
+            ],
+            "feedback": [],
+            "reveal": "книга — book. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a14-sound-write",
+          "revision": "1",
+          "instruction": "Write the noun meaning sound.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a14-sound"
+          ],
+          "requires_graphemes": [
+            "В",
+            "З",
+            "К",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a14-sound"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a14-sound-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "звук",
+            "accepted": [
+              "звук"
+            ],
+            "feedback": [],
+            "reveal": "звук — sound. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "в",
+              "з",
+              "к",
+              "у"
+            ]
+          }
+        },
+        {
+          "id": "a14-book-reference",
+          "revision": "1",
+          "instruction": "The topic is the book, a feminine noun. Say: it is here.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a14-book-she"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Н",
+            "О",
+            "Т",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a14-book-she"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a14-book-she-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Она тут.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Она тут. — It, the book, is here. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a14-read-book",
+          "revision": "1",
+          "instruction": "Try reading the spelling aloud before revealing its model.",
+          "display": "книга",
+          "audio_ids": [
+            "foundation-a14-book"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Г",
+            "И",
+            "К",
+            "Н"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a14-book"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a14-book-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "книга — book",
+            "note": "Try first, then listen. Compare one part at a time; you can replay and make another try."
+          }
+        },
+        {
+          "id": "a14-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [
+            "Г",
+            "З"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You met З and Г, practiced two clusters and extended feminine reference to a book. The earlier neutral naming frame still works before every noun."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-15",
+      "title": "Three new beginnings",
+      "goal": "Meet Х, Ж and Ш one at a time in complete models and short words.",
+      "steps": [
+        {
+          "id": "a15-h",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Х х · ха",
+          "audio_ids": [
+            "foundation-a15-h-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Х"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a15-h-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Let air pass through a narrow gap at the back of the mouth, then release into the vowel. This is a friction sound, unlike an ordinary English h. Listen and try the whole syllable."
+          }
+        },
+        {
+          "id": "a15-choir",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: choir.",
+          "display": "хор",
+          "audio_ids": [
+            "foundation-a15-choir"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Р",
+            "Х"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a15-choir"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a15-choir-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The vowel is stressed. Try the whole word before comparing with its model."
+          }
+        },
+        {
+          "id": "a15-choir-read",
+          "revision": "1",
+          "instruction": "What does this written word mean?",
+          "display": "хор",
+          "audio_ids": [
+            "foundation-a15-choir"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Р",
+            "Х"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a15-choir"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a15-choir-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "reading_meaning",
+            "answer": "choir",
+            "accepted": [
+              "choir",
+              "a choir"
+            ],
+            "feedback": [],
+            "reveal": "хор — choir. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a15-zh",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Ж ж · жа",
+          "audio_ids": [
+            "foundation-a15-zh-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Ж"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a15-zh-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Notice the voiced beginning. This consonant is normally hard in standard Russian; the word hard describes articulation, not difficulty."
+          }
+        },
+        {
+          "id": "a15-beetle",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: beetle.",
+          "display": "жук",
+          "audio_ids": [
+            "foundation-a15-beetle"
+          ],
+          "requires_graphemes": [
+            "Ж",
+            "К",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a15-beetle"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a15-beetle-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "A small concrete noun for the new beginning. Listen to the full word."
+          }
+        },
+        {
+          "id": "a15-sh",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Ш ш · ша",
+          "audio_ids": [
+            "foundation-a15-sh-model"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Ж"
+          ],
+          "introduces_graphemes": [
+            "Ш"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a15-sh-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Notice the voiceless beginning. Compare the two complete models; Ж and Ш are normally hard consonants in standard Russian."
+          }
+        },
+        {
+          "id": "a15-ball",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: ball or sphere.",
+          "display": "шар",
+          "audio_ids": [
+            "foundation-a15-ball"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Р",
+            "Ш"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a15-ball"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a15-ball-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Imagine a round ball. This noun can mean ball in everyday speech and sphere in mathematics."
+          }
+        },
+        {
+          "id": "a15-noise",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: noise.",
+          "display": "шум",
+          "audio_ids": [
+            "foundation-a15-noise"
+          ],
+          "requires_graphemes": [
+            "М",
+            "У",
+            "Ш"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a15-noise"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a15-noise-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Keep this noun distinct from the broader sound noun taught earlier."
+          }
+        },
+        {
+          "id": "a15-beetle-listen",
+          "revision": "1",
+          "instruction": "Which small creature does the recording name?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a15-beetle"
+          ],
+          "requires_graphemes": [
+            "Ж",
+            "К",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a15-beetle"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a15-beetle-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "beetle",
+            "accepted": [
+              "beetle",
+              "a beetle"
+            ],
+            "feedback": [],
+            "reveal": "жук — beetle. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a15-ball-write",
+          "revision": "1",
+          "instruction": "Imagine a round ball. Write the noun that can also mean sphere.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a15-ball"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Р",
+            "Ш"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a15-ball"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a15-ball-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "шар",
+            "accepted": [
+              "шар"
+            ],
+            "feedback": [],
+            "reveal": "шар — ball or sphere. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "а",
+              "р",
+              "ш"
+            ]
+          }
+        },
+        {
+          "id": "a15-noise-say",
+          "revision": "1",
+          "instruction": "A machine is making an unwanted noise. Say the noun meaning noise.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a15-noise"
+          ],
+          "requires_graphemes": [
+            "М",
+            "У",
+            "Ш"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a15-noise"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a15-noise-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "шум",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "шум — noise. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a15-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You met Х, Ж and Ш through separate words. Return to any beginning you want to hear or try again."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-16",
+      "title": "Vowels change their neighbors",
+      "goal": "Meet Ё and Ю, compare hard/soft contexts, and hear final devoicing in one taught word.",
+      "steps": [
+        {
+          "id": "a16-yo",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Ё ё · ё",
+          "audio_ids": [
+            "foundation-a16-yo-model"
+          ],
+          "requires_graphemes": [
+            "Е"
+          ],
+          "introduces_graphemes": [
+            "Ё"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a16-yo-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "At the beginning of this stressed example, hear a glide followed by the vowel. Keep the dots when writing Ё; they distinguish this letter from Е."
+          }
+        },
+        {
+          "id": "a16-honey",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: honey.",
+          "display": "мёд",
+          "audio_ids": [
+            "foundation-a16-honey"
+          ],
+          "requires_graphemes": [
+            "Ё",
+            "Д",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a16-honey"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a16-honey-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [
+            "a16-final-devoicing-example"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Here Ё follows М and accompanies a softened consonant plus its vowel; it is not pronounced as two separately named letters. Ё is stressed in this word. The final written Д is pronounced voiceless in this model; the spelling remains Д."
+          }
+        },
+        {
+          "id": "a16-yu",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Ю ю · ю",
+          "audio_ids": [
+            "foundation-a16-yu-model"
+          ],
+          "requires_graphemes": [],
+          "introduces_graphemes": [
+            "Ю"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a16-yu-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "At the beginning of this model, hear a glide plus vowel. After a consonant this letter often accompanies a soft consonant context; compare the next whole-word pair."
+          }
+        },
+        {
+          "id": "a16-onion",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: onion.",
+          "display": "лук",
+          "audio_ids": [
+            "foundation-a16-onion"
+          ],
+          "requires_graphemes": [
+            "К",
+            "Л",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a16-onion"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a16-onion-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "For this activity the meaning is onion. The beginning is hard in the model; do not infer hardness from an English transliteration."
+          }
+        },
+        {
+          "id": "a16-hatch",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: hatch.",
+          "display": "люк",
+          "audio_ids": [
+            "foundation-a16-hatch"
+          ],
+          "requires_graphemes": [
+            "К",
+            "Л",
+            "Ю"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a16-hatch"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a16-hatch-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "A hatch is an opening with a cover, for example in a spacecraft. Compare its first consonant with the hard beginning of лук: in люк the middle of the tongue rises toward the roof of the mouth while making Л. Say each whole word, without adding another syllable."
+          }
+        },
+        {
+          "id": "a16-read-hatch",
+          "revision": "1",
+          "instruction": "Try reading the spelling aloud before revealing its model.",
+          "display": "люк",
+          "audio_ids": [
+            "foundation-a16-hatch"
+          ],
+          "requires_graphemes": [
+            "К",
+            "Л",
+            "Ю"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a16-hatch"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a16-hatch-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "люк — hatch",
+            "note": "Try first, then listen. Compare one part at a time; you can replay and make another try."
+          }
+        },
+        {
+          "id": "a16-honey-listen",
+          "revision": "1",
+          "instruction": "What food does the recording name?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a16-honey"
+          ],
+          "requires_graphemes": [
+            "Ё",
+            "Д",
+            "М"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a16-honey"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a16-honey-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "honey",
+            "accepted": [
+              "honey",
+              "some honey"
+            ],
+            "feedback": [],
+            "reveal": "мёд — honey. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a16-hatch-write",
+          "revision": "1",
+          "instruction": "Write the word meaning hatch, after comparing its soft beginning with onion.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a16-hatch"
+          ],
+          "requires_graphemes": [
+            "К",
+            "Л",
+            "Ю"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a16-hatch"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a16-hatch-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "люк",
+            "accepted": [
+              "люк"
+            ],
+            "feedback": [],
+            "reveal": "люк — hatch. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "к",
+              "л",
+              "ю"
+            ]
+          }
+        },
+        {
+          "id": "a16-onion-say",
+          "revision": "1",
+          "instruction": "Say the noun for onion before listening to the model.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a16-onion"
+          ],
+          "requires_graphemes": [
+            "К",
+            "Л",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a16-onion"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a16-onion-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "лук",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "лук — onion. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a16-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [
+            "Ё",
+            "Ю"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You met Ё and Ю at the beginning of examples and after consonants. You also contrasted onion with hatch and kept the final Д in the spelling of honey."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-17",
+      "title": "A short glide, a silent sign",
+      "goal": "Meet Й and Ь; write a soft final consonant and choose possessive forms for three nouns.",
+      "steps": [
+        {
+          "id": "a17-j",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Й й · ой",
+          "audio_ids": [
+            "foundation-a17-j-model"
+          ],
+          "requires_graphemes": [
+            "О"
+          ],
+          "introduces_graphemes": [
+            "Й"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a17-j-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Listen to the short glide at the end, after the vowel. Keep the example to one syllable. The small curved mark above Й belongs to the letter; keep it when writing."
+          }
+        },
+        {
+          "id": "a17-my-m",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: my, with a masculine noun.",
+          "display": "мой",
+          "audio_ids": [
+            "foundation-a17-my-m"
+          ],
+          "requires_graphemes": [
+            "Й",
+            "М",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a17-my-m"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a17-my-m-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The ending is a short glide. This possessive word changes form with the noun it accompanies."
+          }
+        },
+        {
+          "id": "a17-soft-sign",
+          "revision": "1",
+          "instruction": "Listen to the whole word, then notice the final sign.",
+          "display": "Ь ь · соль",
+          "audio_ids": [
+            "foundation-a17-salt"
+          ],
+          "requires_graphemes": [
+            "Л",
+            "О",
+            "С"
+          ],
+          "introduces_graphemes": [
+            "Ь"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a17-soft-sign-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Ь has no sound of its own. In this word it marks the preceding final consonant as soft. Write it even though no separate extra syllable is heard."
+          }
+        },
+        {
+          "id": "a17-salt",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: salt.",
+          "display": "соль",
+          "audio_ids": [
+            "foundation-a17-salt"
+          ],
+          "requires_graphemes": [
+            "Л",
+            "О",
+            "С",
+            "Ь"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a17-salt"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a17-salt-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The final consonant is soft; the sign has no separate sound. Copy and say the whole word. Do not use the sign as an audio-only standalone dictation target."
+          }
+        },
+        {
+          "id": "a17-my-f",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: my, with a feminine noun.",
+          "display": "моя",
+          "audio_ids": [
+            "foundation-a17-my-f"
+          ],
+          "requires_graphemes": [
+            "М",
+            "О",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a17-my-f"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a17-my-f-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use this form with a feminine noun such as book. The final vowel is stressed: моя́. Here Я follows a vowel and begins with a short glide into the stressed vowel, as it did at the start of я."
+          }
+        },
+        {
+          "id": "a17-my-n",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: my, with a neuter noun.",
+          "display": "моё",
+          "audio_ids": [
+            "foundation-a17-my-n"
+          ],
+          "requires_graphemes": [
+            "Ё",
+            "М",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a17-my-n"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a17-my-n-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use this form with a neuter noun such as window. Here Ё follows a vowel and begins with a short glide into the stressed vowel. Keep its two dots in writing."
+          }
+        },
+        {
+          "id": "a17-my-cat",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: my cat.",
+          "display": "мой кот",
+          "audio_ids": [
+            "foundation-a17-my-cat"
+          ],
+          "requires_graphemes": [
+            "Й",
+            "К",
+            "М",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a17-my-m",
+            "cat"
+          ],
+          "introduces_meanings": [
+            "a17-my-cat"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a17-my-cat-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use the masculine form with this masculine noun."
+          }
+        },
+        {
+          "id": "a17-my-book",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: my book.",
+          "display": "моя книга",
+          "audio_ids": [
+            "foundation-a17-my-book"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Г",
+            "И",
+            "К",
+            "М",
+            "Н",
+            "О",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a17-my-f",
+            "a14-book"
+          ],
+          "introduces_meanings": [
+            "a17-my-book"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a17-my-book-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use the feminine form with the feminine noun book."
+          }
+        },
+        {
+          "id": "a17-my-window",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: my window.",
+          "display": "моё окно",
+          "audio_ids": [
+            "foundation-a17-my-window"
+          ],
+          "requires_graphemes": [
+            "Ё",
+            "К",
+            "М",
+            "Н",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a17-my-n",
+            "window"
+          ],
+          "introduces_meanings": [
+            "a17-my-window"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a17-my-window-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use the neuter form with the neuter noun window."
+          }
+        },
+        {
+          "id": "a17-agree-book",
+          "revision": "1",
+          "instruction": "Build my book. The noun is feminine.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a17-my-book"
+          ],
+          "requires_graphemes": [
+            "Ё",
+            "А",
+            "Г",
+            "И",
+            "Й",
+            "К",
+            "М",
+            "Н",
+            "О",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a17-my-book",
+            "a17-my-m",
+            "a17-my-f",
+            "a17-my-n"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a17-my-book-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "мой",
+              "моя",
+              "моё",
+              "книга"
+            ],
+            "answer": [
+              "моя",
+              "книга"
+            ],
+            "feedback": [
+              "Choose the feminine possessive form for book.",
+              "Keep the noun book."
+            ],
+            "success": "моя книга — my book. Compare the parts, then try saying the complete word or message."
+          }
+        },
+        {
+          "id": "a17-salt-write",
+          "revision": "1",
+          "instruction": "Write salt, including the taught final sign.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a17-salt"
+          ],
+          "requires_graphemes": [
+            "Л",
+            "О",
+            "С",
+            "Ь"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a17-salt"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a17-salt-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "соль",
+            "accepted": [
+              "соль"
+            ],
+            "feedback": [],
+            "reveal": "соль — salt. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "л",
+              "о",
+              "с",
+              "ь"
+            ]
+          }
+        },
+        {
+          "id": "a17-my-window-say",
+          "revision": "1",
+          "instruction": "The object is your window, a neuter noun. Say: my window.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a17-my-window"
+          ],
+          "requires_graphemes": [
+            "Ё",
+            "К",
+            "М",
+            "Н",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a17-my-window"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a17-my-window-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "моё окно",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "моё окно — my window. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a17-compose-my-robot",
+          "revision": "1",
+          "instruction": "Robot is a masculine noun. Use the taught my forms to write: my robot.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a17-compose-my-robot"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "Й",
+            "М",
+            "О",
+            "Р",
+            "Т"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a17-my-m",
+            "a13-robot"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [
+            "taught-letter-keyboard"
+          ],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "мой робот",
+            "accepted": [
+              "мой робот"
+            ],
+            "feedback": [],
+            "reveal": "мой робот — my robot. Робот is masculine, so choose мой. Compare the possessive form and the noun with your attempt.",
+            "keyboard": [
+              " ",
+              "б",
+              "й",
+              "м",
+              "о",
+              "р",
+              "т"
+            ]
+          }
+        },
+        {
+          "id": "a17-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [
+            "Й"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You met Й and the silent soft sign, then chose forms of my for a cat, a book, a window and a robot."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-18",
+      "title": "Three more letter sounds",
+      "goal": "Meet Ц, Ч and Щ separately; use a short word for each and preserve the distinctions.",
+      "steps": [
+        {
+          "id": "a18-ts",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Ц ц · ца",
+          "audio_ids": [
+            "foundation-a18-ts-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Ц"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a18-ts-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The beginning is a joined affricate, roughly a t+s sequence within one consonant. Ц is normally hard in standard Russian. The English cue is approximate."
+          }
+        },
+        {
+          "id": "a18-circus",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: circus.",
+          "display": "цирк",
+          "audio_ids": [
+            "foundation-a18-circus"
+          ],
+          "requires_graphemes": [
+            "И",
+            "К",
+            "Р",
+            "Ц"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a18-circus"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a18-circus-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Ц stays hard here even though the next written letter is И. The vowel has the quality taught with Ы. Listen to the whole word; keep the spelling цирк."
+          }
+        },
+        {
+          "id": "a18-ch",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Ч ч · ча",
+          "audio_ids": [
+            "foundation-a18-ch-model"
+          ],
+          "requires_graphemes": [
+            "А"
+          ],
+          "introduces_graphemes": [
+            "Ч"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a18-ch-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Notice the beginning of the complete syllable. Ч is normally soft in standard Russian, even before this written А."
+          }
+        },
+        {
+          "id": "a18-tea",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: tea.",
+          "display": "чай",
+          "audio_ids": [
+            "foundation-a18-tea"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Й",
+            "Ч"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a18-tea"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a18-tea-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The final Й is the short glide already introduced. Use the whole model for the normally soft beginning."
+          }
+        },
+        {
+          "id": "a18-tea-listen",
+          "revision": "1",
+          "instruction": "What drink does the model name?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a18-tea"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Й",
+            "Ч"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a18-tea"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a18-tea-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "tea",
+            "accepted": [
+              "tea",
+              "some tea"
+            ],
+            "feedback": [],
+            "reveal": "чай — tea. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a18-shch",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Щ щ · ща",
+          "audio_ids": [
+            "foundation-a18-shch-model"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Ш"
+          ],
+          "introduces_graphemes": [
+            "Щ"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a18-shch-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Listen to this longer soft friction sound. Compare it with the earlier normally hard Ш example. Do not substitute a spoken letter name for the model."
+          }
+        },
+        {
+          "id": "a18-soup",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: cabbage soup.",
+          "display": "щи",
+          "audio_ids": [
+            "foundation-a18-soup"
+          ],
+          "requires_graphemes": [
+            "И",
+            "Ш",
+            "Щ"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a18-soup"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a18-soup-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "A short word containing the new normally soft consonant. The vowel spelling does not make this the same beginning as Ш."
+          }
+        },
+        {
+          "id": "a18-read-circus",
+          "revision": "1",
+          "instruction": "Try reading the spelling aloud before revealing its model.",
+          "display": "цирк",
+          "audio_ids": [
+            "foundation-a18-circus"
+          ],
+          "requires_graphemes": [
+            "И",
+            "К",
+            "Р",
+            "Ц"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a18-circus"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a18-circus-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "цирк — circus",
+            "note": "Try first, then listen. Compare one part at a time; you can replay and make another try."
+          }
+        },
+        {
+          "id": "a18-tea-write",
+          "revision": "1",
+          "instruction": "Write the word for tea.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a18-tea"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Й",
+            "Ч"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a18-tea"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a18-tea-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "чай",
+            "accepted": [
+              "чай"
+            ],
+            "feedback": [],
+            "reveal": "чай — tea. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "а",
+              "й",
+              "ч"
+            ]
+          }
+        },
+        {
+          "id": "a18-soup-say",
+          "revision": "1",
+          "instruction": "Say the noun for the taught cabbage soup.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a18-soup"
+          ],
+          "requires_graphemes": [
+            "И",
+            "Щ"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a18-soup"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a18-soup-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "щи",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "щи — cabbage soup. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a18-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [
+            "Ц",
+            "Ч",
+            "Щ"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You met Ц, Ч and Щ. Return to a whole example to compare their beginnings: Ц stays hard here, while Ч and Щ are soft."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-19",
+      "title": "The last letters, a useful question",
+      "goal": "Meet Ф and Ъ; complete alphabet coverage and ask what something is.",
+      "steps": [
+        {
+          "id": "a19-f",
+          "revision": "1",
+          "instruction": "Play the whole example. The first two shapes show the new letter in uppercase and lowercase; the example follows the dot.",
+          "display": "Ф ф · фа",
+          "audio_ids": [
+            "foundation-a19-f-model"
+          ],
+          "requires_graphemes": [
+            "А",
+            "В"
+          ],
+          "introduces_graphemes": [
+            "Ф"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a19-f-sound"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Notice the beginning of the syllable. Compare it with the earlier voiced В model if useful; imitate the whole examples."
+          }
+        },
+        {
+          "id": "a19-fact",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: fact.",
+          "display": "факт",
+          "audio_ids": [
+            "foundation-a19-fact"
+          ],
+          "requires_graphemes": [
+            "А",
+            "К",
+            "Т",
+            "Ф"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a19-fact"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a19-fact-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Keep the two final consonants in order; avoid adding a vowel between them."
+          }
+        },
+        {
+          "id": "a19-hard-sign",
+          "revision": "1",
+          "instruction": "Play the whole word. Notice the new sign between two letters.",
+          "display": "Ъ ъ · объект",
+          "audio_ids": [
+            "foundation-a19-object"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "Е",
+            "К",
+            "О",
+            "Т"
+          ],
+          "introduces_graphemes": [
+            "Ъ"
+          ],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a19-hard-sign-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Ъ has no sound of its own. It separates the preceding consonant from Е, so a short glide comes before the stressed vowel. Listen to the whole word and keep the sign in writing. Its name does not mean that every speaker must make the preceding consonant hard in this word."
+          }
+        },
+        {
+          "id": "a19-object",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: object.",
+          "display": "объект",
+          "audio_ids": [
+            "foundation-a19-object"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "Е",
+            "К",
+            "О",
+            "Т",
+            "Ъ"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a19-object"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a19-object-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The stressed syllable follows the sign. This useful noun can name an object of discussion; the sign remains in the written form."
+          }
+        },
+        {
+          "id": "a19-what",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: what.",
+          "display": "что",
+          "audio_ids": [
+            "foundation-a19-what"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Т",
+            "Ч",
+            "Ш"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a19-what"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a19-what-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [
+            "a19-chto-exception"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "In standard pronunciation this common word begins with the sound usually written Ш, despite its written Ч. Treat it as a word-specific sound/spelling example, not a new general rule."
+          }
+        },
+        {
+          "id": "a19-question-mark",
+          "revision": "1",
+          "instruction": "A question ends with this written mark.",
+          "display": "?",
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [
+            "question-mark"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "A question mark ends the written question. Listen to the complete question next; typography alone does not supply its intonation."
+          }
+        },
+        {
+          "id": "a19-what-this",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: What is this?",
+          "display": "Что это?",
+          "audio_ids": [
+            "foundation-a19-what-this"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Т",
+            "Ч",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a19-what",
+            "a9-this"
+          ],
+          "introduces_meanings": [
+            "a19-what-this"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a19-what-this-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use the complete audio model for the question. This lets you request an identification, then answer with the earlier naming frame."
+          }
+        },
+        {
+          "id": "a19-this-object",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: This is an object.",
+          "display": "Это объект.",
+          "audio_ids": [
+            "foundation-a19-this-object"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "Е",
+            "К",
+            "О",
+            "Т",
+            "Ъ",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this",
+            "a19-object"
+          ],
+          "introduces_meanings": [
+            "a19-this-object"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a19-this-object-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This is a formal word for an object, for example something being studied or discussed. For an everyday item, Russian also has other words. Here, keep the naming frame and the taught noun together."
+          }
+        },
+        {
+          "id": "a19-object-write",
+          "revision": "1",
+          "instruction": "Write object, including its separating sign.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a19-object"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "Е",
+            "К",
+            "О",
+            "Т",
+            "Ъ"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a19-object"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a19-object-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "объект",
+            "accepted": [
+              "объект"
+            ],
+            "feedback": [],
+            "reveal": "объект — object. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              "б",
+              "е",
+              "к",
+              "о",
+              "т",
+              "ъ"
+            ]
+          }
+        },
+        {
+          "id": "a19-question-listen",
+          "revision": "1",
+          "instruction": "Listen. What is the speaker asking?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a19-what-this"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Т",
+            "Ч",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a19-what-this"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a19-what-this-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "What is this?",
+            "accepted": [
+              "what is this",
+              "what is this?",
+              "identify this",
+              "what this is"
+            ],
+            "feedback": [],
+            "reveal": "Что это? — What is this? Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a19-question-say",
+          "revision": "1",
+          "instruction": "Point to something unfamiliar. Ask: what is this?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a19-what-this"
+          ],
+          "requires_graphemes": [
+            "О",
+            "Т",
+            "Ч",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a19-what-this"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a19-what-this-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Что это?",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Что это? — What is this? Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a19-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You have now encountered all 33 alphabet letters and a useful identification question. You can revisit a letter, practice the question, or continue into messages and ideas."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-20",
+      "title": "Change a verb to change the person",
+      "goal": "Build present-tense messages with read, then use the same person contrasts with think.",
+      "steps": [
+        {
+          "id": "a20-i-read",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: I read or I am reading.",
+          "display": "Я читаю.",
+          "audio_ids": [
+            "foundation-a20-i-read"
+          ],
+          "requires_graphemes": [
+            "А",
+            "И",
+            "Т",
+            "Ч",
+            "Ю",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-ya-word"
+          ],
+          "introduces_meanings": [
+            "a20-i-read"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-i-read-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This form can mean I read or I am reading. The verb has the part чита- plus the speaker ending -ю. The stress stays on а: чита́ю. Here Ю follows a vowel and begins with a short glide."
+          }
+        },
+        {
+          "id": "a20-you-read",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: You read or you are reading, one familiar listener.",
+          "display": "Ты читаешь.",
+          "audio_ids": [
+            "foundation-a20-you-read"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Е",
+            "И",
+            "Т",
+            "Ч",
+            "Ш",
+            "Ы",
+            "Ь"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-ty-word",
+            "a20-i-read"
+          ],
+          "introduces_meanings": [
+            "a20-you-read"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-you-read-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "For one familiar listener, use чита- plus -ешь: чита́ешь. Е follows a vowel here, with a short glide before its unstressed vowel. Final Ь is part of this verb ending; it does not soften the normally hard Ш."
+          }
+        },
+        {
+          "id": "a20-he-reads",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: He reads or he is reading.",
+          "display": "Он читает.",
+          "audio_ids": [
+            "foundation-a20-he-reads"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Е",
+            "И",
+            "Н",
+            "О",
+            "Т",
+            "Ч"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "he-person",
+            "a20-i-read"
+          ],
+          "introduces_meanings": [
+            "a20-he-reads"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-he-reads-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use чита- plus -ет for he, she or a neuter it: чита́ет. The pronoun changes with the referent; this present-tense verb form stays the same."
+          }
+        },
+        {
+          "id": "a20-we-read",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: We read or we are reading.",
+          "display": "Мы читаем.",
+          "audio_ids": [
+            "foundation-a20-we-read"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Е",
+            "И",
+            "М",
+            "Т",
+            "Ч",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a12-we",
+            "a20-i-read"
+          ],
+          "introduces_meanings": [
+            "a20-we-read"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-we-read-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "For a group including the speaker, use чита- plus -ем: чита́ем. Compare the last part with the speaker form you heard earlier."
+          }
+        },
+        {
+          "id": "a20-you-pl-read",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: You read or you are reading, plural or polite.",
+          "display": "Вы читаете.",
+          "audio_ids": [
+            "foundation-a20-you-pl-read"
+          ],
+          "requires_graphemes": [
+            "А",
+            "В",
+            "Е",
+            "И",
+            "Т",
+            "Ч",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a12-you",
+            "a20-i-read"
+          ],
+          "introduces_meanings": [
+            "a20-you-pl-read"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-you-pl-read-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "For several listeners or one polite addressee, use чита- plus -ете: чита́ете. This has one more vowel syllable at the end than the we form."
+          }
+        },
+        {
+          "id": "a20-they-read",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: They read or they are reading.",
+          "display": "Они читают.",
+          "audio_ids": [
+            "foundation-a20-they-read"
+          ],
+          "requires_graphemes": [
+            "А",
+            "И",
+            "Н",
+            "О",
+            "Т",
+            "Ч",
+            "Ю"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "they-people",
+            "a20-i-read"
+          ],
+          "introduces_meanings": [
+            "a20-they-read"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-they-read-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "For they, use чита- plus -ют: чита́ют. Compare the end with the speaker form: чита́ю. The final Т belongs to the they form."
+          }
+        },
+        {
+          "id": "a20-verb-person",
+          "revision": "1",
+          "instruction": "Tell one familiar listener: you are reading.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a20-you-read"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Е",
+            "И",
+            "Т",
+            "Ч",
+            "Ш",
+            "Ы",
+            "Ь",
+            "Ю",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a20-you-read",
+            "a20-i-read",
+            "a20-he-reads"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a20-you-read-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "Я",
+              "Ты",
+              "читаю.",
+              "читаешь.",
+              "читает."
+            ],
+            "answer": [
+              "Ты",
+              "читаешь."
+            ],
+            "feedback": [
+              "Choose the one familiar listener.",
+              "Choose the matching familiar-listener verb ending."
+            ],
+            "success": "Ты читаешь. — You read or you are reading, one familiar listener. Compare the parts, then try saying the complete word or message."
+          }
+        },
+        {
+          "id": "a20-they-read-listen",
+          "revision": "1",
+          "instruction": "Listen. Who is reading?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a20-they-read"
+          ],
+          "requires_graphemes": [
+            "А",
+            "И",
+            "Н",
+            "О",
+            "Т",
+            "Ч",
+            "Ю"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a20-they-read"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a20-they-read-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "They read or they are reading",
+            "accepted": [
+              "they",
+              "they are reading",
+              "they read",
+              "they read or they are reading"
+            ],
+            "feedback": [],
+            "reveal": "Они читают. — They read or they are reading. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a20-we-read-write",
+          "revision": "1",
+          "instruction": "Write: we are reading.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a20-we-read"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Е",
+            "И",
+            "М",
+            "Т",
+            "Ч",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a20-we-read"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a20-we-read-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "Мы читаем.",
+            "accepted": [
+              "Мы читаем."
+            ],
+            "feedback": [],
+            "reveal": "Мы читаем. — We read or we are reading. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": [
+              " ",
+              ".",
+              "а",
+              "е",
+              "и",
+              "м",
+              "т",
+              "ч",
+              "ы"
+            ]
+          }
+        },
+        {
+          "id": "a20-i-think",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: I think or I am thinking.",
+          "display": "Я думаю.",
+          "audio_ids": [
+            "foundation-a20-i-think"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Д",
+            "М",
+            "У",
+            "Ю",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-ya-word",
+            "a20-i-read"
+          ],
+          "introduces_meanings": [
+            "a20-i-think"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-i-think-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The thinking verb uses дума- in these forms, with the same endings as the reading verb. For I, add -ю: ду́маю. Its stress stays on у. You can keep the ending while changing the verb part."
+          }
+        },
+        {
+          "id": "a20-you-think",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: You think or you are thinking, one familiar listener.",
+          "display": "Ты думаешь.",
+          "audio_ids": [
+            "foundation-a20-you-think"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Д",
+            "Е",
+            "М",
+            "Т",
+            "У",
+            "Ш",
+            "Ы",
+            "Ь"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a8-ty-word",
+            "a20-i-think",
+            "a20-you-read"
+          ],
+          "introduces_meanings": [
+            "a20-you-think"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-you-think-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "For one familiar listener, use дума- plus -ешь: ду́маешь. Compare its ending with чита́ешь. Keep Ь in writing; Ш remains hard."
+          }
+        },
+        {
+          "id": "a20-transfer-ending",
+          "revision": "1",
+          "instruction": "Try a new combination: they are thinking. Keep дума- from the thinking examples and choose the ending used for they in the reading examples.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a20-they-think"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Д",
+            "Е",
+            "И",
+            "М",
+            "Н",
+            "О",
+            "Т",
+            "У",
+            "Ы",
+            "Ю"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "they-people",
+            "a12-we",
+            "a20-i-think",
+            "a20-you-think",
+            "a20-they-read",
+            "a20-we-read"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a20-i-think-sample",
+            "a20-they-read-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "blend",
+            "tiles": [
+              "Они",
+              "Мы",
+              "думаю.",
+              "думают.",
+              "думаем."
+            ],
+            "answer": [
+              "Они",
+              "думают."
+            ],
+            "feedback": [
+              "Choose the pronoun for they.",
+              "Keep дума- and use the same they ending as in the reading example."
+            ],
+            "success": "Они думают. — They are thinking. You kept the thinking part and used the they ending. Listen to the complete model next."
+          }
+        },
+        {
+          "id": "a20-he-thinks",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: He thinks or he is thinking.",
+          "display": "Он думает.",
+          "audio_ids": [
+            "foundation-a20-he-thinks"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Д",
+            "Е",
+            "М",
+            "Н",
+            "О",
+            "Т",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "he-person",
+            "a20-i-think",
+            "a20-he-reads"
+          ],
+          "introduces_meanings": [
+            "a20-he-thinks"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-he-thinks-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Use дума- plus -ет for he, she or a neuter it: ду́мает. The ending matches the corresponding reading form."
+          }
+        },
+        {
+          "id": "a20-we-think",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: We think or we are thinking.",
+          "display": "Мы думаем.",
+          "audio_ids": [
+            "foundation-a20-we-think"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Д",
+            "Е",
+            "М",
+            "У",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a12-we",
+            "a20-i-think",
+            "a20-we-read"
+          ],
+          "introduces_meanings": [
+            "a20-we-think"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-we-think-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "For a group including the speaker, use дума- plus -ем: ду́маем. Compare the ending with чита́ем."
+          }
+        },
+        {
+          "id": "a20-you-pl-think",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: You think or you are thinking, plural or polite.",
+          "display": "Вы думаете.",
+          "audio_ids": [
+            "foundation-a20-you-pl-think"
+          ],
+          "requires_graphemes": [
+            "А",
+            "В",
+            "Д",
+            "Е",
+            "М",
+            "Т",
+            "У",
+            "Ы"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a12-you",
+            "a20-i-think",
+            "a20-you-pl-read"
+          ],
+          "introduces_meanings": [
+            "a20-you-pl-think"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-you-pl-think-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "For several listeners or one polite addressee, use дума- plus -ете: ду́маете. Compare the ending with чита́ете."
+          }
+        },
+        {
+          "id": "a20-they-think",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: They think or they are thinking.",
+          "display": "Они думают.",
+          "audio_ids": [
+            "foundation-a20-they-think"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Д",
+            "И",
+            "М",
+            "Н",
+            "О",
+            "Т",
+            "У",
+            "Ю"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "they-people",
+            "a20-i-think",
+            "a20-they-read"
+          ],
+          "introduces_meanings": [
+            "a20-they-think"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a20-they-think-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "For they, use дума- plus -ют: ду́мают. Compare with your earlier choice, then say the complete sentence."
+          }
+        },
+        {
+          "id": "a20-you-think-say",
+          "revision": "1",
+          "instruction": "Address one familiar listener. Say: you are thinking.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a20-you-think"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Д",
+            "Е",
+            "М",
+            "Т",
+            "У",
+            "Ш",
+            "Ы",
+            "Ь"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a20-you-think"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a20-you-think-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Ты думаешь.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Ты думаешь. — You think or you are thinking, one familiar listener. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a20-i-read-say",
+          "revision": "1",
+          "instruction": "Say about yourself: I am reading.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a20-i-read"
+          ],
+          "requires_graphemes": [
+            "А",
+            "И",
+            "Т",
+            "Ч",
+            "Ю",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a20-i-read"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a20-i-read-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Я читаю.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Я читаю. — I read or I am reading. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a20-compose-she-reads",
+          "revision": "1",
+          "instruction": "Write: she is reading. The he/she/it present verb form is the same in the taught pattern.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a20-compose-she-reads"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Е",
+            "И",
+            "Н",
+            "О",
+            "Т",
+            "Ч"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "she-person",
+            "a20-he-reads"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [
+            "taught-letter-keyboard"
+          ],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "written",
+            "answer": "Она читает.",
+            "accepted": [
+              "Она читает."
+            ],
+            "feedback": [],
+            "reveal": "Она читает. — She is reading. Change the pronoun to она; keep the same verb ending as with он. Compare both words with your attempt.",
+            "keyboard": [
+              " ",
+              ".",
+              "а",
+              "е",
+              "и",
+              "н",
+              "о",
+              "т",
+              "ч"
+            ]
+          }
+        },
+        {
+          "id": "a20-compose-she-thinks",
+          "revision": "1",
+          "instruction": "Say: she is thinking. Use the taught person and thinking pattern.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a20-compose-she-thinks"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Д",
+            "Е",
+            "М",
+            "Н",
+            "О",
+            "Т",
+            "У"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "she-person",
+            "a20-he-thinks"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Она думает.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Она думает. — She is thinking. Change the pronoun to она; keep the same verb ending as with он. Compare both words with your attempt.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a20-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You practiced reading and thinking with different people, changed verb endings, and built new messages. You can revisit one person at a time; there is no need to remember the whole set at once."
+          }
+        }
+      ]
+    },
+    {
+      "id": "foundation-21",
+      "title": "First windows into ideas",
+      "goal": "Read four original micro-scenes with taught script; use short new meanings as supported bridges into mathematics, philosophy, fiction and science fiction.",
+      "steps": [
+        {
+          "id": "a21-number",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: number.",
+          "display": "число",
+          "audio_ids": [
+            "foundation-a21-number"
+          ],
+          "requires_graphemes": [
+            "И",
+            "Л",
+            "О",
+            "С",
+            "Ч"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a21-number"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a21-number-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This noun is grammatically neuter. It names a mathematical number. Stress the last vowel: число́; keep the two middle consonants together."
+          }
+        },
+        {
+          "id": "a21-one",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: one.",
+          "display": "один",
+          "audio_ids": [
+            "foundation-a21-one"
+          ],
+          "requires_graphemes": [
+            "Д",
+            "И",
+            "Н",
+            "О"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a21-one"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a21-one-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Stress the last vowel: оди́н. This is the masculine form of one. Here it names the number itself; its other counting and agreement uses can come later."
+          }
+        },
+        {
+          "id": "a21-one-number",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: One is a number.",
+          "display": "Один — это число.",
+          "audio_ids": [
+            "foundation-a21-one-number"
+          ],
+          "requires_graphemes": [
+            "Д",
+            "И",
+            "Л",
+            "Н",
+            "О",
+            "С",
+            "Т",
+            "Ч",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a21-one",
+            "a21-number",
+            "a9-this"
+          ],
+          "introduces_meanings": [
+            "a21-one-number"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a21-one-number-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [
+            "dash-reading-punctuation"
+          ],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This identifies one as a number. The dash links the named number to its description. Pause briefly there if useful; do not say a separate word for the dash."
+          }
+        },
+        {
+          "id": "a21-maybe",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: perhaps or maybe.",
+          "display": "может быть",
+          "audio_ids": [
+            "foundation-a21-maybe"
+          ],
+          "requires_graphemes": [
+            "Б",
+            "Е",
+            "Ж",
+            "М",
+            "О",
+            "Т",
+            "Ы",
+            "Ь"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [
+            "a21-maybe"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a21-maybe-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "This whole expression means perhaps or maybe. Stress the first syllable of the first word. You can use it as a short answer when you are unsure."
+          }
+        },
+        {
+          "id": "a21-fact-question",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: Is this a fact?",
+          "display": "Это факт?",
+          "audio_ids": [
+            "foundation-a21-fact-question"
+          ],
+          "requires_graphemes": [
+            "А",
+            "К",
+            "О",
+            "Т",
+            "Ф",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this",
+            "a19-fact"
+          ],
+          "introduces_meanings": [
+            "a21-fact-question"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a21-fact-question-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "The naming frame becomes a question without adding an English-style helping verb. Listen to the whole question. To leave the answer open, you can use the earlier expression for maybe."
+          }
+        },
+        {
+          "id": "a21-fiction-scene",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: This is a book. I am reading.",
+          "display": "Это книга. Я читаю.",
+          "audio_ids": [
+            "foundation-a21-fiction-scene"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Г",
+            "И",
+            "К",
+            "Н",
+            "О",
+            "Т",
+            "Ч",
+            "Э",
+            "Ю",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a14-this-book",
+            "a20-i-read"
+          ],
+          "introduces_meanings": [
+            "a21-fiction-scene"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a21-fiction-scene-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Imagine opening a book. Read the first sentence, pause, then read the second. You can keep the English meaning nearby."
+          }
+        },
+        {
+          "id": "a21-robot-scene",
+          "revision": "1",
+          "instruction": "Listen, then connect this spelling with its meaning: This is a robot. It is thinking.",
+          "display": "Это робот. Он думает.",
+          "audio_ids": [
+            "foundation-a21-robot-scene"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Б",
+            "Д",
+            "Е",
+            "М",
+            "Н",
+            "О",
+            "Р",
+            "Т",
+            "У",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a13-this-robot",
+            "a13-robot-he",
+            "a20-he-thinks"
+          ],
+          "introduces_meanings": [
+            "a21-robot-scene"
+          ],
+          "requires_samples": [],
+          "introduces_samples": [
+            "a21-robot-scene-sample"
+          ],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "present",
+            "note": "Imagine a robot in a story. The first sentence introduces it; the second says it is thinking. Он refers back to the masculine noun робот."
+          }
+        },
+        {
+          "id": "a21-read-math",
+          "revision": "1",
+          "instruction": "Try reading the spelling aloud before revealing its model.",
+          "display": "Один — это число.",
+          "audio_ids": [
+            "foundation-a21-one-number"
+          ],
+          "requires_graphemes": [
+            "Д",
+            "И",
+            "Л",
+            "Н",
+            "О",
+            "С",
+            "Т",
+            "Ч",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a21-one-number"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a21-one-number-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "read",
+            "reveal_text": "Один — это число. — One is a number",
+            "note": "Try first, then listen. Compare one part at a time; you can replay and make another try."
+          }
+        },
+        {
+          "id": "a21-philosophy-listen",
+          "revision": "1",
+          "instruction": "Listen to the short question. What is being asked?",
+          "display": null,
+          "audio_ids": [
+            "foundation-a21-fact-question"
+          ],
+          "requires_graphemes": [
+            "А",
+            "К",
+            "О",
+            "Т",
+            "Ф",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a21-fact-question"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a21-fact-question-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "listening_meaning",
+            "answer": "Is this a fact?",
+            "accepted": [
+              "is this a fact",
+              "is this a fact?",
+              "whether this is a fact"
+            ],
+            "feedback": [],
+            "reveal": "Это факт? — Is this a fact? Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a21-fiction-read",
+          "revision": "1",
+          "instruction": "Give the meaning of these two short sentences.",
+          "display": "Это книга. Я читаю.",
+          "audio_ids": [
+            "foundation-a21-fiction-scene"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Г",
+            "И",
+            "К",
+            "Н",
+            "О",
+            "Т",
+            "Ч",
+            "Э",
+            "Ю",
+            "Я"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a21-fiction-scene"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a21-fiction-scene-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "reading_meaning",
+            "answer": "This is a book. I am reading.",
+            "accepted": [
+              "this is a book. i am reading.",
+              "this is a book; i am reading",
+              "this is a book. i read."
+            ],
+            "feedback": [],
+            "reveal": "Это книга. Я читаю. — This is a book. I am reading. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a21-scifi-say",
+          "revision": "1",
+          "instruction": "Imagine a story scene. Identify a robot, then say it is thinking. Use two short sentences.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a21-robot-scene"
+          ],
+          "requires_graphemes": [
+            "А",
+            "Б",
+            "Д",
+            "Е",
+            "М",
+            "Н",
+            "О",
+            "Р",
+            "Т",
+            "У",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a21-robot-scene"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [
+            "a21-robot-scene-sample"
+          ],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Это робот. Он думает.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Это робот. Он думает. — This is a robot. It is thinking. Compare with your first answer. Replay or try again if useful.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a21-compose-sphere",
+          "revision": "1",
+          "instruction": "Imagine pointing to a sphere in a mathematical diagram. Identify it using the naming frame.",
+          "display": null,
+          "audio_ids": [
+            "foundation-a21-compose-sphere"
+          ],
+          "requires_graphemes": [
+            "А",
+            "О",
+            "Р",
+            "Т",
+            "Ш",
+            "Э"
+          ],
+          "introduces_graphemes": [],
+          "requires_meanings": [
+            "a9-this",
+            "a15-ball"
+          ],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "recall",
+            "mode": "spoken",
+            "answer": "Это шар.",
+            "accepted": [],
+            "feedback": [],
+            "reveal": "Это шар. — This is a sphere. Keep Это from the naming frame and add шар for the object in the diagram.",
+            "keyboard": []
+          }
+        },
+        {
+          "id": "a21-end",
+          "revision": "1",
+          "instruction": "Pause, repeat, or continue.",
+          "display": null,
+          "audio_ids": [],
+          "requires_graphemes": [],
+          "introduces_graphemes": [],
+          "requires_meanings": [],
+          "introduces_meanings": [],
+          "requires_samples": [],
+          "introduces_samples": [],
+          "requires_conventions": [],
+          "introduces_conventions": [],
+          "audio_first_chunk": false,
+          "action": {
+            "kind": "complete",
+            "summary": "You used the alphabet to read about a number, ask about a fact, open a book scene and imagine a thinking robot. Continue with short scenes that interest you, adding their new words and forms as you need them."
+          }
+        }
+      ]
+    }
+  ]
+}
