@@ -14,9 +14,14 @@ mod model;
 mod practice;
 mod recognition;
 mod recognition_view;
+mod speech_playback;
 mod teacher;
+mod teacher_context;
+mod teacher_example_audio;
+mod teacher_examples;
 mod teacher_practice;
 mod teacher_practice_view;
+mod teacher_prose;
 mod teacher_view;
 mod tutor_view;
 mod workspace_view;
@@ -246,7 +251,7 @@ fn Studio(app: Signal<AppState>) -> Element {
     rsx! {
         div {class:"page-heading",div {div {class:"eyebrow","LISTEN · NOTICE · TRY AGAIN"}h1 {"Find your Russian voice"}p {"Give a phrase a voice and keep your own attempts. Listen first; use the instruments to investigate a particular question."}}}
         if let Some(r)=revision {p {class:"quiet","Linked to: {r.passage.title}"}}
-        AudioStudio {passage_id:revision.map(|r|r.passage.id.to_string()).unwrap_or_default(),revision_id:revision_id.map(|id|id.to_string()).unwrap_or_default(),russian:revision.map(|r|r.passage.russian.clone()).unwrap_or_default(),on_saved:move |record|act(app,|s|recording_saved(s,record)),generating_reference:state.speech_busy,on_generate_reference:move |_|{if let Some(id)=revision_id {generate_reference(app,id)}else{act(app,|s|{s.notice="Choose a passage or lesson phrase to give it a voice.".into();s.navigate(Page::Library)})}}}
+        AudioStudio {passage_id:revision.map(|r|r.passage.id.to_string()).unwrap_or_default(),revision_id:revision_id.map(|id|id.to_string()).unwrap_or_default(),russian:revision.map(|r|r.passage.russian.clone()).unwrap_or_default(),workspace_id:if cfg!(target_arch="wasm32") {String::new()}else{state.device.to_string()},on_region_played:move |played|act(app,|s|s.heard_region(played)),on_saved:move |record|act(app,|s|recording_saved(s,record)),generating_reference:state.speech_busy,on_generate_reference:move |_|{if let Some(id)=revision_id {generate_reference(app,id)}else{act(app,|s|{s.notice="Choose a passage or lesson phrase to give it a voice.".into();s.navigate(Page::Library)})}}}
     }
 }
 fn generate_reference(mut app: Signal<AppState>, revision: uuid::Uuid) {

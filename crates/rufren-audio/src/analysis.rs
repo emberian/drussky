@@ -148,7 +148,14 @@ where
         );
         checkpoint(&mut yield_now).await?;
     }
-    let quality = quality(audio, &mono, &mut yield_now).await?;
+    let (_, quality) = crate::quality::observe(
+        audio.samples(),
+        meta.sample_rate,
+        meta.channels,
+        crate::quality::QualityContext::Recording,
+        &mut yield_now,
+    )
+    .await?;
     let waveform = envelope(&mono, meta.sample_rate, &mut yield_now).await?;
     let normalized = resample(&mono, meta.sample_rate, RATE, &mut yield_now).await?;
     let spectrogram = spectrum(&normalized, &mut yield_now).await?;
@@ -248,103 +255,6 @@ where
         }
     }
     Ok(result)
-}
-
-async fn quality<F, Fut>(
-    audio: &PcmAudio,
-    mono: &[f32],
-    yield_now: &mut F,
-) -> Result<RecordingQuality, AudioError>
-where
-    F: FnMut() -> Fut,
-    Fut: Future<Output = bool>,
-{
-    let rate = audio.metadata().sample_rate as usize;
-    let block_size = rate / 50;
-    let mut blocks = Vec::with_capacity(mono.len().div_ceil(block_size));
-    let mut mono_peak = 0.0_f32;
-    let mut mono_squares = 0.0_f64;
-    let mut mono_sum = 0.0_f64;
-    for (i, block) in mono.chunks(block_size).enumerate() {
-        let mut block_squares = 0.0;
-        for &x in block {
-            mono_peak = mono_peak.max(x.abs());
-            let square = (x as f64).powi(2);
-            block_squares += square;
-            mono_squares += square;
-            mono_sum += x as f64;
-        }
-        blocks.push((
-            block.len(),
-            ((block_squares / block.len() as f64).sqrt() as f32) < 0.01,
-        ));
-        if i % 32 == 0 {
-            checkpoint(yield_now).await?;
-        }
-    }
-    let silent = blocks
-        .iter()
-        .filter(|(_, quiet)| *quiet)
-        .map(|(len, _)| len)
-        .sum::<usize>();
-    let leading = blocks
-        .iter()
-        .take_while(|(_, quiet)| *quiet)
-        .map(|(len, _)| len)
-        .sum::<usize>();
-    let trailing = blocks
-        .iter()
-        .rev()
-        .take_while(|(_, quiet)| *quiet)
-        .map(|(len, _)| len)
-        .sum::<usize>();
-    let mut peak = 0.0_f32;
-    let mut clipped = 0_usize;
-    let mut original_squares = 0.0_f64;
-    for chunk in audio.samples().chunks(65_536) {
-        for &x in chunk {
-            peak = peak.max(x.abs());
-            clipped += usize::from(x.abs() >= 0.999);
-            original_squares += (x as f64).powi(2);
-        }
-        checkpoint(yield_now).await?;
-    }
-    let clipping_fraction = clipped as f32 / audio.samples().len() as f32;
-    let mono_rms = (mono_squares / mono.len() as f64).sqrt() as f32;
-    let rms_dbfs = db(mono_rms);
-    let silent_fraction = silent as f32 / mono.len() as f32;
-    let mut flags = Vec::new();
-    if mono_peak < 0.0001 {
-        flags.push(QualityFlag::Silent);
-    }
-    if rms_dbfs < -35.0 {
-        flags.push(QualityFlag::Quiet);
-    }
-    if clipping_fraction > 0.0 {
-        flags.push(QualityFlag::Clipped);
-    }
-    if silent_fraction > 0.6 {
-        flags.push(QualityFlag::MostlySilent);
-    }
-    if audio.metadata().duration_seconds < 0.15 {
-        flags.push(QualityFlag::TooShort);
-    }
-    if (mono_sum / mono.len() as f64).abs() > 0.05 {
-        flags.push(QualityFlag::DcOffset);
-    }
-    let original_rms = (original_squares / audio.samples().len() as f64).sqrt() as f32;
-    if original_rms > 0.01 && mono_rms < original_rms * 0.1 {
-        flags.push(QualityFlag::DownmixCancellation);
-    }
-    Ok(RecordingQuality {
-        rms_dbfs,
-        peak,
-        clipping_fraction,
-        silent_fraction,
-        leading_silence_seconds: leading as f64 / rate as f64,
-        trailing_silence_seconds: trailing as f64 / rate as f64,
-        flags,
-    })
 }
 
 /// Polyphase low-pass windowed-sinc resampling. 256 fractional phases; Hann

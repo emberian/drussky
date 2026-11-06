@@ -5,9 +5,12 @@
 //! 16 kHz using a low-pass windowed-sinc filter. No network or device APIs are used.
 
 mod analysis;
+mod quality;
+mod region;
 mod wav;
 
 pub use analysis::*;
+pub use region::*;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::future::{Future, ready};
@@ -35,6 +38,8 @@ pub enum AudioError {
     Wav(&'static str),
     #[error("crop must be a nonempty frame range inside the recording")]
     InvalidCrop,
+    #[error("region measurements are invalid or use an unsupported instrument version")]
+    InvalidRegionMetrics,
     #[error("audio analysis was cancelled")]
     Cancelled,
 }
@@ -149,6 +154,19 @@ impl PcmAudio {
     /// extensible, RF64, and duplicate format/data chunks are explicitly rejected.
     pub fn from_wav(bytes: &[u8]) -> Result<Self, AudioError> {
         wav::decode(bytes)
+    }
+
+    /// Decode original WAV frames and hash PCM in bounded chunks. Return false
+    /// from a genuinely yielding callback to cancel without a partial recording.
+    pub async fn from_wav_cooperatively<F, Fut>(
+        bytes: &[u8],
+        yield_now: F,
+    ) -> Result<Self, AudioError>
+    where
+        F: FnMut() -> Fut,
+        Fut: Future<Output = bool>,
+    {
+        wav::decode_cooperatively(bytes, yield_now).await
     }
 
     /// Lossless IEEE float32 WAV with original rate, channels, and samples.

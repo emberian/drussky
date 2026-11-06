@@ -353,7 +353,7 @@ async fn provider_teacher_binds_exact_answer_and_ai_provenance() {
         ReviewStatus::AiGeneratedTeaching
     );
     assert_eq!(result.provenance.response_id, "msg_mock_001");
-    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v2");
+    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v3");
     assert_eq!(
         result.content.feedback.unwrap().verdict,
         AiVerdict::PartlyCorrect

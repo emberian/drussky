@@ -12,6 +12,7 @@ pub(crate) fn PresentedRussian(
     purpose: PresentationPurpose,
     #[props(default)] class: String,
     #[props(default = "ru".to_string())] language: String,
+    #[props(default)] children: Option<Element>,
     #[props(default)] revision: Option<Uuid>,
     #[props(default)] session: Option<Uuid>,
     #[props(default)] decision: Option<Uuid>,
@@ -51,5 +52,8 @@ pub(crate) fn PresentedRussian(
         let id = serde_json::to_string(&cleanup_id).unwrap();
         let _ = document::eval(&format!("window.rufrenPresentations?.get({id})?.();"));
     });
-    rsx! {p {id:element_id, class, lang:language, "{text}"}}
+    match children {
+        Some(children) => rsx! {div {id:element_id, class, lang:language, {children}}},
+        None => rsx! {p {id:element_id, class, lang:language, "{text}"}},
+    }
 }

@@ -84,7 +84,7 @@ pub(crate) fn Practice(mut app: Signal<AppState>) -> Element {
                             for option in &ex.options {{let id=option.id.clone();rsx! {button {class:if session.draft==option.id {"choice-option selected"}else{"choice-option"},aria_pressed:session.draft==option.id,onclick:move |_|act(app,|s|s.update_response(id.clone())),"{option.text}"}}}}
                         }}
                     } else if speaking {
-                        AudioStudio {key:"speak-{session.id}",passage_id:p.id.to_string(),revision_id:revision_id.clone(),russian:String::new(),on_saved:move |record|act(app,|s|recording_saved(s,record)),on_reference_played:move |_|act(app,|s|s.heard_reference()),generating_reference:state.speech_busy,on_generate_reference:move |_|generate_reference(app,session.revision)}
+                        AudioStudio {key:"speak-{session.id}",passage_id:p.id.to_string(),revision_id:revision_id.clone(),russian:String::new(),workspace_id:if cfg!(target_arch="wasm32") {String::new()}else{state.device.to_string()},on_region_played:move |played|act(app,|s|s.heard_region(played)),on_saved:move |record|act(app,|s|recording_saved(s,record)),on_reference_played:move |_|act(app,|s|s.heard_reference()),generating_reference:state.speech_busy,on_generate_reference:move |_|generate_reference(app,session.revision)}
                         if !session.draft.is_empty() {p {class:"quiet","{session.draft}"}}
                     } else {
                         label {r#for:"practice-response",if writing {"Your words in Russian"}else{"What did you understand?"}}

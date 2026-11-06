@@ -22,6 +22,10 @@ mod recognition;
 mod repository;
 #[path = "../src/teacher.rs"]
 mod teacher;
+#[path = "../src/teacher_context.rs"]
+mod teacher_context;
+#[path = "../src/teacher_practice.rs"]
+mod teacher_practice;
 use model::AppState;
 use repository::Repository;
 use rufren_content::ExerciseKind;

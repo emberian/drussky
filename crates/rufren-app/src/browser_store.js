@@ -5,7 +5,7 @@ if (!window.rufrenLibrary) {
   const workspaceJournal='rufren.journal.workspace.v1.',workspaceToken='rufren.workspace.v1',lockPrefix='rufren-workspace-v1.';
   const cache=new Map(),eventVersions=new Map(),heldWorkspaces=new Set();let eventVersion=0,db,flushing=false,failure=null,workspace=null;
   const channel=typeof BroadcastChannel==='function'?new BroadcastChannel('rufren-library'):null;
-  const scoped=name=>['session','session_plan','paused_practice_ids','active_passage_draft','passage_draft_ids','selected_lesson','tutor_response','teacher_response','teacher_request'].includes(name)||name.startsWith('paused_practice.')||name.startsWith('passage_draft.')||name.startsWith('teacher_practice:')||name.startsWith('transcript_draft:');
+  const scoped=name=>['session','session_plan','paused_practice_ids','active_passage_draft','passage_draft_ids','selected_lesson','tutor_response','teacher_response','teacher_request','teacher_context_prepared'].includes(name)||name.startsWith('paused_practice.')||name.startsWith('passage_draft.')||name.startsWith('teacher_practice:')||name.startsWith('transcript_draft:');
   const scopeKey=(id,name)=>workspacePrefix+id+'.meta.'+name;
   const infoKey=id=>workspacePrefix+id+'.info';
   const validId=id=>typeof id==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(id);

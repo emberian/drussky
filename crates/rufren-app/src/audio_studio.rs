@@ -1,10 +1,13 @@
 //! Speech studio UI; the JS adapter handles devices and binary storage, Rust handles DSP.
 use base64::{Engine as _, engine::general_purpose::STANDARD};
 use dioxus::prelude::*;
-use rufren_audio::{AudioAnalysis, AudioError, PcmAudio, analyze_cooperatively, compare};
+use rufren_audio::{
+    AudioAnalysis, AudioError, AudioMetadata, PcmAudio, RegionMetrics, RegionSpan,
+    analyze_cooperatively, compare, compare_regions, measure_region_cooperatively,
+};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
-use std::rc::Rc;
+use std::{collections::HashMap, rc::Rc};
 
 const BRIDGE: &str = include_str!("audio_bridge.js");
 const STYLE: &str = include_str!("audio_studio.css");
@@ -233,6 +236,17 @@ fn import_native_file(event: FormEvent, role: &'static str, mut error: Signal<St
 #[cfg(target_arch = "wasm32")]
 fn import_native_file(_event: FormEvent, _role: &'static str, _error: Signal<String>) {}
 
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct StudioRegionPlayback {
+    pub recording: StudioRecording,
+    pub slot: String,
+    pub source_pcm_hash: String,
+    pub source_kind: String,
+    pub sample_rate: u32,
+    pub span: RegionSpan,
+    pub playback_rate: f64,
+}
+
 #[derive(Deserialize)]
 struct BridgeEvent {
     kind: String,
@@ -246,17 +260,55 @@ struct BridgeEvent {
     channels: u16,
     #[serde(default)]
     recording: Option<StudioRecording>,
+    #[serde(default)]
+    wav_base64: String,
+    #[serde(default)]
+    request_id: String,
+    #[serde(default)]
+    asset_id: String,
+    #[serde(default)]
+    content_hash: String,
+    #[serde(default)]
+    source_pcm_hash: String,
+    #[serde(default)]
+    start_frame: u64,
+    #[serde(default)]
+    end_frame: u64,
+    #[serde(default)]
+    playback_rate: f64,
+}
+
+struct CachedSource {
+    recording: StudioRecording,
+    pcm: PcmAudio,
+    analysis: Rc<AudioAnalysis>,
+    source_kind: &'static str,
+}
+enum SourceLoad {
+    Ready(CachedSource),
+    Fallback(String),
+    Cancelled,
 }
 
 #[derive(Serialize)]
 struct PlotMessage<'a> {
     kind: &'static str,
     role: &'a str,
+    request_id: &'a str,
+    asset_id: &'a str,
+    content_hash: &'a str,
+    source: PlotSource<'a>,
     analysis: PlotAnalysis<'a>,
+}
+#[derive(Serialize)]
+struct PlotSource<'a> {
+    metadata: &'a AudioMetadata,
+    kind: &'a str,
 }
 #[derive(Serialize)]
 struct PlotAnalysis<'a> {
     duration_seconds: f64,
+    quality: &'a rufren_audio::RecordingQuality,
     waveform: &'a [rufren_audio::EnvelopeBin],
     pitch: &'a [rufren_audio::PitchFrame],
     spectrogram: PlotSpectrum<'a>,
@@ -270,7 +322,12 @@ struct PlotSpectrum<'a> {
     frame_times_seconds: &'a [f64],
     power_db_base64: String,
 }
-fn plot_message<'a>(role: &'a str, analysis: &'a AudioAnalysis) -> PlotMessage<'a> {
+fn plot_message<'a>(
+    role: &'a str,
+    request_id: &'a str,
+    source: &'a CachedSource,
+) -> PlotMessage<'a> {
+    let analysis = &source.analysis;
     let spectrum = &analysis.spectrogram;
     let bytes: Vec<u8> = spectrum
         .power_db
@@ -280,8 +337,16 @@ fn plot_message<'a>(role: &'a str, analysis: &'a AudioAnalysis) -> PlotMessage<'
     PlotMessage {
         kind: "analysis",
         role,
+        request_id,
+        asset_id: &source.recording.asset_id,
+        content_hash: &source.recording.content_hash,
+        source: PlotSource {
+            metadata: source.pcm.metadata(),
+            kind: source.source_kind,
+        },
         analysis: PlotAnalysis {
             duration_seconds: analysis.duration_seconds,
+            quality: &analysis.quality,
             waveform: &analysis.waveform,
             pitch: &analysis.pitch,
             spectrogram: PlotSpectrum {
@@ -296,11 +361,17 @@ fn plot_message<'a>(role: &'a str, analysis: &'a AudioAnalysis) -> PlotMessage<'
     }
 }
 
-async fn yield_analysis(role: &str, asset_id: &str) -> bool {
+async fn yield_selection(role: &str, asset_id: &str, request_id: &str, region: bool) -> bool {
     let attribute = serde_json::to_string(&format!("data-selected-{role}")).unwrap_or_default();
-    let asset_id = serde_json::to_string(asset_id).unwrap_or_default();
+    let token_attribute = serde_json::to_string(&format!(
+        "data-{}-request-{role}",
+        if region { "region" } else { "analysis" }
+    ))
+    .unwrap_or_default();
+    let asset = serde_json::to_string(asset_id).unwrap_or_default();
+    let token = serde_json::to_string(request_id).unwrap_or_default();
     let code = format!(
-        "await window.rufrenAudioStudio?.yieldNow(); return document.getElementById('rufren-audio-studio')?.getAttribute({attribute}) === {asset_id};"
+        "await window.rufrenAudioStudio?.yieldNow();const root=document.getElementById('rufren-audio-studio');return !!root && root.getAttribute({attribute})==={asset} && root.getAttribute({token_attribute})==={token};"
     );
     document::eval(&code)
         .await
@@ -308,36 +379,68 @@ async fn yield_analysis(role: &str, asset_id: &str) -> bool {
         .and_then(|v| v.as_bool())
         .unwrap_or(false)
 }
-async fn analyze_event(
-    event: &BridgeEvent,
-    asset_id: &str,
-) -> Result<Option<AudioAnalysis>, String> {
-    if event.samples.len() > 90 * 1024 * 1024 {
-        return Err("The PCM message exceeds the instrument limit".into());
-    }
-    let bytes = STANDARD.decode(&event.samples).map_err(|e| e.to_string())?;
-    if bytes.len() % 4 != 0 || bytes.len() > 64 * 1024 * 1024 {
-        return Err("Invalid PCM byte count".into());
-    }
-    let samples = bytes
-        .chunks_exact(4)
-        .map(|b| f32::from_le_bytes([b[0], b[1], b[2], b[3]]))
-        .collect();
-    let pcm = match PcmAudio::from_interleaved_cooperatively(
-        event.sample_rate,
-        event.channels,
-        samples,
-        || yield_analysis(&event.role, asset_id),
-    )
-    .await
-    {
-        Ok(pcm) => pcm,
-        Err(AudioError::Cancelled) => return Ok(None),
-        Err(e) => return Err(e.to_string()),
+async fn analyze_event(event: &BridgeEvent) -> Result<SourceLoad, String> {
+    let recording = event
+        .recording
+        .clone()
+        .ok_or("Audio source metadata is missing")?;
+    let yield_now = || yield_selection(&event.role, &recording.asset_id, &event.request_id, false);
+    let (pcm, source_kind) = if !event.wav_base64.is_empty() {
+        if event.wav_base64.len() > 90 * 1024 * 1024 {
+            return Err("Original WAV exceeds its bounded size".into());
+        }
+        let bytes = STANDARD
+            .decode(&event.wav_base64)
+            .map_err(|e| e.to_string())?;
+        let mut byte_hash = Sha256::new();
+        for chunk in bytes.chunks(262144) {
+            byte_hash.update(chunk);
+            if !yield_now().await {
+                return Ok(SourceLoad::Cancelled);
+            }
+        }
+        if format!("{:x}", byte_hash.finalize()) != recording.content_hash {
+            return Err("Original WAV failed its byte-hash check".into());
+        }
+        match PcmAudio::from_wav_cooperatively(&bytes, yield_now).await {
+            Ok(pcm) => (pcm, "original_wav"),
+            Err(AudioError::Cancelled) => return Ok(SourceLoad::Cancelled),
+            Err(error) => return Ok(SourceLoad::Fallback(error.to_string())),
+        }
+    } else {
+        if event.samples.len() > 90 * 1024 * 1024 {
+            return Err("PCM message exceeds the instrument limit".into());
+        }
+        let bytes = STANDARD.decode(&event.samples).map_err(|e| e.to_string())?;
+        if bytes.len() % 4 != 0 || bytes.len() > 64 * 1024 * 1024 {
+            return Err("Invalid PCM byte count".into());
+        }
+        let samples = bytes
+            .chunks_exact(4)
+            .map(|b| f32::from_le_bytes([b[0], b[1], b[2], b[3]]))
+            .collect();
+        match PcmAudio::from_interleaved_cooperatively(
+            event.sample_rate,
+            event.channels,
+            samples,
+            yield_now,
+        )
+        .await
+        {
+            Ok(pcm) => (pcm, "decoded_pcm"),
+            Err(AudioError::Cancelled) => return Ok(SourceLoad::Cancelled),
+            Err(e) => return Err(e.to_string()),
+        }
     };
-    match analyze_cooperatively(&pcm, || yield_analysis(&event.role, asset_id)).await {
-        Ok(analysis) => Ok(Some(analysis)),
-        Err(AudioError::Cancelled) => Ok(None),
+    let analyzed = analyze_cooperatively(&pcm, yield_now).await;
+    match analyzed {
+        Ok(analysis) => Ok(SourceLoad::Ready(CachedSource {
+            recording,
+            pcm,
+            analysis: Rc::new(analysis),
+            source_kind,
+        })),
+        Err(AudioError::Cancelled) => Ok(SourceLoad::Cancelled),
         Err(e) => Err(e.to_string()),
     }
 }
@@ -353,15 +456,19 @@ pub fn AudioStudio(
     #[props(default)] on_cue_saved: EventHandler<StudioRecording>,
     #[props(default)] on_generate_reference: Option<EventHandler<()>>,
     #[props(default)] generating_reference: bool,
+    #[props(default)] workspace_id: String,
+    #[props(default)] on_region_played: EventHandler<StudioRegionPlayback>,
 ) -> Element {
     let mut reference = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut attempt = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut error = use_signal(String::new);
-    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id}).to_string();
+    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id}).to_string();
     use_effect(move || {
         spawn(async move {
             // Effects run after mounting. The long-lived eval keeps a bidirectional channel.
             let mut bridge = document::eval(BRIDGE);
+            let mut sources: HashMap<String, Rc<CachedSource>> = HashMap::new();
+            let mut regions: HashMap<String, (String, RegionMetrics)> = HashMap::new();
             loop {
                 let event = match bridge.recv::<BridgeEvent>().await {
                     Ok(event) => event,
@@ -374,34 +481,151 @@ pub fn AudioStudio(
                 };
                 match event.kind.as_str() {
                     "pcm" => {
+                        if !matches!(
+                            event.role.as_str(),
+                            "reference" | "attempt" | "region_a" | "region_b"
+                        ) {
+                            continue;
+                        }
                         error.set(String::new());
-                        let asset_id = event
-                            .recording
-                            .as_ref()
-                            .map(|r| r.asset_id.as_str())
-                            .unwrap_or("");
+                        regions.remove(&event.role);
                         if event.role == "reference" {
                             reference.set(None);
-                        } else {
+                        } else if event.role == "attempt" {
                             attempt.set(None);
                         }
-                        let decoded = analyze_event(&event, asset_id).await;
-                        match decoded {
-                            Ok(Some(analysis)) => {
-                                let message = plot_message(&event.role, &analysis);
-                                if let Err(e) = bridge.send(message) {
-                                    error.set(format!("Could not draw the analysis: {e}"));
+                        let Some(recording) = event.recording.as_ref() else {
+                            continue;
+                        };
+                        let reused = sources
+                            .values()
+                            .find(|source| {
+                                source.recording.asset_id == recording.asset_id
+                                    && source.recording.content_hash == recording.content_hash
+                                    && (source.source_kind == "original_wav"
+                                        || source.pcm.metadata().sample_rate == event.sample_rate
+                                            && source.pcm.metadata().channels == event.channels)
+                            })
+                            .cloned();
+                        let loaded = if let Some(source) = reused {
+                            if !yield_selection(
+                                &event.role,
+                                &recording.asset_id,
+                                &event.request_id,
+                                false,
+                            )
+                            .await
+                            {
+                                continue;
+                            }
+                            Ok(Some(source))
+                        } else {
+                            match analyze_event(&event).await {
+                                Ok(SourceLoad::Ready(source)) => Ok(Some(Rc::new(source))),
+                                Ok(SourceLoad::Cancelled) => Ok(None),
+                                Ok(SourceLoad::Fallback(reason)) => {
+                                    let _=bridge.send(serde_json::json!({"kind":"request_decoded","role":event.role,"asset_id":recording.asset_id,"request_id":event.request_id,"reason":reason}));
+                                    Ok(None)
+                                }
+                                Err(e) => Err(e),
+                            }
+                        };
+                        match loaded {
+                            Ok(Some(source)) => {
+                                if let Err(e) = bridge.send(plot_message(
+                                    &event.role,
+                                    &event.request_id,
+                                    &source,
+                                )) {
+                                    error.set(format!("Could not draw analysis: {e}"));
                                 }
                                 if event.role == "reference" {
-                                    reference.set(Some(Rc::new(analysis)));
-                                } else {
-                                    attempt.set(Some(Rc::new(analysis)));
+                                    reference.set(Some(source.analysis.clone()));
+                                } else if event.role == "attempt" {
+                                    attempt.set(Some(source.analysis.clone()));
                                 }
+                                sources.insert(event.role.clone(), source);
                             }
                             Ok(None) => {}
                             Err(e) => error.set(format!(
-                                "The original is available, but analysis could not run: {e}"
+                                "Original audio is available, but analysis could not run: {e}"
                             )),
+                        }
+                    }
+                    "source_clear" => {
+                        sources.remove(&event.role);
+                        regions.remove(&event.role);
+                    }
+                    "region" => {
+                        if !matches!(event.role.as_str(), "region_a" | "region_b") {
+                            continue;
+                        }
+                        let Some(source) = sources.get(&event.role).cloned() else {
+                            continue;
+                        };
+                        if source.recording.asset_id != event.asset_id
+                            || source.recording.content_hash != event.content_hash
+                            || source.pcm.metadata().content_hash != event.source_pcm_hash
+                        {
+                            continue;
+                        }
+                        let span = RegionSpan {
+                            start_frame: event.start_frame,
+                            end_frame: event.end_frame,
+                        };
+                        match measure_region_cooperatively(&source.pcm, span, || {
+                            yield_selection(&event.role, &event.asset_id, &event.request_id, true)
+                        })
+                        .await
+                        {
+                            Ok(metrics) => {
+                                let _=bridge.send(serde_json::json!({"kind":"region_metrics","role":event.role,"asset_id":event.asset_id,"content_hash":event.content_hash,"request_id":event.request_id,"metrics":metrics}));
+                                regions.insert(
+                                    event.role.clone(),
+                                    (event.request_id.clone(), metrics),
+                                );
+                                if let (Some((a_token, a)), Some((b_token, b))) =
+                                    (regions.get("region_a"), regions.get("region_b"))
+                                {
+                                    if let Ok(comparison) = compare_regions(a, b) {
+                                        let _=bridge.send(serde_json::json!({"kind":"region_comparison","a_request_id":a_token,"b_request_id":b_token,"comparison":comparison}));
+                                    }
+                                }
+                            }
+                            Err(AudioError::Cancelled) => {}
+                            Err(e) => {
+                                let _=bridge.send(serde_json::json!({"kind":"region_error","role":event.role,"request_id":event.request_id,"error":e.to_string()}));
+                            }
+                        }
+                    }
+                    "region_played" => {
+                        if !matches!(event.role.as_str(), "region_a" | "region_b")
+                            || !event.playback_rate.is_finite()
+                            || !(0.25..=2.0).contains(&event.playback_rate)
+                        {
+                            continue;
+                        }
+                        let Some(source) = sources.get(&event.role) else {
+                            continue;
+                        };
+                        let span = RegionSpan {
+                            start_frame: event.start_frame,
+                            end_frame: event.end_frame,
+                        };
+                        if source.recording.asset_id == event.asset_id
+                            && source.recording.content_hash == event.content_hash
+                            && source.pcm.metadata().content_hash == event.source_pcm_hash
+                            && span.validate_for(&source.pcm).is_ok()
+                        {
+                            on_region_played.call(StudioRegionPlayback {
+                                recording: source.recording.clone(),
+                                slot: if event.role == "region_a" { "A" } else { "B" }.into(),
+                                source_pcm_hash: event.source_pcm_hash,
+                                source_kind: source.source_kind.into(),
+                                sample_rate: source.pcm.metadata().sample_rate,
+                                span,
+                                playback_rate: event.playback_rate,
+                            });
                         }
                     }
                     "cue_saved" => {
@@ -479,6 +703,65 @@ pub fn AudioStudio(
                     }
                 }
             }
+            details {id:"audio-region-lab",class:"panel audio-region-lab",
+                summary {h2 {"Compare two regions"}span {"Choose a sound, replay it, and compare its timing and level."}}
+                p {class:"quiet","Choose any saved recording for A and B, including two regions of the same recording. Drag across the waveform or spectrum. The highlighted boundaries are your selections, not automatic sound labels."}
+                div {class:"audio-region-tools",
+                    button {class:"secondary","data-region-action":"use-current","Use current recordings"}
+                    button {class:"text-button","data-region-action":"copy-a","Use A’s recording for B"}
+                    label {class:"audio-checkbox",input {id:"audio-region-zoom",r#type:"checkbox"}"Zoom around both selections"}
+                    label {class:"audio-checkbox",input {id:"audio-region-pitch",r#type:"checkbox"}"Show contextual pitch"}
+                }
+                div {class:"audio-region-panes",
+                    for (slot,label) in [("region_a","A"),("region_b","B")] {
+                        section {class:"audio-region-pane","data-region-slot":slot,
+                            h3 {"Region {label}"}
+                            label {r#for:"audio-region-source-{slot}","Recording"}select {id:"audio-region-source-{slot}","data-region-source":slot,option {value:"","Choose a saved recording…"}}
+                            p {id:"audio-region-identity-{slot}",class:"audio-region-identity","No source selected"}
+                            for (kind,title) in [("wave","Waveform"),("spectrum","Spectrogram"),("pitch","Contextual pitch · 50–400 Hz")] {
+                                div {class:"audio-region-plot","data-region-track":kind,
+                                    span {class:"audio-plot-title","{title}"}
+                                    div {class:"audio-region-surface","data-region-surface":slot,"data-region-kind":kind,
+                                        canvas {id:"audio-{kind}-{slot}",width:"960",height:"180",role:"img",aria_label:"Region {label} {title}"}
+                                        div {class:"audio-region-highlight","data-region-highlight":slot,aria_hidden:"true"}
+                                        for edge in ["start","end"] {button {class:"audio-region-handle",disabled:true,r#type:"button",role:"slider",tabindex:if kind=="wave"{0}else{-1},aria_hidden:if kind=="wave"{"false"}else{"true"},"data-region-edge":edge,"data-region-owner":slot,aria_label:"Region {label} {edge} boundary",aria_valuemin:"0",aria_valuemax:"0",aria_valuenow:"0",span {aria_hidden:"true","⋮"}}}
+                                    }
+                                }
+                            }
+                            div {id:"audio-time-{slot}",class:"audio-time-axis",aria_hidden:"true"}
+                            p {id:"audio-region-scale-{slot}",class:"quiet audio-region-scale"}
+                            div {class:"audio-region-boundaries",
+                                label {r#for:"audio-region-from-{slot}",{"Start (seconds)"} input {id:"audio-region-from-{slot}",r#type:"number",min:"0",step:"0.001",initial_value:"0","data-region-seconds":slot}}
+                                label {r#for:"audio-region-to-{slot}",{"End (seconds)"} input {id:"audio-region-to-{slot}",r#type:"number",min:"0",step:"0.001",initial_value:"0","data-region-seconds":slot}}
+                            }
+                            details {class:"audio-region-precise",summary {"Exact frame boundaries & keyboard help"}
+                                p {class:"quiet","Each boundary is a source PCM frame. End is exclusive. Focus a boundary handle, then use arrows to move one frame; Shift moves 10, Alt moves 100. Home and End move to the available edge."}
+                                div {class:"audio-region-boundaries",
+                                    label {r#for:"audio-region-first-{slot}",{"Start frame"} input {id:"audio-region-first-{slot}",r#type:"number",min:"0",step:"1",initial_value:"0","data-region-frames":slot}}
+                                    label {r#for:"audio-region-last-{slot}",{"End frame"} input {id:"audio-region-last-{slot}",r#type:"number",min:"1",step:"1",initial_value:"0","data-region-frames":slot}}
+                                }
+                                button {class:"text-button","data-region-action":"reset","data-region-role":slot,"Select whole recording"}
+                            }
+                            p {id:"audio-region-range-{slot}",class:"audio-region-range"}
+                            p {id:"audio-region-metrics-{slot}",class:"audio-region-metrics",role:"status",aria_live:"polite","Choose a recording to measure a region."}
+                            div {class:"actions",
+                                button {class:"secondary",disabled:true,"data-region-play":slot,"▶ Play {label}"}
+                                button {class:"text-button",disabled:true,"data-region-export":slot,"Save boundaries"}
+                            }
+                        }
+                    }
+                }
+                div {class:"audio-region-tools",
+                    label {r#for:"audio-region-rate","Playback speed"}select {id:"audio-region-rate",option {value:"1","Natural · 1×"}option {value:"0.85","0.85× · keep voice pitch"}option {value:"0.7","0.7× · keep voice pitch"}option {value:"0.5","0.5× · keep voice pitch"}}
+                    label {class:"audio-checkbox",input {id:"audio-region-loop",r#type:"checkbox"}"Loop one region"}
+                    button {id:"audio-region-compare",class:"primary",disabled:true,"data-region-action":"compare","A → B · selected regions"}
+                    button {class:"secondary","data-action":"stopPlayback","Stop playback"}
+                }
+                p {id:"audio-region-comparison",class:"audio-region-result",role:"status",aria_live:"polite","Select both regions to compare."}
+                p {id:"audio-region-whole",class:"quiet"}
+                p {class:"audio-principle","Both plots use the same seconds-per-pixel, frequency and level scales. Zoom translates the view around each selection; it does not stretch sounds to equal widths. Level depends on microphone, voice and gain. A longer or louder region does not by itself identify stress or a correct vowel."}
+                p {id:"audio-region-persistence",class:"quiet"}
+            }
             section {class:"panel audio-comparison",h2 {"Listen side by side"}
                 div {class:"audio-playback-controls",
                     label {r#for:"audio-rate","Playback speed"}select {id:"audio-rate",option {value:"1",initial_selected:true,"Natural · 1×"}option {value:"0.85","0.85× · keep voice pitch"}option {value:"0.7","0.7× · keep voice pitch"}option {value:"0.5","0.5× · keep voice pitch"}}
@@ -517,7 +800,7 @@ fn quality_summary(analysis: &AudioAnalysis) -> Element {
     }
 }
 
-const PRACTICE_BRIDGE: &str = r#"
+pub(crate) const PRACTICE_BRIDGE: &str = r#"
 const root=typeof rufrenPlayerRoot==='undefined'?document.getElementById('rufren-audio-practice'):rufrenPlayerRoot;
 if(!root) throw Error('Reference player did not mount.');
 window.rufrenAudioPlayers ||= new Map();window.rufrenAudioPlayers.get(root.id)?.destroy();
@@ -593,10 +876,10 @@ await lifetime;
 "#;
 
 #[derive(Deserialize)]
-struct PracticeAudioEvent {
-    kind: String,
+pub(crate) struct PracticeAudioEvent {
+    pub(crate) kind: String,
     #[serde(default)]
-    ready: bool,
+    pub(crate) ready: bool,
 }
 
 /// Audio-only playback for listening practice. No answer text is rendered.

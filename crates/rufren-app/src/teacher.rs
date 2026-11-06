@@ -20,12 +20,20 @@ impl AppState {
         for explanation in &lesson.explanations {
             material.push_str(&format!("{}: {}\n", explanation.title, explanation.text));
         }
+        let summary = self.lesson_practice_summary()?;
+        let learner_context = summary.provider_context().to_owned();
         let request = TeacherRequest::TeachLesson(LessonTeachingRequest {
-            request_id:Uuid::new_v4().to_string(),lesson_id:lesson.id.clone(),title:lesson.title.clone(),
-            objective:lesson.goal.clone(),material,
-            learner_context:Some("I am a complete beginner learning to speak, understand, read and write Russian. My working memory varies. Teach one useful step at a time, give short explanations, and use science fiction or interesting ideas when they fit. I enjoy informal conversations over meals; my friend has no preparation, recording, grading or teaching duties. You are my primary teacher.".into()),
+            request_id: Uuid::new_v4().to_string(),
+            lesson_id: lesson.id.clone(),
+            title: lesson.title.clone(),
+            objective: lesson.goal.clone(),
+            material,
+            learner_context: Some(learner_context),
         });
         request.validate().map_err(|e| e.to_string())?;
+        if let TeacherRequest::TeachLesson(lesson_request) = &request {
+            self.keep_prepared_lesson_context(lesson_request, &summary)?;
+        }
         Ok(request)
     }
 

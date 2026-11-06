@@ -32,8 +32,14 @@ async page => {
     await start('visible','background');await pending('background');
     await target.evaluate(()=>{Object.defineProperty(document,'visibilityState',{value:'visible',configurable:true});document.dispatchEvent(new Event('visibilitychange'));});
     await settled('background',true);
+    // Rich prose observes child-bearing paragraph wrappers independently. Seeing
+    // the first block must never acknowledge a later paragraph in the answer.
+    await target.setContent('<article><div id="rich-first"><p><strong>Приве́т</strong> <em>мир</em>.</p></div><div style="height:1500px"></div><div id="rich-later"><p><a href="https://example.org">Другой абзац</a>.</p></div></article>');
+    await start('rich-first');await settled('rich-first',true);
+    await start('rich-later');await pending('rich-later');
+    await target.locator('#rich-later').scrollIntoViewIfNeeded();await settled('rich-later',true);
     await start('missing');await settled('missing',false);
     if(await target.evaluate(()=>window.rufrenPresentations.size)!==0)throw Error('Observers remained after completion or removal');
-    return {passed:['visible text acknowledged','collapsed answers withheld until opened','offscreen text withheld','replacement cancels old observer','scroll presentation acknowledged','removed text is not exposure','background document withheld','all observers released']};
+    return {passed:['visible text acknowledged','collapsed answers withheld until opened','offscreen text withheld','replacement cancels old observer','scroll presentation acknowledged','removed text is not exposure','background document withheld','rich child wrappers observed independently','all observers released']};
   } finally {await context.close();}
 }

@@ -1,0 +1,42 @@
+{
+  "request": {
+    "mode": "teach_lesson",
+    "input": {
+      "request_id": "f52fd485-75f6-4a55-8340-7830d94b7e49",
+      "lesson_id": "ru.lesson.hello",
+      "title": "Synthetic shell-update persistence fixture",
+      "objective": "Preserve a saved response across a browser application update.",
+      "material": "Ёжик смотрит на звёзды. — The hedgehog looks at the stars.",
+      "learner_context": null
+    }
+  },
+  "content": {
+    "explanation": "This is synthetic QA data, not a model response or lesson recommendation.",
+    "examples": [
+      {
+        "russian": "Ёжик смотрит на звёзды.",
+        "english": "The hedgehog looks at the stars.",
+        "note": "Synthetic text used only to verify durable fields."
+      }
+    ],
+    "next_step": "No learner action is required by this fixture.",
+    "caveats": ["No teacher, recognizer or provider was called to create this fixture."],
+    "feedback": null,
+    "practice": []
+  },
+  "provenance": {
+    "provider": "qa-shell-update-fixture",
+    "model": "synthetic-no-live-teacher",
+    "review_status": "ai_generated_teaching",
+    "scope": "Synthetic storage fixture; no authentic teaching or acoustic judgment.",
+    "prompt_version": "shell-update-fixture-v1",
+    "response_id": "7ef5f53e-e97a-4871-9f94-a270fbc0c2df"
+  },
+  "usage": {
+    "accounting": "subscription_quota",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "estimated_micro_usd": 0,
+    "reserved_micro_usd": 0
+  }
+}

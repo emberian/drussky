@@ -4,7 +4,9 @@ use crate::{
     exposure_view::PresentedRussian,
     gateway,
     model::{AppState, Page},
+    teacher_example_audio::TeacherExampleAudio,
     teacher_practice_view::TeacherPractice as TeacherPracticeForm,
+    teacher_prose::TeacherProse,
     tutor_view::TutorView,
 };
 use dioxus::prelude::*;
@@ -45,6 +47,14 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
         .ok()
         .flatten();
     let lesson = state.lesson().or_else(|| state.content.lessons.first());
+    let recent_practice = state.lesson_practice_summary().ok();
+    let prepared_context = answer.as_ref().and_then(|answer| match &answer.request {
+        TeacherRequest::TeachLesson(request) => state
+            .prepared_lesson_context(&request.request_id)
+            .ok()
+            .flatten(),
+        _ => None,
+    });
     let free_answer = state
         .repo
         .get::<TutorResponse>("tutor_response")
@@ -60,6 +70,13 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
                 for lesson in &state.content.lessons {option {value:lesson.id.clone(),"{lesson.title}"}}
             }
             if let Some(lesson)=lesson {p {class:"lesson-goal","{lesson.goal}"}}
+            if let Some(recent)=recent_practice {
+                details {class:"teacher-context-preview",
+                    summary {"Recent practice sent with this lesson"}
+                    p {class:"quiet","Includes a short summary of your saved work on this lesson: {recent.observations.len()} recent responses."}
+                    pre {class:"teacher-context-text","{recent.provider_context()}"}
+                }
+            }
             div {class:"actions",button {class:"primary",disabled:state.teacher_busy,onclick:move |_|{let request=app.read().lesson_teaching_request();send_teacher(app,request);},if state.teacher_busy {"Your teacher is thinking…"}else{"Teach me this lesson →"}}
                 button {class:"secondary",onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Open lesson & practice"}}
             p {class:"quiet","Start with a short explanation, try the words, then bring them into your next conversation."}
@@ -91,7 +108,11 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
                     }
                     for dimension in [JudgmentDimension::Comprehension,JudgmentDimension::Grammar,JudgmentDimension::Spelling,JudgmentDimension::Recall] {
                         for (_,feedback) in state.library.ai_assessments(id,dimension) {
-                            details {class:"teacher-saved-feedback",summary {"Saved teacher feedback · {feedback.provenance.model}"}p {"{feedback.explanation}"}if let Some(text)=&feedback.suggested_response {p {lang:"ru","{text}"}}p {"{feedback.next_step}"}}
+                            details {class:"teacher-saved-feedback",summary {"Saved teacher feedback · {feedback.provenance.model}"}
+                                TeacherProse {app,language:"en",text:feedback.explanation.clone(),purpose:PresentationPurpose::Instruction}
+                                if let Some(text)=&feedback.suggested_response {PresentedRussian {key:"{text}",app,text:text.clone(),purpose:PresentationPurpose::Reference}}
+                                TeacherProse {app,language:"en",text:feedback.next_step.clone(),purpose:PresentationPurpose::Instruction}
+                            }
                         }
                     }
                 }
@@ -101,21 +122,33 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
             section {class:"panel teacher-answer",aria_label:"Your teacher’s response",
                 span {class:"tag","AI TEACHER"}
                 h2 {match &answer.request {TeacherRequest::TeachLesson(r)=>r.title.clone(),TeacherRequest::AnswerFeedback(_)=>"Working with your response".into()}}
-                PresentedRussian {key:"explanation-{answer.provenance.response_id}",app,class:"teacher-explanation",language:"en",text:answer.content.explanation.clone(),purpose:PresentationPurpose::Instruction}
+                TeacherProse {key:"explanation-{answer.provenance.response_id}",app,class:"teacher-explanation",language:"en",text:answer.content.explanation.clone(),purpose:PresentationPurpose::Instruction}
                 if let Some(feedback)=&answer.content.feedback {
                     p {strong {match feedback.verdict {AiVerdict::Correct=>"This works for the task.",AiVerdict::PartlyCorrect=>"Part of this works; let’s refine it.",AiVerdict::Incorrect=>"There’s something useful to change.",AiVerdict::Uncertain=>"There may be more than one interpretation here."}}}
-                    if let Some(text)=&feedback.suggested_response {p {class:"dialogue-russian",lang:"ru","{text}"}}
-                    for correction in &feedback.corrections {div {class:"teacher-correction",p {span {lang:"ru","{correction.original}"}" → " strong {lang:"ru","{correction.replacement}"}}p {"{correction.reason}"}}}
+                    if let Some(text)=&feedback.suggested_response {PresentedRussian {key:"{text}",app,class:"dialogue-russian",text:text.clone(),purpose:PresentationPurpose::Reference}}
+                    for (index,correction) in feedback.corrections.iter().enumerate() {div {key:"correction-{answer.provenance.response_id}-{index}",class:"teacher-correction",PresentedRussian {app,text:format!("{} → {}",correction.original,correction.replacement),purpose:PresentationPurpose::Instruction,p {span {lang:"ru","{correction.original}"}" → " strong {lang:"ru","{correction.replacement}"}}}TeacherProse {app,language:"en",text:correction.reason.clone(),purpose:PresentationPurpose::Instruction}}}
                 }
-                for (index,example) in answer.content.examples.iter().enumerate() {{let example=example.clone();rsx! {article {class:"phrase-study",PresentedRussian {key:"example-{answer.provenance.response_id}-{index}",app,class:"dialogue-russian",text:example.russian.clone(),purpose:PresentationPurpose::Instruction}p {"{example.english}"}p {class:"quiet","{example.note}"}button {class:"text-button",onclick:move |_|act(app,|s|s.keep_teacher_example(example.clone())),"Keep this phrase for practice →"}}}}}
+                for (index,example) in answer.content.examples.iter().enumerate() {{let example=example.clone();rsx! {article {key:"example-{answer.provenance.response_id}-{index}",class:"phrase-study",
+                    PresentedRussian {app,class:"dialogue-russian",text:example.russian.clone(),purpose:PresentationPurpose::Instruction}
+                    p {"{example.english}"}
+                    TeacherProse {app,class:"quiet",language:"en",text:example.note.clone(),purpose:PresentationPurpose::Instruction}
+                    TeacherExampleAudio {app,answer:answer.clone(),index}
+                    button {class:"text-button",onclick:move |_|act(app,|s|s.keep_teacher_example(example.clone())),"Keep this phrase for practice →"}
+                }}}}
                 if !answer.content.practice.is_empty() {h3 {"A small thing to try"}
                     for (index,_) in answer.content.practice.iter().enumerate() {
                         TeacherPracticeForm {key:"{answer.provenance.response_id}-{index}",app,answer:answer.clone(),index}
                     }
                 }
-                div {class:"hint",span {class:"tag","YOUR NEXT STEP"}p {"{answer.content.next_step}"}}
-                if !answer.content.caveats.is_empty() {details {summary {"Nuance and uncertainty"}ul {for caveat in &answer.content.caveats {li {"{caveat}"}}}}}
+                div {class:"hint",span {class:"tag","YOUR NEXT STEP"}TeacherProse {app,language:"en",text:answer.content.next_step.clone(),purpose:PresentationPurpose::Instruction}}
+                if !answer.content.caveats.is_empty() {details {summary {"Nuance and uncertainty"}ul {for caveat in &answer.content.caveats {li {TeacherProse {app,language:"en",text:caveat.clone(),purpose:PresentationPurpose::Instruction}}}}}}
                 p {class:"quiet","{answer.provenance.model} · AI-generated teaching"}
+                if let Some(prepared)=prepared_context {
+                    details {class:"teacher-context-preview",
+                        summary {"Practice used in this explanation"}
+                        pre {class:"teacher-context-text","{prepared.summary.provider_context()}"}
+                    }
+                }
             }
         }
         details {class:"panel",summary {"Ask a different question"}

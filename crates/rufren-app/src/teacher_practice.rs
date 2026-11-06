@@ -30,6 +30,110 @@ pub(crate) fn practice_source(answer: &TeacherResponse) -> String {
     .to_string()
 }
 
+/// Qualified generated-question identity; it does not label an authored pack or tested feature.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct TeacherPracticeOrigin {
+    pub lesson_id: String,
+    pub source: Uuid,
+    pub index: usize,
+}
+impl TeacherPracticeOrigin {
+    fn encoded(&self) -> String {
+        format!(
+            "teacher:v2:{}:{}:{}",
+            self.lesson_id, self.source, self.index
+        )
+    }
+    fn parse(value: &str) -> Option<Self> {
+        if value.len() > 128 {
+            return None;
+        }
+        let mut parts = value.strip_prefix("teacher:v2:")?.rsplitn(3, ':');
+        let index_text = parts.next()?;
+        let index: usize = index_text.parse().ok()?;
+        let source_text = parts.next()?;
+        let source = Uuid::parse_str(source_text).ok()?;
+        let lesson_id = parts.next()?;
+        if index >= 4
+            || index.to_string() != index_text
+            || source.is_nil()
+            || source.to_string() != source_text
+            || lesson_id.is_empty()
+            || !lesson_id
+                .bytes()
+                .all(|c| c.is_ascii_alphanumeric() || b"-_.:".contains(&c))
+        {
+            return None;
+        }
+        Some(Self {
+            lesson_id: lesson_id.into(),
+            source,
+            index,
+        })
+    }
+}
+/// Resolve only the explicit identity against actual immutable generated facts. A legacy
+/// `teacher:<passage>` question is never attributed from its title, body or latest response.
+pub(crate) fn saved_teacher_practice_origin(
+    library: &Library,
+    attempt: Uuid,
+    context: Uuid,
+) -> Option<TeacherPracticeOrigin> {
+    let a = library.attempt(attempt)?;
+    let Fact::AttemptContextRecorded(c) = &library.events.get(&context)?.fact else {
+        return None;
+    };
+    let origin = TeacherPracticeOrigin::parse(c.exercise_id.as_deref()?)?;
+    let passage = Uuid::new_v5(&origin.source, origin.index.to_string().as_bytes());
+    let revision = Uuid::new_v5(&passage, b"reference-v1");
+    let reference = library.events.get(&revision)?;
+    let Fact::PassageRevised(r) = &reference.fact else {
+        return None;
+    };
+    let task = match a.skill {
+        Skill::Reading => TaskKind::MeaningRecall,
+        Skill::Writing => TaskKind::Composition,
+        _ => return None,
+    };
+    if c.attempt != attempt
+        || a.revision != revision
+        || r.passage.id != passage
+        || reference.device != origin.source
+        || reference.version != 2
+        || reference.recorded_at_ms != 0
+        || !r.parents.is_empty()
+        || attempt != Uuid::new_v5(&a.session, b"attempt")
+        || context != Uuid::new_v5(&a.session, b"context")
+        || a.policy != "teacher-guided-text-v1"
+        || a.self_rating != SelfRating::NotReported
+        || a.cues != [Cue::ReferenceMaterial]
+        || c.task != task
+        || c.content_pack.is_some()
+        || c.content_revision.is_some()
+        || !c.target_features.is_empty()
+        || c.prompt.is_none()
+        || c.reference_answer.is_none()
+    {
+        return None;
+    }
+    let fields: Vec<_> = r.passage.source.split(" · ").collect();
+    if fields.len() != 5
+        || fields[0] != "AI teacher exercise"
+        || fields[4] != origin.index.to_string()
+        || Uuid::new_v5(
+            &Uuid::NAMESPACE_URL,
+            format!(
+                "rufren:teacher-practice:{}:{}:{}",
+                fields[1], fields[2], fields[3]
+            )
+            .as_bytes(),
+        ) != origin.source
+    {
+        return None;
+    }
+    Some(origin)
+}
+
 impl AppState {
     pub(crate) fn teacher_practice_draft(
         &self,
@@ -151,11 +255,40 @@ impl AppState {
                 .unwrap_or("An open response; accept valid alternatives."),
             exercise.teaching_note
         );
+        let legacy_exercise = format!("teacher:{passage_id}");
+        let qualified = match &answer.request {
+            TeacherRequest::TeachLesson(lesson)
+                if self.content.lesson(&lesson.lesson_id).is_some() =>
+            {
+                let origin = TeacherPracticeOrigin {
+                    lesson_id: lesson.lesson_id.clone(),
+                    source: source_id,
+                    index: draft.index,
+                };
+                let encoded = origin.encoded();
+                TeacherPracticeOrigin::parse(&encoded).map(|_| encoded)
+            }
+            _ => None,
+        };
+        let exercise_id = match self
+            .library
+            .events
+            .get(&context_id)
+            .map(|event| &event.fact)
+        {
+            Some(Fact::AttemptContextRecorded(old))
+                if old.attempt == attempt_id
+                    && old.exercise_id.as_deref() == Some(legacy_exercise.as_str()) =>
+            {
+                legacy_exercise
+            }
+            _ => qualified.unwrap_or(legacy_exercise),
+        };
         let context = Fact::AttemptContextRecorded(AttemptContext {
             attempt: attempt_id,
             content_pack: None,
             content_revision: None,
-            exercise_id: Some(format!("teacher:{passage_id}")),
+            exercise_id: Some(exercise_id),
             prompt: Some(prompt),
             reference_answer: Some(reference),
             task: if skill == Skill::Reading {

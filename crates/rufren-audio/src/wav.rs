@@ -1,4 +1,6 @@
-use crate::{AudioError, MAX_WAV_BYTES, PcmAudio, validate_shape};
+use std::future::{Future, ready};
+
+use crate::{AudioError, MAX_WAV_BYTES, PcmAudio, checkpoint, run_ready, validate_shape};
 
 fn u16le(bytes: &[u8], offset: usize) -> u16 {
     u16::from_le_bytes([bytes[offset], bytes[offset + 1]])
@@ -9,9 +11,21 @@ fn u32le(bytes: &[u8], offset: usize) -> u32 {
 }
 
 pub(crate) fn decode(bytes: &[u8]) -> Result<PcmAudio, AudioError> {
+    run_ready(decode_cooperatively(bytes, || ready(true)))
+}
+
+pub(crate) async fn decode_cooperatively<F, Fut>(
+    bytes: &[u8],
+    mut yield_now: F,
+) -> Result<PcmAudio, AudioError>
+where
+    F: FnMut() -> Fut,
+    Fut: Future<Output = bool>,
+{
     if bytes.len() > MAX_WAV_BYTES {
         return Err(AudioError::TooLarge);
     }
+    checkpoint(&mut yield_now).await?;
     if bytes.len() < 12 || &bytes[..4] != b"RIFF" || &bytes[8..12] != b"WAVE" {
         return Err(AudioError::Wav("expected RIFF/WAVE header"));
     }
@@ -24,6 +38,7 @@ pub(crate) fn decode(bytes: &[u8]) -> Result<PcmAudio, AudioError> {
     let mut format = None;
     let mut data = None;
     let mut offset = 12;
+    let mut chunks = 0;
     while offset < end {
         if end - offset < 8 {
             return Err(AudioError::Wav("truncated chunk header"));
@@ -54,6 +69,10 @@ pub(crate) fn decode(bytes: &[u8]) -> Result<PcmAudio, AudioError> {
             .checked_add(size % 2)
             .filter(|n| *n <= end)
             .ok_or(AudioError::Wav("missing chunk padding"))?;
+        chunks += 1;
+        if chunks % 1024 == 0 {
+            checkpoint(&mut yield_now).await?;
+        }
     }
     let fmt = format.ok_or(AudioError::Wav("missing format chunk"))?;
     let data = data.ok_or(AudioError::Wav("missing data chunk"))?;
@@ -79,18 +98,25 @@ pub(crate) fn decode(bytes: &[u8]) -> Result<PcmAudio, AudioError> {
         return Err(AudioError::Wav("inconsistent block alignment or byte rate"));
     }
     validate_shape(sample_rate, channels, data.len() / bytes_per_sample)?;
-    let samples = data
-        .chunks_exact(bytes_per_sample)
-        .map(|x| match (encoding, bits) {
-            (1, 8) => (x[0] as f32 - 128.0) / 128.0,
-            (1, 16) => i16::from_le_bytes([x[0], x[1]]) as f32 / 32768.0,
-            (1, 24) => ((i32::from_le_bytes([x[0], x[1], x[2], 0]) << 8) >> 8) as f32 / 8_388_608.0,
-            (1, 32) => i32::from_le_bytes(x.try_into().unwrap()) as f32 / 2_147_483_648.0,
-            (3, 32) => f32::from_le_bytes(x.try_into().unwrap()),
-            _ => unreachable!("encoding checked before allocation"),
-        })
-        .collect();
-    PcmAudio::from_interleaved(sample_rate, channels, samples)
+    let mut samples = Vec::with_capacity(data.len() / bytes_per_sample);
+    for chunk in data.chunks(bytes_per_sample * 65_536) {
+        samples.extend(
+            chunk
+                .chunks_exact(bytes_per_sample)
+                .map(|x| match (encoding, bits) {
+                    (1, 8) => (x[0] as f32 - 128.0) / 128.0,
+                    (1, 16) => i16::from_le_bytes([x[0], x[1]]) as f32 / 32768.0,
+                    (1, 24) => {
+                        ((i32::from_le_bytes([x[0], x[1], x[2], 0]) << 8) >> 8) as f32 / 8_388_608.0
+                    }
+                    (1, 32) => i32::from_le_bytes(x.try_into().unwrap()) as f32 / 2_147_483_648.0,
+                    (3, 32) => f32::from_le_bytes(x.try_into().unwrap()),
+                    _ => unreachable!("encoding checked before allocation"),
+                }),
+        );
+        checkpoint(&mut yield_now).await?;
+    }
+    PcmAudio::from_interleaved_cooperatively(sample_rate, channels, samples, yield_now).await
 }
 
 pub(crate) fn encode(audio: &PcmAudio) -> Vec<u8> {
