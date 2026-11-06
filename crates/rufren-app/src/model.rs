@@ -1,56 +1,82 @@
 //! Application interactions, independent of Dioxus rendering.
-use crate::repository::{Repository, Result, now_ms};
+use crate::learning::{Preferences, SessionPlan};
+use crate::repository::{now_ms, Repository, Result};
 use rufren_core::*;
-use std::{collections::BTreeSet, rc::Rc};
+use std::rc::Rc;
 use uuid::Uuid;
 
 #[derive(Clone, Copy, PartialEq)]
 pub(crate) enum Page {
     Today,
+    Lessons,
     Library,
     Practice,
     Studio,
     Progress,
+    Teacher,
     Settings,
 }
 impl Page {
-    pub(crate) const ALL: [Self; 6] = [
+    pub(crate) const ALL: [Self; 8] = [
         Self::Today,
+        Self::Lessons,
         Self::Library,
         Self::Practice,
         Self::Studio,
         Self::Progress,
+        Self::Teacher,
         Self::Settings,
     ];
     pub(crate) fn label(self) -> &'static str {
         match self {
             Self::Today => "Today",
+            Self::Lessons => "Lessons",
             Self::Library => "Library",
             Self::Practice => "Practice",
             Self::Studio => "Speech studio",
             Self::Progress => "Progress",
+            Self::Teacher => "Teacher",
             Self::Settings => "Settings",
         }
     }
     pub(crate) fn icon(self) -> &'static str {
         match self {
             Self::Today => "◌",
+            Self::Lessons => "✦",
             Self::Library => "▤",
             Self::Practice => "↗",
             Self::Studio => "≋",
             Self::Progress => "◷",
+            Self::Teacher => "✎",
             Self::Settings => "⚙",
         }
     }
 }
-#[derive(Clone, Default)]
+#[derive(Clone, serde::Serialize, serde::Deserialize)]
 pub(crate) struct Editor {
+    pub(crate) draft_id: Uuid,
     pub(crate) id: Option<Uuid>,
     pub(crate) parent: Option<Uuid>,
     pub(crate) title: String,
     pub(crate) russian: String,
     pub(crate) translation: String,
     pub(crate) source: String,
+    #[serde(default)]
+    pub(crate) pending_save: Option<Event>,
+}
+impl Default for Editor {
+    fn default() -> Self {
+        Self {
+            draft_id: Uuid::new_v4(),
+            id: None,
+            parent: None,
+            title: String::new(),
+            russian: String::new(),
+            translation: String::new(),
+            source: String::new(),
+            pending_save: None,
+        }
+    }
 }
 #[derive(Clone)]
 pub(crate) struct AppState {
@@ -64,7 +90,16 @@ pub(crate) struct AppState {
     pub(crate) endpoint: String,
     pub(crate) token: String,
     pub(crate) syncing: bool,
+    pub(crate) teacher_busy: bool,
+    pub(crate) speech_busy: bool,
+    pub(crate) recognition_job: Option<(Uuid, String)>,
+    pub(crate) recognition_cancel_requested: bool,
     pub(crate) transfer: String,
+    pub(crate) content: Rc<rufren_content::ContentPack>,
+    pub(crate) preferences: Preferences,
+    pub(crate) plan: Option<SessionPlan>,
+    pub(crate) selected_lesson: Option<String>,
+    pub(crate) studio_revision: Option<Uuid>,
 }
 impl PartialEq for AppState {
     fn eq(&self, other: &Self) -> bool {
@@ -74,30 +109,87 @@ impl PartialEq for AppState {
 impl AppState {
     pub(crate) fn open() -> Result<Self> {
         let repo = Rc::new(Repository::open()?);
+        #[allow(unused_mut)]
+        let mut state = Self::from_repository(repo)?;
+        #[cfg(not(target_arch = "wasm32"))]
+        match crate::native_connection::load() {
+            Ok(Some(connection)) => {
+                state.endpoint = connection.endpoint;
+                state.token = connection.token;
+            }
+            Ok(None) => {}
+            Err(error) => state.notice = error,
+        }
+        Ok(state)
+    }
+    pub(crate) fn from_repository(repo: Rc<Repository>) -> Result<Self> {
         let device = repo.identity()?;
         let library = repo.library()?;
         let binding: Option<SyncBinding> = repo.get("sync")?;
         let session = repo.get::<Option<Session>>("session")?.flatten();
+        let preferences = repo.get("preferences")?.unwrap_or_default();
+        let plan: Option<SessionPlan> = repo.get("session_plan")?;
+        let plan = plan.filter(|p| {
+            session
+                .as_ref()
+                .is_some_and(|s: &Session| s.id == p.session)
+        });
+        let plan = if plan.is_some() {
+            plan
+        } else {
+            session
+                .as_ref()
+                .map(|s| crate::drafts::recover_plan(&repo, s))
+                .transpose()?
+                .flatten()
+        };
+        let selected_lesson = repo.get("selected_lesson")?;
+        let editor = crate::editor_drafts::load_editor(&repo)?;
+        let content = Rc::new(rufren_content::load_embedded().map_err(|e| e.to_string())?);
         Ok(Self {
             repo,
             device,
             library,
             session,
             page: Page::Today,
-            editor: Editor::default(),
+            editor,
             notice: String::new(),
             endpoint: binding.map_or("http://127.0.0.1:8787".into(), |b| b.endpoint),
             token: String::new(),
             syncing: false,
+            teacher_busy: false,
+            speech_busy: false,
+            recognition_job: None,
+            recognition_cancel_requested: false,
             transfer: String::new(),
+            content,
+            preferences,
+            plan,
+            selected_lesson,
+            studio_revision: None,
         })
+    }
+    pub(crate) fn navigate(&mut self, page: Page) -> Result<()> {
+        if matches!(
+            page,
+            Page::Library | Page::Lessons | Page::Studio | Page::Teacher
+        ) {
+            if let Some(mut session) = self.session.clone().filter(|s| s.phase == Phase::Retrieve) {
+                if !session.cues.contains(&Cue::ReferenceMaterial) {
+                    session.cues.push(Cue::ReferenceMaterial);
+                    self.repo.set("session", &Some(&session))?;
+                    self.session = Some(session);
+                    self.notice="Reference material opened. This response will retain that support in its practice record.".into();
+                }
+            }
+        }
+        self.refresh()?;
+        self.page = page;
+        Ok(())
     }
     pub(crate) fn refresh(&mut self) -> Result<()> {
         self.library = self.repo.library()?;
         Ok(())
-    }
-    pub(crate) fn save_session(&self) -> Result<()> {
-        self.repo.set("session", &self.session)
     }
     pub(crate) fn start(&mut self, revision: Uuid, skill: Skill) -> Result<()> {
         let passage = self
@@ -107,15 +199,19 @@ impl AppState {
         if passage.passage.translation.trim().is_empty() {
             return Err("Add the passage’s meaning before practicing, so you have something to compare your response with.".into());
         }
-        self.session = Some(Session {
+        self.archive_current()?;
+        let session = Session {
             id: Uuid::new_v4(),
             revision,
             skill,
             phase: Phase::Encounter,
             draft: String::new(),
             cues: vec![],
-        });
-        self.save_session()?;
+        };
+        self.repo.set("session", &Some(&session))?;
+        self.plan = None;
+        self.session = Some(session);
+        self.set_plan(None, None, "free-practice-v1")?;
         self.page = Page::Practice;
         Ok(())
     }
@@ -129,85 +225,95 @@ impl AppState {
             self.page = Page::Practice;
             return Ok(());
         }
-        let revision = if let Some(id) = LeastPracticed.choose(&self.library) {
-            id
-        } else if self.library.heads().is_empty() {
-            let event = starter(self.device, now_ms());
-            let id = event.id;
-            self.repo.append(&[event])?;
-            self.refresh()?;
-            id
-        } else {
-            return Err(
-                "Resolve the competing passage revisions in your library before practicing them."
-                    .into(),
-            );
-        };
-        self.start(revision, Skill::Reading)
-    }
-    pub(crate) fn edit(&mut self, id: Uuid) {
-        if let Some(r) = self.library.revision(id) {
-            let p = &r.passage;
-            self.editor = Editor {
-                id: Some(p.id),
-                parent: Some(id),
-                title: p.title.clone(),
-                russian: p.russian.clone(),
-                translation: p.translation.clone(),
-                source: p.source.clone(),
-            };
-            self.page = Page::Library;
+        if self.library.heads().is_empty() {
+            let id = self
+                .content
+                .lessons
+                .first()
+                .ok_or("The lesson pack is empty")?
+                .id
+                .clone();
+            self.choose_lesson(&id)?;
+            self.navigate(Page::Teacher)?;
+            return Ok(());
         }
-    }
-    pub(crate) fn save_passage(&mut self, resolve: bool) -> Result<()> {
-        self.refresh()?;
-        let d = &self.editor;
-        let id = d.id.unwrap_or_else(Uuid::new_v4);
-        let parents = if resolve {
-            self.library
-                .heads()
-                .get(&id)
-                .cloned()
-                .unwrap_or_default()
-                .into_iter()
-                .collect()
-        } else {
-            d.parent.into_iter().collect::<BTreeSet<_>>()
-        };
-        let event = Event::new(
-            self.device,
-            now_ms(),
-            Fact::PassageRevised(Revision {
-                passage: Passage {
-                    id,
-                    title: d.title.trim().into(),
-                    russian: d.russian.trim().into(),
-                    translation: d.translation.trim().into(),
-                    source: d.source.trim().into(),
-                    coach_reviewed: false,
-                },
-                parents,
-            }),
-        )
-        .map_err(|e| e.to_string())?;
-        let revision = event.id;
-        self.repo.append(&[event])?;
-        self.refresh()?;
-        self.edit(revision);
-        self.notice = "Passage saved on this device.".into();
+        if let Some(entry) =
+            SpacedReview.select(&self.library, now_ms(), &[self.preferences.review_skill])
+        {
+            self.start(entry.state.key.revision, entry.state.key.skill)?;
+            self.set_plan(None, None, SpacedReview.id())?;
+            if entry.state.attempts > 0 {
+                self.phase(Phase::Retrieve)?;
+            }
+            let context = PolicyContext {
+                session: self.session.as_ref().unwrap().id,
+                now_ms: now_ms(),
+                skills: vec![self.preferences.review_skill],
+                contrast_domain: None,
+            };
+            if let Some(decision) = SpacedReview
+                .decide(&self.library, &context)
+                .map_err(|e| e.to_string())?
+            {
+                self.repo.append(&[Event::new(
+                    self.device,
+                    now_ms(),
+                    Fact::TeachingDecisionRecorded(decision),
+                )
+                .map_err(|e| e.to_string())?])?;
+                self.refresh()?;
+            }
+            return Ok(());
+        }
+        self.page = Page::Lessons;
+        self.notice="Your scheduled reviews can rest for now. Explore a lesson, or choose a passage to practice freely.".into();
         Ok(())
     }
+    pub(crate) fn save_passage(&mut self, resolve: bool) -> Result<()> {
+        self.save_editor_draft(resolve)
+    }
     pub(crate) fn phase(&mut self, phase: Phase) -> Result<()> {
-        let s = self.session.as_mut().ok_or("No active practice")?;
+        let mut s = self.session.clone().ok_or("No active practice")?;
+        if !matches!(
+            (s.phase, phase),
+            (Phase::Encounter, Phase::Retrieve)
+                | (Phase::Retrieve, Phase::Reflect)
+                | (Phase::Reflect, Phase::Complete)
+        ) {
+            return Err("That practice step is not available yet.".into());
+        }
+        if phase == Phase::Reflect && s.draft.trim().is_empty() {
+            return Err("Add a response before comparing it.".into());
+        }
+        if phase == Phase::Reflect {
+            if s.skill == Skill::Speaking
+                && self
+                    .plan
+                    .as_ref()
+                    .is_none_or(|p| p.response_recording.is_none())
+            {
+                return Err("Save a spoken recording before reflecting on this attempt.".into());
+            }
+            if (s.skill == Skill::Listening || self.exercise().is_some_and(|e| e.requires_audio))
+                && self.plan.as_ref().is_none_or(|p| p.reference_plays == 0)
+            {
+                return Err("Listen to the reference before reflecting on this attempt.".into());
+            }
+        }
         if phase == Phase::Retrieve {
             s.cues.clear();
         }
         s.phase = phase;
-        self.save_session()
+        self.repo.set("session", &Some(&s))?;
+        self.session = Some(s);
+        Ok(())
     }
     pub(crate) fn hint(&mut self) -> Result<()> {
-        let s = self.session.as_mut().ok_or("No active practice")?;
-        let cue = if s.skill == Skill::Writing {
+        let mut s = self.session.clone().ok_or("No active practice")?;
+        if s.phase != Phase::Retrieve {
+            return Err("Hints belong to the response step.".into());
+        }
+        let cue = if s.skill != Skill::Reading {
             Cue::OriginalText
         } else {
             Cue::Translation
@@ -215,34 +321,100 @@ impl AppState {
         if !s.cues.contains(&cue) {
             s.cues.push(cue);
         }
-        self.save_session()
+        self.repo.set("session", &Some(&s))?;
+        self.session = Some(s);
+        Ok(())
     }
     pub(crate) fn record(&mut self, rating: SelfRating) -> Result<()> {
         self.refresh()?;
-        let s = self.session.clone().ok_or("No active practice")?;
-        if s.phase != Phase::Reflect {
+        let session = self.session.clone().ok_or("No active practice")?;
+        if session.phase != Phase::Reflect {
             return Err("Finish your response before recording the attempt.".into());
         }
-        if !self.library.attempts().any(|(_, a)| a.session == s.id) {
-            let event = Event::new(
+        let existing = self
+            .library
+            .attempts()
+            .find(|(_, a)| a.session == session.id)
+            .map(|(e, _)| e.clone());
+        let recovered = existing.is_some();
+        let event = if let Some(event) = existing {
+            let Fact::AttemptRecorded(attempt) = &event.fact else {
+                unreachable!()
+            };
+            if attempt.revision != session.revision || attempt.skill != session.skill {
+                return Err(
+                    "The saved response belongs to a different practice. Its history was kept."
+                        .into(),
+                );
+            }
+            event
+        } else {
+            Event::new(
                 self.device,
                 now_ms(),
                 Fact::AttemptRecorded(Attempt {
-                    session: s.id,
-                    revision: s.revision,
-                    skill: s.skill,
-                    response: s.draft,
-                    cues: s.cues,
+                    session: session.id,
+                    revision: session.revision,
+                    skill: session.skill,
+                    response: session.draft.clone(),
+                    cues: session.cues.clone(),
                     self_rating: rating,
-                    policy: LeastPracticed.id().into(),
+                    policy: self
+                        .plan
+                        .as_ref()
+                        .map_or("free-practice-v1", |p| p.policy.as_str())
+                        .into(),
                 }),
             )
-            .map_err(|e| e.to_string())?;
-            self.repo.append(&[event])?;
+            .map_err(|e| e.to_string())?
+        };
+        let mut events = vec![event.clone()];
+        // Browser journaling may persist a prefix before quota/interruption. Reconstruct missing
+        // companions from the saved plan using the durable attempt's identity and timestamp.
+        if self.library.contexts(event.id).is_empty() {
+            if let Some(context) = self.attempt_context(event.id)? {
+                let mut companion = Event::new(
+                    event.device,
+                    event.recorded_at_ms,
+                    Fact::AttemptContextRecorded(context),
+                )
+                .map_err(|e| e.to_string())?;
+                companion.id = Uuid::new_v5(&event.id, b"practice-context-v1");
+                events.push(companion);
+            }
         }
+        if let Some(mut attachment) = self
+            .plan
+            .as_ref()
+            .and_then(|p| p.response_recording.clone())
+        {
+            let target = AnnotationTarget::Attempt(event.id);
+            if !self
+                .library
+                .recordings(target)
+                .iter()
+                .any(|(_, a)| a.asset_id == attachment.asset_id)
+            {
+                attachment.target = target;
+                let mut companion = Event::new(
+                    event.device,
+                    event.recorded_at_ms,
+                    Fact::RecordingAttached(attachment),
+                )
+                .map_err(|e| e.to_string())?;
+                companion.id = Uuid::new_v5(&event.id, b"spoken-response-v1");
+                events.push(companion);
+            }
+        }
+        self.repo.append(&events)?;
         self.phase(Phase::Complete)?;
         self.refresh()?;
-        self.notice = "Practice saved. You can return to this passage whenever you like.".into();
+        self.notice = if recovered {
+            "Your earlier saved reflection was recovered with its question and recording links."
+        } else {
+            "Practice saved. Give it time, then return to see what stays with you."
+        }
+        .into();
         Ok(())
     }
 }

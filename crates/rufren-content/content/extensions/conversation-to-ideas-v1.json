@@ -1,0 +1,3501 @@
+{
+  "extension_schema_version": 1,
+  "id": "ru.extension.conversation-to-ideas",
+  "revision": "2026-11-05.1",
+  "base_pack_id": "ru.pack.first-contacts",
+  "required_base_revision": "2026-11-05.3",
+  "editorial_status": "generated_draft",
+  "authorship": "Original AI-authored curriculum; no human certification; all dialogues and fictional worlds are newly composed.",
+  "units": [
+    {
+      "id": "ru.unit.everyday_connections",
+      "title": "More to say at the table",
+      "description": "Likes, needs, quantities, companions and topics: useful meanings that expose the case system in small steps.",
+      "lesson_ids": [
+        "ru.lesson.preferences",
+        "ru.lesson.quantities",
+        "ru.lesson.together",
+        "ru.lesson.topics"
+      ]
+    },
+    {
+      "id": "ru.unit.stories_and_arguments",
+      "title": "Follow a story and an argument",
+      "description": "Connect descriptions, movement, bounded events and quantifier scope through original speculative scenes and supported technical reading.",
+      "lesson_ids": [
+        "ru.lesson.relative",
+        "ru.lesson.journeys",
+        "ru.lesson.return_signal",
+        "ru.lesson.scope"
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "ru.lesson.preferences",
+      "unit_id": "ru.unit.everyday_connections",
+      "title": "What do you like or need?",
+      "goal": "Say what appeals to you and what you need, while distinguishing the experiencer from the thing.",
+      "prerequisites": [
+        "ru.lesson.requests",
+        "ru.lesson.describing"
+      ],
+      "target_ids": [
+        "ru.target.experiencer",
+        "ru.target.need"
+      ],
+      "phrase_ids": [
+        "ru.phrase.preferences.01",
+        "ru.phrase.preferences.02",
+        "ru.phrase.preferences.03",
+        "ru.phrase.preferences.04",
+        "ru.phrase.preferences.05",
+        "ru.phrase.preferences.06",
+        "ru.phrase.preferences.07",
+        "ru.phrase.preferences.08",
+        "ru.phrase.preferences.09",
+        "ru.phrase.preferences.10"
+      ],
+      "exercise_ids": [
+        "ru.exercise.preferences.read",
+        "ru.exercise.preferences.contrast",
+        "ru.exercise.preferences.listen",
+        "ru.exercise.preferences.write",
+        "ru.exercise.preferences.say",
+        "ru.exercise.preferences.compose",
+        "ru.exercise.preferences.dictate"
+      ],
+      "explanations": [
+        {
+          "title": "The person is not always the subject",
+          "text": "Мне нравится чай has the shape “tea appeals to me”. Мне names the experiencer; чай is the grammatical subject. Compare мне / тебе, then нравится чай / нравятся книги. The verb changes with what is liked. Learn these as meaningful contrasts before expanding the pronoun table.",
+          "source_ids": [
+            "ru.source.extension.dative"
+          ]
+        },
+        {
+          "title": "A thing needed, an action needed",
+          "text": "Нужен чай and нужна вода agree with the thing needed. Нужно отдохнуть introduces an action with an infinitive. Keep нужен, нужна and нужно visible while first choosing a meaning. Wanting and needing differ: я хочу воду is not identical to мне нужна вода.",
+          "source_ids": []
+        },
+        {
+          "title": "Short practice, real choice",
+          "text": "Begin with one preference and a genuine follow-up question. The AI teacher supplies the missing word and gives one correction at a time. The plural-books line is a second small step; it need not be held in memory together with all need forms.",
+          "source_ids": []
+        }
+      ],
+      "dialogue": {
+        "title": "What do you like or need?",
+        "situation": "Two people discuss the meal. The AI teacher takes either role; ты fits this informal relationship.",
+        "turns": [
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.preferences.01"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.preferences.02"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.preferences.03"
+          },
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.preferences.02"
+          }
+        ]
+      },
+      "conversation_invitation": "If it fits at a meal, say whether you like the food or tea, or ask about your friend’s preference. No lesson preparation is needed.",
+      "transfer_prompt": "The AI teacher supplies another familiar food and asks whose preference is being described. Then say one true preference and one current need.",
+      "sound_note": "Hear the whole chunks мне нравится and мне нужна. Compare the marked stress in ну́жен / нужна́; judge your spoken version from actual audio, not from a typed answer."
+    },
+    {
+      "id": "ru.lesson.quantities",
+      "unit_id": "ru.unit.everyday_connections",
+      "title": "One cup, two cups, five cups",
+      "goal": "Ask how much or how many, and distinguish a count from an amount.",
+      "prerequisites": [
+        "ru.lesson.possession",
+        "ru.lesson.requests"
+      ],
+      "target_ids": [
+        "ru.target.quantity",
+        "ru.target.amount"
+      ],
+      "phrase_ids": [
+        "ru.phrase.quantities.01",
+        "ru.phrase.quantities.02",
+        "ru.phrase.quantities.03",
+        "ru.phrase.quantities.04",
+        "ru.phrase.quantities.05",
+        "ru.phrase.quantities.06",
+        "ru.phrase.quantities.07",
+        "ru.phrase.quantities.08"
+      ],
+      "exercise_ids": [
+        "ru.exercise.quantities.read",
+        "ru.exercise.quantities.contrast",
+        "ru.exercise.quantities.listen",
+        "ru.exercise.quantities.write",
+        "ru.exercise.quantities.say",
+        "ru.exercise.quantities.compose",
+        "ru.exercise.quantities.dictate"
+      ],
+      "explanations": [
+        {
+          "title": "A small counting family",
+          "text": "Compare одна чашка, две чашки, пять чашек. These are naming or inanimate-object count phrases: one agrees with the noun, two uses the singular genitive form here, and five uses plural genitive. The adjective-free examples deliberately avoid another agreement problem. Learn чашек and книг as forms, not a universal “remove the last letter” algorithm.",
+          "source_ids": [
+            "ru.source.extension.numbers"
+          ]
+        },
+        {
+          "title": "An amount is not a count",
+          "text": "Немного воды asks for a little water. Сколько чашек? asks for a cup count. Чашки can also be a plural naming form in other contexts; an ending alone does not identify every case. Read the whole phrase and its meaning.",
+          "source_ids": []
+        },
+        {
+          "title": "Keep the larger system available, not compulsory",
+          "text": "Next examples can add три чашки and четыре чашки; compound numbers, eleven to fourteen, animate objects and oblique-case number phrases need further teaching. This lesson does not claim that every Russian numeral always has this pattern.",
+          "source_ids": []
+        }
+      ],
+      "dialogue": {
+        "title": "One cup, two cups, five cups",
+        "situation": "The AI teacher and learner imagine setting a table. The requested count, not an assumption about the real household, controls the answer.",
+        "turns": [
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.quantities.01"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.quantities.02"
+          },
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.quantities.03"
+          }
+        ]
+      },
+      "conversation_invitation": "If you are getting cups or water anyway, use the amount you really need. The conversation can stay ordinary.",
+      "transfer_prompt": "With the AI teacher, count a different familiar object in a new table scene, then request a small amount of water. Change the number and noun independently.",
+      "sound_note": "Compare the audible final syllables in ча́шка / ча́шки / ча́шек. Keep normal-speed reference audio available; written endings are not a hearing test."
+    },
+    {
+      "id": "ru.lesson.together",
+      "unit_id": "ru.unit.everyday_connections",
+      "title": "With whom, and with what?",
+      "goal": "Talk about company and useful instruments without treating every English “with” as the same construction.",
+      "prerequisites": [
+        "ru.lesson.requests",
+        "ru.lesson.roles"
+      ],
+      "target_ids": [
+        "ru.target.companion",
+        "ru.target.instrument",
+        "ru.target.accompaniment"
+      ],
+      "phrase_ids": [
+        "ru.phrase.together.01",
+        "ru.phrase.together.02",
+        "ru.phrase.together.03",
+        "ru.phrase.together.04",
+        "ru.phrase.together.05",
+        "ru.phrase.together.06",
+        "ru.phrase.together.07",
+        "ru.phrase.together.08"
+      ],
+      "exercise_ids": [
+        "ru.exercise.together.read",
+        "ru.exercise.together.contrast",
+        "ru.exercise.together.listen",
+        "ru.exercise.together.write",
+        "ru.exercise.together.say",
+        "ru.exercise.together.compose",
+        "ru.exercise.together.dictate"
+      ],
+      "explanations": [
+        {
+          "title": "Company and instrument share a case, not a preposition",
+          "text": "С Аней and с роботом name company and use с plus the instrumental. Ручкой and карандашом name the writing instrument without с. These phrases do not justify translating every English “with” by с. Learn the complete construction and the message it expresses.",
+          "source_ids": []
+        },
+        {
+          "title": "With milk, without milk",
+          "text": "С молоком and без молока contrast inclusion and absence. Без uses genitive here; с uses instrumental in this accompaniment meaning. The spelling с also occurs with other cases and meanings elsewhere, so its case is not fixed independently of the construction.",
+          "source_ids": []
+        },
+        {
+          "title": "Recover the smaller steps",
+          "text": "Читаю / читаешь / читает connect I, you and a named third person. Пишу supplies a new useful present form. If the person ending and the case ending compete for attention, keep one constant while practicing the other.",
+          "source_ids": []
+        }
+      ],
+      "dialogue": {
+        "title": "With whom, and with what?",
+        "situation": "The AI teacher plays two readers discussing who is reading together.",
+        "turns": [
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.together.01"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.together.02"
+          },
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.together.03"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.together.04"
+          }
+        ]
+      },
+      "conversation_invitation": "If a drink comes up naturally, say whether you want milk with it. Or mention who you were reading with, using help with the past form if needed.",
+      "transfer_prompt": "The AI teacher supplies a familiar new name and asks for a companion sentence; then changes the situation to writing with a pencil. Explain which part changes and why.",
+      "sound_note": "Keep the different stress in молоко́м / молока́ and карандашо́м audible. Start with whole phrases; a text correction alone cannot establish the sound."
+    },
+    {
+      "id": "ru.lesson.topics",
+      "unit_id": "ru.unit.everyday_connections",
+      "title": "A book about something; a thought that something is true",
+      "goal": "Ask what a discussion is about and distinguish a topic from a proposition.",
+      "prerequisites": [
+        "ru.lesson.location",
+        "ru.lesson.plans"
+      ],
+      "target_ids": [
+        "ru.target.topic",
+        "ru.target.proposition"
+      ],
+      "phrase_ids": [
+        "ru.phrase.topics.01",
+        "ru.phrase.topics.02",
+        "ru.phrase.topics.03",
+        "ru.phrase.topics.04",
+        "ru.phrase.topics.05",
+        "ru.phrase.topics.06",
+        "ru.phrase.topics.07",
+        "ru.phrase.topics.08"
+      ],
+      "exercise_ids": [
+        "ru.exercise.topics.read",
+        "ru.exercise.topics.contrast",
+        "ru.exercise.topics.listen",
+        "ru.exercise.topics.write",
+        "ru.exercise.topics.say",
+        "ru.exercise.topics.compose",
+        "ru.exercise.topics.dictate"
+      ],
+      "explanations": [
+        {
+          "title": "Topic versus claim",
+          "text": "О роботе names the topic of thought; что робот здесь gives the proposition being thought. The first sentence does not locate the robot. In the second, я думаю marks the speaker’s judgment, not proof that the robot is here. This difference connects ordinary conversation with later arguments.",
+          "source_ids": []
+        },
+        {
+          "title": "A familiar case with another job",
+          "text": "The prepositional case appeared in locations such as в комнате. Here о космосе and о роботе name topics; о памяти shows a different ending for a feminine noun in -ь. Об этом is a useful topic phrase. Do not infer that every noun uses -е or that every vowel-initial word has the same preposition rule.",
+          "source_ids": []
+        },
+        {
+          "title": "An informal invitation",
+          "text": "Давай поговорим offers a conversation with one informal addressee. Давайте поговорим fits polite singular or plural address. Поговорим is a bounded talk in this invitation, not a promise to finish discussing everything. The AI teacher supplies responses and follow-up questions.",
+          "source_ids": []
+        }
+      ],
+      "dialogue": {
+        "title": "A book about something; a thought that something is true",
+        "situation": "Two people choose between books. The topic is supplied in the answer, not inferred from the cover.",
+        "turns": [
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.topics.01"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.topics.02"
+          },
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.topics.03"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.topics.04"
+          }
+        ]
+      },
+      "conversation_invitation": "Mention a book or idea that is actually on your mind. A single sentence about its topic can start an ordinary conversation.",
+      "transfer_prompt": "The AI teacher gives a new noun and a separate short claim. Produce one “about” sentence and one “think that” sentence, then explain which one commits the speaker to a proposition.",
+      "sound_note": "Hear the whole chunks о чём and об этом, preserving ё in чём. Use generated examples before trying connected speech."
+    },
+    {
+      "id": "ru.lesson.relative",
+      "unit_id": "ru.unit.stories_and_arguments",
+      "title": "Which person, which book?",
+      "goal": "Follow and build a short relative clause while keeping its local roles clear.",
+      "prerequisites": [
+        "ru.lesson.roles",
+        "ru.lesson.describing",
+        "ru.lesson.topics"
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "phrase_ids": [
+        "ru.phrase.relative.01",
+        "ru.phrase.relative.02",
+        "ru.phrase.relative.03",
+        "ru.phrase.relative.04",
+        "ru.phrase.relative.05",
+        "ru.phrase.relative.06",
+        "ru.phrase.relative.07",
+        "ru.phrase.relative.08"
+      ],
+      "exercise_ids": [
+        "ru.exercise.relative.read",
+        "ru.exercise.relative.contrast",
+        "ru.exercise.relative.listen",
+        "ru.exercise.relative.write",
+        "ru.exercise.relative.say",
+        "ru.exercise.relative.compose",
+        "ru.exercise.relative.dictate"
+      ],
+      "explanations": [
+        {
+          "title": "Two decisions, not one ending rule",
+          "text": "Книга is feminine singular, so the relative pronoun remains feminine singular. Its role inside the added clause decides the case: которая лежит (book is the subject), которую читает Аня (book is what Anya reads), о которой говорит Вера (book is the topic). Start with two separate sentences if combining them is difficult.",
+          "source_ids": [
+            "ru.source.extension.relative"
+          ]
+        },
+        {
+          "title": "The local clause matters",
+          "text": "Девушка, которая видит Аню is the young woman doing the seeing. Девушка, которую видит Аня is the young woman being seen. Both antecedents девушка have the same naming form; copying that form into the relative clause would lose the distinction. Keep the two people visible and ask who sees whom.",
+          "source_ids": [
+            "ru.source.extension.relative"
+          ]
+        },
+        {
+          "title": "A real ambiguity boundary",
+          "text": "In сигнал, который слышит робот, masculine inanimate который has the same nominative and accusative shape. The local verb, roles and context still matter. Not every sentence offers a uniquely visible case ending; do not turn useful morphology into an infallible single-cue strategy.",
+          "source_ids": []
+        }
+      ],
+      "dialogue": {
+        "title": "Which person, which book?",
+        "situation": "Two different young women are being discussed. One sees Anya; Anya sees the other. The AI teacher keeps those identities visible while modeling the exchange.",
+        "turns": [
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.relative.04"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.relative.05"
+          },
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.relative.06"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.relative.07"
+          }
+        ]
+      },
+      "conversation_invitation": "If a book or person comes up naturally, a short description can help identify which one you mean. Two separate sentences are also fine.",
+      "transfer_prompt": "The AI teacher introduces two new participants and makes the relative clause identify different roles. Interpret the message first, then combine two short sentences.",
+      "sound_note": "Listen for которая / которую in whole clauses before producing them. Keep the head noun visible during supported practice, then try an audio-only message separately."
+    },
+    {
+      "id": "ru.lesson.journeys",
+      "unit_id": "ru.unit.stories_and_arguments",
+      "title": "A trip now, a familiar route",
+      "goal": "Distinguish a directed trip, a usual route and walking around in a place.",
+      "prerequisites": [
+        "ru.lesson.destination",
+        "ru.lesson.together"
+      ],
+      "target_ids": [
+        "ru.target.motion_mode",
+        "ru.target.motion_pattern"
+      ],
+      "phrase_ids": [
+        "ru.phrase.journeys.01",
+        "ru.phrase.journeys.02",
+        "ru.phrase.journeys.03",
+        "ru.phrase.journeys.04",
+        "ru.phrase.journeys.05",
+        "ru.phrase.journeys.06",
+        "ru.phrase.journeys.07",
+        "ru.phrase.journeys.08"
+      ],
+      "exercise_ids": [
+        "ru.exercise.journeys.read",
+        "ru.exercise.journeys.contrast",
+        "ru.exercise.journeys.listen",
+        "ru.exercise.journeys.write",
+        "ru.exercise.journeys.say",
+        "ru.exercise.journeys.compose",
+        "ru.exercise.journeys.dictate"
+      ],
+      "explanations": [
+        {
+          "title": "Two questions about a journey",
+          "text": "For these current directed trips, иду is on foot and еду is by vehicle. The usual-route examples use хожу and езжу. These four verbs are imperfective; the contrast is not imperfective versus perfective. Keep the destination fixed while changing travel mode, then keep mode fixed while changing the situation.",
+          "source_ids": [
+            "ru.source.extension.motion-aspect"
+          ]
+        },
+        {
+          "title": "Not simply now versus always",
+          "text": "Ходит по комнате describes walking around a room and can be happening now. Directed verbs can also occur in repeated scenarios; adverbs alone are not an infallible selector. The present lesson teaches representative uses, not an exhaustive decision tree.",
+          "source_ids": [
+            "ru.source.extension.motion-aspect"
+          ]
+        },
+        {
+          "title": "Movement does not force a destination",
+          "text": "В комнату is a destination; по комнате gives the area of movement here and uses a dative form. This new по frame is learned as a whole. It is not the same construction as location в комнате even though комнате has the same written shape.",
+          "source_ids": []
+        }
+      ],
+      "dialogue": {
+        "title": "A trip now, a familiar route",
+        "situation": "Two people discuss a present walk and a usual destination. The AI teacher supplies a visible map if useful.",
+        "turns": [
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.journeys.01"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.journeys.02"
+          },
+          {
+            "speaker": "A",
+            "phrase_id": "ru.phrase.journeys.03"
+          },
+          {
+            "speaker": "B",
+            "phrase_id": "ru.phrase.journeys.04"
+          }
+        ]
+      },
+      "conversation_invitation": "Mention where you are actually going or a place you often visit. A map or English clarification can help keep the conversation moving.",
+      "transfer_prompt": "The AI teacher provides a new destination and switches foot/vehicle or current-trip/usual-route context one at a time. Later contrast walking within a place with entering it.",
+      "sound_note": "Compare е́ду / е́зжу and иду́ / хожу́ in full messages. Generated audio should retain ё in идёшь; a transcript match is not an evaluation of the consonant clusters."
+    },
+    {
+      "id": "ru.lesson.return_signal",
+      "unit_id": "ru.unit.stories_and_arguments",
+      "title": "Original scene: a reply arrives",
+      "goal": "Track an ongoing activity, a bounded result and the order of two events.",
+      "prerequisites": [
+        "ru.lesson.time",
+        "ru.lesson.signal",
+        "ru.lesson.topics"
+      ],
+      "target_ids": [
+        "ru.target.aspect_context",
+        "ru.target.event_order"
+      ],
+      "phrase_ids": [
+        "ru.phrase.return_signal.01",
+        "ru.phrase.return_signal.02",
+        "ru.phrase.return_signal.03",
+        "ru.phrase.return_signal.04",
+        "ru.phrase.return_signal.05",
+        "ru.phrase.return_signal.06",
+        "ru.phrase.return_signal.07",
+        "ru.phrase.return_signal.08"
+      ],
+      "exercise_ids": [
+        "ru.exercise.return_signal.read",
+        "ru.exercise.return_signal.contrast",
+        "ru.exercise.return_signal.listen",
+        "ru.exercise.return_signal.write",
+        "ru.exercise.return_signal.say",
+        "ru.exercise.return_signal.compose",
+        "ru.exercise.return_signal.dictate"
+      ],
+      "explanations": [
+        {
+          "title": "An activity and a perceptual event",
+          "text": "Слушала reports listening as an activity. Услышала reports coming to hear something; it does not mean finishing all possible hearing. These are a useful semantic contrast, not a mechanical aspect pair formed by adding a prefix to the same stem.",
+          "source_ids": [
+            "ru.source.extension.motion-aspect"
+          ]
+        },
+        {
+          "title": "Writing and the result",
+          "text": "Писала ответ does not by itself say whether the reply was finished. Написала ответ presents a bounded writing result in this scene. Do not infer “definitely unfinished” from every imperfective sentence. Потом explicitly orders the later event.",
+          "source_ids": [
+            "ru.source.extension.motion-aspect"
+          ]
+        },
+        {
+          "title": "A future result without буду",
+          "text": "Напишет is a perfective future in tomorrow’s prediction; буду/будет + imperfective infinitive gives a different future construction. Compare завтра она будет писать with завтра она напишет ответ. Do not combine будет with написать as the ordinary future of this verb.",
+          "source_ids": []
+        },
+        {
+          "title": "An original story, a small reading task",
+          "text": "The scene is newly authored, not an excerpt from a named writer. Голос means voice; вдруг means suddenly; потом means then. Hear the full short scene, inspect one unclear clause, and retell only what it actually says.",
+          "source_ids": []
+        }
+      ],
+      "dialogue": {
+        "title": "Original scene: a reply arrives",
+        "situation": "An original continuation of the quiet-station scene. A narrator describes Vera listening; Vera asks a question and Anya answers. This is a fictional exchange for the AI teacher.",
+        "turns": [
+          {
+            "speaker": "Narrator",
+            "phrase_id": "ru.phrase.return_signal.01"
+          },
+          {
+            "speaker": "Narrator",
+            "phrase_id": "ru.phrase.return_signal.02"
+          },
+          {
+            "speaker": "Vera",
+            "phrase_id": "ru.phrase.return_signal.03"
+          },
+          {
+            "speaker": "Anya",
+            "phrase_id": "ru.phrase.return_signal.04"
+          },
+          {
+            "speaker": "Narrator",
+            "phrase_id": "ru.phrase.return_signal.05"
+          },
+          {
+            "speaker": "Narrator",
+            "phrase_id": "ru.phrase.return_signal.06"
+          }
+        ]
+      },
+      "conversation_invitation": "If a story you read comes up at dinner, say one thing that happened in it. The friend need not evaluate a retelling.",
+      "transfer_prompt": "The AI teacher introduces a new tiny scene with familiar verbs, asks what is asserted about completion, and invites a two-sentence retelling.",
+      "sound_note": "Hear the distinct word shapes писа́ла / написа́ла / напи́шет. A slow replay can help locate stress; return to a normal-speed phrase afterward."
+    },
+    {
+      "id": "ru.lesson.scope",
+      "unit_id": "ru.unit.stories_and_arguments",
+      "title": "Everyone has an answer; one answer for everyone",
+      "goal": "Distinguish local witnesses, a shared witness, partial negation and total negation in an imagined world.",
+      "prerequisites": [
+        "ru.lesson.logic",
+        "ru.lesson.relative",
+        "ru.lesson.quantities"
+      ],
+      "target_ids": [
+        "ru.target.scope",
+        "ru.target.negative_scope"
+      ],
+      "phrase_ids": [
+        "ru.phrase.scope.01",
+        "ru.phrase.scope.02",
+        "ru.phrase.scope.03",
+        "ru.phrase.scope.04",
+        "ru.phrase.scope.05",
+        "ru.phrase.scope.06",
+        "ru.phrase.scope.07",
+        "ru.phrase.scope.08"
+      ],
+      "exercise_ids": [
+        "ru.exercise.scope.read",
+        "ru.exercise.scope.contrast",
+        "ru.exercise.scope.listen",
+        "ru.exercise.scope.write",
+        "ru.exercise.scope.say",
+        "ru.exercise.scope.compose",
+        "ru.exercise.scope.dictate"
+      ],
+      "explanations": [
+        {
+          "title": "Who may choose after whom?",
+          "text": "For every door there is a fitting key permits a different key for each door. There is a key that fits every door requires a shared key. Neither sentence asserts uniqueness. Start with two visible doors and two differently shaped keys, then compare a single master key. These are explicit intended readings in this imagined situation; ordinary language is not a universal unambiguous logic parser.",
+          "source_ids": []
+        },
+        {
+          "title": "Not every is weaker than none",
+          "text": "Use a scene with three robots so the domain is nonempty. Не каждый робот знает ответ says that at least one does not know; it does not guarantee that any know. Ни один робот не знает ответа says none know. The ни один … не pattern expresses a single negative message; do not cancel its two negative words as if they were two Boolean negations.",
+          "source_ids": []
+        },
+        {
+          "title": "New forms, visible supports",
+          "text": "Ключ = key; дверь = door; подходит к = fits/is suitable for; ко всем дверям = for all the doors in this fitting construction. Keep these glosses visible during the first semantic comparison. Отве́та after не знает is a natural genitive in the authored negative sentence; this does not mean every negated Russian object must be genitive.",
+          "source_ids": []
+        },
+        {
+          "title": "From a fictional world to formal text",
+          "text": "Draw arrows from doors to fitting keys, then paraphrase the Russian claim. Later map the two readings to ∀ door ∃ key and ∃ key ∀ door. The logical notation is an explanation aid; it must not answer a Russian-only listening question in advance. Mathematical and philosophical conclusions need their own domain assumptions.",
+          "source_ids": []
+        }
+      ],
+      "dialogue": {
+        "title": "Everyone has an answer; one answer for everyone",
+        "situation": "Three robots inhabit an imaginary station. The AI teacher reports that not every robot knows the answer; the learner gives an example of one that does. The final line reminds us that one example does not prove a universal claim. Keep the key puzzle as a separate comparison.",
+        "turns": [
+          {
+            "speaker": "AI teacher",
+            "phrase_id": "ru.phrase.scope.04"
+          },
+          {
+            "speaker": "Learner",
+            "phrase_id": "ru.phrase.scope.06"
+          },
+          {
+            "speaker": "AI teacher",
+            "phrase_id": "ru.phrase.scope.08"
+          }
+        ]
+      },
+      "conversation_invitation": "If an interesting puzzle or claim comes up naturally, you can try saying “This is an example, but not a proof.” No puzzle session or assessment is expected of your friend.",
+      "transfer_prompt": "The AI teacher supplies a new little world with two or three objects and asks which Russian claim fits. Explain the claim, then describe a different world in your own words.",
+      "sound_note": "Hear the complete phrases не каждый and ни один … не before comparing their scope. Keep answer-bearing Russian text hidden in listening practice, including the lesson’s explanatory examples."
+    }
+  ],
+  "targets": [
+    {
+      "id": "ru.target.experiencer",
+      "title": "Say who likes something",
+      "description": "Use мне/тебе with нравится and distinguish the person experiencing a preference from the grammatical subject.",
+      "prerequisites": [
+        "ru.target.person",
+        "ru.target.agreement"
+      ]
+    },
+    {
+      "id": "ru.target.need",
+      "title": "Distinguish a needed thing from a needed action",
+      "description": "Use мне нужен/нужна with a singular noun and мне нужно with an infinitive in bounded examples.",
+      "prerequisites": [
+        "ru.target.want",
+        "ru.target.agreement"
+      ]
+    },
+    {
+      "id": "ru.target.quantity",
+      "title": "Count a few everyday things",
+      "description": "Use one/two/five with selected inanimate nouns and distinguish singular genitive from plural genitive in those frames.",
+      "prerequisites": [
+        "ru.target.absence"
+      ]
+    },
+    {
+      "id": "ru.target.amount",
+      "title": "Ask for an amount",
+      "description": "Use сколько and немного воды as a useful amount construction without treating water as a count noun.",
+      "prerequisites": [
+        "ru.target.object",
+        "ru.target.absence"
+      ]
+    },
+    {
+      "id": "ru.target.companion",
+      "title": "Say with whom",
+      "description": "Use с + instrumental for company in short familiar exchanges.",
+      "prerequisites": [
+        "ru.target.roles"
+      ]
+    },
+    {
+      "id": "ru.target.instrument",
+      "title": "Name an instrument",
+      "description": "Use a bare instrumental for the writing instrument and distinguish it from с + instrumental company.",
+      "prerequisites": [
+        "ru.target.object"
+      ]
+    },
+    {
+      "id": "ru.target.topic",
+      "title": "Name a topic with о/об",
+      "description": "Use о + prepositional with selected nouns and об этом with a demonstrative.",
+      "prerequisites": [
+        "ru.target.location"
+      ]
+    },
+    {
+      "id": "ru.target.proposition",
+      "title": "Report a thought with что",
+      "description": "Distinguish thinking about a topic from thinking that a proposition holds.",
+      "prerequisites": [
+        "ru.target.person",
+        "ru.target.location"
+      ]
+    },
+    {
+      "id": "ru.target.relative_clause",
+      "title": "Connect a noun to a description",
+      "description": "Use который-family forms with gender/number from the noun and case from the relative clause role.",
+      "prerequisites": [
+        "ru.target.roles",
+        "ru.target.agreement",
+        "ru.target.topic"
+      ]
+    },
+    {
+      "id": "ru.target.motion_mode",
+      "title": "Distinguish foot travel from vehicle travel",
+      "description": "Contrast иду and еду in current directed-trip contexts.",
+      "prerequisites": [
+        "ru.target.motion_preview"
+      ]
+    },
+    {
+      "id": "ru.target.motion_pattern",
+      "title": "Distinguish directed and nondirected movement",
+      "description": "Contrast current directed trips with usual routes and movement around a place without equating directionality with aspect.",
+      "prerequisites": [
+        "ru.target.motion_preview",
+        "ru.target.location"
+      ]
+    },
+    {
+      "id": "ru.target.aspect_context",
+      "title": "Read aspect in a bounded context",
+      "description": "Contrast слушать/услышать and писать/написать with stated context instead of translating all perfectives as finished.",
+      "prerequisites": [
+        "ru.target.aspect_preview",
+        "ru.target.scifi"
+      ]
+    },
+    {
+      "id": "ru.target.event_order",
+      "title": "Connect successive events",
+      "description": "Use потом and когда to track an original narrative without inventing unstated events.",
+      "prerequisites": [
+        "ru.target.time",
+        "ru.target.evidence"
+      ]
+    },
+    {
+      "id": "ru.target.scope",
+      "title": "Track quantifier dependency",
+      "description": "Distinguish each participant having some object from one common object serving every participant; use an explicitly nonempty fictional domain.",
+      "prerequisites": [
+        "ru.target.quantifier",
+        "ru.target.relative_clause"
+      ]
+    },
+    {
+      "id": "ru.target.negative_scope",
+      "title": "Distinguish not every from none",
+      "description": "Interpret не каждый and ни один … не without treating either as a statement about most participants.",
+      "prerequisites": [
+        "ru.target.quantifier",
+        "ru.target.absence"
+      ]
+    },
+    {
+      "id": "ru.target.accompaniment",
+      "title": "Include or exclude an accompaniment",
+      "description": "Use с молоком versus без молока to distinguish an accompaniment from its absence.",
+      "prerequisites": [
+        "ru.target.absence"
+      ]
+    }
+  ],
+  "phrases": [
+    {
+      "id": "ru.phrase.preferences.01",
+      "russian": "Тебе нравится суп?",
+      "stressed": "Тебе́ нра́вится суп?",
+      "translation": "Do you like the soup? (informal singular)",
+      "chunks": [
+        "Тебе́",
+        "нра́вится суп?"
+      ],
+      "target_ids": [
+        "ru.target.experiencer"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.preferences.02",
+      "russian": "Да, мне нравится суп.",
+      "stressed": "Да, мне нра́вится суп.",
+      "translation": "Yes, I like the soup.",
+      "chunks": [
+        "Да, мне",
+        "нра́вится суп."
+      ],
+      "target_ids": [
+        "ru.target.experiencer"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.preferences.03",
+      "russian": "А тебе?",
+      "stressed": "А тебе́?",
+      "translation": "And you? (asking about your experience or preference)",
+      "chunks": [
+        "А тебе́?"
+      ],
+      "target_ids": [
+        "ru.target.experiencer"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.preferences.04",
+      "russian": "Мне нравится чай.",
+      "stressed": "Мне нра́вится чай.",
+      "translation": "I like tea.",
+      "chunks": [
+        "Мне",
+        "нра́вится чай."
+      ],
+      "target_ids": [
+        "ru.target.experiencer"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.preferences.05",
+      "russian": "Мне нравятся эти книги.",
+      "stressed": "Мне нра́вятся э́ти кни́ги.",
+      "translation": "I like these books.",
+      "chunks": [
+        "Мне",
+        "нра́вятся э́ти кни́ги."
+      ],
+      "target_ids": [
+        "ru.target.experiencer"
+      ],
+      "note": "Эти is the plural of this/these; нравится → нравятся agrees with books, not with me.",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.preferences.06",
+      "russian": "Мне нужен чай.",
+      "stressed": "Мне ну́жен чай.",
+      "translation": "I need tea.",
+      "chunks": [
+        "Мне",
+        "ну́жен чай."
+      ],
+      "target_ids": [
+        "ru.target.need"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.preferences.07",
+      "russian": "Мне нужна вода.",
+      "stressed": "Мне нужна́ вода́.",
+      "translation": "I need water.",
+      "chunks": [
+        "Мне",
+        "нужна́ вода́."
+      ],
+      "target_ids": [
+        "ru.target.need"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.preferences.08",
+      "russian": "Мне нужно отдохнуть.",
+      "stressed": "Мне ну́жно отдохну́ть.",
+      "translation": "I need to rest.",
+      "chunks": [
+        "Мне",
+        "ну́жно отдохну́ть."
+      ],
+      "target_ids": [
+        "ru.target.need"
+      ],
+      "note": "Отдохнуть is supplied as a useful infinitive; a complete aspect treatment is deferred.",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.preferences.09",
+      "russian": "Тебе нужна книга?",
+      "stressed": "Тебе́ нужна́ кни́га?",
+      "translation": "Do you need a book? (informal singular)",
+      "chunks": [
+        "Тебе́",
+        "нужна́ кни́га?"
+      ],
+      "target_ids": [
+        "ru.target.need"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.preferences.10",
+      "russian": "Нет, мне нужна карта.",
+      "stressed": "Нет, мне нужна́ ка́рта.",
+      "translation": "No, I need a map.",
+      "chunks": [
+        "Нет, мне",
+        "нужна́ ка́рта."
+      ],
+      "target_ids": [
+        "ru.target.need"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.quantities.01",
+      "russian": "Сколько нужно чашек?",
+      "stressed": "Ско́лько ну́жно ча́шек?",
+      "translation": "How many cups are needed?",
+      "chunks": [
+        "Ско́лько",
+        "ну́жно ча́шек?"
+      ],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.quantities.02",
+      "russian": "Две чашки, пожалуйста.",
+      "stressed": "Две ча́шки, пожа́луйста.",
+      "translation": "Two cups, please.",
+      "chunks": [
+        "Две ча́шки,",
+        "пожа́луйста."
+      ],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.quantities.03",
+      "russian": "Вот две чашки.",
+      "stressed": "Вот две ча́шки.",
+      "translation": "Here are two cups.",
+      "chunks": [
+        "Вот",
+        "две ча́шки."
+      ],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.quantities.04",
+      "russian": "Одна чашка на столе.",
+      "stressed": "Одна́ ча́шка на столе́.",
+      "translation": "One cup is on the table.",
+      "chunks": [
+        "Одна́ ча́шка",
+        "на столе́."
+      ],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.quantities.05",
+      "russian": "Пять чашек на столе.",
+      "stressed": "Пять ча́шек на столе́.",
+      "translation": "Five cups are on the table.",
+      "chunks": [
+        "Пять ча́шек",
+        "на столе́."
+      ],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.quantities.06",
+      "russian": "Немного воды, пожалуйста.",
+      "stressed": "Немно́го воды́, пожа́луйста.",
+      "translation": "A little water, please.",
+      "chunks": [
+        "Немно́го воды́,",
+        "пожа́луйста."
+      ],
+      "target_ids": [
+        "ru.target.amount"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.quantities.07",
+      "russian": "У меня две книги.",
+      "stressed": "У меня́ две кни́ги.",
+      "translation": "I have two books.",
+      "chunks": [
+        "У меня́",
+        "две кни́ги."
+      ],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.quantities.08",
+      "russian": "У меня пять книг.",
+      "stressed": "У меня́ пять книг.",
+      "translation": "I have five books.",
+      "chunks": [
+        "У меня́",
+        "пять книг."
+      ],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.together.01",
+      "russian": "С кем ты читаешь?",
+      "stressed": "С кем ты чита́ешь?",
+      "translation": "Who are you reading with? (informal singular)",
+      "chunks": [
+        "С кем",
+        "ты чита́ешь?"
+      ],
+      "target_ids": [
+        "ru.target.companion"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.together.02",
+      "russian": "Я читаю с Аней.",
+      "stressed": "Я чита́ю с А́ней.",
+      "translation": "I am reading with Anya.",
+      "chunks": [
+        "Я чита́ю",
+        "с А́ней."
+      ],
+      "target_ids": [
+        "ru.target.companion"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.together.03",
+      "russian": "А Вера?",
+      "stressed": "А Ве́ра?",
+      "translation": "And Vera?",
+      "chunks": [
+        "А Ве́ра?"
+      ],
+      "target_ids": [
+        "ru.target.companion"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.together.04",
+      "russian": "Вера читает с роботом.",
+      "stressed": "Ве́ра чита́ет с ро́ботом.",
+      "translation": "Vera is reading with a robot.",
+      "chunks": [
+        "Ве́ра",
+        "чита́ет с ро́ботом."
+      ],
+      "target_ids": [
+        "ru.target.companion"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.together.05",
+      "russian": "Я пишу ручкой.",
+      "stressed": "Я пишу́ ру́чкой.",
+      "translation": "I am writing with a pen.",
+      "chunks": [
+        "Я пишу́",
+        "ру́чкой."
+      ],
+      "target_ids": [
+        "ru.target.instrument"
+      ],
+      "note": "Ручка means pen here, rather than handle or a little hand.",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.together.06",
+      "russian": "Я пишу карандашом.",
+      "stressed": "Я пишу́ карандашо́м.",
+      "translation": "I am writing with a pencil.",
+      "chunks": [
+        "Я пишу́",
+        "карандашо́м."
+      ],
+      "target_ids": [
+        "ru.target.instrument"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.together.07",
+      "russian": "Чай с молоком, пожалуйста.",
+      "stressed": "Чай с молоко́м, пожа́луйста.",
+      "translation": "Tea with milk, please.",
+      "chunks": [
+        "Чай",
+        "с молоко́м, пожа́луйста."
+      ],
+      "target_ids": [
+        "ru.target.accompaniment"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.together.08",
+      "russian": "Я хочу чай без молока.",
+      "stressed": "Я хочу́ чай без молока́.",
+      "translation": "I want tea without milk.",
+      "chunks": [
+        "Я хочу́",
+        "чай без молока́."
+      ],
+      "target_ids": [
+        "ru.target.accompaniment"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.topics.01",
+      "russian": "О чём эта книга?",
+      "stressed": "О чём э́та кни́га?",
+      "translation": "What is this book about?",
+      "chunks": [
+        "О чём",
+        "э́та кни́га?"
+      ],
+      "target_ids": [
+        "ru.target.topic"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.topics.02",
+      "russian": "Эта книга о космосе.",
+      "stressed": "Э́та кни́га о ко́смосе.",
+      "translation": "This book is about space.",
+      "chunks": [
+        "Э́та кни́га",
+        "о ко́смосе."
+      ],
+      "target_ids": [
+        "ru.target.topic"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.topics.03",
+      "russian": "А эта?",
+      "stressed": "А э́та?",
+      "translation": "And this one? (feminine referent)",
+      "chunks": [
+        "А э́та?"
+      ],
+      "target_ids": [
+        "ru.target.topic"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.topics.04",
+      "russian": "Эта книга о памяти.",
+      "stressed": "Э́та кни́га о па́мяти.",
+      "translation": "This book is about memory.",
+      "chunks": [
+        "Э́та кни́га",
+        "о па́мяти."
+      ],
+      "target_ids": [
+        "ru.target.topic"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.topics.05",
+      "russian": "Я думаю о роботе.",
+      "stressed": "Я ду́маю о ро́боте.",
+      "translation": "I am thinking about the robot.",
+      "chunks": [
+        "Я ду́маю",
+        "о ро́боте."
+      ],
+      "target_ids": [
+        "ru.target.topic"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.topics.06",
+      "russian": "Я думаю, что робот здесь.",
+      "stressed": "Я ду́маю, что ро́бот здесь.",
+      "translation": "I think that the robot is here.",
+      "chunks": [
+        "Я ду́маю,",
+        "что ро́бот здесь."
+      ],
+      "target_ids": [
+        "ru.target.proposition"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.topics.07",
+      "russian": "Давай поговорим об этом.",
+      "stressed": "Дава́й поговори́м об э́том.",
+      "translation": "Let us talk about this. (informal singular invitation)",
+      "chunks": [
+        "Дава́й",
+        "поговори́м об э́том."
+      ],
+      "target_ids": [
+        "ru.target.topic"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.topics.08",
+      "russian": "Что это значит?",
+      "stressed": "Что э́то зна́чит?",
+      "translation": "What does this mean?",
+      "chunks": [
+        "Что э́то",
+        "зна́чит?"
+      ],
+      "target_ids": [
+        "ru.target.repair"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.relative.01",
+      "russian": "Вот книга, которая лежит на столе.",
+      "stressed": "Вот кни́га, кото́рая лежи́т на столе́.",
+      "translation": "Here is the book that is lying on the table.",
+      "chunks": [
+        "Вот кни́га,",
+        "кото́рая лежи́т на столе́."
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.relative.02",
+      "russian": "Вот книга, которую читает Аня.",
+      "stressed": "Вот кни́га, кото́рую чита́ет А́ня.",
+      "translation": "Here is the book that Anya is reading.",
+      "chunks": [
+        "Вот кни́га,",
+        "кото́рую чита́ет А́ня."
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.relative.03",
+      "russian": "Вот книга, о которой говорит Вера.",
+      "stressed": "Вот кни́га, о кото́рой говори́т Ве́ра.",
+      "translation": "Here is the book that Vera is talking about.",
+      "chunks": [
+        "Вот кни́га,",
+        "о кото́рой говори́т Ве́ра."
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.relative.04",
+      "russian": "Где девушка, которая видит Аню?",
+      "stressed": "Где де́вушка, кото́рая ви́дит А́ню?",
+      "translation": "Where is the young woman who sees Anya?",
+      "chunks": [
+        "Где де́вушка,",
+        "кото́рая ви́дит А́ню?"
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.relative.05",
+      "russian": "Она здесь.",
+      "stressed": "Она́ здесь.",
+      "translation": "She is here.",
+      "chunks": [
+        "Она́ здесь."
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.relative.06",
+      "russian": "А где девушка, которую видит Аня?",
+      "stressed": "А где де́вушка, кото́рую ви́дит А́ня?",
+      "translation": "And where is the young woman whom Anya sees?",
+      "chunks": [
+        "А где де́вушка,",
+        "кото́рую ви́дит А́ня?"
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.relative.07",
+      "russian": "Она на станции.",
+      "stressed": "Она́ на ста́нции.",
+      "translation": "She is at the station.",
+      "chunks": [
+        "Она́",
+        "на ста́нции."
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.relative.08",
+      "russian": "Это сигнал, который слышит робот.",
+      "stressed": "Э́то сигна́л, кото́рый слы́шит ро́бот.",
+      "translation": "This is the signal that the robot hears.",
+      "chunks": [
+        "Э́то сигна́л,",
+        "кото́рый слы́шит ро́бот."
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "note": "Сигнал is masculine inanimate: its accusative relative form который looks like the nominative. Do not infer the role from that ending alone.",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.journeys.01",
+      "russian": "Куда ты сейчас идёшь?",
+      "stressed": "Куда́ ты сейча́с идёшь?",
+      "translation": "Where are you going now? (on foot; informal singular)",
+      "chunks": [
+        "Куда́",
+        "ты сейча́с идёшь?"
+      ],
+      "target_ids": [
+        "ru.target.motion_mode",
+        "ru.target.destination"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.journeys.02",
+      "russian": "Я иду в магазин.",
+      "stressed": "Я иду́ в магази́н.",
+      "translation": "I am going to the shop. (on foot)",
+      "chunks": [
+        "Я иду́",
+        "в магази́н."
+      ],
+      "target_ids": [
+        "ru.target.motion_mode",
+        "ru.target.destination"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.journeys.03",
+      "russian": "А обычно?",
+      "stressed": "А о́бычно?",
+      "translation": "And usually?",
+      "chunks": [
+        "А о́бычно?"
+      ],
+      "target_ids": [
+        "ru.target.motion_pattern"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.journeys.04",
+      "russian": "Обычно я хожу в библиотеку.",
+      "stressed": "О́бычно я хожу́ в библиоте́ку.",
+      "translation": "I usually go to the library. (on foot)",
+      "chunks": [
+        "О́бычно я хожу́",
+        "в библиоте́ку."
+      ],
+      "target_ids": [
+        "ru.target.motion_pattern"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.journeys.05",
+      "russian": "Сейчас я еду на станцию.",
+      "stressed": "Сейча́с я е́ду на ста́нцию.",
+      "translation": "I am travelling to the station now. (by vehicle)",
+      "chunks": [
+        "Сейча́с я е́ду",
+        "на ста́нцию."
+      ],
+      "target_ids": [
+        "ru.target.motion_mode",
+        "ru.target.destination"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.journeys.06",
+      "russian": "Обычно я езжу на станцию.",
+      "stressed": "О́бычно я е́зжу на ста́нцию.",
+      "translation": "I usually travel to the station. (by vehicle)",
+      "chunks": [
+        "О́бычно я е́зжу",
+        "на ста́нцию."
+      ],
+      "target_ids": [
+        "ru.target.motion_mode",
+        "ru.target.motion_pattern"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.journeys.07",
+      "russian": "Робот ходит по комнате.",
+      "stressed": "Ро́бот хо́дит по ко́мнате.",
+      "translation": "The robot is walking around the room.",
+      "chunks": [
+        "Ро́бот хо́дит",
+        "по ко́мнате."
+      ],
+      "target_ids": [
+        "ru.target.motion_pattern"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.journeys.08",
+      "russian": "Робот идёт в комнату.",
+      "stressed": "Ро́бот идёт в ко́мнату.",
+      "translation": "The robot is going into the room. (on foot)",
+      "chunks": [
+        "Ро́бот идёт",
+        "в ко́мнату."
+      ],
+      "target_ids": [
+        "ru.target.motion_pattern",
+        "ru.target.destination"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.return_signal.01",
+      "russian": "Вера слушала сигнал.",
+      "stressed": "Ве́ра слу́шала сигна́л.",
+      "translation": "Vera was listening to the signal.",
+      "chunks": [
+        "Ве́ра",
+        "слу́шала сигна́л."
+      ],
+      "target_ids": [
+        "ru.target.aspect_context"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.return_signal.02",
+      "russian": "Вдруг она услышала голос.",
+      "stressed": "Вдруг она́ услы́шала го́лос.",
+      "translation": "Suddenly she heard a voice.",
+      "chunks": [
+        "Вдруг она́",
+        "услы́шала го́лос."
+      ],
+      "target_ids": [
+        "ru.target.aspect_context"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.return_signal.03",
+      "russian": "Кто здесь?",
+      "stressed": "Кто здесь?",
+      "translation": "Who is here?",
+      "chunks": [
+        "Кто здесь?"
+      ],
+      "target_ids": [
+        "ru.target.narrative"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.return_signal.04",
+      "russian": "Это я, Аня.",
+      "stressed": "Э́то я, А́ня.",
+      "translation": "It is me, Anya.",
+      "chunks": [
+        "Э́то я, А́ня."
+      ],
+      "target_ids": [
+        "ru.target.narrative"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.return_signal.05",
+      "russian": "Вера писала ответ.",
+      "stressed": "Ве́ра писа́ла отве́т.",
+      "translation": "Vera was writing a reply.",
+      "chunks": [
+        "Ве́ра",
+        "писа́ла отве́т."
+      ],
+      "target_ids": [
+        "ru.target.aspect_context"
+      ],
+      "note": "This line by itself does not assert completion or noncompletion.",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.return_signal.06",
+      "russian": "Потом она написала ответ.",
+      "stressed": "Пото́м она́ написа́ла отве́т.",
+      "translation": "Then she wrote the reply. (a bounded completed result)",
+      "chunks": [
+        "Пото́м она́",
+        "написа́ла отве́т."
+      ],
+      "target_ids": [
+        "ru.target.aspect_context",
+        "ru.target.event_order"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.return_signal.07",
+      "russian": "Когда Вера услышала голос, она написала ответ.",
+      "stressed": "Когда́ Ве́ра услы́шала го́лос, она́ написа́ла отве́т.",
+      "translation": "When Vera heard the voice, she wrote a reply.",
+      "chunks": [
+        "Когда́ Ве́ра",
+        "услы́шала го́лос,",
+        "она́ написа́ла отве́т."
+      ],
+      "target_ids": [
+        "ru.target.aspect_context",
+        "ru.target.event_order"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.return_signal.08",
+      "russian": "Завтра Вера напишет ответ.",
+      "stressed": "За́втра Ве́ра напи́шет отве́т.",
+      "translation": "Tomorrow Vera will write the reply. (bounded result intended)",
+      "chunks": [
+        "За́втра Ве́ра",
+        "напи́шет отве́т."
+      ],
+      "target_ids": [
+        "ru.target.aspect_context",
+        "ru.target.time"
+      ],
+      "note": "Напишет is a perfective future here, not a present-tense report.",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.scope.01",
+      "russian": "У каждого робота есть ключ.",
+      "stressed": "У ка́ждого ро́бота есть ключ.",
+      "translation": "Every robot has a key.",
+      "chunks": [
+        "У ка́ждого ро́бота",
+        "есть ключ."
+      ],
+      "target_ids": [
+        "ru.target.scope"
+      ],
+      "note": "The key may differ from robot to robot; this sentence does not establish a common key.",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.scope.02",
+      "russian": "Есть ключ, который подходит ко всем дверям.",
+      "stressed": "Есть ключ, кото́рый подхо́дит ко всем дверя́м.",
+      "translation": "There is a key that fits every door.",
+      "chunks": [
+        "Есть ключ,",
+        "кото́рый подхо́дит",
+        "ко всем дверя́м."
+      ],
+      "target_ids": [
+        "ru.target.scope"
+      ],
+      "note": "This says one and the same key fits all the doors; it does not say there is exactly one such key.",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.scope.03",
+      "russian": "Для каждой двери есть ключ, который к ней подходит.",
+      "stressed": "Для ка́ждой две́ри есть ключ, кото́рый к ней подхо́дит.",
+      "translation": "For every door, there is a key that fits it.",
+      "chunks": [
+        "Для ка́ждой две́ри",
+        "есть ключ,",
+        "кото́рый к ней подхо́дит."
+      ],
+      "target_ids": [
+        "ru.target.scope"
+      ],
+      "note": "The key can depend on the door; a single common key is allowed but not required.",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.scope.04",
+      "russian": "Не каждый робот знает ответ.",
+      "stressed": "Не ка́ждый ро́бот зна́ет отве́т.",
+      "translation": "Not every robot knows the answer.",
+      "chunks": [
+        "Не ка́ждый ро́бот",
+        "зна́ет отве́т."
+      ],
+      "target_ids": [
+        "ru.target.negative_scope"
+      ],
+      "note": "This does not by itself establish that any robot knows it.",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.scope.05",
+      "russian": "Ни один робот не знает ответа.",
+      "stressed": "Ни оди́н ро́бот не зна́ет отве́та.",
+      "translation": "No robot knows the answer.",
+      "chunks": [
+        "Ни оди́н ро́бот",
+        "не зна́ет отве́та."
+      ],
+      "target_ids": [
+        "ru.target.negative_scope"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.scope.06",
+      "russian": "Есть робот, который знает ответ.",
+      "stressed": "Есть ро́бот, кото́рый зна́ет отве́т.",
+      "translation": "There is a robot that knows the answer.",
+      "chunks": [
+        "Есть ро́бот,",
+        "кото́рый зна́ет отве́т."
+      ],
+      "target_ids": [
+        "ru.target.quantifier",
+        "ru.target.relative_clause"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.scope.07",
+      "russian": "Каждый робот знает один и тот же ответ.",
+      "stressed": "Ка́ждый ро́бот зна́ет оди́н и тот же отве́т.",
+      "translation": "Every robot knows the same answer.",
+      "chunks": [
+        "Ка́ждый ро́бот",
+        "зна́ет оди́н и тот же отве́т."
+      ],
+      "target_ids": [
+        "ru.target.scope"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    },
+    {
+      "id": "ru.phrase.scope.08",
+      "russian": "Это пример, но не доказательство.",
+      "stressed": "Э́то приме́р, но не доказа́тельство.",
+      "translation": "This is an example, but not a proof.",
+      "chunks": [
+        "Э́то приме́р,",
+        "но не доказа́тельство."
+      ],
+      "target_ids": [
+        "ru.target.evidence"
+      ],
+      "note": "",
+      "audio": "pending_generated_speech",
+      "editorial_status": "generated_draft"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ru.exercise.preferences.read",
+      "lesson_id": "ru.lesson.preferences",
+      "kind": "reading_comprehension",
+      "response_mode": "choice",
+      "instruction": "Whose preference does the sentence report, and what is liked?",
+      "reference_phrase_id": "ru.phrase.preferences.05",
+      "stimulus_phrase_ids": [
+        "ru.phrase.preferences.05"
+      ],
+      "target_ids": [
+        "ru.target.experiencer"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "The speaker likes these books."
+        },
+        {
+          "id": "b",
+          "text": "The person being addressed likes these books."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Мне names the experiencer; книги names what is liked.",
+      "feedback": "Нравятся agrees with plural книги, while мне still means to me.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.preferences.contrast",
+      "lesson_id": "ru.lesson.preferences",
+      "kind": "contrast",
+      "response_mode": "choice",
+      "instruction": "You need water, rather than simply enjoying it. Which sentence gives that message?",
+      "reference_phrase_id": "ru.phrase.preferences.07",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.need"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Мне нравится вода."
+        },
+        {
+          "id": "b",
+          "text": "Мне нужна вода."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "Choose the need construction; вода is feminine.",
+      "feedback": "Нужна states a need; нравится states a preference. Both are grammatical, but their meanings differ.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.preferences.listen",
+      "lesson_id": "ru.lesson.preferences",
+      "kind": "listening_comprehension",
+      "response_mode": "choice",
+      "instruction": "Listen without Russian text. What does the speaker need?",
+      "reference_phrase_id": "ru.phrase.preferences.08",
+      "stimulus_phrase_ids": [
+        "ru.phrase.preferences.08"
+      ],
+      "target_ids": [
+        "ru.target.need"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Water."
+        },
+        {
+          "id": "b",
+          "text": "Rest."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "Listen for the action after нужно.",
+      "feedback": "Нужно отдохнуть names a needed action. Replaying or seeing the text is support to record.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.preferences.write",
+      "lesson_id": "ru.lesson.preferences",
+      "kind": "written_retrieval",
+      "response_mode": "text",
+      "instruction": "Write: I need a map.",
+      "reference_phrase_id": "ru.phrase.preferences.10",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.need"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Мне нужна карта."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Карта is feminine; the person needing it is мне.",
+      "feedback": "Нужна agrees with карта. A different correct paraphrase can be reviewed by the AI teacher.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.preferences.say",
+      "lesson_id": "ru.lesson.preferences",
+      "kind": "spoken_retrieval",
+      "response_mode": "speech",
+      "instruction": "In an AI-teacher role-play, ask informally: Do you like the soup?",
+      "reference_phrase_id": "ru.phrase.preferences.01",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.experiencer"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Тебе нравится суп?",
+        "criteria": [
+          "Use an informal singular question about the other person’s preference.",
+          "The AI teacher checks meaning; stress/intonation feedback requires the recording."
+        ]
+      },
+      "hint": "Use тебе for the person experiencing the preference.",
+      "feedback": "After the question, listen to a reply and respond to its meaning.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.preferences.compose",
+      "lesson_id": "ru.lesson.preferences",
+      "kind": "composition",
+      "response_mode": "text",
+      "instruction": "Write one true thing you like and one thing or action you need. The example is only a possible answer.",
+      "reference_phrase_id": "ru.phrase.preferences.04",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.experiencer",
+        "ru.target.need"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Мне нравится чай. Мне нужно отдохнуть.",
+        "criteria": [
+          "Distinguish preference from need.",
+          "Use experiencer and agreement appropriately; accept other grammatical messages."
+        ]
+      },
+      "hint": "A noun after нужен/нужна and an infinitive after нужно have different patterns.",
+      "feedback": "The AI teacher chooses one useful correction, explains it and invites a revised answer.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.preferences.dictate",
+      "lesson_id": "ru.lesson.preferences",
+      "kind": "dictation",
+      "response_mode": "text",
+      "instruction": "Listen without the written sentence. Write what you hear in ordinary Russian spelling; stress marks are optional.",
+      "reference_phrase_id": "ru.phrase.preferences.07",
+      "stimulus_phrase_ids": [
+        "ru.phrase.preferences.07"
+      ],
+      "target_ids": [
+        "ru.target.need"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Мне нужна вода."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Listen for the ending of нужна and the final stress in вода.",
+      "feedback": "The spelling вода preserves an unstressed о. Do not infer pronunciation accuracy from dictation.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.quantities.read",
+      "lesson_id": "ru.lesson.quantities",
+      "kind": "reading_comprehension",
+      "response_mode": "choice",
+      "instruction": "How many cups does this sentence place on the table?",
+      "reference_phrase_id": "ru.phrase.quantities.05",
+      "stimulus_phrase_ids": [
+        "ru.phrase.quantities.05"
+      ],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Two."
+        },
+        {
+          "id": "b",
+          "text": "Five."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "Пять identifies the count.",
+      "feedback": "Пять чашек is a count phrase; compare две чашки without changing the situation.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.quantities.contrast",
+      "lesson_id": "ru.lesson.quantities",
+      "kind": "contrast",
+      "response_mode": "choice",
+      "instruction": "Which request asks for a small amount of water rather than a number of cups?",
+      "reference_phrase_id": "ru.phrase.quantities.06",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.amount"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Немного воды, пожалуйста."
+        },
+        {
+          "id": "b",
+          "text": "Две чашки, пожалуйста."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Немного describes an amount.",
+      "feedback": "Воды is the genitive form here; чашки is a cup count after две.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.quantities.listen",
+      "lesson_id": "ru.lesson.quantities",
+      "kind": "listening_comprehension",
+      "response_mode": "choice",
+      "instruction": "Listen without Russian text. How many books does the speaker have?",
+      "reference_phrase_id": "ru.phrase.quantities.07",
+      "stimulus_phrase_ids": [
+        "ru.phrase.quantities.07"
+      ],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Two books."
+        },
+        {
+          "id": "b",
+          "text": "Five books."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Listen to the number before books.",
+      "feedback": "Две книги reports two books. A familiar book word alone cannot distinguish the options.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.quantities.write",
+      "lesson_id": "ru.lesson.quantities",
+      "kind": "written_retrieval",
+      "response_mode": "text",
+      "instruction": "Write: I have five books.",
+      "reference_phrase_id": "ru.phrase.quantities.08",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "У меня пять книг.",
+          "У меня есть пять книг."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "After пять, use the form книг.",
+      "feedback": "Both authored variants describe having five books; есть is possible but not compulsory here.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.quantities.say",
+      "lesson_id": "ru.lesson.quantities",
+      "kind": "spoken_retrieval",
+      "response_mode": "speech",
+      "instruction": "Ask for two cups politely.",
+      "reference_phrase_id": "ru.phrase.quantities.02",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Две чашки, пожалуйста.",
+        "criteria": [
+          "Request two cups, not one or five.",
+          "Use две чашки; evaluate pronunciation only from available audio."
+        ]
+      },
+      "hint": "Чашка is feminine, so use две.",
+      "feedback": "The AI teacher can reply with the cups and then change the requested number.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.quantities.compose",
+      "lesson_id": "ru.lesson.quantities",
+      "kind": "composition",
+      "response_mode": "text",
+      "instruction": "Imagine a table with one cup and five books. Describe it in two short sentences.",
+      "reference_phrase_id": "ru.phrase.quantities.04",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.quantity"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "На столе одна чашка. На столе пять книг.",
+        "criteria": [
+          "Preserve the two different counts.",
+          "Use appropriate noun forms; accept natural word-order variants."
+        ]
+      },
+      "hint": "Use a location frame already encountered and change the counted noun.",
+      "feedback": "Check the counts first, then compare одна чашка with пять книг. Try saying the two messages aloud after the correction.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.quantities.dictate",
+      "lesson_id": "ru.lesson.quantities",
+      "kind": "dictation",
+      "response_mode": "text",
+      "instruction": "Listen without the written sentence. Write what you hear in ordinary Russian spelling; stress marks are optional.",
+      "reference_phrase_id": "ru.phrase.quantities.06",
+      "stimulus_phrase_ids": [
+        "ru.phrase.quantities.06"
+      ],
+      "target_ids": [
+        "ru.target.amount"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Немного воды, пожалуйста."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Немного is followed by воды.",
+      "feedback": "Воды ends with ы here. Keyboard slips and uncertainty about the form can be recorded separately.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.together.read",
+      "lesson_id": "ru.lesson.together",
+      "kind": "reading_comprehension",
+      "response_mode": "choice",
+      "instruction": "Who is reading with Anya?",
+      "reference_phrase_id": "ru.phrase.together.02",
+      "stimulus_phrase_ids": [
+        "ru.phrase.together.02"
+      ],
+      "target_ids": [
+        "ru.target.companion"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Vera."
+        },
+        {
+          "id": "b",
+          "text": "The speaker."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "Я names the reader; с Аней names the companion.",
+      "feedback": "Аней is an instrumental form of Аня in the company phrase.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.together.contrast",
+      "lesson_id": "ru.lesson.together",
+      "kind": "contrast",
+      "response_mode": "choice",
+      "instruction": "Which sentence says what instrument the speaker is writing with?",
+      "reference_phrase_id": "ru.phrase.together.05",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.companion",
+        "ru.target.instrument"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Я пишу ручкой."
+        },
+        {
+          "id": "b",
+          "text": "Я пишу с Аней."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Choose the writing instrument, not the reading companion.",
+      "feedback": "Ручкой names the writing instrument. С Аней names the person writing with you; both messages use the same writing verb.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.together.listen",
+      "lesson_id": "ru.lesson.together",
+      "kind": "listening_comprehension",
+      "response_mode": "choice",
+      "instruction": "Listen without Russian text. Which drink does the speaker want?",
+      "reference_phrase_id": "ru.phrase.together.08",
+      "stimulus_phrase_ids": [
+        "ru.phrase.together.08"
+      ],
+      "target_ids": [
+        "ru.target.accompaniment"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Tea with milk."
+        },
+        {
+          "id": "b",
+          "text": "Tea without milk."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "The small word before milk changes the request.",
+      "feedback": "Без молока means without milk. Do not infer the choice from hearing чай alone.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.together.write",
+      "lesson_id": "ru.lesson.together",
+      "kind": "written_retrieval",
+      "response_mode": "text",
+      "instruction": "Write: I am writing with a pencil.",
+      "reference_phrase_id": "ru.phrase.together.06",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.instrument"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Я пишу карандашом."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "The instrument form is карандашом; no с is needed here.",
+      "feedback": "Keep the writing verb and instrument together; another grammatical answer can receive contextual review.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.together.say",
+      "lesson_id": "ru.lesson.together",
+      "kind": "spoken_retrieval",
+      "response_mode": "speech",
+      "instruction": "Say that you are reading with Anya.",
+      "reference_phrase_id": "ru.phrase.together.02",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.companion"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Я читаю с Аней.",
+        "criteria": [
+          "Preserve reading and Anya as the companion.",
+          "Use с Аней; speech feedback must cite audio if making acoustic claims."
+        ]
+      },
+      "hint": "Аня becomes Аней in this company construction.",
+      "feedback": "The AI teacher asks a follow-up about what you are reading.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.together.compose",
+      "lesson_id": "ru.lesson.together",
+      "kind": "composition",
+      "response_mode": "text",
+      "instruction": "Write one sentence about a companion and one about an instrument. You may use supplied vocabulary.",
+      "reference_phrase_id": "ru.phrase.together.04",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.companion",
+        "ru.target.instrument"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Вера читает с Аней. Я пишу ручкой.",
+        "criteria": [
+          "Distinguish company from instrument.",
+          "Accept other correct combinations and vocabulary; do not demand the example verbatim."
+        ]
+      },
+      "hint": "Keep the scene simple enough that the intended meaning is clear.",
+      "feedback": "A single useful correction and a revised message are more helpful than a list of every possible refinement.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.together.dictate",
+      "lesson_id": "ru.lesson.together",
+      "kind": "dictation",
+      "response_mode": "text",
+      "instruction": "Listen without the written sentence. Write what you hear in ordinary Russian spelling; stress marks are optional.",
+      "reference_phrase_id": "ru.phrase.together.07",
+      "stimulus_phrase_ids": [
+        "ru.phrase.together.07"
+      ],
+      "target_ids": [
+        "ru.target.accompaniment"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Чай с молоком, пожалуйста."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Listen for the accompaniment phrase с молоком.",
+      "feedback": "Молоком preserves two unstressed о letters. Dictation and acoustic imitation are separate observations.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.topics.read",
+      "lesson_id": "ru.lesson.topics",
+      "kind": "reading_comprehension",
+      "response_mode": "choice",
+      "instruction": "What does this sentence establish about the speaker?",
+      "reference_phrase_id": "ru.phrase.topics.05",
+      "stimulus_phrase_ids": [
+        "ru.phrase.topics.05"
+      ],
+      "target_ids": [
+        "ru.target.topic",
+        "ru.target.proposition"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "They are thinking about the robot."
+        },
+        {
+          "id": "b",
+          "text": "They believe the robot is here."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Identify whether the complement is a topic or a full claim.",
+      "feedback": "О роботе gives a topic; it does not tell us where the robot is.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.topics.contrast",
+      "lesson_id": "ru.lesson.topics",
+      "kind": "contrast",
+      "response_mode": "choice",
+      "instruction": "Which sentence reports the speaker’s belief about the robot’s location?",
+      "reference_phrase_id": "ru.phrase.topics.06",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.topic",
+        "ru.target.proposition"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Я думаю о роботе."
+        },
+        {
+          "id": "b",
+          "text": "Я думаю, что робот здесь."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "Что introduces the content of the thought.",
+      "feedback": "The belief is reported, but its truth is not thereby established.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.topics.listen",
+      "lesson_id": "ru.lesson.topics",
+      "kind": "listening_comprehension",
+      "response_mode": "choice",
+      "instruction": "Listen without Russian text. What is this book about?",
+      "reference_phrase_id": "ru.phrase.topics.04",
+      "stimulus_phrase_ids": [
+        "ru.phrase.topics.04"
+      ],
+      "target_ids": [
+        "ru.target.topic"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Memory."
+        },
+        {
+          "id": "b",
+          "text": "Space."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Listen to the noun in the about phrase.",
+      "feedback": "О памяти gives memory as the topic. The book’s topic does not tell us its conclusions.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.topics.write",
+      "lesson_id": "ru.lesson.topics",
+      "kind": "written_retrieval",
+      "response_mode": "text",
+      "instruction": "Write: This book is about space.",
+      "reference_phrase_id": "ru.phrase.topics.02",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.topic"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Эта книга о космосе."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Use о and the form космосе.",
+      "feedback": "Космос becomes космосе here. The sentence needs no present-tense is.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.topics.say",
+      "lesson_id": "ru.lesson.topics",
+      "kind": "spoken_retrieval",
+      "response_mode": "speech",
+      "instruction": "Ask what this book is about.",
+      "reference_phrase_id": "ru.phrase.topics.01",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.topic"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "О чём эта книга?",
+        "criteria": [
+          "Ask about the topic of the book.",
+          "Use an appropriate topic question; judge intonation only from audio."
+        ]
+      },
+      "hint": "Begin with О чём.",
+      "feedback": "The AI teacher answers with a new topic and checks whether you understood it.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.topics.compose",
+      "lesson_id": "ru.lesson.topics",
+      "kind": "composition",
+      "response_mode": "text",
+      "instruction": "Write a topic sentence about a robot, then a sentence reporting your belief that the robot is at home.",
+      "reference_phrase_id": "ru.phrase.topics.05",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.topic",
+        "ru.target.proposition"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Я думаю о роботе. Я думаю, что робот дома.",
+        "criteria": [
+          "Distinguish the topic from a proposition.",
+          "Use дома for at home; accept natural alternative word order."
+        ]
+      },
+      "hint": "The second sentence needs a whole claim after что.",
+      "feedback": "The AI teacher checks meaning first; this changed combination is practice, not proof of general comprehension.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.topics.dictate",
+      "lesson_id": "ru.lesson.topics",
+      "kind": "dictation",
+      "response_mode": "text",
+      "instruction": "Listen without the written sentence. Write what you hear in ordinary Russian spelling; stress marks are optional.",
+      "reference_phrase_id": "ru.phrase.topics.06",
+      "stimulus_phrase_ids": [
+        "ru.phrase.topics.06"
+      ],
+      "target_ids": [
+        "ru.target.proposition"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Я думаю, что робот здесь."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "There is a comma before что in this sentence.",
+      "feedback": "Compare your words first, then punctuation. This task tolerates final punctuation but does not silently remove the internal comma.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.relative.read",
+      "lesson_id": "ru.lesson.relative",
+      "kind": "reading_comprehension",
+      "response_mode": "choice",
+      "instruction": "In the relative clause, who sees whom?",
+      "reference_phrase_id": "ru.phrase.relative.06",
+      "stimulus_phrase_ids": [
+        "ru.phrase.relative.06"
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Anya sees the young woman."
+        },
+        {
+          "id": "b",
+          "text": "The young woman sees Anya."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Которую marks the young woman as the object inside the relative clause.",
+      "feedback": "Аня is the subject of видит here; the unchanged девушка outside the clause does not assign the inside role.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.relative.contrast",
+      "lesson_id": "ru.lesson.relative",
+      "kind": "contrast",
+      "response_mode": "choice",
+      "instruction": "Which line identifies the book as the thing Anya reads?",
+      "reference_phrase_id": "ru.phrase.relative.02",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Вот книга, которая лежит на столе."
+        },
+        {
+          "id": "b",
+          "text": "Вот книга, которую читает Аня."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "Inside the added clause, the book is the object of reading.",
+      "feedback": "Которую is feminine singular accusative, while Аня is the reader.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.relative.listen",
+      "lesson_id": "ru.lesson.relative",
+      "kind": "listening_comprehension",
+      "response_mode": "choice",
+      "instruction": "Listen without Russian text. What identifies this book?",
+      "reference_phrase_id": "ru.phrase.relative.03",
+      "stimulus_phrase_ids": [
+        "ru.phrase.relative.03"
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Anya is reading it."
+        },
+        {
+          "id": "b",
+          "text": "Vera is talking about it."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "Listen for the about phrase and the named speaker.",
+      "feedback": "О которой keeps the topic relation inside the added clause.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.relative.write",
+      "lesson_id": "ru.lesson.relative",
+      "kind": "written_retrieval",
+      "response_mode": "text",
+      "instruction": "Combine “Here is the book” and “Anya is reading the book” into one Russian sentence with a relative clause.",
+      "reference_phrase_id": "ru.phrase.relative.02",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Вот книга, которую читает Аня.",
+          "Вот книга, которую Аня читает."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "The repeated book is the object inside the second clause.",
+      "feedback": "Которую replaces that object; do not add a second книгу after читает.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.relative.say",
+      "lesson_id": "ru.lesson.relative",
+      "kind": "spoken_retrieval",
+      "response_mode": "speech",
+      "instruction": "Identify the signal that the robot hears.",
+      "reference_phrase_id": "ru.phrase.relative.08",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Это сигнал, который слышит робот.",
+        "criteria": [
+          "Name the signal and connect it to the robot hearing it.",
+          "Accept grammatical word-order variants; assess speech from audio."
+        ]
+      },
+      "hint": "Сигнал is masculine; the inanimate accusative form is который here.",
+      "feedback": "The AI teacher can ask which robot, opening a follow-up rather than a paradigm recitation.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.relative.compose",
+      "lesson_id": "ru.lesson.relative",
+      "kind": "composition",
+      "response_mode": "text",
+      "instruction": "Write a sentence identifying a book that Vera reads; then identify a book that Anya talks about.",
+      "reference_phrase_id": "ru.phrase.relative.02",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Вот книга, которую читает Вера. Вот книга, о которой говорит Аня.",
+        "criteria": [
+          "Preserve reading versus talking about.",
+          "Choose the relative form from its clause role, not the antecedent’s case."
+        ]
+      },
+      "hint": "Build each message as two clauses first if needed.",
+      "feedback": "The AI teacher checks the relationship and gives one targeted form correction. Then say which book the sentence identifies.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.relative.dictate",
+      "lesson_id": "ru.lesson.relative",
+      "kind": "dictation",
+      "response_mode": "text",
+      "instruction": "Listen without the written sentence. Write what you hear in ordinary Russian spelling; stress marks are optional.",
+      "reference_phrase_id": "ru.phrase.relative.02",
+      "stimulus_phrase_ids": [
+        "ru.phrase.relative.02"
+      ],
+      "target_ids": [
+        "ru.target.relative_clause"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Вот книга, которую читает Аня."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Listen for которую and the reader’s name.",
+      "feedback": "A written relative ending supports spelling evidence; it does not alone establish fast spoken comprehension.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.journeys.read",
+      "lesson_id": "ru.lesson.journeys",
+      "kind": "reading_comprehension",
+      "response_mode": "choice",
+      "instruction": "What movement does the sentence describe?",
+      "reference_phrase_id": "ru.phrase.journeys.07",
+      "stimulus_phrase_ids": [
+        "ru.phrase.journeys.07"
+      ],
+      "target_ids": [
+        "ru.target.motion_pattern"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Going into the room."
+        },
+        {
+          "id": "b",
+          "text": "Walking around the room."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "The place phrase is по комнате.",
+      "feedback": "Movement within a place is compatible with a motion verb; it does not become a destination merely because someone moves.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.journeys.contrast",
+      "lesson_id": "ru.lesson.journeys",
+      "kind": "contrast",
+      "response_mode": "choice",
+      "instruction": "You are currently travelling to the station in a vehicle. Which message fits?",
+      "reference_phrase_id": "ru.phrase.journeys.05",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.motion_mode"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Сейчас я еду на станцию."
+        },
+        {
+          "id": "b",
+          "text": "Сейчас я иду на станцию."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Both sentences describe a current trip; choose the verb for travelling in a vehicle.",
+      "feedback": "Еду gives vehicle travel here; иду gives travel on foot. The destination and time are the same.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.journeys.listen",
+      "lesson_id": "ru.lesson.journeys",
+      "kind": "listening_comprehension",
+      "response_mode": "choice",
+      "instruction": "Listen without Russian text. Is the robot entering the room or moving around within it?",
+      "reference_phrase_id": "ru.phrase.journeys.08",
+      "stimulus_phrase_ids": [
+        "ru.phrase.journeys.08"
+      ],
+      "target_ids": [
+        "ru.target.motion_pattern",
+        "ru.target.destination"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Entering the room."
+        },
+        {
+          "id": "b",
+          "text": "Moving around within it."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Listen to the whole verb-and-place phrase.",
+      "feedback": "Идёт в комнату gives directed motion into the room; compare ходит по комнате.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.journeys.write",
+      "lesson_id": "ru.lesson.journeys",
+      "kind": "written_retrieval",
+      "response_mode": "text",
+      "instruction": "Write: I usually travel to the station by vehicle. Use the usual-route verb.",
+      "reference_phrase_id": "ru.phrase.journeys.06",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.motion_pattern",
+        "ru.target.motion_mode"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Обычно я езжу на станцию.",
+          "Я обычно езжу на станцию."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Use езжу with the supplied station destination.",
+      "feedback": "This is a representative habitual-route use, not a rule that every repeated journey forbids еду.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.journeys.say",
+      "lesson_id": "ru.lesson.journeys",
+      "kind": "spoken_retrieval",
+      "response_mode": "speech",
+      "instruction": "Say you are going to the shop on foot now.",
+      "reference_phrase_id": "ru.phrase.journeys.02",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.motion_mode",
+        "ru.target.destination"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Сейчас я иду в магазин.",
+        "criteria": [
+          "Preserve a current directed trip on foot to the shop.",
+          "Accept optional сейчас and natural word order; listen before making pronunciation claims."
+        ]
+      },
+      "hint": "The directed foot-travel form is иду.",
+      "feedback": "The AI teacher asks what you need there, reconnecting motion with a useful conversation.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.journeys.compose",
+      "lesson_id": "ru.lesson.journeys",
+      "kind": "composition",
+      "response_mode": "text",
+      "instruction": "Describe a vehicle trip to the library now and a usual walking route to the shop.",
+      "reference_phrase_id": "ru.phrase.journeys.05",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.motion_mode",
+        "ru.target.motion_pattern"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Сейчас я еду в библиотеку. Обычно я хожу в магазин.",
+        "criteria": [
+          "Keep transport mode and trip context distinct in both messages.",
+          "Use the destination forms библиотеку and магазин; accept natural paraphrases."
+        ]
+      },
+      "hint": "Change one dimension at a time if the two sentences feel crowded.",
+      "feedback": "Check vehicle versus foot travel first, then current trip versus usual route. Say each message again with the intended journey in mind.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.journeys.dictate",
+      "lesson_id": "ru.lesson.journeys",
+      "kind": "dictation",
+      "response_mode": "text",
+      "instruction": "Listen without the written sentence. Write what you hear in ordinary Russian spelling; stress marks are optional.",
+      "reference_phrase_id": "ru.phrase.journeys.07",
+      "stimulus_phrase_ids": [
+        "ru.phrase.journeys.07"
+      ],
+      "target_ids": [
+        "ru.target.motion_pattern"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Робот ходит по комнате."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Listen for ходит and the phrase по комнате.",
+      "feedback": "The same written комнате can serve different constructions; interpret the preposition and verb together.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.return_signal.read",
+      "lesson_id": "ru.lesson.return_signal",
+      "kind": "reading_comprehension",
+      "response_mode": "choice",
+      "instruction": "From this sentence alone, what do we know about finishing the reply?",
+      "reference_phrase_id": "ru.phrase.return_signal.05",
+      "stimulus_phrase_ids": [
+        "ru.phrase.return_signal.05"
+      ],
+      "target_ids": [
+        "ru.target.aspect_context"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "It definitely remained unfinished."
+        },
+        {
+          "id": "b",
+          "text": "Completion is not asserted either way."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "The imperfective line describes the writing; no ending of the activity is stated.",
+      "feedback": "Писала does not license the stronger claim that she never finished.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.return_signal.contrast",
+      "lesson_id": "ru.lesson.return_signal",
+      "kind": "contrast",
+      "response_mode": "choice",
+      "instruction": "Which sentence presents a completed reply in the past?",
+      "reference_phrase_id": "ru.phrase.return_signal.06",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.aspect_context"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Вера написала ответ."
+        },
+        {
+          "id": "b",
+          "text": "Вера писала ответ."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Look for the bounded result in this writing context.",
+      "feedback": "Написала ответ asserts the result here; писала ответ alone leaves completion open.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.return_signal.listen",
+      "lesson_id": "ru.lesson.return_signal",
+      "kind": "listening_comprehension",
+      "response_mode": "choice",
+      "instruction": "Listen without Russian text. Which event is presented first?",
+      "reference_phrase_id": "ru.phrase.return_signal.07",
+      "stimulus_phrase_ids": [
+        "ru.phrase.return_signal.07"
+      ],
+      "target_ids": [
+        "ru.target.event_order"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Vera writes a reply, then hears the voice."
+        },
+        {
+          "id": "b",
+          "text": "Vera hears the voice, then writes a reply."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "Use the whole when-clause and main clause.",
+      "feedback": "The narrative connects hearing the voice to the reply; it does not say who created the earlier signal.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.return_signal.write",
+      "lesson_id": "ru.lesson.return_signal",
+      "kind": "written_retrieval",
+      "response_mode": "text",
+      "instruction": "Write: Tomorrow Vera will write the reply. Present the bounded result using напишет.",
+      "reference_phrase_id": "ru.phrase.return_signal.08",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.aspect_context",
+        "ru.target.time"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Завтра Вера напишет ответ.",
+          "Вера завтра напишет ответ."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Напишет supplies the perfective future without будет.",
+      "feedback": "Keep tomorrow, Vera and the reply; alternate natural word orders can be reviewed.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.return_signal.say",
+      "lesson_id": "ru.lesson.return_signal",
+      "kind": "spoken_retrieval",
+      "response_mode": "speech",
+      "instruction": "Retell the two events: Vera heard a voice; then she wrote a reply.",
+      "reference_phrase_id": "ru.phrase.return_signal.02",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.aspect_context",
+        "ru.target.event_order"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Вера услышала голос. Потом она написала ответ.",
+        "criteria": [
+          "Preserve the event order and the reply result.",
+          "Use the scene’s third-person forms; assess stress only with the recording."
+        ]
+      },
+      "hint": "Two short sentences are enough; потом makes the order explicit.",
+      "feedback": "The AI teacher asks one meaning question and offers one correction before a new retelling.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.return_signal.compose",
+      "lesson_id": "ru.lesson.return_signal",
+      "kind": "composition",
+      "response_mode": "text",
+      "instruction": "Write a new two-sentence version: Anya was writing a reply; then she heard a voice. Do not claim that she finished the reply.",
+      "reference_phrase_id": "ru.phrase.return_signal.05",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.aspect_context",
+        "ru.target.event_order"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Аня писала ответ. Потом она услышала голос.",
+        "criteria": [
+          "Keep writing as the background activity and hearing as the later event.",
+          "Do not add a completion assertion; accept grammatical alternatives."
+        ]
+      },
+      "hint": "Use писала for the writing and услышала for coming to hear the voice.",
+      "feedback": "Писала leaves the completion of the reply open. Потом она услышала голос adds the later event without claiming that she finished writing.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.return_signal.dictate",
+      "lesson_id": "ru.lesson.return_signal",
+      "kind": "dictation",
+      "response_mode": "text",
+      "instruction": "Listen without the written sentence. Write what you hear in ordinary Russian spelling; stress marks are optional.",
+      "reference_phrase_id": "ru.phrase.return_signal.02",
+      "stimulus_phrase_ids": [
+        "ru.phrase.return_signal.02"
+      ],
+      "target_ids": [
+        "ru.target.aspect_context"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Вдруг она услышала голос."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Listen for вдруг, услышала and голос.",
+      "feedback": "Услышала reports a hearing event. Writing the expected letters cannot show whether you pronounced the word accurately.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.scope.read",
+      "lesson_id": "ru.lesson.scope",
+      "kind": "reading_comprehension",
+      "response_mode": "choice",
+      "instruction": "There are two doors. What does this sentence require?",
+      "reference_phrase_id": "ru.phrase.scope.03",
+      "stimulus_phrase_ids": [
+        "ru.phrase.scope.03"
+      ],
+      "target_ids": [
+        "ru.target.scope"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Each door has a fitting key; the keys may differ."
+        },
+        {
+          "id": "b",
+          "text": "One common key fits both doors."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Ask whether the choice of key can depend on the door.",
+      "feedback": "A common key is compatible with this line, but it is not required. Distinguish compatible from entailed.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.scope.contrast",
+      "lesson_id": "ru.lesson.scope",
+      "kind": "contrast",
+      "response_mode": "choice",
+      "instruction": "There are three robots. Which claim allows zero robots to know the answer, while also allowing one or two to know it?",
+      "reference_phrase_id": "ru.phrase.scope.04",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.negative_scope"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Ни один робот не знает ответа."
+        },
+        {
+          "id": "b",
+          "text": "Не каждый робот знает ответ."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "b"
+      },
+      "hint": "Compare what each sentence rules out, rather than guessing the most typical scene.",
+      "feedback": "Не каждый rules out all three knowing. Ни один rules out any knowing; not every does not imply some do.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.scope.listen",
+      "lesson_id": "ru.lesson.scope",
+      "kind": "listening_comprehension",
+      "response_mode": "choice",
+      "instruction": "Listen without Russian text. Which key condition is stated?",
+      "reference_phrase_id": "ru.phrase.scope.02",
+      "stimulus_phrase_ids": [
+        "ru.phrase.scope.02"
+      ],
+      "target_ids": [
+        "ru.target.scope"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A single common key fits every door."
+        },
+        {
+          "id": "b",
+          "text": "Each door has a fitting key, possibly different ones."
+        }
+      ],
+      "answer": {
+        "type": "choice",
+        "correct_option": "a"
+      },
+      "hint": "Attend to whether the key is introduced before the all-doors phrase.",
+      "feedback": "The sentence asserts a shared fitting key but not exactly one. Both interpretations permit a common key; only the stronger one requires it.",
+      "requires_audio": true
+    },
+    {
+      "id": "ru.exercise.scope.write",
+      "lesson_id": "ru.lesson.scope",
+      "kind": "written_retrieval",
+      "response_mode": "text",
+      "instruction": "Write: Not every robot knows the answer.",
+      "reference_phrase_id": "ru.phrase.scope.04",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.negative_scope"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Не каждый робот знает ответ."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "Keep не attached to каждый in this message.",
+      "feedback": "Не каждый is partial negation; do not replace it with ни один unless you intend the stronger claim.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.scope.say",
+      "lesson_id": "ru.lesson.scope",
+      "kind": "spoken_retrieval",
+      "response_mode": "speech",
+      "instruction": "Say that there is a robot that knows the answer.",
+      "reference_phrase_id": "ru.phrase.scope.06",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.quantifier",
+        "ru.target.relative_clause"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Есть робот, который знает ответ.",
+        "criteria": [
+          "Assert existence of a knowing robot, without asserting that every robot knows.",
+          "Accept equivalent grammatical existence statements; evaluate pronunciation from actual audio."
+        ]
+      },
+      "hint": "Есть робот introduces an existing participant.",
+      "feedback": "The AI teacher asks whether this alone tells us what the other robots know. It does not.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.scope.compose",
+      "lesson_id": "ru.lesson.scope",
+      "kind": "composition",
+      "response_mode": "text",
+      "instruction": "In a station with three robots, exactly one knows the answer. Write two true Russian sentences: one existence claim and one not-every claim.",
+      "reference_phrase_id": "ru.phrase.scope.06",
+      "stimulus_phrase_ids": [],
+      "target_ids": [
+        "ru.target.quantifier",
+        "ru.target.negative_scope"
+      ],
+      "options": [],
+      "answer": {
+        "type": "coach_review",
+        "example": "Есть робот, который знает ответ. Не каждый робот знает ответ.",
+        "criteria": [
+          "Both messages must be true in the supplied world.",
+          "Do not say that none know or all know; other grammatical expressions can be accepted."
+        ]
+      },
+      "hint": "Use the given world as context and choose the scope of each message deliberately.",
+      "feedback": "The AI teacher evaluates language and entailment separately. If the logic is understood in English but the Russian is hard, teach the Russian rather than repeating the logic lesson.",
+      "requires_audio": false
+    },
+    {
+      "id": "ru.exercise.scope.dictate",
+      "lesson_id": "ru.lesson.scope",
+      "kind": "dictation",
+      "response_mode": "text",
+      "instruction": "Listen without the written sentence. Write what you hear in ordinary Russian spelling; stress marks are optional.",
+      "reference_phrase_id": "ru.phrase.scope.05",
+      "stimulus_phrase_ids": [
+        "ru.phrase.scope.05"
+      ],
+      "target_ids": [
+        "ru.target.negative_scope"
+      ],
+      "options": [],
+      "answer": {
+        "type": "exact",
+        "variants": [
+          "Ни один робот не знает ответа."
+        ],
+        "policy": {
+          "ignore_case": true,
+          "collapse_whitespace": true,
+          "ignore_terminal_punctuation": true,
+          "require_stress": false
+        }
+      },
+      "hint": "The negative pattern here is ни один … не; keep both words.",
+      "feedback": "The authored object form is ответа. Other grammatical formulations need contextual review instead of an automatic wrong label.",
+      "requires_audio": true
+    }
+  ],
+  "sources": [
+    {
+      "id": "ru.source.extension.dative",
+      "title": "Chernyshov and Chernyshova, Active Russian Grammar, 2024 author-hosted sample",
+      "url": "https://activerussian.com/wp-content/uploads/2024/11/active_grammar.pdf",
+      "accessed": "2026-11-05",
+      "scope": "Dative experiencer and recipient constructions, including нравиться. Original examples and sequence are ours.",
+      "access_note": "Author-hosted sample opened; selected dative material inspected. Not an exhaustive lexical or pronunciation review."
+    },
+    {
+      "id": "ru.source.extension.relative",
+      "title": "Ekaterina Lyutikova, Puzzles of Russian Relative Clauses, 2008, MSU",
+      "url": "https://www.philol.msu.ru/~otipl/new/main/courses/syntax/Zagadki_Lyutikova_2008.pdf",
+      "accessed": "2026-11-05",
+      "scope": "The relative pronoun agrees with its antecedent in gender/number; its clause role matters for case. Pages 3–5 support the bounded examples.",
+      "access_note": "Full PDF opened; relevant examples and discussion inspected. No source example or literary quotation copied."
+    },
+    {
+      "id": "ru.source.extension.motion-aspect",
+      "title": "Saint Petersburg State University, Institute for Philological Studies: verb, adverb, predicative words",
+      "url": "https://iphil.ru/glagol-narechie-bezlichno-predikativnye-slova-9/",
+      "accessed": "2026-11-05",
+      "scope": "Motion directionality is not simply once versus repeatedly; perfective aspect includes boundaries other than completion. This supports cautions in the original lessons.",
+      "access_note": "Relevant motion/aspect sections retrieved, including repeated use of directed verbs. The long overview contains apparent typographical inconsistencies elsewhere; it is not used as a mechanical paradigm generator."
+    },
+    {
+      "id": "ru.source.extension.numbers",
+      "title": "Valuysky Industrial College: Russian language methodical materials",
+      "url": "https://valindteh31.ru/uploads/file/Svedeniya_ob_Obrazovatelnoy_organizatsii/Obrazovanie/MD_13_02_11_gruppa_8TE_2021/MR/MR_OUP.01_Russkiy_yazik.pdf",
+      "accessed": "2026-11-05",
+      "scope": "Institutional material describes genitive singular after два/три/четыре and genitive plural after пять and higher in the relevant naming construction.",
+      "access_note": "Search-index passage inspected; full PDF not read. The lesson deliberately limits the rule to selected inanimate nouns and small numbers, without generalizing to every case or compound numeral."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Rufren</title>
+  <rect width="512" height="512" rx="112" fill="#203e3b"/>
+  <circle cx="373" cy="133" r="13" fill="#dca37b"/>
+  <!-- A drawn Cyrillic р: no font download or platform font dependency. -->
+  <path d="M163 396V172h45v19c16-18 35-27 59-27 51 0 85 38 85 95s-34 95-85 95c-24 0-44-9-59-25v67zm45-138c0 34 18 56 47 56s47-22 47-56-18-55-47-55-47 21-47 55z" fill="#faf5e9" fill-rule="evenodd"/>
+  <path d="M123 127c53-53 135-70 203-43" fill="none" stroke="#7fa79b" stroke-width="9" stroke-linecap="round"/>
+</svg>

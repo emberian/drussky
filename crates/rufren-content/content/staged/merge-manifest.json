@@ -1,0 +1,113 @@
+{
+  "status": "deterministic_candidate",
+  "pack_id": "ru.pack.first-contacts",
+  "revision": "2026-11-05.4",
+  "previous_revisions": [
+    "2026-11-05.1",
+    "2026-11-05.2",
+    "2026-11-05.3"
+  ],
+  "base_path": "tests/fixtures/beginner-v1-2026-11-05.3.json",
+  "base_sha256": "c314851f4f806c49dd2468e28e7d66ee4b4b32d52b26c6c4ac75a7c513f741ef",
+  "extension_path": "content/extensions/conversation-to-ideas-v1.json",
+  "extension_sha256": "c64c949fb941f25751f0d7ccbd0d1b57902d97ccdcb2756480ae1d6f95d84995",
+  "draft_path": "content/staged/beginner-v1-2026-11-05.4.json",
+  "draft_sha256": "df85b192b43679fdb782bbabe142f688d983455743ebffd764615445cfe019d4",
+  "base_counts": {
+    "units": 4,
+    "lessons": 16,
+    "targets": 34,
+    "phrases": 103,
+    "exercises": 116,
+    "sources": 8
+  },
+  "extension_counts": {
+    "units": 2,
+    "lessons": 8,
+    "targets": 16,
+    "phrases": 66,
+    "exercises": 56,
+    "sources": 4
+  },
+  "combined_counts": {
+    "units": 6,
+    "lessons": 24,
+    "targets": 50,
+    "phrases": 169,
+    "exercises": 172,
+    "sources": 12
+  },
+  "unchanged_base_phrase_payload_count": 103,
+  "preserved_legacy_event_count": 103,
+  "imported_content_event_version": 2,
+  "canonical_rust_validation": "recorded separately in coordinated workspace build logs",
+  "encounter_waves": [
+    [
+      "ru.lesson.hello"
+    ],
+    [
+      "ru.lesson.repair"
+    ],
+    [
+      "ru.lesson.naming"
+    ],
+    [
+      "ru.lesson.introductions"
+    ],
+    [
+      "ru.lesson.location"
+    ],
+    [
+      "ru.lesson.requests"
+    ],
+    [
+      "ru.lesson.possession"
+    ],
+    [
+      "ru.lesson.describing",
+      "ru.lesson.quantities"
+    ],
+    [
+      "ru.lesson.roles",
+      "ru.lesson.preferences"
+    ],
+    [
+      "ru.lesson.time",
+      "ru.lesson.together"
+    ],
+    [
+      "ru.lesson.destination"
+    ],
+    [
+      "ru.lesson.plans",
+      "ru.lesson.journeys"
+    ],
+    [
+      "ru.lesson.signal",
+      "ru.lesson.topics"
+    ],
+    [
+      "ru.lesson.logic",
+      "ru.lesson.relative",
+      "ru.lesson.return_signal"
+    ],
+    [
+      "ru.lesson.reasons",
+      "ru.lesson.scope"
+    ],
+    [
+      "ru.lesson.reader"
+    ]
+  ],
+  "exercise_kinds": {
+    "reading_comprehension": 24,
+    "listening_comprehension": 26,
+    "written_retrieval": 25,
+    "spoken_retrieval": 25,
+    "composition": 24,
+    "dictation": 24,
+    "contrast": 24
+  },
+  "listening_correct_first": 13,
+  "listening_correct_later": 13
+}

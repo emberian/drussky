@@ -758,3 +758,27 @@ hr {
 }
 
 }
+/* Learning paths, coaching, and explicit response choices. */
+.lesson-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:26px;align-items:start}
+.lesson-index{position:sticky;top:20px;max-height:85vh;overflow:auto;padding-right:5px}
+.lesson-index h2{font:20px Georgia;margin:20px 0 8px}.lesson-index p{font-size:12px;line-height:1.6}
+.lesson-link{display:block;width:100%;border:0;background:transparent;color:var(--green);text-align:left;border-radius:6px;padding:12px;margin:4px 0;font-size:12px;line-height:1.5;min-height:44px}
+.lesson-link.selected,.attempt-choice.selected,.choice-option.selected{background:#e7ecdb;border-color:#829a7c}
+.draft-note{background:#f2f1e5;border-radius:5px;padding:12px;color:#646e58;font-size:12px!important}
+.dialogue-turn{display:grid;grid-template-columns:75px 1fr;gap:18px;padding:12px 0;border-bottom:1px solid var(--line)}
+.dialogue-turn p{margin:3px 0}.speaker{color:#72816e;font-size:11px;padding-top:10px}
+.dialogue-russian{font:24px/1.7 Georgia!important}.explanation h3{font:21px Georgia;margin-top:25px}.sound-note{padding:15px;border-left:3px solid #89996f;background:#f3f4e9}
+.phrase-study{padding:18px 0;border-top:1px solid var(--line)}.phrase-study:first-of-type{border-top:0}.phrase-study p{margin:5px 0}
+.phrase-chunks{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.phrase-chunks span{background:#edf0e1;border-radius:5px;padding:7px 12px;font:17px Georgia}
+.exercise-choice,.attempt-choice{display:flex;flex-direction:column;gap:9px;border:1px solid var(--line);border-radius:6px;background:#fffdf7;color:inherit;width:100%;text-align:left;padding:16px;margin:12px 0}
+.exercise-choice strong,.attempt-choice strong{font-size:14px;font-weight:500;line-height:1.7}.exercise-choice small,.attempt-choice small{font-size:11px;color:var(--muted)}
+.alphabet summary{cursor:pointer;font:22px Georgia;min-height:44px}.alphabet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.alphabet-grid article{padding:14px;background:#f0f2e6;border-radius:5px}.alphabet-grid strong{display:block;font:27px Georgia}.alphabet-grid span,.alphabet-grid small{font-size:12px;color:var(--muted)}
+.choice-list{border:0;padding:0;margin:20px 0}.choice-list legend{font-size:13px;color:var(--muted);margin-bottom:10px}.choice-option{display:block;width:100%;border:1px solid var(--line);border-radius:7px;background:#fffdf7;text-align:left;color:inherit;padding:16px;margin:10px 0;line-height:1.6}
+.authored-feedback,.coach-note,.feedback-history{background:#f0f3e8;padding:18px;border-radius:6px;margin:20px 0}.coach-note small{color:var(--muted)}
+select{font:inherit;padding:12px;width:100%;color:inherit;background:#fffdf8;border:1px solid var(--line);border-radius:5px;min-height:44px}
+input[type=range]{padding:5px 0}blockquote{margin:18px 0;padding:12px 20px;border-left:3px solid #8da17e;font:21px/1.6 Georgia}
+.preference-row{display:flex;align-items:center;gap:12px;margin:18px 0}.preference-row input[type=checkbox]{width:22px;height:22px}.preference-row label{margin:0;font-size:13px}
+.review-summary{margin-top:30px;padding:20px 0;border-top:1px solid var(--line);display:flex;gap:30px;color:var(--muted);font-size:13px}
+.teacher-explanation{white-space:pre-line;max-width:75ch}.teacher-answer{margin-top:24px}.teacher-correction{border-left:3px solid #8da17e;padding:2px 18px;margin:18px 0}.teacher-saved-feedback{margin:18px 0}.teacher-saved-feedback summary,.panel>summary{cursor:pointer;min-height:44px;line-height:1.6;padding:8px 0}.teacher-start .actions{margin-top:20px}
+@media(max-width:1000px){.lesson-layout{grid-template-columns:1fr}.lesson-index{position:static;max-height:260px;border:1px solid var(--line);border-radius:7px;padding:16px}.lesson-index section{margin:0}.lesson-index h2{margin-top:10px}.alphabet-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.sidebar nav{grid-template-columns:repeat(4,minmax(0,1fr))}.nav-item{font-size:10px;gap:3px;padding:9px 3px;white-space:normal}.nav-item span{flex-shrink:0}.dialogue-turn{grid-template-columns:55px 1fr;gap:10px}.dialogue-russian{font-size:22px!important}.review-summary{flex-wrap:wrap;gap:15px}.alphabet-grid{grid-template-columns:1fr 1fr}}

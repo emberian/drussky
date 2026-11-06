@@ -1,0 +1,128 @@
+{
+  "schema_version": "rufren-speech-sample-audit-v1",
+  "fixture_id": "qwen-public-russian-unaccented-v1",
+  "artifact_relative_path": ".local/qwen3-tts/samples/public-russian-unaccented-v1.wav",
+  "source_text": "Здравствуйте! Как у вас дела? Я учу русский язык. На двери висит замок, а на холме стоит старый замок. Всё готово? Для каждого натурального числа существует следующее число.",
+  "audio_sha256": "1bf0293b6f296f8e2a9cf4064a6cd26bb989bb86cecbd66cdfd17d5865988fb4",
+  "shape": {
+    "sample_rate": 24000,
+    "channels": 1,
+    "frames": 380160,
+    "sample_width_bytes": 2,
+    "duration_seconds": 15.84
+  },
+  "provenance": {
+    "kind": "ai_generated_speech",
+    "provider": "local_qwen3_tts",
+    "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-bf16@7d3824abff87e49756bb0f83fb5411de75d160c4",
+    "voice": "rufren-russian-warm-v1",
+    "prompt_version": "rufren-qwen-russian-v1",
+    "validation": "Local BF16 VoiceDesign; mlx-audio 0.6.4; seed 42; no human reference or learner pronunciation assessment"
+  },
+  "container_and_binding_check": "pass",
+  "control": "Only U+0301 combining acute marks removed from initial public text; same model, voice, seed and settings",
+  "independent_asr": {
+    "schema_version": "rufren-speech-transcript-v1",
+    "request_id": "qwen-public-russian-unaccented-asr-v1",
+    "attempt_id": null,
+    "revision_id": null,
+    "asset_id": "qwen-public-russian-unaccented-v1",
+    "audio_sha256": "1bf0293b6f296f8e2a9cf4064a6cd26bb989bb86cecbd66cdfd17d5865988fb4",
+    "original_audio": {
+      "sample_rate": 24000,
+      "channels": 1,
+      "frames": 380160,
+      "encoding": "pcm_s16le",
+      "bits": 16
+    },
+    "source_pcm_sha256": "4ec0cbe1c054cc4bb1886b20c46e4e6ac51dffea18b608286785b1c4cb535a59",
+    "source_pcm_hash_format": "interleaved-little-endian-f32-no-header-v1",
+    "span": {
+      "start_frame": 0,
+      "end_frame": 380160
+    },
+    "span_coordinate_system": "original_frames_half_open",
+    "derivative": {
+      "sample_rate": 16000,
+      "channels": 1,
+      "frames": 253440,
+      "pcm_sha256": "99de62de6c69d6f11f1bcd131a55a344ddd47ca27bad7dbee306fb7f94180a48",
+      "pcm_hash_format": "little-endian-f32-no-header-v1",
+      "method": "arithmetic-channel-mean; scipy.signal.resample_poly default Kaiser5",
+      "scipy_version": "1.18.1",
+      "amplitude_normalization": false
+    },
+    "evidence_kind": "transcript_hypothesis",
+    "transcript": "Здравствуйте. Как у вас дела? Я учу русский язык. На двери висит замок, а на холме стоит старый замок. Все готово? Для каждого натурального числа существует следующее число.",
+    "language": "ru",
+    "language_selection": "explicit_not_detected",
+    "target_conditioned": false,
+    "word_timestamps": null,
+    "word_alignment_status": "not_run",
+    "confidence": null,
+    "acoustic_assessment": null,
+    "provenance": {
+      "provider": "local_qwen3_asr",
+      "model": "mlx-community/Qwen3-ASR-1.7B-bf16",
+      "revision": "e1f6c266914abc5a46e8756e02580f834a6cf8a7",
+      "runtime": "mlx-audio==0.6.4",
+      "mlx_version": "0.32.4",
+      "manifest_sha256": "730f409412ed99134bc62b7989581fa8c42cf699b0c8ddd26846c4e2f2ea9801",
+      "worker_sha256": "874c736c9146fbd044a78e1882ca1052c8af5000acddb129a4c642744db6edd6",
+      "decoding": {
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "seed": 42,
+        "language": "Russian",
+        "hotwords": []
+      }
+    },
+    "timing": {
+      "started_at": "2026-11-06T05:33:05.159458+00:00",
+      "completed_at": "2026-11-06T05:33:12.945626+00:00",
+      "elapsed_seconds": 7.783,
+      "process_peak_rss_bytes": 4363059200,
+      "metal_peak_bytes": 5258106284
+    },
+    "usage": {
+      "prompt_tokens": 224,
+      "generation_tokens": 57
+    }
+  },
+  "lexical_review": {
+    "schema_version": "rufren-lexical-review-v1",
+    "mode": "generated_reference",
+    "asset_id": "qwen-public-russian-unaccented-v1",
+    "audio_sha256": "1bf0293b6f296f8e2a9cf4064a6cd26bb989bb86cecbd66cdfd17d5865988fb4",
+    "independent_transcript": "Здравствуйте. Как у вас дела? Я учу русский язык. На двери висит замок, а на холме стоит старый замок. Все готово? Для каждого натурального числа существует следующее число.",
+    "lexical_differences": [
+      {
+        "kind": "substitution",
+        "expected_index": 19,
+        "heard_index": 19,
+        "expected": "всё",
+        "heard": "все",
+        "yo_spelling_ambiguity": true
+      }
+    ],
+    "lexical_screen": "mismatch_needs_review",
+    "primary_action": "listen_confirm_meaning_and_retry",
+    "automatic_replacement_budget_remaining": 0,
+    "replay": {
+      "span": {
+        "start_frame": 0,
+        "end_frame": 380160
+      },
+      "coordinate_system": "original_frames_half_open",
+      "localization": "selected_crop_not_word_alignment"
+    },
+    "pronunciation_verdict": null,
+    "reference_phonetics_verified": false,
+    "next_step": "Compare the displayed words, replay this phrase, and try once more."
+  },
+  "stress_listening_check": "unassessed",
+  "palatalization_listening_check": "unassessed",
+  "question_and_yo_listening_check": "unassessed",
+  "naturalness_listening_check": "unassessed",
+  "comparison_finding": "Both intended замок tokens now recovered, versus самоек and заямок in acute-mark condition. Всё still transcribed as Все. This supports plain-text frontend testing for this backend but does not verify either homograph stress."
+}

@@ -1,0 +1,314 @@
+{
+  "format": "rufren-two-token-signal-audit-v1",
+  "scope": "two existing synthetic recordings, no native correctness or calibration claim",
+  "script_sha256": "139947302b4a9fe92400e1422d3d13935e645f0eb9984d3cbd9f217d5000bdca",
+  "numpy_version": "2.5.4",
+  "scipy_version": "1.18.1",
+  "methods": {
+    "spectrogram": "24 kHz, 20 ms Hann, 5 ms hop, 1024 FFT; 2|STFT| levels; no gain normalization",
+    "rms": "20 ms original-time windows; 5 ms hop, after polyphase downsampling to 12 kHz",
+    "pitch": "YIN-style fixed 30 ms difference region plus lag support, 80–400 Hz, threshold .15; no interpolation across missing F0",
+    "lpc": "12 kHz, 30 ms Hamming, preemphasis .97, autocorrelation LPC orders 12/14/16, positive-frequency poles with 30–700 Hz bandwidth",
+    "regions": "analyst-selected from spectral transitions; interiors exclude edges; sensitivity ranges are not error bars"
+  },
+  "tokens": {
+    "castle": {
+      "source_text": "Это за́мок.",
+      "source_audio_sha256": "3ce677ebdad80003b514c177abdb2eb7efbc7674a92acbc2abf2f80b8d51ebe4",
+      "source_relative_path": ".local/silero-tts/samples/silero-stress-castle-v1.wav",
+      "provenance": {
+        "kind": "ai_generated_speech",
+        "provider": "local_silero_tts",
+        "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+        "voice": "xenia",
+        "prompt_version": "rufren-silero-russian-stress-v1",
+        "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+        "synthesis_input": {
+          "source_text_sha256": "09e9ff7a0ad4e6f7ffa6b5153aed0e1aca5dff3c4ac0ef75b0446b3b8f92e5eb",
+          "synthesis_text": "Это з+амок.",
+          "synthesis_text_sha256": "aac5546c4a59a20a9a22062ea436197beebb5a9291b51727d00ff47235ae6fe7",
+          "transform": "pedagogical_acute_to_silero_plus",
+          "context": "explicit_stress"
+        }
+      },
+      "sample_rate": 24000,
+      "frames": 23400,
+      "regions": [
+        {
+          "id": "vowel_candidate_1",
+          "start_frame": 7080,
+          "end_frame": 10440,
+          "duration_ms": 140.0,
+          "boundary_sensitivity_duration_range_ms": [
+            120.0,
+            160.00000000000003
+          ],
+          "boundary_ranges_are": "analyst-selected sensitivity ranges, not confidence intervals or measured alignment errors",
+          "interior_frames": [
+            7800,
+            9960
+          ],
+          "interior_median_rms_dbfs": -17.006800381866263,
+          "interior_median_f0_hz": 181.79598261686365,
+          "interior_median_yin_periodicity": 0.9084571095720766,
+          "low_to_mid_band_power_db": 6.240705236620622,
+          "band_power_definition": "300–1000 Hz / 1000–2000 Hz; descriptive Welch power ratio, not a stress classifier",
+          "lpc_poles_by_order": {
+            "12": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 840.2332326131555,
+                "median_bandwidth_hz": 106.60933458628696
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 1467.2807554734645,
+                "median_bandwidth_hz": 110.43574167538674
+              }
+            ],
+            "14": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 824.5106620996429,
+                "median_bandwidth_hz": 124.97298558184723
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 1488.006901659144,
+                "median_bandwidth_hz": 126.84014913653802
+              }
+            ],
+            "16": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 826.0294835611933,
+                "median_bandwidth_hz": 135.9461224097553
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 1486.1941062833284,
+                "median_bandwidth_hz": 118.12962755032906
+              }
+            ]
+          },
+          "formant_labels_validated": false
+        },
+        {
+          "id": "vowel_candidate_2",
+          "start_frame": 12000,
+          "end_frame": 13200,
+          "duration_ms": 50.0,
+          "boundary_sensitivity_duration_range_ms": [
+            30.00000000000003,
+            70.00000000000006
+          ],
+          "boundary_ranges_are": "analyst-selected sensitivity ranges, not confidence intervals or measured alignment errors",
+          "interior_frames": [
+            12240,
+            12960
+          ],
+          "interior_median_rms_dbfs": -28.26436709702832,
+          "interior_median_f0_hz": 169.59882839435093,
+          "interior_median_yin_periodicity": 0.881943769072008,
+          "low_to_mid_band_power_db": 3.766706731377403,
+          "band_power_definition": "300–1000 Hz / 1000–2000 Hz; descriptive Welch power ratio, not a stress classifier",
+          "lpc_poles_by_order": {
+            "12": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 758.1674365270621,
+                "median_bandwidth_hz": 415.4939125505484
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 1178.0684152888477,
+                "median_bandwidth_hz": 365.60009085331905
+              }
+            ],
+            "14": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 804.7120861410815,
+                "median_bandwidth_hz": 425.57372897514944
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 1306.3209936296985,
+                "median_bandwidth_hz": 408.8181387134041
+              }
+            ],
+            "16": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 763.8921892043004,
+                "median_bandwidth_hz": 363.17644641643926
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 1193.689918193284,
+                "median_bandwidth_hz": 340.72907902660927
+              }
+            ]
+          },
+          "formant_labels_validated": false
+        }
+      ],
+      "word_replay": {
+        "path": "castle-word-replay.wav",
+        "start_frame": 5640,
+        "end_frame": 16560,
+        "sha256": "484096fc56594050fc3831258d473c3026e6b6a9eb6ee0ab8649695cbdcf3e3f",
+        "coordinates": "original frames; half-open; analyst-selected context crop"
+      }
+    },
+    "lock": {
+      "source_text": "Это замо́к.",
+      "source_audio_sha256": "3f0198c2415844291042e3161e445520e6d9aad7aec0c6956596a8c1e2d0ec76",
+      "source_relative_path": ".local/silero-tts/samples/silero-stress-lock-v1.wav",
+      "provenance": {
+        "kind": "ai_generated_speech",
+        "provider": "local_silero_tts",
+        "model": "v5_6_ru@04cc9b1d08ce38bcaa9d02c488d80d3e6806d17f7eaa7c95982f36a3cbf50b2e",
+        "voice": "xenia",
+        "prompt_version": "rufren-silero-russian-stress-v1",
+        "validation": "Explicit + stress input; lexical and acoustic correctness are not certified by ASR",
+        "synthesis_input": {
+          "source_text_sha256": "2fecfa19e447266e8421aab400737b2ab1907c83e3a33d6f724cca9984d86e9a",
+          "synthesis_text": "Это зам+ок.",
+          "synthesis_text_sha256": "a326f9291b6a4194bca3b332f3725f239cc7e54c3e421926d3932224c1f0652a",
+          "transform": "pedagogical_acute_to_silero_plus",
+          "context": "explicit_stress"
+        }
+      },
+      "sample_rate": 24000,
+      "frames": 23100,
+      "regions": [
+        {
+          "id": "vowel_candidate_1",
+          "start_frame": 6600,
+          "end_frame": 8400,
+          "duration_ms": 75.0,
+          "boundary_sensitivity_duration_range_ms": [
+            55.00000000000005,
+            94.99999999999997
+          ],
+          "boundary_ranges_are": "analyst-selected sensitivity ranges, not confidence intervals or measured alignment errors",
+          "interior_frames": [
+            6960,
+            8040
+          ],
+          "interior_median_rms_dbfs": -16.23031303196227,
+          "interior_median_f0_hz": 217.26366005517113,
+          "interior_median_yin_periodicity": 0.9473485432162922,
+          "low_to_mid_band_power_db": 5.273841547521972,
+          "band_power_definition": "300–1000 Hz / 1000–2000 Hz; descriptive Welch power ratio, not a stress classifier",
+          "lpc_poles_by_order": {
+            "12": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 722.1268755338004,
+                "median_bandwidth_hz": 222.48283909808453
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 1501.8671000769523,
+                "median_bandwidth_hz": 102.83203547873222
+              }
+            ],
+            "14": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 718.3084765659061,
+                "median_bandwidth_hz": 259.1813062997543
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 1510.6563550900873,
+                "median_bandwidth_hz": 132.10171399008695
+              }
+            ],
+            "16": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 515.3715904071255,
+                "median_bandwidth_hz": 207.71121462090844
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 974.8958294286431,
+                "median_bandwidth_hz": 281.9069427392275
+              }
+            ]
+          },
+          "formant_labels_validated": false
+        },
+        {
+          "id": "vowel_candidate_2",
+          "start_frame": 9480,
+          "end_frame": 12960,
+          "duration_ms": 145.0,
+          "boundary_sensitivity_duration_range_ms": [
+            125.0,
+            165.00000000000003
+          ],
+          "boundary_ranges_are": "analyst-selected sensitivity ranges, not confidence intervals or measured alignment errors",
+          "interior_frames": [
+            10080,
+            12360
+          ],
+          "interior_median_rms_dbfs": -22.594556257472632,
+          "interior_median_f0_hz": 179.1889983566378,
+          "interior_median_yin_periodicity": 0.9337149094309702,
+          "low_to_mid_band_power_db": 16.128958586979284,
+          "band_power_definition": "300–1000 Hz / 1000–2000 Hz; descriptive Welch power ratio, not a stress classifier",
+          "lpc_poles_by_order": {
+            "12": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 720.961460344377,
+                "median_bandwidth_hz": 122.06602608891055
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 2771.1418161116962,
+                "median_bandwidth_hz": 320.42891040563114
+              }
+            ],
+            "14": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 716.6738939450198,
+                "median_bandwidth_hz": 137.72062408911535
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 2555.4785718966746,
+                "median_bandwidth_hz": 429.22896011933665
+              }
+            ],
+            "16": [
+              {
+                "candidate_index": 1,
+                "median_frequency_hz": 675.8368781316044,
+                "median_bandwidth_hz": 121.43310209730288
+              },
+              {
+                "candidate_index": 2,
+                "median_frequency_hz": 977.7108176744573,
+                "median_bandwidth_hz": 448.4916304452724
+              }
+            ]
+          },
+          "formant_labels_validated": false
+        }
+      ],
+      "word_replay": {
+        "path": "lock-word-replay.wav",
+        "start_frame": 5640,
+        "end_frame": 16560,
+        "sha256": "82954800ffb2c76f7f171b94e1d3d95564291d78775029929ec1dc7522cc35df",
+        "coordinates": "original frames; half-open; analyst-selected context crop"
+      }
+    }
+  }
+}

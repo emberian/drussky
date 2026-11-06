@@ -1,12 +1,51 @@
+mod asset_sync;
+mod audio_studio;
+mod coach;
+mod drafts;
+mod drafts_view;
+mod editor_drafts;
+mod editor_drafts_view;
+mod exposure;
+mod exposure_view;
+mod gateway;
+mod learning;
+mod lessons;
 mod model;
+mod practice;
+mod recognition;
+mod recognition_view;
+mod teacher;
+mod teacher_practice;
+mod teacher_practice_view;
+mod teacher_view;
+mod tutor_view;
+mod workspace_view;
+use audio_studio::{AudioStudio, StudioRecording};
+use exposure_view::PresentedRussian;
+use lessons::Lessons;
+use practice::Practice;
+use teacher_view::Teacher;
+#[cfg(not(target_arch = "wasm32"))]
+mod native_connection;
+#[cfg(not(target_arch = "wasm32"))]
+mod native_http;
 mod repository;
 use dioxus::prelude::*;
+use dioxus_core::spawn_forever;
 use model::*;
 use repository::{Result, now_ms, synchronize};
 use rufren_core::*;
 
 const STYLE: &str = include_str!("style.css");
 fn main() {
+    #[cfg(all(feature = "desktop", not(target_arch = "wasm32")))]
+    dioxus::LaunchBuilder::desktop()
+        .with_cfg(
+            dioxus::desktop::Config::new()
+                .with_window(dioxus::desktop::WindowBuilder::new().with_title("Rufren")),
+        )
+        .launch(App);
+    #[cfg(not(all(feature = "desktop", not(target_arch = "wasm32"))))]
     dioxus::launch(App);
 }
 
@@ -22,10 +61,17 @@ fn act(mut app: Signal<AppState>, f: impl FnOnce(&mut AppState) -> Result<()>) {
 
 #[component]
 fn App() -> Element {
-    let initial = use_hook(AppState::open);
-    match initial {
-        Ok(state) => rsx! {Shell {initial:state}},
-        Err(error) => rsx! {
+    let initial = use_resource(|| async {
+        repository::initialize_browser().await?;
+        AppState::open()
+    });
+    let snapshot = initial.read().clone();
+    match snapshot {
+        None => {
+            rsx! {style {"{STYLE}"} main {class:"fatal",h1 {"Opening your notebook…"}p {"Loading your saved practice and recordings."}}}
+        }
+        Some(Ok(state)) => rsx! {Shell {initial:state}},
+        Some(Err(error)) => rsx! {
             style {"{STYLE}"} main {class:"fatal",h1 {"Your notebook could not be opened."} p {"{error}"} p {"Your saved data has not been replaced. Restore access to storage and reopen Rufren."}}
         },
     }
@@ -39,15 +85,15 @@ fn Shell(initial: AppState) -> Element {
         div {class:"shell",
             aside {class:"sidebar",
                 a {class:"brand",href:"#",onclick:move |_|app.write().page=Page::Today, span {class:"brand-mark","р"} div {strong {"rufren"} small {"a world in another language"}}}
-                nav {aria_label:"Main navigation",for page in Page::ALL {button {class:if state.page==page {"nav-item active"}else{"nav-item"},onclick:move |_|{app.write().page=page;act(app,|s|s.refresh());},span {"{page.icon()}"} "{page.label()}"}}}
+                nav {aria_label:"Main navigation",for page in Page::ALL {button {class:if state.page==page {"nav-item active"}else{"nav-item"},aria_current:if state.page==page {"page"}else{"false"},onclick:move |_|act(app,|s|s.navigate(page)),span {"{page.icon()}"} "{page.label()}"}}}
                 div {class:"sidebar-bottom",span {class:"status-dot"} "On this device" p {"Your pace. Your Russian."}}
             }
             main {class:"main",
                 header {class:"topbar",span {"YOUR RUSSIAN NOTEBOOK"} span {class:"quiet","{state.page.label()}"}}
                 if !state.notice.is_empty() {div {class:"notice",role:"status",span {"{state.notice}"} button {aria_label:"Dismiss message",onclick:move |_|app.write().notice.clear(),"×"}}}
                 match state.page {
-                    Page::Today=>rsx!{Today {app}},Page::Library=>rsx!{LibraryView {app}},Page::Practice=>rsx!{Practice {app}},
-                    Page::Studio=>rsx!{Studio {}},Page::Progress=>rsx!{Progress {app}},Page::Settings=>rsx!{Settings {app}},
+                    Page::Today=>rsx!{Today {app}},Page::Lessons=>rsx!{Lessons {app}},Page::Teacher=>rsx!{Teacher {app}},Page::Library=>rsx!{LibraryView {app}},Page::Practice=>rsx!{Practice {app}},
+                    Page::Studio=>rsx!{Studio {app}},Page::Progress=>rsx!{Progress {app}},Page::Settings=>rsx!{Settings {app}},
                 }
             }
         }
@@ -65,14 +111,15 @@ fn Today(mut app: Signal<AppState>) -> Element {
     rsx! {
         section {class:"hero",div {class:"eyebrow","BEGIN WITH CURIOSITY"} h1 {"A little Russian." br {} em {"A bigger world."}}
             p {class:"lede","A conversation with a friend. A sentence from another world. Start with something you want to understand."}
-            div {class:"actions",button {class:"primary",onclick:move |_|act(app,|s|s.begin()),if resume {"Continue your practice →"}else if count==0 {"Begin with a small story →"}else{"Practice from your library →"}}
-            button {class:"text-button",onclick:move |_|{app.write().editor=Editor::default();app.write().page=Page::Library;},"Add a passage"}}
+            div {class:"actions",button {class:"primary",onclick:move |_|act(app,|s|s.begin()),if resume {"Continue your practice →"}else if count==0 {"Start with your teacher →"}else{"Review what’s ready →"}}
+            button {class:"text-button",onclick:move |_|act(app,|s|s.new_passage()),"Add a passage"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Teacher)),"Ask your teacher"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Explore lessons"}}
             div {class:"orbital",aria_hidden:"true",div {class:"orbit orbit-one"} div {class:"orbit orbit-two"} span {class:"star star-one","✦"} span {class:"star star-two","·"} span {class:"planet"}}
         }
+        drafts_view::PausedPractices {app}
         div {class:"section-heading",h2 {"Make it yours"}span {"Small steps, connected."}}
         div {class:"cards three",
-            button {class:"feature-card",onclick:move |_|app.write().page=Page::Library,span {class:"card-number","01 / COLLECT"}h3 {"Words worth keeping"}p {"Bring a phrase from your coach, a story, or a question you want to ask."}span {class:"card-link","Open your library ↗"}}
-            button {class:"feature-card",onclick:move |_|app.write().page=Page::Studio,span {class:"card-number","02 / LISTEN CLOSELY"}h3 {"Find your Russian voice"}p {"A place for reference audio, your recordings, and focused feedback."}span {class:"card-link","Explore the speech studio ↗"}}
+            button {class:"feature-card",onclick:move |_|act(app,|s|s.navigate(Page::Library)),span {class:"card-number","01 / COLLECT"}h3 {"Words worth keeping"}p {"Keep a phrase from your teacher, a story, or a conversation."}span {class:"card-link","Open your library ↗"}}
+            button {class:"feature-card",onclick:move |_|act(app,|s|s.navigate(Page::Studio)),span {class:"card-number","02 / LISTEN CLOSELY"}h3 {"Find your Russian voice"}p {"A place for reference audio, your recordings, and focused feedback."}span {class:"card-link","Explore the speech studio ↗"}}
             button {class:"feature-card",onclick:move |_|app.write().page=Page::Progress,span {class:"card-number","03 / RETURN"}h3 {"See what stays with you"}p {"Keep reading, writing, listening, and speaking in view as you practice."}span {class:"card-link","View your practice ↗"}}
         }
         div {class:"quiet-summary",span {"{count} passages in your notebook"}span {"{attempts} saved practice attempts"}}
@@ -87,82 +134,35 @@ fn LibraryView(mut app: Signal<AppState>) -> Element {
         d.id.and_then(|id| heads.get(&id))
             .is_some_and(|v| v.len() > 1);
     rsx! {
-        div {class:"page-heading",div {div {class:"eyebrow","YOUR COLLECTION"}h1 {"A library of possibilities"}p {"Keep the original, its meaning, and where it came from."}}button {class:"secondary",onclick:move |_|app.write().editor=Editor::default(),"New passage"}}
+        div {class:"page-heading",div {div {class:"eyebrow","YOUR COLLECTION"}h1 {"A library of possibilities"}p {"Keep the original, its meaning, and where it came from."}}button {class:"secondary",onclick:move |_|act(app,|s|s.new_passage()),"New passage"}}
+        editor_drafts_view::EditorDrafts {app}
         div {class:"library-layout",
             section {class:"passage-list",aria_label:"Saved passages",
-                if heads.is_empty() {div {class:"empty",h3 {"Your first page is waiting."}p {"Add a few words from your coach, or start with our small story."}button {class:"text-button",onclick:move |_|act(app,|s|s.begin()),"Try a starter passage →"}}}
+                if heads.is_empty() {div {class:"empty",h3 {"Your first page is waiting."}p {"Keep a phrase you care about, or start with your first lesson."}button {class:"text-button",onclick:move |_|{act(app,|s|s.navigate(Page::Lessons));},"Explore the first lessons →"}}}
                 for revisions in heads.values() {for id in revisions {if let Some(r)=state.library.revision(*id) {
-                    {let revision=*id;rsx!{button {class:if d.parent==Some(revision) {"passage-card selected"}else{"passage-card"},onclick:move |_|app.write().edit(revision),
-                        span {class:"tag",if revisions.len()>1 {"Competing revision"}else{"RUSSIAN"}}h3 {"{r.passage.title}"}p {lang:"ru","{r.passage.russian}"}small {"{r.passage.source}"}
+                    {let revision=*id;rsx!{button {class:if d.parent==Some(revision) {"passage-card selected"}else{"passage-card"},onclick:move |_|act(app,|s|s.edit(revision)),
+                        span {class:"tag",if revisions.len()>1 {"Competing revision"}else{"RUSSIAN"}}h3 {"{r.passage.title}"}PresentedRussian {key:"library-{id}",app,text:r.passage.russian.clone(),revision:Some(*id),purpose:PresentationPurpose::Reference}small {"{r.passage.source}"}
                     }}}
                 }}}
             }
             section {class:"panel editor",h2 {if d.id.is_some() {"Your passage"}else{"Add something you love"}}
-                label {r#for:"passage-title","Title"}input {id:"passage-title",value:d.title,oninput:move |e|app.write().editor.title=e.value(),placeholder:"A line worth learning"}
-                label {r#for:"passage-russian","Russian text"}textarea {id:"passage-russian",lang:"ru",class:"russian-input",value:d.russian,oninput:move |e|app.write().editor.russian=e.value(),placeholder:"Русский текст…"}
-                label {r#for:"passage-meaning","Meaning or translation"}textarea {id:"passage-meaning",value:d.translation,oninput:move |e|app.write().editor.translation=e.value(),placeholder:"What does it mean in this context?"}
-                label {r#for:"passage-source","Source or coach note"}input {id:"passage-source",value:d.source,oninput:move |e|app.write().editor.source=e.value(),placeholder:"Book, author, conversation, or your own words"}
+                p {class:"quiet",if d.pending_save.is_some() {"A save was interrupted. Choose Save passage to finish it; your words are kept."}else{"Draft saved as you type on this device. Save passage to add this version to your library."}}
+                label {r#for:"passage-title","Title"}input {id:"passage-title",value:d.title,oninput:move |e|act(app,|s|s.update_editor(editor_drafts::EditorField::Title,e.value())),placeholder:"A line worth learning"}
+                label {r#for:"passage-russian","Russian text"}textarea {id:"passage-russian",lang:"ru",class:"russian-input",value:d.russian,oninput:move |e|act(app,|s|s.update_editor(editor_drafts::EditorField::Russian,e.value())),placeholder:"Русский текст…"}
+                label {r#for:"passage-meaning","Meaning or translation"}textarea {id:"passage-meaning",value:d.translation,oninput:move |e|act(app,|s|s.update_editor(editor_drafts::EditorField::Translation,e.value())),placeholder:"What does it mean in this context?"}
+                label {r#for:"passage-source","Source or conversation note"}input {id:"passage-source",value:d.source,oninput:move |e|act(app,|s|s.update_editor(editor_drafts::EditorField::Source,e.value())),placeholder:"Book, author, conversation, or your own words"}
                 if conflicts {div {class:"notice",p {"This passage was edited in more than one place. Both versions are kept. Select a version to inspect it; resolve when this editor contains the wording you want."}}}
                 div {class:"actions",button {class:"primary",onclick:move |_|act(app,|s|s.save_passage(false)),"Save passage"}
                     if conflicts {button {class:"secondary",onclick:move |_|act(app,|s|s.save_passage(true)),"Resolve with this wording"}}
                 }
-                if let Some(revision)=d.parent {if !conflicts {div {class:"practice-options",p {"Practice the saved version"}button {class:"secondary",onclick:move |_|act(app,|s|s.start(revision,Skill::Reading)),"Read for meaning"}button {class:"secondary",onclick:move |_|act(app,|s|s.start(revision,Skill::Writing)),"Write from memory"}}}}
+                if let Some(revision)=d.parent {if !conflicts {div {class:"practice-options",p {"Practice the saved version"}
+                    button {class:"secondary",onclick:move |_|act(app,|s|s.start(revision,Skill::Reading)),"Read for meaning"}
+                    button {class:"secondary",onclick:move |_|act(app,|s|s.start(revision,Skill::Writing)),"Write from memory"}
+                    button {class:"secondary",onclick:move |_|act(app,|s|s.start(revision,Skill::Listening)),"Listen for meaning"}
+                    button {class:"secondary",onclick:move |_|act(app,|s|s.start(revision,Skill::Speaking)),"Speak from meaning"}
+                    button {class:"text-button",onclick:move |_|act(app,|s|s.open_studio(revision)),"Hear & explore the voice"}
+                }}}
             }
-        }
-    }
-}
-#[component]
-fn Practice(mut app: Signal<AppState>) -> Element {
-    let state = app.read().clone();
-    let Some(session) = state.session.clone() else {
-        return rsx! {div {class:"empty large",div {class:"eyebrow","ONE SMALL STEP"}h1 {"Meet a little Russian."}p {"Choose a passage and make it familiar, at your own pace."}button {class:"primary",onclick:move |_|act(app,|s|s.begin()),"Choose my next passage →"}}};
-    };
-    let Some(revision) = state.library.revision(session.revision) else {
-        return rsx! {p {"This practice refers to a passage not yet available on this device. Sync or restore its backup."}};
-    };
-    let p = &revision.passage;
-    let writing = session.skill == Skill::Writing;
-    rsx! {
-        div {class:"page-heading",div {div {class:"eyebrow","{session.skill.label()} · AT YOUR PACE"}h1 {"{p.title}"}p {"{p.source}"}}}
-        ol {class:"steps",for (i,(phase,label)) in [(Phase::Encounter,"Meet"),(Phase::Retrieve,"Try"),(Phase::Reflect,"Reflect"),(Phase::Complete,"Keep")].into_iter().enumerate() {
-            li {class:if session.phase==phase {"current"}else{""},span {"{i+1}"} "{label}"}
-        }}
-        section {class:"panel practice-panel",
-            match session.phase {
-                Phase::Encounter=>rsx!{
-                    span {class:"tag","READ AND CONNECT"}p {class:"russian-display",lang:"ru","{p.russian}"}p {class:"translation","{p.translation}"}
-                    p {class:"quiet","Take your time. Next, you’ll try " if writing {"writing the Russian"} else {"explaining the meaning"} " without the answer beside you."}
-                    button {class:"primary",onclick:move |_|act(app,|s|s.phase(Phase::Retrieve)),"I'm ready to try →"}
-                },
-                Phase::Retrieve=>rsx!{
-                    span {class:"tag",if writing {"WRITE THE RUSSIAN"}else{"READ FOR MEANING"}}
-                    p {class:if writing {"prompt"}else{"russian-display"},if writing {"{p.translation}"}else{"{p.russian}"}}
-                    label {r#for:"practice-response",if writing {"Your words in Russian"}else{"What does this mean?"}}
-                    textarea {id:"practice-response",class:"response",value:session.draft.clone(),oninput:move |e|act(app,|s|{if let Some(session)=s.session.as_mut(){session.draft=e.value();}s.save_session()}),placeholder:"Take a moment. There’s no timer."}
-                    if session.cues.is_empty() {button {class:"text-button",onclick:move |_|act(app,|s|s.hint()),"Give me a hint"}}
-                    else {div {class:"hint",span {class:"tag","A LITTLE SUPPORT"}p {if writing {"{p.russian}"}else{"{p.translation}"}}}}
-                    div {class:"actions",button {class:"primary",disabled:session.draft.trim().is_empty(),onclick:move |_|act(app,|s|s.phase(Phase::Reflect)),"Compare my response →"}}
-                },
-                Phase::Reflect=>rsx!{
-                    span {class:"tag","YOUR RESPONSE"}p {class:"prompt","{session.draft}"}hr {}p {class:"russian-display",lang:"ru","{p.russian}"}p {class:"translation","{p.translation}"}
-                    h2 {"How did that feel?"}p {class:"quiet","Your reflection is saved alongside the hints you used. A coach can help with correctness."}
-                    div {class:"rating-buttons",button {class:"secondary",onclick:move |_|act(app,|s|s.record(SelfRating::Again)),"I'd like another look"}button {class:"secondary",onclick:move |_|act(app,|s|s.record(SelfRating::WithHelp)),"I needed some help"}button {class:"primary",onclick:move |_|act(app,|s|s.record(SelfRating::Recalled)),"I recalled it"}}
-                },
-                Phase::Complete=>rsx!{
-                    div {class:"completion-mark","✦"}h2 {"A little more familiar."}p {"Your attempt is saved. Return to the passage, or let it rest for now."}
-                    div {class:"actions",button {class:"primary",onclick:move |_|{app.write().page=Page::Today;},"Back to today"}button {class:"secondary",onclick:move |_|act(app,|s|s.begin()),"Practice another passage"}}
-                },
-            }
-        }
-    }
-}
-#[component]
-fn Studio() -> Element {
-    rsx! {
-        div {class:"page-heading",div {div {class:"eyebrow","LISTEN · NOTICE · TRY AGAIN"}h1 {"A place for your voice"}p {"Build a conversation between what you hear and what you say."}}}
-        section {class:"panel studio",div {class:"wave",aria_hidden:"true",for height in [18,32,52,28,70,92,48,78,40,62,90,54,34,72,44,24,38] {span {style:"height:{height}px"}}}
-            h2 {"Your recording space is taking shape."}p {"Recording and playback will connect your coach’s examples with your own attempts. They aren’t available in this foundation build yet."}
-            div {class:"cards three",div {class:"mini-card",h3 {"Reference"}p {"A natural example, with context."}}div {class:"mini-card",h3 {"Your attempt"}p {"Listen side by side, at your pace."}}div {class:"mini-card",h3 {"One useful cue"}p {"A focused correction to try next."}}}
         }
     }
 }
@@ -178,7 +178,7 @@ fn Progress(app: Signal<AppState>) -> Element {
     rsx! {
         div {class:"page-heading",div {div {class:"eyebrow","WHAT YOU'VE PRACTICED"}h1 {"Four ways into a language"}p {"A record of your practice, with room to grow in every direction."}}}
         div {class:"cards four",for skill in Skill::ALL {div {class:"panel stat",span {class:"tag","{skill.label()}"}strong {"{attempts.iter().filter(|(_,a)|a.skill==skill).count()}"}p {"saved attempts"}}}}
-        section {class:"panel",h2 {"Remembering with and without support"}p {"Marked ‘I recalled it’ without a recorded hint: {independent}."}p {class:"quiet","These are your reflections, not proficiency scores. Listening and speaking will appear here when audio practice is connected."}}
+        section {class:"panel",h2 {"Remembering with and without support"}p {"Marked ‘I recalled it’ without a recorded hint: {independent}."}p {class:"quiet","These are your reflections, not proficiency scores. Listening and speaking require real audio practice. Counts describe activity; delayed use and specific feedback tell us more about what stays with you."}}
         section {class:"panel",h2 {"Recent practice"}
             if attempts.is_empty() {p {class:"quiet","Your first practice will start this story."}}
             for (event,attempt) in attempts.iter().rev().take(12) {div {class:"history-row",span {"{attempt.skill.label()}"}span {{state.library.revision(attempt.revision).map(|r|r.passage.title.as_str()).unwrap_or("Passage not available")}}small {if attempt.cues.is_empty(){"No hint"}else{"With a hint"} " · {relative_day(event.recorded_at_ms)}"}}}
@@ -198,25 +198,200 @@ fn Settings(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
     rsx! {
         div {class:"page-heading",div {div {class:"eyebrow","YOUR NOTEBOOK, YOUR DEVICES"}h1 {"Keep your Russian with you"}p {"Practice saves locally. Connect your own sync library when you’re ready."}}}
+        section {class:"panel",h2 {"How you like to learn"}
+            div {class:"preference-row",input {id:"show-stress",r#type:"checkbox",checked:state.preferences.show_stress,onchange:move |e|act(app,|s|{s.preferences.show_stress=e.checked();s.save_preferences()})}label {r#for:"show-stress","Show stress marks in lesson references"}}
+            div {class:"preference-row",input {id:"show-chunks",r#type:"checkbox",checked:state.preferences.chunked,onchange:move |e|act(app,|s|{s.preferences.chunked=e.checked();s.save_preferences()})}label {r#for:"show-chunks","Break lesson phrases into short chunks"}}
+            label {r#for:"review-skill","Focus for scheduled reviews"}select {id:"review-skill",value:state.preferences.review_skill.label(),onchange:move |e|act(app,|s|{s.preferences.review_skill=match e.value().as_str(){"Writing"=>Skill::Writing,"Listening"=>Skill::Listening,"Speaking"=>Skill::Speaking,_=>Skill::Reading};s.save_preferences()}),
+                for skill in Skill::ALL {option {value:skill.label(),"{skill.label()}"}}
+            }
+            p {class:"quiet","Every practice stays untimed. Review intervals are a transparent baseline, kept separate for each skill. Listening and speaking use your saved recordings."}
+        }
+        workspace_view::SavedWindows {}
         div {class:"cards two",
-            section {class:"panel",h2 {"Connect your devices"}p {"Passages and practice records can sync through your private relay. Audio and API credentials are not included."}
+            section {class:"panel",h2 {"Connect your devices"}p {"Passages, practice, and teacher feedback sync through your private relay. Choose separately whether to transfer recordings; model API credentials stay on the relay."}
                 label {r#for:"sync-url","Sync URL"}input {id:"sync-url",value:state.endpoint,oninput:move |e|app.write().endpoint=e.value(),placeholder:"https://your-sync-host"}
-                label {r#for:"sync-key","Sync key · kept only for this session"}input {id:"sync-key",r#type:"password",autocomplete:"off",value:state.token,oninput:move |e|app.write().token=e.value()}
+                div {class:"preference-row",input {id:"sync-recordings",r#type:"checkbox",checked:state.preferences.sync_recordings,disabled:state.syncing,onchange:move |e|act(app,|s|{s.preferences.sync_recordings=e.checked();s.save_preferences()})}label {r#for:"sync-recordings","Include original recordings and timed cues"}}
+                label {r#for:"sync-key","Private connection key"}input {id:"sync-key",r#type:"password",autocomplete:"off",value:state.token,oninput:move |e|app.write().token=e.value()}
+                if cfg!(target_arch="wasm32") {p {class:"quiet","This browser keeps the key in memory until you close Rufren."}}else{p {class:"quiet","The installed connection stays in this device’s Keychain. Disconnect removes it."}}
                 div {class:"actions",button {class:"primary",disabled:state.syncing,onclick:move |_|{
                     let snapshot=app.read().clone();app.write().syncing=true;
-                    spawn(async move {let result=synchronize(snapshot.repo,snapshot.endpoint,snapshot.token).await;app.write().syncing=false;
-                        match result {Ok(_)=>act(app,|s|{s.refresh()?;s.notice="Your notebook is up to date with the sync library.".into();Ok(())}),Err(e)=>app.write().notice=e}
+                    spawn_forever(async move {let result=async {synchronize(snapshot.repo.clone(),snapshot.endpoint.clone(),snapshot.token.clone()).await?;
+                        if snapshot.preferences.sync_recordings {asset_sync::synchronize_audio(snapshot.repo,snapshot.endpoint,snapshot.token).await.map(Some).map_err(|e|format!("Passages and practice synced; recording sync stopped: {e}"))} else {Ok(None)}}.await;app.write().syncing=false;
+                        match result {Ok(count)=>act(app,|s|{s.refresh()?;s.notice=count.map_or("Your notebook is up to date with the sync library.".into(),|n|format!("Notebook synced. {n} recordings transferred."));Ok(())}),Err(e)=>app.write().notice=e}
                     });
                 },if state.syncing {"Syncing…"}else{"Sync now"}}
-                button {class:"text-button",disabled:state.syncing,onclick:move |_|act(app,|s|{s.repo.disconnect()?;s.token.clear();s.notice="Disconnected. Your local passages and practice are kept.".into();Ok(())}),"Disconnect"}}
+                button {class:"text-button",disabled:state.syncing,onclick:move |_|act(app,|s|{s.repo.disconnect()?;
+                    #[cfg(not(target_arch="wasm32"))]
+                    crate::native_connection::forget()?;
+                    s.token.clear();s.notice="Disconnected. Your local passages and practice are kept.".into();Ok(())}),"Disconnect"}}
             }
             section {class:"panel",h2 {"A portable copy"}p {"Export your passages and practice records as JSON, or restore a previous export. Restoring merges records and keeps competing edits."}
-                div {class:"actions",button {class:"secondary",onclick:move |_|act(app,|s|{s.transfer=serde_json::to_string_pretty(&s.repo.library()?).map_err(|e|e.to_string())?;Ok(())}),"Prepare export"}
-                button {class:"secondary",onclick:move |_|act(app,|s|{let library:Library=serde_json::from_str(&s.transfer).map_err(|e|format!("Could not read backup: {e}"))?;
+                div {class:"actions",button {class:"secondary",onclick:move |_|act(app,|s|{s.transfer=repository::export_library(s.repo.library()?)?;Ok(())}),"Prepare export"}
+                button {class:"secondary",onclick:move |_|act(app,|s|{let library=repository::import_library(&s.transfer)?;
                     if library.events.iter().any(|(id,e)|*id!=e.id){return Err("Backup event IDs do not match".into());}
                     s.repo.append(&library.events.into_values().collect::<Vec<_>>())?;s.refresh()?;s.notice="Backup merged into your notebook.".into();Ok(())}),"Restore JSON"}}
                 label {r#for:"backup-json","Copy this text to a file, or paste a backup to restore"}textarea {id:"backup-json",class:"backup",value:state.transfer,oninput:move |e|app.write().transfer=e.value(),placeholder:"Your portable library…"}
             }
         }
     }
+}
+
+#[component]
+fn Studio(app: Signal<AppState>) -> Element {
+    let state = app.read().clone();
+    let revision_id = state
+        .studio_revision
+        .or_else(|| state.session.as_ref().map(|s| s.revision));
+    let revision = revision_id.and_then(|id| state.library.revision(id));
+    rsx! {
+        div {class:"page-heading",div {div {class:"eyebrow","LISTEN · NOTICE · TRY AGAIN"}h1 {"Find your Russian voice"}p {"Give a phrase a voice and keep your own attempts. Listen first; use the instruments to investigate a particular question."}}}
+        if let Some(r)=revision {p {class:"quiet","Linked to: {r.passage.title}"}}
+        AudioStudio {passage_id:revision.map(|r|r.passage.id.to_string()).unwrap_or_default(),revision_id:revision_id.map(|id|id.to_string()).unwrap_or_default(),russian:revision.map(|r|r.passage.russian.clone()).unwrap_or_default(),on_saved:move |record|act(app,|s|recording_saved(s,record)),generating_reference:state.speech_busy,on_generate_reference:move |_|{if let Some(id)=revision_id {generate_reference(app,id)}else{act(app,|s|{s.notice="Choose a passage or lesson phrase to give it a voice.".into();s.navigate(Page::Library)})}}}
+    }
+}
+fn generate_reference(mut app: Signal<AppState>, revision: uuid::Uuid) {
+    if app.read().speech_busy {
+        return;
+    }
+    let snapshot = app.read().clone();
+    let Some(passage) = snapshot
+        .library
+        .revision(revision)
+        .map(|r| r.passage.clone())
+    else {
+        app.write().notice = "This passage is unavailable. Open or sync it first.".into();
+        return;
+    };
+    let text = snapshot
+        .content
+        .phrases
+        .iter()
+        .find(|p| snapshot.phrase_revision(p) == revision)
+        .map(|p| p.stressed.clone())
+        .or_else(|| {
+            snapshot
+                .plan
+                .as_ref()
+                .filter(|p| {
+                    snapshot
+                        .session
+                        .as_ref()
+                        .is_some_and(|s| s.id == p.session && s.revision == revision)
+                })
+                .and_then(|p| p.snapshot.as_ref())
+                .and_then(|s| {
+                    s.phrases
+                        .iter()
+                        .find(|p| p.id == s.exercise.reference_phrase_id)
+                })
+                .map(|p| p.stressed.clone())
+        })
+        .unwrap_or(passage.russian);
+    if text.chars().count() > 256 || text.len() > 1024 {
+        app.write().notice =
+            "Give one short phrase a voice at a time. Split this passage into smaller phrases."
+                .into();
+        return;
+    }
+    let request_id = uuid::Uuid::new_v4().to_string();
+    let revision_id = revision.to_string();
+    let body = serde_json::json!({"text":text,"request_id":request_id,"revision_id":revision_id});
+    app.write().speech_busy = true;
+    dioxus_core::spawn_forever(async move {
+        let result = async {
+            let response = gateway::request::<serde_json::Value>(
+                &snapshot.endpoint,
+                &snapshot.token,
+                "/api/speech/generate",
+                Some(&body),
+                4 * 1024 * 1024,
+                90_000,
+            )
+            .await?;
+            audio_studio::save_generated_reference(
+                &passage.id.to_string(),
+                &revision_id,
+                &text,
+                &request_id,
+                response,
+            )
+            .await
+        }
+        .await;
+        app.write().speech_busy = false;
+        match result {
+            Ok(record) => act(app, |s| {
+                recording_saved(s, record)?;
+                s.notice =
+                    "Your spoken reference is ready. Listen, then try the meaning yourself.".into();
+                Ok(())
+            }),
+            Err(problem) => app.write().notice = problem,
+        }
+    });
+}
+fn recording_saved(s: &mut AppState, record: StudioRecording) -> Result<()> {
+    let Ok(revision) = uuid::Uuid::parse_str(&record.revision_id) else {
+        s.notice = "Recording kept in your local speech studio.".into();
+        return Ok(());
+    };
+    if s.library.revision(revision).is_none() {
+        return Err(
+            "Recording saved locally; its passage is not available for linking yet.".into(),
+        );
+    }
+    let attachment = AudioAttachment {
+        asset_id: record.asset_id.clone(),
+        asset: AudioAsset {
+            sha256: record.content_hash.clone(),
+            media_type: record.mime_type.clone(),
+            sample_rate_hz: record.sample_rate,
+            channels: record.channels,
+            frames: record.frames,
+        },
+        target: AnnotationTarget::Revision(revision),
+        role: if record.role == "reference" {
+            AudioRole::Reference
+        } else {
+            AudioRole::Attempt
+        },
+        note: if record.interrupted {
+            "Recording interrupted; captured portion preserved".into()
+        } else {
+            String::new()
+        },
+    };
+    let mut event = rufren_core::Event::new(
+        s.device,
+        record.created_at_ms,
+        Fact::RecordingAttached(attachment.clone()),
+    )
+    .map_err(|e| e.to_string())?;
+    // Re-linking the same immutable original remains idempotent across retries.
+    event.id = uuid::Uuid::new_v5(
+        &revision,
+        format!("audio:{}:{}", record.asset_id, record.role).as_bytes(),
+    );
+    event.device = uuid::Uuid::new_v5(&revision, b"audio-attachment-writer");
+    s.repo.append(&[event])?;
+    s.refresh()?;
+    if record.role == "attempt"
+        && s.session.as_ref().is_some_and(|session| {
+            session.revision == revision
+                && session.skill == Skill::Speaking
+                && session.phase == Phase::Retrieve
+        })
+    {
+        s.update_response(format!(
+            "Recorded response · {:.1} seconds",
+            record.duration_ms as f64 / 1000.0
+        ))?;
+        if let Some(mut plan) = s.plan.clone() {
+            plan.response_recording = Some(attachment);
+            s.repo.set("session_plan", &plan)?;
+            s.plan = Some(plan);
+        }
+    }
+    s.notice="Recording saved with its passage. The original audio stays on this device until you choose to sync recordings.".into();
+    Ok(())
 }

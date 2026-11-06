@@ -1,0 +1,278 @@
+{
+  "schema_version": "rufren-speech-teacher-evaluation-v1",
+  "purpose": "Public teaching sample audit and evidence-policy fixtures, not a labeled learner corpus",
+  "audio_coordinate_system": "original recording frames, half-open intervals",
+  "tts_prompts": [
+    {
+      "id": "greeting",
+      "source_text": "Здра́вствуйте! Как у вас дела́?",
+      "meaning": "greeting and question",
+      "audit_target": "ordinary connected speech; avoid an exaggerated isolated-word reference",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "learning",
+      "source_text": "Я учу́ ру́сский язы́к.",
+      "meaning": "I am learning Russian",
+      "audit_target": "stress in inflected forms",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "lock",
+      "source_text": "На две́ри виси́т замо́к.",
+      "meaning": "A lock is hanging on the door",
+      "audit_target": "second-syllable stress in замо́к",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "castle",
+      "source_text": "На холме́ стои́т ста́рый за́мок.",
+      "meaning": "An old castle stands on the hill",
+      "audit_target": "first-syllable stress in за́мок",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "flour",
+      "source_text": "Э́то мука́ для хле́ба.",
+      "meaning": "This is flour for bread",
+      "audit_target": "final stress in мука́",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "anguish",
+      "source_text": "Э́то на́стоящая му́ка.",
+      "meaning": "This is real torment",
+      "audit_target": "initial stress in му́ка",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "all_things",
+      "source_text": "Всё гото́во?",
+      "meaning": "Is everything ready?",
+      "audit_target": "ё and ordinary yes/no question contour",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "all_people",
+      "source_text": "Все гото́вы?",
+      "meaning": "Is everyone ready?",
+      "audit_target": "contrast with всё; do not normalize ё to е in target checks",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "hard_soft_t",
+      "source_text": "мат — мать",
+      "meaning": "obscene language — mother",
+      "audit_target": "word-final hard/soft contrast; teach meanings before asking for a choice",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "hard_soft_l",
+      "source_text": "у́гол — у́голь",
+      "meaning": "corner — coal",
+      "audit_target": "word-final hard/soft contrast; not a universal F2 cutoff",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "vowel_contrast",
+      "source_text": "был — бил",
+      "meaning": "was — struck",
+      "audit_target": "ы/и with accompanying consonant context; do not pretend it isolates only vowel quality",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "vowel_reduction",
+      "source_text": "Молоко́ уже́ на столе́.",
+      "meaning": "The milk is already on the table",
+      "audit_target": "contextual reduction, not equal syllable timing",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "scifi",
+      "source_text": "Ро́бот ви́дит кора́бль.",
+      "meaning": "The robot sees a ship",
+      "audit_target": "interesting short phrase; words must be introduced before diagnosis",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    },
+    {
+      "id": "math",
+      "source_text": "Для ка́ждого натура́льного числа́ существу́ет сле́дующее число́.",
+      "meaning": "For every natural number there is a next number",
+      "audit_target": "phrase grouping and correct mathematical wording; longer stretch goal",
+      "audio_state": "not_recorded",
+      "audio_sha256": null,
+      "heard_transcript": null,
+      "target_listening_result": "unassessed"
+    }
+  ],
+  "policy_cases": [
+    {
+      "id": "text_only_speech",
+      "given": "transcript only",
+      "required_primary_action": "show_model_and_contrast",
+      "prohibited_claims": [
+        "claim_heard_pronunciation",
+        "native_accent_score"
+      ]
+    },
+    {
+      "id": "silent_capture",
+      "given": "valid WAV with silence",
+      "required_primary_action": "retry_capture",
+      "prohibited_claims": [
+        "language_error",
+        "phoneme_error"
+      ]
+    },
+    {
+      "id": "clipped_onset",
+      "given": "first consonant absent due to crop boundary",
+      "required_primary_action": "replay_wider_span",
+      "prohibited_claims": [
+        "missing_consonant_diagnosis"
+      ]
+    },
+    {
+      "id": "asr_disagreement",
+      "given": "unprompted Qwen says был; independent recognizer says бил",
+      "required_primary_action": "confirm_meaning_and_contrast",
+      "prohibited_claims": [
+        "confident_vowel_error",
+        "average_confidences"
+      ]
+    },
+    {
+      "id": "asr_agreement_target",
+      "given": "recognizers recover intended text",
+      "required_primary_action": "acknowledge_message_and_transfer",
+      "prohibited_claims": [
+        "all_phonemes_correct",
+        "native_accent_score"
+      ]
+    },
+    {
+      "id": "homograph_same_text",
+      "given": "замок transcript; intended sense is castle; no acoustic stress evidence",
+      "required_primary_action": "teach_stress_contrast",
+      "prohibited_claims": [
+        "stress_correct_from_transcript",
+        "stress_wrong_from_transcript"
+      ]
+    },
+    {
+      "id": "target_conditioned_alignment",
+      "given": "aligner assigns expected omitted word an interval",
+      "required_primary_action": "recheck_transcript_and_replay",
+      "prohibited_claims": [
+        "word_was_spoken_from_alignment"
+      ]
+    },
+    {
+      "id": "coarse_word_alignment",
+      "given": "Qwen word timestamps with 80 ms resolution",
+      "required_primary_action": "replay_word_with_margin",
+      "prohibited_claims": [
+        "vowel_duration_from_word_boundary",
+        "palatalization_from_alignment"
+      ]
+    },
+    {
+      "id": "missing_f0",
+      "given": "unvoiced or aperiodic frames with missing F0",
+      "required_primary_action": "listen_and_preserve_gap",
+      "prohibited_claims": [
+        "flat_intonation",
+        "failed_pronunciation"
+      ]
+    },
+    {
+      "id": "thoughtful_pause",
+      "given": "long pause in a new philosophical answer",
+      "required_primary_action": "offer_phrase_chunk",
+      "prohibited_claims": [
+        "global_low_fluency",
+        "must_speak_faster"
+      ]
+    },
+    {
+      "id": "stale_asset",
+      "given": "evidence original SHA differs from selected attempt",
+      "required_primary_action": "reject_binding",
+      "prohibited_claims": [
+        "attach_to_current_attempt"
+      ]
+    },
+    {
+      "id": "out_of_range_span",
+      "given": "listener interval ends after source recording",
+      "required_primary_action": "reject_span",
+      "prohibited_claims": [
+        "crop_outside_recording"
+      ]
+    },
+    {
+      "id": "unsupported_listener_phone",
+      "given": "listener diagnoses a phoneme absent from the cited crop",
+      "required_primary_action": "downgrade_and_replay",
+      "prohibited_claims": [
+        "confident_phoneme_correction"
+      ]
+    },
+    {
+      "id": "tentative_stress",
+      "given": "audio listener suggests wrong stress but is uncalibrated",
+      "required_primary_action": "play_stress_contrast_and_retry",
+      "prohibited_claims": [
+        "certain_stress_error",
+        "invent_calibrated_probability"
+      ]
+    },
+    {
+      "id": "grammar_from_uncertain_asr",
+      "given": "unconfirmed transcript contains possible wrong case ending",
+      "required_primary_action": "confirm_words_before_language_correction",
+      "prohibited_claims": [
+        "definite_grammar_error_from_unconfirmed_transcript"
+      ]
+    }
+  ]
+}

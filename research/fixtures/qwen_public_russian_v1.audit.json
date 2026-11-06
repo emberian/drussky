@@ -1,0 +1,162 @@
+{
+  "schema_version": "rufren-speech-sample-audit-v1",
+  "fixture_id": "qwen-public-russian-v1",
+  "artifact_relative_path": ".local/qwen3-tts/samples/public-russian-v1.wav",
+  "source_text": "Здравствуйте! Как у вас дела? Я учу русский язык. На двери висит замо́к, а на холме стоит старый за́мок. Всё готово? Для каждого натурального числа существует следующее число.",
+  "audio_sha256": "9b4f568b66665996c75b840fbd09e843e98f29d0addd3f2ac7f18309437bacf0",
+  "shape": {
+    "sample_rate": 24000,
+    "channels": 1,
+    "frames": 320640,
+    "sample_width_bytes": 2,
+    "duration_seconds": 13.36
+  },
+  "provenance": {
+    "kind": "ai_generated_speech",
+    "provider": "local_qwen3_tts",
+    "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-bf16@7d3824abff87e49756bb0f83fb5411de75d160c4",
+    "voice": "rufren-russian-warm-v1",
+    "prompt_version": "rufren-qwen-russian-v1",
+    "validation": "Local BF16 VoiceDesign; mlx-audio 0.6.4; seed 42; no human reference or learner pronunciation assessment"
+  },
+  "container_and_binding_check": "pass",
+  "lexical_asr_check": "suspected_target_issue",
+  "stress_listening_check": "unassessed",
+  "palatalization_listening_check": "unassessed",
+  "question_and_yo_listening_check": "unassessed",
+  "naturalness_listening_check": "unassessed",
+  "note": "Actual artifact/hash verified and unprompted ASR completed. Recognition flags target words for review; this does not establish which system caused the mismatch or diagnose pronunciation.",
+  "independent_asr": {
+    "schema_version": "rufren-speech-transcript-v1",
+    "request_id": "qwen-public-russian-asr-v1",
+    "attempt_id": null,
+    "revision_id": null,
+    "asset_id": "qwen-public-russian-v1",
+    "audio_sha256": "9b4f568b66665996c75b840fbd09e843e98f29d0addd3f2ac7f18309437bacf0",
+    "original_audio": {
+      "sample_rate": 24000,
+      "channels": 1,
+      "frames": 320640,
+      "encoding": "pcm_s16le",
+      "bits": 16
+    },
+    "source_pcm_sha256": "192b4d34ee3e01f573863400582632cb38d3aee5ae35452e8d7060d8784707f4",
+    "source_pcm_hash_format": "interleaved-little-endian-f32-no-header-v1",
+    "span": {
+      "start_frame": 0,
+      "end_frame": 320640
+    },
+    "span_coordinate_system": "original_frames_half_open",
+    "derivative": {
+      "sample_rate": 16000,
+      "channels": 1,
+      "frames": 213760,
+      "pcm_sha256": "e62c4f474a9d10c355e1773595962341e9f4fe22a5ee09dd4f18c557bfe44069",
+      "pcm_hash_format": "little-endian-f32-no-header-v1",
+      "method": "arithmetic-channel-mean; scipy.signal.resample_poly default Kaiser5",
+      "scipy_version": "1.18.1",
+      "amplitude_normalization": false
+    },
+    "evidence_kind": "transcript_hypothesis",
+    "transcript": "Здравствуйте. Как у вас дела? Я учу русский язык. На двери висит самоек, а на холме стоит старый заямок. Все готово? Для каждого натурального числа существует следующее число.",
+    "language": "ru",
+    "language_selection": "explicit_not_detected",
+    "target_conditioned": false,
+    "word_timestamps": null,
+    "word_alignment_status": "not_run",
+    "confidence": null,
+    "acoustic_assessment": null,
+    "provenance": {
+      "provider": "local_qwen3_asr",
+      "model": "mlx-community/Qwen3-ASR-1.7B-bf16",
+      "revision": "e1f6c266914abc5a46e8756e02580f834a6cf8a7",
+      "runtime": "mlx-audio==0.6.4",
+      "mlx_version": "0.32.4",
+      "manifest_sha256": "efdef86e667bac5a79cc0a9a5cf288a6510331776657eb6b4894caf9088867fe",
+      "worker_sha256": "ea5a428d18faa9bd2ef3c1187090fa3ae2b659e37ca85931ae4e85e22eea69fe",
+      "decoding": {
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "seed": 42,
+        "language": "Russian",
+        "hotwords": []
+      }
+    },
+    "timing": {
+      "started_at": "2026-11-06T05:26:09.026571+00:00",
+      "completed_at": "2026-11-06T05:26:20.771501+00:00",
+      "elapsed_seconds": 11.737,
+      "process_peak_rss_bytes": 4355702784,
+      "metal_peak_bytes": 5191502392
+    },
+    "usage": {
+      "prompt_tokens": 192,
+      "generation_tokens": 58
+    }
+  },
+  "review_findings": [
+    {
+      "intended": "замо́к",
+      "hypothesis": "самоек",
+      "status": "unresolved_tts_or_asr"
+    },
+    {
+      "intended": "за́мок",
+      "hypothesis": "заямок",
+      "status": "unresolved_tts_or_asr"
+    },
+    {
+      "intended": "Всё",
+      "hypothesis": "Все",
+      "status": "unresolved_tts_or_asr_or_yo_normalization"
+    }
+  ],
+  "next_check": "Controlled unaccented comparison completed; see qwen_public_russian_unaccented_v1.audit.json. Homograph stress still needs targeted listening or independently validated acoustic evidence.",
+  "lexical_review": {
+    "schema_version": "rufren-lexical-review-v1",
+    "mode": "generated_reference",
+    "asset_id": "qwen-public-russian-v1",
+    "audio_sha256": "9b4f568b66665996c75b840fbd09e843e98f29d0addd3f2ac7f18309437bacf0",
+    "independent_transcript": "Здравствуйте. Как у вас дела? Я учу русский язык. На двери висит самоек, а на холме стоит старый заямок. Все готово? Для каждого натурального числа существует следующее число.",
+    "lexical_differences": [
+      {
+        "kind": "substitution",
+        "expected_index": 12,
+        "heard_index": 12,
+        "expected": "замок",
+        "heard": "самоек",
+        "yo_spelling_ambiguity": false
+      },
+      {
+        "kind": "substitution",
+        "expected_index": 18,
+        "heard_index": 18,
+        "expected": "замок",
+        "heard": "заямок",
+        "yo_spelling_ambiguity": false
+      },
+      {
+        "kind": "substitution",
+        "expected_index": 19,
+        "heard_index": 19,
+        "expected": "всё",
+        "heard": "все",
+        "yo_spelling_ambiguity": true
+      }
+    ],
+    "lexical_screen": "mismatch_needs_review",
+    "primary_action": "request_one_alternative_reference_candidate",
+    "automatic_replacement_budget_remaining": 1,
+    "replay": {
+      "span": {
+        "start_frame": 0,
+        "end_frame": 320640
+      },
+      "coordinate_system": "original_frames_half_open",
+      "localization": "selected_crop_not_word_alignment"
+    },
+    "pronunciation_verdict": null,
+    "reference_phonetics_verified": false,
+    "next_step": "Compare the displayed words, replay this phrase, and try once more."
+  }
+}

@@ -1,0 +1,26 @@
+[Unit]
+Description=Rufren private library relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=rufren
+Group=rufren
+ExecStart=/opt/rufren/rufren-relay
+EnvironmentFile=/etc/rufren/relay.env
+WorkingDirectory=/var/lib/rufren
+StateDirectory=rufren
+UMask=0077
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/rufren
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+# Replace with your own DNS hostname. Relay listens only on loopback.
+sync.example.invalid {
+    request_body /v1/assets/blobs/* {
+        max_size 34MB
+    }
+    request_body /v1/sync {
+        max_size 2MB
+    }
+    reverse_proxy 127.0.0.1:8787
+    header {
+        Strict-Transport-Security "max-age=31536000"
+        -Server
+    }
+    # Deliberately no access log: passages and bearer credentials should not enter logs.
+}

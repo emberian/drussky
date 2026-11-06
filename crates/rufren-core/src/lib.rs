@@ -3,7 +3,29 @@ use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
 use uuid::Uuid;
 
-pub const SCHEMA_VERSION: u32 = 1;
+mod asset_transport;
+pub use asset_transport::*;
+mod ai_feedback;
+pub use ai_feedback::*;
+mod presentation;
+mod speech_facts;
+pub use presentation::*;
+pub use speech_facts::*;
+mod learner;
+mod learning_facts;
+mod review;
+mod teaching;
+pub use learner::*;
+pub use learning_facts::*;
+pub use review::*;
+pub use teaching::*;
+
+/// Current event encoding. Database migrations and transport compatibility are independent.
+pub const EVENT_VERSION: u32 = 3;
+pub const MIN_EVENT_VERSION: u32 = 1;
+pub const SYNC_VERSION: u32 = 3;
+/// Backward-compatible name for callers constructing events; never use for a DB schema.
+pub const SCHEMA_VERSION: u32 = EVENT_VERSION;
 pub const SYNC_BATCH: usize = 128;
 pub const MAX_TEXT: usize = 32_000;
 
@@ -70,6 +92,8 @@ pub enum Cue {
     OriginalText,
     Replay,
     Coach,
+    /// Reference-bearing screens were opened during retrieval; possible answer exposure.
+    ReferenceMaterial,
 }
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
@@ -78,6 +102,8 @@ pub enum SelfRating {
     Again,
     WithHelp,
     Recalled,
+    /// The learner supplied a response without reporting a recall grade.
+    NotReported,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
@@ -118,6 +144,15 @@ pub struct Session {
 pub enum Fact {
     PassageRevised(Revision),
     AttemptRecorded(Attempt),
+    AttemptContextRecorded(AttemptContext),
+    CoachJudgmentRecorded(CoachJudgment),
+    CoachAnnotationRecorded(CoachAnnotation),
+    TeachingDecisionRecorded(TeachingDecision),
+    RecordingAttached(AudioAttachment),
+    AiAssessmentRecorded(AiAssessment),
+    StimulusPresented(StimulusPresentation),
+    SpeechTranscribed(SpeechTranscription),
+    TranscriptConfirmed(TranscriptConfirmation),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
@@ -143,7 +178,17 @@ impl Event {
         Ok(event)
     }
     pub fn validate(&self) -> Result<(), Error> {
-        if self.version != SCHEMA_VERSION {
+        let required = match &self.fact {
+            Fact::StimulusPresented(_)
+            | Fact::SpeechTranscribed(_)
+            | Fact::TranscriptConfirmed(_) => 3,
+            Fact::AiAssessmentRecorded(a) if a.confirmed_transcript.is_some() => 3,
+            Fact::AttemptRecorded(a) if a.self_rating == SelfRating::NotReported => 3,
+            Fact::AttemptRecorded(a) if a.cues.contains(&Cue::ReferenceMaterial) => 2,
+            Fact::PassageRevised(_) | Fact::AttemptRecorded(_) => 1,
+            _ => 2,
+        };
+        if !(MIN_EVENT_VERSION..=EVENT_VERSION).contains(&self.version) || self.version < required {
             return Err(Error::Version(self.version));
         }
         if self.id.is_nil() || self.device.is_nil() {
@@ -176,6 +221,7 @@ impl Event {
                     return Err(Error::Invalid("invalid attempt".into()));
                 }
             }
+            _ => validate_learning_fact(self)?,
         }
         Ok(())
     }
@@ -201,7 +247,9 @@ impl Library {
             }
         }
         // Parents may arrive on a later page. Validate cross-reference types when available.
+        validate_audio_identities(&merged)?;
         for event in merged.values() {
+            validate_learning_references(event, &merged)?;
             if let Fact::PassageRevised(r) = &event.fact {
                 for parent in &r.parents {
                     if let Some(p) = merged.get(parent) {
@@ -250,6 +298,9 @@ impl Library {
                 }) = merged.get(&id)
                 {
                     stack.extend(r.parents.iter().map(|p| (*p, false)));
+                }
+                if let Some(event) = merged.get(&id) {
+                    stack.extend(learning_parents(&event.fact).iter().map(|p| (*p, false)));
                 }
             }
         }
@@ -321,8 +372,10 @@ pub struct SyncResponse {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(deny_unknown_fields)]
 pub struct AudioAsset {
+    /// SHA-256 of the original encoded audio blob, not of decoded/resampled PCM.
     pub sha256: String,
     pub media_type: String,
+    /// One decoding observation. Device audio contexts can resample identical blobs differently.
     pub sample_rate_hz: u32,
     pub channels: u16,
     pub frames: u64,

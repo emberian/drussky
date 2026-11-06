@@ -1,5 +1,5 @@
 use rufren_core::*;
-use serde::{Serialize, de::DeserializeOwned};
+use serde::{de::DeserializeOwned, Serialize};
 use std::collections::BTreeSet;
 use uuid::Uuid;
 pub type Result<T> = std::result::Result<T, String>;
@@ -11,7 +11,9 @@ pub struct Repository {
     #[cfg(not(target_arch = "wasm32"))]
     store: std::cell::RefCell<rufren_store::Store>,
     #[cfg(target_arch = "wasm32")]
-    storage: web_sys::Storage,
+    storage: BrowserStorage,
+    #[cfg(target_arch = "wasm32")]
+    projection: std::cell::RefCell<(u64, Library)>,
 }
 impl Repository {
     pub fn open() -> Result<Self> {
@@ -26,21 +28,29 @@ impl Repository {
                     .to_path_buf()
             };
             std::fs::create_dir_all(&path).map_err(err)?;
-            Ok(Self {
-                store: std::cell::RefCell::new(
-                    rufren_store::Store::open(path.join("library.sqlite")).map_err(err)?,
-                ),
-            })
+            Self::open_at(path.join("library.sqlite"))
         }
         #[cfg(target_arch = "wasm32")]
         {
-            let storage = web_sys::window()
-                .ok_or("No browser window")?
-                .local_storage()
+            if js_sys::eval("!!window.rufrenLibrary")
                 .map_err(|_| "Browser storage unavailable")?
-                .ok_or("Browser storage is disabled")?;
-            Ok(Self { storage })
+                .as_bool()
+                != Some(true)
+            {
+                return Err("Browser storage is still opening. Reopen Rufren.".into());
+            }
+            Ok(Self {
+                storage: BrowserStorage,
+                projection: std::cell::RefCell::new((0, Library::default())),
+            })
         }
+    }
+    /// Open an explicit native SQLite path (including `:memory:` for isolated model tests).
+    #[cfg(not(target_arch = "wasm32"))]
+    pub fn open_at(path: impl AsRef<std::path::Path>) -> Result<Self> {
+        Ok(Self {
+            store: std::cell::RefCell::new(rufren_store::Store::open(path).map_err(err)?),
+        })
     }
     pub fn identity(&self) -> Result<Uuid> {
         #[cfg(not(target_arch = "wasm32"))]
@@ -93,30 +103,13 @@ impl Repository {
         }
         #[cfg(target_arch = "wasm32")]
         {
-            let mut events = Vec::new();
-            for i in 0..self
-                .storage
-                .length()
-                .map_err(|_| "Cannot read browser storage")?
-            {
-                if let Some(k) = self
-                    .storage
-                    .key(i)
-                    .map_err(|_| "Cannot enumerate browser storage")?
-                {
-                    if k.starts_with("rufren.v1.event.") {
-                        let json = self
-                            .storage
-                            .get_item(&k)
-                            .map_err(|_| "Cannot read event")?
-                            .ok_or("An event disappeared while reading")?;
-                        events.push(serde_json::from_str(&json).map_err(err)?);
-                    }
-                }
+            let mut cached = self.projection.borrow_mut();
+            let (revision, events) = self.storage.events_after(cached.0)?;
+            if !events.is_empty() {
+                cached.1.merge(&events).map_err(err)?;
             }
-            let mut lib = Library::default();
-            lib.merge(&events).map_err(err)?;
-            Ok(lib)
+            cached.0 = revision;
+            Ok(cached.1.clone())
         }
     }
     pub fn disconnect(&self) -> Result<()> {
@@ -126,18 +119,12 @@ impl Repository {
         }
         #[cfg(target_arch = "wasm32")]
         {
-            let mut keys = Vec::new();
-            for i in 0..self
+            let keys = self
                 .storage
-                .length()
-                .map_err(|_| "Cannot read sync state")?
-            {
-                if let Some(k) = self.storage.key(i).map_err(|_| "Cannot read sync key")? {
-                    if k.starts_with("rufren.v1.ack.") {
-                        keys.push(k);
-                    }
-                }
-            }
+                .entries()?
+                .into_iter()
+                .map(|(key, _)| key)
+                .filter(|key| key.starts_with("rufren.v1.ack."));
             for k in keys {
                 self.storage
                     .remove_item(&k)
@@ -157,10 +144,20 @@ impl Repository {
         {
             let mut library = self.library()?;
             library.merge(events).map_err(err)?;
+            let encoded = events
+                .iter()
+                .map(|event| {
+                    let json = serde_json::to_string(event).map_err(err)?;
+                    if json.len() > 1_048_576 {
+                        return Err("Event exceeds the sync size budget".into());
+                    }
+                    Ok((event.id, json))
+                })
+                .collect::<Result<Vec<_>>>()?;
             // Each key is immutable. Partial batches can safely be retried after quota/error.
-            for event in events {
-                self.storage.set_item(&format!("rufren.v1.event.{}",event.id),&serde_json::to_string(event).map_err(err)?)
-                    .map_err(|_|"Could not save all events. Storage may be full; retry after exporting a backup.")?;
+            for (id, json) in encoded {
+                self.storage.set_item(&format!("rufren.v1.event.{id}"), &json)
+                    .map_err(|_| "Could not save all events. Storage may be full; retry after exporting a backup.")?;
             }
             Ok(())
         }
@@ -173,19 +170,14 @@ impl Repository {
         #[cfg(target_arch = "wasm32")]
         {
             let prefix = format!("rufren.v1.ack.{relay}.");
-            let mut ids = BTreeSet::new();
-            for i in 0..self
-                .storage
-                .length()
-                .map_err(|_| "Cannot read sync state")?
-            {
-                if let Some(k) = self.storage.key(i).map_err(|_| "Cannot read sync key")? {
-                    if let Some(id) = k.strip_prefix(&prefix) {
-                        ids.insert(Uuid::parse_str(id).map_err(err)?);
-                    }
-                }
-            }
-            Ok(ids)
+            self.storage
+                .entries()?
+                .into_iter()
+                .filter_map(|(key, _)| {
+                    key.strip_prefix(&prefix)
+                        .map(|id| Uuid::parse_str(id).map_err(err))
+                })
+                .collect()
         }
     }
     pub fn accept(&self, binding: &SyncBinding, response: &SyncResponse) -> Result<()> {
@@ -198,6 +190,12 @@ impl Repository {
         }
         #[cfg(target_arch = "wasm32")]
         {
+            if response.version != SYNC_VERSION
+                || binding.relay != response.relay
+                || binding.cursor != response.cursor
+            {
+                return Err("Invalid sync page or binding".into());
+            }
             // Durability order matters: events first, acks second, cursor last. A crash causes a
             // duplicate replay, never a cursor that skips events we haven't stored.
             self.append(&response.events)?;
@@ -236,10 +234,10 @@ pub async fn synchronize(
     if binding.as_ref().is_some_and(|b| b.endpoint != base) {
         return Err("Disconnect the existing sync library before changing its URL".into());
     }
-    let builder = reqwest::Client::builder();
     #[cfg(not(target_arch = "wasm32"))]
-    let builder = builder.timeout(std::time::Duration::from_secs(30));
-    let client = builder.build().map_err(err)?;
+    let client = crate::native_http::client(&base, std::time::Duration::from_secs(30))?;
+    #[cfg(target_arch = "wasm32")]
+    let client = reqwest::Client::builder().build().map_err(err)?;
     let mut received = 0;
     for _ in 0..1000 {
         let lib = repo.library()?;
@@ -267,27 +265,13 @@ pub async fn synchronize(
         }
         let more_pending = lib.events.keys().filter(|id| !ack.contains(id)).count() > pending.len();
         let request = SyncRequest {
-            version: SCHEMA_VERSION,
+            version: SYNC_VERSION,
             relay: binding.as_ref().map(|b| b.relay),
             after: binding.as_ref().map_or(0, |b| b.cursor),
             events: pending,
         };
-        let response = client
-            .post(format!("{base}/v1/sync"))
-            .bearer_auth(&token)
-            .json(&request)
-            .send()
-            .await
-            .map_err(|e| format!("Could not reach your sync library: {e}"))?;
-        if !response.status().is_success() {
-            return Err(format!(
-                "Sync returned {}: {}",
-                response.status(),
-                response.text().await.unwrap_or_default()
-            ));
-        }
-        let response: SyncResponse = response.json().await.map_err(err)?;
-        if response.version != SCHEMA_VERSION {
+        let response = exchange_http(&client, &base, &token, &request).await?;
+        if response.version != SYNC_VERSION {
             return Err(Error::Version(response.version).to_string());
         }
         if binding.as_ref().is_some_and(|b| b.relay != response.relay) {
@@ -295,12 +279,25 @@ pub async fn synchronize(
         }
         if response.cursor < request.after
             || response.events.len() > SYNC_BATCH
-            || (response.has_more && response.cursor == request.after)
+            || response.relay.is_nil()
+            || response.accepted.len() > SYNC_BATCH
+            || (response.has_more && response.events.is_empty())
+            || (response.events.is_empty() && response.cursor != request.after)
+            || response.cursor - request.after < response.events.len() as u64
+            || response
+                .events
+                .iter()
+                .map(|e| e.id)
+                .collect::<BTreeSet<_>>()
+                .len()
+                != response.events.len()
         {
             return Err("Invalid sync cursor or page".into());
         }
         let sent: BTreeSet<_> = request.events.iter().map(|e| e.id).collect();
-        if response.accepted.iter().copied().collect::<BTreeSet<_>>() != sent {
+        if response.accepted.len() != sent.len()
+            || response.accepted.iter().copied().collect::<BTreeSet<_>>() != sent
+        {
             return Err("Sync acknowledgement does not match the sent batch".into());
         }
         let next = SyncBinding {
@@ -318,6 +315,209 @@ pub async fn synchronize(
     Err("Sync paused after many pages. Run it again to continue.".into())
 }
 
+/// Versioned portable text/fact backup. Audio Blobs are exported separately in the studio.
+#[derive(serde::Serialize, serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct LibraryBackup {
+    format: String,
+    version: u32,
+    event_version: u32,
+    created_at_ms: i64,
+    library: Library,
+}
+pub fn export_library(library: Library) -> Result<String> {
+    serde_json::to_string_pretty(&LibraryBackup {
+        format: "rufren-library".into(),
+        version: 1,
+        event_version: EVENT_VERSION,
+        created_at_ms: now_ms(),
+        library,
+    })
+    .map_err(err)
+}
+pub fn import_library(text: &str) -> Result<Library> {
+    // Allow original unwrapped exports while rejecting newer backup envelopes explicitly.
+    let value: serde_json::Value =
+        serde_json::from_str(text).map_err(|e| format!("Could not read backup: {e}"))?;
+    let library = if value.get("format").is_some() {
+        let backup: LibraryBackup = serde_json::from_value(value).map_err(err)?;
+        if backup.format != "rufren-library"
+            || backup.version != 1
+            || backup.event_version > EVENT_VERSION
+        {
+            return Err(
+                "Unsupported backup format or event version. Update Rufren before restoring."
+                    .into(),
+            );
+        }
+        backup.library
+    } else {
+        serde_json::from_value(value).map_err(err)?
+    };
+    if library.events.iter().any(|(id, e)| *id != e.id) {
+        return Err("Backup event IDs do not match".into());
+    }
+    let mut validated = Library::default();
+    validated
+        .merge(&library.events.into_values().collect::<Vec<_>>())
+        .map_err(err)?;
+    Ok(validated)
+}
+
+const MAX_SYNC_RESPONSE: usize = 1_100_000;
+async fn exchange_http(
+    client: &reqwest::Client,
+    base: &str,
+    token: &str,
+    request: &SyncRequest,
+) -> Result<SyncResponse> {
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        let mut response = client
+            .post(format!("{base}/v1/sync"))
+            .bearer_auth(token)
+            .json(request)
+            .send()
+            .await
+            .map_err(|e| {
+                format!(
+                    "Could not reach your sync library: {e}. Your saved work is safe; retry sync."
+                )
+            })?;
+        if response
+            .content_length()
+            .is_some_and(|n| n > MAX_SYNC_RESPONSE as u64)
+        {
+            return Err("Sync response exceeds the size limit".into());
+        }
+        let status = response.status();
+        let mut body = Vec::new();
+        while let Some(chunk) = response.chunk().await.map_err(err)? {
+            if body.len() + chunk.len() > MAX_SYNC_RESPONSE {
+                return Err("Sync response exceeds the size limit".into());
+            }
+            body.extend_from_slice(&chunk);
+        }
+        if !status.is_success() {
+            return Err(format!(
+                "Sync returned {status}: {}",
+                String::from_utf8_lossy(&body[..body.len().min(1024)])
+            ));
+        }
+        serde_json::from_slice(&body).map_err(err)
+    }
+    #[cfg(target_arch = "wasm32")]
+    {
+        let _ = client;
+        // Fetch AbortController covers both headers and streaming body on web. `redirect:error`
+        // prevents a redirect from sending this private key to another endpoint.
+        let args = serde_json::json!({"url": format!("{base}/v1/sync"), "token":token, "body":serde_json::to_string(request).map_err(err)?, "limit":MAX_SYNC_RESPONSE});
+        let script = format!(
+            r#"const a = {args};
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 30000);
+          try {{
+            const response = await fetch(a.url, {{method:'POST', redirect:'error', signal:controller.signal, headers:{{'Authorization':'Bearer '+a.token,'Content-Type':'application/json'}}, body:a.body}});
+            const reader = response.body.getReader(); let size=0, chunks=[];
+            while(true) {{ const part=await reader.read(); if(part.done) break; size+=part.value.byteLength; if(size>a.limit) {{ await reader.cancel(); throw Error('Sync response exceeds the size limit'); }} chunks.push(part.value); }}
+            const bytes=new Uint8Array(size); let offset=0; for(const c of chunks){{bytes.set(c,offset);offset+=c.length;}}
+            const body=new TextDecoder().decode(bytes);
+            if(!response.ok) throw Error('Sync returned '+response.status+': '+body.slice(0,1024));
+            return {{body}};
+          }} catch(error) {{ return {{error:error.name==='AbortError'?'Sync timed out. Your work is saved; retry sync.':String(error.message)}}; }} finally {{ clearTimeout(timer); }}"#
+        );
+        let output: serde_json::Value = dioxus::document::eval(&script).await.map_err(err)?;
+        if let Some(error) = output.get("error").and_then(|e| e.as_str()) {
+            return Err(error.into());
+        }
+        serde_json::from_str(
+            output
+                .get("body")
+                .and_then(|v| v.as_str())
+                .ok_or("Empty sync response")?,
+        )
+        .map_err(err)
+    }
+}
+
+/// Hydrate the durable IndexedDB cache before constructing application state.
+pub async fn initialize_browser() -> Result<()> {
+    #[cfg(target_arch = "wasm32")]
+    {
+        let value = dioxus::document::eval(include_str!("browser_store.js"))
+            .await
+            .map_err(err)?;
+        if value.as_bool() != Some(true) {
+            return Err("Could not initialize durable browser storage".into());
+        }
+    }
+    Ok(())
+}
+
+#[cfg(target_arch = "wasm32")]
+struct BrowserStorage;
+#[cfg(target_arch = "wasm32")]
+impl BrowserStorage {
+    fn entries(&self) -> Result<Vec<(String, String)>> {
+        let json = js_sys::eval("JSON.stringify(window.rufrenLibrary.entries())")
+            .map_err(|_| "Cannot read browser notebook")?
+            .as_string()
+            .ok_or("Invalid browser cache")?;
+        serde_json::from_str(&json).map_err(err)
+    }
+    fn events_after(&self, revision: u64) -> Result<(u64, Vec<Event>)> {
+        #[derive(serde::Deserialize)]
+        struct Delta {
+            revision: u64,
+            entries: Vec<(String, String)>,
+        }
+        let json = js_sys::eval(&format!(
+            "JSON.stringify(window.rufrenLibrary.eventsAfter({revision}))"
+        ))
+        .map_err(|_| "Cannot read browser event cache")?
+        .as_string()
+        .ok_or("Invalid browser cache")?;
+        let delta: Delta = serde_json::from_str(&json).map_err(err)?;
+        let events = delta
+            .entries
+            .into_iter()
+            .map(|(key, json)| {
+                let event: Event = serde_json::from_str(&json).map_err(err)?;
+                if key != format!("rufren.v1.event.{}", event.id) {
+                    return Err("Stored event ID does not match its key".into());
+                }
+                Ok(event)
+            })
+            .collect::<Result<_>>()?;
+        Ok((delta.revision, events))
+    }
+    fn get_item(&self, key: &str) -> Result<Option<String>> {
+        let expression = format!(
+            "window.rufrenLibrary.get({})",
+            serde_json::to_string(key).map_err(err)?
+        );
+        Ok(js_sys::eval(&expression)
+            .map_err(|_| "Cannot read browser storage")?
+            .as_string())
+    }
+    fn set_item(&self, key: &str, value: &str) -> Result<()> {
+        self.write(key, Some(value))
+    }
+    fn remove_item(&self, key: &str) -> Result<()> {
+        self.write(key, None)
+    }
+    fn write(&self, key: &str, value: Option<&str>) -> Result<()> {
+        let expression = format!(
+            "window.rufrenLibrary.write({}, {})",
+            serde_json::to_string(key).map_err(err)?,
+            serde_json::to_string(&value).map_err(err)?
+        );
+        js_sys::eval(&expression).map(|_| ()).map_err(|_| {
+            "Cannot save browser notebook; export a backup and check available storage".into()
+        })
+    }
+}
+
 pub fn now_ms() -> i64 {
     #[cfg(target_arch = "wasm32")]
     {
@@ -329,5 +529,68 @@ pub fn now_ms() -> i64 {
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap_or_default()
             .as_millis() as i64
+    }
+}
+
+#[cfg(target_arch = "wasm32")]
+#[derive(Clone, serde::Deserialize, PartialEq)]
+pub struct BrowserWorkspace {
+    pub id: String,
+    pub last_used_ms: i64,
+    pub last_used_label: String,
+    pub active: bool,
+    pub current: bool,
+    pub practice_response: Option<String>,
+    pub passage_title: Option<String>,
+    pub paused_count: usize,
+    pub passage_count: usize,
+}
+/// Inventory only; switching obtains ownership again rather than trusting this snapshot.
+#[cfg(target_arch = "wasm32")]
+pub async fn browser_workspaces() -> Result<Vec<BrowserWorkspace>> {
+    #[cfg(target_arch = "wasm32")]
+    {
+        let result=dioxus::document::eval("try { return {windows:await window.rufrenLibrary.workspaces()}; } catch(error) {return {error:error.message};}").await.map_err(err)?;
+        if let Some(error) = result.get("error").and_then(serde_json::Value::as_str) {
+            return Err(error.into());
+        }
+        serde_json::from_value(
+            result
+                .get("windows")
+                .cloned()
+                .ok_or("Saved window list is unavailable")?,
+        )
+        .map_err(err)
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        Ok(Vec::new())
+    }
+}
+#[cfg(target_arch = "wasm32")]
+pub async fn switch_browser_workspace(id: &str) -> Result<()> {
+    #[cfg(target_arch = "wasm32")]
+    {
+        let id = serde_json::to_string(id).map_err(err)?;
+        let script = format!(
+            "try {{ return {{switched:await window.rufrenLibrary.switchWorkspace({id})}}; }} catch(error) {{return {{error:error.message}};}}"
+        );
+        let result = dioxus::document::eval(&script).await.map_err(err)?;
+        if let Some(error) = result.get("error").and_then(serde_json::Value::as_str) {
+            return Err(error.into());
+        }
+        if result.get("switched").and_then(serde_json::Value::as_bool) != Some(true) {
+            return Err("Saved window could not be reopened".into());
+        }
+        web_sys::window()
+            .ok_or("Browser window is unavailable")?
+            .location()
+            .reload()
+            .map_err(|_| "Reload Rufren to finish reopening the saved window".into())
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        let _ = id;
+        Err("Saved browser windows are available in the browser app".into())
     }
 }

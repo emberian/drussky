@@ -12,6 +12,12 @@ mobile = ["dioxus/mobile"]
 
 [dependencies]
 rufren-core.workspace = true
+rufren-content.workspace = true
+rufren-audio.workspace = true
+base64 = "0.22"
+sha2 = "0.10"
+rufren-tutor = { workspace = true, default-features = false }
+rufren-speech = { workspace = true, default-features = false }
 dioxus = { version = "=0.7.10", default-features = false, features = ["macro", "html", "signals", "hooks", "launch", "document"] }
 serde.workspace = true
 serde_json.workspace = true
@@ -26,3 +32,6 @@ reqwest = { version = "0.12", default-features = false, features = ["json", "rus
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 web-sys = { version = "0.3", features = ["Window", "Storage", "Location"] }
 js-sys = "0.3"
+
+[target.'cfg(any(target_os = "macos", target_os = "ios"))'.dependencies]
+security-framework = "3.7"

@@ -6,11 +6,16 @@ license.workspace = true
 [dependencies]
 rufren-core.workspace = true
 rufren-store.workspace = true
+rufren-tutor = { workspace = true, features = ["server"] }
+rufren-speech = { workspace = true, features = ["server"] }
 axum = "0.8"
-tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "signal"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "signal", "sync", "time"] }
 tower-http = { version = "0.6", features = ["cors"] }
 subtle = "2"
 serde_json.workspace = true
-[dev-dependencies]
-reqwest = { version = "0.12", default-features = false, features = ["json"] }
+serde.workspace = true
+sha2 = "0.10"
 uuid.workspace = true
+[dev-dependencies]
+tempfile = "3"
+reqwest = { version = "0.12", default-features = false, features = ["json"] }

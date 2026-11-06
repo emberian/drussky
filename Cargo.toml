@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/rufren-core", "crates/rufren-store", "crates/rufren-relay", "crates/rufren-app"]
+members = ["crates/rufren-core", "crates/rufren-store", "crates/rufren-relay", "crates/rufren-app", "crates/rufren-content", "crates/rufren-audio", "crates/rufren-tutor", "crates/rufren-speech"]
 resolver = "2"
 
 [workspace.package]
@@ -10,9 +10,13 @@ license = "MIT OR Apache-2.0"
 [workspace.dependencies]
 rufren-core = { path = "crates/rufren-core" }
 rufren-store = { path = "crates/rufren-store" }
+rufren-content = { path = "crates/rufren-content" }
+rufren-audio = { path = "crates/rufren-audio" }
+rufren-tutor = { path = "crates/rufren-tutor", default-features = false }
+rufren-speech = { path = "crates/rufren-speech", default-features = false }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-uuid = { version = "1", features = ["v4", "serde", "js"] }
+uuid = { version = "1", features = ["v4", "v5", "serde", "js"] }
 thiserror = "2"
 rusqlite = { version = "0.37", features = ["bundled"] }
 
