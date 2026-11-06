@@ -11,7 +11,25 @@ use rufren_content::{AnswerMatch, AnswerSpec, ResponseMode};
 use rufren_core::*;
 
 #[component]
-pub(crate) fn Practice(mut app: Signal<AppState>) -> Element {
+pub(crate) fn Practice(app: Signal<AppState>) -> Element {
+    let active = app.read().active_teacher_revisit();
+    match active {
+        Ok(Some((answer, snapshot))) => {
+            rsx! {for session in [snapshot.id] {crate::teacher_revisit_view::TeacherReturn {key:"active-return-{session}",app,answer:answer.clone(),snapshot:snapshot.clone()}}}
+        }
+        Ok(None) => rsx! {PassagePractice {app}},
+        Err(problem) => {
+            rsx! {section {class:"panel",h1 {"Your saved return needs attention"}p {role:"alert","{problem}"}
+                p {"Your original task and response are kept. Sync or restore missing material before continuing."}
+                button {class:"secondary",onclick:move |_|act(app,|s|s.navigate(Page::Settings)),"Open sync & backups"}
+                button {class:"text-button",onclick:move |_|act(app,|s|{s.clear_active_teacher_revisit()?;s.navigate(Page::Today)}),"Return to Today"}
+            }}
+        }
+    }
+}
+
+#[component]
+fn PassagePractice(mut app: Signal<AppState>) -> Element {
     let mut ready = use_signal(|| None::<String>);
     let mut capture_busy = use_signal(|| false);
     let state = app.read().clone();
@@ -167,6 +185,14 @@ fn select_spoken_take(
 }
 
 fn next_review(state: &AppState, revision: uuid::Uuid, skill: Skill) -> String {
+    if state
+        .library
+        .events
+        .get(&revision)
+        .is_some_and(is_teacher_generated_reference)
+    {
+        return "Teacher exercises return with their saved question. This general passage practice is kept separately.".into();
+    }
     let now = crate::repository::now_ms();
     let review = SpacedReview.project(&state.library, ReviewKey { revision, skill }, now);
     let minutes = (review.due_at_ms.saturating_sub(now).max(0) + 59_999) / 60_000;

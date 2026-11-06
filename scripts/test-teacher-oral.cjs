@@ -63,32 +63,32 @@ function teacherResponse(request, count) {
   };
 }
 
-function generatedVoice(request) {
+function generatedVoice(request, fixture = audio) {
   return { request_id: request.request_id, revision_id: request.revision_id,
-    source_text: request.text, wav_base64: audio.wav.toString('base64'), sha256: audio.hash,
-    sample_rate: 24000, channels: 1, frames: audio.frames,
+    source_text: request.text, wav_base64: fixture.wav.toString('base64'), sha256: fixture.hash,
+    sample_rate: 24000, channels: 1, frames: fixture.frames,
     provenance: { kind: 'ai_generated_speech', provider: 'qa_synthetic',
       model: 'deterministic-tone-not-speech', voice: 'Synthetic test tone' } };
 }
 
-function recognizedWords(request) {
-  assert.equal(request.audio_sha256, audio.hash);
-  assert.deepEqual(Buffer.from(request.wav_base64, 'base64'), audio.wav);
+function recognizedWords(request, fixture = audio, transcript = 'Я читаю.') {
+  assert.equal(request.audio_sha256, fixture.hash);
+  assert.deepEqual(Buffer.from(request.wav_base64, 'base64'), fixture.wav);
   // Production recognition contract fixes provider/model identifiers. The route,
   // timing and audit receipt below explicitly identify this as fabricated QA data.
   return {
     schema_version: 'rufren-speech-transcript-v1', request_id: request.request_id,
     attempt_id: request.attempt_id, revision_id: request.revision_id,
     asset_id: request.asset_id, audio_sha256: request.audio_sha256,
-    original_audio: { sample_rate: 24000, channels: 1, frames: audio.frames, encoding: 'pcm_s16le', bits: 16 },
-    source_pcm_sha256: audio.pcmHash,
+    original_audio: { sample_rate: 24000, channels: 1, frames: fixture.frames, encoding: 'pcm_s16le', bits: 16 },
+    source_pcm_sha256: fixture.pcmHash,
     source_pcm_hash_format: 'interleaved-little-endian-f32-no-header-v1',
-    span: { start_frame: 0, end_frame: audio.frames }, span_coordinate_system: 'original_frames_half_open',
-    derivative: { sample_rate: 16000, channels: 1, frames: 16000, pcm_sha256: '1'.repeat(64),
+    span: { start_frame: 0, end_frame: fixture.frames }, span_coordinate_system: 'original_frames_half_open',
+    derivative: { sample_rate: 16000, channels: 1, frames: Math.ceil(fixture.frames * 16000 / 24000), pcm_sha256: '1'.repeat(64),
       pcm_hash_format: 'little-endian-f32-no-header-v1',
       method: 'arithmetic-channel-mean; scipy.signal.resample_poly default Kaiser5',
       scipy_version: 'synthetic-fixture-not-run', amplitude_normalization: false },
-    evidence_kind: 'transcript_hypothesis', transcript: 'Я читаю.', language: 'ru',
+    evidence_kind: 'transcript_hypothesis', transcript, language: 'ru',
     language_selection: 'explicit_not_detected', target_conditioned: false,
     word_timestamps: null, word_alignment_status: 'not_run', confidence: null, acoustic_assessment: null,
     provenance: { provider: 'local_qwen3_asr', model: 'mlx-community/Qwen3-ASR-1.7B-bf16',

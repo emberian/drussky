@@ -22,6 +22,9 @@ mod teacher_context;
 mod teacher_example_audio;
 mod teacher_example_view;
 mod teacher_examples;
+mod teacher_feedback_view;
+mod teacher_revisit;
+mod teacher_revisit_view;
 mod teacher_lesson_view;
 mod teacher_notebook;
 mod teacher_notebook_view;
@@ -119,7 +122,7 @@ fn Today(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
     let count = state.library.heads().len();
     let attempts = state.library.attempts().count();
-    let resume = state
+    let resume = state.active_teacher_revisit().ok().flatten().is_some_and(|(_,draft)|draft.saved_attempt.is_none()) || state
         .session
         .as_ref()
         .is_some_and(|s| s.phase != Phase::Complete);
@@ -130,6 +133,7 @@ fn Today(mut app: Signal<AppState>) -> Element {
             button {class:"text-button",onclick:move |_|act(app,|s|s.new_passage()),"Add a passage"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Teacher)),"Ask your teacher"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Explore lessons"}}
             div {class:"orbital",aria_hidden:"true",div {class:"orbit orbit-one"} div {class:"orbit orbit-two"} span {class:"star star-one","✦"} span {class:"star star-two","·"} span {class:"planet"}}
         }
+        teacher_revisit_view::TeacherReturns {app}
         teacher_notebook_view::ContinueTeacher {app}
         drafts_view::PausedPractices {app}
         div {class:"section-heading",h2 {"Make it yours"}span {"Small steps, connected."}}
@@ -195,6 +199,7 @@ fn Progress(app: Signal<AppState>) -> Element {
         div {class:"page-heading",div {div {class:"eyebrow","WHAT YOU'VE PRACTICED"}h1 {"Four ways into a language"}p {"A record of your practice, with room to grow in every direction."}}}
         div {class:"cards four",for skill in Skill::ALL {div {class:"panel stat",span {class:"tag","{skill.label()}"}strong {"{attempts.iter().filter(|(_,a)|a.skill==skill).count()}"}p {"saved attempts"}}}}
         section {class:"panel",h2 {"Remembering with and without support"}p {"Marked ‘I recalled it’ without a recorded hint: {independent}."}p {class:"quiet","These are your reflections, not proficiency scores. Listening and speaking require real audio practice. Counts describe activity; delayed use and specific feedback tell us more about what stays with you."}}
+        teacher_revisit_view::TeacherReturns {app,expanded:true}
         section {class:"panel",h2 {"Recent practice"}
             if attempts.is_empty() {p {class:"quiet","Your first practice will start this story."}}
             for (event,attempt) in attempts.iter().rev().take(12) {div {class:"history-row",span {"{attempt.skill.label()}"}span {{state.library.revision(attempt.revision).map(|r|r.passage.title.as_str()).unwrap_or("Passage not available")}}small {if attempt.cues.is_empty(){"No hint"}else{"With a hint"} " · {relative_day(event.recorded_at_ms)}"}}}
@@ -217,10 +222,10 @@ fn Settings(mut app: Signal<AppState>) -> Element {
         section {class:"panel",h2 {"How you like to learn"}
             div {class:"preference-row",input {id:"show-stress",r#type:"checkbox",checked:state.preferences.show_stress,onchange:move |e|act(app,|s|{s.preferences.show_stress=e.checked();s.save_preferences()})}label {r#for:"show-stress","Show stress marks in lesson references"}}
             div {class:"preference-row",input {id:"show-chunks",r#type:"checkbox",checked:state.preferences.chunked,onchange:move |e|act(app,|s|{s.preferences.chunked=e.checked();s.save_preferences()})}label {r#for:"show-chunks","Break lesson phrases into short chunks"}}
-            label {r#for:"review-skill","Focus for scheduled reviews"}select {id:"review-skill",value:state.preferences.review_skill.label(),onchange:move |e|act(app,|s|{s.preferences.review_skill=match e.value().as_str(){"Writing"=>Skill::Writing,"Listening"=>Skill::Listening,"Speaking"=>Skill::Speaking,_=>Skill::Reading};s.save_preferences()}),
+            label {r#for:"review-skill","Skill for general passage reviews"}select {id:"review-skill",value:state.preferences.review_skill.label(),onchange:move |e|act(app,|s|{s.preferences.review_skill=match e.value().as_str(){"Writing"=>Skill::Writing,"Listening"=>Skill::Listening,"Speaking"=>Skill::Speaking,_=>Skill::Reading};s.save_preferences()}),
                 for skill in Skill::ALL {option {value:skill.label(),"{skill.label()}"}}
             }
-            p {class:"quiet","Every practice stays untimed. Review intervals are a transparent baseline, kept separate for each skill. Listening and speaking use your saved recordings."}
+            p {class:"quiet","Every practice stays untimed. General passage reviews use your chosen skill. Teacher exercises return in their original skill with their original question. Listening and speaking use saved audio."}
         }
         workspace_view::SavedWindows {}
         div {class:"cards two",

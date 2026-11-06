@@ -201,6 +201,15 @@ impl SpacedReview {
     pub fn queue(&self, library: &Library, now_ms: i64, skills: &[Skill]) -> Vec<ReviewEntry> {
         let mut entries = Vec::new();
         for heads in library.heads().values().filter(|heads| heads.len() == 1) {
+            // Teacher tasks retain their exact question and skill in their own revisit queue.
+            // A generic passage review would silently substitute a different task.
+            if library
+                .events
+                .get(&heads[0])
+                .is_some_and(is_teacher_generated_reference)
+            {
+                continue;
+            }
             for skill in skills.iter().copied().collect::<BTreeSet<_>>() {
                 let state = self.project(
                     library,

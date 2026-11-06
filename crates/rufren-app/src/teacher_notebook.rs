@@ -86,6 +86,31 @@ impl AppState {
         &self,
         response: &TeacherResponse,
     ) -> Option<(Uuid, usize)> {
+        let origin = self.teacher_feedback_task_origin(response)?;
+        origin.lesson_id.as_ref()?;
+        Some((origin.key.document_id, origin.key.practice_index))
+    }
+    pub(crate) fn teacher_revisit_for_feedback(
+        &self,
+        response: &TeacherResponse,
+    ) -> Option<TeacherRevisitKey> {
+        let origin = self.teacher_feedback_task_origin(response)?;
+        origin.review.then_some(origin.key)
+    }
+    pub(crate) fn teacher_revisit_feedback(&self, attempt: Uuid) -> Option<TeacherResponse> {
+        self.teacher_notebook().into_iter().find_map(|entry| {
+            let TeacherRequest::AnswerFeedback(request) = &entry.response.request else {
+                return None;
+            };
+            (request.attempt_id.as_deref() == Some(attempt.to_string().as_str())
+                && self.teacher_revisit_for_feedback(&entry.response).is_some())
+            .then_some(entry.response)
+        })
+    }
+    pub(crate) fn teacher_feedback_task_origin(
+        &self,
+        response: &TeacherResponse,
+    ) -> Option<crate::teacher_revisit::ProvenTeacherTaskOrigin> {
         let TeacherRequest::AnswerFeedback(request) = &response.request else {
             return None;
         };
@@ -96,18 +121,17 @@ impl AppState {
         else {
             return None;
         };
-        let origin = crate::teacher_practice::saved_teacher_practice_origin(
+        let origin = crate::teacher_revisit::proven_teacher_task_origin(
             &self.library,
             attempt_id,
             context_id,
         )?;
-        let document = self.library.teacher_document(origin.source)?;
-        let TeacherRequest::TeachLesson(lesson) = &document.response.request else {
-            return None;
-        };
-        let (_, revision_id, reference) =
-            crate::teacher_practice::teacher_reference_fact(&document.response, origin.index)
-                .ok()?;
+        let document = self.library.teacher_document(origin.key.document_id)?;
+        let (_, revision_id, reference) = crate::teacher_practice::teacher_reference_fact(
+            &document.response,
+            origin.key.practice_index,
+        )
+        .ok()?;
         let skill = match attempt.skill {
             Skill::Reading => TeacherSkill::Reading,
             Skill::Writing => TeacherSkill::Writing,
@@ -133,8 +157,7 @@ impl AppState {
             .iter()
             .map(|cue| serde_json::to_value(cue).ok()?.as_str().map(str::to_owned))
             .collect::<Option<_>>()?;
-        (lesson.lesson_id == origin.lesson_id
-            && self.library.events.get(&revision_id)?.fact == reference
+        (self.library.events.get(&revision_id)?.fact == reference
             && attempt.revision == revision_id
             && request.revision_id == revision_id.to_string()
             && request.exercise_id == context.exercise_id
@@ -144,7 +167,7 @@ impl AppState {
             && request.response == words
             && request.cues == cues
             && task == context.task)
-            .then_some((origin.source, origin.index))
+            .then_some(origin)
     }
 
     pub(crate) fn select_teacher_document(&self, id: Uuid) -> Result<()> {

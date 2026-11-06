@@ -22,10 +22,18 @@ pub(crate) fn TeacherAudioPractice(
     index: usize,
     mut active_speaking: Signal<Option<String>>,
     mut capture_busy: Signal<bool>,
+    #[props(default)] review: bool,
 ) -> Element {
     let initial = use_hook(|| {
         let mut state = app.write();
-        let mut draft = state.teacher_practice_draft(&answer, index)?;
+        let mut draft = if review {
+            state.teacher_revisit_draft(&answer, index)?
+        } else {
+            state.teacher_practice_draft(&answer, index)?
+        };
+        if review != draft.review.is_some() {
+            return Err("This oral task belongs to a different practice mode.".into());
+        }
         let binding = state.prepare_teacher_audio_practice(&answer, &mut draft)?;
         Ok::<_, String>((draft, binding))
     });
@@ -43,7 +51,20 @@ pub(crate) fn TeacherAudioPractice(
     let listening = binding.skill == Skill::Listening;
     let revision = binding.revision_id;
     let passage = binding.passage_id;
-    let identity = format!("{}-{index}", snapshot.source);
+    let identity = format!(
+        "{}-{index}{}",
+        snapshot.source,
+        if review {
+            format!("-review-{}", snapshot.id)
+        } else {
+            String::new()
+        }
+    );
+    let review_saved = review && snapshot.saved_attempt.is_some();
+    let rating = snapshot
+        .review
+        .as_ref()
+        .map_or(SelfRating::NotReported, |review| review.self_rating);
     let editor_active = active_speaking.read().as_deref() == Some(identity.as_str());
     let played = snapshot
         .audio
@@ -67,11 +88,12 @@ pub(crate) fn TeacherAudioPractice(
     let reveal_answer = answer.clone();
     let field = format!("teacher-oral-response-{identity}");
     rsx! {
-        article {class:"phrase-study teacher-exercise teacher-oral-exercise", "data-teacher-skill":if listening {"listening"}else{"speaking"}, "data-exercise-index":index.to_string(),
+        article {class:"phrase-study teacher-exercise teacher-oral-exercise", "data-teacher-skill":if listening {"listening"}else{"speaking"}, "data-exercise-index":index.to_string(),"data-teacher-review":review.to_string(),"data-review-session":if review {snapshot.id.to_string()}else{String::new()},
             span {class:"tag",if listening {"LISTEN & UNDERSTAND"}else{"SAY SOMETHING"}}
             TeacherProse {app,language:"en",text:exercise.prompt.clone(),purpose:PresentationPurpose::TaskInput,session:Some(snapshot.id),revision:Some(revision)}
+            if review {p {class:"quiet",if listening {"Listen, then explain what you understood. Replays and model reveals are kept with this response."}else{"Record a new response for this revisit. Your earlier take stays with its saved attempt."}}}
             if listening {
-                AudioPractice {key:"listen-{identity}",instance_id:Some(format!("teacher-listening-{identity}")),revision_id:revision.to_string(),
+                if !review_saved {AudioPractice {key:"listen-{identity}",instance_id:Some(format!("teacher-listening-{identity}")),revision_id:revision.to_string(),
                     on_played:move |_|{},on_ready:move |_|{},
                     on_played_recording:move |record| change_draft(app,draft,|state,draft| {
                         let metadata = recording_metadata(&record)?;
@@ -79,15 +101,15 @@ pub(crate) fn TeacherAudioPractice(
                         state.teacher_audio_reference_played(&playback_answer,draft,attachment,&metadata)
                     }),
                     generating:state.speech_busy,on_generate:move |_|generate_reference(app,revision)
-                }
+                }}
                 label {r#for:field.clone(),"What did you understand?"}
-                textarea {id:field,value:snapshot.response.clone(),disabled:state.teacher_busy,
+                textarea {id:field,value:snapshot.response.clone(),disabled:state.teacher_busy||review_saved,
                     placeholder:"English is fine. Listen as often as you need.",
                     oninput:move |event|change_draft(app,draft,|state,draft|state.teacher_practice_edit_response(&edit_answer,draft,event.value()))
                 }
                 if !played {p {class:"quiet","Play the reference before discussing your answer."}}
             } else {
-                if editor_active {
+                if editor_active&&!review_saved {
                     AudioSpeaking {key:"speak-{identity}",passage_id:passage.to_string(),revision_id:revision.to_string(),
                         workspace_id:if cfg!(target_arch="wasm32") {String::new()}else{state.device.to_string()},
                         selected_asset_id:snapshot.selected_asset_id().map(str::to_owned),
@@ -110,12 +132,18 @@ pub(crate) fn TeacherAudioPractice(
                         })
                     }
                 } else {
-                    button {class:"secondary",disabled:capture_busy(),onclick:move |_|active_speaking.set(Some(identity.clone())),"Open recorder for this exercise"}
+                    button {class:"secondary",disabled:capture_busy()||review_saved,onclick:move |_|active_speaking.set(Some(identity.clone())),"Open recorder for this exercise"}
                     if let Some(asset)=snapshot.selected_asset_id() {AudioReview {asset_id:asset.to_owned()}}
                 }
                 if snapshot.selected_attachment().is_some() {p {class:"quiet","Your selected take is ready. Keep it, then check the words it heard."}}
             }
-            button {class:"primary",disabled:state.teacher_busy || capture_busy() || !ready_to_submit,
+            if review {
+                crate::teacher_revisit_view::ReviewSelfReport {value:rating,disabled:state.teacher_busy||capture_busy()||review_saved,
+                    on_change:move |rating|change_draft(app,draft,|state,draft|state.set_teacher_revisit_rating(draft,rating))
+                }
+                if review_saved {p {class:"quiet",role:"status","This revisit is saved. Start another revisit when you want a fresh response."}}
+            }
+            button {class:"primary",disabled:state.teacher_busy || capture_busy() || review_saved || !ready_to_submit,
                 onclick:move |_| {
                     let Some(mut next)=draft.read().clone() else{return};
                     let result=app.write().submit_teacher_practice(&submit_answer,&mut next);
@@ -142,14 +170,14 @@ pub(crate) fn TeacherAudioPractice(
                 }
             }
             if !revealed {
-                button {class:"text-button",disabled:capture_busy(),onclick:move |_|change_draft(app,draft,|state,draft| {
+                button {class:"text-button",disabled:capture_busy()||review_saved,onclick:move |_|change_draft(app,draft,|state,draft| {
                     state.teacher_audio_reveal(&reveal_answer,draft,Cue::OriginalText)?;
                     state.teacher_audio_reveal(&reveal_answer,draft,Cue::Translation)
                 }),"Show a model & explanation"}
             } else {
                 div {class:"hint teacher-oral-model",
                     if let Some(text)=&exercise.reference_russian {PresentedRussian {app,class:"dialogue-russian",text:text.clone(),purpose:PresentationPurpose::Reference,revision:Some(revision),session:Some(snapshot.id)}}
-                    if !listening {
+                    if !listening&&!review_saved {
                         AudioPractice {instance_id:Some(format!("teacher-speaking-model-{}-{index}",snapshot.source)),revision_id:revision.to_string(),
                             on_played:move |_|{},on_ready:move |_|{},
                             on_played_recording:move |record|change_draft(app,draft,|state,draft| {

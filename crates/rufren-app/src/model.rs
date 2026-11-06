@@ -1,6 +1,6 @@
 //! Application interactions, independent of Dioxus rendering.
 use crate::learning::{Preferences, SessionPlan};
-use crate::repository::{now_ms, Repository, Result};
+use crate::repository::{Repository, Result, now_ms};
 use rufren_core::*;
 use std::rc::Rc;
 use uuid::Uuid;
@@ -174,6 +174,10 @@ impl AppState {
             page,
             Page::Library | Page::Lessons | Page::Studio | Page::Teacher
         ) {
+            // A Teacher revisit has its own saved draft, separate from Session.
+            // Persist support before changing pages; a failed write keeps the
+            // learner here rather than silently losing the assistance record.
+            self.teacher_revisit_mark_active_support(Cue::ReferenceMaterial)?;
             if let Some(mut session) = self.session.clone().filter(|s| s.phase == Phase::Retrieve) {
                 if !session.cues.contains(&Cue::ReferenceMaterial) {
                     session.cues.push(Cue::ReferenceMaterial);
@@ -212,16 +216,35 @@ impl AppState {
         self.plan = None;
         self.session = Some(session);
         self.set_plan(None, None, "free-practice-v1")?;
+        self.clear_active_teacher_revisit()?;
         self.page = Page::Practice;
         Ok(())
     }
     pub(crate) fn begin(&mut self) -> Result<()> {
         self.refresh()?;
         if self
+            .active_teacher_revisit()?
+            .is_some_and(|(_, draft)| draft.saved_attempt.is_none())
+        {
+            self.page = Page::Practice;
+            return Ok(());
+        }
+        self.clear_active_teacher_revisit()?;
+        if self
             .session
             .as_ref()
             .is_some_and(|s| s.phase != Phase::Complete)
         {
+            self.page = Page::Practice;
+            return Ok(());
+        }
+        if let Some(entry) = self
+            .teacher_revisits(now_ms())
+            .entries
+            .into_iter()
+            .find(|entry| entry.due)
+        {
+            self.start_teacher_revisit(entry.key, now_ms())?;
             self.page = Page::Practice;
             return Ok(());
         }

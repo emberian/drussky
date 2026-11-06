@@ -1,14 +1,14 @@
 //! Executable teacher exercises retain the actual question, reference and answer.
 use crate::{
     model::AppState,
-    repository::{now_ms, Result},
+    repository::{Result, now_ms},
 };
 use rufren_core::*;
 use rufren_tutor::{ReviewStatus, TeacherRequest, TeacherResponse, TeacherSkill};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Clone, Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize, PartialEq)]
 pub(crate) struct TeacherPracticeDraft {
     pub id: Uuid,
     pub source: String,
@@ -18,6 +18,8 @@ pub(crate) struct TeacherPracticeDraft {
     pub saved_attempt: Option<Uuid>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audio: Option<crate::teacher_audio_practice::TeacherAudioDraft>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub review: Option<crate::teacher_revisit::TeacherRevisitDraft>,
 }
 impl TeacherPracticeDraft {
     pub(crate) fn fork_saved_answer(&mut self) {
@@ -162,7 +164,11 @@ impl AppState {
         let key = format!("teacher_practice:{source}:{index}");
         let saved: Option<TeacherPracticeDraft> = self.repo.get(&key)?;
         if let Some(saved) = saved {
-            if saved.source != source || saved.index != index || saved.id.is_nil() {
+            if saved.source != source
+                || saved.index != index
+                || saved.id.is_nil()
+                || saved.review.is_some()
+            {
                 return Err("This saved draft belongs to a different teacher exercise.".into());
             }
             return Ok(saved);
@@ -175,6 +181,7 @@ impl AppState {
             started_at_ms: now_ms(),
             saved_attempt: None,
             audio: None,
+            review: None,
         })
     }
 
@@ -184,6 +191,16 @@ impl AppState {
         }
         if let Some(audio) = &draft.audio {
             audio.validate()?;
+            if draft.review.is_none() && !audio.cues.contains(&Cue::ReferenceMaterial) {
+                return Err("This guided oral draft is missing its original reference-support cue. Its earlier draft is kept.".into());
+            }
+        }
+        if draft.review.is_some() {
+            let merged = self.merged_teacher_revisit_draft(draft)?;
+            return self.repo.set(
+                &crate::teacher_revisit::teacher_revisit_storage_key(&merged)?,
+                &merged,
+            );
         }
         self.repo.set(
             &format!("teacher_practice:{}:{}", draft.source, draft.index),
@@ -215,6 +232,12 @@ impl AppState {
         if exercise.skill == Some(TeacherSkill::Speaking) {
             return Err("Choose a speaking recording; typed labels are not spoken words.".into());
         }
+        if draft.review.is_some() {
+            *draft = self.merged_teacher_revisit_draft(draft)?;
+            if draft.saved_attempt.is_some() {
+                return Err("This revisit is already saved. Start another scheduled revisit for a fresh response.".into());
+            }
+        }
         if draft.response == text {
             return Ok(());
         }
@@ -222,7 +245,11 @@ impl AppState {
         next.fork_saved_answer();
         next.response = text;
         self.save_teacher_practice_draft(&next)?;
-        *draft = next;
+        *draft = if next.review.is_some() {
+            self.merged_teacher_revisit_draft(&next)?
+        } else {
+            next
+        };
         Ok(())
     }
     pub(crate) fn teacher_practice_exercise_id(
@@ -278,6 +305,11 @@ impl AppState {
         {
             return Err("Write a short response to this teacher exercise first.".into());
         }
+        if draft.review.is_some() {
+            *draft = self.merged_teacher_revisit_draft(draft)?;
+            self.validate_teacher_revisit(answer, draft)?;
+            self.qualify_teacher_revisit_support(answer, draft)?;
+        }
         let exercise = answer
             .content
             .practice
@@ -328,9 +360,20 @@ impl AppState {
             revision: revision_id,
             skill,
             response: draft.response.clone(),
-            cues: vec![Cue::ReferenceMaterial],
-            self_rating: SelfRating::NotReported,
-            policy: "teacher-guided-text-v1".into(),
+            cues: draft.review.as_ref().map_or_else(
+                || vec![Cue::ReferenceMaterial],
+                |review| review.cues.clone(),
+            ),
+            self_rating: draft
+                .review
+                .as_ref()
+                .map_or(SelfRating::NotReported, |review| review.self_rating),
+            policy: if draft.review.is_some() {
+                crate::teacher_revisit::TEACHER_REVISIT_POLICY
+            } else {
+                "teacher-guided-text-v1"
+            }
+            .into(),
         });
         let prompt = if skill == Skill::Reading {
             format!("{}\n\nRussian text:\n{russian}", exercise.prompt)
@@ -378,9 +421,17 @@ impl AppState {
             attempt: attempt_id,
             content_pack: None,
             content_revision: None,
-            exercise_id: Some(exercise_id),
+            exercise_id: Some(if draft.review.is_some() {
+                crate::teacher_revisit::teacher_revisit_exercise_id(draft)?
+            } else {
+                exercise_id
+            }),
             prompt: Some(prompt),
-            reference_answer: Some(reference),
+            reference_answer: Some(if draft.review.is_some() {
+                crate::teacher_revisit::teacher_revisit_context_reference(&reference, draft)?
+            } else {
+                reference
+            }),
             task: if skill == Skill::Reading {
                 TaskKind::MeaningRecall
             } else {
@@ -428,50 +479,5 @@ pub(crate) fn teacher_reference_fact(
     answer: &TeacherResponse,
     index: usize,
 ) -> Result<(Uuid, Uuid, Fact)> {
-    answer.request.validate().map_err(|e| e.to_string())?;
-    answer
-        .content
-        .validate_for(&answer.request)
-        .map_err(|e| e.to_string())?;
-    if answer.provenance.review_status != ReviewStatus::AiGeneratedTeaching
-        || answer.provenance.response_id.is_empty()
-    {
-        return Err("The teacher exercise is missing its source.".into());
-    }
-    let exercise = answer
-        .content
-        .practice
-        .get(index)
-        .ok_or("This teacher exercise is unavailable.")?;
-    let source = Uuid::parse_str(&practice_source(answer)).map_err(|e| e.to_string())?;
-    let passage = Uuid::new_v5(&source, index.to_string().as_bytes());
-    let revision = Uuid::new_v5(&passage, b"reference-v1");
-    let title = match &answer.request {
-        TeacherRequest::TeachLesson(lesson) => lesson.title.as_str(),
-        _ => "A teacher follow-up",
-    };
-    let fact = Fact::PassageRevised(Revision {
-        passage: Passage {
-            id: passage,
-            title: format!("{title} · practice {}", index + 1),
-            russian: exercise
-                .reference_russian
-                .clone()
-                .ok_or("This exercise needs its reference Russian")?,
-            translation: exercise
-                .reference_english
-                .clone()
-                .ok_or("This exercise needs its reference meaning")?,
-            source: format!(
-                "AI teacher exercise · {} · {} · {} · {}",
-                answer.provenance.provider,
-                answer.provenance.model,
-                answer.provenance.response_id,
-                index
-            ),
-            coach_reviewed: false,
-        },
-        parents: Default::default(),
-    });
-    Ok((source, revision, fact))
+    rufren_core::teacher_practice_reference_fact(answer, index).map_err(|error| error.to_string())
 }

@@ -2,7 +2,7 @@
 
 Updated 2026-11-06. Rufren is a Rust/Dioxus personal Russian learning environment. The AI teacher provides explanations, examples, reference speech, exercises and language feedback. Conversations with the friend over meals are optional real-world use, without assigned grading, recording or approval work. [DESIGN.md](DESIGN.md) and [COMPLETENESS.md](COMPLETENESS.md) retain the full learning destination.
 
-This document describes the implemented boundaries and data contracts. The main private relay now serves protocol 4 and Teacher prompt 5 with negotiated guided lessons. The final web build has notebook, oral-practice, exposure and v3→v4 service-worker recovery acceptance; matching Mac/iPad artifacts are frozen. Physical iPad provisioning still awaits Apple's agreement, and current native UI acceptance awaits desktop unlock. [TASKS.md](TASKS.md) is definitive for artifacts, activation, checks and remaining work.
+This document describes the implemented boundaries and data contracts. The main private relay serves protocol 4 and Teacher prompt 6 with negotiated guided lessons. Exact-task Teacher returns now compose with the notebook, all four skills, delayed feedback, exposure qualification and offline recovery. The final web build passes the return journey and an actual same-protocol app update; matching Mac/iPad artifacts are frozen. Earlier v3→v4 migration evidence remains scoped to that upgrade. Physical iPad provisioning still awaits Apple's agreement, and current native UI acceptance awaits desktop unlock. [TASKS.md](TASKS.md) is definitive for artifacts, activation, checks and remaining work.
 
 ## Boundaries
 
@@ -61,7 +61,7 @@ The principal facts are:
 - `SpeechTranscribed`, `TranscriptConfirmed`: independent recognition of an exact recording/hash/original-frame span, full worker audit, and explicit learner confirmation or edit. Original audio and the attempt's recording label remain unchanged.
 - `TeacherDocumentRecorded`: the full accepted teaching or feedback document and an archive receipt. Saving it supplies no presentation, completion, recall or mastery evidence.
 
-`SelfRating::NotReported` retains the absence of a self-rating. Inline Teacher practice uses it rather than manufacturing success or failure. An unrated response does not postpone existing review. Guided responses preserve assistance; whole-answer judgments remain attempt-level observations.
+`SelfRating::NotReported` retains the absence of a self-rating. Inline guided Teacher practice uses it rather than manufacturing success or failure. An unrated generic response does not postpone existing review; a completed Teacher return may schedule another check at its existing interval without advancing it. Guided responses preserve assistance; whole-answer judgments remain attempt-level observations.
 
 ## Durable Teacher notebook
 
@@ -86,6 +86,20 @@ The UI renders a step's goal, orientation, models, optional explanation/support 
 Reading/writing exercises save the literal typed response and exact prompt/reference. Listening requires acknowledged playback of the correct immutable reference; reference text/meaning/answer reveals are retained as assistance. Speaking selects an exact durable take for the attempt, independently transcribes its original bytes, and requires learner-confirmed or edited words before language-content feedback. Recording labels never masquerade as spoken words. Response edits and changed take/support state preserve prior attempts and use new draft identities as needed; retries retain original fact bytes.
 
 Qualified AI exercise origin v2 binds a known lesson ID, source document and practice index to derived passage/revision/attempt/context identities. It is distinct from event/protocol version 4. Legacy identities retain their retry bytes without guessed lesson origins. Generated exercises do not acquire authored curriculum features or direct feature-mastery credit.
+
+## Returning to an exact Teacher exercise
+
+`TeacherRevisitKey` binds the archived document and practice index, preserving the original question, reference and skill for both lesson exercises and feedback follow-ups. A proved completed guided response seeds the first return about a day later. Generated Teacher references are excluded from the generic passage queue: importing a generated definition does not create a due exercise, and a missing archive cannot be replaced with a guessed question.
+
+Returns use a separate workspace-local draft and fresh session, response, playback count and recording selection. Pausing resumes that session; an explicit fresh try creates another. Guided drafts remain separate. Reading text and the first listening playback are required task input; replay, model answers, translation and reference material retain their assistance. Speaking requires a fresh take and explicitly confirmed words for content feedback. Completed returns are immutable, self-report is optional, and AI feedback can arrive after the learner leaves the exercise.
+
+The existing attempt/context facts carry policy `teacher-delayed-revisit-v1`, the exact exercise identity and a typed reference footer with source guided attempt/context and actual retrieval start. This adds no event or sync version. Qualification verifies the complete archived task and context rather than trusting the footer alone. Original feedback binds to the exact saved response or confirmed words. Local active pointers and unfinished drafts are not synced, while completed attempts and archived feedback are ordinary immutable facts.
+
+Teacher prompt 6 gives current-attempt evidence precedence over the archived exercise's teaching note. An original first-encounter recommendation cannot establish current exposure or assistance on a later return; absent cues cannot establish independent recall. Feedback next actions must make sense without assuming nested practice cards are on screen. The original source note and request bytes remain intact. This server-only prompt change leaves the client assets and event schema unchanged; scoped live feedback acceptance does not guarantee every future model response.
+
+The pure `TeacherRevisitPolicy` projects fixed 1, 3, 7, 14, 30, 60 and 120 day steps. A due response given without help can advance one step after self-reported recall or an exact-task AI-correct judgment, with separate evidence counters. Answer help and difficulty shorten the return; replay, absent outcome, contested judgments and recent target restudy have explicit conservative handling. Eligibility uses retrieval start, while the next due time is anchored to completion. Early work cannot earn a longer gap by leaving its form open; late AI feedback is attributed to the original occurrence. Co-timed attempts do not acquire an arbitrary UUID winner.
+
+Presentation facts arriving later can qualify the derived schedule if they show matching support during the recorded attempt. The original response, cues and self-report are never rewritten. Required own task input is exempt; own replay/model audio and foreign target presentations remain distinguishable. Bounded source IDs explain derived support. These rules do not establish attention, independent retention, unfamiliarity, acoustic quality or an optimal interval for Ember. [Teacher returns](research/TEACHER_REVISITS.md) separates the research basis from this engineering policy.
 
 ## Context, exposure and learning projections
 

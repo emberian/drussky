@@ -1,8 +1,11 @@
 //! Durable oral Teacher tasks. Playback/selection refer to exact stored originals, not latest takes.
 use crate::{
     model::AppState,
-    repository::{now_ms, Result},
-    teacher_practice::{practice_source, TeacherPracticeDraft},
+    repository::{Result, now_ms},
+    teacher_practice::{TeacherPracticeDraft, practice_source},
+    teacher_revisit::{
+        TEACHER_REVISIT_POLICY, teacher_revisit_context_reference, teacher_revisit_exercise_id,
+    },
 };
 use rufren_core::*;
 use rufren_tutor::{TeacherResponse, TeacherSkill};
@@ -68,7 +71,6 @@ impl TeacherAudioDraft {
             || !matches!(self.binding.skill, Skill::Listening | Skill::Speaking)
             || !valid_hash(&self.binding.task_fingerprint)
             || self.cues.len() > 32
-            || !self.cues.contains(&Cue::ReferenceMaterial)
             || (self.binding.skill == Skill::Listening && self.selected_recording.is_some())
             || (self.reference_plays == 0) != self.played_reference.is_none()
             || self.played_reference.as_ref().is_some_and(|p| {
@@ -99,6 +101,48 @@ pub(crate) struct SubmittedAudioEvidence {
     pub played_reference: Option<TeacherPlayedReference>,
     pub selected_recording: Option<TeacherSelectedRecording>,
     pub reference_plays: u32,
+}
+pub(crate) fn audio_reference_base(context: &AttemptContext) -> Option<&str> {
+    context
+        .reference_answer
+        .as_deref()?
+        .rsplit_once(BINDING_MARKER)
+        .map(|(base, _)| base)
+}
+fn review_editable(draft: &TeacherPracticeDraft) -> Result<()> {
+    if draft.review.is_some() && draft.saved_attempt.is_some() {
+        return Err(
+            "This revisit is already saved. Start another scheduled revisit for a fresh response."
+                .into(),
+        );
+    }
+    Ok(())
+}
+fn sync_review_cues(draft: &mut TeacherPracticeDraft) {
+    if let (Some(review), Some(audio)) = (&mut draft.review, &draft.audio) {
+        review.cues = audio.cues.clone();
+    }
+}
+fn previously_submitted_original(library: &Library, sha256: &str, session: Uuid) -> bool {
+    let current = Uuid::new_v5(&session, b"attempt");
+    let cutoff = library
+        .events
+        .get(&current)
+        .map_or_else(now_ms, |event| event.recorded_at_ms);
+    library.events.values().any(|event| {
+        let Fact::RecordingAttached(a) = &event.fact else {
+            return false;
+        };
+        let AnnotationTarget::Attempt(id) = a.target else {
+            return false;
+        };
+        a.role == AudioRole::Attempt
+            && a.asset.sha256 == sha256
+            && id != current
+            && library.events.get(&id).is_some_and(|source| {
+                matches!(source.fact, Fact::AttemptRecorded(_)) && source.recorded_at_ms <= cutoff
+            })
+    })
 }
 pub(crate) fn submitted_audio_evidence(context: &AttemptContext) -> Option<SubmittedAudioEvidence> {
     let (_, json) = context
@@ -204,6 +248,11 @@ impl AppState {
     ) -> Result<TeacherAudioBinding> {
         let binding = bind(answer, draft)?;
         self.refresh()?;
+        if draft.review.is_some() {
+            let merged = self.merged_teacher_revisit_draft(draft)?;
+            self.validate_teacher_revisit(answer, &merged)?;
+            *draft = merged;
+        }
         let (source, revision_id, reference) =
             crate::teacher_practice::teacher_reference_fact(answer, draft.index)?;
         if revision_id != binding.revision_id {
@@ -229,6 +278,18 @@ impl AppState {
         let mut next = draft.clone();
         if let Some(audio) = &next.audio {
             audio.validate()?;
+            if draft
+                .review
+                .as_ref()
+                .map_or(!audio.cues.contains(&Cue::ReferenceMaterial), |review| {
+                    review.cues != audio.cues
+                })
+            {
+                return Err(
+                    "This oral exercise has inconsistent help cues; its earlier draft is kept."
+                        .into(),
+                );
+            }
             if audio.binding != binding {
                 return Err("This saved oral draft belongs to a changed question. Start a fresh teacher exercise.".into());
             }
@@ -236,7 +297,10 @@ impl AppState {
             next.audio = Some(TeacherAudioDraft {
                 binding: binding.clone(),
                 reference_plays: 0,
-                cues: vec![Cue::ReferenceMaterial],
+                cues: next.review.as_ref().map_or_else(
+                    || vec![Cue::ReferenceMaterial],
+                    |review| review.cues.clone(),
+                ),
                 played_reference: None,
                 selected_recording: None,
             });
@@ -252,6 +316,7 @@ impl AppState {
         attachment: Uuid,
         record: &AudioRecordMetadata,
     ) -> Result<()> {
+        review_editable(draft)?;
         let binding = self.prepare_teacher_audio_practice(answer, draft)?;
         checked_attachment(
             &self.library,
@@ -266,13 +331,23 @@ impl AppState {
         let mut next = draft.clone();
         next.fork_saved_answer();
         let audio = next.audio.as_mut().unwrap();
+        let review = next.review.is_some();
+        let audio_family = format!("teacher-oral-reference:{}", binding.revision_id);
         let previous = self
             .library
             .presentations()
             .filter(|(_, p)| {
                 p.session == Some(next.id)
                     && p.revision == Some(binding.revision_id)
-                    && p.purpose == PresentationPurpose::Audio
+                    && (if review {
+                        p.utterance_family.as_deref() == Some(audio_family.as_str())
+                            && matches!(
+                                p.purpose,
+                                PresentationPurpose::Audio | PresentationPurpose::TaskInput
+                            )
+                    } else {
+                        p.purpose == PresentationPurpose::Audio
+                    })
             })
             .count()
             .min(u32::MAX as usize) as u32;
@@ -296,9 +371,16 @@ impl AppState {
                 session: Some(next.id),
                 revision: Some(binding.revision_id),
                 russian,
-                purpose: PresentationPurpose::Audio,
+                purpose: if review
+                    && binding.skill == Skill::Listening
+                    && audio.reference_plays == 1
+                {
+                    PresentationPurpose::TaskInput
+                } else {
+                    PresentationPurpose::Audio
+                },
                 decision: None,
-                utterance_family: None,
+                utterance_family: review.then_some(audio_family),
             }),
         )
         .map_err(|e| e.to_string())?;
@@ -309,6 +391,7 @@ impl AppState {
             sha256: record.content_hash.clone(),
         });
         self.repo.append(&[presented])?;
+        sync_review_cues(&mut next);
         self.save_teacher_practice_draft(&next)?;
         *draft = next;
         self.refresh()
@@ -321,6 +404,7 @@ impl AppState {
         record: &AudioRecordMetadata,
         accept_interrupted: bool,
     ) -> Result<()> {
+        review_editable(draft)?;
         let binding = self.prepare_teacher_audio_practice(answer, draft)?;
         if binding.skill != Skill::Speaking {
             return Err(
@@ -336,6 +420,32 @@ impl AppState {
         )?;
         if record.interrupted && !accept_interrupted {
             return Err("This take was interrupted. Choose it explicitly if the captured portion is your intended response.".into());
+        }
+        if draft.review.is_some() {
+            let resuming = draft
+                .audio
+                .as_ref()
+                .and_then(|audio| audio.selected_recording.as_ref())
+                .is_some_and(|selected| {
+                    selected.attachment == attachment
+                        && selected.asset_id == record.asset_id
+                        && selected.sha256 == record.content_hash
+                });
+            if previously_submitted_original(&self.library, &record.content_hash, draft.id)
+                || (!resuming && record.created_at_ms < draft.started_at_ms)
+            {
+                // The recorder can still offer this preserved original for replay. Keep
+                // that opportunity as support even when it cannot serve as new production.
+                let mut supported = draft.clone();
+                let cues = &mut supported.audio.as_mut().unwrap().cues;
+                if !cues.contains(&Cue::ReferenceMaterial) {
+                    cues.push(Cue::ReferenceMaterial);
+                }
+                sync_review_cues(&mut supported);
+                self.save_teacher_practice_draft(&supported)?;
+                *draft = supported;
+                return Err("Make a new take for this revisit. The earlier take stays with its original attempt; opening it is kept as reference help for this response.".into());
+            }
         }
         let selected = TeacherSelectedRecording {
             attachment,
@@ -372,6 +482,7 @@ impl AppState {
         answer: &TeacherResponse,
         draft: &mut TeacherPracticeDraft,
     ) -> Result<()> {
+        review_editable(draft)?;
         let binding = self.prepare_teacher_audio_practice(answer, draft)?;
         if binding.skill != Skill::Speaking {
             return Err("Only speaking tasks have a selected learner take.".into());
@@ -393,6 +504,7 @@ impl AppState {
         draft: &mut TeacherPracticeDraft,
         cue: Cue,
     ) -> Result<()> {
+        review_editable(draft)?;
         self.prepare_teacher_audio_practice(answer, draft)?;
         if !matches!(
             cue,
@@ -406,6 +518,7 @@ impl AppState {
         let mut next = draft.clone();
         next.fork_saved_answer();
         next.audio.as_mut().unwrap().cues.push(cue);
+        sync_review_cues(&mut next);
         self.save_teacher_practice_draft(&next)?;
         *draft = next;
         Ok(())
@@ -440,6 +553,26 @@ fn checked_compact<'a>(
         _ => None,
     }
 }
+fn valid_played_presentation(
+    library: &Library,
+    binding: &TeacherAudioBinding,
+    played: &TeacherPlayedReference,
+    session: Uuid,
+    plays: u32,
+    review: bool,
+) -> bool {
+    let Some(reference) = library.revision(binding.revision_id) else {
+        return false;
+    };
+    let purpose = if review && binding.skill == Skill::Listening && plays == 1 {
+        PresentationPurpose::TaskInput
+    } else {
+        PresentationPurpose::Audio
+    };
+    matches!(library.events.get(&played.presentation).map(|event|&event.fact),Some(Fact::StimulusPresented(p))
+        if p.purpose==purpose&&p.revision==Some(binding.revision_id)&&p.russian==reference.passage.russian
+        &&(if review {p.session==Some(session)&&p.utterance_family.as_deref()==Some(format!("teacher-oral-reference:{}",binding.revision_id).as_str())}else{p.session.is_some()}))
+}
 pub(crate) fn valid_submitted_audio(
     library: &Library,
     attempt: Uuid,
@@ -448,6 +581,10 @@ pub(crate) fn valid_submitted_audio(
     let Some(a) = library.attempt(attempt) else {
         return false;
     };
+    let review = a.policy == TEACHER_REVISIT_POLICY;
+    if !review && a.policy != TEACHER_AUDIO_POLICY {
+        return false;
+    }
     let Some(evidence) = submitted_audio_evidence(context) else {
         return false;
     };
@@ -468,7 +605,10 @@ pub(crate) fn valid_submitted_audio(
         || context.prompt.is_none()
         || evidence.question_sha256
             != question_identity(context.prompt.as_deref().unwrap(), base, a.skill)
-        || !a.cues.contains(&Cue::ReferenceMaterial)
+        || (!review && !a.cues.contains(&Cue::ReferenceMaterial))
+        || ((evidence.reference_plays > 1
+            || a.skill == Skill::Speaking && evidence.reference_plays > 0)
+            && !a.cues.contains(&Cue::Replay))
         || a.cues.len() > 32
     {
         return false;
@@ -486,17 +626,15 @@ pub(crate) fn valid_submitted_audio(
         {
             return false;
         }
-        match library
-            .events
-            .get(&played.presentation)
-            .map(|event| &event.fact)
-        {
-            Some(Fact::StimulusPresented(p))
-                if p.purpose == PresentationPurpose::Audio
-                    && p.revision == Some(a.revision)
-                    && p.session.is_some()
-                    && p.russian == reference.passage.russian => {}
-            _ => return false,
+        if !valid_played_presentation(
+            library,
+            &evidence.binding,
+            played,
+            a.session,
+            evidence.reference_plays,
+            review,
+        ) {
+            return false;
         }
         if evidence.reference_plays == 0 {
             return false;
@@ -509,6 +647,18 @@ pub(crate) fn valid_submitted_audio(
             evidence.played_reference.is_some() && evidence.selected_recording.is_none()
         }
         Skill::Speaking => {
+            if review
+                && previously_submitted_original(
+                    library,
+                    evidence
+                        .selected_recording
+                        .as_ref()
+                        .map_or("", |s| s.sha256.as_str()),
+                    a.session,
+                )
+            {
+                return false;
+            }
             let Some(selected) = &evidence.selected_recording else {
                 return false;
             };
@@ -546,12 +696,22 @@ impl AppState {
         draft: &mut TeacherPracticeDraft,
     ) -> Result<Uuid> {
         let binding = self.prepare_teacher_audio_practice(answer, draft)?;
+        if draft.review.is_some() {
+            self.qualify_teacher_revisit_support(answer, draft)?;
+        }
         let audio = draft
             .audio
             .as_ref()
             .ok_or("Prepare this oral exercise first.")?
             .clone();
         audio.validate()?;
+        if draft.review.is_some() {
+            self.validate_teacher_revisit(answer, draft)?;
+            if draft.review.as_ref().unwrap().cues != audio.cues {
+                return Err("The saved revisit help cues do not match this oral response.".into());
+            }
+        }
+        let review = draft.review.is_some();
         let exercise = answer
             .content
             .practice
@@ -570,6 +730,9 @@ impl AppState {
                 .selected_recording
                 .as_ref()
                 .ok_or("Choose the exact speaking take before submitting.")?;
+            if review && previously_submitted_original(&self.library, &selected.sha256, draft.id) {
+                return Err("Make a new take for this revisit; the previous response cannot stand in for a new production.".into());
+            }
             Some(
                 checked_compact(
                     &self.library,
@@ -601,14 +764,18 @@ impl AppState {
             {
                 return Err("The played reference no longer matches this exact exercise.".into());
             }
-            let russian = &self
-                .library
-                .revision(binding.revision_id)
-                .unwrap()
-                .passage
-                .russian;
-            if !self.library.events.get(&played.presentation).is_some_and(|e|matches!(&e.fact,Fact::StimulusPresented(p) if p.purpose==PresentationPurpose::Audio&&p.revision==Some(binding.revision_id)&&p.session.is_some()&&&p.russian==russian)) {
-                return Err("This draft has no durable acknowledgment of its actual reference playback.".into());
+            if !valid_played_presentation(
+                &self.library,
+                &binding,
+                played,
+                draft.id,
+                audio.reference_plays,
+                review,
+            ) {
+                return Err(
+                    "This draft has no durable acknowledgment of its actual reference playback."
+                        .into(),
+                );
             }
         }
         let attempt_id = Uuid::new_v5(&draft.id, b"attempt");
@@ -624,19 +791,28 @@ impl AppState {
             exercise.reference_english.as_deref().unwrap(),
             exercise.teaching_note
         );
+        let reference = if review {
+            teacher_revisit_context_reference(&reference, draft)?
+        } else {
+            reference
+        };
         let reference = audio_reference_answer(&reference, &exercise.prompt, &audio)?;
         let context = AttemptContext {
             attempt: attempt_id,
             content_pack: None,
             content_revision: None,
-            exercise_id: Some(self.teacher_practice_exercise_id(
-                answer,
-                draft.index,
-                source,
-                binding.passage_id,
-                context_id,
-                attempt_id,
-            )),
+            exercise_id: Some(if review {
+                teacher_revisit_exercise_id(draft)?
+            } else {
+                self.teacher_practice_exercise_id(
+                    answer,
+                    draft.index,
+                    source,
+                    binding.passage_id,
+                    context_id,
+                    attempt_id,
+                )
+            }),
             prompt: Some(exercise.prompt.clone()),
             reference_answer: Some(reference),
             task: if binding.skill == Skill::Listening {
@@ -674,8 +850,16 @@ impl AppState {
             skill: binding.skill,
             response,
             cues: audio.cues.clone(),
-            self_rating: SelfRating::NotReported,
-            policy: TEACHER_AUDIO_POLICY.into(),
+            self_rating: draft
+                .review
+                .as_ref()
+                .map_or(SelfRating::NotReported, |review| review.self_rating),
+            policy: if review {
+                TEACHER_REVISIT_POLICY
+            } else {
+                TEACHER_AUDIO_POLICY
+            }
+            .into(),
         };
         let mut facts = vec![
             (attempt_id, Fact::AttemptRecorded(attempt)),

@@ -4351,6 +4351,7 @@ dependencies = [
  "rufren-speech",
  "rufren-store",
  "rufren-tutor",
+ "rusqlite",
  "security-framework",
  "serde",
  "serde_json",

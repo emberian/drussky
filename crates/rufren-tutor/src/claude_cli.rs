@@ -852,7 +852,7 @@ print({output:?})
         assert_eq!(response.provenance.response_id, "cli-generated-result-001");
         assert_eq!(
             response.provenance.prompt_version,
-            "rufren-ai-teacher-v5+cli-structured-v1"
+            "rufren-ai-teacher-v6+cli-structured-v1"
         );
         assert_eq!(
             response.provenance.review_status,
@@ -870,6 +870,17 @@ print({output:?})
             serde_json::from_slice(&std::fs::read(fixture.path().join("received.json")).unwrap())
                 .unwrap();
         assert_eq!(received["input"], serde_json::to_value(&request).unwrap());
+        let arguments = received["argv"].as_array().unwrap();
+        let system_index = arguments
+            .iter()
+            .position(|v| v == "--system-prompt")
+            .unwrap();
+        assert!(
+            arguments[system_index + 1]
+                .as_str()
+                .unwrap()
+                .starts_with(anthropic::TEACHER_SYSTEM)
+        );
         assert!(
             !received["argv"]
                 .as_array()

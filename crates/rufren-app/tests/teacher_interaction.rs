@@ -29,6 +29,9 @@ mod teacher_context;
 mod teacher_notebook;
 #[path = "../src/teacher_practice.rs"]
 mod teacher_practice;
+#[path = "../src/teacher_revisit.rs"]
+mod teacher_revisit;
+
 use base64::{Engine, engine::general_purpose::STANDARD};
 use model::AppState;
 use repository::Repository;

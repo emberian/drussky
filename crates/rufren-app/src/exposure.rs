@@ -1,7 +1,7 @@
 //! Immutable opportunities to see or hear material, distinct from planning or mastery.
 use crate::{
     model::AppState,
-    repository::{now_ms, Result},
+    repository::{Result, now_ms},
 };
 use rufren_core::*;
 use uuid::Uuid;
@@ -30,6 +30,34 @@ impl AppState {
                         .into(),
                 )
             };
+        }
+        if let Fact::StimulusPresented(shown) = &fact {
+            if let Some((answer, draft)) = self.active_teacher_revisit()? {
+                let exercise = answer
+                    .content
+                    .practice
+                    .get(draft.index)
+                    .ok_or("The active revisit no longer identifies its original question")?;
+                let targets: Vec<&str> = exercise
+                    .reference_russian
+                    .as_deref()
+                    .into_iter()
+                    .chain(exercise.expected_response.as_deref())
+                    .collect();
+                if presentation_reveals_target(shown, draft.id, &targets) {
+                    // Visibility, not storage or rendering, reaches this seam.
+                    // An invalid pointer or failed cue write must remain visible
+                    // as an error rather than allowing an unsupported claim.
+                    let cue = if shown.session == Some(draft.id)
+                        && shown.purpose == PresentationPurpose::Audio
+                    {
+                        Cue::Replay
+                    } else {
+                        Cue::ReferenceMaterial
+                    };
+                    self.teacher_revisit_mark_active_support(cue)?;
+                }
+            }
         }
         let event = Event {
             version: EVENT_VERSION,
@@ -75,5 +103,64 @@ impl AppState {
                 utterance_family: None,
             },
         )
+    }
+}
+
+/// Required reading text and the first listening play use TaskInput, not help.
+/// Own Audio facts identify additional replay/model support, including facts
+/// which survived a failed local draft write after playback acknowledgment.
+/// A different task/window showing the same exact target is intervening restudy.
+fn presentation_reveals_target(
+    shown: &StimulusPresentation,
+    review_session: Uuid,
+    targets: &[&str],
+) -> bool {
+    if shown.session == Some(review_session) && shown.purpose == PresentationPurpose::TaskInput {
+        return false;
+    }
+    targets
+        .iter()
+        .any(|target| stimulus_contains(&shown.russian, target))
+}
+
+#[cfg(test)]
+mod revisit_support_tests {
+    use super::*;
+
+    #[test]
+    fn required_stimulus_is_not_help_but_revealed_or_foreign_target_is() {
+        let review = Uuid::new_v4();
+        let mut shown = StimulusPresentation {
+            session: Some(review),
+            revision: None,
+            russian: "Я чита́ю кни́гу.".into(),
+            purpose: PresentationPurpose::TaskInput,
+            decision: None,
+            utterance_family: None,
+        };
+        let target = ["Я читаю книгу."];
+        assert!(!presentation_reveals_target(&shown, review, &target));
+        shown.purpose = PresentationPurpose::Audio;
+        assert!(
+            presentation_reveals_target(&shown, review, &target),
+            "own Audio is replay/model support; first required play is TaskInput"
+        );
+        for purpose in [
+            PresentationPurpose::Answer,
+            PresentationPurpose::Reference,
+            PresentationPurpose::Instruction,
+        ] {
+            shown.purpose = purpose;
+            assert!(presentation_reveals_target(&shown, review, &target));
+        }
+        shown.session = Some(Uuid::new_v4());
+        shown.purpose = PresentationPurpose::TaskInput;
+        assert!(presentation_reveals_target(&shown, review, &target));
+        shown.purpose = PresentationPurpose::Audio;
+        assert!(presentation_reveals_target(&shown, review, &target));
+        shown.session = None;
+        assert!(presentation_reveals_target(&shown, review, &target));
+        shown.russian = "Она читает книгу.".into();
+        assert!(!presentation_reveals_target(&shown, review, &target));
     }
 }

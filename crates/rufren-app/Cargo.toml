@@ -39,3 +39,4 @@ security-framework = "3.7"
 
 [dev-dependencies]
 dioxus-ssr = "=0.7.10"
+rusqlite.workspace = true

@@ -374,7 +374,7 @@ async fn provider_teacher_binds_exact_answer_and_ai_provenance() {
         ReviewStatus::AiGeneratedTeaching
     );
     assert_eq!(result.provenance.response_id, "msg_mock_001");
-    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v5");
+    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v6");
     assert_eq!(
         result.content.feedback.unwrap().verdict,
         AiVerdict::PartlyCorrect
@@ -485,6 +485,41 @@ async fn provider_teacher_guided_schema_is_opt_in_and_binds_original_arrays() {
     let submitted: TeacherRequest =
         serde_json::from_str(seen[1].1["messages"][0]["content"].as_str().unwrap()).unwrap();
     assert_eq!(submitted, request);
+    task.abort();
+}
+
+#[tokio::test]
+async fn provider_teacher_revisit_keeps_historical_task_bytes_and_current_attempt_policy() {
+    let mut request = teacher_request();
+    if let TeacherRequest::AnswerFeedback(input) = &mut request {
+        input.exercise_id =
+            Some("teacher:revisit:v1:11111111-1111-4111-8111-111111111111:0".into());
+        input.reference = Some("Example answer: Я в школе.\nTeaching note: This is a first encounter; using the translation is expected.\nRufren teacher revisit v1: {\"format_version\":1,\"document_id\":\"11111111-1111-4111-8111-111111111111\",\"practice_index\":0,\"source_attempt_id\":\"22222222-2222-4222-8222-222222222222\",\"source_context_id\":\"33333333-3333-4333-8333-333333333333\",\"started_at_ms\":1234}".into());
+        input.cues.clear();
+    }
+    let exact_input = serde_json::to_string(&request).unwrap();
+    let (service, mock, task) = service(
+        vec![
+            (200, json!({"input_tokens":1000})),
+            (200, response(teacher_content())),
+        ],
+        Duration::ZERO,
+        Duration::from_secs(2),
+        DEFAULT_SESSION_BUDGET_MICRO_USD,
+    )
+    .await;
+    let result = service.teach(&request).await.unwrap();
+    assert_eq!(result.request, request);
+    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v6");
+    let seen = mock.seen.lock().unwrap();
+    // The provider receives the exact historical data, with the same server policy
+    // used by CLI teaching. This checks transport/context precedence, not model truth.
+    assert_eq!(seen[1].1["messages"][0]["content"], exact_input);
+    assert_eq!(seen[1].1["system"], anthropic::TEACHER_SYSTEM);
+    let system = seen[1].1["system"].as_str().unwrap();
+    assert!(system.contains("teacher:revisit:v1:"));
+    assert!(system.contains("Current-attempt evidence takes precedence"));
+    assert!(system.contains("does not prove independent recall"));
     task.abort();
 }
 

@@ -4,10 +4,8 @@ use crate::{
     exposure_view::PresentedRussian,
     gateway,
     model::{AppState, Page},
-    teacher_example_view::TeacherExampleView,
     teacher_lesson_view::TeacherLessonView,
     teacher_notebook_view::{TeacherNotebook, step_for_practice},
-    teacher_practice_view::TeacherPractice as TeacherPracticeForm,
     teacher_prose::TeacherProse,
     tutor_view::TutorView,
 };
@@ -67,6 +65,13 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
     let return_lesson = answer
         .as_ref()
         .and_then(|answer| state.teacher_lesson_for_feedback(answer));
+    let return_review = answer.as_ref().and_then(|answer| {
+        let key=state.teacher_revisit_for_feedback(answer)?;
+        let (_,draft)=state.active_teacher_revisit().ok().flatten()?;
+        let TeacherRequest::AnswerFeedback(request)=&answer.request else{return None};
+        (draft.source==key.document_id.to_string() && draft.index==key.practice_index
+            && draft.saved_attempt.map(|id|id.to_string()).as_deref()==request.attempt_id.as_deref()).then_some(())
+    }).is_some();
     let feedback_document = answer
         .as_ref()
         .filter(|answer| matches!(answer.request, TeacherRequest::TeachLesson(_)))
@@ -136,7 +141,7 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
         }
     };
     rsx! {
-        style {".teacher-compact-heading {{margin-bottom:12px}}.teacher-compact-heading h1 {{font-size:1.75rem;margin:0}}.teacher-tools {{margin-bottom:16px}}.teacher-tools > summary {{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600}}.teacher-tools[open] > summary {{margin-bottom:12px}}.teacher-tools .teacher-start:not([open]) {{padding:16px 24px}}.teacher-context-action {{margin:8px 0}}"}
+        style {".teacher-compact-heading {{margin-bottom:12px}}.teacher-compact-heading h1 {{font-size:1.75rem;margin:0}}.teacher-tools {{margin-bottom:16px}}.teacher-tools > summary {{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600}}.teacher-tools > summary::before {{content:\"\";width:0;height:0;border-left:5px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent;margin-right:10px}}.teacher-tools[open] > summary::before {{transform:rotate(90deg)}}.teacher-tools[open] > summary {{margin-bottom:12px}}.teacher-tools .teacher-start:not([open]) {{padding:16px 24px}}.teacher-context-action {{margin:8px 0}}"}
         div {class:if answer.is_some(){"page-heading teacher-compact-heading"}else{"page-heading"},div {
             if answer.is_none(){div {class:"eyebrow","EXPLAIN · TRY · UNDERSTAND"}}
             h1 {"Your Russian teacher"}
@@ -179,6 +184,7 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
             }
         }
         if !reviewing_history {
+            if return_review {div {class:"actions teacher-return",button {class:"primary",disabled:state.teacher_busy || state.speech_busy || capture_busy(),onclick:move |_|act(app,|state|state.navigate(Page::Practice)),"Return to this saved review →"}}}
             if let Some((document,index))=return_lesson {
                 div {class:"actions teacher-return",button {class:"secondary",disabled:state.teacher_busy || state.speech_busy || capture_busy(),onclick:move |_|act(app,|state| {
                     let answer=state.library.teacher_document(document).ok_or("The original lesson is unavailable. Sync it, then try again.")?.response.clone();
@@ -195,19 +201,8 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
                 if matches!(answer.request,TeacherRequest::TeachLesson(_)) {
                     TeacherLessonView {key:"guided-{answer.provenance.response_id}",app,answer:answer.clone(),active_speaking,capture_busy}
                 } else {
-                TeacherProse {key:"explanation-{answer.provenance.response_id}",app,class:"teacher-explanation",language:"en",text:answer.content.explanation.clone(),purpose:PresentationPurpose::Instruction}
-                if let Some(feedback)=&answer.content.feedback {
-                    p {strong {match feedback.verdict {AiVerdict::Correct=>"This works for the task.",AiVerdict::PartlyCorrect=>"Part of this works; let’s refine it.",AiVerdict::Incorrect=>"There’s something useful to change.",AiVerdict::Uncertain=>"There may be more than one interpretation here."}}}
-                    if let Some(text)=&feedback.suggested_response {PresentedRussian {key:"{text}",app,class:"dialogue-russian",text:text.clone(),purpose:PresentationPurpose::Reference}}
-                    for (index,correction) in feedback.corrections.iter().enumerate() {div {key:"correction-{answer.provenance.response_id}-{index}",class:"teacher-correction",PresentedRussian {app,text:format!("{} → {}",correction.original,correction.replacement),purpose:PresentationPurpose::Instruction,p {span {lang:"ru","{correction.original}"}" → " strong {lang:"ru","{correction.replacement}"}}}TeacherProse {app,language:"en",text:correction.reason.clone(),purpose:PresentationPurpose::Instruction}}}
-                }
-                for (index,_) in answer.content.examples.iter().enumerate() {TeacherExampleView {key:"example-{answer.provenance.response_id}-{index}",app,answer:answer.clone(),index}}
-                if !answer.content.practice.is_empty() {h3 {"A small thing to try"}
-                    for (index,_) in answer.content.practice.iter().enumerate() {
-                        TeacherPracticeForm {key:"{answer.provenance.response_id}-{index}",app,answer:answer.clone(),index,active_speaking,capture_busy}
-                    }
-                }
-                div {class:"hint",span {class:"tag","YOUR NEXT STEP"}TeacherProse {app,language:"en",text:answer.content.next_step.clone(),purpose:PresentationPurpose::Instruction}}
+                crate::teacher_feedback_view::TeacherFeedback {app,answer:answer.clone(),active_speaking,capture_busy}
+
                 }
                 if !answer.content.caveats.is_empty() {details {summary {"Nuance and uncertainty"}ul {for caveat in &answer.content.caveats {li {TeacherProse {app,language:"en",text:caveat.clone(),purpose:PresentationPurpose::Instruction}}}}}}
                 p {class:"quiet","{answer.provenance.model} · AI-generated teaching"}

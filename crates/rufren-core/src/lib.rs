@@ -21,6 +21,8 @@ pub use review::*;
 pub use teaching::*;
 mod teacher_archive;
 pub use teacher_archive::*;
+mod teacher_revisit;
+pub use teacher_revisit::*;
 
 /// Current event encoding. Database migrations and transport compatibility are independent.
 pub const EVENT_VERSION: u32 = 4;

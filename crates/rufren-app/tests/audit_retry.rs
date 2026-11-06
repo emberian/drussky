@@ -17,6 +17,21 @@ mod native_connection;
 mod native_http;
 #[path = "../src/repository.rs"]
 mod repository;
+#[path = "../src/recognition.rs"]
+mod recognition;
+#[path = "../src/teacher.rs"]
+mod teacher;
+#[path = "../src/teacher_audio_practice.rs"]
+mod teacher_audio_practice;
+#[path = "../src/teacher_context.rs"]
+mod teacher_context;
+#[path = "../src/teacher_notebook.rs"]
+mod teacher_notebook;
+#[path = "../src/teacher_practice.rs"]
+mod teacher_practice;
+#[path = "../src/teacher_revisit.rs"]
+mod teacher_revisit;
+
 use model::AppState;
 use repository::{Repository, now_ms};
 use rufren_content::ExerciseKind;

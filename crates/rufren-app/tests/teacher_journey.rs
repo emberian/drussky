@@ -30,6 +30,9 @@ mod teacher_context;
 mod teacher_notebook;
 #[path = "../src/teacher_practice.rs"]
 mod teacher_practice;
+#[path = "../src/teacher_revisit.rs"]
+mod teacher_revisit;
+
 use model::AppState;
 use repository::Repository;
 use rufren_content::ExerciseKind;

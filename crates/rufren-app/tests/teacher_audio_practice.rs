@@ -29,6 +29,8 @@ mod teacher_context;
 mod teacher_notebook;
 #[path = "../src/teacher_practice.rs"]
 mod teacher_practice;
+#[path = "../src/teacher_revisit.rs"]
+mod teacher_revisit;
 use model::AppState;
 use repository::Repository;
 use rufren_core::*;
@@ -122,7 +124,16 @@ fn attach(
     role: &str,
     interrupted: bool,
 ) -> (Uuid, AudioRecordMetadata, Vec<u8>) {
-    let pcm = rufren_audio::PcmAudio::from_mono(16000, vec![0.125; 16000]).unwrap();
+    attach_level(state, binding, role, interrupted, 0.125)
+}
+fn attach_level(
+    state: &mut AppState,
+    binding: &TeacherAudioBinding,
+    role: &str,
+    interrupted: bool,
+    level: f32,
+) -> (Uuid, AudioRecordMetadata, Vec<u8>) {
+    let pcm = rufren_audio::PcmAudio::from_mono(16000, vec![level; 16000]).unwrap();
     let bytes = pcm.to_wav();
     let metadata = AudioRecordMetadata {
         asset_id: format!("synthetic-{}", Uuid::new_v4()),
@@ -477,7 +488,13 @@ fn teacher_audio_practice_corrupt_missing_support_cue_fails_before_any_attempt_f
     s.teacher_practice_edit_response(&answer, &mut draft, "Hi.".into())
         .unwrap();
     let before = s.library.clone();
+    let saved_before = s.teacher_practice_draft(&answer, 0).unwrap();
     draft.audio.as_mut().unwrap().cues.clear();
+    assert!(s.save_teacher_practice_draft(&draft).is_err());
+    assert_eq!(
+        s.teacher_practice_draft(&answer, 0).unwrap().audio,
+        saved_before.audio
+    );
     assert!(s.submit_teacher_practice(&answer, &mut draft).is_err());
     assert_eq!(s.library, before);
     assert!(s.library.attempts().next().is_none());
@@ -503,4 +520,342 @@ fn teacher_audio_practice_corrupt_listening_take_selection_fails_before_any_atte
     assert!(s.submit_teacher_practice(&answer, &mut draft).is_err());
     assert_eq!(s.library, before);
     assert!(s.library.attempts().next().is_none());
+}
+
+fn oral_revisit(
+    skill: TeacherSkill,
+) -> (
+    AppState,
+    TeacherResponse,
+    TeacherPracticeDraft,
+    TeacherPracticeDraft,
+    TeacherAudioBinding,
+) {
+    let (mut state, answer, mut guided, binding) = prepared(skill);
+    state
+        .keep_teacher_response(&answer.request, &answer)
+        .unwrap();
+    if binding.skill == Skill::Listening {
+        let (id, record, _) = attach(&mut state, &binding, "reference", false);
+        state
+            .teacher_audio_reference_played(&answer, &mut guided, id, &record)
+            .unwrap();
+        state
+            .teacher_practice_edit_response(&answer, &mut guided, "Hi.".into())
+            .unwrap();
+    } else {
+        let (id, record, _) = attach(&mut state, &binding, "attempt", false);
+        state
+            .teacher_audio_select_recording(&answer, &mut guided, id, &record, false)
+            .unwrap();
+    }
+    state.submit_teacher_practice(&answer, &mut guided).unwrap();
+    // Separate completed input from the new review boundary at millisecond resolution.
+    std::thread::sleep(std::time::Duration::from_millis(2));
+    let key = TeacherRevisitKey {
+        document_id: teacher_document_id(&answer),
+        practice_index: 0,
+    };
+    let mut revisit = state
+        .start_teacher_revisit(key, repository::now_ms())
+        .unwrap();
+    assert_ne!(revisit.id, guided.id);
+    assert!(revisit.response.is_empty());
+    assert!(revisit.audio.is_none());
+    state
+        .prepare_teacher_audio_practice(&answer, &mut revisit)
+        .unwrap();
+    assert!(revisit.audio.as_ref().unwrap().cues.is_empty());
+    (state, answer, guided, revisit, binding)
+}
+
+#[test]
+fn teacher_audio_revisit_listening_needs_current_session_task_input_without_default_help() {
+    let (mut state, answer, guided, mut revisit, binding) = oral_revisit(TeacherSkill::Listening);
+    state
+        .teacher_practice_edit_response(&answer, &mut revisit, "Hi again.".into())
+        .unwrap();
+    assert!(
+        state
+            .submit_teacher_practice(&answer, &mut revisit)
+            .is_err()
+    );
+    assert_eq!(state.library.attempts().count(), 1);
+    let (id, record, _) = attach(&mut state, &binding, "reference", false);
+    state
+        .teacher_audio_reference_played(&answer, &mut revisit, id, &record)
+        .unwrap();
+    let audio = revisit.audio.as_ref().unwrap().clone();
+    let played = audio.played_reference.as_ref().unwrap();
+    let Fact::StimulusPresented(presentation) = &state.library.events[&played.presentation].fact
+    else {
+        panic!()
+    };
+    let presentation = presentation.clone();
+    assert_eq!(presentation.session, Some(revisit.id));
+    assert_eq!(presentation.purpose, PresentationPurpose::TaskInput);
+    assert!(audio.cues.is_empty());
+    assert!(revisit.review.as_ref().unwrap().cues.is_empty());
+    let attempt = state
+        .submit_teacher_practice(&answer, &mut revisit)
+        .unwrap();
+    let actual = state.library.attempt(attempt).unwrap();
+    assert_eq!(actual.policy, teacher_revisit::TEACHER_REVISIT_POLICY);
+    assert!(actual.cues.is_empty());
+    assert_eq!(actual.self_rating, SelfRating::NotReported);
+    let (context_event, context) = state.library.contexts(attempt)[0];
+    assert!(
+        teacher_revisit::saved_teacher_revisit_origin(&state.library, attempt, context_event.id)
+            .is_some()
+    );
+    assert!(teacher_audio_practice::valid_submitted_audio(
+        &state.library,
+        attempt,
+        context
+    ));
+    // Same input text, purpose, family and asset, but another session is not proof
+    // that this review actually provided its required listening input.
+    let mut forged_presentation = presentation.clone();
+    forged_presentation.session = Some(guided.id);
+    let forged = Event::new(
+        state.device,
+        repository::now_ms(),
+        Fact::StimulusPresented(forged_presentation),
+    )
+    .unwrap();
+    let forged_id = forged.id;
+    let mut library = state.library.clone();
+    library.merge(&[forged]).unwrap();
+    let mut forged_context = context.clone();
+    let mut forged_audio = audio.clone();
+    forged_audio.played_reference.as_mut().unwrap().presentation = forged_id;
+    let base = teacher_audio_practice::audio_reference_base(context).unwrap();
+    forged_context.reference_answer = Some(
+        teacher_audio_practice::audio_reference_answer(
+            base,
+            context.prompt.as_deref().unwrap(),
+            &forged_audio,
+        )
+        .unwrap(),
+    );
+    assert!(!teacher_audio_practice::valid_submitted_audio(
+        &library,
+        attempt,
+        &forged_context
+    ));
+    let saved_id = revisit.id;
+    assert!(
+        state
+            .teacher_audio_reference_played(&answer, &mut revisit, id, &record)
+            .is_err()
+    );
+    assert_eq!(revisit.id, saved_id);
+    assert!(
+        state
+            .teacher_practice_edit_response(&answer, &mut revisit, "Changed after saving".into())
+            .is_err()
+    );
+}
+
+#[test]
+fn teacher_audio_revisit_replay_reveal_and_optional_report_are_explicit_help() {
+    let (mut state, answer, _, mut revisit, binding) = oral_revisit(TeacherSkill::Listening);
+    let (id, record, _) = attach(&mut state, &binding, "reference", false);
+    state
+        .teacher_audio_reference_played(&answer, &mut revisit, id, &record)
+        .unwrap();
+    state
+        .teacher_audio_reference_played(&answer, &mut revisit, id, &record)
+        .unwrap();
+    state
+        .teacher_audio_reveal(&answer, &mut revisit, Cue::OriginalText)
+        .unwrap();
+    state
+        .teacher_audio_reveal(&answer, &mut revisit, Cue::Translation)
+        .unwrap();
+    state
+        .set_teacher_revisit_rating(&mut revisit, SelfRating::WithHelp)
+        .unwrap();
+    state
+        .teacher_practice_edit_response(&answer, &mut revisit, "Hi.".into())
+        .unwrap();
+    let attempt = state
+        .submit_teacher_practice(&answer, &mut revisit)
+        .unwrap();
+    let actual = state.library.attempt(attempt).unwrap();
+    assert_eq!(
+        actual.cues,
+        [Cue::Replay, Cue::OriginalText, Cue::Translation]
+    );
+    assert_eq!(actual.self_rating, SelfRating::WithHelp);
+    assert!(!actual.cues.contains(&Cue::ReferenceMaterial));
+    assert_eq!(
+        state
+            .teacher_revisit_draft(&answer, 0)
+            .unwrap()
+            .saved_attempt,
+        Some(attempt)
+    );
+    let context = state.library.contexts(attempt)[0];
+    assert!(
+        teacher_revisit::saved_teacher_revisit_origin(&state.library, attempt, context.0.id)
+            .is_some()
+    );
+}
+
+#[test]
+fn teacher_audio_revisit_speaking_rejects_old_bytes_and_resumes_exact_new_take() {
+    let (mut state, answer, guided, mut revisit, binding) = oral_revisit(TeacherSkill::Speaking);
+    assert!(revisit.selected_asset_id().is_none());
+    let (old, record, _) = attach(&mut state, &binding, "attempt", false);
+    assert!(
+        state
+            .teacher_audio_select_recording(&answer, &mut revisit, old, &record, false)
+            .is_err()
+    );
+    assert!(revisit.selected_asset_id().is_none());
+    assert!(revisit.response.is_empty());
+    let (fresh, record, bytes) = attach_level(&mut state, &binding, "attempt", false, 0.25);
+    state
+        .teacher_audio_select_recording(&answer, &mut revisit, fresh, &record, false)
+        .unwrap();
+    let session = revisit.id;
+    let repository = state.repo.clone();
+    drop(state);
+    let mut state = AppState::from_repository(repository).unwrap();
+    let mut revisit = state.teacher_revisit_draft(&answer, 0).unwrap();
+    assert_eq!(revisit.id, session);
+    assert_eq!(revisit.selected_asset_id(), Some(record.asset_id.as_str()));
+    state
+        .teacher_audio_select_recording(&answer, &mut revisit, fresh, &record, true)
+        .unwrap();
+    let attempt = state
+        .submit_teacher_practice(&answer, &mut revisit)
+        .unwrap();
+    assert_ne!(Some(attempt), guided.saved_attempt);
+    let current = state.library.attempt(attempt).unwrap();
+    assert_eq!(current.cues, [Cue::ReferenceMaterial]);
+    assert_eq!(current.self_rating, SelfRating::NotReported);
+    let link = state.library.recordings(AnnotationTarget::Attempt(attempt))[0];
+    assert_eq!(link.1.asset_id, record.asset_id);
+    assert_eq!(link.1.asset.sha256, record.content_hash);
+    let asr = state
+        .recognition_request(link.0.id, &bytes, "review-transcription".into())
+        .unwrap();
+    assert_eq!(asr.attempt_id, Some(attempt.to_string()));
+    assert!(
+        state.answer_feedback_request(attempt).is_err(),
+        "exact reviewed words still require ASR and learner confirmation"
+    );
+    let context = state.library.contexts(attempt)[0];
+    assert!(
+        teacher_revisit::saved_teacher_revisit_origin(&state.library, attempt, context.0.id)
+            .is_some()
+    );
+}
+
+#[test]
+fn teacher_audio_revisit_fresh_speaking_take_has_no_inherited_reference_help() {
+    let (mut state, answer, _, mut revisit, binding) = oral_revisit(TeacherSkill::Speaking);
+    let (id, record, _) = attach_level(&mut state, &binding, "attempt", false, 0.375);
+    state
+        .teacher_audio_select_recording(&answer, &mut revisit, id, &record, false)
+        .unwrap();
+    let attempt = state
+        .submit_teacher_practice(&answer, &mut revisit)
+        .unwrap();
+    assert!(state.library.attempt(attempt).unwrap().cues.is_empty());
+    assert_eq!(
+        state.library.attempt(attempt).unwrap().policy,
+        teacher_revisit::TEACHER_REVISIT_POLICY
+    );
+}
+
+#[test]
+fn teacher_audio_revisit_durable_replay_survives_actual_metadata_write_failure() {
+    let (source, answer, _, mut revisit, binding) = oral_revisit(TeacherSkill::Listening);
+    let folder =
+        std::env::temp_dir().join(format!("rufren-replay-write-failure-{}", Uuid::new_v4()));
+    std::fs::create_dir(&folder).unwrap();
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        std::fs::set_permissions(&folder, std::fs::Permissions::from_mode(0o700)).unwrap();
+    }
+    let database = folder.join("library.sqlite");
+    let repo = Rc::new(Repository::open_at(&database).unwrap());
+    repo.append(&source.library.events.into_values().collect::<Vec<_>>())
+        .unwrap();
+    let key = teacher_revisit::teacher_revisit_storage_key(&revisit).unwrap();
+    repo.set(&key, &revisit).unwrap();
+    let mut state = AppState::from_repository(repo).unwrap();
+    state.select_teacher_revisit(&revisit).unwrap();
+    let (attachment, record, _) = attach(&mut state, &binding, "reference", false);
+    state
+        .teacher_audio_reference_played(&answer, &mut revisit, attachment, &record)
+        .unwrap();
+    assert_eq!(revisit.audio.as_ref().unwrap().reference_plays, 1);
+    assert!(revisit.audio.as_ref().unwrap().cues.is_empty());
+    // The prepare write (plays=1) succeeds. The subsequent Audio event commits, then
+    // the callback's metadata write (plays=2) fails inside the actual SQLite store.
+    let sql = rusqlite::Connection::open(&database).unwrap();
+    sql.execute_batch("CREATE TRIGGER fail_second_reference_play BEFORE INSERT ON metadata
+        WHEN NEW.key LIKE 'teacher_revisit:%' AND json_extract(NEW.json,'$.audio.reference_plays') >= 2
+        BEGIN SELECT RAISE(ABORT,'synthetic interrupted replay metadata write'); END;").unwrap();
+    assert!(
+        state
+            .teacher_audio_reference_played(&answer, &mut revisit, attachment, &record)
+            .is_err()
+    );
+    let saved = state.teacher_revisit_draft(&answer, 0).unwrap();
+    assert_eq!(saved.audio.as_ref().unwrap().reference_plays, 1);
+    assert!(saved.audio.as_ref().unwrap().cues.is_empty());
+    state.refresh().unwrap();
+    let replay_sources: Vec<_> = state
+        .library
+        .presentations()
+        .filter(|(_, p)| p.session == Some(revisit.id) && p.purpose == PresentationPurpose::Audio)
+        .map(|(e, _)| e.id)
+        .collect();
+    assert_eq!(
+        replay_sources.len(),
+        1,
+        "Audio acknowledgment survives failed metadata save"
+    );
+    // Resume from the durable old draft, not the callback's uncommitted local fields.
+    let mut revisit = saved;
+    state
+        .teacher_practice_edit_response(&answer, &mut revisit, "Hi.".into())
+        .unwrap();
+    let attempt = state
+        .submit_teacher_practice(&answer, &mut revisit)
+        .unwrap();
+    let actual = state.library.attempt(attempt).unwrap();
+    assert_eq!(actual.cues, [Cue::Replay]);
+    assert_eq!(actual.self_rating, SelfRating::NotReported);
+    assert!(!actual.cues.contains(&Cue::ReferenceMaterial));
+    assert!(
+        state
+            .teacher_revisit_draft(&answer, 0)
+            .unwrap()
+            .review
+            .unwrap()
+            .cues
+            .contains(&Cue::Replay)
+    );
+    let context = state.library.contexts(attempt)[0];
+    assert!(teacher_audio_practice::valid_submitted_audio(
+        &state.library,
+        attempt,
+        context.1
+    ));
+    assert!(
+        teacher_revisit::saved_teacher_revisit_origin(&state.library, attempt, context.0.id)
+            .is_some()
+    );
+    sql.execute_batch("DROP TRIGGER fail_second_reference_play;")
+        .unwrap();
+    drop(sql);
+    drop(state);
+    std::fs::remove_dir_all(folder).unwrap();
 }
