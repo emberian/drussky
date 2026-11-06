@@ -10,7 +10,13 @@ const path = require('node:path');
 const { CURRENT_PROTOCOL } = require('./qa-current-protocol.cjs');
 const { navigate } = require('./qa-navigation.cjs');
 const { teacherResponse, wavFixture, generatedVoice, recognizedWords } = require('./test-teacher-oral.cjs');
-const { openLessonTools } = require('./test-teacher-notebook.cjs');
+const { openLessonTools: openLegacyLessonTools } = require('./test-teacher-notebook.cjs');
+
+async function openLessonTools(page) {
+  const session = page.locator('.teacher-start > summary');
+  if (!await session.count()) return openLegacyLessonTools(page);
+  if (!await session.evaluate(node => node.closest('details')?.open)) await session.click();
+}
 
 const APP = process.env.RUFREN_QA_URL || 'http://127.0.0.1:8091';
 const RELAY = 'http://127.0.0.1:18993'; // Intercepted; never starts or contacts a relay.
@@ -222,12 +228,17 @@ async function createDriver(browser, label, time, routeInstaller, audit, taskSpe
 
 async function seedGuided(driver, audit, indices = [0, 1, 2, 3]) {
   const { page, nav } = driver;
-  await nav('Teacher'); await page.getByText('Ready · Synthetic exact-task fixture', { exact: true }).waitFor();
+  await nav('Teacher');
+  await openLessonTools(page);
+  await page.getByText('Ready · Synthetic exact-task fixture', { exact: true }).waitFor({ state: 'attached' });
   await page.getByRole('button', { name: 'Teach me this lesson', exact: false }).click();
   const flow = page.locator('.teacher-lesson-flow'); await flow.waitFor();
   const document = await flow.getAttribute('data-lesson-document');
   const answers = ['The first speaker.', TASKS[1].expected_response, 'Two.'];
-  const jump = async index => { await flow.getByRole('combobox', { name: 'Go to a step', exact: true }).selectOption(String(index));
+  const jump = async index => {
+    const legacySelect = flow.getByRole('combobox', { name: 'Go to a step', exact: true });
+    if (await legacySelect.count()) await legacySelect.selectOption(String(index));
+    else await flow.getByRole('navigation', { name: 'Lesson outline', exact: true }).locator('.teacher-step-row').nth(index).click();
     await page.waitForFunction(index => document.querySelector('.teacher-lesson-flow')?.dataset.lessonStep === String(index), index); };
   for (const index of indices) {
     await jump(index); const exercise = page.locator('.teacher-lesson-current .teacher-exercise');

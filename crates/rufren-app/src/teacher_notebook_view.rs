@@ -33,7 +33,7 @@ pub(crate) fn step_for_practice(answer: &TeacherResponse, index: usize) -> usize
         .unwrap_or(index + 1)
 }
 
-fn title(entry: &TeacherNotebookEntry) -> String {
+pub(crate) fn title(entry: &TeacherNotebookEntry) -> String {
     match &entry.response.request {
         TeacherRequest::TeachLesson(request) => request.title.clone(),
         TeacherRequest::AnswerFeedback(request) => format!(
@@ -107,10 +107,10 @@ pub(crate) fn TeacherNotebook(
         })
         .collect();
     rsx! {
-        section {class:"panel teacher-notebook",aria_label:"Saved teaching",
+        section {class:"teacher-notebook",aria_label:"Saved teaching",
             style {"{STYLE}"}
             button {class:"secondary",aria_expanded:expanded(),disabled,onclick:move |_|expanded.set(!expanded()),"Your saved lessons"}
-            if expanded() {
+            if expanded() {div {class:"teacher-notebook-browser",
                 p {class:"quiet","Reopen a lesson with its examples and exercises. Your current work is kept."}
                 label {r#for:"teacher-notebook-search","Find a lesson"}
                 input {id:"teacher-notebook-search",r#type:"search",value:query(),placeholder:"Search by topic or words",oninput:move |event|{query.set(event.value());limit.set(12);}}
@@ -133,14 +133,12 @@ pub(crate) fn TeacherNotebook(
                     }}}
                 }
                 if matching.len()>limit() {button {class:"text-button",onclick:move |_|limit.set(limit()+12),"Show more saved teaching"}}
-            }
+            }}
         }
     }
 }
 
-#[component]
-pub(crate) fn ContinueTeacher(app: Signal<AppState>) -> Element {
-    let state = app.read().clone();
+pub(crate) fn unfinished_lesson(state: &AppState) -> Option<TeacherNotebookEntry> {
     let documents = state.teacher_notebook();
     let selected = state.selected_teacher_document().ok().flatten();
     let preferred = selected.as_ref().and_then(|answer| match &answer.request {
@@ -163,19 +161,5 @@ pub(crate) fn ContinueTeacher(app: Signal<AppState>) -> Element {
                 .find(|entry| entry.document_id == id)
         })
         .or_else(|| documents.iter().filter(unfinished).next());
-    let Some(entry) = selected else {
-        return rsx! {};
-    };
-    let id = entry.document_id;
-    let cursor = state.teacher_lesson_cursor(id).unwrap_or(0);
-    let steps = lesson_step_count(&entry.response);
-    let label = title(entry);
-    rsx! {
-        section {class:"panel teacher-resume",aria_label:"Continue your teaching",
-            span {class:"tag","PICK UP WHERE YOU LEFT OFF"}
-            PresentedRussian {app,text:label.clone(),language:"en",purpose:PresentationPurpose::Instruction,h2 {"{label}"}}
-            p {class:"quiet","Step {cursor+1} of {steps}. Your responses and recordings are kept."}
-            button {class:"primary",onclick:move |_|act(app,|state|{state.select_teacher_document(id)?;state.navigate(Page::Teacher)}),"Continue this lesson →"}
-        }
-    }
+    selected.cloned()
 }

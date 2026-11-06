@@ -2,7 +2,13 @@
 
 Updated 2026-11-06. Rufren is a Rust/Dioxus personal Russian learning environment. The AI teacher provides explanations, examples, reference speech, exercises and language feedback. Conversations with the friend over meals are optional real-world use, without assigned grading, recording or approval work. [DESIGN.md](DESIGN.md) and [COMPLETENESS.md](COMPLETENESS.md) retain the full learning destination.
 
-This document describes the implemented source boundaries and data contracts, including the Reader's event/sync version 7. Source compatibility does not establish deployment, browser/device acceptance or teaching quality. [TASKS.md](TASKS.md) is definitive for artifacts, activation, checks and remaining work.
+This document describes the implemented source boundaries and data contracts, using current event/sync version 8. Source compatibility does not establish deployment, browser/device acceptance or teaching quality. [TASKS.md](TASKS.md) is definitive for artifacts, activation, checks and remaining work.
+
+## Application navigation
+
+The shell has five persistent primary destinations: Today, Learn, Talk, Read and Notebook. Responsive navigation renders phone bottom tabs or a tablet/desktop sidebar. Practice and Speech studio are secondary Learn destinations; Progress and Settings are secondary Notebook destinations. This changes presentation and routing, not event identities or learning-evidence semantics.
+
+Today’s resume action restores the exact unfinished lesson. Learn separates searchable catalog and lesson detail; lesson steps use an explicit outline. Saved passage practice searches all available history and progressively displays twelve rows at a time. Feedback keeps exact question, original response, corrections and next action primary, with explanation/examples/practice disclosed separately; explanation starts open when no concrete correction exists. Local drafts, saved-source links and immutable original answers retain their existing contracts. Final browser and physical-device acceptance are separate from this source structure.
 
 ## Boundaries
 
@@ -47,7 +53,7 @@ Native uses the Dioxus WebView route; web uses the browser renderer. The experim
 
 ## Immutable facts and compatibility
 
-Current source uses **event/sync version 7**. Existing v1–v6 facts remain readable without rewriting their event versions, identities or payloads. Reader documents, exact excerpt/reference links and Reader-anchored dialogue require v7. `SoundTrialPrepared`, `SoundReferencePlayed` and `SoundTrialCompleted` require v6; other dialogue/audio-conversation facts require v5; `TeacherDocumentRecorded` requires v4; presentation, transcription, confirmation and `NotReported` require v3; earlier fact types retain their supported minimums. Existing deterministic authored imports and generated reference definitions retain their historical v2 encoding; Reader derivatives use v7. Event encoding, sync protocol, document format, backup, asset transport and SQLite schema are separate contracts; the physical SQLite schema remains version 1. Deployment versions and rollout receipts belong in TASKS.md.
+Current source uses **event/sync version 8**. Review cadence, timing choices and immutable review-start decisions require v8. Existing v1–v7 facts remain readable without rewriting their event versions, identities or payloads. Reader documents, exact excerpt/reference links and Reader-anchored dialogue require v7. `SoundTrialPrepared`, `SoundReferencePlayed` and `SoundTrialCompleted` require v6; other dialogue/audio-conversation facts require v5; `TeacherDocumentRecorded` requires v4; presentation, transcription, confirmation and `NotReported` require v3; earlier fact types retain their supported minimums. Existing deterministic authored imports and generated reference definitions retain their historical v2 encoding; Reader derivatives use v7. Event encoding, sync protocol, document format, backup, asset transport and SQLite schema are separate contracts; the physical SQLite schema remains version 1. Deployment versions and rollout receipts belong in TASKS.md.
 
 An Event UUID identifies immutable content. Reusing an Event ID with different content fails. Writer IDs and timestamps are provenance, not authenticated people or merge winners. `Library::merge` validates a batch atomically, including cross-reference types, audio identities, document identity, cycles and supersession. References can arrive before their targets on another sync page; known references are checked again when targets arrive. Concurrent passage edits and competing feedback remain visible until explicitly resolved. No missing evidence is synthesized.
 

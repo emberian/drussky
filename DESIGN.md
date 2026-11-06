@@ -8,6 +8,18 @@ Working memory is sometimes challenging. Treat that as a variable demand to acco
 
 The evidence IDs below refer to [the evidence review](research/EVIDENCE.md). Product choices are hypotheses to test with Ember, rather than consequences automatically proved by the cited research.
 
+## Product navigation and hierarchy
+
+The interface keeps five primary destinations available: **Today, Learn, Talk, Read and Notebook**. Phone layouts use bottom tabs; tablet and desktop layouts use a sidebar with the same destinations. Practice and Speech studio belong under Learn; Progress and Settings belong under Notebook. Secondary tools should be discoverable without competing with the learner’s main destinations.
+
+Today resumes the exact unfinished lesson and shows useful next actions; empty return sections disappear. Learn has a searchable lesson catalog and a compact catalog-to-detail path. Inside a lesson, an explicit outline exposes the steps instead of hiding navigation in a selection menu. Saved passage practice searches the complete available history and reveals rows in groups of twelve with “Show more”; an eighty-item cap must not make older material unreachable.
+
+Feedback puts the question, original answer, concrete corrections and next step first. Extra explanation, examples and practice use disclosures. Explanation opens by default when there is no concrete correction, so a meaningful response does not disappear behind an empty feedback summary. Support remains available without forcing every detail into the initial view.
+
+These choices follow Apple’s guidance on [tab bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars), [sidebars](https://developer.apple.com/design/human-interface-guidelines/sidebars), [pop-up buttons](https://developer.apple.com/design/human-interface-guidelines/pop-up-buttons), [lists and tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables), and [disclosure controls](https://developer.apple.com/design/human-interface-guidelines/disclosure-controls). They are product decisions, not a claim of native control implementation or completed HIG/device acceptance. The current revision passes scoped browser navigation/catalog checks; actual iPad use and further usability work remain.
+
+The project has spent too much attention on foundational machinery before establishing a coherent everyday product. Better navigation is a necessary correction, while the destination remains fluent four-skill Russian, native-like pronunciation and independent literary/scientific reading. Advanced curriculum is still thin, learning outcomes and pronunciation assessment remain unvalidated, and broader device/OS runtime work remains open.
+
 ## The central learning loop
 
 1. **Encounter:** the AI teacher introduces a useful utterance in a small conversation or reading passage, with generated or curated audio ready to play. Preserve meaning, situation, exact text and audio provenance. A phrase picked up over a meal can also become material when Ember wants.
@@ -102,7 +114,7 @@ The implemented Reader gives connected passages their own workspace. It preserve
 
 Reading place, open help and own-word notes persist locally. Failed-save guards retain visible edits and prevent guarded actions from silently discarding them; unsaved edits are not promised to survive process loss. Ember can read without a quiz, write an idea in English or Russian, or open a Teacher question anchored to the exact source part. Sending that question is a separate action. Using translation or discussing an idea can support understanding without demonstrating independent Russian reading.
 
-Keeping a phrase is an explicit choice that retains its source span. Later edits create child revisions with navigable source ancestry; reading and extraction do not manufacture attempts or mastery. The Reader's immutable documents, links and sent discussion use event/sync version 7, while its reading state stays local and physical SQLite remains schema 1. These are source contracts, not rollout or learning-quality claims; [ARCHITECTURE.md](ARCHITECTURE.md) details the boundaries.
+Keeping a phrase is an explicit choice that retains its source span. Later edits create child revisions with navigable source ancestry; reading and extraction do not manufacture attempts or mastery. The Reader's immutable documents, links and sent discussion were introduced in event/sync version 7 and remain supported by current version 8, while its reading state stays local and physical SQLite remains schema 1. These are source contracts, not rollout or learning-quality claims; [ARCHITECTURE.md](ARCHITECTURE.md) details the boundaries.
 
 The next reading strand should grow into definitions, proofs and arguments, including constructions such as “let,” “if … then,” “for every,” and “there exists.” General simplified adaptations remain a proposal, distinct from the current stress/translation support. Preserve their original sources and identify generated changes when implemented. Routine teaching has no per-item human approval requirement. [Reading Studio](research/READING_STUDIO.md) describes the evidence and future evaluation: supported access, understanding unfamiliar passages and later phrase use are different outcomes, and memorizing a translation does not establish reading competence.
 

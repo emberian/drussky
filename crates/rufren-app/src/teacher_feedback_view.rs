@@ -17,6 +17,30 @@ pub(crate) fn TeacherFeedback(
     capture_busy: Signal<bool>,
     #[props(default = true)] show_practice: bool,
 ) -> Element {
+    rsx! {
+        TeacherFeedbackContent {key:"{answer.provenance.response_id}",app,answer,active_speaking,capture_busy,show_practice}
+    }
+}
+
+// A new saved answer remounts this keyed component, resetting explicit disclosure
+// and repair state. Explanation is essential when no correction reason exists.
+#[component]
+fn TeacherFeedbackContent(
+    mut app: Signal<AppState>,
+    answer: TeacherResponse,
+    active_speaking: Signal<Option<String>>,
+    capture_busy: Signal<bool>,
+    show_practice: bool,
+) -> Element {
+    let explanation_is_primary = answer.content.feedback.as_ref().is_none_or(|feedback| {
+        !feedback
+            .corrections
+            .iter()
+            .any(|correction| !correction.reason.trim().is_empty())
+    });
+    let mut explanation_open = use_signal(|| explanation_is_primary);
+    let mut examples_open = use_signal(|| false);
+    let mut practice_open = use_signal(|| false);
     let mut repair = use_signal(|| None::<(TeacherResponse, usize, Uuid)>);
     let state = app.read().clone();
     let task = match &answer.request {
@@ -69,16 +93,17 @@ pub(crate) fn TeacherFeedback(
         });
     });
     rsx! {
+        div {class:"teacher-feedback",
                 if let Some(request)=task {
                     section {class:"teacher-feedback-task",aria_label:"The question and your saved response",
-                        h3 {"The question you answered"}
+                        h3 {"Question"}
                         if let Some((instruction,text))=&reading_question {
                             TeacherProse {app,language:"en",text:instruction.clone(),purpose:PresentationPurpose::Reference}
                             PresentedRussian {app,class:"dialogue-russian",text:text.clone(),purpose:PresentationPurpose::Reference}
                         } else {
                             TeacherProse {app,language:"en",text:request.prompt.clone(),purpose:PresentationPurpose::Reference}
                         }
-                        h3 {if request.evidence==TextEvidence::Transcript {"Your saved words to discuss"}else{"Your saved response"}}
+                        h3 {if request.evidence==TextEvidence::Transcript {"Your confirmed words"}else{"Your earlier response"}}
                         PresentedRussian {app,language:if matches!(request.skill,TeacherSkill::Writing|TeacherSkill::Speaking){"ru"}else{"en"},text:request.response.clone(),purpose:PresentationPurpose::Reference,
                             blockquote {style:"white-space:pre-wrap","{request.response}"}
                         }
@@ -86,34 +111,65 @@ pub(crate) fn TeacherFeedback(
                         if request.evidence==TextEvidence::Transcript {p {class:"quiet","These are the words you confirmed or edited from the recording. This feedback concerns their meaning and language."}}
                     }
                 }
-                TeacherProse {key:"explanation-{answer.provenance.response_id}",app,class:"teacher-explanation",language:"en",text:answer.content.explanation.clone(),purpose:PresentationPurpose::Instruction}
                 if let Some(feedback)=&answer.content.feedback {
+                    section {class:"teacher-feedback-critique",
+                    h3 {"Feedback"}
                     p {strong {match feedback.verdict {AiVerdict::Correct=>"This works for the task.",AiVerdict::PartlyCorrect=>"Part of this works; let’s refine it.",AiVerdict::Incorrect=>"There’s something useful to change.",AiVerdict::Uncertain=>"There may be more than one interpretation here."}}}
                     if let Some(text)=&feedback.suggested_response {PresentedRussian {key:"{text}",app,class:"dialogue-russian",text:text.clone(),purpose:PresentationPurpose::Reference}}
                     for (index,correction) in feedback.corrections.iter().enumerate() {div {key:"correction-{answer.provenance.response_id}-{index}",class:"teacher-correction",PresentedRussian {app,text:format!("{} → {}",correction.original,correction.replacement),purpose:PresentationPurpose::Instruction,p {span {lang:"ru","{correction.original}"}" → " strong {lang:"ru","{correction.replacement}"}}}TeacherProse {app,language:"en",text:correction.reason.clone(),purpose:PresentationPurpose::Instruction}}}
+                    }
                 }
-                for (index,_) in answer.content.examples.iter().enumerate() {TeacherExampleView {key:"example-{answer.provenance.response_id}-{index}",app,answer:answer.clone(),index}}
-                div {class:"hint",span {class:"tag","YOUR NEXT STEP"}TeacherProse {app,language:"en",text:answer.content.next_step.clone(),purpose:PresentationPurpose::Instruction}}
+                div {class:"teacher-feedback-explanation",
+                    button {class:"teacher-feedback-disclosure",aria_expanded:explanation_open().to_string(),onclick:move |_| explanation_open.toggle(),
+                        span {"Explanation"} span {aria_hidden:"true",if explanation_open() {"−"} else {"+"}}
+                    }
+                    if explanation_open() {
+                        section {class:"teacher-feedback-detail",aria_label:"Full explanation",
+                            TeacherProse {key:"explanation-{answer.provenance.response_id}",app,class:"teacher-explanation",language:"en",text:answer.content.explanation.clone(),purpose:PresentationPurpose::Instruction}
+                        }
+                    }
+                }
+                section {class:"teacher-feedback-next",h3 {"Next step"}TeacherProse {app,language:"en",text:answer.content.next_step.clone(),purpose:PresentationPurpose::Instruction}}
                 if repair_available {
                     if let Some((source,index,session))=repair() {
                         section {class:"teacher-feedback-repair",aria_label:"Try the same question again",
                             h3 {id:focus_id,tabindex:"-1","Try this question again"}
-                            p {class:"quiet","Use the explanation as you try again. Your earlier answer is kept."}
+                            p {class:"quiet","Use the feedback as you try again. Your earlier answer is kept."}
                             TeacherPracticeForm {key:"repair-{response_id}-{session}",app,answer:source,index,active_speaking,capture_busy}
                         }
                     } else {
-                        button {class:"secondary",disabled:busy,onclick:move |_| {
+                        button {class:"primary teacher-feedback-retry",disabled:busy,onclick:move |_| {
                             if app.read().teacher_busy || app.read().speech_busy || capture_busy() { return; }
                             let result=app.write().start_teacher_feedback_repair(&repair_answer);
                             match result {Ok(next)=>{app.write().notice.clear();repair.set(Some(next));},Err(error)=>app.write().notice=error}
                         },"Try this question again"}
                     }
                 }
-                if show_practice && !answer.content.practice.is_empty() {h3 {"More practice"}
-                    for (index,_) in answer.content.practice.iter().enumerate() {
-                        TeacherPracticeForm {key:"{answer.provenance.response_id}-{index}",app,answer:answer.clone(),index,active_speaking,capture_busy}
+                div {class:"teacher-feedback-details",
+                    if !answer.content.examples.is_empty() {
+                        button {class:"teacher-feedback-disclosure",aria_expanded:examples_open().to_string(),onclick:move |_| examples_open.toggle(),
+                            span {"Examples"} span {aria_hidden:"true",if examples_open() {"−"} else {"+"}}
+                        }
+                        if examples_open() {
+                            section {class:"teacher-feedback-detail",aria_label:"Examples",
+                                for (index,_) in answer.content.examples.iter().enumerate() {TeacherExampleView {key:"example-{answer.provenance.response_id}-{index}",app,answer:answer.clone(),index}}
+                            }
+                        }
+                    }
+                    if show_practice && !answer.content.practice.is_empty() {
+                        button {class:"teacher-feedback-disclosure",aria_expanded:practice_open().to_string(),onclick:move |_| practice_open.toggle(),
+                            span {"More practice"} span {aria_hidden:"true",if practice_open() {"−"} else {"+"}}
+                        }
+                        if practice_open() {
+                            section {class:"teacher-feedback-detail",aria_label:"More practice",
+                                for (index,_) in answer.content.practice.iter().enumerate() {
+                                    TeacherPracticeForm {key:"{answer.provenance.response_id}-{index}",app,answer:answer.clone(),index,active_speaking,capture_busy}
+                                }
+                            }
+                        }
                     }
                 }
                 crate::teacher_dialogue_view::AskAboutThis {app,document:teacher_document_id(&answer),focus:rufren_tutor::TeacherDialogueFocus::Feedback,disabled:capture_busy()}
+        }
     }
 }

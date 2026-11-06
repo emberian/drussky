@@ -82,6 +82,7 @@ pub(crate) fn TeacherDialogues(mut app: Signal<AppState>) -> Element {
     let have_active = matches!(&active, Ok(Some(_)));
     rsx! {
         style {"{STYLE}"}
+        div {class:"page-heading",h1 {"Talk"}}
         section {class:"dialogue-workspace",aria_label:"Conversations with your teacher",
             details {class:"panel dialogue-library",open:!have_active,
                 summary {"Conversations & new questions"}

@@ -1,6 +1,7 @@
 // Actual app rendering and presentation facts; synthetic fixture, no model calls.
 const { chromium } = require(process.env.RUFREN_PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
+const { navigate } = require('./qa-navigation.cjs');
 const response = {
   request: { mode: 'answer_feedback', input: {
     request_id: 'presentation-fixture', revision_id: 'fixture-revision',
@@ -37,9 +38,9 @@ const response = {
     .some(event => event.fact.kind === 'stimulus_presented' && event.fact.data.russian === text), text);
   try {
     await page.goto(process.env.RUFREN_QA_URL || 'http://127.0.0.1:8091');
-    await page.getByRole('navigation').waitFor();
+    await page.getByRole('navigation', { name: 'Main navigation sidebar', exact: true }).waitFor();
     await page.evaluate(value => window.rufrenLibrary.write('rufren.v1.meta.teacher_response', JSON.stringify(value)), response);
-    await page.getByRole('navigation').getByRole('button', { name: /Teacher/ }).click();
+    await navigate(page, 'Teacher');
     await page.locator('.teacher-correction').scrollIntoViewIfNeeded();
     await waitSeen('Я читать. → Я читаю.');
     await waitSeen('Я читаю книгу.');

@@ -15,6 +15,7 @@ mod gateway;
 mod learning;
 mod lessons;
 mod model;
+mod navigation;
 mod practice;
 mod progress;
 mod progress_view;
@@ -67,6 +68,7 @@ use repository::{Result, synchronize};
 use rufren_core::*;
 
 const STYLE: &str = include_str!("style.css");
+const FEEDBACK_STYLE: &str = include_str!("teacher_feedback_view.css");
 fn main() {
     #[cfg(all(feature = "desktop", not(target_arch = "wasm32")))]
     dioxus::LaunchBuilder::desktop()
@@ -120,52 +122,30 @@ fn App() -> Element {
 #[component]
 fn Shell(initial: AppState) -> Element {
     let mut app = use_signal(|| initial);
-    let mut navigation_open = use_signal(|| false);
-    let current_page = use_memo(move || app.read().page);
-    use_effect(move || {
-        let _page = current_page();
-        navigation_open.set(false);
-    });
     let state = app.read().clone();
+    let destination = navigation::current(&state).label();
     rsx! {
         style {"{STYLE}"}
+        style {"{FEEDBACK_STYLE}"}
         div {class:"shell",
-            aside {class:"sidebar",onkeydown:move |event|if event.key()==Key::Escape && navigation_open(){navigation_open.set(false);focus_navigation_toggle();},
-                div {class:"navigation-heading",
-                    a {class:"brand",href:"#",onclick:move |event|{event.prevent_default();navigate_shell(app,navigation_open,Page::Today);}, span {class:"brand-mark","р"} div {strong {"rufren"} small {"a world in another language"}}}
-                    span {class:"mobile-destination","{state.page.label()}"}
-                    button {id:"navigation-toggle",class:"navigation-toggle",aria_controls:"main-navigation",aria_expanded:navigation_open(),onclick:move |_|navigation_open.set(!navigation_open()),if navigation_open(){"Close"}else{"Menu"}}
-                }
-                nav {id:"main-navigation",class:if navigation_open(){"navigation expanded"}else{"navigation"},aria_label:"Main navigation",for page in Page::ALL {button {class:if state.page==page {"nav-item active"}else{"nav-item"},aria_current:if state.page==page {"page"}else{"false"},onclick:move |_|navigate_shell(app,navigation_open,page),span {aria_hidden:"true","{page.icon()}"} "{page.label()}"}}}
-                div {class:"sidebar-bottom",span {class:"status-dot"} "On this device" p {"Your pace. Your Russian."}}
+            aside {class:"sidebar",
+                a {class:"brand",href:"#",onclick:move |event|{event.prevent_default();act(app,|s|navigation::open(s,navigation::Destination::Today));}, span {class:"brand-mark","р"} strong {"rufren"}}
+                navigation::PrimaryNavigation {app,compact:false}
+                navigation::SecondaryNavigation {app,compact:false}
+                div {class:"sidebar-bottom",span {class:"status-dot"} "On this device"}
             }
             main {class:"main",
-                header {class:"topbar",span {"YOUR RUSSIAN NOTEBOOK"} span {class:"quiet","{state.page.label()}"}}
+                header {class:"topbar",span {"Rufren"} span {class:"quiet","{destination}"}}
+                navigation::SecondaryNavigation {app,compact:true}
                 if !state.notice.is_empty() {div {class:"notice",role:"status",span {"{state.notice}"} button {aria_label:"Dismiss message",onclick:move |_|app.write().notice.clear(),"×"}}}
                 match state.page {
                     Page::Today=>rsx!{Today {app}},Page::Lessons=>rsx!{Lessons {app}},Page::Teacher=>rsx!{Teacher {app}},Page::Library=>rsx!{LibraryView {app}},Page::Practice=>rsx!{Practice {app}},
                     Page::Reader=>rsx!{reader_view::ReaderView {app}},Page::Studio=>rsx!{Studio {app}},Page::Progress=>rsx!{Progress {app}},Page::Settings=>rsx!{Settings {app}},
                 }
             }
+            navigation::PrimaryNavigation {app,compact:true}
         }
     }
-}
-
-fn navigate_shell(mut app: Signal<AppState>, mut open: Signal<bool>, page: Page) {
-    let result = app.write().navigate(page);
-    match result {
-        Ok(()) => {
-            open.set(false);
-            focus_page_heading();
-        }
-        Err(problem) => app.write().notice = problem,
-    }
-}
-
-fn focus_navigation_toggle() {
-    spawn(async move {
-        let _ = document::eval("document.getElementById('navigation-toggle')?.focus();").await;
-    });
 }
 
 fn focus_page_heading() {
@@ -194,33 +174,48 @@ fn Today(mut app: Signal<AppState>) -> Element {
             .is_some_and(|s| s.phase != Phase::Complete);
     let sound_resume = state.sound_focus_unfinished().unwrap_or(false);
     let resume = resume || (sound_resume && state.sound_focus_is_selected().unwrap_or(false));
-    let returning = resume || sound_resume || attempts > 0;
+    let teaching = teacher_notebook_view::unfinished_lesson(&state);
+    let teaching_id = teaching.as_ref().map(|entry| entry.document_id);
+    let resume_teaching = !resume && teaching_id.is_some();
+    let teaching_title = teaching
+        .as_ref()
+        .map(teacher_notebook_view::title)
+        .unwrap_or_default();
+    let returning = resume || sound_resume || teaching.is_some() || attempts > 0;
+    let teacher_returns = state.teacher_revisits(now);
+    let show_teacher_returns =
+        !teacher_returns.entries.is_empty() || !teacher_returns.diagnostics.is_empty();
+    let show_passage_returns = SpacedReview
+        .queue(&state.library, now, &Skill::ALL)
+        .iter()
+        .any(|entry| entry.state.attempts > 0);
     let finished = !resume
+        && !resume_teaching
         && state
             .daily_plan(now)
             .ok()
             .flatten()
             .is_some_and(|plan| !plan.items.is_empty() && plan.is_finished());
     rsx! {
-        section {class:if returning {"hero hero-compact"}else{"hero"},div {class:"eyebrow","BEGIN WITH CURIOSITY"} h1 {if returning {"Your Russian, today."}else{"A little Russian." br {} em {"A bigger world."}}}
-            if !returning {p {class:"lede","A conversation with a friend. A sentence from another world. Start with something you want to understand."}}
-            div {class:"actions",button {class:"primary",onclick:move |_|act(app,|s|if finished {s.navigate(Page::Progress)}else{s.begin()}),if resume {"Continue your practice →"}else if finished {"See your practice →"}else if attempts==0 {"Start with your teacher →"}else{"Choose my next step →"}}
-            button {class:"text-button",onclick:move |_|act(app,|s|s.new_passage()),"Add a passage"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Teacher)),"Ask your teacher"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Explore lessons"}}
-            if !returning {div {class:"orbital",aria_hidden:"true",div {class:"orbit orbit-one"} div {class:"orbit orbit-two"} span {class:"star star-one","✦"} span {class:"star star-two","·"} span {class:"planet"}}}
+        section {class:if resume_teaching {"hero hero-compact teacher-resume"}else{"hero hero-compact"},
+            div {class:"eyebrow","YOUR RUSSIAN, AT YOUR PACE"}
+            h1 {if returning {"Welcome back."}else{"Make yourself at home."}}
+            p {class:"lede","A conversation, a passage, a little practice. Follow what interests you."}
+            if resume_teaching {p {class:"quiet","Continue " PresentedRussian {app,text:teaching_title.clone(),language:"en",inline:true,purpose:PresentationPurpose::Instruction} ". Your place and unfinished response are kept."}}
+            div {class:"actions",
+                button {id:"today-primary",class:"primary",onclick:move |_|act(app,|s|{
+                    if resume {s.begin()}else if let Some(id)=teaching_id {s.navigate(Page::Teacher)?;s.select_teacher_document(id)?;s.repo.set("teacher_surface",&"lessons")}else if finished {s.navigate(Page::Progress)}else{s.begin()}
+                }),if resume {"Continue learning"}else if resume_teaching {"Continue this lesson"}else if finished {"See your progress"}else if attempts==0 {"Start learning"}else{"Continue learning"}}
+                button {class:"secondary",onclick:move |_|act(app,|s|navigation::open(s,navigation::Destination::Talk)),"Let’s talk"}
+                button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Reader)),"Find something to read"}
+            }
         }
-        daily_plan_view::DailyPractice {app}
+        details {class:"today-session",summary {"Your practice session"}daily_plan_view::DailyPractice {app}}
         ContinueSoundFocus {app}
         PausedSoundFocus {app}
-        details {class:"panel",summary {"Browse your saved Teacher returns"}teacher_revisit_view::TeacherReturns {app,expanded:true}}
-        details {class:"panel",summary {"Browse your saved passage returns"}review_timing_view::PassageReturns {app}}
-        teacher_notebook_view::ContinueTeacher {app}
+        if show_teacher_returns {details {class:"panel",summary {"Browse your saved Teacher returns"}teacher_revisit_view::TeacherReturns {app,expanded:true}}}
+        if show_passage_returns {details {class:"panel",summary {"Browse your saved passage returns"}review_timing_view::PassageReturns {app}}}
         drafts_view::PausedPractices {app}
-        div {class:"section-heading",h2 {"Make it yours"}span {"Small steps, connected."}}
-        div {class:"cards three",
-            button {class:"feature-card",onclick:move |_|act(app,|s|s.navigate(Page::Reader)),span {class:"card-number","01 / READ"}h3 {"A story. An idea. A new world."}p {"Explore Russian fiction and ideas, with help a sentence away."}span {class:"card-link","Find something to read ↗"}}
-            button {class:"feature-card",onclick:move |_|act(app,|s|s.navigate(Page::Studio)),span {class:"card-number","02 / LISTEN CLOSELY"}h3 {"Find your Russian voice"}p {"A place for reference audio, your recordings, and focused feedback."}span {class:"card-link","Explore the speech studio ↗"}}
-            button {class:"feature-card",onclick:move |_|app.write().page=Page::Progress,span {class:"card-number","03 / RETURN"}h3 {"See what stays with you"}p {"Keep reading, writing, listening, and speaking in view as you practice."}span {class:"card-link","View your practice ↗"}}
-        }
         div {class:"quiet-summary",span {"{count} passages in your notebook"}span {"{attempts} saved practice attempts"}}
     }
 }
@@ -265,9 +260,20 @@ fn PausedSoundFocus(app: Signal<AppState>) -> Element {
 fn LibraryView(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
     let d = state.editor.clone();
-    let heads: std::collections::BTreeMap<_, _> = state.library.heads().into_iter().filter(|(_, revisions)| {
-        !revisions.iter().all(|id| state.library.events.get(id).is_some_and(is_reader_audio_reference))
-    }).collect();
+    let heads: std::collections::BTreeMap<_, _> = state
+        .library
+        .heads()
+        .into_iter()
+        .filter(|(_, revisions)| {
+            !revisions.iter().all(|id| {
+                state
+                    .library
+                    .events
+                    .get(id)
+                    .is_some_and(is_reader_audio_reference)
+            })
+        })
+        .collect();
     let sound_reference = d
         .parent
         .and_then(|id| state.library.events.get(&id))
@@ -276,7 +282,7 @@ fn LibraryView(mut app: Signal<AppState>) -> Element {
         d.id.and_then(|id| heads.get(&id))
             .is_some_and(|v| v.len() > 1);
     rsx! {
-        div {class:"page-heading",div {div {class:"eyebrow","YOUR COLLECTION"}h1 {"A library of possibilities"}p {"Keep the original, its meaning, and where it came from."}}button {class:"secondary",onclick:move |_|act(app,|s|s.new_passage()),"New passage"}}
+        div {class:"page-heading",div {div {class:"eyebrow","YOUR COLLECTION"}h1 {"Your notebook"}p {"Keep the original, its meaning, and where it came from."}}button {class:"secondary",onclick:move |_|act(app,|s|s.new_passage()),"New passage"}}
         editor_drafts_view::EditorDrafts {app}
         div {class:"library-layout",
             section {class:"passage-list",aria_label:"Saved passages",

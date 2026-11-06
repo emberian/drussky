@@ -1,0 +1,21 @@
+/* Feedback keeps the task and its next action together; supporting material opens on request. */
+.teacher-feedback { max-width: 68ch; font-size: 1rem; line-height: 1.6; }
+.teacher-feedback h3 { font-family: inherit; font-size: 1rem; font-weight: 650; line-height: 1.4; margin: 0 0 .65rem; letter-spacing: normal; }
+.teacher-feedback p { margin: .5rem 0 .9rem; }
+.teacher-feedback-task { padding-bottom: 1.5rem; border-bottom: 1px solid var(--border, #d9ddd7); }
+.teacher-feedback-task h3:not(:first-child) { margin-top: 1.35rem; }
+.teacher-feedback-task blockquote { font-family: inherit; font-size: 1rem; line-height: 1.6; padding: .65rem .9rem; margin: .5rem 0; border-left: 2px solid var(--border, #d9ddd7); background: transparent; }
+.teacher-feedback .dialogue-russian { font-size: 1.15rem; line-height: 1.6; }
+.teacher-feedback-critique { margin: 1.5rem 0; }
+.teacher-feedback .teacher-correction { border-left: 0; padding: 0; margin: 1rem 0; }
+.teacher-feedback .teacher-correction + .teacher-correction { border-top: 1px solid var(--border, #d9ddd7); padding-top: 1rem; }
+.teacher-feedback-next { margin: 1.5rem 0 1rem; }
+.teacher-feedback-next .teacher-prose, .teacher-feedback-next .teacher-prose p { font-family: inherit; font-size: 1rem; font-weight: 400; line-height: 1.6; }
+.teacher-feedback-retry { margin-bottom: 1.25rem; }
+.teacher-feedback-repair { margin: 1.5rem 0; scroll-margin-top: 1rem; }
+.teacher-feedback-details { margin: 1.5rem 0; border-top: 1px solid var(--border, #d9ddd7); }
+.teacher-feedback-disclosure { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; min-height: 48px; margin: 0; padding: .75rem 0; border: 0; border-bottom: 1px solid var(--border, #d9ddd7); border-radius: 0; background: transparent; color: inherit; text-align: left; font: inherit; font-weight: 600; box-shadow: none; }
+.teacher-feedback-disclosure:hover { background: transparent; color: var(--accent, #315d50); }
+.teacher-feedback-disclosure:focus-visible { outline: 2px solid var(--accent, #315d50); outline-offset: 3px; }
+.teacher-feedback-detail { padding: 1rem 0; }
+.teacher-feedback .teacher-explanation { white-space: normal; }

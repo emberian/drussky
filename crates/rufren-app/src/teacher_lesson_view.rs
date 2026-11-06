@@ -1,5 +1,6 @@
 //! A saved teacher lesson is navigated one step at a time; navigation is not a grade.
 use crate::{
+    exposure_view::PresentedRussian,
     model::{AppState, Page},
     teacher_example_view::TeacherExampleView,
     teacher_practice::saved_teacher_practice_origin,
@@ -10,8 +11,6 @@ use dioxus::prelude::*;
 use rufren_core::{PresentationPurpose, teacher_document_id};
 use rufren_tutor::{ExamplePresentation, TeacherRequest, TeacherResponse};
 use uuid::Uuid;
-
-const STYLE: &str = include_str!("teacher_lesson_view.css");
 
 #[derive(Clone, PartialEq)]
 struct LessonStep {
@@ -158,9 +157,7 @@ fn LessonCursor(
         .count();
     let missing_archive = state.library.teacher_document(document).is_none();
     drop(state);
-    let jump_id = use_hook(|| format!("teacher-lesson-jump-{}", Uuid::new_v4()));
     rsx! {
-        style {"{STYLE}"}
         div {class:"teacher-lesson-flow","data-lesson-document":document.to_string(),"data-lesson-step":position.map(|i|i.to_string()).unwrap_or_default(),
             div {class:"teacher-lesson-position",
                 p {class:"quiet",role:"status",aria_live:"polite",match position {
@@ -171,6 +168,19 @@ fn LessonCursor(
             }
             if let Err(error)=&*cursor.read() {p {class:"teacher-lesson-error",role:"alert","{error} Choose a step to continue; your saved place has not been reset."}}
             if !problem.read().is_empty() {p {class:"teacher-lesson-error",role:"alert","{problem}"}}
+            div {class:"teacher-lesson-layout",
+                nav {class:"teacher-lesson-outline",aria_label:"Lesson outline",
+                    h3 {"In this lesson"}
+                    ol {
+                        for (index,step) in steps.iter().enumerate() {
+                            li {key:"outline-{index}",button {class:"teacher-step-row",aria_current:if position==Some(index) {"step"}else{"false"},disabled:busy,onclick:move |_|change_place(app,cursor,problem,active_speaking,capture_busy,document,count,Some(index),false,focus_request),
+                                span {aria_hidden:"true","{index+1}"}PresentedRussian {app,text:step.goal.clone(),language:"en",purpose:PresentationPurpose::Reference,strong {"{step.goal}"}}
+                            }}
+                        }
+                    }
+                    button {class:"text-button",aria_current:if position==Some(count) {"step"}else{"false"},disabled:busy,onclick:move |_|change_place(app,cursor,problem,active_speaking,capture_busy,document,count,Some(count),false,focus_request),"Finish for now"}
+                }
+                div {class:"teacher-lesson-content",
             if let Some(step)=current {
                 for step in [step.clone()] {
                     LessonStepView {key:"{document}-step-{step.id}",app,answer:answer.clone(),step,active_speaking,capture_busy,busy}
@@ -187,13 +197,7 @@ fn LessonCursor(
                     button {class:"secondary",disabled:busy||position.is_none_or(|i|i==0),onclick:move |_|change_place(app,cursor,problem,active_speaking,capture_busy,document,count,position.map(|i|i.saturating_sub(1)),false,focus_request),"← Back"}
                     button {class:if current.is_some_and(|step|step.practice.is_some()) {"secondary"}else{"primary"},disabled:busy||position.is_none_or(|i|i>=count),onclick:move |_|change_place(app,cursor,problem,active_speaking,capture_busy,document,count,position.map(|i|(i+1).min(count)),false,focus_request),if position==Some(count.saturating_sub(1)) {"Finish for now →"}else{"Next step →"}}
                 }
-                div {class:"teacher-lesson-jump",
-                    label {r#for:jump_id.clone(),"Go to a step"}
-                    select {id:jump_id,value:position.map(|i|i.to_string()).unwrap_or_default(),disabled:busy,onchange:move |event|change_place(app,cursor,problem,active_speaking,capture_busy,document,count,event.value().parse().ok(),false,focus_request),
-                        if position.is_none() {option {value:"",disabled:true,"Choose a step…"}}
-                        for (index,step) in steps.iter().enumerate() {option {value:index.to_string(),{format!("{}. {}",index+1,step.goal)}}}
-                        option {value:count.to_string(),"Finished for now"}
-                    }
+            }
                 }
             }
             if missing_archive {p {class:"quiet","This lesson is readable here. Saving a place requires its original in your teacher notebook."}}

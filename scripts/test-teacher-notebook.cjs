@@ -106,16 +106,40 @@ async function main() {
     const rect = heading.getBoundingClientRect(); return rect.top >= 0 && rect.bottom <= innerHeight;
   });
   const jump = async position => {
-    const picker = flow.getByRole('combobox', { name: 'Go to a step', exact: true });
-    await picker.focus();
-    await picker.selectOption(String(position)); await step(position); await focusedStep();
+    const row = flow.locator('.teacher-step-row').nth(position);
+    await row.click(); await step(position); await focusedStep();
+    assert.equal(await row.getAttribute('aria-current'), 'step');
+    assert.equal(await flow.getByRole('combobox').count(), 0, 'Lesson outline remains visible without opening a select');
   };
   const start = async index => {
-    await openLessonTools(page);
+    await nav('Lessons');
+    assert.equal(await page.locator('#teacher-lesson').count(), 0, 'Catalog is the single lesson browser');
+    if (index === 0) {
+      await page.setViewportSize({width:390,height:844});
+      assert(await page.locator('.lesson-index').isVisible(), 'Compact Learn starts with the catalog');
+      assert.equal(await page.locator('.lesson-body').isVisible(), false);
+      assert(await page.locator('.lesson-index').evaluate(node=>node.scrollHeight<=node.clientHeight+1), 'Catalog has no nested scroll region');
+      await page.locator('.lesson-link').first().click();
+      assert.equal(await page.locator('.lesson-index').isVisible(),false);
+      await page.waitForFunction(()=>{const back=document.querySelector('.lesson-catalog-back')?.getBoundingClientRect();return document.activeElement?.id==='lesson-detail-heading'&&back?.top>=0&&back.bottom<=innerHeight;});
+      await page.getByRole('button',{name:'Back to lessons',exact:false}).click();
+      assert(await page.locator('.lesson-index').isVisible());
+      await page.waitForFunction(()=>document.activeElement?.id==='lesson-search');
+      await nav('Settings'); await nav('Lessons');
+      assert(await page.locator('.lesson-index').isVisible(), 'A persisted selection does not hide the catalog on return');
+      assert.equal(await page.locator('.lesson-body').isVisible(),false);
+      await page.screenshot({path:path.join(OUTPUT,'phone-catalog-list.png'),fullPage:true});
+      await page.setViewportSize({width:1200,height:900});
+      await page.locator('#lesson-search').fill('mathematical');
+      assert.equal(await page.locator('.lesson-link').count(), 1, 'Catalog search finds a meaningful topic');
+      await page.locator('#lesson-search').fill('');
+    }
+    await page.locator('.lesson-link').nth(index).click();
+    await page.getByRole('button', { name: 'Learn with the AI teacher', exact: false }).click();
     const panel = page.locator('details.teacher-start');
     if (await panel.getAttribute('open') === null) await panel.locator(':scope > summary').click();
-    await page.locator('#teacher-lesson').selectOption({ index });
     await page.getByRole('button', { name: 'Teach me this lesson', exact: false }).click(); await step(0);
+    assert.equal(await flow.locator('.teacher-step-row[aria-current="step"]').count(), 1);
   };
   const openSaved = async query => {
     await openLessonTools(page);
@@ -126,7 +150,7 @@ async function main() {
   };
   try {
     await page.goto(APP); await page.locator('main.main h1').waitFor(); await connect(); await nav('Teacher');
-    await page.getByText('Ready · Synthetic notebook fixture', { exact: true }).waitFor();
+    await page.getByText('Ready · Synthetic notebook fixture', { exact: true }).waitFor({ state: 'attached' });
     await start(0);
     const alpha = await flow.getAttribute('data-lesson-document');
     assert.equal(await page.locator('.teacher-exercise').count(), 1);
@@ -169,6 +193,14 @@ async function main() {
     assert.equal(await page.getByText(MARKERS.detail, { exact: true }).count(), 0, 'Disclosures reset when changing steps');
     await jump(1);
     checks.push('Feedback returns to exact source document/practice, not the latest other lesson');
+    await page.getByRole('button', { name: 'Review saved practice', exact: true }).click();
+    await page.locator('#teacher-attempt-search').fill('reading');
+    assert(await page.locator('.teacher-history-row').count() > 0, 'Saved practice can be found by skill');
+    assert.equal(await page.locator('#teacher-attempt').count(), 0, 'Saved practice is a searchable list, not a capped select');
+    await page.locator('.teacher-history-row').first().click();
+    assert.equal(await page.locator('.teacher-history-row').first().getAttribute('aria-pressed'), 'true');
+    await page.getByRole('button', { name: 'Return to current teaching', exact: true }).click(); await step(1);
+
     await flow.getByRole('button', { name: 'Pause & return to Today', exact: true }).click();
     await page.locator('.teacher-resume').waitFor();
     const beforeReload = (await events(page)).map(e => e.id);
@@ -196,6 +228,7 @@ async function main() {
     legacy = true;
     await openLessonTools(page);
     const panel = page.locator('details.teacher-start'); if (await panel.getAttribute('open') === null) await panel.locator(':scope > summary').click();
+    await page.getByText('Connection and lesson context', { exact: true }).click();
     const ready = page.waitForResponse(r => r.url().endsWith('/api/teacher/status'));
     await page.getByRole('button', { name: 'Check connection again', exact: true }).click(); await ready;
     await page.getByText('Ready · Synthetic legacy fixture', { exact: true }).waitFor();
@@ -207,6 +240,24 @@ async function main() {
     assert.equal(await page.locator('.teacher-exercise').count(), 1);
     assert.equal(await flow.locator('.teacher-lesson-current').getAttribute('data-step-id'), 'practice-0');
     checks.push('Unadvertised guided capability uses legacy schema; original disclosure and original practice order remain readable');
+    // Search must include old attempts beyond the former eighty-row select cap.
+    await page.evaluate(() => {
+      const base=window.rufrenLibrary.entries().filter(([key])=>key.startsWith('rufren.v1.event.')).map(([,raw])=>JSON.parse(raw)).find(event=>event.fact.kind==='attempt_recorded');
+      for(let index=0;index<81;index++) {
+        const event={...base,id:crypto.randomUUID(),recorded_at_ms:base.recorded_at_ms-1000-index,fact:{kind:'attempt_recorded',data:{...base.fact.data,response:'uncapped history fixture '+index}}};
+        window.rufrenLibrary.write('rufren.v1.event.'+event.id,JSON.stringify(event));
+      }
+    });
+    await page.reload(); await page.locator('main.main h1').waitFor(); await connect(); await nav('Teacher');
+    await page.getByRole('button',{name:'Review saved practice',exact:true}).click();
+    assert.equal(await page.locator('.teacher-history-row').count(),12);
+    await page.getByRole('button',{name:'Show more saved practice',exact:true}).click();
+    assert.equal(await page.locator('.teacher-history-row').count(),24);
+    await page.locator('#teacher-attempt-search').fill('uncapped history fixture 80');
+    assert.equal(await page.locator('.teacher-history-row').count(),1);
+    await page.locator('.teacher-history-row').click();
+    assert.equal(await page.locator('blockquote').innerText(),'uncapped history fixture 80');
+    checks.push('Search includes attempts older than eighty rows; Show more expands twelve to twenty-four and selection opens the exact response');
     assert.deepEqual(errors, []); assert.deepEqual(forbidden, []);
     await fs.writeFile(path.join(OUTPUT, 'result.json'), JSON.stringify({ ok: true, fixture: 'All teaching is synthetic; no inference or main service mutation', checks, layouts, requests, events: await events(page), errors, forbidden }, null, 2));
     console.log('PASS synthetic notebook/guided lesson archive, drafts, exact return, resume, search, legacy fallback and responsive layout');

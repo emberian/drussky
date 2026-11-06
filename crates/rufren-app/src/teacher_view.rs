@@ -13,8 +13,10 @@ use rufren_core::*;
 use rufren_tutor::*;
 use uuid::Uuid;
 
+const TEACHER_STYLE: &str = include_str!("teacher_lesson_view.css");
+
 #[component]
-pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
+pub(crate) fn Teacher(app: Signal<AppState>) -> Element {
     let conversations = app
         .read()
         .repo
@@ -24,18 +26,14 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
         .as_deref()
         == Some("dialogues");
     rsx! {
-        style {".teacher-surface-switch {{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 22px}}.teacher-surface-switch button[aria-pressed=true] {{background:var(--green);color:#fff6da}}"}
-        div {class:"page-heading teacher-compact-heading",h1 {"Your Russian teacher"}}
-        div {class:"teacher-surface-switch",role:"group",aria_label:"Teacher activities",
-            button {class:"secondary",aria_pressed:!conversations,onclick:move |_|act(app,|s|s.repo.set("teacher_surface",&"lessons")),"Lessons"}
-            button {class:"secondary",aria_pressed:conversations,onclick:move |_|act(app,|s|s.repo.set("teacher_surface",&"dialogues")),"Conversations"}
-        }
         if conversations {crate::teacher_dialogue_view::TeacherDialogues {app}}else{TeacherLessons {app}}
     }
 }
 
 #[component]
 fn TeacherLessons(mut app: Signal<AppState>) -> Element {
+    let mut history_query = use_signal(String::new);
+    let mut history_limit = use_signal(|| 12usize);
     let mut history_for = use_signal(|| None::<String>);
     let active_speaking = use_signal(|| None::<String>);
     let capture_busy = use_signal(|| false);
@@ -121,6 +119,12 @@ fn TeacherLessons(mut app: Signal<AppState>) -> Element {
             .is_ok_and(|status| status.lesson_flow == Some(LessonFlowCapability::GuidedV1))
     });
     let lesson = state.lesson().or_else(|| state.content.lessons.first());
+    let starting_selected = answer.as_ref().is_none_or(|answer| match &answer.request {
+        TeacherRequest::TeachLesson(request) => {
+            lesson.is_some_and(|lesson| lesson.id != request.lesson_id)
+        }
+        _ => false,
+    });
     let recent_practice = state.lesson_practice_summary().ok();
     let prepared_context = answer.as_ref().and_then(|answer| match &answer.request {
         TeacherRequest::TeachLesson(request) => request.learner_context.clone(),
@@ -134,31 +138,27 @@ fn TeacherLessons(mut app: Signal<AppState>) -> Element {
         .filter(|r| r.content.validate().is_ok());
     let history_key = response_key.clone();
     let management = rsx! {
-        TeacherNotebook {app,disabled:state.teacher_busy || state.speech_busy || capture_busy(),on_selected:move |_|history_for.set(None)}
-        details {class:"panel teacher-start",open:answer.is_none(),
-            summary {if answer.is_some(){"Start another lesson"}else{"Choose your first lesson"}}
-            h2 {"What shall we work on?"}
-            label {r#for:"teacher-lesson","Your lesson"}
-            select {id:"teacher-lesson",value:lesson.map(|l|l.id.clone()).unwrap_or_default(),disabled:state.teacher_busy,onchange:move |e|act(app,|s|{s.selected_lesson=Some(e.value());s.repo.set("selected_lesson",&s.selected_lesson)}),
-                for lesson in &state.content.lessons {option {value:lesson.id.clone(),"{lesson.title}"}}
-            }
-            if let Some(lesson)=lesson {p {class:"lesson-goal","{lesson.goal}"}}
-            if let Some(recent)=recent_practice {
-                details {class:"teacher-context-preview",
-                    summary {"Recent practice sent with this lesson"}
-                    p {class:"quiet","Includes a short summary of your saved work on this lesson: {recent.observations.len()} recent responses."}
+        div {class:"teacher-workspace-actions actions",
+            button {class:"secondary",disabled:state.teacher_busy || state.speech_busy || capture_busy(),onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Browse lessons"}
+            TeacherNotebook {app,disabled:state.teacher_busy || state.speech_busy || capture_busy(),on_selected:move |_|history_for.set(None)}
+        }
+        details {class:"teacher-start",open:starting_selected,
+            summary {if answer.is_some(){"Start a new teaching session"}else{"Begin with your teacher"}}
+            if let Some(lesson)=lesson {h2 {"{lesson.title}"}p {class:"lesson-goal","{lesson.goal}"}}
+            div {class:"actions",button {class:"primary",disabled:state.teacher_busy || state.speech_busy || capture_busy(),onclick:move |_|{let mut request=app.read().lesson_teaching_request();if !supports_guided {if let Ok(TeacherRequest::TeachLesson(lesson))=&mut request {lesson.lesson_flow=None;}}send_teacher(app,request);},if state.teacher_busy {"Your teacher is thinking…"}else{"Teach me this lesson →"}}}
+            details {class:"teacher-connection",
+                summary {"Connection and lesson context"}
+                if let Some(recent)=recent_practice {
+                    p {class:"quiet","Includes {recent.observations.len()} recent saved responses."}
                     PresentedRussian {app,text:recent.provider_context(),language:"en",purpose:PresentationPurpose::Instruction,pre {class:"teacher-context-text","{recent.provider_context()}"}}
                 }
+                match status {
+                    Some(Ok(status))=>rsx! {p {class:"quiet",role:"status",if status.enabled {"Ready" if let Some(model)=&status.model {" · {model}"}}else{"{status.message}"}}},
+                    Some(Err(problem))=>rsx! {p {class:"quiet",role:"status","{problem}"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Settings)),"Open teacher connection"}},
+                    None=>rsx! {p {class:"quiet",role:"status","Checking your teacher connection…"}},
+                }
+                button {class:"text-button",disabled:state.teacher_busy,onclick:move |_|availability.restart(),"Check connection again"}
             }
-            div {class:"actions",button {class:"primary",disabled:state.teacher_busy || state.speech_busy || capture_busy(),onclick:move |_|{let mut request=app.read().lesson_teaching_request();if !supports_guided {if let Ok(TeacherRequest::TeachLesson(lesson))=&mut request {lesson.lesson_flow=None;}}send_teacher(app,request);},if state.teacher_busy {"Your teacher is thinking…"}else{"Teach me this lesson →"}}
-                button {class:"secondary",onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Open lesson & practice"}}
-            p {class:"quiet","Start with a short explanation, try the words, then bring them into your next conversation."}
-            match status {
-                Some(Ok(status))=>rsx! {p {class:"quiet",role:"status",if status.enabled {"Ready" if let Some(model)=&status.model {" · {model}"}}else{"{status.message}"}}},
-                Some(Err(problem))=>rsx! {p {class:"quiet",role:"status","{problem}"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Settings)),"Open teacher connection"}},
-                None=>rsx! {p {class:"quiet",role:"status","Checking your teacher connection…"}},
-            }
-            button {class:"text-button",disabled:state.teacher_busy,onclick:move |_|availability.restart(),"Check connection again"}
         }
         if !attempts.is_empty() {
             div {class:"actions teacher-history-toggle",
@@ -169,18 +169,32 @@ fn TeacherLessons(mut app: Signal<AppState>) -> Element {
         }
     };
     rsx! {
-        style {".teacher-compact-heading {{margin-bottom:12px}}.teacher-compact-heading h1 {{font-size:1.75rem;margin:0}}.teacher-tools {{margin-bottom:16px}}.teacher-tools > summary {{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600}}.teacher-tools > summary::before {{content:\"\";width:0;height:0;border-left:5px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent;margin-right:10px}}.teacher-tools[open] > summary::before {{transform:rotate(90deg)}}.teacher-tools[open] > summary {{margin-bottom:12px}}.teacher-tools .teacher-start:not([open]) {{padding:16px 24px}}.teacher-context-action {{margin:8px 0}}"}
-        for tools_key in [response_key.clone()] {details {key:"tools-{tools_key}",class:"teacher-tools",open:answer.is_none(),
-            summary {"Lessons & history"}
-            {management.clone()}
-        }}
+        style {"{TEACHER_STYLE}"}
+        style {".teacher-compact-heading {{margin-bottom:12px}}.teacher-compact-heading h1 {{font-size:1.75rem;margin:0}}.teacher-context-action {{margin:8px 0}}"}
+        div {class:"page-heading teacher-compact-heading",h1 {"Learn with your teacher"}}
+        {management}
         if let Err(problem)=selected_document {p {role:"alert","{problem}"}}
         if reviewing_history && !attempts.is_empty() {
             section {class:"panel",
                 h2 {"Work with your answer"}
-                label {r#for:"teacher-attempt","Saved practice"}
-                select {id:"teacher-attempt",value:selected_id.map(|id|id.to_string()).unwrap_or_default(),disabled:state.teacher_busy,onchange:move |e|selected.set(Uuid::parse_str(&e.value()).ok()),
-                    for (event,attempt) in attempts.iter().take(80) {option {value:event.id.to_string(),"{attempt.skill.label()} · "{state.library.revision(attempt.revision).map(|r|r.passage.title.as_str()).unwrap_or("Saved passage")}}}
+                label {r#for:"teacher-attempt-search","Find saved practice"}
+                input {id:"teacher-attempt-search",r#type:"search",value:history_query(),placeholder:"Search topic, skill, or response",oninput:move |e|{history_query.set(e.value());history_limit.set(12);}}
+                div {class:"teacher-history-list",aria_label:"Saved practice",
+                    {let query=history_query().trim().to_lowercase();let matching:Vec<_>=attempts.iter().filter(|(_,attempt)| {
+                        let title=state.library.revision(attempt.revision).map(|r|r.passage.title.as_str()).unwrap_or("Saved passage");
+                        format!("{} {} {}",attempt.skill.label(),title,attempt.response).to_lowercase().contains(&query)
+                    }).collect();rsx! {
+                        if matching.is_empty() {p {"No saved practice matches this search."}}
+                        for (event,attempt) in matching.iter().take(history_limit()) {
+                            {let id=event.id;let title=state.library.revision(attempt.revision).map(|r|r.passage.title.as_str()).unwrap_or("Saved passage");rsx! {
+                                button {key:"attempt-{id}",class:"teacher-history-row",aria_pressed:selected_id==Some(id),disabled:state.teacher_busy || state.speech_busy || capture_busy(),onclick:move |_|selected.set(Some(id)),
+                                    span {class:"quiet","{attempt.skill.label()}"}
+                                    PresentedRussian {app,text:title.to_string(),language:"en",purpose:PresentationPurpose::Reference,strong {"{title}"}}
+                                }
+                            }}
+                        }
+                        if matching.len()>history_limit() {button {class:"text-button",onclick:move |_|history_limit.set(history_limit()+12),"Show more saved practice"}}
+                    }}
                 }
                 if let Some((id,attempt))=current {
                     if attempt.skill!=Skill::Speaking {blockquote {"{attempt.response}"}}
@@ -227,7 +241,7 @@ fn TeacherLessons(mut app: Signal<AppState>) -> Element {
                 crate::teacher_feedback_view::TeacherFeedback {key:"feedback-{answer.provenance.response_id}",app,answer:answer.clone(),active_speaking,capture_busy}
 
                 }
-                if !answer.content.caveats.is_empty() {details {summary {"Nuance and uncertainty"}ul {for caveat in &answer.content.caveats {li {TeacherProse {app,language:"en",text:caveat.clone(),purpose:PresentationPurpose::Instruction}}}}}}
+                if !matches!(answer.request,TeacherRequest::TeachLesson(_)) && !answer.content.caveats.is_empty() {details {summary {"Nuance and uncertainty"}ul {for caveat in &answer.content.caveats {li {TeacherProse {app,language:"en",text:caveat.clone(),purpose:PresentationPurpose::Instruction}}}}}}
                 p {class:"quiet","{answer.provenance.model} · AI-generated teaching"}
                 if let Some(prepared)=prepared_context {
                     details {class:"teacher-context-preview",

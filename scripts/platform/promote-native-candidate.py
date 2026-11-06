@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Select a staged pair after an accepted SAME-protocol relay activation.
+"""Select a staged pair with an accepted SAME-protocol running backend.
 
 Reuses activate-relay-candidate.py acceptance validation. This command performs
 strict read-only live checks, then updates artifact aliases/status only. It never
@@ -26,7 +26,45 @@ activation_helper = module('relay_activation', 'activate-relay-candidate.py')
 shared = activation_helper.shared
 
 
-def promote(stage_path, activation_path, web_build):
+def validate_backend(ios_path, protocol, activation_path=None, accepted_relay_path=None):
+    if bool(activation_path) == bool(accepted_relay_path):
+        raise ValueError('Select exactly one activation receipt or accepted running relay')
+    if accepted_relay_path:
+        accepted, binary = activation_helper.validate_candidate(accepted_relay_path, ios_path)
+        if (accepted['data_protocol'] != protocol
+                or accepted['relay_executable_sha256'] != accepted['expected_previous_relay_sha256']
+                or shared.prior.config_fingerprint() != accepted['private_config_sha256']):
+            raise ValueError('Client-only promotion requires the same accepted backend and configuration')
+        expected_pid = None
+        provenance = {'mode': 'client-only', 'accepted_relay_receipt': str(Path(accepted_relay_path).resolve())}
+    else:
+        activation = native.read(activation_path)
+        if (activation.get('accepted') is not True or activation.get('data_protocol') != protocol
+                or activation.get('transition_profile') != 'same-protocol'
+                or activation.get('stage') != f'active-data{protocol}-awaiting-root-alias-promotion'
+                or Path(activation['native_candidate_receipt']).resolve() != ios_path
+                or not activation.get('private_config_preserved') or not activation.get('artifact_aliases_preserved')):
+            raise ValueError('Successful same-protocol activation must select this exact native pair')
+        accepted, binary = activation_helper.validate_candidate(Path(activation['accepted_relay_receipt']), ios_path)
+        if (activation['relay_executable_sha256'] != accepted['relay_executable_sha256']
+                or shared.prior.config_fingerprint() != activation['config_hashes_before']
+                or shared.worker_source_fingerprint() != activation['worker_source_sha256']
+                or shared.alias_fingerprint() != activation['artifact_alias_hashes_before']):
+            raise ValueError('Accepted relay configuration or alias identity changed')
+        expected_pid = activation['relay_pid']
+        provenance = {'mode': 'after-relay-activation',
+                      'accepted_relay_cutover': str(Path(activation_path).resolve())}
+    running = shared.services.service_status('relay')
+    if (not running.get('running') or running.get('ownership') != 'recorded'
+            or (expected_pid is not None and running['pid'] != expected_pid)
+            or running['executable'] != str(binary)
+            or running['recorded_sha256'] != accepted['relay_executable_sha256']
+            or not running['on_disk_matches_receipt']):
+        raise ValueError('Actual immutable relay process differs from the accepted backend')
+    return accepted, {**provenance, 'relay_pid': running['pid']}
+
+
+def promote(stage_path, activation_path, web_build, accepted_relay_path=None):
     staged = native.read(stage_path)
     if staged.get('stage') != 'staged' or staged.get('current_artifacts_and_aliases_preserved') is not True:
         raise ValueError('Candidate has no completed stable staging receipt')
@@ -51,25 +89,7 @@ def promote(stage_path, activation_path, web_build):
     native.verify_executable(previous['ios_receipt'])
     native.verify_executable(previous['macos_receipt'], True)
     native.assert_equal_maps(previous['alias_sha256'], native.alias_hashes(), 'Active artifact aliases')
-    activation = native.read(activation_path)
-    if (activation.get('accepted') is not True or activation.get('data_protocol') != protocol
-            or activation.get('transition_profile') != 'same-protocol'
-            or activation.get('stage') != f'active-data{protocol}-awaiting-root-alias-promotion'
-            or Path(activation['native_candidate_receipt']).resolve() != ios_path
-            or not activation.get('private_config_preserved') or not activation.get('artifact_aliases_preserved')):
-        raise ValueError('Successful same-protocol activation must select this exact native pair')
-    accepted, binary = activation_helper.validate_candidate(Path(activation['accepted_relay_receipt']), ios_path)
-    if (activation['relay_executable_sha256'] != accepted['relay_executable_sha256']
-            or shared.prior.config_fingerprint() != activation['config_hashes_before']
-            or shared.worker_source_fingerprint() != activation['worker_source_sha256']
-            or shared.alias_fingerprint() != activation['artifact_alias_hashes_before']):
-        raise ValueError('Accepted relay configuration or alias identity changed')
-    running = shared.services.service_status('relay')
-    if (not running.get('running') or running.get('ownership') != 'recorded'
-            or running['pid'] != activation['relay_pid'] or running['executable'] != str(binary)
-            or running['recorded_sha256'] != accepted['relay_executable_sha256']
-            or not running['on_disk_matches_receipt']):
-        raise ValueError('Actual immutable relay process differs from the accepted activation')
+    accepted, backend_provenance = validate_backend(ios_path, protocol, activation_path, accepted_relay_path)
     record_path = folder / 'promotion.json'
     if record_path.exists():
         raise ValueError('Candidate promotion is already recorded; inspect before retrying')
@@ -110,7 +130,7 @@ def promote(stage_path, activation_path, web_build):
     record = {'promoted_at': native.now(), 'candidate': staged['candidate'], 'data_protocol': protocol,
               'reference_web_build': web_build, 'teacher_prompt_version': ios['teacher_prompt_version'],
               'dialogue_prompt_version': ios['dialogue_prompt_version'],
-              'native_receipt': str(Path(stage_path).resolve()), 'accepted_relay_cutover': str(Path(activation_path).resolve()),
+              'native_receipt': str(Path(stage_path).resolve()), **backend_provenance,
               'relay_executable_sha256': accepted['relay_executable_sha256'], 'live_preflight': preflight,
               'capabilities': capabilities, 'historical_alias_sha256_preserved': preserved,
               'previous_ios_sha256': previous['ios_receipt']['rust_executable_sha256'],
@@ -124,11 +144,14 @@ def promote(stage_path, activation_path, web_build):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('stage_receipt', type=Path)
-    parser.add_argument('--activation-receipt', type=Path, required=True)
+    backend = parser.add_mutually_exclusive_group(required=True)
+    backend.add_argument('--activation-receipt', type=Path)
+    backend.add_argument('--accepted-relay', type=Path,
+                         help='Client-only: accepted same running backend, including private_config_sha256')
     parser.add_argument('--expected-web-build', required=True)
     args = parser.parse_args()
     try:
-        result = promote(args.stage_receipt, args.activation_receipt, args.expected_web_build)
+        result = promote(args.stage_receipt, args.activation_receipt, args.expected_web_build, args.accepted_relay)
         print(json.dumps({'promoted': True, 'candidate': result['candidate'],
                           'data_protocol': result['data_protocol'], 'device_actions': 'none'}))
     except (ValueError, RuntimeError, KeyError, OSError, json.JSONDecodeError):

@@ -1,5 +1,8 @@
 use crate::exposure_view::PresentedRussian;
-use crate::{act, model::AppState};
+use crate::{
+    act,
+    model::{AppState, Page},
+};
 use dioxus::prelude::*;
 use rufren_content::{ExerciseKind, LessonPracticeAction, ResponseMode};
 use rufren_core::{PresentationPurpose, Skill};
@@ -8,22 +11,50 @@ use rufren_core::{PresentationPurpose, Skill};
 pub(crate) fn Lessons(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
     let selected = state.lesson().cloned();
+    let mut query = use_signal(String::new);
+    let needle = query().trim().to_lowercase();
+    let mut detail_open = use_signal(|| false);
+    let mut focus_request = use_signal(|| None::<String>);
+    use_effect(move || {
+        let Some(target) = focus_request() else {
+            return;
+        };
+        focus_request.set(None);
+        spawn(async move {
+            let selector = if target == "detail" {
+                "#lesson-detail-heading"
+            } else {
+                "#lesson-search"
+            };
+            let script = format!(
+                "await new Promise(requestAnimationFrame);const el=document.querySelector({});if(el){{el.focus({{preventScroll:true}});const top=el.id==='lesson-detail-heading'&&matchMedia('(max-width:1000px)').matches?el.closest('.lesson-body'):el;top.scrollIntoView({{block:'start'}});}}",
+                serde_json::to_string(selector).unwrap_or_default()
+            );
+            let _ = document::eval(&script).await;
+        });
+    });
     let mut preparing_sound = use_signal(|| None::<String>);
     rsx! {
-        div {class:"page-heading", div {div {class:"eyebrow","FROM YOUR FIRST WORDS TO OTHER WORLDS"} h1 {"A path into Russian"}p {"Learn with your AI teacher, from your first exchange to ideas worth reading."}}}
-        div {class:"lesson-layout",
+        style {".lesson-link strong,.lesson-link small {{display:block}}.lesson-link small {{margin-top:4px;font-size:12px;font-weight:400;line-height:1.4;color:var(--muted)}}.lesson-index input {{width:100%;margin-bottom:16px}}"}
+        div {class:if detail_open() {"page-heading lesson-catalog-heading detail-open"}else{"page-heading lesson-catalog-heading"}, div {h1 {"Learn"}p {"Choose something you want to understand. Your AI teacher will help you read, listen, write, and speak."}}}
+        div {class:if detail_open() {"lesson-layout detail-open"}else{"lesson-layout"},
             aside {class:"lesson-index",aria_label:"Lesson sequence",
-                for unit in &state.content.units {section {h2 {"{unit.title}"}p {class:"quiet","{unit.description}"}
-                    for id in &unit.lesson_ids {if let Some(lesson)=state.content.lesson(id) {
-                        {let id=id.clone();rsx! {button {class:if state.selected_lesson.as_deref()==Some(id.as_str()) {"lesson-link selected"}else{"lesson-link"},aria_pressed:state.selected_lesson.as_deref()==Some(id.as_str()),onclick:move |_|act(app,|s|s.choose_lesson(&id)), if state.selected_lesson.as_deref()==Some(lesson.id.as_str()) {span {aria_hidden:"true","✓ "}} "{lesson.title}"}}}
+                label {r#for:"lesson-search","Find a lesson"}
+                input {id:"lesson-search",r#type:"search",placeholder:"Search topics or goals",value:query(),oninput:move |event|query.set(event.value())}
+                if !state.content.lessons.iter().any(|l|format!("{} {}",l.title,l.goal).to_lowercase().contains(&needle)) {p {"No lessons match this search."}}
+                for unit in state.content.units.iter().filter(|unit|unit.lesson_ids.iter().any(|id|state.content.lesson(id).is_some_and(|l|format!("{} {}",l.title,l.goal).to_lowercase().contains(&needle)))) {section {h2 {"{unit.title}"}p {class:"quiet","{unit.description}"}
+                    for id in &unit.lesson_ids {if let Some(lesson)=state.content.lesson(id).filter(|l|format!("{} {}",l.title,l.goal).to_lowercase().contains(&needle)) {
+                        {let id=id.clone();rsx! {button {class:if state.selected_lesson.as_deref()==Some(id.as_str()) {"lesson-link selected"}else{"lesson-link"},aria_pressed:state.selected_lesson.as_deref()==Some(id.as_str()),onclick:move |_| {let result=app.write().choose_lesson(&id);match result {Ok(())=>{detail_open.set(true);focus_request.set(Some("detail".into()));},Err(error)=>app.write().notice=error,}}, strong {"{lesson.title}"} small {"{lesson.goal}"}}}}
                     }}
                 }}
             }
             div {class:"lesson-body",
+                button {class:"text-button lesson-catalog-back",onclick:move |_|{detail_open.set(false);focus_request.set(Some("list".into()));},"← Back to lessons"}
                 if let Some(lesson)=selected {
-                    section {class:"panel",span {class:"tag","LESSON"}h2 {"{lesson.title}"}p {class:"lesson-goal","{lesson.goal}"}
+                    section {class:"panel",span {class:"tag","LESSON"}h2 {id:"lesson-detail-heading",tabindex:"-1","{lesson.title}"}p {class:"lesson-goal","{lesson.goal}"}
                         p {class:"draft-note","AI-authored learning material · editorial draft. Hear an AI speech model, explore the pattern, and try a short response at your own pace."}
-                        div {class:"actions",button {class:"primary",onclick:{let id=lesson.id.clone();move |_|act(app,|s|{s.import_lesson(&id)?;s.notice="Lesson phrases added to your library for listening, practice, and your own notes.".into();Ok(())})},"Keep these phrases"}}
+                        div {class:"actions",button {class:"primary",onclick:move |_|act(app,|s|{s.repo.set("teacher_surface", &"lessons")?;s.navigate(Page::Teacher)}),"Learn with the AI teacher →"}
+                        button {class:"secondary",onclick:{let id=lesson.id.clone();move |_|act(app,|s|{s.import_lesson(&id)?;s.notice="Lesson phrases added to your library for listening, practice, and your own notes.".into();Ok(())})},"Keep these phrases"}}
                     }
                     section {class:"panel",h2 {"{lesson.dialogue.title}"}PresentedRussian {app,language:"en",class:"quiet",text:lesson.dialogue.situation.clone(),purpose:PresentationPurpose::Instruction}
                         for turn in &lesson.dialogue.turns {if let Some(phrase)=state.content.phrase(&turn.phrase_id) {
@@ -74,7 +105,7 @@ pub(crate) fn Lessons(mut app: Signal<AppState>) -> Element {
                         }
 
                     }
-                    section {class:"panel",h2 {"If it fits over a meal"}p {class:"quiet","An optional moment with your friend. No lesson preparation, recordings, or correction duties."}PresentedRussian {app,language:"en",text:lesson.conversation_invitation.clone(),purpose:PresentationPurpose::Instruction}h3 {"A fresh idea for the AI teacher"}PresentedRussian {app,language:"en",text:lesson.transfer_prompt.clone(),purpose:PresentationPurpose::Instruction}}
+                    details {class:"panel",summary {"Optional conversation beyond the lesson"}p {class:"quiet","An optional moment with your friend. No lesson preparation, recordings, or correction duties."}PresentedRussian {app,language:"en",text:lesson.conversation_invitation.clone(),purpose:PresentationPurpose::Instruction}h3 {"A fresh idea for the AI teacher"}PresentedRussian {app,language:"en",text:lesson.transfer_prompt.clone(),purpose:PresentationPurpose::Instruction}}
                 } else {
                     section {class:"panel empty",h2 {"Start with a conversation."}p {"Open the first lesson with your AI teacher. You can hear, read, and try one useful phrase before learning the whole alphabet."}
                         button {class:"primary",onclick:move |_|act(app,|s|{let id=s.content.lessons.first().ok_or("No first lesson")?.id.clone();s.choose_lesson(&id)}),"Open the first lesson →"}}

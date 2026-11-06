@@ -32,7 +32,17 @@ async function main() {
     await navigate(page, 'Teacher');
     await page.locator('.teacher-feedback-task').waitFor();
     assert((await page.locator('.teacher-feedback-task').innerText()).includes(response.request.input.response));
-    assert((await page.locator('body').innerText()).includes(response.content.explanation));
+    const feedback = page.locator('.teacher-feedback').first();
+    const explanation = feedback.getByRole('button', { name: 'Explanation', exact: true });
+    assert.equal(await explanation.getAttribute('aria-expanded'), 'false', 'Real correction reasons make duplicate full explanation optional');
+    assert.equal(await feedback.locator('.teacher-explanation').count(), 0, 'Collapsed explanation is not mounted or observed');
+    assert.equal(await feedback.locator('.teacher-lesson-example').count(), 0, 'Collapsed examples are not mounted or observed');
+    assert.equal(await feedback.locator('.teacher-feedback-detail .teacher-exercise').count(), 0);
+    assert(await feedback.locator('.teacher-feedback-next .teacher-prose p').first().evaluate(el => parseFloat(getComputedStyle(el).fontSize) <= 18), 'Next step uses readable body type');
+    await explanation.click();
+    assert.equal(await explanation.getAttribute('aria-expanded'), 'true');
+    assert((await feedback.locator('.teacher-explanation').innerText()).includes('Хорошо'));
+    await explanation.click();
     const next = page.getByRole('button', { name: 'Try this question again', exact: true });
     assert.equal(await next.count(), 1, 'Actual captured response proves its exact archived task for repair');
     await page.locator('.teacher-feedback-task').scrollIntoViewIfNeeded();
@@ -41,8 +51,34 @@ async function main() {
     await page.screenshot({ path: path.join(OUTPUT, 'repair-phone.png'), fullPage: true });
     assert.equal(await page.locator('.teacher-feedback-repair textarea').inputValue(), '');
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    // A separate, explicitly synthetic render fixture exercises substantive
+    // Uncertain feedback without structured corrections. The real v7 stays intact.
+    const uncertain = structuredClone(response);
+    uncertain.provenance.response_id = '5099ebc7-c6eb-4ede-973b-b2cc53dfc5df';
+    uncertain.content.feedback.verdict = 'uncertain';
+    uncertain.content.feedback.corrections = [];
+    uncertain.content.explanation = 'Synthetic uncertainty fixture: the full explanation is essential.\n\nСкрытый проверочный пример.';
+    uncertain.content.examples = [{ russian: 'Отдельный проверочный пример.', english: 'Synthetic optional example.', note: 'Synthetic visibility-check fixture.' }];
+    await page.evaluate(response => window.rufrenLibrary.write('rufren.v1.meta.teacher_response', JSON.stringify(response)), uncertain);
+    await page.reload();
+    await page.locator('main.main h1').waitFor();
+    await navigate(page, 'Teacher');
+    const uncertainFeedback = page.locator('.teacher-feedback').first();
+    const uncertainExplanation = uncertainFeedback.getByRole('button', { name: 'Explanation', exact: true });
+    assert.equal(await uncertainExplanation.getAttribute('aria-expanded'), 'true', 'No correction reason: substantive explanation starts open independent of verdict');
+    assert((await uncertainFeedback.locator('.teacher-explanation').innerText()).includes('the full explanation is essential'));
+    await page.screenshot({ path: path.join(OUTPUT, 'uncertain-explanation-open-phone.png'), fullPage: true });
+    await uncertainExplanation.click();
+    assert.equal(await uncertainFeedback.locator('.teacher-explanation').count(), 0, 'Explicit close is respected');
+    const marker = 'Отдельный проверочный пример.';
+    const markerEvents = () => page.evaluate(text => window.rufrenLibrary.entries().filter(([k,v]) => k.startsWith('rufren.v1.event.') && JSON.parse(v).fact.kind === 'stimulus_presented' && JSON.parse(v).fact.data.russian === text).length, marker);
+    assert.equal(await markerEvents(), 0, 'Optional synthetic example has no exposure while hidden');
+    await uncertainFeedback.getByRole('button', { name: 'Examples', exact: true }).click();
+    await uncertainFeedback.getByText(marker, { exact: true }).scrollIntoViewIfNeeded();
+    await page.waitForFunction(text => window.rufrenLibrary.entries().some(([k,v]) => k.startsWith('rufren.v1.event.') && JSON.parse(v).fact.kind === 'stimulus_presented' && JSON.parse(v).fact.data.russian === text), marker);
+    await page.screenshot({ path: path.join(OUTPUT, 'uncertain-no-corrections-phone.png'), fullPage: true });
     assert.deepEqual(errors, []); assert.deepEqual(forbidden, []);
-    await fs.writeFile(path.join(OUTPUT, 'result.json'), JSON.stringify({ ok: true, offline_build, fixture: 'Previously captured v7 model response and untouched archived source/events; render-only, no new model calls. Repair start is synthetic browser use.', source: acceptance.capture.source_path, response_provenance: response.provenance, requests: forbidden, errors, body: await page.locator('body').innerText() }, null, 2));
+    await fs.writeFile(path.join(OUTPUT, 'result.json'), JSON.stringify({ ok: true, offline_build, fixture: 'Previously captured v7 response and untouched archived source/events, plus a separate synthetic Uncertain/no-corrections rendering fixture; no new model calls. Repair start is synthetic browser use.', source: acceptance.capture.source_path, response_provenance: response.provenance, requests: forbidden, errors, body: await page.locator('body').innerText() }, null, 2));
   } catch(error) {
     await page.screenshot({ path: path.join(OUTPUT, 'failure.png'), fullPage: true });
     await fs.writeFile(path.join(OUTPUT, 'failure.json'), JSON.stringify({ error: String(error), errors, forbidden, body: await page.locator('body').innerText() }, null, 2)); throw error;
