@@ -13,3 +13,43 @@ test('authored printable shapes reject unknown letters instead of invented traci
 test('new dictation round restores hidden model and rejects stale audio completion',async()=>{const {session:s}=ink();const old=s.draft.attempt_id;await s.mode('copy');s.begin(1,'pen',point());s.end(1);await s.compare();await s.newTry();assert.equal(s.draft.mode,'hidden');assert.ok(s.draft.aids.some(a=>a.kind==='previous_model_this_activity'));assert.equal(await s.audioResult(old,true),false);assert.ok(!s.draft.aids.some(a=>a.kind==='sound_task_input_completed'));});
 
 test('sound-to-writing comparison needs actual completed task input',async()=>{const {session:s,adapter}=ink(undefined,{audio_role:'task_input'});s.begin(1,'pen',point());s.end(1);await assert.rejects(s.compare(),/Listen to the sound first/);assert.equal(adapter.originals.size,0);await s.audioResult(s.draft.attempt_id,true);await s.compare();assert.equal(adapter.originals.size,1);});
+
+
+test('alphabet renderer is explicit and preserves historical model paths',()=>{
+ const api=require('../crates/rufren-app/src/handwriting.js');
+ const old=model('Аа Мм.');
+ assert.throws(()=>model('Я'),/authored/);
+ const alphabet='АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
+ for(const glyph of alphabet+alphabet.toLowerCase()+'?—.') assert.ok(api.model(glyph,undefined,api.ALPHABET_MODEL).length,glyph);
+ assert.deepEqual(model('Аа Мм.'),old);
+ const {session:s}=ink(undefined,{target:'Я',model_version:api.ALPHABET_MODEL});
+ assert.equal(s.draft.model_version,api.ALPHABET_MODEL);
+ assert.throws(()=>api.validate(s.draft,{...config,target:'Я'}),/different task/);
+});
+test('successful draft retry resolves only persistence failure and retains exact ink',async()=>{
+ const r=repository();const save=r.saveDraft;let fail=true;
+ r.saveDraft=async d=>{if(fail)throw Error('journal full');await save(d)};
+ const {session:s,events}=ink(r);s.begin(1,'pen',point());s.end(1);await s.tail;
+ assert.equal(s.failed,true);assert.ok(events.some(e=>e.kind==='persistence_error'));
+ const before=structuredClone(s.draft);fail=false;await s.persist();
+ assert.equal(s.failed,false);assert.deepEqual(s.draft,before);
+ assert.equal(events.at(-2).kind,'persistence_recovered');
+ assert.equal(events.at(-1).dirty,false);assert.equal(r.originals.size,0);
+});
+
+test('authored alphabet paths and all continuation writing targets resolve under the new renderer',()=>{
+ const api=require('../crates/rufren-app/src/handwriting.js');
+ const source=require('../crates/rufren-content/content/extensions/alphabet-construction-glyphs-v1.json');
+ for(const glyph of [...source.glyphs,...source.punctuation_additions]) assert.deepEqual(api.ALPHABET_GLYPHS[glyph.glyph],glyph.path_commands);
+ const tasks=require('../crates/rufren-content/content/extensions/alphabet-construction-handwriting-v1.json');
+ for(const task of tasks){
+  const weight=[...task.target].reduce((n,c)=>n+(c===' '?0.45:c==='.'?0.28:0.84),0);
+  const paper={width:Math.max(task.layout==='phrase_line'?640:400,Math.ceil(weight*125+80)),height:300,model_size:task.layout==='letter_box'?190:125,baseline:225,layout:task.layout};
+  const paths=api.model(task.target,paper,api.ALPHABET_MODEL);assert.ok(paths.length,task.id);
+  for(const path of paths){
+   const [x,y,scale]=path.transform.match(/-?\d+(?:\.\d+)?/g).map(Number);
+   assert.ok(x>=0&&y>=0,task.id);
+   assert.ok(y+120*scale<=paper.height,task.id+' descender');
+  }
+ }
+});

@@ -735,3 +735,57 @@ fn duplicate_unfinished_routes_follow_active_then_explicit_preference() {
     );
     assert_eq!(a.library.attempts().count(), 0);
 }
+
+#[test]
+fn finish_inline_writing_advances_its_course_once_and_keeps_original() {
+    let mut a = app();
+    let run = begin(&mut a, "f2-cat", Sequence::SeeCopyHearSay);
+    let ink = drawing(&run, true);
+    a.writing_accept_web(run.id, run.round_id, &ink).unwrap();
+    a.writing_audio_completed(run.id, run.round_id, &run.definition().unwrap().audio_id)
+        .unwrap();
+    let original = a.active_handwriting().unwrap().original;
+    a.writing_finish_and_continue(run.id, run.round_id, SayDisposition::SelfReportedSaid)
+        .unwrap();
+    let next = a.foundation_state().unwrap();
+    assert_ne!(next.session, run.course_session);
+    assert_ne!(next.step_id, run.course_step);
+    assert!(a.page == Page::Foundations);
+    assert_eq!(a.active_handwriting().unwrap().original, original);
+    assert_eq!(
+        a.active_handwriting().unwrap().say,
+        SayDisposition::SelfReportedSaid
+    );
+    a.writing_finish_and_continue(run.id, run.round_id, SayDisposition::SelfReportedSaid)
+        .unwrap();
+    assert_eq!(a.foundation_state().unwrap().session, next.session);
+    assert_eq!(a.library.attempts().count(), 0);
+}
+
+#[test]
+fn finish_catalog_writing_returns_to_catalog_without_advancing_course() {
+    let mut a = app();
+    source(&mut a, "f2-cat");
+    a.open_writing_catalog().unwrap();
+    let task = handwriting_task_for_step("f2-cat").unwrap();
+    a.open_writing_task(&task.id, Sequence::SeeCopyHearSay)
+        .unwrap();
+    let run = a.active_handwriting().unwrap();
+    let cursor = serde_json::to_value(a.foundation_state().unwrap()).unwrap();
+    a.writing_accept_web(run.id, run.round_id, &drawing(&run, true))
+        .unwrap();
+    a.writing_finish_and_continue(run.id, run.round_id, SayDisposition::Skipped)
+        .unwrap();
+    assert_eq!(
+        a.repo
+            .get::<String>("handwriting.surface")
+            .unwrap()
+            .as_deref(),
+        Some("catalog")
+    );
+    assert_eq!(
+        serde_json::to_value(a.foundation_state().unwrap()).unwrap(),
+        cursor
+    );
+    assert_eq!(a.active_handwriting().unwrap().say, SayDisposition::Skipped);
+}

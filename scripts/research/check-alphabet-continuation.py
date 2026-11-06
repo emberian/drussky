@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Validate the unshipped alphabet continuation against the current authored course.
+"""Validate the alphabet continuation against its frozen preceding edition.
 
 This checks structure and exact bindings, not pronunciation quality or learning.
 """
 import json,pathlib,re,hashlib
 r=pathlib.Path(__file__).resolve().parents[2];d=r/'crates/rufren-content/content/extensions'
-base=json.load(open(r/'crates/rufren-content/content/foundations-v1.json'));p=json.load(open(d/'alphabet-construction-v1.json'));b=json.load(open(d/'alphabet-construction-bindings-v1.json'));w=json.load(open(d/'alphabet-construction-handwriting-v1.json'));g=json.load(open(d/'alphabet-construction-glyphs-v1.json'))
+base_path=r/'crates/rufren-content/content/foundations-previous-v2.json'
+base=json.load(open(base_path));p=json.load(open(d/'alphabet-construction-v1.json'));b=json.load(open(d/'alphabet-construction-bindings-v1.json'));w=json.load(open(d/'alphabet-construction-handwriting-v1.json'));g=json.load(open(d/'alphabet-construction-glyphs-v1.json'))
+current=json.load(open(r/'crates/rufren-content/content/foundations-v1.json'))
+assert current['episodes']==base['episodes']+p['episodes'], 'runtime episodes differ from reviewed append'
+assert current['assets']==base['assets']+p['assets'], 'runtime audio bindings differ from reviewed append'
 shapes=lambda s:{c.upper() for c in s if 'А'<=c<='я' or c in 'Ёё'}
 known=set();mean=set();samples=set();conv=set();ids=set();sources={}; assets={a['id']:a['spoken'] for a in base['assets']+p['assets']}; previous=set(); errors=[]
 for e in base['episodes']+p['episodes']:
@@ -55,4 +59,4 @@ for request in b['audio_requests']:
  assert request['marked_stress_request'].replace('\u0301','')==request['ordinary_spelling']
 assert {s['id'] for e in p['episodes'] for s in e['steps'] if s['action']['kind']=='recall'}=={x['step_id'] for x in b['recall_bindings']}
 assert not errors,errors
-print(json.dumps({'result':'passed structural editorial audit only','continuation':b['inventory'],'merged_letters':len(known),'glyph_models':len(g['glyphs']),'base_pack_sha256':hashlib.sha256((r/'crates/rufren-content/content/foundations-v1.json').read_bytes()).hexdigest(),'checks':['prior prerequisite declarations','visible and response Cyrillic coverage','all references and audio request IDs','ordinary and marked-stress request text identity','current action invariants','whole-target and initial-segment audio binding','handwriting case/punctuation glyph coverage','complete 33-letter inventory','exact recall binding coverage']},ensure_ascii=False,indent=2))
+print(json.dumps({'result':'passed structural editorial audit only','continuation':b['inventory'],'merged_letters':len(known),'glyph_models':len(g['glyphs']),'base_pack_sha256':hashlib.sha256(base_path.read_bytes()).hexdigest(),'checks':['exact append to frozen preceding edition','prior prerequisite declarations','visible and response Cyrillic coverage','all references and audio request IDs','ordinary and marked-stress request text identity','current action invariants','whole-target and initial-segment audio binding','handwriting case/punctuation glyph coverage','complete 33-letter inventory','exact recall binding coverage']},ensure_ascii=False,indent=2))

@@ -56,6 +56,8 @@ pub(crate) fn HandwritingPad(
     let instance = use_hook(|| Uuid::new_v4().to_string());
     let root_id = format!("handwriting-{instance}");
     let mut error = use_signal(String::new);
+    let mut audio_error = use_signal(String::new);
+    let mut persistence_error = use_signal(String::new);
     let effect_root = root_id.clone();
     let effect_scope = scope_id.clone();
     let effect_task = task.clone();
@@ -72,7 +74,7 @@ pub(crate) fn HandwritingPad(
                     return;
                 }
             };
-            let config = serde_json::json!({"scope_id":scope,"task_id":task.id,"task_revision":task.revision,"target":task.target,"audio_id":task.reference_audio_id,"audio_role":task.audio_role,"initial_mode":initial_mode,"initial":initial,"paper":task.paper,"attempt_id":attempt_id,"external_flow":true,"meaning_visible":task.meaning.is_some(),"sound_visible":task.reference_audio_id.is_some()});
+            let config = serde_json::json!({"model_version":task.model_version,"scope_id":scope,"task_id":task.id,"task_revision":task.revision,"target":task.target,"audio_id":task.reference_audio_id,"audio_role":task.audio_role,"initial_mode":initial_mode,"initial":initial,"paper":task.paper,"attempt_id":attempt_id,"external_flow":true,"meaning_visible":task.meaning.is_some(),"sound_visible":task.reference_audio_id.is_some()});
             let script = format!(
                 r#"{BRIDGE}
 const root=document.getElementById({root});if(!root)throw Error('The handwriting pad did not mount.');
@@ -118,6 +120,8 @@ try{{while(true){{const message=await dioxus.recv();const waiter=pending.get(mes
                             on_saved.call(submission)
                         }
                     }
+                    "persistence_error" => persistence_error.set(event.message),
+                    "persistence_recovered" => persistence_error.set(String::new()),
                     "status" => on_dirty.call(event.dirty),
                     "audio_completed" => on_audio_completed.call(event.audio_id),
                     "error" => error.set(event.message),
@@ -138,7 +142,9 @@ try{{while(true){{const message=await dioxus.recv();const waiter=pending.get(mes
                                     == Some(serde_json::Value::Bool(true));
                                 if current {
                                     if let Err(e) = result {
-                                        error.set(e)
+                                        audio_error.set(e)
+                                    } else {
+                                        audio_error.set(String::new());
                                     }
                                 }
                             });
@@ -162,14 +168,16 @@ try{{while(true){{const message=await dioxus.recv();const waiter=pending.get(mes
       section {id:root_id,class:"handwriting-pad",aria_label:"Handwritten Russian practice",
        p {class:"ink-instruction","{task.instruction}"}
        if !error().is_empty(){p {role:"alert","{error}"}}
+       if !audio_error().is_empty(){p {role:"alert","{audio_error}"}}
+       if !persistence_error().is_empty(){p {role:"alert","{persistence_error}"}}
           div {class:"ink-context","data-ink-meaning":"true",if let Some(meaning)=task.meaning.clone(){p {"{meaning}"}}}
        div {class:"ink-sound","data-ink-sound":"true",if task.reference_audio_id.is_some(){button {class:"primary","data-ink-listen":"true","Listen"}}}
        div {class:"ink-pad-heading",span {"Write here"}div {"data-ink-device-options":"true",button {class:"text-button","data-ink-input":"pen","data-ink-control":"true","Use Pencil"}span {" · "}button {class:"text-button","data-ink-input":"finger","data-ink-control":"true","Use finger"}}button {class:"secondary","data-ink-show":"true","data-ink-control":"true","Show model"}button {class:"secondary","data-ink-hide":"true","data-ink-control":"true","Hide model"}}
     div {class:"ink-workspace",div {class:"ink-model","data-ink-model":"true"}div {class:"ink-paper",span {class:"ink-pane-label","Your drawing"}canvas {width:"400",height:"300",aria_label:"Draw your Russian letters here"}}div {class:"ink-comparison","data-ink-comparison":"true",hidden:true}}
-    p {class:"ink-guidance","data-ink-guidance":"true",hidden:initial_mode==InkMode::Hidden,"{task.formation_hint}"}
-       div {class:"actions",button {class:"secondary","data-ink-undo":"true","data-ink-edit":"true","Undo last stroke"}button {class:"secondary","data-ink-clear":"true","data-ink-edit":"true","Clear this drawing"}button {class:"primary","data-ink-compare":"true","Compare with the example"}button {class:"secondary","data-ink-new":"true",hidden:true,"Try again"}}
+       div {class:"actions",button {class:"secondary","data-ink-undo":"true","data-ink-edit":"true","Undo"}button {class:"secondary","data-ink-clear":"true","data-ink-edit":"true","Clear"}button {class:"primary","data-ink-compare":"true","Compare"}button {class:"secondary","data-ink-new":"true",hidden:true,"Try again"}}
        p {role:"status","data-ink-status":"true"}button {class:"secondary","data-ink-retry-save":"true",hidden:true,"Retry saving"}
        details {summary {"Drawing and cues"}
+        p {class:"ink-guidance","data-ink-guidance":"true",hidden:initial_mode==InkMode::Hidden,"{task.formation_hint}"}
         fieldset {class:"ink-mode-options",legend {"Model help"}for (mode,label) in [("hidden","Hidden"),("copy","Copy"),("trace","Trace")]{label {input {r#type:"radio",name:format!("ink-model-{instance}"),"data-ink-mode":mode,"data-ink-control":"true"}"{label}"}}}
      button {class:"secondary","data-ink-replay":"true","data-ink-control":"true","Watch the strokes"}
      if task.meaning.is_some(){button {class:"secondary","data-ink-toggle-meaning":"true","data-ink-control":"true","Show / hide meaning"}}
@@ -430,12 +438,16 @@ fn native_event(
             let result = { app.read().writing_audio_completed(run_id, round, &audio_id) };
             if let Err(e) = result {
                 native_error(app, instance, e)
+            } else {
+                app.write().notice.clear();
             }
         }
         NativeWritingEvent::ModelRevealed { .. } => {
             let result = { app.read().writing_model_revealed(run_id, round) };
             if let Err(e) = result {
                 native_error(app, instance, e)
+            } else {
+                app.write().notice.clear();
             }
         }
         NativeWritingEvent::Paused { .. } => {
@@ -454,16 +466,17 @@ fn native_event(
         _ => (),
     }
 }
-fn open_native(
+fn attach_native(
     mut app: Signal<AppState>,
     run: HandwritingActivity,
     on_event: Callback<(Uuid, Uuid, Uuid, NativeWritingEvent)>,
     alive: Rc<std::cell::Cell<bool>>,
-) {
+    host: handwriting_native::NativeWritingHostRect,
+) -> Result<Uuid> {
     if handwriting_native::is_open() {
-        return;
+        return Err("Another writing page is still saving. Try again in a moment.".into());
     }
-    let result = (|| -> Result<()> {
+    (|| -> Result<Uuid> {
         let current = app.read().active_handwriting()?;
         if current.id != run.id || current.round_id != run.round_id || current.stage != run.stage {
             return Err("The writing activity changed. Its original is kept.".into());
@@ -477,7 +490,7 @@ fn open_native(
         )
         .ok_or("The spoken model is unavailable")?
         .to_vec();
-        let initial: Option<NativeWritingCheckpoint> = if run.stage == WritingStage::Compare {
+        let initial: Option<NativeWritingCheckpoint> = if run.original.is_some() {
             if let Some(reference) = &run.original {
                 let value: serde_json::Value = app
                     .read()
@@ -503,37 +516,164 @@ fn open_native(
             meaning: task.meaning,
             model_text: task.target,
             comparison_hint: run.definition()?.model_help,
-            model_visible: run.model_revealed || run.stage == WritingStage::Compare,
+            model_visible: run.model_revealed || run.original.is_some(),
             allow_model_reveal: true,
             allow_listen: true,
-            paper: NativePaper {
-                width_points: task.paper.width as f64,
-                height_points: task.paper.height as f64,
-                line_height_points: task.paper.model_size as f64,
-            },
+            paper: initial
+                .as_ref()
+                .map(|checkpoint| checkpoint.canonical.paper.clone())
+                .unwrap_or(NativePaper {
+                    width_points: task.paper.width as f64,
+                    height_points: task.paper.height as f64,
+                    line_height_points: task.paper.model_size as f64,
+                }),
             audio: Some(NativeWritingAudio {
                 id: task.reference_audio_id.unwrap(),
                 sha256: format!("{:x}", Sha256::digest(&bytes)),
                 wav_bytes: bytes,
             }),
             initial,
-            initial_compared: run.stage == WritingStage::Compare,
+            initial_compared: run.original.is_some(),
         };
         app.read()
             .writing_native_instance(run.id, run.round_id, Some(instance))?;
-        handwriting_native::open_native(
+        if let Err(error) = handwriting_native::attach_inline(
             request,
             Rc::new(move |event| {
                 if alive.get() {
                     on_event.call((run.id, run.round_id, instance, event))
                 }
             }),
-        )?;
-        Ok(())
-    })();
-    if let Err(e) = result {
-        app.write().notice = e
-    }
+            host,
+        ) {
+            app.read()
+                .writing_native_instance(run.id, run.round_id, None)?;
+            return Err(error);
+        }
+        Ok(instance)
+    })()
+}
+
+#[component]
+fn NativeWritingPaper(
+    mut app: Signal<AppState>,
+    run: HandwritingActivity,
+    on_event: Callback<(Uuid, Uuid, Uuid, NativeWritingEvent)>,
+) -> Element {
+    let host_id = use_hook(|| format!("native-paper-{}", Uuid::new_v4()));
+    let alive = use_hook(|| Rc::new(std::cell::Cell::new(true)));
+    let attached = use_hook(|| Rc::new(std::cell::Cell::new(None::<Uuid>)));
+    let mut ready = use_signal(|| false);
+    let mut playing = use_signal(|| false);
+    let mut finger = use_signal(|| false);
+    let mut problem = use_signal(String::new);
+    let mut retry = use_signal(|| 0usize);
+    let callback_alive = alive.clone();
+    let event_handler = use_callback(move |event: (Uuid, Uuid, Uuid, NativeWritingEvent)| {
+        if !callback_alive.get() {
+            return;
+        }
+        match &event.3 {
+            NativeWritingEvent::Ready { .. } => ready.set(true),
+            NativeWritingEvent::AudioStarted { .. } => playing.set(true),
+            NativeWritingEvent::AudioCompleted { .. } | NativeWritingEvent::AudioStopped { .. } => {
+                playing.set(false)
+            }
+            NativeWritingEvent::Failure { message, .. } => {
+                playing.set(false);
+                problem.set(message.clone());
+            }
+            _ => (),
+        }
+        on_event.call(event);
+    });
+    let effect_id = host_id.clone();
+    let effect_alive = alive.clone();
+    let effect_attached = attached.clone();
+    let initial_run = use_hook(|| run.clone());
+    use_effect(move || {
+        let _ = retry();
+        let id = effect_id.clone();
+        let alive = effect_alive.clone();
+        let attached = effect_attached.clone();
+        let run = initial_run.clone();
+        spawn(async move {
+            let script = format!(
+                "const hostId={};\n{}",
+                serde_json::to_string(&id).unwrap(),
+                include_str!("handwriting_native_host.js")
+            );
+            let mut bridge = document::eval(&script);
+            while let Ok(rect) = bridge
+                .recv::<handwriting_native::NativeWritingHostRect>()
+                .await
+            {
+                if !alive.get() {
+                    break;
+                }
+                let result = if let Some(instance) = attached.get() {
+                    handwriting_native::update_inline_rect(instance, rect)
+                } else if rect.width > 0.0 && rect.height > 0.0 {
+                    attach_native(app, run.clone(), event_handler, alive.clone(), rect)
+                        .map(|instance| attached.set(Some(instance)))
+                } else {
+                    Ok(())
+                };
+                if let Err(error) = result {
+                    problem.set(error);
+                    break;
+                }
+            }
+        });
+    });
+    let drop_id = host_id.clone();
+    let drop_alive = alive.clone();
+    let drop_attached = attached.clone();
+    use_drop(move || {
+        drop_alive.set(false);
+        let id = serde_json::to_string(&drop_id).unwrap();
+        let _ = document::eval(&format!("window.drusskyNativePaperHosts?.get({id})?.();"));
+        if let Some(instance) = drop_attached.get() {
+            if handwriting_native::is_open() {
+                // Normal navigation has already flushed and detached. This is
+                // recovery for an unexpected unmount, preserving the journal.
+                if let Err(error) = handwriting_native::detach_inline(instance) {
+                    tracing_notice(&error);
+                }
+            }
+        }
+    });
+    let writing = run.stage == WritingStage::Writing;
+    let visible = run.model_revealed || !writing;
+    let task = run.task();
+    let listen_id = attached.clone();
+    let reveal_id = attached.clone();
+    let undo_id = attached.clone();
+    let redo_id = attached.clone();
+    let finger_id = attached.clone();
+    let compare_id = attached.clone();
+    rsx! {section {class:"native-writing-paper",
+        if writing {p {class:"writing-prompt","{task.instruction}"}}
+        if visible {div {class:"writing-example",lang:"ru","{task.target}"}}
+        if writing {div {class:"actions",
+            button {class:"secondary",disabled:!ready()||playing(),onclick:move |_|{if let Some(id)=listen_id.get(){if let Err(e)=handwriting_native::native_listen(id){problem.set(e)}}},if playing(){"Playing…"}else{"Listen"}}
+            if !visible {button {class:"text-button",disabled:!ready(),onclick:move |_|{if let Some(id)=reveal_id.get(){if let Err(e)=handwriting_native::native_reveal(id){problem.set(e)}}},"Show example"}}
+        }}
+        div {id:host_id,class:"native-paper-host",role:"group",aria_label:"Write here with Apple Pencil"}
+        if !ready() && problem().is_empty(){p {role:"status",class:"quiet","Preparing paper…"}}
+        if writing {div {class:"actions writing-tools",
+            button {class:"text-button",disabled:!ready(),onclick:move |_|{if let Some(id)=undo_id.get(){if let Err(e)=handwriting_native::native_undo(id){problem.set(e)}}},"Undo"}
+            button {class:"text-button",disabled:!ready(),onclick:move |_|{if let Some(id)=redo_id.get(){if let Err(e)=handwriting_native::native_redo(id){problem.set(e)}}},"Redo"}
+            button {class:"text-button",aria_pressed:finger(),disabled:!ready(),onclick:move |_|{if let Some(id)=finger_id.get(){let next=!finger();match handwriting_native::native_finger(id,next){Ok(())=>finger.set(next),Err(e)=>problem.set(e)}}},if finger(){"Finger drawing on"}else{"Use finger"}}
+            button {class:"primary",disabled:!ready()||playing(),onclick:move |_|{if let Some(id)=compare_id.get(){problem.set(String::new());if let Err(e)=handwriting_native::native_compare(id){problem.set(e)}}},"Compare"}
+        }}
+        if !problem().is_empty(){p {role:"alert","{problem}"}if !ready(){button {class:"secondary",onclick:move |_|{problem.set(String::new());retry+=1;},"Try opening the paper again"}}}
+    }}
+}
+
+fn tracing_notice(error: &str) {
+    // No UI signal may outlive its component during an emergency teardown.
+    eprintln!("Native writing recovery: {error}");
 }
 
 #[component]
@@ -543,6 +683,8 @@ pub(crate) fn Writing(mut app: Signal<AppState>) -> Element {
     use_drop(move || drop_alive.set(false));
     let mut dirty = use_signal(|| false);
     let mut tick = use_signal(|| 0usize);
+    let mut catalog_query = use_signal(String::new);
+    let mut catalog_group = use_signal(|| "all".to_string());
     let _ = tick();
     let surface = app
         .read()
@@ -565,15 +707,69 @@ pub(crate) fn Writing(mut app: Signal<AppState>) -> Element {
             .into_iter()
             .filter(|task| app.read().handwriting_task_available(task).unwrap_or(false))
             .collect();
-        tasks.sort_by_key(|task| task.meaning.is_none());
+        let available_count = tasks.len();
+        let query = catalog_query().trim().to_lowercase();
+        let group = catalog_group();
+        tasks.retain(|task| {
+            let category = match task.layout {
+                rufren_content::handwriting_tasks::FoundationHandwritingLayout::LetterBox => {
+                    "letters"
+                }
+                rufren_content::handwriting_tasks::FoundationHandwritingLayout::WordLine => "words",
+                rufren_content::handwriting_tasks::FoundationHandwritingLayout::PhraseLine => {
+                    "messages"
+                }
+            };
+            (group == "all" || group == category)
+                && (query.is_empty()
+                    || task.target.to_lowercase().contains(&query)
+                    || task
+                        .meaning
+                        .as_deref()
+                        .unwrap_or("")
+                        .to_lowercase()
+                        .contains(&query))
+        });
         let empty = tasks.is_empty();
-        return rsx! {section {class:"card",h1 {id:"page-heading","Write and say"}p {"Use a word you have met. Hear it and write, or copy it first; then say the same word or message."}
+        let sections: Vec<_> = [
+            (
+                "Letters",
+                rufren_content::handwriting_tasks::FoundationHandwritingLayout::LetterBox,
+            ),
+            (
+                "Words",
+                rufren_content::handwriting_tasks::FoundationHandwritingLayout::WordLine,
+            ),
+            (
+                "Messages",
+                rufren_content::handwriting_tasks::FoundationHandwritingLayout::PhraseLine,
+            ),
+        ]
+        .into_iter()
+        .map(|(title, layout)| {
+            (
+                title,
+                tasks
+                    .iter()
+                    .filter(|task| task.layout == layout)
+                    .cloned()
+                    .collect::<Vec<_>>(),
+            )
+        })
+        .filter(|(_, items)| !items.is_empty())
+        .collect();
+        let first_group = sections.first().map(|(title, _)| *title).unwrap_or("");
+        return rsx! {section {class:"card writing-catalog",style {"{WRITING_CATALOG_STYLE}"}h1 {id:"page-heading","Write and say"}p {"Use a word you have met. Hear it and write, or copy it first; then say the same word or message."}
                button {class:"secondary",onclick:move |_|nav_act(app,|a|a.open_writing_history_list()),"Your writing"}
-               if empty {p {"First meet a few sounds and letters. Writing activities appear here as you meet their words."}button {class:"primary",onclick:move |_|nav_act(app,|a|a.start_foundations()),"Start sounds & letters"}}
-        for task in tasks {if app.read().handwriting_task_available(&task).unwrap_or(false){div {class:"writing-choice",h2 {"{task.target}"}if let Some(meaning)=&task.meaning{p {"{meaning}"}}
+               label {"Find writing" input {r#type:"search",value:"{catalog_query}",placeholder:"Russian or meaning",oninput:move |event|catalog_query.set(event.value())}}
+               fieldset {class:"writing-catalog-filters",legend {"Show"}for (value,label) in [("all","All"),("letters","Letters"),("words","Words"),("messages","Messages")] {button {class:"secondary",r#type:"button",aria_pressed:group == value,onclick:move |_|catalog_group.set(value.to_string()),"{label}"}}}
+               p {"{tasks.len()} matching activities · {available_count} available to practise"}
+               if empty && available_count > 0 {p {"No matching activities. Try another word or group."}}
+               if available_count == 0 {p {"First meet a few sounds and letters. Writing activities appear here as you meet their words."}button {class:"primary",onclick:move |_|nav_act(app,|a|a.start_foundations()),"Start sounds & letters"}}
+        for (title, items) in sections {details {class:"writing-catalog-group",open:group != "all" || !query.is_empty() || title == first_group,summary {"{title} · {items.len()}"}for task in items {div {class:"writing-choice",h2 {"{task.target}"}if let Some(meaning)=&task.meaning{p {"{meaning}"}}
                 {let id=task.id.clone();rsx!{button {class:"primary",onclick:move |_|{let id=id.clone();nav_act(app,move|a|a.open_writing_task(&id,WritingSequence::HearWriteCompareSay))},"Hear and write"}}}
                 {let id=task.id.clone();rsx!{button {class:"secondary",onclick:move |_|{let id=id.clone();nav_act(app,move|a|a.open_writing_task(&id,WritingSequence::SeeCopyHearSay))},"See and copy"}}}
-               }}}
+               }}}}
                button {class:"secondary",onclick:move |_|nav_act(app,|a|a.navigate(Page::Foundations)),"Back to my course"}
               }};
     }
@@ -587,29 +783,57 @@ pub(crate) fn Writing(mut app: Signal<AppState>) -> Element {
     let busy = app.read().handwriting_navigation_busy;
     let completed = run.stage == WritingStage::Complete;
     let speech_busy = app.read().writing_speech_busy;
-    rsx! {section {class:"card writing-lesson",
-      p {class:"eyebrow",match run.stage{WritingStage::Writing=>if run.sequence==WritingSequence::HearWriteCompareSay{"HEAR → WRITE"}else{"SEE → COPY"},WritingStage::Compare=>"COMPARE YOUR DRAWING",WritingStage::Say=>"SAY THE SAME WORDS",WritingStage::Complete=>"PRACTICE KEPT"}}
-      h1 {id:"page-heading",tabindex:"-1",if run.stage==WritingStage::Writing&&run.sequence==WritingSequence::HearWriteCompareSay{"Hear it, then write it"}else{"{definition.target}"}}
-      if matches!(run.stage,WritingStage::Writing|WritingStage::Compare){
-       if native{p {"{task.instruction}"}{let capture=run.clone();let alive=alive.clone();rsx!{button {class:"primary",disabled:busy,onclick:move |_|open_native(app,capture.clone(),on_native,alive.clone()),if run.stage==WritingStage::Compare{"Open my drawing and comparison"}else{"Open writing paper"}}}}}
-       else{HandwritingPad {key:"{scope}",app,scope_id:scope.clone(),task:task.clone(),attempt_id:Some(run.attempt_id),initial_mode:if run.sequence==WritingSequence::SeeCopyHearSay{InkMode::Copy}else{InkMode::Hidden},on_saved:move|original|{crate::act(app,|a|a.writing_accept_web(id,round,&original));tick+=1;dirty.set(false)},on_dirty:move|value|dirty.set(value),on_audio_completed:move|asset:String|{crate::act(app,|a|a.writing_audio_completed(id,round,&asset));}}}
+    let compared = matches!(run.stage, WritingStage::Compare | WritingStage::Say);
+    rsx! {
+     style {"{WRITING_WORKSPACE_STYLE}"}
+     section {class:"card writing-lesson",
+      header {class:"writing-header",h1 {id:"page-heading",tabindex:"-1","Write and say"}
+       button {class:"text-button",disabled:busy||speech_busy,onclick:move |_|nav_act(app,|a|a.navigate(Page::Foundations)),"Pause"}}
+      if native {
+       NativeWritingPaper {key:"native-{scope}",app,run:run.clone(),on_event:on_native}
+      } else {
+       HandwritingPad {key:"{scope}",app,scope_id:scope.clone(),task:task.clone(),attempt_id:Some(run.attempt_id),initial_mode:if run.sequence==WritingSequence::SeeCopyHearSay{InkMode::Copy}else{InkMode::Hidden},on_saved:move|original|{crate::act(app,|a|a.writing_accept_web(id,round,&original));tick+=1;dirty.set(false)},on_dirty:move|value|dirty.set(value),on_audio_completed:move|asset:String|{crate::act(app,|a|a.writing_audio_completed(id,round,&asset));}}
       }
-      if run.stage==WritingStage::Compare{
-       p {"{definition.model_help}"}if let Some(meaning)=&definition.meaning{p {"{meaning}"}}if let Some(grammar)=&definition.grammar_note{details {summary {"How this message works"}p {"{grammar}"}}}
-       button {class:"primary",disabled:busy||dirty(),onclick:move |_|nav_act(app,move|a|a.writing_go_say(id,round)),"Now say it"}
+      if compared || completed {
+       section {class:"writing-response",
+        if let Some(meaning)=&definition.meaning{p {class:"writing-meaning","{meaning}"}}
+        if !completed {p {"{definition.say_instruction}"}}
+        if let Ok(binding)=crate::writing_speech::WritingSpeechBinding::from_run(&run){crate::writing_speech::WritingSpeech {app,binding,on_busy:move|value|app.write().writing_speech_busy=value}}
+        details {summary {"Writing tips"}p {"{definition.model_help}"}if let Some(grammar)=&definition.grammar_note{p {"{grammar}"}}}
+       }
+       if compared {footer {class:"actions writing-next",
+        button {class:"primary",disabled:busy||dirty()||speech_busy||!run.audio_completed,onclick:move |_|nav_act(app,move|a|a.writing_finish_and_continue(id,round,SayDisposition::SelfReportedSaid)),"I said it · Next"}
+        button {class:"text-button",disabled:busy||dirty()||speech_busy,onclick:move |_|nav_act(app,move|a|a.writing_finish_and_continue(id,round,SayDisposition::Skipped)),"Skip speaking"}
+       }}
+       if completed {footer {class:"actions",
+        button {class:"primary",disabled:busy||speech_busy,onclick:move |_|nav_act(app,move|a|a.writing_finish_and_continue(id,round,SayDisposition::Skipped)),"Continue"}
+        button {class:"secondary",disabled:busy||speech_busy,onclick:move |_|nav_act(app,move|a|a.writing_new_round(id,round,WritingSequence::HearWriteCompareSay)),"Try from listening"}
+        button {class:"text-button",disabled:busy||speech_busy,onclick:move |_|nav_act(app,|a|a.open_writing_history_list()),"Your writing"}
+       }}
       }
-      if run.stage==WritingStage::Say{
-       if let Some(meaning)=&definition.meaning{p {"{meaning}"}}p {"{definition.say_instruction}"}
-       if let Ok(binding)=crate::writing_speech::WritingSpeechBinding::from_run(&run){crate::writing_speech::WritingSpeech {app,binding,on_busy:move|value|app.write().writing_speech_busy=value}}
-    button {class:"primary",disabled:busy||speech_busy||!run.audio_completed,onclick:move |_|nav_act(app,move|a|a.writing_say_done(id,round,SayDisposition::SelfReportedSaid)),"I said it — continue"}
-       button {class:"secondary",disabled:busy||speech_busy,onclick:move |_|nav_act(app,move|a|a.writing_say_done(id,round,SayDisposition::Skipped)),"Skip speaking"}
-      }
-      if completed{if let Ok(binding)=crate::writing_speech::WritingSpeechBinding::from_run(&run){crate::writing_speech::WritingSpeech {app,binding,on_busy:move|value|app.write().writing_speech_busy=value}}p {if run.say==SayDisposition::SelfReportedSaid{"Your writing is kept, and you tried saying the example."}else{"Your writing is kept. You can return to speaking another time."}}
-       button {class:"secondary",onclick:move |_|nav_act(app,move|a|a.writing_new_round(id,round,WritingSequence::HearWriteCompareSay)),"Hear and write a fresh try"}
-       button {class:"secondary",onclick:move |_|nav_act(app,move|a|a.writing_new_round(id,round,WritingSequence::SeeCopyHearSay)),"Copy a fresh try"}
-      }
-      if run.original.is_some(){button {class:"secondary",onclick:move |_|{let export=app.read().handwriting_export();match export{Ok(value)=>{let text=serde_json::to_string_pretty(&value).unwrap();spawn(async move{if let Err(e)=crate::audio_studio::export_json(text,format!("drussky-writing-{id}.json")).await{app.write().notice=e}});},Err(e)=>app.write().notice=e}},"Save a copy"}}
-      button {class:if completed{"primary"}else{"secondary"},disabled:busy,onclick:move |_|nav_act(app,|a|a.navigate(Page::Foundations)),if completed{"Back to my course"}else{"Stop here — keep my place"}}
-      if completed {button {class:"secondary",onclick:move |_|nav_act(app,|a|a.open_writing_history_list()),"See my saved writing"}}
-     }}
+     }
+    }
 }
+
+const WRITING_CATALOG_STYLE: &str = r#".writing-catalog-filters{display:flex;gap:8px;flex-wrap:wrap;border:0;padding:0;margin:16px 0}.writing-catalog-filters legend{margin-bottom:8px}.writing-catalog-filters button{min-height:44px;min-width:64px}.writing-catalog-filters button[aria-pressed=true]{background:#244f42;color:white}.writing-catalog-group>summary{min-height:44px;display:list-item;align-content:center;cursor:pointer}.writing-catalog-group .writing-choice{padding:12px 0;border-top:1px solid #d4ddd4}"#;
+
+const WRITING_WORKSPACE_STYLE: &str = r#"
+.writing-lesson{max-width:900px;margin:0 auto;padding:24px}
+.writing-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+.writing-header h1{font-size:1.5rem;margin:0}.writing-prompt{margin:8px 0 14px}
+.writing-example{font-size:clamp(2rem,5vw,3.3rem);line-height:1.25;margin:12px 0;white-space:pre-wrap}
+.native-paper-host{height:clamp(240px,34vh,360px);width:100%;border:1px solid var(--line,#ccd4cc);border-radius:12px;background:var(--paper,#faf9f3);overflow:hidden}
+.writing-tools{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.writing-tools .primary{margin-left:auto}
+.writing-response{margin-top:16px}.writing-response>p{margin:8px 0}.writing-response details{font-size:.95rem;margin:12px 0}
+.writing-next{display:flex;align-items:center;gap:12px;margin-top:16px}
+.writing-lesson button{min-height:44px}.writing-meaning{font-size:1.1rem;color:var(--muted)}
+.writing-lesson .handwriting-pad{max-width:none}.writing-lesson .handwriting-pad[data-sealed=true] .ink-instruction,
+.writing-lesson .handwriting-pad[data-sealed=true] .ink-pad-heading,
+.writing-lesson .handwriting-pad[data-sealed=true] .ink-guidance,
+.writing-lesson .handwriting-pad[data-sealed=true] .ink-sound,
+.writing-lesson .handwriting-pad[data-sealed=true] .ink-context,
+.writing-lesson .handwriting-pad[data-sealed=true]>div.actions,
+.writing-lesson .handwriting-pad[data-sealed=true]>[data-ink-status],
+.writing-lesson .handwriting-pad[data-sealed=true]>details{display:none}
+@media(max-width:600px){.writing-lesson{padding:16px}.native-paper-host{height:260px}.writing-lesson .ink-model svg,.writing-lesson .ink-comparison svg{height:112px}}
+"#;

@@ -30,7 +30,10 @@ pub(crate) struct WritingSpeechBinding {
 }
 impl WritingSpeechBinding {
     pub(crate) fn from_run(run: &HandwritingActivity) -> Result<Self> {
-        if !matches!(run.stage, WritingStage::Say | WritingStage::Complete) {
+        if !matches!(
+            run.stage,
+            WritingStage::Compare | WritingStage::Say | WritingStage::Complete
+        ) {
             return Err("Compare your saved drawing before opening its speaking turn.".into());
         }
         let original = run
@@ -122,7 +125,7 @@ impl AppState {
     ) -> Result<HandwritingActivity> {
         let run = self.active_handwriting()?;
         if WritingSpeechBinding::from_run(&run)? != *binding
-            || (editing && run.stage != WritingStage::Say)
+            || (editing && !matches!(run.stage, WritingStage::Compare | WritingStage::Say))
         {
             return Err(
                 "The speaking turn changed. Your voice and drawing originals are kept.".into(),
@@ -366,11 +369,10 @@ fn WritingSpeechEditor(
     let play_owner = owner.clone();
     rsx! {style {"{WRITING_SPEECH_STYLE}"}
         section {class:"writing-speech","data-writing-speech-run":binding.run_id.to_string(),"data-writing-speech-round":binding.round_id.to_string(),"data-writing-speech-original":binding.ink_original_id.to_string(),
-            p {class:"quiet","Listen, then say it aloud. Recording is optional."}
             div {class:"actions",button {class:"primary",disabled:playing()||recording(),onclick:move |_|{
                 playing.set(true);problem.set(String::new());let binding=model_binding.clone();let alive=play_alive.clone();let owner=play_owner.clone();
                 spawn(async move{let result=play_model(&binding.model_audio_id,&owner).await;if !alive.get(){return;}playing.set(false);match result{Ok(true)=>{if let Err(error)=app.write().writing_audio_completed(binding.run_id,binding.round_id,&binding.model_audio_id){problem.set(error);}},Ok(false)=>problem.set("Playback stopped or interrupted. Replay when you are ready.".into()),Err(error)=>problem.set(error)}});
-            },if playing(){"Playing the model…"}else{"Listen, then say it"}}
+            },if playing(){"Playing…"}else{"Listen"}}
             if playing(){button {class:"text-button",onclick:move |_|stop_model(&owner),"Stop model"}}}
             if readonly {if let Some(record)=&selected{AudioReviewPlayer {asset_id:record.asset_id.clone(),expected_hash:Some(record.content_hash.clone()),label:"Your saved voice".to_string()}}}
             else{div {inert:playing().then_some(""),AudioSpeaking {passage_id:String::new(),revision_id:String::new(),writing_scope:Some(binding.scope()),selected_asset_id:selected.as_ref().map(|r|r.asset_id.clone()),selected_content_hash:selected.as_ref().map(|r|r.content_hash.clone()),workspace_id:if cfg!(target_arch="wasm32"){String::new()}else{app.read().device.to_string()},

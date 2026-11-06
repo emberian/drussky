@@ -33,6 +33,7 @@ struct Pending {
 }
 struct State {
     request: NativeWritingRequest,
+    inline: Cell<Option<NativeWritingHostRect>>,
     outbox: Rc<EventQueue>,
     controller: Retained<WritingController>,
     canvas: Retained<PKCanvasView>,
@@ -278,6 +279,10 @@ fn layout(s: &State) {
     let Some(view) = s.controller.view() else {
         return;
     };
+    if s.inline.get().is_some() {
+        s.canvas.setFrame(view.bounds());
+        return;
+    }
     let bounds = view.bounds();
     let safe = view.safeAreaInsets();
     let x = safe.left + 16.0;
@@ -532,7 +537,7 @@ fn checkpoint(s: &Rc<State>, reason: NativeCheckpointReason) {
     if reason == NativeCheckpointReason::Compare && unsafe { drawing.strokes().is_empty() } {
         s.requested.set(None);
         s.canvas.drawingGestureRecognizer().setEnabled(true);
-        status(s, "Write a word or phrase before comparing.");
+        fail(s, "Write a word or phrase before comparing.".into());
         return;
     }
     let archive = unsafe { drawing.dataRepresentation() };
@@ -735,6 +740,10 @@ fn dismiss(s: &Rc<State>) {
         return;
     }
     stop_audio(s);
+    if let Some(player) = s.player.borrow_mut().take() {
+        player.setDelegate(None);
+    }
+    s.canvas.setDrawingDelegate(None);
     cancel_timer(s);
     unsafe {
         NSNotificationCenter::defaultCenter().removeObserver(&s.controller);
@@ -742,6 +751,25 @@ fn dismiss(s: &Rc<State>) {
     s.picker.setVisible_forFirstResponder(false, &s.canvas);
     s.picker.removeCanvasObserver(&s.canvas);
     let id = s.request.instance_id;
+    if s.inline.get().is_some() {
+        s.controller.willMoveToParentViewController(None);
+        if let Some(view) = s.controller.view() {
+            view.removeFromSuperview();
+        }
+        s.controller.removeFromParentViewController();
+        emit(s, NativeWritingEvent::Closed { instance_id: id });
+        later(move || {
+            ACTIVE.with(|a| {
+                if a.borrow()
+                    .as_ref()
+                    .is_some_and(|s| s.request.instance_id == id)
+                {
+                    a.borrow_mut().take();
+                }
+            });
+        });
+        return;
+    }
     // Retain the state until UIKit's actual dismissal completion, never tear down
     // a delegate from inside its own callback.
     let completion = RcBlock::new(move || {
@@ -763,8 +791,23 @@ fn dismiss(s: &Rc<State>) {
         .dismissViewControllerAnimated_completion(true, Some(&completion));
 }
 pub(crate) fn open_native(
+    request: NativeWritingRequest,
+    callback: NativeWritingCallback,
+) -> NativeWritingResult<()> {
+    open(request, callback, None)
+}
+pub(crate) fn attach_inline(
+    request: NativeWritingRequest,
+    callback: NativeWritingCallback,
+    host: NativeWritingHostRect,
+) -> NativeWritingResult<()> {
+    host.validate()?;
+    open(request, callback, Some(host))
+}
+fn open(
     mut request: NativeWritingRequest,
     callback: NativeWritingCallback,
+    host: Option<NativeWritingHostRect>,
 ) -> NativeWritingResult<()> {
     request.validate()?;
     if !request.initial_compared {
@@ -842,10 +885,14 @@ pub(crate) fn open_native(
         &*status_label as &UIView,
         &*canvas as &UIView,
     ] {
-        view.addSubview(v);
+        if host.is_none() || std::ptr::eq(v, &*canvas as &UIView) {
+            view.addSubview(v);
+        }
     }
-    for b in &buttons {
-        view.addSubview(b);
+    if host.is_none() {
+        for b in &buttons {
+            view.addSubview(b);
+        }
     }
     let picker = PKToolPicker::init(mtm.alloc());
     picker.addCanvasObserver(&canvas);
@@ -863,6 +910,7 @@ pub(crate) fn open_native(
     let latest_initial = request.initial.clone();
     let s = Rc::new(State {
         request,
+        inline: Cell::new(host),
         outbox: Rc::new(EventQueue {
             callback,
             events: RefCell::new(VecDeque::new()),
@@ -933,7 +981,26 @@ pub(crate) fn open_native(
             emit(&s, NativeWritingEvent::Ready { instance_id: id });
         }
     });
-    presenter.presentViewController_animated_completion(&s.controller, true, Some(&completion));
+    if let Some(host) = host {
+        presenter.addChildViewController(&s.controller);
+        view.setClipsToBounds(true);
+        webview.setClipsToBounds(true);
+        webview.addSubview(&view);
+        s.controller.didMoveToParentViewController(Some(&presenter));
+        update_inline_rect(id, host)?;
+        // Queue readiness after attachment, matching the modal's completion.
+        later(move || {
+            if let Some(s) = state(id) {
+                s.canvas.becomeFirstResponder();
+                if !s.comparison.get() {
+                    s.picker.setVisible_forFirstResponder(true, &s.canvas);
+                }
+                emit(&s, NativeWritingEvent::Ready { instance_id: id });
+            }
+        });
+    } else {
+        presenter.presentViewController_animated_completion(&s.controller, true, Some(&completion));
+    }
     Ok(())
 }
 
@@ -947,5 +1014,145 @@ pub(crate) fn request_pause(instance: Uuid) -> NativeWritingResult<()> {
     }
     let s = state(instance).ok_or("The native writing controller is no longer active.")?;
     request_checkpoint(&s, NativeCheckpointReason::Back);
+    Ok(())
+}
+
+fn active_main(instance: Uuid) -> NativeWritingResult<Rc<State>> {
+    MainThreadMarker::new().ok_or("Use native writing on the main thread.")?;
+    state(instance)
+        .filter(|s| !s.closing.get())
+        .ok_or("The native writing controller is no longer active.".into())
+}
+pub(crate) fn update_inline_rect(
+    instance: Uuid,
+    host: NativeWritingHostRect,
+) -> NativeWritingResult<()> {
+    host.validate()?;
+    let s = active_main(instance)?;
+    if s.inline.get().is_none() {
+        return Err("This writing activity is not inline.".into());
+    }
+    let window = native_runtime::window();
+    let webview = window.webview.webview();
+    let bounds = webview.bounds();
+    let sx = bounds.size.width / host.viewport_width;
+    // UIKit's WebView may retain its full height above the keyboard. A single
+    // scale derived from viewport width preserves ink proportions; the visual
+    // viewport height is for visibility clipping, never vertical stretching.
+    let sy = sx;
+    let view = s
+        .controller
+        .view()
+        .ok_or("The inline paper view is unavailable.")?;
+    // The bridge subtracts visualViewport offsets from CSS client coordinates.
+    // Keep the whole host frame so clipping never shifts ink coordinates.
+    view.setFrame(rect(
+        bounds.origin.x + host.x * sx,
+        bounds.origin.y + host.y * sy,
+        host.width * sx,
+        host.height * sy,
+    ));
+    view.setHidden(
+        host.width == 0.0
+            || host.height == 0.0
+            || host.x + host.width <= 0.0
+            || host.y + host.height <= 0.0
+            || host.x >= host.viewport_width
+            || host.y >= host.viewport_height,
+    );
+    s.inline.set(Some(host));
+    layout(&s);
+    Ok(())
+}
+pub(crate) fn native_listen(instance: Uuid) -> NativeWritingResult<()> {
+    let s = active_main(instance)?;
+    listen(&s);
+    Ok(())
+}
+pub(crate) fn native_reveal(instance: Uuid) -> NativeWritingResult<()> {
+    let s = active_main(instance)?;
+    if s.request.allow_model_reveal && !s.model_visible.get() {
+        reveal(&s);
+    }
+    Ok(())
+}
+pub(crate) fn native_compare(instance: Uuid) -> NativeWritingResult<()> {
+    let s = active_main(instance)?;
+    if !s.comparison.get() {
+        request_checkpoint(&s, NativeCheckpointReason::Compare);
+    }
+    Ok(())
+}
+
+pub(crate) fn native_undo(instance: Uuid) -> NativeWritingResult<()> {
+    let s = active_main(instance)?;
+    if !s.comparison.get() && !s.tool_active.get() && s.requested.get().is_none() {
+        if let Some(u) = s.canvas.undoManager() {
+            unsafe {
+                u.undo();
+            }
+        }
+    }
+    Ok(())
+}
+pub(crate) fn native_redo(instance: Uuid) -> NativeWritingResult<()> {
+    let s = active_main(instance)?;
+    if !s.comparison.get() && !s.tool_active.get() && s.requested.get().is_none() {
+        if let Some(u) = s.canvas.undoManager() {
+            unsafe {
+                u.redo();
+            }
+        }
+    }
+    Ok(())
+}
+pub(crate) fn native_finger(instance: Uuid, enabled: bool) -> NativeWritingResult<()> {
+    let s = active_main(instance)?;
+    if !s.comparison.get() && !s.tool_active.get() && s.requested.get().is_none() {
+        s.finger.set(enabled);
+        s.canvas.setDrawingPolicy(if enabled { 1 } else { 2 });
+    }
+    Ok(())
+}
+
+/// Normal navigation uses request_pause + durable ACK. An unexpectedly dropped
+/// renderer has no callback consumer, so journal its current archive before cleanup.
+pub(crate) fn detach_inline(instance: Uuid) -> NativeWritingResult<()> {
+    MainThreadMarker::new().ok_or("Use native writing on the main thread.")?;
+    // Paused may unmount the HTML owner while native dismissal is completing.
+    // Repeated cleanup must neither journal again nor report a spurious failure.
+    let Some(s) = state(instance) else {
+        return Ok(());
+    };
+    if s.closing.get() {
+        return Ok(());
+    }
+    if s.inline.get().is_none() {
+        return Err("This writing activity is not inline.".into());
+    }
+    if let Some(view) = s.controller.view() {
+        view.setHidden(true);
+    }
+    s.requested.set(None);
+    cancel_timer(&s);
+    // Disabling may finish the active stroke; its delegate is still installed.
+    s.canvas.drawingGestureRecognizer().setEnabled(false);
+    s.tool_active.set(false);
+    checkpoint(&s, NativeCheckpointReason::Autosave);
+    let archive = unsafe { s.canvas.drawing().dataRepresentation() };
+    let saved = s
+        .latest
+        .borrow()
+        .as_ref()
+        .is_some_and(|c| c.archive_sha256 == hash(&archive.to_vec()));
+    if !saved {
+        // Keep the hidden native state available for retry rather than destroying
+        // the sole surviving original when local storage itself fails.
+        return Err(
+            "The original ink could not be journaled; the native paper is retained for recovery."
+                .into(),
+        );
+    }
+    dismiss(&s);
     Ok(())
 }

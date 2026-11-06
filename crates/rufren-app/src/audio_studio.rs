@@ -956,7 +956,7 @@ pub fn AudioStudio(
             div {class:"panel audio-session-bar",
                 div {id:"audio-mic-status",class:"audio-mic",role:"status","data-active":"false","Microphone off"}
                 button {id:"audio-stop-recording",class:"audio-stop",disabled:true,"data-action":"stop","Stop & keep take"}
-                p {id:"audio-status",role:"status",aria_live:"polite","Opening audio storage…"}
+                p {id:"audio-status",role:"status",aria_live:"polite","Opening saved recordings…"}
                 if !error.read().is_empty() {p {class:"audio-error",role:"alert","{error}"}}
             }
             div {class:"audio-tracks",
@@ -966,13 +966,12 @@ pub fn AudioStudio(
                         p {class:"quiet","{description}"}
                         if role=="reference" {if let Some(generate)=on_generate_reference {button {class:"primary",disabled:generating_reference,onclick:move |_|generate.call(()),if generating_reference {"Generating reference…"}else{"Generate reference audio"}}}}
                         div {class:"audio-acquire",
-                            button {class:"primary","data-action":"record","data-role":role,"data-record":"true",if role=="reference" {"● Record another voice"}else{if dialogue_scope.is_some(){"● Record my message"}else{"● Record my attempt"}}}
+                            button {class:"primary","data-action":"record","data-role":role,"data-record":"true",if role=="reference" {"● Record another voice"}else{if dialogue_scope.is_some(){"Record my message"}else{"Record my voice"}}}
                             if writing_scope.is_none(){label {class:"secondary audio-file",r#for:"audio-import-{role}",{if dialogue_scope.is_some(){"Import WAV"}else{"Import audio"}} input {id:"audio-import-{role}",name:"audio-import-{role}",onchange:move |event|import_native_file(event,role,error),r#type:"file",accept:if dialogue_scope.is_some(){"audio/wav,.wav"}else{"audio/*,.wav,.mp3,.m4a,.ogg,.flac"},"data-import":role}}}
                         }
                         label {r#for:"audio-library-{role}",if dialogue_scope.is_some(){"Saved takes for this message"}else{"Saved takes for this phrase"}}
                         select {id:"audio-library-{role}","data-library":role,aria_label:"Saved {title}"}
                         p {id:"audio-name-{role}",class:"audio-clip-name","No recording selected"}
-                        p {id:"audio-provenance-{role}",class:"quiet audio-source","No source selected"}
                         div {class:"audio-plot",
                             span {class:"audio-plot-title","Waveform · original timing"}
                             canvas {id:"audio-wave-{role}",width:"960",height:"180",role:"img",aria_label:"{title} waveform; recording quality and duration are described below.","Waveform appears after recording or import."}
@@ -981,12 +980,13 @@ pub fn AudioStudio(
                         div {class:"audio-span",
                             label {r#for:"audio-from-{role}",{"Start (s)"} input {id:"audio-from-{role}",r#type:"number",min:"0",step:"0.01",initial_value:"0",inputmode:"decimal"}}
                             label {r#for:"audio-to-{role}",{"End (s)"} input {id:"audio-to-{role}",r#type:"number",min:"0",step:"0.01",initial_value:"0",inputmode:"decimal"}}
-                            button {class:"secondary",disabled:true,"data-needs":role,"data-action":"play","data-role":role,if compact {"▶ Replay my take"}else{"▶ Play span"}}
+                            button {class:"secondary",disabled:true,"data-needs":role,"data-action":"play","data-role":role,if compact {"Replay"}else{"▶ Play span"}}
                             if compact && role=="attempt" {button {class:"text-button","data-action":"stopPlayback","Stop playback"}}
                         }
-                        if role=="reference" {if let Some(a)=reference_analysis.as_ref() {{quality_summary(a)}}}
-                        else {if let Some(a)=attempt_analysis.as_ref() {{quality_summary(a)}}}
-                        details {class:"audio-details",summary {"Inspect sound & add a cue"}
+                        details {class:"audio-details",summary {"Recording details & sound tools"}
+                            p {id:"audio-provenance-{role}",class:"quiet audio-source","No source selected"}
+                            if role=="reference" {if let Some(a)=reference_analysis.as_ref() {{quality_summary(a)}}}
+                            else {if let Some(a)=attempt_analysis.as_ref() {{quality_summary(a)}}}
                             p {class:"quiet","Time runs left to right. Brighter bands mean more energy at a frequency. Voices and microphones differ; matching this picture is not the goal."}
                             div {class:"audio-plot",span {id:"audio-spectrum-label-{role}",class:"audio-plot-title","Spectrogram · frequency increases upward"}canvas {id:"audio-spectrum-{role}",width:"960",height:"180",role:"img",aria_label:"{title} spectrogram. Use playback and focused review to interpret frequency patterns.","Spectrogram appears after recording or import."}}
                             div {class:"audio-plot",span {class:"audio-plot-title","Estimated pitch · 50–400 Hz, logarithmic · confident voiced frames only"}canvas {id:"audio-pitch-{role}",width:"960",height:"180",role:"img",aria_label:"{title} estimated pitch. Gaps can mean unvoiced sound or uncertain estimation.","Pitch display appears after recording or import."}}
@@ -1164,7 +1164,7 @@ function click(event){
  media.play().then(()=>{
   if(!alive||generation!==playGeneration||load!==loadGeneration)return;
   if(playbackToken!==undefined&&root.dataset.playbackToken!==playbackToken)return;
-  proof.started=true;status.textContent=rate===1?'Playing the selected recording.':'Playing slowly, keeping voice pitch. Time stretching can add artifacts.';const {blob,...recording}=playedRecord;send({kind:'played',recording,...(playbackToken===undefined?{}:{playback_token:playbackToken,playback_id:playbackId})});completed();
+  proof.started=true;status.textContent=rate===1?'Playing the selected recording.':'Playing slowly.';const {blob,...recording}=playedRecord;send({kind:'played',recording,...(playbackToken===undefined?{}:{playback_token:playbackToken,playback_id:playbackId})});completed();
  }).catch(error=>{if(alive&&generation===playGeneration)status.textContent=`Playback could not start. Tap Listen again, or check this app’s audio permission. ${error.message}`;});
 }
 function change(event){if(event.target===picker){root.dataset.selectedReference=picker.value;prepare();}}
@@ -1200,7 +1200,7 @@ async function prepare(){
    const p=selected.device?.provenance;
    if(typeof p?.source_text!=='string'||p.source_text_sha256!==expectedSourceHash)throw Error('This voice does not match the selected text. Its original was kept.');
    const textHash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p.source_text))),n=>n.toString(16).padStart(2,'0')).join('');
-   if(textHash!==expectedSourceHash)throw Error('This voice’s text provenance failed its integrity check. Its original was kept.');
+   if(textHash!==expectedSourceHash)throw Error('This recording could not be checked against its text. Create the audio again.');
   }
   const bytes=await selected.blob.arrayBuffer();
   const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join('');
@@ -1213,7 +1213,7 @@ async function prepare(){
    media.onerror=()=>{clearTimeout(prepareTimer);reject(Error('This device could not play the saved original. Import a WAV or MP3 reference.'));};
    media.src=url;media.load();
   }),lifetime.then(()=>{throw Error('Reference player closed.');}),cancellation.then(()=>{throw Error('Reference selection changed.');})]);
-  if(alive&&generation===loadGeneration){record=selected;if(sourceLabel)sourceLabel.textContent=referenceSource(record);buttons.forEach(b=>b.disabled=Number(b.dataset.practiceRate)!==1&&!preservePitchKey);const readyLabel=root.dataset.asset!==undefined?'Recording':'Reference';status.textContent=modelExample?'Ready. Listen to the complete example.':playbackToken!==undefined?'Ready. Listen to the whole sound, then choose its meaning.':preservePitchKey?`${readyLabel} ready. Listen at natural speed, or replay slowly with voice pitch preserved.`:`${readyLabel} ready at natural speed. Pitch-preserving slow playback is unavailable here.`;send({kind:'ready',ready:true});}
+  if(alive&&generation===loadGeneration){record=selected;if(sourceLabel)sourceLabel.textContent=referenceSource(record);buttons.forEach(b=>b.disabled=Number(b.dataset.practiceRate)!==1&&!preservePitchKey);const readyLabel=root.dataset.asset!==undefined?'Recording':'Reference';status.textContent=modelExample?'Ready. Listen to the complete example.':playbackToken!==undefined?'Ready. Listen to the whole sound, then choose its meaning.':preservePitchKey?`${readyLabel} ready.`:`${readyLabel} ready. Slow replay is unavailable on this device.`;send({kind:'ready',ready:true});}
  }catch(error){if(alive&&generation===loadGeneration){status.textContent=error.message;send({kind:'ready',ready:false});}}
 }
 await prepare();
@@ -1286,10 +1286,10 @@ pub fn AudioPractice(
             if let Some(generate)=on_generate {button {class:"secondary",disabled:generating,onclick:move |_|generate.call(()),if generating {"Generating reference…"}else{"Generate reference audio"}}}
             label {r#for:voice_id.clone(),"Reference voice"}
             select {id:voice_id,disabled:true,"data-reference-select":"true"}
-            p {class:"quiet audio-source","data-reference-source":"true"}
+            details {summary {"Voice source"}p {class:"quiet audio-source","data-reference-source":"true"}}
             div {class:"actions",
-                button {class:"primary",disabled:true,"data-practice-rate":"1","▶ Listen / replay"}
-                button {class:"secondary",disabled:true,"data-practice-rate":"0.7","Replay slowly · keep voice pitch"}
+                button {class:"primary",disabled:true,"data-practice-rate":"1","Listen"}
+                button {class:"secondary",disabled:true,"data-practice-rate":"0.7","Replay slowly"}
                 button {class:"text-button","data-practice-stop":"true","Stop"}
             }
             p {class:"quiet",role:"status","data-practice-status":"true","Opening reference audio…"}
@@ -1356,11 +1356,11 @@ pub(crate) fn AudioReviewPlayer(
         div {id:element_id,class:"audio-practice audio-review-player","data-asset":asset_id,"data-expected-hash":expected_hash,
             h3 {"{label}"}
             div {class:"actions",
-                button {class:"primary",disabled:true,"data-practice-rate":"1","▶ Play this recording"}
-                button {class:"secondary",disabled:true,"data-practice-rate":"0.7","Replay slowly · keep voice pitch"}
+                button {class:"primary",disabled:true,"data-practice-rate":"1","Replay"}
+                button {class:"secondary",disabled:true,"data-practice-rate":"0.7","Replay slowly"}
                 button {class:"text-button","data-practice-stop":"true","Stop"}
             }
-            p {class:"quiet",role:"status","data-practice-status":"true","Opening the exact saved original…"}
+            p {class:"quiet",role:"status","data-practice-status":"true","Opening recording…"}
             if !error.read().is_empty() {p {role:"alert","{error}"}}
         }
     }

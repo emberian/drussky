@@ -156,7 +156,7 @@ fn SavedInk(original: WritingOriginalReview, task: HandwritingTask) -> Element {
         let original = original.clone();
         let task = task.clone();
         spawn(async move {
-            let config = serde_json::json!({"scope_id":original.reference.scope_id,"target":task.target,"task_id":task.id,"task_revision":task.revision,"paper":task.paper});
+            let config = serde_json::json!({"model_version":task.model_version,"scope_id":original.reference.scope_id,"target":task.target,"task_id":task.id,"task_revision":task.revision,"paper":task.paper});
             let script = format!(
                 "{}\nconst canvas=document.getElementById({});if(!canvas)return false;return window.RufrenHandwriting.preview(canvas,{},{});",
                 include_str!("handwriting.js"),

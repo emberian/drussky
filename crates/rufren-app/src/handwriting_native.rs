@@ -213,6 +213,39 @@ impl NativeWritingCheckpoint {
         Ok(())
     }
 }
+/// CSS rectangle relative to the visual viewport, plus its dimensions, sampled together.
+/// Native layout never changes the drawing's paper coordinates or viewport.
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+pub(crate) struct NativeWritingHostRect {
+    pub x: f64,
+    pub y: f64,
+    pub width: f64,
+    pub height: f64,
+    pub viewport_width: f64,
+    pub viewport_height: f64,
+}
+impl NativeWritingHostRect {
+    pub(crate) fn validate(&self) -> NativeWritingResult<()> {
+        if ![
+            self.x,
+            self.y,
+            self.width,
+            self.height,
+            self.viewport_width,
+            self.viewport_height,
+        ]
+        .iter()
+        .all(|v| v.is_finite() && v.abs() <= 1_000_000.0)
+            || self.width < 0.0
+            || self.height < 0.0
+            || self.viewport_width <= 0.0
+            || self.viewport_height <= 0.0
+        {
+            return Err("The inline writing bounds are invalid.".into());
+        }
+        Ok(())
+    }
+}
 #[derive(Clone, Debug)]
 pub(crate) struct NativeWritingAudio {
     pub id: String,
@@ -352,7 +385,11 @@ pub(crate) enum NativeWritingEvent {
 #[path = "handwriting_native_ios.rs"]
 mod ios;
 #[cfg(all(target_os = "ios", feature = "mobile"))]
-pub(crate) use ios::{ack, is_open, native_drawing_preview, open_native, request_pause};
+pub(crate) use ios::{
+    ack, attach_inline, detach_inline, is_open, native_compare, native_drawing_preview,
+    native_finger, native_listen, native_redo, native_reveal, native_undo, open_native,
+    request_pause, update_inline_rect,
+};
 pub(crate) const fn supported() -> bool {
     cfg!(all(target_os = "ios", feature = "mobile"))
 }
@@ -583,4 +620,80 @@ mod preview_tests {
             assert!(native_preview_geometry(&paper, Some(bounds)).is_err());
         }
     }
+}
+
+#[cfg(not(all(target_os = "ios", feature = "mobile")))]
+pub(crate) fn attach_inline(
+    request: NativeWritingRequest,
+    callback: NativeWritingCallback,
+    host: NativeWritingHostRect,
+) -> NativeWritingResult<()> {
+    host.validate()?;
+    open_native(request, callback)
+}
+#[cfg(not(all(target_os = "ios", feature = "mobile")))]
+pub(crate) fn update_inline_rect(
+    _instance: Uuid,
+    host: NativeWritingHostRect,
+) -> NativeWritingResult<()> {
+    host.validate()?;
+    Err("Inline PencilKit is available in the iPad app.".into())
+}
+#[cfg(not(all(target_os = "ios", feature = "mobile")))]
+pub(crate) fn native_listen(_instance: Uuid) -> NativeWritingResult<()> {
+    Err("Native writing is unavailable.".into())
+}
+#[cfg(not(all(target_os = "ios", feature = "mobile")))]
+pub(crate) fn native_reveal(_instance: Uuid) -> NativeWritingResult<()> {
+    Err("Native writing is unavailable.".into())
+}
+#[cfg(not(all(target_os = "ios", feature = "mobile")))]
+pub(crate) fn native_compare(_instance: Uuid) -> NativeWritingResult<()> {
+    Err("Native writing is unavailable.".into())
+}
+
+#[cfg(not(all(target_os = "ios", feature = "mobile")))]
+pub(crate) fn native_undo(_instance: Uuid) -> NativeWritingResult<()> {
+    Err("Native writing is unavailable.".into())
+}
+#[cfg(not(all(target_os = "ios", feature = "mobile")))]
+pub(crate) fn native_redo(_instance: Uuid) -> NativeWritingResult<()> {
+    Err("Native writing is unavailable.".into())
+}
+#[cfg(not(all(target_os = "ios", feature = "mobile")))]
+pub(crate) fn native_finger(_instance: Uuid, _enabled: bool) -> NativeWritingResult<()> {
+    Err("Native writing is unavailable.".into())
+}
+
+#[cfg(test)]
+mod inline_bounds_tests {
+    use super::*;
+    #[test]
+    fn inline_bounds_accept_scrolled_and_hidden_hosts_without_changing_paper() {
+        let mut host = NativeWritingHostRect {
+            x: -20.0,
+            y: -300.0,
+            width: 800.0,
+            height: 500.0,
+            viewport_width: 1024.0,
+            viewport_height: 768.0,
+        };
+        assert!(host.validate().is_ok());
+        host.width = 0.0;
+        host.height = 0.0;
+        assert!(host.validate().is_ok());
+        for invalid in [f64::NAN, f64::INFINITY, -1.0] {
+            host.width = invalid;
+            assert!(host.validate().is_err());
+        }
+        host.width = 800.0;
+        host.viewport_width = 0.0;
+        assert!(host.validate().is_err());
+    }
+}
+
+/// Emergency unmount only: preserve recovery ink without accepting a comparison.
+#[cfg(not(all(target_os = "ios", feature = "mobile")))]
+pub(crate) fn detach_inline(_instance: Uuid) -> NativeWritingResult<()> {
+    Ok(())
 }

@@ -62,7 +62,15 @@ pub struct FoundationHandwritingTask {
 }
 
 pub fn handwriting_tasks() -> Vec<FoundationHandwritingTask> {
-    serde_json::from_str(HANDWRITING_TASKS_JSON).expect("bundled handwriting activities must parse")
+    let mut tasks: Vec<FoundationHandwritingTask> = serde_json::from_str(HANDWRITING_TASKS_JSON)
+        .expect("bundled handwriting activities must parse");
+    tasks.extend(
+        serde_json::from_str::<Vec<FoundationHandwritingTask>>(include_str!(
+            "../content/extensions/alphabet-construction-handwriting-v1.json"
+        ))
+        .expect("alphabet writing activities must parse"),
+    );
+    tasks
 }
 pub fn handwriting_task_for_step(step_id: &str) -> Option<FoundationHandwritingTask> {
     handwriting_tasks()
@@ -218,9 +226,9 @@ pub fn validate_handwriting_tasks(
 mod tests {
     use super::*;
     #[test]
-    fn all_seventeen_activities_resolve() {
+    fn all_activities_resolve() {
         let tasks = handwriting_tasks();
-        assert_eq!(tasks.len(), 17);
+        assert_eq!(tasks.len(), 106);
         assert_eq!(
             validate_handwriting_tasks(&crate::foundations::foundations(), &tasks),
             Ok(())

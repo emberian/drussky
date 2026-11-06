@@ -8,6 +8,10 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 const MODEL: &str = "hand-printed-six-v2";
+const ALPHABET_MODEL: &str = "hand-printed-alphabet-v1";
+fn legacy_model() -> String {
+    MODEL.into()
+}
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum InkMode {
@@ -23,6 +27,8 @@ pub(crate) enum InkAudioRole {
 }
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub(crate) struct HandwritingTask {
+    #[serde(default = "legacy_model")]
+    pub model_version: String,
     pub id: String,
     pub revision: String,
     pub target: String,
@@ -116,7 +122,7 @@ pub(crate) struct HandwritingSubmission {
 impl HandwritingSubmission {
     fn validate(&self, scope: &str, task: &HandwritingTask, original: bool) -> Result<()> {
         if self.version != 1
-            || self.model_version != MODEL
+            || self.model_version != task.model_version
             || self.view_box != [task.paper.width, task.paper.height]
             || self.scope_id != scope
             || self.task_id != task.id
@@ -367,14 +373,22 @@ fn paper_for(task: &FoundationHandwritingTask) -> InkPaper {
         },
         FoundationHandwritingLayout::WordLine => InkPaper {
             width: 400.max((weight * 125.0 + 80.0).ceil() as u32),
-            height: 260,
+            height: if task.source_pack_revision == "foundation-2026-11-06.3" {
+                300
+            } else {
+                260
+            },
             model_size: 125,
             baseline: 225,
             layout: "word_line".into(),
         },
         FoundationHandwritingLayout::PhraseLine => InkPaper {
             width: 640.max((weight * 120.0 + 80.0).ceil() as u32),
-            height: 260,
+            height: if task.source_pack_revision == "foundation-2026-11-06.3" {
+                300
+            } else {
+                260
+            },
             model_size: 120,
             baseline: 225,
             layout: "phrase_line".into(),
@@ -400,16 +414,29 @@ impl HandwritingActivity {
             .expect("validated authored writing activity");
         let copy = self.sequence == WritingSequence::SeeCopyHearSay;
         let instruction = if copy {
-            format!(
-                "Copy {}. Listen to the whole example when you are ready, then say it.",
-                t.target
-            )
+            "Copy the example.".into()
         } else if t.input_focus == FoundationHandwritingInputFocus::InitialSegmentOfSyllable {
-            "Listen to the beginning of the example, before the vowel. Write the uppercase letter for that beginning sound.".into()
+            "Listen, then write the capital letter for the first sound.".into()
         } else {
-            match t.layout{FoundationHandwritingLayout::LetterBox=>"Listen to the vowel. Write its uppercase Russian letter, then compare.".into(),FoundationHandwritingLayout::WordLine=>"Listen to the whole example. Write it in lowercase, then compare.".into(),FoundationHandwritingLayout::PhraseLine=>"Listen to the whole message. Write it with the space and punctuation you learned, then compare.".into()}
+            match t.layout {
+                FoundationHandwritingLayout::LetterBox => {
+                    "Listen, then write the capital letter.".into()
+                }
+                FoundationHandwritingLayout::WordLine => {
+                    "Listen, then write the word in lowercase.".into()
+                }
+                FoundationHandwritingLayout::PhraseLine => {
+                    "Listen, then write the message, including spaces and punctuation.".into()
+                }
+            }
         };
         HandwritingTask {
+            model_version: if t.source_pack_revision == "foundation-2026-11-06.3" {
+                ALPHABET_MODEL
+            } else {
+                MODEL
+            }
+            .into(),
             id: format!("{}-{}", t.id, if copy { "copy" } else { "sound" }),
             revision: t.revision.clone(),
             target: t.target.clone(),
@@ -884,6 +911,38 @@ impl AppState {
         // Preference is a recoverable pointer; the complete canonical round is
         // durable before this write, and other unfinished runs stay in history.
         self.writing_prefer_run(&run)
+    }
+
+    /// Finish the exercise in place and return directly to its next useful task.
+    /// Retrying navigation after a saved completion must not advance twice.
+    pub(crate) fn writing_finish_and_continue(
+        &mut self,
+        id: Uuid,
+        round: Uuid,
+        disposition: SayDisposition,
+    ) -> Result<()> {
+        let run = self.active_handwriting()?;
+        if run.id != id || run.round_id != round {
+            return Err("This writing activity changed. Your work is saved.".into());
+        }
+        if run.stage == WritingStage::Compare {
+            self.writing_go_say(id, round)?;
+        }
+        if run.stage != WritingStage::Complete {
+            self.writing_say_done(id, round, disposition)?;
+        }
+        if !run.entry_previewed {
+            let course = self.foundation_state()?;
+            if course.session == run.course_session
+                && course.step_id == run.course_step
+                && run.definition()?.foundation_step_id == course.step_id
+            {
+                self.foundation_next(false)?;
+            }
+            self.navigate(Page::Foundations)
+        } else {
+            self.open_writing_catalog()
+        }
     }
     pub(crate) fn handwriting_originals(
         &self,

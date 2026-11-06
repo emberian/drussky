@@ -79,7 +79,7 @@ pub(crate) fn DialogueVoiceInput(
     rsx! {
         style {"{STYLE}"}
         section {class:"dialogue-voice-input","data-dialogue-input":input_id.to_string(),
-            p {class:"quiet","Speak Russian, then check the words before adding them to your message. A recording is kept separately from the words you adopt."}
+            p {class:"quiet","Record your message, then check the words."}
             if !problem().is_empty(){p {role:"alert","{problem}"}}
             if !committed {
                 AudioSpeaking {key:"dialogue-recorder-{input_id}",passage_id:String::new(),revision_id:String::new(),dialogue_scope:Some(DialogueRecorderScope{thread_id,input_id}),
@@ -104,12 +104,12 @@ pub(crate) fn DialogueVoiceInput(
             if let Some((recording,_))=recording {
                 div {class:"actions",
                     button {class:"secondary",disabled:state.recognition_job.is_some()||committed,onclick:move |_|{on_clear.call(());transcribe_dialogue(app,thread_id,input_id,recording);},
-                        if this_job {"Listening for the words…"}else if selected_transcription.is_some(){"Transcribe this take again"}else{"Find the words in this take"}
+                        if this_job {"Listening for the words…"}else if selected_transcription.is_some(){"Transcribe again"}else{"Transcribe"}
                     }
                     if this_job {button {class:"text-button",disabled:state.recognition_cancel_requested,onclick:move |_|crate::recognition_view::cancel(app),if state.recognition_cancel_requested {"Cancelling…"}else{"Cancel transcription"}}}
                 }
             }
-            p {class:"quiet","Transcription uses your private speech service. Supported input: PCM WAV, mono or stereo, 8–48 kHz, up to 45 seconds and 9 MB. Your original stays on this device and can be synced in Settings."}
+            details {summary {"About voice input"}p {class:"quiet","Transcription uses your private speech service. Recordings stay on this device unless you sync them in Settings."}p {class:"quiet","To import a message, choose a WAV recording under 45 seconds and 9 MB."}}
             if let Some(transcription)=selected_transcription {
                 DialogueTranscriptEditor {key:"dialogue-transcript-{transcription}",app,thread_id,input_id,transcription,on_adopt,
                     on_confirmed:move |confirmation|{let mut next=voice();next.transcription=Some(transcription);next.confirmation=Some(confirmation);let result=app.read().save_dialogue_voice_draft(thread_id,input_id,&next);match result{Ok(())=>voice.set(next),Err(error)=>problem.set(error)}}
@@ -169,12 +169,12 @@ fn DialogueTranscriptEditor(
             if !committed {
                 label {r#for:"dialogue-transcript-{transcription}","Words to add to your message · edit anything it misheard"}
                 textarea {id:"dialogue-transcript-{transcription}",lang:"ru",value:text(),disabled:state.teacher_busy,
-                    oninput:move |event|{let value=event.value();if value.len()>2048{problem.set("Keep one message under 2 KB.".into());return;}text.set(value.clone());let result=app.read().repo.set(&format!("dialogue_transcript_draft:{transcription}"),&value);match result{Ok(())=>problem.set(String::new()),Err(error)=>problem.set(format!("Your edit is still here, but could not be saved: {error}"))}}
+                    oninput:move |event|{let value=event.value();if value.len()>2048{problem.set("This message is too long. Try a shorter message.".into());return;}text.set(value.clone());let result=app.read().repo.set(&format!("dialogue_transcript_draft:{transcription}"),&value);match result{Ok(())=>problem.set(String::new()),Err(error)=>problem.set(format!("Your edit is still here, but could not be saved: {error}"))}}
                 }
                 button {class:"primary",disabled:state.teacher_busy||text.read().trim().is_empty(),onclick:move |_|{
                     let result=(||{let confirmation=app.write().confirm_dialogue_transcription(transcription,text())?;let adopted=app.read().dialogue_audio_input_reference(thread_id,input_id,confirmation)?;Ok::<_,String>((confirmation,adopted))})();
                     match result {Ok((confirmation,adopted))=>{on_confirmed.call(confirmation);on_adopt.call(adopted);},Err(error)=>problem.set(error)}
-                },"Use these words in my message"}
+                },"Use these words"}
             }
             details {summary {"About this transcription"}p {"{observation.provenance.model}"}p {class:"quiet","An independent Russian transcript is a hypothesis about words. It does not assess pronunciation or rhythm."}}
         }
@@ -307,7 +307,7 @@ pub(crate) fn DialogueChunkAudio(
                 if voices.len()>1 {label {r#for:select_id.clone(),"Spoken voice"}select {id:select_id,value:asset.clone().unwrap_or_default(),onchange:move |event|selected.set(Some(event.value())),for(index,(_,audio))in voices.iter().enumerate(){option{value:audio.asset_id.clone(),{format!("Voice {}",index+1)}}}}}
                 if let Some(asset_id)=asset {AudioReviewPlayer {key:"dialogue-voice-{asset_id}",asset_id,label:"Spoken teacher message".to_string(),on_played:move |record|{let result=app.write().heard_dialogue_chunk(reply_id,chunk_index,&record);if let Err(error)=result{app.write().notice=error;}}}}
             }
-            if let Some(source)=voice_source {p {class:"quiet","{source}"}}
+            if let Some(source)=voice_source {details {summary {"Voice source"}p {class:"quiet","{source}"}}}
             button {class:"secondary",disabled:state.speech_busy,onclick:move |_|generate_chunk(app,reply_id,chunk_index),if state.speech_busy {"Creating spoken audio…"}else if voices.is_empty(){"Create spoken audio"}else{"Create another voice"}}
         }
     }
