@@ -22,7 +22,7 @@ The versioned manifest is published after database and referenced originals have
 
 ## Actual recovery result
 
-`scripts/test-relay-recovery.mjs` creates synthetic data through the real Dioxus UI, reuses the clearly labeled v3 speech fixture shared with shell-update QA, and starts its own relay and TLS proxy on disposable loopback ports. No main data, configuration, credentials, keys, services, or browser profiles are used. Providers are disabled; one synthetic Teacher submission is intercepted locally so its durable question/context can be tested without inference.
+`scripts/test-relay-recovery.mjs` creates synthetic data through the real Dioxus UI, reuses the clearly labeled v3 speech fixture shared with shell-update QA, and starts its own relay and TLS proxy on disposable loopback ports. No main relay data, configuration, credentials, keys, or existing browser profiles are used. The shared preview supplies read-only app assets; no main relay/TLS endpoint is contacted. Providers are disabled; one synthetic Teacher submission is intercepted locally so its durable question/context can be tested without inference.
 
 | Acceptance boundary | Observed result |
 |---|---|

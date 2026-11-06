@@ -5,7 +5,8 @@
   font-synthesis:none;
   --green:#315e50;
   --line:#dddfd3;
-  --muted:#708078;
+  --muted:#56685e;
+  --olive-text:#5d6e56;
   --paper:#fffef9
 }
 * {
@@ -136,7 +137,7 @@ a {
   border-bottom:1px solid var(--line);
   font-size:10px;
   letter-spacing:2px;
-  color:#899088
+  color:var(--muted)
 }
 .topbar .quiet {
   letter-spacing:0;
@@ -152,7 +153,7 @@ a {
   font-size:10px;
   letter-spacing:2px;
   font-weight:600;
-  color:#7f8b71
+  color:var(--olive-text)
 }
 .hero h1 {
   font:clamp(38px,4.1vw,65px)/1.1 Georgia,serif;
@@ -168,7 +169,7 @@ a {
 .lede {
   max-width:475px;
   line-height:1.8;
-  color:#6d7c71;
+  color:var(--muted);
   font-size:14px;
   position:relative;
   z-index:1
@@ -382,7 +383,7 @@ a {
   font-size:10px;
   letter-spacing:1.5px;
   text-transform:uppercase;
-  color:#75836d
+  color:var(--olive-text)
 }
 .editor label,.panel label {
   font-size:11px;
@@ -399,6 +400,10 @@ input,textarea {
   padding:12px;
   font-size:13px;
   outline-color:#869a7e
+}
+input::placeholder,textarea::placeholder {
+  color:var(--muted);
+  opacity:1
 }
 textarea {
   resize:vertical;
@@ -442,7 +447,7 @@ textarea {
   padding:0;
   list-style:none;
   margin:0 0 27px;
-  color:#8b9589;
+  color:var(--muted);
   font-size:12px
 }
 .steps li {
@@ -766,7 +771,7 @@ hr {
 .lesson-link.selected,.attempt-choice.selected,.choice-option.selected{background:#e7ecdb;border-color:#829a7c}
 .draft-note{background:#f2f1e5;border-radius:5px;padding:12px;color:#646e58;font-size:12px!important}
 .dialogue-turn{display:grid;grid-template-columns:75px 1fr;gap:18px;padding:12px 0;border-bottom:1px solid var(--line)}
-.dialogue-turn p{margin:3px 0}.speaker{color:#72816e;font-size:11px;padding-top:10px}
+.dialogue-turn p{margin:3px 0}.speaker{color:var(--olive-text);font-size:11px;padding-top:10px}
 .dialogue-russian{font:24px/1.7 Georgia!important}.explanation h3{font:21px Georgia;margin-top:25px}.sound-note{padding:15px;border-left:3px solid #89996f;background:#f3f4e9}
 .phrase-study{padding:18px 0;border-top:1px solid var(--line)}.phrase-study:first-of-type{border-top:0}.phrase-study p{margin:5px 0}
 .phrase-chunks{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.phrase-chunks span{background:#edf0e1;border-radius:5px;padding:7px 12px;font:17px Georgia}
