@@ -224,7 +224,7 @@ fn TeacherLessons(mut app: Signal<AppState>) -> Element {
                 if matches!(answer.request,TeacherRequest::TeachLesson(_)) {
                     TeacherLessonView {key:"guided-{answer.provenance.response_id}",app,answer:answer.clone(),active_speaking,capture_busy}
                 } else {
-                crate::teacher_feedback_view::TeacherFeedback {app,answer:answer.clone(),active_speaking,capture_busy}
+                crate::teacher_feedback_view::TeacherFeedback {key:"feedback-{answer.provenance.response_id}",app,answer:answer.clone(),active_speaking,capture_busy}
 
                 }
                 if !answer.content.caveats.is_empty() {details {summary {"Nuance and uncertainty"}ul {for caveat in &answer.content.caveats {li {TeacherProse {app,language:"en",text:caveat.clone(),purpose:PresentationPurpose::Instruction}}}}}}

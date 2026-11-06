@@ -155,6 +155,64 @@ pub(crate) fn saved_teacher_practice_origin(
 }
 
 impl AppState {
+    /// Retry the proven original task as supported guided work, without replacing
+    /// either the submitted response or the feedback currently being read.
+    pub(crate) fn start_teacher_feedback_repair(
+        &mut self,
+        feedback: &TeacherResponse,
+    ) -> Result<(TeacherResponse, usize, Uuid)> {
+        self.refresh()?;
+        feedback.request.validate().map_err(|e| e.to_string())?;
+        feedback
+            .content
+            .validate_for(&feedback.request)
+            .map_err(|e| e.to_string())?;
+        let origin = self.teacher_feedback_task_origin(feedback)
+            .ok_or("This feedback cannot be linked to an exact saved Teacher question. Its original response is kept.")?;
+        let answer = self
+            .library
+            .teacher_document(origin.key.document_id)
+            .ok_or("Sync the original Teacher question before trying it again.")?
+            .response
+            .clone();
+        let index = origin.key.practice_index;
+        // Read the durable slot rather than a component snapshot: an unfinished
+        // response made elsewhere must be resumed, never replaced by a blank one.
+        let saved = self.teacher_practice_draft(&answer, index)?;
+        if saved.saved_attempt.is_none() {
+            return Ok((answer, index, saved.id));
+        }
+        let next = TeacherPracticeDraft {
+            id: Uuid::new_v4(),
+            source: saved.source,
+            index,
+            response: String::new(),
+            started_at_ms: now_ms(),
+            saved_attempt: None,
+            audio: None,
+            review: None,
+        };
+        let target = PracticeBatchKey::Teacher {
+            document_id: origin.key.document_id,
+            practice_index: index,
+        };
+        let decision = self.prepare_review_start(
+            next.id,
+            target,
+            next.started_at_ms,
+            next.started_at_ms,
+            next.started_at_ms,
+            "teacher-guided-v1",
+            "You chose a supported fresh response to this exact Teacher question after feedback.",
+            self.library.events.keys().copied().collect(),
+        )?;
+        // The existing durable pending-start recovery covers interruption between
+        // these writes. No editable form is exposed until the start is recorded.
+        self.save_teacher_practice_draft(&next)?;
+        self.record_review_start(&decision)?;
+        Ok((answer, index, next.id))
+    }
+
     pub(crate) fn teacher_practice_draft(
         &mut self,
         answer: &TeacherResponse,

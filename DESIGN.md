@@ -24,6 +24,8 @@ The teacher starts with one short useful exchange, explains its meaning and an i
 
 The same material supplies listening, meaning-to-speech, Cyrillic reading and writing tasks. Listening-only retrieval hides answer-bearing text and tracks replay support. A scheduled delayed review attempts retrieval before showing the answer again. New utterances later test whether the useful feature transfers. A phrase is not learned in all four skills because one exercise succeeded.
 
+Feedback keeps the exact question and saved answer beside the explanation. Reading input is distinct from instructions; oral feedback shows the confirmed words and exact original recording, and discusses language without claiming to assess pronunciation. An optional “Try this question again” opens supported practice on that original task inline. Earlier answers and critique remain available, unfinished work resumes, and a fresh oral response requires a new recording. This is a repair opportunity, not evidence of independent delayed recall or a clean response before help.
+
 The teacher should use the learner history to choose a manageable next step, explain the choice when useful, and preserve drafts and assistance. Cached lessons, examples and audio support ordinary offline use; unavailable cloud services should leave a useful local path and a recoverable request rather than send Ember to find a human grader.
 
 ### Conversations over meals

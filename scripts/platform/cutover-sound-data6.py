@@ -299,12 +299,13 @@ def alias_fingerprint():
     return {path.name: prior.digest(path) for path in sorted(FOLDER.glob('frozen-artifact*.json'))}
 
 
-def execute(args):
+def execute(args, *, candidate_validator=None, transition_spec=None):
     selected = getattr(args, 'transition_profile', DEFAULT_PROFILE)
-    profile = transition(selected)
+    profile = transition_spec if transition_spec is not None else transition(selected)
     previous_version, target = profile['from'], profile['to']
     database_state = lambda path: logical_database(path, target)
-    accepted, executable = accepted_candidate(args.accepted_relay, args.native_manifest, selected)
+    validator = candidate_validator or accepted_candidate
+    accepted, executable = validator(args.accepted_relay, args.native_manifest, selected)
     native = json.loads(args.native_manifest.read_text())
     if prior.digest(FOLDER / 'ca.pem') != native['ca_sha256']:
         raise ValueError('Private CA differs from the frozen native trust certificate')
@@ -321,6 +322,8 @@ def execute(args):
     if (not before['running'] or not proxy['running'] or before['ownership'] != 'recorded'
             or before['recorded_sha256'] != previous['relay_executable_sha256'] or not before['on_disk_matches_receipt']):
         raise ValueError(f'Running relay/TLS provenance does not match accepted data{previous_version}')
+    if getattr(args, 'expected_previous_executable', None) is not None and before.get('executable') != str(args.expected_previous_executable):
+        raise ValueError('Running owned relay path differs from the explicitly accepted previous executable')
     authenticated_statuses(previous_version)
     config, aliases, workers = prior.config_fingerprint(), alias_fingerprint(), worker_source_fingerprint()
     environment = json.loads((FOLDER / 'relay-environment.json').read_text())

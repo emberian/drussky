@@ -1,6 +1,8 @@
 //! Exact oral exercise callbacks and durable bindings; public synthetic metadata/audio only.
 #![cfg(not(target_arch = "wasm32"))]
 #![allow(dead_code)]
+#[path = "../src/daily_plan.rs"]
+mod daily_plan;
 #[path = "../src/drafts.rs"]
 mod drafts;
 #[path = "../src/editor_drafts.rs"]
@@ -9,32 +11,30 @@ mod editor_drafts;
 mod exposure;
 #[path = "../src/learning.rs"]
 mod learning;
-#[path = "../src/daily_plan.rs"]
-mod daily_plan;
-#[path = "../src/sound_focus.rs"]
-mod sound_focus;
-#[path = "../src/reader.rs"]
-mod reader;
-#[path = "../src/teacher_dialogue.rs"]
-mod teacher_dialogue;
 #[path = "../src/model.rs"]
 mod model;
-#[path = "../src/review_timing.rs"]
-mod review_timing;
 #[path = "../src/native_connection.rs"]
 mod native_connection;
 #[path = "../src/native_http.rs"]
 mod native_http;
+#[path = "../src/reader.rs"]
+mod reader;
 #[path = "../src/recognition.rs"]
 mod recognition;
 #[path = "../src/repository.rs"]
 mod repository;
+#[path = "../src/review_timing.rs"]
+mod review_timing;
+#[path = "../src/sound_focus.rs"]
+mod sound_focus;
 #[path = "../src/teacher.rs"]
 mod teacher;
 #[path = "../src/teacher_audio_practice.rs"]
 mod teacher_audio_practice;
 #[path = "../src/teacher_context.rs"]
 mod teacher_context;
+#[path = "../src/teacher_dialogue.rs"]
+mod teacher_dialogue;
 #[path = "../src/teacher_notebook.rs"]
 mod teacher_notebook;
 #[path = "../src/teacher_practice.rs"]
@@ -128,6 +128,57 @@ fn prepared(
         .unwrap();
     (s, answer, draft, binding)
 }
+
+#[test]
+fn listening_feedback_repair_clears_old_audio_input_and_remains_supported() {
+    let (mut state, teacher, mut first, binding) = prepared(TeacherSkill::Listening);
+    state
+        .keep_teacher_response(&teacher.request, &teacher)
+        .unwrap();
+    let (attachment, metadata, _) = attach(&mut state, &binding, "reference", false);
+    state
+        .teacher_audio_reference_played(&teacher, &mut first, attachment, &metadata)
+        .unwrap();
+    state
+        .teacher_practice_edit_response(&teacher, &mut first, "Hi.".into())
+        .unwrap();
+    let attempt = state.submit_teacher_practice(&teacher, &mut first).unwrap();
+    let request = state.answer_feedback_request(attempt).unwrap();
+    let critique = TeacherResponse {
+        request,
+        provenance: teacher.provenance.clone(),
+        usage: teacher.usage.clone(),
+        content: TeacherContent {
+            lesson_flow: None,
+            explanation: "That greeting works.".into(),
+            examples: vec![],
+            next_step: "Listen again, then say what the greeting means.".into(),
+            caveats: vec![],
+            practice: vec![],
+            feedback: Some(AiAnswerFeedback {
+                verdict: AiVerdict::Correct,
+                suggested_response: None,
+                corrections: vec![],
+            }),
+        },
+    };
+    let (source, index, session) = state.start_teacher_feedback_repair(&critique).unwrap();
+    let mut repair = state.teacher_practice_draft(&source, index).unwrap();
+    assert_ne!(session, first.id);
+    assert!(repair.response.is_empty());
+    assert!(repair.audio.is_none());
+    state
+        .prepare_teacher_audio_practice(&source, &mut repair)
+        .unwrap();
+    let audio = repair.audio.as_ref().unwrap();
+    assert_eq!(audio.reference_plays, 0);
+    assert!(audio.played_reference.is_none());
+    assert!(audio.selected_recording.is_none());
+    assert_eq!(audio.cues, vec![Cue::ReferenceMaterial]);
+    assert!(state.submit_teacher_practice(&source, &mut repair).is_err());
+    assert_eq!(state.library.attempt(attempt).unwrap().response, "Hi.");
+}
+
 fn attach(
     state: &mut AppState,
     binding: &TeacherAudioBinding,

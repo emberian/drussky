@@ -1,6 +1,8 @@
 //! Durable notebook migration, sync/export, and exact lesson recovery. No provider calls.
 #![cfg(not(target_arch = "wasm32"))]
 #![allow(dead_code)]
+#[path = "../src/daily_plan.rs"]
+mod daily_plan;
 #[path = "../src/drafts.rs"]
 mod drafts;
 #[path = "../src/editor_drafts.rs"]
@@ -9,32 +11,30 @@ mod editor_drafts;
 mod exposure;
 #[path = "../src/learning.rs"]
 mod learning;
-#[path = "../src/daily_plan.rs"]
-mod daily_plan;
-#[path = "../src/sound_focus.rs"]
-mod sound_focus;
-#[path = "../src/reader.rs"]
-mod reader;
-#[path = "../src/teacher_dialogue.rs"]
-mod teacher_dialogue;
 #[path = "../src/model.rs"]
 mod model;
-#[path = "../src/review_timing.rs"]
-mod review_timing;
 #[path = "../src/native_connection.rs"]
 mod native_connection;
 #[path = "../src/native_http.rs"]
 mod native_http;
+#[path = "../src/reader.rs"]
+mod reader;
 #[path = "../src/recognition.rs"]
 mod recognition;
 #[path = "../src/repository.rs"]
 mod repository;
+#[path = "../src/review_timing.rs"]
+mod review_timing;
+#[path = "../src/sound_focus.rs"]
+mod sound_focus;
 #[path = "../src/teacher.rs"]
 mod teacher;
 #[path = "../src/teacher_audio_practice.rs"]
 mod teacher_audio_practice;
 #[path = "../src/teacher_context.rs"]
 mod teacher_context;
+#[path = "../src/teacher_dialogue.rs"]
+mod teacher_dialogue;
 #[path = "../src/teacher_notebook.rs"]
 mod teacher_notebook;
 #[path = "../src/teacher_practice.rs"]
@@ -111,6 +111,34 @@ fn feedback(request: &TeacherRequest) -> TeacherResponse {
       "provenance":{"provider":"synthetic","model":"no-model","response_id":"revisit-feedback","prompt_version":"revisit-test-v1","scope":"Language content only.","review_status":"ai_generated_teaching"},
       "usage":{"input_tokens":0,"output_tokens":0,"estimated_micro_usd":0,"reserved_micro_usd":0}
     })).unwrap()
+}
+
+#[test]
+fn revisit_feedback_repair_returns_to_supported_original_without_replacing_the_return() {
+    let (mut state, answer, guided, key) = seeded();
+    let mut revisit = state
+        .start_teacher_revisit(key, repository::now_ms())
+        .unwrap();
+    state
+        .teacher_practice_edit_response(&answer, &mut revisit, "Я читаю.".into())
+        .unwrap();
+    let attempt = state
+        .submit_teacher_practice(&answer, &mut revisit)
+        .unwrap();
+    let request = state.answer_feedback_request(attempt).unwrap();
+    let critique = feedback(&request);
+    state.keep_teacher_response(&request, &critique).unwrap();
+    let original_return = state.library.attempt(attempt).unwrap().clone();
+    let (source, index, session) = state.start_teacher_feedback_repair(&critique).unwrap();
+    assert_eq!(source, answer);
+    assert_eq!(index, key.practice_index);
+    assert_ne!(session, revisit.id);
+    assert_ne!(session, guided.id);
+    let repair = state.teacher_practice_draft(&source, index).unwrap();
+    assert!(repair.review.is_none());
+    assert!(repair.response.is_empty());
+    assert_eq!(state.library.attempt(attempt).unwrap(), &original_return);
+    assert!(state.teacher_revisit_draft(&answer, index).unwrap() == revisit);
 }
 
 #[test]

@@ -1,6 +1,8 @@
 //! Bounded synthetic interaction tests. No model, microphone, credentials, or private corpus.
 #![cfg(not(target_arch = "wasm32"))]
 #![allow(dead_code)]
+#[path = "../src/daily_plan.rs"]
+mod daily_plan;
 #[path = "../src/drafts.rs"]
 mod drafts;
 #[path = "../src/editor_drafts.rs"]
@@ -9,32 +11,30 @@ mod editor_drafts;
 mod exposure;
 #[path = "../src/learning.rs"]
 mod learning;
-#[path = "../src/daily_plan.rs"]
-mod daily_plan;
-#[path = "../src/sound_focus.rs"]
-mod sound_focus;
-#[path = "../src/reader.rs"]
-mod reader;
-#[path = "../src/teacher_dialogue.rs"]
-mod teacher_dialogue;
 #[path = "../src/model.rs"]
 mod model;
-#[path = "../src/review_timing.rs"]
-mod review_timing;
 #[path = "../src/native_connection.rs"]
 mod native_connection;
 #[path = "../src/native_http.rs"]
 mod native_http;
+#[path = "../src/reader.rs"]
+mod reader;
 #[path = "../src/recognition.rs"]
 mod recognition;
 #[path = "../src/repository.rs"]
 mod repository;
+#[path = "../src/review_timing.rs"]
+mod review_timing;
+#[path = "../src/sound_focus.rs"]
+mod sound_focus;
 #[path = "../src/teacher.rs"]
 mod teacher;
 #[path = "../src/teacher_audio_practice.rs"]
 mod teacher_audio_practice;
 #[path = "../src/teacher_context.rs"]
 mod teacher_context;
+#[path = "../src/teacher_dialogue.rs"]
+mod teacher_dialogue;
 #[path = "../src/teacher_notebook.rs"]
 mod teacher_notebook;
 #[path = "../src/teacher_practice.rs"]
@@ -142,6 +142,99 @@ fn feedback(request: &TeacherRequest) -> TeacherResponse {
             practice: vec![],
         },
     }
+}
+
+#[test]
+fn feedback_repair_preserves_original_and_pins_a_blank_supported_response() {
+    let mut state = app();
+    let teacher = lesson();
+    state
+        .keep_teacher_response(&teacher.request, &teacher)
+        .unwrap();
+    let mut first = state.teacher_practice_draft(&teacher, 0).unwrap();
+    first.response = "Я читаю.".into();
+    let attempt = state.submit_teacher_practice(&teacher, &mut first).unwrap();
+    let original = state.library.attempt(attempt).unwrap().clone();
+    let request = state.answer_feedback_request(attempt).unwrap();
+    let answer = feedback(&request);
+    state.keep_teacher_response(&request, &answer).unwrap();
+    state
+        .change_review_cadence(
+            ReviewCadence::MoreSpace,
+            Default::default(),
+            repository::now_ms(),
+        )
+        .unwrap();
+    let (source, index, session) = state.start_teacher_feedback_repair(&answer).unwrap();
+    assert_eq!(source, teacher);
+    assert_eq!(index, 0);
+    assert_ne!(session, first.id);
+    let mut repair = state.teacher_practice_draft(&source, index).unwrap();
+    assert_eq!(repair.id, session);
+    assert!(repair.response.is_empty());
+    assert!(repair.saved_attempt.is_none());
+    assert!(repair.review.is_none());
+    assert!(repair.audio.is_none());
+    let target = PracticeBatchKey::Teacher {
+        document_id: teacher_document_id(&source),
+        practice_index: index,
+    };
+    let start = state
+        .review_start_decision(session, target)
+        .unwrap()
+        .unwrap();
+    assert_eq!(start.cadence, ReviewCadence::MoreSpace);
+    assert_eq!(state.library.attempt(attempt).unwrap(), &original);
+    assert_eq!(
+        state
+            .repo
+            .get::<TeacherResponse>("teacher_response")
+            .unwrap(),
+        Some(answer.clone())
+    );
+    repair.response = "Я читаю книгу.".into();
+    let repaired = state.submit_teacher_practice(&source, &mut repair).unwrap();
+    assert_ne!(repaired, attempt);
+    let attempt = state.library.attempt(repaired).unwrap();
+    assert_eq!(attempt.cues, vec![Cue::ReferenceMaterial]);
+    assert_eq!(attempt.policy, "teacher-guided-text-v1");
+    assert_eq!(
+        state.review_start_decision(session, target).unwrap(),
+        Some(start)
+    );
+}
+
+#[test]
+fn feedback_repair_resumes_newer_unfinished_work_after_reload_and_rejects_changed_task() {
+    let mut state = app();
+    let teacher = lesson();
+    state
+        .keep_teacher_response(&teacher.request, &teacher)
+        .unwrap();
+    let mut first = state.teacher_practice_draft(&teacher, 0).unwrap();
+    first.response = "Я читаю.".into();
+    let attempt = state.submit_teacher_practice(&teacher, &mut first).unwrap();
+    let answer = feedback(&state.answer_feedback_request(attempt).unwrap());
+    let (source, index, session) = state.start_teacher_feedback_repair(&answer).unwrap();
+    let mut draft = state.teacher_practice_draft(&source, index).unwrap();
+    state
+        .teacher_practice_edit_response(&source, &mut draft, "Сейчас я читаю".into())
+        .unwrap();
+    let mut restored = AppState::from_repository(state.repo.clone()).unwrap();
+    let (_, _, resumed) = restored.start_teacher_feedback_repair(&answer).unwrap();
+    assert_eq!(resumed, session);
+    assert!(restored.teacher_practice_draft(&source, index).unwrap() == draft);
+    let count = restored.library.events.len();
+    let mut wrong = answer.clone();
+    let TeacherRequest::AnswerFeedback(request) = &mut wrong.request else {
+        unreachable!()
+    };
+    request.prompt.push_str(" A different question.");
+    assert!(restored.start_teacher_feedback_repair(&wrong).is_err());
+    assert_eq!(restored.library.events.len(), count);
+    assert!(restored.teacher_practice_draft(&source, index).unwrap() == draft);
+    let mut missing = app();
+    assert!(missing.start_teacher_feedback_repair(&answer).is_err());
 }
 fn recording(state: &mut AppState) -> (Uuid, Uuid, Vec<u8>) {
     let audio = PcmAudio::from_mono(

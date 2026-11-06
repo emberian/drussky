@@ -279,12 +279,19 @@ pub(crate) fn TeacherReturn(
         div {class:"page-heading",div {div {class:"eyebrow","RETURN · TRY · UNDERSTAND"}h1 {id:heading.clone(),tabindex:"-1","A fresh try"}p {"{title}"}}}
         section {class:"panel teacher-return-screen","data-active-review-document":key.document_id.to_string(),"data-active-review-index":key.practice_index.to_string(),"data-active-review-session":snapshot.id.to_string(),
             if saved.is_none(){p {class:"quiet","Try the original question before reopening its answer. Help is available whenever you want it."}}
-            for session in [snapshot.id] {TeacherPractice {key:"return-session-{session}",app,answer:answer.clone(),index:key.practice_index,active_speaking,capture_busy,review:true}}
+            if saved.is_some() && feedback.is_some() {
+                details {class:"teacher-saved-review-details",
+                    summary {"Saved review details"}
+                    for session in [snapshot.id] {TeacherPractice {key:"return-session-{session}",app,answer:answer.clone(),index:key.practice_index,active_speaking,capture_busy,review:true}}
+                }
+            } else {
+                for session in [snapshot.id] {TeacherPractice {key:"return-session-{session}",app,answer:answer.clone(),index:key.practice_index,active_speaking,capture_busy,review:true}}
+            }
             if let Some(attempt)=saved {
                 if let Some(feedback)=feedback {
                     section {class:"teacher-return-feedback",aria_label:"Feedback on this return",
                         h2 {"Work with this response"}
-                        TeacherFeedback {app,answer:feedback.clone(),active_speaking,capture_busy,show_practice:false}
+                        TeacherFeedback {key:"feedback-{feedback.provenance.response_id}",app,answer:feedback.clone(),active_speaking,capture_busy,show_practice:false}
                         p {class:"quiet","{feedback.provenance.model} · AI-generated feedback"}
                     }
                 } else if state.teacher_busy {p {role:"status","Your teacher is thinking. Your response is already saved."}}
