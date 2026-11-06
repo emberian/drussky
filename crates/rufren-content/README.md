@@ -1,7 +1,8 @@
 # First contacts content pack
 
 `rufren-content` embeds an original, offline Russian curriculum as typed JSON. It has
-no dependency on the app, storage, scheduler, or core event model. The current pack
+no UI, storage, or network implementation. Its Reader definitions/builders share the
+portable core schema rather than duplicating event DTOs. The current lesson pack
 contains 6 units, 24 lessons, 169 phrases, 172 exercises, 50 target features, and a
 33-letter reference. The naming lesson includes лук / люк and за́мок / замо́к
 with distinct hearing, speaking, and written-stress activities. All Russian teaching content is **generated editorial draft**,
@@ -180,4 +181,43 @@ Tests for this seam are narrowly available with:
 
 ```text
 cargo test -p rufren-content --test sound_contrast
+```
+
+## Supported Reader anthology
+
+`content/reader-v1.json` is a separate offline anthology, loaded with
+`load_reader_anthology()`. It does not revise the `.4` lesson pack or any historical
+phrase/exercise identity. Four version-1 definitions provide original speculative
+fiction, a mathematical argument, a philosophical dialogue, and the exact opening
+two sentences of Chekhov's *The Student*. They contain 31 chunks, 99 notes and eight
+optional prompts. Source records and the editorial audit are described in
+`research/READER_CONTENT.md`.
+
+The anthology uses the portable core's `ReaderDefinition` directly. Its unchanged
+`original`, SHA-256, source/author/edition/URL/rights/provenance, and exact global
+UTF-8 chunk spans are distinct from `help_provenance` and the AI-authored stress,
+translation, gloss, grammar and prompt support. Chunks partition the whole original,
+including whitespace and paragraph delimiters. Removing only the pedagogical acute
+from a stress layer must recover its exact chunk; ё, punctuation and spacing remain
+unchanged. Notes quote exact original spans within their owning chunks.
+
+`ReaderAnthology::definition(id, version)` performs exact lookup. `document`,
+`document_event`, and `document_events` delegate deterministic identity and immutable
+payload construction to core. The content wrapper adds bounded catalog metadata,
+document counts, and uniqueness checks, without a parallel DTO or hash algorithm.
+Importing these document events does not create a practice attempt or reading
+competence evidence. Arbitrary learner-pasted originals use the same core schema
+through the app's separate import path.
+
+Version-1 definition fingerprints cover original text, source records and all static
+AI help. Changing any published definition requires an explicitly new version,
+even if only a gloss changes: the same id/version must not emit unequal immutable
+document facts. Original-source rights do not automatically describe a modern
+translation or website; the authentic excerpt's source record states its actual
+selection and boundaries. No native audio or human certification is claimed.
+
+The focused content target is:
+
+```text
+cargo test -p rufren-content --test reader_content
 ```

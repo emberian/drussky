@@ -81,11 +81,24 @@ pub fn teacher_dialogue_anchor(
 ) -> Result<TeacherDialogueAnchor, Error> {
     teacher_dialogue_anchor_in(&library.events, document_id, focus)
 }
+fn dialogue_anchor_source_present(
+    events: &BTreeMap<Uuid, Event>,
+    anchor: &TeacherDialogueAnchor,
+) -> bool {
+    if reader_dialogue_focus(&anchor.focus) {
+        matches!(events.get(&anchor.document_id).map(|e| &e.fact), Some(Fact::ReaderDocumentRecorded(d)) if d.document_id == anchor.document_id)
+    } else {
+        events.values().any(|e| matches!(&e.fact, Fact::TeacherDocumentRecorded(d) if d.document_id == anchor.document_id))
+    }
+}
 fn teacher_dialogue_anchor_in(
     events: &BTreeMap<Uuid, Event>,
     document_id: Uuid,
     focus: TeacherDialogueFocus,
 ) -> Result<TeacherDialogueAnchor, Error> {
+    if reader_dialogue_focus(&focus) {
+        return crate::reader::reader_anchor_in(events, document_id, focus);
+    }
     let invalid = || Error::Invalid("that dialogue source or focus is unavailable".into());
     let document = events
         .values()
@@ -187,6 +200,9 @@ fn teacher_dialogue_anchor_in(
                     ));
                 }
             }
+        }
+        TeacherDialogueFocus::ReaderWhole | TeacherDialogueFocus::ReaderChunk { .. } => {
+            return Err(invalid());
         }
     }
     if snapshot.len() > TEACHER_DIALOGUE_ANCHOR_BYTES {
@@ -356,7 +372,9 @@ pub(crate) fn validate_dialogue_graph(events: &BTreeMap<Uuid, Event>) -> Result<
             }
         }
         if let Some(anchor) = &r.anchor {
-            let available = events.values().any(|e|matches!(&e.fact,Fact::TeacherDocumentRecorded(d) if d.document_id==anchor.document_id));
+            let available = dialogue_anchor_source_present(events, anchor) || events.values().any(|e|matches!(&e.fact,Fact::TeacherDocumentRecorded(d) if d.document_id==anchor.document_id)
+                ||matches!(&e.fact,Fact::ReaderDocumentRecorded(d) if d.document_id==anchor.document_id))
+                || (reader_dialogue_focus(&anchor.focus)&&events.contains_key(&anchor.document_id));
             if available
                 && teacher_dialogue_anchor_in(events, anchor.document_id, anchor.focus.clone())?
                     != *anchor
@@ -511,7 +529,7 @@ impl Library {
             };
             let r = message.request();
             if let Some(a) = &r.anchor {
-                if self.teacher_document(a.document_id).is_none() {
+                if !dialogue_anchor_source_present(&self.events, a) {
                     path.missing_documents.push(a.document_id);
                 }
             }

@@ -8,7 +8,7 @@ license.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 unicode-normalization = "0.1"
+rufren-core.workspace = true
 
 [dev-dependencies]
-rufren-core.workspace = true
 uuid.workspace = true

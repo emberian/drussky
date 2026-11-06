@@ -1,5 +1,6 @@
 //! Versioned original Russian learning material. Content is editorial draft, not a
-//! pronunciation reference or proof of competence. No runtime network or core dependency.
+//! pronunciation reference or proof of competence. No UI, filesystem, or network.
+//! Reader definitions and immutable document builders share the portable core schema.
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
 use unicode_normalization::UnicodeNormalization;
@@ -8,6 +9,11 @@ pub mod sound_contrast;
 pub use sound_contrast::{
     LessonPracticeAction, SoundContrastDefinition, SoundMemberDefinition, SoundTaskDefinition,
     SoundUtteranceDefinition, SoundUtteranceKind, sound_contrast, sound_contrasts,
+};
+
+pub mod reader;
+pub use reader::{
+    READER_ANTHOLOGY_JSON, READER_ANTHOLOGY_SCHEMA_VERSION, ReaderAnthology, load_reader_anthology,
 };
 
 pub const SCHEMA_VERSION: u32 = 1;

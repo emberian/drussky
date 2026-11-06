@@ -922,7 +922,7 @@ window.rufrenAudioPlayers ||= new Map();window.rufrenAudioPlayers.get(root.id)?.
 let alive=true,db,record,finish,url,prepareTimer,cancelPrepare,loadGeneration=0,playGeneration=0;
 // Completion is opt-in for blind Sound Focus trials. Ordinary players retain
 // their existing successful-start acknowledgment semantics.
-const playbackToken=root.dataset.playbackToken,expectedHash=root.dataset.expectedHash;
+const playbackToken=root.dataset.playbackToken,expectedHash=root.dataset.expectedHash,expectedSourceHash=root.dataset.sourceTextSha256;
 const modelExample=root.dataset.playbackContext==='example';
 let activePlayback;
 const lifetime=new Promise(resolve=>finish=resolve);
@@ -980,13 +980,19 @@ async function prepare(){
   }else{
    const records=await new Promise((resolve,reject)=>{const r=db.transaction('assets').objectStore('assets').getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
    const machine=r=>['ai_generated_speech','system_generated_speech'].includes(r.device?.provenance?.kind)?1:0;
-   const references=records.filter(r=>r.role==='reference'&&r.revision_id===root.dataset.revision&&!r.interrupted).sort((a,b)=>machine(b)-machine(a)||b.created_at_ms-a.created_at_ms);
+   const references=records.filter(r=>r.role==='reference'&&r.revision_id===root.dataset.revision&&!r.interrupted&&(expectedSourceHash===undefined||(machine(r)&&r.device?.provenance?.source_text_sha256===expectedSourceHash))).sort((a,b)=>machine(b)-machine(a)||b.created_at_ms-a.created_at_ms);
    selected=references.find(r=>r.asset_id===root.dataset.selectedReference)||references[0];
    if(picker){picker.replaceChildren(...references.map((r,i)=>new Option(root.dataset.hideReferenceName==='true'?`${referenceSource(r)} · Voice ${i+1} · ${(r.duration_ms/1000).toFixed(1)}s`:`${referenceSource(r)} · ${r.name}`,r.asset_id)));picker.disabled=!references.length;if(selected)picker.value=selected.asset_id;}
-   if(!selected)throw Error('Generate reference audio for this phrase. You can also sync an existing reference or add a provided voice in the speech studio.');
+   if(!selected)throw Error(expectedSourceHash===undefined?'Generate reference audio for this phrase. You can also sync an existing reference or add a provided voice in the speech studio.':'Create audio for this exact text, or sync its saved original in Settings.');
   }
   if(!(selected.blob instanceof Blob)||selected.byte_length!==selected.blob.size||!/^[0-9a-f]{64}$/.test(selected.content_hash))throw Error('The stored audio metadata is invalid. Restore the original from an audio backup.');
   if(!crypto.subtle)throw Error('Use HTTPS or localhost to check and play saved audio.');
+  if(expectedSourceHash!==undefined){
+   const p=selected.device?.provenance;
+   if(typeof p?.source_text!=='string'||p.source_text_sha256!==expectedSourceHash)throw Error('This voice does not match the selected text. Its original was kept.');
+   const textHash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p.source_text))),n=>n.toString(16).padStart(2,'0')).join('');
+   if(textHash!==expectedSourceHash)throw Error('This voice’s text provenance failed its integrity check. Its original was kept.');
+  }
   const bytes=await selected.blob.arrayBuffer();
   const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join('');
   if(hash!==selected.content_hash)throw Error('This audio failed its integrity check. Restore your audio backup.');

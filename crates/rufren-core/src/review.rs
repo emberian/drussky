@@ -206,7 +206,7 @@ impl SpacedReview {
             if library
                 .events
                 .get(&heads[0])
-                .is_some_and(|e| is_teacher_generated_reference(e) || is_sound_focus_reference(e))
+                .is_some_and(is_reserved_practice_reference)
             {
                 continue;
             }

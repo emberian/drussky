@@ -3,7 +3,7 @@ use rufren_store::Store;
 use uuid::Uuid;
 
 #[tokio::test]
-async fn notebook_v4_dialogue_v5_and_current_sound_refuse_legacy_clients_before_mutation() {
+async fn notebook_dialogue_sound_and_current_reader_refuse_legacy_clients_before_mutation() {
     let mut store = Store::open(":memory:").unwrap();
     let mut old: Vec<_> = (1..=4)
         .map(|version| {
@@ -30,7 +30,14 @@ async fn notebook_v4_dialogue_v5_and_current_sound_refuse_legacy_clients_before_
         "../../../scripts/platform/fixtures/sound-v6-prepared.json"
     ))
     .unwrap();
-    old.push(Event::new(Uuid::new_v4(), 6, Fact::SoundTrialPrepared(prepared)).unwrap());
+    let mut sound = Event::new(Uuid::new_v4(), 6, Fact::SoundTrialPrepared(prepared)).unwrap();
+    sound.version = 6;
+    old.push(sound);
+    let definition = serde_json::from_str(include_str!(
+        "../../../scripts/platform/fixtures/reader-v7-definition.json"
+    ))
+    .unwrap();
+    old.push(reader_document_event(&definition).unwrap());
     store.append(&old).unwrap();
     let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
     let endpoint = format!("http://{}", listener.local_addr().unwrap());
@@ -44,7 +51,7 @@ async fn notebook_v4_dialogue_v5_and_current_sound_refuse_legacy_clients_before_
     });
     let client = reqwest::Client::new();
     let rejected = starter(Uuid::new_v4(), 4);
-    for version in [3, 4, 5] {
+    for version in 3..SYNC_VERSION {
         for events in [vec![], vec![rejected.clone()]] {
             let response = client
                 .post(format!("{endpoint}/v1/sync"))
@@ -90,7 +97,8 @@ async fn notebook_v4_dialogue_v5_and_current_sound_refuse_legacy_clients_before_
     assert_eq!(current.version, SYNC_VERSION);
     assert_eq!(current.events, old);
     assert_eq!(
-        current.cursor, 6,
+        current.cursor,
+        old.len() as u64,
         "rejected uploads consumed no sequence/cursor"
     );
     assert!(!current.events.iter().any(|event| event.id == rejected.id));

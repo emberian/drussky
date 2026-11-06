@@ -1,0 +1,1385 @@
+{
+  "schema_version": 1,
+  "id": "ru.reader.anthology",
+  "version": "1",
+  "documents": [
+    {
+      "id": "ru.reader.echo",
+      "version": "1",
+      "title": "A voice on a recording",
+      "original": "На далёкой станции Аня нашла запись. На записи звучал её голос: «Не открывай дверь». Но Аня не помнила этих слов.\n\n— Ты уверена, что это твой голос? — спросил робот.\n— Голос мой, — ответила Аня. — А память?\n\nСо стороны двери послышался стук. Аня выключила звук. Стук тоже прекратился.\n\n— Значит, там никого нет? — спросил робот.\n— Не знаю. Давай сначала послушаем ещё раз.",
+      "original_sha256": "e6ff4c96a04f8c1f89f7d0dc241cfd0bba3ecde104559ece4df38c642056603e",
+      "source": {
+        "kind": "ai_authored",
+        "title": "Голос на записи",
+        "author": "Rufren AI contributors",
+        "edition": "Rufren Reader, original composition, 2026-11-06, version 1",
+        "url": null,
+        "rights": "Original AI-authored material created for Rufren; no third-party passage or translation reproduced.",
+        "provenance": "Original speculative microfiction. Newly composed for this anthology, not a quotation, translation or adaptation of a named work."
+      },
+      "help_provenance": "English translations, stress marks, glosses, grammar notes and prompts are newly AI-authored support for Rufren, separate from the original text and its source. AI editorial review is not human certification. No source translation or audio is reproduced.",
+      "chunks": [
+        {
+          "id": "ru.reader.echo.chunk.01",
+          "span": {
+            "start": 0,
+            "end": 67
+          },
+          "text": "На далёкой станции Аня нашла запись. ",
+          "stress": "На далёкой ста́нции А́ня нашла́ за́пись. ",
+          "translation": "At a distant station, Anya found a recording.",
+          "glosses": [
+            {
+              "span": {
+                "start": 5,
+                "end": 19
+              },
+              "text": "далёкой",
+              "explanation": "далёкий = distant; далёкой agrees with feminine станции in the location phrase."
+            },
+            {
+              "span": {
+                "start": 42,
+                "end": 52
+              },
+              "text": "нашла",
+              "explanation": "найти = find; нашла́ is a feminine past form."
+            },
+            {
+              "span": {
+                "start": 53,
+                "end": 65
+              },
+              "text": "запись",
+              "explanation": "за́пись = a recording here, rather than a written entry."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 0,
+                "end": 34
+              },
+              "text": "На далёкой станции",
+              "explanation": "A location: at a distant station. The adjective and noun both belong to this phrase; на does not describe a destination here."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.echo.chunk.02",
+          "span": {
+            "start": 67,
+            "end": 153
+          },
+          "text": "На записи звучал её голос: «Не открывай дверь». ",
+          "stress": "На за́писи звуча́л её го́лос: «Не открыва́й дверь». ",
+          "translation": "Her voice could be heard on the recording: “Do not open the door.”",
+          "glosses": [
+            {
+              "span": {
+                "start": 85,
+                "end": 97
+              },
+              "text": "звучал",
+              "explanation": "звуча́ть = sound / be heard; звуча́л describes the recorded voice."
+            },
+            {
+              "span": {
+                "start": 98,
+                "end": 102
+              },
+              "text": "её",
+              "explanation": "её = her; this possessive refers to Anya and does not change with the noun."
+            },
+            {
+              "span": {
+                "start": 117,
+                "end": 138
+              },
+              "text": "Не открывай",
+              "explanation": "Do not open: a negative instruction to one informal addressee."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 115,
+                "end": 151
+              },
+              "text": "«Не открывай дверь»",
+              "explanation": "The quoted instruction belongs to the recording. The narrator is reporting it, not instructing the reader."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.echo.chunk.03",
+          "span": {
+            "start": 153,
+            "end": 205
+          },
+          "text": "Но Аня не помнила этих слов.\n\n",
+          "stress": "Но А́ня не по́мнила э́тих слов.\n\n",
+          "translation": "But Anya did not remember these words.",
+          "glosses": [
+            {
+              "span": {
+                "start": 170,
+                "end": 184
+              },
+              "text": "помнила",
+              "explanation": "по́мнить = remember; не по́мнила says she did not remember."
+            },
+            {
+              "span": {
+                "start": 185,
+                "end": 202
+              },
+              "text": "этих слов",
+              "explanation": "these words: a genitive plural phrase in this negative sentence."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 165,
+                "end": 202
+              },
+              "text": "не помнила этих слов",
+              "explanation": "This denies remembering the words. It does not establish that she never said them, or explain why she cannot remember."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.echo.chunk.04",
+          "span": {
+            "start": 205,
+            "end": 296
+          },
+          "text": "— Ты уверена, что это твой голос? — спросил робот.\n",
+          "stress": "— Ты уве́рена, что э́то твой го́лос? — спроси́л ро́бот.\n",
+          "translation": "“Are you sure that this is your voice?” the robot asked.",
+          "glosses": [
+            {
+              "span": {
+                "start": 214,
+                "end": 228
+              },
+              "text": "уверена",
+              "explanation": "уве́рена = sure/certain, feminine singular, addressed to Anya."
+            },
+            {
+              "span": {
+                "start": 244,
+                "end": 252
+              },
+              "text": "твой",
+              "explanation": "твой = your, informal singular; masculine to agree with голос."
+            },
+            {
+              "span": {
+                "start": 269,
+                "end": 283
+              },
+              "text": "спросил",
+              "explanation": "спроси́ть = ask; спроси́л is a masculine past form."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 230,
+                "end": 263
+              },
+              "text": "что это твой голос",
+              "explanation": "The content of what Anya might be sure of: that this is her voice. The robot asks about her certainty rather than confirming it."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.echo.chunk.05",
+          "span": {
+            "start": 296,
+            "end": 370
+          },
+          "text": "— Голос мой, — ответила Аня. — А память?\n\n",
+          "stress": "— Го́лос мой, — отве́тила А́ня. — А па́мять?\n\n",
+          "translation": "“The voice is mine,” Anya replied. “And the memory?”",
+          "glosses": [
+            {
+              "span": {
+                "start": 311,
+                "end": 317
+              },
+              "text": "мой",
+              "explanation": "мой = mine / my; masculine to agree with голос."
+            },
+            {
+              "span": {
+                "start": 323,
+                "end": 339
+              },
+              "text": "ответила",
+              "explanation": "отве́тить = answer; отве́тила is a feminine past form."
+            },
+            {
+              "span": {
+                "start": 355,
+                "end": 367
+              },
+              "text": "память",
+              "explanation": "па́мять = memory."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 352,
+                "end": 368
+              },
+              "text": "А память?",
+              "explanation": "An elliptical, deliberately unresolved question. It contrasts recognizing a voice with remembering its words; it does not assert that a memory was erased or replaced."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.echo.chunk.06",
+          "span": {
+            "start": 370,
+            "end": 432
+          },
+          "text": "Со стороны двери послышался стук. ",
+          "stress": "Со стороны́ две́ри послы́шался стук. ",
+          "translation": "A knocking sound came from the direction of the door.",
+          "glosses": [
+            {
+              "span": {
+                "start": 370,
+                "end": 400
+              },
+              "text": "Со стороны двери",
+              "explanation": "from the direction of the door; this reports the apparent direction of the sound."
+            },
+            {
+              "span": {
+                "start": 401,
+                "end": 421
+              },
+              "text": "послышался",
+              "explanation": "послы́шаться = become audible / be heard."
+            },
+            {
+              "span": {
+                "start": 422,
+                "end": 430
+              },
+              "text": "стук",
+              "explanation": "стук = knocking, tapping or a similar impact sound; a person is not explicitly identified."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 401,
+                "end": 430
+              },
+              "text": "послышался стук",
+              "explanation": "The narration reports a sound. It does not say кто-то постучал, which would explicitly introduce someone knocking."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.echo.chunk.07",
+          "span": {
+            "start": 432,
+            "end": 468
+          },
+          "text": "Аня выключила звук. ",
+          "stress": "А́ня вы́ключила звук. ",
+          "translation": "Anya muted the sound.",
+          "glosses": [
+            {
+              "span": {
+                "start": 439,
+                "end": 466
+              },
+              "text": "выключила звук",
+              "explanation": "turned the sound off / muted it; here, the recording’s playback sound."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 439,
+                "end": 457
+              },
+              "text": "выключила",
+              "explanation": "вы́ключить presents a bounded action: she switched the sound off."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.echo.chunk.08",
+          "span": {
+            "start": 468,
+            "end": 511
+          },
+          "text": "Стук тоже прекратился.\n\n",
+          "stress": "Стук то́же прекрати́лся.\n\n",
+          "translation": "The knocking stopped too.",
+          "glosses": [
+            {
+              "span": {
+                "start": 477,
+                "end": 485
+              },
+              "text": "тоже",
+              "explanation": "то́же = too / also."
+            },
+            {
+              "span": {
+                "start": 486,
+                "end": 508
+              },
+              "text": "прекратился",
+              "explanation": "прекрати́ться = stop / cease; the sound itself ceases."
+            }
+          ],
+          "grammar_notes": [],
+          "prompts": [
+            {
+              "id": "ru.reader.echo.prompt.observation",
+              "question": "What happens just after Anya mutes the sound? You can answer in English.",
+              "teaching_note": "The knocking stops too. Accept a concise paraphrase. Distinguish the observed sequence from an explanation of its cause; the text has not established whether anyone is there."
+            }
+          ]
+        },
+        {
+          "id": "ru.reader.echo.chunk.09",
+          "span": {
+            "start": 511,
+            "end": 588
+          },
+          "text": "— Значит, там никого нет? — спросил робот.\n",
+          "stress": "— Зна́чит, там никого́ нет? — спроси́л ро́бот.\n",
+          "translation": "“So there is nobody there?” the robot asked.",
+          "glosses": [
+            {
+              "span": {
+                "start": 515,
+                "end": 527
+              },
+              "text": "Значит",
+              "explanation": "So / does that mean: the robot proposes an inference here."
+            },
+            {
+              "span": {
+                "start": 536,
+                "end": 555
+              },
+              "text": "никого нет",
+              "explanation": "there is nobody; никого is a negative pronoun in this absence construction."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 515,
+                "end": 556
+              },
+              "text": "Значит, там никого нет?",
+              "explanation": "This is the robot’s question, not a fact asserted by the narrator."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.echo.chunk.10",
+          "span": {
+            "start": 588,
+            "end": 666
+          },
+          "text": "— Не знаю. Давай сначала послушаем ещё раз.",
+          "stress": "— Не зна́ю. Дава́й снача́ла послу́шаем ещё раз.",
+          "translation": "“I do not know. Let us listen again first.”",
+          "glosses": [
+            {
+              "span": {
+                "start": 618,
+                "end": 632
+              },
+              "text": "сначала",
+              "explanation": "снача́ла = first, before doing something else."
+            },
+            {
+              "span": {
+                "start": 633,
+                "end": 665
+              },
+              "text": "послушаем ещё раз",
+              "explanation": "let us listen once more; the invitation proposes another listening episode."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 607,
+                "end": 617
+              },
+              "text": "Давай",
+              "explanation": "An informal invitation to one addressee. Here Anya addresses the robot."
+            }
+          ],
+          "prompts": [
+            {
+              "id": "ru.reader.echo.prompt.inference",
+              "question": "Does Anya accept the robot’s suggestion that nobody is there? What in her reply supports your answer? English is welcome.",
+              "teaching_note": "No: she says she does not know and proposes listening again. Do not demand a solution to the mystery; the passage intentionally leaves the cause and whether anyone is there unsettled."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ru.reader.no_largest",
+      "version": "1",
+      "title": "Why there is no largest natural number",
+      "original": "Пусть дано натуральное число. Прибавим к нему один. Получится натуральное число, которое больше исходного. Значит, для каждого натурального числа есть большее натуральное число. Поэтому самого большого натурального числа не существует.\n\nЭто не проверка всех чисел по очереди. Мы показали, как получить большее число из любого данного.",
+      "original_sha256": "2b5e618ae16c0e0f3f5fb33aa1b81c55398c929fa9785c0a13d2a52ad98d7e64",
+      "source": {
+        "kind": "ai_authored",
+        "title": "Нет самого большого натурального числа",
+        "author": "Rufren AI contributors",
+        "edition": "Rufren Reader, original composition, 2026-11-06, version 1",
+        "url": null,
+        "rights": "Original AI-authored material created for Rufren; no third-party passage or translation reproduced.",
+        "provenance": "Original elementary mathematical argument. The statement holds whether natural numbers begin at zero or at one. Newly composed for this anthology, not a quotation, translation or adaptation of a named work."
+      },
+      "help_provenance": "English translations, stress marks, glosses, grammar notes and prompts are newly AI-authored support for Rufren, separate from the original text and its source. AI editorial review is not human certification. No source translation or audio is reproduced.",
+      "chunks": [
+        {
+          "id": "ru.reader.no_largest.chunk.01",
+          "span": {
+            "start": 0,
+            "end": 55
+          },
+          "text": "Пусть дано натуральное число. ",
+          "stress": "Пусть дано́ натура́льное число́. ",
+          "translation": "Let a natural number be given.",
+          "glosses": [
+            {
+              "span": {
+                "start": 0,
+                "end": 10
+              },
+              "text": "Пусть",
+              "explanation": "Let: introduces a mathematical assumption or arbitrary object here."
+            },
+            {
+              "span": {
+                "start": 11,
+                "end": 19
+              },
+              "text": "дано",
+              "explanation": "да́ть = give; дано́ means given, neuter to match число."
+            },
+            {
+              "span": {
+                "start": 20,
+                "end": 53
+              },
+              "text": "натуральное число",
+              "explanation": "натура́льное число́ = natural number. The argument works with either the zero-starting or one-starting convention."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 0,
+                "end": 53
+              },
+              "text": "Пусть дано натуральное число",
+              "explanation": "No special natural number is selected. The reasoning is intended to work for any given member of the domain."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.no_largest.chunk.02",
+          "span": {
+            "start": 55,
+            "end": 94
+          },
+          "text": "Прибавим к нему один. ",
+          "stress": "Приба́вим к нему́ оди́н. ",
+          "translation": "Let us add one to it.",
+          "glosses": [
+            {
+              "span": {
+                "start": 55,
+                "end": 71
+              },
+              "text": "Прибавим",
+              "explanation": "приба́вить = add; приба́вим is first-person plural, used here to invite a mathematical step."
+            },
+            {
+              "span": {
+                "start": 72,
+                "end": 83
+              },
+              "text": "к нему",
+              "explanation": "to it; нему refers back to the number."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 84,
+                "end": 92
+              },
+              "text": "один",
+              "explanation": "One is the quantity being added. This is not an assertion that the original number was one."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.no_largest.chunk.03",
+          "span": {
+            "start": 94,
+            "end": 196
+          },
+          "text": "Получится натуральное число, которое больше исходного. ",
+          "stress": "Полу́чится натура́льное число́, кото́рое бо́льше исхо́дного. ",
+          "translation": "The result will be a natural number that is greater than the original one.",
+          "glosses": [
+            {
+              "span": {
+                "start": 94,
+                "end": 112
+              },
+              "text": "Получится",
+              "explanation": "получи́ться = result / come out; полу́чится describes what the operation produces."
+            },
+            {
+              "span": {
+                "start": 163,
+                "end": 194
+              },
+              "text": "больше исходного",
+              "explanation": "greater than the original one; исходного refers to the original number, with число omitted."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 148,
+                "end": 194
+              },
+              "text": "которое больше исходного",
+              "explanation": "Которое refers to the result, a neuter число. The result is being compared with the starting number."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.no_largest.chunk.04",
+          "span": {
+            "start": 196,
+            "end": 268
+          },
+          "text": "Значит, для каждого натурального числа ",
+          "stress": "Зна́чит, для ка́ждого натура́льного числа́ ",
+          "translation": "Therefore, for every natural number,",
+          "glosses": [
+            {
+              "span": {
+                "start": 210,
+                "end": 231
+              },
+              "text": "для каждого",
+              "explanation": "for every; the following larger number may depend on the number chosen."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 210,
+                "end": 267
+              },
+              "text": "для каждого натурального числа",
+              "explanation": "This scopes over the starting number. It does not introduce a single number larger than all natural numbers."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.no_largest.chunk.05",
+          "span": {
+            "start": 268,
+            "end": 327
+          },
+          "text": "есть большее натуральное число. ",
+          "stress": "есть бо́льшее натура́льное число́. ",
+          "translation": "there is a larger natural number.",
+          "glosses": [
+            {
+              "span": {
+                "start": 277,
+                "end": 291
+              },
+              "text": "большее",
+              "explanation": "бо́льшее = larger, a neuter adjective agreeing with число; compare больше in “is greater than”."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 268,
+                "end": 325
+              },
+              "text": "есть большее натуральное число",
+              "explanation": "For each starting number, its successor supplies a larger one. The witness can vary with the starting number."
+            }
+          ],
+          "prompts": [
+            {
+              "id": "ru.reader.no_largest.prompt.step",
+              "question": "What operation gives a larger natural number, and does the argument need a specially chosen starting number? You may answer in English.",
+              "teaching_note": "Add one to the given number. The starting natural number is arbitrary. A paraphrase is enough; naming a very large example does not capture the general step."
+            }
+          ]
+        },
+        {
+          "id": "ru.reader.no_largest.chunk.06",
+          "span": {
+            "start": 327,
+            "end": 436
+          },
+          "text": "Поэтому самого большого натурального числа не существует.\n\n",
+          "stress": "Поэ́тому са́мого большо́го натура́льного числа́ не существу́ет.\n\n",
+          "translation": "Consequently, there is no largest natural number.",
+          "glosses": [
+            {
+              "span": {
+                "start": 327,
+                "end": 341
+              },
+              "text": "Поэтому",
+              "explanation": "Consequently / for that reason: introduces the conclusion."
+            },
+            {
+              "span": {
+                "start": 342,
+                "end": 371
+              },
+              "text": "самого большого",
+              "explanation": "the largest; this is a superlative phrase, not merely a very large number."
+            },
+            {
+              "span": {
+                "start": 408,
+                "end": 433
+              },
+              "text": "не существует",
+              "explanation": "does not exist."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 342,
+                "end": 433
+              },
+              "text": "самого большого натурального числа не существует",
+              "explanation": "If a candidate were largest, the earlier construction would give a still larger natural number. No candidate can therefore be largest."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.no_largest.chunk.07",
+          "span": {
+            "start": 436,
+            "end": 506
+          },
+          "text": "Это не проверка всех чисел по очереди. ",
+          "stress": "Э́то не прове́рка всех чи́сел по о́череди. ",
+          "translation": "This is not a check of all numbers one by one.",
+          "glosses": [
+            {
+              "span": {
+                "start": 448,
+                "end": 464
+              },
+              "text": "проверка",
+              "explanation": "прове́рка = check / examination."
+            },
+            {
+              "span": {
+                "start": 485,
+                "end": 504
+              },
+              "text": "по очереди",
+              "explanation": "по о́череди = one after another / in turn."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 465,
+                "end": 484
+              },
+              "text": "всех чисел",
+              "explanation": "all the numbers; чисел is genitive plural after проверка in this phrase."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.no_largest.chunk.08",
+          "span": {
+            "start": 506,
+            "end": 612
+          },
+          "text": "Мы показали, как получить большее число из любого данного.",
+          "stress": "Мы показа́ли, как получи́ть бо́льшее число́ из любо́го да́нного.",
+          "translation": "We have shown how to obtain a larger number from any given one.",
+          "glosses": [
+            {
+              "span": {
+                "start": 511,
+                "end": 527
+              },
+              "text": "показали",
+              "explanation": "показа́ть = show; показа́ли is a plural past form."
+            },
+            {
+              "span": {
+                "start": 579,
+                "end": 611
+              },
+              "text": "из любого данного",
+              "explanation": "from any given one; the omitted noun is число."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 579,
+                "end": 611
+              },
+              "text": "из любого данного",
+              "explanation": "The procedure works for an arbitrary given number. This is the basis of the universal conclusion, rather than checking finitely many examples."
+            }
+          ],
+          "prompts": [
+            {
+              "id": "ru.reader.no_largest.prompt.scope",
+              "question": "Does the argument produce one number greater than every natural number, or a way to find a larger number for each starting number? Explain in English or Russian.",
+              "teaching_note": "It gives a construction for each starting number, not a single universal maximum. Ask the learner to connect “для каждого” with the variable choice of larger number; prior knowledge of the theorem alone is not evidence of reading every clause."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ru.reader.words_and_evidence",
+      "version": "1",
+      "title": "Words, evidence and a reason to help",
+      "original": "— Если робот говорит: «Мне больно», он чувствует боль?\n— Я не знаю. Но его слова — причина проверить, нужна ли ему помощь.\n— Значит, слова доказывают, что боль есть?\n— Нет. Причина действовать и доказательство — не одно и то же.\n— А если он молчит?\n— Молчание тоже не доказывает, что боли нет. Иногда мы помогаем, даже когда не уверены.",
+      "original_sha256": "9c61712febdca95a3d05ea616fb57f51015ab3ce239853befbc98030a8a59123",
+      "source": {
+        "kind": "ai_authored",
+        "title": "Слова и основания",
+        "author": "Rufren AI contributors",
+        "edition": "Rufren Reader, original composition, 2026-11-06, version 1",
+        "url": null,
+        "rights": "Original AI-authored material created for Rufren; no third-party passage or translation reproduced.",
+        "provenance": "Original philosophical dialogue between two unspecified speakers. It explores a distinction between conclusive proof and a reason to investigate/help, without settling whether a robot has experiences. Newly composed for this anthology, not a quotation, translation or adaptation of a named work."
+      },
+      "help_provenance": "English translations, stress marks, glosses, grammar notes and prompts are newly AI-authored support for Rufren, separate from the original text and its source. AI editorial review is not human certification. No source translation or audio is reproduced.",
+      "chunks": [
+        {
+          "id": "ru.reader.words_and_evidence.chunk.01",
+          "span": {
+            "start": 0,
+            "end": 99
+          },
+          "text": "— Если робот говорит: «Мне больно», он чувствует боль?\n",
+          "stress": "— Е́сли ро́бот говори́т: «Мне бо́льно», он чу́вствует боль?\n",
+          "translation": "“If a robot says, ‘I am in pain,’ does it feel pain?”",
+          "glosses": [
+            {
+              "span": {
+                "start": 42,
+                "end": 61
+              },
+              "text": "Мне больно",
+              "explanation": "I am in pain / it hurts; мне names the experiencer."
+            },
+            {
+              "span": {
+                "start": 70,
+                "end": 97
+              },
+              "text": "чувствует боль",
+              "explanation": "feels pain; чувствует is the verb, боль is the noun."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 4,
+                "end": 63
+              },
+              "text": "Если робот говорит: «Мне больно»",
+              "explanation": "The first speaker sets a hypothetical condition. The embedded robot utterance is quoted; neither narrator nor author asserts that this particular robot is suffering."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.words_and_evidence.chunk.02",
+          "span": {
+            "start": 99,
+            "end": 121
+          },
+          "text": "— Я не знаю. ",
+          "stress": "— Я не зна́ю. ",
+          "translation": "“I do not know.",
+          "glosses": [],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 103,
+                "end": 120
+              },
+              "text": "Я не знаю.",
+              "explanation": "The second speaker withholds a definite answer to the question about experience."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.words_and_evidence.chunk.03",
+          "span": {
+            "start": 121,
+            "end": 220
+          },
+          "text": "Но его слова — причина проверить, нужна ли ему помощь.\n",
+          "stress": "Но его́ слова́ — причи́на прове́рить, нужна́ ли ему́ по́мощь.\n",
+          "translation": "But its words are a reason to check whether it needs help.”",
+          "glosses": [
+            {
+              "span": {
+                "start": 126,
+                "end": 143
+              },
+              "text": "его слова",
+              "explanation": "its words; его refers to the robot."
+            },
+            {
+              "span": {
+                "start": 148,
+                "end": 181
+              },
+              "text": "причина проверить",
+              "explanation": "a reason to check / investigate, in this speaker’s judgment."
+            },
+            {
+              "span": {
+                "start": 183,
+                "end": 218
+              },
+              "text": "нужна ли ему помощь",
+              "explanation": "whether it needs help; ему is to it, помощь is the needed help."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 194,
+                "end": 198
+              },
+              "text": "ли",
+              "explanation": "Marks the embedded yes/no question: whether help is needed. It does not assert that help is needed."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.words_and_evidence.chunk.04",
+          "span": {
+            "start": 220,
+            "end": 297
+          },
+          "text": "— Значит, слова доказывают, что боль есть?\n",
+          "stress": "— Зна́чит, слова́ дока́зывают, что боль есть?\n",
+          "translation": "“So the words prove that there is pain?”",
+          "glosses": [
+            {
+              "span": {
+                "start": 249,
+                "end": 269
+              },
+              "text": "доказывают",
+              "explanation": "дока́зывать = prove; дока́зывают is plural, agreeing with слова."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 224,
+                "end": 236
+              },
+              "text": "Значит",
+              "explanation": "The first speaker asks whether a stronger conclusion follows. This is a question, not a conclusion already accepted by both speakers."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.words_and_evidence.chunk.05",
+          "span": {
+            "start": 297,
+            "end": 411
+          },
+          "text": "— Нет. Причина действовать и доказательство — не одно и то же.\n",
+          "stress": "— Нет. Причи́на де́йствовать и доказа́тельство — не одно́ и то же.\n",
+          "translation": "“No. A reason to act and a proof are not the same thing.”",
+          "glosses": [
+            {
+              "span": {
+                "start": 324,
+                "end": 346
+              },
+              "text": "действовать",
+              "explanation": "де́йствовать = act / take action."
+            },
+            {
+              "span": {
+                "start": 350,
+                "end": 378
+              },
+              "text": "доказательство",
+              "explanation": "доказа́тельство = proof here; the word can also mean evidence in other contexts."
+            },
+            {
+              "span": {
+                "start": 383,
+                "end": 409
+              },
+              "text": "не одно и то же",
+              "explanation": "not the same thing."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 309,
+                "end": 378
+              },
+              "text": "Причина действовать и доказательство",
+              "explanation": "This speaker distinguishes a practical reason from conclusive proof. The reply does not claim that a verbal report has no evidential value."
+            }
+          ],
+          "prompts": [
+            {
+              "id": "ru.reader.words_and_evidence.prompt.distinction",
+              "question": "What two things does the second speaker distinguish? You can explain in English.",
+              "teaching_note": "A reason to investigate or act and conclusive proof that pain exists. Do not require agreement with the speaker’s position. Do not reinterpret “not proof” as “no evidence at all”."
+            }
+          ]
+        },
+        {
+          "id": "ru.reader.words_and_evidence.chunk.06",
+          "span": {
+            "start": 411,
+            "end": 446
+          },
+          "text": "— А если он молчит?\n",
+          "stress": "— А е́сли он молчи́т?\n",
+          "translation": "“And if it says nothing?”",
+          "glosses": [
+            {
+              "span": {
+                "start": 432,
+                "end": 444
+              },
+              "text": "молчит",
+              "explanation": "молча́ть = be silent / say nothing; молчи́т refers to the robot."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 415,
+                "end": 445
+              },
+              "text": "А если он молчит?",
+              "explanation": "An elliptical follow-up: what follows if the robot is silent? Silence is not yet assigned a meaning."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.words_and_evidence.chunk.07",
+          "span": {
+            "start": 446,
+            "end": 527
+          },
+          "text": "— Молчание тоже не доказывает, что боли нет. ",
+          "stress": "— Молча́ние то́же не дока́зывает, что бо́ли нет. ",
+          "translation": "“Silence does not prove that there is no pain either.",
+          "glosses": [
+            {
+              "span": {
+                "start": 450,
+                "end": 466
+              },
+              "text": "Молчание",
+              "explanation": "молча́ние = silence; the noun corresponding to молчать."
+            },
+            {
+              "span": {
+                "start": 510,
+                "end": 525
+              },
+              "text": "боли нет",
+              "explanation": "there is no pain; боли is the genitive form after нет."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 476,
+                "end": 525
+              },
+              "text": "не доказывает, что боли нет",
+              "explanation": "The speaker rejects a proof of absence. This is not a proof that pain is present."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.words_and_evidence.chunk.08",
+          "span": {
+            "start": 527,
+            "end": 603
+          },
+          "text": "Иногда мы помогаем, даже когда не уверены.",
+          "stress": "Иногда́ мы помога́ем, да́же когда́ не уве́рены.",
+          "translation": "Sometimes we help even when we are not sure.”",
+          "glosses": [
+            {
+              "span": {
+                "start": 527,
+                "end": 539
+              },
+              "text": "Иногда",
+              "explanation": "иногда́ = sometimes; not a claim about every situation."
+            },
+            {
+              "span": {
+                "start": 545,
+                "end": 561
+              },
+              "text": "помогаем",
+              "explanation": "помога́ть = help; помога́ем is the we form."
+            },
+            {
+              "span": {
+                "start": 563,
+                "end": 582
+              },
+              "text": "даже когда",
+              "explanation": "even when; introduces a condition under which helping still occurs."
+            },
+            {
+              "span": {
+                "start": 583,
+                "end": 602
+              },
+              "text": "не уверены",
+              "explanation": "not sure; plural to match мы."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 527,
+                "end": 561
+              },
+              "text": "Иногда мы помогаем",
+              "explanation": "A statement by the second speaker about acting under uncertainty. It is not a general rule prescribing one action in every case."
+            }
+          ],
+          "prompts": [
+            {
+              "id": "ru.reader.words_and_evidence.prompt.silence",
+              "question": "According to the second speaker, what does silence prove about pain? Does the dialogue settle whether the robot feels it? English is welcome.",
+              "teaching_note": "Silence does not conclusively establish absence, and the dialogue does not settle presence or absence. Distinguish understanding the speaker’s claim from endorsing it; accept a short explanation in either language."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ru.reader.chekhov_student_opening",
+      "version": "1",
+      "title": "Chekhov: the first sounds of The Student",
+      "original": "Погода вначале была хорошая, тихая. Кричали дрозды, и по соседству в болотах что-то живое жалобно гудело, точно дуло в пустую бутылку.",
+      "original_sha256": "789b66e16086a3d62d893c78818213ac6d279d897b75ce3de44b5bd503c3b83c",
+      "source": {
+        "kind": "authentic_excerpt",
+        "title": "Студент",
+        "author": "Антон Павлович Чехов (1860–1904)",
+        "edition": "Чехов А. П. Полное собрание сочинений и писем: В 30 т. Сочинения: В 18 т. АН СССР; Ин-т мировой лит. им. А. М. Горького. М.: Наука, 1977. Т. 8. Рассказы. Повести, 1892–1894. С. 306–309; excerpt: opening two sentences on p. 306.",
+        "url": "https://feb-web.ru/feb/chekhov/texts/sp0/sp8/sp8-306-.htm?cmd=p",
+        "rights": "Public-domain underlying Russian work, first published in 1894; author died in 1904. Only the literary text is reproduced, not modern editorial commentary, apparatus or a published translation. This is not a blanket license for the source website or entire 1977 edition.",
+        "provenance": "Exact opening two sentences checked against the FEB digital scholarly edition on 2026-11-06. Source spelling and punctuation retained; the two source sentences remain one paragraph. The excerpt stops at a sentence boundary without inserting an ellipsis into the quoted text. Stress marks, English translation and all reading help are new AI-authored additions, not Chekhov’s or the scholarly editors’ text."
+      },
+      "help_provenance": "English translations, stress marks, glosses, grammar notes and prompts are newly AI-authored support for Rufren, separate from the original text and its source. AI editorial review is not human certification. No source translation or audio is reproduced.",
+      "chunks": [
+        {
+          "id": "ru.reader.chekhov_student_opening.chunk.01",
+          "span": {
+            "start": 0,
+            "end": 65
+          },
+          "text": "Погода вначале была хорошая, тихая. ",
+          "stress": "Пого́да внача́ле была́ хоро́шая, ти́хая. ",
+          "translation": "The weather at first was fine and calm.",
+          "glosses": [
+            {
+              "span": {
+                "start": 0,
+                "end": 12
+              },
+              "text": "Погода",
+              "explanation": "пого́да = weather."
+            },
+            {
+              "span": {
+                "start": 13,
+                "end": 27
+              },
+              "text": "вначале",
+              "explanation": "внача́ле = at first / initially."
+            },
+            {
+              "span": {
+                "start": 28,
+                "end": 36
+              },
+              "text": "была",
+              "explanation": "была́ = was, feminine to agree with погода."
+            },
+            {
+              "span": {
+                "start": 53,
+                "end": 63
+              },
+              "text": "тихая",
+              "explanation": "ти́хая = quiet/calm; here it characterizes the weather, not an absence of every sound."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 28,
+                "end": 63
+              },
+              "text": "была хорошая, тихая",
+              "explanation": "A past description of the weather. These feminine adjective forms agree with погода. Do not replace the author’s wording with a single compulsory predicate-adjective case rule."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.chekhov_student_opening.chunk.02",
+          "span": {
+            "start": 65,
+            "end": 94
+          },
+          "text": "Кричали дрозды, ",
+          "stress": "Крича́ли дрозды́, ",
+          "translation": "Thrushes were calling,",
+          "glosses": [
+            {
+              "span": {
+                "start": 65,
+                "end": 79
+              },
+              "text": "Кричали",
+              "explanation": "крича́ть = cry out/call; here it describes birds calling, not people shouting."
+            },
+            {
+              "span": {
+                "start": 80,
+                "end": 92
+              },
+              "text": "дрозды",
+              "explanation": "дрозд = thrush, a kind of bird; дрозды́ is plural."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 65,
+                "end": 92
+              },
+              "text": "Кричали дрозды",
+              "explanation": "The verb precedes the birds it describes. The word order introduces a sound in the scene."
+            }
+          ],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.chekhov_student_opening.chunk.03",
+          "span": {
+            "start": 94,
+            "end": 139
+          },
+          "text": "и по соседству в болотах ",
+          "stress": "и по сосе́дству в боло́тах ",
+          "translation": "and nearby in the marshes",
+          "glosses": [
+            {
+              "span": {
+                "start": 97,
+                "end": 120
+              },
+              "text": "по соседству",
+              "explanation": "nearby / in the vicinity; learn this as a whole location phrase."
+            },
+            {
+              "span": {
+                "start": 121,
+                "end": 138
+              },
+              "text": "в болотах",
+              "explanation": "in the marshes; боло́то = marsh, в болотах is plural location."
+            }
+          ],
+          "grammar_notes": [],
+          "prompts": []
+        },
+        {
+          "id": "ru.reader.chekhov_student_opening.chunk.04",
+          "span": {
+            "start": 139,
+            "end": 191
+          },
+          "text": "что-то живое жалобно гудело, ",
+          "stress": "что́-то живо́е жа́лобно гуде́ло, ",
+          "translation": "something alive was making a plaintive humming sound,",
+          "glosses": [
+            {
+              "span": {
+                "start": 139,
+                "end": 161
+              },
+              "text": "что-то живое",
+              "explanation": "something alive; an unidentified living thing, not a named animal."
+            },
+            {
+              "span": {
+                "start": 162,
+                "end": 176
+              },
+              "text": "жалобно",
+              "explanation": "жа́лобно = plaintively / in a mournful-sounding way; it characterizes the sound."
+            },
+            {
+              "span": {
+                "start": 177,
+                "end": 189
+              },
+              "text": "гудело",
+              "explanation": "гуде́ть = hum / drone / make a sustained low sound; гуде́ло is a neuter past form."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 139,
+                "end": 189
+              },
+              "text": "что-то живое жалобно гудело",
+              "explanation": "Живое and гудело are neuter forms in this construction with что-то. The passage gives no species or identity for the sound’s source."
+            }
+          ],
+          "prompts": [
+            {
+              "id": "ru.reader.chekhov_student_opening.prompt.soundscape",
+              "question": "How can the weather be described as calm while the passage contains sounds? You may answer in English.",
+              "teaching_note": "Тихая describes the weather. The next sentence explicitly includes bird calls and a marsh sound. Calm weather need not mean an entirely silent scene; accept other text-grounded paraphrases."
+            }
+          ]
+        },
+        {
+          "id": "ru.reader.chekhov_student_opening.chunk.05",
+          "span": {
+            "start": 191,
+            "end": 242
+          },
+          "text": "точно дуло в пустую бутылку.",
+          "stress": "то́чно ду́ло в пусту́ю буты́лку.",
+          "translation": "as though it were blowing into an empty bottle.",
+          "glosses": [
+            {
+              "span": {
+                "start": 191,
+                "end": 201
+              },
+              "text": "точно",
+              "explanation": "as though / as if here, introducing a comparison; not “exactly” in this use."
+            },
+            {
+              "span": {
+                "start": 202,
+                "end": 210
+              },
+              "text": "дуло",
+              "explanation": "дуть = blow; дуло is a neuter past form in the comparison."
+            },
+            {
+              "span": {
+                "start": 211,
+                "end": 241
+              },
+              "text": "в пустую бутылку",
+              "explanation": "into an empty bottle; пустую and бутылку are feminine accusative forms."
+            }
+          ],
+          "grammar_notes": [
+            {
+              "span": {
+                "start": 191,
+                "end": 241
+              },
+              "text": "точно дуло в пустую бутылку",
+              "explanation": "A simile describes the quality of the sound. It does not assert that a bottle is physically present in the marsh."
+            }
+          ],
+          "prompts": [
+            {
+              "id": "ru.reader.chekhov_student_opening.prompt.comparison",
+              "question": "Does the excerpt tell us that there is an actual bottle in the marsh, or identify what is making the sound? Explain in English or Russian.",
+              "teaching_note": "No. The bottle belongs to a comparison introduced by точно; the source is only called something alive. Do not require the learner to identify a bird, frog or other species not named in the text."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

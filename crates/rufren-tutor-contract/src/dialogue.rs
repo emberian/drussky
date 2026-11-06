@@ -63,6 +63,8 @@ pub enum TeacherDialogueFocus {
     Step { step_id: String },
     Practice { index: usize },
     Feedback,
+    ReaderWhole,
+    ReaderChunk { chunk_id: String },
 }
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -224,6 +226,12 @@ impl TeacherDialogueRequest {
                                 .all(|c| c.is_ascii_alphanumeric() || b"-_".contains(&c))
                     }
                     TeacherDialogueFocus::Practice { index } => *index >= 4,
+                    TeacherDialogueFocus::ReaderChunk { chunk_id } => {
+                        !bounded(chunk_id, 128)
+                            || !chunk_id
+                                .bytes()
+                                .all(|c| c.is_ascii_alphanumeric() || b"._-".contains(&c))
+                    }
                     _ => false,
                 }
             {

@@ -132,12 +132,27 @@ fn validate_draft(draft: &DialogueDraft) -> Result<()> {
 }
 impl AppState {
     /// The source link must also work on a device without the origin's local cursor.
-    pub(crate) fn return_to_dialogue_source(&self, anchor: &TeacherDialogueAnchor) -> Result<()> {
+    pub(crate) fn return_to_dialogue_source(
+        &mut self,
+        anchor: &TeacherDialogueAnchor,
+    ) -> Result<()> {
         let expected =
             teacher_dialogue_anchor(&self.library, anchor.document_id, anchor.focus.clone())
                 .map_err(|error| error.to_string())?;
         if expected != *anchor {
-            return Err("This conversation's saved source does not match the available lesson. Its original question is kept.".into());
+            return Err("This conversation's saved source does not match the available text. Its original question is kept.".into());
+        }
+        if matches!(
+            &anchor.focus,
+            TeacherDialogueFocus::ReaderWhole | TeacherDialogueFocus::ReaderChunk { .. }
+        ) {
+            self.note_reference_access()?;
+            let chunk = match &anchor.focus {
+                TeacherDialogueFocus::ReaderChunk { chunk_id } => Some(chunk_id.as_str()),
+                _ => None,
+            };
+            self.open_reader_document(anchor.document_id, chunk)?;
+            return self.navigate(crate::model::Page::Reader);
         }
         let document = self
             .library
@@ -160,6 +175,9 @@ impl AppState {
                 TeacherDialogueFocus::Explanation => 0,
                 TeacherDialogueFocus::Feedback => {
                     return Err("This source is a lesson rather than feedback.".into());
+                }
+                TeacherDialogueFocus::ReaderWhole | TeacherDialogueFocus::ReaderChunk { .. } => {
+                    return Err("This passage source is unavailable. Sync it and try again.".into());
                 }
             };
             self.set_teacher_lesson_cursor(anchor.document_id, step)?;
@@ -274,6 +292,41 @@ impl AppState {
         action: DialogueAction,
     ) -> Result<DialogueDraft> {
         self.new_dialogue(config, action, Some((document, focus)))
+    }
+    /// Save a complete editable source-bound composer in one local transaction.
+    pub(crate) fn new_anchored_dialogue_with_text(
+        &self,
+        document: Uuid,
+        focus: TeacherDialogueFocus,
+        config: DialogueConfig,
+        action: DialogueAction,
+        text: String,
+    ) -> Result<DialogueDraft> {
+        if text.len() > DIALOGUE_MAX_TEXT_BYTES {
+            return Err(
+                "Keep one dialogue message under 2 KiB. Your earlier drafts are kept.".into(),
+            );
+        }
+        let anchor =
+            teacher_dialogue_anchor(&self.library, document, focus).map_err(|e| e.to_string())?;
+        let mut local = self.load_dialogue_local()?;
+        let id = Uuid::new_v4();
+        self.insert_dialogue_draft(
+            &mut local,
+            DialogueDraft {
+                id,
+                thread_id: id,
+                parent_reply_id: None,
+                config,
+                action,
+                correction: DialogueCorrection::Off,
+                anchor: Some(anchor),
+                text,
+                confirmed_audio: None,
+                revision: 1,
+                committed_request_id: None,
+            },
+        )
     }
     pub(crate) fn dialogue_drafts(&self) -> Result<Vec<DialogueDraft>> {
         Ok(self.load_dialogue_local()?.drafts.into_values().collect())

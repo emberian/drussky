@@ -1,0 +1,72 @@
+# Reading Studio: a supported route into wanted texts
+
+Research/design note, 2026-11-06. This addresses the literary/scientific destination in [DESIGN.md](../DESIGN.md) and [COMPLETENESS.md](../COMPLETENESS.md). The product should let Ember spend time with an interesting passage and return to it over days. A passage is not merely a wrapper around vocabulary cards. The AI teacher supplies help and discussion; everyday use has no friend or native-listener duties.
+
+## Recommended first experience
+
+Begin with a coherent scene or argument containing several paragraphs, a visible title/source and a reason to read it. A literary scene can establish a situation and a turn; a scientific passage can state a question, explain a relationship and reach a conclusion. Do not break every sentence into a separate required exercise. The first bundled reading should contain enough connected meaning to reward continued reading, even when Ember needs substantial support.
+
+For zero Russian, offer **Original** and clearly labelled **Adaptation** as two linked reading versions. Start the supported version when it is helpful, while making the original immediately accessible. A short English orientation can establish who/what the passage concerns without explaining every outcome. Paragraph translation remains available. An adaptation should preserve the central scene or claim, not just replace it with unrelated beginner sentences. Neither a word-count target nor a fixed number of paragraphs is established as optimal by the research below.
+
+A concrete flow:
+
+1. **Read at one's own pace.** Show a continuous document with paragraphs, a saved place and optional focus on the current paragraph. Keep nearby context available. One tap can play an exact sentence/short span where audio exists; listening while reading is supported reading, not a listening-only test. Longer documents can be read across sessions without a completion quiz.
+2. **Ask about a phrase.** Select a word or phrase to see its meaning *here*. Show the selected Russian beside the gloss. An optional expansion explains the dictionary form, an ending, a pronoun's referent or the construction. A dismissible side/bottom panel should preserve position and selection rather than replace the document. Support multiword expressions: a dictionary sense for each token often misses the phrase's meaning.
+3. **Translate or unpack a paragraph.** Offer a faithful translation and, separately, a simpler explanation or adaptation. The learner can pin useful help and continue reading. Do not force a guess before every gloss. Provide an optional “ask the teacher about this” action with the exact selected text and surrounding paragraph already attached.
+4. **Discuss the idea.** After a meaningful section, offer one question such as “What changed in the scene?” or “What condition does this claim depend on?” Accept English, Russian or a mixture. Keep the text available. The teacher responds to the idea, cites the relevant passage and clarifies one consequential misunderstanding. Russian expression can be coached separately if requested; imperfect Russian must not be treated as proof of poor comprehension.
+5. **Keep something useful.** Let the learner save a phrase, construction or question with its exact source context and contextual meaning. Suggest a small shortlist after reading, without converting every lookup into compulsory review. A saved item can later become a listening, reading or production task through the existing teacher/revisit flow. Merely saving or viewing it does not establish recall or make it due as a completed task.
+6. **Resume and continue.** Restore the version, paragraph, selection, pinned help and unfinished response. The next opening should make continuing the passage easier than managing its metadata. Cached source text and prepared help remain useful without a network request; new AI help can fail visibly and be retried without losing the reader's place.
+
+Useful first controls are Read, Explain selection, Translate paragraph and Discuss. Source/history management should be secondary. Provide one-tap wider context for a focused paragraph, untimed reading and adjustable text size. These are product accommodations for variable task demands, not a treatment or a fixed learner profile.
+
+## Source and teaching contracts
+
+Preserve the exact source text, its edition/version and attribution. A Russian translation of another author's work needs translator/edition information; it is not an original Russian composition by that author. Distinguish public-domain/licensed source material, personal imports and generated texts. A generated adaptation or translation must never silently overwrite the source or inherit its authorship. Stress marks or modernized orthography are also transformations, even when helpful.
+
+The following are the minimum useful relationships, not a demand for a particular schema:
+
+| Object | What must remain bound together |
+| --- | --- |
+| Source document | Exact text/version, title, author/translator where known, source locator, provenance/rights information and stable paragraph identity |
+| Selected span | Document/version, paragraph and validated exact-text range; preserve a quote or text hash so edits cannot silently move an explanation to another sentence |
+| Reading aid | Selected span or paragraph, kind (contextual gloss, grammar explanation, translation, adaptation), actual text and provider/authorship provenance |
+| Adapted passage | Its own immutable text/version, explicit parent source and mapping to the source section it represents; mark omissions/reorganization rather than inventing exact sentence equivalence |
+| Discussion | Exact version/section, question, available/revealed help, actual learner response and attributable teacher feedback |
+| Extracted learning item | Source span and surrounding meaning, selected surface form, useful lemma/construction information, learner's reason/interest and explicit intended practice task if created |
+
+Contextual glosses should give the selected sense first, with morphology serving understanding rather than occupying the screen. For example, an inflected noun should retain its encountered form and explain the role of that ending when it matters. Do not label every lemma as known after one inflected form is understood. A phrase whose value is literary or philosophical may deserve saving as a phrase, not decomposition into a list of nouns.
+
+For mathematical and scientific prose, preserve domains, quantifiers, negation, conditions and logical direction. “For every … there exists …” cannot be simplified by reversing its quantifiers. Distinguish the author's assertion, an explanation of it, and an additional illustrative example. If an adaptation omits a qualification, disclose the omission; prefer an easier explanation that retains the qualification. The same principle applies to narrative viewpoint, ambiguity and irony: an interpretation is not automatically a literal translation.
+
+## Evidence behind these choices
+
+| Evidence | Finding and boundary | Practical consequence |
+| --- | --- | --- |
+| [Watanabe 1997](https://doi.org/10.1017/S027226319700301X), publisher abstract | 231 Japanese university students were randomly assigned to 10 reading conditions. Single and multiple-choice marginal glosses outperformed no cue/appositives on incidental vocabulary outcomes, including delayed testing; single versus multiple-choice glosses did not differ significantly. The added translation task had no effect in that experiment. This concerns vocabulary learning under those tasks, not a prohibition on translations for comprehension. | Give a usable gloss directly. A forced quiz at every lookup adds friction without being established as necessary by this result. |
+| [Laufer & Hill 2000](https://doi.org/10.64152/10125/25073), primary full text | 32 Israeli and 40 Hong Kong university learners used a CALL dictionary while reading; 12 target words were tested immediately. Lookup preferences differed, no universally best lookup behavior was established, and lookup count bore little relation to retention. Choices were not randomized treatment assignments. | Allow contextual L1 meaning and optional further information. Count a lookup as help used, not a learned word; do not infer a fixed learning style or causal advantage from the preferred panel. |
+| [Hu & Nation 2000](https://www.wgtn.ac.nz/lals/resources/paul-nations-resources/paul-nations-publications/publications/documents/2000-Hu-Density-and-comprehension.pdf), original study/abstract; [Kremmel et al. 2023](https://doi.org/10.1111/lang.12622), registered replication, primary full text | The original inferred approximately 98% lexical coverage for adequate unassisted fiction comprehension. The replication analyzed 104 Sri Lankan adult English learners, added an informational text and another question format, and did not reproduce 98% coverage as sufficient. Genre, response format and task quality complicate the relationship. Participants had prior English education; these are not zero-beginner Russian studies. | Familiar words matter, but no coverage percentage should unlock or ban a wanted text. Distinguish supported access from independent reading, and measure the particular meaning understood. |
+| [Nakanishi 2015](https://doi.org/10.1002/tesq.157), synthesis, publisher abstract already reviewed | 34 studies/3,942 participants; extensive-reading outcomes improved, with group-comparison effect d=.46. Intensive work on a difficult authentic paragraph plus many explanations is not the same intervention as extensive reading. | Maintain both an accessible reading strand and close work on wanted originals. Neither can be replaced by endless word exercises. |
+
+These studies support selected components. They do not validate this complete reader, an ideal gloss density, an optimal chunk size, or an AI-generated adaptation's accuracy. The design choices above are inspectable hypotheses. In particular, contextual phrase extraction, optional own-word discussion and source-preserving layered support are justified here by the user's goals and the need to keep task evidence interpretable, not by a claim that one study proves the entire flow.
+
+## Understanding, assistance and assessment
+
+The first aim is to understand something worth reading. An English account of the idea after using a translation is useful **supported understanding**. It is not evidence of unassisted Russian reading. Likewise, a response about the adaptation does not establish comprehension of every sentence in the original. Preserve which version and aids were actually displayed. Availability of a translation and a deliberate reveal are different facts; recorded display still does not prove attention.
+
+A reading prompt's source text is task input, not automatically answer help. A model response or translation that supplies the requested meaning is answer-bearing support. A discussion can refer back to the passage without being a memory test. If a later task intentionally tests memory with the passage closed, label that different task explicitly rather than reinterpreting an ordinary open-text answer.
+
+For factual or scientific understanding, define a few relevant meaning units and their source spans: agent/action, cause/condition, claim/reason, or quantifier scope. Give partial credit in prose and distinguish an omitted detail from a contradiction. The expected answer should not be a password. For literary discussion, distinguish explicit textual facts from plausible interpretations, ask what in the passage supports a reading, and allow reasonable alternatives. Do not turn the teacher's favored interpretation into objective ground truth.
+
+Feedback should say what the response got right, correct a specific misunderstanding using the source, and offer a useful next thought. When teaching Russian wording, preserve the learner's intended meaning and separate language correction from interpretation. Do not pretend to evaluate pronunciation from a written explanation or transcript. Feedback on a translation-assisted answer can still be valuable without inflating it into proficiency evidence.
+
+## A lean future evaluation
+
+For ordinary use, ask whether the passage was worth continuing and whether help made it understandable. Completion, duration and fewer lookups alone do not establish learning. More lookups can indicate useful engagement with a harder passage; fewer can indicate familiarity, guessing or avoidance.
+
+For a small personal comparison, use matched new passages or alternate sections rather than repeatedly testing the memorized same paragraph. Compare two support arrangements with similar reading time and the same opportunity to seek help. Record version, prior exposure, actual aids used, task question and first response before corrective feedback. Check a central meaning and one relation/inference, accepting English so Russian production does not dominate the reading measure. Keep separate outcomes for supported understanding now, later recognition/use of selected phrases, and understanding an unfamiliar related passage.
+
+A small holdout can use familiar constructions in new content. Once it has been displayed, it is no longer an unseen passage for a later test. Source family and close adaptations should share exposure ancestry. A failure should lead to useful explanation, not make everyday reading wait for research-grade evaluation. No human reviewer or friend needs to approve each passage before use; AI assistance can operate with preserved source links, explicit uncertainty and correctable outputs.
+
+## Source acquisition
+
+Public primary PDFs and provenance are in `/Users/ember/paperbin/rufren/reading-studio/`: `laufer-hill2000.pdf` and `hu-nation2000.pdf`, with `acquisition.json` listing URLs, byte counts, SHA-256 digests and failed requests. The first Laufer download returned an HTML challenge; it is preserved and marked as such, while the repository API supplied the valid PDF. Hu/Nation's PDF is a scanned archival copy; the substantive threshold comparison above uses its indexed abstract and the replication's methods/discussion. Kremmel's full article was read through the publisher in the browser; direct local HTML/PDF requests were rejected, which is recorded. Watanabe and Nakanishi findings remain abstract-based. No model inference, app source change or build was performed for this note.

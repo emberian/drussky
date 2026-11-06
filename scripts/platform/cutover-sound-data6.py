@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Plan or execute a receipt-pinned private relay5→6 cutover.
+"""Plan or execute a receipt-pinned private relay transition.
 
-Default plan changes nothing. Execute requires explicit accepted relay/native/
+The historical default remains5→6 Sound; --transition-profile reader-data7 selects
+6→7 Reader with Teacher6/dialogue4. Default plan changes nothing. Execute requires explicit accepted relay/native/
 consumer receipts and an immutable rollback binary. It stops only the recorded
 relay, verifies a quiescent SQLite+original-audio backup, and preserves TLS,
-configuration and artifact aliases. Failure may restart5 only when the exact
-logical snapshot is unchanged and contains no6 events; it never restores over
+configuration and artifact aliases. Failure may restart the old binary only when
+the exact logical snapshot is unchanged and contains no target-version events; it never restores over
 changed history. No inference endpoint is called.
 """
 import argparse
@@ -26,6 +27,26 @@ spec = importlib.util.spec_from_file_location('dialogue_cutover', Path(__file__)
 prior = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(prior)
 ROOT, FOLDER, services, preflight = prior.ROOT, prior.FOLDER, prior.services, prior.preflight
+DEFAULT_PROFILE = 'sound-data6'
+TRANSITIONS = {
+    DEFAULT_PROFILE: {'from': 5, 'to': 6, 'consumer': 'sound'},
+    'reader-data7': {'from': 6, 'to': 7, 'consumer': 'reader',
+                     'teacher': 'rufren-ai-teacher-v6', 'dialogue': 'rufren-ai-dialogue-v4'},
+}
+
+
+def transition(name=DEFAULT_PROFILE):
+    if name not in TRANSITIONS:
+        raise ValueError('Unsupported explicit relay transition profile')
+    return TRANSITIONS[name]
+
+
+def shared_source_hashes(values):
+    return {name: sha for name, sha in values.items()
+            if name in ('Cargo.toml', 'Cargo.lock') or name.startswith((
+                'crates/rufren-core/', 'crates/rufren-store/', 'crates/rufren-relay/',
+                'crates/rufren-tutor/', 'crates/rufren-tutor-contract/',
+                'crates/rufren-speech/', 'crates/rufren-audio/'))}
 
 
 def pinned_json(path, expected_hash):
@@ -35,7 +56,7 @@ def pinned_json(path, expected_hash):
     return json.loads(path.read_text())
 
 
-def logical_database(path):
+def logical_database(path, max_version=6):
     uri = 'file:' + urllib.parse.quote(str(Path(path).resolve())) + '?mode=ro'
     with closing(sqlite3.connect(uri, uri=True)) as db:
         db.execute('BEGIN')
@@ -51,17 +72,17 @@ def logical_database(path):
             state[name] = {'columns': columns, 'rows': db.execute('SELECT * FROM ' + quoted + ' ORDER BY ' + ordered).fetchall()}
         count, cursor = db.execute('SELECT COUNT(*),COALESCE(MAX(seq),0) FROM events').fetchone()
         versions = [json.loads(row[0]).get('version') for row in db.execute('SELECT json FROM events')]
-    if any(type(version) is not int or not 1 <= version <= 6 for version in versions):
+    if type(max_version) is not int or any(type(version) is not int or not 1 <= version <= max_version for version in versions):
         raise ValueError('Unexpected event version; preserve history and resolve forward')
     encoded = json.dumps(state, ensure_ascii=False, separators=(',', ':'), default=lambda value: {'sqlite_blob_hex': value.hex()}).encode()
     return {'sha256': hashlib.sha256(encoded).hexdigest(), 'physical_schema': schema,
             'event_count': count, 'cursor': cursor, 'max_event_version': max(versions, default=0)}
 
 
-def rollback_is_safe(snapshot, current):
+def rollback_is_safe(snapshot, current, previous_version=5):
     return (snapshot['sha256'] == current['sha256']
             and type(current['max_event_version']) is int
-            and current['max_event_version'] <= 5)
+            and type(previous_version) is int and current['max_event_version'] <= previous_version)
 
 
 def worker_source_fingerprint():
@@ -90,27 +111,38 @@ def run_backup(command, source, destination=None, assets=None):
     return json.loads(Path(destination).with_suffix(Path(destination).suffix + '.json').read_text()) if command == 'backup' else json.loads(result.stdout)
 
 
-def accepted_candidate(path, native_path):
+def accepted_candidate(path, native_path, transition_profile=DEFAULT_PROFILE):
+    profile = transition(transition_profile)
+    target = profile['to']
     accepted = json.loads(path.read_text())
-    if accepted.get('accepted') is not True or type(accepted.get('data_protocol')) is not int or accepted['data_protocol'] != 6:
-        raise ValueError('Root acceptance must explicitly select data protocol6')
+    if accepted.get('accepted') is not True or type(accepted.get('data_protocol')) is not int or accepted['data_protocol'] != target:
+        raise ValueError(f'Root acceptance must explicitly select data protocol{target}')
+    if profile['consumer'] == 'reader' and (accepted.get('teacher_prompt_version') != profile['teacher'] or accepted.get('dialogue_prompt_version') != profile['dialogue']):
+        raise ValueError('Reader transition requires exact Teacher6/dialogue4 policy identities')
     executable = Path(accepted['relay_executable']).resolve(strict=True)
     if executable.is_relative_to(ROOT / 'target') or prior.digest(executable) != accepted['relay_executable_sha256']:
         raise ValueError('Candidate must be an accepted immutable executable outside target/')
     pinned_json(native_path, accepted['native_manifest_sha256'])
-    native = preflight.artifact(native_path, 6, accepted['teacher_prompt_version'], accepted['dialogue_prompt_version'])
+    native = preflight.artifact(native_path, target, accepted['teacher_prompt_version'], accepted['dialogue_prompt_version'])
     source = pinned_json(native['source_evidence'], accepted['source_evidence_sha256'])
     if source['server_prompt_source_sha256'] != accepted['teacher_prompt_source_sha256'] or source['dialogue_prompt_source_sha256'] != accepted['dialogue_prompt_source_sha256']:
         raise ValueError('Accepted relay policy-source hashes differ from frozen client pairing')
     # Accepted source hashes bind the immutable relay build to the same frozen
     # core/store/transport sources as the client, independent of later tree edits.
-    shared = {name: sha for name, sha in source['source_sha256'].items()
-              if name in ('Cargo.toml', 'Cargo.lock') or name.startswith((
-                  'crates/rufren-core/', 'crates/rufren-store/', 'crates/rufren-relay/',
-                  'crates/rufren-tutor/', 'crates/rufren-tutor-contract/',
-                  'crates/rufren-speech/', 'crates/rufren-audio/'))}
+    shared = shared_source_hashes(source['source_sha256'])
     if not shared or accepted['relay_source_sha256'] != shared:
         raise ValueError('Accepted relay and frozen native shared-source identities differ')
+    if profile['consumer'] == 'reader':
+        build = pinned_json(accepted['relay_build_receipt'], accepted['relay_build_receipt_sha256'])
+        if (Path(build['binary']).resolve(strict=True) != executable
+                or build.get('binary_sha256') != accepted['relay_executable_sha256']
+                or type(build.get('sync_version')) is not int or build['sync_version'] != target
+                or type(build.get('event_version')) is not int or build['event_version'] != target
+                or build.get('teacher_policy') != profile['teacher'] or build.get('dialogue_policy') != profile['dialogue']
+                or shared_source_hashes(build['source_sha256']) != shared
+                or build.get('prompt_source_sha256') != accepted['dialogue_prompt_source_sha256']
+                or prior.digest(Path(build['prompt_source'])) != build['prompt_source_sha256']):
+            raise ValueError('Reader candidate build receipt differs from the actual accepted binary/shared sources/policy')
     workers = worker_source_fingerprint()
     if (accepted.get('worker_sources_reviewed') is not True
             or accepted.get('worker_source_scope') != 'files-only'
@@ -120,18 +152,32 @@ def accepted_candidate(path, native_path):
     if any(workers.get(name) != sha for name, sha in captured_workers.items()):
         raise ValueError('Captured native worker sources differ from the accepted file snapshot')
     consumer = pinned_json(accepted['consumer_receipt'], accepted['consumer_receipt_sha256'])
-    if (consumer.get('passed') is not True or type(consumer.get('protocol')) is not int or consumer['protocol'] != 6
+    if (consumer.get('passed') is not True or type(consumer.get('protocol')) is not int or consumer['protocol'] != target
             or consumer.get('relay_executable_sha256') != accepted['relay_executable_sha256']
             or consumer.get('preview_build') != source['reference_web_build']
             or consumer.get('coherent_snapshot_restored') is not True
             or consumer.get('legacy_protocol_refused') is not True
             or consumer.get('owned_service_stopped') is not True
-            or type(consumer.get('sound_trials')) is not int or consumer['sound_trials'] < 1
-            or type(consumer.get('sound_completed_trials')) is not int or consumer['sound_completed_trials'] < 1
-            or not consumer.get('empty_app_sound_trials')
             or type(consumer.get('original_take_records')) is not int or consumer['original_take_records'] < 1
             or not consumer.get('played_original_asset_ids')):
-        raise ValueError('Accepted consumer must prove protocol6 Sound facts, saved responses, originals, restore and empty-app playback')
+        raise ValueError('Accepted consumer must prove matching protocol/binary/web, originals, coherent restore, legacy refusal and playback')
+    if profile['consumer'] == 'sound':
+        if (type(consumer.get('sound_trials')) is not int or consumer['sound_trials'] < 1
+                or type(consumer.get('sound_completed_trials')) is not int or consumer['sound_completed_trials'] < 1
+                or not consumer.get('empty_app_sound_trials')):
+            raise ValueError('Sound consumer is missing saved and unfinished trial restoration')
+    else:
+        reader = consumer.get('empty_app_reader')
+        if (type(consumer.get('reader_documents')) is not int or consumer['reader_documents'] < 2
+                or not isinstance(reader, dict) or not isinstance(reader.get('documents'), list)
+                or len(reader['documents']) != consumer['reader_documents']
+                or any(not isinstance(doc, dict) for doc in reader['documents'])
+                or not {'ai_authored', 'learner_provided'}.issubset({doc.get('source_kind') for doc in reader['documents']})
+                or not reader.get('excerpts') or not reader.get('audio') or not reader.get('producer_local_keys_absent_before_open')
+                or not isinstance(reader.get('dialogues'), list)
+                or any(not isinstance(path, dict) for path in reader['dialogues'])
+                or not any(len({path.get('chunk_id') for path in reader['dialogues'] if path.get('document_id') == document.get('document_id')}) >= 2 for document in reader['documents'])):
+            raise ValueError('Reader consumer must restore authored/custom originals, exact excerpts, distinct chunk anchors, local-state isolation and voice')
     return accepted, executable
 
 
@@ -170,32 +216,37 @@ def alias_fingerprint():
 
 
 def execute(args):
-    accepted, executable = accepted_candidate(args.accepted_relay, args.native_manifest)
+    selected = getattr(args, 'transition_profile', DEFAULT_PROFILE)
+    profile = transition(selected)
+    previous_version, target = profile['from'], profile['to']
+    database_state = lambda path: logical_database(path, target)
+    accepted, executable = accepted_candidate(args.accepted_relay, args.native_manifest, selected)
     native = json.loads(args.native_manifest.read_text())
     if prior.digest(FOLDER / 'ca.pem') != native['ca_sha256']:
         raise ValueError('Private CA differs from the frozen native trust certificate')
     previous = json.loads(args.previous_activation.read_text())
     rollback = args.rollback_executable.resolve(strict=True)
-    if (type(previous.get('data_protocol')) is not int or previous['data_protocol'] != 5
+    if (type(previous.get('data_protocol')) is not int or previous['data_protocol'] != previous_version
             or previous.get('accepted') is not True or rollback.is_relative_to(ROOT / 'target')
             or prior.digest(rollback) != previous['relay_executable_sha256']):
-        raise ValueError('Rollback must be the accepted immutable data5 executable')
+        raise ValueError(f'Rollback must be the accepted immutable data{previous_version} executable')
     active = json.loads((FOLDER / 'frozen-artifact.json').read_text())
-    if type(active.get('data_protocol')) is not int or active['data_protocol'] != 5:
-        raise ValueError('Active artifact is no longer data5; inspect current rollout')
+    if type(active.get('data_protocol')) is not int or active['data_protocol'] != previous_version:
+        raise ValueError(f'Active artifact is no longer data{previous_version}; inspect current rollout')
     before, proxy = services.service_status('relay'), services.service_status('tls-proxy')
     if (not before['running'] or not proxy['running'] or before['ownership'] != 'recorded'
             or before['recorded_sha256'] != previous['relay_executable_sha256'] or not before['on_disk_matches_receipt']):
-        raise ValueError('Running relay/TLS provenance does not match accepted data5')
-    authenticated_statuses(5)
+        raise ValueError(f'Running relay/TLS provenance does not match accepted data{previous_version}')
+    authenticated_statuses(previous_version)
     config, aliases, workers = prior.config_fingerprint(), alias_fingerprint(), worker_source_fingerprint()
     environment = json.loads((FOLDER / 'relay-environment.json').read_text())
     db, assets = Path(environment['RUFREN_RELAY_DB']), Path(environment['RUFREN_RELAY_ASSETS'])
-    if logical_database(db)['max_event_version'] > 5:
+    if database_state(db)['max_event_version'] > previous_version:
         raise ValueError('Existing history contains future events; resolve forward')
     output = args.output.resolve()
     output.mkdir(mode=0o700, parents=True, exist_ok=False)
-    report = {'stage': 'prepared', 'started_at': datetime.now(timezone.utc).isoformat(),
+    report = {'stage': 'prepared', 'transition_profile': selected, 'from_protocol': previous_version,
+              'started_at': datetime.now(timezone.utc).isoformat(),
               'accepted_relay_receipt': str(args.accepted_relay.resolve()),
               'native_candidate_receipt': str(args.native_manifest.resolve()),
               'candidate_executable': str(executable), 'relay_executable_sha256': accepted['relay_executable_sha256'],
@@ -213,27 +264,27 @@ def execute(args):
         stopped = True
         if services.owned_pid('relay') is not None:
             raise RuntimeError('Owned relay did not stop; cutover refused')
-        baseline = logical_database(db)
-        snapshot_db = output / 'pre-data6.sqlite'
+        baseline = database_state(db)
+        snapshot_db = output / f'pre-data{target}.sqlite'
         report['backup'] = run_backup('backup', db, snapshot_db, assets)
         report['backup_verified'] = run_backup('verify', snapshot_db)
-        snapshot = logical_database(snapshot_db)
-        if logical_database(db) != snapshot or baseline != snapshot:
+        snapshot = database_state(snapshot_db)
+        if database_state(db) != snapshot or baseline != snapshot:
             raise ValueError('Source changed while relay stopped; cutover refused')
         report.update(stage='quiescent-snapshot-verified', snapshot=snapshot, snapshot_database=str(snapshot_db))
         prior.private_write(receipt, report)
         services.start('relay', str(FOLDER / 'provider-environment.json'), executable, accepted['relay_executable_sha256'])
-        report['capabilities'] = authenticated_statuses(6)
+        report['capabilities'] = authenticated_statuses(target)
         if prior.config_fingerprint() != config or alias_fingerprint() != aliases or worker_source_fingerprint() != workers or services.service_status('tls-proxy')['pid'] != proxy['pid']:
             raise ValueError('Private configuration, aliases or TLS proxy changed')
         running = services.service_status('relay')
         if running['executable'] != str(executable) or running['recorded_sha256'] != accepted['relay_executable_sha256'] or not running['on_disk_matches_receipt']:
             raise ValueError('Running candidate executable provenance failed')
-        report.update(stage='active-data6-awaiting-root-alias-promotion', completed_at=datetime.now(timezone.utc).isoformat(),
-                      relay_pid=running['pid'], data_protocol=6, accepted=True, running_candidate=running,
-                      private_config_preserved=True, artifact_aliases_preserved=True, logical_database_after=logical_database(db))
+        report.update(stage=f'active-data{target}-awaiting-root-alias-promotion', completed_at=datetime.now(timezone.utc).isoformat(),
+                      relay_pid=running['pid'], data_protocol=target, accepted=True, running_candidate=running,
+                      private_config_preserved=True, artifact_aliases_preserved=True, logical_database_after=database_state(db))
         prior.private_write(receipt, report)
-        print(json.dumps({'activated': True, 'data_protocol': 6, 'receipt': str(receipt), 'artifact_aliases_changed': False, 'model_calls': 0}))
+        print(json.dumps({'activated': True, 'data_protocol': target, 'receipt': str(receipt), 'artifact_aliases_changed': False, 'model_calls': 0}))
     except BaseException as error:
         report.update(stage='cutover-failed-history-retained', error_type=type(error).__name__)
         if isinstance(error, IncompleteAudioBackup):
@@ -245,16 +296,16 @@ def execute(args):
                     if running.get('executable') != str(executable):
                         raise RuntimeError('Unexpected process; no rollback signal sent')
                     services.stop('relay')
-                current = logical_database(db)
+                current = database_state(db)
                 report['logical_database_at_failure'] = current
-                safe = rollback_is_safe(snapshot or baseline, current) if snapshot or baseline else False
+                safe = rollback_is_safe(snapshot or baseline, current, previous_version) if snapshot or baseline else False
                 if safe and prior.config_fingerprint() == config and alias_fingerprint() == aliases and worker_source_fingerprint() == workers:
                     services.start('relay', str(FOLDER / 'provider-environment.json'), rollback, previous['relay_executable_sha256'])
-                    authenticated_statuses(5)
-                    report.update(stage='safe-data5-restart-no-history-restored', rollback_started=True,
+                    authenticated_statuses(previous_version)
+                    report.update(stage=f'safe-data{previous_version}-restart-no-history-restored', rollback_started=True,
                                   rollback_owned_process=services.service_status('relay'))
                 else:
-                    report.update(rollback_started=False, recovery='Retain DB/audio and snapshots; repair forward with data6. No old binary or restore was applied over changed history.')
+                    report.update(rollback_started=False, recovery=f'Retain DB/audio and snapshots; repair forward with data{target}. No old binary or restore was applied over changed history.')
         except BaseException as recovery_error:
             report.update(recovery_error_type=type(recovery_error).__name__, rollback_started=False)
         prior.private_write(receipt, report)
@@ -264,13 +315,17 @@ def execute(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=['plan', 'execute'], nargs='?', default='plan')
+    parser.add_argument('--transition-profile', choices=sorted(TRANSITIONS), default=DEFAULT_PROFILE)
     for name in ['accepted-relay', 'native-manifest', 'previous-activation', 'rollback-executable', 'output']:
         parser.add_argument('--' + name, type=Path)
     args = parser.parse_args()
+    profile = transition(args.transition_profile)
     if args.action == 'plan':
-        print(json.dumps({'action': 'plan-only-no-service-change', 'from_protocol': 5, 'to_protocol': 6,
-                          'requires': ['accepted immutable relay/native/source/consumer receipts', 'accepted immutable5 rollback binary', 'new coherent snapshot directory'],
-                          'rollback_rule': 'Exact unchanged logical DB snapshot and no6 events; otherwise preserve and fix forward',
+        print(json.dumps({'action': 'plan-only-no-service-change', 'transition_profile': args.transition_profile,
+                          'from_protocol': profile['from'], 'to_protocol': profile['to'],
+                          'teacher_prompt_version': profile.get('teacher'), 'dialogue_prompt_version': profile.get('dialogue'),
+                          'requires': ['accepted immutable relay/native/source/consumer receipts', f'accepted immutable{profile["from"]} rollback binary', 'new coherent snapshot directory'],
+                          'rollback_rule': f'Exact unchanged logical DB snapshot and no{profile["to"]} events; otherwise preserve and fix forward',
                           'artifact_aliases_changed': False, 'model_calls': 0}))
         return
     if any(getattr(args, name.replace('-', '_')) is None for name in ['accepted-relay', 'native-manifest', 'previous-activation', 'rollback-executable', 'output']):

@@ -126,7 +126,7 @@ pub(crate) fn validate_ai_references(
             _ => {
                 return Err(Error::Invalid(
                     "AI assessment binding differs from the exact attempt".into(),
-                ))
+                ));
             }
         }
     }
@@ -151,7 +151,7 @@ pub(crate) fn validate_ai_references(
                 _ => {
                     return Err(Error::Invalid(
                         "AI transcript evidence belongs to another attempt or revision".into(),
-                    ))
+                    ));
                 }
             }
         }
@@ -171,7 +171,7 @@ pub(crate) fn validate_ai_references(
             _ => {
                 return Err(Error::Invalid(
                     "AI assessment context differs from the exact task".into(),
-                ))
+                ));
             }
         }
     }

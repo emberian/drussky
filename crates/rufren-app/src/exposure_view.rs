@@ -19,6 +19,7 @@ pub(crate) fn PresentedRussian(
     #[props(default)] session: Option<Uuid>,
     #[props(default)] decision: Option<Uuid>,
     #[props(default)] utterance_family: Option<String>,
+    #[props(default)] inline: bool,
 ) -> Element {
     let identity = serde_json::to_string(&(
         &text,
@@ -28,6 +29,7 @@ pub(crate) fn PresentedRussian(
         decision,
         &utterance_family,
         &language,
+        inline,
     ))
     .expect("presentation identity is serializable");
     // Dioxus consults keys during sibling-list reconciliation. A key on a
@@ -35,7 +37,7 @@ pub(crate) fn PresentedRussian(
     rsx! {for identity in [identity] {
         PresentedRussianBlock {key:"{identity}", app, text:text.clone(), purpose,
             class:class.clone(), language:language.clone(), children:children.clone(),
-            revision, session, decision, utterance_family:utterance_family.clone()}
+            revision, session, decision, utterance_family:utterance_family.clone(),inline}
     }}
 }
 
@@ -51,6 +53,7 @@ fn PresentedRussianBlock(
     #[props(default)] session: Option<Uuid>,
     #[props(default)] decision: Option<Uuid>,
     #[props(default)] utterance_family: Option<String>,
+    #[props(default)] inline: bool,
 ) -> Element {
     let instance = use_hook(Uuid::new_v4);
     let element_id = format!("russian-presentation-{instance}");
@@ -86,9 +89,11 @@ fn PresentedRussianBlock(
         let id = serde_json::to_string(&cleanup_id).unwrap();
         let _ = document::eval(&format!("window.rufrenPresentations?.get({id})?.();"));
     });
-    match children {
-        Some(children) => rsx! {div {id:element_id, class, lang:language, {children}}},
-        None => rsx! {p {id:element_id, class, lang:language, "{text}"}},
+    match (inline, children) {
+        (true, Some(children)) => rsx! {span {id:element_id, class, lang:language, {children}}},
+        (true, None) => rsx! {span {id:element_id, class, lang:language, "{text}"}},
+        (false, Some(children)) => rsx! {div {id:element_id, class, lang:language, {children}}},
+        (false, None) => rsx! {p {id:element_id, class, lang:language, "{text}"}},
     }
 }
 

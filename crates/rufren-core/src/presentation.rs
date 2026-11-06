@@ -55,7 +55,7 @@ pub(crate) fn validate_presentation_references(
             _ => {
                 return Err(Error::Invalid(
                     "presentation refers to another teaching session".into(),
-                ))
+                ));
             }
         }
     }

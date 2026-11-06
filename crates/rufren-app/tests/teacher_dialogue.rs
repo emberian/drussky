@@ -13,6 +13,8 @@ mod learning;
 mod daily_plan;
 #[path = "../src/sound_focus.rs"]
 mod sound_focus;
+#[path = "../src/reader.rs"]
+mod reader;
 #[path = "../src/model.rs"]
 mod model;
 #[path = "../src/native_connection.rs"]

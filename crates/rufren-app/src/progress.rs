@@ -107,9 +107,11 @@ fn teacher_title(library: &Library, key: TeacherRevisitKey) -> String {
 
 fn generic_target(library: &Library, revision: Uuid, skill: Skill) -> Option<ProgressTarget> {
     let saved = library.revision(revision)?;
-    if library.events.get(&revision).is_some_and(|event| {
-        is_teacher_generated_reference(event) || is_sound_focus_reference(event)
-    }) || saved.passage.translation.trim().is_empty()
+    if library
+        .events
+        .get(&revision)
+        .is_some_and(is_reserved_practice_reference)
+        || saved.passage.translation.trim().is_empty()
         || library
             .heads()
             .get(&saved.passage.id)
@@ -557,7 +559,10 @@ mod tests {
     }
     #[test]
     fn reserved_sound_reference_without_companions_never_becomes_generic_practice() {
-        let definition = rufren_content::sound_contrasts().into_iter().next().unwrap();
+        let definition = rufren_content::sound_contrasts()
+            .into_iter()
+            .next()
+            .unwrap();
         let contrast: SoundContrastSnapshot =
             serde_json::from_value(serde_json::to_value(definition).unwrap()).unwrap();
         let reference = sound_reference_event(&contrast, &contrast.members[0].id).unwrap();

@@ -9,6 +9,7 @@ use uuid::Uuid;
 pub(crate) enum Page {
     Today,
     Lessons,
+    Reader,
     Library,
     Practice,
     Studio,
@@ -17,9 +18,10 @@ pub(crate) enum Page {
     Settings,
 }
 impl Page {
-    pub(crate) const ALL: [Self; 8] = [
+    pub(crate) const ALL: [Self; 9] = [
         Self::Today,
         Self::Lessons,
+        Self::Reader,
         Self::Library,
         Self::Practice,
         Self::Studio,
@@ -31,6 +33,7 @@ impl Page {
         match self {
             Self::Today => "Today",
             Self::Lessons => "Lessons",
+            Self::Reader => "Reader",
             Self::Library => "Library",
             Self::Practice => "Practice",
             Self::Studio => "Speech studio",
@@ -43,6 +46,7 @@ impl Page {
         match self {
             Self::Today => "◌",
             Self::Lessons => "✦",
+            Self::Reader => "☷",
             Self::Library => "▤",
             Self::Practice => "↗",
             Self::Studio => "≋",
@@ -100,6 +104,9 @@ pub(crate) struct AppState {
     pub(crate) plan: Option<SessionPlan>,
     pub(crate) selected_lesson: Option<String>,
     pub(crate) studio_revision: Option<Uuid>,
+    /// Failed Reader saves stay in memory until retry; navigation must flush them.
+    pub(crate) reader_pending_edits: std::collections::BTreeMap<(Uuid, String), String>,
+    pub(crate) reader_pending_import: Option<crate::reader::ReaderImportDraft>,
 }
 impl PartialEq for AppState {
     fn eq(&self, other: &Self) -> bool {
@@ -167,15 +174,18 @@ impl AppState {
             plan,
             selected_lesson,
             studio_revision: None,
+            reader_pending_edits: Default::default(),
+            reader_pending_import: None,
         })
     }
     pub(crate) fn navigate(&mut self, page: Page) -> Result<()> {
+        self.flush_pending_reader_edits()?;
         if page == Page::Practice {
             self.reconcile_daily_plan(now_ms())?;
         }
         if matches!(
             page,
-            Page::Library | Page::Lessons | Page::Studio | Page::Teacher
+            Page::Library | Page::Lessons | Page::Reader | Page::Studio | Page::Teacher
         ) {
             self.note_reference_access()?;
         }
@@ -211,6 +221,7 @@ impl AppState {
         skill: Skill,
         session_id: Uuid,
     ) -> Result<()> {
+        self.flush_pending_reader_edits()?;
         if self
             .library
             .events
@@ -218,6 +229,14 @@ impl AppState {
             .is_some_and(is_sound_focus_reference)
         {
             return Err("Open Sound Focus from its lesson to practice this contrast, or replay it from your sound history.".into());
+        }
+        if self
+            .library
+            .events
+            .get(&revision)
+            .is_some_and(is_reader_audio_reference)
+        {
+            return Err("This is a reading voice reference. Keep an original phrase in the Reader to practice it.".into());
         }
         if session_id.is_nil()
             || self
@@ -256,6 +275,7 @@ impl AppState {
         Ok(())
     }
     pub(crate) fn begin(&mut self) -> Result<()> {
+        self.flush_pending_reader_edits()?;
         self.refresh()?;
         self.reconcile_daily_plan(now_ms())?;
         if self.sound_focus_is_selected()? && self.sound_focus_unfinished()? {

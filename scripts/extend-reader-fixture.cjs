@@ -1,0 +1,74 @@
+// One actual near-limit custom import, extending a frozen synthetic Reader graph.
+// No inference, relay connection, source-profile mutation or audio regeneration.
+const {chromium}=require(process.env.RUFREN_PLAYWRIGHT_MODULE||'playwright');
+const fs=require('node:fs/promises'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const {navigate}=require('./qa-navigation.cjs');
+const {facts}=require('./test-teacher-dialogue.cjs');
+const {metadata,openReadingOptions}=require('./test-reader.cjs');
+const APP=process.env.RUFREN_QA_URL||'http://127.0.0.1:8091';
+const [baseArg,outArg]=process.argv.slice(2);assert(baseArg&&outArg,'Usage: extend-reader-fixture.cjs <frozen producer directory> <new output directory>');
+const base=path.resolve(baseArg),out=path.resolve(outArg),sha=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
+let browser,context,page;const result={passed:false,scope:'Synthetic near64KiB original through actual UI import, late-part navigation and offline reload; base graph/audio preserved',errors:[],forbidden:[],inference_calls:0};
+(async()=>{
+ await fs.mkdir(out,{mode:0o700});
+ const input=JSON.parse(await fs.readFile(path.join(base,'library.json'))),source=Array.isArray(input.events)?input.events:Object.values(input.events);
+ const expected=JSON.parse(await fs.readFile(path.join(base,'expected-reader.json')));
+ const voice=JSON.parse(await fs.readFile(path.join(base,'originals.json')));
+ let original='';for(let number=1;;number++){
+  const paragraph=`Запись ${String(number).padStart(3,'0')}. Вечером Мира открыла окно и услышала тихий голос. «Всё ещё гори́т свет», — сказала она. Она оставила книгу на столе\u00a0и вышла в сад. За дверью пахло дождём; домой она вернётся после прогулки.\n\n`;
+  if(Buffer.byteLength(original+paragraph)>64_000)break;original+=paragraph;
+ }
+ original+='Последняя запись: ёжик ещё ждёт у двери.\n';
+ assert(Buffer.byteLength(original)>63_000&&Buffer.byteLength(original)<=65_536);
+ await fs.writeFile(path.join(out,'long-original.txt'),original);
+ browser=await chromium.launch({headless:true,...(process.env.RUFREN_CHROMIUM_EXECUTABLE?{executablePath:process.env.RUFREN_CHROMIUM_EXECUTABLE}:{})});
+ context=await browser.newContext({viewport:{width:1200,height:900}});
+ await context.route('**/*',route=>{const url=new URL(route.request().url());if(url.origin!==new URL(APP).origin||/^\/(api|v1)\//.test(url.pathname)){result.forbidden.push(url.origin+url.pathname);if(route.request().method()==='POST'&&url.pathname.startsWith('/api/'))result.inference_calls++;return route.abort();}return route.continue();});
+ page=await context.newPage();page.setDefaultTimeout(45_000);page.on('pageerror',error=>result.errors.push(error.message));
+ await page.goto(APP);result.preview_build=await page.evaluate(()=>fetch('./offline-build.json').then(response=>response.json()).then(value=>value.version));
+ if(process.env.RUFREN_EXPECT_WEB)assert.equal(result.preview_build,process.env.RUFREN_EXPECT_WEB);
+ await navigate(page,'Settings');await page.locator('#backup-json').fill(JSON.stringify({events:Object.fromEntries(source.map(event=>[event.id,event]))}));
+ await page.getByRole('button',{name:'Restore JSON',exact:true}).click();await page.getByText('Backup merged into your notebook.',{exact:true}).waitFor();
+ assert.equal((await facts(page)).length,source.length);
+ await navigate(page,'Reader');await page.getByRole('button',{name:'Or bring your own Russian text',exact:true}).click();
+ await page.locator('#reader-import-title').fill('Synthetic long Reader original · UTF-8 boundary');
+ await page.locator('#reader-import-original').fill(original);
+ await page.locator('#reader-import-source').fill('Explicit synthetic QA original with repeated numbered paragraphs; no third-party work or learner history.');
+ assert.equal(await page.locator('#reader-import-original').inputValue(),original);
+ await page.getByRole('button',{name:'Open my text →',exact:true}).click();await page.locator('.reader-document').waitFor();
+ const document_id=await page.locator('.reader-document').getAttribute('data-reader-document');
+ const event=(await facts(page)).find(event=>event.fact.kind==='reader_document_recorded'&&event.fact.data.document_id===document_id);assert(event);
+ const definition=event.fact.data.definition;
+ assert.equal(definition.original,original);assert.equal(definition.original_sha256,sha(Buffer.from(original)));
+ assert(definition.chunks.length>16&&definition.chunks.length<=64);
+ assert.equal(definition.chunks.map(chunk=>chunk.text).join(''),original);
+ let offset=0;for(const chunk of definition.chunks){assert.equal(chunk.span.start,offset);assert.equal(Buffer.from(original).subarray(chunk.span.start,chunk.span.end).toString(),chunk.text);offset=chunk.span.end;}assert.equal(offset,Buffer.byteLength(original));
+ assert.equal(await page.locator('.reader-continuous-original').textContent(),original);
+ await openReadingOptions(page);const last=definition.chunks.at(-1);
+ await page.locator('#reader-part-select').selectOption(last.id);await page.locator(`.reader-current[data-reader-chunk="${last.id}"]`).waitFor();
+ const part=page.locator(`.reader-current[data-reader-chunk="${last.id}"]`);
+ await part.getByRole('button',{name:'In your own words / ask a question',exact:true}).click();
+ const note='Local synthetic note for the last part; it must not appear on the restored empty device.';
+ await part.getByLabel('What did you take from this part?',{exact:true}).fill(note);
+ await page.evaluate(()=>window.rufrenLibrary.flush());
+ assert.equal((await metadata(page,'reader_state:'+document_id)).own_words[last.id],note);
+ await page.waitForFunction(()=>navigator.serviceWorker.controller!==null,undefined,{timeout:60_000});
+ await context.setOffline(true);await page.reload();await navigate(page,'Reader');await page.locator(`.reader-document[data-reader-document="${document_id}"]`).waitFor();
+ assert.equal(await page.locator('.reader-continuous-original').textContent(),original);
+ assert.equal(await page.locator('#reader-part-select').inputValue(),last.id);
+ assert.equal((await metadata(page,'reader_state:'+document_id)).own_words[last.id],note);
+ assert.equal(await page.getByLabel('What did you take from this part?',{exact:true}).inputValue(),note);
+ await page.screenshot({path:path.join(out,'offline-long-last-part.png')});
+ const final=await facts(page);for(const old of source)assert.deepEqual(final.find(event=>event.id===old.id),old);
+ assert.equal(final.filter(event=>event.fact.kind==='attempt_recorded').length,source.filter(event=>event.fact.kind==='attempt_recorded').length);
+ assert.equal(final.filter(event=>event.fact.kind==='teacher_dialogue_user_recorded').length,source.filter(event=>event.fact.kind==='teacher_dialogue_user_recorded').length);
+ expected.documents.push({document_id,title:definition.title,original_ru:definition.original,original_sha256:definition.original_sha256,source:definition.source,chunks:definition.chunks.map((chunk,index)=>({chunk_id:chunk.id,index,text:chunk.text}))});
+ expected.base_local_only_observations=expected.local_only;
+ expected.local_only=[];for(const key of ['reader_selection','reader_import_draft',...expected.documents.map(document=>'reader_state:'+document.document_id)])expected.local_only.push({key,producer_value:await metadata(page,key),consumer_before_open:null});
+ expected.long_source_supplement={base_fixture:base,base_library_sha256:sha(await fs.readFile(path.join(base,'library.json'))),document_id,original_bytes:Buffer.byteLength(original),original_sha256:definition.original_sha256,chunks:definition.chunks.length,offline_late_chunk:last.id,offline_reload:true,source_is_synthetic:true};
+ await fs.writeFile(path.join(out,'library.json'),JSON.stringify({version:7,events:final},null,2));
+ await fs.writeFile(path.join(out,'expected-reader.json'),JSON.stringify(expected,null,2));
+ await fs.writeFile(path.join(out,'originals.json'),JSON.stringify(voice,null,2));await fs.mkdir(path.join(out,'originals'));
+ for(const record of voice.records){const bytes=await fs.readFile(path.join(base,'originals',record.content_hash+'.blob'));assert.equal(sha(bytes),record.content_hash);assert.equal(bytes.length,record.byte_length);await fs.writeFile(path.join(out,'originals',record.content_hash+'.blob'),bytes);}
+ assert.deepEqual(result.errors,[]);assert.deepEqual(result.forbidden,[]);result.passed=true;Object.assign(result,{base_events:source.length,events:final.length,document_id,original_bytes:Buffer.byteLength(original),original_sha256:definition.original_sha256,chunks:definition.chunks.length,late_chunk_id:last.id,offline_reload:true,base_audio_originals_copied_without_regeneration:voice.records.length});
+})().catch(async error=>{result.error=error.stack;if(page)await page.screenshot({path:path.join(out,'failure.png')}).catch(()=>{});process.exitCode=1;}).finally(async()=>{if(context)await context.close();if(browser)await browser.close();await fs.writeFile(path.join(out,'result.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));});

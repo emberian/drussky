@@ -134,7 +134,7 @@ fn DialogueThreadView(app: Signal<AppState>, draft: DialogueDraft, ready: bool) 
         section {class:"teacher-dialogue","data-dialogue-thread":draft.thread_id.to_string(),"data-dialogue-leaf":leaf.map(|v|v.to_string()).unwrap_or_default(),
             div {class:"dialogue-heading",h2 {if draft.config.intent==DialogueIntent::Roleplay {"Conversation"} else {"{draft.config.topic}"}}
                 if let Some(anchor)=&draft.anchor {
-                    {let source=anchor.clone();rsx! {button {class:"text-button",onclick:move |_|act(app,|s|{s.return_to_dialogue_source(&source)?;crate::focus_page_heading();Ok(())}),"Return to the source lesson or feedback"}}}
+                    {let source=anchor.clone();let reader=matches!(&source.focus,TeacherDialogueFocus::ReaderWhole|TeacherDialogueFocus::ReaderChunk{..});rsx! {button {class:"text-button",onclick:move |_|act(app,|s|{s.return_to_dialogue_source(&source)?;crate::focus_page_heading();Ok(())}),if reader {"Return to the passage"}else{"Return to the source lesson or feedback"}}}}
                 }
             }
             if draft.config.intent==DialogueIntent::Roleplay {

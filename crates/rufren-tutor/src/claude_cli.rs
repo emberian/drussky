@@ -952,7 +952,7 @@ print({output:?})
         assert_eq!(response.request, request);
         assert_eq!(
             response.provenance.prompt_version,
-            "rufren-ai-dialogue-v2+cli-structured-v1"
+            "rufren-ai-dialogue-v4+cli-structured-v1"
         );
         assert_eq!(
             response.usage.accounting,

@@ -1,0 +1,58 @@
+{
+  "id": "synthetic.reader.transport",
+  "version": "1",
+  "title": "Synthetic Reader transport original",
+  "original": "Вечером Мира открыла книгу.\n\nНа следующей странице был новый рассказ.\n\nОна прочитала его ещё раз.",
+  "original_sha256": "161a42d7af1eccd235206a92872350749c5fcfc2bd02955f4f40c86a408a002e",
+  "source": {
+    "kind": "learner_provided",
+    "title": "Synthetic Reader transport original",
+    "author": "Synthetic fixture",
+    "edition": "1",
+    "url": null,
+    "rights": "Synthetic QA text.",
+    "provenance": "Explicit synthetic storage fixture; no learner history."
+  },
+  "help_provenance": "No generated assistance in this transport fixture.",
+  "chunks": [
+    {
+      "id": "chunk-1",
+      "span": {
+        "start": 0,
+        "end": 52
+      },
+      "text": "Вечером Мира открыла книгу.\n\n",
+      "stress": null,
+      "translation": null,
+      "glosses": [],
+      "grammar_notes": [],
+      "prompts": []
+    },
+    {
+      "id": "chunk-2",
+      "span": {
+        "start": 52,
+        "end": 128
+      },
+      "text": "На следующей странице был новый рассказ.\n\n",
+      "stress": null,
+      "translation": null,
+      "glosses": [],
+      "grammar_notes": [],
+      "prompts": []
+    },
+    {
+      "id": "chunk-3",
+      "span": {
+        "start": 128,
+        "end": 175
+      },
+      "text": "Она прочитала его ещё раз.",
+      "stress": null,
+      "translation": null,
+      "glosses": [],
+      "grammar_notes": [],
+      "prompts": []
+    }
+  ]
+}

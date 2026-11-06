@@ -18,6 +18,9 @@ mod model;
 mod practice;
 mod progress;
 mod progress_view;
+mod reader;
+mod reader_audio;
+mod reader_view;
 mod recognition;
 mod recognition_view;
 mod sound_focus;
@@ -139,7 +142,7 @@ fn Shell(initial: AppState) -> Element {
                 if !state.notice.is_empty() {div {class:"notice",role:"status",span {"{state.notice}"} button {aria_label:"Dismiss message",onclick:move |_|app.write().notice.clear(),"×"}}}
                 match state.page {
                     Page::Today=>rsx!{Today {app}},Page::Lessons=>rsx!{Lessons {app}},Page::Teacher=>rsx!{Teacher {app}},Page::Library=>rsx!{LibraryView {app}},Page::Practice=>rsx!{Practice {app}},
-                    Page::Studio=>rsx!{Studio {app}},Page::Progress=>rsx!{Progress {app}},Page::Settings=>rsx!{Settings {app}},
+                    Page::Reader=>rsx!{reader_view::ReaderView {app}},Page::Studio=>rsx!{Studio {app}},Page::Progress=>rsx!{Progress {app}},Page::Settings=>rsx!{Settings {app}},
                 }
             }
         }
@@ -211,7 +214,7 @@ fn Today(mut app: Signal<AppState>) -> Element {
         drafts_view::PausedPractices {app}
         div {class:"section-heading",h2 {"Make it yours"}span {"Small steps, connected."}}
         div {class:"cards three",
-            button {class:"feature-card",onclick:move |_|act(app,|s|s.navigate(Page::Library)),span {class:"card-number","01 / COLLECT"}h3 {"Words worth keeping"}p {"Keep a phrase from your teacher, a story, or a conversation."}span {class:"card-link","Open your library ↗"}}
+            button {class:"feature-card",onclick:move |_|act(app,|s|s.navigate(Page::Reader)),span {class:"card-number","01 / READ"}h3 {"A story. An idea. A new world."}p {"Explore Russian fiction and ideas, with help a sentence away."}span {class:"card-link","Find something to read ↗"}}
             button {class:"feature-card",onclick:move |_|act(app,|s|s.navigate(Page::Studio)),span {class:"card-number","02 / LISTEN CLOSELY"}h3 {"Find your Russian voice"}p {"A place for reference audio, your recordings, and focused feedback."}span {class:"card-link","Explore the speech studio ↗"}}
             button {class:"feature-card",onclick:move |_|app.write().page=Page::Progress,span {class:"card-number","03 / RETURN"}h3 {"See what stays with you"}p {"Keep reading, writing, listening, and speaking in view as you practice."}span {class:"card-link","View your practice ↗"}}
         }
@@ -259,7 +262,9 @@ fn PausedSoundFocus(app: Signal<AppState>) -> Element {
 fn LibraryView(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
     let d = state.editor.clone();
-    let heads = state.library.heads();
+    let heads: std::collections::BTreeMap<_, _> = state.library.heads().into_iter().filter(|(_, revisions)| {
+        !revisions.iter().all(|id| state.library.events.get(id).is_some_and(is_reader_audio_reference))
+    }).collect();
     let sound_reference = d
         .parent
         .and_then(|id| state.library.events.get(&id))
@@ -289,7 +294,11 @@ fn LibraryView(mut app: Signal<AppState>) -> Element {
                 div {class:"actions",button {class:"primary",onclick:move |_|act(app,|s|s.save_passage(false)),"Save passage"}
                     if conflicts {button {class:"secondary",onclick:move |_|act(app,|s|s.save_passage(true)),"Resolve with this wording"}}
                 }
-                if let Some(revision)=d.parent {if !conflicts {div {class:"practice-options",p {"Practice the saved version"}
+                if let Some(revision)=d.parent {
+                    for link in state.reader_sources_for_revision(revision) {
+                        {let document=link.document_id;let chunk=link.chunk_id.clone();rsx!{button {class:"text-button",onclick:move |_|act(app,|s|{s.open_reader_document(document,chunk.as_deref())?;s.navigate(Page::Reader)?;focus_page_heading();Ok(())}),"View original source →"}}}
+                    }
+                    if !conflicts {div {class:"practice-options",p {"Practice the saved version"}
                     if sound_reference {
                         button {class:"secondary",onclick:move |_|act(app,|s|s.choose_lesson("ru.lesson.naming")),"Explore Sound Focus"}
                     } else {

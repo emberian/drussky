@@ -67,18 +67,31 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
     )
     .unwrap();
     originals.push((dialogue, dialogue_json));
-    drop(raw);
-    let mut store = Store::open(&path).unwrap();
-    assert_eq!(store.library().unwrap().events.len(), 5);
     let prepared: SoundTrialPrepared = serde_json::from_str(include_str!(
         "../../../scripts/platform/fixtures/sound-v6-prepared.json"
     ))
     .unwrap();
     let trial_id = prepared.trial_id;
-    let new = Event::new(Uuid::new_v4(), 6, Fact::SoundTrialPrepared(prepared)).unwrap();
+    let mut sound = Event::new(Uuid::new_v4(), 6, Fact::SoundTrialPrepared(prepared)).unwrap();
+    sound.version = 6; // Preserve the actual historical Sound envelope unchanged.
+    let sound_json = serde_json::to_string_pretty(&sound).unwrap();
+    raw.execute(
+        "INSERT INTO events(id,json) VALUES (?1,?2)",
+        rusqlite::params![sound.id.to_string(), &sound_json],
+    )
+    .unwrap();
+    originals.push((sound, sound_json));
+    drop(raw);
+    let mut store = Store::open(&path).unwrap();
+    assert_eq!(store.library().unwrap().events.len(), originals.len());
+    let definition: ReaderDefinition = serde_json::from_str(include_str!(
+        "../../../scripts/platform/fixtures/reader-v7-definition.json"
+    ))
+    .unwrap();
+    let new = reader_document_event(&definition).unwrap();
     assert_eq!(new.version, EVENT_VERSION);
-    assert!(new.version >= 6);
-    for version in [3, 4, 5] {
+    assert!(new.version >= 7);
+    for version in 3..SYNC_VERSION {
         assert!(
             store
                 .exchange(&SyncRequest {
@@ -89,7 +102,7 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
                 })
                 .is_err()
         );
-        assert_eq!(store.library().unwrap().events.len(), 5);
+        assert_eq!(store.library().unwrap().events.len(), originals.len());
         assert!(
             store.get::<Uuid>("relay").unwrap().is_none(),
             "old protocol refusal precedes identity/cursor/write processing"
@@ -105,7 +118,7 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
         .unwrap();
     assert_eq!(accepted.version, SYNC_VERSION);
     assert_eq!(accepted.accepted, vec![new.id]);
-    assert_eq!(accepted.events.len(), 6);
+    assert_eq!(accepted.events.len(), originals.len() + 1);
     drop(store);
     let reopened = Store::open(&path).unwrap();
     assert_eq!(reopened.library().unwrap().teacher_documents().len(), 1);
@@ -116,6 +129,15 @@ fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
             .unwrap()
             .dialogue_user(request_id)
             .is_some()
+    );
+    assert_eq!(
+        reopened
+            .library()
+            .unwrap()
+            .reader_document(new.id)
+            .unwrap()
+            .definition,
+        definition
     );
     assert!(
         reopened

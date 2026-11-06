@@ -5,6 +5,8 @@ import json
 from contextlib import closing
 from pathlib import Path
 import sqlite3
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -58,6 +60,19 @@ class HistoryGuard(unittest.TestCase):
         with self.assertRaises(cutover.IncompleteAudioBackup):
             cutover.run_backup('backup', self.path, self.path.with_name('pending.sqlite'))
         self.assertFalse(self.path.with_name('pending.sqlite.json').exists())
+
+    def test_reader_rollback6_allows_only_exact_unchanged_history_without7(self):
+        with closing(sqlite3.connect(self.path)) as db, db:
+            db.execute('UPDATE events SET json=?', (json.dumps({'version': 6}),))
+        six = cutover.logical_database(self.path, 7)
+        self.assertTrue(cutover.rollback_is_safe(six, six, 6))
+        with closing(sqlite3.connect(self.path)) as db, db:
+            db.execute('INSERT INTO events VALUES(2,?,?)', ('new-seven', json.dumps({'version': 7})))
+        seven = cutover.logical_database(self.path, 7)
+        self.assertFalse(cutover.rollback_is_safe(six, seven, 6))
+        self.assertFalse(cutover.rollback_is_safe(seven, seven, 6), 'even an unchanged7 snapshot cannot restart6')
+        with self.assertRaises(ValueError):
+            cutover.logical_database(self.path)  # Historical default still6.
 
 
 class ReceiptGuard(unittest.TestCase):
@@ -161,6 +176,107 @@ class ReceiptGuard(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         cutover.authenticated_statuses(5)
                     opener.assert_not_called()
+
+
+class ReaderReceiptGuard(unittest.TestCase):
+    def setUp(self):
+        ReceiptGuard.setUp(self)
+        self.prompt = self.root / 'dialogue.rs'
+        self.prompt.write_text('synthetic frozen dialogue4 policy, never run')
+        source = json.loads(self.source.read_text())
+        source['dialogue_prompt_source_sha256'] = cutover.prior.digest(self.prompt)
+        self.source.write_text(json.dumps(source))
+        self.value.update(data_protocol=7, teacher_prompt_version='rufren-ai-teacher-v6',
+                          dialogue_prompt_version='rufren-ai-dialogue-v4',
+                          dialogue_prompt_source_sha256=cutover.prior.digest(self.prompt),
+                          source_evidence_sha256=cutover.prior.digest(self.source))
+        self.build = self.root / 'actual-relay-build.json'
+        self.build_value = {'binary': str(self.binary), 'binary_sha256': cutover.prior.digest(self.binary),
+                            'event_version': 7, 'sync_version': 7, 'teacher_policy': 'rufren-ai-teacher-v6',
+                            'dialogue_policy': 'rufren-ai-dialogue-v4', 'source_sha256': source['source_sha256'],
+                            'prompt_source': str(self.prompt), 'prompt_source_sha256': cutover.prior.digest(self.prompt)}
+        self.value['relay_build_receipt'] = str(self.build)
+        self.consumer_value.update(protocol=7, reader_documents=2, empty_app_reader={
+            'documents': [{'document_id': 'authored', 'source_kind': 'ai_authored'},
+                          {'document_id': 'custom', 'source_kind': 'learner_provided'}],
+            'excerpts': [{'revision_id': 'saved-phrase'}], 'audio': [{'asset_id': 'saved-original'}],
+            'producer_local_keys_absent_before_open': ['reader_state:custom'],
+            'dialogues': [{'document_id': 'custom', 'chunk_id': 'part-3'},
+                          {'document_id': 'custom', 'chunk_id': 'part-4'}]})
+
+    def tearDown(self):
+        ReceiptGuard.tearDown(self)
+
+    def write(self):
+        self.build.write_text(json.dumps(self.build_value))
+        self.value['relay_build_receipt_sha256'] = cutover.prior.digest(self.build)
+        ReceiptGuard.write(self)
+
+    def check(self):
+        with patch.object(cutover.preflight, 'artifact', return_value={'source_evidence': str(self.source)}), \
+                patch.object(cutover, 'worker_source_fingerprint', return_value={'scripts/speech/synthetic.py': 'worker-source'}):
+            return cutover.accepted_candidate(self.accepted, self.native, 'reader-data7')
+
+    def test_exact_reader_pair_binds_actual_relay_build_and_preserves_default_profile(self):
+        self.write()
+        self.assertEqual(self.check()[1], self.binary.resolve())
+        with patch.object(cutover.preflight, 'artifact') as artifact:
+            with self.assertRaises(ValueError):
+                cutover.accepted_candidate(self.accepted, self.native)
+            artifact.assert_not_called()  # Default remains Sound6, never autodetects7.
+
+    def test_reader_build_identity_policy_and_source_mismatches_refuse(self):
+        for key, value in [('binary_sha256', 'different-binary'), ('sync_version', 6), ('event_version', True),
+                           ('teacher_policy', 'wrong-policy'), ('dialogue_policy', 'rufren-ai-dialogue-v3'),
+                           ('source_sha256', {'Cargo.toml': 'different-build-source'}),
+                           ('prompt_source_sha256', 'different-policy-file')]:
+            with self.subTest(key=key):
+                previous = self.build_value[key]
+                self.build_value[key] = value
+                self.write()
+                with self.assertRaises(ValueError):
+                    self.check()
+                self.build_value[key] = previous
+
+    def test_reader_cannot_use_sound_only_or_wrong_consumer_and_chunk_proof(self):
+        for key, value in [('protocol', 6), ('reader_documents', True), ('empty_app_reader', None)]:
+            with self.subTest(key=key):
+                previous = self.consumer_value[key]
+                self.consumer_value[key] = value
+                self.write()
+                with self.assertRaises(ValueError):
+                    self.check()
+                self.consumer_value[key] = previous
+        reader = self.consumer_value['empty_app_reader']
+        for key, value in [('documents', [None, None]), ('audio', []), ('excerpts', []),
+                           ('producer_local_keys_absent_before_open', []),
+                           ('dialogues', [{'document_id': 'custom', 'chunk_id': 'part-3'}])]:
+            with self.subTest(key=key):
+                previous = reader[key]
+                reader[key] = value
+                self.write()
+                with self.assertRaises(ValueError):
+                    self.check()
+                reader[key] = previous
+
+    def test_reader_profile_requires_teacher6_dialogue4(self):
+        self.value['dialogue_prompt_version'] = 'rufren-ai-dialogue-v3'
+        self.write()
+        with self.assertRaises(ValueError):
+            self.check()
+
+
+class TransitionPlan(unittest.TestCase):
+    def test_both_plans_are_explicit_and_default_is_historical_sound(self):
+        script = Path(__file__).with_name('cutover-sound-data6.py')
+        for arguments, before, after in [([], 5, 6), (['--transition-profile', 'reader-data7'], 6, 7)]:
+            result = subprocess.run([sys.executable, str(script), 'plan', *arguments], capture_output=True, text=True, check=True)
+            value = json.loads(result.stdout)
+            self.assertEqual((value['from_protocol'], value['to_protocol']), (before, after))
+            self.assertEqual(value['action'], 'plan-only-no-service-change')
+            self.assertEqual(value['model_calls'], 0)
+        with self.assertRaises(ValueError):
+            cutover.transition('arbitrary-unsupported-upgrade')
 
 
 if __name__ == '__main__':

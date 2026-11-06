@@ -346,7 +346,7 @@ fn dialogue_v5_gates_new_fact_but_preserves_actual_legacy_v4_archive_bytes() {
     assert_eq!(serde_json::to_string(&restored).unwrap(), raw);
     let root = request();
     let mut event = user(&root);
-    assert_eq!(event.version, 6);
+    assert_eq!(event.version, EVENT_VERSION);
     for version in 1..=4 {
         event.version = version;
         assert!(matches!(event.validate(),Err(Error::Version(v)) if v==version));
@@ -355,7 +355,7 @@ fn dialogue_v5_gates_new_fact_but_preserves_actual_legacy_v4_archive_bytes() {
     let mut l = Library::default();
     l.merge(&[restored.clone(), event]).unwrap();
     assert_eq!(l.events[&restored.id], restored);
-    assert_eq!((EVENT_VERSION, SYNC_VERSION), (6, 6));
+    assert_eq!((EVENT_VERSION, SYNC_VERSION), (7, 7));
 }
 
 #[test]

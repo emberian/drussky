@@ -11,6 +11,10 @@ mod editor_drafts;
 mod exposure;
 #[path = "../src/learning.rs"]
 mod learning;
+#[path = "../src/reader.rs"]
+mod reader;
+#[path = "../src/teacher_dialogue.rs"]
+mod teacher_dialogue;
 #[path = "../src/model.rs"]
 mod model;
 #[path = "../src/native_connection.rs"]

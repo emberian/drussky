@@ -31,11 +31,13 @@ mod practice_batch;
 pub use practice_batch::*;
 mod sound_contrast;
 pub use sound_contrast::*;
+mod reader;
+pub use reader::*;
 
 /// Current event encoding. Database migrations and transport compatibility are independent.
-pub const EVENT_VERSION: u32 = 6;
+pub const EVENT_VERSION: u32 = 7;
 pub const MIN_EVENT_VERSION: u32 = 1;
-pub const SYNC_VERSION: u32 = 6;
+pub const SYNC_VERSION: u32 = 7;
 /// Backward-compatible name for callers constructing events; never use for a DB schema.
 pub const SCHEMA_VERSION: u32 = EVENT_VERSION;
 pub const SYNC_BATCH: usize = 128;
@@ -174,6 +176,8 @@ pub enum Fact {
     SoundTrialPrepared(SoundTrialPrepared),
     SoundReferencePlayed(SoundReferencePlayed),
     SoundTrialCompleted(SoundTrialCompleted),
+    ReaderDocumentRecorded(ReaderDocument),
+    ReaderExcerptLinked(ReaderExcerptLink),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
@@ -200,6 +204,22 @@ impl Event {
     }
     pub fn validate(&self) -> Result<(), Error> {
         let required = match &self.fact {
+            Fact::ReaderDocumentRecorded(_) | Fact::ReaderExcerptLinked(_) => 7,
+            Fact::TeacherDialogueUserRecorded(r)
+                if r.anchor
+                    .as_ref()
+                    .is_some_and(|a| reader_dialogue_focus(&a.focus)) =>
+            {
+                7
+            }
+            Fact::TeacherDialogueReplyRecorded(r)
+                if r.request
+                    .anchor
+                    .as_ref()
+                    .is_some_and(|a| reader_dialogue_focus(&a.focus)) =>
+            {
+                7
+            }
             Fact::SoundTrialPrepared(_)
             | Fact::SoundReferencePlayed(_)
             | Fact::SoundTrialCompleted(_) => 6,
@@ -243,6 +263,9 @@ impl Event {
                 if is_sound_focus_reference(self) {
                     validate_sound_fact(self)?;
                 }
+                if is_reader_audio_reference(self) || is_reader_kept_excerpt(self) {
+                    validate_reader_fact(self)?;
+                }
             }
             Fact::AttemptRecorded(a) => {
                 if a.session.is_nil()
@@ -275,6 +298,9 @@ impl Event {
             Fact::SoundTrialPrepared(_)
             | Fact::SoundReferencePlayed(_)
             | Fact::SoundTrialCompleted(_) => validate_sound_fact(self)?,
+            Fact::ReaderDocumentRecorded(_) | Fact::ReaderExcerptLinked(_) => {
+                validate_reader_fact(self)?
+            }
             _ => validate_learning_fact(self)?,
         }
         Ok(())
@@ -306,7 +332,9 @@ impl Library {
         validate_teacher_document_identities(&merged)?;
         validate_dialogue_graph(&merged)?;
         validate_sound_identities(&merged)?;
+        validate_reader_identities(&merged)?;
         for event in merged.values() {
+            validate_reader_references(event, &merged)?;
             validate_sound_references(event, &merged)?;
             validate_dialogue_audio_references(event, &merged)?;
             validate_learning_references(event, &merged)?;
@@ -439,6 +467,14 @@ pub struct AudioAsset {
     pub sample_rate_hz: u32,
     pub channels: u16,
     pub frames: u64,
+}
+
+/// Backend reference artifacts stay available for their owning workflow and
+/// exact playback, while ordinary practice must be an explicit meaningful action.
+pub fn is_reserved_practice_reference(event: &Event) -> bool {
+    is_teacher_generated_reference(event)
+        || is_sound_focus_reference(event)
+        || is_reader_audio_reference(event)
 }
 
 pub trait TeachingPolicy {

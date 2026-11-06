@@ -262,6 +262,13 @@ impl AppState {
                 } else {
                     None
                 }
+            } else if self
+                .library
+                .events
+                .get(&a.revision)
+                .is_some_and(is_reserved_practice_reference)
+            {
+                None
             } else if self.library.revision(a.revision).is_some() {
                 Some(PracticeBatchSource::Passage)
             } else {
