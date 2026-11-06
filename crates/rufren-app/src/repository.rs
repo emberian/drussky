@@ -103,6 +103,63 @@ impl Repository {
                 })
         }
     }
+    pub(crate) fn metadata_with_prefix(
+        &self,
+        prefix: &str,
+    ) -> Result<Vec<(String, serde_json::Value)>> {
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            self.store
+                .borrow()
+                .metadata_with_prefix(prefix)
+                .map_err(err)
+        }
+        #[cfg(target_arch = "wasm32")]
+        {
+            self.metadata_browser_query(prefix, None)
+        }
+    }
+    pub(crate) fn metadata_with_scope(
+        &self,
+        prefix: &str,
+        scope: &str,
+    ) -> Result<Vec<(String, serde_json::Value)>> {
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            self.store
+                .borrow()
+                .metadata_with_scope(prefix, scope)
+                .map_err(err)
+        }
+        #[cfg(target_arch = "wasm32")]
+        {
+            self.metadata_browser_query(prefix, Some(scope))
+        }
+    }
+    #[cfg(target_arch = "wasm32")]
+    fn metadata_browser_query(
+        &self,
+        prefix: &str,
+        scope: Option<&str>,
+    ) -> Result<Vec<(String, serde_json::Value)>> {
+        let prefix = serde_json::to_string(prefix).map_err(err)?;
+        let scope = serde_json::to_string(&scope).map_err(err)?;
+        let raw = js_sys::eval(&format!(
+            "JSON.stringify(window.rufrenLibrary.metadataEntries({prefix},{scope}))"
+        ))
+        .map_err(|_| "Cannot read saved local activities")?
+        .as_string()
+        .ok_or("Invalid local activity metadata")?;
+        let entries: Vec<(String, String)> = serde_json::from_str(&raw).map_err(err)?;
+        entries
+            .into_iter()
+            .map(|(key, value)| {
+                serde_json::from_str(&value)
+                    .map(|value| (key, value))
+                    .map_err(err)
+            })
+            .collect()
+    }
     pub(crate) fn cached_teacher_metadata(&self) -> Result<Vec<CachedTeacherMetadata>> {
         #[cfg(not(target_arch = "wasm32"))]
         {

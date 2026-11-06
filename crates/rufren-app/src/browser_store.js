@@ -123,9 +123,30 @@ if (!window.rufrenLibrary) {
       return {id:record.id,last_used_ms:record.last_used_ms,last_used_label:new Date(record.last_used_ms).toLocaleString(),active:active.has(record.id),current:record.id===workspace,practice_response:session?.phase!=='complete'?(session?.draft||null):null,passage_title:draft?.editor?.title||null,paused_count:parse(record.id,'paused_practice_ids')?.length||0,passage_count:parse(record.id,'passage_draft_ids')?.length||0};
     });
   };
+  // Return logical metadata for this workspace only. Filter keys before decoding;
+  // history listing must not copy every drawing/audio payload or another tab's drafts.
+  const metadataEntries=(starts,scope=null)=>{
+    if(typeof starts!=='string')throw Error('Invalid metadata prefix');
+    overlay(readPending().entries);const result=[];
+    const globalRoot=prefix+'meta.',localRoot=workspacePrefix+workspace+'.meta.';
+    for(const[key,raw]of cache){
+      let name;
+      if(key.startsWith(localRoot)){name=key.slice(localRoot.length);if(!scoped(name))continue;}
+      else if(key.startsWith(globalRoot)){name=key.slice(globalRoot.length);if(scoped(name))continue;}
+      else continue;
+      if(!name.startsWith(starts))continue;
+      if(scope!==null&&JSON.parse(raw)?.scope_id!==scope)continue;
+      // Preserve the stored representation (including 0.0) for Rust's exact
+      // parser and ink-identity checks; never normalize payloads through JS.
+      result.push([name,raw]);
+    }
+    result.sort((a,b)=>{const x=a[0],y=b[0];return x<y?-1:x>y?1:0;});
+    return result;
+  };
   window.rufrenLibrary={
     ready,
     entries:()=>{overlay(readPending().entries);return [...cache];},
+    metadataEntries,
     eventsAfter:after=>{overlay(readPending().entries);return {revision:eventVersion,entries:[...eventVersions].filter(([,version])=>version>after).map(([key])=>[key,cache.get(key)])};},
     get:key=>{overlay(readPending().entries);return cache.get(physical(key))??null;},
     write:(key,value)=>{const target=physical(key);if(target!==key)writeWorkspace([[target,value]]);else writeRaw(key,value);},

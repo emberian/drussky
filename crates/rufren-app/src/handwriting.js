@@ -87,6 +87,18 @@ class InkSession {
 
  newTry(){this.send({kind:'stop_audio'});const previous=this.draft.attempt_id;if(this.comparing)throw Error('Finish saving first.');if(this.active!==null)this.end(this.active,'new_try');if(this.draft.pending_snapshot&&!this.draft.sealed)throw Error('Finish saving the original first.');if(!this.draft.sealed&&this.draft.strokes.length)throw Error('Compare or clear this drawing before starting a new try.');this.draft={...this.draft,attempt_id:this.uuid(),created_at_ms:this.now(),strokes:[],sealed:false,aids:[],mode:this.config.initial_mode||'trace',meaning_visible:this.config.meaning_visible!==false,sound_visible:this.config.audio_role==='task_input'||this.config.sound_visible!==false,saved_at_ms:undefined,pending_snapshot:undefined,prior_attempt_id:previous};this.aid('previous_model_this_activity','practice_after_comparison');if(this.draft.mode!=='hidden')this.aid('visual_model',this.draft.mode);if(this.draft.meaning_visible)this.aid('meaning','shown');return this.persist();}
 }
+function drawInk(ctx,draft){
+ for(const s of draft.strokes){for(let i=0;i<s.points.length;i++){const p=s.points[i],prior=s.points[Math.max(0,i-1)];ctx.strokeStyle='#183c33';ctx.fillStyle='#183c33';ctx.lineWidth=2+Math.max(0,Math.min(1,p.pressure))*5;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();if(i===0){ctx.arc(p.x,p.y,ctx.lineWidth/2,0,Math.PI*2);ctx.fill()}else{ctx.moveTo(prior.x,prior.y);ctx.lineTo(p.x,p.y);ctx.stroke()}}}
+}
+function preview(canvas,draft,config){
+ validate(draft,config);const {width,height}=paper(config.paper);
+ if(![width,height].every(n=>Number.isFinite(n)&&n>0&&n<=16384))throw Error('Invalid drawing dimensions.');
+ const scale=Math.min(1,1024/width,1024/height);canvas.width=Math.max(1,Math.round(width*scale));canvas.height=Math.max(1,Math.round(height*scale));
+ const ctx=canvas.getContext('2d');if(!ctx)throw Error('The saved drawing could not be displayed.');
+ ctx.setTransform(scale,0,0,scale,0,0);ctx.clearRect(0,0,width,height);
+ for(const [index,y]of guides(config.target,config.paper).entries()){ctx.strokeStyle=index===2?'#93a591':'#c2cbc0';ctx.lineWidth=index===2?2:1;ctx.setLineDash(index===2?[]:[8,7]);ctx.beginPath();ctx.moveTo(20,y);ctx.lineTo(width-20,y);ctx.stroke();}ctx.setLineDash([]);
+ drawInk(ctx,draft);return true;
+}
 function install(root,config,adapter,send){
  const {width:WIDTH,height:HEIGHT}=paper(config.paper);const viewport=r=>fitViewport(r,WIDTH,HEIGHT);
  config={...config,input_mode:config.input_mode||(navigator.maxTouchPoints===0?'mouse':'pen')};
@@ -101,7 +113,7 @@ function install(root,config,adapter,send){
  const render=()=>{
   const box=canvas.getBoundingClientRect(),ratio=global.devicePixelRatio||1;canvas.width=Math.max(1,Math.round(box.width*ratio));canvas.height=Math.max(1,Math.round(box.height*ratio));ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);const view=viewport(box);ctx.setTransform(view.scale*ratio,0,0,view.scale*ratio,view.x*ratio,view.y*ratio);
   for(const [index,y] of lineYs.entries()){ctx.strokeStyle=index===2?'#93a591':'#c2cbc0';ctx.lineWidth=index===2?2:1;ctx.setLineDash(index===2?[]:[8,7]);ctx.beginPath();ctx.moveTo(20,y);ctx.lineTo(WIDTH-20,y);ctx.stroke()}ctx.setLineDash([]);
-  for(const s of session.draft.strokes){for(let i=0;i<s.points.length;i++){const p=s.points[i],prior=s.points[Math.max(0,i-1)];ctx.strokeStyle='#183c33';ctx.fillStyle='#183c33';ctx.lineWidth=2+Math.max(0,Math.min(1,p.pressure))*5;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();if(i===0){ctx.arc(p.x,p.y,ctx.lineWidth/2,0,Math.PI*2);ctx.fill()}else{ctx.moveTo(prior.x,prior.y);ctx.lineTo(p.x,p.y);ctx.stroke()}}}
+  drawInk(ctx,session.draft);
   const d=session.draft;root.dataset.visual=d.mode;root.dataset.sealed=String(d.sealed);modelBox.hidden=d.mode==='hidden';comparison.hidden=!d.sealed;root.querySelector('[data-ink-guidance]').hidden=d.mode==='hidden'&&!d.sealed;root.querySelector('[data-ink-meaning]').hidden=!d.meaning_visible;root.querySelector('[data-ink-sound]').hidden=!d.sound_visible;
   for(const button of root.querySelectorAll('[data-ink-edit]'))button.disabled=d.sealed||!!d.pending_snapshot||session.leaving;
   root.querySelector('[data-ink-compare]').disabled=session.comparing||session.leaving;root.querySelector('[data-ink-new]').disabled=session.leaving;for(const button of root.querySelectorAll('[data-ink-control]'))button.disabled=session.leaving||session.comparing||!!d.pending_snapshot&&!d.sealed;root.querySelector('[data-ink-show]').hidden=d.mode!=='hidden'||d.sealed;root.querySelector('[data-ink-hide]').hidden=d.mode==='hidden'||d.sealed;root.querySelector('[data-ink-retry-save]').hidden=!session.failed;root.querySelector('[data-ink-device-options]').hidden=d.input_mode==='mouse';for(const input of root.querySelectorAll('[data-ink-mode]'))input.checked=input.dataset.inkMode===d.mode;for(const b of root.querySelectorAll('[data-ink-input]'))b.setAttribute('aria-pressed',String(b.dataset.inkInput===d.input_mode));root.querySelector('[data-ink-new]').hidden=!d.sealed||!!config.external_flow;root.querySelector('[data-ink-compare]').hidden=d.sealed;status.textContent=session.comparing?'Opening the example…':session.failed?'Your ink needs saving. Retry before comparing.':d.sealed?'Compare your shape with the example. You can try again when ready.':d.input_mode==='pen'?'Pencil only. Touches on this pad do not make ink.':'Drawing with '+(d.input_mode==='finger'?'a finger':'a mouse')+'.';
@@ -123,5 +135,5 @@ function install(root,config,adapter,send){
  global.addEventListener('pagehide',()=>interrupt('page_hidden'),{signal});document.addEventListener('visibilitychange',()=>{if(document.hidden)interrupt('document_hidden')},{signal});
  render();return {session,audioResult:(attempt_id,ok)=>session.audioResult(attempt_id,ok),flush:async()=>{session.leaving=true;interrupt('navigation_requested');render();const ok=await session.flush();if(!ok)session.leaving=false;render();return ok;},resumeDrawing(){session.leaving=false;render();},dispose(){if(disposed)return;disposed=true;interrupt('pad_unmounted');animations.forEach(a=>a.cancel());resize.disconnect();controller.abort();}};
 }
-const api={VERSION,MODEL,WIDTH,HEIGHT,GLYPHS,model,guides,validate,InkSession,install};global.RufrenHandwriting=api;if(typeof module!=='undefined')module.exports=api;
+const api={VERSION,MODEL,WIDTH,HEIGHT,GLYPHS,model,guides,validate,InkSession,install,preview};global.RufrenHandwriting=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);

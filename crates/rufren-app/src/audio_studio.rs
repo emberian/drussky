@@ -929,6 +929,28 @@ pub fn AudioStudio(
     rsx! {
         style {"{STYLE}"}
         section {id:"rufren-audio-studio",class:if compact {"audio-studio audio-speaking"}else{"audio-studio"},"data-config":config,"data-instance":instance_id,"data-advanced":"false",
+            if writing_scope.is_some() {
+                div {class:"writing-voice-controls",
+                    button {class:"secondary","data-action":"record","data-role":"attempt","data-record":"true","Record my voice"}
+                    button {id:"audio-stop-recording",class:"audio-stop",disabled:true,hidden:true,"data-action":"stop","Stop & keep"}
+                    button {class:"secondary",disabled:true,"data-needs":"attempt","data-action":"play","data-role":"attempt","Replay my voice"}
+                    button {class:"text-button",hidden:true,"data-writing-stop-playback":"true","data-action":"stopPlayback","Stop replay"}
+                }
+                div {id:"audio-mic-status",class:"audio-mic",role:"status","data-active":"false","Microphone off"}
+                p {id:"audio-status",role:"status",aria_live:"polite","Opening saved voices…"}
+                if !error.read().is_empty() {p {class:"audio-error",role:"alert","{error}"}}
+                div {id:"writing-voice-recovery",hidden:true,
+                    p {"This take has not saved yet. Keep this page open to retry or save a copy."}
+                    div {class:"actions",
+                        button {class:"secondary","data-action":"retryWritingSave","Retry saving"}
+                        button {class:"secondary","data-action":"download","data-role":"attempt","Save audio copy"}
+                    }
+                }
+                details {id:"writing-voice-history",hidden:true,
+                    summary {"Earlier takes"}
+                    div {id:"writing-voice-takes",role:"group",aria_label:"Choose a voice for this drawing"}
+                }
+            } else {
             if compact {div {class:"audio-speaking-heading",h3 {if dialogue_scope.is_some(){"Your voice message"}else{"Your spoken response"}}button {class:"text-button","data-action":"advanced",aria_expanded:"false","Show sound tools"}}}
             if !russian.is_empty() {div {class:"panel audio-passage",span {class:"tag","YOUR PHRASE"}p {class:"russian-display",lang:"ru","{russian}"}}}
             div {class:"panel audio-session-bar",
@@ -1058,6 +1080,7 @@ pub fn AudioStudio(
             section {class:"panel audio-storage",h2 {"Keep your voices"}p {"Recordings and timed cues save on this device. Include originals in Settings when you want to sync them, and download a backup to keep a separate copy."}
                 div {class:"actions",button {class:"secondary","data-action":"backup","Download audio backup"}label {class:"secondary audio-file",r#for:"audio-restore",{"Restore audio backup"} input {id:"audio-restore",name:"audio-restore",onchange:move |event|import_native_file(event,"restore",error),r#type:"file",accept:"application/json,.json","data-restore":"true"}}}
                 p {class:"quiet","Short takes work best: recording stops after 30 seconds; imported clips may be up to 60 seconds. Leaving this screen releases the microphone. Microphone availability depends on your browser or app’s device permissions."}
+            }
             }
         }
     }

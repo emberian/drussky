@@ -80,6 +80,63 @@ fn later(f: impl Fn() + 'static) {
         NSOperationQueue::mainQueue().addOperationWithBlock(&b);
     }
 }
+
+/// Read-only rendering for a selected history original. Never attach to a
+/// canvas, reproject control points, archive, journal, or emit writing events.
+pub(crate) fn native_drawing_preview(
+    checkpoint: &NativeWritingCheckpoint,
+) -> NativeWritingResult<Option<String>> {
+    let mtm = MainThreadMarker::new()
+        .ok_or("View the saved native drawing from the app's main window.")?;
+    checkpoint.validate()?;
+    objc2::rc::autoreleasepool(|_| {
+        let data = NSData::with_bytes(&checkpoint.archive()?);
+        let drawing = unsafe { PKDrawing::initWithData_error(PKDrawing::alloc(), &data) }
+            .map_err(|_| "The saved PencilKit archive could not be rendered.")?;
+        // Empty drawings may have CGRectNull bounds. The recorded paper is
+        // still a meaningful blank preview; nonempty drawings must have valid
+        // finite rendered bounds before any bitmap allocation.
+        let bounds = if unsafe { drawing.strokes().is_empty() } {
+            None
+        } else {
+            let bounds = unsafe { drawing.bounds() };
+            if bounds.size.width == 0.0 || bounds.size.height == 0.0 {
+                // A fully masked drawing also has no rendered area.
+                None
+            } else {
+                Some([
+                    bounds.origin.x,
+                    bounds.origin.y,
+                    bounds.size.width,
+                    bounds.size.height,
+                ])
+            }
+        };
+        let ([x, y, width, height], scale) =
+            native_preview_geometry(&checkpoint.canonical.paper, bounds)?;
+        let image = unsafe {
+            drawing_image(
+                &drawing,
+                CGRect::new(CGPoint::new(x, y), CGSize::new(width, height)),
+                scale,
+                mtm,
+            )
+        };
+        let png = image
+            .png_representation()
+            .ok_or("The native drawing preview could not be encoded as PNG.")?;
+        // The raster is bounded above; separately bound the encoded transport
+        // before copying it into the transient WebView image source.
+        if png.is_empty() || png.len() > 12 * 1024 * 1024 {
+            return Err("The native drawing preview exceeds its image byte bound.".into());
+        }
+        Ok(Some(format!(
+            "data:image/png;base64,{}",
+            STANDARD.encode(png.to_vec())
+        )))
+    })
+}
+
 struct EventQueue {
     callback: NativeWritingCallback,
     events: RefCell<VecDeque<NativeWritingEvent>>,

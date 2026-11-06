@@ -59,6 +59,7 @@ mod teacher_view;
 mod tutor_view;
 mod workspace_view;
 mod writing_speech;
+mod writing_history_view;
 use audio_studio::{AudioStudio, StudioRecording};
 use exposure_view::PresentedRussian;
 use lessons::Lessons;

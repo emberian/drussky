@@ -16,7 +16,8 @@ rufren-tutor = { path = "crates/rufren-tutor", default-features = false }
 rufren-tutor-contract = { path = "crates/rufren-tutor-contract" }
 rufren-speech = { path = "crates/rufren-speech", default-features = false }
 serde = { version = "1", features = ["derive"] }
-serde_json = "1"
+# Saved ink identities require exact f64 round-trips, including pen coordinates.
+serde_json = { version = "1", features = ["float_roundtrip"] }
 uuid = { version = "1", features = ["v4", "v5", "serde", "js"] }
 thiserror = "2"
 rusqlite = { version = "0.37", features = ["bundled"] }

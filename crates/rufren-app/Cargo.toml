@@ -46,7 +46,7 @@ objc2-app-kit = { version = "0.3.2", default-features = false, features = ["std"
 
 [target.'cfg(target_os = "ios")'.dependencies]
 objc2-foundation = { version = "0.3.2", default-features = false, features = ["NSTimer", "NSRunLoop", "NSNotification", "NSDate"] }
-objc2-ui-kit = { version = "0.3.2", default-features = false, features = ["std", "block2", "objc2-core-foundation", "UIActivity", "UIActivityViewController", "UIPopoverPresentationController", "UIPresentationController", "UIResponder", "UIView", "UIViewController", "UIWindow", "UIScrollView", "UIGestureRecognizer", "UIControl", "UIButton", "UILabel", "UIFont", "UIColor", "UIInterface", "UIBezierPath", "UIApplication", "UIGeometry"] }
+objc2-ui-kit = { version = "0.3.2", default-features = false, features = ["std", "block2", "objc2-core-foundation", "UIActivity", "UIActivityViewController", "UIPopoverPresentationController", "UIPresentationController", "UIResponder", "UIView", "UIViewController", "UIWindow", "UIScrollView", "UIGestureRecognizer", "UIControl", "UIButton", "UILabel", "UIFont", "UIColor", "UIImage", "UIInterface", "UIBezierPath", "UIApplication", "UIGeometry"] }
 objc2-pencil-kit = { version = "0.3.2", default-features = false, features = ["std", "PKDrawing", "PKStroke", "PKStrokePath", "PKStrokePoint", "PKFloatRange", "PKInk", "PKInkType", "PKTool", "PKInkingTool", "PKEraserTool", "PKContentVersion", "objc2-core-foundation"] }
 objc2-core-foundation = { version = "0.3.2", default-features = false, features = ["std", "CFCGTypes", "objc2"] }
 

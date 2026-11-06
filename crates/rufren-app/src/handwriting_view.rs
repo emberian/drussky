@@ -8,6 +8,8 @@ use dioxus::prelude::*;
 use serde::Deserialize;
 use uuid::Uuid;
 const BRIDGE: &str = include_str!("handwriting.js");
+const UNSAVED_DRAWING_NOTICE: &str =
+    "Your drawing still needs saving. Keep this pad open and retry.";
 /// Parent awaits this before switching tasks/pages. A false result keeps the visible ink in place.
 pub(crate) async fn flush(scope: &str) -> Result<()> {
     let scope = serde_json::to_string(scope).map_err(|e| e.to_string())?;
@@ -19,7 +21,7 @@ pub(crate) async fn flush(scope: &str) -> Result<()> {
     if value == serde_json::Value::Bool(true) {
         Ok(())
     } else {
-        Err("Your drawing still needs saving. Keep this pad open and retry.".into())
+        Err(UNSAVED_DRAWING_NOTICE.into())
     }
 }
 #[derive(Deserialize)]
@@ -105,6 +107,9 @@ try{{while(true){{const message=await dioxus.recv();const waiter=pending.get(mes
                                         .handwriting_store_original(&scope, &task, original)
                                 })
                         };
+                        if result.is_ok() && app.read().notice == UNSAVED_DRAWING_NOTICE {
+                            app.write().notice.clear();
+                        }
                         let _=bridge.send(serde_json::json!({"request_id":event.request_id,"ok":result.is_ok(),"error":result.err()}));
                     }
                     "saved" => {
@@ -175,7 +180,7 @@ try{{while(true){{const message=await dioxus.recv();const waiter=pending.get(mes
       }
      }
 }
-const INK_STYLE: &str = r#".handwriting-pad{max-width:760px}.ink-mode-options{border:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}.ink-mode-options label{display:flex;align-items:center;gap:6px;min-height:44px}.ink-mode-options input{width:20px;height:20px}.ink-instruction{font-size:1.1rem;line-height:1.45}.ink-pad-heading{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}.ink-pad-heading>span{font-weight:600;margin-right:auto}.ink-pad-heading button[aria-pressed=true]{font-weight:700;text-decoration:underline}.ink-workspace{position:relative;width:100%;height:220px}.ink-paper{height:100%;min-width:0}.ink-workspace canvas{display:block;width:100%;height:100%;position:relative;touch-action:none;user-select:none;-webkit-user-select:none;border:1px solid #aab9ac;border-radius:10px;background:transparent;box-sizing:border-box}.ink-model svg,.ink-comparison svg{display:block;width:100%;height:220px}.ink-model{color:#adb8ad}.handwriting-pad[data-visual=trace] .ink-model{position:absolute;inset:0;pointer-events:none}.ink-pane-label{display:none;font-size:.9rem;font-weight:600;margin-bottom:6px}.handwriting-pad[data-visual=copy] .ink-workspace,.handwriting-pad[data-sealed=true] .ink-workspace{height:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;align-items:start}.handwriting-pad[data-visual=copy] .ink-paper,.handwriting-pad[data-sealed=true] .ink-paper{height:auto}.handwriting-pad[data-visual=copy] canvas,.handwriting-pad[data-sealed=true] canvas{height:220px}.handwriting-pad[data-visual=copy] .ink-pane-label,.handwriting-pad[data-sealed=true] .ink-pane-label{display:block}.handwriting-pad[data-sealed=true] .ink-workspace>.ink-model{display:none}.ink-comparison{color:#596e5e}.handwriting-pad button,.handwriting-pad select{min-height:44px;white-space:normal}.ink-guidance{font-size:.95rem;line-height:1.5}.handwriting-pad [hidden]{display:none!important}@media(max-width:600px){.handwriting-pad[data-visual=copy] .ink-workspace,.handwriting-pad[data-sealed=true] .ink-workspace{grid-template-columns:1fr}.ink-workspace{height:200px}}"#;
+const INK_STYLE: &str = r#".handwriting-pad{max-width:760px}.ink-mode-options{border:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}.ink-mode-options label{display:flex;align-items:center;gap:6px;min-height:44px}.ink-mode-options input{width:20px;height:20px}.ink-instruction{font-size:1.1rem;line-height:1.45}.ink-pad-heading{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}.ink-pad-heading>span{font-weight:600;margin-right:auto}.ink-pad-heading button[aria-pressed=true]{font-weight:700;text-decoration:underline}.ink-workspace{position:relative;width:100%;height:220px}.ink-paper{height:100%;min-width:0}.ink-workspace canvas{display:block;width:100%;height:100%;position:relative;touch-action:none;user-select:none;-webkit-user-select:none;border:1px solid #aab9ac;border-radius:10px;background:transparent;box-sizing:border-box}.ink-model svg,.ink-comparison svg{display:block;width:100%;height:220px}.ink-model{color:#adb8ad}.handwriting-pad[data-visual=copy] .ink-model{color:#596e5e}.handwriting-pad[data-visual=trace] .ink-model{position:absolute;inset:0;pointer-events:none}.ink-pane-label{display:none;font-size:.9rem;font-weight:600;margin-bottom:6px}.handwriting-pad[data-visual=copy] .ink-workspace,.handwriting-pad[data-sealed=true] .ink-workspace{height:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;align-items:start}.handwriting-pad[data-visual=copy] .ink-paper,.handwriting-pad[data-sealed=true] .ink-paper{height:auto}.handwriting-pad[data-visual=copy] canvas,.handwriting-pad[data-sealed=true] canvas{height:220px}.handwriting-pad[data-visual=copy] .ink-pane-label,.handwriting-pad[data-sealed=true] .ink-pane-label{display:block}.handwriting-pad[data-sealed=true] .ink-workspace>.ink-model{display:none}.ink-comparison{color:#596e5e}.handwriting-pad button,.handwriting-pad select{min-height:44px;white-space:normal}.ink-guidance{font-size:.95rem;line-height:1.5}.handwriting-pad [hidden]{display:none!important}@media(max-width:600px){.handwriting-pad[data-visual=copy] .ink-workspace,.handwriting-pad[data-sealed=true] .ink-workspace{grid-template-columns:1fr}.ink-workspace{height:200px}}"#;
 
 async fn resume_drawing(scope: &str) {
     let scope = serde_json::to_string(scope).unwrap();
@@ -539,20 +544,22 @@ pub(crate) fn Writing(mut app: Signal<AppState>) -> Element {
     let mut dirty = use_signal(|| false);
     let mut tick = use_signal(|| 0usize);
     let _ = tick();
-    let catalog = app
+    let surface = app
         .read()
         .repo
         .get::<String>("handwriting.surface")
         .ok()
-        .flatten()
-        .as_deref()
-        == Some("catalog");
+        .flatten();
+    let catalog = surface.as_deref() == Some("catalog");
     let run = app.read().active_handwriting();
     let on_native = use_callback(
         move |(id, round, instance, event): (Uuid, Uuid, Uuid, NativeWritingEvent)| {
             native_event(app, id, round, instance, event)
         },
     );
+    if surface.as_deref() == Some("history") {
+        return rsx! {crate::writing_history_view::WritingHistory {app}};
+    }
     if catalog || run.is_err() {
         let mut tasks: Vec<_> = handwriting_tasks()
             .into_iter()
@@ -561,6 +568,7 @@ pub(crate) fn Writing(mut app: Signal<AppState>) -> Element {
         tasks.sort_by_key(|task| task.meaning.is_none());
         let empty = tasks.is_empty();
         return rsx! {section {class:"card",h1 {id:"page-heading","Write and say"}p {"Use a word you have met. Hear it and write, or copy it first; then say the same word or message."}
+               button {class:"secondary",onclick:move |_|nav_act(app,|a|a.open_writing_history_list()),"Your writing"}
                if empty {p {"First meet a few sounds and letters. Writing activities appear here as you meet their words."}button {class:"primary",onclick:move |_|nav_act(app,|a|a.start_foundations()),"Start sounds & letters"}}
         for task in tasks {if app.read().handwriting_task_available(&task).unwrap_or(false){div {class:"writing-choice",h2 {"{task.target}"}if let Some(meaning)=&task.meaning{p {"{meaning}"}}
                 {let id=task.id.clone();rsx!{button {class:"primary",onclick:move |_|{let id=id.clone();nav_act(app,move|a|a.open_writing_task(&id,WritingSequence::HearWriteCompareSay))},"Hear and write"}}}
@@ -602,5 +610,6 @@ pub(crate) fn Writing(mut app: Signal<AppState>) -> Element {
       }
       if run.original.is_some(){button {class:"secondary",onclick:move |_|{let export=app.read().handwriting_export();match export{Ok(value)=>{let text=serde_json::to_string_pretty(&value).unwrap();spawn(async move{if let Err(e)=crate::audio_studio::export_json(text,format!("drussky-writing-{id}.json")).await{app.write().notice=e}});},Err(e)=>app.write().notice=e}},"Save a copy"}}
       button {class:if completed{"primary"}else{"secondary"},disabled:busy,onclick:move |_|nav_act(app,|a|a.navigate(Page::Foundations)),if completed{"Back to my course"}else{"Stop here — keep my place"}}
+      if completed {button {class:"secondary",onclick:move |_|nav_act(app,|a|a.open_writing_history_list()),"See my saved writing"}}
      }}
 }

@@ -13,6 +13,7 @@ if(config.writing_scope){const s=config.writing_scope,uuid=/^[0-9a-f]{8}-[0-9a-f
   if(config.dialogue_scope||config.sound_focus_scope||config.passage_id||config.revision_id||!['run_id','round_id','ink_original_id'].every(key=>uuid.test(s[key]))||!/^[0-9a-f]{64}$/.test(s.ink_sha256)||!['ink_format','task_id','task_revision'].every(key=>typeof s[key]==='string'&&s[key].length>0&&s[key].length<=256))throw Error('This recording needs its exact saved drawing and writing task.');
 }
 let compactAdvanced=!config.compact,choiceGeneration=0,pendingOperations=0;
+let writingChosenId=config.selected_asset_id||'',writingUnsaved=null,writingReplaying=false;
 let alive = true, db, context, stream, processor, source, sink, capture, starting = false, finish;
 const lifetime = new Promise(resolve => finish = resolve);
 const yieldQueue = [], yieldChannel = typeof MessageChannel === 'function' ? new MessageChannel() : null;
@@ -62,7 +63,14 @@ function controls() {
   root.querySelectorAll('[data-record]').forEach(b => { b.disabled = Boolean(config.review_only || capture || starting || pendingOperations || (config.frozen_reference_asset_id&&b.dataset.role==='reference')); });
   $('audio-stop-recording').disabled = !(capture || starting);
   root.querySelectorAll('[data-needs]').forEach(b => { b.disabled = !selected[b.dataset.needs] || !!capture || starting || !!pendingOperations; });
-  $('audio-compare').disabled = !selected.reference || !selected.attempt || !!capture || starting || !!pendingOperations;
+  const compareButton=$('audio-compare');if(compareButton)compareButton.disabled = !selected.reference || !selected.attempt || !!capture || starting || !!pendingOperations;
+  if(config.writing_scope){
+    $('audio-stop-recording').hidden=!(capture||starting);
+    root.querySelector('[data-writing-stop-playback]').hidden=!writingReplaying;
+    root.querySelectorAll('[data-writing-take]').forEach(button=>{button.disabled=!!(capture||starting||pendingOperations);button.setAttribute('aria-pressed',String(button.dataset.writingTake===writingChosenId));});
+    $('writing-voice-recovery').hidden=!writingUnsaved;
+    $('writing-voice-recovery').querySelectorAll('button').forEach(button=>button.disabled=!!(capture||starting||pendingOperations));
+  }
   root.querySelectorAll('input[type=file], select[data-library]').forEach(n => { n.disabled = !!config.review_only || !!capture || starting || !!pendingOperations; });
   if(config.frozen_reference_asset_id)for(const node of [$('audio-import-reference'),$('audio-library-reference')])if(node)node.disabled=true;
   regionControls();
@@ -81,7 +89,8 @@ function failure(error) {
     SecurityError: 'This WebView has not enabled microphone access. Import a recording, or use a secure browser.',
     QuotaExceededError: 'This device’s audio storage is full. Download your recording before leaving this page.'
   };
-  status(descriptions[error?.name] || error?.message || String(error), true); controls();
+  const writingDescriptions={NotFoundError:'No microphone was found. Connect one, or say it aloud and continue.',SecurityError:'Microphone access is unavailable here. You can say it aloud and continue.'};
+  status((config.writing_scope&&writingDescriptions[error?.name]) || descriptions[error?.name] || error?.message || String(error), true); controls();
 }
 async function audioContext(resume = true) {
   const Audio = window.AudioContext || window.webkitAudioContext;
@@ -147,6 +156,7 @@ async function refreshLibrary() {
   const records = await storage('all');
   for(const record of records)if(Object.hasOwn(record,'original_mime_type')){record.device={...record.device,source_mime_type:record.original_mime_type};delete record.original_mime_type;await storage('put',record);}
   if (!alive) return;
+  if(config.writing_scope){renderWritingTakes(records);return;}
   for (const role of ['reference','attempt']) {
     const picker = $(`audio-library-${role}`); picker.replaceChildren(new Option('Choose a saved recording…', ''));
     records.filter(r => r.role === role && recordMatchesScope(r))
@@ -157,6 +167,25 @@ async function refreshLibrary() {
     picker.value = selected[role]?.asset_id || '';
   }
   regionSourceList(records);
+}
+// A writing turn chooses only originals belonging to this exact saved drawing.
+// Native buttons keep the choices reachable by touch, keyboard and screen reader.
+function renderWritingTakes(records){
+  const takes=records.filter(record=>recordMatchesScope(record)).sort((a,b)=>b.created_at_ms-a.created_at_ms);
+  const list=$('writing-voice-takes');list.replaceChildren();
+  for(const [index,record]of takes.entries()){
+    const button=document.createElement('button');button.type='button';button.className='secondary';button.dataset.writingTake=record.asset_id;
+    button.textContent=`${record.interrupted?'Use partial take':'Use take'} ${takes.length-index} · ${(record.duration_ms/1000).toFixed(1)} sec · ${new Date(record.created_at_ms).toLocaleString()}`;
+    button.setAttribute('aria-pressed',String(record.asset_id===writingChosenId));list.append(button);
+  }
+  $('writing-voice-history').hidden=!takes.length;
+  controls();
+}
+async function retryWritingSave(){
+  const record=writingUnsaved;if(!record)return;
+  beginOperation();
+  try{await keepWrite(storage('put',record));if(!alive)return;writingUnsaved=null;writingChosenId=record.interrupted?'':record.asset_id;emit({kind:'saved',recording:metadata(record)});await refreshLibrary();status(record.interrupted?'Partial take saved. Choose it in Earlier takes if you want to keep it with the drawing.':'Your voice is saved. Replay it, or continue.');}
+  finally{endOperation();}
 }
 // Float WAV keeps the actual captured mono PCM. Imported originals remain untouched.
 function wav(samples, sampleRate) {
@@ -200,6 +229,7 @@ async function selectRecord(role, record, buffer) {
   }
   if(!currentAnalysis(role,record.asset_id,token))return false;
   selected[role] = record; root.setAttribute(`data-selected-${role}`,record.asset_id); clips.set(record.asset_id, {...clips.get(record.asset_id),record,buffer});pruneClips();
+  if(config.writing_scope){controls();status(record.interrupted?'Partial take ready to replay. Choose it in Earlier takes to use it.':'Your voice is ready to replay.');return true;}
   delete analyses[role]; for(const kind of ['wave','spectrum','pitch']) {const canvas=$(`audio-${kind}-${role}`);canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);}
   $(`audio-from-${role}`).value = '0'; $(`audio-to-${role}`).value = buffer.duration.toFixed(3);
   $(`audio-name-${role}`).textContent = clipLabel(record,buffer);
@@ -237,9 +267,10 @@ async function saveAudio(role, blob, buffer, name, interrupted = false, device =
   const record=await makeRecord(role,blob,buffer,name,interrupted,device,origin),asset_id=record.asset_id;
   // Keep a downloadable in-memory take even when persistence fails.
   if(alive){clips.set(asset_id,{record,buffer});selected[role]=record;pruneClips();controls();}
-  try { await storage('put',record); emit({kind:'saved',recording:metadata(record)}); await refreshLibrary(); }
-  catch (error) { if(!alive)(window.rufrenAudioRecovery ||= []).push(record);await selectRecord(role,record,buffer);throw error; }
+  try { await storage('put',record); if(config.writing_scope){writingUnsaved=null;writingChosenId=interrupted?'':asset_id;}emit({kind:'saved',recording:metadata(record)}); await refreshLibrary(); }
+  catch (error) { if(config.writing_scope)writingUnsaved=record;if(!alive)(window.rufrenAudioRecovery ||= []).push(record);await selectRecord(role,record,buffer);throw error; }
   await selectRecord(role,record,buffer);
+  if(config.writing_scope){status(interrupted?'Partial take saved. Choose it in Earlier takes if you want to use it.':'Your voice is saved. Replay it, or continue.');return;}
   status(interrupted ? 'The interrupted take was saved. Listen for a cutoff before using it.' : 'Original audio saved on this device. Listen, choose a span, and try one useful change.');
 }
 function stopIndependentPlayers(){for(const api of window.rufrenAudioPlayers?.values()||[])api.stop?.();}
@@ -251,7 +282,7 @@ function stopPlayback() {
 function selection(role) {
   const record = selected[role]; if (!record) throw Error(`Add a ${role === 'reference' ? 'reference voice' : 'learner attempt'} first.`);
   const buffer = clips.get(record.asset_id)?.buffer; if (!buffer) throw Error('Choose the recording again.');
-  const from = Number($(`audio-from-${role}`).value), to = Number($(`audio-to-${role}`).value);
+  const from = config.writing_scope?0:Number($(`audio-from-${role}`).value), to = config.writing_scope?buffer.duration:Number($(`audio-to-${role}`).value);
   if (!Number.isFinite(from) || !Number.isFinite(to) || from < 0 || to <= from || to > buffer.duration+0.005) throw Error('Choose a span with 0 ≤ start < end ≤ the recording duration.');
   return {record,buffer,from,to:Math.min(to,buffer.duration)};
 }
@@ -295,12 +326,12 @@ function playStretched(role,span,rate,loop,generation) {
 }
 async function play(role, keep = false) {
   const span=selection(role);if(!alive)return false;stopIndependentPlayers();if(!keep)stopPlayback();
-  const generation=playGeneration,rate=Number($('audio-rate').value),loop=$('audio-loop').checked&&!keep;
+  const generation=playGeneration,rate=config.writing_scope?1:Number($('audio-rate').value),loop=!config.writing_scope&&$('audio-loop').checked&&!keep;
   if(rate!==1)return playStretched(role,span,rate,loop,generation);
   const ctx=await audioContext();if(!alive||generation!==playGeneration)return false;
   const node=ctx.createBufferSource();node.buffer=span.buffer;node.playbackRate.value=1;
   node.connect(ctx.destination);node.loop=loop;node.loopStart=span.from;node.loopEnd=span.to;node.assetId=span.record.asset_id;playing.push(node);
-  status(`${loop?'Looping':'Playing'} ${role==='reference'?'reference voice':'your attempt'} at natural speed.`);
+  status(config.writing_scope?'Playing your voice…':`${loop?'Looping':'Playing'} ${role==='reference'?'reference voice':'your attempt'} at natural speed.`);
   return new Promise(resolve=>{
     node.onended=()=>{node.onended=null;node.disconnect();node.buffer=null;playing=playing.filter(n=>n!==node);pruneClips();resolve(generation===playGeneration);};
     if(loop)node.start(0,span.from);else node.start(0,span.from,span.to-span.from);
@@ -319,10 +350,12 @@ async function startRecording(role) {
   if(config.review_only)throw Error('This saved response is kept. Start a new sound practice to make another take.');
   if(config.frozen_reference_asset_id&&role==='reference')throw Error('This comparison keeps its exact saved model. Record your own take instead.');
   if (capture || starting) return;
+  if(config.writing_scope&&writingUnsaved)throw Error('Your unsaved take is still here. Retry saving it before recording again.');
   if (!crypto.subtle) throw Error('Secure audio storage needs HTTPS, localhost, or a supported native WebView. Import or record in a secure browser.');
   if (!navigator.mediaDevices?.getUserMedia) throw Error('Microphone capture is unavailable here. Use HTTPS or localhost in a browser, or import a recording. Native apps also need microphone permission in their host configuration.');
   if(role==='attempt'){choiceGeneration++;clearAttempt();}
   starting = true; const generation = ++requestGeneration; mic(false); stopPlayback();stopIndependentPlayers();
+  if(config.writing_scope)status('Opening microphone…');
   try {
     if (!db) await openDatabase();
     if (!alive || generation !== requestGeneration) return;
@@ -361,7 +394,7 @@ async function startRecording(role) {
     source.connect(processor); processor.connect(sink);
 
     timer = setInterval(() => { if (capture) mic(true,`${((performance.now()-capture.started)/1000).toFixed(1)} s / 30 s`); },200);
-    mic(true,'0.0 s / 30 s'); status('Recording. Say one short phrase, then press Stop & keep take.');
+    mic(true,'0.0 s / 30 s'); status(config.writing_scope?'Say it, then tap Stop & keep.':'Recording. Say one short phrase, then press Stop & keep take.');
   } catch (error) { requestGeneration++; starting = false; capture = null; releaseCapture(); mic(false); throw error; }
 }
 function releaseCapture() {
@@ -532,20 +565,29 @@ function draw(role, analysis) {
   $(`audio-spectrum-label-${role}`).textContent=`Spectrogram · 0–${maxHz.toLocaleString()} Hz · ${floor} to 0 dBFS · Hann ${spec.fft_size} / hop ${spec.hop_size}`;
 }
 const analyses = {};
+async function replayWriting(){
+  writingReplaying=true;beginOperation();
+  try{const completed=await play('attempt');if(completed)status('Replay finished. Listen to the model again, or continue.');}
+  finally{writingReplaying=false;endOperation();}
+}
 function click(event) {
+  const takeButton=event.target.closest('[data-writing-take]');
+  if(takeButton&&root.contains(takeButton)){chooseExisting('attempt',takeButton.dataset.writingTake).catch(failure);return;}
   const button=event.target.closest('[data-action]'); if (!button || !root.contains(button)) return;
   const role=button.dataset.role;
-  const actions = {advanced:toggleAdvanced,record:()=>startRecording(role),stop:()=>stopRecording(),play:()=>play(role),compare,stopPlayback:()=>{stopPlayback();status('Playback stopped.');},cue:()=>saveCue(role),download:()=>downloadClip(role),backup:exportAudio};
+  const actions = {advanced:toggleAdvanced,record:()=>startRecording(role),stop:()=>stopRecording(),play:()=>config.writing_scope?replayWriting():play(role),retryWritingSave,compare,stopPlayback:()=>{stopPlayback();status('Playback stopped.');},cue:()=>saveCue(role),download:()=>downloadClip(role),backup:exportAudio};
   if (actions[button.dataset.action]) Promise.resolve().then(actions[button.dataset.action]).catch(failure);
 }
 function clearAttempt(){
   stopPlayback();selected.attempt=null;pruneClips();delete analyses.attempt;analysisTokens.attempt='';sourceGenerations.attempt='';root.setAttribute('data-selected-attempt','');
+  if(config.writing_scope){writingChosenId='';emit({kind:'source_clear',role:'attempt'});emit({kind:'selected',recording:null});controls();return;}
   for(const kind of ['wave','spectrum','pitch']){const canvas=$(`audio-${kind}-attempt`);canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);}$('audio-from-attempt').value='0';$('audio-to-attempt').value='0';$('audio-cues-attempt').replaceChildren();
   $('audio-library-attempt').value='';$('audio-name-attempt').textContent='No recording selected';$('audio-provenance-attempt').textContent='No source selected';
   emit({kind:'source_clear',role:'attempt'});emit({kind:'selected',recording:null});controls();
 }
 function validAttempt(record){return record&&record.role==='attempt'&&recordMatchesScope(record);}
 async function chooseExisting(role,id){
+  if(config.writing_scope&&writingUnsaved)throw Error('Your unsaved take is still here. Retry saving it before choosing another voice.');
   if(config.review_only)throw Error('This review keeps the exact selected response.');
   const generation=++choiceGeneration;stopPlayback();if(role==='attempt')clearAttempt();if(!id)return;
   beginOperation();
@@ -553,7 +595,7 @@ async function chooseExisting(role,id){
     const record=await storage('get',id);if(!alive||generation!==choiceGeneration)return;
     if(!record||record.role!==role||!recordMatchesScope(record))throw Error('This recording does not belong to the current phrase. Choose its exact saved take.');
     const prepared=await selectRecord(role,record);
-    if(prepared&&alive&&generation===choiceGeneration&&selected[role]?.asset_id===id&&role==='attempt'){if(record.interrupted)status('You selected a partial take. Replay it and check the cutoff before using it.');emit({kind:'selected',recording:metadata(record)});}
+    if(prepared&&alive&&generation===choiceGeneration&&selected[role]?.asset_id===id&&role==='attempt'){if(config.writing_scope){writingChosenId=id;controls();status(record.interrupted?'Partial take chosen. Replay it to check where it ends.':'This voice is saved with the drawing.');}else if(record.interrupted)status('You selected a partial take. Replay it and check the cutoff before using it.');emit({kind:'selected',recording:metadata(record)});}
   }finally{endOperation();}
 }
 async function toggleAdvanced(){
@@ -813,6 +855,7 @@ function destroy() {
   // Snapshot the buffers before teardown. Device tracks stop synchronously;
   // original persistence continues without touching this unmounted component.
   const take=capture;capture=null;starting=false;requestGeneration++;
+  if(writingUnsaved){(window.rufrenAudioRecovery ||= []).push(writingUnsaved);writingUnsaved=null;}
   alive=false;finish();yieldQueue.splice(0).forEach(resolve=>resolve());yieldChannel?.port1.close();yieldChannel?.port2.close();
   releaseCapture();stopPlayback();
   const write=preserveExitTake(take),regionWrite=shutdownRegions();
@@ -844,8 +887,9 @@ try {
   for(const record of [...recovery]){await storage('put',record);recovery.splice(recovery.indexOf(record),1);}
   await refreshLibrary();
   if(config.frozen_reference_asset_id){const record=await storage('get',config.frozen_reference_asset_id);if(!record||record.role!=='reference'||!recordMatchesScope(record))throw Error('This exact model is unavailable. Restore its original before comparing.');await selectRecord('reference',record);}
-  if(config.selected_asset_id){const record=await storage('get',config.selected_asset_id);if(!validAttempt(record)||(config.selected_content_hash&&record.content_hash!==config.selected_content_hash)){emit({kind:'selected',recording:null});throw Error('The exact response take is unavailable. Choose another saved take or record again.');}await selectRecord('attempt',record);}
+  if(config.selected_asset_id){const record=await storage('get',config.selected_asset_id);if(!validAttempt(record)||(config.selected_content_hash&&record.content_hash!==config.selected_content_hash)){if(config.writing_scope){writingChosenId='';controls();}emit({kind:'selected',recording:null});throw Error('The exact response take is unavailable. Choose another saved take or record again.');}await selectRecord('attempt',record);}
   if(window.rufrenAudioExitError){status('The interrupted recording has been recovered on this device. Choose it from saved takes.');delete window.rufrenAudioExitError;}
+  else if(config.writing_scope)status(selected.attempt?'Your saved voice is ready to replay.':'Say it aloud. Record only if you want to hear yourself.');
   else if(config.compact)status(selected.attempt?'Your exact saved take is ready to replay.':'Record a short response, then stop to keep it. You can also choose an existing take.');
   else status('Record or import a reference voice, then make your own attempt. Originals stay on this device.'); }
 catch(error) { failure(error); }

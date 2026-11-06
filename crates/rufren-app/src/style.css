@@ -683,3 +683,6 @@ input[type=range]{padding:5px 0}blockquote{margin:18px 0;padding:12px 20px;borde
 
 /* Interface headings use platform type; reading passages retain their text face. */
 h1,h2,h3,.hero h1,.page-heading h1,.lesson-index h2,.explanation h3 {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:-.025em}
+
+/* Keep each writing action a separate touch target at narrow widths. */
+.writing-lesson > button { margin-right: 8px; margin-bottom: 8px; }

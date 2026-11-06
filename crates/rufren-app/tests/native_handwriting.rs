@@ -18,8 +18,9 @@ fn paper() -> NativePaper {
 }
 fn point(time: f64) -> NativeInkPoint {
     NativeInkPoint {
-        x: 120.0,
-        y: 84.0,
+        // Nontrivial coordinates that drift with serde_json's default parser.
+        x: 51.248178375505404,
+        y: 52.314008204106244,
         time_offset_seconds: time,
         width: 5.0,
         height: 5.0,
@@ -113,10 +114,10 @@ fn native_checkpoint_binds_both_exact_archive_and_canonical_projection_hashes() 
     wrong.canonical.strokes[0].points[0].x += 1.0;
     assert!(wrong.validate().is_err());
     let json = serde_json::to_vec(&c).unwrap();
-    assert_eq!(
-        serde_json::from_slice::<NativeWritingCheckpoint>(&json).unwrap(),
-        c
-    );
+    let restored: NativeWritingCheckpoint = serde_json::from_slice(&json).unwrap();
+    restored.validate().unwrap();
+    assert_eq!(restored, c);
+    assert_eq!(serde_json::to_vec(&restored).unwrap(), json);
 }
 #[test]
 fn native_saved_paper_can_reopen_in_new_controller_but_not_different_task_or_attempt() {

@@ -6,9 +6,10 @@ use objc2::{
     runtime::ProtocolObject,
     MainThreadOnly,
 };
+use objc2_core_foundation::CGRect;
 use objc2_foundation::{NSData, NSError, NSObject, NSObjectProtocol, NSString};
 use objc2_pencil_kit::{PKDrawing, PKInk, PKTool};
-use objc2_ui_kit::{UIColor, UIResponder, UIScrollView, UIView};
+use objc2_ui_kit::{UIColor, UIImage, UIResponder, UIScrollView, UIView};
 
 #[link(name = "PencilKit", kind = "framework")]
 unsafe extern "C" {}
@@ -136,4 +137,17 @@ pub unsafe fn ink_color(ink: &PKInk) -> Retained<UIColor> {
 }
 pub unsafe fn ink_type(ink: &PKInk) -> Retained<NSString> {
     unsafe { objc2::msg_send![ink, inkType] }
+}
+
+/// Public iOS PKDrawing selector absent from objc2-pencil-kit 0.3.2.
+/// PKDrawing.h: a transparent image of `rect`, in pixels `rect.size * scale`.
+/// The caller validates geometry and supplies a positive explicit scale so the
+/// device's Retina scale cannot expand the allocation.
+pub unsafe fn drawing_image(
+    drawing: &PKDrawing,
+    rect: CGRect,
+    scale: f64,
+    _main_thread: objc2_foundation::MainThreadMarker,
+) -> Retained<UIImage> {
+    unsafe { objc2::msg_send![drawing, imageFromRect: rect, scale: scale] }
 }

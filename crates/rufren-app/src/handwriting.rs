@@ -292,6 +292,31 @@ pub(crate) struct WritingRound {
     pub sequence: WritingSequence,
     pub original: Option<WritingOriginalRef>,
     pub say: SayDisposition,
+    // Older archives did not distinguish Compare from Complete. Keep that unknown.
+    #[serde(default)]
+    pub stage: Option<WritingStage>,
+    #[serde(default)]
+    pub attempt_id: Option<Uuid>,
+    #[serde(default)]
+    pub audio_completed: Option<bool>,
+}
+/// A read-only projection of an exact round; opening it never replaces the live round.
+#[derive(Clone, Debug, PartialEq)]
+pub(crate) struct WritingRoundReview {
+    pub run_id: Uuid,
+    pub round_id: Uuid,
+    pub scope_id: String,
+    pub sequence: WritingSequence,
+    pub task: HandwritingTask,
+    pub stage: Option<WritingStage>,
+    pub say: SayDisposition,
+    pub original: Option<WritingOriginalRef>,
+    pub originals: Vec<WritingOriginalReview>,
+}
+#[derive(Clone, Debug, PartialEq)]
+pub(crate) struct WritingOriginalReview {
+    pub reference: WritingOriginalRef,
+    pub payload: serde_json::Value,
 }
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -412,6 +437,45 @@ impl HandwritingActivity {
         {
             return Err("This writing run no longer matches its authored task. Your drawings are preserved.".into());
         }
+        let mut round_ids = std::collections::BTreeSet::from([self.round_id]);
+        for round in &self.history {
+            if round.round_id.is_nil()
+                || !round_ids.insert(round.round_id)
+                || round.scope_id.is_empty()
+                || !task.sequences.contains(&round.sequence)
+                || round.attempt_id.is_some_and(|id| id.is_nil())
+            {
+                return Err(
+                    "A saved writing round has a different identity. Its original is preserved."
+                        .into(),
+                );
+            }
+        }
+        for (scope, sequence, original) in self
+            .history
+            .iter()
+            .map(|r| (r.scope_id.as_str(), r.sequence, r.original.as_ref()))
+            .chain(std::iter::once((
+                self.scope_id.as_str(),
+                self.sequence,
+                self.original.as_ref(),
+            )))
+        {
+            if let Some(original) = original {
+                let suffix = if sequence == WritingSequence::SeeCopyHearSay {
+                    "copy"
+                } else {
+                    "sound"
+                };
+                if original.id.is_nil()
+                    || original.scope_id != scope
+                    || original.task_id != format!("{}-{suffix}", self.task_id)
+                    || original.task_revision != self.task_revision
+                {
+                    return Err("A saved original belongs to another writing round. Its identity is preserved.".into());
+                }
+            }
+        }
         Ok(())
     }
 }
@@ -438,7 +502,18 @@ impl AppState {
             .get::<HandwritingActivity>(&activity_key(id))?
             .ok_or("The saved writing run is unavailable. Its original drawings are preserved.")?;
         run.validate()?;
+        if run.id != id {
+            return Err(
+                "The saved writing run has a different identity. Its original is preserved.".into(),
+            );
+        }
         Ok(run)
+    }
+    fn writing_prefer_run(&self, run: &HandwritingActivity) -> Result<()> {
+        self.repo.set(
+            &course_key(run.course_session, &run.task_id, run.sequence),
+            &run.id,
+        )
     }
     pub(crate) fn handwriting_for_course(
         &self,
@@ -453,28 +528,13 @@ impl AppState {
                 return Ok(Some(active));
             }
         }
-        for sequence in [
-            task.sequence,
-            if task.sequence == WritingSequence::SeeCopyHearSay {
-                WritingSequence::HearWriteCompareSay
-            } else {
-                WritingSequence::SeeCopyHearSay
-            },
-        ] {
-            if let Some(id) = self
-                .repo
-                .get::<Uuid>(&course_key(course, &task.id, sequence))?
-            {
-                let run = self.writing_load(id)?;
-                if run.course_session != course
-                    || (run.sequence != sequence && run.stage != WritingStage::Complete)
-                {
-                    return Err("The saved writing route no longer matches its selection. Your drawing is kept.".into());
-                }
-                return Ok(Some(run));
-            }
-        }
-        Ok(None)
+        // Legacy course/sequence pointers name a run, not its changing current round.
+        // Discover canonical activities so a stale or interrupted index cannot hide ink.
+        Ok(self
+            .handwriting_history()?
+            .into_iter()
+            .rev()
+            .find(|run| run.course_session == course && run.task_id == task.id))
     }
     pub(crate) fn active_handwriting(&self) -> Result<HandwritingActivity> {
         let id = self
@@ -528,8 +588,50 @@ impl AppState {
         self.writing_reference_use()?;
         let course = self.foundation_state()?;
         let key = course_key(course.session, &task.id, sequence);
-        let run = if let Some(id) = self.repo.get::<Uuid>(&key)? {
-            self.writing_load(id)?
+        let runs = self.handwriting_history()?;
+        let indexed = self
+            .repo
+            .get::<Uuid>(&key)?
+            .map(|id| self.writing_load(id))
+            .transpose()?;
+        if indexed.as_ref().is_some_and(|run| {
+            run.course_session != course.session
+                || run.task_id != task.id
+                || run.task_revision != task.revision
+        }) {
+            return Err(
+                "The saved writing route names another course or task. Your drawing is kept."
+                    .into(),
+            );
+        }
+        let matching = |run: &HandwritingActivity| {
+            run.course_session == course.session
+                && run.task_id == task.id
+                && run.task_revision == task.revision
+                && run.sequence == sequence
+        };
+        // An explicit active/resumed run wins over the preferred route pointer.
+        // Canonical order is only recovery fallback, never a recency claim.
+        let active = self.active_handwriting().ok();
+        let existing = active
+            .as_ref()
+            .filter(|run| matching(run) && run.stage != WritingStage::Complete)
+            .or_else(|| indexed.as_ref().filter(|run| matching(run)))
+            .or_else(|| {
+                runs.iter()
+                    .find(|run| matching(run) && run.stage != WritingStage::Complete)
+            })
+            .or_else(|| runs.iter().filter(|run| matching(run)).last())
+            // A legacy pointer can name a completed run whose current round
+            // changed route. Keep its earlier fresh-round reentry behavior.
+            .or_else(|| {
+                indexed
+                    .as_ref()
+                    .filter(|run| run.stage == WritingStage::Complete)
+            })
+            .cloned();
+        let run = if let Some(run) = existing {
+            run
         } else {
             let id = Uuid::new_v4();
             let round = Uuid::new_v4();
@@ -555,18 +657,15 @@ impl AppState {
                 history: vec![],
                 native_instance: None,
             };
+            // The activity is the canonical history record. A crash after this
+            // write and before either pointer is recoverable by enumeration.
             self.repo.set(&activity_key(id), &run)?;
-            self.repo.set(&key, &id)?;
             run
         };
+        self.repo.set(&key, &run.id)?;
         self.repo.set("handwriting.active", &run.id)?;
         if run.stage == WritingStage::Complete {
             self.writing_new_round(run.id, run.round_id, sequence)?
-        } else if run.sequence != sequence {
-            return Err(
-                "The saved writing route differs from the selected route. Its draft is preserved."
-                    .into(),
-            );
         }
         self.repo.set("handwriting.surface", &"run")?;
         self.navigate(Page::Handwriting)
@@ -766,6 +865,9 @@ impl AppState {
             sequence: run.sequence,
             original: run.original.clone(),
             say: run.say,
+            stage: Some(run.stage),
+            attempt_id: Some(run.attempt_id),
+            audio_completed: Some(run.audio_completed),
         });
         run.round_id = Uuid::new_v4();
         run.attempt_id = Uuid::new_v4();
@@ -778,27 +880,169 @@ impl AppState {
         run.entry_previewed = true;
         run.say = SayDisposition::NotReported;
         run.native_instance = None;
-        self.repo.set(&activity_key(id), &run)
+        self.repo.set(&activity_key(id), &run)?;
+        // Preference is a recoverable pointer; the complete canonical round is
+        // durable before this write, and other unfinished runs stay in history.
+        self.writing_prefer_run(&run)
     }
     pub(crate) fn handwriting_originals(
         &self,
         scope: &str,
         task: &HandwritingTask,
     ) -> Result<Vec<HandwritingSubmission>> {
+        // The index is only an acceleration hint. A sealed original may have
+        // reached disk immediately before an interrupted index write.
+        let mut originals = Vec::new();
+        for (key, value) in self
+            .repo
+            .metadata_with_scope("handwriting.original:", scope)?
+        {
+            let original: HandwritingSubmission =
+                serde_json::from_value(value).map_err(|e| e.to_string())?;
+            if original.scope_id != scope {
+                continue;
+            }
+            original.validate(scope, task, true)?;
+            if key != original_key(original.attempt_id) {
+                return Err(
+                    "A saved drawing has a different storage identity. Its original is preserved."
+                        .into(),
+                );
+            }
+            originals.push(original)
+        }
+        // Keep detecting a genuinely missing indexed original rather than
+        // silently presenting a complete-looking partial history.
         let ids: Vec<Uuid> = self
             .repo
             .get(&format!("handwriting.originals:{scope}"))?
             .unwrap_or_default();
-        let mut originals = Vec::new();
-        for id in ids {
-            let original = self
-                .repo
-                .get::<HandwritingSubmission>(&original_key(id))?
-                .ok_or("A saved drawing is unavailable. Its index is kept.")?;
-            original.validate(scope, task, true)?;
-            originals.push(original)
+        if ids
+            .iter()
+            .any(|id| !originals.iter().any(|o| o.attempt_id == *id))
+        {
+            return Err("A saved drawing is unavailable. Its index is kept.".into());
         }
         Ok(originals)
+    }
+    /// Canonical local runs, including legacy runs whose active/course index
+    /// was superseded or whose pointer write was interrupted. No migration writes
+    /// are necessary: the installed v2 activity metadata is already the record.
+    pub(crate) fn handwriting_history(&self) -> Result<Vec<HandwritingActivity>> {
+        let mut runs = Vec::new();
+        for (key, value) in self.repo.metadata_with_prefix("handwriting.activity:")? {
+            let run: HandwritingActivity =
+                serde_json::from_value(value).map_err(|e| e.to_string())?;
+            run.validate()?;
+            if key != activity_key(run.id) {
+                return Err("A saved writing run has a different storage identity. Its original is preserved.".into());
+            }
+            runs.push(run);
+        }
+        Ok(runs)
+    }
+    /// Explicit history reentry resumes the exact run, including a completed run,
+    /// without starting a fresh attempt or changing the course's saved cursor.
+    pub(crate) fn open_handwriting_history(&mut self, id: Uuid) -> Result<()> {
+        let run = self.writing_load(id)?;
+        self.writing_reference_use()?;
+        self.writing_prefer_run(&run)?;
+        self.repo.set("handwriting.active", &id)?;
+        self.resume_handwriting()
+    }
+    pub(crate) fn handwriting_round_review(
+        &self,
+        id: Uuid,
+        round_id: Uuid,
+    ) -> Result<WritingRoundReview> {
+        let run = self.writing_load(id)?;
+        let (scope, sequence, stage, say, original) = if run.round_id == round_id {
+            (
+                run.scope(),
+                run.sequence,
+                Some(run.stage),
+                run.say,
+                run.original.clone(),
+            )
+        } else {
+            let round = run
+                .history
+                .iter()
+                .find(|r| r.round_id == round_id)
+                .ok_or("That writing round is unavailable. Your current drawing is kept.")?;
+            (
+                round.scope_id.clone(),
+                round.sequence,
+                round.stage,
+                round.say,
+                round.original.clone(),
+            )
+        };
+        // Use the archived round's route when reconstructing its authored task;
+        // the current run may already have moved from copy to dictation.
+        let mut projection = run.clone();
+        projection.sequence = sequence;
+        let task = projection.task();
+        let mut originals = Vec::new();
+        for (key, artifact) in self
+            .repo
+            .metadata_with_scope("handwriting.artifact:", &scope)?
+        {
+            if artifact["scope_id"].as_str() != Some(&scope) {
+                continue;
+            }
+            let artifact_id: Uuid =
+                serde_json::from_value(artifact["id"].clone()).map_err(|e| e.to_string())?;
+            let reference = self.writing_artifact_ref(artifact_id)?;
+            if key != reference.local_key
+                || reference.scope_id != scope
+                || reference.task_id != task.id
+                || reference.task_revision != task.revision
+            {
+                return Err("A drawing's task identity differs from its saved round. Its original is preserved.".into());
+            }
+            originals.push(WritingOriginalReview {
+                reference,
+                payload: artifact["payload"].clone(),
+            });
+        }
+        // Raw web originals are independently durable. Include the narrow
+        // interruption window before their generic artifact was written.
+        for ink in self.handwriting_originals(&scope, &task)? {
+            let payload = serde_json::to_value(&ink).map_err(|e| e.to_string())?;
+            if let Some(stored) = originals.iter().find(|o| o.reference.id == ink.attempt_id) {
+                if stored.payload != payload {
+                    return Err("Two saved originals use the same drawing identity with different ink. Both are preserved.".into());
+                }
+                continue;
+            }
+            let reference = WritingOriginalRef {
+                id: ink.attempt_id,
+                scope_id: scope.clone(),
+                task_id: task.id.clone(),
+                task_revision: task.revision.clone(),
+                format: "web-pointer-ink-v2".into(),
+                sha256: hash(&serde_json::to_vec(&payload).map_err(|e| e.to_string())?),
+                local_key: original_key(ink.attempt_id),
+            };
+            originals.push(WritingOriginalReview { reference, payload });
+        }
+        if let Some(reference) = &original {
+            if !originals.iter().any(|o| o.reference == *reference) {
+                return Err("The round's saved original is unavailable or changed. Its reference is preserved.".into());
+            }
+        }
+        Ok(WritingRoundReview {
+            run_id: id,
+            round_id,
+            scope_id: scope,
+            sequence,
+            task,
+            stage,
+            say,
+            original,
+            originals,
+        })
     }
     pub(crate) fn handwriting_course_complete(&self, course: Uuid) -> bool {
         self.handwriting_for_course(course)
@@ -821,19 +1065,34 @@ impl AppState {
         self.navigate(Page::Handwriting)
     }
     pub(crate) fn handwriting_export(&self) -> Result<serde_json::Value> {
-        let run = self.active_handwriting()?;
+        self.handwriting_export_run(self.active_handwriting()?.id)
+    }
+    /// Export an exact saved run without changing the current activity. Review
+    /// supplies the same recovered originals shown in history, including saves
+    /// interrupted before their index or accepted-reference write.
+    pub(crate) fn handwriting_export_run(&self, id: Uuid) -> Result<serde_json::Value> {
+        let run = self.writing_load(id)?;
         let mut originals = Vec::new();
-        for reference in run
+        for round_id in run
             .history
             .iter()
-            .filter_map(|r| r.original.as_ref())
-            .chain(run.original.as_ref())
+            .map(|r| r.round_id)
+            .chain(std::iter::once(run.round_id))
         {
-            let artifact = self
-                .repo
-                .get::<serde_json::Value>(&reference.local_key)?
-                .ok_or("A writing original is unavailable. Its reference is preserved.")?;
-            originals.push(artifact)
+            let review = self.handwriting_round_review(id, round_id)?;
+            for original in review.originals {
+                let reference = original.reference;
+                originals.push(serde_json::json!({
+                    "version": 1,
+                    "id": reference.id,
+                    "scope_id": reference.scope_id,
+                    "task_id": reference.task_id,
+                    "task_revision": reference.task_revision,
+                    "format": reference.format,
+                    "sha256": reference.sha256,
+                    "payload": original.payload,
+                }));
+            }
         }
         let mut native_latest = Vec::new();
         for scope in run
@@ -861,6 +1120,19 @@ impl AppState {
             .repo
             .get::<serde_json::Value>(&key)?
             .ok_or("The saved drawing is unavailable. Its reference is kept.")?;
+        if artifact["id"] != serde_json::json!(id)
+            || artifact["version"] != 1
+            || artifact["sha256"].as_str()
+                != Some(
+                    hash(&serde_json::to_vec(&artifact["payload"]).map_err(|e| e.to_string())?)
+                        .as_str(),
+                )
+        {
+            return Err(
+                "The drawing's saved bytes do not match its identity. Its original is preserved."
+                    .into(),
+            );
+        }
         Ok(WritingOriginalRef {
             id,
             scope_id: artifact["scope_id"]
@@ -915,18 +1187,24 @@ impl AppState {
     }
     pub(crate) fn writing_navigation_needs_flush(&self) -> bool {
         self.page == Page::Handwriting
-            && self
-                .repo
-                .get::<String>("handwriting.surface")
-                .ok()
-                .flatten()
-                .as_deref()
-                != Some("catalog")
+            && !matches!(
+                self.repo
+                    .get::<String>("handwriting.surface")
+                    .ok()
+                    .flatten()
+                    .as_deref(),
+                Some("catalog" | "history")
+            )
             && self.active_handwriting().is_ok()
     }
     pub(crate) fn open_writing_catalog(&mut self) -> Result<()> {
         self.writing_reference_use()?;
         self.repo.set("handwriting.surface", &"catalog")?;
+        self.navigate(Page::Handwriting)
+    }
+    pub(crate) fn open_writing_history_list(&mut self) -> Result<()> {
+        self.writing_reference_use()?;
+        self.repo.set("handwriting.surface", &"history")?;
         self.navigate(Page::Handwriting)
     }
 }

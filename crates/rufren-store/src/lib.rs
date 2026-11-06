@@ -122,6 +122,36 @@ impl Store {
         )?;
         Ok(())
     }
+    /// Enumerate only matching local metadata, without unrelated drawing payloads.
+    pub fn metadata_with_prefix(&self, prefix: &str) -> Result<Vec<(String, serde_json::Value)>> {
+        self.metadata_selection(prefix, None)
+    }
+    /// Exact scope filtering happens in SQLite, before drawing JSON reaches the app.
+    pub fn metadata_with_scope(
+        &self,
+        prefix: &str,
+        scope: &str,
+    ) -> Result<Vec<(String, serde_json::Value)>> {
+        self.metadata_selection(prefix, Some(scope))
+    }
+    fn metadata_selection(
+        &self,
+        prefix: &str,
+        scope: Option<&str>,
+    ) -> Result<Vec<(String, serde_json::Value)>> {
+        let mut stmt = self.connection.prepare(
+            "SELECT key,json FROM metadata WHERE key>=?1 AND (?2 IS NULL OR key<?2)
+             AND (?3 IS NULL OR (json_valid(json) AND json_extract(json,'$.scope_id')=?3)) ORDER BY key",
+        )?;
+        let rows = stmt.query_map(params![prefix, prefix_end(prefix), scope], |row| {
+            Ok((row.get::<_, String>(0)?, row.get::<_, String>(1)?))
+        })?;
+        rows.map(|row| {
+            let (key, raw) = row?;
+            Ok((key, serde_json::from_str(&raw)?))
+        })
+        .collect()
+    }
     pub fn library(&self) -> Result<Library> {
         read_library(&self.connection, &self.projection)
     }
@@ -290,6 +320,22 @@ impl Store {
             has_more: cursor < newest,
         })
     }
+}
+
+/// Exclusive binary-text upper bound for a literal prefix (not a LIKE pattern).
+fn prefix_end(prefix: &str) -> Option<String> {
+    for (offset, ch) in prefix.char_indices().rev() {
+        let mut next = u32::from(ch) + 1;
+        if next == 0xD800 {
+            next = 0xE000;
+        }
+        if let Some(next) = char::from_u32(next) {
+            let mut bound = prefix[..offset].to_owned();
+            bound.push(next);
+            return Some(bound);
+        }
+    }
+    None
 }
 
 fn read_library(connection: &Connection, cache: &RefCell<(u64, Library)>) -> Result<Library> {

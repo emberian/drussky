@@ -352,10 +352,62 @@ pub(crate) enum NativeWritingEvent {
 #[path = "handwriting_native_ios.rs"]
 mod ios;
 #[cfg(all(target_os = "ios", feature = "mobile"))]
-pub(crate) use ios::{ack, is_open, open_native, request_pause};
+pub(crate) use ios::{ack, is_open, native_drawing_preview, open_native, request_pause};
 pub(crate) const fn supported() -> bool {
     cfg!(all(target_os = "ios", feature = "mobile"))
 }
+
+/// Transient history image, rendered from the saved PencilKit archive on iOS.
+/// Call only for an explicitly viewed original, on the app's main thread.
+/// Other platforms cannot render the native archive faithfully.
+#[cfg(not(all(target_os = "ios", feature = "mobile")))]
+pub(crate) fn native_drawing_preview(
+    checkpoint: &NativeWritingCheckpoint,
+) -> NativeWritingResult<Option<String>> {
+    checkpoint.validate()?;
+    Ok(None)
+}
+
+/// Paper and native rendered bounds are combined before selecting a bitmap scale.
+/// Keep both edges bounded, including long paper and transformed outlying ink.
+pub(crate) fn native_preview_geometry(
+    paper: &NativePaper,
+    ink_bounds: Option<[f64; 4]>,
+) -> NativeWritingResult<([f64; 4], f64)> {
+    paper.validate()?;
+    const MAX_EXTENT: f64 = 1_000_000.0;
+    let mut rect = [0.0, 0.0, paper.width_points, paper.height_points];
+    if let Some([x, y, width, height]) = ink_bounds {
+        if ![x, y, width, height]
+            .iter()
+            .all(|n| n.is_finite() && n.abs() <= MAX_EXTENT)
+            || width <= 0.0
+            || height <= 0.0
+        {
+            return Err("The saved drawing has unsupported preview bounds.".into());
+        }
+        let left = x.min(0.0);
+        let top = y.min(0.0);
+        rect = [
+            left,
+            top,
+            (x + width).max(paper.width_points) - left,
+            (y + height).max(paper.height_points) - top,
+        ];
+    }
+    let [_, _, width, height] = rect;
+    if width > MAX_EXTENT || height > MAX_EXTENT {
+        return Err("The saved drawing is too spread out for a history preview.".into());
+    }
+    // One pixel of rounding room keeps UIKit's raster dimensions within
+    // 1024 × 2048 (about 8 MiB of RGBA), independent of device screen scale.
+    let scale = (1023.0 / width).min(2047.0 / height).min(1.0);
+    if width * scale < 1.0 || height * scale < 1.0 {
+        return Err("The saved drawing is too narrow for a history preview.".into());
+    }
+    Ok((rect, scale))
+}
+
 #[cfg(not(all(target_os = "ios", feature = "mobile")))]
 pub(crate) fn open_native(
     request: NativeWritingRequest,
@@ -478,5 +530,57 @@ pub(crate) fn native_checkpoint_interval(tool_active: bool, explicit: bool) -> f
         0.0
     } else {
         0.25
+    }
+}
+
+#[cfg(test)]
+mod preview_tests {
+    use super::*;
+
+    fn paper(width_points: f64, height_points: f64) -> NativePaper {
+        NativePaper {
+            width_points,
+            height_points,
+            line_height_points: 80.0,
+        }
+    }
+
+    #[test]
+    fn preview_bounds_include_transformed_ink_outside_all_paper_edges() {
+        let (rect, scale) =
+            native_preview_geometry(&paper(1024.0, 768.0), Some([-100.0, -40.0, 1300.0, 900.0]))
+                .unwrap();
+        assert_eq!(rect, [-100.0, -40.0, 1300.0, 900.0]);
+        assert!(rect[2] * scale <= 1024.0);
+        assert!(rect[3] * scale <= 2048.0);
+    }
+
+    #[test]
+    fn preview_raster_stays_bounded_for_every_extreme_valid_paper_shape() {
+        for width in [320.0, 8192.0] {
+            for height in [200.0, 16384.0] {
+                let (rect, scale) = native_preview_geometry(&paper(width, height), None).unwrap();
+                assert_eq!(rect, [0.0, 0.0, width, height]);
+                assert!((1.0..=1024.0).contains(&(width * scale).ceil()));
+                assert!((1.0..=2048.0).contains(&(height * scale).ceil()));
+                assert!((width * scale).ceil() * (height * scale).ceil() <= 1024.0 * 2048.0);
+            }
+        }
+    }
+
+    #[test]
+    fn preview_rejects_nonfinite_excessive_and_subpixel_geometry() {
+        let paper = paper(1024.0, 768.0);
+        for bounds in [
+            [f64::NAN, 0.0, 10.0, 10.0],
+            [0.0, f64::INFINITY, 10.0, 10.0],
+            [0.0, 0.0, f64::MAX, 10.0],
+            [0.0, 0.0, 0.0, 10.0],
+            [0.0, 0.0, -1.0, 10.0],
+            [-1_000_000.0, 0.0, 10.0, 10.0],
+            [0.0, 0.0, 1_000_000.0, 10.0],
+        ] {
+            assert!(native_preview_geometry(&paper, Some(bounds)).is_err());
+        }
     }
 }
