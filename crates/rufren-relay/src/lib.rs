@@ -15,8 +15,8 @@ use rufren_speech::{
 };
 use rufren_store::Store;
 use rufren_tutor::{
-    TeacherRequest, TeacherResponse, TutorError, TutorRequest, TutorResponse, TutorService,
-    TutorStatus,
+    TeacherDialogueRequest, TeacherDialogueResponse, TeacherRequest, TeacherResponse, TutorError,
+    TutorRequest, TutorResponse, TutorService, TutorStatus,
 };
 use std::{
     collections::VecDeque,
@@ -131,6 +131,10 @@ pub fn router_with_ai_services(
             "/api/teacher/teach",
             post(teacher_teach).layer(DefaultBodyLimit::max(32_768)),
         )
+        .route(
+            "/api/teacher/dialogue",
+            post(teacher_dialogue).layer(DefaultBodyLimit::max(32_768)),
+        )
         .route("/api/speech/status", get(speech_status))
         .route(
             "/api/speech/generate",
@@ -213,13 +217,19 @@ async fn authorize(State(state): State<Relay>, request: Request, next: Next) -> 
         }
     }
     // Teaching can use deep reasoning; private data transfers retain their shorter bound.
+    let is_dialogue = request.uri().path() == "/api/teacher/dialogue";
     let deadline = match request.uri().path() {
-        "/api/teacher/teach" | "/api/tutor/suggest" => Duration::from_secs(110),
+        "/api/teacher/teach" | "/api/teacher/dialogue" | "/api/tutor/suggest" => {
+            Duration::from_secs(110)
+        }
         "/api/speech/transcribe" => Duration::from_secs(130),
         _ => Duration::from_secs(60),
     };
     match tokio::time::timeout(deadline, next.run(request)).await {
         Ok(response) => response,
+        Err(_) if is_dialogue => {
+            (StatusCode::GATEWAY_TIMEOUT, TutorError::Timeout.to_string()).into_response()
+        }
         Err(_) => (
             StatusCode::REQUEST_TIMEOUT,
             "Request timed out; saved batches can safely be retried",
@@ -285,6 +295,18 @@ async fn tutor_suggest(
             };
             (status, error.to_string())
         })
+}
+
+async fn teacher_dialogue(
+    State(state): State<Relay>,
+    Json(request): Json<TeacherDialogueRequest>,
+) -> Result<Json<TeacherDialogueResponse>, HttpError> {
+    state
+        .tutor
+        .dialogue(&request)
+        .await
+        .map(Json)
+        .map_err(tutor_http_error)
 }
 
 async fn teacher_teach(

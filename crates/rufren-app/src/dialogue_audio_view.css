@@ -1,0 +1,11 @@
+.dialogue-voice-input { margin-top:12px; min-width:0 }
+.dialogue-voice-input>.quiet,.dialogue-chunk-audio>.quiet,.dialogue-user-audio .quiet { font-size:12px; line-height:1.7; overflow-wrap:anywhere }
+.dialogue-voice-input .audio-review-player h3,.dialogue-chunk-audio .audio-review-player h3,.dialogue-user-audio .audio-review-player h3 { font-size:18px; margin-top:0 }
+.dialogue-transcript-words { margin-top:18px }
+.dialogue-transcript-words>h3 { font:23px Georgia,serif }
+.dialogue-voice-input summary,.dialogue-user-audio summary { min-height:44px; padding:8px 0; line-height:1.6; cursor:pointer }
+.dialogue-chunk-audio { margin:8px 0; min-width:0 }
+.dialogue-chunk-audio>button { font-size:12px }
+.dialogue-chunk-audio select { width:100%; min-height:44px; padding:10px; border:1px solid var(--control-line); border-radius:6px; color:inherit; background:var(--paper); font:inherit; font-size:13px }
+.dialogue-user-audio { margin:8px 0; min-width:0 }
+.dialogue-audio-audit { white-space:pre-wrap; overflow-wrap:anywhere; max-height:18rem; overflow:auto; padding:12px; border:1px solid var(--line); border-radius:6px; font:11px/1.7 ui-monospace,monospace; background:var(--paper) }

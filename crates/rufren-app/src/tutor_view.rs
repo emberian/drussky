@@ -123,7 +123,7 @@ pub fn TutorView(
                                 }
                             });
                         },
-                        if sending() {span {class:"tutor-spinner",aria_hidden:"true"} "Thinking through your text…"}else{"Send text to Anthropic ↗"}
+                        if sending() {span {class:"tutor-spinner",aria_hidden:"true"} "Thinking through your text…"}else{"Send to your teacher ↗"}
                     }
                     button {class:"text-button",disabled:busy,
                         onclick:move |_|{
@@ -155,7 +155,7 @@ pub fn TutorView(
             section {class:"tutor-result",aria_label:"Tutor suggestions",aria_live:"polite",
                 if let Some(answer)=answer {
                     div {class:"tutor-answer-heading",span {class:"tag tutor-review-tag","UNREVIEWED AI SUGGESTION"}
-                        p {"A starting point to explore and check with your coach."}}
+                        p {"An AI suggestion to explore; it can be mistaken."}}
                     article {class:"panel tutor-answer",
                         h2 {"{task_title(&answer.task)}"}
                         TeacherProse {app,language:"en",class:"tutor-prose",text:answer.content.explanation.clone(),purpose:PresentationPurpose::Instruction}

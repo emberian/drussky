@@ -2,6 +2,8 @@
 //! Shared by the provider gateway, durable learning history and application.
 
 use serde::{Deserialize, Serialize};
+mod dialogue;
+pub use dialogue::*;
 mod teacher;
 pub use teacher::*;
 
@@ -145,6 +147,8 @@ pub struct TutorStatus {
     pub accounting: UsageAccounting,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub lesson_flow: Option<LessonFlowCapability>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub dialogue: Option<DialogueCapability>,
 }
 
 /// Errors deliberately exclude provider response bodies, request text, URLs and secrets.

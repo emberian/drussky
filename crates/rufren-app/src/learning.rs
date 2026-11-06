@@ -1,7 +1,7 @@
 //! Lesson provenance and user-controlled practice, separate from rendering.
 use crate::{
     model::{AppState, Page},
-    repository::{now_ms, Result},
+    repository::{Result, now_ms},
 };
 use rufren_content::{Exercise, ExerciseKind, Lesson, Phrase};
 use rufren_core::*;

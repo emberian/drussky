@@ -11,6 +11,8 @@ mod anthropic;
 #[cfg(feature = "server")]
 mod claude_cli;
 #[cfg(feature = "server")]
+mod dialogue;
+#[cfg(feature = "server")]
 mod teacher;
 
 #[cfg(feature = "server")]
@@ -142,6 +144,7 @@ impl TutorService {
         TutorStatus {
             enabled,
             lesson_flow: enabled.then_some(LessonFlowCapability::GuidedV1),
+            dialogue: enabled.then_some(DialogueCapability::ThreadedV1),
             provider:self.provider.as_ref().map(|p|match p {Provider::Anthropic(_)=>"anthropic",Provider::ClaudeCli(_)=>"claude_cli"}.into()),
             model:match &self.provider {Some(Provider::Anthropic(p))=>Some(p.model().into()),Some(Provider::ClaudeCli(p))=>Some(p.configured_profile()),_=>None},
             message:match &self.provider {
@@ -177,6 +180,19 @@ impl TutorService {
         match provider {
             Provider::Anthropic(p) => p.teach(request).await,
             Provider::ClaudeCli(p) => p.teach(request).await,
+        }
+    }
+
+    pub async fn dialogue(
+        &self,
+        request: &TeacherDialogueRequest,
+    ) -> Result<TeacherDialogueResponse, TutorError> {
+        request.validate()?;
+        let provider = self.provider.as_ref().ok_or(TutorError::Disabled)?;
+        let _permit = self.admit()?;
+        match provider {
+            Provider::Anthropic(p) => p.dialogue(request).await,
+            Provider::ClaudeCli(p) => p.dialogue(request).await,
         }
     }
 

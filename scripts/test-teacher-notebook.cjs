@@ -3,6 +3,7 @@ const { chromium } = require(process.env.RUFREN_PLAYWRIGHT_MODULE || 'playwright
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { navigate } = require('./qa-navigation.cjs');
 const { teacherResponse } = require('./test-teacher-oral.cjs');
 
 const APP = process.env.RUFREN_QA_URL || 'http://127.0.0.1:8091';
@@ -92,7 +93,7 @@ async function main() {
     } else { forbidden.push(req.url()); return route.abort('blockedbyclient'); }
     await route.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify(body) });
   });
-  const nav = name => page.getByRole('navigation', { name: 'Main navigation' }).getByRole('button', { name: new RegExp(name) }).click();
+  const nav = name => navigate(page, name);
   const connect = async () => { await nav('Settings'); await page.locator('#sync-url').fill(RELAY); await page.locator('#sync-key').fill('synthetic-notebook-no-secret'); };
   const flow = page.locator('.teacher-lesson-flow');
   const input = page.locator('.teacher-lesson-current .teacher-exercise textarea');
@@ -123,7 +124,7 @@ async function main() {
     await page.locator('.teacher-notebook-entry').click();
   };
   try {
-    await page.goto(APP); await page.getByRole('navigation').waitFor(); await connect(); await nav('Teacher');
+    await page.goto(APP); await page.locator('main.main h1').waitFor(); await connect(); await nav('Teacher');
     await page.getByText('Ready · Synthetic notebook fixture', { exact: true }).waitFor();
     await start(0);
     const alpha = await flow.getAttribute('data-lesson-document');
@@ -150,7 +151,7 @@ async function main() {
     const beta = await flow.getAttribute('data-lesson-document'); assert.notEqual(beta, alpha);
     await input.fill('Черновик Beta: отдельный ответ');
     const lessons = (await documents()).filter(e => e.fact.data.response.request.mode === 'teach_lesson');
-    assert.equal(lessons.length, 2); assert(lessons.every(e => e.version === 4));
+    assert.equal(lessons.length, 2); assert(lessons.every(e => e.version === 5));
     assert.equal((await events(page)).filter(e => e.fact.kind === 'attempt_recorded').length, 0, 'Navigation and saving documents are not completed practice');
     await openSaved('alpha notebook'); await step(1);
     assert.equal(await flow.getAttribute('data-lesson-document'), alpha); assert.equal(await input.getAttribute('id'), alphaField);
@@ -170,7 +171,7 @@ async function main() {
     await flow.getByRole('button', { name: 'Pause & return to Today', exact: true }).click();
     await page.locator('.teacher-resume').waitFor();
     const beforeReload = (await events(page)).map(e => e.id);
-    await page.reload(); await page.getByRole('navigation').waitFor(); await connect(); await nav('Today');
+    await page.reload(); await page.locator('main.main h1').waitFor(); await connect(); await nav('Today');
     await page.getByRole('button', { name: 'Continue this lesson', exact: false }).click(); await step(1);
     assert.equal(await flow.getAttribute('data-lesson-document'), alpha);
     assert.equal(await input.inputValue(), 'Alpha unfinished lighthouse meaning');

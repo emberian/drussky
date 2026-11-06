@@ -161,6 +161,28 @@ impl Anthropic {
         .map_err(|_| TutorError::Timeout)?
     }
 
+    pub async fn dialogue(
+        &self,
+        request: &TeacherDialogueRequest,
+    ) -> Result<TeacherDialogueResponse, TutorError> {
+        tokio::time::timeout(self.timeout,async {
+            let (value,usage,response_id)=self.structured(
+                serde_json::to_string(request).map_err(|_|TutorError::InvalidRequest)?,
+                dialogue::schema(),dialogue::SYSTEM,
+            ).await?;
+            let content:TeacherDialogueContent=serde_json::from_value(value).map_err(|_|TutorError::InvalidResponse)?;
+            content.validate_for(request)?;
+            let response=TeacherDialogueResponse{
+                request:request.clone(),content,usage,
+                provenance:provenance(self.model,ReviewStatus::AiGeneratedTeaching,
+                    "Learner-authored dialogue and language-content teaching; no grading or acoustic assessment",
+                    dialogue::PROMPT_VERSION,response_id),
+            };
+            response.validate()?;
+            Ok(response)
+        }).await.map_err(|_|TutorError::Timeout)?
+    }
+
     async fn structured(
         &self,
         input: String,

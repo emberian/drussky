@@ -29,5 +29,6 @@ pub(crate) fn TeacherFeedback(
                     }
                 }
                 div {class:"hint",span {class:"tag","YOUR NEXT STEP"}TeacherProse {app,language:"en",text:answer.content.next_step.clone(),purpose:PresentationPurpose::Instruction}}
+                crate::teacher_dialogue_view::AskAboutThis {app,document:teacher_document_id(&answer),focus:rufren_tutor::TeacherDialogueFocus::Feedback,disabled:capture_busy()}
     }
 }

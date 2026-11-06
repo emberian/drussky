@@ -258,6 +258,15 @@ fn LessonStepView(
     busy: bool,
 ) -> Element {
     let document = teacher_document_id(&answer);
+    let focus = if answer.content.lesson_flow.is_some() {
+        rufren_tutor::TeacherDialogueFocus::Step {
+            step_id: step.id.clone(),
+        }
+    } else if let Some(index) = step.practice {
+        rufren_tutor::TeacherDialogueFocus::Practice { index }
+    } else {
+        rufren_tutor::TeacherDialogueFocus::Explanation
+    };
     rsx! {
         section {class:"teacher-lesson-current","data-step-id":step.id.clone(),
             div {class:"teacher-lesson-goal",role:"heading",aria_level:"3",tabindex:"-1",TeacherProse {app,language:"en",text:step.goal,purpose:PresentationPurpose::Instruction}}
@@ -268,6 +277,7 @@ fn LessonStepView(
                 for index in step.support {TeacherExampleView {key:"support-{document}-{index}",app,answer:answer.clone(),index,purpose:PresentationPurpose::Reference}}
             }}
             if let Some(index)=step.practice {TeacherPractice {key:"practice-{document}-{index}",app,answer,index,active_speaking,capture_busy}}
+            crate::teacher_dialogue_view::AskAboutThis {app,document,focus,disabled:capture_busy()}
         }
     }
 }

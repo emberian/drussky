@@ -585,3 +585,153 @@ async fn provider_api_reasoning_blocks_and_optional_model_prices_are_explicit() 
     assert_eq!(result.usage.accounting, UsageAccounting::ApiTokenEstimate);
     task.abort();
 }
+
+fn dialogue_request() -> TeacherDialogueRequest {
+    serde_json::from_value(json!({
+        "request_id":"10000000-0000-4000-8000-000000000001","thread_id":"10000000-0000-4000-8000-000000000001","parent_reply_id":null,
+        "config":{"intent":"clarification","topic":"Location and direction","teacher_role":null,"learner_role":null},
+        "action":"ask","correction":"off","anchor":null,"ancestors":[],"omitted_parent_id":null,"omitted_count":0,
+        "text":"Why is it в школе?"
+    })).unwrap()
+}
+fn dialogue_content() -> Value {
+    json!({"explanation_english":"This means location, so use the prepositional case.",
+        "utterance":{"russian":"Я в шко́ле.","english":"I am at school.","note":"Location."},
+        "next_question":null,"correction":null,"scene_state":"open"})
+}
+#[tokio::test]
+async fn provider_dialogue_targeted_help_preserves_prior_line_and_scoped_instruction() {
+    let mut request = dialogue_request();
+    let first = request.request_id;
+    let parent = "10000000-0000-4000-8000-000000000002".parse().unwrap();
+    request.request_id = "10000000-0000-4000-8000-000000000003".parse().unwrap();
+    request.parent_reply_id = Some(parent);
+    request.config.intent = DialogueIntent::Roleplay;
+    request.config.topic = "A ship's AI offers tea.".into();
+    request.text="Could you explain your last question in English and give me one short Russian reply I can use?".into();
+    request.ancestors = vec![
+        DialogueAncestor {
+            message_id: first,
+            role: DialogueRole::User,
+            text: "[Learner action: start the scene]".into(),
+        },
+        DialogueAncestor {
+            message_id: parent,
+            role: DialogueRole::Assistant,
+            text: "Хоти́те ча́ю?\nWould you like some tea?".into(),
+        },
+    ];
+    let exact_input = serde_json::to_string(&request).unwrap();
+    let (service, mock, task) = service(
+        vec![
+            (200, json!({"input_tokens":1000})),
+            (200, response(dialogue_content())),
+        ],
+        Duration::ZERO,
+        Duration::from_secs(2),
+        DEFAULT_SESSION_BUDGET_MICRO_USD,
+    )
+    .await;
+    let response = service.dialogue(&request).await.unwrap();
+    assert_eq!(response.request, request);
+    assert_eq!(response.provenance.prompt_version, "rufren-ai-dialogue-v2");
+    let seen = mock.seen.lock().unwrap();
+    assert_eq!(seen[1].1["messages"][0]["content"], exact_input);
+    let system = seen[1].1["system"].as_str().unwrap();
+    assert_eq!(system, dialogue::SYSTEM);
+    assert!(system.contains("faithful brief meaning and one usable short model reply"));
+    assert!(system.contains("written word-stress marks do not fix sentence pitch"));
+    task.abort();
+}
+#[tokio::test]
+async fn provider_dialogue_exact_binding_and_budget_shared_with_teaching() {
+    let (service, mock, task) = service(
+        vec![
+            (200, json!({"input_tokens":1000})),
+            (200, response(dialogue_content())),
+        ],
+        Duration::ZERO,
+        Duration::from_secs(2),
+        RESERVATION_MICRO_USD,
+    )
+    .await;
+    let request = dialogue_request();
+    let result = service.dialogue(&request).await.unwrap();
+    assert_eq!(result.request, request);
+    assert_eq!(result.provenance.prompt_version, "rufren-ai-dialogue-v2");
+    assert_eq!(
+        service.status().dialogue,
+        Some(DialogueCapability::ThreadedV1)
+    );
+    assert!(matches!(
+        service.teach(&teacher_request()).await,
+        Err(TutorError::BudgetExceeded)
+    ));
+    let seen = mock.seen.lock().unwrap();
+    assert_eq!(seen.len(), 2);
+    assert_eq!(seen[1].1["system"], dialogue::SYSTEM);
+    assert_eq!(
+        seen[1].1["output_config"]["format"]["schema"],
+        dialogue::schema()
+    );
+    let input: TeacherDialogueRequest =
+        serde_json::from_str(seen[1].1["messages"][0]["content"].as_str().unwrap()).unwrap();
+    assert_eq!(input, request);
+    task.abort();
+}
+#[tokio::test]
+async fn provider_dialogue_invalid_current_correction_rejected_without_retry() {
+    let mut invalid = dialogue_content();
+    invalid["correction"] =
+        json!({"original":"школе","replacement":"школу","reason":"An unwanted correction."});
+    let (service, mock, task) = service(
+        vec![
+            (200, json!({"input_tokens":1000})),
+            (200, response(invalid)),
+        ],
+        Duration::ZERO,
+        Duration::from_secs(2),
+        DEFAULT_SESSION_BUDGET_MICRO_USD,
+    )
+    .await;
+    assert!(matches!(
+        service.dialogue(&dialogue_request()).await,
+        Err(TutorError::InvalidResponse)
+    ));
+    assert_eq!(mock.calls.load(Ordering::SeqCst), 2);
+    task.abort();
+}
+#[tokio::test]
+async fn provider_dialogue_bounds_precede_network_and_quota_and_auth_redacts() {
+    let (service, mock, task) = self::service(
+        vec![],
+        Duration::ZERO,
+        Duration::from_secs(2),
+        DEFAULT_SESSION_BUDGET_MICRO_USD,
+    )
+    .await;
+    let mut invalid = dialogue_request();
+    invalid.text = "x".repeat(2049);
+    assert!(matches!(
+        service.dialogue(&invalid).await,
+        Err(TutorError::InvalidRequest)
+    ));
+    assert_eq!(mock.calls.load(Ordering::SeqCst), 0);
+    assert_eq!(
+        service.status().remaining_budget_micro_usd,
+        DEFAULT_SESSION_BUDGET_MICRO_USD
+    );
+    task.abort();
+    let (service, mock, task) = self::service(
+        vec![(401, json!({"error":"PRIVATE-DIALOGUE-TEXT"}))],
+        Duration::ZERO,
+        Duration::from_secs(2),
+        DEFAULT_SESSION_BUDGET_MICRO_USD,
+    )
+    .await;
+    let error = service.dialogue(&dialogue_request()).await.unwrap_err();
+    assert!(matches!(error, TutorError::Authentication));
+    assert!(!error.to_string().contains("PRIVATE"));
+    assert_eq!(mock.calls.load(Ordering::SeqCst), 1);
+    task.abort();
+}

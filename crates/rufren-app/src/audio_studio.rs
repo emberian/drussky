@@ -48,11 +48,50 @@ pub struct StudioRecording {
     pub annotations: Vec<StudioAnnotation>,
 }
 
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct DialogueRecorderScope {
+    pub thread_id: uuid::Uuid,
+    pub input_id: uuid::Uuid,
+}
+
 /// Save one generated original, bound to the exact phrase revision and request.
 /// Network/provider configuration is owned by the shared gateway client.
 pub async fn save_generated_reference(
     passage_id: &str,
     revision_id: &str,
+    expected_text: &str,
+    expected_request_id: &str,
+    response: serde_json::Value,
+) -> Result<StudioRecording, String> {
+    save_generated_audio(
+        passage_id,
+        revision_id,
+        None,
+        expected_text,
+        expected_request_id,
+        response,
+    )
+    .await
+}
+
+pub(crate) async fn save_generated_dialogue_audio(
+    thread_id: uuid::Uuid,
+    reply_id: uuid::Uuid,
+    chunk_index: usize,
+    expected_text: &str,
+    expected_request_id: &str,
+    response: serde_json::Value,
+) -> Result<StudioRecording, String> {
+    if thread_id.is_nil() || reply_id.is_nil() || chunk_index > 1 {
+        return Err("Invalid dialogue utterance binding.".into());
+    }
+    save_generated_audio("","",Some(serde_json::json!({"thread_id":thread_id,"reply_id":reply_id,"chunk_index":chunk_index})),expected_text,expected_request_id,response).await
+}
+
+async fn save_generated_audio(
+    passage_id: &str,
+    revision_id: &str,
+    dialogue_scope: Option<serde_json::Value>,
     expected_text: &str,
     expected_request_id: &str,
     response: serde_json::Value,
@@ -81,15 +120,21 @@ pub async fn save_generated_reference(
         .map_err(|e| format!("Invalid generated audio response: {e}"))?;
     if generated.source_text != expected_text
         || generated.request_id != expected_request_id
-        || generated.revision_id.as_deref() != Some(revision_id)
+        || generated.revision_id.as_deref()
+            != if dialogue_scope.is_some() {
+                None
+            } else {
+                Some(revision_id)
+            }
     {
         return Err(
             "Generated audio does not match this exact phrase and request. Nothing was attached."
                 .into(),
         );
     }
-    if !uuid::Uuid::parse_str(passage_id).is_ok_and(|id| !id.is_nil())
-        || !uuid::Uuid::parse_str(revision_id).is_ok_and(|id| !id.is_nil())
+    if (dialogue_scope.is_none()
+        && (!uuid::Uuid::parse_str(passage_id).is_ok_and(|id| !id.is_nil())
+            || !uuid::Uuid::parse_str(revision_id).is_ok_and(|id| !id.is_nil())))
         || generated.wav_base64.len() > 6 * 1024 * 1024
     {
         return Err("Invalid generated audio binding or size.".into());
@@ -154,12 +199,20 @@ pub async fn save_generated_reference(
         "source_text_sha256".into(),
         format!("{:x}", Sha256::digest(expected_text.as_bytes())).into(),
     );
-    provenance.insert("revision_id".into(), revision_id.into());
+    if let Some(scope) = &dialogue_scope {
+        provenance.insert("dialogue_scope".into(), scope.clone());
+    } else {
+        provenance.insert("revision_id".into(), revision_id.into());
+    }
     provenance.insert("request_id".into(), expected_request_id.into());
     let voice = provenance
         .get("voice")
         .and_then(|v| v.as_str())
         .unwrap_or("Generated voice");
+    let mut device = serde_json::json!({"provenance":provenance,"source_mime_type":"audio/wav"});
+    if let Some(scope) = dialogue_scope {
+        device["dialogue_scope"] = scope;
+    }
     let recording = StudioRecording {
         asset_id: format!("{hash}-{}", uuid::Uuid::new_v4()),
         content_hash: hash,
@@ -175,7 +228,7 @@ pub async fn save_generated_reference(
         created_at_ms: crate::repository::now_ms(),
         mime_type: "audio/wav".into(),
         interrupted: false,
-        device: serde_json::json!({"provenance":provenance,"source_mime_type":"audio/wav"}),
+        device,
         annotations: Vec::new(),
     };
     let request = serde_json::json!({"recording":recording,"wav_base64":generated.wav_base64});
@@ -464,13 +517,14 @@ pub fn AudioStudio(
     #[props(default)] selected_asset_id: Option<String>,
     #[props(default)] on_selected: EventHandler<Option<StudioRecording>>,
     #[props(default)] on_recording_state: EventHandler<bool>,
+    #[props(default)] dialogue_scope: Option<DialogueRecorderScope>,
 ) -> Element {
     let instance_id = use_hook(|| uuid::Uuid::new_v4().to_string());
     let effect_instance = instance_id.clone();
     let mut reference = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut attempt = use_signal(|| None::<Rc<AudioAnalysis>>);
     let mut error = use_signal(String::new);
-    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id,"compact":compact,"selected_asset_id":selected_asset_id}).to_string();
+    let config = serde_json::json!({"passage_id":passage_id,"revision_id":revision_id,"workspace_id":workspace_id,"compact":compact,"selected_asset_id":selected_asset_id,"dialogue_scope":dialogue_scope}).to_string();
     use_effect(move || {
         let script = format!(
             "const rufrenStudioRoot=document.getElementById('rufren-audio-studio');if(rufrenStudioRoot?.dataset.instance!=={})return;\n{}",
@@ -678,7 +732,7 @@ pub fn AudioStudio(
     rsx! {
         style {"{STYLE}"}
         section {id:"rufren-audio-studio",class:if compact {"audio-studio audio-speaking"}else{"audio-studio"},"data-config":config,"data-instance":instance_id,"data-advanced":"false",
-            if compact {div {class:"audio-speaking-heading",h3 {"Your spoken response"}button {class:"text-button","data-action":"advanced",aria_expanded:"false","Show sound tools"}}}
+            if compact {div {class:"audio-speaking-heading",h3 {if dialogue_scope.is_some(){"Your voice message"}else{"Your spoken response"}}button {class:"text-button","data-action":"advanced",aria_expanded:"false","Show sound tools"}}}
             if !russian.is_empty() {div {class:"panel audio-passage",span {class:"tag","YOUR PHRASE"}p {class:"russian-display",lang:"ru","{russian}"}}}
             div {class:"panel audio-session-bar",
                 div {id:"audio-mic-status",class:"audio-mic",role:"status","data-active":"false","Microphone off"}
@@ -693,10 +747,10 @@ pub fn AudioStudio(
                         p {class:"quiet","{description}"}
                         if role=="reference" {if let Some(generate)=on_generate_reference {button {class:"primary",disabled:generating_reference,onclick:move |_|generate.call(()),if generating_reference {"Generating reference…"}else{"Generate reference audio"}}}}
                         div {class:"audio-acquire",
-                            button {class:"primary","data-action":"record","data-role":role,"data-record":"true",if role=="reference" {"● Record another voice"}else{"● Record my attempt"}}
-                            label {class:"secondary audio-file",r#for:"audio-import-{role}",{"Import audio"} input {id:"audio-import-{role}",name:"audio-import-{role}",onchange:move |event|import_native_file(event,role,error),r#type:"file",accept:"audio/*,.wav,.mp3,.m4a,.ogg,.flac","data-import":role}}
+                            button {class:"primary","data-action":"record","data-role":role,"data-record":"true",if role=="reference" {"● Record another voice"}else{if dialogue_scope.is_some(){"● Record my message"}else{"● Record my attempt"}}}
+                            label {class:"secondary audio-file",r#for:"audio-import-{role}",{if dialogue_scope.is_some(){"Import WAV"}else{"Import audio"}} input {id:"audio-import-{role}",name:"audio-import-{role}",onchange:move |event|import_native_file(event,role,error),r#type:"file",accept:if dialogue_scope.is_some(){"audio/wav,.wav"}else{"audio/*,.wav,.mp3,.m4a,.ogg,.flac"},"data-import":role}}
                         }
-                        label {r#for:"audio-library-{role}","Saved takes for this phrase"}
+                        label {r#for:"audio-library-{role}",if dialogue_scope.is_some(){"Saved takes for this message"}else{"Saved takes for this phrase"}}
                         select {id:"audio-library-{role}","data-library":role,aria_label:"Saved {title}"}
                         p {id:"audio-name-{role}",class:"audio-clip-name","No recording selected"}
                         p {id:"audio-provenance-{role}",class:"quiet audio-source","No source selected"}
@@ -826,9 +880,10 @@ pub fn AudioSpeaking(
     #[props(default)] on_region_played: EventHandler<StudioRegionPlayback>,
     #[props(default)] on_generate_reference: Option<EventHandler<()>>,
     #[props(default)] generating_reference: bool,
+    #[props(default)] dialogue_scope: Option<DialogueRecorderScope>,
     #[props(default)] workspace_id: String,
 ) -> Element {
-    rsx! {AudioStudio {passage_id,revision_id,workspace_id,compact:true,selected_asset_id,on_saved,on_selected,on_recording_state,on_reference_played,on_region_played,on_generate_reference,generating_reference}}
+    rsx! {AudioStudio {passage_id,revision_id,workspace_id,compact:true,selected_asset_id,on_saved,on_selected,on_recording_state,on_reference_played,on_region_played,on_generate_reference,generating_reference,dialogue_scope}}
 }
 
 fn quality_summary(analysis: &AudioAnalysis) -> Element {
@@ -912,7 +967,7 @@ async function prepare(){
    media.onerror=()=>{clearTimeout(prepareTimer);reject(Error('This device could not play the saved original. Import a WAV or MP3 reference.'));};
    media.src=url;media.load();
   }),lifetime.then(()=>{throw Error('Reference player closed.');}),cancellation.then(()=>{throw Error('Reference selection changed.');})]);
-  if(alive&&generation===loadGeneration){record=selected;if(sourceLabel)sourceLabel.textContent=referenceSource(record);buttons.forEach(b=>b.disabled=Number(b.dataset.practiceRate)!==1&&!preservePitchKey);status.textContent=preservePitchKey?'Reference ready. Listen at natural speed, or replay slowly with voice pitch preserved.':'Reference ready at natural speed. Pitch-preserving slow playback is unavailable here.';send({kind:'ready',ready:true});}
+  if(alive&&generation===loadGeneration){record=selected;if(sourceLabel)sourceLabel.textContent=referenceSource(record);buttons.forEach(b=>b.disabled=Number(b.dataset.practiceRate)!==1&&!preservePitchKey);const readyLabel=root.dataset.asset!==undefined?'Recording':'Reference';status.textContent=preservePitchKey?`${readyLabel} ready. Listen at natural speed, or replay slowly with voice pitch preserved.`:`${readyLabel} ready at natural speed. Pitch-preserving slow playback is unavailable here.`;send({kind:'ready',ready:true});}
  }catch(error){if(alive&&generation===loadGeneration){status.textContent=error.message;send({kind:'ready',ready:false});}}
 }
 await prepare();
@@ -1011,7 +1066,11 @@ pub fn AudioReview(
 }
 
 #[component]
-fn AudioReviewPlayer(asset_id: String, label: String) -> Element {
+pub(crate) fn AudioReviewPlayer(
+    asset_id: String,
+    label: String,
+    #[props(default)] on_played: EventHandler<StudioRecording>,
+) -> Element {
     let element_id = use_hook(|| format!("rufren-audio-review-{}", uuid::Uuid::new_v4()));
     let mut error = use_signal(String::new);
     let effect_id = element_id.clone();
@@ -1023,7 +1082,13 @@ fn AudioReviewPlayer(asset_id: String, label: String) -> Element {
         );
         spawn(async move {
             let mut bridge = document::eval(&script);
-            while bridge.recv::<PracticeAudioEvent>().await.is_ok() {}
+            while let Ok(event) = bridge.recv::<PracticeAudioEvent>().await {
+                if event.kind == "played" {
+                    if let Some(recording) = event.recording {
+                        on_played.call(recording);
+                    }
+                }
+            }
             error.set("The recording player disconnected. Reopen this review to reconnect.".into());
         });
     });

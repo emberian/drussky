@@ -54,9 +54,9 @@ def required_assets(path):
             result[key], records[asset_id] = size, key
         for (text,) in db.execute('SELECT json FROM events'):
             fact = json.loads(text)['fact']
-            if fact['kind'] == 'recording_attached':
+            if fact['kind'] in ('recording_attached', 'dialogue_audio_attached'):
                 references.append((fact['data']['asset_id'], fact['data']['asset']['sha256']))
-            elif fact['kind'] == 'speech_transcribed':
+            elif fact['kind'] in ('speech_transcribed', 'dialogue_speech_transcribed'):
                 references.append((fact['data']['asset_id'], fact['data']['audio_sha256']))
     pending = {asset_id for asset_id, _ in references if asset_id not in records}
     if pending:

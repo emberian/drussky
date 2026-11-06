@@ -75,7 +75,7 @@ pub enum TeacherRequest {
 pub const ORAL_REFERENCE_MAX_BYTES: usize = 1024;
 pub const ORAL_REFERENCE_MAX_CHARS: usize = 256;
 
-fn oral_reference(text: &str) -> bool {
+pub(crate) fn oral_reference(text: &str) -> bool {
     bounded(text, ORAL_REFERENCE_MAX_BYTES)
         && text.chars().count() <= ORAL_REFERENCE_MAX_CHARS
         && !text

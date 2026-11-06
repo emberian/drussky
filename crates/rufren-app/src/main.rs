@@ -1,6 +1,8 @@
 mod asset_sync;
 mod audio_studio;
 mod coach;
+mod dialogue_audio;
+mod dialogue_audio_view;
 mod drafts;
 mod drafts_view;
 mod editor_drafts;
@@ -19,18 +21,20 @@ mod teacher;
 mod teacher_audio_practice;
 mod teacher_audio_practice_view;
 mod teacher_context;
+mod teacher_dialogue;
+mod teacher_dialogue_view;
 mod teacher_example_audio;
 mod teacher_example_view;
 mod teacher_examples;
 mod teacher_feedback_view;
-mod teacher_revisit;
-mod teacher_revisit_view;
 mod teacher_lesson_view;
 mod teacher_notebook;
 mod teacher_notebook_view;
 mod teacher_practice;
 mod teacher_practice_view;
 mod teacher_prose;
+mod teacher_revisit;
+mod teacher_revisit_view;
 mod teacher_view;
 mod tutor_view;
 mod workspace_view;
@@ -81,6 +85,13 @@ fn App() -> Element {
         if let Err(problem) = state.recover_cached_teacher_responses() {
             state.notice = problem;
         }
+        match state.reconcile_dialogue() {
+            Ok(report) if !report.diagnostics.is_empty() => {
+                state.notice = report.diagnostics.join(" ")
+            }
+            Err(problem) => state.notice = problem,
+            _ => {}
+        }
         Ok::<_, String>(state)
     });
     let snapshot = initial.read().clone();
@@ -97,13 +108,23 @@ fn App() -> Element {
 #[component]
 fn Shell(initial: AppState) -> Element {
     let mut app = use_signal(|| initial);
+    let mut navigation_open = use_signal(|| false);
+    let current_page = use_memo(move || app.read().page);
+    use_effect(move || {
+        let _page = current_page();
+        navigation_open.set(false);
+    });
     let state = app.read().clone();
     rsx! {
         style {"{STYLE}"}
         div {class:"shell",
-            aside {class:"sidebar",
-                a {class:"brand",href:"#",onclick:move |_|app.write().page=Page::Today, span {class:"brand-mark","р"} div {strong {"rufren"} small {"a world in another language"}}}
-                nav {aria_label:"Main navigation",for page in Page::ALL {button {class:if state.page==page {"nav-item active"}else{"nav-item"},aria_current:if state.page==page {"page"}else{"false"},onclick:move |_|act(app,|s|s.navigate(page)),span {"{page.icon()}"} "{page.label()}"}}}
+            aside {class:"sidebar",onkeydown:move |event|if event.key()==Key::Escape && navigation_open(){navigation_open.set(false);focus_navigation_toggle();},
+                div {class:"navigation-heading",
+                    a {class:"brand",href:"#",onclick:move |event|{event.prevent_default();navigate_shell(app,navigation_open,Page::Today);}, span {class:"brand-mark","р"} div {strong {"rufren"} small {"a world in another language"}}}
+                    span {class:"mobile-destination","{state.page.label()}"}
+                    button {id:"navigation-toggle",class:"navigation-toggle",aria_controls:"main-navigation",aria_expanded:navigation_open(),onclick:move |_|navigation_open.set(!navigation_open()),if navigation_open(){"Close"}else{"Menu"}}
+                }
+                nav {id:"main-navigation",class:if navigation_open(){"navigation expanded"}else{"navigation"},aria_label:"Main navigation",for page in Page::ALL {button {class:if state.page==page {"nav-item active"}else{"nav-item"},aria_current:if state.page==page {"page"}else{"false"},onclick:move |_|navigate_shell(app,navigation_open,page),span {aria_hidden:"true","{page.icon()}"} "{page.label()}"}}}
                 div {class:"sidebar-bottom",span {class:"status-dot"} "On this device" p {"Your pace. Your Russian."}}
             }
             main {class:"main",
@@ -117,15 +138,43 @@ fn Shell(initial: AppState) -> Element {
         }
     }
 }
+
+fn navigate_shell(mut app: Signal<AppState>, mut open: Signal<bool>, page: Page) {
+    let result = app.write().navigate(page);
+    match result {
+        Ok(()) => {
+            open.set(false);
+            focus_page_heading();
+        }
+        Err(problem) => app.write().notice = problem,
+    }
+}
+
+fn focus_navigation_toggle() {
+    spawn(async move {
+        let _ = document::eval("document.getElementById('navigation-toggle')?.focus();").await;
+    });
+}
+
+fn focus_page_heading() {
+    spawn(async move {
+        let _ = document::eval("await new Promise(requestAnimationFrame); const heading = document.querySelector('main.main h1'); if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({preventScroll:true}); heading.scrollIntoView({block:'start'}); }").await;
+    });
+}
 #[component]
 fn Today(mut app: Signal<AppState>) -> Element {
     let state = app.read().clone();
     let count = state.library.heads().len();
     let attempts = state.library.attempts().count();
-    let resume = state.active_teacher_revisit().ok().flatten().is_some_and(|(_,draft)|draft.saved_attempt.is_none()) || state
-        .session
-        .as_ref()
-        .is_some_and(|s| s.phase != Phase::Complete);
+    let resume = state
+        .active_teacher_revisit()
+        .ok()
+        .flatten()
+        .is_some_and(|(_, draft)| draft.saved_attempt.is_none())
+        || state
+            .session
+            .as_ref()
+            .is_some_and(|s| s.phase != Phase::Complete);
     rsx! {
         section {class:"hero",div {class:"eyebrow","BEGIN WITH CURIOSITY"} h1 {"A little Russian." br {} em {"A bigger world."}}
             p {class:"lede","A conversation with a friend. A sentence from another world. Start with something you want to understand."}
@@ -238,7 +287,7 @@ fn Settings(mut app: Signal<AppState>) -> Element {
                     let snapshot=app.read().clone();app.write().syncing=true;
                     spawn_forever(async move {let result=async {synchronize(snapshot.repo.clone(),snapshot.endpoint.clone(),snapshot.token.clone()).await?;
                         if snapshot.preferences.sync_recordings {asset_sync::synchronize_audio(snapshot.repo,snapshot.endpoint,snapshot.token).await.map(Some).map_err(|e|format!("Passages and practice synced; recording sync stopped: {e}"))} else {Ok(None)}}.await;app.write().syncing=false;
-                        match result {Ok(count)=>act(app,|s|{s.refresh()?;s.notice=count.map_or("Your notebook is up to date with the sync library.".into(),|n|format!("Notebook synced. {n} recordings transferred."));Ok(())}),Err(e)=>app.write().notice=e}
+                        match result {Ok(count)=>act(app,|s|{s.refresh()?;let recovered=s.reconcile_dialogue()?;if !recovered.diagnostics.is_empty(){s.notice=recovered.diagnostics.join(" ");return Ok(());}s.notice=count.map_or("Your notebook is up to date with the sync library.".into(),|n|format!("Notebook synced. {n} recordings transferred."));Ok(())}),Err(e)=>app.write().notice=e}
                     });
                 },if state.syncing {"Syncing…"}else{"Sync now"}}
                 button {class:"text-button",disabled:state.syncing,onclick:move |_|act(app,|s|{s.repo.disconnect()?;
@@ -250,7 +299,7 @@ fn Settings(mut app: Signal<AppState>) -> Element {
                 div {class:"actions",button {class:"secondary",onclick:move |_|act(app,|s|{s.transfer=repository::export_library(s.repo.library()?)?;Ok(())}),"Prepare export"}
                 button {class:"secondary",onclick:move |_|act(app,|s|{let library=repository::import_library(&s.transfer)?;
                     if library.events.iter().any(|(id,e)|*id!=e.id){return Err("Backup event IDs do not match".into());}
-                    s.repo.append(&library.events.into_values().collect::<Vec<_>>())?;s.refresh()?;s.notice="Backup merged into your notebook.".into();Ok(())}),"Restore JSON"}}
+                    s.repo.append(&library.events.into_values().collect::<Vec<_>>())?;s.refresh()?;let recovered=s.reconcile_dialogue()?;if !recovered.diagnostics.is_empty(){s.notice=recovered.diagnostics.join(" ");return Ok(());}s.notice="Backup merged into your notebook.".into();Ok(())}),"Restore JSON"}}
                 label {r#for:"backup-json","Copy this text to a file, or paste a backup to restore"}textarea {id:"backup-json",class:"backup",value:state.transfer,oninput:move |e|app.write().transfer=e.value(),placeholder:"Your portable library…"}
             }
         }

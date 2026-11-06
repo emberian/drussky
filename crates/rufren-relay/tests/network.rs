@@ -463,3 +463,83 @@ async fn network_current_refuses_protocol2_push_and_pull_before_history() {
     assert_eq!(page.cursor, 2);
     server.abort();
 }
+
+#[tokio::test]
+async fn network_dialogue_auth_precedes_decode_disabled_is_explicit_and_upload_bounded() {
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+    let base = format!("http://{}", listener.local_addr().unwrap());
+    let server = tokio::spawn(async move {
+        axum::serve(
+            listener,
+            rufren_relay::router(
+                Store::open(":memory:").unwrap(),
+                "dialogue-test-key".into(),
+                vec![],
+            ),
+        )
+        .await
+        .unwrap();
+    });
+    let client = reqwest::Client::new();
+    let url = format!("{base}/api/teacher/dialogue");
+    assert_eq!(
+        client
+            .post(&url)
+            .body("not JSON")
+            .send()
+            .await
+            .unwrap()
+            .status(),
+        401
+    );
+    let request = serde_json::json!({"request_id":"10000000-0000-4000-8000-000000000001","thread_id":"10000000-0000-4000-8000-000000000001","parent_reply_id":null,
+        "config":{"intent":"clarification","topic":"Location","teacher_role":null,"learner_role":null},"action":"ask","correction":"off","anchor":null,"ancestors":[],"omitted_parent_id":null,"omitted_count":0,"text":"Why is it в школе?"});
+    assert_eq!(
+        client
+            .post(&url)
+            .bearer_auth("dialogue-test-key")
+            .json(&request)
+            .send()
+            .await
+            .unwrap()
+            .status(),
+        503
+    );
+    let mut invalid = request.clone();
+    invalid["text"] = serde_json::json!("x".repeat(2049));
+    assert_eq!(
+        client
+            .post(&url)
+            .bearer_auth("dialogue-test-key")
+            .json(&invalid)
+            .send()
+            .await
+            .unwrap()
+            .status(),
+        400
+    );
+    invalid["text"] = serde_json::json!("x".repeat(32769));
+    assert_eq!(
+        client
+            .post(&url)
+            .bearer_auth("dialogue-test-key")
+            .json(&invalid)
+            .send()
+            .await
+            .unwrap()
+            .status(),
+        413
+    );
+    let status: serde_json::Value = client
+        .get(format!("{base}/api/teacher/status"))
+        .bearer_auth("dialogue-test-key")
+        .send()
+        .await
+        .unwrap()
+        .json()
+        .await
+        .unwrap();
+    assert_eq!(status["enabled"], false);
+    assert!(status.get("dialogue").is_none());
+    server.abort();
+}

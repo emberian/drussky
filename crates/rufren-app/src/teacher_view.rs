@@ -7,7 +7,6 @@ use crate::{
     teacher_lesson_view::TeacherLessonView,
     teacher_notebook_view::{TeacherNotebook, step_for_practice},
     teacher_prose::TeacherProse,
-    tutor_view::TutorView,
 };
 use dioxus::prelude::*;
 use rufren_core::*;
@@ -16,6 +15,27 @@ use uuid::Uuid;
 
 #[component]
 pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
+    let conversations = app
+        .read()
+        .repo
+        .get::<String>("teacher_surface")
+        .ok()
+        .flatten()
+        .as_deref()
+        == Some("dialogues");
+    rsx! {
+        style {".teacher-surface-switch {{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 22px}}.teacher-surface-switch button[aria-pressed=true] {{background:var(--green);color:#fff6da}}"}
+        div {class:"page-heading teacher-compact-heading",h1 {"Your Russian teacher"}}
+        div {class:"teacher-surface-switch",role:"group",aria_label:"Teacher activities",
+            button {class:"secondary",aria_pressed:!conversations,onclick:move |_|act(app,|s|s.repo.set("teacher_surface",&"lessons")),"Lessons"}
+            button {class:"secondary",aria_pressed:conversations,onclick:move |_|act(app,|s|s.repo.set("teacher_surface",&"dialogues")),"Conversations"}
+        }
+        if conversations {crate::teacher_dialogue_view::TeacherDialogues {app}}else{TeacherLessons {app}}
+    }
+}
+
+#[component]
+fn TeacherLessons(mut app: Signal<AppState>) -> Element {
     let mut history_for = use_signal(|| None::<String>);
     let active_speaking = use_signal(|| None::<String>);
     let capture_busy = use_signal(|| false);
@@ -65,13 +85,21 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
     let return_lesson = answer
         .as_ref()
         .and_then(|answer| state.teacher_lesson_for_feedback(answer));
-    let return_review = answer.as_ref().and_then(|answer| {
-        let key=state.teacher_revisit_for_feedback(answer)?;
-        let (_,draft)=state.active_teacher_revisit().ok().flatten()?;
-        let TeacherRequest::AnswerFeedback(request)=&answer.request else{return None};
-        (draft.source==key.document_id.to_string() && draft.index==key.practice_index
-            && draft.saved_attempt.map(|id|id.to_string()).as_deref()==request.attempt_id.as_deref()).then_some(())
-    }).is_some();
+    let return_review = answer
+        .as_ref()
+        .and_then(|answer| {
+            let key = state.teacher_revisit_for_feedback(answer)?;
+            let (_, draft) = state.active_teacher_revisit().ok().flatten()?;
+            let TeacherRequest::AnswerFeedback(request) = &answer.request else {
+                return None;
+            };
+            (draft.source == key.document_id.to_string()
+                && draft.index == key.practice_index
+                && draft.saved_attempt.map(|id| id.to_string()).as_deref()
+                    == request.attempt_id.as_deref())
+            .then_some(())
+        })
+        .is_some();
     let feedback_document = answer
         .as_ref()
         .filter(|answer| matches!(answer.request, TeacherRequest::TeachLesson(_)))
@@ -103,7 +131,7 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
         .get::<TutorResponse>("tutor_response")
         .ok()
         .flatten()
-        .and_then(|r| serde_json::to_string(&r).ok());
+        .filter(|r| r.content.validate().is_ok());
     let history_key = response_key.clone();
     let management = rsx! {
         TeacherNotebook {app,disabled:state.teacher_busy || state.speech_busy || capture_busy(),on_selected:move |_|history_for.set(None)}
@@ -142,11 +170,6 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
     };
     rsx! {
         style {".teacher-compact-heading {{margin-bottom:12px}}.teacher-compact-heading h1 {{font-size:1.75rem;margin:0}}.teacher-tools {{margin-bottom:16px}}.teacher-tools > summary {{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600}}.teacher-tools > summary::before {{content:\"\";width:0;height:0;border-left:5px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent;margin-right:10px}}.teacher-tools[open] > summary::before {{transform:rotate(90deg)}}.teacher-tools[open] > summary {{margin-bottom:12px}}.teacher-tools .teacher-start:not([open]) {{padding:16px 24px}}.teacher-context-action {{margin:8px 0}}"}
-        div {class:if answer.is_some(){"page-heading teacher-compact-heading"}else{"page-heading"},div {
-            if answer.is_none(){div {class:"eyebrow","EXPLAIN · TRY · UNDERSTAND"}}
-            h1 {"Your Russian teacher"}
-            if answer.is_none(){p {"Learn one useful thing, try it, and work through what feels unfamiliar."}}
-        }}
         for tools_key in [response_key.clone()] {details {key:"tools-{tools_key}",class:"teacher-tools",open:answer.is_none(),
             summary {"Lessons & history"}
             {management.clone()}
@@ -214,11 +237,14 @@ pub(crate) fn Teacher(mut app: Signal<AppState>) -> Element {
                 }
             }
         }}
-        details {class:"panel",summary {"Ask a different question"}
-            TutorView {app,endpoint:state.endpoint.clone(),token:state.token.clone(),restored_response_json:free_answer,
-                on_response:move |response|act(app,|s|s.repo.set("tutor_response",&response)),
-                on_add:move |example: TutorExample|act(app,|s|s.keep_teacher_example(example))}
-        }
+        if let Some(earlier)=free_answer {details {class:"panel",summary {"Earlier one-off answer"}
+            p {class:"quiet","The original question was not saved with this older answer. It remains here separately from your conversations."}
+            TeacherProse {app,language:"en",text:earlier.content.explanation.clone(),purpose:PresentationPurpose::Instruction}
+            for example in &earlier.content.examples {PresentedRussian {app,text:example.russian.clone(),purpose:PresentationPurpose::Reference}TeacherProse {app,language:"en",text:example.english.clone(),purpose:PresentationPurpose::Reference}TeacherProse {app,language:"en",text:example.note.clone(),purpose:PresentationPurpose::Instruction}}
+            TeacherProse {app,language:"en",text:earlier.content.next_step.clone(),purpose:PresentationPurpose::Instruction}
+            for caveat in &earlier.content.caveats {TeacherProse {app,language:"en",text:caveat.clone(),purpose:PresentationPurpose::Instruction}}
+            p {class:"quiet","{earlier.provenance.model} · Earlier AI suggestion"}
+        }}
         details {class:"panel",summary {"Optional notes from a conversation"}crate::coach::ConversationNotes {app}}
     }
 }

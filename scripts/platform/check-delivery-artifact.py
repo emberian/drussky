@@ -18,7 +18,7 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def artifact(path, expected_sync_version, expected_teacher_prompt=None):
+def artifact(path, expected_sync_version, expected_teacher_prompt=None, expected_dialogue_prompt=None):
     manifest = json.loads(path.read_text())
     if type(expected_sync_version) is not int or expected_sync_version < 1:
         raise ValueError('Expected sync version must be a positive integer')
@@ -26,6 +26,8 @@ def artifact(path, expected_sync_version, expected_teacher_prompt=None):
         raise ValueError('Frozen artifact data protocol differs from the selected rollout')
     if expected_teacher_prompt and manifest.get('teacher_prompt_version') != expected_teacher_prompt:
         raise ValueError('Frozen artifact teacher prompt differs from the selected rollout')
+    if expected_dialogue_prompt and manifest.get('dialogue_prompt_version') != expected_dialogue_prompt:
+        raise ValueError('Frozen artifact dialogue prompt differs from the selected rollout')
     if type(manifest.get('lesson_count')) is not int or manifest['lesson_count'] < 1:
         raise ValueError('Frozen artifact lesson count is invalid')
     evidence = json.loads(Path(manifest['source_evidence']).read_text())
@@ -35,6 +37,8 @@ def artifact(path, expected_sync_version, expected_teacher_prompt=None):
         raise ValueError('Build-source evidence and frozen artifact protocols differ')
     if manifest.get('teacher_prompt_version') and evidence.get('teacher_prompt_version') != manifest['teacher_prompt_version']:
         raise ValueError('Build-source evidence and frozen artifact teacher prompts differ')
+    if manifest.get('dialogue_prompt_version') and evidence.get('dialogue_prompt_version') != manifest['dialogue_prompt_version']:
+        raise ValueError('Build-source evidence and frozen artifact dialogue prompts differ')
     if evidence.get('content_revision') != manifest.get('content_lineage') or evidence.get('lesson_count') != manifest['lesson_count']:
         raise ValueError('Build-source evidence and frozen artifact content differ')
     if evidence.get('ca_sha256') != manifest.get('ca_sha256'):
@@ -92,6 +96,7 @@ def main():
     parser.add_argument('manifest', type=Path)
     parser.add_argument('--expected-sync-version', type=int, required=True)
     parser.add_argument('--expected-teacher-prompt')
+    parser.add_argument('--expected-dialogue-prompt')
     parser.add_argument('--offline', action='store_true', help='Static artifact validation only; never sufficient for installation')
     parser.add_argument('--bootstrap', type=Path)
     parser.add_argument('--ca-cert', type=Path)
@@ -99,7 +104,7 @@ def main():
     if not args.offline and (not args.bootstrap or not args.ca_cert):
         parser.error('Live preflight requires --bootstrap and --ca-cert (or explicitly use --offline)')
     try:
-        manifest = artifact(args.manifest, args.expected_sync_version, args.expected_teacher_prompt)
+        manifest = artifact(args.manifest, args.expected_sync_version, args.expected_teacher_prompt, args.expected_dialogue_prompt)
         if not args.offline:
             with args.ca_cert.open('rb') as certificate:
                 if hashlib.file_digest(certificate, 'sha256').hexdigest() != manifest['ca_sha256']:
@@ -108,6 +113,7 @@ def main():
         print(json.dumps({'artifact_verified': True, 'relay_verified': not args.offline,
                           'data_protocol': manifest['data_protocol'],
                           'teacher_prompt_version': manifest.get('teacher_prompt_version'),
+                          'dialogue_prompt_version': manifest.get('dialogue_prompt_version'),
                           'content_lineage': manifest.get('content_lineage'),
                           'lesson_count': manifest['lesson_count'],
                           'rust_executable_sha256': manifest['rust_executable_sha256']}))

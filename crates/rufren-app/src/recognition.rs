@@ -1,11 +1,11 @@
 //! Exact recording → independent transcript → learner-adopted words.
 use crate::{
     model::AppState,
-    repository::{now_ms, Result},
+    repository::{Result, now_ms},
 };
-use base64::{engine::general_purpose::STANDARD, Engine};
+use base64::{Engine, engine::general_purpose::STANDARD};
 use rufren_core::*;
-use rufren_speech::{inspect_recognition_wav, RecognitionRequest, RecognitionResponse};
+use rufren_speech::{RecognitionRequest, RecognitionResponse, inspect_recognition_wav};
 use sha2::{Digest, Sha256};
 use uuid::Uuid;
 

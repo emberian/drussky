@@ -3,15 +3,13 @@ use rufren_store::{DB_SCHEMA_VERSION, Store};
 use uuid::Uuid;
 
 #[test]
-fn notebook_v4_reopen_preserves_legacy_json_and_refuses_v3_before_writing() {
-    assert_eq!(EVENT_VERSION, 4);
-    assert_eq!(SYNC_VERSION, 4);
+fn notebook_v4_reopens_verbatim_under_current_and_refuses_legacy_protocols() {
     assert_eq!(DB_SCHEMA_VERSION, 1);
     let dir = tempfile::tempdir().unwrap();
     let path = dir.path().join("notebook.sqlite");
     drop(Store::open(&path).unwrap());
     let raw = rusqlite::Connection::open(&path).unwrap();
-    let originals: Vec<_> = (1..=3)
+    let mut originals: Vec<_> = (1..=3)
         .map(|version| {
             let mut event = starter(Uuid::new_v4(), version as i64);
             event.version = version;
@@ -24,15 +22,12 @@ fn notebook_v4_reopen_preserves_legacy_json_and_refuses_v3_before_writing() {
             (event, json)
         })
         .collect();
-    drop(raw);
-    let mut store = Store::open(&path).unwrap();
-    assert_eq!(store.library().unwrap().events.len(), 3);
     let response = serde_json::from_str(include_str!(
         "../../../scripts/platform/fixtures/teacher-notebook-response.json"
     ))
     .unwrap();
     let document_id = teacher_document_id(&response);
-    let new = Event::new(
+    let mut archive = Event::new(
         Uuid::new_v4(),
         4,
         Fact::TeacherDocumentRecorded(TeacherDocument {
@@ -44,36 +39,70 @@ fn notebook_v4_reopen_preserves_legacy_json_and_refuses_v3_before_writing() {
         }),
     )
     .unwrap();
-    assert!(
-        store
-            .exchange(&SyncRequest {
-                version: 3,
-                relay: None,
-                after: 0,
-                events: vec![new.clone()],
-            })
-            .is_err()
-    );
-    assert_eq!(store.library().unwrap().events.len(), 3);
-    assert!(
-        store.get::<Uuid>("relay").unwrap().is_none(),
-        "protocol refusal precedes relay identity/cursor/write processing"
-    );
+    archive.version = 4; // Historical archive encoding must not be upgraded on read.
+    let archive_json = serde_json::to_string_pretty(&archive).unwrap();
+    raw.execute(
+        "INSERT INTO events(id,json) VALUES (?1,?2)",
+        rusqlite::params![archive.id.to_string(), &archive_json],
+    )
+    .unwrap();
+    originals.push((archive, archive_json));
+    drop(raw);
+    let mut store = Store::open(&path).unwrap();
+    assert_eq!(store.library().unwrap().events.len(), 4);
+    let request_id = Uuid::new_v4();
+    let request = serde_json::from_value(serde_json::json!({
+        "request_id":request_id,"thread_id":request_id,"parent_reply_id":null,
+        "config":{"intent":"clarification","topic":"Synthetic current dialogue","teacher_role":null,"learner_role":null},
+        "action":"ask","correction":"off","anchor":null,"ancestors":[],"omitted_parent_id":null,"omitted_count":0,"text":"Why does this ending change?"
+    })).unwrap();
+    let new = Event::new(
+        Uuid::new_v4(),
+        5,
+        Fact::TeacherDialogueUserRecorded(request),
+    )
+    .unwrap();
+    assert_eq!(new.version, EVENT_VERSION);
+    assert!(new.version >= 5);
+    for version in [3, 4] {
+        assert!(
+            store
+                .exchange(&SyncRequest {
+                    version,
+                    relay: None,
+                    after: 0,
+                    events: vec![new.clone()]
+                })
+                .is_err()
+        );
+        assert_eq!(store.library().unwrap().events.len(), 4);
+        assert!(
+            store.get::<Uuid>("relay").unwrap().is_none(),
+            "old protocol refusal precedes identity/cursor/write processing"
+        );
+    }
     let accepted = store
         .exchange(&SyncRequest {
-            version: 4,
+            version: SYNC_VERSION,
             relay: None,
             after: 0,
             events: vec![new.clone()],
         })
         .unwrap();
-    assert_eq!(accepted.version, 4);
+    assert_eq!(accepted.version, SYNC_VERSION);
     assert_eq!(accepted.accepted, vec![new.id]);
-    assert_eq!(accepted.events.len(), 4);
+    assert_eq!(accepted.events.len(), 5);
     drop(store);
     let reopened = Store::open(&path).unwrap();
     assert_eq!(reopened.library().unwrap().teacher_documents().len(), 1);
     assert_eq!(reopened.library().unwrap().events.get(&new.id), Some(&new));
+    assert!(
+        reopened
+            .library()
+            .unwrap()
+            .dialogue_user(request_id)
+            .is_some()
+    );
     drop(reopened);
     let raw = rusqlite::Connection::open(&path).unwrap();
     let db_version: u32 = raw

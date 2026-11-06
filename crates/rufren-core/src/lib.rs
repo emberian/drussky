@@ -23,11 +23,15 @@ mod teacher_archive;
 pub use teacher_archive::*;
 mod teacher_revisit;
 pub use teacher_revisit::*;
+mod teacher_dialogue;
+pub use teacher_dialogue::*;
+mod dialogue_audio;
+pub use dialogue_audio::*;
 
 /// Current event encoding. Database migrations and transport compatibility are independent.
-pub const EVENT_VERSION: u32 = 4;
+pub const EVENT_VERSION: u32 = 5;
 pub const MIN_EVENT_VERSION: u32 = 1;
-pub const SYNC_VERSION: u32 = 4;
+pub const SYNC_VERSION: u32 = 5;
 /// Backward-compatible name for callers constructing events; never use for a DB schema.
 pub const SCHEMA_VERSION: u32 = EVENT_VERSION;
 pub const SYNC_BATCH: usize = 128;
@@ -158,6 +162,11 @@ pub enum Fact {
     SpeechTranscribed(SpeechTranscription),
     TranscriptConfirmed(TranscriptConfirmation),
     TeacherDocumentRecorded(TeacherDocument),
+    TeacherDialogueUserRecorded(rufren_tutor_contract::TeacherDialogueRequest),
+    TeacherDialogueReplyRecorded(rufren_tutor_contract::TeacherDialogueResponse),
+    DialogueAudioAttached(DialogueAudioAttachment),
+    DialogueSpeechTranscribed(DialogueSpeechTranscription),
+    DialogueTranscriptConfirmed(DialogueTranscriptConfirmation),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
@@ -184,6 +193,11 @@ impl Event {
     }
     pub fn validate(&self) -> Result<(), Error> {
         let required = match &self.fact {
+            Fact::TeacherDialogueUserRecorded(_)
+            | Fact::TeacherDialogueReplyRecorded(_)
+            | Fact::DialogueAudioAttached(_)
+            | Fact::DialogueSpeechTranscribed(_)
+            | Fact::DialogueTranscriptConfirmed(_) => 5,
             Fact::TeacherDocumentRecorded(_) => 4,
             Fact::StimulusPresented(_)
             | Fact::SpeechTranscribed(_)
@@ -239,6 +253,12 @@ impl Event {
                     ));
                 }
             }
+            Fact::TeacherDialogueUserRecorded(_) | Fact::TeacherDialogueReplyRecorded(_) => {
+                validate_dialogue_fact(self)?
+            }
+            Fact::DialogueAudioAttached(_)
+            | Fact::DialogueSpeechTranscribed(_)
+            | Fact::DialogueTranscriptConfirmed(_) => validate_dialogue_audio_fact(self)?,
             _ => validate_learning_fact(self)?,
         }
         Ok(())
@@ -266,8 +286,11 @@ impl Library {
         }
         // Parents may arrive on a later page. Validate cross-reference types when available.
         validate_audio_identities(&merged)?;
+        validate_dialogue_audio_identities(&merged)?;
         validate_teacher_document_identities(&merged)?;
+        validate_dialogue_graph(&merged)?;
         for event in merged.values() {
+            validate_dialogue_audio_references(event, &merged)?;
             validate_learning_references(event, &merged)?;
             if let Fact::PassageRevised(r) = &event.fact {
                 for parent in &r.parents {

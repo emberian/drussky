@@ -99,13 +99,18 @@ function sourceLabel(record) {
   if(p?.kind==='system_generated_speech')return `System speech · ${p.voice}`;
   return record.role==='reference'?'Provided voice':'Your recorded audio';
 }
+function recordMatchesScope(record){
+  const scope=record.device?.dialogue_scope;
+  if(config.dialogue_scope)return record.passage_id===''&&record.revision_id===''&&scope?.thread_id===config.dialogue_scope.thread_id&&scope?.input_id===config.dialogue_scope.input_id;
+  return !scope&&record.passage_id===config.passage_id&&record.revision_id===config.revision_id;
+}
 async function refreshLibrary() {
   const records = await storage('all');
   for(const record of records)if(Object.hasOwn(record,'original_mime_type')){record.device={...record.device,source_mime_type:record.original_mime_type};delete record.original_mime_type;await storage('put',record);}
   if (!alive) return;
   for (const role of ['reference','attempt']) {
     const picker = $(`audio-library-${role}`); picker.replaceChildren(new Option('Choose a saved recording…', ''));
-    records.filter(r => r.role === role && r.passage_id === config.passage_id && r.revision_id === config.revision_id)
+    records.filter(r => r.role === role && recordMatchesScope(r))
       .sort((a,b) => b.created_at_ms - a.created_at_ms).forEach(r => {
         const label = `${sourceLabel(r)} · ${r.name} · ${(r.duration_ms/1000).toFixed(1)}s · ${new Date(r.created_at_ms).toLocaleString()}`;
         picker.add(new Option(label, r.asset_id));
@@ -184,7 +189,7 @@ async function makeRecord(role,blob,info,name,interrupted=false,device={}) {
   return {asset_id,content_hash,role,name,passage_id:config.passage_id,revision_id:config.revision_id,
     duration_ms:Math.round(info.duration*1000),sample_rate:info.sampleRate,channels:info.numberOfChannels,frames:info.length,
     byte_length:blob.size,created_at_ms:Date.now(),mime_type:await audioMime(blob),
-    interrupted,device:{...device,source_mime_type:blob.type},annotations:[],blob};
+    interrupted,device:{...device,source_mime_type:blob.type,...(config.dialogue_scope?{dialogue_scope:config.dialogue_scope}:{})},annotations:[],blob};
 }
 async function saveAudio(role, blob, buffer, name, interrupted = false, device = {}) {
   const record=await makeRecord(role,blob,buffer,name,interrupted,device),asset_id=record.asset_id;
@@ -478,13 +483,13 @@ function clearAttempt(){
   $('audio-library-attempt').value='';$('audio-name-attempt').textContent='No recording selected';$('audio-provenance-attempt').textContent='No source selected';
   emit({kind:'source_clear',role:'attempt'});emit({kind:'selected',recording:null});controls();
 }
-function validAttempt(record){return record&&record.role==='attempt'&&record.passage_id===config.passage_id&&record.revision_id===config.revision_id;}
+function validAttempt(record){return record&&record.role==='attempt'&&recordMatchesScope(record);}
 async function chooseExisting(role,id){
   const generation=++choiceGeneration;stopPlayback();if(role==='attempt')clearAttempt();if(!id)return;
   beginOperation();
   try{
     const record=await storage('get',id);if(!alive||generation!==choiceGeneration)return;
-    if(!record||record.role!==role||record.passage_id!==config.passage_id||record.revision_id!==config.revision_id)throw Error('This recording does not belong to the current phrase. Choose its exact saved take.');
+    if(!record||record.role!==role||!recordMatchesScope(record))throw Error('This recording does not belong to the current phrase. Choose its exact saved take.');
     const prepared=await selectRecord(role,record);
     if(prepared&&alive&&generation===choiceGeneration&&selected[role]?.asset_id===id&&role==='attempt'){if(record.interrupted)status('You selected a partial take. Replay it and check the cutoff before using it.');emit({kind:'selected',recording:metadata(record)});}
   }finally{endOperation();}
@@ -527,7 +532,7 @@ async function sendPcm(role,record,buffer,token,decoded=false){
 function regionSourceList(records){
   if(!regionLab)return;
   for(const role of REGION_ROLES){const picker=$(`audio-region-source-${role}`),value=regionSlots[role].record?.asset_id||selected[role]?.asset_id||'';picker.replaceChildren(new Option('Choose a saved recording…',''));
-    for(const record of [...records].sort((a,b)=>b.created_at_ms-a.created_at_ms))picker.add(new Option(`${sourceLabel(record)} · ${record.name} · ${(record.duration_ms/1000).toFixed(2)} s`,record.asset_id));picker.value=value;
+    for(const record of records.filter(record=>config.dialogue_scope?recordMatchesScope(record):!record.device?.dialogue_scope).sort((a,b)=>b.created_at_ms-a.created_at_ms))picker.add(new Option(`${sourceLabel(record)} · ${record.name} · ${(record.duration_ms/1000).toFixed(2)} s`,record.asset_id));picker.value=value;
   }
 }
 async function loadRegion(role,id,preset){
@@ -545,6 +550,7 @@ async function loadRegion(role,id,preset){
   regionControls();updateRegionComparison();emit({kind:'source_clear',role});
   try{
     const record=await storage('get',id);if(!currentAnalysis(role,id,token))return;
+    if(record&&(config.dialogue_scope?!recordMatchesScope(record):record.device?.dialogue_scope))throw Error('Choose a recording from this audio context.');
     if(!record)throw Error('That recording is not available on this device. Sync or restore its original.');
     state.record=record;selected[role]=record;$(`audio-region-source-${role}`).value=id;
     $(`audio-region-identity-${role}`).textContent=`${record.name} · checking the original…`;
@@ -556,7 +562,7 @@ async function loadRegion(role,id,preset){
 }
 
 function focusKey(role,state){const m=state.source?.metadata;return JSON.stringify(['region-focus-v1',regionWorkspace,role,state.record?.asset_id,state.record?.content_hash,m?.content_hash,m?.sample_rate,m?.frames]);}
-function pairKey(){return JSON.stringify(['region-pair-v1',regionWorkspace,config.passage_id,config.revision_id]);}
+function pairKey(){const key=['region-pair-v1',regionWorkspace,config.passage_id,config.revision_id];if(config.dialogue_scope)key.push(config.dialogue_scope.thread_id,config.dialogue_scope.input_id);return JSON.stringify(key);}
 async function focusDb(){
   if(!regionWorkspace)return null;
   if(focusDatabase)return focusDatabase;if(focusOpening)return focusOpening;
@@ -722,7 +728,7 @@ if(regionLab){regionLab.addEventListener('toggle',regionToggle);root.addEventLis
 async function assetsChanged(event) {
   const detail=event.detail;
   if(!alive||detail?.passage_id!==config.passage_id||detail?.revision_id!==config.revision_id)return;
-  try{const record=await storage('get',detail.asset_id);if(!record||record.role!=='reference')return;await refreshLibrary();await selectRecord('reference',record);}
+  try{const record=await storage('get',detail.asset_id);if(!record||record.role!=='reference'||!recordMatchesScope(record))return;await refreshLibrary();await selectRecord('reference',record);}
   catch(error){failure(error);}
 }
 async function importBytes(request) {

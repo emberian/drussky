@@ -1,7 +1,7 @@
 //! Passage drafts are separate from published revisions and never replace one another.
 use crate::{
     model::{AppState, Editor, Page},
-    repository::{now_ms, Repository, Result},
+    repository::{Repository, Result, now_ms},
 };
 use rufren_core::*;
 use serde::{Deserialize, Serialize};

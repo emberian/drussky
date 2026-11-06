@@ -7,6 +7,7 @@ const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { navigate } = require('./qa-navigation.cjs');
 const { teacherResponse, wavFixture, generatedVoice, recognizedWords } = require('./test-teacher-oral.cjs');
 const { openLessonTools } = require('./test-teacher-notebook.cjs');
 
@@ -76,7 +77,7 @@ function syntheticReplica() {
   return {
     records,
     exchange(request) {
-      assert.equal(request.version, 4);
+      assert.equal(request.version, 5);
       assert(request.relay === null || request.relay === relay);
       assert(Number.isSafeInteger(request.after) && request.after >= 0 && request.after <= records.length);
       assert(request.events.length <= 128);
@@ -85,7 +86,7 @@ function syntheticReplica() {
         else { const saved = structuredClone(event); byID.set(event.id, saved); records.push(saved); }
       }
       const page = records.slice(request.after, request.after + 128);
-      return { version: 4, relay, accepted: request.events.map(event => event.id), events: page,
+      return { version: 5, relay, accepted: request.events.map(event => event.id), events: page,
         cursor: request.after + page.length, has_more: request.after + page.length < records.length };
     },
   };
@@ -155,7 +156,7 @@ async function createDriver(browser, label, time, routeInstaller, audit, taskSpe
   await context.tracing.start({ screenshots: true, snapshots: true, sources: true });
   const page = await context.newPage();
   page.on('pageerror', error => audit.errors.push({ label, message: error.message }));
-  const nav = name => page.getByRole('navigation', { name: 'Main navigation' }).getByRole('button', { name: new RegExp(name) }).click();
+  const nav = name => navigate(page, name);
   const connect = async () => { await nav('Settings'); await page.locator('#sync-url').fill(RELAY); await page.locator('#sync-key').fill('synthetic-revisit-no-secret'); };
   const now = async value => {
     await page.evaluate(value => window.qaRevisitClock(value), value);
@@ -210,7 +211,7 @@ async function createDriver(browser, label, time, routeInstaller, audit, taskSpe
     await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === 'Sync now' && !b.disabled));
     await nav('Today');
   };
-  await page.goto(APP); await page.getByRole('navigation').waitFor(); await connect();
+  await page.goto(APP); await page.locator('main.main h1').waitFor(); await connect();
   return { context, page, label, nav, connect, now, allRows, row, due, screen, open, saveText, currentAttempt, finish, sync };
 }
 
@@ -325,7 +326,7 @@ async function consumerJourney(browser, audit, checks, drivers) {
   await a.screen.locator('textarea').first().fill(TASKS[1].expected_response);
   await a.screen.getByRole('button', { name: 'Pause & return to Today', exact: true }).click();
   await a.page.evaluate(async () => { await navigator.serviceWorker.ready; }); await a.page.waitForFunction(() => navigator.serviceWorker.controller !== null);
-  const posts = audit.requests.length; await a.context.setOffline(true); await a.page.reload(); await a.page.getByRole('navigation').waitFor();
+  const posts = audit.requests.length; await a.context.setOffline(true); await a.page.reload(); await a.page.locator('main.main h1').waitFor();
   await a.page.getByRole('button', { name: 'Continue this return', exact: false }).click(); await a.screen.waitFor();
   assert.equal(await a.screen.getAttribute('data-active-review-session'), writeSession);
   assert.equal(await a.screen.locator('textarea').first().inputValue(), TASKS[1].expected_response);
@@ -435,7 +436,7 @@ async function realSourceCapture(browser, audit, checks, drivers) {
   const d=await createDriver(browser,'capture',SEED_TIME,routes,audit,original.content.practice);drivers.push(d);
   if(process.env.RUFREN_LIVE_REVISIT_FEEDBACK==='approved')d.page.setDefaultTimeout(130000);
   await d.page.evaluate(response => window.rufrenLibrary.write('rufren.v1.meta.teacher_response',JSON.stringify(response)),original);
-  await d.page.reload();await d.page.getByRole('navigation').waitFor();await d.connect();await d.nav('Teacher');
+  await d.page.reload();await d.page.locator('main.main h1').waitFor();await d.connect();await d.nav('Teacher');
   const flow=d.page.locator('.teacher-lesson-flow');await flow.waitFor();
   const document=await flow.getAttribute('data-lesson-document');
   const archive=(await facts(d.page)).find(e=>e.fact.kind==='teacher_document_recorded'&&e.fact.data.document_id===document);

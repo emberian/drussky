@@ -169,7 +169,7 @@ fn transcribe(mut app: Signal<AppState>, recording: Uuid) {
     });
 }
 
-fn cancel(mut app: Signal<AppState>) {
+pub(crate) fn cancel(mut app: Signal<AppState>) {
     let state = app.read().clone();
     let Some((_, request_id)) = state.recognition_job else {
         return;

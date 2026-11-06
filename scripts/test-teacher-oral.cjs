@@ -6,6 +6,7 @@ const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { navigate } = require('./qa-navigation.cjs');
 
 const APP = process.env.RUFREN_QA_URL || 'http://127.0.0.1:8091';
 const RELAY = 'http://127.0.0.1:18991'; // Intercepted; no process listens here.
@@ -160,10 +161,9 @@ async function main() {
     await route.fulfill({ status: 200, contentType: 'application/json',
       headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify(body) });
   });
-  const nav = name => page.getByRole('navigation', { name: 'Main navigation' })
-    .getByRole('button', { name: new RegExp(name) }).click();
+  const nav = name => navigate(page, name);
   try {
-    await page.goto(APP); await page.getByRole('navigation').waitFor();
+    await page.goto(APP); await page.locator('main.main h1').waitFor();
     await nav('Settings'); await page.locator('#sync-url').fill(RELAY);
     await page.locator('#sync-key').fill('synthetic-oral-fixture-no-secret');
     await nav('Teacher');
@@ -346,7 +346,7 @@ async function journey({ page, context, nav, requests }) {
   const durableIDs = (await events(page)).map(event => event.id);
   const postsBeforeOffline = requests.filter(request => request.method === 'POST').length;
   await context.setOffline(true);
-  await page.reload(); await page.getByRole('navigation').waitFor();
+  await page.reload(); await page.locator('main.main h1').waitFor();
   // Web connection credentials are deliberately memory-only across reloads.
   await nav('Settings'); await page.locator('#sync-url').fill(RELAY);
   await page.locator('#sync-key').fill('synthetic-oral-fixture-no-secret');

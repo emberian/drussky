@@ -3,15 +3,29 @@ use rufren_store::Store;
 use uuid::Uuid;
 
 #[tokio::test]
-async fn notebook_v4_http_refuses_v3_upload_and_download_before_mutation() {
+async fn notebook_v4_and_current_dialogue_refuse_legacy_clients_before_mutation() {
     let mut store = Store::open(":memory:").unwrap();
-    let old: Vec<_> = (1..=3)
+    let mut old: Vec<_> = (1..=4)
         .map(|version| {
             let mut event = starter(Uuid::new_v4(), version as i64);
             event.version = version;
             event
         })
         .collect();
+    let request_id = Uuid::new_v4();
+    let request = serde_json::from_value(serde_json::json!({
+        "request_id":request_id,"thread_id":request_id,"parent_reply_id":null,
+        "config":{"intent":"clarification","topic":"Synthetic current dialogue","teacher_role":null,"learner_role":null},
+        "action":"ask","correction":"off","anchor":null,"ancestors":[],"omitted_parent_id":null,"omitted_count":0,"text":"A synthetic learner question."
+    })).unwrap();
+    old.push(
+        Event::new(
+            Uuid::new_v4(),
+            5,
+            Fact::TeacherDialogueUserRecorded(request),
+        )
+        .unwrap(),
+    );
     store.append(&old).unwrap();
     let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
     let endpoint = format!("http://{}", listener.local_addr().unwrap());
@@ -25,32 +39,37 @@ async fn notebook_v4_http_refuses_v3_upload_and_download_before_mutation() {
     });
     let client = reqwest::Client::new();
     let rejected = starter(Uuid::new_v4(), 4);
-    for events in [vec![], vec![rejected.clone()]] {
-        let response = client
-            .post(format!("{endpoint}/v1/sync"))
-            .bearer_auth("synthetic-key")
-            .json(&SyncRequest {
-                version: 3,
-                relay: None,
-                after: 0,
-                events,
-            })
-            .send()
-            .await
-            .unwrap();
-        assert!(!response.status().is_success());
-        let message = response.text().await.unwrap();
-        assert!(message.contains("Unsupported data version 3"), "{message}");
-        assert!(
-            !message.contains("passage_revised"),
-            "old clients receive no new facts"
-        );
+    for version in [3, 4] {
+        for events in [vec![], vec![rejected.clone()]] {
+            let response = client
+                .post(format!("{endpoint}/v1/sync"))
+                .bearer_auth("synthetic-key")
+                .json(&SyncRequest {
+                    version,
+                    relay: None,
+                    after: 0,
+                    events,
+                })
+                .send()
+                .await
+                .unwrap();
+            assert!(!response.status().is_success());
+            let message = response.text().await.unwrap();
+            assert!(
+                message.contains(&format!("Unsupported data version {version}")),
+                "{message}"
+            );
+            assert!(
+                !message.contains("passage_revised"),
+                "old clients receive no new facts"
+            );
+        }
     }
     let current: SyncResponse = client
         .post(format!("{endpoint}/v1/sync"))
         .bearer_auth("synthetic-key")
         .json(&SyncRequest {
-            version: 4,
+            version: SYNC_VERSION,
             relay: None,
             after: 0,
             events: vec![],
@@ -63,10 +82,10 @@ async fn notebook_v4_http_refuses_v3_upload_and_download_before_mutation() {
         .json()
         .await
         .unwrap();
-    assert_eq!(current.version, 4);
+    assert_eq!(current.version, SYNC_VERSION);
     assert_eq!(current.events, old);
     assert_eq!(
-        current.cursor, 3,
+        current.cursor, 5,
         "rejected uploads consumed no sequence/cursor"
     );
     assert!(!current.events.iter().any(|event| event.id == rejected.id));
@@ -78,7 +97,7 @@ async fn notebook_v4_http_refuses_v3_upload_and_download_before_mutation() {
         .text()
         .await
         .unwrap();
-    assert_eq!(health, "rufren-relay/4");
+    assert_eq!(health, format!("rufren-relay/{SYNC_VERSION}"));
     server.abort();
 }
 
@@ -89,7 +108,7 @@ async fn notebook_v4_http_exact_documents_and_independent_receipts_converge_coll
     ))
     .unwrap();
     let document_id = teacher_document_id(&response);
-    let first = Event::new(
+    let mut first = Event::new(
         Uuid::new_v4(),
         10,
         Fact::TeacherDocumentRecorded(TeacherDocument {
@@ -101,6 +120,7 @@ async fn notebook_v4_http_exact_documents_and_independent_receipts_converge_coll
         }),
     )
     .unwrap();
+    first.version = 4; // Preserve historical notebook facts under the current protocol.
     let mut second = first.clone();
     second.id = Uuid::new_v4();
     second.device = Uuid::new_v4();
@@ -131,7 +151,7 @@ async fn notebook_v4_http_exact_documents_and_independent_receipts_converge_coll
             .post(&url)
             .bearer_auth("synthetic-key")
             .json(&SyncRequest {
-                version: 4,
+                version: SYNC_VERSION,
                 relay: None,
                 after: 0,
                 events: vec![event],
@@ -160,7 +180,7 @@ async fn notebook_v4_http_exact_documents_and_independent_receipts_converge_coll
         .post(&url)
         .bearer_auth("synthetic-key")
         .json(&SyncRequest {
-            version: 4,
+            version: SYNC_VERSION,
             relay: Some(binding.relay),
             after: binding.cursor,
             events: vec![],
@@ -203,7 +223,7 @@ async fn notebook_v4_http_exact_documents_and_independent_receipts_converge_coll
             .post(&url)
             .bearer_auth("synthetic-key")
             .json(&SyncRequest {
-                version: 4,
+                version: SYNC_VERSION,
                 relay: Some(binding.relay),
                 after: 2,
                 events: vec![unrelated, collision]
@@ -218,7 +238,7 @@ async fn notebook_v4_http_exact_documents_and_independent_receipts_converge_coll
         .post(&url)
         .bearer_auth("synthetic-key")
         .json(&SyncRequest {
-            version: 4,
+            version: SYNC_VERSION,
             relay: Some(binding.relay),
             after: 0,
             events: vec![first.clone(), second.clone()],

@@ -2,7 +2,7 @@
 use crate::{
     learning::SessionPlan,
     model::{AppState, Page},
-    repository::{now_ms, Repository, Result},
+    repository::{Repository, Result, now_ms},
 };
 use rufren_core::{Phase, Session};
 use serde::{Deserialize, Serialize};

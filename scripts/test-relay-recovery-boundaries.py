@@ -51,6 +51,36 @@ class RecoveryBoundaries(unittest.TestCase):
             with sqlite3.connect(database) as source:
                 self.assertEqual(source.execute('SELECT COUNT(*) FROM events').fetchone()[0], 1)
 
+    def test_dialogue_audio_and_transcript_originals_share_complete_backup_boundary(self):
+        for kind in ('dialogue_audio_attached', 'dialogue_speech_transcribed'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temporary:
+                folder = Path(temporary)
+                database, assets, digest = fixture(folder, register=False)
+                with sqlite3.connect(database) as connection:
+                    event = json.loads(connection.execute('SELECT json FROM events').fetchone()[0])
+                    event['version'] = 5
+                    event['fact']['kind'] = kind
+                    event['fact']['data'] = (dict(asset_id='take-a', asset=dict(sha256=digest))
+                                            if kind == 'dialogue_audio_attached'
+                                            else dict(asset_id='take-a', audio_sha256=digest))
+                    connection.execute('UPDATE events SET json=?', (json.dumps(event),))
+                pending = invoke('backup', database, folder / 'pending.sqlite', '--assets', assets)
+                self.assertNotEqual(pending.returncode, 0)
+                self.assertIn('have not completed recording sync', pending.stderr)
+                self.assertFalse((folder / 'pending.sqlite.json').exists())
+                content = (assets / f'{digest}.blob').read_bytes()
+                with sqlite3.connect(database) as connection:
+                    connection.execute('INSERT INTO metadata VALUES (?,?)', ('asset.record.take-a',
+                        json.dumps(dict(asset_id='take-a', content_hash=digest, byte_length=len(content)))))
+                backup, restored = folder / 'complete.sqlite', folder / 'restored.sqlite'
+                copied = invoke('backup', database, backup, '--assets', assets)
+                self.assertEqual(copied.returncode, 0, copied.stderr)
+                self.assertEqual(invoke('verify', backup).returncode, 0)
+                self.assertEqual(invoke('restore', backup, restored).returncode, 0)
+                self.assertEqual((folder / 'restored.sqlite.assets' / f'{digest}.blob').read_bytes(), content)
+                with sqlite3.connect(restored) as connection:
+                    self.assertEqual(json.loads(connection.execute('SELECT json FROM events').fetchone()[0]), event)
+
     def test_manifest_claims_require_exact_types_and_identity(self):
         with tempfile.TemporaryDirectory() as temporary:
             folder = Path(temporary)
