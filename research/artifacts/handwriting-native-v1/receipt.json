@@ -1,0 +1,203 @@
+{
+  "schema": "drussky-synthetic-native-ink-probe-v1",
+  "date": "2026-11-06",
+  "os": "macOS 27.0.1 (26A434)",
+  "sdk": "Xcode 27.1",
+  "scope": "Integration and script-ambiguity observations on 3 geometric block-print drawings. Not human handwriting, pedagogy, or an accuracy benchmark.",
+  "input_sha256": "5f6c65bb73acdfb024985567135b3ac6ddd4fe54d719ed5902191a31dcf5f0bd",
+  "input_privacy": "Entirely fabricated geometric marks, no user ink, account or device identifiers.",
+  "target_leakage_controls": {
+    "expected_answers_in_recognition_input": false,
+    "custom_words": [],
+    "language_correction": false,
+    "pencilkit_search_used": false
+  },
+  "geometry": {
+    "page_points": [
+      300,
+      90
+    ],
+    "letter_height_points": 24,
+    "pk_point_size": 5,
+    "pk_point_force": 0.5,
+    "raster_scale": 3,
+    "raster_appearance": "NSAppearance.aqua, black marks on opaque white"
+  },
+  "pencilkit": {
+    "language": "ru-Cyrl-RU",
+    "recognition_version": 9,
+    "inference_api": "PKStrokeRecognizer.recognizedText(strokeIDs: nil)",
+    "three_calls_per_variant": true
+  },
+  "vision": {
+    "language": "ru-RU",
+    "api": "VNRecognizeTextRequest",
+    "revision": 3,
+    "recognition_level": "accurate",
+    "uses_language_correction": false,
+    "custom_words": [],
+    "confidence_is_calibrated_learner_grade": false
+  },
+  "demonstration_normalization": {
+    "latin_to_cyrillic_mapping": {
+      "A": "А",
+      "H": "Н",
+      "K": "К",
+      "M": "М",
+      "O": "О",
+      "T": "Т"
+    },
+    "used_during_recognition": false,
+    "scope": "Post-hoc, target-independent script disambiguation for these six visually identical uppercase forms in a Russian-only task; not transliteration, spelling correction, or permission to normalize mixed-script mathematics."
+  },
+  "counts": {
+    "fixtures": 3,
+    "pencilkit_packaged_async_main_nonnull": 0,
+    "pencilkit_application_run_nonnull": 0,
+    "vision_raw_unicode_exact": 0,
+    "vision_after_declared_script_normalization_exact": 3
+  },
+  "results": [
+    {
+      "id": "ink001",
+      "synthetic_label": "КОТ",
+      "archive_sha256": "0df8b622996f6b2be4b8151cbd40d13273079f5d7a8cee8ef92863932915e762",
+      "image_file": "ink001.png",
+      "image_sha256": "e3fabb7af9e1747cad29696c729aa61258ca841e7e6cd0fc740df304d915097e",
+      "pencilkit_packaged_async_main": {
+        "archive_sha256": "0df8b622996f6b2be4b8151cbd40d13273079f5d7a8cee8ef92863932915e762",
+        "id": "ink001",
+        "recognition_elapsed_seconds": 0.06768107414245605,
+        "recognition_version": 9,
+        "text": null
+      },
+      "pencilkit_application_run": {
+        "archive_sha256": "0df8b622996f6b2be4b8151cbd40d13273079f5d7a8cee8ef92863932915e762",
+        "id": "ink001",
+        "recognition_elapsed_seconds": 0.05021500587463379,
+        "recognition_version": 9,
+        "text": null
+      },
+      "vision": {
+        "archive_sha256": "0df8b622996f6b2be4b8151cbd40d13273079f5d7a8cee8ef92863932915e762",
+        "id": "ink001",
+        "language": "ru-RU",
+        "observations": [
+          {
+            "bounds": [
+              0.07111111048148151,
+              0.3851851864197531,
+              0.2466666666666667,
+              0.37037037037037035
+            ],
+            "candidates": [
+              {
+                "raw_vision_confidence": 0.5,
+                "text": "KOT"
+              }
+            ]
+          }
+        ],
+        "recognition_elapsed_seconds": 102.29322409629822,
+        "revision": 3
+      },
+      "raw_unicode_exact_match": false,
+      "demonstration_script_normalization": "КОТ",
+      "normalized_exact_match": true
+    },
+    {
+      "id": "ink002",
+      "synthetic_label": "ОНА",
+      "archive_sha256": "f0b2c5f5ab759fd6df7bc9998595416f51e42a4491171a79f225382c331603ee",
+      "image_file": "ink002.png",
+      "image_sha256": "d01e80b01c9eb44a06c0c2f45339a104c2a8b5c95c29c6dc017cb2cde74ce2d6",
+      "pencilkit_packaged_async_main": {
+        "archive_sha256": "f0b2c5f5ab759fd6df7bc9998595416f51e42a4491171a79f225382c331603ee",
+        "id": "ink002",
+        "recognition_elapsed_seconds": 0.004649996757507324,
+        "recognition_version": 9,
+        "text": null
+      },
+      "pencilkit_application_run": {
+        "archive_sha256": "f0b2c5f5ab759fd6df7bc9998595416f51e42a4491171a79f225382c331603ee",
+        "id": "ink002",
+        "recognition_elapsed_seconds": 0.00256502628326416,
+        "recognition_version": 9,
+        "text": null
+      },
+      "vision": {
+        "archive_sha256": "f0b2c5f5ab759fd6df7bc9998595416f51e42a4491171a79f225382c331603ee",
+        "id": "ink002",
+        "language": "ru-RU",
+        "observations": [
+          {
+            "bounds": [
+              0.07078243471144166,
+              0.38799083935267054,
+              0.24953162299262158,
+              0.36841529563621234
+            ],
+            "candidates": [
+              {
+                "raw_vision_confidence": 1,
+                "text": "OHA"
+              }
+            ]
+          }
+        ],
+        "recognition_elapsed_seconds": 0.07462191581726074,
+        "revision": 3
+      },
+      "raw_unicode_exact_match": false,
+      "demonstration_script_normalization": "ОНА",
+      "normalized_exact_match": true
+    },
+    {
+      "id": "ink003",
+      "synthetic_label": "ТАМ КОТ.",
+      "archive_sha256": "35f255c780310b16d2630027c29e584dcc097b4e59b9cdd07db8a21f977d6324",
+      "image_file": "ink003.png",
+      "image_sha256": "a38d86d0cfc1602f199a84b8194aa1ca3933ae44e1fdbc878e01ad3e1ce1e711",
+      "pencilkit_packaged_async_main": {
+        "archive_sha256": "35f255c780310b16d2630027c29e584dcc097b4e59b9cdd07db8a21f977d6324",
+        "id": "ink003",
+        "recognition_elapsed_seconds": 0.007027983665466309,
+        "recognition_version": 9,
+        "text": null
+      },
+      "pencilkit_application_run": {
+        "archive_sha256": "35f255c780310b16d2630027c29e584dcc097b4e59b9cdd07db8a21f977d6324",
+        "id": "ink003",
+        "recognition_elapsed_seconds": 0.003448963165283203,
+        "recognition_version": 9,
+        "text": null
+      },
+      "vision": {
+        "archive_sha256": "35f255c780310b16d2630027c29e584dcc097b4e59b9cdd07db8a21f977d6324",
+        "id": "ink003",
+        "language": "ru-RU",
+        "observations": [
+          {
+            "bounds": [
+              0.06731822084258625,
+              0.34041783594576347,
+              0.5927484809027778,
+              0.4475829512984665
+            ],
+            "candidates": [
+              {
+                "raw_vision_confidence": 1,
+                "text": "TAM KOT."
+              }
+            ]
+          }
+        ],
+        "recognition_elapsed_seconds": 0.07691502571105957,
+        "revision": 3
+      },
+      "raw_unicode_exact_match": false,
+      "demonstration_script_normalization": "ТАМ КОТ.",
+      "normalized_exact_match": true
+    }
+  ]
+}
