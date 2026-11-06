@@ -20,7 +20,9 @@ The app also has five destinations: **Today, Learn, Talk, Read and Notebook**. T
 
 The seven-episode course passed complete offline browser journeys at phone and tablet sizes and is installed on the iPad. Later returns open a blank answer while keeping your exact place and draft in the course. Upgrading preserves the earlier three-episode history. Real Mac Save/Cancel and recovery of original audio bytes pass; physical iPad share-sheet behavior and authenticated connection restoration after the new launch remain unobserved. [TASKS.md](TASKS.md) records acceptance and delivery scope.
 
-Drawing letters with Apple Pencil is a local prototype, not a shipped writing feature. Printed Cyrillic and cursive need distinct teaching paths. Explicit grammar construction—combining words and changing forms to express meaning—is part of the continuing curriculum, alongside reading, listening and speech; a collection of phrases is not the complete course.
+Connected handwriting practice is being implemented and is not yet installed. It will span syllables, words and messages: hear → write → compare → say, or see → copy → hear → say, with later returns under different cues. Native PencilKit is the leading iPad capture path; Rust retains the activity model and a portable ink adapter. Printed Cyrillic and cursive need distinct teaching paths. Explicit grammar construction—combining words and changing forms to express meaning—is part of the continuing curriculum.
+
+The [product comparison](research/WRITING_PRODUCT_COMPARISON.md), [primary learning comparisons](research/HANDWRITING_ACTIVITIES.md), [recognition algorithms](research/HANDWRITING_ALGORITHMS.md) and [adaptive learning algorithms](research/MULTIMODAL_LEARNING_ALGORITHMS.md) explain the current choices and the evaluations still needed. Recognition accuracy, handwriting form, spelling, pronunciation and later recall are separate questions.
 
 Claude’s actual Voice Mode lives in Claude’s app/web interface; there is no embedded Voice Mode API integration here. Drussky’s own recording → transcription → Claude text teaching → generated speech path is not yet a complete hands-free conversation loop.
 
