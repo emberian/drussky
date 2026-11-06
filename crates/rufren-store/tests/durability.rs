@@ -277,7 +277,7 @@ fn durability_download_pages_are_byte_bounded_and_resume_without_loss() {
 }
 
 #[test]
-fn durability_v3_reopens_legacy_v1_v2_without_rewriting_and_rejects_old_protocol() {
+fn durability_current_reopens_legacy_v1_v2_without_rewriting_and_rejects_old_protocol() {
     let directory = tempfile::tempdir().unwrap();
     let path = directory.path().join("legacy.sqlite");
     drop(Store::open(&path).unwrap());
@@ -335,17 +335,17 @@ fn durability_v3_reopens_legacy_v1_v2_without_rewriting_and_rejects_old_protocol
     assert!(store.get::<Uuid>("relay").unwrap().is_none()); // rejected before relay identity or data changes
     assert_eq!(store.library().unwrap().events.len(), 2);
     let current = starter(device, 4);
-    assert_eq!(current.version, 3);
+    assert_eq!(current.version, EVENT_VERSION);
     store.append(&[current.clone()]).unwrap();
     let page = store
         .exchange(&SyncRequest {
-            version: 3,
+            version: SYNC_VERSION,
             relay: None,
             after: 0,
             events: vec![],
         })
         .unwrap();
-    assert_eq!(page.version, 3);
+    assert_eq!(page.version, SYNC_VERSION);
     assert_eq!(page.events, vec![passage, attempt, current]);
     drop(store);
     let connection = rusqlite::Connection::open(&path).unwrap();

@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/rufren-core", "crates/rufren-store", "crates/rufren-relay", "crates/rufren-app", "crates/rufren-content", "crates/rufren-audio", "crates/rufren-tutor", "crates/rufren-speech"]
+members = ["crates/rufren-core", "crates/rufren-store", "crates/rufren-relay", "crates/rufren-app", "crates/rufren-content", "crates/rufren-audio", "crates/rufren-tutor", "crates/rufren-tutor-contract", "crates/rufren-speech"]
 resolver = "2"
 
 [workspace.package]
@@ -13,6 +13,7 @@ rufren-store = { path = "crates/rufren-store" }
 rufren-content = { path = "crates/rufren-content" }
 rufren-audio = { path = "crates/rufren-audio" }
 rufren-tutor = { path = "crates/rufren-tutor", default-features = false }
+rufren-tutor-contract = { path = "crates/rufren-tutor-contract" }
 rufren-speech = { path = "crates/rufren-speech", default-features = false }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

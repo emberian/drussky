@@ -4384,6 +4384,7 @@ dependencies = [
 name = "rufren-core"
 version = "0.1.0"
 dependencies = [
+ "rufren-tutor-contract",
  "serde",
  "serde_json",
  "thiserror 2.0.21",
@@ -4446,12 +4447,20 @@ dependencies = [
  "axum",
  "futures-util",
  "reqwest",
+ "rufren-tutor-contract",
+ "serde_json",
+ "tempfile",
+ "tokio",
+]
+
+[[package]]
+name = "rufren-tutor-contract"
+version = "0.1.0"
+dependencies = [
  "rufren-speech",
  "serde",
  "serde_json",
- "tempfile",
  "thiserror 2.0.21",
- "tokio",
 ]
 
 [[package]]

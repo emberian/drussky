@@ -3,6 +3,11 @@
 const {chromium} = require(process.env.RUFREN_PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
 const pack = require('../crates/rufren-content/data/beginner-v1.json');
+const {notebookResponse,openLessonTools} = require('./test-teacher-notebook.cjs');
+const guided=notebookResponse({mode:'teach_lesson',input:{request_id:'visibility-guided-fixture',lesson_id:pack.lessons[0].id,title:'Synthetic guided exposure fixture',objective:'Test actual disclosure visibility.',material:'Synthetic material: Я читаю.',learner_context:null,lesson_flow:'guided_v1'}});
+// Unique Cyrillic goals verify heading exposure after intentional focus/scroll.
+guided.content.lesson_flow.steps[0].goal+=' · Действие';
+guided.content.lesson_flow.steps[1].goal+=' · Смысл';
 const speechEvents = [
   {
     "version": 3,
@@ -134,6 +139,41 @@ const tutor = {
   usage:{accounting:'subscription_quota',input_tokens:0,output_tokens:0,estimated_micro_usd:0,reserved_micro_usd:0},
   content:{explanation:'**Синтетический пример.** Visible tutor prose.',examples:[{russian:'Черепаха читает.',english:'The tortoise reads.',note:'Only a synthetic fixture.'}],next_step:'A rendering check only.',caveats:['**Скрытый нюанс.** Collapsed tutor fixture.']},
 };
+// The notebook journey owns cross-document draft persistence; this companion
+// checks the actual presentation boundary of the guided disclosures.
+async function checkGuidedExposure(page,guided,seen,waitSeen) {
+  const current=page.locator('.teacher-lesson-current');
+  const first=guided.content.lesson_flow.steps[0];
+  const support=first.examples.find(ref=>ref.presentation==='optional_support');
+  assert.ok(support,'fixture needs optional support');
+  const supportText=guided.content.examples[support.example_index].russian;
+  assert.match(first.detail,/[А-Яа-яЁё]/,'detail must exercise Russian history');
+  assert.match(guided.content.explanation,/[А-Яа-яЁё]/,'original must exercise Russian history');
+  await current.getByRole('heading',{name:first.goal,exact:true}).scrollIntoViewIfNeeded();await waitSeen(first.goal);
+  const why=current.getByRole('button',{name:/Why/});
+  const optional=current.getByRole('button',{name:/See optional examples/});
+  const original=page.getByRole('button',{name:/Read the full saved lesson/});
+  for(const text of [first.detail,supportText,guided.content.explanation]) {
+    assert.equal((await seen(text)).length,0,'undisclosed saved text is not presentation');
+  }
+  await why.click();await page.getByText(first.detail,{exact:true}).scrollIntoViewIfNeeded();await waitSeen(first.detail);
+  assert.equal((await seen(first.detail))[0].fact.data.purpose,'instruction');
+  await optional.click();await current.getByText(supportText,{exact:true}).scrollIntoViewIfNeeded();await waitSeen(supportText);
+  assert.equal((await seen(supportText))[0].fact.data.purpose,'reference');
+  await original.click();await page.locator('.teacher-explanation').scrollIntoViewIfNeeded();await waitSeen(guided.content.explanation);
+  const observedGoal=()=>page.locator('.teacher-lesson-goal [id^="russian-presentation-"]');
+  const before=await observedGoal().getAttribute('id');
+  const jump=page.getByLabel('Go to a step');await jump.selectOption('1');
+  await page.locator('.teacher-lesson-flow[data-lesson-step="1"]').waitFor();
+  assert.notEqual(await observedGoal().getAttribute('id'),before,'new step must not inherit old observer');
+  await page.waitForFunction(()=>{const active=document.activeElement;const r=active?.getBoundingClientRect();return active?.classList.contains('teacher-lesson-goal')&&r.top>=0&&r.bottom<=innerHeight;});
+  await waitSeen(guided.content.lesson_flow.steps[1].goal);
+  assert.equal((await seen(guided.content.lesson_flow.steps[1].detail)).length,0,'next step focus must not reveal its hidden detail');
+  assert.equal(await page.getByRole('button',{name:/Read the full saved lesson/}).getAttribute('aria-expanded'),'false');
+  await jump.selectOption('0');await page.locator('.teacher-lesson-flow[data-lesson-step="0"]').waitFor();
+  assert.equal(await why.getAttribute('aria-expanded'),'false','Why starts closed on reentering step');
+  assert.equal(await optional.getAttribute('aria-expanded'),'false','optional support starts closed on reentering step');
+}
 (async()=>{
   const browser=await chromium.launch({headless:true});
   const context=await browser.newContext({viewport:{width:1100,height:800}});
@@ -154,10 +194,11 @@ const tutor = {
   const settle=()=>page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
   try {
     await page.goto(origin);await page.getByRole('navigation').waitFor();
-    await page.evaluate(({events,tutor})=>{
+    await page.evaluate(({events,tutor,guided})=>{
       for(const e of events)window.rufrenLibrary.write('rufren.v1.event.'+e.id,JSON.stringify(e));
       window.rufrenLibrary.write('rufren.v1.meta.tutor_response',JSON.stringify(tutor));
-    },{events:speechEvents,tutor});
+      window.rufrenLibrary.write('rufren.v1.meta.teacher_response',JSON.stringify(guided));
+    },{events:speechEvents,tutor,guided});
     await page.reload();await page.getByRole('navigation').waitFor();
     await nav('Lessons');await page.locator('.lesson-link').first().click();
     const sound=page.locator('.sound-note');await sound.scrollIntoViewIfNeeded();await waitSeen(pack.lessons[0].sound_note);
@@ -179,6 +220,7 @@ const tutor = {
     await alphabet.locator('article').last().scrollIntoViewIfNeeded();await waitSeen(lastText);
     const lastExample=last.examples[0];await waitSeen(lastExample);
     await nav('Teacher');
+    await openLessonTools(page);
     await page.getByRole('button',{name:'Review saved practice',exact:true}).click();
     const hypothesis='Гипотеза: ёжик читает.',confirmed='Подтверждённые слова: ёжик пишет.';
     await page.getByText(hypothesis,{exact:true}).scrollIntoViewIfNeeded();await waitSeen(hypothesis);
@@ -189,6 +231,7 @@ const tutor = {
       assert.equal(event.fact.data.session,attempt.fact.data.session);assert.equal(event.fact.data.revision,attempt.fact.data.revision);
     }
     await page.getByRole('button',{name:'Return to current teaching',exact:true}).click();
+    await checkGuidedExposure(page,guided,seen,waitSeen);
     assert.equal((await seen('Синтетический пример. Visible tutor prose.')).length,0,'collapsed tutor is not exposure');
     await page.getByText('Ask a different question',{exact:true}).click();
     await page.locator('.tutor-prose').scrollIntoViewIfNeeded();await waitSeen('Синтетический пример. Visible tutor prose.');
@@ -197,7 +240,7 @@ const tutor = {
     await page.getByText('Things to check',{exact:true}).click();
     await page.locator('.tutor-caveats').scrollIntoViewIfNeeded();await waitSeen('Скрытый нюанс. Collapsed tutor fixture.');
     assert.deepEqual(errors,[]);assert.deepEqual(unexpected,[]);
-    console.log('PASS changed lesson observer identity/facts; chunks; collapsed/offscreen alphabet and examples; ASR/confirmed text exact attribution; collapsed tutor and rich caveat withholding. No model/provider requests.');
+    console.log('PASS changed lesson observer identity/facts; chunks; collapsed/offscreen alphabet and examples; ASR/confirmed text exact attribution; collapsed tutor and rich caveat withholding; guided Why/support/original withholding, exact purposes and reset on step changes. No model/provider requests.');
   } catch(error) {console.error("Browser diagnostic:",await page.locator("body").innerText(),errors,unexpected);throw error;}
   finally {await context.close();await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

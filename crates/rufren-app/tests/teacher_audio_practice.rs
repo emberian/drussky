@@ -25,6 +25,8 @@ mod teacher;
 mod teacher_audio_practice;
 #[path = "../src/teacher_context.rs"]
 mod teacher_context;
+#[path = "../src/teacher_notebook.rs"]
+mod teacher_notebook;
 #[path = "../src/teacher_practice.rs"]
 mod teacher_practice;
 use model::AppState;
@@ -33,7 +35,7 @@ use rufren_core::*;
 use rufren_tutor::*;
 use sha2::{Digest, Sha256};
 use std::rc::Rc;
-use teacher_audio_practice::{TeacherAudioBinding, TEACHER_AUDIO_POLICY};
+use teacher_audio_practice::{TEACHER_AUDIO_POLICY, TeacherAudioBinding};
 use teacher_practice::TeacherPracticeDraft;
 use uuid::Uuid;
 fn app() -> AppState {
@@ -45,8 +47,12 @@ fn app() -> AppState {
 }
 fn lesson(state: &AppState, skill: TeacherSkill) -> TeacherResponse {
     let listening = skill == TeacherSkill::Listening;
+    let mut request = state.lesson_teaching_request().unwrap();
+    if let TeacherRequest::TeachLesson(request) = &mut request {
+        request.lesson_flow = None;
+    }
     TeacherResponse {
-        request: state.lesson_teaching_request().unwrap(),
+        request,
         provenance: TutorProvenance {
             provider: "synthetic".into(),
             model: "teacher-test".into(),
@@ -68,6 +74,7 @@ fn lesson(state: &AppState, skill: TeacherSkill) -> TeacherResponse {
             reserved_micro_usd: 0,
         },
         content: TeacherContent {
+            lesson_flow: None,
             explanation: "A short greeting can carry a complete message.".into(),
             examples: vec![TutorExample {
                 russian: "Привет.".into(),
@@ -179,9 +186,10 @@ fn teacher_audio_practice_listening_requires_exact_successful_input_and_persists
     let (id, record, _) = attach(&mut s, &binding, "reference", false);
     let mut wrong = record.clone();
     wrong.content_hash = "f".repeat(64);
-    assert!(s
-        .teacher_audio_reference_played(&answer, &mut draft, id, &wrong)
-        .is_err());
+    assert!(
+        s.teacher_audio_reference_played(&answer, &mut draft, id, &wrong)
+            .is_err()
+    );
     assert_eq!(draft.audio.as_ref().unwrap().reference_plays, 0);
     s.teacher_audio_reference_played(&answer, &mut draft, id, &record)
         .unwrap();
@@ -288,18 +296,20 @@ fn teacher_audio_practice_reveals_and_answer_edits_fork_without_faking_a_new_pla
     let edited = s.submit_teacher_practice(&answer, &mut draft).unwrap();
     assert_ne!(edited, original);
     assert_eq!(s.library.attempt(original).unwrap().response, "Hi.");
-    assert!(!s
-        .library
-        .attempt(original)
-        .unwrap()
-        .cues
-        .contains(&Cue::Translation));
-    assert!(s
-        .library
-        .attempt(edited)
-        .unwrap()
-        .cues
-        .contains(&Cue::Translation));
+    assert!(
+        !s.library
+            .attempt(original)
+            .unwrap()
+            .cues
+            .contains(&Cue::Translation)
+    );
+    assert!(
+        s.library
+            .attempt(edited)
+            .unwrap()
+            .cues
+            .contains(&Cue::Translation)
+    );
     assert!(teacher_audio_practice::valid_submitted_audio(
         &s.library,
         edited,
@@ -311,9 +321,10 @@ fn teacher_audio_practice_reveals_and_answer_edits_fork_without_faking_a_new_pla
 fn teacher_audio_practice_speaking_copies_exact_selected_take_and_opens_existing_asr_path() {
     let (mut s, answer, mut draft, binding) = prepared(TeacherSkill::Speaking);
     assert!(s.submit_teacher_practice(&answer, &mut draft).is_err());
-    assert!(s
-        .teacher_practice_edit_response(&answer, &mut draft, "Привет.".into())
-        .is_err());
+    assert!(
+        s.teacher_practice_edit_response(&answer, &mut draft, "Привет.".into())
+            .is_err()
+    );
     let (id, record, bytes) = attach(&mut s, &binding, "attempt", false);
     s.teacher_audio_select_recording(&answer, &mut draft, id, &record, false)
         .unwrap();
@@ -348,12 +359,14 @@ fn teacher_audio_practice_speaking_copies_exact_selected_take_and_opens_existing
     );
     assert_eq!(review.interval_ms, 0);
     assert_eq!(review.coach_confirmed_unassisted, 0);
-    assert!(teacher_practice::saved_teacher_practice_origin(
-        &s.library,
-        attempt,
-        s.library.contexts(attempt)[0].0.id
-    )
-    .is_some());
+    assert!(
+        teacher_practice::saved_teacher_practice_origin(
+            &s.library,
+            attempt,
+            s.library.contexts(attempt)[0].0.id
+        )
+        .is_some()
+    );
 }
 
 #[test]
@@ -371,20 +384,22 @@ fn teacher_audio_practice_clear_new_capture_and_selected_partial_never_reuse_old
     assert!(draft.response.is_empty());
     assert!(s.submit_teacher_practice(&answer, &mut draft).is_err());
     let (partial, record, _) = attach(&mut s, &binding, "attempt", true);
-    assert!(s
-        .teacher_audio_select_recording(&answer, &mut draft, partial, &record, false)
-        .is_err());
+    assert!(
+        s.teacher_audio_select_recording(&answer, &mut draft, partial, &record, false)
+            .is_err()
+    );
     assert!(draft.selected_attachment().is_none());
     s.teacher_audio_select_recording(&answer, &mut draft, partial, &record, true)
         .unwrap();
     let new = s.submit_teacher_practice(&answer, &mut draft).unwrap();
     assert_ne!(new, old);
-    assert!(s
-        .library
-        .attempt(new)
-        .unwrap()
-        .response
-        .contains("interrupted"));
+    assert!(
+        s.library
+            .attempt(new)
+            .unwrap()
+            .response
+            .contains("interrupted")
+    );
     assert_eq!(
         s.library.recordings(AnnotationTarget::Attempt(old))[0]
             .1
@@ -405,25 +420,29 @@ fn teacher_audio_practice_clear_new_capture_and_selected_partial_never_reuse_old
 fn teacher_audio_practice_rejects_wrong_question_roles_and_changed_source_binding() {
     let (mut s, answer, mut draft, binding) = prepared(TeacherSkill::Speaking);
     let (reference, metadata, _) = attach(&mut s, &binding, "reference", false);
-    assert!(s
-        .teacher_audio_select_recording(&answer, &mut draft, reference, &metadata, false)
-        .is_err());
+    assert!(
+        s.teacher_audio_select_recording(&answer, &mut draft, reference, &metadata, false)
+            .is_err()
+    );
     let (attempt, metadata, _) = attach(&mut s, &binding, "attempt", false);
-    assert!(s
-        .teacher_audio_reference_played(&answer, &mut draft, attempt, &metadata)
-        .is_err());
+    assert!(
+        s.teacher_audio_reference_played(&answer, &mut draft, attempt, &metadata)
+            .is_err()
+    );
     let mut changed = answer.clone();
     changed.content.practice[0].prompt =
         "A changed question under the same response identity".into();
-    assert!(s
-        .prepare_teacher_audio_practice(&changed, &mut draft)
-        .is_err());
+    assert!(
+        s.prepare_teacher_audio_practice(&changed, &mut draft)
+            .is_err()
+    );
     assert_eq!(draft.audio.as_ref().unwrap().binding, binding);
     let mut foreign = answer;
     foreign.provenance.response_id = "another-response".into();
-    assert!(s
-        .prepare_teacher_audio_practice(&foreign, &mut draft)
-        .is_err());
+    assert!(
+        s.prepare_teacher_audio_practice(&foreign, &mut draft)
+            .is_err()
+    );
 }
 
 #[test]
@@ -435,12 +454,14 @@ fn teacher_audio_practice_speaking_model_replay_is_support_and_legacy_text_draft
     s.teacher_audio_reference_played(&answer, &mut draft, id, &record)
         .unwrap();
     assert!(draft.audio.as_ref().unwrap().cues.contains(&Cue::Replay));
-    assert!(draft
-        .audio
-        .as_ref()
-        .unwrap()
-        .cues
-        .contains(&Cue::OriginalText));
+    assert!(
+        draft
+            .audio
+            .as_ref()
+            .unwrap()
+            .cues
+            .contains(&Cue::OriginalText)
+    );
     let mut json = serde_json::to_value(&draft).unwrap();
     json.as_object_mut().unwrap().remove("audio");
     let restored: TeacherPracticeDraft = serde_json::from_value(json).unwrap();

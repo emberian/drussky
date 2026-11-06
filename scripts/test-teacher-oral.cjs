@@ -126,6 +126,11 @@ async function assets(page) {
   });
 }
 
+async function openLessonTools(page) {
+  const summary = page.getByText('Lessons & history', { exact: true });
+  if (await summary.count() && !await summary.evaluate(node => node.closest('details')?.open)) await summary.click();
+}
+
 async function main() {
   await fs.mkdir(OUTPUT, { recursive: true });
   await fs.writeFile(path.join(OUTPUT, 'deterministic-tone.wav'), audio.wav);
@@ -163,7 +168,7 @@ async function main() {
     await page.locator('#sync-key').fill('synthetic-oral-fixture-no-secret');
     await nav('Teacher');
     await page.getByRole('button', { name: 'Teach me this lesson', exact: false }).click();
-    await page.locator('.teacher-exercise').first().waitFor();
+    await page.locator('.teacher-lesson-flow').waitFor();
     await journey({ page, context, nav, requests });
     assert.deepEqual(forbidden, [], 'No real relay/external service may be contacted');
     assert.deepEqual(errors, []);
@@ -191,13 +196,20 @@ async function journey({ page, context, nav, requests }) {
   const oral = skill => page.locator(`.teacher-oral-exercise[data-teacher-skill="${skill}"]`);
   const listening = oral('listening'), speaking = oral('speaking');
   const written = page.locator('.teacher-exercise').filter({ has: page.getByText('Write in Russian that you are writing.', { exact: true }) });
-  const returnToLesson = () => page.getByRole('button', { name: 'Return to your lesson & exercises', exact: false }).click();
+  const returnToLesson = () => page.getByRole('button', { name: 'Return to this lesson & exercise', exact: false }).click();
+  // This fixture deliberately omits guided capability: legacy response order is
+  // orientation, listening, speaking, writing. Every practice is still one step.
+  const jump = async index => {
+    await page.locator('.teacher-lesson-flow').getByRole('combobox', { name: 'Go to a step', exact: true }).selectOption(String(index + 1));
+    await page.waitForFunction(position => document.querySelector('.teacher-lesson-flow')?.dataset.lessonStep === String(position), index + 1);
+  };
   const waitFact = (kind, field, value) => page.waitForFunction(({ kind, field, value }) =>
     window.rufrenLibrary.entries().some(([key, raw]) => key.startsWith('rufren.v1.event.') &&
       (() => { const e = JSON.parse(raw); return e.fact.kind === kind && e.fact.data[field] === value; })()), { kind, field, value });
   const feedbackRequest = () => requests.filter(r => r.path === '/api/teacher/teach' && r.request.mode === 'answer_feedback').at(-1)?.request.input;
-  await listening.waitFor();
+  await jump(2);
   await written.locator('textarea').fill('Незаконченный ответ — ёжик.');
+  await jump(0); await listening.waitFor();
   assert.equal(await listening.locator('.teacher-oral-model').count(), 0);
   assert.equal((await page.locator('body').innerText()).includes(LISTEN), false, 'Listening reference must be concealed');
   assert.equal((await events(page)).some(e => e.fact.kind === 'stimulus_presented' && e.fact.data.russian === LISTEN), false,
@@ -209,6 +221,7 @@ async function journey({ page, context, nav, requests }) {
   await page.waitForFunction(() => document.querySelector('.teacher-oral-exercise[data-teacher-skill="listening"] [data-practice-rate="1"]')?.disabled === false);
   assert.equal(await listening.getByRole('button', { name: 'Discuss what I heard', exact: false }).isDisabled(), true,
     'Generated/saved audio alone must not count as played');
+  await page.getByRole('button', { name: 'Read the full saved lesson', exact: false }).click();
   await page.getByRole('button', { name: 'Create spoken example', exact: true }).click();
   await page.waitForFunction(() => document.querySelector('.teacher-example-player [data-practice-rate="1"]')?.disabled === false);
   const players = await page.evaluate(() => [...document.querySelectorAll('[data-practice-media]')]
@@ -243,10 +256,13 @@ async function journey({ page, context, nav, requests }) {
   assert.equal(listeningAttempt.fact.data.self_rating, 'not_reported');
   assert.equal(listeningAttempt.fact.data.revision, played.fact.data.revision);
   await returnToLesson();
+  await jump(2);
   assert.equal(await written.locator('textarea').inputValue(), 'Незаконченный ответ — ёжик.');
+  await jump(0);
   assert.equal(await listening.locator('textarea').inputValue(), 'The cat is sleeping.');
   await listening.locator('.teacher-oral-model').waitFor();
 
+  await jump(1);
   await speaking.getByRole('button', { name: 'Open recorder for this exercise', exact: true }).click();
   assert.equal(await page.locator('.audio-speaking').count(), 1, 'Only one speaking editor mounts');
   await speaking.locator('#audio-import-attempt').setInputFiles({ name: 'synthetic-tone-not-speech.wav', mimeType: 'audio/wav', buffer: audio.wav });
@@ -301,10 +317,13 @@ async function journey({ page, context, nav, requests }) {
   assert.equal(confirmation.fact.kind, 'transcript_confirmed'); assert.equal(confirmation.fact.data.operation, 'edit');
   await waitFact('ai_assessment_recorded', 'confirmed_transcript', confirmation.id);
   await returnToLesson();
+  await jump(2);
   assert.equal(await written.locator('textarea').inputValue(), 'Незаконченный ответ — ёжик.');
+  await jump(1);
   assert.equal(await page.locator('.transcript-words textarea').count(), 1,
     'Current lesson must not duplicate its inline transcript editor in saved history');
   const transcriptID = await speaking.locator('.transcript-words textarea').getAttribute('id');
+  await openLessonTools(page);
   await page.getByRole('button', { name: 'Review saved practice', exact: true }).click();
   assert.equal(await page.locator('.teacher-answer').count(), 0, 'Saved practice is an alternate view');
   await page.getByRole('heading', { name: 'Work with your answer', exact: true }).waitFor();
@@ -312,9 +331,12 @@ async function journey({ page, context, nav, requests }) {
     'Saved practice mounts exactly one editor for the selected transcription');
   assert.equal(await page.locator('.transcript-words textarea').getAttribute('id'), transcriptID);
   assert.equal(await page.locator('.transcript-words textarea').inputValue(), 'Я читаю книгу.');
+  await openLessonTools(page);
   await page.getByRole('button', { name: 'Return to current teaching', exact: true }).click();
   assert.equal(await page.locator('.transcript-words textarea').count(), 1);
+  await jump(2);
   assert.equal(await written.locator('textarea').inputValue(), 'Незаконченный ответ — ёжик.');
+  await jump(1);
   await page.screenshot({ path: path.join(OUTPUT, 'lesson-desktop.png'), fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Phone layout must fit');
@@ -329,9 +351,12 @@ async function journey({ page, context, nav, requests }) {
   await nav('Settings'); await page.locator('#sync-url').fill(RELAY);
   await page.locator('#sync-key').fill('synthetic-oral-fixture-no-secret');
   await nav('Teacher');
-  await returnToLesson();
+  await page.locator('.teacher-lesson-flow').waitFor();
+  await jump(2);
   assert.equal(await written.locator('textarea').inputValue(), 'Незаконченный ответ — ёжик.');
+  await jump(0);
   assert.equal(await listening.locator('textarea').inputValue(), 'The cat is sleeping.');
+  await jump(1);
   const recovered = (await assets(page)).find(record => record.asset_id === original.asset_id);
   assert.equal(recovered.actual_sha256, audio.hash); assert.equal(recovered.revision_id, attempt.fact.data.revision);
   const offlineIDs = new Set((await events(page)).map(event => event.id));

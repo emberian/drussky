@@ -26,6 +26,8 @@ mod teacher;
 mod teacher_audio_practice;
 #[path = "../src/teacher_context.rs"]
 mod teacher_context;
+#[path = "../src/teacher_notebook.rs"]
+mod teacher_notebook;
 #[path = "../src/teacher_practice.rs"]
 mod teacher_practice;
 use model::AppState;
@@ -92,7 +94,7 @@ fn input(request: &TeacherRequest) -> &AnswerFeedbackRequest {
     value
 }
 fn feedback(request: &TeacherRequest) -> TeacherResponse {
-    let content=TeacherContent {explanation:"The object of читаю uses the accusative here. The correction concerns the written form, not pronunciation.".into(),examples:vec![],next_step:"Try the same meaning with another object.".into(),caveats:vec!["This is an attributed AI judgment of language content.".into()],feedback:Some(AiAnswerFeedback {verdict:AiVerdict::PartlyCorrect,suggested_response:Some("Я читаю книгу.".into()),corrections:if input(request).response.contains("книга") {vec![TextCorrection {original:"книга".into(),replacement:"книгу".into(),reason:"Accusative direct object".into()}]}else{vec![]}}),practice:vec![]};
+    let content=TeacherContent { lesson_flow: None,explanation:"The object of читаю uses the accusative here. The correction concerns the written form, not pronunciation.".into(),examples:vec![],next_step:"Try the same meaning with another object.".into(),caveats:vec!["This is an attributed AI judgment of language content.".into()],feedback:Some(AiAnswerFeedback {verdict:AiVerdict::PartlyCorrect,suggested_response:Some("Я читаю книгу.".into()),corrections:if input(request).response.contains("книга") {vec![TextCorrection {original:"книга".into(),replacement:"книгу".into(),reason:"Accusative direct object".into()}]}else{vec![]}}),practice:vec![]};
     let response = TeacherResponse {
         request: request.clone(),
         content,
@@ -217,14 +219,18 @@ fn teacher_journey_provider_feedback_becomes_exact_sourced_ai_fact_with_retry_sa
         assessment.provenance.prompt_version,
         response.provenance.prompt_version
     );
-    assert!(state
-        .library
-        .judgments(attempt, JudgmentDimension::Grammar)
-        .is_empty());
-    assert!(state
-        .library
-        .judgments(attempt, JudgmentDimension::Recall)
-        .is_empty());
+    assert!(
+        state
+            .library
+            .judgments(attempt, JudgmentDimension::Grammar)
+            .is_empty()
+    );
+    assert!(
+        state
+            .library
+            .judgments(attempt, JudgmentDimension::Recall)
+            .is_empty()
+    );
     assert_eq!(
         SpacedReview.project(&state.library, key, repository::now_ms()),
         before
@@ -244,11 +250,13 @@ fn teacher_journey_provider_feedback_becomes_exact_sourced_ai_fact_with_retry_sa
             .id,
         saved_id
     );
-    assert!(reopened
-        .repo
-        .get::<TeacherResponse>("teacher_response")
-        .unwrap()
-        .is_some());
+    assert!(
+        reopened
+            .repo
+            .get::<TeacherResponse>("teacher_response")
+            .unwrap()
+            .is_some()
+    );
 }
 
 #[test]
@@ -282,11 +290,13 @@ fn teacher_journey_mismatched_echo_and_stale_attempt_binding_leave_history_uncha
         );
         assert_eq!(state.library, before);
     }
-    assert!(state
-        .repo
-        .get::<TeacherResponse>("teacher_response")
-        .unwrap()
-        .is_none());
+    assert!(
+        state
+            .repo
+            .get::<TeacherResponse>("teacher_response")
+            .unwrap()
+            .is_none()
+    );
 }
 
 #[test]
@@ -334,9 +344,11 @@ fn teacher_journey_changed_retry_or_missing_provider_identity_cannot_replace_sav
     assert_eq!(state.library, before);
     let mut wrong_source = response;
     wrong_source.provenance.review_status = ReviewStatus::UnreviewedAiSuggestion;
-    assert!(state
-        .keep_teacher_response(&request, &wrong_source)
-        .is_err());
+    assert!(
+        state
+            .keep_teacher_response(&request, &wrong_source)
+            .is_err()
+    );
     assert_eq!(state.library, before);
 }
 
@@ -395,10 +407,12 @@ fn teacher_journey_legacy_authored_response_is_not_reinterpreted_using_current_p
         state.answer_feedback_request(attempt).is_err(),
         "a current exercise with the same ID cannot stand in for a missing historical question"
     );
-    assert!(state
-        .library
-        .ai_assessments(attempt, JudgmentDimension::Comprehension)
-        .is_empty());
+    assert!(
+        state
+            .library
+            .ai_assessments(attempt, JudgmentDimension::Comprehension)
+            .is_empty()
+    );
 }
 
 #[test]

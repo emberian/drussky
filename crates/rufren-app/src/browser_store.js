@@ -3,9 +3,9 @@
 if (!window.rufrenLibrary) {
   const prefix='rufren.v1.',pendingPrefix='rufren.journal.v1.',workspacePrefix=prefix+'workspace.';
   const workspaceJournal='rufren.journal.workspace.v1.',workspaceToken='rufren.workspace.v1',lockPrefix='rufren-workspace-v1.';
-  const cache=new Map(),eventVersions=new Map(),heldWorkspaces=new Set();let eventVersion=0,db,flushing=false,failure=null,workspace=null;
+  const cache=new Map(),eventVersions=new Map(),heldWorkspaces=new Set(),teacherRecoveryWorkspaces=new Set();let eventVersion=0,db,flushing=false,failure=null,workspace=null;
   const channel=typeof BroadcastChannel==='function'?new BroadcastChannel('rufren-library'):null;
-  const scoped=name=>['session','session_plan','paused_practice_ids','active_passage_draft','passage_draft_ids','selected_lesson','tutor_response','teacher_response','teacher_lesson_response','teacher_request','teacher_context_prepared'].includes(name)||name.startsWith('paused_practice.')||name.startsWith('passage_draft.')||name.startsWith('teacher_practice:')||name.startsWith('transcript_draft:');
+  const scoped=name=>['session','session_plan','paused_practice_ids','active_passage_draft','passage_draft_ids','selected_lesson','tutor_response','teacher_response','teacher_lesson_response','teacher_request','teacher_context_prepared','teacher_notebook_selection'].includes(name)||name.startsWith('paused_practice.')||name.startsWith('passage_draft.')||name.startsWith('teacher_notebook_cursor:')||name.startsWith('teacher_practice:')||name.startsWith('transcript_draft:');
   const scopeKey=(id,name)=>workspacePrefix+id+'.meta.'+name;
   const infoKey=id=>workspacePrefix+id+'.info';
   const validId=id=>typeof id==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(id);
@@ -100,6 +100,8 @@ if (!window.rufrenLibrary) {
       const migration=[];
       for(const[key,value]of cache){if(key.startsWith(prefix+'meta.')){const name=key.slice((prefix+'meta.').length);if(scoped(name)){const target=scopeKey(workspace,name);if(!cache.has(target))migration.push([target,value]);migration.push([key,null]);}}}
       writeWorkspace(migration);
+      const locks=await navigator.locks.query(),busy=new Set(locks.held.map(lock=>lock.name).filter(name=>name.startsWith(lockPrefix)).map(name=>name.slice(lockPrefix.length)));
+      for(const record of descriptors(cache))if(record.id===workspace||!busy.has(record.id))teacherRecoveryWorkspaces.add(record.id);
     });
   };
   const ready=new Promise((resolve,reject)=>{
@@ -127,6 +129,17 @@ if (!window.rufrenLibrary) {
     eventsAfter:after=>{overlay(readPending().entries);return {revision:eventVersion,entries:[...eventVersions].filter(([,version])=>version>after).map(([key])=>[key,cache.get(key)])};},
     get:key=>{overlay(readPending().entries);return cache.get(physical(key))??null;},
     write:(key,value)=>{const target=physical(key);if(target!==key)writeWorkspace([[target,value]]);else writeRaw(key,value);},
+    // Read-only legacy recovery: current workspace plus inactive workspaces observed at
+    // bootstrap. Another live window retains sole ownership of its mutable draft slots.
+    teacherCaches:()=>{
+      overlay(readPending().entries);const roots=[prefix+'meta.',...[...teacherRecoveryWorkspaces].map(id=>workspacePrefix+id+'.meta.')],result=[];
+      const decode=raw=>{try{return JSON.parse(raw);}catch{return null;}};
+      for(const root of roots)for(const name of ['teacher_response','teacher_lesson_response']){
+        const raw=cache.get(root+name);if(raw===undefined||raw==='null')continue;
+        result.push({response:decode(raw),prepared_context:decode(cache.get(root+'teacher_context_prepared')||'null')});
+      }
+      return result;
+    },
     workspaces:savedWindows,
     switchWorkspace:async id=>{await ready;const known=await databaseEntries(workspacePrefix);for(const[key,value]of readPending().entries)if(key.startsWith(workspacePrefix))value===null?known.delete(key):known.set(key,value);if(!validId(id)||!descriptors(known).some(record=>record.id===id))throw Error('That saved window is unavailable. Refresh the list.');if(id!==workspace&&!await claim(id))throw Error('This saved window is open in another tab. Close it there before reopening it here.');sessionStorage.setItem(workspaceToken,id);return true;},
     flush,

@@ -20,9 +20,20 @@
       }
     ],
     "next_step": "No learner action is required by this fixture.",
-    "caveats": ["No teacher, recognizer or provider was called to create this fixture."],
+    "caveats": [
+      "No teacher, recognizer or provider was called to create this fixture."
+    ],
     "feedback": null,
-    "practice": []
+    "practice": [
+      {
+        "prompt": "Synthetic persistence exercise: write the Russian for the hedgehog looking at the stars.",
+        "expected_response": "Ёжик смотрит на звёзды.",
+        "teaching_note": "Synthetic schema-valid persistence fixture only; no learner answer was evaluated.",
+        "reference_russian": "Ёжик смотрит на звёзды.",
+        "reference_english": "The hedgehog looks at the stars.",
+        "skill": "writing"
+      }
+    ]
   },
   "provenance": {
     "provider": "qa-shell-update-fixture",

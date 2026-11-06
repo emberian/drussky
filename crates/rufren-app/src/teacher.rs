@@ -1,7 +1,7 @@
 //! Teacher context and durable model feedback, independent of the UI.
 use crate::{
     model::{AppState, Editor},
-    repository::{now_ms, Result},
+    repository::{Result, now_ms},
 };
 use rufren_core::*;
 use rufren_tutor::*;
@@ -29,6 +29,7 @@ impl AppState {
             objective: lesson.goal.clone(),
             material,
             learner_context: Some(learner_context),
+            lesson_flow: Some(LessonFlowCapability::GuidedV1),
         });
         request.validate().map_err(|e| e.to_string())?;
         if let TeacherRequest::TeachLesson(lesson_request) = &request {
@@ -349,12 +350,16 @@ impl AppState {
             self.repo.append(&[event])?;
             self.refresh()?;
         }
+        let legacy_cache_writable = self.archive_accepted_teacher_response(response)?;
         // Feedback replaces the current view, but the lesson's remaining exercises stay
         // available. Only fully validated lesson responses may replace this slot.
-        if matches!(expected, TeacherRequest::TeachLesson(_)) {
-            self.repo.set("teacher_lesson_response", response)?;
+        if legacy_cache_writable {
+            if matches!(expected, TeacherRequest::TeachLesson(_)) {
+                self.repo.set("teacher_lesson_response", response)?;
+            }
+            self.repo.set("teacher_response", response)?;
         }
-        self.repo.set("teacher_response", response)?;
+        self.select_teacher_document(teacher_document_id(response))?;
         Ok(())
     }
 

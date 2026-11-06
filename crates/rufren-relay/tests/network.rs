@@ -402,7 +402,7 @@ async fn network_recognition_auth_disabled_bounds_and_exact_cancel() {
 }
 
 #[tokio::test]
-async fn network_v3_refuses_protocol2_push_and_pull_before_history() {
+async fn network_current_refuses_protocol2_push_and_pull_before_history() {
     let mut store = Store::open(":memory:").unwrap();
     let mut first = starter(Uuid::new_v4(), 1);
     first.version = 1;
@@ -445,7 +445,7 @@ async fn network_v3_refuses_protocol2_push_and_pull_before_history() {
         .post(&endpoint)
         .bearer_auth("compatibility-key")
         .json(&SyncRequest {
-            version: 3,
+            version: SYNC_VERSION,
             relay: None,
             after: 0,
             events: vec![],
@@ -458,7 +458,7 @@ async fn network_v3_refuses_protocol2_push_and_pull_before_history() {
         .json()
         .await
         .unwrap();
-    assert_eq!(page.version, 3);
+    assert_eq!(page.version, SYNC_VERSION);
     assert_eq!(page.events, vec![first, second]);
     assert_eq!(page.cursor, 2);
     server.abort();

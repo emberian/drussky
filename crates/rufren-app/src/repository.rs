@@ -1,10 +1,17 @@
 use rufren_core::*;
-use serde::{de::DeserializeOwned, Serialize};
+use serde::{Serialize, de::DeserializeOwned};
 use std::collections::BTreeSet;
 use uuid::Uuid;
 pub type Result<T> = std::result::Result<T, String>;
 fn err(e: impl std::fmt::Display) -> String {
     e.to_string()
+}
+
+/// Surviving local response slots. Recovery never edits their originating workspace.
+#[derive(serde::Deserialize)]
+pub(crate) struct CachedTeacherMetadata {
+    pub response: serde_json::Value,
+    pub prepared_context: Option<serde_json::Value>,
 }
 
 pub struct Repository {
@@ -96,6 +103,39 @@ impl Repository {
                 })
         }
     }
+    pub(crate) fn cached_teacher_metadata(&self) -> Result<Vec<CachedTeacherMetadata>> {
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            let prepared_context = self
+                .get::<serde_json::Value>("teacher_context_prepared")
+                .ok()
+                .flatten();
+            let mut caches = Vec::new();
+            for key in ["teacher_response", "teacher_lesson_response"] {
+                if let Some(response) = self
+                    .get::<serde_json::Value>(key)
+                    .unwrap_or(Some(serde_json::Value::Null))
+                {
+                    caches.push(CachedTeacherMetadata {
+                        response,
+                        prepared_context: prepared_context.clone(),
+                    });
+                }
+            }
+            Ok(caches)
+        }
+        #[cfg(target_arch = "wasm32")]
+        {
+            let json = js_sys::eval("JSON.stringify(window.rufrenLibrary.teacherCaches())")
+                .map_err(
+                    |_| "Cannot read saved teacher responses; their original caches were kept",
+                )?
+                .as_string()
+                .ok_or("Invalid teacher response cache")?;
+            serde_json::from_str(&json).map_err(err)
+        }
+    }
+
     pub fn library(&self) -> Result<Library> {
         #[cfg(not(target_arch = "wasm32"))]
         {

@@ -1,0 +1,37 @@
+{
+  "request": {
+    "mode": "teach_lesson",
+    "input": {
+      "request_id": "synthetic-notebook-request",
+      "lesson_id": "synthetic.lesson",
+      "title": "Synthetic notebook persistence fixture",
+      "objective": "Preserve an exact short lesson across sync and restore.",
+      "material": "Я читаю книгу. — I am reading a book.",
+      "learner_context": null
+    }
+  },
+  "content": {
+    "explanation": "Synthetic data for transport and recovery tests; no model was called.",
+    "examples": [{"russian": "Я читаю книгу.", "english": "I am reading a book.", "note": "Synthetic example."}],
+    "next_step": "Try the synthetic practice item.",
+    "caveats": [],
+    "feedback": null,
+    "practice": [{
+      "prompt": "Write Russian for: I am reading a book.",
+      "expected_response": "Я читаю книгу.",
+      "teaching_note": "Accept appropriate alternatives.",
+      "reference_russian": "Я читаю книгу.",
+      "reference_english": "I am reading a book.",
+      "skill": "writing"
+    }]
+  },
+  "provenance": {
+    "provider": "synthetic-fixture",
+    "model": "no-model",
+    "response_id": "synthetic-notebook-response",
+    "prompt_version": "synthetic-notebook-v1",
+    "scope": "Synthetic persistence tests; no inference or learner data.",
+    "review_status": "ai_generated_teaching"
+  },
+  "usage": {"input_tokens": 0, "output_tokens": 0, "estimated_micro_usd": 0, "reserved_micro_usd": 0}
+}

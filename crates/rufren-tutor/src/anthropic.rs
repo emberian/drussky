@@ -137,7 +137,7 @@ impl Anthropic {
             let (value, usage, response_id) = self
                 .structured(
                     serde_json::to_string(request).map_err(|_| TutorError::InvalidRequest)?,
-                    teacher_schema(),
+                    teacher_schema_for(request),
                     TEACHER_SYSTEM,
                 )
                 .await?;
@@ -313,5 +313,38 @@ pub(crate) fn teacher_schema() -> Value {
         "feedback",
         "practice"
     ]);
+    schema
+}
+
+pub(crate) fn teacher_schema_for(request: &TeacherRequest) -> Value {
+    let mut schema = teacher_schema();
+    if !request.wants_lesson_flow() {
+        return schema;
+    }
+    // Anthropic's structured-output subset does not enforce numeric/string/array
+    // upper bounds. Describe them here and enforce the shared Rust contract after
+    // decoding, rather than send unsupported constraints that fail API requests.
+    // https://platform.claude.com/docs/en/build-with-claude/structured-outputs
+    schema["properties"]["lesson_flow"] = json!({
+        "type":"object","additionalProperties":false,
+        "properties":{"steps":{"type":"array","description":"1-6 purposeful steps; unique stable short ASCII IDs. Every practice index exactly once.",
+            "items":{"type":"object","additionalProperties":false,
+                "properties":{
+                    "id":{"type":"string","description":"Unique within this response, 1-64 ASCII letters/digits/hyphens/underscores."},
+                    "goal":{"type":"string","description":"One communicative micro-goal, up to 512 UTF-8 bytes."},
+                    "orientation":{"type":"string","description":"Brief useful orientation up to 2000 UTF-8 bytes, with no hidden listening answer."},
+                    "detail":{"type":["string","null"],"description":"Optional deeper explanation, up to 6000 UTF-8 bytes; not shown before learner requests it."},
+                    "examples":{"type":"array","description":"At most 6 distinct existing example indices. Listening steps use only optional_support.",
+                        "items":{"type":"object","additionalProperties":false,
+                            "properties":{"example_index":{"type":"integer"},"presentation":{"type":"string","enum":["model","optional_support"]}},
+                            "required":["example_index","presentation"]}},
+                    "practice_index":{"type":["integer","null"],"description":"One existing practice index or null; every practice belongs to exactly one step."}
+                },"required":["id","goal","orientation","detail","examples","practice_index"]
+            }}},"required":["steps"]
+    });
+    schema["required"]
+        .as_array_mut()
+        .expect("teacher schema required array")
+        .push(json!("lesson_flow"));
     schema
 }

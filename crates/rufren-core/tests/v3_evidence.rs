@@ -139,9 +139,11 @@ fn v3_transcript_confirmation_and_teacher_feedback_preserve_the_original_recordi
             .id,
         feedback.id
     );
-    assert!(library
-        .judgments(attempt.id, JudgmentDimension::Grammar)
-        .is_empty());
+    assert!(
+        library
+            .judgments(attempt.id, JudgmentDimension::Grammar)
+            .is_empty()
+    );
     assert_eq!(
         SpacedReview
             .project(
@@ -166,30 +168,38 @@ fn v3_wrong_recording_hash_attempt_revision_and_worker_audit_are_rejected_atomic
     let before = library.clone();
     let mut wrong = t.clone();
     wrong.recording = t.attempt;
-    assert!(library
-        .merge(&[event(2, Fact::SpeechTranscribed(wrong))])
-        .is_err());
+    assert!(
+        library
+            .merge(&[event(2, Fact::SpeechTranscribed(wrong))])
+            .is_err()
+    );
     let mut wrong = t.clone();
     wrong.audio_sha256 = "f".repeat(64);
     let value = wrong.audio_sha256.clone();
     change_audit(&mut wrong, "audio_sha256", json!(value));
-    assert!(library
-        .merge(&[event(2, Fact::SpeechTranscribed(wrong))])
-        .is_err());
+    assert!(
+        library
+            .merge(&[event(2, Fact::SpeechTranscribed(wrong))])
+            .is_err()
+    );
     let mut wrong = t.clone();
     wrong.attempt = Uuid::new_v4();
     let value = wrong.attempt.to_string();
     change_audit(&mut wrong, "attempt_id", json!(value));
-    assert!(library
-        .merge(&[event(2, Fact::SpeechTranscribed(wrong))])
-        .is_err());
+    assert!(
+        library
+            .merge(&[event(2, Fact::SpeechTranscribed(wrong))])
+            .is_err()
+    );
     let mut wrong = t.clone();
     wrong.revision = Uuid::new_v4();
     let value = wrong.revision.to_string();
     change_audit(&mut wrong, "revision_id", json!(value));
-    assert!(library
-        .merge(&[event(2, Fact::SpeechTranscribed(wrong))])
-        .is_err());
+    assert!(
+        library
+            .merge(&[event(2, Fact::SpeechTranscribed(wrong))])
+            .is_err()
+    );
     let mut wrong = t.clone();
     wrong.transcript = "Changed text outside the immutable worker response".into();
     assert!(wrong.validate().is_err());
@@ -208,17 +218,19 @@ fn v3_empty_hypotheses_are_valid_but_confirmation_requires_explicit_nonempty_wor
     t.validate().unwrap();
     let observed = event(2, Fact::SpeechTranscribed(t));
     library.merge(&[observed.clone()]).unwrap();
-    assert!(Event::new(
-        Uuid::new_v4(),
-        3,
-        Fact::TranscriptConfirmed(TranscriptConfirmation {
-            transcription: observed.id,
-            text: String::new(),
-            operation: TranscriptOperation::Confirm,
-            supersedes: BTreeSet::new()
-        })
-    )
-    .is_err());
+    assert!(
+        Event::new(
+            Uuid::new_v4(),
+            3,
+            Fact::TranscriptConfirmed(TranscriptConfirmation {
+                transcription: observed.id,
+                text: String::new(),
+                operation: TranscriptOperation::Confirm,
+                supersedes: BTreeSet::new()
+            })
+        )
+        .is_err()
+    );
     let edit = confirmation(observed.id, "Привет.", TranscriptOperation::Edit);
     library.merge(&[edit]).unwrap();
     assert_eq!(
@@ -235,13 +247,15 @@ fn v3_confirm_edits_and_conflicts_remain_historical_and_cannot_cross_transcripti
     let (mut library, _, _, t) = speech();
     let observed = event(2, Fact::SpeechTranscribed(t.clone()));
     library.merge(&[observed.clone()]).unwrap();
-    assert!(library
-        .merge(&[confirmation(
-            observed.id,
-            "Different words",
-            TranscriptOperation::Confirm
-        )])
-        .is_err());
+    assert!(
+        library
+            .merge(&[confirmation(
+                observed.id,
+                "Different words",
+                TranscriptOperation::Confirm
+            )])
+            .is_err()
+    );
     let a = confirmation(observed.id, &t.transcript, TranscriptOperation::Confirm);
     let b = confirmation(observed.id, "Я читаю газету.", TranscriptOperation::Edit);
     library.merge(&[a.clone(), b.clone()]).unwrap();
@@ -280,9 +294,11 @@ fn v3_ai_cannot_skip_confirmation_change_confirmed_words_or_relabel_written_evid
     );
     let mut a = assessment(&t, confirmed.id, &t.transcript);
     a.response = "Words never confirmed".into();
-    assert!(library
-        .merge(&[event(4, Fact::AiAssessmentRecorded(a))])
-        .is_err());
+    assert!(
+        library
+            .merge(&[event(4, Fact::AiAssessmentRecorded(a))])
+            .is_err()
+    );
     let mut a = assessment(&t, confirmed.id, &t.transcript);
     a.evidence = AiTextEvidence::WrittenText;
     assert!(a.validate().is_err());
@@ -290,16 +306,18 @@ fn v3_ai_cannot_skip_confirmation_change_confirmed_words_or_relabel_written_evid
     let mut a = assessment(&t, confirmed.id, &t.transcript);
     a.attempt = other.attempt;
     a.revision = other.revision;
-    assert!(library
-        .merge(&[event(4, Fact::AiAssessmentRecorded(a))])
-        .is_err());
+    assert!(
+        library
+            .merge(&[event(4, Fact::AiAssessmentRecorded(a))])
+            .is_err()
+    );
     assert_eq!(library, before);
 }
 
 #[test]
 fn v3_protocol_and_new_fact_gates_preserve_old_v1_v2_facts_without_rewriting_them() {
-    assert_eq!(EVENT_VERSION, 3);
-    assert_eq!(SYNC_VERSION, 3);
+    assert!(EVENT_VERSION >= 3);
+    assert!(SYNC_VERSION >= 3);
     for version in [1, 2] {
         let mut old = starter(Uuid::new_v4(), 0);
         old.version = version;
@@ -321,6 +339,8 @@ fn v3_protocol_and_new_fact_gates_preserve_old_v1_v2_facts_without_rewriting_the
         }),
     );
     for mut new in [attempt, presented, event(2, Fact::SpeechTranscribed(t))] {
+        new.version = 3;
+        new.validate().unwrap();
         new.version = 2;
         assert!(matches!(new.validate(), Err(Error::Version(2))));
     }
@@ -427,8 +447,11 @@ fn v3_presentation_history_recognizes_embedded_phrases_and_pre_log_uncertainty()
     );
     unlogged_probe.version = 2;
     legacy.merge(&[unlogged_probe.clone()]).unwrap();
-    assert_eq!(legacy.stimulus_novelty(old.id, 10, Some(unlogged_probe.id)), StimulusNovelty::UnknownHistory,
-        "a legacy completed probe without a first-input presentation cannot prove pre-response novelty");
+    assert_eq!(
+        legacy.stimulus_novelty(old.id, 10, Some(unlogged_probe.id)),
+        StimulusNovelty::UnknownHistory,
+        "a legacy completed probe without a first-input presentation cannot prove pre-response novelty"
+    );
 }
 
 #[test]

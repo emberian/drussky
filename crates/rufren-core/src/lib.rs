@@ -19,11 +19,13 @@ pub use learner::*;
 pub use learning_facts::*;
 pub use review::*;
 pub use teaching::*;
+mod teacher_archive;
+pub use teacher_archive::*;
 
 /// Current event encoding. Database migrations and transport compatibility are independent.
-pub const EVENT_VERSION: u32 = 3;
+pub const EVENT_VERSION: u32 = 4;
 pub const MIN_EVENT_VERSION: u32 = 1;
-pub const SYNC_VERSION: u32 = 3;
+pub const SYNC_VERSION: u32 = 4;
 /// Backward-compatible name for callers constructing events; never use for a DB schema.
 pub const SCHEMA_VERSION: u32 = EVENT_VERSION;
 pub const SYNC_BATCH: usize = 128;
@@ -153,6 +155,7 @@ pub enum Fact {
     StimulusPresented(StimulusPresentation),
     SpeechTranscribed(SpeechTranscription),
     TranscriptConfirmed(TranscriptConfirmation),
+    TeacherDocumentRecorded(TeacherDocument),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
@@ -179,6 +182,7 @@ impl Event {
     }
     pub fn validate(&self) -> Result<(), Error> {
         let required = match &self.fact {
+            Fact::TeacherDocumentRecorded(_) => 4,
             Fact::StimulusPresented(_)
             | Fact::SpeechTranscribed(_)
             | Fact::TranscriptConfirmed(_) => 3,
@@ -221,6 +225,18 @@ impl Event {
                     return Err(Error::Invalid("invalid attempt".into()));
                 }
             }
+            Fact::TeacherDocumentRecorded(document) => {
+                document.validate()?;
+                if document
+                    .context_source_fact_ids
+                    .as_ref()
+                    .is_some_and(|ids| ids.contains(&self.id))
+                {
+                    return Err(Error::Invalid(
+                        "teacher document cites itself as prepared context".into(),
+                    ));
+                }
+            }
             _ => validate_learning_fact(self)?,
         }
         Ok(())
@@ -248,6 +264,7 @@ impl Library {
         }
         // Parents may arrive on a later page. Validate cross-reference types when available.
         validate_audio_identities(&merged)?;
+        validate_teacher_document_identities(&merged)?;
         for event in merged.values() {
             validate_learning_references(event, &merged)?;
             if let Fact::PassageRevised(r) = &event.fact {

@@ -1,6 +1,6 @@
 # Relay recovery acceptance
 
-Verified 2026-11-06 against protocol 3 using a frozen relay binary and the prepared Dioxus preview. The accepted receipt is `.local/relay-recovery-qa/run-02/result.json`; it is a private, ignored local QA artifact, not a checked-in learner export.
+Verified 2026-11-06 against protocol 4 with a frozen relay binary and Dioxus preview `a572b35bce5be4d9b942`. The accepted current receipt is `.local/relay-recovery-qa/run-03-v4/result.json`. Earlier protocol-3 acceptance remains `.local/relay-recovery-qa/run-02/result.json`. These are private, ignored synthetic QA artifacts, not learner exports. The main relay was left on its existing protocol 3 throughout this isolated proof; this is not a service/device rollout claim.
 
 ## What changed
 
@@ -22,7 +22,27 @@ The versioned manifest is published after database and referenced originals have
 
 ## Actual recovery result
 
-`scripts/test-relay-recovery.mjs` creates synthetic data through the real Dioxus UI, reuses the clearly labeled v3 speech fixture shared with shell-update QA, and starts its own relay and TLS proxy on disposable loopback ports. No main relay data, configuration, credentials, keys, or existing browser profiles are used. The shared preview supplies read-only app assets; no main relay/TLS endpoint is contacted. Providers are disabled; one synthetic Teacher submission is intercepted locally so its durable question/context can be tested without inference.
+`scripts/test-relay-recovery.mjs` creates synthetic data through the real Dioxus UI, reuses the clearly labeled v3 speech fixture shared with shell-update QA, and starts its own relay and TLS proxy on disposable loopback ports. No main relay data, configuration, credentials, keys, or existing browser profiles are used. The shared preview supplies read-only app assets; no main relay/TLS endpoint is contacted. Providers are disabled. In the protocol-4 run, two explicit Teacher UI requests receive clearly attributed synthetic lesson/feedback fixtures through local interception, without executing a model. The earlier protocol-3 run intercepted its one submission as an unavailable provider.
+
+The protocol-4 run passed all **16** acceptance boundaries on its first attempt:
+
+| Acceptance boundary | Protocol-4 observed result |
+|---|---|
+| Coherent online snapshot | 34 immutable events, versions 2/3/4 in physical database schema 1; 7 acknowledged writes overlapped the backup |
+| Full Teacher notebook | Exact guided lesson and exact feedback documents, including echoed requests, all content/flow, provenance, usage, and live-receipt metadata; two guided steps retained |
+| Context integrity | Exact prepared baseline context retained, with its known empty source-fact list; unrelated saved practice was not attributed to that lesson |
+| Rust semantic check | `Verified 34 immutable events and 3 recording metadata records` on the restored working copy |
+| Original audio/associations | Existing recording→ASR→confirmation→AI-feedback chain and all take metadata retained; 3 take IDs, 1 original hash, exact 64,044-byte WAV, distinct 16/48 kHz decoding observations and timed cue |
+| Old-client boundary | A protocol-3 upload is refused with 409 before changing facts or sequence cursor, and receives no data page |
+| Restore/reseed | Same relay UUID and rollback protection; deliberate reconnect reseeds the exact 72-event app union; authentication rotation remains separate |
+| Empty-client notebook | A separate empty browser profile downloads exact documents and originals, opens the guided lesson from saved teaching at its own local step 0, advances, opens feedback, and returns to the exact original exercise |
+| No regeneration | Opening restored teaching issues no new Teacher request; only the two explicit synthetic source requests occurred, with zero inference calls |
+| Faults and integrity | The same incomplete/mismatched bundle, wrong-library, digest and original-byte checks pass; the original backup digest remains unchanged after Rust validation |
+| Cleanup | Own relay/TLS listeners closed and PID markers removed; main relay/TLS/data/configuration/credentials untouched |
+
+The guided fixture is accepted through the normal Teacher response path, not disguised as a passage or written directly into the archive. Its practice submission creates the actual immutable question/context; its exact feedback is accepted and archived. The restored empty client discovers those documents through the notebook UI. Local selection and lesson cursor are not synced or converted into completion/presentation facts. This run checks notebook persistence and navigation with synthetic teaching, not real-model pedagogy or guided oral generation.
+
+The earlier protocol-3 result remains useful evidence for the pre-notebook path:
 
 | Acceptance boundary | Observed result |
 |---|---|
@@ -41,16 +61,16 @@ The versioned manifest is published after database and referenced originals have
 
 The app's requests in this harness pass through a Node HTTPS transport that verifies the fixture CA and certificate hostname. Certificate verification is enabled; there is no ignore-certificate flag or global trust-store change. This proves the actual app/API recovery path over that verified TLS boundary. It does **not** test Safari's certificate store, iPad device networking, or native Keychain restoration.
 
-The first harness attempt stopped because its diagnostic counter included an automatic read-only Teacher-status request as well as the intentionally intercepted synthetic submission. The counter was narrowed to POST requests; this was a QA orchestration error, not a data-recovery failure. Both runs' owned PID markers were removed and their relay/TLS listeners were confirmed stopped. Main services were never restarted by the test.
+The first protocol-3 harness attempt stopped because its diagnostic counter included an automatic read-only Teacher-status request as well as the intentionally intercepted synthetic submission. The counter was narrowed to POST requests; this was a QA orchestration error, not a data-recovery failure. Both protocol-3 runs and the protocol-4 run have no remaining owned PID markers or relay/TLS listeners. Main services were never restarted by these tests.
 
 ## Reproduce and operate
 
-The harness requires an already built protocol-3 relay, a prepared Dioxus preview, OpenSSL, Caddy, and Playwright. It performs no build, download, container launch, model inference, or deployment:
+The harness defaults to an already built protocol-4 relay and matching prepared Dioxus preview, plus OpenSSL, Caddy, and Playwright. Set `RUFREN_RECOVERY_PROTOCOL=3` only with the matching historical relay/app artifacts. It performs no build, download, container launch, model inference, or deployment:
 
 ```sh
 python3 scripts/test-relay-backup.py
 python3 scripts/test-relay-recovery-boundaries.py
-node scripts/test-relay-recovery.mjs .local/relay-recovery-qa/new-run-name
+RUFREN_RECOVERY_PROTOCOL=4 node scripts/test-relay-recovery.mjs .local/relay-recovery-qa/new-run-name
 ```
 
 Use a new run name. Set `RUFREN_PREVIEW_URL`, `RUFREN_PLAYWRIGHT_MODULE`, or `RUFREN_CHROMIUM_EXECUTABLE` when they differ from defaults. The harness retains its synthetic fixtures and receipts for inspection, and stops only the processes named in its own PID files. The reusable production backup/restore commands remain in [deploy/README.md](../deploy/README.md).

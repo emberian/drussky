@@ -21,6 +21,7 @@ if (!controlArg) throw Error("Usage: qa-shell-update.mjs <immutable baseline/pub
 const baseline = await realpath(baselineArg), runDir = path.resolve(runArg), control = path.resolve(controlArg);
 await mkdir(runDir); // Never overwrite a previous run or its browser profile.
 const oldBuild = JSON.parse(await readFile(path.join(baseline, "offline-build.json")));
+const requireTeacherArchive = process.env.RUFREN_SHELL_REQUIRE_TEACHER_ARCHIVE === "1";
 const hash = bytes => createHash("sha256").update(bytes).digest("hex");
 const mime = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".wasm": "application/wasm", ".css": "text/css", ".png": "image/png", ".svg": "image/svg+xml", ".webmanifest": "application/manifest+json", ".json": "application/json" };
 let serving = baseline, failAsset = null, context, server, origin, currentStage = "starting";
@@ -64,6 +65,7 @@ async function verifyWork(page, expected) {
   assert.equal(actual.teacher, expected.teacher, "The explicitly synthetic saved teacher response must survive");
   for (const [key, value] of Object.entries(expected.events)) assert.equal(actual.events[key], value, `Immutable fact changed/lost: ${key}`);
   assert.equal(await page.getByRole("button", { name: "Give me a hint", exact: true }).count(), 0);
+  await verifyDurableEvents(page, expected);
 }
 async function wasmDigest(page, relative) {
   return page.evaluate(async relative => {
@@ -72,6 +74,66 @@ async function wasmDigest(page, relative) {
   }, relative);
 }
 async function cacheNames(page) { return page.evaluate(() => caches.keys()); }
+async function durableEvents(page) {
+  return page.evaluate(() => new Promise((resolve, reject) => {
+    const open = indexedDB.open("rufren-library", 1);
+    open.onerror = () => reject(open.error);
+    open.onsuccess = () => {
+      const db = open.result, entries = {}, transaction = db.transaction("entries"), cursor = transaction.objectStore("entries").openCursor();
+      cursor.onsuccess = () => { const row = cursor.result; if (row) { if (String(row.key).startsWith("rufren.v1.event.")) entries[row.key] = row.value; row.continue(); } };
+      transaction.oncomplete = () => { db.close(); resolve(entries); };
+      transaction.onabort = () => { db.close(); reject(transaction.error); };
+    };
+  }));
+}
+async function verifyDurableEvents(page, expected) {
+  await waitFor(async () => {
+    await page.evaluate(() => window.rufrenLibrary.flush());
+    const stored = await durableEvents(page);
+    return Object.entries(expected.events).every(([key, bytes]) => stored[key] === bytes);
+  }, "original immutable fact bytes committed to IndexedDB");
+}
+function teacherDocumentId(response) {
+  const namespace = Buffer.from("6ba7b8119dad11d180b400c04fd430c8", "hex");
+  const name = `rufren:teacher-practice:${response.provenance.provider}:${response.provenance.model}:${response.provenance.response_id}`;
+  const bytes = createHash("sha1").update(namespace).update(name).digest().subarray(0, 16);
+  bytes[6] = (bytes[6] & 15) | 80; bytes[8] = (bytes[8] & 63) | 128;
+  const hex = bytes.toString("hex"); return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+}
+async function recoveredTeacher(page, expected) {
+  await verifyDurableEvents(page, expected);
+  const stored = await durableEvents(page), original = JSON.parse(expected.teacher);
+  const archives = Object.entries(stored).map(([key, raw]) => ({key, raw, event:JSON.parse(raw)})).filter(({event}) => event.fact.kind === "teacher_document_recorded" && event.fact.data.response.provenance.response_id === original.provenance.response_id);
+  if (!archives.length && !requireTeacherArchive) return null;
+  assert.equal(archives.length, 1, "Exactly one immutable archive must recover the original cached teacher response");
+  const archive = archives[0], document = archive.event.fact.data;
+  assert.equal(archive.event.version, 4, "Recovery uses the new event protocol");
+  assert.equal(document.format_version, 1);
+  assert.equal(document.document_id, teacherDocumentId(original), "Original generated practice/document identity is unchanged");
+  assert.deepEqual(document.response, original, "Exact typed request, teaching, examples, provenance and usage recover unchanged");
+  assert.deepEqual(document.receipt, {kind:"recovered_local_cache"}, "Recovery must not invent the unknown original receipt time");
+  assert.equal(document.context_source_fact_ids, undefined, "No context source IDs may be guessed from current history");
+  assert(archive.event.recorded_at_ms > 0, "Archive event has its own time, separate from unknown receipt time");
+  return archive;
+}
+async function openSavedTeacher(page, expected, archive) {
+  await nav(page, "teacher").click();
+  if (archive) {
+    // New layouts may put notebook management behind a compact disclosure.
+    const management = page.locator("details.teacher-tools");
+    if (await management.count() && !await management.first().evaluate(element => element.open)) await management.first().locator(":scope > summary").click();
+    const toggle = page.getByRole("button", {name:"Your saved lessons", exact:true});
+    if (await toggle.getAttribute("aria-expanded") !== "true") await toggle.click();
+    const entry = page.locator(`[data-document-id="${archive.event.fact.data.document_id}"]`);
+    await entry.getByText("Saved earlier", {exact:true}).waitFor();
+    await entry.click();
+    await page.locator(`[data-lesson-document="${archive.event.fact.data.document_id}"]`).waitFor();
+    const original = page.getByRole("button", {name:/Read the full saved lesson/});
+    assert.equal(await original.getAttribute("aria-expanded"), "false", "Legacy full response starts behind explicit original disclosure");
+    await original.click();
+  }
+  await page.getByText("SYNTHETIC SHELL UPDATE TEACHER FIXTURE", {exact:false}).first().waitFor();
+}
 async function seed(page) {
   await nav(page, "Library").click();
   await page.getByRole("button", { name: "New passage", exact: true }).click();
@@ -114,8 +176,19 @@ async function seed(page) {
   const expected = await snapshot(page);
   assert.equal(expected.session.draft, draft); assert(expected.session.cues.length > 0);
   assert(expected.events[`rufren.v1.event.${synthetic.transcription}`]);
+  if (requireTeacherArchive) assert(Object.values(expected.events).every(raw => JSON.parse(raw).version <= 3), "The upgrade baseline contains only legacy event versions");
   await writeFile(path.join(runDir, "expected-durable-work.json"), JSON.stringify(expected, null, 2));
+  await writeFile(path.join(runDir, "original-event-byte-hashes.json"), JSON.stringify(Object.fromEntries(Object.entries(expected.events).map(([key, raw]) => [key, hash(raw)])), null, 2));
+  await verifyDurableEvents(page, expected);
   return expected;
+}
+
+async function restrictContext(target) {
+  await target.route("**/*", route => {
+    const url = new URL(route.request().url());
+    if (!["http:", "https:"].includes(url.protocol) || url.origin === origin) return route.continue();
+    forbidden.push(url.origin + url.pathname); return route.abort();
+  });
 }
 
 try {
@@ -135,11 +208,7 @@ try {
   origin = `http://127.0.0.1:${server.address().port}`;
   await writeFile(path.join(runDir, "runtime.json"), JSON.stringify({ pid: process.pid, origin, baseline, control }, null, 2));
   context = await playwright.chromium.launchPersistentContext(path.join(runDir, "browser-profile"), { headless: true, viewport: { width: 1280, height: 900 }, serviceWorkers: "allow" });
-  await context.route("**/*", route => {
-    const url = new URL(route.request().url());
-    if (!["http:", "https:"].includes(url.protocol) || url.origin === origin) return route.continue();
-    forbidden.push(url.origin + url.pathname); return route.abort();
-  });
+  await restrictContext(context);
   const observer = context.pages()[0] || await context.newPage();
   await observer.goto("about:blank");
   const cdp = await context.newCDPSession(observer);
@@ -202,15 +271,49 @@ try {
   assert.deepEqual(await cacheNames(updated), [`rufren-shell:/:${nextBuild.version}`], "Activation cleaned only the previous shell version");
   const cachedUrls = await updated.evaluate(async () => { const result = []; for (const key of await caches.keys()) for (const request of await (await caches.open(key)).keys()) result.push(request.url); return result; });
   assert(cachedUrls.every(url => !new URL(url).search && !/\/(api|v1)\//.test(new URL(url).pathname)), "No private API or query URL entered Cache Storage");
-  await nav(updated, "teacher").click(); await updated.getByText("SYNTHETIC SHELL UPDATE TEACHER FIXTURE", { exact: false }).first().waitFor();
-  await updated.screenshot({ path: path.join(runDir, "new-version-saved-teacher.png"), fullPage: true });
+  const archive = await recoveredTeacher(updated, expected);
+  await updated.screenshot({ path: path.join(runDir, "new-version-preserved-draft.png"), fullPage: true });
+  if (archive) await writeFile(path.join(runDir, "recovered-teacher-archive.json"), JSON.stringify(archive, null, 2));
+  // Close the entire browser, not only old controlled tabs. The server remains
+  // available but the new browser is offline before its first app navigation.
+  await waitFor(() => updated.evaluate(() => !Object.keys(localStorage).some(key => key.startsWith("rufren.journal."))), "all durable workspace/event journals committed before process restart");
+  await context.close();
+  context = await playwright.chromium.launchPersistentContext(path.join(runDir, "browser-profile"), { headless:true, viewport:{width:1280,height:900}, serviceWorkers:"allow" });
+  await restrictContext(context); await context.setOffline(true);
+  const reopened = context.pages()[0] || await context.newPage();
+  await openApp(reopened, origin + "/"); await verifyWork(reopened, expected);
+  assert.equal(await wasmDigest(reopened, newWasm), newWasmHash, "New shell starts after complete browser-process restart while offline");
+  const reopenedArchive = await recoveredTeacher(reopened, expected);
+  assert.deepEqual(reopenedArchive, archive, "Recovery is idempotent across a full offline browser restart");
+  if (reopenedArchive) {
+    // Reading teacher reference is a deliberate new support action. Do it in a
+    // separate workspace so the old unfinished practice remains an exact probe.
+    const notebook = await context.newPage(); await openApp(notebook, origin + "/");
+    assert.notEqual(await notebook.evaluate(() => sessionStorage.getItem("rufren.workspace.v1")), expected.workspace);
+    await openSavedTeacher(notebook, expected, reopenedArchive);
+    await notebook.screenshot({path:path.join(runDir, "offline-browser-restart-notebook.png"), fullPage:true});
+    await notebook.close(); await verifyWork(reopened, expected);
+  } else {
+    await openSavedTeacher(reopened, expected, null);
+    await reopened.screenshot({path:path.join(runDir, "offline-browser-restart-notebook.png"), fullPage:true});
+  }
+  for (const relative of ["api/teacher/status", "v1/events", "pwa-register.js"]) {
+    assert(await reopened.evaluate(async relative => { try { await fetch(new URL(relative, location.href), {headers:{Authorization:"Bearer synthetic-offline-probe"}}); return false; } catch { return true; } }, relative), "New worker must also bypass private/authenticated offline requests");
+  }
   assert.deepEqual(pageErrors, [], "No uncaught Dioxus/browser errors"); assert.deepEqual(forbidden, [], "No external/provider/relay call was attempted");
-  const result = { passed: true, baseline: oldBuild.version, candidate: nextBuild.version, oldWasmHash, newWasmHash, checks: ["actual UI assisted completed attempt", "exact Cyrillic unfinished draft and support", "clearly synthetic imported transcript/confirmation/assessment facts", "clearly synthetic saved public teacher DTO", "interrupted real installation preserves bootable offline old shell", "new worker waits without reloading draft", "old tab reload remains pinned", "one remaining old tab prevents activation", "all old tabs close before activation", "fresh offline new-version startup preserves durable work", "private/authenticated requests and API cache boundary"], factCount: Object.keys(expected.events).length, apiCalls: requests.filter(r => /^\/(api|v1)\//.test(r.path)).length };
+  const result = { passed: true, baseline: oldBuild.version, candidate: nextBuild.version, oldWasmHash, newWasmHash, checks: ["actual UI assisted completed attempt", "exact Cyrillic unfinished draft and support", "clearly synthetic imported transcript/confirmation/assessment facts", "clearly synthetic saved public teacher DTO", "interrupted real installation preserves bootable offline old shell", "new worker waits without reloading draft", "old tab reload remains pinned", "one remaining old tab prevents activation", "all old tabs close before activation", "fresh offline new-version startup preserves durable work", "authoritative IndexedDB original event byte preservation", "complete offline browser-process restart and saved teaching reopen", "private/authenticated requests and API cache boundary"], recoveredTeacherArchive:archive?{event_id:archive.event.id,event_version:archive.event.version,document_id:archive.event.fact.data.document_id,receipt:archive.event.fact.data.receipt,exact_typed_response:true}:null, factCount: Object.keys(expected.events).length, apiCalls: requests.filter(r => /^\/(api|v1)\//.test(r.path)).length };
   assert.equal(result.apiCalls, 0, "Fixture must make zero API calls");
   await writeFile(path.join(runDir, "result.json"), JSON.stringify(result, null, 2) + "\n");
   await state("passed", result);
 } catch (error) {
   await writeFile(path.join(runDir, "failure.json"), JSON.stringify({ stage: currentStage, message: error.message, stack: error.stack }, null, 2) + "\n");
+  try {
+    const page = context?.pages().find(page => page.url().startsWith(origin));
+    if (page) {
+      await writeFile(path.join(runDir, "failure-browser-state.json"), JSON.stringify({snapshot:await snapshot(page),durable_events:await durableEvents(page),notice:await page.locator(".notice").allTextContents()}, null, 2));
+      await page.screenshot({path:path.join(runDir, "failure.png"),fullPage:true});
+    }
+  } catch {} // Preserve the original failure if the browser itself is unavailable.
   console.error(error); process.exitCode = 1;
 } finally {
   await writeFile(path.join(runDir, "worker-lifecycle.json"), JSON.stringify(lifecycle, null, 2));

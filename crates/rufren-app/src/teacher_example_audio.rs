@@ -20,6 +20,7 @@ pub(crate) fn TeacherExampleAudio(
         Err(problem) => return rsx! {p {class:"quiet", "{problem}"}},
     };
     let element_id = use_hook(|| format!("teacher-example-audio-{}", uuid::Uuid::new_v4()));
+    let voice_id = format!("{element_id}-voice");
     let mut ready = use_signal(|| false);
     let mut error = use_signal(String::new);
     let effect_id = element_id.clone();
@@ -56,8 +57,8 @@ pub(crate) fn TeacherExampleAudio(
                 },if busy {"Generating audio…"}else{"Create spoken example"}}
             }
             div {id:element_id,class:"teacher-example-player",hidden:!ready(),"data-revision":revision.to_string(),aria_label:"Spoken teacher example",
-                label {class:"quiet",r#for:"teacher-voice-{revision}","Reference voice"}
-                select {id:"teacher-voice-{revision}",disabled:true,"data-reference-select":"true"}
+                label {class:"quiet",r#for:voice_id.clone(),"Reference voice"}
+                select {id:voice_id,disabled:true,"data-reference-select":"true"}
                 div {class:"actions",
                     button {class:"secondary",disabled:true,"data-practice-rate":"1","▶ Listen"}
                     button {class:"text-button",disabled:true,"data-practice-rate":"0.7","Slowly"}

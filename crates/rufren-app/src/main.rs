@@ -20,7 +20,11 @@ mod teacher_audio_practice;
 mod teacher_audio_practice_view;
 mod teacher_context;
 mod teacher_example_audio;
+mod teacher_example_view;
 mod teacher_examples;
+mod teacher_lesson_view;
+mod teacher_notebook;
+mod teacher_notebook_view;
 mod teacher_practice;
 mod teacher_practice_view;
 mod teacher_prose;
@@ -70,7 +74,11 @@ fn act(mut app: Signal<AppState>, f: impl FnOnce(&mut AppState) -> Result<()>) {
 fn App() -> Element {
     let initial = use_resource(|| async {
         repository::initialize_browser().await?;
-        AppState::open()
+        let mut state = AppState::open()?;
+        if let Err(problem) = state.recover_cached_teacher_responses() {
+            state.notice = problem;
+        }
+        Ok::<_, String>(state)
     });
     let snapshot = initial.read().clone();
     match snapshot {
@@ -122,6 +130,7 @@ fn Today(mut app: Signal<AppState>) -> Element {
             button {class:"text-button",onclick:move |_|act(app,|s|s.new_passage()),"Add a passage"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Teacher)),"Ask your teacher"}button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Lessons)),"Explore lessons"}}
             div {class:"orbital",aria_hidden:"true",div {class:"orbit orbit-one"} div {class:"orbit orbit-two"} span {class:"star star-one","✦"} span {class:"star star-two","·"} span {class:"planet"}}
         }
+        teacher_notebook_view::ContinueTeacher {app}
         drafts_view::PausedPractices {app}
         div {class:"section-heading",h2 {"Make it yours"}span {"Small steps, connected."}}
         div {class:"cards three",

@@ -25,9 +25,11 @@ mod teacher;
 mod teacher_audio_practice;
 #[path = "../src/teacher_context.rs"]
 mod teacher_context;
+#[path = "../src/teacher_notebook.rs"]
+mod teacher_notebook;
 #[path = "../src/teacher_practice.rs"]
 mod teacher_practice;
-use base64::{engine::general_purpose::STANDARD, Engine};
+use base64::{Engine, engine::general_purpose::STANDARD};
 use model::AppState;
 use repository::Repository;
 use rufren_audio::PcmAudio;
@@ -62,6 +64,7 @@ fn usage() -> TutorUsage {
 }
 fn lesson() -> TeacherResponse {
     let request = TeacherRequest::TeachLesson(LessonTeachingRequest {
+        lesson_flow: None,
         request_id: Uuid::new_v4().to_string(),
         lesson_id: "ru.lesson.synthetic".into(),
         title: "Talking about reading".into(),
@@ -74,6 +77,7 @@ fn lesson() -> TeacherResponse {
         provenance: provenance("lesson-response"),
         usage: usage(),
         content: TeacherContent {
+            lesson_flow: None,
             explanation: "Use читаю for what I am reading now.".into(),
             examples: vec![TutorExample {
                 russian: "Я читаю книгу.".into(),
@@ -110,6 +114,7 @@ fn feedback(request: &TeacherRequest) -> TeacherResponse {
         provenance: provenance("feedback-response"),
         usage: usage(),
         content: TeacherContent {
+            lesson_flow: None,
             explanation:
                 "This feedback concerns the words supplied for this exact task, not their sound."
                     .into(),
@@ -215,21 +220,24 @@ fn teacher_interaction_inline_practice_records_exact_question_without_invented_s
         let c = contexts[0].1;
         let exercise = &teacher.content.practice[index];
         assert!(c.prompt.as_ref().unwrap().starts_with(&exercise.prompt));
-        assert!(c
-            .reference_answer
-            .as_ref()
-            .unwrap()
-            .contains(exercise.reference_russian.as_ref().unwrap()));
-        assert!(c
-            .reference_answer
-            .as_ref()
-            .unwrap()
-            .contains(exercise.reference_english.as_ref().unwrap()));
-        assert!(c
-            .reference_answer
-            .as_ref()
-            .unwrap()
-            .contains(&exercise.teaching_note));
+        assert!(
+            c.reference_answer
+                .as_ref()
+                .unwrap()
+                .contains(exercise.reference_russian.as_ref().unwrap())
+        );
+        assert!(
+            c.reference_answer
+                .as_ref()
+                .unwrap()
+                .contains(exercise.reference_english.as_ref().unwrap())
+        );
+        assert!(
+            c.reference_answer
+                .as_ref()
+                .unwrap()
+                .contains(&exercise.teaching_note)
+        );
         assert_eq!(
             c.task,
             if index == 0 {
@@ -287,9 +295,11 @@ fn teacher_interaction_draft_reload_submit_retry_and_new_answer_preserve_both_at
     );
     assert_eq!(state.library, before);
     resumed.response = "Сейчас я читаю книгу.".into();
-    assert!(state
-        .submit_teacher_practice(&teacher, &mut resumed)
-        .is_err());
+    assert!(
+        state
+            .submit_teacher_practice(&teacher, &mut resumed)
+            .is_err()
+    );
     assert_eq!(
         state.library, before,
         "a changed answer cannot overwrite the original attempt ID"
@@ -415,9 +425,11 @@ fn teacher_interaction_asr_rejects_wrong_bytes_hash_shape_encoding_and_other_tak
     let mut altered = bytes.clone();
     let last = altered.len() - 1;
     altered[last] ^= 1;
-    assert!(state
-        .recognition_request(take, &altered, "recognition-wrong".into())
-        .is_err());
+    assert!(
+        state
+            .recognition_request(take, &altered, "recognition-wrong".into())
+            .is_err()
+    );
     let request = state
         .recognition_request(take, &bytes, "recognition-valid".into())
         .unwrap();
@@ -430,8 +442,10 @@ fn teacher_interaction_asr_rejects_wrong_bytes_hash_shape_encoding_and_other_tak
     let mut wrong = response.clone();
     wrong.source_pcm_sha256 = "f".repeat(64);
     wrong.validate_for(&request).unwrap();
-    assert!(state.keep_transcription(take, &request, &wrong).is_err(),
-        "decoded source PCM identity must match the exact original WAV, independently of a provider claim");
+    assert!(
+        state.keep_transcription(take, &request, &wrong).is_err(),
+        "decoded source PCM identity must match the exact original WAV, independently of a provider claim"
+    );
     assert_eq!(state.library, before);
     let mut wrong = response.clone();
     wrong.original_audio.frames += 1;
@@ -454,9 +468,11 @@ fn teacher_interaction_asr_rejects_wrong_bytes_hash_shape_encoding_and_other_tak
     assert_eq!(state.library, before);
     let (_, other, _) = recording(&mut state);
     let before = state.library.clone();
-    assert!(state
-        .keep_transcription(other, &request, &response)
-        .is_err());
+    assert!(
+        state
+            .keep_transcription(other, &request, &response)
+            .is_err()
+    );
     assert_eq!(state.library, before);
 }
 
@@ -550,9 +566,11 @@ fn teacher_interaction_latest_lesson_survives_feedback_reload_and_rejected_repla
             "provenance" => rejected.provenance.response_id.clear(),
             _ => unreachable!(),
         }
-        assert!(state
-            .keep_teacher_response(&next.request, &rejected)
-            .is_err());
+        assert!(
+            state
+                .keep_teacher_response(&next.request, &rejected)
+                .is_err()
+        );
         assert_eq!(
             state
                 .repo

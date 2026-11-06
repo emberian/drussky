@@ -374,7 +374,7 @@ async fn provider_teacher_binds_exact_answer_and_ai_provenance() {
         ReviewStatus::AiGeneratedTeaching
     );
     assert_eq!(result.provenance.response_id, "msg_mock_001");
-    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v4");
+    assert_eq!(result.provenance.prompt_version, "rufren-ai-teacher-v5");
     assert_eq!(
         result.content.feedback.unwrap().verdict,
         AiVerdict::PartlyCorrect
@@ -420,6 +420,7 @@ async fn provider_teacher_lesson_has_practice_without_an_answer_grade() {
         objective: "Distinguish location and destination.".into(),
         material: "Я в школе. Я иду в школу.".into(),
         learner_context: None,
+        lesson_flow: None,
     });
     let mut lesson = teacher_content();
     lesson["feedback"] = Value::Null;
@@ -434,6 +435,56 @@ async fn provider_teacher_lesson_has_practice_without_an_answer_grade() {
     assert_eq!(result.request, request);
     assert!(!result.content.practice.is_empty());
     assert!(result.content.feedback.is_none());
+    task.abort();
+}
+
+#[tokio::test]
+async fn provider_teacher_guided_schema_is_opt_in_and_binds_original_arrays() {
+    let mut request = TeacherRequest::TeachLesson(LessonTeachingRequest {
+        request_id: "guided-request".into(),
+        lesson_id: "hello".into(),
+        title: "A first exchange".into(),
+        objective: "Greet politely.".into(),
+        material: "Здравствуйте! — Hello!".into(),
+        learner_context: None,
+        lesson_flow: None,
+    });
+    assert!(
+        anthropic::teacher_schema_for(&request)["properties"]
+            .get("lesson_flow")
+            .is_none()
+    );
+    if let TeacherRequest::TeachLesson(input) = &mut request {
+        input.lesson_flow = Some(LessonFlowCapability::GuidedV1);
+    }
+    let mut output = teacher_content();
+    output["feedback"] = Value::Null;
+    output["lesson_flow"] = json!({"steps":[{"id":"location","goal":"Express a location.","orientation":"Try the location pattern.","detail":null,"examples":[],"practice_index":0}]});
+    let (service, mock, task) = service(
+        vec![(200, json!({"input_tokens":1000})), (200, response(output))],
+        Duration::ZERO,
+        Duration::from_secs(2),
+        DEFAULT_SESSION_BUDGET_MICRO_USD,
+    )
+    .await;
+    let result = service.teach(&request).await.unwrap();
+    assert_eq!(result.request, request);
+    assert_eq!(
+        result.content.lesson_flow.unwrap().steps[0].practice_index,
+        Some(0)
+    );
+    let seen = mock.seen.lock().unwrap();
+    let schema = &seen[1].1["output_config"]["format"]["schema"];
+    assert!(schema["properties"].get("lesson_flow").is_some());
+    assert!(
+        schema["required"]
+            .as_array()
+            .unwrap()
+            .contains(&json!("lesson_flow"))
+    );
+    let submitted: TeacherRequest =
+        serde_json::from_str(seen[1].1["messages"][0]["content"].as_str().unwrap()).unwrap();
+    assert_eq!(submitted, request);
     task.abort();
 }
 

@@ -25,6 +25,8 @@ mod teacher;
 mod teacher_audio_practice;
 #[path = "../src/teacher_context.rs"]
 mod teacher_context;
+#[path = "../src/teacher_notebook.rs"]
+mod teacher_notebook;
 #[path = "../src/teacher_practice.rs"]
 mod teacher_practice;
 use model::AppState;
@@ -32,7 +34,7 @@ use repository::Repository;
 use rufren_core::*;
 use rufren_tutor::*;
 use std::{collections::BTreeSet, rc::Rc};
-use teacher_context::{PracticeRelevance, ResponseEvidence, MAX_TEACHER_CONTEXT_BYTES};
+use teacher_context::{MAX_TEACHER_CONTEXT_BYTES, PracticeRelevance, ResponseEvidence};
 use uuid::Uuid;
 fn app() -> AppState {
     let mut state =
@@ -139,7 +141,10 @@ fn opinion(
     id
 }
 fn generated(state: &AppState) -> TeacherResponse {
-    let request = state.lesson_teaching_request().unwrap();
+    let mut request = state.lesson_teaching_request().unwrap();
+    if let TeacherRequest::TeachLesson(request) = &mut request {
+        request.lesson_flow = None;
+    }
     TeacherResponse {
         request,
         provenance: TutorProvenance {
@@ -158,6 +163,7 @@ fn generated(state: &AppState) -> TeacherResponse {
             reserved_micro_usd: 0,
         },
         content: TeacherContent {
+            lesson_flow: None,
             explanation: "A short meaningful greeting.".into(),
             examples: vec![TutorExample {
                 russian: "Привет.".into(),
@@ -232,9 +238,11 @@ fn teacher_context_reports_cues_self_rating_and_attributed_feedback_without_mast
     assert_eq!(summary.counts.unassisted_recalled, 0);
     assert_eq!(o.feedback[0].fact_id, feedback);
     assert!(summary.source_fact_ids().contains(&feedback));
-    assert!(summary
-        .provider_context()
-        .contains("AI opinion whole-response"));
+    assert!(
+        summary
+            .provider_context()
+            .contains("AI opinion whole-response")
+    );
     assert!(summary.provider_context().contains("not feature mastery"));
 }
 
@@ -319,11 +327,13 @@ fn teacher_context_preserves_old_revision_evidence_across_lesson_phrase_edits_an
         .id
         .clone();
     state.choose_lesson(&other).unwrap();
-    assert!(state
-        .lesson_practice_summary_at(None, now)
-        .unwrap()
-        .observations
-        .is_empty());
+    assert!(
+        state
+            .lesson_practice_summary_at(None, now)
+            .unwrap()
+            .observations
+            .is_empty()
+    );
     state.choose_lesson(&lesson).unwrap();
     assert_eq!(
         state
@@ -379,10 +389,11 @@ fn teacher_context_budget_caps_recent_examples_and_keeps_unicode_excerpts_explic
         assert!(o.response.as_ref().unwrap().text.len() <= 160);
         assert!(o.feedback.len() <= 2);
         assert!(o.feedback_conflicting);
-        assert!(o
-            .feedback
-            .iter()
-            .all(|f| f.explanation.as_ref().unwrap().text.len() <= 100));
+        assert!(
+            o.feedback
+                .iter()
+                .all(|f| f.explanation.as_ref().unwrap().text.len() <= 100)
+        );
     }
 }
 
@@ -476,11 +487,13 @@ fn teacher_context_qualified_ai_practice_follows_actual_origin_lesson_and_expose
         .id
         .clone();
     state.choose_lesson(&other).unwrap();
-    assert!(state
-        .lesson_practice_summary()
-        .unwrap()
-        .observations
-        .is_empty());
+    assert!(
+        state
+            .lesson_practice_summary()
+            .unwrap()
+            .observations
+            .is_empty()
+    );
     state.choose_lesson(&lesson).unwrap();
     assert_eq!(
         state.lesson_practice_summary().unwrap().observations[0].attempt_id,
@@ -525,11 +538,13 @@ fn teacher_context_legacy_generated_retries_preserve_bytes_and_foreign_origin_id
         serde_json::to_string(&legacy.library.events[&context_id]).unwrap(),
         old_json
     );
-    assert!(legacy
-        .lesson_practice_summary()
-        .unwrap()
-        .observations
-        .is_empty());
+    assert!(
+        legacy
+            .lesson_practice_summary()
+            .unwrap()
+            .observations
+            .is_empty()
+    );
     let origin =
         teacher_practice::saved_teacher_practice_origin(&source.library, a, context_id).unwrap();
     for id in [
@@ -552,17 +567,19 @@ fn teacher_context_legacy_generated_retries_preserve_bytes_and_foreign_origin_id
             teacher_practice::saved_teacher_practice_origin(&remote.library, a, context_id)
                 .is_none()
         );
-        assert!(remote
-            .lesson_practice_summary()
-            .unwrap()
-            .observations
-            .is_empty());
+        assert!(
+            remote
+                .lesson_practice_summary()
+                .unwrap()
+                .observations
+                .is_empty()
+        );
     }
 }
 
 #[test]
-fn teacher_context_speaking_without_confirmed_words_does_not_send_labels_or_failure_as_language_evidence(
-) {
+fn teacher_context_speaking_without_confirmed_words_does_not_send_labels_or_failure_as_language_evidence()
+ {
     let mut state = app();
     let now = repository::now_ms();
     let revision = reference(&state);
@@ -596,9 +613,11 @@ fn teacher_context_speaking_without_confirmed_words_does_not_send_labels_or_fail
     assert_eq!(summary.counts.unassisted_again, 0);
     assert_eq!(summary.counts.assisted_rated, 0);
     assert!(!summary.provider_context().contains("SENTINEL"));
-    assert!(summary
-        .provider_context()
-        .contains("No uniquely confirmed spoken words"));
+    assert!(
+        summary
+            .provider_context()
+            .contains("No uniquely confirmed spoken words")
+    );
 }
 
 #[test]
@@ -644,10 +663,12 @@ fn teacher_context_prepared_snapshot_matches_request_without_recomputing_later_h
         .unwrap();
     assert_eq!(retained, saved);
     assert!(!retained.source_fact_ids.contains(&b));
-    assert!(state
-        .prepared_lesson_context("unrelated-request")
-        .unwrap()
-        .is_none());
+    assert!(
+        state
+            .prepared_lesson_context("unrelated-request")
+            .unwrap()
+            .is_none()
+    );
     let TeacherRequest::TeachLesson(second) = state.lesson_teaching_request().unwrap() else {
         unreachable!()
     };

@@ -98,6 +98,7 @@ mod tests {
     fn response() -> TeacherResponse {
         TeacherResponse {
             request: TeacherRequest::TeachLesson(LessonTeachingRequest {
+                lesson_flow: None,
                 request_id: "example-fixture".into(),
                 lesson_id: "greetings".into(),
                 title: "A greeting".into(),
@@ -121,6 +122,7 @@ mod tests {
                 reserved_micro_usd: 0,
             },
             content: TeacherContent {
+                lesson_flow: None,
                 explanation: "A short greeting.".into(),
                 examples: vec![TutorExample {
                     russian: "Привет.".into(),
