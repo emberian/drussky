@@ -94,7 +94,7 @@ rescaled by the tutor to the learner's current vocabulary.
   "texts": [
     { "id": "tolstoy-filippok", "title": "Филиппок", "title_en": "Filipok",
       "author": "Лев Толстой", "year": 1875, "level": "A2",
-      "topic": "classic | scifi | math | philosophy | everyday",
+      "topic": "classic | scifi | math | science | philosophy | everyday",
       "text": "the Russian text or excerpt, ≤ 3000 characters, paragraphs separated by \n",
       "summary_en": "one line saying what it is and why it's worth reading",
       "license": "public domain | CC BY 2.0 FR | …", "source": "https://…" }
