@@ -155,6 +155,7 @@ struct MeetExercise: View {
     @Environment(\.horizontalSizeClass) private var sizeClass
     let slot: ExerciseSlot
     let isActive: Bool
+    @State private var demo = StrokeDemo()
 
     var body: some View {
         if let letter = slot.exercise.letter.flatMap({ book.course.letter($0) }) {
@@ -174,6 +175,7 @@ struct MeetExercise: View {
                         .foregroundStyle(Theme.ink)
                         .accessibilityLabel("handwritten \(letter.upper)")
                     HearButton(text: letter.say, size: 52 * k)
+                    WatchStrokesButton(demo: demo)
                 }
                 let about = VStack(alignment: .leading, spacing: 4) {
                     (Text(letter.sound).font(.system(size: 18, weight: .semibold))
@@ -197,7 +199,8 @@ struct MeetExercise: View {
                     }
                 }
                 WritingExercise(slot: slot, isActive: isActive, ghostOverride: "\(letter.upper) \(letter.lower)",
-                                instructionOverride: "Trace it, then write it a few more times on your own.")
+                                instructionOverride: "Trace it, then write it a few more times on your own.",
+                                coach: LetterCoach(letter: letter, demo: demo))
             }
             .onChange(of: book.advanceSignal) { _, _ in
                 if isActive && book.advancePage == slot.pageIndex { voice.play(letter.say) }
@@ -254,6 +257,7 @@ struct WritingExercise: View {
     let isActive: Bool
     var ghostOverride: String? = nil
     var instructionOverride: String? = nil
+    var coach: LetterCoach? = nil
 
     @StateObject private var pad: PadController
     @State private var checking = false
@@ -261,7 +265,8 @@ struct WritingExercise: View {
     @State private var idleTask: Task<Void, Never>?
     @State private var width: CGFloat = 640
 
-    init(slot: ExerciseSlot, isActive: Bool, ghostOverride: String? = nil, instructionOverride: String? = nil) {
+    init(slot: ExerciseSlot, isActive: Bool, ghostOverride: String? = nil, instructionOverride: String? = nil, coach: LetterCoach? = nil) {
+        self.coach = coach
         self.slot = slot
         self.isActive = isActive
         self.ghostOverride = ghostOverride
@@ -305,6 +310,7 @@ struct WritingExercise: View {
                     .accessibilityIdentifier("strip-\(slot.index)")
                     .background(GeometryReader { g in Color.clear.onAppear { width = g.size.width }
                         .onChange(of: g.size.width) { _, w in width = w } })
+                    .overlay { if let coach, let ghost { StrokeDemoOverlay(demo: coach.demo, placed: coach.placed(ghost: ghost), height: stripHeight) } }
                 if result.revealed || result.status == .missed {
                     Correction(text: target)
                         .offset(y: -30)
@@ -390,6 +396,7 @@ struct WritingExercise: View {
         if let feedback = feedbackLine {
             feedback
         }
+        if let coach { FormationHintLine(pad: pad, letter: coach.letter) }
     }
 
     private var feedbackLine: AnyView? {
