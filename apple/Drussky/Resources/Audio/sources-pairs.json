@@ -1,0 +1,1331 @@
+{
+ "intonation-vy-lyubite-muzyku.m4a": {
+  "key": "вы любите музыку",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-вы любите музыку ?.wav",
+  "author": "DoctorandusManhattan",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B2%D1%8B_%D0%BB%D1%8E%D0%B1%D0%B8%D1%82%D0%B5_%D0%BC%D1%83%D0%B7%D1%8B%D0%BA%D1%83_%3F.wav",
+  "speaker": "DoctorandusManhattan"
+ },
+ "intonation-ya-goloden.m4a": {
+  "key": "я голоден",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-я голоден.wav",
+  "author": "DoctorandusManhattan",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%8F_%D0%B3%D0%BE%D0%BB%D0%BE%D0%B4%D0%B5%D0%BD.wav",
+  "speaker": "DoctorandusManhattan"
+ },
+ "pair-atlas-silero-aidar-cde7d3.m4a": {
+  "key": "атла́с",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "атл+ас."
+ },
+ "pair-atlas-silero-aidar-fe1837.m4a": {
+  "key": "а́тлас",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+атлас."
+ },
+ "pair-atlas-silero-baya-63dce4.m4a": {
+  "key": "а́тлас",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "+атлас."
+ },
+ "pair-atlas-silero-baya-b166ea.m4a": {
+  "key": "атла́с",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "атл+ас."
+ },
+ "pair-atlas-silero-xenia-241170.m4a": {
+  "key": "атла́с",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "атл+ас."
+ },
+ "pair-atlas-silero-xenia-b717b1.m4a": {
+  "key": "а́тлас",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+атлас."
+ },
+ "pair-bil-silero-aidar-592ce8.m4a": {
+  "key": "бил",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "б+ил."
+ },
+ "pair-bil-silero-baya-e8e9c9.m4a": {
+  "key": "бил",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "б+ил."
+ },
+ "pair-bil-silero-xenia-419552.m4a": {
+  "key": "бил",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "б+ил."
+ },
+ "pair-bit-shtooka-790692.m4a": {
+  "key": "бить",
+  "kind": "human_recording",
+  "title": "Ru-бить.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D0%B8%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-bit-tatiana-kerbush-f53416.m4a": {
+  "key": "бить",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-бить.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B1%D0%B8%D1%82%D1%8C.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-brat-shtooka-a759a6.m4a": {
+  "key": "брать",
+  "kind": "human_recording",
+  "title": "Ru-брать.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D1%80%D0%B0%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-brat-tatiana-kerbush-984b9b.m4a": {
+  "key": "брать",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-брать.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B1%D1%80%D0%B0%D1%82%D1%8C.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-byl-silero-aidar-daba10.m4a": {
+  "key": "был",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "б+ыл."
+ },
+ "pair-byl-silero-baya-525738.m4a": {
+  "key": "был",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "б+ыл."
+ },
+ "pair-byl-silero-xenia-af212c.m4a": {
+  "key": "был",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "б+ыл."
+ },
+ "pair-byt-shtooka-3bca2f.m4a": {
+  "key": "быть",
+  "kind": "human_recording",
+  "title": "Ru-быть.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D1%8B%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-byt-tatiana-kerbush-4615fb.m4a": {
+  "key": "быть",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-быть.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B1%D1%8B%D1%82%D1%8C.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-chasha-1640max-9eb5ac.m4a": {
+  "key": "ча́ша",
+  "kind": "human_recording",
+  "title": "Ru-чаша.ogg",
+  "author": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B0%D1%88%D0%B0.ogg",
+  "speaker": "1640max"
+ },
+ "pair-chasha-silero-xenia-e107bc.m4a": {
+  "key": "ча́ша",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ч+аша."
+ },
+ "pair-chashcha-silero-aidar-ef40ea.m4a": {
+  "key": "ча́ща",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "ч+аща."
+ },
+ "pair-chashcha-silero-baya-347a06.m4a": {
+  "key": "ча́ща",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "ч+аща."
+ },
+ "pair-chashcha-silero-xenia-720950.m4a": {
+  "key": "ча́ща",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ч+аща."
+ },
+ "pair-doma-aleksey-pogrebno-689a28.m4a": {
+  "key": "дома́",
+  "kind": "human_recording",
+  "title": "Ru-дома́.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BE%D0%BC%D0%B0%CC%81.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-doma-silero-aidar-4bac24.m4a": {
+  "key": "до́ма",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "д+ома."
+ },
+ "pair-doma-silero-baya-397c90.m4a": {
+  "key": "до́ма",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "д+ома."
+ },
+ "pair-doma-silero-xenia-573520.m4a": {
+  "key": "до́ма",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+ома."
+ },
+ "pair-doma-silero-xenia-cccd06.m4a": {
+  "key": "дома́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "дом+а."
+ },
+ "pair-khlopok-silero-aidar-403ff5.m4a": {
+  "key": "хлопо́к",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "хлоп+ок."
+ },
+ "pair-khlopok-silero-aidar-90d741.m4a": {
+  "key": "хло́пок",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "хл+опок."
+ },
+ "pair-khlopok-silero-baya-0a960b.m4a": {
+  "key": "хлопо́к",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "хлоп+ок."
+ },
+ "pair-khlopok-silero-baya-0ef04b.m4a": {
+  "key": "хло́пок",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "хл+опок."
+ },
+ "pair-khlopok-silero-xenia-097fc0.m4a": {
+  "key": "хлопо́к",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "хлоп+ок."
+ },
+ "pair-khlopok-silero-xenia-1dc49a.m4a": {
+  "key": "хло́пок",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "хл+опок."
+ },
+ "pair-kod-aleksey-pogrebno-72a452.m4a": {
+  "key": "код",
+  "kind": "human_recording",
+  "title": "Ru-код.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D0%B4.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-kod-silero-xenia-df8442.m4a": {
+  "key": "код",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "к+од."
+ },
+ "pair-kon-aleksey-pogrebno-3f3083.m4a": {
+  "key": "кон",
+  "kind": "human_recording",
+  "title": "Ru-кон.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D0%BD.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-kon-aleksey-pogrebno-42d7b9.m4a": {
+  "key": "конь",
+  "kind": "human_recording",
+  "title": "Ru-конь.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D0%BD%D1%8C.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-kon-cinemantique-13c425.m4a": {
+  "key": "конь",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Cinemantique-конь.wav",
+  "author": "Cinemantique",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Cinemantique-%D0%BA%D0%BE%D0%BD%D1%8C.wav",
+  "speaker": "Cinemantique"
+ },
+ "pair-kon-rominf-f968b9.m4a": {
+  "key": "кон",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Rominf-кон.wav",
+  "author": "Rominf",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Rominf-%D0%BA%D0%BE%D0%BD.wav",
+  "speaker": "Rominf"
+ },
+ "pair-kon-tatiana-kerbush-41c223.m4a": {
+  "key": "конь",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush (Reda Kerbouche)-конь.wav",
+  "author": "Tatiana Kerbush (Reda Kerbouche)",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush_(Reda_Kerbouche)-%D0%BA%D0%BE%D0%BD%D1%8C.wav",
+  "speaker": "Tatiana Kerbush (Reda Kerbouche)"
+ },
+ "pair-kon-tatiana-kerbush-8e19dc.m4a": {
+  "key": "кон",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-кон.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BA%D0%BE%D0%BD.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-kot-baidax-ce9567.m4a": {
+  "key": "кот",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-кот.wav",
+  "author": "Baidax",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%BA%D0%BE%D1%82.wav",
+  "speaker": "Baidax"
+ },
+ "pair-lug-1640max-ae31e7.m4a": {
+  "key": "луг",
+  "kind": "human_recording",
+  "title": "Ru-луг.ogg",
+  "author": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%83%D0%B3.ogg",
+  "speaker": "1640max"
+ },
+ "pair-lug-tatiana-kerbush-bf696d.m4a": {
+  "key": "луг",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-луг.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BB%D1%83%D0%B3.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-lyuk-1640max-f49b7a.m4a": {
+  "key": "люк",
+  "kind": "human_recording",
+  "title": "Ru-люк.ogg",
+  "author": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%8E%D0%BA.ogg",
+  "speaker": "1640max"
+ },
+ "pair-mat-1640max-dfb3d4.m4a": {
+  "key": "мат",
+  "kind": "human_recording",
+  "title": "Ru-мат.ogg",
+  "author": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B0%D1%82.ogg",
+  "speaker": "1640max"
+ },
+ "pair-mat-silero-xenia-6d4bb6.m4a": {
+  "key": "мать",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ать."
+ },
+ "pair-mat-silero-xenia-c2ff2a.m4a": {
+  "key": "мат",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ат."
+ },
+ "pair-mil-silero-aidar-ddce5d.m4a": {
+  "key": "мил",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "м+ил."
+ },
+ "pair-mil-silero-baya-7df6a2.m4a": {
+  "key": "мил",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "м+ил."
+ },
+ "pair-mil-silero-xenia-97b862.m4a": {
+  "key": "мил",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ил."
+ },
+ "pair-milo-silero-aidar-34afcd.m4a": {
+  "key": "ми́ло",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "м+ило."
+ },
+ "pair-milo-silero-baya-131dab.m4a": {
+  "key": "ми́ло",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "м+ило."
+ },
+ "pair-milo-silero-xenia-dd0b42.m4a": {
+  "key": "ми́ло",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ило."
+ },
+ "pair-mishka-domesticfrog-b723cd.m4a": {
+  "key": "ми́шка",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DomesticFrog-мишка.wav",
+  "author": "DomesticFrog",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DomesticFrog-%D0%BC%D0%B8%D1%88%D0%BA%D0%B0.wav",
+  "speaker": "DomesticFrog"
+ },
+ "pair-mishka-silero-xenia-fbeefe.m4a": {
+  "key": "ми́шка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ишка."
+ },
+ "pair-mol-1640max-419b88.m4a": {
+  "key": "мол",
+  "kind": "human_recording",
+  "title": "Ru-мол.ogg",
+  "author": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%BE%D0%BB.ogg",
+  "speaker": "1640max"
+ },
+ "pair-mol-shtooka-76f13b.m4a": {
+  "key": "моль",
+  "kind": "human_recording",
+  "title": "Ru-моль.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%BE%D0%BB%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-mol-silero-xenia-4967ad.m4a": {
+  "key": "моль",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+оль."
+ },
+ "pair-mol-tatiana-kerbush-94019c.m4a": {
+  "key": "мол",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-мол.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BC%D0%BE%D0%BB.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-muka-aleksey-pogrebno-5b2fa6.m4a": {
+  "key": "мука́",
+  "kind": "human_recording",
+  "title": "Ru-мука́.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D1%83%D0%BA%D0%B0%CC%81.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-muka-aleksey-pogrebno-d0106e.m4a": {
+  "key": "му́ка",
+  "kind": "human_recording",
+  "title": "Ru-му́ка.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D1%83%CC%81%D0%BA%D0%B0.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-muka-silero-xenia-4cdc09.m4a": {
+  "key": "му́ка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ука."
+ },
+ "pair-muka-silero-xenia-e19306.m4a": {
+  "key": "мука́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "мук+а."
+ },
+ "pair-myl-silero-aidar-907420.m4a": {
+  "key": "мыл",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "м+ыл."
+ },
+ "pair-myl-silero-baya-1d8b19.m4a": {
+  "key": "мыл",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "м+ыл."
+ },
+ "pair-myl-silero-xenia-fc482d.m4a": {
+  "key": "мыл",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ыл."
+ },
+ "pair-mylo-shtooka-a24a0f.m4a": {
+  "key": "мы́ло",
+  "kind": "human_recording",
+  "title": "Ru-мыло.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D1%8B%D0%BB%D0%BE.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-mylo-silero-xenia-1897c3.m4a": {
+  "key": "мы́ло",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ыло."
+ },
+ "pair-myshka-1640max-1d990e.m4a": {
+  "key": "мы́шка",
+  "kind": "human_recording",
+  "title": "Ru-мышка.ogg",
+  "author": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D1%8B%D1%88%D0%BA%D0%B0.ogg",
+  "speaker": "1640max"
+ },
+ "pair-myshka-tatiana-moocit-ee559c.m4a": {
+  "key": "мы́шка",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana moocit-мышка.wav",
+  "author": "Tatiana moocit",
+  "license": "CC BY 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_moocit-%D0%BC%D1%8B%D1%88%D0%BA%D0%B0.wav",
+  "speaker": "Tatiana moocit"
+ },
+ "pair-nit-1640max-a22288.m4a": {
+  "key": "нить",
+  "kind": "human_recording",
+  "title": "Ru-нить.ogg",
+  "author": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B8%D1%82%D1%8C.ogg",
+  "speaker": "1640max"
+ },
+ "pair-nit-silero-xenia-e82533.m4a": {
+  "key": "нить",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "н+ить."
+ },
+ "pair-nyos-myrkur-d53dcb.m4a": {
+  "key": "нёс",
+  "kind": "human_recording",
+  "title": "Ru-нёс.ogg",
+  "author": "Myrkur",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D1%91%D1%81.ogg",
+  "speaker": "Myrkur"
+ },
+ "pair-nyos-silero-xenia-b34c4a.m4a": {
+  "key": "нёс",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "н+ёс."
+ },
+ "pair-nyt-aleksey-pogrebno-4fa419.m4a": {
+  "key": "ныть",
+  "kind": "human_recording",
+  "title": "Ru-ныть.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D1%8B%D1%82%D1%8C.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-nyt-silero-xenia-46d9a6.m4a": {
+  "key": "ныть",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "н+ыть."
+ },
+ "pair-okna-silero-aidar-6d6a97.m4a": {
+  "key": "о́кна",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+окна."
+ },
+ "pair-okna-silero-aidar-d2e077.m4a": {
+  "key": "окна́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "окн+а."
+ },
+ "pair-okna-silero-baya-326252.m4a": {
+  "key": "окна́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "окн+а."
+ },
+ "pair-okna-silero-baya-9e45a4.m4a": {
+  "key": "о́кна",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "+окна."
+ },
+ "pair-okna-silero-xenia-bf30a8.m4a": {
+  "key": "о́кна",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+окна."
+ },
+ "pair-okna-silero-xenia-ef64ad.m4a": {
+  "key": "окна́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "окн+а."
+ },
+ "pair-pil-silero-aidar-72d102.m4a": {
+  "key": "пил",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "п+ил."
+ },
+ "pair-pil-silero-baya-537746.m4a": {
+  "key": "пил",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "п+ил."
+ },
+ "pair-pil-silero-xenia-5d5a31.m4a": {
+  "key": "пил",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "п+ил."
+ },
+ "pair-pishchi-silero-aidar-f6100b.m4a": {
+  "key": "пи́щи",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "п+ищи."
+ },
+ "pair-pishchi-silero-baya-54afbc.m4a": {
+  "key": "пи́щи",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "п+ищи."
+ },
+ "pair-pishchi-silero-xenia-82a73e.m4a": {
+  "key": "пи́щи",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "п+ищи."
+ },
+ "pair-pishi-silero-aidar-a588dc.m4a": {
+  "key": "пиши́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "пиш+и."
+ },
+ "pair-pishi-silero-baya-4c16e5.m4a": {
+  "key": "пиши́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "пиш+и."
+ },
+ "pair-pishi-silero-xenia-6bb042.m4a": {
+  "key": "пиши́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "пиш+и."
+ },
+ "pair-plachu-silero-aidar-362c65.m4a": {
+  "key": "плачу́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "плач+у."
+ },
+ "pair-plachu-silero-aidar-f641f0.m4a": {
+  "key": "пла́чу",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "пл+ачу."
+ },
+ "pair-plachu-silero-baya-290fec.m4a": {
+  "key": "пла́чу",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "пл+ачу."
+ },
+ "pair-plachu-silero-baya-3f721b.m4a": {
+  "key": "плачу́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "плач+у."
+ },
+ "pair-plachu-silero-xenia-1e8fe6.m4a": {
+  "key": "плачу́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "плач+у."
+ },
+ "pair-plachu-silero-xenia-f24d2d.m4a": {
+  "key": "пла́чу",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "пл+ачу."
+ },
+ "pair-plod-gulnara-streit-ef6d73.m4a": {
+  "key": "плод",
+  "kind": "human_recording",
+  "title": "Ru-плод.ogg",
+  "author": "Gulnara Streit",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BB%D0%BE%D0%B4.ogg",
+  "speaker": "Gulnara Streit"
+ },
+ "pair-plod-silero-xenia-b62745.m4a": {
+  "key": "плод",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "пл+од."
+ },
+ "pair-plot-1640max-acc36d.m4a": {
+  "key": "плот",
+  "kind": "human_recording",
+  "title": "Ru-плот.ogg",
+  "author": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BB%D0%BE%D1%82.ogg",
+  "speaker": "1640max"
+ },
+ "pair-plot-tatiana-kerbush-2890b9.m4a": {
+  "key": "плот",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-плот.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D0%BB%D0%BE%D1%82.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-plyush-silero-aidar-c083d5.m4a": {
+  "key": "плюш",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "пл+юш."
+ },
+ "pair-plyush-silero-baya-de0917.m4a": {
+  "key": "плюш",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "пл+юш."
+ },
+ "pair-plyush-silero-xenia-79674f.m4a": {
+  "key": "плюш",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "пл+юш."
+ },
+ "pair-plyushch-domesticfrog-bb55df.m4a": {
+  "key": "плющ",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DomesticFrog-плющ.wav",
+  "author": "DomesticFrog",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DomesticFrog-%D0%BF%D0%BB%D1%8E%D1%89.wav",
+  "speaker": "DomesticFrog"
+ },
+ "pair-plyushch-irina-neyshlotsk-2db19b.m4a": {
+  "key": "плющ",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Irina (Нейшлотский)-Плющ.wav",
+  "author": "Irina (Нейшлотский)",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Irina_(%D0%9D%D0%B5%D0%B9%D1%88%D0%BB%D0%BE%D1%82%D1%81%D0%BA%D0%B8%D0%B9)-%D0%9F%D0%BB%D1%8E%D1%89.wav",
+  "speaker": "Irina (Нейшлотский)"
+ },
+ "pair-polka-shtooka-4cc091.m4a": {
+  "key": "по́лька",
+  "kind": "human_recording",
+  "title": "Ru-полька.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D0%BB%D1%8C%D0%BA%D0%B0.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-polka-shtooka-81d6d3.m4a": {
+  "key": "по́лка",
+  "kind": "human_recording",
+  "title": "Ru-полка.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D0%BB%D0%BA%D0%B0.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-polka-silero-xenia-20407a.m4a": {
+  "key": "по́лка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "п+олка."
+ },
+ "pair-polka-silero-xenia-fc166e.m4a": {
+  "key": "по́лька",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "п+олька."
+ },
+ "pair-pyl-rominf-42af50.m4a": {
+  "key": "пыл",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Rominf-пыл.wav",
+  "author": "Rominf",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Rominf-%D0%BF%D1%8B%D0%BB.wav",
+  "speaker": "Rominf"
+ },
+ "pair-pyl-tatiana-kerbush-db7bfc.m4a": {
+  "key": "пыл",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-пыл.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D1%8B%D0%BB.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-pyl-wanjuscha-492b2c.m4a": {
+  "key": "пыл",
+  "kind": "human_recording",
+  "title": "Ru-пыл.ogg",
+  "author": "Wanjuscha",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%8B%D0%BB.ogg",
+  "speaker": "Wanjuscha"
+ },
+ "pair-rad-gulnara-streit-5654e7.m4a": {
+  "key": "рад",
+  "kind": "human_recording",
+  "title": "Ru-рад.ogg",
+  "author": "Gulnara Streit",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%B0%D0%B4.ogg",
+  "speaker": "Gulnara Streit"
+ },
+ "pair-rad-silero-xenia-444b22.m4a": {
+  "key": "рад",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "р+ад."
+ },
+ "pair-ryad-shtooka-9652ee.m4a": {
+  "key": "ряд",
+  "kind": "human_recording",
+  "title": "Ru-ряд.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D1%8F%D0%B4.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-ryad-tatiana-kerbush-80a77f.m4a": {
+  "key": "ряд",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-ряд.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%80%D1%8F%D0%B4.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-shal-silero-aidar-2c1f05.m4a": {
+  "key": "шаль",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "ш+аль."
+ },
+ "pair-shal-silero-baya-5aa8be.m4a": {
+  "key": "шаль",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "ш+аль."
+ },
+ "pair-shal-silero-xenia-4b8184.m4a": {
+  "key": "шаль",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ш+аль."
+ },
+ "pair-shar-shtooka-65783e.m4a": {
+  "key": "шар",
+  "kind": "human_recording",
+  "title": "Ru-шар.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D0%B0%D1%80.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-shar-silero-xenia-f5dcae.m4a": {
+  "key": "шар",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ш+ар."
+ },
+ "pair-shchyolk-silero-aidar-eb6d52.m4a": {
+  "key": "щёлк",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "щ+ёлк."
+ },
+ "pair-shchyolk-silero-baya-fdf004.m4a": {
+  "key": "щёлк",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "щ+ёлк."
+ },
+ "pair-shchyolk-silero-xenia-24e70f.m4a": {
+  "key": "щёлк",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "щ+ёлк."
+ },
+ "pair-shest-domesticfrog-b3891d.m4a": {
+  "key": "шест",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DomesticFrog-шест.wav",
+  "author": "DomesticFrog",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DomesticFrog-%D1%88%D0%B5%D1%81%D1%82.wav",
+  "speaker": "DomesticFrog"
+ },
+ "pair-shest-silero-xenia-370b30.m4a": {
+  "key": "шест",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ш+ест."
+ },
+ "pair-shest-xana000-d96994.m4a": {
+  "key": "шесть",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-шесть.wav",
+  "author": "XANA000",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%88%D0%B5%D1%81%D1%82%D1%8C.wav",
+  "speaker": "XANA000"
+ },
+ "pair-shit-shtooka-526c1a.m4a": {
+  "key": "шить",
+  "kind": "human_recording",
+  "title": "Ru-шить.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D0%B8%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-shit-silero-xenia-0521fe.m4a": {
+  "key": "шить",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ш+ить."
+ },
+ "pair-shyolk-shtooka-e77b03.m4a": {
+  "key": "шёлк",
+  "kind": "human_recording",
+  "title": "Ru-шёлк.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D1%91%D0%BB%D0%BA.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-shyolk-tatiana-kerbush-9c5a8e.m4a": {
+  "key": "шёлк",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-шёлк.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%88%D1%91%D0%BB%D0%BA.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-slova-silero-aidar-40db60.m4a": {
+  "key": "сло́ва",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "сл+ова."
+ },
+ "pair-slova-silero-aidar-6ecf12.m4a": {
+  "key": "слова́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "слов+а."
+ },
+ "pair-slova-silero-baya-5a9b92.m4a": {
+  "key": "сло́ва",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "сл+ова."
+ },
+ "pair-slova-silero-baya-e41adf.m4a": {
+  "key": "слова́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "слов+а."
+ },
+ "pair-slova-silero-xenia-a60da1.m4a": {
+  "key": "сло́ва",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "сл+ова."
+ },
+ "pair-slova-silero-xenia-e69432.m4a": {
+  "key": "слова́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "слов+а."
+ },
+ "pair-stal-1640max-4297a5.m4a": {
+  "key": "сталь",
+  "kind": "human_recording",
+  "title": "Ru-сталь.ogg",
+  "author": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%82%D0%B0%D0%BB%D1%8C.ogg",
+  "speaker": "1640max"
+ },
+ "pair-stal-silero-aidar-01a56d.m4a": {
+  "key": "стал",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "ст+ал."
+ },
+ "pair-stal-silero-baya-509591.m4a": {
+  "key": "стал",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "ст+ал."
+ },
+ "pair-stal-silero-xenia-6a9eeb.m4a": {
+  "key": "стал",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ст+ал."
+ },
+ "pair-stal-silero-xenia-c0e489.m4a": {
+  "key": "сталь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ст+аль."
+ },
+ "pair-ugol-shtooka-223036.m4a": {
+  "key": "у́голь",
+  "kind": "human_recording",
+  "title": "Ru-уголь.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%83%D0%B3%D0%BE%D0%BB%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-ugol-shtooka-c74d8a.m4a": {
+  "key": "у́гол",
+  "kind": "human_recording",
+  "title": "Ru-угол.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%83%D0%B3%D0%BE%D0%BB.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-ugol-silero-xenia-fbb9ab.m4a": {
+  "key": "у́голь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+уголь."
+ },
+ "pair-ugol-tatiana-kerbush-eb0914.m4a": {
+  "key": "у́гол",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-угол.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%83%D0%B3%D0%BE%D0%BB.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-uzhe-silero-aidar-53cc82.m4a": {
+  "key": "уже́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "уж+е."
+ },
+ "pair-uzhe-silero-aidar-dda228.m4a": {
+  "key": "у́же",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+уже."
+ },
+ "pair-uzhe-silero-baya-9f078b.m4a": {
+  "key": "у́же",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "+уже."
+ },
+ "pair-uzhe-silero-baya-c6d167.m4a": {
+  "key": "уже́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "уж+е."
+ },
+ "pair-uzhe-silero-xenia-044749.m4a": {
+  "key": "уже́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "уж+е."
+ },
+ "pair-uzhe-silero-xenia-b32e4b.m4a": {
+  "key": "у́же",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+уже."
+ },
+ "pair-ves-aleksey-pogrebno-99a274.m4a": {
+  "key": "весь",
+  "kind": "human_recording",
+  "title": "Ru-весь (мужской голос).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%B5%D1%81%D1%8C_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B9_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-ves-aleksey-pogrebno-e582aa.m4a": {
+  "key": "вес",
+  "kind": "human_recording",
+  "title": "Ru-вес (vʲes).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%B5%D1%81_(v%CA%B2es).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-ves-shtooka-66a255.m4a": {
+  "key": "весь",
+  "kind": "human_recording",
+  "title": "Ru-весь.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%B5%D1%81%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-ves-shtooka-80fe06.m4a": {
+  "key": "вес",
+  "kind": "human_recording",
+  "title": "Ru-вес.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%B5%D1%81.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-ves-tatiana-kerbush-852221.m4a": {
+  "key": "весь",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-весь.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B2%D0%B5%D1%81%D1%8C.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-ves-tatiana-kerbush-8d1cd3.m4a": {
+  "key": "вес",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-вес.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B2%D0%B5%D1%81.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-vit-silero-xenia-f6ed6d.m4a": {
+  "key": "вить",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в+ить."
+ },
+ "pair-vit-tatiana-kerbush-d1bdf9.m4a": {
+  "key": "вить",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-вить.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B2%D0%B8%D1%82%D1%8C.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-vody-silero-aidar-0be624.m4a": {
+  "key": "воды́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "вод+ы."
+ },
+ "pair-vody-silero-aidar-2ad5b9.m4a": {
+  "key": "во́ды",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "в+оды."
+ },
+ "pair-vody-silero-baya-5ddf67.m4a": {
+  "key": "во́ды",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "в+оды."
+ },
+ "pair-vody-silero-baya-da1762.m4a": {
+  "key": "воды́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "вод+ы."
+ },
+ "pair-vody-silero-xenia-0204fd.m4a": {
+  "key": "воды́",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "вод+ы."
+ },
+ "pair-vody-silero-xenia-8443e3.m4a": {
+  "key": "во́ды",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в+оды."
+ },
+ "pair-vyt-shtooka-62a136.m4a": {
+  "key": "выть",
+  "kind": "human_recording",
+  "title": "Ru-выть.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D1%8B%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-vyt-silero-xenia-96a81c.m4a": {
+  "key": "выть",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в+ыть."
+ },
+ "pair-zamok-aleksey-pogrebno-44e1f4.m4a": {
+  "key": "замо́к",
+  "kind": "human_recording",
+  "title": "Ru-замок (zaˈmok).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%B0%D0%BC%D0%BE%D0%BA_(za%CB%88mok).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-zamok-aleksey-pogrebno-761e2f.m4a": {
+  "key": "за́мок",
+  "kind": "human_recording",
+  "title": "Ru-замок (ˈzamɐk).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%B0%D0%BC%D0%BE%D0%BA_(%CB%88zam%C9%90k).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pair-zamok-silero-xenia-80d3b0.m4a": {
+  "key": "замо́к",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зам+ок."
+ },
+ "pair-zamok-silero-xenia-8bd9d8.m4a": {
+  "key": "за́мок",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "з+амок."
+ },
+ "pair-zhal-shtooka-b28a6b.m4a": {
+  "key": "жаль",
+  "kind": "human_recording",
+  "title": "Ru-жаль.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B6%D0%B0%D0%BB%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
+ "pair-zhal-silero-xenia-465fff.m4a": {
+  "key": "жаль",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ж+аль."
+ },
+ "pair-zhar-1640max-4b8d71.m4a": {
+  "key": "жар",
+  "kind": "human_recording",
+  "title": "Ru-жар.ogg",
+  "author": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B6%D0%B0%D1%80.ogg",
+  "speaker": "1640max"
+ },
+ "pair-zhar-tatiana-kerbush-175696.m4a": {
+  "key": "жар",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-жар.wav",
+  "author": "Tatiana Kerbush",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B6%D0%B0%D1%80.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pair-zhest-myrkur-fbd1fc.m4a": {
+  "key": "жест",
+  "kind": "human_recording",
+  "title": "Ru-жест.ogg",
+  "author": "Myrkur",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B6%D0%B5%D1%81%D1%82.ogg",
+  "speaker": "Myrkur"
+ },
+ "pair-zhest-silero-xenia-8527fa.m4a": {
+  "key": "жест",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ж+ест."
+ },
+ "pair-zhit-hwizzkid-e8d898.m4a": {
+  "key": "жить",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Hwizzkid-жить.wav",
+  "author": "Hwizzkid",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Hwizzkid-%D0%B6%D0%B8%D1%82%D1%8C.wav",
+  "speaker": "Hwizzkid"
+ },
+ "pair-zhit-shtooka-2af473.m4a": {
+  "key": "жить",
+  "kind": "human_recording",
+  "title": "Ru-жить.ogg",
+  "author": "Shtooka",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B6%D0%B8%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ }
+}

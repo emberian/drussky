@@ -67,6 +67,8 @@ enum ExerciseKind: String, Codable, Sendable {
     case translate, fill
     case readMeaning = "read_meaning"
     case passage
+    /// Generated minimal-pair listening (SoundPairs.swift); never authored in course.json.
+    case soundPair = "sound_pair"
 
     /// Exercises answered with the pencil on ruled paper.
     var isWriting: Bool {

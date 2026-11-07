@@ -29,20 +29,41 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         audioDir = Bundle.main.url(forResource: "Audio", withExtension: nil)
         super.init()
         synth.delegate = self
-        if let url = audioDir?.appendingPathComponent("index.json"),
-           let data = try? Data(contentsOf: url),
-           let map = try? JSONDecoder().decode([String: String].self, from: data) {
-            index = map
+        // index.json, then every index-*.json beside it (index-pairs.json …); earlier files win.
+        for url in Self.audioTables(audioDir, prefix: "index") {
+            if let data = try? Data(contentsOf: url), let map = try? JSONDecoder().decode([String: String].self, from: data) {
+                index.merge(map) { first, _ in first }
+            }
         }
         if let url = privateDir?.appendingPathComponent("index.json"), let data = try? Data(contentsOf: url),
            let map = try? JSONDecoder().decode([String: String].self, from: data) {
             privateIndex = map
         }
-        if let url = audioDir?.appendingPathComponent("variants.json"),
-           let data = try? Data(contentsOf: url),
-           let map = try? JSONDecoder().decode([String: [String]].self, from: data) {
-            variants = map
+        for url in Self.audioTables(audioDir, prefix: "variants") {
+            if let data = try? Data(contentsOf: url), let map = try? JSONDecoder().decode([String: [String]].self, from: data) {
+                for (k, files) in map { variants[k, default: []] += files.filter { !(variants[k] ?? []).contains($0) } }
+            }
         }
+    }
+
+    /// `<prefix>.json` first, then `<prefix>-*.json` in name order.
+    private static func audioTables(_ dir: URL?, prefix: String) -> [URL] {
+        guard let dir else { return [] }
+        let names = (try? FileManager.default.contentsOfDirectory(atPath: dir.path)) ?? []
+        let extra = names.filter { $0.hasPrefix(prefix + "-") && $0.hasSuffix(".json") }.sorted()
+        return ([prefix + ".json"] + extra).map { dir.appendingPathComponent($0) }
+    }
+
+    /// Every speaker's recording of a pair word. With `exactStress` only clips filed under the
+    /// stress-marked form count (за́мок ≠ замо́к); otherwise the plain word's clips join in.
+    func pairVoices(_ form: String, exactStress: Bool) -> [URL] {
+        var keys = [RussianText.pairKey(form)]
+        if !exactStress { keys.append(RussianText.key(form)) }
+        var files: [String] = []
+        for k in keys {
+            for f in (index[k].map { [$0] } ?? []) + (variants[k] ?? []) where !files.contains(f) { files.append(f) }
+        }
+        return files.compactMap { audioDir?.appendingPathComponent($0) }
     }
 
     static func configureSession() {

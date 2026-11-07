@@ -38,12 +38,13 @@ struct RhythmView: View {
     @State private var mine: [Float]?
 
     var body: some View {
-        Group {
+        VStack(spacing: 0) {  // not Group: with nothing loaded yet, .task needs a view to attach to
             if let model, let mine {
                 let longest = max(model.count, mine.count, 1)
                 VStack(alignment: .leading, spacing: 6) {
                     row(model, of: longest, label: "Model", color: Theme.accent.opacity(0.75))
                     row(mine, of: longest, label: "You", color: Theme.ink)
+                    IntonationRow(modelURL: modelURL, mineURL: mineURL, version: version)
                     Text(hint(model: model, mine: mine))
                         .font(.system(size: 13)).foregroundStyle(Theme.muted)
                 }

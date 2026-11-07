@@ -19,7 +19,7 @@ struct BookView: View {
         }
         .sheet(isPresented: $showContents) { ContentsView().presentationSizing(.page) }
         .sheet(isPresented: $showSettings) { SettingsView() }
-        .alert("Ear training", isPresented: Binding(get: { notice != nil }, set: { if !$0 { notice = nil } })) {
+        .alert(noticeTitle, isPresented: Binding(get: { notice != nil }, set: { if !$0 { notice = nil } })) {
             Button("OK") { notice = nil }
         } message: { Text(notice ?? "") }
         .sheet(isPresented: $showLibrary) { LibrarySheet().presentationSizing(.page) }
@@ -29,15 +29,32 @@ struct BookView: View {
         .onAppear {
             showContents = QA.has("-qa-contents")
             showSettings = QA.has("-qa-settings")
+            if QA.has("-qa-pairs") { makeSoundPairs() }
+            if QA.has("-qa-intonation") { QA.intonationPage(book) }
         }
     }
 
     @Environment(Voice.self) private var voice
     @State private var notice: String?
+    @State private var noticeTitle = "Ear training"
+
+    private func makeSoundPairs() {
+        let data = SoundPairs.load()
+        let exercises = book.soundPairsExercises(from: data) { voice.pairVoices($0, exactStress: $1).count }
+        guard exercises.filter(\.isSoundPairTrial).count >= 4 else {
+            noticeTitle = "Sound pairs"
+            notice = "The pairs use letters you haven't met yet — a few more pages and they open up."
+            return
+        }
+        let names = Set(exercises.compactMap(\.hint)).compactMap { data.contrast($0)?.name }.sorted()
+        book.insertWrittenPage(title: "Sound pairs", intro: "Two words, one sound apart: \(names.joined(separator: " · ")). Hear one, pick it, then hear both. Each time a different voice.",
+                               unitTitle: "Listening", exercises: exercises, newWords: [])
+    }
 
     private func makeEarTraining() {
         let exercises = book.earTraining(from: Library.load().sentences ?? [], hasAudio: voice.hasRecording)
         guard exercises.count >= 4 else {
+            noticeTitle = "Ear training"
             notice = "Not enough recorded sentences you can read yet — keep going and try again soon."
             return
         }
@@ -85,6 +102,7 @@ struct BookView: View {
                 Button { writeMode = .text } label: { Label("Read my own text…", systemImage: "doc.text") }
                 Button { showLibrary = true } label: { Label("Library", systemImage: "books.vertical") }
                 Button { makeEarTraining() } label: { Label("Ear training", systemImage: "ear") }
+                Button { makeSoundPairs() } label: { Label("Sound pairs", systemImage: "ear.badge.waveform") }
             } label: {
                 Image(systemName: "plus.square.on.square").font(.system(size: 18, weight: .medium)).frame(width: 44, height: 44)
             }

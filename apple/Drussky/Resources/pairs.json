@@ -1,0 +1,83 @@
+{
+ "version": 1,
+ "contrasts": [
+  {
+   "id": "y-i",
+   "name": "ы or и",
+   "note": "For ы, keep your lips spread as for и but pull the whole tongue back. A hard consonant comes before ы, a soft one before и."
+  },
+  {
+   "id": "hard-soft",
+   "name": "Hard or soft",
+   "note": "A soft consonant is said with the middle of the tongue raised toward the roof of the mouth, at the same moment as the consonant. ь, я, ё, ю, е and и mark it; it is not an extra syllable."
+  },
+  {
+   "id": "sh-shch",
+   "name": "ш or щ",
+   "note": "ш is hard and low, tongue cupped back. щ is long and soft, tongue raised and forward, like a drawn-out sh in “sheep”."
+  },
+  {
+   "id": "zh-sh",
+   "name": "ж or ш",
+   "note": "ж is ш with the voice on. At the end of a word the voice goes off: луг and лук sound the same, and so do код and кот."
+  },
+  {
+   "id": "reduction",
+   "name": "Unstressed о",
+   "note": "Only a stressed о sounds like о. Before the stress it sounds like а: дома́ is said “дама́”."
+  },
+  {
+   "id": "stress",
+   "name": "Where the stress falls",
+   "note": "The stressed vowel is longer and clearer; the others shrink. Moving it makes a different word."
+  }
+ ],
+ "pairs": [
+  {"contrast": "y-i", "words": [{"ru": "быть", "en": "to be"}, {"ru": "бить", "en": "to beat"}]},
+  {"contrast": "y-i", "words": [{"ru": "был", "en": "was"}, {"ru": "бил", "en": "beat (past)"}]},
+  {"contrast": "y-i", "words": [{"ru": "мыл", "en": "washed"}, {"ru": "мил", "en": "dear, kind"}]},
+  {"contrast": "y-i", "words": [{"ru": "мы́ло", "en": "soap"}, {"ru": "ми́ло", "en": "sweetly"}]},
+  {"contrast": "y-i", "words": [{"ru": "выть", "en": "to howl"}, {"ru": "вить", "en": "to weave"}]},
+  {"contrast": "y-i", "words": [{"ru": "пыл", "en": "fervour"}, {"ru": "пил", "en": "drank"}]},
+  {"contrast": "y-i", "words": [{"ru": "ныть", "en": "to whine"}, {"ru": "нить", "en": "thread"}]},
+  {"contrast": "y-i", "words": [{"ru": "мы́шка", "en": "little mouse"}, {"ru": "ми́шка", "en": "teddy bear"}]},
+
+  {"contrast": "hard-soft", "words": [{"ru": "мат", "en": "checkmate"}, {"ru": "мать", "en": "mother"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "брат", "en": "brother"}, {"ru": "брать", "en": "to take"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "у́гол", "en": "corner"}, {"ru": "у́голь", "en": "coal"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "кон", "en": "round (of a game)"}, {"ru": "конь", "en": "horse"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "лук", "en": "onion"}, {"ru": "люк", "en": "hatch"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "вес", "en": "weight"}, {"ru": "весь", "en": "all, whole"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "шест", "en": "pole"}, {"ru": "шесть", "en": "six"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "мол", "en": "pier"}, {"ru": "моль", "en": "moth"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "по́лка", "en": "shelf"}, {"ru": "по́лька", "en": "polka"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "нос", "en": "nose"}, {"ru": "нёс", "en": "carried"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "рад", "en": "glad"}, {"ru": "ряд", "en": "row"}]},
+  {"contrast": "hard-soft", "words": [{"ru": "стал", "en": "became"}, {"ru": "сталь", "en": "steel"}]},
+
+  {"contrast": "sh-shch", "words": [{"ru": "ча́ша", "en": "bowl"}, {"ru": "ча́ща", "en": "thicket"}]},
+  {"contrast": "sh-shch", "words": [{"ru": "шёлк", "en": "silk"}, {"ru": "щёлк", "en": "click!"}]},
+  {"contrast": "sh-shch", "words": [{"ru": "пиши́", "en": "write!"}, {"ru": "пи́щи", "en": "of food"}]},
+  {"contrast": "sh-shch", "words": [{"ru": "плюш", "en": "plush"}, {"ru": "плющ", "en": "ivy"}]},
+
+  {"contrast": "zh-sh", "words": [{"ru": "жар", "en": "heat"}, {"ru": "шар", "en": "ball, sphere"}]},
+  {"contrast": "zh-sh", "words": [{"ru": "жить", "en": "to live"}, {"ru": "шить", "en": "to sew"}]},
+  {"contrast": "zh-sh", "words": [{"ru": "жаль", "en": "a pity"}, {"ru": "шаль", "en": "shawl"}]},
+  {"contrast": "zh-sh", "words": [{"ru": "жест", "en": "gesture"}, {"ru": "шест", "en": "pole"}]},
+  {"contrast": "zh-sh", "same": true, "words": [{"ru": "луг", "en": "meadow"}, {"ru": "лук", "en": "onion"}]},
+  {"contrast": "zh-sh", "same": true, "words": [{"ru": "код", "en": "code"}, {"ru": "кот", "en": "cat"}]},
+  {"contrast": "zh-sh", "same": true, "words": [{"ru": "плод", "en": "fruit"}, {"ru": "плот", "en": "raft"}]},
+
+  {"contrast": "reduction", "words": [{"ru": "до́ма", "en": "at home"}, {"ru": "дома́", "en": "houses"}]},
+  {"contrast": "reduction", "words": [{"ru": "сло́ва", "en": "of a word"}, {"ru": "слова́", "en": "words"}]},
+  {"contrast": "reduction", "words": [{"ru": "о́кна", "en": "windows"}, {"ru": "окна́", "en": "of a window"}]},
+  {"contrast": "reduction", "words": [{"ru": "во́ды", "en": "waters"}, {"ru": "воды́", "en": "of water"}]},
+
+  {"contrast": "stress", "words": [{"ru": "за́мок", "en": "castle"}, {"ru": "замо́к", "en": "lock"}]},
+  {"contrast": "stress", "words": [{"ru": "му́ка", "en": "torment"}, {"ru": "мука́", "en": "flour"}]},
+  {"contrast": "stress", "words": [{"ru": "пла́чу", "en": "I cry"}, {"ru": "плачу́", "en": "I pay"}]},
+  {"contrast": "stress", "words": [{"ru": "а́тлас", "en": "atlas"}, {"ru": "атла́с", "en": "satin"}]},
+  {"contrast": "stress", "words": [{"ru": "у́же", "en": "narrower"}, {"ru": "уже́", "en": "already"}]},
+  {"contrast": "stress", "words": [{"ru": "хло́пок", "en": "cotton"}, {"ru": "хлопо́к", "en": "a clap"}]}
+ ]
+}
