@@ -71,6 +71,7 @@ struct ExerciseRow: View {
         case .listenPick: ListenPickExercise(slot: slot, isActive: isActive)
         case .readAloud: ReadAloudExercise(slot: slot, isActive: isActive)
         case .readMeaning: ReadMeaningExercise(slot: slot, isActive: isActive)
+        case .passage: PassageExercise(slot: slot)
         }
     }
 }
@@ -690,4 +691,86 @@ struct FlowRow: Layout {
 
 extension Array {
     subscript(safe i: Int) -> Element? { indices.contains(i) ? self[i] : nil }
+}
+
+// MARK: - Passage
+
+/// A short text to read: tap any word for its meaning and sound, hear the whole, and reveal a
+/// translation only if you want it.
+struct PassageExercise: View {
+    @Environment(Book.self) private var book
+    @Environment(Voice.self) private var voice
+    let slot: ExerciseSlot
+    @State private var selected: String?
+    @State private var showTranslation = false
+
+    private var text: String { slot.exercise.text ?? "" }
+
+    /// Words with the punctuation that follows them kept attached for display.
+    private var tokens: [String] { text.split(separator: " ").map(String.init) }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 14) {
+                Instruction(text: "Read it. Tap any word you want to check.")
+                HearButton(text: text, size: 40, label: "Whole text")
+            }
+            FlowRow(spacing: 8) {
+                ForEach(Array(tokens.enumerated()), id: \.offset) { _, token in
+                    let word = Self.bare(token)
+                    Button { select(word) } label: {
+                        Text(Theme.stressed(token, show: book.settings.showStress))
+                            .font(Theme.russian(28))
+                            .foregroundStyle(Theme.text)
+                            .padding(.vertical, 2).padding(.horizontal, 3)
+                            .background(RoundedRectangle(cornerRadius: 6)
+                                .fill(selected == word ? Theme.accent.opacity(0.15) : .clear))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(18)
+            .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
+            if let selected {
+                HStack(spacing: 12) {
+                    Text(selected).font(Theme.russian(24, weight: .medium)).foregroundStyle(Theme.text)
+                    Text(gloss(for: selected) ?? "—").font(.system(size: 17)).foregroundStyle(Theme.muted)
+                    HearButton(text: selected, size: 34)
+                }
+                .transition(.opacity)
+            }
+            if let en = slot.exercise.en {
+                Button(showTranslation ? "Hide the translation" : "Show the translation") {
+                    withAnimation { showTranslation.toggle() }
+                }
+                .font(Theme.label(14)).foregroundStyle(Theme.accent)
+                if showTranslation {
+                    Text(en).font(.system(size: 17)).italic().foregroundStyle(Theme.text.opacity(0.85))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            if !slot.result.status.isComplete {
+                PillButton(title: "I've read it", systemImage: "checkmark", prominent: true) {
+                    slot.record { $0.status = .done }
+                }
+            }
+        }
+        .animation(.easeOut(duration: 0.2), value: selected)
+    }
+
+    private func select(_ word: String) {
+        selected = word
+        voice.play(word)
+    }
+
+    private func gloss(for word: String) -> String? {
+        let key = RussianText.key(word)
+        if let g = slot.exercise.glosses?.first(where: { RussianText.key($0.key) == key })?.value { return g }
+        return book.course.word(word)?.en
+    }
+
+    static func bare(_ token: String) -> String {
+        let punct = Set(".,?!—–:;…«»\"()")
+        return String(token.drop(while: { punct.contains($0) }).reversed().drop(while: { punct.contains($0) }).reversed())
+    }
 }

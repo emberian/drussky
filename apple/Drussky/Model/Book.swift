@@ -182,7 +182,7 @@ final class Book {
         switch exercise.kind {
         case .meet: return exercise.letter.map { "letter:\($0)" }
         // Only what the learner produced becomes something to recall later.
-        case .explain, .readMeaning: return nil
+        case .explain, .readMeaning, .passage: return nil
         default:
             guard let target = exercise.target ?? exercise.text, let word = course.word(target) else { return nil }
             return "word:\(RussianText.key(word.ru))"
@@ -298,6 +298,7 @@ final class Book {
         case .translate: lines.append("Writing the Russian for “\(ex.en ?? "")” (answer «\(ex.answerText ?? "")»).")
         case .fill: lines.append("Filling the gap: \(ex.before ?? "")___\(ex.after ?? "") — “\(ex.hint ?? "")” (answer «\(ex.answerText ?? "")»).")
         case .readMeaning: lines.append("Reading «\(ex.text ?? "")» and choosing its meaning from: \((ex.options ?? []).joined(separator: " / ")).")
+        case .passage: lines.append("Reading a passage: «\(ex.text ?? "")» (translation: \(ex.en ?? "none")).")
         }
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")

@@ -208,4 +208,17 @@ final class DrusskyTests: XCTestCase {
         print("PEN hits: \(hits)/\(total) misses:", misses)
         XCTAssertGreaterThanOrEqual(Double(hits) / Double(total), 0.75, "misses: \(misses)")
     }
+
+    func testPassageDecodesAndStripsPunctuation() throws {
+        let json = #"{"kind":"passage","text":"Робо́т ви́дел звезду́. «Что э́то?»","en":"The robot saw a star.","glosses":{"ви́дел":"saw","звезду":"star (object)"}}"#
+        let ex = try JSONDecoder().decode(Exercise.self, from: Data(json.utf8))
+        XCTAssertEqual(ex.kind, .passage)
+        XCTAssertEqual(ex.glosses?.count, 2)
+        XCTAssertEqual(ex.spoken, ex.text)
+        XCTAssertEqual(PassageExercise.bare("звезду́."), "звезду́")
+        XCTAssertEqual(PassageExercise.bare("«Что"), "Что")
+        XCTAssertEqual(PassageExercise.bare("э́то?»"), "э́то")
+        let round = try JSONDecoder().decode(Exercise.self, from: JSONEncoder().encode(ex))
+        XCTAssertEqual(round.glosses, ex.glosses)
+    }
 }

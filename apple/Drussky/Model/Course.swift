@@ -66,6 +66,7 @@ enum ExerciseKind: String, Codable, Sendable {
     case readAloud = "read_aloud"
     case translate, fill
     case readMeaning = "read_meaning"
+    case passage
 
     /// Exercises answered with the pencil on ruled paper.
     var isWriting: Bool {
@@ -93,9 +94,11 @@ struct Exercise: Codable, Sendable, Hashable {
     var answerIndex: Int? = nil
     /// Set on exercises the app generated for spaced review.
     var reviewKey: String? = nil
+    /// Passage glosses: word as written (lowercase, no stress) → meaning in context.
+    var glosses: [String: String]? = nil
 
     enum CodingKeys: String, CodingKey {
-        case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey
+        case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses
     }
 
     init(kind: ExerciseKind) { self.kind = kind }
@@ -114,6 +117,7 @@ struct Exercise: Codable, Sendable, Hashable {
         after = try c.decodeIfPresent(String.self, forKey: .after)
         hint = try c.decodeIfPresent(String.self, forKey: .hint)
         reviewKey = try c.decodeIfPresent(String.self, forKey: .reviewKey)
+        glosses = try c.decodeIfPresent([String: String].self, forKey: .glosses)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -135,6 +139,7 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(after, forKey: .after)
         try c.encodeIfPresent(hint, forKey: .hint)
         try c.encodeIfPresent(reviewKey, forKey: .reviewKey)
+        try c.encodeIfPresent(glosses, forKey: .glosses)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }
@@ -155,7 +160,7 @@ struct Exercise: Codable, Sendable, Hashable {
         switch kind {
         case .listenPick: say
         case .dictation: say ?? text
-        case .readAloud, .trace, .copy, .readMeaning: text
+        case .readAloud, .trace, .copy, .readMeaning, .passage: text
         case .fill: [before, answerText, after].compactMap { $0 }.joined()
         case .translate: answerText
         default: nil
