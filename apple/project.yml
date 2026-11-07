@@ -24,6 +24,10 @@ targets:
       - path: Drussky/Resources/Audio
         type: folder
         buildPhase: resources
+      - path: PrivatePack
+        type: folder
+        buildPhase: resources
+        optional: true
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: software.ember.drussky

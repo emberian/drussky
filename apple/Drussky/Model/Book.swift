@@ -129,7 +129,7 @@ final class Book {
         guard !courseFinished else { return false }
         let (unit, source) = course.pageSequence[courseCursor]
         courseCursor += 1
-        var exercises = source.exercises
+        var exercises = source.exercises.map(faded)
         let taughtHere = Set(source.exercises.compactMap { memoryKey(for: $0) })
         let reviews = due.filter { !taughtHere.contains($0.key) }.prefix(3)
         // Spread reviews through the page: after the opening, in the middle, near the end.
@@ -141,6 +141,17 @@ final class Book {
         appendPage(sourceID: source.id, unitTitle: unit.title, title: source.title, intro: source.intro,
                    isReview: false, exercises: exercises)
         return true
+    }
+
+    /// Expertise reversal: scaffolds that help a novice get in the way once an item is secure.
+    /// A word recalled right at least twice without a miss loses its support on later pages:
+    /// trace → copy, copy → write it from hearing.
+    func faded(_ ex: Exercise) -> Exercise {
+        guard [.trace, .copy].contains(ex.kind), let key = memoryKey(for: ex), let m = memories[key],
+              m.lapses == 0, m.reps >= 2 else { return ex }
+        var e = ex
+        if ex.kind == .trace { e.kind = .copy; e.times = 1 } else { e.kind = .dictation; e.times = nil }
+        return e
     }
 
     private func appendPage(sourceID: String?, unitTitle: String, title: String, intro: String?,

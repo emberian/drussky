@@ -263,4 +263,19 @@ final class DrusskyTests: XCTestCase {
         XCTAssertEqual(book.page?.unitTitle, "Your text")
         XCTAssertEqual(book.pages.map(\.number), Array(1...book.pages.count))
     }
+
+    func testSecureWordsLoseTheirScaffolds() throws {
+        let book = Book(course: try course(), store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        var copy = Exercise(kind: .copy); copy.text = "ма́ма"; copy.times = 2
+        XCTAssertEqual(book.faded(copy).kind, .copy, "new words keep their support")
+        let key = try XCTUnwrap(book.memoryKey(for: copy))
+        book.keep("ма́ма", en: "mom")
+        for _ in 0..<2 {
+            book.shiftMemories(byDays: 5)
+            var d = Exercise(kind: .dictation); d.text = "ма́ма"; d.reviewKey = key
+            book.insertWrittenPage(title: "t", intro: nil, unitTitle: "u", exercises: [d], newWords: [])
+            book.record(page: book.currentPage, exercise: 0) { $0.status = .correct }
+        }
+        XCTAssertEqual(book.faded(copy).kind, .dictation, "a secure word is written from hearing instead")
+    }
 }

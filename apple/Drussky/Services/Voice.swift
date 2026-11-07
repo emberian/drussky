@@ -11,6 +11,9 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
     private var index: [String: String] = [:]
     /// Other speakers' recordings of the same word (variants.json); each tap plays the next voice.
     private var variants: [String: [String]] = [:]
+    /// Personal-study recordings from PrivatePack/Audio (never in a release build).
+    private var privateIndex: [String: String] = [:]
+    private let privateDir = Bundle.main.url(forResource: "PrivatePack", withExtension: nil)?.appendingPathComponent("Audio")
     private var turn: [String: Int] = [:]
     /// Playback runs on its own queue: an audio-route stall (Bluetooth, a busy audio server)
     /// must never freeze the page. `player` is only touched on `audioQueue`.
@@ -31,6 +34,10 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
            let map = try? JSONDecoder().decode([String: String].self, from: data) {
             index = map
         }
+        if let url = privateDir?.appendingPathComponent("index.json"), let data = try? Data(contentsOf: url),
+           let map = try? JSONDecoder().decode([String: String].self, from: data) {
+            privateIndex = map
+        }
         if let url = audioDir?.appendingPathComponent("variants.json"),
            let data = try? Data(contentsOf: url),
            let map = try? JSONDecoder().decode([String: [String]].self, from: data) {
@@ -45,7 +52,7 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         try? session.setActive(true)
     }
 
-    func hasRecording(_ text: String) -> Bool { index[RussianText.key(text)] != nil }
+    func hasRecording(_ text: String) -> Bool { index[RussianText.key(text)] != nil || privateIndex[RussianText.key(text)] != nil }
     func speakerCount(_ text: String) -> Int { index[RussianText.key(text)] == nil ? 0 : 1 + (variants[RussianText.key(text)]?.count ?? 0) }
 
     func recordingURL(for text: String) -> URL? {
@@ -64,6 +71,10 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
                 start(url)
                 return
             }
+        }
+        if let file = privateIndex[key], let url = privateDir?.appendingPathComponent(file) {
+            start(url)
+            return
         }
         let utterance = AVSpeechUtterance(string: RussianText.unstressed(text))
         utterance.voice = Self.bestRussianVoice

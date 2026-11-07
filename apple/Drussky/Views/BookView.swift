@@ -7,6 +7,7 @@ struct BookView: View {
     @State private var showContents = false
     @State private var showSettings = false
     @State private var writeMode: WritePageSheet.Mode?
+    @State private var showLibrary = false
     @Environment(\.horizontalSizeClass) private var sizeClass
 
     var body: some View {
@@ -18,6 +19,7 @@ struct BookView: View {
         }
         .sheet(isPresented: $showContents) { ContentsView().presentationSizing(.page) }
         .sheet(isPresented: $showSettings) { SettingsView() }
+        .sheet(isPresented: $showLibrary) { LibrarySheet().presentationSizing(.page) }
         .sheet(isPresented: Binding(get: { writeMode != nil }, set: { if !$0 { writeMode = nil } })) {
             if let writeMode { WritePageSheet(mode: writeMode) }
         }
@@ -65,6 +67,7 @@ struct BookView: View {
             Menu {
                 Button { writeMode = .practice } label: { Label("A page from my mistakes", systemImage: "wand.and.stars") }
                 Button { writeMode = .text } label: { Label("Read my own text…", systemImage: "doc.text") }
+                Button { showLibrary = true } label: { Label("Library", systemImage: "books.vertical") }
             } label: {
                 Image(systemName: "plus.square.on.square").font(.system(size: 18, weight: .medium)).frame(width: 44, height: 44)
             }

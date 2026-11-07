@@ -1,25 +1,40 @@
 import SwiftUI
 
-/// Asks the tutor for a new page: practice from what you keep missing, or a reading page from
-/// a Russian text you bring (paste it, or use the keyboard's Scan Text to read it off paper).
+/// Asks the tutor for a new page: practice from what you keep missing, a reading page from a
+/// Russian text you bring, or a library text — as written or rescaled to your level.
 struct WritePageSheet: View {
-    enum Mode { case practice, text }
-    @Environment(Book.self) private var book
+    enum Mode: Hashable { case practice, text }
     @Environment(\.dismiss) private var dismiss
     let mode: Mode
+
+    var body: some View {
+        NavigationStack {
+            WritePageContent(source: mode == .practice ? .practice : .ownText, onDone: { dismiss() })
+                .navigationTitle(mode == .practice ? "A page from your mistakes" : "Read your own text")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
+        }
+    }
+}
+
+struct WritePageContent: View {
+    enum Source: Hashable { case practice, ownText, library(Library.Text) }
+    @Environment(Book.self) private var book
+    let source: Source
+    var onDone: () -> Void
     @State private var text = ""
     @State private var writing = false
     @State private var progress = 0
     @State private var error: String?
 
     var body: some View {
-        NavigationStack {
+        ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                switch mode {
+                switch source {
                 case .practice:
                     Text("Your tutor writes a fresh page from the things you've been finding hardest, and puts it right after this one.")
                         .font(.system(size: 17)).foregroundStyle(Theme.text)
-                case .text:
+                case .ownText:
                     Text("Paste any Russian — a paragraph of a story, a poem, a menu. On iPad you can also tap the text field and choose Scan Text to read it straight off paper.")
                         .font(.system(size: 17)).foregroundStyle(Theme.text)
                     TextEditor(text: $text)
@@ -34,55 +49,132 @@ struct WritePageSheet: View {
                                     .padding(18).allowsHitTesting(false)
                             }
                         }
+                case .library(let t):
+                    LibraryTextHeader(text: t)
                 }
                 if writing {
                     HStack(spacing: 12) {
                         ProgressView()
-                        Text(progress == 0 ? "Your tutor is thinking…" : "Your tutor is writing the page… \(progress) characters")
+                        Text(progress == 0 ? "Your tutor is reading…" : "Your tutor is writing the page… \(progress) characters")
                             .font(.system(size: 15)).foregroundStyle(Theme.muted)
                     }
                 }
                 if let error { Text(error).font(.system(size: 15)).foregroundStyle(Theme.redPen) }
-                Spacer()
-                Button {
-                    Task { await write() }
-                } label: {
-                    Text(mode == .practice ? "Write my page" : "Make it a page")
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .frame(maxWidth: .infinity).padding(.vertical, 14)
-                        .background(Capsule().fill(canWrite ? Theme.accent : Theme.muted.opacity(0.3)))
-                        .foregroundStyle(.white)
-                }
-                .buttonStyle(.plain)
-                .disabled(!canWrite)
+                buttons
             }
             .padding(24)
-            .background(Theme.paper.ignoresSafeArea())
-            .navigationTitle(mode == .practice ? "A page from your mistakes" : "Read your own text")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() }.disabled(writing) } }
         }
+        .background(Theme.paper.ignoresSafeArea())
         .interactiveDismissDisabled(writing)
     }
 
-    private var canWrite: Bool {
-        !writing && (mode == .practice || RussianText.letters(in: text).count >= 3)
+    @ViewBuilder private var buttons: some View {
+        switch source {
+        case .practice:
+            bigButton("Write my page", enabled: !writing) { .practice }
+        case .ownText:
+            bigButton("Make it a page", enabled: !writing && RussianText.letters(in: text).count >= 3) { .text(text) }
+        case .library(let t):
+            bigButton("Rescale to my level", enabled: !writing) { .rescale(t.text, title: "\(t.author), «\(t.title)»") }
+            bigButton("Read it as written", enabled: !writing, prominent: false) { .text(t.text) }
+        }
     }
 
-    private func write() async {
+    private func bigButton(_ title: String, enabled: Bool, prominent: Bool = true, request: @escaping () -> PageWriter.Request) -> some View {
+        Button { Task { await write(request()) } } label: {
+            Text(title)
+                .font(.system(size: 18, weight: .semibold, design: .rounded))
+                .frame(maxWidth: .infinity).padding(.vertical, 14)
+                .background(Capsule().fill(prominent ? (enabled ? Theme.accent : Theme.muted.opacity(0.3)) : Theme.accent.opacity(0.1)))
+                .foregroundStyle(prominent ? Color.white : Theme.accent)
+        }
+        .buttonStyle(.plain)
+        .disabled(!enabled)
+    }
+
+    private func write(_ request: PageWriter.Request) async {
         writing = true
         error = nil
         progress = 0
         defer { writing = false }
         do {
-            let request: PageWriter.Request = mode == .practice ? .practice : .text(text)
             let (page, exercises) = try await PageWriter.write(request, book: book) { n in progress = n }
-            book.insertWrittenPage(title: page.title, intro: page.intro,
-                                   unitTitle: mode == .practice ? "Written for you" : "Your text",
+            let unit: String = {
+                switch source {
+                case .practice: "Written for you"
+                case .ownText: "Your text"
+                case .library(let t): "Library · \(t.level)"
+                }
+            }()
+            book.insertWrittenPage(title: page.title, intro: page.intro, unitTitle: unit,
                                    exercises: exercises, newWords: page.new_words ?? [])
-            dismiss()
+            onDone()
         } catch {
             self.error = error.localizedDescription
+        }
+    }
+}
+
+struct LibraryTextHeader: View {
+    let text: Library.Text
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(text.title).font(Theme.russian(30, weight: .semibold)).foregroundStyle(Theme.text)
+            Text([text.author, text.year.map(String.init)].compactMap { $0 }.joined(separator: ", "))
+                .font(.system(size: 15)).foregroundStyle(Theme.muted)
+            if let s = text.summary_en { Text(s).font(.system(size: 17)).foregroundStyle(Theme.text) }
+            Text(String(text.text.prefix(420)) + (text.text.count > 420 ? "…" : ""))
+                .font(Theme.russian(19)).foregroundStyle(Theme.text.opacity(0.85))
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
+            Text("Original level \(text.level) · \(text.license)\(text.isPrivate == true ? " · personal study" : "")")
+                .font(Theme.label(12)).foregroundStyle(Theme.muted)
+        }
+    }
+}
+
+/// Real texts to read, by level. Opening one makes a reading page — as written or rescaled.
+struct LibrarySheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @State private var library = Library.load()
+    @State private var topic = "all"
+
+    private var topics: [String] { ["all"] + Array(Set(library.texts.map(\.topic))).sorted() }
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Picker("Topic", selection: $topic) {
+                    ForEach(topics, id: \.self) { Text($0 == "all" ? "Everything" : $0.capitalized).tag($0) }
+                }
+                .pickerStyle(.segmented)
+                .listRowBackground(Color.clear)
+                ForEach(Library.levels, id: \.self) { level in
+                    let texts = library.texts.filter { $0.level == level && (topic == "all" || $0.topic == topic) }
+                    if !texts.isEmpty {
+                        Section(level) {
+                            ForEach(texts) { t in
+                                NavigationLink {
+                                    WritePageContent(source: .library(t), onDone: { dismiss() })
+                                        .navigationTitle(t.title).navigationBarTitleDisplayMode(.inline)
+                                } label: {
+                                    VStack(alignment: .leading, spacing: 3) {
+                                        Text(t.title).font(Theme.russian(20, weight: .medium))
+                                        Text([t.author, t.title_en].compactMap { $0 }.joined(separator: " · "))
+                                            .font(.system(size: 14)).foregroundStyle(.secondary)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if library.texts.isEmpty {
+                    Text("The library is empty in this build.").foregroundStyle(.secondary)
+                }
+            }
+            .navigationTitle("Library")
+            .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         }
     }
 }

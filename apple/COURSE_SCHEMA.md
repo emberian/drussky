@@ -81,3 +81,29 @@ memorable line in the tutor's voice.
    no talk about recordings, models, accuracy or the app itself. No mention of friends or coaches.
 5. **Size.** A page is 6–10 exercises, ~8–12 minutes. Writing (trace/copy/dictation/translate/fill)
    should be the majority of exercises; every page mixes in hearing and speaking.
+
+# Library — `Drussky/Resources/library.json` (and `PrivatePack/library.json`)
+
+Real texts to read beyond the course, at several levels. The app shows them on the inside
+cover by level; opening one makes a reading page from it — either the original (glossed) or
+rescaled by the tutor to the learner's current vocabulary.
+
+```json
+{
+  "version": 1,
+  "texts": [
+    { "id": "tolstoy-filippok", "title": "Филиппок", "title_en": "Filipok",
+      "author": "Лев Толстой", "year": 1875, "level": "A2",
+      "topic": "classic | scifi | math | philosophy | everyday",
+      "text": "the Russian text or excerpt, ≤ 3000 characters, paragraphs separated by \n",
+      "summary_en": "one line saying what it is and why it's worth reading",
+      "license": "public domain | CC BY 2.0 FR | …", "source": "https://…" }
+  ],
+  "sentences": [
+    { "ru": "…", "en": "…", "audio": "file.m4a", "speaker": "…", "license": "…", "source": "https://…" }
+  ]
+}
+```
+
+Levels follow CEFR (A1 A2 B1 B2 C1). `PrivatePack/` (git-ignored, never in a release build)
+has the same layout for material that is fine for personal study but not redistributable.

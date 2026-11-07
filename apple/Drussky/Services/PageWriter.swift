@@ -8,7 +8,12 @@ enum PageWriter {
     enum Request {
         case practice
         case text(String)
+        /// Rewrite a text down (or up) to the learner's level, keeping its content.
+        case rescale(String, title: String)
     }
+
+    /// Rescaling is a rewriting job; Sonnet 5.5 does it quickly and well.
+    static let rescaleModel = "claude-sonnet-5-5"
 
     struct Written: Decodable {
         var title: String
@@ -31,13 +36,15 @@ enum PageWriter {
     static func write(_ request: Request, book: Book, progress: @escaping (Int) -> Void) async throws -> (Written, [Exercise]) {
         let prompt = Self.prompt(for: request, book: book)
         var raw = ""
-        for try await chunk in Tutor.stream([.init(role: "user", text: prompt)], system: system, maxTokens: 16_000, effort: "medium") {
+        let model: String = { if case .rescale = request { return rescaleModel } else { return Tutor.model } }()
+        for try await chunk in Tutor.stream([.init(role: "user", text: prompt)], system: system, maxTokens: 16_000,
+                                            effort: "medium", model: model) {
             raw += chunk
             progress(raw.count)
         }
         guard let json = extractJSON(raw), let data = json.data(using: .utf8),
               let written = try? JSONDecoder().decode(Written.self, from: data) else { throw Failure.unreadable }
-        let allowPassageLetters: Bool = { if case .text = request { return true } else { return false } }()
+        let allowPassageLetters: Bool = { if case .practice = request { return false } else { return true } }()
         let usable = written.exercises.compactMap { sanitize($0, book: book, passageAnyLetters: allowPassageLetters) }
         guard usable.count >= 4 else { throw Failure.tooFew }
         return (written, usable)
@@ -110,6 +117,22 @@ enum PageWriter {
             give an English translation. Then 5–7 graded exercises about it: read_meaning questions on what it \
             says, and translate/fill/dictation for its most useful new words (list those in new_words). This page \
             may use letters they haven't met inside the passage only.
+            """
+        case .rescale(let text, let title):
+            return """
+            \(state)
+
+            Rewrite this text («\(title)») for this learner's level, then make a reading page from your rewrite:
+            ---
+            \(text.prefix(3000))
+            ---
+            The rewrite must keep what happens (or the argument) and the voice of the original as far as the level \
+            allows: 4–10 short sentences, built mostly from words they know, with at most 8 new words, each worth \
+            learning and glossed. Prefer present and past tense they've seen; avoid participles and rare cases unless \
+            they already know them. Title the page after the original. First ONE passage exercise with your rewrite \
+            (stress-marked, every unknown word glossed, English translation), then 5–7 graded exercises: read_meaning \
+            on what happens, and translate/fill/dictation for the new words (list them in new_words). \
+            In the passage's English translation, end with a line: "Rescaled from: <author/title>".
             """
         }
     }

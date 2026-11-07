@@ -74,7 +74,8 @@ enum Tutor {
         stream(turns, system: system(context: context), maxTokens: 4000, effort: "low")
     }
 
-    static func stream(_ turns: [Turn], system systemPrompt: String, maxTokens: Int, effort: String) -> AsyncThrowingStream<String, Error> {
+    static func stream(_ turns: [Turn], system systemPrompt: String, maxTokens: Int, effort: String,
+                       model: String = Tutor.model) -> AsyncThrowingStream<String, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {
