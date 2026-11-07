@@ -300,4 +300,15 @@ final class DrusskyTests: XCTestCase {
         XCTAssertEqual(Set(ids).count, ids.count, "no page repeated")
         XCTAssertTrue(Set(had).isSubset(of: Set(ids)))
     }
+
+    /// Recording a read-aloud result must not read the book while mutating it (the pattern
+    /// that crashed on the iPad after stopping a recording).
+    func testRecordingAReadAloudResultDoesNotTrap() throws {
+        let book = Book(course: try course(), store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        let i = try XCTUnwrap(book.pages[0].exercises.firstIndex { $0.kind == .readAloud })
+        let slot = ExerciseSlot(book: book, pageIndex: 0, index: i)
+        let file = slot.recordingURL.lastPathComponent
+        slot.finish { r in r.attempts += 1; r.recording = file; r.recognized = "мама"; r.status = .correct }
+        XCTAssertEqual(book.pages[0].results[i].recording, file)
+    }
 }

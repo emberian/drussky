@@ -100,25 +100,27 @@ final class SpeechCheck {
         return mic && speech
     }
 
-    static func transcribe(_ url: URL, hint: String) async -> String? {
+    /// Nonisolated, with a Sendable result handler: the recognizer may call back on any queue
+    /// (on-device recognition does not always honour `queue`), and a main-actor closure there
+    /// traps at runtime. Exactly one resume, guarded by `Once`.
+    nonisolated static func transcribe(_ url: URL, hint: String) async -> String? {
         guard let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ru-RU")), recognizer.isAvailable else { return nil }
         let request = SFSpeechURLRecognitionRequest(url: url)
         request.contextualStrings = [hint]
         request.shouldReportPartialResults = false
         if recognizer.supportsOnDeviceRecognition { request.requiresOnDeviceRecognition = true }
-        return await withCheckedContinuation { continuation in
-            var resumed = false
-            recognizer.queue = .main  // results land on the main actor this function runs on
-            recognizer.recognitionTask(with: request) { result, error in
-                guard !resumed else { return }
+        nonisolated(unsafe) let keepAlive = recognizer
+        return await withCheckedContinuation { (continuation: CheckedContinuation<String?, Never>) in
+            let once = Once()
+            recognizer.recognitionTask(with: request) { @Sendable result, error in
+                _ = keepAlive
                 if let result, result.isFinal {
-                    resumed = true
                     // Prefer an alternative that matches the target, else the best guess.
                     let all = result.transcriptions.map(\.formattedString)
-                    continuation.resume(returning: all.first { RussianText.matches($0, hint) } ?? all.first)
+                    let best = all.first { RussianText.matches($0, hint) } ?? all.first
+                    if once.claim() { continuation.resume(returning: best) }
                 } else if error != nil {
-                    resumed = true
-                    continuation.resume(returning: nil)
+                    if once.claim() { continuation.resume(returning: nil) }
                 }
             }
         }

@@ -672,9 +672,12 @@ struct ReadAloudExercise: View {
         if speech.activeKey == key && speech.isRecording {
             let heard = await speech.finish(target: target)
             let ok = heard.map { RussianText.matches($0, target) } ?? false
+            // Read everything from the book before mutating it: touching `slot` (which reads
+            // book.pages) inside the mutation is an exclusivity violation and aborts.
+            let file = slot.recordingURL.lastPathComponent
             slot.finish { r in
                 r.attempts += 1
-                r.recording = slot.recordingURL.lastPathComponent
+                r.recording = file
                 r.recognized = heard
                 if ok && !r.status.isComplete { r.status = r.attempts == 1 ? .correct : .done }
             }
