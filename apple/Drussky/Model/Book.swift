@@ -174,7 +174,8 @@ final class Book {
         if let key = exercise.reviewKey { return key }
         switch exercise.kind {
         case .meet: return exercise.letter.map { "letter:\($0)" }
-        case .explain: return nil
+        // Only what the learner produced becomes something to recall later.
+        case .explain, .readMeaning: return nil
         default:
             guard let target = exercise.target ?? exercise.text, let word = course.word(target) else { return nil }
             return "word:\(RussianText.key(word.ru))"
@@ -209,12 +210,22 @@ final class Book {
 
     var dueCount: Int { dueMemories().count }
 
+    /// English glosses shared by more than one entry can't be asked as "write it in Russian".
+    private var ambiguousGlosses: Set<String> {
+        var seen: [String: Int] = [:]
+        for w in course.lexicon { seen[w.en.lowercased(), default: 0] += 1 }
+        return Set(seen.filter { $0.value > 1 }.keys)
+    }
+
     /// A review exercise for a remembered item, varying the modality across repetitions.
     func reviewExercise(for memory: Memory, variant: Int) -> Exercise {
         let parts = memory.key.split(separator: ":", maxSplits: 1).map(String.init)
         var ex: Exercise
         if parts.first == "letter", let letter = course.letter(parts[1]) {
-            if variant % 2 == 0 {
+            // Dictate the letter only when its spoken form begins with it (а, ра); signs and
+            // letters voiced inside a word (ы in "ты") are recalled by choosing what was heard.
+            let sayable = RussianText.key(letter.say).hasPrefix(letter.lower)
+            if variant % 2 == 0 && sayable {
                 // Hear the letter's sound, write the letter.
                 ex = Exercise(kind: .dictation)
                 ex.text = letter.lower
@@ -227,14 +238,16 @@ final class Book {
                 ex.options = ([letter.say] + others).shuffled()
             }
         } else if let word = course.word(parts.count > 1 ? parts[1] : "") {
+            let askable = !ambiguousGlosses.contains(word.en.lowercased())
             switch variant % 3 {
-            case 0: ex = Exercise(kind: .translate); ex.en = word.en; ex.answerText = word.ru
-            case 1: ex = Exercise(kind: .dictation); ex.text = word.ru
+            case 0 where askable: ex = Exercise(kind: .translate); ex.en = word.en; ex.answerText = word.ru
+            case 0, 1: ex = Exercise(kind: .dictation); ex.text = word.ru
             default: ex = Exercise(kind: .readAloud); ex.text = word.ru
             }
         } else {
-            ex = Exercise(kind: .explain)
-            ex.text = "Keep going."
+            // A word no longer in the course lexicon: still recall it by ear.
+            ex = Exercise(kind: .dictation)
+            ex.text = parts.count > 1 ? parts[1] : ""
         }
         ex.reviewKey = memory.key
         return ex

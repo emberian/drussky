@@ -33,6 +33,10 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
 
     func hasRecording(_ text: String) -> Bool { index[RussianText.key(text)] != nil }
 
+    func recordingURL(for text: String) -> URL? {
+        index[RussianText.key(text)].flatMap { audioDir?.appendingPathComponent($0) }
+    }
+
     func play(_ text: String) {
         let key = RussianText.key(text)
         stop()

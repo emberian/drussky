@@ -21,7 +21,7 @@ enum InkReader {
         let candidates = await recognize(cg, hint: RussianText.unstressed(single ? String(repeating: target, count: 3) : target))
         let matched = candidates.first {
             single ? majority($0, of: target)
-                : (RussianText.matches($0, target) || RussianText.matches(caseFolded($0), target))
+                : RussianText.answerMatches($0, target)
         }
         let best = matched ?? candidates.first ?? ""
         return Reading(best: single ? String(best.prefix(1)) : best, candidates: candidates, matches: matched != nil)
@@ -43,8 +43,6 @@ enum InkReader {
         return out
     }
 
-    /// Single letters written alone are hard for any recognizer; accept either case.
-    private static func caseFolded(_ s: String) -> String { s.lowercased() }
 
     /// Dark ink on white, padded, at a size the recognizer likes.
     @MainActor

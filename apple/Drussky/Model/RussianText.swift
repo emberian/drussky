@@ -55,4 +55,20 @@ enum RussianText {
         let got = comparable(heard).filter { !$0.isWhitespace }
         return !got.isEmpty && !wanted.isEmpty && got.allSatisfy { wanted.contains($0) } && wanted.isSubset(of: Set(got))
     }
+
+    static let pronouns: Set<String> = ["я", "ты", "он", "она", "оно", "мы", "вы", "они"]
+
+    /// Written answers: exact match, or the same with/without a leading subject pronoun
+    /// (Russian drops it freely: "читаю" and "я читаю" are both "I am reading").
+    static func answerMatches(_ heard: String, _ target: String) -> Bool {
+        if matches(heard, target) || matches(heard.lowercased(), target) { return true }
+        func dropPronoun(_ s: String) -> String? {
+            let words = comparable(s).split(separator: " ")
+            guard words.count > 1, pronouns.contains(String(words[0])) else { return nil }
+            return words.dropFirst().joined(separator: " ")
+        }
+        if let t = dropPronoun(target), matches(heard, t) { return true }
+        if let h = dropPronoun(heard), matches(h, target) { return true }
+        return false
+    }
 }

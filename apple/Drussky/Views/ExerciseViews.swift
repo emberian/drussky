@@ -597,6 +597,9 @@ struct ReadAloudExercise: View {
                 }
                 HearButton(text: target, size: 44, label: "Model")
             }
+            if recordingExists {
+                RhythmView(modelURL: voice.recordingURL(for: target), mineURL: slot.recordingURL, version: slot.result.attempts)
+            }
             if denied {
                 Text("Drussky needs the microphone and speech recognition, in Settings → Drussky.")
                     .font(.system(size: 14)).foregroundStyle(Theme.redPen)

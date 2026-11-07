@@ -11,6 +11,9 @@ final class DrusskyTests: XCTestCase {
         XCTAssertTrue(RussianText.matches("ёж", "еж"))
         XCTAssertTrue(RussianText.isRepetition("Аа Аа", of: "А"))
         XCTAssertFalse(RussianText.isRepetition("Ма", of: "А"))
+        XCTAssertTrue(RussianText.answerMatches("читаю", "Я чита́ю."))
+        XCTAssertTrue(RussianText.answerMatches("я читаю", "чита́ю"))
+        XCTAssertFalse(RussianText.answerMatches("ты читаешь", "Я чита́ю."))
     }
 
     func testCourseDecodesAndIsWellFormed() throws {
