@@ -333,6 +333,22 @@ def main():
                 err("audio", f"no recording for {s!r}")
             elif not (audio / f).is_file():
                 err("audio", f"missing file {f} for {s!r}")
+        sources = json.loads((audio / "sources.json").read_text())
+        variants_path = audio / "variants.json"
+        variants = json.loads(variants_path.read_text()) if variants_path.exists() else {}
+        for k, files in sorted(variants.items()):
+            if k not in index:
+                err("audio", f"variants key {k!r} has no primary in index.json")
+            if len(set(files)) != len(files) or index.get(k) in files:
+                err("audio", f"variants for {k!r} repeat a file or the primary")
+            for f in files:
+                if not (audio / f).is_file():
+                    err("audio", f"missing variant file {f} for {k!r}")
+                src = sources.get(f)
+                if not src:
+                    err("audio", f"variant {f} has no sources.json entry")
+                elif src.get("key") != k or src.get("kind") != "human_recording" or not (src.get("license") and src.get("source_page")):
+                    err("audio", f"variant {f}: sources.json entry lacks key/kind/license/source_page for {k!r}")
 
     pages = sum(len(u["pages"]) for u in course["units"])
     exercises = sum(len(p["exercises"]) for u in course["units"] for p in u["pages"])

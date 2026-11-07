@@ -172,9 +172,15 @@ def main():
         index[k] = f"{name}.m4a"
         sources[f"{name}.m4a"] = {"key": k, "kind": "ai_generated_speech", "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)", "input": synth}
 
+    # Extra-speaker clips are built by make_variants.py; keep their provenance.
+    variants_path = AUDIO / "variants.json"
+    extra = {f for fs in json.loads(variants_path.read_text()).values() for f in fs} if variants_path.exists() else set()
+    if extra:
+        old = json.loads((AUDIO / "sources.json").read_text())
+        sources.update({f: old[f] for f in extra if f in old})
     (AUDIO / "index.json").write_text(json.dumps(dict(sorted(index.items())), ensure_ascii=False, indent=1) + "\n")
     (AUDIO / "sources.json").write_text(json.dumps(dict(sorted(sources.items())), ensure_ascii=False, indent=1) + "\n")
-    stale = {p.name for p in AUDIO.glob("*.m4a")} - set(index.values())
+    stale = {p.name for p in AUDIO.glob("*.m4a")} - set(index.values()) - extra
     if stale:
         print("stale files not in index (left in place):", sorted(stale))
     print(f"wrote {len(index)} entries")

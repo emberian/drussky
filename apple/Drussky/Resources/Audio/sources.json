@@ -49,6 +49,16 @@
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B9.ogg"
  },
+ "bolshoy-tatiana-kerbush-a55ad1.m4a": {
+  "key": "большой",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-большой.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B9.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "brat-4fcce0.m4a": {
   "key": "брат",
   "kind": "human_recording",
@@ -57,6 +67,26 @@
   "credit": "The Shtooka Project",
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D1%80%D0%B0%D1%82.ogg"
+ },
+ "brat-aleksey-pogrebnoj-al-346dc4.m4a": {
+  "key": "брат",
+  "kind": "human_recording",
+  "title": "Ru-брат (brat).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D1%80%D0%B0%D1%82_(brat).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "brat-tatiana-kerbush-e4930f.m4a": {
+  "key": "брат",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-брат.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B1%D1%80%D0%B0%D1%82.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "byl-8826ed.m4a": {
   "key": "был",
@@ -69,6 +99,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "был+а."
+ },
+ "byla-aleksey-pogrebnoj-al-939713.m4a": {
+  "key": "была",
+  "kind": "human_recording",
+  "title": "Ru-была́.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D1%8B%D0%BB%D0%B0%CC%81.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "byli-d69a8d.m4a": {
   "key": "были",
@@ -118,6 +158,36 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B0%D0%B9.ogg"
  },
+ "chay-koyash-086123.m4a": {
+  "key": "чай",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Кояш-чай.wav",
+  "author": "Speaker: Кояш Recorder: Кояш",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-%D0%9A%D0%BE%D1%8F%D1%88-%D1%87%D0%B0%D0%B9.wav",
+  "speaker": "Кояш"
+ },
+ "chay-svetlov-artem-52b531.m4a": {
+  "key": "чай",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Svetlov Artem-чай.wav",
+  "author": "Speaker: Svetlov Artem Recorder: Svetlov Artem",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Svetlov_Artem-%D1%87%D0%B0%D0%B9.wav",
+  "speaker": "Svetlov Artem"
+ },
+ "chay-tatiana-kerbush-45cdd9.m4a": {
+  "key": "чай",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush (Reda Kerbouche)-чай.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Reda Kerbouche",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush_(Reda_Kerbouche)-%D1%87%D0%B0%D0%B9.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "chelovek-414a4a.m4a": {
   "key": "человек",
   "kind": "human_recording",
@@ -126,6 +196,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA.ogg"
+ },
+ "chelovek-infovarius-a81ae0.m4a": {
+  "key": "человек",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Infovarius-человек.wav",
+  "author": "Speaker: Infovarius Recorder: Infovarius",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Infovarius-%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA.wav",
+  "speaker": "Infovarius"
  },
  "cherez-mesyats-prikhodit-novyy-signal-v-533337.m4a": {
   "key": "через месяц приходит новый сигнал в нём одно слово привет мира не знает кто это но теперь она знает мы не одни",
@@ -142,11 +222,31 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%B5.ogg"
  },
+ "chetyre-baidax-05c6f4.m4a": {
+  "key": "четыре",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-четыре.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%B5.wav",
+  "speaker": "Baidax"
+ },
  "chetyre-chyotnoe-chislo-070914.m4a": {
   "key": "четыре чётное число",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Чет+ыре — ч+ётное числ+о."
+ },
+ "chetyre-xana000-280d01.m4a": {
+  "key": "четыре",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-четыре.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%B5.wav",
+  "speaker": "XANA000"
  },
  "chisla-5e766d.m4a": {
   "key": "числа",
@@ -217,6 +317,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D1%82%D0%BE.ogg"
  },
+ "chto-aleksey-pogrebnoj-al-9eaa3a.m4a": {
+  "key": "что",
+  "kind": "human_recording",
+  "title": "Ru-что-.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D1%82%D0%BE-.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "chto-delal-papa-3c018a.m4a": {
   "key": "что делал папа",
   "kind": "ai_generated_speech",
@@ -231,6 +341,16 @@
   "credit": "http://tatoeba.org/por/sentences/show/5412",
   "license": "CC BY 4.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D1%82%D0%BE_%D1%8D%D1%82%D0%BE.ogg"
+ },
+ "chto-eto-andrey672-825983.m4a": {
+  "key": "что это",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Andrey672-Что это?.wav",
+  "author": "Speaker: Andrey672 Recorder: Andrey672",
+  "credit": "Own work",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Andrey672-%D0%A7%D1%82%D0%BE_%D1%8D%D1%82%D0%BE%3F.wav",
+  "speaker": "Andrey672"
  },
  "chto-eto-eto-chay-9aa824.m4a": {
   "key": "что это это чай",
@@ -285,6 +405,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Чт+о т+ам? +Это с+уп."
+ },
+ "chto-tatiana-kerbush-8fb163.m4a": {
+  "key": "что",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-что.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%87%D1%82%D0%BE.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "chto-ty-delaesh-0d1880.m4a": {
   "key": "что ты делаешь",
@@ -352,6 +482,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Ч+ётное числ+о д+елится на дв+а."
  },
+ "da-aleksey-pogrebnoj-al-764a96.m4a": {
+  "key": "да",
+  "kind": "human_recording",
+  "title": "Ru-да..-.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B0..-.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "da-d4f57d.m4a": {
   "key": "да",
   "kind": "human_recording",
@@ -412,11 +552,31 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "д+елится на дв+а."
  },
+ "desyat-baidax-0c17ef.m4a": {
+  "key": "десять",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-десять.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%B4%D0%B5%D1%81%D1%8F%D1%82%D1%8C.wav",
+  "speaker": "Baidax"
+ },
  "desyat-devyat-vosem-sem-shest-pyat-chety-b4f1b2.m4a": {
   "key": "десять девять восемь семь шесть пять четыре три два один",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Д+есять, д+евять, в+осемь, с+емь, ш+есть, п+ять, чет+ыре, тр+и, дв+а, од+ин!"
+ },
+ "desyat-doctorandusmanhattan-fa7d7b.m4a": {
+  "key": "десять",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-десять.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B4%D0%B5%D1%81%D1%8F%D1%82%D1%8C.wav",
+  "speaker": "DoctorandusManhattan"
  },
  "desyat-f37f3a.m4a": {
   "key": "десять",
@@ -446,6 +606,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Девян+осто пл+юс д+есять — ст+о."
  },
+ "devyat-baidax-b9a24e.m4a": {
+  "key": "девять",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-девять.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D1%8C.wav",
+  "speaker": "Baidax"
+ },
  "devyat-d2c296.m4a": {
   "key": "девять",
   "kind": "human_recording",
@@ -454,6 +624,26 @@
   "credit": "The Shtooka Project",
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D1%8C.ogg"
+ },
+ "devyat-doctorandusmanhattan-3938a5.m4a": {
+  "key": "девять",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-девять.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D1%8C.wav",
+  "speaker": "DoctorandusManhattan"
+ },
+ "devyat-xana000-bfa905.m4a": {
+  "key": "девять",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-девять.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D1%8C.wav",
+  "speaker": "XANA000"
  },
  "dlya-lyubogo-chisla-e2c479.m4a": {
   "key": "для любого числа",
@@ -476,6 +666,26 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BD%D1%91%D0%BC.ogg"
  },
+ "dnyom-lingyaz-8ac690.m4a": {
+  "key": "днём",
+  "kind": "human_recording",
+  "title": "Ru-днём-2.ogg",
+  "author": "Lingyaz",
+  "credit": "Own work",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BD%D1%91%D0%BC-2.ogg",
+  "speaker": "Lingyaz"
+ },
+ "dobroe-utro-andrey672-8bd554.m4a": {
+  "key": "доброе утро",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Andrey672-Доброе утро!.wav",
+  "author": "Speaker: Andrey672 Recorder: Andrey672",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Andrey672-%D0%94%D0%BE%D0%B1%D1%80%D0%BE%D0%B5_%D1%83%D1%82%D1%80%D0%BE!.wav",
+  "speaker": "Andrey672"
+ },
  "dobroe-utro-b1d3ed.m4a": {
   "key": "доброе утро",
   "kind": "human_recording",
@@ -497,6 +707,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Д+оброе +утро! К+офе?"
  },
+ "dobroe-utro-zakharovsergeevich-c821c4.m4a": {
+  "key": "доброе утро",
+  "kind": "human_recording",
+  "title": "Ru-Доброе утро.ogg",
+  "author": "Захаровсергеевич",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%94%D0%BE%D0%B1%D1%80%D0%BE%D0%B5_%D1%83%D1%82%D1%80%D0%BE.ogg",
+  "speaker": "Захаровсергеевич"
+ },
  "dobryy-vecher-1a5c81.m4a": {
   "key": "добрый вечер",
   "kind": "human_recording",
@@ -511,6 +731,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Д+обрый в+ечер! Чт+о на +ужин?"
+ },
+ "dobryy-vecher-doctorandusmanhattan-497f6a.m4a": {
+  "key": "добрый вечер",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-добрый вечер.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B4%D0%BE%D0%B1%D1%80%D1%8B%D0%B9_%D0%B2%D0%B5%D1%87%D0%B5%D1%80.wav",
+  "speaker": "DoctorandusManhattan"
  },
  "dokazatelstvo-ce9c40.m4a": {
   "key": "доказательство",
@@ -529,6 +759,46 @@
   "credit": "The Shtooka Project",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BE%D0%BC.ogg"
+ },
+ "dom-doctorandusmanhattan-0446fb.m4a": {
+  "key": "дом",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-дом.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B4%D0%BE%D0%BC.wav",
+  "speaker": "DoctorandusManhattan"
+ },
+ "dom-infovarius-1ef21c.m4a": {
+  "key": "дом",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Infovarius-дом.wav",
+  "author": "Speaker: Infovarius Recorder: Infovarius",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Infovarius-%D0%B4%D0%BE%D0%BC.wav",
+  "speaker": "Infovarius"
+ },
+ "dom-myrkur-f31e2a.m4a": {
+  "key": "дом",
+  "kind": "human_recording",
+  "title": "Ru-дом (2).ogg",
+  "author": "Myrkur",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BE%D0%BC_(2).ogg",
+  "speaker": "Myrkur"
+ },
+ "dom-tatiana-kerbush-218581.m4a": {
+  "key": "дом",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush (Reda Kerbouche)-дом.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Reda Kerbouche",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush_(Reda_Kerbouche)-%D0%B4%D0%BE%D0%BC.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "doma-e72723.m4a": {
   "key": "дома",
@@ -596,6 +866,36 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B2%D0%B0.ogg"
  },
+ "dva-aleksey-pogrebnoj-al-849714.m4a": {
+  "key": "два",
+  "kind": "human_recording",
+  "title": "Ru-два (2).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B2%D0%B0_(2).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "dva-baidax-3e164f.m4a": {
+  "key": "два",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-два.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%B4%D0%B2%D0%B0.wav",
+  "speaker": "Baidax"
+ },
+ "dva-cinemantique-da8581.m4a": {
+  "key": "два",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Cinemantique-два.wav",
+  "author": "Speaker: Cinemantique Recorder: Cinemantique",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Cinemantique-%D0%B4%D0%B2%D0%B0.wav",
+  "speaker": "Cinemantique"
+ },
  "dva-plyus-dva-chetyre-c6fdc7.m4a": {
   "key": "два плюс два четыре",
   "kind": "ai_generated_speech",
@@ -620,6 +920,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Дв+а пл+юс тр+и — п+ять."
  },
+ "dva-xana000-76fa1d.m4a": {
+  "key": "два",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-два.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D0%B4%D0%B2%D0%B0.wav",
+  "speaker": "XANA000"
+ },
  "dvadtsat-a970b1.m4a": {
   "key": "двадцать",
   "kind": "human_recording",
@@ -633,6 +943,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Дв+адцать, тр+идцать, с+орок, пятьдес+ят, шестьдес+ят, с+емьдесят, в+осемьдесят, девян+осто, ст+о."
+ },
+ "dvadtsat-xana000-614673.m4a": {
+  "key": "двадцать",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-двадцать.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D0%B4%D0%B2%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.wav",
+  "speaker": "XANA000"
  },
  "dvukh-chyotnykh-chisel-b8cc73.m4a": {
   "key": "двух чётных чисел",
@@ -676,6 +996,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B5%D1%89%D1%91.ogg"
  },
+ "eshchyo-aleksey-pogrebnoj-al-add96e.m4a": {
+  "key": "ещё",
+  "kind": "human_recording",
+  "title": "Ru-ещё (jeˈɕɵ).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B5%D1%89%D1%91_(je%CB%88%C9%95%C9%B5).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "eshchyo-kofe-da-pozhaluysta-60b24e.m4a": {
   "key": "ещё кофе да пожалуйста",
   "kind": "ai_generated_speech",
@@ -709,6 +1039,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "+Если п+ять — ч+ётное числ+о, то +я р+обот."
  },
+ "esli-tatiana-kerbush-ad2691.m4a": {
+  "key": "если",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-если.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B5%D1%81%D0%BB%D0%B8.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "est-3d5105.m4a": {
   "key": "есть",
   "kind": "human_recording",
@@ -726,6 +1066,16 @@
   "credit": "The Shtooka Project",
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%8D%D1%82%D0%BE.ogg"
+ },
+ "eto-aleksey-pogrebnoj-al-ca3bbf.m4a": {
+  "key": "это",
+  "kind": "human_recording",
+  "title": "Ru-это (мужское произношение).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free sources",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%8D%D1%82%D0%BE_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B5).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "eto-chay-c69a1e.m4a": {
   "key": "это чай",
@@ -1056,6 +1406,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Гд+е ст+ол? В+от +он."
  },
+ "gde-tatiana-kerbush-0207ee.m4a": {
+  "key": "где",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-где.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B3%D0%B4%D0%B5.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "gde-ty-byl-49cf72.m4a": {
   "key": "где ты был",
   "kind": "ai_generated_speech",
@@ -1095,6 +1455,16 @@
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%BE%D1%80%D0%BE%D0%B4.ogg"
  },
+ "gorod-tatiana-kerbush-bc6f59.m4a": {
+  "key": "город",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-город.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B3%D0%BE%D1%80%D0%BE%D0%B4.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "gorode-23b7e0.m4a": {
   "key": "городе",
   "kind": "ai_generated_speech",
@@ -1115,6 +1485,26 @@
   "credit": "Own work",
   "license": "CC BY-SA 3.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%BE%D1%82%D0%BE%D0%B2.ogg"
+ },
+ "gotov-aleksey-pogrebnoj-al-a06d31.m4a": {
+  "key": "готов",
+  "kind": "human_recording",
+  "title": "Ru-гото́в.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%BE%D1%82%D0%BE%CC%81%D0%B2.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "gotov-lvova-857eff.m4a": {
+  "key": "готов",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Lvova-готов.wav",
+  "author": "Speaker: Lvova Recorder: Lvova",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%B3%D0%BE%D1%82%D0%BE%D0%B2.wav",
+  "speaker": "Lvova"
  },
  "govorili-e08169.m4a": {
   "key": "говорили",
@@ -1146,6 +1536,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "говор+ит."
  },
+ "govorit-tatiana-kerbush-16c439.m4a": {
+  "key": "говорить",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-говорить.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8%D1%82%D1%8C.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "govoryat-e3eb7c.m4a": {
   "key": "говорят",
   "kind": "human_recording",
@@ -1154,6 +1554,16 @@
   "credit": "Forvo",
   "license": "CC BY-SA 4.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%82.ogg"
+ },
+ "govoryat-rominf-43a736.m4a": {
+  "key": "говорят",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Rominf-говорят.wav",
+  "author": "Speaker: Rominf Recorder: Rominf",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Rominf-%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%82.wav",
+  "speaker": "Rominf"
  },
  "govoryu-8bbcfc.m4a": {
   "key": "говорю",
@@ -1218,11 +1628,31 @@
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%B0%D0%BA.ogg"
  },
+ "kak-aleksey-pogrebnoj-al-8d6875.m4a": {
+  "key": "как",
+  "kind": "human_recording",
+  "title": "Ru-как (мужской голос).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free sourses",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%B0%D0%BA_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B9_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "kak-dela-1cc857.m4a": {
   "key": "как дела",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "К+ак дел+а?"
+ },
+ "kak-dela-aleksey-pogrebnoj-al-127343.m4a": {
+  "key": "как дела",
+  "kind": "human_recording",
+  "title": "Ru-как дела-.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%B0%D0%BA_%D0%B4%D0%B5%D0%BB%D0%B0-.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "kak-dela-khorosho-c4a074.m4a": {
   "key": "как дела хорошо",
@@ -1235,6 +1665,26 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "К+ак дел+а? Хорош+о, спас+ибо. А у теб+я?"
+ },
+ "kak-tatiana-kerbush-29a540.m4a": {
+  "key": "как",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-как.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BA%D0%B0%D0%BA.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "kasha-aleksey-pogrebnoj-al-6d71d0.m4a": {
+  "key": "каша",
+  "kind": "human_recording",
+  "title": "Ru-ка́ша.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%B0%CC%81%D1%88%D0%B0.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "kasha-b93fe3.m4a": {
   "key": "каша",
@@ -1296,6 +1746,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Хл+еб, с+ыр, ч+ай, к+офе."
  },
+ "khleb-tatiana-kerbush-2cd388.m4a": {
+  "key": "хлеб",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-хлеб.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%85%D0%BB%D0%B5%D0%B1.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "khochesh-kofe-a29b49.m4a": {
   "key": "хочешь кофе",
   "kind": "ai_generated_speech",
@@ -1340,6 +1800,16 @@
   "credit": "free open public sources",
   "license": "CC BY-SA 3.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%85%D0%BE%D1%80.ogg"
+ },
+ "khor-tatiana-kerbush-3d0ee9.m4a": {
+  "key": "хор",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-хор.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%85%D0%BE%D1%80.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "khorosho-6a4730.m4a": {
   "key": "хорошо",
@@ -1413,6 +1883,16 @@
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D1%84%D0%B5.ogg"
  },
+ "kofe-koyash-18ac6c.m4a": {
+  "key": "кофе",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Кояш-кофе.wav",
+  "author": "Speaker: Кояш Recorder: Кояш",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-%D0%9A%D0%BE%D1%8F%D1%88-%D0%BA%D0%BE%D1%84%D0%B5.wav",
+  "speaker": "Кояш"
+ },
  "kosmos-050bdc.m4a": {
   "key": "космос",
   "kind": "human_recording",
@@ -1437,6 +1917,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D1%82.ogg"
  },
+ "kot-aleksey-pogrebnoj-al-54a923.m4a": {
+  "key": "кот",
+  "kind": "human_recording",
+  "title": "Ru-кот (мужское произношение).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free sources",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D1%82_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B5).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "kot-byl-tut-f58b06.m4a": {
   "key": "кот был тут",
   "kind": "ai_generated_speech",
@@ -1448,6 +1938,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "К+от д+ома."
+ },
+ "kot-lvova-66bf85.m4a": {
+  "key": "кот",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Lvova-кот.wav",
+  "author": "Speaker: Lvova Recorder: Lvova",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%BA%D0%BE%D1%82.wav",
+  "speaker": "Lvova"
  },
  "kot-spal-na-stole-da1100.m4a": {
   "key": "кот спал на столе",
@@ -1475,6 +1975,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D1%82%D0%BE.ogg"
+ },
+ "kto-aleksey-pogrebnoj-al-1e25d7.m4a": {
+  "key": "кто",
+  "kind": "human_recording",
+  "title": "Ru-кто (муж голос).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D1%82%D0%BE_(%D0%BC%D1%83%D0%B6_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "kto-doma-a4b2a4.m4a": {
   "key": "кто дома",
@@ -1539,6 +2049,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "кт+ото."
  },
+ "kto-to-gulnara-streit-b7071a.m4a": {
+  "key": "кто то",
+  "kind": "human_recording",
+  "title": "Ru-кто-то.ogg",
+  "author": "Gulnara Streit",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D1%82%D0%BE-%D1%82%D0%BE.ogg",
+  "speaker": "Gulnara Streit"
+ },
  "kuda-f75eb7.m4a": {
   "key": "куда",
   "kind": "human_recording",
@@ -1601,6 +2121,26 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0.ogg"
  },
+ "lozhka-aleksey-pogrebnoj-al-da64d0.m4a": {
+  "key": "ложка",
+  "kind": "human_recording",
+  "title": "Ru-ло́жка.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D0%BE%CC%81%D0%B6%D0%BA%D0%B0.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "luk-aleksey-pogrebnoj-al-b0476c.m4a": {
+  "key": "лук",
+  "kind": "human_recording",
+  "title": "Ru-лук (luk).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%83%D0%BA_(luk).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "luk-f2dac6.m4a": {
   "key": "лук",
   "kind": "human_recording",
@@ -1610,6 +2150,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%83%D0%BA.ogg"
  },
+ "luk-tatiana-kerbush-f753e2.m4a": {
+  "key": "лук",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-лук.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BB%D1%83%D0%BA.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "luna-699ebb.m4a": {
   "key": "луна",
   "kind": "human_recording",
@@ -1618,6 +2168,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%83%D0%BD%D0%B0.ogg"
+ },
+ "luna-aleksey-pogrebnoj-al-218546.m4a": {
+  "key": "луна",
+  "kind": "human_recording",
+  "title": "Ru-Луна.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%9B%D1%83%D0%BD%D0%B0.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "lyubit-b90490.m4a": {
   "key": "любит",
@@ -1639,6 +2199,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%8E%D0%B4%D0%B8.ogg"
+ },
+ "lyudi-infovarius-0a9ac6.m4a": {
+  "key": "люди",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Infovarius-люди.wav",
+  "author": "Speaker: Infovarius Recorder: Infovarius",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Infovarius-%D0%BB%D1%8E%D0%B4%D0%B8.wav",
+  "speaker": "Infovarius"
  },
  "lyuk-b34bf0.m4a": {
   "key": "люк",
@@ -1665,6 +2235,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B0%D0%BC%D0%B0.ogg"
+ },
+ "mama-aleksey-pogrebnoj-al-b422be.m4a": {
+  "key": "мама",
+  "kind": "human_recording",
+  "title": "Ru-ма́ма.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B0%CC%81%D0%BC%D0%B0.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "mama-chitaet-e1e769.m4a": {
   "key": "мама читает",
@@ -1702,11 +2282,31 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "М+ама на к+ухне."
  },
+ "mama-reda-kerbouche-bb2a80.m4a": {
+  "key": "мама",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Reda Kerbouche-мама.wav",
+  "author": "Speaker: Reda Kerbouche Recorder: Reda Kerbouche",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Reda_Kerbouche-%D0%BC%D0%B0%D0%BC%D0%B0.wav",
+  "speaker": "Reda Kerbouche"
+ },
  "mama-tam-68e62f.m4a": {
   "key": "мама там",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "М+ама т+ам."
+ },
+ "mama-tatiana-kerbush-e54779.m4a": {
+  "key": "мама",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-мама.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BC%D0%B0%D0%BC%D0%B0.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "mat-99ef9a.m4a": {
   "key": "мать",
@@ -1732,6 +2332,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "М+едленно, пож+алуйста."
  },
+ "menya-domesticfrog-9047f2.m4a": {
+  "key": "меня",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DomesticFrog-меня.wav",
+  "author": "Speaker: DomesticFrog Recorder: DomesticFrog",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DomesticFrog-%D0%BC%D0%B5%D0%BD%D1%8F.wav",
+  "speaker": "DomesticFrog"
+ },
  "menya-f62570.m4a": {
   "key": "меня",
   "kind": "human_recording",
@@ -1755,6 +2365,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "М+ир +очень больш+ой."
+ },
+ "mir-tatiana-kerbush-54da09.m4a": {
+  "key": "мир",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-мир.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BC%D0%B8%D1%80.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "mira-6fbc4a.m4a": {
   "key": "мира",
@@ -1813,6 +2433,26 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "молч+ит."
  },
+ "moloko-1apollinariya1-21adf8.m4a": {
+  "key": "молоко",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-1Apollinariya1-молоко.wav",
+  "author": "Speaker: 1Apollinariya1 Recorder: 1Apollinariya1",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-1Apollinariya1-%D0%BC%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE.wav",
+  "speaker": "1Apollinariya1"
+ },
+ "moloko-aleksey-pogrebnoj-al-f0a170.m4a": {
+  "key": "молоко",
+  "kind": "human_recording",
+  "title": "Ru-молоко (mɐlɐ'ko).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE_(m%C9%90l%C9%90%27ko).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "moloko-c2d396.m4a": {
   "key": "молоко",
   "kind": "human_recording",
@@ -1821,6 +2461,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE.ogg"
+ },
+ "moloko-doctorandusmanhattan-ee42ca.m4a": {
+  "key": "молоко",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-молоко.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%BC%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE.wav",
+  "speaker": "DoctorandusManhattan"
  },
  "moloko-tut-0bb956.m4a": {
   "key": "молоко тут",
@@ -1938,6 +2588,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "М+удрый челов+ек зн+ает."
+ },
+ "my-aleksey-pogrebnoj-al-44e7fc.m4a": {
+  "key": "мы",
+  "kind": "human_recording",
+  "title": "Ru-мы (муж голос).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "CC 3.0",
+  "license": "CC BY 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D1%8B_(%D0%BC%D1%83%D0%B6_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "my-byli-tam-746387.m4a": {
   "key": "мы были там",
@@ -2095,6 +2755,16 @@
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-на.ogg"
  },
+ "na-aleksey-pogrebnoj-al-a6f6c1.m4a": {
+  "key": "на",
+  "kind": "human_recording",
+  "title": "Ru-на (мужское произношение).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free sources",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B0_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B5).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "na-kukhne-c86dae.m4a": {
   "key": "на кухне",
   "kind": "human_recording",
@@ -2203,6 +2873,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "н+аше окн+о."
  },
+ "ne-aleksey-pogrebnoj-al-d62c48.m4a": {
+  "key": "не",
+  "kind": "human_recording",
+  "title": "Ru-не (nʲə).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B5_(n%CA%B2%C9%99).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "ne-ce6256.m4a": {
   "key": "не",
   "kind": "human_recording",
@@ -2225,6 +2905,16 @@
   "author": "not stated; see source page",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F.ogg"
+ },
+ "nedelya-doctorandusmanhattan-7a775e.m4a": {
+  "key": "неделя",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-неделя.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F.wav",
+  "speaker": "DoctorandusManhattan"
  },
  "nemnogo-e60898.m4a": {
   "key": "немного",
@@ -2283,6 +2973,16 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Н+ет, спас+ибо."
  },
+ "net-tatiana-moocit-f53950.m4a": {
+  "key": "нет",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana moocit-нет.wav",
+  "author": "Speaker: Tatiana moocit Recorder: Tatiana moocit",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_moocit-%D0%BD%D0%B5%D1%82.wav",
+  "speaker": "Tatiana moocit"
+ },
  "net-ya-ne-znayu-ea2709.m4a": {
   "key": "нет я не знаю",
   "kind": "ai_generated_speech",
@@ -2307,6 +3007,26 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE.ogg"
  },
+ "no-aleksey-pogrebnoj-al-a860db.m4a": {
+  "key": "но",
+  "kind": "human_recording",
+  "title": "Ru-но (муж голос).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE_(%D0%BC%D1%83%D0%B6_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "no-tatiana-kerbush-d909d1.m4a": {
+  "key": "но",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-но.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BD%D0%BE.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "no-teper-ona-znaet-my-ne-odni-54e76c.m4a": {
   "key": "но теперь она знает мы не одни",
   "kind": "ai_generated_speech",
@@ -2321,6 +3041,16 @@
   "credit": "The Shtooka Project",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE%D1%87%D1%8C.ogg"
+ },
+ "noch-tatiana-kerbush-d29a2f.m4a": {
+  "key": "ночь",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-ночь.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BD%D0%BE%D1%87%D1%8C.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "noch-zvyozdy-kosmos-ochen-bolshoy-2b83ab.m4a": {
   "key": "ночь звёзды космос очень большой",
@@ -2364,6 +3094,36 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE%D1%81.ogg"
  },
+ "nos-aleksey-pogrebnoj-al-ff4e52.m4a": {
+  "key": "нос",
+  "kind": "human_recording",
+  "title": "Ru-нос (1).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE%D1%81_(1).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "nos-baidax-2b9139.m4a": {
+  "key": "нос",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-нос.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%BD%D0%BE%D1%81.wav",
+  "speaker": "Baidax"
+ },
+ "nos-tatiana-kerbush-7c5627.m4a": {
+  "key": "нос",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-нос.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BD%D0%BE%D1%81.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "novyy-3697be.m4a": {
   "key": "новый",
   "kind": "human_recording",
@@ -2390,6 +3150,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B1%D0%B5%D0%B4.ogg"
+ },
+ "obed-aleksey-pogrebnoj-al-03ed89.m4a": {
+  "key": "обед",
+  "kind": "human_recording",
+  "title": "Ru-обе́д.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B1%D0%B5%CC%81%D0%B4.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "obekt-a0f625.m4a": {
   "key": "объект",
@@ -2421,6 +3191,26 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "+Очень вк+усно, спас+ибо!"
  },
+ "odin-baidax-3ce5d5.m4a": {
+  "key": "один",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-один.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%BE%D0%B4%D0%B8%D0%BD.wav",
+  "speaker": "Baidax"
+ },
+ "odin-doctorandusmanhattan-2156b3.m4a": {
+  "key": "один",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-один.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%BE%D0%B4%D0%B8%D0%BD.wav",
+  "speaker": "DoctorandusManhattan"
+ },
  "odin-dva-tri-chetyre-pyat-3d1b73.m4a": {
   "key": "один два три четыре пять",
   "kind": "ai_generated_speech",
@@ -2440,6 +3230,26 @@
   "author": "not stated; see source page",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B4%D0%B8%D0%BD.ogg"
+ },
+ "odin-myrkur-317a1a.m4a": {
+  "key": "один",
+  "kind": "human_recording",
+  "title": "Ru-Один.ogg",
+  "author": "Myrkur",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%9E%D0%B4%D0%B8%D0%BD.ogg",
+  "speaker": "Myrkur"
+ },
+ "odin-xana000-cf5e05.m4a": {
+  "key": "один",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-один.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D0%BE%D0%B4%D0%B8%D0%BD.wav",
+  "speaker": "XANA000"
  },
  "odinnadtsat-8074a8.m4a": {
   "key": "одиннадцать",
@@ -2527,6 +3337,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "+Он х+одит в п+арк к+аждый д+ень."
+ },
+ "on-lvova-5c03d0.m4a": {
+  "key": "он",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Lvova-он.wav",
+  "author": "Speaker: Lvova Recorder: Lvova",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%BE%D0%BD.wav",
+  "speaker": "Lvova"
  },
  "on-ne-govorit-po-angliyski-a18f51.m4a": {
   "key": "он не говорит по английски",
@@ -2698,6 +3518,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%BF%D1%8F%D1%82%D1%8C.ogg"
  },
+ "opyat-aleksey-pogrebnoj-al-ca8544.m4a": {
+  "key": "опять",
+  "kind": "human_recording",
+  "title": "Ru-опя́ть.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%BF%D1%8F%CC%81%D1%82%D1%8C.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "otets-e28872.m4a": {
   "key": "отец",
   "kind": "human_recording",
@@ -2705,6 +3535,16 @@
   "author": "not stated; see source page",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D1%82%D0%B5%D1%86.ogg"
+ },
+ "otets-tatiana-kerbush-4b52d8.m4a": {
+  "key": "отец",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-отец.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BE%D1%82%D0%B5%D1%86.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "otvet-796f48.m4a": {
   "key": "ответ",
@@ -2714,6 +3554,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D1%82%D0%B2%D0%B5%D1%82.ogg"
+ },
+ "otvet-myrkur-88a2fb.m4a": {
+  "key": "ответ",
+  "kind": "human_recording",
+  "title": "Ru-ответ (2).ogg",
+  "author": "Myrkur",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D1%82%D0%B2%D0%B5%D1%82_(2).ogg",
+  "speaker": "Myrkur"
  },
  "oy-001dcf.m4a": {
   "key": "ой",
@@ -2741,6 +3591,26 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%B0%D0%BF%D0%B0.ogg"
+ },
+ "papa-aleksey-pogrebnoj-al-deba73.m4a": {
+  "key": "папа",
+  "kind": "human_recording",
+  "title": "Ru-па́па.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%B0%CC%81%D0%BF%D0%B0.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "papa-tatiana-kerbush-1a3739.m4a": {
+  "key": "папа",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-папа.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D0%B0%D0%BF%D0%B0.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "park-e1a2cc.m4a": {
   "key": "парк",
@@ -2811,11 +3681,30 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "поангл+ийски."
  },
+ "po-angliyski-shtooka-a5b639.m4a": {
+  "key": "по английски",
+  "kind": "human_recording",
+  "title": "Ru-по-английски.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE-%D0%B0%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B8.ogg",
+  "speaker": "Shtooka"
+ },
  "po-russki-a17950.m4a": {
   "key": "по русски",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "пор+усски."
+ },
+ "po-russki-shtooka-9c67fc.m4a": {
+  "key": "по русски",
+  "kind": "human_recording",
+  "title": "Ru-по-русски.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8.ogg",
+  "speaker": "Shtooka"
  },
  "pochemu-80a8d7.m4a": {
   "key": "почему",
@@ -2904,6 +3793,36 @@
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Потом+у чт+о +это пр+авда."
  },
+ "potomu-chto-myrkur-ceb845.m4a": {
+  "key": "потому что",
+  "kind": "human_recording",
+  "title": "Ru-потому что (2).ogg",
+  "author": "Myrkur",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D1%82%D0%BE%D0%BC%D1%83_%D1%87%D1%82%D0%BE_(2).ogg",
+  "speaker": "Myrkur"
+ },
+ "potomu-chto-tatiana-kerbush-bee8c3.m4a": {
+  "key": "потому что",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-потому что.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D0%BE%D1%82%D0%BE%D0%BC%D1%83_%D1%87%D1%82%D0%BE.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "pozhaluysta-1640max-9aa531.m4a": {
+  "key": "пожалуйста",
+  "kind": "human_recording",
+  "title": "Ru-пожалуйста (ɨ).ogg",
+  "author": "1640max",
+  "credit": "(ɨ) Forvo",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0_(%C9%A8).ogg",
+  "speaker": "1640max"
+ },
  "pozhaluysta-441aca.m4a": {
   "key": "пожалуйста",
   "kind": "human_recording",
@@ -2913,6 +3832,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0.ogg"
  },
+ "pozhaluysta-tatiana-kerbush-a71d7b.m4a": {
+  "key": "пожалуйста",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-пожалуйста.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "pravda-ce605d.m4a": {
   "key": "правда",
   "kind": "human_recording",
@@ -2920,6 +3849,26 @@
   "author": "not stated; see source page",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%80%D0%B0%D0%B2%D0%B4%D0%B0.ogg"
+ },
+ "pravda-lvova-ee9703.m4a": {
+  "key": "правда",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Lvova-правда.wav",
+  "author": "Speaker: Lvova Recorder: Lvova",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%BF%D1%80%D0%B0%D0%B2%D0%B4%D0%B0.wav",
+  "speaker": "Lvova"
+ },
+ "privet-andrey672-133673.m4a": {
+  "key": "привет",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Andrey672-Привет!.wav",
+  "author": "Speaker: Andrey672 Recorder: Andrey672",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Andrey672-%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82!.wav",
+  "speaker": "Andrey672"
  },
  "privet-e24505.m4a": {
   "key": "привет",
@@ -2934,6 +3883,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Прив+ет! М+ы не одн+и."
+ },
+ "privet-tatiana-kerbush-73c916.m4a": {
+  "key": "привет",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-привет.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "priyatnogo-appetita-de00fa.m4a": {
   "key": "приятного аппетита",
@@ -2971,11 +3930,51 @@
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%8F%D1%82%D1%8C.ogg"
  },
+ "pyat-aleksey-pogrebnoj-al-2af540.m4a": {
+  "key": "пять",
+  "kind": "human_recording",
+  "title": "Ru-пять (pʲatʲ).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%8F%D1%82%D1%8C_(p%CA%B2at%CA%B2).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "pyat-baidax-993762.m4a": {
+  "key": "пять",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-пять.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%BF%D1%8F%D1%82%D1%8C.wav",
+  "speaker": "Baidax"
+ },
+ "pyat-doctorandusmanhattan-765be8.m4a": {
+  "key": "пять",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-пять.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%BF%D1%8F%D1%82%D1%8C.wav",
+  "speaker": "DoctorandusManhattan"
+ },
  "pyat-eto-chislo-eto-fakt-974d39.m4a": {
   "key": "пять это число это факт",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "П+ять — +это числ+о. +Это ф+акт."
+ },
+ "pyat-myrkur-273061.m4a": {
+  "key": "пять",
+  "kind": "human_recording",
+  "title": "Ru-пять (2).ogg",
+  "author": "Myrkur",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%8F%D1%82%D1%8C_(2).ogg",
+  "speaker": "Myrkur"
  },
  "pyat-nechyotnoe-chislo-fb4338.m4a": {
   "key": "пять нечётное число",
@@ -3157,6 +4156,26 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%BE%D1%82.ogg"
  },
+ "rot-aleksey-pogrebnoj-al-17cd63.m4a": {
+  "key": "рот",
+  "kind": "human_recording",
+  "title": "Ru-рот (мужское произношение).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free sources",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%BE%D1%82_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B5).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "rot-tatiana-kerbush-67f9f0.m4a": {
+  "key": "рот",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-рот.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%80%D0%BE%D1%82.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "rukopisi-f1d015.m4a": {
   "key": "рукописи",
   "kind": "ai_generated_speech",
@@ -3217,6 +4236,26 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B5%D0%BC%D1%8C.ogg"
  },
+ "sem-baidax-0bddfb.m4a": {
+  "key": "семь",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-семь.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D1%81%D0%B5%D0%BC%D1%8C.wav",
+  "speaker": "Baidax"
+ },
+ "sem-doctorandusmanhattan-4d290b.m4a": {
+  "key": "семь",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-семь.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%81%D0%B5%D0%BC%D1%8C.wav",
+  "speaker": "DoctorandusManhattan"
+ },
  "sem-nechyotnoe-chislo-a5ee3d.m4a": {
   "key": "семь нечётное число",
   "kind": "ai_generated_speech",
@@ -3274,11 +4313,31 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D0%B5%D1%81%D1%82%D1%8C.ogg"
  },
+ "shest-baidax-b192a1.m4a": {
+  "key": "шесть",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-шесть.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D1%88%D0%B5%D1%81%D1%82%D1%8C.wav",
+  "speaker": "Baidax"
+ },
  "shest-chyotnoe-chislo-6adb9e.m4a": {
   "key": "шесть чётное число",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Ш+есть — ч+ётное числ+о."
+ },
+ "shest-doctorandusmanhattan-86bb4f.m4a": {
+  "key": "шесть",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-шесть.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%88%D0%B5%D1%81%D1%82%D1%8C.wav",
+  "speaker": "DoctorandusManhattan"
  },
  "shest-eto-chislo-cea39b.m4a": {
   "key": "шесть это число",
@@ -3307,6 +4366,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D0%B5%D1%81%D1%82%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.ogg"
  },
+ "shestdesyat-xana000-a80c47.m4a": {
+  "key": "шестьдесят",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-шестьдесят.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%88%D0%B5%D1%81%D1%82%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.wav",
+  "speaker": "XANA000"
+ },
  "shum-03d768.m4a": {
   "key": "шум",
   "kind": "human_recording",
@@ -3332,6 +4401,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE.ogg"
  },
+ "sledovatelno-tatiana-kerbush-fe278d.m4a": {
+  "key": "следовательно",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-следовательно.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "slovo-f56eb6.m4a": {
   "key": "слово",
   "kind": "human_recording",
@@ -3340,6 +4419,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BB%D0%BE%D0%B2%D0%BE.ogg"
+ },
+ "slovo-tatiana-moocit-2b595c.m4a": {
+  "key": "слово",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana moocit-слово.wav",
+  "author": "Speaker: Tatiana moocit Recorder: Tatiana moocit",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_moocit-%D1%81%D0%BB%D0%BE%D0%B2%D0%BE.wav",
+  "speaker": "Tatiana moocit"
  },
  "slushaet-9a621e.m4a": {
   "key": "слушает",
@@ -3362,6 +4451,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BE%D0%BA.ogg"
  },
+ "sok-tatiana-kerbush-b4aff7.m4a": {
+  "key": "сок",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-сок.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%81%D0%BE%D0%BA.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "sol-45d814.m4a": {
   "key": "соль",
   "kind": "human_recording",
@@ -3370,6 +4469,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BE%D0%BB%D1%8C.ogg"
+ },
+ "son-aleksey-pogrebnoj-al-d8966a.m4a": {
+  "key": "сон",
+  "kind": "human_recording",
+  "title": "Ru-сон (муж голос).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "CC 3.0",
+  "license": "CC BY 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BE%D0%BD_(%D0%BC%D1%83%D0%B6_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "son-e6e87d.m4a": {
   "key": "сон",
@@ -3389,6 +4498,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BE%D1%80%D0%BE%D0%BA.ogg"
  },
+ "sorok-xana000-9c5ba1.m4a": {
+  "key": "сорок",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-сорок.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%81%D0%BE%D1%80%D0%BE%D0%BA.wav",
+  "speaker": "XANA000"
+ },
  "spal-58be91.m4a": {
   "key": "спал",
   "kind": "ai_generated_speech",
@@ -3403,6 +4522,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BF%D0%B0%D1%81%D0%B8%D0%B1%D0%BE.ogg"
+ },
+ "spasibo-butko-672678.m4a": {
+  "key": "спасибо",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Butko-спасибо.wav",
+  "author": "Speaker: Butko Recorder: Butko",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Butko-%D1%81%D0%BF%D0%B0%D1%81%D0%B8%D0%B1%D0%BE.wav",
+  "speaker": "Butko"
  },
  "spasibo-i-tebe-64a60e.m4a": {
   "key": "спасибо и тебе",
@@ -3430,6 +4559,16 @@
   "credit": "Own work ( Lingua Libre )",
   "license": "CC BY-SA 4.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%81%D0%BF%D0%BE%D0%BA%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BD%D0%BE%D1%87%D0%B8.wav"
+ },
+ "spokoynoy-nochi-doctorandusmanhattan-51ba6b.m4a": {
+  "key": "спокойной ночи",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-спокойной ночи.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%81%D0%BF%D0%BE%D0%BA%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BD%D0%BE%D1%87%D0%B8.wav",
+  "speaker": "DoctorandusManhattan"
  },
  "spravedlivost-f3821b.m4a": {
   "key": "справедливость",
@@ -3469,6 +4608,26 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%82%D0%BE.ogg"
  },
+ "sto-doctorandusmanhattan-4f82ae.m4a": {
+  "key": "сто",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-сто.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%81%D1%82%D0%BE.wav",
+  "speaker": "DoctorandusManhattan"
+ },
+ "sto-xana000-53f420.m4a": {
+  "key": "сто",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-сто.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%81%D1%82%D0%BE.wav",
+  "speaker": "XANA000"
+ },
  "stol-09721b.m4a": {
   "key": "стол",
   "kind": "human_recording",
@@ -3483,6 +4642,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "ст+ол — +он."
+ },
+ "stol-tatiana-kerbush-2100e7.m4a": {
+  "key": "стол",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush (Reda Kerbouche)-стол.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Reda Kerbouche",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush_(Reda_Kerbouche)-%D1%81%D1%82%D0%BE%D0%BB.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "strannyy-7d1a8f.m4a": {
   "key": "странный",
@@ -3531,6 +4700,16 @@
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%83%D0%BF.ogg"
  },
+ "sup-tatiana-kerbush-bac5dd.m4a": {
+  "key": "суп",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-суп.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%81%D1%83%D0%BF.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "sushchestvuet-293acf.m4a": {
   "key": "существует",
   "kind": "ai_generated_speech",
@@ -3562,6 +4741,16 @@
   "author": "not stated; see source page",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%8B%D1%80.ogg"
+ },
+ "syr-tatiana-kerbush-7d8560.m4a": {
+  "key": "сыр",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-сыр.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%81%D1%8B%D1%80.wav",
+  "speaker": "Tatiana Kerbush"
  },
  "ta-1d9fc0.m4a": {
   "key": "та",
@@ -3662,6 +4851,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%B8%D1%85%D0%BE.ogg"
  },
+ "to-aleksey-pogrebnoj-al-4f0519.m4a": {
+  "key": "то",
+  "kind": "human_recording",
+  "title": "Ru-то (мужское произношение).ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free sources",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%BE_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B5).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "to-b4cb0f.m4a": {
   "key": "то",
   "kind": "human_recording",
@@ -3707,6 +4906,26 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%BE%D0%B6%D0%B5.ogg"
  },
+ "tri-baidax-d86150.m4a": {
+  "key": "три",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-три.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D1%82%D1%80%D0%B8.wav",
+  "speaker": "Baidax"
+ },
+ "tri-doctorandusmanhattan-b7b1b0.m4a": {
+  "key": "три",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-три.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%82%D1%80%D0%B8.wav",
+  "speaker": "DoctorandusManhattan"
+ },
  "tri-e036c7.m4a": {
   "key": "три",
   "kind": "human_recording",
@@ -3716,11 +4935,31 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D1%80%D0%B8.ogg"
  },
+ "tri-erzianj-jurnalist-3868ed.m4a": {
+  "key": "три",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Erzianj jurnalist-три.wav",
+  "author": "Speaker: Erzianj jurnalist Recorder: Erzianj jurnalist",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Erzianj_jurnalist-%D1%82%D1%80%D0%B8.wav",
+  "speaker": "Erzianj jurnalist"
+ },
  "tri-plyus-chetyre-sem-3e63bd.m4a": {
   "key": "три плюс четыре семь",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Тр+и пл+юс чет+ыре — с+емь."
+ },
+ "tri-xana000-b0a61a.m4a": {
+  "key": "три",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-три.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%82%D1%80%D0%B8.wav",
+  "speaker": "XANA000"
  },
  "tridtsat-2c750d.m4a": {
   "key": "тридцать",
@@ -3739,6 +4978,16 @@
   "credit": "Own work ( Lingua Libre )",
   "license": "CC0",
   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%82%D1%80%D0%B8%D0%B4%D1%86%D0%B0%D1%82%D1%8C_%D0%BF%D1%8F%D1%82%D1%8C.wav"
+ },
+ "tridtsat-xana000-605055.m4a": {
+  "key": "тридцать",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-тридцать.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%82%D1%80%D0%B8%D0%B4%D1%86%D0%B0%D1%82%D1%8C.wav",
+  "speaker": "XANA000"
  },
  "trinadtsat-90e38d.m4a": {
   "key": "тринадцать",
@@ -3834,6 +5083,16 @@
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D1%8B.ogg"
  },
+ "ty-aleksey-pogrebnoj-al-685264.m4a": {
+  "key": "ты",
+  "kind": "human_recording",
+  "title": "Ru-ты.. (tɨ).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D1%8B.._(t%C9%A8).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
  "ty-byl-99aabb.m4a": {
   "key": "ты был",
   "kind": "ai_generated_speech",
@@ -3903,6 +5162,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Т+ы х+очешь с+уп?"
+ },
+ "ty-myrkur-6c9ce8.m4a": {
+  "key": "ты",
+  "kind": "human_recording",
+  "title": "Ru-ты (2).ogg",
+  "author": "Myrkur",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D1%8B_(2).ogg",
+  "speaker": "Myrkur"
  },
  "ty-ponimaesh-996f26.m4a": {
   "key": "ты понимаешь",
@@ -4040,6 +5309,16 @@
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Ум+ом Росс+ию не пон+ять."
+ },
+ "utro-aleksey-pogrebnoj-al-246174.m4a": {
+  "key": "утро",
+  "kind": "human_recording",
+  "title": "Ru-у́тро.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%83%CC%81%D1%82%D1%80%D0%BE.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "utro-b41931.m4a": {
   "key": "утро",
@@ -4269,6 +5548,16 @@
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%B5%D1%87%D0%B5%D1%80%D0%BE%D0%BC.ogg"
  },
+ "vecherom-tatiana-kerbush-c8c438.m4a": {
+  "key": "вечером",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-вечером.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B2%D0%B5%D1%87%D0%B5%D1%80%D0%BE%D0%BC.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "verit-1cedbf.m4a": {
   "key": "верить",
   "kind": "human_recording",
@@ -4302,6 +5591,56 @@
   "license": "CC BY-SA 3.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D0%B4%D0%B0.ogg"
  },
+ "voda-aleksey-pogrebnoj-al-12d2c9.m4a": {
+  "key": "вода",
+  "kind": "human_recording",
+  "title": "Ru-вода (vɐ'da).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D0%B4%D0%B0_(v%C9%90%27da).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "voda-infovarius-15ac50.m4a": {
+  "key": "вода",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Infovarius-вода.wav",
+  "author": "Speaker: Infovarius Recorder: Infovarius",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Infovarius-%D0%B2%D0%BE%D0%B4%D0%B0.wav",
+  "speaker": "Infovarius"
+ },
+ "voda-lvova-1a0b99.m4a": {
+  "key": "вода",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Lvova-вода.wav",
+  "author": "Speaker: Lvova Recorder: Lvova",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%B2%D0%BE%D0%B4%D0%B0.wav",
+  "speaker": "Lvova"
+ },
+ "voda-tatiana-kerbush-0b3a91.m4a": {
+  "key": "вода",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-вода.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B2%D0%BE%D0%B4%D0%B0.wav",
+  "speaker": "Tatiana Kerbush"
+ },
+ "vosem-baidax-7a1065.m4a": {
+  "key": "восемь",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Baidax-восемь.wav",
+  "author": "Speaker: Baidax Recorder: Baidax",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C.wav",
+  "speaker": "Baidax"
+ },
  "vosem-d38592.m4a": {
   "key": "восемь",
   "kind": "human_recording",
@@ -4310,6 +5649,26 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C.ogg"
  },
+ "vosem-doctorandusmanhattan-265c9a.m4a": {
+  "key": "восемь",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-восемь.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C.wav",
+  "speaker": "DoctorandusManhattan"
+ },
+ "vosem-tatiana-kerbush-85fc60.m4a": {
+  "key": "восемь",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush (Reda Kerbouche)-восемь.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Reda Kerbouche",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush_(Reda_Kerbouche)-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "vosemdesyat-f1afc4.m4a": {
   "key": "восемьдесят",
   "kind": "human_recording",
@@ -4317,6 +5676,16 @@
   "author": "not stated; see source page",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.ogg"
+ },
+ "vosemdesyat-xana000-eb57ac.m4a": {
+  "key": "восемьдесят",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-XANA000-восемьдесят.wav",
+  "author": "Speaker: XANA000 Recorder: XANA000",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.wav",
+  "speaker": "XANA000"
  },
  "vot-f9ad91.m4a": {
   "key": "вот",
@@ -4841,6 +6210,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%B5%D0%BC%D0%BB%D1%8F.ogg"
  },
+ "zemlya-tatiana-kerbush-4562d2.m4a": {
+  "key": "земля",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-Земля.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%97%D0%B5%D0%BC%D0%BB%D1%8F.wav",
+  "speaker": "Tatiana Kerbush"
+ },
  "zemlyu-9fa60c.m4a": {
   "key": "землю",
   "kind": "ai_generated_speech",
@@ -4876,6 +6255,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B6%D1%83%D0%BA.ogg"
+ },
+ "zhuk-lvova-b50678.m4a": {
+  "key": "жук",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Lvova-жук.wav",
+  "author": "Speaker: Lvova Recorder: Lvova",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%B6%D1%83%D0%BA.wav",
+  "speaker": "Lvova"
  },
  "znachit-4dcb49.m4a": {
   "key": "значит",
@@ -4924,6 +6313,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%BD%D0%B0%D1%82%D1%8C.ogg"
+ },
+ "znat-aleksey-pogrebnoj-al-85909b.m4a": {
+  "key": "знать",
+  "kind": "human_recording",
+  "title": "Ru-знать (znatj).ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%BD%D0%B0%D1%82%D1%8C_(znatj).ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "znayu-8979f5.m4a": {
   "key": "знаю",

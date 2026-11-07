@@ -1,0 +1,1584 @@
+{
+ "большой": [
+  {
+   "orig": ".local/drussky-audio/human/orig/2e93143d968d.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-большой.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B9.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 224.3
+  }
+ ],
+ "брат": [
+  {
+   "orig": ".local/drussky-audio/human/orig/1d71c2c04254.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-брат.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B1%D1%80%D0%B0%D1%82.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 219.2
+  },
+  {
+   "orig": ".local/drussky-audio/variants/orig/a3eb188c176a.ogg",
+   "title": "Ru-брат (brat).ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D1%80%D0%B0%D1%82_(brat).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 165.5
+  }
+ ],
+ "была": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/5c51206861be.ogg",
+   "title": "Ru-была́.ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D1%8B%D0%BB%D0%B0%CC%81.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 114.9
+  }
+ ],
+ "вечером": [
+  {
+   "orig": ".local/drussky-audio/human/orig/ab539da0d874.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-вечером.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B2%D0%B5%D1%87%D0%B5%D1%80%D0%BE%D0%BC.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 220.2
+  }
+ ],
+ "вода": [
+  {
+   "orig": ".local/drussky-audio/human/orig/426d880e1e2c.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-вода.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B2%D0%BE%D0%B4%D0%B0.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 234.2
+  },
+  {
+   "orig": ".local/drussky-audio/variants/orig/cb3d921a0161.ogg",
+   "title": "Ru-вода (vɐ'da).ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D0%B4%D0%B0_(v%C9%90%27da).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 102.6
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/9b9d48f9869d.wav",
+   "title": "LL-Q7737 (rus)-Lvova-вода.wav",
+   "author": "Speaker: Lvova Recorder: Lvova",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%B2%D0%BE%D0%B4%D0%B0.wav",
+   "speaker": "Lvova",
+   "f0_hz": 190.5
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/f51875500e7f.wav",
+   "title": "LL-Q7737 (rus)-Infovarius-вода.wav",
+   "author": "Speaker: Infovarius Recorder: Infovarius",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Infovarius-%D0%B2%D0%BE%D0%B4%D0%B0.wav",
+   "speaker": "Infovarius",
+   "f0_hz": 142.0
+  }
+ ],
+ "восемь": [
+  {
+   "orig": ".local/drussky-audio/human/orig/cde4fbc3400e.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-восемь.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 114.3
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/4bb34168f75a.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush (Reda Kerbouche)-восемь.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Reda Kerbouche",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush_(Reda_Kerbouche)-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 223.3
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/461398444723.wav",
+   "title": "LL-Q7737 (rus)-Baidax-восемь.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C.wav",
+   "speaker": "Baidax",
+   "f0_hz": 111.1
+  }
+ ],
+ "восемьдесят": [
+  {
+   "orig": ".local/drussky-audio/human/orig/4d404ac632bb.wav",
+   "title": "LL-Q7737 (rus)-XANA000-восемьдесят.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.wav",
+   "speaker": "XANA000",
+   "f0_hz": 125.0
+  }
+ ],
+ "где": [
+  {
+   "orig": ".local/drussky-audio/human/orig/9e11c182a8d4.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-где.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B3%D0%B4%D0%B5.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 214.3
+  }
+ ],
+ "говорить": [
+  {
+   "orig": ".local/drussky-audio/human/orig/40268c2cbecc.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-говорить.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8%D1%82%D1%8C.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 216.2
+  }
+ ],
+ "говорят": [
+  {
+   "orig": ".local/drussky-audio/human/orig/3a437425661e.wav",
+   "title": "LL-Q7737 (rus)-Rominf-говорят.wav",
+   "author": "Speaker: Rominf Recorder: Rominf",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Rominf-%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%82.wav",
+   "speaker": "Rominf",
+   "f0_hz": 111.6
+  }
+ ],
+ "город": [
+  {
+   "orig": ".local/drussky-audio/human/orig/011f2ffaf9b4.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-город.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B3%D0%BE%D1%80%D0%BE%D0%B4.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 212.4
+  }
+ ],
+ "готов": [
+  {
+   "orig": ".local/drussky-audio/human/orig/75802b592899.wav",
+   "title": "LL-Q7737 (rus)-Lvova-готов.wav",
+   "author": "Speaker: Lvova Recorder: Lvova",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%B3%D0%BE%D1%82%D0%BE%D0%B2.wav",
+   "speaker": "Lvova",
+   "f0_hz": 230.8
+  },
+  {
+   "orig": ".local/drussky-audio/variants/orig/8af10659896b.ogg",
+   "title": "Ru-гото́в.ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free cources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%BE%D1%82%D0%BE%CC%81%D0%B2.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 233.0
+  }
+ ],
+ "да": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/09e0e9caa860.ogg",
+   "title": "Ru-да..-.ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B0..-.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 90.7
+  }
+ ],
+ "два": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/5c7c89bd97c2.ogg",
+   "title": "Ru-два (2).ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B2%D0%B0_(2).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 90.6
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/1c6ae2f0539d.wav",
+   "title": "LL-Q7737 (rus)-XANA000-два.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D0%B4%D0%B2%D0%B0.wav",
+   "speaker": "XANA000",
+   "f0_hz": 124.7
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/d6002ba0a599.wav",
+   "title": "LL-Q7737 (rus)-Cinemantique-два.wav",
+   "author": "Speaker: Cinemantique Recorder: Cinemantique",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Cinemantique-%D0%B4%D0%B2%D0%B0.wav",
+   "speaker": "Cinemantique",
+   "f0_hz": 113.7
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/f3f396457825.wav",
+   "title": "LL-Q7737 (rus)-Baidax-два.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%B4%D0%B2%D0%B0.wav",
+   "speaker": "Baidax",
+   "f0_hz": 104.8
+  }
+ ],
+ "двадцать": [
+  {
+   "orig": ".local/drussky-audio/human/orig/0693f2bf8d19.wav",
+   "title": "LL-Q7737 (rus)-XANA000-двадцать.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D0%B4%D0%B2%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.wav",
+   "speaker": "XANA000",
+   "f0_hz": 128.4
+  }
+ ],
+ "девять": [
+  {
+   "orig": ".local/drussky-audio/human/orig/368a9778a050.wav",
+   "title": "LL-Q7737 (rus)-XANA000-девять.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D1%8C.wav",
+   "speaker": "XANA000",
+   "f0_hz": 123.7
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/3d022380bb60.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-девять.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D1%8C.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 118.2
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/9c88f96ae788.wav",
+   "title": "LL-Q7737 (rus)-Baidax-девять.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D1%8C.wav",
+   "speaker": "Baidax",
+   "f0_hz": 105.7
+  }
+ ],
+ "десять": [
+  {
+   "orig": ".local/drussky-audio/human/orig/1c8993862780.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-десять.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B4%D0%B5%D1%81%D1%8F%D1%82%D1%8C.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 113.7
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/5fc2bce052cf.wav",
+   "title": "LL-Q7737 (rus)-Baidax-десять.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%B4%D0%B5%D1%81%D1%8F%D1%82%D1%8C.wav",
+   "speaker": "Baidax",
+   "f0_hz": 98.6
+  }
+ ],
+ "днём": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/6a1f642dff3d.ogg",
+   "title": "Ru-днём-2.ogg",
+   "author": "Lingyaz",
+   "credit": "Own work",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BD%D1%91%D0%BC-2.ogg",
+   "speaker": "Lingyaz",
+   "f0_hz": 96.4
+  }
+ ],
+ "доброе утро": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/d43e1da2b5f4.ogg",
+   "title": "Ru-Доброе утро.ogg",
+   "author": "Захаровсергеевич",
+   "credit": "Own work",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%94%D0%BE%D0%B1%D1%80%D0%BE%D0%B5_%D1%83%D1%82%D1%80%D0%BE.ogg",
+   "speaker": "Захаровсергеевич",
+   "f0_hz": 313.7
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/a51b51a09212.wav",
+   "title": "LL-Q7737 (rus)-Andrey672-Доброе утро!.wav",
+   "author": "Speaker: Andrey672 Recorder: Andrey672",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Andrey672-%D0%94%D0%BE%D0%B1%D1%80%D0%BE%D0%B5_%D1%83%D1%82%D1%80%D0%BE!.wav",
+   "speaker": "Andrey672",
+   "f0_hz": 139.5
+  }
+ ],
+ "добрый вечер": [
+  {
+   "orig": ".local/drussky-audio/human/orig/a31776b80a8e.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-добрый вечер.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B4%D0%BE%D0%B1%D1%80%D1%8B%D0%B9_%D0%B2%D0%B5%D1%87%D0%B5%D1%80.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 125.7
+  }
+ ],
+ "дом": [
+  {
+   "orig": ".local/drussky-audio/human/orig/f1bd80d01c91.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-дом.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B4%D0%BE%D0%BC.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 102.6
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/e75ed0053650.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush (Reda Kerbouche)-дом.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Reda Kerbouche",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush_(Reda_Kerbouche)-%D0%B4%D0%BE%D0%BC.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 222.2
+  },
+  {
+   "orig": ".local/drussky-audio/variants/orig/96a0d79d6d4c.ogg",
+   "title": "Ru-дом (2).ogg",
+   "author": "Myrkur",
+   "credit": "Own work",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BE%D0%BC_(2).ogg",
+   "speaker": "Myrkur",
+   "f0_hz": 146.4
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/6ac4769d1e72.wav",
+   "title": "LL-Q7737 (rus)-Infovarius-дом.wav",
+   "author": "Speaker: Infovarius Recorder: Infovarius",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Infovarius-%D0%B4%D0%BE%D0%BC.wav",
+   "speaker": "Infovarius",
+   "f0_hz": 164.4
+  }
+ ],
+ "если": [
+  {
+   "orig": ".local/drussky-audio/human/orig/ddd9336161d8.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-если.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%B5%D1%81%D0%BB%D0%B8.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 230.8
+  }
+ ],
+ "ещё": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/b739f1b60cb6.ogg",
+   "title": "Ru-ещё (jeˈɕɵ).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free cources Pogrebnoj-Alexandroff",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B5%D1%89%D1%91_(je%CB%88%C9%95%C9%B5).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 115.4
+  }
+ ],
+ "жук": [
+  {
+   "orig": ".local/drussky-audio/human/orig/cd336e991ec4.wav",
+   "title": "LL-Q7737 (rus)-Lvova-жук.wav",
+   "author": "Speaker: Lvova Recorder: Lvova",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%B6%D1%83%D0%BA.wav",
+   "speaker": "Lvova",
+   "f0_hz": 211.6
+  }
+ ],
+ "земля": [
+  {
+   "orig": ".local/drussky-audio/human/orig/1b94abf60c86.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-Земля.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%97%D0%B5%D0%BC%D0%BB%D1%8F.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 220.2
+  }
+ ],
+ "знать": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/101adff12626.ogg",
+   "title": "Ru-знать (znatj).ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%BD%D0%B0%D1%82%D1%8C_(znatj).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 105.7
+  }
+ ],
+ "как": [
+  {
+   "orig": ".local/drussky-audio/human/orig/18341912991e.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-как.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BA%D0%B0%D0%BA.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 214.3
+  },
+  {
+   "orig": ".local/drussky-audio/variants/orig/e23b7d8ae65d.ogg",
+   "title": "Ru-как (мужской голос).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free sourses",
+   "license": "CC BY-SA 2.5",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%B0%D0%BA_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B9_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 100.8
+  }
+ ],
+ "как дела": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/5fab8f994f6a.ogg",
+   "title": "Ru-как дела-.ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free cources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%B0%D0%BA_%D0%B4%D0%B5%D0%BB%D0%B0-.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 95.8
+  }
+ ],
+ "каша": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/0d4fabe48f22.ogg",
+   "title": "Ru-ка́ша.ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free cources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%B0%CC%81%D1%88%D0%B0.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 94.1
+  }
+ ],
+ "кот": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/f3b50c0f843f.ogg",
+   "title": "Ru-кот (мужское произношение).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free sources",
+   "license": "CC BY-SA 2.5",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D1%82_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B5).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 85.7
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/d7335912c3f6.wav",
+   "title": "LL-Q7737 (rus)-Lvova-кот.wav",
+   "author": "Speaker: Lvova Recorder: Lvova",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%BA%D0%BE%D1%82.wav",
+   "speaker": "Lvova",
+   "f0_hz": 237.6
+  }
+ ],
+ "кофе": [
+  {
+   "orig": ".local/drussky-audio/human/orig/560ce72b5470.wav",
+   "title": "LL-Q7737 (rus)-Кояш-кофе.wav",
+   "author": "Speaker: Кояш Recorder: Кояш",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-%D0%9A%D0%BE%D1%8F%D1%88-%D0%BA%D0%BE%D1%84%D0%B5.wav",
+   "speaker": "Кояш",
+   "f0_hz": 167.8
+  }
+ ],
+ "кто": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/c753cc889db2.ogg",
+   "title": "Ru-кто (муж голос).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free cources",
+   "license": "CC BY-SA 2.5",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D1%82%D0%BE_(%D0%BC%D1%83%D0%B6_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 103.7
+  }
+ ],
+ "кто то": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/1aea5753db8e.ogg",
+   "title": "Ru-кто-то.ogg",
+   "author": "Gulnara Streit",
+   "credit": "The Shtooka Project",
+   "license": "CC BY 2.0 fr",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D1%82%D0%BE-%D1%82%D0%BE.ogg",
+   "speaker": "Gulnara Streit",
+   "f0_hz": 214.3
+  }
+ ],
+ "ложка": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/47edbb6ab24a.ogg",
+   "title": "Ru-ло́жка.ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D0%BE%CC%81%D0%B6%D0%BA%D0%B0.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 98.8
+  }
+ ],
+ "лук": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/cef1e69592b8.ogg",
+   "title": "Ru-лук (luk).ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%83%D0%BA_(luk).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 113.7
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/4ffd81299b62.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-лук.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BB%D1%83%D0%BA.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 242.4
+  }
+ ],
+ "луна": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/42e29d732c9e.ogg",
+   "title": "Ru-Луна.ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free cources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%9B%D1%83%D0%BD%D0%B0.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 93.9
+  }
+ ],
+ "люди": [
+  {
+   "orig": ".local/drussky-audio/human/orig/e9f8d093e3dc.wav",
+   "title": "LL-Q7737 (rus)-Infovarius-люди.wav",
+   "author": "Speaker: Infovarius Recorder: Infovarius",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Infovarius-%D0%BB%D1%8E%D0%B4%D0%B8.wav",
+   "speaker": "Infovarius",
+   "f0_hz": 165.1
+  }
+ ],
+ "мама": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/a94854d72149.ogg",
+   "title": "Ru-ма́ма.ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources Aleksey Pogrebnoj-Alexandroff",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B0%CC%81%D0%BC%D0%B0.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 118.8
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/b9c19ebdd9b9.wav",
+   "title": "LL-Q7737 (rus)-Reda Kerbouche-мама.wav",
+   "author": "Speaker: Reda Kerbouche Recorder: Reda Kerbouche",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Reda_Kerbouche-%D0%BC%D0%B0%D0%BC%D0%B0.wav",
+   "speaker": "Reda Kerbouche",
+   "f0_hz": 124.4
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/9c25c8c236c1.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-мама.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BC%D0%B0%D0%BC%D0%B0.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 224.3
+  }
+ ],
+ "меня": [
+  {
+   "orig": ".local/drussky-audio/human/orig/8c5edb18d27a.wav",
+   "title": "LL-Q7737 (rus)-DomesticFrog-меня.wav",
+   "author": "Speaker: DomesticFrog Recorder: DomesticFrog",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DomesticFrog-%D0%BC%D0%B5%D0%BD%D1%8F.wav",
+   "speaker": "DomesticFrog",
+   "f0_hz": 115.4
+  }
+ ],
+ "мир": [
+  {
+   "orig": ".local/drussky-audio/human/orig/6436c5ed2c7c.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-мир.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BC%D0%B8%D1%80.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 216.2
+  }
+ ],
+ "молоко": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/6819f2719864.ogg",
+   "title": "Ru-молоко (mɐlɐ'ko).ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE_(m%C9%90l%C9%90%27ko).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 104.4
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/1fcf93bf05fe.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-молоко.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%BC%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 97.6
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/1f8cc9fc4c39.wav",
+   "title": "LL-Q7737 (rus)-1Apollinariya1-молоко.wav",
+   "author": "Speaker: 1Apollinariya1 Recorder: 1Apollinariya1",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-1Apollinariya1-%D0%BC%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE.wav",
+   "speaker": "1Apollinariya1",
+   "f0_hz": 226.4
+  }
+ ],
+ "мы": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/d49ae714ebbf.ogg",
+   "title": "Ru-мы (муж голос).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "CC 3.0",
+   "license": "CC BY 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D1%8B_(%D0%BC%D1%83%D0%B6_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 89.1
+  }
+ ],
+ "на": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/a1c8ddb3820d.ogg",
+   "title": "Ru-на (мужское произношение).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free sources",
+   "license": "CC BY-SA 2.5",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B0_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B5).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 85.3
+  }
+ ],
+ "не": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/00318dc34f90.ogg",
+   "title": "Ru-не (nʲə).ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B5_(n%CA%B2%C9%99).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 102.1
+  }
+ ],
+ "неделя": [
+  {
+   "orig": ".local/drussky-audio/human/orig/cabdb6930dee.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-неделя.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 114.3
+  }
+ ],
+ "нет": [
+  {
+   "orig": ".local/drussky-audio/human/orig/90ff20b6b0e5.wav",
+   "title": "LL-Q7737 (rus)-Tatiana moocit-нет.wav",
+   "author": "Speaker: Tatiana moocit Recorder: Tatiana moocit",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_moocit-%D0%BD%D0%B5%D1%82.wav",
+   "speaker": "Tatiana moocit",
+   "f0_hz": 235.3
+  }
+ ],
+ "но": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/72df366d7729.ogg",
+   "title": "Ru-но (муж голос).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free cources",
+   "license": "CC BY-SA 2.5",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE_(%D0%BC%D1%83%D0%B6_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 90.9
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/674d9a457ee4.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-но.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BD%D0%BE.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 221.2
+  }
+ ],
+ "нос": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/c8054f0fb53b.ogg",
+   "title": "Ru-нос (1).ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE%D1%81_(1).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 98.8
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/351b4aa1caff.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-нос.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BD%D0%BE%D1%81.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 218.2
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/58146436dd82.wav",
+   "title": "LL-Q7737 (rus)-Baidax-нос.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%BD%D0%BE%D1%81.wav",
+   "speaker": "Baidax",
+   "f0_hz": 114.8
+  }
+ ],
+ "ночь": [
+  {
+   "orig": ".local/drussky-audio/human/orig/164a77125bfe.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-ночь.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BD%D0%BE%D1%87%D1%8C.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 224.3
+  }
+ ],
+ "обед": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/8c20e8e24076.ogg",
+   "title": "Ru-обе́д.ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B1%D0%B5%CC%81%D0%B4.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 88.7
+  }
+ ],
+ "один": [
+  {
+   "orig": ".local/drussky-audio/human/orig/7f7b8acd5e95.wav",
+   "title": "LL-Q7737 (rus)-XANA000-один.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D0%BE%D0%B4%D0%B8%D0%BD.wav",
+   "speaker": "XANA000",
+   "f0_hz": 131.9
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/80bd83681022.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-один.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%BE%D0%B4%D0%B8%D0%BD.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 113.7
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/92ed9e8162a2.wav",
+   "title": "LL-Q7737 (rus)-Baidax-один.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%BE%D0%B4%D0%B8%D0%BD.wav",
+   "speaker": "Baidax",
+   "f0_hz": 105.3
+  },
+  {
+   "orig": ".local/drussky-audio/variants/orig/222fabf8cadd.ogg",
+   "title": "Ru-Один.ogg",
+   "author": "Myrkur",
+   "credit": "Own work",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%9E%D0%B4%D0%B8%D0%BD.ogg",
+   "speaker": "Myrkur",
+   "f0_hz": 136.0
+  }
+ ],
+ "он": [
+  {
+   "orig": ".local/drussky-audio/human/orig/94fc4f1b9ecb.wav",
+   "title": "LL-Q7737 (rus)-Lvova-он.wav",
+   "author": "Speaker: Lvova Recorder: Lvova",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%BE%D0%BD.wav",
+   "speaker": "Lvova",
+   "f0_hz": 193.5
+  }
+ ],
+ "опять": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/a704030e8069.ogg",
+   "title": "Ru-опя́ть.ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources Aleksey Pogrebnoj-Alexandroff",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%BF%D1%8F%CC%81%D1%82%D1%8C.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 110.3
+  }
+ ],
+ "ответ": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/90761e4a0f91.ogg",
+   "title": "Ru-ответ (2).ogg",
+   "author": "Myrkur",
+   "credit": "Own work",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D1%82%D0%B2%D0%B5%D1%82_(2).ogg",
+   "speaker": "Myrkur",
+   "f0_hz": 148.1
+  }
+ ],
+ "отец": [
+  {
+   "orig": ".local/drussky-audio/human/orig/00ceba0a6a4e.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-отец.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BE%D1%82%D0%B5%D1%86.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 227.5
+  }
+ ],
+ "папа": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/27e975783e94.ogg",
+   "title": "Ru-па́па.ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources Aleksey Pogrebnoj-Alexandroff",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%B0%CC%81%D0%BF%D0%B0.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 112.7
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/4ab5e62af682.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-папа.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D0%B0%D0%BF%D0%B0.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 212.4
+  }
+ ],
+ "по английски": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/a06a29cee68d.ogg",
+   "title": "Ru-по-английски.ogg",
+   "author": "The Shtooka Project (speaker not identified)",
+   "credit": null,
+   "license": "CC BY 2.0 fr",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE-%D0%B0%D0%BD%D0%B3%D0%BB%D0%B8%D0%B9%D1%81%D0%BA%D0%B8.ogg",
+   "speaker": "Shtooka",
+   "f0_hz": 175.2
+  }
+ ],
+ "по русски": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/32ff6336f8f7.ogg",
+   "title": "Ru-по-русски.ogg",
+   "author": "The Shtooka Project (speaker not identified)",
+   "credit": "Audio sample provided by The Shtooka Project .",
+   "license": "CC BY 2.0 fr",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8.ogg",
+   "speaker": "Shtooka",
+   "f0_hz": 215.3
+  }
+ ],
+ "пожалуйста": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/81d312336964.ogg",
+   "title": "Ru-пожалуйста (ɨ).ogg",
+   "author": "1640max",
+   "credit": "(ɨ) Forvo",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0_(%C9%A8).ogg",
+   "speaker": "1640max",
+   "f0_hz": 145.5
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/4406aed17a59.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-пожалуйста.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 224.3
+  }
+ ],
+ "потому что": [
+  {
+   "orig": ".local/drussky-audio/human/orig/d6c307f261b1.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-потому что.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D0%BE%D1%82%D0%BE%D0%BC%D1%83_%D1%87%D1%82%D0%BE.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 247.4
+  },
+  {
+   "orig": ".local/drussky-audio/variants/orig/a90c328ccff4.ogg",
+   "title": "Ru-потому что (2).ogg",
+   "author": "Myrkur",
+   "credit": "Own work",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D1%82%D0%BE%D0%BC%D1%83_%D1%87%D1%82%D0%BE_(2).ogg",
+   "speaker": "Myrkur",
+   "f0_hz": 169.0
+  }
+ ],
+ "правда": [
+  {
+   "orig": ".local/drussky-audio/human/orig/2295dc179c75.wav",
+   "title": "LL-Q7737 (rus)-Lvova-правда.wav",
+   "author": "Speaker: Lvova Recorder: Lvova",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%BF%D1%80%D0%B0%D0%B2%D0%B4%D0%B0.wav",
+   "speaker": "Lvova",
+   "f0_hz": 206.9
+  }
+ ],
+ "привет": [
+  {
+   "orig": ".local/drussky-audio/human/orig/0ac53ca37646.wav",
+   "title": "LL-Q7737 (rus)-Andrey672-Привет!.wav",
+   "author": "Speaker: Andrey672 Recorder: Andrey672",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Andrey672-%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82!.wav",
+   "speaker": "Andrey672",
+   "f0_hz": 133.3
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/190dad325d91.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-привет.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 220.2
+  }
+ ],
+ "пять": [
+  {
+   "orig": ".local/drussky-audio/human/orig/6e2febb56b45.wav",
+   "title": "LL-Q7737 (rus)-Baidax-пять.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D0%BF%D1%8F%D1%82%D1%8C.wav",
+   "speaker": "Baidax",
+   "f0_hz": 275.9
+  },
+  {
+   "orig": ".local/drussky-audio/variants/orig/60d58543bdca.ogg",
+   "title": "Ru-пять (pʲatʲ).ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%8F%D1%82%D1%8C_(p%CA%B2at%CA%B2).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 92.3
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/27672bc8d3c7.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-пять.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%BF%D1%8F%D1%82%D1%8C.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 110.6
+  },
+  {
+   "orig": ".local/drussky-audio/variants/orig/650096db46f9.ogg",
+   "title": "Ru-пять (2).ogg",
+   "author": "Myrkur",
+   "credit": "Own work",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%8F%D1%82%D1%8C_(2).ogg",
+   "speaker": "Myrkur",
+   "f0_hz": 153.8
+  }
+ ],
+ "рот": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/6b316e825869.ogg",
+   "title": "Ru-рот (мужское произношение).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free sources",
+   "license": "CC BY-SA 2.5",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%BE%D1%82_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B5).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 91.3
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/f0db7a3943e3.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-рот.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%80%D0%BE%D1%82.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 226.4
+  }
+ ],
+ "семь": [
+  {
+   "orig": ".local/drussky-audio/human/orig/7f6bf653c80e.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-семь.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%81%D0%B5%D0%BC%D1%8C.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 120.6
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/0ed3c6a86764.wav",
+   "title": "LL-Q7737 (rus)-Baidax-семь.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D1%81%D0%B5%D0%BC%D1%8C.wav",
+   "speaker": "Baidax",
+   "f0_hz": 105.3
+  }
+ ],
+ "следовательно": [
+  {
+   "orig": ".local/drussky-audio/human/orig/c99deb188db1.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-следовательно.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 224.3
+  }
+ ],
+ "слово": [
+  {
+   "orig": ".local/drussky-audio/human/orig/bfdba3cf18cc.wav",
+   "title": "LL-Q7737 (rus)-Tatiana moocit-слово.wav",
+   "author": "Speaker: Tatiana moocit Recorder: Tatiana moocit",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_moocit-%D1%81%D0%BB%D0%BE%D0%B2%D0%BE.wav",
+   "speaker": "Tatiana moocit",
+   "f0_hz": 206.9
+  }
+ ],
+ "сок": [
+  {
+   "orig": ".local/drussky-audio/human/orig/75c8a6419fe2.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-сок.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%81%D0%BE%D0%BA.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 225.4
+  }
+ ],
+ "сон": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/0cbeb8ce4d3d.ogg",
+   "title": "Ru-сон (муж голос).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "CC 3.0",
+   "license": "CC BY 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BE%D0%BD_(%D0%BC%D1%83%D0%B6_%D0%B3%D0%BE%D0%BB%D0%BE%D1%81).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 93.8
+  }
+ ],
+ "сорок": [
+  {
+   "orig": ".local/drussky-audio/human/orig/a9d9acd66985.wav",
+   "title": "LL-Q7737 (rus)-XANA000-сорок.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%81%D0%BE%D1%80%D0%BE%D0%BA.wav",
+   "speaker": "XANA000",
+   "f0_hz": 123.1
+  }
+ ],
+ "спасибо": [
+  {
+   "orig": ".local/drussky-audio/human/orig/d3f4b9668e7b.wav",
+   "title": "LL-Q7737 (rus)-Butko-спасибо.wav",
+   "author": "Speaker: Butko Recorder: Butko",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Butko-%D1%81%D0%BF%D0%B0%D1%81%D0%B8%D0%B1%D0%BE.wav",
+   "speaker": "Butko",
+   "f0_hz": 150.9
+  }
+ ],
+ "спокойной ночи": [
+  {
+   "orig": ".local/drussky-audio/human/orig/755ecfed9670.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-спокойной ночи.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%81%D0%BF%D0%BE%D0%BA%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BD%D0%BE%D1%87%D0%B8.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 125.7
+  }
+ ],
+ "сто": [
+  {
+   "orig": ".local/drussky-audio/human/orig/5a2e1aa0d7e6.wav",
+   "title": "LL-Q7737 (rus)-XANA000-сто.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%81%D1%82%D0%BE.wav",
+   "speaker": "XANA000",
+   "f0_hz": 145.5
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/c11952298840.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-сто.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%81%D1%82%D0%BE.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 114.3
+  }
+ ],
+ "стол": [
+  {
+   "orig": ".local/drussky-audio/human/orig/640bc9229785.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush (Reda Kerbouche)-стол.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Reda Kerbouche",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush_(Reda_Kerbouche)-%D1%81%D1%82%D0%BE%D0%BB.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 233.0
+  }
+ ],
+ "суп": [
+  {
+   "orig": ".local/drussky-audio/human/orig/31df2fde3ade.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-суп.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%81%D1%83%D0%BF.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 271.2
+  }
+ ],
+ "сыр": [
+  {
+   "orig": ".local/drussky-audio/human/orig/0ecb59972f49.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-сыр.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%81%D1%8B%D1%80.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 236.5
+  }
+ ],
+ "то": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/5a6f86213abf.ogg",
+   "title": "Ru-то (мужское произношение).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free sources",
+   "license": "CC BY-SA 2.5",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%BE_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B5).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 88.9
+  }
+ ],
+ "три": [
+  {
+   "orig": ".local/drussky-audio/human/orig/fc0f364f1eab.wav",
+   "title": "LL-Q7737 (rus)-XANA000-три.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%82%D1%80%D0%B8.wav",
+   "speaker": "XANA000",
+   "f0_hz": 131.5
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/1a96b7c46ef2.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-три.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%82%D1%80%D0%B8.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 111.6
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/6da7fce63f6b.wav",
+   "title": "LL-Q7737 (rus)-Erzianj jurnalist-три.wav",
+   "author": "Speaker: Erzianj jurnalist Recorder: Erzianj jurnalist",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Erzianj_jurnalist-%D1%82%D1%80%D0%B8.wav",
+   "speaker": "Erzianj jurnalist",
+   "f0_hz": 170.2
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/ece82d430830.wav",
+   "title": "LL-Q7737 (rus)-Baidax-три.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D1%82%D1%80%D0%B8.wav",
+   "speaker": "Baidax",
+   "f0_hz": 108.1
+  }
+ ],
+ "тридцать": [
+  {
+   "orig": ".local/drussky-audio/human/orig/dc8392c0663e.wav",
+   "title": "LL-Q7737 (rus)-XANA000-тридцать.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%82%D1%80%D0%B8%D0%B4%D1%86%D0%B0%D1%82%D1%8C.wav",
+   "speaker": "XANA000",
+   "f0_hz": 125.7
+  }
+ ],
+ "ты": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/37227e964c4e.ogg",
+   "title": "Ru-ты (2).ogg",
+   "author": "Myrkur",
+   "credit": "Own work",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D1%8B_(2).ogg",
+   "speaker": "Myrkur",
+   "f0_hz": 169.6
+  },
+  {
+   "orig": ".local/drussky-audio/variants/orig/ee2106849d6a.ogg",
+   "title": "Ru-ты.. (tɨ).ogg",
+   "author": "Aleksey Pogrebnoj-Alexandroff",
+   "credit": "free open public sources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D1%8B.._(t%C9%A8).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 103.5
+  }
+ ],
+ "утро": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/bcad3a5dc850.ogg",
+   "title": "Ru-у́тро.ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free cources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%83%CC%81%D1%82%D1%80%D0%BE.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 97.2
+  }
+ ],
+ "хлеб": [
+  {
+   "orig": ".local/drussky-audio/human/orig/1dc4ab84cbb6.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-хлеб.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%85%D0%BB%D0%B5%D0%B1.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 234.2
+  }
+ ],
+ "хор": [
+  {
+   "orig": ".local/drussky-audio/human/orig/ebf26ec7ab06.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-хор.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%85%D0%BE%D1%80.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 228.6
+  }
+ ],
+ "чай": [
+  {
+   "orig": ".local/drussky-audio/human/orig/06a4ab4c91b5.wav",
+   "title": "LL-Q7737 (rus)-Svetlov Artem-чай.wav",
+   "author": "Speaker: Svetlov Artem Recorder: Svetlov Artem",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Svetlov_Artem-%D1%87%D0%B0%D0%B9.wav",
+   "speaker": "Svetlov Artem",
+   "f0_hz": 107.1
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/b6cdaeaf2c7d.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush (Reda Kerbouche)-чай.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Reda Kerbouche",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush_(Reda_Kerbouche)-%D1%87%D0%B0%D0%B9.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 228.6
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/10ae79970d87.wav",
+   "title": "LL-Q7737 (rus)-Кояш-чай.wav",
+   "author": "Speaker: Кояш Recorder: Кояш",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-%D0%9A%D0%BE%D1%8F%D1%88-%D1%87%D0%B0%D0%B9.wav",
+   "speaker": "Кояш",
+   "f0_hz": 154.8
+  }
+ ],
+ "человек": [
+  {
+   "orig": ".local/drussky-audio/human/orig/88fe34cf1906.wav",
+   "title": "LL-Q7737 (rus)-Infovarius-человек.wav",
+   "author": "Speaker: Infovarius Recorder: Infovarius",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Infovarius-%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA.wav",
+   "speaker": "Infovarius",
+   "f0_hz": 157.9
+  }
+ ],
+ "четыре": [
+  {
+   "orig": ".local/drussky-audio/human/orig/a39939ab8d80.wav",
+   "title": "LL-Q7737 (rus)-XANA000-четыре.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%B5.wav",
+   "speaker": "XANA000",
+   "f0_hz": 131.9
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/4567eb6c3749.wav",
+   "title": "LL-Q7737 (rus)-Baidax-четыре.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%B5.wav",
+   "speaker": "Baidax",
+   "f0_hz": 102.6
+  }
+ ],
+ "что": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/d344ccc10d46.ogg",
+   "title": "Ru-что-.ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free cources",
+   "license": "CC BY-SA 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D1%82%D0%BE-.ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 163.5
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/f72c316018d3.wav",
+   "title": "LL-Q7737 (rus)-Tatiana Kerbush-что.wav",
+   "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%87%D1%82%D0%BE.wav",
+   "speaker": "Tatiana Kerbush",
+   "f0_hz": 226.4
+  }
+ ],
+ "что это": [
+  {
+   "orig": ".local/drussky-audio/human/orig/4dd46c83e593.wav",
+   "title": "LL-Q7737 (rus)-Andrey672-Что это?.wav",
+   "author": "Speaker: Andrey672 Recorder: Andrey672",
+   "credit": "Own work",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Andrey672-%D0%A7%D1%82%D0%BE_%D1%8D%D1%82%D0%BE%3F.wav",
+   "speaker": "Andrey672",
+   "f0_hz": 150.0
+  }
+ ],
+ "шесть": [
+  {
+   "orig": ".local/drussky-audio/human/orig/90fd650e2b1a.wav",
+   "title": "LL-Q7737 (rus)-DoctorandusManhattan-шесть.wav",
+   "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D1%88%D0%B5%D1%81%D1%82%D1%8C.wav",
+   "speaker": "DoctorandusManhattan",
+   "f0_hz": 116.8
+  },
+  {
+   "orig": ".local/drussky-audio/human/orig/a1bd147b78fc.wav",
+   "title": "LL-Q7737 (rus)-Baidax-шесть.wav",
+   "author": "Speaker: Baidax Recorder: Baidax",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC BY-SA 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Baidax-%D1%88%D0%B5%D1%81%D1%82%D1%8C.wav",
+   "speaker": "Baidax",
+   "f0_hz": 247.4
+  }
+ ],
+ "шестьдесят": [
+  {
+   "orig": ".local/drussky-audio/human/orig/92c031879767.wav",
+   "title": "LL-Q7737 (rus)-XANA000-шестьдесят.wav",
+   "author": "Speaker: XANA000 Recorder: XANA000",
+   "credit": "Own work ( Lingua Libre )",
+   "license": "CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-XANA000-%D1%88%D0%B5%D1%81%D1%82%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.wav",
+   "speaker": "XANA000",
+   "f0_hz": 134.1
+  }
+ ],
+ "это": [
+  {
+   "orig": ".local/drussky-audio/variants/orig/07b228abfac5.ogg",
+   "title": "Ru-это (мужское произношение).ogg",
+   "author": "Pogrebnoj-Alexandroff",
+   "credit": "open free sources",
+   "license": "CC BY-SA 2.5",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%8D%D1%82%D0%BE_(%D0%BC%D1%83%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B5).ogg",
+   "speaker": "Aleksey Pogrebnoj-Alexandroff",
+   "f0_hz": 87.3
+  }
+ ]
+}
