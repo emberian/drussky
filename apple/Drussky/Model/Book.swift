@@ -98,7 +98,14 @@ final class Book {
     // MARK: Pages
 
     var page: BookPage? { pages.indices.contains(currentPage) ? pages[currentPage] : nil }
-    var courseFinished: Bool { courseCursor >= course.pageSequence.count }
+    /// The next authored page the learner hasn't had, in course order. Tracking pages by id
+    /// (not by position) means a course revision that inserts or reorders pages never makes
+    /// the learner skip or repeat one.
+    private var nextCoursePage: (unit: Course.Unit, page: Course.Page)? {
+        let had = Set(pages.compactMap(\.sourceID))
+        return course.pageSequence.first { !had.contains($0.page.id) }
+    }
+    var courseFinished: Bool { nextCoursePage == nil }
 
     func goTo(_ index: Int) {
         guard pages.indices.contains(index) else { return }
@@ -130,7 +137,7 @@ final class Book {
             return true
         }
         guard !courseFinished else { return false }
-        let (unit, source) = course.pageSequence[courseCursor]
+        guard let (unit, source) = nextCoursePage else { return false }
         courseCursor += 1
         var exercises = source.exercises.map(faded)
         let taughtHere = Set(source.exercises.compactMap { memoryKey(for: $0) })

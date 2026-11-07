@@ -278,4 +278,26 @@ final class DrusskyTests: XCTestCase {
         }
         XCTAssertEqual(book.faded(copy).kind, .dictation, "a secure word is written from hearing instead")
     }
+
+    /// A course revision that inserts a page before the learner's place is picked up next,
+    /// and no page is skipped or repeated.
+    func testCourseRevisionsNeverSkipOrRepeatPages() throws {
+        var c = try course()
+        let book1 = Book(course: c, store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        for p in 0..<3 { QA.complete(book1, page: p, upTo: .max); book1.turnForward() }
+        let had = book1.pages.compactMap(\.sourceID)
+        var inserted = c.units[0].pages[0]; inserted.id = "u1-inserted"
+        c.units[0].pages.insert(inserted, at: 1)
+        let store = BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString))
+        let b = Book(course: try course(), store: store)
+        for p in 0..<3 { QA.complete(b, page: p, upTo: .max); b.turnForward() }
+        b.saveNow()
+        let revised = Book(course: c, store: store)
+        revised.turnForward()
+        XCTAssertEqual(revised.pages.last?.sourceID, "u1-inserted")
+        revised.turnForward()
+        let ids = revised.pages.compactMap(\.sourceID)
+        XCTAssertEqual(Set(ids).count, ids.count, "no page repeated")
+        XCTAssertTrue(Set(had).isSubset(of: Set(ids)))
+    }
 }

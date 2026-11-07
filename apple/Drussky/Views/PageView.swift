@@ -156,7 +156,7 @@ struct PageView: View {
     private func summary(_ page: BookPage) -> String {
         let firstTry = page.results.filter { $0.status == .correct }.count
         let missed = page.results.filter { $0.status == .missed }.count
-        var parts = ["\(page.exercises.count) exercises"]
+        var parts = [page.exercises.count == 1 ? "1 exercise" : "\(page.exercises.count) exercises"]
         if firstTry > 0 { parts.append("\(firstTry) right first time") }
         if missed > 0 { parts.append("\(missed) to bring back soon") }
         return parts.joined(separator: " · ")
