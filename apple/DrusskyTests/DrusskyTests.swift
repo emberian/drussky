@@ -157,10 +157,29 @@ final class DrusskyTests: XCTestCase {
         var hits: [String] = [], misses: [String] = []
         for phrase in ["Э́то кот.", "спаси́бо", "Где ма́ма?", "Я чита́ю кни́гу.", "Мы тут.", "молоко́", "Как дела́?", "Она́ там."] {
             guard let url = voice.recordingURL(for: phrase) else { misses.append("\(phrase): no file"); continue }
+            let t0 = Date()
             let heard = await SpeechCheck.transcribe(url, hint: RussianText.unstressed(phrase))
+            print("SPEECH-TIME", phrase, String(format: "%.1fs", Date().timeIntervalSince(t0)))
             if let heard, RussianText.matches(heard, phrase) { hits.append(phrase) } else { misses.append("\(phrase)→\(heard ?? "nil")") }
         }
         print("SPEECH hits:", hits, "misses:", misses)
         XCTAssertGreaterThanOrEqual(hits.count, 5, "misses: \(misses)")
+    }
+
+    /// One live tutor answer through the app's own streaming client. Runs only when a key is
+    /// supplied via TEST_RUNNER_DRUSSKY_TUTOR_KEY; the key is removed from the Keychain after.
+    func testTutorAnswersLive() async throws {
+        let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"] ?? ""
+        try XCTSkipIf(key.isEmpty, "no tutor key supplied")
+        Keychain.apiKey = key
+        defer { Keychain.apiKey = nil }
+        var answer = ""
+        let context = "Workbook page 3: “Н: looks like H”. Letters met so far: А М О Т К Н.\nWriting the Russian for “she” (answer «она́»). Missed it and was shown the answer. Handwriting recognition read: «оно»."
+        for try await chunk in Tutor.stream([.init(role: "user", text: "Why is it она and not оно?")], context: context) {
+            answer += chunk
+        }
+        print("TUTOR:", answer)
+        XCTAssertGreaterThan(answer.count, 40)
+        XCTAssertTrue(answer.contains("он"), "answer discusses the Russian forms")
     }
 }

@@ -161,6 +161,12 @@ final class PaperStripView: UIView, UIPencilInteractionDelegate {
         canvas.isScrollEnabled = false
         canvas.tool = pen
         canvas.overrideUserInterfaceStyle = .unspecified
+        // The canvas's own accessibility tree grows with every stroke and makes snapshots crawl;
+        // the strip itself is the accessible element.
+        canvas.accessibilityElementsHidden = true
+        isAccessibilityElement = true
+        accessibilityLabel = "Writing line"
+        accessibilityTraits = [.allowsDirectInteraction]
         addSubview(canvas)
         let pencil = UIPencilInteraction()
         pencil.delegate = self

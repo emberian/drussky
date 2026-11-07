@@ -50,6 +50,17 @@
                ReferencedContainer = "container:Drussky.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "85DF0D55B3936D0C44F99785"
+               BuildableName = "DrusskyUITests.xctest"
+               BlueprintName = "DrusskyUITests"
+               ReferencedContainer = "container:Drussky.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>

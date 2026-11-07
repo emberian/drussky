@@ -622,7 +622,9 @@ struct ReadAloudExercise: View {
             if ok {
                 Text("Heard «\(heard)». ").font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.good)
             } else {
-                Text(heard.isEmpty ? "I didn't catch Russian there." : "I heard «\(heard)».")
+                Text(heard.isEmpty
+                     ? (speech.lastTimedOut ? "The Russian listener is still getting ready. Compare yours with the model by ear this time." : "I didn't catch Russian there.")
+                     : "I heard «\(heard)».")
                     .font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.text)
                 if !slot.result.status.isComplete {
                     HStack(spacing: 10) {
@@ -650,6 +652,8 @@ struct ReadAloudExercise: View {
             voice.stop()
             if speech.isRecording { speech.cancel() }
             denied = !(await speech.start(to: slot.recordingURL, key: key))
+            // Permission was just granted (or already was): load the recognizer while they speak.
+            SpeechCheck.warmUp(with: voice.recordingURL(for: target))
         }
     }
 }

@@ -1,11 +1,12 @@
 {
  "a-51b4ea.m4a": {
   "key": "а",
-  "from": "crates/rufren-app/assets/foundations/foundation-a.wav",
   "kind": "human_recording",
-  "credit": "The Shtooka Project (individual speaker not identified on source page)",
-  "license": "CC BY 2.0 FR",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-а.ogg"
+  "title": "Ru-а.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "Public domain",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B0.ogg"
  },
  "a-u-tebya-ea1ea8.m4a": {
   "key": "а у тебя",
@@ -20,50 +21,75 @@
  },
  "ba-a1f9dc.m4a": {
   "key": "ба",
-  "from": "crates/rufren-app/assets/foundations/foundation-a13-b-model.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-ба.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D0%B0.ogg"
  },
  "bolshoy-f99234.m4a": {
   "key": "большой",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "больш+ой."
+  "kind": "human_recording",
+  "title": "Ru-большой.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B9.ogg"
  },
  "brat-4fcce0.m4a": {
   "key": "брат",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "бр+ат."
+  "kind": "human_recording",
+  "title": "Ru-брат.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D1%80%D0%B0%D1%82.ogg"
  },
  "cha-67fa59.m4a": {
   "key": "ча",
-  "from": "crates/rufren-app/assets/foundations/foundation-a18-ch-model.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-ча.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B0.ogg"
  },
  "chashka-6540e4.m4a": {
   "key": "чашка",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "ч+ашка."
+  "kind": "human_recording",
+  "title": "Ru-чашка.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B0%D1%88%D0%BA%D0%B0.ogg"
  },
  "chay-c90efe.m4a": {
   "key": "чай",
-  "from": "crates/rufren-app/assets/foundations/foundation-a18-tea.wav",
   "kind": "human_recording",
-  "credit": "Audio sample provided by The Shtooka Project.",
+  "title": "Ru-чай.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B0%D0%B9.ogg"
  },
  "chetyre-5cc4d7.m4a": {
   "key": "четыре",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "чет+ыре."
+  "kind": "human_recording",
+  "title": "Ru-четыре.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%B5.ogg"
  },
  "chislo-c2ab07.m4a": {
   "key": "число",
-  "from": "crates/rufren-app/assets/foundations/foundation-a21-number.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-число.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B8%D1%81%D0%BB%D0%BE.ogg"
  },
  "chitaem-972489.m4a": {
   "key": "читаем",
@@ -79,9 +105,12 @@
  },
  "chitat-506c53.m4a": {
   "key": "читать",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "чит+ать."
+  "kind": "human_recording",
+  "title": "Ru-читать.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C.ogg"
  },
  "chitayu-0a20e3.m4a": {
   "key": "читаю",
@@ -91,16 +120,21 @@
  },
  "chto-2e8900.m4a": {
   "key": "что",
-  "from": "crates/rufren-app/assets/foundations/foundation-a19-what.wav",
   "kind": "human_recording",
-  "credit": "Audio sample provided by The Shtooka Project.",
+  "title": "Ru-что.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D1%82%D0%BE.ogg"
  },
  "chto-eto-43cd41.m4a": {
   "key": "что это",
-  "from": "crates/rufren-app/assets/foundations/foundation-a19-what-this.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-что это.ogg",
+  "author": "Inego (Yanis Batura)",
+  "credit": "http://tatoeba.org/por/sentences/show/5412",
+  "license": "CC BY 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D1%82%D0%BE_%D1%8D%D1%82%D0%BE.ogg"
  },
  "chto-eto-eto-chay-9aa824.m4a": {
   "key": "что это это чай",
@@ -140,8 +174,12 @@
  },
  "da-d4f57d.m4a": {
   "key": "да",
-  "from": "crates/rufren-app/assets/foundations/foundation-da.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-да.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B0.ogg"
  },
  "da-est-2fb5bd.m4a": {
   "key": "да есть",
@@ -169,21 +207,29 @@
  },
  "desyat-f37f3a.m4a": {
   "key": "десять",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "д+есять."
+  "kind": "human_recording",
+  "title": "Ru-десять.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B5%D1%81%D1%8F%D1%82%D1%8C.ogg"
  },
  "devyat-d2c296.m4a": {
   "key": "девять",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "д+евять"
+  "kind": "human_recording",
+  "title": "Ru-девять.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D1%8C.ogg"
  },
  "dobroe-utro-b1d3ed.m4a": {
   "key": "доброе утро",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "д+оброе +утро."
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-доброе утро.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%B4%D0%BE%D0%B1%D1%80%D0%BE%D0%B5_%D1%83%D1%82%D1%80%D0%BE.wav"
  },
  "dobroe-utro-kak-dela-caf786.m4a": {
   "key": "доброе утро как дела",
@@ -199,9 +245,12 @@
  },
  "dobryy-vecher-1a5c81.m4a": {
   "key": "добрый вечер",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "д+обрый в+ечер."
+  "kind": "human_recording",
+  "title": "Ru-добрый вечер.ogg",
+  "author": "Захаровсергеевич",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BE%D0%B1%D1%80%D1%8B%D0%B9_%D0%B2%D0%B5%D1%87%D0%B5%D1%80.ogg"
  },
  "dobryy-vecher-chto-na-uzhin-eed2d1.m4a": {
   "key": "добрый вечер что на ужин",
@@ -211,15 +260,21 @@
  },
  "dom-8e35c3.m4a": {
   "key": "дом",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "д+ом."
+  "kind": "human_recording",
+  "title": "Ru-дом.ogg",
+  "author": "Gulnara Streit",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BE%D0%BC.ogg"
  },
  "doma-e72723.m4a": {
   "key": "дома",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "д+ома."
+  "kind": "human_recording",
+  "title": "Ru-дома.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BE%D0%BC%D0%B0.ogg"
  },
  "dumaem-4dde47.m4a": {
   "key": "думаем",
@@ -235,9 +290,12 @@
  },
  "dumat-6fcaa5.m4a": {
   "key": "думать",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "д+умать."
+  "kind": "human_recording",
+  "title": "Ru-думать.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D1%83%D0%BC%D0%B0%D1%82%D1%8C.ogg"
  },
  "dumayu-2b6585.m4a": {
   "key": "думаю",
@@ -253,9 +311,12 @@
  },
  "dva-0c5d1b.m4a": {
   "key": "два",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "дв+а."
+  "kind": "human_recording",
+  "title": "Ru-два.ogg",
+  "author": "The Shtooka Project",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B2%D0%B0.ogg"
  },
  "dva-plyus-dva-chetyre-c6fdc7.m4a": {
   "key": "два плюс два четыре",
@@ -283,23 +344,27 @@
  },
  "e-1bc16a.m4a": {
   "key": "э",
-  "from": "crates/rufren-app/assets/foundations/foundation-a9-eh-model.wav",
   "kind": "human_recording",
-  "credit": "Pogrebnoj-Alexandroff",
+  "title": "Ru-э.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
   "license": "CC BY-SA 2.5",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%8D.ogg"
  },
  "e-bea15c.m4a": {
   "key": "е",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "+е."
+  "kind": "macos_tts",
+  "title": "say -v Milena",
+  "provider": "macOS Milena (ru_RU), Apple system voice"
  },
  "eshchyo-74edea.m4a": {
   "key": "ещё",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "ещ+ё."
+  "kind": "human_recording",
+  "title": "Ru-ещё.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B5%D1%89%D1%91.ogg"
  },
  "eshchyo-kofe-da-pozhaluysta-60b24e.m4a": {
   "key": "ещё кофе да пожалуйста",
@@ -315,14 +380,21 @@
  },
  "est-3d5105.m4a": {
   "key": "есть",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "+есть."
+  "kind": "human_recording",
+  "title": "Ru-есть.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B5%D1%81%D1%82%D1%8C.ogg"
  },
  "eto-8f3028.m4a": {
   "key": "это",
-  "from": "crates/rufren-app/assets/foundations/foundation-a9-this.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-это.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%8D%D1%82%D0%BE.ogg"
  },
  "eto-chay-c69a1e.m4a": {
   "key": "это чай",
@@ -508,20 +580,30 @@
  },
  "fakt-f6f468.m4a": {
   "key": "факт",
-  "from": "crates/rufren-app/assets/foundations/foundation-a19-fact.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-факт.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%84%D0%B0%D0%BA%D1%82.ogg"
  },
  "ga-5857ad.m4a": {
   "key": "га",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "г+а."
+  "kind": "human_recording",
+  "title": "Ru-га.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%B0.ogg"
  },
  "gde-c9a8de.m4a": {
   "key": "где",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "гд+е."
+  "kind": "human_recording",
+  "title": "Ru-где.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%B4%D0%B5.ogg"
  },
  "gde-chay-5bb1c9.m4a": {
   "key": "где чай",
@@ -633,15 +715,21 @@
  },
  "gorod-b5ca89.m4a": {
   "key": "город",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "г+ород."
+  "kind": "human_recording",
+  "title": "Ru-город.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%BE%D1%80%D0%BE%D0%B4.ogg"
  },
  "gotov-6aa18d.m4a": {
   "key": "готов",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "гот+ов."
+  "kind": "human_recording",
+  "title": "Ru-готов.ogg",
+  "author": "Myrkur",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%BE%D1%82%D0%BE%D0%B2.ogg"
  },
  "govorim-9a56f8.m4a": {
   "key": "говорим",
@@ -651,9 +739,12 @@
  },
  "govorit-ae07dc.m4a": {
   "key": "говорить",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "говор+ить."
+  "kind": "human_recording",
+  "title": "Ru-говорить.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8%D1%82%D1%8C.ogg"
  },
  "govorit-b7b322.m4a": {
   "key": "говорит",
@@ -663,9 +754,12 @@
  },
  "govoryat-e3eb7c.m4a": {
   "key": "говорят",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "говор+ят."
+  "kind": "human_recording",
+  "title": "Ru-говорят.ogg",
+  "author": "1640max",
+  "credit": "Forvo",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%82.ogg"
  },
  "govoryu-8bbcfc.m4a": {
   "key": "говорю",
@@ -675,23 +769,30 @@
  },
  "i-a59e2c.m4a": {
   "key": "и",
-  "from": "crates/rufren-app/assets/foundations/foundation-i.wav",
   "kind": "human_recording",
-  "credit": "The Shtooka Project; individual speaker not identified on source page",
+  "title": "Ru-и.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-и.ogg"
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B8.ogg"
  },
  "ka-13c6c6.m4a": {
   "key": "ка",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "к+а."
+  "kind": "human_recording",
+  "title": "Ru-ка.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%B0.ogg"
  },
  "kak-0adcaf.m4a": {
   "key": "как",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "к+ак."
+  "kind": "human_recording",
+  "title": "Ru-как.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%B0%D0%BA.ogg"
  },
  "kak-dela-1cc857.m4a": {
   "key": "как дела",
@@ -713,21 +814,30 @@
  },
  "kasha-b93fe3.m4a": {
   "key": "каша",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "к+аша."
+  "kind": "human_recording",
+  "title": "Ru-каша.ogg",
+  "author": "1640max",
+  "credit": "Forvo",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%B0%D1%88%D0%B0.ogg"
  },
  "kha-c08051.m4a": {
   "key": "ха",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "х+а."
+  "kind": "human_recording",
+  "title": "Ru-ха.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%85%D0%B0.ogg"
  },
  "khleb-adc547.m4a": {
   "key": "хлеб",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "хл+еб."
+  "kind": "human_recording",
+  "title": "Ru-хлеб.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%85%D0%BB%D0%B5%D0%B1.ogg"
  },
  "khleb-syr-chay-kofe-5e1bb5.m4a": {
   "key": "хлеб сыр чай кофе",
@@ -761,17 +871,21 @@
  },
  "khor-96f8be.m4a": {
   "key": "хор",
-  "from": "crates/rufren-app/assets/foundations/foundation-a15-choir.wav",
   "kind": "human_recording",
-  "credit": "Aleksey Pogrebnoj-Alexandroff",
+  "title": "Ru-хор.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
   "license": "CC BY-SA 3.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%85%D0%BE%D1%80.ogg"
  },
  "khorosho-6a4730.m4a": {
   "key": "хорошо",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "хорош+о."
+  "kind": "human_recording",
+  "title": "Ru-хорошо.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%85%D0%BE%D1%80%D0%BE%D1%88%D0%BE.ogg"
  },
  "khorosho-spasibo-b2ded2.m4a": {
   "key": "хорошо спасибо",
@@ -781,8 +895,12 @@
  },
  "kniga-2b8417.m4a": {
   "key": "книга",
-  "from": "crates/rufren-app/assets/foundations/foundation-a14-book.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-книга.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0.ogg"
  },
  "kniga-ona-c4551a.m4a": {
   "key": "книга она",
@@ -804,23 +922,30 @@
  },
  "kofe-a847d5.m4a": {
   "key": "кофе",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "к+офе."
+  "kind": "human_recording",
+  "title": "Ru-кофе.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D1%84%D0%B5.ogg"
  },
  "kosmos-050bdc.m4a": {
   "key": "космос",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "к+осмос."
+  "kind": "human_recording",
+  "title": "Ru-космос.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D1%81%D0%BC%D0%BE%D1%81.ogg"
  },
  "kot-9e7f48.m4a": {
   "key": "кот",
-  "from": "crates/rufren-app/assets/foundations/foundation-kot.wav",
   "kind": "human_recording",
-  "credit": "The Shtooka Project (individual speaker not identified on source page)",
-  "license": "CC BY 2.0 FR",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-кот.ogg"
+  "title": "Ru-кот.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D1%82.ogg"
  },
  "kot-doma-ac1ef5.m4a": {
   "key": "кот дома",
@@ -836,9 +961,12 @@
  },
  "kto-1ee849.m4a": {
   "key": "кто",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "кт+о."
+  "kind": "human_recording",
+  "title": "Ru-кто.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D1%82%D0%BE.ogg"
  },
  "kto-doma-a4b2a4.m4a": {
   "key": "кто дома",
@@ -848,9 +976,12 @@
  },
  "kto-eto-63025d.m4a": {
   "key": "кто это",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "Кт+о +это?"
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DoctorandusManhattan-кто это ?.wav",
+  "author": "Speaker: DoctorandusManhattan Recorder: DoctorandusManhattan",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DoctorandusManhattan-%D0%BA%D1%82%D0%BE_%D1%8D%D1%82%D0%BE_%3F.wav"
  },
  "kto-eto-chto-eto-a9fa66.m4a": {
   "key": "кто это что это",
@@ -896,15 +1027,19 @@
  },
  "kukhnya-aed56e.m4a": {
   "key": "кухня",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "к+ухня."
+  "kind": "human_recording",
+  "title": "Ru-кухня.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D1%83%D1%85%D0%BD%D1%8F.ogg"
  },
  "la-0c3646.m4a": {
   "key": "ла",
-  "from": "crates/rufren-app/assets/foundations/foundation-a10-l-model.wav",
   "kind": "human_recording",
-  "credit": "Aleksey Pogrebnoj-Alexandroff",
+  "title": "Ru-ла.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
   "license": "CC BY-SA 3.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D0%B0.ogg"
  },
@@ -916,15 +1051,18 @@
  },
  "lozhka-037c14.m4a": {
   "key": "ложка",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "л+ожка."
+  "kind": "human_recording",
+  "title": "Ru-ложка.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0.ogg"
  },
  "luk-f2dac6.m4a": {
   "key": "лук",
-  "from": "crates/rufren-app/assets/foundations/foundation-a16-onion.wav",
   "kind": "human_recording",
-  "credit": "Audio sample provided by The Shtooka Project.",
+  "title": "Ru-лук.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%83%D0%BA.ogg"
  },
@@ -936,9 +1074,12 @@
  },
  "lyudi-8670f8.m4a": {
   "key": "люди",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "л+юди."
+  "kind": "human_recording",
+  "title": "Ru-люди.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%8E%D0%B4%D0%B8.ogg"
  },
  "lyuk-b34bf0.m4a": {
   "key": "люк",
@@ -950,14 +1091,21 @@
  },
  "ma-b176b6.m4a": {
   "key": "ма",
-  "from": "crates/rufren-app/assets/foundations/foundation-ma.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-ма.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B0.ogg"
  },
  "mama-2241a2.m4a": {
   "key": "мама",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "м+ама."
+  "kind": "human_recording",
+  "title": "Ru-мама.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B0%D0%BC%D0%B0.ogg"
  },
  "mama-chitaet-e1e769.m4a": {
   "key": "мама читает",
@@ -985,15 +1133,21 @@
  },
  "mat-99ef9a.m4a": {
   "key": "мать",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "м+ать."
+  "kind": "human_recording",
+  "title": "Ru-мать.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B0%D1%82%D1%8C.ogg"
  },
  "medlenno-8e7498.m4a": {
   "key": "медленно",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "м+едленно."
+  "kind": "human_recording",
+  "title": "Ru-медленно.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B5%D0%B4%D0%BB%D0%B5%D0%BD%D0%BD%D0%BE.ogg"
  },
  "medlenno-pozhaluysta-de92c1.m4a": {
   "key": "медленно пожалуйста",
@@ -1003,15 +1157,21 @@
  },
  "menya-f62570.m4a": {
   "key": "меня",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "мен+я."
+  "kind": "human_recording",
+  "title": "Ru-меня.ogg",
+  "author": "Ivnadur",
+  "credit": "Own work",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B5%D0%BD%D1%8F.ogg"
  },
  "mir-88eed5.m4a": {
   "key": "мир",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "м+ир."
+  "kind": "human_recording",
+  "title": "Ru-мир.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B8%D1%80.ogg"
  },
  "mir-ochen-bolshoy-451e0e.m4a": {
   "key": "мир очень большой",
@@ -1021,15 +1181,21 @@
  },
  "mo-0e48a8.m4a": {
   "key": "мо",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "м+о."
+  "kind": "human_recording",
+  "title": "Ru-мо.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%BE.ogg"
  },
  "moloko-c2d396.m4a": {
   "key": "молоко",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "молок+о."
+  "kind": "human_recording",
+  "title": "Ru-молоко.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE.ogg"
  },
  "moloko-tut-0bb956.m4a": {
   "key": "молоко тут",
@@ -1039,8 +1205,12 @@
  },
  "moy-5ff398.m4a": {
   "key": "мой",
-  "from": "crates/rufren-app/assets/foundations/foundation-a17-my-m.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-мой.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%BE%D0%B9.ogg"
  },
  "moy-dom-2a0595.m4a": {
   "key": "мой дом",
@@ -1101,9 +1271,12 @@
  },
  "mozhno-e1939f.m4a": {
   "key": "можно",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "м+ожно."
+  "kind": "human_recording",
+  "title": "Ru-можно.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE.ogg"
  },
  "mozhno-eshchyo-b3a7e4.m4a": {
   "key": "можно ещё",
@@ -1129,8 +1302,12 @@
  },
  "my-fa0374.m4a": {
   "key": "мы",
-  "from": "crates/rufren-app/assets/foundations/foundation-a12-we.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-мы.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D1%8B.ogg"
  },
  "my-govorim-1f413b.m4a": {
   "key": "мы говорим",
@@ -1170,9 +1347,12 @@
  },
  "mysl-a9c7cc.m4a": {
   "key": "мысль",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "м+ысль."
+  "kind": "human_recording",
+  "title": "Ru-мысль.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D1%8B%D1%81%D0%BB%D1%8C.ogg"
  },
  "mysl-eto-ne-fakt-7d38b5.m4a": {
   "key": "мысль это не факт",
@@ -1208,9 +1388,12 @@
  },
  "nash-d38790.m4a": {
   "key": "наш",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "н+аш."
+  "kind": "human_recording",
+  "title": "Ru-наш.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B0%D1%88.ogg"
  },
  "nash-dom-5d9602.m4a": {
   "key": "наш дом",
@@ -1256,25 +1439,39 @@
  },
  "ne-ce6256.m4a": {
   "key": "не",
-  "from": "crates/rufren-app/assets/foundations/foundation-a9-e-model.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-не.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B5.ogg"
  },
  "nemnogo-e60898.m4a": {
   "key": "немного",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "немн+ого."
+  "kind": "human_recording",
+  "title": "Ru-немного.ogg",
+  "author": "1640max",
+  "credit": "Forvo",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B5%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE.ogg"
  },
  "nepravda-999a58.m4a": {
   "key": "неправда",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "непр+авда."
+  "kind": "human_recording",
+  "title": "Ru-неправда.ogg",
+  "author": "1640max",
+  "credit": "Forvo",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B5%D0%BF%D1%80%D0%B0%D0%B2%D0%B4%D0%B0.ogg"
  },
  "net-ced07f.m4a": {
   "key": "нет",
-  "from": "crates/rufren-app/assets/foundations/foundation-net.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-нет.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "CC 3.0",
+  "license": "CC BY 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B5%D1%82.ogg"
  },
  "net-eto-kofe-bdb8d2.m4a": {
   "key": "нет это кофе",
@@ -1314,15 +1511,21 @@
  },
  "nichego-93534d.m4a": {
   "key": "ничего",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "ничег+о."
+  "kind": "human_recording",
+  "title": "Ru-ничего.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B8%D1%87%D0%B5%D0%B3%D0%BE.ogg"
  },
  "noch-f9e174.m4a": {
   "key": "ночь",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "н+очь."
+  "kind": "human_recording",
+  "title": "Ru-ночь.ogg",
+  "author": "Gulnara Streit",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE%D1%87%D1%8C.ogg"
  },
  "noch-zvyozdy-kosmos-ochen-bolshoy-2b83ab.m4a": {
   "key": "ночь звёзды космос очень большой",
@@ -1332,49 +1535,66 @@
  },
  "noga-3a7c8b.m4a": {
   "key": "нога",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "ног+а."
+  "kind": "human_recording",
+  "title": "Ru-нога.ogg",
+  "author": "Gulnara Streit",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE%D0%B3%D0%B0.ogg"
  },
  "normalno-a444ce.m4a": {
   "key": "нормально",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "норм+ально."
+  "kind": "human_recording",
+  "title": "Ru-нормально.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE%D1%80%D0%BC%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE.ogg"
  },
  "nos-8032e3.m4a": {
   "key": "нос",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "н+ос."
+  "kind": "human_recording",
+  "title": "Ru-нос.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE%D1%81.ogg"
  },
  "o-57afad.m4a": {
   "key": "о",
-  "from": "crates/rufren-app/assets/foundations/foundation-o.wav",
   "kind": "human_recording",
-  "credit": "Сергей Сахно, Vion Nicolas; The Shtooka Project",
-  "license": "CC BY 3.0 US",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-о.ogg"
+  "title": "Ru-о.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE.ogg"
  },
  "obed-71d3d5.m4a": {
   "key": "обед",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "об+ед."
+  "kind": "human_recording",
+  "title": "Ru-обед.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B1%D0%B5%D0%B4.ogg"
  },
  "obekt-a0f625.m4a": {
   "key": "объект",
-  "from": "crates/rufren-app/assets/foundations/foundation-a19-object.wav",
   "kind": "human_recording",
-  "credit": "1640max",
+  "title": "Ru-объект.ogg",
+  "author": "1640max",
+  "credit": "Forvo",
   "license": "CC BY-SA 4.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82.ogg"
  },
  "ochen-68fe9b.m4a": {
   "key": "очень",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "+очень."
+  "kind": "human_recording",
+  "title": "Ru-очень.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D1%87%D0%B5%D0%BD%D1%8C.ogg"
  },
  "ochen-vkusno-30abd9.m4a": {
   "key": "очень вкусно",
@@ -1402,22 +1622,28 @@
  },
  "odin-ec47b9.m4a": {
   "key": "один",
-  "from": "crates/rufren-app/assets/foundations/foundation-a21-one.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-один.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B4%D0%B8%D0%BD.ogg"
  },
  "odni-f36b3d.m4a": {
   "key": "одни",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "одн+и."
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Lvova-одни.wav",
+  "author": "Speaker: Lvova Recorder: Lvova",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%BE%D0%B4%D0%BD%D0%B8.wav"
  },
  "okno-f663f7.m4a": {
   "key": "окно",
-  "from": "crates/rufren-app/assets/foundations/foundation-okno.wav",
   "kind": "human_recording",
-  "credit": "The Shtooka Project; individual speaker not identified on source page",
+  "title": "Ru-окно.ogg",
+  "author": "not stated; see source page",
   "license": "CC BY 2.0 fr",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-окно.ogg"
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%BA%D0%BD%D0%BE.ogg"
  },
  "okno-ono-f4509c.m4a": {
   "key": "окно оно",
@@ -1427,11 +1653,12 @@
  },
  "on-5f92b2.m4a": {
   "key": "он",
-  "from": "crates/rufren-app/assets/foundations/foundation-on.wav",
   "kind": "human_recording",
-  "credit": "The Shtooka Project; individual speaker not identified on source page",
+  "title": "Ru-он.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-он.ogg"
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%BD.ogg"
  },
  "on-chitaet-bd60a6.m4a": {
   "key": "он читает",
@@ -1458,11 +1685,12 @@
  },
  "ona-9e75fd.m4a": {
   "key": "она",
-  "from": "crates/rufren-app/assets/foundations/foundation-ona.wav",
   "kind": "human_recording",
-  "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
-  "license": "CC BY 3.0 us",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-она.ogg"
+  "title": "LL-Q7737 (rus)-Lvova-она.wav",
+  "author": "Speaker: Lvova Recorder: Lvova",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%BE%D0%BD%D0%B0.wav"
  },
  "ona-chitaet-ed4c19.m4a": {
   "key": "она читает",
@@ -1488,11 +1716,12 @@
  },
  "oni-46f000.m4a": {
   "key": "они",
-  "from": "crates/rufren-app/assets/foundations/foundation-oni.wav",
   "kind": "human_recording",
-  "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
-  "license": "CC BY 3.0 us",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-они.ogg"
+  "title": "LL-Q7737 (rus)-Cinemantique-они.wav",
+  "author": "Speaker: Cinemantique Recorder: Cinemantique",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Cinemantique-%D0%BE%D0%BD%D0%B8.wav"
  },
  "oni-chitayut-d60f7b.m4a": {
   "key": "они читают",
@@ -1530,32 +1759,47 @@
  },
  "ono-d69a4f.m4a": {
   "key": "оно",
-  "from": "crates/rufren-app/assets/foundations/foundation-ono.wav",
   "kind": "human_recording",
-  "credit": "1640max / Forvo",
+  "title": "Ru-оно.ogg",
+  "author": "1640max",
+  "credit": "Forvo",
   "license": "CC BY-SA 4.0",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-оно.ogg"
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%BD%D0%BE.ogg"
  },
  "otets-e28872.m4a": {
   "key": "отец",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "от+ец."
+  "kind": "human_recording",
+  "title": "Ru-отец.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D1%82%D0%B5%D1%86.ogg"
  },
  "oy-001dcf.m4a": {
   "key": "ой",
-  "from": "crates/rufren-app/assets/foundations/foundation-a17-j-model.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-ой.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free sources",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B9.ogg"
  },
  "pa-b2b12d.m4a": {
   "key": "па",
-  "from": "crates/rufren-app/assets/foundations/foundation-a13-p-model.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-па.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%B0.ogg"
  },
  "papa-918d73.m4a": {
   "key": "папа",
-  "from": "crates/rufren-app/assets/foundations/foundation-a13-dad.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-папа.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%B0%D0%BF%D0%B0.ogg"
  },
  "pereday-034040.m4a": {
   "key": "передай",
@@ -1577,15 +1821,21 @@
  },
  "planeta-3796ba.m4a": {
   "key": "планета",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "пл+анета."
+  "kind": "human_recording",
+  "title": "Ru-планета.ogg",
+  "author": "Alexander Mikhalenko",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BB%D0%B0%D0%BD%D0%B5%D1%82%D0%B0.ogg"
  },
  "plyus-9cb56d.m4a": {
   "key": "плюс",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "пл+юс."
+  "kind": "human_recording",
+  "title": "Ru-плюс.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BB%D1%8E%D1%81.ogg"
  },
  "po-angliyski-231d50.m4a": {
   "key": "по английски",
@@ -1601,27 +1851,38 @@
  },
  "ponimat-83514f.m4a": {
   "key": "понимать",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "поним+ать."
+  "kind": "human_recording",
+  "title": "Ru-понимать.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D1%82%D1%8C.ogg"
  },
  "pozhaluysta-441aca.m4a": {
   "key": "пожалуйста",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "пож+алуйста."
+  "kind": "human_recording",
+  "title": "Ru-пожалуйста.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0.ogg"
  },
  "pravda-ce605d.m4a": {
   "key": "правда",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "пр+авда."
+  "kind": "human_recording",
+  "title": "Ru-правда.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%80%D0%B0%D0%B2%D0%B4%D0%B0.ogg"
  },
  "priyatnogo-appetita-de00fa.m4a": {
   "key": "приятного аппетита",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "при+ятного аппет+ита."
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-приятного аппетита.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D1%80%D0%B8%D1%8F%D1%82%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BF%D0%BF%D0%B5%D1%82%D0%B8%D1%82%D0%B0.wav"
  },
  "priyatnogo-appetita-spasibo-i-tebe-e673e2.m4a": {
   "key": "приятного аппетита спасибо и тебе",
@@ -1631,9 +1892,12 @@
  },
  "pyat-4464b0.m4a": {
   "key": "пять",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "п+ять."
+  "kind": "human_recording",
+  "title": "Ru-пять.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%8F%D1%82%D1%8C.ogg"
  },
  "pyat-eto-chislo-eto-fakt-974d39.m4a": {
   "key": "пять это число это факт",
@@ -1649,17 +1913,20 @@
  },
  "ra-114ce3.m4a": {
   "key": "ра",
-  "from": "crates/rufren-app/assets/foundations/foundation-a11-r-model.wav",
   "kind": "human_recording",
-  "credit": "Pogrebnoj-Alexandroff",
+  "title": "Ru-ра.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "open free cources",
   "license": "CC BY-SA 3.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%B0.ogg"
  },
  "raketa-161431.m4a": {
   "key": "ракета",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "рак+ета."
+  "kind": "human_recording",
+  "title": "Ru-ракета.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.ogg"
  },
  "raketa-letit-9695db.m4a": {
   "key": "ракета летит",
@@ -1693,8 +1960,12 @@
  },
  "robot-f69f79.m4a": {
   "key": "робот",
-  "from": "crates/rufren-app/assets/foundations/foundation-a13-robot.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-робот.ogg",
+  "author": "1640max",
+  "credit": "Forvo",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%BE%D0%B1%D0%BE%D1%82.ogg"
  },
  "robot-znaet-gde-raketa-cc610c.m4a": {
   "key": "робот знает где ракета",
@@ -1704,9 +1975,11 @@
  },
  "rot-7942ac.m4a": {
   "key": "рот",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "р+от."
+  "kind": "human_recording",
+  "title": "Ru-рот.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%BE%D1%82.ogg"
  },
  "sa-1c0044.m4a": {
   "key": "са",
@@ -1722,26 +1995,38 @@
  },
  "sem-4cf209.m4a": {
   "key": "семь",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "с+емь."
+  "kind": "human_recording",
+  "title": "Ru-семь.ogg",
+  "author": "The Shtooka Project",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B5%D0%BC%D1%8C.ogg"
  },
  "sestra-3fcff1.m4a": {
   "key": "сестра",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "сестр+а."
+  "kind": "human_recording",
+  "title": "Ru-сестра.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B5%D1%81%D1%82%D1%80%D0%B0.ogg"
  },
  "sha-33c674.m4a": {
   "key": "ша",
-  "from": "crates/rufren-app/assets/foundations/foundation-a15-sh-model.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-ша.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D0%B0.ogg"
  },
  "shcha-9034d3.m4a": {
   "key": "ща",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "щ+а."
+  "kind": "human_recording",
+  "title": "Ru-ща.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%89%D0%B0.ogg"
  },
  "shchi-c6bf76.m4a": {
   "key": "щи",
@@ -1753,9 +2038,12 @@
  },
  "shest-7d61d4.m4a": {
   "key": "шесть",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "ш+есть."
+  "kind": "human_recording",
+  "title": "Ru-шесть.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D0%B5%D1%81%D1%82%D1%8C.ogg"
  },
  "shest-eto-chislo-cea39b.m4a": {
   "key": "шесть это число",
@@ -1777,45 +2065,64 @@
  },
  "shum-03d768.m4a": {
   "key": "шум",
-  "from": "crates/rufren-app/assets/foundations/foundation-a15-noise.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-шум.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D1%83%D0%BC.ogg"
  },
  "sledovatelno-d078df.m4a": {
   "key": "следовательно",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "сл+едовательно."
+  "kind": "human_recording",
+  "title": "Ru-следовательно.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE.ogg"
  },
  "slovo-f56eb6.m4a": {
   "key": "слово",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "сл+ово."
+  "kind": "human_recording",
+  "title": "Ru-слово.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BB%D0%BE%D0%B2%D0%BE.ogg"
  },
  "sok-69e824.m4a": {
   "key": "сок",
-  "from": "crates/rufren-app/assets/foundations/foundation-a10-juice.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-сок.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BE%D0%BA.ogg"
  },
  "sol-45d814.m4a": {
   "key": "соль",
-  "from": "crates/rufren-app/assets/foundations/foundation-a17-salt.wav",
   "kind": "human_recording",
-  "credit": "Audio sample provided by The Shtooka Project.",
+  "title": "Ru-соль.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BE%D0%BB%D1%8C.ogg"
  },
  "son-e6e87d.m4a": {
   "key": "сон",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "с+он."
+  "kind": "human_recording",
+  "title": "Ru-сон.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BE%D0%BD.ogg"
  },
  "spasibo-00f66d.m4a": {
   "key": "спасибо",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "спас+ибо."
+  "kind": "human_recording",
+  "title": "Ru-спасибо.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BF%D0%B0%D1%81%D0%B8%D0%B1%D0%BE.ogg"
  },
  "spasibo-i-tebe-64a60e.m4a": {
   "key": "спасибо и тебе",
@@ -1837,14 +2144,21 @@
  },
  "spokoynoy-nochi-b14427.m4a": {
   "key": "спокойной ночи",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "спок+ойной н+очи."
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-спокойной ночи.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%81%D0%BF%D0%BE%D0%BA%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BD%D0%BE%D1%87%D0%B8.wav"
  },
  "stol-09721b.m4a": {
   "key": "стол",
-  "from": "crates/rufren-app/assets/foundations/foundation-a10-table.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-стол.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%82%D0%BE%D0%BB.ogg"
  },
  "stol-on-b1bd23.m4a": {
   "key": "стол он",
@@ -1854,15 +2168,20 @@
  },
  "stul-b7723c.m4a": {
   "key": "стул",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "ст+ул."
+  "kind": "human_recording",
+  "title": "Ru-стул.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%82%D1%83%D0%BB.ogg"
  },
  "sup-f61df2.m4a": {
   "key": "суп",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "с+уп."
+  "kind": "human_recording",
+  "title": "Ru-суп.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%83%D0%BF.ogg"
  },
  "sushchestvuyu-20f6f9.m4a": {
   "key": "существую",
@@ -1872,62 +2191,92 @@
  },
  "syr-4372c8.m4a": {
   "key": "сыр",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "с+ыр"
+  "kind": "human_recording",
+  "title": "Ru-сыр.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%8B%D1%80.ogg"
  },
  "ta-1d9fc0.m4a": {
   "key": "та",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "т+а."
+  "kind": "human_recording",
+  "title": "Ru-та.ogg",
+  "author": "Pogrebnoj-Alexandroff",
+  "credit": "СС 3,0",
+  "license": "CC BY 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%B0.ogg"
  },
  "tak-d39566.m4a": {
   "key": "так",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "т+ак."
+  "kind": "human_recording",
+  "title": "Ru-так.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%B0%D0%BA.ogg"
  },
  "tam-fd8f30.m4a": {
   "key": "там",
-  "from": "crates/rufren-app/assets/foundations/foundation-tam.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-там.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%B0%D0%BC.ogg"
  },
  "tarelka-158aca.m4a": {
   "key": "тарелка",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "тар+елка."
+  "kind": "human_recording",
+  "title": "Ru-тарелка.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%B0%D1%80%D0%B5%D0%BB%D0%BA%D0%B0.ogg"
  },
  "tebe-c053a9.m4a": {
   "key": "тебе",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "теб+е."
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-DomesticFrog-тебе.wav",
+  "author": "Speaker: DomesticFrog Recorder: DomesticFrog",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-DomesticFrog-%D1%82%D0%B5%D0%B1%D0%B5.wav"
  },
  "tebya-a3a435.m4a": {
   "key": "тебя",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "теб+я."
+  "kind": "human_recording",
+  "title": "Ru-тебя.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%B5%D0%B1%D1%8F.ogg"
  },
  "tort-d56474.m4a": {
   "key": "торт",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "т+орт."
+  "kind": "human_recording",
+  "title": "Ru-торт.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%BE%D1%80%D1%82.ogg"
  },
  "tozhe-135c15.m4a": {
   "key": "тоже",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "т+оже."
+  "kind": "human_recording",
+  "title": "Ru-тоже.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%BE%D0%B6%D0%B5.ogg"
  },
  "tri-e036c7.m4a": {
   "key": "три",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "тр+и."
+  "kind": "human_recording",
+  "title": "Ru-три.ogg",
+  "author": "Gulnara Streit",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D1%80%D0%B8.ogg"
  },
  "tri-plyus-chetyre-sem-3e63bd.m4a": {
   "key": "три плюс четыре семь",
@@ -1937,19 +2286,29 @@
  },
  "tsa-1b2982.m4a": {
   "key": "ца",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "ц+а."
+  "kind": "human_recording",
+  "title": "Ru-ца.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%86%D0%B0.ogg"
  },
  "tsirk-4bd0a7.m4a": {
   "key": "цирк",
-  "from": "crates/rufren-app/assets/foundations/foundation-a18-circus.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-цирк.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%86%D0%B8%D1%80%D0%BA.ogg"
  },
  "tut-91720c.m4a": {
   "key": "тут",
-  "from": "crates/rufren-app/assets/foundations/foundation-a11-here.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-тут.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D1%83%D1%82.ogg"
  },
  "tvoy-brat-755bfd.m4a": {
   "key": "твой брат",
@@ -1965,9 +2324,12 @@
  },
  "tvoy-fa3010.m4a": {
   "key": "твой",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "тв+ой."
+  "kind": "human_recording",
+  "title": "Ru-твой.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D0%B2%D0%BE%D0%B9.ogg"
  },
  "tvoy-kofe-1cd6ac.m4a": {
   "key": "твой кофе",
@@ -2001,11 +2363,12 @@
  },
  "ty-ac60e9.m4a": {
   "key": "ты",
-  "from": "crates/rufren-app/assets/foundations/foundation-ty.wav",
   "kind": "human_recording",
-  "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+  "title": "Ru-ты.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
   "license": "CC BY 3.0 us",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-ты.ogg"
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D1%8B.ogg"
  },
  "ty-chitaesh-be0629.m4a": {
   "key": "ты читаешь",
@@ -2084,9 +2447,12 @@
  },
  "u-d944cd.m4a": {
   "key": "у",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "+у"
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Cinemantique-у.wav",
+  "author": "Speaker: Cinemantique Recorder: Cinemantique",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Cinemantique-%D1%83.wav"
  },
  "u-menya-est-9ac7e7.m4a": {
   "key": "у меня есть",
@@ -2150,21 +2516,30 @@
  },
  "ulitsa-ee37f3.m4a": {
   "key": "улица",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "+улица."
+  "kind": "human_recording",
+  "title": "Ru-улица.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%83%D0%BB%D0%B8%D1%86%D0%B0.ogg"
  },
  "utro-b41931.m4a": {
   "key": "утро",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "+утро."
+  "kind": "human_recording",
+  "title": "Ru-утро.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%83%D1%82%D1%80%D0%BE.ogg"
  },
  "uzhin-f44647.m4a": {
   "key": "ужин",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "+ужин."
+  "kind": "human_recording",
+  "title": "Ru-ужин.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%83%D0%B6%D0%B8%D0%BD.ogg"
  },
  "uzhin-gotov-33125d.m4a": {
   "key": "ужин готов",
@@ -2180,21 +2555,30 @@
  },
  "v-f3d123.m4a": {
   "key": "в",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "в."
+  "kind": "human_recording",
+  "title": "Ru-в.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2.ogg"
  },
  "va-d05cea.m4a": {
   "key": "ва",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "в+а."
+  "kind": "human_recording",
+  "title": "Ru-ва.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%B0.ogg"
  },
  "vash-e37fe4.m4a": {
   "key": "ваш",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "в+аш."
+  "kind": "human_recording",
+  "title": "Ru-ваш.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%B0%D1%88.ogg"
  },
  "vasha-5e6bd3.m4a": {
   "key": "ваша",
@@ -2216,26 +2600,38 @@
  },
  "vkusno-39e926.m4a": {
   "key": "вкусно",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "вк+усно."
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Rominf-вкусно.wav",
+  "author": "Speaker: Rominf Recorder: Rominf",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Rominf-%D0%B2%D0%BA%D1%83%D1%81%D0%BD%D0%BE.wav"
  },
  "voda-5f3761.m4a": {
   "key": "вода",
-  "from": "crates/rufren-app/assets/foundations/foundation-a12-water.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-вода.ogg",
+  "author": "Alexander Mikhalenko",
+  "credit": "Own work",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D0%B4%D0%B0.ogg"
  },
  "vosem-d38592.m4a": {
   "key": "восемь",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "в+осемь."
+  "kind": "human_recording",
+  "title": "Ru-восемь.ogg",
+  "author": "not stated; see source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C.ogg"
  },
  "vot-f9ad91.m4a": {
   "key": "вот",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "в+от."
+  "kind": "human_recording",
+  "title": "Ru-вот.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D1%82.ogg"
  },
  "vot-kot-i-mama-99f8a6.m4a": {
   "key": "вот кот и мама",
@@ -2251,14 +2647,21 @@
  },
  "vsyo-a990af.m4a": {
   "key": "всё",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "вс+ё"
+  "kind": "human_recording",
+  "title": "Ru-всё.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D1%81%D1%91.ogg"
  },
  "vy-cc86ef.m4a": {
   "key": "вы",
-  "from": "crates/rufren-app/assets/foundations/foundation-a12-you.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-вы.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D1%8B.ogg"
  },
  "vy-chitaete-1eca04.m4a": {
   "key": "вы читаете",
@@ -2289,11 +2692,12 @@
  },
  "ya-4f566f.m4a": {
   "key": "я",
-  "from": "crates/rufren-app/assets/foundations/foundation-ya.wav",
   "kind": "human_recording",
-  "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+  "title": "Ru-я.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
   "license": "CC BY 3.0 us",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-я.ogg"
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%8F.ogg"
  },
  "ya-chitayu-17f6c2.m4a": {
   "key": "я читаю",
@@ -2450,9 +2854,12 @@
  },
  "ya-znayu-chto-nichego-ne-znayu-11e383.m4a": {
   "key": "я знаю что ничего не знаю",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "+Я зн+аю, чт+о ничег+о не зн+аю."
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Tatiana Kerbush-я знаю, что ничего не знаю.wav",
+  "author": "Speaker: Tatiana Kerbush Recorder: Tatiana Kerbush",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D1%8F_%D0%B7%D0%BD%D0%B0%D1%8E,_%D1%87%D1%82%D0%BE_%D0%BD%D0%B8%D1%87%D0%B5%D0%B3%D0%BE_%D0%BD%D0%B5_%D0%B7%D0%BD%D0%B0%D1%8E.wav"
  },
  "ya-znayu-ty-znaesh-963ffb.m4a": {
   "key": "я знаю ты знаешь",
@@ -2478,21 +2885,30 @@
  },
  "za-a98e59.m4a": {
   "key": "за",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "з+а."
+  "kind": "human_recording",
+  "title": "Ru-за.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%B0.ogg"
  },
  "zadacha-888054.m4a": {
   "key": "задача",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "зад+ача."
+  "kind": "human_recording",
+  "title": "Ru-задача.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0.ogg"
  },
  "zavtrak-660e64.m4a": {
   "key": "завтрак",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "з+автрак."
+  "kind": "human_recording",
+  "title": "Ru-завтрак.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA.ogg"
  },
  "zavtrak-gotov-bc48dc.m4a": {
   "key": "завтрак готов",
@@ -2502,19 +2918,30 @@
  },
  "zdes-1c3c90.m4a": {
   "key": "здесь",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "зд+есь."
+  "kind": "human_recording",
+  "title": "Ru-здесь.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%B4%D0%B5%D1%81%D1%8C.ogg"
  },
  "zha-2505b9.m4a": {
   "key": "жа",
-  "from": "crates/rufren-app/assets/foundations/foundation-a15-zh-model.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-жа.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B6%D0%B0.ogg"
  },
  "zhuk-c7dc2e.m4a": {
   "key": "жук",
-  "from": "crates/rufren-app/assets/foundations/foundation-a15-beetle.wav",
-  "kind": "ai_generated_speech"
+  "kind": "human_recording",
+  "title": "Ru-жук.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B6%D1%83%D0%BA.ogg"
  },
  "znaesh-9dd58d.m4a": {
   "key": "знаешь",
@@ -2536,21 +2963,30 @@
  },
  "znat-69d4f1.m4a": {
   "key": "знать",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "зн+ать."
+  "kind": "human_recording",
+  "title": "Ru-знать.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%BD%D0%B0%D1%82%D1%8C.ogg"
  },
  "znayu-8979f5.m4a": {
   "key": "знаю",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "зн+аю."
+  "kind": "human_recording",
+  "title": "Ru-знаю.ogg",
+  "author": "Inego (Yanis Batura)",
+  "credit": "http://tatoeba.org/por/sentences/show/3247178",
+  "license": "CC BY 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%BD%D0%B0%D1%8E.ogg"
  },
  "zvezda-53096f.m4a": {
   "key": "звезда",
-  "kind": "ai_generated_speech",
-  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "звезд+а."
+  "kind": "human_recording",
+  "title": "Ru-звезда.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B7%D0%B2%D0%B5%D0%B7%D0%B4%D0%B0.ogg"
  },
  "zvyozdy-82af27.m4a": {
   "key": "звёзды",

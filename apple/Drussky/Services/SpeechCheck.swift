@@ -16,6 +16,17 @@ final class SpeechCheck {
     private var session = 0
 
     var isRecording: Bool { phase == .recording }
+    /// True when the last check gave up waiting because the recognizer was still loading.
+    private(set) var lastTimedOut = false
+    private static var warmed = false
+
+    /// The first on-device Russian transcription loads a model and can take minutes; later ones
+    /// take a fraction of a second. Run one silently on a bundled clip as soon as we're allowed.
+    static func warmUp(with url: URL?) {
+        guard !warmed, let url, SFSpeechRecognizer.authorizationStatus() == .authorized else { return }
+        warmed = true
+        Task.detached(priority: .utility) { _ = await transcribe(url, hint: "") }
+    }
 
     func start(to url: URL, key: String) async -> Bool {
         guard phase != .listening, await Self.permissions() else { return false }
@@ -52,12 +63,20 @@ final class SpeechCheck {
         stopMeter()
         phase = .listening
         let mine = session
-        let heard = await Self.transcribe(url, hint: RussianText.unstressed(target))
+        let hint = RussianText.unstressed(target)
+        // Never keep the learner waiting on a recognizer that is still loading.
+        // A race that resumes exactly once: the transcription, or ten seconds.
+        let heard: String?? = await withCheckedContinuation { (c: CheckedContinuation<String??, Never>) in
+            let once = Once()
+            Task { let r = await Self.transcribe(url, hint: hint); if once.claim() { c.resume(returning: .some(r)) } }
+            Task { try? await Task.sleep(for: .seconds(10)); if once.claim() { c.resume(returning: .none) } }
+        }
+        lastTimedOut = heard == nil
         if session == mine {
             phase = .finished
             activeKey = nil
         }
-        return heard
+        return heard ?? nil
     }
 
     func cancel() {

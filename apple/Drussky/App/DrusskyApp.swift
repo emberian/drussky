@@ -42,7 +42,9 @@ enum AppModel {
             QA.prepare(store: store)
             let book = Book(course: course, store: store)
             QA.apply(to: book)
-            return .ready(book, Voice(), SpeechCheck())
+            let voice = Voice()
+            SpeechCheck.warmUp(with: voice.recordingURL(for: "спаси́бо"))
+            return .ready(book, voice, SpeechCheck())
         } catch {
             return .failed("\(error)")
         }

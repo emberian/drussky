@@ -22,11 +22,14 @@ APPLE = Path(__file__).resolve().parents[1]
 REPO = APPLE.parent
 sys.path.insert(0, str(APPLE / "scripts"))
 from validate_course import key, spoken_strings  # noqa: E402
+from audio_level import decode, level, to_wav  # noqa: E402
 
 COURSE = APPLE / "Drussky/Resources/course.json"
 AUDIO = APPLE / "Drussky/Resources/Audio"
 SCRATCH = REPO / ".local/drussky-audio"
 FOUNDATION = REPO / "crates/rufren-app/assets/foundations"
+# Chosen human (or macOS) takes: key -> {orig, kind, title, source_page, license, author, provider}
+HUMAN = APPLE / "scripts/human_audio.json"
 FOUNDATION_TEXT = REPO / "crates/rufren-content/content/foundations-v1.json"
 # research/ALPHABET_AUDIO_SOURCE_REVIEW.md: these two have review problems.
 DO_NOT_REUSE = {"foundation-a11-u-model", "foundation-a17-my-n"}
@@ -96,20 +99,27 @@ def plan():
         # prefer human recordings when two foundation assets share a key
         if k not in foundation or kinds.get(a["id"]) == "human_recording":
             foundation[k] = a["id"]
-    reuse = {k: foundation[k] for k in wanted if k in foundation}
-    generate = {k: wanted[k] for k in wanted if k not in foundation}
-    return wanted, reuse, generate, kinds, manifest
+    human = json.loads(HUMAN.read_text()) if HUMAN.exists() else {}
+    human = {k: v for k, v in human.items() if k in wanted}
+    reuse = {k: foundation[k] for k in wanted if k in foundation and k not in human}
+    generate = {k: wanted[k] for k in wanted if k not in foundation and k not in human}
+    return wanted, human, reuse, generate, kinds, manifest
 
 
-def to_m4a(wav, m4a):
+def to_m4a(src, m4a):
+    """Trim silence, level to a common loudness, encode AAC."""
+    pcm, _ = level(decode(src))
+    leveled = SCRATCH / "level" / (m4a.stem + ".wav")
+    leveled.parent.mkdir(parents=True, exist_ok=True)
+    leveled.write_bytes(to_wav(pcm))
     tmp = m4a.with_suffix(".tmp.m4a")
-    subprocess.run(["afconvert", "-f", "m4af", "-d", "aac", "-b", "64000", str(wav), str(tmp)], check=True)
+    subprocess.run(["afconvert", "-f", "m4af", "-d", "aac", "-b", "64000", str(leveled), str(tmp)], check=True)
     tmp.replace(m4a)
 
 
 def main():
-    wanted, reuse, generate, kinds, manifest = plan()
-    print(f"{len(wanted)} keys: reuse {len(reuse)} ({sum(kinds.get(v) == 'human_recording' for v in reuse.values())} human), generate {len(generate)}")
+    wanted, human, reuse, generate, kinds, manifest = plan()
+    print(f"{len(wanted)} keys: chosen human/macOS {len(human)}, reuse {len(reuse)} ({sum(kinds.get(v) == 'human_recording' for v in reuse.values())} human), generate {len(generate)}")
     if "--plan" in sys.argv:
         for k, s in generate.items():
             print("  gen", repr(s), "->", SYNTH_FINAL.get(k) or silero_text(SYNTH_OVERRIDES.get(k, s)))
@@ -118,6 +128,12 @@ def main():
     (SCRATCH / "wav").mkdir(parents=True, exist_ok=True)
     index, sources = {}, {}
     credits = {a["id"]: a.get("provenance", {}) for a in manifest["assets"]}
+
+    for k, h in human.items():
+        name = slug(k) + ".m4a"
+        to_m4a(REPO / h["orig"], AUDIO / name)
+        index[k] = name
+        sources[name] = {"key": k, **{f: h[f] for f in ("kind", "title", "author", "credit", "license", "source_page", "provider") if h.get(f)}}
 
     for k, fid in reuse.items():
         name = slug(k) + ".m4a"

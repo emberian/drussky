@@ -23,6 +23,7 @@
 		9AEF27A7EFA1034C131805E5 /* MarckScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */; };
 		A009ECABCA825B294FD93098 /* InkReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B8787FE5BD39DD4C776BD8 /* InkReader.swift */; };
 		AD8A2190D80258D2E1F620D1 /* Audio in Resources */ = {isa = PBXBuildFile; fileRef = 76FA98F7CF39CE01A5ADCC7A /* Audio */; };
+		B642A68EF4FACF87C704635A /* LaunchProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FF00557E4301350608DB9 /* LaunchProbe.swift */; };
 		BC4BD4EC630AE39955A764B6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8667B929B9319AC53CBBAA /* PageView.swift */; };
 		D3A0E99EAF001AFDB22943D0 /* SpeechCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */; };
 		DB3D064DB50315B07FD9D64C /* QA.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2183BBBE99C1790444D983 /* QA.swift */; };
@@ -33,6 +34,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6F68893F1B698792BEF2BCBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DB5D2166543BCFE6145621D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3DF5E4E96FA9D5E45063EF5;
+			remoteInfo = Drussky;
+		};
 		D9ACC66A70FBCF4979353381 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9DB5D2166543BCFE6145621D /* Project object */;
@@ -44,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		020DCB5CAE85CF08A1342CF2 /* DrusskyTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DrusskyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B90003DA1A2BC105BEF7BDF /* DrusskyUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DrusskyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MarckScript-Regular.ttf"; sourceTree = "<group>"; };
 		27AE7A8C01467109460EB5B7 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		3337A7628485FC5AE5B0DC88 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -56,6 +65,7 @@
 		74264D1BFDC2677C7515FBED /* TutorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorView.swift; sourceTree = "<group>"; };
 		76FA98F7CF39CE01A5ADCC7A /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Audio; path = Drussky/Resources/Audio; sourceTree = SOURCE_ROOT; };
 		966160D52E50F1ED0AD393D5 /* Drussky.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Drussky.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		966FF00557E4301350608DB9 /* LaunchProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchProbe.swift; sourceTree = "<group>"; };
 		97D974078BE264B301B0782B /* RhythmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmView.swift; sourceTree = "<group>"; };
 		C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViews.swift; sourceTree = "<group>"; };
 		D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -71,6 +81,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		041A425F9E0F853F7382281E /* DrusskyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				966FF00557E4301350608DB9 /* LaunchProbe.swift */,
+			);
+			path = DrusskyUITests;
+			sourceTree = "<group>";
+		};
 		06305DCDBD604A16CF5D89E8 /* DrusskyTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +179,7 @@
 			children = (
 				1F5F4280DFDE09F9376E8534 /* Drussky */,
 				06305DCDBD604A16CF5D89E8 /* DrusskyTests */,
+				041A425F9E0F853F7382281E /* DrusskyUITests */,
 				F9D5F14943E0FF3C0C7B3F7D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -170,6 +189,7 @@
 			children = (
 				966160D52E50F1ED0AD393D5 /* Drussky.app */,
 				020DCB5CAE85CF08A1342CF2 /* DrusskyTests.xctest */,
+				1B90003DA1A2BC105BEF7BDF /* DrusskyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -194,6 +214,24 @@
 			productName = DrusskyTests;
 			productReference = 020DCB5CAE85CF08A1342CF2 /* DrusskyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		85DF0D55B3936D0C44F99785 /* DrusskyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B315BF34306E4D5BDF8643F8 /* Build configuration list for PBXNativeTarget "DrusskyUITests" */;
+			buildPhases = (
+				41F71F5A4A41A18988BB3D67 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				511F3BF5F9E4EADAADDF62E5 /* PBXTargetDependency */,
+			);
+			name = DrusskyUITests;
+			packageProductDependencies = (
+			);
+			productName = DrusskyUITests;
+			productReference = 1B90003DA1A2BC105BEF7BDF /* DrusskyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		D3DF5E4E96FA9D5E45063EF5 /* Drussky */ = {
 			isa = PBXNativeTarget;
@@ -226,6 +264,11 @@
 						DevelopmentTeam = 992772WV7K;
 						ProvisioningStyle = Automatic;
 					};
+					85DF0D55B3936D0C44F99785 = {
+						DevelopmentTeam = 992772WV7K;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D3DF5E4E96FA9D5E45063EF5;
+					};
 					D3DF5E4E96FA9D5E45063EF5 = {
 						DevelopmentTeam = 992772WV7K;
 						ProvisioningStyle = Automatic;
@@ -248,6 +291,7 @@
 			targets = (
 				D3DF5E4E96FA9D5E45063EF5 /* Drussky */,
 				7F1163F3F26E0E43A8413C7F /* DrusskyTests */,
+				85DF0D55B3936D0C44F99785 /* DrusskyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -268,6 +312,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		41F71F5A4A41A18988BB3D67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B642A68EF4FACF87C704635A /* LaunchProbe.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B60A46CFDF464BCCE1B117F8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -303,6 +355,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		511F3BF5F9E4EADAADDF62E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3DF5E4E96FA9D5E45063EF5 /* Drussky */;
+			targetProxy = 6F68893F1B698792BEF2BCBE /* PBXContainerItemProxy */;
+		};
 		84B4FE280A6A728DFAC25021 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D3DF5E4E96FA9D5E45063EF5 /* Drussky */;
@@ -498,6 +555,24 @@
 			};
 			name = Debug;
 		};
+		51CBE8F73F89A9048C600DA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.drussky.uitests;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Drussky;
+			};
+			name = Release;
+		};
 		5D444824610C5F3D668C9112 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -532,6 +607,24 @@
 			};
 			name = Release;
 		};
+		CFFD70AA28491554A3B0E2BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.drussky.uitests;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Drussky;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -540,6 +633,15 @@
 			buildConfigurations = (
 				4DB74A8A70FC4F692D7574C3 /* Debug */,
 				3E19F22DDCE73C156B3C0102 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B315BF34306E4D5BDF8643F8 /* Build configuration list for PBXNativeTarget "DrusskyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFFD70AA28491554A3B0E2BE /* Debug */,
+				51CBE8F73F89A9048C600DA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

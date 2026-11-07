@@ -9,7 +9,13 @@ import Observation
 final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate {
     private(set) var speakingKey: String?
     private var index: [String: String] = [:]
-    private var player: AVAudioPlayer?
+    /// Playback runs on its own queue: an audio-route stall (Bluetooth, a busy audio server)
+    /// must never freeze the page. `player` is only touched on `audioQueue`.
+    private let audioQueue = DispatchQueue(label: "software.ember.drussky.voice", qos: .userInitiated)
+    private let deck = Deck()
+
+    /// The current player; only touched on `audioQueue`.
+    private final class Deck: @unchecked Sendable { var player: AVAudioPlayer? }
     private let synth = AVSpeechSynthesizer()
     private let audioDir: URL?
 
@@ -41,11 +47,8 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         let key = RussianText.key(text)
         stop()
         speakingKey = key
-        if let file = index[key], let url = audioDir?.appendingPathComponent(file),
-           let p = try? AVAudioPlayer(contentsOf: url) {
-            p.delegate = self
-            player = p
-            p.play()
+        if let file = index[key], let url = audioDir?.appendingPathComponent(file) {
+            start(url)
             return
         }
         let utterance = AVSpeechUtterance(string: RussianText.unstressed(text))
@@ -56,16 +59,30 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
 
     func playFile(_ url: URL, key: String) {
         stop()
-        guard let p = try? AVAudioPlayer(contentsOf: url) else { return }
         speakingKey = key
-        p.delegate = self
-        player = p
-        p.play()
+        start(url)
+    }
+
+    private func start(_ url: URL) {
+        audioQueue.async { [weak self] in
+            guard let self else { return }
+            self.deck.player?.stop()
+            guard let p = try? AVAudioPlayer(contentsOf: url) else {
+                Task { @MainActor in self.speakingKey = nil }
+                return
+            }
+            p.delegate = self
+            self.deck.player = p
+            p.play()
+        }
     }
 
     func stop() {
-        player?.stop()
-        player = nil
+        let deck = self.deck
+        audioQueue.async {
+            deck.player?.stop()
+            deck.player = nil
+        }
         if synth.isSpeaking { synth.stopSpeaking(at: .immediate) }
         speakingKey = nil
     }
@@ -76,7 +93,12 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
     }()
 
     nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        Task { @MainActor in self.speakingKey = nil }
+        let finished = ObjectIdentifier(player)
+        audioQueue.async { [weak self] in
+            // Only the current player's end clears the indicator (a replaced one also "finishes").
+            guard let self, let current = self.deck.player, ObjectIdentifier(current) == finished else { return }
+            Task { @MainActor in self.speakingKey = nil }
+        }
     }
 
     nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {

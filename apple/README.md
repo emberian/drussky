@@ -59,7 +59,19 @@ xcodebuild -project Drussky.xcodeproj -scheme Drussky \
 xcodebuild -project Drussky.xcodeproj -scheme Drussky -configuration Release \
   -destination 'id=<device udid>' -derivedDataPath .build/device -allowProvisioningUpdates build
 xcrun devicectl device install app --device <device udid> .build/device/Build/Products/Release-iphoneos/Drussky.app
+# Mac (native Mac Catalyst app, sandboxed with microphone + network)
+xcodebuild -project Drussky.xcodeproj -scheme Drussky -configuration Release \
+  -destination 'platform=macOS,variant=Mac Catalyst' -derivedDataPath .build/mac -allowProvisioningUpdates build
+cp -R .build/mac/Build/Products/Release-maccatalyst/Drussky.app ~/Applications/
 ```
+
+Tests: `DrusskyTests` covers text normalization, course integrity, audio coverage (every
+string the app or its reviews can speak), handwriting recognition on synthetic print (13/13)
+and cursive (11/12) ink, scheduling and persistence, notebook-recovery and redo
+regressions, speech recognition on recorded Russian (runs once speech recognition is
+allowed), and one live tutor answer (runs when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
+`DrusskyUITests` writes on the paper with real touch strokes, completes the exercise, and
+checks it survives a relaunch.
 
 QA launch arguments (simulator): `-qa-reset`, `-qa-complete N` (work through N pages with
 synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-contents`,

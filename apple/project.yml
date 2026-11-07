@@ -55,10 +55,22 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Drussky.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Drussky"
         BUNDLE_LOADER: "$(TEST_HOST)"
+  DrusskyUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [DrusskyUITests]
+    dependencies:
+      - target: Drussky
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: software.ember.drussky.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: Drussky
+        SUPPORTS_MACCATALYST: NO
 schemes:
   Drussky:
     build:
       targets:
         Drussky: all
     test:
-      targets: [DrusskyTests]
+      targets: [DrusskyTests, DrusskyUITests]
