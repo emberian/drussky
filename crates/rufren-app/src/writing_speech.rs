@@ -418,6 +418,7 @@ mod writing_speech_tests {
             audio_completed: false,
             model_revealed: true,
             entry_previewed: true,
+            return_intent: None,
             say: SayDisposition::NotReported,
             history: vec![],
             native_instance: None,

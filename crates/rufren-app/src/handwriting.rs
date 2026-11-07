@@ -325,6 +325,15 @@ pub(crate) struct WritingOriginalReview {
     pub payload: serde_json::Value,
 }
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub(crate) enum WritingReturnIntent {
+    Foundations {
+        session: Uuid,
+        step: String,
+        revision: String,
+    },
+    Catalog,
+}
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct HandwritingActivity {
     pub version: u32,
@@ -344,6 +353,8 @@ pub(crate) struct HandwritingActivity {
     pub model_revealed: bool,
     #[serde(default)]
     pub entry_previewed: bool,
+    #[serde(default)]
+    pub return_intent: Option<WritingReturnIntent>,
     pub say: SayDisposition,
     pub history: Vec<WritingRound>,
     #[serde(default)]
@@ -586,6 +597,9 @@ impl AppState {
                 .contains(&format!("{}:encountered", task.foundation_step_id)))
     }
     pub(crate) fn open_handwriting(&mut self) -> Result<()> {
+        if self.page == Page::Foundations && self.prepare_foundation_writing()?.is_some() {
+            return Ok(());
+        }
         let course = self.foundation_state()?;
         let task = handwriting_task_for_step(&course.step_id)
             .ok_or("This encounter has no authored writing activity yet.")?;
@@ -597,16 +611,91 @@ impl AppState {
         }
         self.open_writing_task(&task.id, task.sequence)
     }
+    pub(crate) fn foundation_writing(&self) -> Result<Option<HandwritingActivity>> {
+        let course = self.foundation_state()?;
+        if course.review_resume.is_some() {
+            return Ok(None);
+        }
+        if !matches!(
+            rufren_content::foundations().episodes[course.episode].steps[course.step].action,
+            rufren_content::FoundationAction::Present { .. }
+        ) {
+            return Ok(None);
+        }
+        let Some(task) = handwriting_task_for_step(&course.step_id) else {
+            return Ok(None);
+        };
+        Ok(self.handwriting_for_course(course.session)?.filter(|run| {
+            run.task_revision == task.revision
+                && self.writing_returns_to_foundations(run).unwrap_or(false)
+                && run.sequence == WritingSequence::SeeCopyHearSay
+        }))
+    }
+    /// Prepare only the authored current teaching model for copying, before it is heard.
+    /// This binds navigation intent without changing the run's original provenance.
+    pub(crate) fn prepare_foundation_writing(&mut self) -> Result<Option<HandwritingActivity>> {
+        let course = self.foundation_state()?;
+        if course.review_resume.is_some() {
+            return Ok(None);
+        }
+        let step = &rufren_content::foundations().episodes[course.episode].steps[course.step];
+        if !matches!(
+            step.action,
+            rufren_content::FoundationAction::Present { .. }
+        ) {
+            return Ok(None);
+        }
+        let Some(task) = handwriting_task_for_step(&course.step_id) else {
+            return Ok(None);
+        };
+        self.open_writing_task_inner(&task.id, WritingSequence::SeeCopyHearSay, true)?;
+        self.foundation_writing()
+    }
+    fn writing_returns_to_foundations(&self, run: &HandwritingActivity) -> Result<bool> {
+        let course = self.foundation_state()?;
+        let task = run.definition()?;
+        if task.foundation_step_id != course.step_id
+            || task.foundation_step_revision != course.step_revision
+        {
+            return Ok(false);
+        }
+        Ok(match &run.return_intent {
+            Some(WritingReturnIntent::Foundations {
+                session,
+                step,
+                revision,
+            }) => {
+                *session == course.session
+                    && *step == course.step_id
+                    && *revision == course.step_revision
+            }
+            Some(WritingReturnIntent::Catalog) => false,
+            None => {
+                !run.entry_previewed
+                    && course.session == run.course_session
+                    && course.step_id == run.course_step
+                    && course.step_revision == run.course_step_revision
+            }
+        })
+    }
     pub(crate) fn open_writing_task(
         &mut self,
         task_id: &str,
         sequence: WritingSequence,
     ) -> Result<()> {
+        self.open_writing_task_inner(task_id, sequence, false)
+    }
+    fn open_writing_task_inner(
+        &mut self,
+        task_id: &str,
+        sequence: WritingSequence,
+        inline: bool,
+    ) -> Result<()> {
         let task = handwriting_tasks()
             .into_iter()
             .find(|t| t.id == task_id)
             .ok_or("That writing activity is unavailable.")?;
-        if !self.handwriting_task_available(&task)? {
+        if !inline && !self.handwriting_task_available(&task)? {
             return Err("Meet this word or letter with its lesson model first. Your current course place is kept.".into());
         }
         if !task.sequences.contains(&sequence) {
@@ -662,12 +751,20 @@ impl AppState {
         } else {
             let id = Uuid::new_v4();
             let round = Uuid::new_v4();
+            // A copy exercise continues the model heard in this exact lesson
+            // encounter. Dictation still needs its own fresh task input, and
+            // catalog practice and subsequent rounds start independently.
+            let heard_course_model = sequence == WritingSequence::SeeCopyHearSay
+                && self.page == Page::Foundations
+                && course.step_id == task.foundation_step_id
+                && course.step_revision == task.foundation_step_revision
+                && course.played.contains(&task.audio_id);
             let run = HandwritingActivity {
                 version: 2,
                 id,
                 course_session: course.session,
-                course_step: course.step_id,
-                course_step_revision: course.step_revision,
+                course_step: course.step_id.clone(),
+                course_step_revision: course.step_revision.clone(),
                 task_id: task.id.clone(),
                 task_revision: task.revision.clone(),
                 sequence,
@@ -676,10 +773,12 @@ impl AppState {
                 attempt_id: Uuid::new_v4(),
                 scope_id: format!("{id}:{round}"),
                 original: None,
-                audio_completed: false,
+                audio_completed: heard_course_model,
                 model_revealed: sequence == WritingSequence::SeeCopyHearSay,
-                entry_previewed: self.repo.get::<String>("handwriting.surface")?.as_deref()
-                    == Some("catalog"),
+                entry_previewed: self.page == Page::Handwriting
+                    && self.repo.get::<String>("handwriting.surface")?.as_deref()
+                        == Some("catalog"),
+                return_intent: None,
                 say: SayDisposition::NotReported,
                 history: vec![],
                 native_instance: None,
@@ -689,8 +788,33 @@ impl AppState {
             self.repo.set(&activity_key(id), &run)?;
             run
         };
+        let mut run = run;
+        run.return_intent = Some(if inline || self.page == Page::Foundations {
+            WritingReturnIntent::Foundations {
+                session: course.session,
+                step: course.step_id.clone(),
+                revision: course.step_revision.clone(),
+            }
+        } else {
+            WritingReturnIntent::Catalog
+        });
+        if run.stage == WritingStage::Writing
+            && run.original.is_none()
+            && sequence == WritingSequence::SeeCopyHearSay
+            && self.page == Page::Foundations
+            && course.step_id == task.foundation_step_id
+            && course.step_revision == task.foundation_step_revision
+            && course.played.contains(&task.audio_id)
+        {
+            run.audio_completed = true;
+        }
+        self.repo.set(&activity_key(run.id), &run)?;
         self.repo.set(&key, &run.id)?;
         self.repo.set("handwriting.active", &run.id)?;
+        if inline {
+            self.repo.set("handwriting.surface", &"run")?;
+            return Ok(());
+        }
         if run.stage == WritingStage::Complete {
             self.writing_new_round(run.id, run.round_id, sequence)?
         }
@@ -703,7 +827,11 @@ impl AppState {
             return Err("The spoken example belongs to another writing attempt.".into());
         }
         run.audio_completed = true;
-        self.repo.set(&activity_key(id), &run)
+        self.repo.set(&activity_key(id), &run)?;
+        if self.writing_returns_to_foundations(&run)? {
+            self.foundation_replayed(asset)?;
+        }
+        Ok(())
     }
     pub(crate) fn writing_model_revealed(&self, id: Uuid, round: Uuid) -> Result<()> {
         let mut run = self.active_handwriting()?;
@@ -931,11 +1059,15 @@ impl AppState {
         if run.stage != WritingStage::Complete {
             self.writing_say_done(id, round, disposition)?;
         }
-        if !run.entry_previewed {
+        if matches!(
+            run.return_intent,
+            Some(WritingReturnIntent::Foundations { .. })
+        ) || (run.return_intent.is_none() && !run.entry_previewed)
+        {
             let course = self.foundation_state()?;
-            if course.session == run.course_session
-                && course.step_id == run.course_step
+            if self.writing_returns_to_foundations(&run)?
                 && run.definition()?.foundation_step_id == course.step_id
+                && run.definition()?.foundation_step_revision == course.step_revision
             {
                 self.foundation_next(false)?;
             }
@@ -1003,7 +1135,9 @@ impl AppState {
     /// Explicit history reentry resumes the exact run, including a completed run,
     /// without starting a fresh attempt or changing the course's saved cursor.
     pub(crate) fn open_handwriting_history(&mut self, id: Uuid) -> Result<()> {
-        let run = self.writing_load(id)?;
+        let mut run = self.writing_load(id)?;
+        run.return_intent = Some(WritingReturnIntent::Catalog);
+        self.repo.set(&activity_key(id), &run)?;
         self.writing_reference_use()?;
         self.writing_prefer_run(&run)?;
         self.repo.set("handwriting.active", &id)?;
@@ -1119,7 +1253,10 @@ impl AppState {
         })
     }
     pub(crate) fn resume_handwriting(&mut self) -> Result<()> {
-        self.active_handwriting()?;
+        let run = self.active_handwriting()?;
+        if self.writing_returns_to_foundations(&run)? {
+            return self.navigate(Page::Foundations);
+        }
         self.repo.set("handwriting.surface", &"run")?;
         self.navigate(Page::Handwriting)
     }
@@ -1245,6 +1382,13 @@ impl AppState {
         Ok(())
     }
     pub(crate) fn writing_navigation_needs_flush(&self) -> bool {
+        if self.page == Page::Foundations {
+            return self.foundation_writing().ok().flatten().is_some_and(|run| {
+                self.active_handwriting()
+                    .ok()
+                    .is_some_and(|active| active.id == run.id)
+            });
+        }
         self.page == Page::Handwriting
             && !matches!(
                 self.repo

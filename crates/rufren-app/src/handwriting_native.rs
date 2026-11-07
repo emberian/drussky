@@ -1,6 +1,6 @@
 //! Native paper is a renderer of a Rust-owned writing activity. Drawing checkpoints
 //! contain PencilKit control points, never relabelled browser hardware samples.
-use base64::{engine::general_purpose::STANDARD, Engine as _};
+use base64::{Engine as _, engine::general_purpose::STANDARD};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::rc::Rc;

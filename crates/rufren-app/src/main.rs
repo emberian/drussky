@@ -58,8 +58,8 @@ mod teacher_revisit_view;
 mod teacher_view;
 mod tutor_view;
 mod workspace_view;
-mod writing_speech;
 mod writing_history_view;
+mod writing_speech;
 use audio_studio::{AudioStudio, StudioRecording};
 use exposure_view::PresentedRussian;
 use lessons::Lessons;
@@ -137,7 +137,7 @@ fn Shell(initial: AppState) -> Element {
     rsx! {
         style {"{STYLE}"}
         style {"{FEEDBACK_STYLE}"}
-        div {class:"shell",
+        div {class:if state.page==Page::Foundations{"shell lesson-active"}else{"shell"},
             aside {class:"sidebar",
                 a {class:"brand",href:"#",onclick:move |event|{event.prevent_default();handwriting_view::nav_act(app,|s|navigation::open(s,navigation::Destination::Today));}, span {class:"brand-mark","р"} strong {"Drussky"}}
                 navigation::PrimaryNavigation {app,compact:false}
@@ -235,8 +235,8 @@ fn Today(mut app: Signal<AppState>) -> Element {
             p {class:"lede",if foundation_review_active {"Try a familiar word, then compare with its model. Your place in the course is kept."}else if foundation_primary {"Start with a sound, meet its letters, and try a little Russian. Everything you need for these first steps is already here."}else{"A conversation, a passage, a little practice. Follow what interests you."}}
             div {class:"actions",
                 button {id:"today-primary",class:"primary",onclick:move |_|act(app,|s|{
-                    if resume {s.begin()}else if writing_resume {s.resume_handwriting()}else if foundation_primary {s.start_foundations()}else if finished {s.navigate(Page::Progress)}else{s.begin()}
-                }),if resume {"Continue learning"}else if writing_resume {"Continue writing and speaking"}else if foundation_primary && foundation_review_active {"Continue recall practice"}else if foundation_primary && foundation_started {"Continue sounds & letters"}else if foundation_primary {"Start sounds & letters"}else if finished {"See your progress"}else{"Continue learning"}}
+                    if resume {s.begin()}else if foundation_primary {s.start_foundations()}else if writing_resume {s.resume_handwriting()}else if finished {s.navigate(Page::Progress)}else{s.begin()}
+                }),if resume {"Continue learning"}else if foundation_primary && foundation_review_active {"Continue recall practice"}else if foundation_primary && foundation_started {"Continue sounds & letters"}else if foundation_primary {"Start sounds & letters"}else if writing_resume {"Continue writing and speaking"}else if finished {"See your progress"}else{"Continue learning"}}
                 button {class:"secondary",onclick:move |_|act(app,|s|navigation::open(s,navigation::Destination::Talk)),"Let’s talk"}
                 button {class:"text-button",onclick:move |_|act(app,|s|s.navigate(Page::Reader)),"Find something to read"}
             }

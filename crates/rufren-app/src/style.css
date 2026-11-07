@@ -686,3 +686,6 @@ h1,h2,h3,.hero h1,.page-heading h1,.lesson-index h2,.explanation h3 {font-family
 
 /* Keep each writing action a separate touch target at narrow widths. */
 .writing-lesson > button { margin-right: 8px; margin-bottom: 8px; }
+
+/* Focused lessons retain their own Pause action; navigation cannot cover ink. */
+@media(max-width:760px){.lesson-active .compact-navigation{display:none}.lesson-active .main{padding-bottom:24px}}

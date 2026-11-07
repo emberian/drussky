@@ -9,21 +9,28 @@ use rufren_content::FoundationAction;
 use rufren_content::foundations::{FoundationRecallMode, foundation_step_pack_revision};
 use rufren_core::{PresentationPurpose, StimulusPresentation};
 use uuid::Uuid;
-const STYLE: &str = r#".foundation-card{max-width:680px;margin:0 auto;padding-bottom:1rem}.foundation-card h1{font-size:1.6rem;line-height:1.15;margin:.5rem 0}.foundation-card>p{margin:.5rem 0}.foundation-card .foundation-instruction{font-size:1.08rem;line-height:1.45;font-weight:500;margin:.85rem 0 .55rem}.foundation-card details{margin-top:.65rem}.foundation-card button{white-space:normal;overflow-wrap:anywhere}.foundation-card .actions{margin-top:.8rem}.foundation-card>button{margin-right:.5rem;margin-bottom:.35rem}.foundation-context{font-size:1rem;line-height:1.5}.foundation-symbols{font-size:2.7rem;letter-spacing:.12em;line-height:1.25;text-align:center;padding:.35rem 0;margin:.35rem 0}.foundation-symbols>div,.foundation-symbols .russian,.foundation-script{font:inherit!important;line-height:inherit!important;margin:0!important;padding:0!important}.foundation-tray{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0}.foundation-tray button{font-size:1.4rem;min-width:60px;min-height:50px;max-width:100%}.foundation-progress{font-size:.9rem;color:var(--muted)}.foundation-draft{min-height:72px;padding:1rem;border:1px solid var(--line,#d8ded4);border-radius:8px;font-size:2rem}.foundation-feedback{padding:1rem;border-left:4px solid var(--accent);margin:1rem 0}.foundation-active{background:#e3e9df;border-radius:8px}"#;
+const STYLE: &str = r#".foundation-card{max-width:680px;margin:0 auto;padding-bottom:1rem}.foundation-card h1{font-size:1.6rem;line-height:1.15;margin:.5rem 0}.foundation-card>p{margin:.5rem 0}.foundation-card .foundation-instruction{font-size:1.08rem;line-height:1.45;font-weight:500;margin:.85rem 0 .55rem}.foundation-card details{margin-top:.65rem}.foundation-card button{white-space:normal;overflow-wrap:anywhere}.foundation-card .actions{margin-top:.8rem}.foundation-card>button{margin-right:.5rem;margin-bottom:.35rem}.foundation-context{font-size:1rem;line-height:1.5}.foundation-symbols{font-size:2.7rem;letter-spacing:.12em;line-height:1.25;text-align:center;padding:.35rem 0;margin:.35rem 0}.foundation-symbols>div,.foundation-symbols .russian,.foundation-script{font:inherit!important;line-height:inherit!important;margin:0!important;padding:0!important}.foundation-tray{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0}.foundation-tray button{font-size:1.4rem;min-width:60px;min-height:50px;max-width:100%}.foundation-progress{font-size:.9rem;color:var(--muted)}.foundation-draft{min-height:72px;padding:1rem;border:1px solid var(--line,#d8ded4);border-radius:8px;font-size:2rem}.foundation-feedback{padding:1rem;border-left:4px solid var(--accent);margin:1rem 0}.foundation-active{background:#e3e9df;border-radius:8px}.foundation-with-paper{max-width:900px}.foundation-with-paper .foundation-symbols{font-size:2rem;padding:0}.foundation-with-paper .foundation-instruction{font-size:1rem;margin:.65rem 0}.foundation-session-tools{border-top:1px solid var(--line);padding-top:.6rem}.foundation-with-paper>.writing-lesson{padding:0}.foundation-with-paper>details{font-size:.9rem}.foundation-card>.foundation-progress{margin-bottom:1rem}.foundation-heading{display:flex;align-items:start;justify-content:space-between;gap:12px}.foundation-heading>button{flex-shrink:0}.writing-embedded .ink-instruction,.writing-embedded .writing-prompt{display:none}@media(max-width:600px){.foundation-heading{align-items:center}.foundation-heading h1{font-size:1.3rem}}"#;
 #[component]
-pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
+pub(crate) fn Foundations(mut app: Signal<AppState>) -> Element {
     use_drop(crate::foundation_audio::stop);
     let mut playing = use_signal(|| None::<String>);
     let mut audio_error = use_signal(String::new);
     let mut displayed_session = use_signal(|| None::<Uuid>);
+    let mut paper_error = use_signal(String::new);
     use_effect(move || {
-        if let Ok(current) = app.read().foundation_state() {
+        let current = { app.read().foundation_state() };
+        if let Ok(current) = current {
             if *displayed_session.peek() != Some(current.session) {
                 displayed_session.set(Some(current.session));
                 audio_error.set(String::new());
                 playing.set(None);
+                paper_error.set(String::new());
+                let prepared = { app.write().prepare_foundation_writing() };
+                if let Err(error) = prepared {
+                    paper_error.set(error);
+                }
                 spawn(async move {
-                    let _=document::eval("await new Promise(requestAnimationFrame);const heading=document.getElementById('foundation-step-heading');heading?.focus({preventScroll:true});heading?.scrollIntoView({block:'start',behavior:'instant'});").await;
+                    let _=document::eval("await new Promise(requestAnimationFrame);const heading=document.getElementById('foundation-step-heading')||document.getElementById('page-heading');heading?.focus({preventScroll:true});heading?.scrollIntoView({block:'start',behavior:'instant'});").await;
                 });
             }
         }
@@ -54,33 +61,39 @@ pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
     let can_answer = replay_ids.is_empty() || replay_ids.iter().any(|id| s.played.contains(id));
     let support_step = step.clone();
     let writing_task = rufren_content::handwriting_tasks::handwriting_task_for_step(&step.id);
-    let writing_available =
-        writing_task.is_some() && step.audio_ids.iter().all(|id| s.played.contains(id));
-    let writing_label = writing_task
-        .as_ref()
-        .map(|t| match t.layout {
-            rufren_content::handwriting_tasks::FoundationHandwritingLayout::LetterBox => {
-                "Write this letter"
-            }
-            rufren_content::handwriting_tasks::FoundationHandwritingLayout::PhraseLine => {
-                "Write and say this message"
-            }
-            _ => {
-                if t.meaning.is_some() {
-                    "Write and say this word"
-                } else {
-                    "Write and say this sound pattern"
-                }
-            }
-        })
-        .unwrap_or("Write and say");
-    let writing_complete = app.read().handwriting_course_complete(session);
-    let writing_started = app
-        .read()
-        .handwriting_for_course(session)
-        .ok()
-        .flatten()
-        .is_some();
+    let embedded = !s.finished
+        && s.review_resume.is_none()
+        && matches!(step.action, FoundationAction::Present { .. })
+        && writing_task.is_some();
+    let writing_run = app.read().foundation_writing().ok().flatten();
+    let instruction = if embedded {
+        let task = writing_task.as_ref().unwrap();
+        let target = if matches!(
+            task.layout,
+            rufren_content::handwriting_tasks::FoundationHandwritingLayout::LetterBox
+        ) {
+            format!("capital {}", task.target)
+        } else {
+            format!("{}", task.target)
+        };
+        format!(
+            "Listen, then copy {target}. Compare keeps your drawing beside the example so you can check it."
+        )
+    } else {
+        step.instruction.clone()
+    };
+    let next_label = foundation_next_label(&pack, s.episode, s.step);
+    let section_label = if s.episode == 0 {
+        if s.step < 4 {
+            "Two letters"
+        } else if s.step < 9 {
+            "Put the sounds together"
+        } else {
+            "Hear yes and no"
+        }
+    } else {
+        "Sounds, words and meaning"
+    };
     let refreshers = crate::foundation::foundation_missing_intros(&s, &step);
     let draft_text = match &step.action {
         FoundationAction::Choose { options, .. } => s
@@ -99,16 +112,18 @@ pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
     };
     rsx! {
      style {"{STYLE}"}
-     section {class:"card foundation-card",id:"foundation-card",
-      p {class:"eyebrow",if s.review_resume.is_some(){"RECALL PRACTICE"}else{"FOUNDATIONS · EPISODE {s.episode+1} OF {pack.episodes.len()}"}}
-      h1 {id:"page-heading",tabindex:"-1","{episode.title}"}
-      if s.review_resume.is_none(){p {class:"foundation-progress","Step {s.step+1} of {episode.steps.len()} · untimed"}}
+     section {class:if embedded{"card foundation-card foundation-with-paper"}else{"card foundation-card"},id:"foundation-card",
+      p {class:"eyebrow",if s.review_resume.is_some(){"RECALL PRACTICE"}else{"SOUNDS & LETTERS · LESSON {s.episode+1} OF {pack.episodes.len()}"}}
+      header {class:"foundation-heading",h1 {id:"page-heading",tabindex:"-1","{episode.title}"}button {class:"text-button",onclick:move |_|foundation_nav(app,session,|a|a.navigate(Page::Today)),"Pause lesson"}}
+      if s.review_resume.is_none(){p {class:"foundation-progress","Step {s.step+1} of {episode.steps.len()} · {section_label}"}}
       if s.finished {
-       h2 {"A small beginning, ready to revisit"}
-       p {"You reached the end of the current small-step course. Return to these words whenever you like. Later lessons include more untaught letters; use their audio and English support when exploring."}
-       button {onclick:move |_|foundation_act(app,session,|a|a.navigate(Page::Lessons)),"Explore later lessons with help"}
-       button {class:"secondary",onclick:move |_|foundation_act(app,session,|a|a.foundation_repeat_episode()),"Repeat this episode"}
-       button {class:"secondary",onclick:move |_|foundation_act(app,session,|a|a.navigate(Page::Today)),"Stop here"}
+       h2 {"Your next small step"}
+       p {"You reached the end of this route through the alphabet and short messages. Its examples introduce all 33 letters. It is fine if some still feel unfamiliar, or if you skipped steps."}
+       p {"For a familiar next step, repeat the final book, number and robot scenes. Today also offers recall practice for words you have already tried, when it is time to revisit them."}
+       button {onclick:move |_|foundation_nav(app,session,|a|a.foundation_repeat_episode()),"Repeat these short scenes"}
+       button {class:"secondary",onclick:move |_|foundation_nav(app,session,|a|a.navigate(Page::Today)),"Return to Today"}
+       p {"For something new, explore a lesson with its audio and English support. New words and grammar still need their own introductions; knowing the letters is a beginning."}
+       button {class:"secondary",onclick:move |_|foundation_nav(app,session,|a|a.navigate(Page::Lessons)),"Browse supported lessons"}
       } else {
        if !refreshers.is_empty(){
         details {open:true,summary {"A quick introduction for a step you skipped"}
@@ -125,7 +140,7 @@ pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
          }
         }
        }
-       p {class:"foundation-instruction",id:"foundation-step-heading",tabindex:"-1","{step.instruction}"}
+       p {class:"foundation-instruction",id:"foundation-step-heading",tabindex:"-1","{instruction}"}
        if let Some(display)=step.display.clone() {
         if display.chars().any(|c| ('А'..='я').contains(&c)) {
          div {class:if playing().is_some(){"foundation-symbols foundation-active"}else{"foundation-symbols"},
@@ -138,7 +153,7 @@ pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
         FoundationAction::Complete{summary}=>rsx!{p {"{summary}"}},
         _=>rsx!{},
        }
-       if show_audio {
+       if show_audio && !embedded {
         for id in replay_ids.clone() {
          {let asset=id.clone();let spoken=pack.assets.iter().find(|a|a.id==id).map(|a|a.spoken.clone()).unwrap_or_default();
           rsx!{button {class:if can_answer{"secondary"}else{"primary"},disabled:playing().is_some(),onclick:move |_|{
@@ -149,7 +164,14 @@ pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
         }
 
        }
-       if writing_available {button {class:if writing_complete{"secondary"}else{"primary"},onclick:move |_|foundation_act(app,session,|a|a.open_handwriting()),if writing_complete{"Write and say it again"}else if writing_started{"Continue writing and speaking"}else{"{writing_label}"}}}
+       if embedded {
+        if let Some(run) = writing_run {
+         crate::handwriting_view::WritingExercise {key:"lesson-paper-{session}",app,run,embedded:true,next_label:Some(next_label.clone())}
+        } else if !paper_error().is_empty() {
+         p {role:"alert","{paper_error}"}
+         button {class:"secondary",onclick:move |_|{let result={app.write().prepare_foundation_writing()};paper_error.set(result.err().unwrap_or_default());},"Retry opening paper"}
+        } else {p {role:"status","Preparing your paper…"}}
+       }
        if !audio_error().is_empty(){p {role:"alert","{audio_error}"}p {"Retry Listen, or Skip for now. Skipping does not count as listening practice."}}
        match &step.action {
         FoundationAction::Choose{options,..}=>rsx!{
@@ -220,10 +242,10 @@ pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
         }
        }
        if pending {button {onclick:move |_|foundation_act(app,session,|a|a.foundation_submit(&support_step)),"Retry saving this response"}p {"Your original response is reserved. Feedback appears after it is safely saved."}}
-       if (is_recall&&feedback.is_some())||(!is_recall&&!matches!(step.action,FoundationAction::Choose{..}|FoundationAction::Blend{..}|FoundationAction::Copy{..}))||s.accepted {
-        button {class:if writing_available&&!writing_complete{"secondary"}else{"primary"},disabled:pending||playing().is_some()||(matches!(step.action,FoundationAction::Present{..})&&!can_answer)||(is_read&&!s.revealed),onclick:move |_|foundation_act(app,session,|a|{crate::foundation_audio::stop();a.foundation_next(false)}),if s.review_resume.is_some(){"Back to my course"}else if matches!(step.action,FoundationAction::Complete{..}){"Next episode"}else{"Continue"}}
+       if !embedded && ((is_recall&&feedback.is_some())||(!is_recall&&!matches!(step.action,FoundationAction::Choose{..}|FoundationAction::Blend{..}|FoundationAction::Copy{..}))||s.accepted) {
+        button {class:"primary",disabled:pending||playing().is_some()||(matches!(step.action,FoundationAction::Present{..})&&!can_answer)||(is_read&&!s.revealed),onclick:move |_|foundation_nav(app,session,|a|{crate::foundation_audio::stop();a.foundation_next(false)}),if s.review_resume.is_some(){"Back to my course"}else{"{next_label}"}}
        }
-       if matches!(step.action,FoundationAction::Complete{..}){button {class:"secondary",onclick:move |_|foundation_act(app,session,|a|a.foundation_repeat_episode()),"Repeat this episode"}}
+       if matches!(step.action,FoundationAction::Complete{..}){button {class:"secondary",onclick:move |_|foundation_nav(app,session,|a|a.foundation_repeat_episode()),"Repeat this episode"}}
        details {
         summary {"Smaller step / Show me"}
         p {"Replay as often as you like. You can stop or skip without losing your place."}
@@ -260,9 +282,8 @@ pub(crate) fn Foundations(app: Signal<AppState>) -> Element {
         }
        }
        }
-       div {class:"actions",
-        button {class:"secondary",disabled:pending,onclick:move |_|foundation_act(app,session,|a|{crate::foundation_audio::stop();a.foundation_next(true)}),if s.review_resume.is_some(){"Skip and return to my course"}else{"Skip for now"}}
-        button {class:"secondary",onclick:move |_|foundation_act(app,session,|a|a.navigate(Page::Today)),"Stop here · save my place"}
+       div {class:"actions foundation-session-tools",
+        button {class:"text-button",disabled:pending,onclick:move |_|foundation_nav(app,session,move|a|{crate::foundation_audio::stop();a.foundation_next(!embedded || !can_answer)}),if s.review_resume.is_some(){"Skip and return to my course"}else if embedded&&can_answer{"Continue without writing"}else{"Skip for now"}}
        }
       }
      }
@@ -301,4 +322,51 @@ fn foundation_act(
         }
         f(a)
     })
+}
+
+/// A continuation describes the next learning action, never an implementation route.
+fn foundation_next_label(
+    pack: &rufren_content::FoundationPack,
+    episode: usize,
+    step: usize,
+) -> String {
+    let current = &pack.episodes[episode];
+    if step + 1 == current.steps.len() {
+        return pack
+            .episodes
+            .get(episode + 1)
+            .map(|next| format!("Next lesson: {}", next.title))
+            .unwrap_or_else(|| "Finish this course".into());
+    }
+    let next = &current.steps[step + 1];
+    match &next.action {
+        FoundationAction::Present { .. } => next
+            .display
+            .as_ref()
+            .filter(|text| {
+                text.chars().count() <= 28 && text.chars().any(|c| ('А'..='я').contains(&c))
+            })
+            .map(|text| format!("Next: {text}"))
+            .unwrap_or_else(|| "Next: listen for meaning".into()),
+        FoundationAction::Choose { .. } => "Next: listen and choose".into(),
+        FoundationAction::Blend { .. } => "Next: put the letters together".into(),
+        FoundationAction::Read { .. } => "Next: try reading".into(),
+        FoundationAction::Speak { .. } => "Next: try saying it".into(),
+        FoundationAction::Copy { .. } => "Next: try writing".into(),
+        FoundationAction::Recall { .. } => "Next: try remembering".into(),
+        FoundationAction::Complete { .. } => "Finish this lesson".into(),
+    }
+}
+
+fn foundation_nav(
+    app: Signal<AppState>,
+    session: Uuid,
+    f: impl FnOnce(&mut AppState) -> crate::repository::Result<()> + 'static,
+) {
+    crate::handwriting_view::nav_act(app, move |state| {
+        if state.foundation_state()?.session != session {
+            return Err("That lesson step changed. Your work is kept.".into());
+        }
+        f(state)
+    });
 }

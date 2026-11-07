@@ -1,10 +1,9 @@
 //! iOS-only public selectors omitted by objc2-pencil-kit0.3.2's generated bindings.
 //! Match PencilKit/UIKit/AVFAudio SDK headers; no private classes or selectors.
 use objc2::{
-    extern_class, extern_methods, extern_protocol,
+    MainThreadOnly, extern_class, extern_methods, extern_protocol,
     rc::{Allocated, Retained},
     runtime::ProtocolObject,
-    MainThreadOnly,
 };
 use objc2_core_foundation::CGRect;
 use objc2_foundation::{NSData, NSError, NSObject, NSObjectProtocol, NSString};

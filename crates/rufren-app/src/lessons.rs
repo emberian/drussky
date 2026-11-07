@@ -37,7 +37,7 @@ pub(crate) fn Lessons(mut app: Signal<AppState>) -> Element {
     rsx! {
         style {".lesson-link strong,.lesson-link small {{display:block}}.lesson-link small {{margin-top:4px;font-size:12px;font-weight:400;line-height:1.4;color:var(--muted)}}.lesson-index input {{width:100%;margin-bottom:16px}}"}
         div {class:if detail_open {"page-heading lesson-catalog-heading detail-open"}else{"page-heading lesson-catalog-heading"}, div {h1 {"Learn"}p {"Begin with sounds and letters, then explore Russian at your own pace."}}}
-        if !detail_open {section {class:"panel foundation-entry",h2 {"Sounds & letters"}p {"A prepared introduction from zero: hear your first sounds, meet six Cyrillic letters, and build a short message. Audio is included."}button {class:"primary",onclick:move |_|act(app,|s|s.start_foundations()),if state.foundation_has_started(){"Return to sounds & letters"}else{"Start sounds & letters"}}}
+        if !detail_open {section {class:"panel foundation-entry",h2 {"Sounds & letters"}p {"Learn the Cyrillic alphabet through sounds, writing and short words. Start from zero, with the recordings and paper already in each lesson."}button {class:"primary",onclick:move |_|act(app,|s|s.start_foundations()),if state.foundation_has_started(){"Return to sounds & letters"}else{"Start sounds & letters"}}}
         h2 {"Explore by topic"}p {class:"quiet","These {state.content.lessons.len()} prepared topic lessons include full Russian text and English explanations. They are a reference to explore; they do not yet form a gradual course through the alphabet."}}
         div {class:if detail_open {"lesson-layout detail-open"}else{"lesson-layout"},
             aside {class:"lesson-index",aria_label:"Lesson sequence",

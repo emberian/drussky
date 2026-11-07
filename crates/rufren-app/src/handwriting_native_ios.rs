@@ -34,6 +34,7 @@ struct Pending {
 struct State {
     request: NativeWritingRequest,
     inline: Cell<Option<NativeWritingHostRect>>,
+    initial_inline_viewport: Cell<bool>,
     outbox: Rc<EventQueue>,
     controller: Retained<WritingController>,
     canvas: Retained<PKCanvasView>,
@@ -911,6 +912,7 @@ fn open(
     let s = Rc::new(State {
         request,
         inline: Cell::new(host),
+        initial_inline_viewport: Cell::new(host.is_some()),
         outbox: Rc::new(EventQueue {
             callback,
             events: RefCell::new(VecDeque::new()),
@@ -1062,6 +1064,28 @@ pub(crate) fn update_inline_rect(
     );
     s.inline.set(Some(host));
     layout(&s);
+    if host.width > 0.0 && host.height > 0.0 && s.initial_inline_viewport.replace(false) {
+        // Wait for the actual inline bounds, not the controller's initial
+        // full-window frame. Only a fresh sheet is fitted: subsequent geometry
+        // updates preserve the learner's zoom and position.
+        if let Some(checkpoint) = &s.request.initial {
+            s.canvas
+                .setMinimumZoomScale(checkpoint.zoom_scale.min(0.25));
+            s.canvas.setMaximumZoomScale(checkpoint.zoom_scale.max(4.0));
+            s.canvas.setZoomScale(checkpoint.zoom_scale);
+            s.canvas.setContentOffset(CGPoint::new(
+                checkpoint.content_offset[0],
+                checkpoint.content_offset[1],
+            ));
+        } else {
+            let fit = ((host.width * sx / s.request.paper.width_points)
+                .min(host.height * sy / s.request.paper.height_points))
+            .clamp(0.1, 4.0);
+            s.canvas.setMinimumZoomScale(fit.min(0.25));
+            s.canvas.setZoomScale(fit);
+            s.canvas.setContentOffset(CGPoint::new(0.0, 0.0));
+        }
+    }
     Ok(())
 }
 pub(crate) fn native_listen(instance: Uuid) -> NativeWritingResult<()> {

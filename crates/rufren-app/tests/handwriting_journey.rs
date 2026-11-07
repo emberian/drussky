@@ -174,11 +174,23 @@ fn save(a: &mut AppState, run: &HandwritingActivity, ink: &HandwritingSubmission
 fn writing_requires_taught_source_and_preserves_exact_course() {
     let mut a = app();
     a.start_foundations().unwrap();
-    assert!(a.open_handwriting().is_err());
+    let task = handwriting_task_for_step(&a.foundation_state().unwrap().step_id).unwrap();
+    assert!(
+        a.open_writing_task(&task.id, Sequence::SeeCopyHearSay)
+            .is_err()
+    );
+    let unheard = serde_json::to_value(a.foundation_state().unwrap()).unwrap();
+    a.open_handwriting().unwrap();
+    assert!(a.page == Page::Foundations);
+    assert!(!a.active_handwriting().unwrap().audio_completed);
+    assert_eq!(
+        serde_json::to_value(a.foundation_state().unwrap()).unwrap(),
+        unheard
+    );
     a.foundation_replayed("foundation-a").unwrap();
     let before = serde_json::to_value(a.foundation_state().unwrap()).unwrap();
     a.open_handwriting().unwrap();
-    assert!(a.page == Page::Handwriting);
+    assert!(a.page == Page::Foundations);
     let run = a.active_handwriting().unwrap();
     assert_eq!(run.definition().unwrap().target, "А");
     assert_eq!(
@@ -186,6 +198,150 @@ fn writing_requires_taught_source_and_preserves_exact_course() {
         before
     );
     assert_eq!(a.library.attempts().count(), 0);
+}
+#[test]
+fn copy_continues_completed_course_model_without_inventing_exposure() {
+    let mut a = app();
+    source(&mut a, "f2-cat");
+    let task = handwriting_task_for_step("f2-cat").unwrap();
+    a.foundation_replayed(&task.audio_id).unwrap();
+    let events = a.library.events.len();
+    a.open_writing_task(&task.id, Sequence::SeeCopyHearSay)
+        .unwrap();
+    let run = a.active_handwriting().unwrap();
+    assert!(run.audio_completed);
+    assert_eq!(a.library.events.len(), events);
+    save(&mut a, &run, &drawing(&run, true));
+    a.writing_go_say(run.id, run.round_id).unwrap();
+    a.writing_say_done(run.id, run.round_id, SayDisposition::SelfReportedSaid)
+        .unwrap();
+    a.writing_new_round(run.id, run.round_id, Sequence::SeeCopyHearSay)
+        .unwrap();
+    let fresh = a.active_handwriting().unwrap();
+    assert!(!fresh.audio_completed);
+    assert_eq!(fresh.history[0].audio_completed, Some(true));
+}
+#[test]
+fn copy_does_not_reuse_unheard_foreign_or_catalog_listening() {
+    for case in ["unheard", "asset", "step", "catalog"] {
+        let mut a = app();
+        source(&mut a, "f2-cat");
+        let task = handwriting_task_for_step("f2-cat").unwrap();
+        let mut state = a.foundation_state().unwrap();
+        state.played.clear();
+        a.foundation_save(&state).unwrap();
+        if case != "unheard" {
+            a.foundation_replayed(if case == "asset" {
+                "foundation-a"
+            } else {
+                &task.audio_id
+            })
+            .unwrap();
+        }
+        if case == "step" {
+            let mut state = a.foundation_state().unwrap();
+            state
+                .encounters
+                .push(format!("{}:encountered", task.foundation_step_id));
+            let pack = rufren_content::foundations();
+            let step = &pack.episodes[0].steps[0];
+            state.episode = 0;
+            state.step = 0;
+            state.episode_id = pack.episodes[0].id.clone();
+            state.step_id = step.id.clone();
+            state.step_revision = step.revision.clone();
+            a.foundation_save(&state).unwrap();
+        }
+        // Encounter eligibility alone is not listening completion.
+        let mut state = a.foundation_state().unwrap();
+        state
+            .encounters
+            .push(format!("{}:encountered", task.foundation_step_id));
+        a.foundation_save(&state).unwrap();
+        if case == "catalog" {
+            a.open_writing_catalog().unwrap();
+        }
+        a.open_writing_task(&task.id, Sequence::SeeCopyHearSay)
+            .unwrap();
+        assert!(!a.active_handwriting().unwrap().audio_completed, "{case}");
+    }
+}
+#[test]
+fn invalid_course_revision_cannot_supply_copy_listening() {
+    let mut a = app();
+    source(&mut a, "f2-cat");
+    let task = handwriting_task_for_step("f2-cat").unwrap();
+    a.foundation_replayed(&task.audio_id).unwrap();
+    let mut state = a.foundation_state().unwrap();
+    state.step_revision = "obsolete-step-revision".into();
+    a.foundation_save(&state).unwrap();
+    assert!(
+        a.open_writing_task(&task.id, Sequence::SeeCopyHearSay)
+            .is_err()
+    );
+    assert!(a.active_handwriting().is_err());
+}
+#[test]
+fn course_entry_ignores_stale_catalog_surface() {
+    let mut a = app();
+    a.open_writing_catalog().unwrap();
+    source(&mut a, "f2-cat");
+    let task = handwriting_task_for_step("f2-cat").unwrap();
+    a.foundation_replayed(&task.audio_id).unwrap();
+    a.open_writing_task(&task.id, Sequence::SeeCopyHearSay)
+        .unwrap();
+    let run = a.active_handwriting().unwrap();
+    assert!(!run.entry_previewed);
+    assert!(run.audio_completed);
+    save(&mut a, &run, &drawing(&run, true));
+    a.writing_finish_and_continue(run.id, run.round_id, SayDisposition::SelfReportedSaid)
+        .unwrap();
+    assert!(a.page == Page::Foundations);
+    assert_ne!(a.foundation_state().unwrap().session, run.course_session);
+}
+#[test]
+fn a_new_course_session_does_not_inherit_the_previous_runs_listening() {
+    let mut a = app();
+    source(&mut a, "f2-cat");
+    let task = handwriting_task_for_step("f2-cat").unwrap();
+    a.foundation_replayed(&task.audio_id).unwrap();
+    a.open_writing_task(&task.id, Sequence::SeeCopyHearSay)
+        .unwrap();
+    let first = a.active_handwriting().unwrap();
+    assert!(first.audio_completed);
+    source(&mut a, "f2-cat");
+    let mut state = a.foundation_state().unwrap();
+    state.played.clear();
+    state.encounters.push("f2-cat:encountered".into());
+    a.foundation_save(&state).unwrap();
+    a.open_writing_task(&task.id, Sequence::SeeCopyHearSay)
+        .unwrap();
+    let next = a.active_handwriting().unwrap();
+    assert_ne!(next.course_session, first.course_session);
+    assert!(!next.audio_completed);
+    assert!(
+        a.handwriting_history()
+            .unwrap()
+            .iter()
+            .find(|r| r.id == first.id)
+            .unwrap()
+            .audio_completed
+    );
+}
+#[test]
+fn dictation_requires_fresh_input_even_after_matching_course_completion() {
+    let mut a = app();
+    source(&mut a, "f2-cat");
+    let task = handwriting_task_for_step("f2-cat").unwrap();
+    a.foundation_replayed(&task.audio_id).unwrap();
+    a.open_writing_task(&task.id, Sequence::HearWriteCompareSay)
+        .unwrap();
+    let run = a.active_handwriting().unwrap();
+    assert!(!run.audio_completed);
+    assert!(
+        a.writing_accept_web(run.id, run.round_id, &drawing(&run, true))
+            .is_err()
+    );
 }
 #[test]
 fn original_pressure_is_immutable_and_separate_from_repair_draft() {
@@ -211,7 +367,13 @@ fn word_and_phrase_complete_connected_audio_ink_compare_say_without_grade() {
     for step in ["f2-cat", "f3-message"] {
         let mut a = app();
         let run = begin(&mut a, step, Sequence::HearWriteCompareSay);
-        let before = serde_json::to_value(a.foundation_state().unwrap()).unwrap();
+        let mut expected = a.foundation_state().unwrap();
+        // The real completed playback records replay support, while the
+        // course cursor and all learning evidence remain unchanged.
+        if !expected.cues.contains(&rufren_core::Cue::Replay) {
+            expected.cues.push(rufren_core::Cue::Replay);
+        }
+        let before = serde_json::to_value(expected).unwrap();
         let original = drawing(&run, true);
         a.handwriting_store_original(&run.scope(), &run.task(), &original)
             .unwrap();
@@ -359,7 +521,7 @@ fn unfinished_changed_route_reentry_preserves_both_exact_drafts() {
     save(&mut a, &copy, &original);
     a.writing_new_round(copy.id, copy.round_id, Sequence::HearWriteCompareSay)
         .unwrap();
-    let hear = a.active_handwriting().unwrap();
+    let mut hear = a.active_handwriting().unwrap();
     let hear_draft = drawing(&hear, false);
     a.handwriting_store_draft(&hear.scope(), &hear.task(), &hear_draft)
         .unwrap();
@@ -374,6 +536,7 @@ fn unfinished_changed_route_reentry_preserves_both_exact_drafts() {
         .unwrap();
     a.open_writing_task(&copy.task_id, Sequence::HearWriteCompareSay)
         .unwrap();
+    hear.return_intent = Some(WritingReturnIntent::Catalog);
     assert_eq!(a.active_handwriting().unwrap(), hear);
     assert_eq!(
         a.handwriting_draft(&hear.scope(), &hear.task()).unwrap(),
@@ -406,8 +569,8 @@ fn history_reopens_old_session_exactly_without_fresh_attempt_or_course_movement(
     a.writing_go_say(first.id, first.round_id).unwrap();
     a.writing_say_done(first.id, first.round_id, SayDisposition::Skipped)
         .unwrap();
-    let completed = a.active_handwriting().unwrap();
-    let current = begin(&mut a, "f3-message", Sequence::HearWriteCompareSay);
+    let mut completed = a.active_handwriting().unwrap();
+    let mut current = begin(&mut a, "f3-message", Sequence::HearWriteCompareSay);
     let draft = drawing(&current, false);
     a.handwriting_store_draft(&current.scope(), &current.task(), &draft)
         .unwrap();
@@ -415,6 +578,7 @@ fn history_reopens_old_session_exactly_without_fresh_attempt_or_course_movement(
     let mut reloaded = AppState::from_repository(a.repo.clone()).unwrap();
     assert_eq!(reloaded.handwriting_history().unwrap().len(), 2);
     reloaded.open_handwriting_history(first.id).unwrap();
+    completed.return_intent = Some(WritingReturnIntent::Catalog);
     assert_eq!(reloaded.active_handwriting().unwrap(), completed);
     assert_eq!(
         serde_json::to_value(reloaded.foundation_state().unwrap()).unwrap(),
@@ -431,6 +595,7 @@ fn history_reopens_old_session_exactly_without_fresh_attempt_or_course_movement(
         "review must be read-only"
     );
     reloaded.open_handwriting_history(current.id).unwrap();
+    current.return_intent = Some(WritingReturnIntent::Catalog);
     assert_eq!(reloaded.active_handwriting().unwrap(), current);
     assert_eq!(
         reloaded
@@ -472,7 +637,9 @@ fn canonical_history_recovers_interrupted_run_and_original_index_writes() {
             .any(|r| r.id == orphan.id)
     );
     reloaded.open_handwriting_history(orphan.id).unwrap();
-    assert_eq!(reloaded.active_handwriting().unwrap(), orphan);
+    let mut expected = orphan.clone();
+    expected.return_intent = Some(WritingReturnIntent::Catalog);
+    assert_eq!(reloaded.active_handwriting().unwrap(), expected);
     let review = reloaded
         .handwriting_round_review(orphan.id, orphan.round_id)
         .unwrap();
@@ -788,4 +955,135 @@ fn finish_catalog_writing_returns_to_catalog_without_advancing_course() {
         cursor
     );
     assert_eq!(a.active_handwriting().unwrap().say, SayDisposition::Skipped);
+}
+
+#[test]
+fn continuous_lesson_prepares_paper_before_audio_and_restores_exact_round() {
+    let mut a = app();
+    source(&mut a, "f1-a");
+    a.navigate(Page::Foundations).unwrap();
+    let mut course = a.foundation_state().unwrap();
+    course.played.clear();
+    a.foundation_save(&course).unwrap();
+    let run = a.prepare_foundation_writing().unwrap().unwrap();
+    assert!(a.page == Page::Foundations);
+    assert!(!run.audio_completed);
+    assert!(a.foundation_state().unwrap().played.is_empty());
+    assert!(
+        !a.handwriting_task_available(&run.definition().unwrap())
+            .unwrap()
+    );
+    let restored = a.prepare_foundation_writing().unwrap().unwrap();
+    assert_eq!(restored.id, run.id);
+    assert_eq!(restored.round_id, run.round_id);
+    assert!(a.writing_navigation_needs_flush());
+    a.writing_audio_completed(run.id, run.round_id, &run.definition().unwrap().audio_id)
+        .unwrap();
+    assert!(
+        a.foundation_state()
+            .unwrap()
+            .played
+            .contains(&run.definition().unwrap().audio_id)
+    );
+    a.resume_handwriting().unwrap();
+    assert!(a.page == Page::Foundations);
+}
+
+#[test]
+fn continuous_lesson_rebinds_catalog_intent_without_replacing_run() {
+    let mut a = app();
+    source(&mut a, "f1-a");
+    a.open_writing_catalog().unwrap();
+    let task = handwriting_task_for_step("f1-a").unwrap();
+    a.open_writing_task(&task.id, Sequence::SeeCopyHearSay)
+        .unwrap();
+    let catalog = a.active_handwriting().unwrap();
+    assert!(matches!(
+        catalog.return_intent,
+        Some(WritingReturnIntent::Catalog)
+    ));
+    a.navigate(Page::Foundations).unwrap();
+    let bound = a.prepare_foundation_writing().unwrap().unwrap();
+    assert_eq!(bound.id, catalog.id);
+    assert_eq!(bound.round_id, catalog.round_id);
+    assert_eq!(bound.course_step, catalog.course_step);
+    assert_eq!(bound.entry_previewed, catalog.entry_previewed);
+    assert!(bound.audio_completed);
+    a.open_handwriting_history(bound.id).unwrap();
+    assert!(a.page == Page::Handwriting);
+    assert!(matches!(
+        a.active_handwriting().unwrap().return_intent,
+        Some(WritingReturnIntent::Catalog)
+    ));
+}
+
+#[test]
+fn continuous_lesson_preparation_does_not_offer_paper_on_unrelated_actions() {
+    let mut a = app();
+    source(&mut a, "c5-keyboard");
+    assert!(a.prepare_foundation_writing().unwrap().is_none());
+}
+
+#[test]
+fn continuous_lesson_complete_is_restored_and_fresh_round_keeps_return_intent() {
+    let mut a = app();
+    source(&mut a, "f2-cat");
+    a.navigate(Page::Foundations).unwrap();
+    let run = a.prepare_foundation_writing().unwrap().unwrap();
+    a.writing_accept_web(run.id, run.round_id, &drawing(&run, true))
+        .unwrap();
+    a.writing_go_say(run.id, run.round_id).unwrap();
+    a.writing_say_done(run.id, run.round_id, SayDisposition::Skipped)
+        .unwrap();
+    let completed = a.prepare_foundation_writing().unwrap().unwrap();
+    assert_eq!(completed.id, run.id);
+    assert_eq!(completed.round_id, run.round_id);
+    assert_eq!(completed.stage, WritingStage::Complete);
+    let original = completed.original.clone();
+    a.writing_new_round(run.id, run.round_id, Sequence::SeeCopyHearSay)
+        .unwrap();
+    let fresh = a.active_handwriting().unwrap();
+    assert!(fresh.entry_previewed);
+    assert_eq!(fresh.return_intent, completed.return_intent);
+    assert_eq!(fresh.history[0].original, original);
+    a.writing_accept_web(fresh.id, fresh.round_id, &drawing(&fresh, true))
+        .unwrap();
+    a.writing_finish_and_continue(fresh.id, fresh.round_id, SayDisposition::Skipped)
+        .unwrap();
+    assert!(a.page == Page::Foundations);
+    let after = a.foundation_state().unwrap();
+    a.writing_finish_and_continue(fresh.id, fresh.round_id, SayDisposition::Skipped)
+        .unwrap();
+    assert!(a.page == Page::Foundations);
+    assert_eq!(a.foundation_state().unwrap().session, after.session);
+}
+
+#[test]
+fn completed_catalog_round_keeps_its_original_unheard_evidence_when_embedded() {
+    let mut a = app();
+    source(&mut a, "f2-cat");
+    a.open_writing_catalog().unwrap();
+    let task = handwriting_task_for_step("f2-cat").unwrap();
+    a.open_writing_task(&task.id, Sequence::SeeCopyHearSay)
+        .unwrap();
+    let run = a.active_handwriting().unwrap();
+    assert!(!run.audio_completed);
+    save(&mut a, &run, &drawing(&run, true));
+    a.writing_go_say(run.id, run.round_id).unwrap();
+    a.writing_say_done(run.id, run.round_id, SayDisposition::Skipped)
+        .unwrap();
+    let completed = a.active_handwriting().unwrap();
+    let original_bytes = a.handwriting_export_run(run.id).unwrap()["originals"].clone();
+    a.navigate(Page::Foundations).unwrap();
+    let mut restored = a.prepare_foundation_writing().unwrap().unwrap();
+    assert!(matches!(
+        restored.return_intent,
+        Some(WritingReturnIntent::Foundations { .. })
+    ));
+    restored.return_intent = completed.return_intent.clone();
+    assert_eq!(restored, completed);
+    assert_eq!(
+        a.handwriting_export_run(run.id).unwrap()["originals"],
+        original_bytes
+    );
 }
