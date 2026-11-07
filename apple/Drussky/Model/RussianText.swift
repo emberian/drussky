@@ -37,7 +37,37 @@ enum RussianText {
 
     static func matches(_ heard: String, _ target: String) -> Bool {
         let a = comparable(heard), b = comparable(target)
-        return !a.isEmpty && (a == b || a.replacingOccurrences(of: " ", with: "") == b.replacingOccurrences(of: " ", with: ""))
+        if !a.isEmpty && (a == b || a.replacingOccurrences(of: " ", with: "") == b.replacingOccurrences(of: " ", with: "")) { return true }
+        return shapeMatches(heard, target)
+    }
+
+    /// What a handwritten Russian letter can come back as from a recognizer that read it as
+    /// Latin (cursive т looks like m, и like u, д like g, а like a/o/G…). Lowercase keys.
+    static let lookalikes: [Character: Set<Character>] = [
+        "a": ["а"], "b": ["б", "в", "ь"], "c": ["с"], "d": ["д", "б"], "e": ["е", "ё", "э"], "g": ["д", "а"],
+        "h": ["н", "ч"], "i": ["і", "и"], "k": ["к"], "l": ["л"], "m": ["т", "м"], "n": ["п", "л", "т"],
+        "o": ["о"], "p": ["р"], "r": ["г"], "s": ["э", "з", "с"], "t": ["т"], "u": ["и", "ц"], "v": ["в", "у"],
+        "w": ["ш"], "x": ["х", "ж"], "y": ["у"], "z": ["г", "з"], "3": ["з", "э"], "6": ["б", "в"], "0": ["о"],
+        "4": ["ч"], "9": ["д"],
+    ]
+
+    /// Position-by-position match of a recognizer's reading against the known answer, allowing
+    /// each read glyph to stand for the Russian letters it is commonly confused with.
+    static func shapeMatches(_ heard: String, _ target: String) -> Bool {
+        var h = heard
+        for (pair, letter) in [("bl", "ы"), ("bI", "ы"), ("b|", "ы"), ("bi", "ы"), ("IO", "ю"), ("Io", "ю"), ("lo", "ю")] {
+            h = h.replacingOccurrences(of: pair, with: letter)
+        }
+        let a = Array(key(h).replacingOccurrences(of: " ", with: ""))
+        let b = Array(key(target).replacingOccurrences(of: "ё", with: "е").replacingOccurrences(of: " ", with: ""))
+        guard !a.isEmpty, a.count == b.count else { return false }
+        for (x, y) in zip(a, b) {
+            let x = x == "ё" ? "е" : x
+            if x == y { continue }
+            if let options = lookalikes[x], options.contains(y) { continue }
+            return false
+        }
+        return true
     }
 
     /// Cyrillic letters used in a string (uppercased), for letters-before-use logic.

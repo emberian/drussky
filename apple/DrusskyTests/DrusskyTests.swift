@@ -1,4 +1,5 @@
 import PencilKit
+import Speech
 import XCTest
 @testable import Drussky
 
@@ -12,6 +13,10 @@ final class DrusskyTests: XCTestCase {
         XCTAssertTrue(RussianText.isRepetition("Аа Аа", of: "А"))
         XCTAssertFalse(RussianText.isRepetition("Ма", of: "А"))
         XCTAssertEqual(String(Theme.stressed("они́", show: true).characters), "они")
+        XCTAssertTrue(RussianText.matches("Sno Kom", "Это кот"))
+        XCTAssertFalse(RussianText.matches("оно", "она"), "pronouns stay distinct")
+        XCTAssertFalse(RussianText.matches("OHO", "она"))
+        XCTAssertFalse(RussianText.matches("mama", "папа"))
         XCTAssertTrue(RussianText.answerMatches("читаю", "Я чита́ю."))
         XCTAssertTrue(RussianText.answerMatches("я читаю", "чита́ю"))
         XCTAssertFalse(RussianText.answerMatches("ты читаешь", "Я чита́ю."))
@@ -63,6 +68,17 @@ final class DrusskyTests: XCTestCase {
 
     /// Vision reads Cyrillic ink. Synthetic ink is font outlines, so this is a lower bound on
     /// the pipeline working, not a measure of accuracy on real handwriting.
+    func testInkReaderReadsCursiveCyrillic() async throws {
+        var hits: [String] = [], misses: [String] = []
+        for word in ["кот", "мама", "окно", "она", "книга", "спасибо", "молоко", "Это кот", "где", "читаю", "хорошо", "звезда"] {
+            let drawing = SyntheticInk.drawing(for: word, height: 132, cursive: true)
+            let reading = await InkReader.read(drawing, target: word)
+            if reading?.matches == true { hits.append(word) } else { misses.append("\(word)→\(reading?.candidates ?? [])") }
+        }
+        print("CURSIVE hits:", hits.count, hits, "misses:", misses)
+        XCTAssertGreaterThanOrEqual(hits.count, 6, "misses: \(misses)")
+    }
+
     func testInkReaderReadsSyntheticCyrillic() async throws {
         var hits: [String] = []
         var misses: [String] = []
@@ -129,5 +145,22 @@ final class DrusskyTests: XCTestCase {
         book.record(page: 0, exercise: i) { $0.status = .correct }
         XCTAssertEqual(book.memories[key]?.lapses, lapses)
         XCTAssertEqual(book.memories[key]?.reps, 0, "a redo after being shown the answer is not a recall")
+    }
+
+    /// The speech path, end to end, on recorded Russian: the same transcription call the
+    /// read-aloud exercise makes after you speak.
+    func testSpeechRecognizerHearsRecordedRussian() async throws {
+        // Never prompt from a test (a prompt would hang it); runs once the app has been allowed.
+        let status = SFSpeechRecognizer.authorizationStatus()
+        try XCTSkipUnless(status == .authorized, "speech recognition not authorized in this environment (\(status.rawValue))")
+        let voice = Voice()
+        var hits: [String] = [], misses: [String] = []
+        for phrase in ["Э́то кот.", "спаси́бо", "Где ма́ма?", "Я чита́ю кни́гу.", "Мы тут.", "молоко́", "Как дела́?", "Она́ там."] {
+            guard let url = voice.recordingURL(for: phrase) else { misses.append("\(phrase): no file"); continue }
+            let heard = await SpeechCheck.transcribe(url, hint: RussianText.unstressed(phrase))
+            if let heard, RussianText.matches(heard, phrase) { hits.append(phrase) } else { misses.append("\(phrase)→\(heard ?? "nil")") }
+        }
+        print("SPEECH hits:", hits, "misses:", misses)
+        XCTAssertGreaterThanOrEqual(hits.count, 5, "misses: \(misses)")
     }
 }

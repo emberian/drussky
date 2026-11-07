@@ -61,9 +61,9 @@ enum QA {
 
 /// Handwriting-like ink generated from font outlines: each glyph contour becomes a stroke.
 enum SyntheticInk {
-    static func drawing(for text: String, height: CGFloat, wobble: Double = 0) -> PKDrawing {
+    static func drawing(for text: String, height: CGFloat, wobble: Double = 0, cursive: Bool = false) -> PKDrawing {
         let metrics = StripMetrics(height: height)
-        let font = metrics.font(cursive: false) as CTFont
+        let font = metrics.font(cursive: cursive) as CTFont
         let attr = NSAttributedString(string: text, attributes: [.font: font])
         let line = CTLineCreateWithAttributedString(attr)
         var strokes: [PKStroke] = []
