@@ -46,6 +46,10 @@ mod teacher_revisit;
 mod foundation;
 #[path = "../src/foundation_review.rs"]
 mod foundation_review;
+#[path = "../src/foundation_writing.rs"]
+mod foundation_writing;
+#[path = "../src/handwriting.rs"]
+mod handwriting;
 use model::AppState;
 use repository::Repository;
 use rufren_content::FoundationAction;

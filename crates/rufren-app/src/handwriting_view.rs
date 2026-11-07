@@ -56,6 +56,12 @@ pub(crate) fn HandwritingPad(
 ) -> Element {
     let instance = use_hook(|| Uuid::new_v4().to_string());
     let root_id = format!("handwriting-{instance}");
+    let paper_style = format!(
+        "--ink-paper-ratio: {} / {}; --ink-paper-max-width: {}px;",
+        task.paper.width,
+        task.paper.height,
+        320.0 * task.paper.width as f64 / task.paper.height as f64
+    );
     let mut error = use_signal(String::new);
     let mut audio_error = use_signal(String::new);
     let mut persistence_error = use_signal(String::new);
@@ -75,7 +81,7 @@ pub(crate) fn HandwritingPad(
                     return;
                 }
             };
-            let config = serde_json::json!({"model_version":task.model_version,"scope_id":scope,"task_id":task.id,"task_revision":task.revision,"target":task.target,"audio_id":task.reference_audio_id,"audio_role":task.audio_role,"initial_mode":initial_mode,"initial":initial,"paper":task.paper,"attempt_id":attempt_id,"external_flow":true,"meaning_visible":task.meaning.is_some(),"sound_visible":task.reference_audio_id.is_some()});
+            let config = serde_json::json!({"model_version":task.model_version,"scope_id":scope,"task_id":task.id,"task_revision":task.revision,"target":task.target,"audio_id":task.reference_audio_id,"audio_role":task.audio_role,"initial_mode":initial_mode,"initial":initial,"paper":task.paper,"attempt_id":attempt_id,"external_flow":true,"meaning_visible":initial_mode != InkMode::Hidden && task.meaning.is_some(),"sound_visible":task.reference_audio_id.is_some()});
             let script = format!(
                 r#"{BRIDGE}
 const root=document.getElementById({root});if(!root)throw Error('The handwriting pad did not mount.');
@@ -166,16 +172,16 @@ try{{while(true){{const message=await dioxus.recv();const waiter=pending.get(mes
     });
     rsx! {
       style {"{INK_STYLE}"}
-      section {id:root_id,class:"handwriting-pad",aria_label:"Handwritten Russian practice",
+      section {id:root_id,class:"handwriting-pad",style:paper_style,aria_label:"Handwritten Russian practice",
        p {class:"ink-instruction","{task.instruction}"}
        if !error().is_empty(){p {role:"alert","{error}"}}
        if !audio_error().is_empty(){p {role:"alert","{audio_error}"}}
        if !persistence_error().is_empty(){p {role:"alert","{persistence_error}"}}
-          div {class:"ink-context","data-ink-meaning":"true",if let Some(meaning)=task.meaning.clone(){p {"{meaning}"}}}
-       div {class:"ink-sound","data-ink-sound":"true",if task.reference_audio_id.is_some(){button {class:if embedded{"secondary"}else{"primary"},"data-ink-listen":"true","Listen"}}}
-       button {class:"secondary","data-ink-replay":"true","data-ink-control":"true","Watch the strokes"}
+          div {class:"ink-context","data-ink-meaning":"true",hidden:initial_mode==InkMode::Hidden,if let Some(meaning)=task.meaning.clone(){p {"{meaning}"}}}
+       div {class:"ink-sound","data-ink-sound":"true",if task.reference_audio_id.is_some(){button {class:if embedded && initial_mode != InkMode::Hidden{"secondary"}else{"primary"},"data-ink-listen":"true","Listen"}}}
+       button {class:"secondary",hidden:initial_mode==InkMode::Hidden,"data-ink-replay":"true","data-ink-control":"true","Watch the strokes"}
        div {class:"ink-pad-heading",span {"Write here"}div {"data-ink-device-options":"true",button {class:"text-button","data-ink-input":"pen","data-ink-control":"true","Use Pencil"}span {" · "}button {class:"text-button","data-ink-input":"finger","data-ink-control":"true","Use finger"}}button {class:"secondary","data-ink-show":"true","data-ink-control":"true","Show model"}button {class:"secondary","data-ink-hide":"true","data-ink-control":"true","Hide model"}}
-    div {class:"ink-workspace",div {class:"ink-model","data-ink-model":"true"}div {class:"ink-paper",span {class:"ink-pane-label","Your drawing"}canvas {width:"400",height:"300",aria_label:"Draw your Russian letters here"}}div {class:"ink-comparison","data-ink-comparison":"true",hidden:true}}
+    div {class:"ink-workspace",div {class:"ink-model","data-ink-model":"true"}div {class:"ink-paper",span {class:"ink-pane-label","Your drawing"}canvas {width:"400",height:"300",aria_label:"Write Russian here"}}div {class:"ink-comparison","data-ink-comparison":"true",hidden:true}}
        div {class:"actions",button {class:"secondary","data-ink-undo":"true","data-ink-edit":"true","Undo"}button {class:"secondary","data-ink-clear":"true","data-ink-edit":"true","Clear"}button {class:"primary","data-ink-compare":"true","Compare"}button {class:"secondary","data-ink-new":"true",hidden:true,"Try again"}}
        p {role:"status","data-ink-status":"true"}button {class:"secondary","data-ink-retry-save":"true",hidden:true,"Retry saving"}
        details {summary {"Drawing and cues"}
@@ -189,7 +195,7 @@ try{{while(true){{const message=await dioxus.recv();const waiter=pending.get(mes
       }
      }
 }
-const INK_STYLE: &str = r#".handwriting-pad{max-width:760px}.ink-mode-options{border:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}.ink-mode-options label{display:flex;align-items:center;gap:6px;min-height:44px}.ink-mode-options input{width:20px;height:20px}.ink-instruction{font-size:1.1rem;line-height:1.45}.ink-pad-heading{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}.ink-pad-heading>span{font-weight:600;margin-right:auto}.ink-pad-heading button[aria-pressed=true]{font-weight:700;text-decoration:underline}.ink-workspace{position:relative;width:100%;height:220px}.ink-paper{height:100%;min-width:0}.ink-workspace canvas{display:block;width:100%;height:100%;position:relative;touch-action:none;user-select:none;-webkit-user-select:none;border:1px solid #aab9ac;border-radius:10px;background:transparent;box-sizing:border-box}.ink-model svg,.ink-comparison svg{display:block;width:100%;height:220px}.ink-model{color:#adb8ad}.handwriting-pad[data-visual=copy] .ink-model{color:#596e5e}.handwriting-pad[data-visual=trace] .ink-model{position:absolute;inset:0;pointer-events:none}.ink-pane-label{display:none;font-size:.9rem;font-weight:600;margin-bottom:6px}.handwriting-pad[data-visual=copy] .ink-workspace,.handwriting-pad[data-sealed=true] .ink-workspace{height:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;align-items:start}.handwriting-pad[data-visual=copy] .ink-paper,.handwriting-pad[data-sealed=true] .ink-paper{height:auto}.handwriting-pad[data-visual=copy] canvas,.handwriting-pad[data-sealed=true] canvas{height:220px}.handwriting-pad[data-visual=copy] .ink-pane-label,.handwriting-pad[data-sealed=true] .ink-pane-label{display:block}.handwriting-pad[data-sealed=true] .ink-workspace>.ink-model{display:none}.ink-comparison{color:#596e5e}.handwriting-pad button,.handwriting-pad select{min-height:44px;white-space:normal}.ink-guidance{font-size:.95rem;line-height:1.5}.handwriting-pad [hidden]{display:none!important}@media(max-width:600px){.handwriting-pad[data-visual=copy] .ink-workspace,.handwriting-pad[data-sealed=true] .ink-workspace{grid-template-columns:1fr}.ink-workspace{height:200px}}"#;
+const INK_STYLE: &str = r#".handwriting-pad{max-width:760px}.ink-mode-options{border:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}.ink-mode-options label{display:flex;align-items:center;gap:6px;min-height:44px}.ink-mode-options input{width:20px;height:20px}.ink-instruction{font-size:1.1rem;line-height:1.45}.ink-pad-heading{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}.ink-pad-heading>span{font-weight:600;margin-right:auto}.ink-pad-heading button[aria-pressed=true]{font-weight:700;text-decoration:underline}.ink-workspace{position:relative;width:100%;height:auto}.ink-paper,.ink-model,.ink-comparison{width:min(100%,var(--ink-paper-max-width));min-width:0;margin-inline:auto}.ink-paper{height:auto}.ink-workspace canvas{display:block;width:100%;height:auto;aspect-ratio:var(--ink-paper-ratio);position:relative;touch-action:none;user-select:none;-webkit-user-select:none;border:0;outline:1px solid #aab9ac;outline-offset:-1px;border-radius:10px;background:transparent;box-sizing:border-box}.ink-model svg,.ink-comparison svg{display:block;width:100%;height:auto;aspect-ratio:var(--ink-paper-ratio)}.ink-model{color:#adb8ad}.handwriting-pad[data-visual=copy] .ink-model{color:#596e5e}.handwriting-pad[data-visual=trace] .ink-model{position:absolute;inset:0;pointer-events:none}.ink-pane-label{display:none;font-size:.9rem;font-weight:600;margin-bottom:6px}.handwriting-pad[data-visual=copy] .ink-workspace,.handwriting-pad[data-sealed=true] .ink-workspace{height:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;align-items:start}.handwriting-pad[data-visual=copy] .ink-paper,.handwriting-pad[data-sealed=true] .ink-paper{height:auto}.handwriting-pad[data-visual=copy] canvas,.handwriting-pad[data-sealed=true] canvas{height:auto}.handwriting-pad[data-visual=copy] .ink-pane-label,.handwriting-pad[data-sealed=true] .ink-pane-label{display:block}.handwriting-pad[data-sealed=true] .ink-workspace>.ink-model{display:none}.ink-comparison{color:#596e5e}.handwriting-pad button,.handwriting-pad select{min-height:44px;white-space:normal}.ink-guidance{font-size:.95rem;line-height:1.5}.handwriting-pad [hidden]{display:none!important}@media(max-width:600px){.handwriting-pad[data-visual=copy] .ink-workspace,.handwriting-pad[data-sealed=true] .ink-workspace{grid-template-columns:1fr}.ink-workspace{height:auto}}"#;
 
 async fn resume_drawing(scope: &str) {
     let scope = serde_json::to_string(scope).unwrap();
@@ -700,16 +706,22 @@ fn NativeWritingPaper(
     let writing = run.stage == WritingStage::Writing;
     let visible = run.model_revealed || !writing;
     let task = run.task();
+    let paper_style = format!(
+        "--ink-paper-ratio: {} / {}; --ink-paper-max-width: {}px;",
+        task.paper.width,
+        task.paper.height,
+        320.0 * task.paper.width as f64 / task.paper.height as f64
+    );
     let listen_id = attached.clone();
     let reveal_id = attached.clone();
     let undo_id = attached.clone();
     let redo_id = attached.clone();
     let finger_id = attached.clone();
     let compare_id = attached.clone();
-    rsx! {section {class:"native-writing-paper",
+    rsx! {section {class:"native-writing-paper",style:paper_style,
         if writing {p {class:"writing-prompt","{task.instruction}"}}
         if writing {div {class:"actions",
-            button {class:"secondary",disabled:!ready()||playing(),onclick:move |_|{if let Some(id)=listen_id.get(){if let Err(e)=handwriting_native::native_listen(id){problem.set(e)}}},if playing(){"Playing…"}else{"Listen"}}
+            button {class:if visible{"secondary"}else{"primary"},disabled:!ready()||playing(),onclick:move |_|{if let Some(id)=listen_id.get(){if let Err(e)=handwriting_native::native_listen(id){problem.set(e)}}},if playing(){"Playing…"}else{"Listen"}}
             if !visible {button {class:"text-button",disabled:!ready(),onclick:move |_|{if let Some(id)=reveal_id.get(){if let Err(e)=handwriting_native::native_reveal(id){problem.set(e)}}},"Show example"}}
         }}
         div {class:if visible{"native-paper-pair with-model"}else{"native-paper-pair"},
@@ -721,7 +733,7 @@ fn NativeWritingPaper(
             button {class:"text-button",disabled:!ready(),onclick:move |_|{if let Some(id)=undo_id.get(){if let Err(e)=handwriting_native::native_undo(id){problem.set(e)}}},"Undo"}
             button {class:"text-button",disabled:!ready(),onclick:move |_|{if let Some(id)=redo_id.get(){if let Err(e)=handwriting_native::native_redo(id){problem.set(e)}}},"Redo"}
             button {class:"text-button",aria_pressed:finger(),disabled:!ready(),onclick:move |_|{if let Some(id)=finger_id.get(){let next=!finger();match handwriting_native::native_finger(id,next){Ok(())=>finger.set(next),Err(e)=>problem.set(e)}}},if finger(){"Finger drawing on"}else{"Use finger"}}
-            button {class:"primary",disabled:!ready()||playing(),onclick:move |_|{if let Some(id)=compare_id.get(){problem.set(String::new());if let Err(e)=handwriting_native::native_compare(id){problem.set(e)}}},"Compare"}
+            button {class:"primary",disabled:!ready()||playing()||(run.sequence==WritingSequence::HearWriteCompareSay&&!run.audio_completed),onclick:move |_|{if let Some(id)=compare_id.get(){problem.set(String::new());if let Err(e)=handwriting_native::native_compare(id){problem.set(e)}}},"Compare"}
         }}
         if !problem().is_empty(){p {role:"alert","{problem}"}if !ready(){button {class:"secondary",onclick:move |_|{problem.set(String::new());retry+=1;},"Try opening the paper again"}}}
     }}
@@ -828,9 +840,24 @@ pub(crate) fn WritingExercise(
     run: HandwritingActivity,
     #[props(default)] embedded: bool,
     #[props(default)] next_label: Option<String>,
+    #[props(default)] comparison_focus: Option<String>,
+    #[props(default)] allow_repair: bool,
 ) -> Element {
     let mut dirty = use_signal(|| false);
     let mut tick = use_signal(|| 0usize);
+    let mut displayed_round = use_signal(|| None::<Uuid>);
+    use_effect(move || {
+        let current = app.read().active_handwriting().ok().map(|run| run.round_id);
+        let previous = *displayed_round.peek();
+        if current != previous {
+            displayed_round.set(current);
+            if previous.is_some() {
+                spawn(async move {
+                    let _ = document::eval("await new Promise(requestAnimationFrame);const heading=document.getElementById('foundation-step-heading')||document.getElementById('page-heading');heading?.focus({preventScroll:true});heading?.scrollIntoView({block:'start',behavior:'instant'});").await;
+                });
+            }
+        }
+    });
     let _ = tick();
     let on_native = use_callback(
         move |(id, round, instance, event): (Uuid, Uuid, Uuid, NativeWritingEvent)| {
@@ -860,10 +887,20 @@ pub(crate) fn WritingExercise(
       }
       if compared || completed {
        section {class:"writing-response",
+        if let Some(focus)=&comparison_focus {p {class:"writing-comparison-focus","{focus}"}}
         if let Some(meaning)=&definition.meaning{p {class:"writing-meaning","{meaning}"}}
         if !completed {p {"{definition.say_instruction}"}}
         if let Ok(binding)=crate::writing_speech::WritingSpeechBinding::from_run(&run){crate::writing_speech::WritingSpeech {app,binding,on_busy:move|value|app.write().writing_speech_busy=value}}
         details {summary {"Writing tips"}p {"{definition.model_help}"}if let Some(grammar)=&definition.grammar_note{p {"{grammar}"}}}
+        if allow_repair {
+         details {class:"writing-repair",summary {"Practise a part again"}
+          p {"Keep this drawing and try on fresh paper."}
+          div {class:"actions",
+           button {class:"secondary",disabled:busy||dirty()||speech_busy,onclick:move |_|nav_act(app,move|a|a.writing_new_round(id,round,WritingSequence::SeeCopyHearSay)),"Practise with the example"}
+           button {class:"secondary",disabled:busy||dirty()||speech_busy,onclick:move |_|nav_act(app,move|a|a.writing_new_round(id,round,WritingSequence::HearWriteCompareSay)),"Try again by ear"}
+          }
+         }
+        }
        }
        if compared {footer {class:"actions writing-next",
         button {class:"primary",disabled:busy||dirty()||speech_busy||!run.audio_completed,onclick:move |_|nav_act(app,move|a|a.writing_finish_and_continue(id,round,SayDisposition::SelfReportedSaid)),if embedded{"I said it · {continue_label}"}else{"{continue_label}"}}
@@ -886,7 +923,7 @@ const WRITING_WORKSPACE_STYLE: &str = r#"
 .writing-embedded{padding:0;max-width:none;margin:0}.writing-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
 .writing-header h1{font-size:1.5rem;margin:0}.writing-prompt{margin:8px 0 14px}
 .writing-example{font-size:clamp(2rem,5vw,3.3rem);line-height:1.25;margin:12px 0;white-space:pre-wrap}
-.native-paper-pair{display:grid;gap:12px;align-items:start}.native-paper-pair.with-model{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}.native-handprint-model{min-width:0;color:#596e5e}.native-handprint-model svg{display:block;width:100%;height:clamp(180px,26vh,260px)}.native-handprint-model details{font-size:.95rem}.native-paper-host{height:clamp(240px,34vh,360px);width:100%;border:1px solid var(--line,#ccd4cc);border-radius:12px;background:var(--paper,#faf9f3);overflow:hidden}
+.native-paper-pair{display:grid;gap:12px;align-items:start}.native-paper-pair.with-model{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}.native-handprint-model{min-width:0;color:#596e5e}.native-handprint-model svg{display:block;width:100%;height:auto;aspect-ratio:var(--ink-paper-ratio);max-width:var(--ink-paper-max-width);margin-inline:auto}.native-handprint-model details{font-size:.95rem}.native-paper-host{height:auto;width:min(100%,var(--ink-paper-max-width));aspect-ratio:var(--ink-paper-ratio);margin-inline:auto;border:1px solid var(--line,#ccd4cc);border-radius:12px;background:var(--paper,#faf9f3);overflow:hidden}
 .writing-tools{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.writing-tools .primary{margin-left:auto}
 .writing-response{margin-top:16px}.writing-response>p{margin:8px 0}.writing-response details{font-size:.95rem;margin:12px 0}
 .writing-next{display:flex;align-items:center;gap:12px;margin-top:16px}
@@ -899,5 +936,5 @@ const WRITING_WORKSPACE_STYLE: &str = r#"
 .writing-lesson .handwriting-pad[data-sealed=true]>div.actions,
 .writing-lesson .handwriting-pad[data-sealed=true]>[data-ink-status],
 .writing-lesson .handwriting-pad[data-sealed=true]>details{display:none}
-@media(max-width:600px){.writing-lesson{padding:16px}.writing-embedded{padding:0}.native-paper-host{height:260px}.writing-lesson .ink-model svg,.writing-lesson .ink-comparison svg{height:112px}}
+@media(max-width:600px){.writing-lesson{padding:16px}.writing-embedded{padding:0}.native-paper-host{height:auto}}
 "#;

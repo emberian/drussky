@@ -16,6 +16,7 @@ mod foundation;
 mod foundation_audio;
 mod foundation_review;
 mod foundation_view;
+mod foundation_writing;
 mod gateway;
 mod handwriting;
 mod handwriting_native;
@@ -198,13 +199,24 @@ fn Today(mut app: Signal<AppState>) -> Element {
     let teaching = teacher_notebook_view::unfinished_lesson(&state);
     let teaching_id = teaching.as_ref().map(|entry| entry.document_id);
     let foundation = state.foundation_state();
+    let writing_checkpoint_active = state
+        .foundation_writing_checkpoint()
+        .ok()
+        .flatten()
+        .is_some();
     let foundation_started = state.foundation_has_started();
-    let foundation_ready = foundation.as_ref().is_ok_and(|s| !s.finished);
+    let foundation_ready =
+        writing_checkpoint_active || foundation.as_ref().is_ok_and(|s| !s.finished);
     let foundation_review_active = foundation.as_ref().is_ok_and(|s| s.review_resume.is_some());
-    let foundation_returns = if foundation_review_active {
+    let foundation_returns = if foundation_review_active || writing_checkpoint_active {
         Vec::new()
     } else {
         state.foundation_review_queue(now)
+    };
+    let writing_returns = if foundation_review_active || writing_checkpoint_active {
+        Vec::new()
+    } else {
+        state.foundation_writing_returns(now)
     };
     let writing_resume = state.handwriting_resume_available();
     let foundation_primary = !resume && foundation_ready;
@@ -242,6 +254,18 @@ fn Today(mut app: Signal<AppState>) -> Element {
             }
         }
         if let Err(problem)=foundation {p {role:"alert","{problem}"}}
+        if !writing_returns.is_empty() {
+            section {class:"panel",id:"writing-returns",
+                h2 {"A little listening and writing"}
+                p {"Try a familiar sound with the spelling hidden. Your lesson will stay where you left it."}
+                div {class:"actions",
+                    for entry in writing_returns.into_iter().take(1) {
+                        button {class:"secondary",onclick:move |_|act(app,|s|s.foundation_start_writing_return(&entry.task_id)),"{entry.label}"}
+                    }
+                    button {class:"text-button",onclick:move |_|act(app,|s|s.foundation_snooze_writing_returns()),"Another day"}
+                }
+            }
+        }
         if !foundation_returns.is_empty() {
             section {class:"panel",id:"foundation-returns",
                 h2 {"A little recall practice"}

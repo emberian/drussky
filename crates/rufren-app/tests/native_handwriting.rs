@@ -2,7 +2,7 @@
 //! claim that a test host parsed a PKDrawing or exercised a physical Pencil.
 #[path = "../src/handwriting_native.rs"]
 mod native;
-use base64::{engine::general_purpose::STANDARD, Engine as _};
+use base64::{Engine as _, engine::general_purpose::STANDARD};
 use native::*;
 use sha2::{Digest, Sha256};
 use uuid::Uuid;
@@ -63,6 +63,7 @@ fn checkpoint() -> NativeWritingCheckpoint {
         canonical,
         zoom_scale: 1.25,
         content_offset: [50.0, 0.0],
+        model_help: None,
     }
 }
 fn request(c: &NativeWritingCheckpoint) -> NativeWritingRequest {
@@ -95,9 +96,11 @@ fn native_ink_projection_retains_processed_force_timing_transform_and_mask_coord
     assert_eq!(decoded.strokes[0].points[0].force, 2.7);
     assert_eq!(decoded.strokes[0].transform[4], 42.0);
     assert_eq!(decoded.strokes[0].visible_ranges, vec![[0.0, 1.0]]);
-    assert!(String::from_utf8(json)
-        .unwrap()
-        .contains("pencilkit-control-points-v1"));
+    assert!(
+        String::from_utf8(json)
+            .unwrap()
+            .contains("pencilkit-control-points-v1")
+    );
 }
 #[test]
 fn native_checkpoint_binds_both_exact_archive_and_canonical_projection_hashes() {
@@ -211,4 +214,51 @@ fn native_checkpoint_cadence_batches_changes_but_explicit_intents_wait_only_for_
     assert_eq!(native_checkpoint_interval(false, false), 0.25);
     assert_eq!(native_checkpoint_interval(true, true), 1.0);
     assert_eq!(native_checkpoint_interval(false, true), 0.0);
+}
+
+#[test]
+fn native_model_help_keeps_legacy_unknown_and_comparison_feedback_separate() {
+    let legacy = checkpoint();
+    let legacy_bytes = serde_json::to_vec(&legacy).unwrap();
+    assert!(!String::from_utf8_lossy(&legacy_bytes).contains("model_help"));
+    let restored: NativeWritingCheckpoint = serde_json::from_slice(&legacy_bytes).unwrap();
+    assert_eq!(serde_json::to_vec(&restored).unwrap(), legacy_bytes);
+    assert!(!NativeWritingModelHelp::for_open(Some(&restored), false, false).history_from_start);
+
+    let clean = NativeWritingModelHelp::for_open(None, false, false);
+    assert!(clean.history_from_start);
+    assert!(!clean.visible_at_start);
+    assert!(clean.revealed_at_ms.is_empty());
+    let mut saved = checkpoint();
+    saved.model_help = Some(clean.clone());
+    // Opening a sealed comparison shows feedback without rewriting assistance.
+    assert_eq!(
+        NativeWritingModelHelp::for_open(Some(&saved), true, true),
+        clean
+    );
+    // Visibility learned between snapshots cannot become a clean response.
+    let recovered = NativeWritingModelHelp::for_open(Some(&saved), true, false);
+    assert!(!recovered.history_from_start);
+    assert!(recovered.visible_at_start);
+    saved.model_help.as_mut().unwrap().revealed_at_ms.push(900);
+    saved.validate().unwrap();
+    let json = serde_json::to_vec(&saved).unwrap();
+    let reopened: NativeWritingCheckpoint = serde_json::from_slice(&json).unwrap();
+    assert_eq!(reopened.model_help, saved.model_help);
+    reopened.validate().unwrap();
+    saved.model_help.as_mut().unwrap().revealed_at_ms.push(1001);
+    assert!(saved.validate().is_err());
+}
+
+#[test]
+fn native_layout_following_preserves_explicit_zoom_and_pan() {
+    assert!(native_viewport_still_fitted(Some(0.75), 0.75, [0.0, 0.0]));
+    assert!(!native_viewport_still_fitted(Some(0.75), 1.0, [0.0, 0.0]));
+    assert!(!native_viewport_still_fitted(Some(0.75), 0.75, [10.0, 0.0]));
+    assert!(!native_viewport_still_fitted(None, 0.75, [0.0, 0.0]));
+    assert!(!native_viewport_still_fitted(
+        Some(0.75),
+        f64::NAN,
+        [0.0, 0.0]
+    ));
 }

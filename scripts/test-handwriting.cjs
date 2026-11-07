@@ -53,3 +53,107 @@ test('authored alphabet paths and all continuation writing targets resolve under
   }
  }
 });
+
+
+test('capture limits stop with explicit interruption and keep every accepted point saveable',async()=>{
+ const saved=[];const adapter={async saveDraft(d){saved[0]=d},async saveOriginal(){}};
+ const {session:s,events}=ink(adapter);
+ await s.flush();
+ // A near-limit restored stroke is valid; adding more must not create a draft
+ // that Rust rejects or quietly discard the uncaptured part as a complete stroke.
+ s.draft.strokes=[{pointer_id:1,pointer_type:'pen',active:true,interrupted:false,cancel_reason:null,points:Array.from({length:99999},()=>point())}];s.active=1;
+ assert.equal(s.move(1,[point(31),point(32)]),false);
+ await s.flush();
+ assert.equal(s.draft.strokes[0].points.length,100000);
+ assert.equal(s.draft.strokes[0].points.at(-1).x,31);
+ assert.equal(s.active,null);
+ assert.equal(s.draft.strokes[0].cancel_reason,'capture_limit');
+ assert.ok(events.some(e=>e.kind==='error'&&e.message.includes('drawing limit')));
+ assert.deepEqual(saved[0].strokes[0].points,s.draft.strokes[0].points);
+ await s.undo();assert.equal(s.begin(2,'pen',point()),true);s.end(2);await s.flush();
+});
+
+test('stroke limit refuses a new stroke without changing existing ink',async()=>{
+ const {session:s,events}=ink({async saveDraft(){},async saveOriginal(){}});await s.flush();
+ s.draft.strokes=Array.from({length:1000},(_,pointer_id)=>({pointer_id,pointer_type:'pen',active:false,points:[point()],interrupted:false,cancel_reason:null}));
+ assert.equal(s.begin(1001,'pen',point()),false);await s.flush();
+ assert.equal(s.draft.strokes.length,1000);assert.ok(events.some(e=>e.kind==='error'));
+});
+
+test('a full assistance log refuses new answer help before changing visibility',async()=>{
+ const {session:s}=ink({async saveDraft(){},async saveOriginal(){}});await s.flush();
+ s.draft.aids=Array.from({length:4096},()=>({kind:'meaning',value:'shown',at_ms:1234}));
+ assert.throws(()=>s.mode('copy'),/help-history limit/);assert.equal(s.draft.mode,'hidden');
+ s.draft.mode='copy';assert.throws(()=>s.replay(),/help-history limit/);assert.equal(s.draft.aids.length,4096);
+});
+
+
+test('pending saves coalesce new samples without mutating the in-flight snapshot',async()=>{
+ let release;const snapshots=[];
+ const adapter={async saveDraft(d){snapshots.push(d);if(snapshots.length===1)await new Promise(resolve=>release=resolve)},async saveOriginal(){}};
+ const {session:s}=ink(adapter);
+ s.begin(1,'pen',point(10));for(let i=0;i<40;i++)s.move(1,[point(i+20)]);s.end(1);
+ assert.equal(snapshots.length,1);assert.equal(snapshots[0].strokes.length,0);
+ release();await s.flush();
+ assert.equal(snapshots.length,2);
+ assert.deepEqual(snapshots[1].strokes,s.draft.strokes);
+ assert.equal(snapshots[1].strokes[0].points.length,41);
+});
+
+
+test('visual and meaning help stay hidden until the partial draft and help marker are durable',async()=>{
+ let fail=false,block=false,release;const snapshots=[];
+ const adapter={async saveDraft(d){if(fail)throw Error('journal unavailable');if(block){block=false;await new Promise(resolve=>release=resolve)}snapshots.push(d)},async saveOriginal(){}};
+ const {session:s}=ink(adapter,{meaning_visible:false});await s.flush();
+ s.begin(1,'pen',point(20));s.end(1);await s.flush();
+ block=true;const revealing=s.mode('copy');
+ assert.equal(s.draft.mode,'hidden');
+ release();await revealing;
+ const marker=snapshots.find(d=>d.mode==='hidden'&&d.aids.some(a=>a.kind==='visual_model'));
+ assert.ok(marker);assert.equal(marker.strokes[0].points[0].x,20);
+ assert.equal(s.draft.mode,'copy');
+ await s.mode('hidden');fail=true;
+ assert.equal(await s.mode('trace'),false);assert.equal(s.draft.mode,'hidden');
+ assert.equal(await s.cue('meaning',true),false);assert.equal(s.draft.meaning_visible,false);
+ fail=false;assert.equal(await s.cue('meaning',true),true);assert.equal(s.draft.meaning_visible,true);
+});
+
+
+test('a pending reveal cannot override a later Hide model choice',async()=>{
+ let release,block=false;const adapter={async saveDraft(){if(block){block=false;await new Promise(resolve=>release=resolve)}},async saveOriginal(){}};
+ const {session:s}=ink(adapter);await s.flush();
+ block=true;const show=s.mode('copy');const hide=s.mode('hidden');
+ release();await Promise.all([show,hide]);assert.equal(s.draft.mode,'hidden');
+});
+
+
+test('stroke demonstration cannot reveal a hidden answer or change a sealed original',async()=>{
+ const {session:s}=ink();await s.flush();const hidden=structuredClone(s.draft);
+ assert.equal(await s.replay(),false);assert.deepEqual(s.draft,hidden);
+ s.begin(1,'pen',point());s.end(1);await s.compare();
+ const compared=structuredClone(s.draft);
+ assert.equal(await s.replay(),true);assert.deepEqual(s.draft,compared);
+});
+
+test('legacy margin ink stays visible through phone/tablet fitting with unchanged paper coordinates',()=>{
+ const {drawingBounds,fitViewport}=require('../crates/rufren-app/src/handwriting.js');
+ const drawing={strokes:[{points:[point(-58.29,88.4),point(414.88,208)]}]};
+ const before=JSON.stringify(drawing);const supplied={width:400,height:260};
+ const bounds=drawingBounds(drawing,supplied);
+ assert.equal(bounds.x,-62.29);assert.equal(bounds.y,0);assert.ok(Math.abs(bounds.width-481.17)<1e-9);assert.equal(bounds.height,260);
+ for(const width of [144,240,492]){
+  const frame={width,height:width*bounds.height/bounds.width};
+  const transform=fitViewport(frame,400,260,bounds);
+  for(const stroke of drawing.strokes)for(const p of stroke.points){
+   const x=p.x*transform.scale+transform.x,y=p.y*transform.scale+transform.y;
+   assert.ok(x>=4*transform.scale-1e-9&&x<=frame.width-4*transform.scale+1e-9);
+   assert.ok(y>=0&&y<=frame.height);
+   assert.ok(Math.abs((x-transform.x)/transform.scale-p.x)<1e-9);
+  }
+  // The guide's paper anchors use the same transform, not an independent fit.
+  const guideX=20*transform.scale+transform.x;
+  assert.ok(Math.abs((guideX-transform.x)/transform.scale-20)<1e-9);
+ }
+ assert.equal(JSON.stringify(drawing),before);
+ assert.deepEqual(drawingBounds({strokes:[{points:[point(50,80),point(300,220)]}]},supplied),{x:0,y:0,width:400,height:260});
+});

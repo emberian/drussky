@@ -46,6 +46,8 @@ mod teacher_revisit;
 mod foundation;
 #[path = "../src/foundation_review.rs"]
 mod foundation_review;
+#[path = "../src/foundation_writing.rs"]
+mod foundation_writing;
 #[path = "../src/handwriting.rs"]
 mod handwriting;
 use handwriting::*;
@@ -1085,5 +1087,610 @@ fn completed_catalog_round_keeps_its_original_unheard_evidence_when_embedded() {
     assert_eq!(
         a.handwriting_export_run(run.id).unwrap()["originals"],
         original_bytes
+    );
+}
+
+fn start_checkpoint(
+    a: &mut AppState,
+    anchor: &str,
+) -> foundation_writing::FoundationWritingCheckpointView {
+    source(a, anchor);
+    let state = a.foundation_state().unwrap();
+    let step = rufren_content::foundations().episodes[state.episode].steps[state.step].clone();
+    match &step.action {
+        rufren_content::FoundationAction::Choose { correct_id, .. } => {
+            a.foundation_edit(vec![correct_id.clone()]).unwrap();
+            a.foundation_submit(&step).unwrap();
+        }
+        rufren_content::FoundationAction::Read { .. } => a.foundation_read_try(&step).unwrap(),
+        _ => panic!("fixture needs an actual response at this anchor"),
+    }
+    a.foundation_next(false).unwrap();
+    a.foundation_writing_checkpoint().unwrap().unwrap()
+}
+fn finish_checkpoint_at(a: &mut AppState, now: i64) -> HandwritingActivity {
+    let checkpoint = a.foundation_writing_checkpoint().unwrap().unwrap();
+    let run = a.prepare_foundation_writing().unwrap().unwrap();
+    a.writing_audio_completed(run.id, run.round_id, &run.definition().unwrap().audio_id)
+        .unwrap();
+    let ink = drawing(&run, true);
+    save(a, &run, &ink);
+    a.writing_go_say(run.id, run.round_id).unwrap();
+    a.writing_say_done(run.id, run.round_id, SayDisposition::SelfReportedSaid)
+        .unwrap();
+    a.foundation_finish_writing_checkpoint_at(checkpoint.item_session, false, now)
+        .unwrap();
+    a.writing_load(run.id).unwrap()
+}
+
+#[test]
+fn continuous_recall_preserves_anchor_ink_and_advances_each_item_once() {
+    let mut a = app();
+    let checkpoint = start_checkpoint(&mut a, "f1-radio-no");
+    assert_eq!((checkpoint.index, checkpoint.count), (0, 2));
+    assert_eq!(checkpoint.task_id, "foundation-hand-print-ma");
+    assert_eq!(a.foundation_state().unwrap().step_id, "f1-radio-no");
+    let before_course = serde_json::to_value(a.foundation_state().unwrap()).unwrap();
+    let run = a.prepare_foundation_writing().unwrap().unwrap();
+    assert_eq!(run.sequence, Sequence::HearWriteCompareSay);
+    assert!(!run.audio_completed && !run.model_revealed);
+    assert_eq!(run.pre_submission_cues, Some(vec![]));
+    let draft = drawing(&run, false);
+    a.handwriting_store_draft(&run.scope(), &run.task(), &draft)
+        .unwrap();
+    a.navigate(Page::Today).unwrap();
+    let mut resumed = AppState::from_repository(a.repo.clone()).unwrap();
+    resumed.start_foundations().unwrap();
+    let same = resumed.prepare_foundation_writing().unwrap().unwrap();
+    assert_eq!(same.id, run.id);
+    assert_eq!(same.round_id, run.round_id);
+    assert_eq!(
+        serde_json::to_value(resumed.foundation_state().unwrap()).unwrap(),
+        before_course
+    );
+    assert_eq!(
+        resumed
+            .handwriting_draft(&run.scope(), &run.task())
+            .unwrap(),
+        Some(draft)
+    );
+    resumed
+        .writing_audio_completed(run.id, run.round_id, "foundation-ma")
+        .unwrap();
+    assert_eq!(
+        serde_json::to_value(resumed.foundation_state().unwrap()).unwrap(),
+        before_course
+    );
+    save(&mut resumed, &run, &drawing(&run, true));
+    resumed
+        .writing_finish_and_continue(run.id, run.round_id, SayDisposition::SelfReportedSaid)
+        .unwrap();
+    let second = resumed.foundation_writing_checkpoint().unwrap().unwrap();
+    assert_eq!(second.task_id, "foundation-hand-print-am");
+    assert_eq!(second.index, 1);
+    assert_ne!(second.item_session, checkpoint.item_session);
+    // Duplicate old continuation must not skip the next listening turn.
+    resumed
+        .writing_finish_and_continue(run.id, run.round_id, SayDisposition::Skipped)
+        .unwrap();
+    assert_eq!(
+        resumed.foundation_writing_checkpoint().unwrap().unwrap(),
+        second
+    );
+    assert!(
+        resumed
+            .foundation_skip_writing_checkpoint(checkpoint.item_session)
+            .is_err()
+    );
+    resumed
+        .foundation_skip_writing_checkpoint(second.item_session)
+        .unwrap();
+    assert!(resumed.foundation_writing_checkpoint().unwrap().is_none());
+    assert_eq!(resumed.foundation_state().unwrap().step_id, "f1-end");
+    assert_eq!(
+        resumed
+            .handwriting_originals(&run.scope(), &run.task())
+            .unwrap()
+            .len(),
+        1
+    );
+    let visits = resumed
+        .repo
+        .metadata_with_prefix("foundation.writing.visit:")
+        .unwrap();
+    assert_eq!(visits.len(), 2);
+    assert_eq!(
+        visits.iter().filter(|(_, v)| v["skipped"] == true).count(),
+        1
+    );
+    assert_eq!(
+        visits
+            .iter()
+            .map(|(_, v)| v["originals"].as_array().unwrap().len())
+            .sum::<usize>(),
+        1
+    );
+}
+
+#[test]
+fn continuous_recall_skipped_source_is_not_silently_taught_or_queued() {
+    let mut a = app();
+    source(&mut a, "f1-radio-no");
+    let mut state = a.foundation_state().unwrap();
+    state.encounters.retain(|e| e != "f1-model-ma:encountered");
+    state.encounters.push("f1-model-ma:skipped".into());
+    a.foundation_save(&state).unwrap();
+    let step = rufren_content::foundations().episodes[state.episode].steps[state.step].clone();
+    let rufren_content::FoundationAction::Choose { correct_id, .. } = &step.action else {
+        panic!()
+    };
+    a.foundation_edit(vec![correct_id.clone()]).unwrap();
+    a.foundation_submit(&step).unwrap();
+    a.foundation_next(false).unwrap();
+    let checkpoint = a.foundation_writing_checkpoint().unwrap().unwrap();
+    assert_eq!(checkpoint.count, 1);
+    assert_eq!(checkpoint.task_id, "foundation-hand-print-am");
+    a.foundation_skip_writing_checkpoint(checkpoint.item_session)
+        .unwrap();
+    assert!(
+        a.foundation_writing_returns(repository::now_ms() + 2 * rufren_core::DAY_MS)
+            .is_empty()
+    );
+}
+
+#[test]
+fn continuous_recall_repair_keeps_original_and_assistance_chronology() {
+    let mut a = app();
+    start_checkpoint(&mut a, "f2-radio-no");
+    let first = a.prepare_foundation_writing().unwrap().unwrap();
+    a.writing_audio_completed(first.id, first.round_id, "foundation-kot")
+        .unwrap();
+    let mut original = drawing(&first, true);
+    original.aids.push(InkAid {
+        kind: "visual_model".into(),
+        value: "copy".into(),
+        at_ms: 123500,
+    });
+    save(&mut a, &first, &original);
+    assert_eq!(
+        a.active_handwriting().unwrap().pre_submission_cues,
+        Some(vec!["visual_model".into()])
+    );
+    a.writing_new_round(first.id, first.round_id, Sequence::SeeCopyHearSay)
+        .unwrap();
+    let supported = a.active_handwriting().unwrap();
+    assert_eq!(
+        supported.history[0].pre_submission_cues,
+        Some(vec!["visual_model".into()])
+    );
+    assert_eq!(
+        supported.history[0].original.as_ref().unwrap().id,
+        first.attempt_id
+    );
+    assert!(
+        supported
+            .pre_submission_cues
+            .as_ref()
+            .unwrap()
+            .contains(&"after_comparison".into())
+    );
+    assert_eq!(supported.return_intent, first.return_intent);
+    a.writing_audio_completed(supported.id, supported.round_id, "foundation-kot")
+        .unwrap();
+    save(&mut a, &supported, &drawing(&supported, true));
+    a.writing_new_round(
+        supported.id,
+        supported.round_id,
+        Sequence::HearWriteCompareSay,
+    )
+    .unwrap();
+    let retry = a.active_handwriting().unwrap();
+    assert_eq!(retry.sequence, Sequence::HearWriteCompareSay);
+    assert!(!retry.model_revealed && !retry.audio_completed);
+    assert_eq!(
+        retry.pre_submission_cues,
+        Some(vec!["after_comparison".into()])
+    );
+    assert_eq!(retry.history.len(), 2);
+    assert_eq!(
+        a.prepare_foundation_writing().unwrap().unwrap().round_id,
+        retry.round_id
+    );
+    assert_eq!(
+        a.handwriting_originals(&first.scope(), &first.task())
+            .unwrap(),
+        vec![original]
+    );
+}
+
+#[test]
+fn continuous_recall_catalog_detour_cannot_replace_checkpoint_or_clear_help() {
+    let mut a = app();
+    let checkpoint = start_checkpoint(&mut a, "f1-radio-no");
+    let first = a.prepare_foundation_writing().unwrap().unwrap();
+    let draft = drawing(&first, false);
+    a.handwriting_store_draft(&first.scope(), &first.task(), &draft)
+        .unwrap();
+    a.open_writing_catalog().unwrap();
+    a.open_writing_task("foundation-hand-print-a", Sequence::SeeCopyHearSay)
+        .unwrap();
+    let catalog = a.active_handwriting().unwrap();
+    assert_ne!(first.id, catalog.id);
+    a.start_foundations().unwrap();
+    let restored = a.prepare_foundation_writing().unwrap().unwrap();
+    assert_eq!(restored.id, first.id);
+    assert_eq!(restored.round_id, first.round_id);
+    assert_eq!(
+        restored.pre_submission_cues,
+        Some(vec!["reference_material".into()])
+    );
+    assert_eq!(
+        a.foundation_writing_checkpoint().unwrap().unwrap(),
+        checkpoint
+    );
+    assert_eq!(
+        a.handwriting_draft(&first.scope(), &first.task()).unwrap(),
+        Some(draft)
+    );
+    assert!(a.foundation_edit(vec!["late old answer".into()]).is_err());
+    assert!(a.foundation_replayed("foundation-net").is_err());
+    assert!(a.foundation_next(true).is_err());
+}
+
+#[test]
+fn continuous_recall_later_returns_preserve_course_and_are_bounded_without_grades() {
+    let mut a = app();
+    let now = repository::now_ms();
+    start_checkpoint(&mut a, "f1-radio-no");
+    finish_checkpoint_at(&mut a, now);
+    finish_checkpoint_at(&mut a, now + 1);
+    start_checkpoint(&mut a, "f2-radio-no");
+    finish_checkpoint_at(&mut a, now + 2);
+    assert!(
+        a.foundation_writing_returns(now + rufren_core::DAY_MS - 1)
+            .is_empty()
+    );
+    let later = now + rufren_core::DAY_MS + 10;
+    let queue = a.foundation_writing_returns(later);
+    assert_eq!(queue.len(), 2);
+    assert_eq!(queue[0].task_id, "foundation-hand-print-ma");
+    assert_eq!(queue[1].task_id, "foundation-hand-print-am");
+    let mut course = a.foundation_state().unwrap();
+    course.draft = vec!["unfinished response kept exactly".into()];
+    course.cues.push(rufren_core::Cue::Translation);
+    a.foundation_save(&course).unwrap();
+    let before = serde_json::to_value(&course).unwrap();
+    let event_count = a.repo.library().unwrap().events.len();
+    a.foundation_start_writing_return_at(&queue[0].task_id, later)
+        .unwrap();
+    let view = a.foundation_writing_checkpoint().unwrap().unwrap();
+    assert_eq!(
+        view.kind,
+        foundation_writing::FoundationWritingCheckpointKind::Return
+    );
+    let run = a.prepare_foundation_writing().unwrap().unwrap();
+    assert_eq!(run.sequence, Sequence::HearWriteCompareSay);
+    assert!(!run.model_revealed && !run.audio_completed);
+    let mut restored = AppState::from_repository(a.repo.clone()).unwrap();
+    restored.start_foundations().unwrap();
+    assert_eq!(
+        restored.foundation_writing_checkpoint().unwrap().unwrap(),
+        view
+    );
+    restored
+        .foundation_finish_writing_checkpoint_at(view.item_session, true, later + 1)
+        .unwrap();
+    assert_eq!(
+        serde_json::to_value(restored.foundation_state().unwrap()).unwrap(),
+        before
+    );
+    assert_eq!(restored.repo.library().unwrap().events.len(), event_count);
+    let queue = restored.foundation_writing_returns(later + 2);
+    assert_eq!(queue.len(), 1); // One of two daily return opportunities remains.
+    assert_eq!(queue[0].task_id, "foundation-hand-print-am");
+    restored
+        .foundation_start_writing_return_at(&queue[0].task_id, later + 2)
+        .unwrap();
+    let second = restored.foundation_writing_checkpoint().unwrap().unwrap();
+    restored
+        .foundation_finish_writing_checkpoint_at(second.item_session, true, later + 3)
+        .unwrap();
+    assert!(restored.foundation_writing_returns(later + 4).is_empty());
+    assert_eq!(
+        serde_json::to_value(restored.foundation_state().unwrap()).unwrap(),
+        before
+    );
+    assert_eq!(restored.repo.library().unwrap().events.len(), event_count);
+}
+
+#[test]
+fn continuous_recall_recovers_committed_visit_before_course_write_without_new_round() {
+    let mut a = app();
+    start_checkpoint(&mut a, "f1-radio-no");
+    let before_first = a.foundation_state().unwrap();
+    let first_view = a.foundation_writing_checkpoint().unwrap().unwrap();
+    let completed = finish_checkpoint_at(&mut a, repository::now_ms());
+    let receipt_key = format!("foundation.writing.visit:{}", first_view.item_session);
+    let receipt = a
+        .repo
+        .get::<serde_json::Value>(&receipt_key)
+        .unwrap()
+        .unwrap();
+    // Fault boundary: visit reached durable storage, the later course write did not.
+    a.foundation_save(&before_first).unwrap();
+    assert!(
+        a.writing_new_round(
+            completed.id,
+            completed.round_id,
+            Sequence::HearWriteCompareSay
+        )
+        .is_err()
+    );
+    assert!(
+        a.writing_check_original(
+            completed.id,
+            completed.round_id,
+            completed.original.as_ref().unwrap()
+        )
+        .is_err()
+    );
+    assert!(a.prepare_foundation_writing().unwrap().is_none());
+    let second = a.foundation_writing_checkpoint().unwrap().unwrap();
+    assert_eq!(second.task_id, "foundation-hand-print-am");
+    assert_ne!(second.item_session, first_view.item_session);
+    assert_eq!(
+        a.repo
+            .get::<serde_json::Value>(&receipt_key)
+            .unwrap()
+            .unwrap(),
+        receipt
+    );
+    assert_eq!(a.writing_load(completed.id).unwrap().history.len(), 0);
+    let before_skip = a.foundation_state().unwrap();
+    a.foundation_skip_writing_checkpoint(second.item_session)
+        .unwrap();
+    let mut after_skip = serde_json::to_value(a.foundation_state().unwrap()).unwrap();
+    a.foundation_save(&before_skip).unwrap();
+    assert!(a.prepare_foundation_writing().unwrap().is_none());
+    let mut recovered = serde_json::to_value(a.foundation_state().unwrap()).unwrap();
+    // The next step had no durable session before the failed write.
+    after_skip.as_object_mut().unwrap().remove("session");
+    recovered.as_object_mut().unwrap().remove("session");
+    assert_eq!(recovered, after_skip);
+    assert!(a.foundation_writing_checkpoint().unwrap().is_none());
+    assert_eq!(
+        a.repo
+            .metadata_with_prefix("foundation.writing.visit:")
+            .unwrap()
+            .len(),
+        2
+    );
+}
+
+#[test]
+fn continuous_recall_native_help_is_taken_from_original_not_post_compare_visibility() {
+    for (help, expected) in [
+        (
+            Some(
+                serde_json::json!({"history_from_start":true,"visible_at_start":false,"revealed_at_ms":[]}),
+            ),
+            Some(Vec::<String>::new()),
+        ),
+        (
+            Some(
+                serde_json::json!({"history_from_start":true,"visible_at_start":false,"revealed_at_ms":[123500]}),
+            ),
+            Some(vec!["visual_model".into()]),
+        ),
+        (
+            Some(
+                serde_json::json!({"history_from_start":false,"visible_at_start":true,"revealed_at_ms":[]}),
+            ),
+            None,
+        ),
+        (None, None),
+    ] {
+        let mut a = app();
+        start_checkpoint(&mut a, "f2-radio-no");
+        let run = a.prepare_foundation_writing().unwrap().unwrap();
+        a.writing_audio_completed(run.id, run.round_id, "foundation-kot")
+            .unwrap();
+        // Boundary fixture: generic original classification, not a device archive validation.
+        let payload = serde_json::json!({"model_help":help});
+        let reference = a
+            .writing_store_artifact(
+                run.attempt_id,
+                &run.scope(),
+                &run.task().id,
+                &run.task_revision,
+                "apple-pencilkit-v1",
+                payload,
+            )
+            .unwrap();
+        a.writing_accept_original(run.id, run.round_id, reference)
+            .unwrap();
+        assert_eq!(
+            a.active_handwriting().unwrap().pre_submission_cues,
+            expected
+        );
+        a.writing_model_revealed(run.id, run.round_id).unwrap();
+        assert_eq!(
+            a.active_handwriting().unwrap().pre_submission_cues,
+            expected
+        );
+    }
+}
+
+#[test]
+fn continuous_recall_reference_after_comparison_does_not_rewrite_original_support() {
+    let mut a = app();
+    start_checkpoint(&mut a, "f2-radio-no");
+    let run = a.prepare_foundation_writing().unwrap().unwrap();
+    a.writing_audio_completed(run.id, run.round_id, "foundation-kot")
+        .unwrap();
+    save(&mut a, &run, &drawing(&run, true));
+    let compared = a.active_handwriting().unwrap();
+    assert_eq!(compared.pre_submission_cues, Some(vec![]));
+    a.open_writing_catalog().unwrap();
+    a.start_foundations().unwrap();
+    let returned = a.prepare_foundation_writing().unwrap().unwrap();
+    assert_eq!(returned.pre_submission_cues, compared.pre_submission_cues);
+    assert_eq!(returned.original, compared.original);
+    assert_eq!(returned.round_id, compared.round_id);
+}
+
+#[test]
+fn continuous_recall_late_base_callbacks_cannot_mutate_the_suspended_course() {
+    let mut a = app();
+    source(&mut a, "c6-window-it-say");
+    let state = a.foundation_state().unwrap();
+    let step = rufren_content::foundations().episodes[state.episode].steps[state.step].clone();
+    a.foundation_edit(vec!["I tried aloud (self-report).".into()])
+        .unwrap();
+    a.foundation_submit(&step).unwrap();
+    a.foundation_next(false).unwrap();
+    assert!(a.foundation_writing_checkpoint().unwrap().is_some());
+    let before = serde_json::to_value(a.foundation_state().unwrap()).unwrap();
+    let events = a.repo.library().unwrap().events;
+    let revision = Uuid::new_v5(
+        &Uuid::NAMESPACE_URL,
+        format!(
+            "rufren-foundation:{}:{}",
+            rufren_content::foundations::foundation_step_pack_revision(&step.id),
+            step.id
+        )
+        .as_bytes(),
+    )
+    .to_string();
+    let recording = rufren_core::AudioRecordMetadata {
+        asset_id: "late-course-recording".into(),
+        content_hash: "a".repeat(64),
+        role: "attempt".into(),
+        name: "Late recorded original".into(),
+        passage_id: revision.clone(),
+        revision_id: revision,
+        duration_ms: 1000,
+        sample_rate: 16000,
+        channels: 1,
+        frames: 16000,
+        byte_length: 32044,
+        created_at_ms: repository::now_ms(),
+        mime_type: "audio/wav".into(),
+        interrupted: false,
+        device: serde_json::Value::Null,
+        annotations: vec![],
+    };
+    recording.validate().unwrap();
+    macro_rules! rejects_without_mutating {
+        ($call:expr) => {{
+            assert!($call.is_err());
+            assert_eq!(
+                serde_json::to_value(a.foundation_state().unwrap()).unwrap(),
+                before
+            );
+            assert_eq!(a.repo.library().unwrap().events, events);
+        }};
+    }
+    rejects_without_mutating!(a.foundation_cannot_yet(&step));
+    rejects_without_mutating!(a.foundation_save_recording(recording));
+    let read_step = rufren_content::foundations().episodes[0]
+        .steps
+        .iter()
+        .find(|s| matches!(s.action, rufren_content::FoundationAction::Read { .. }))
+        .unwrap()
+        .clone();
+    rejects_without_mutating!(a.foundation_read_try(&read_step));
+    rejects_without_mutating!(a.foundation_replayed("foundation-ono"));
+    rejects_without_mutating!(a.foundation_edit(vec!["late edit".into()]));
+    rejects_without_mutating!(a.foundation_help());
+    rejects_without_mutating!(a.foundation_retry());
+    rejects_without_mutating!(a.foundation_submit(&step));
+    rejects_without_mutating!(a.foundation_next(false));
+    rejects_without_mutating!(a.foundation_repeat_episode());
+}
+
+#[test]
+fn continuous_recall_blank_help_allows_later_practice_without_inventing_ink() {
+    for portable in [true, false] {
+        let mut a = app();
+        let first = start_checkpoint(&mut a, "f1-radio-no");
+        let run = a.prepare_foundation_writing().unwrap().unwrap();
+        let events = a.repo.library().unwrap().events;
+        if portable {
+            let mut blank = drawing(&run, false);
+            blank.strokes.clear();
+            blank.mode = InkMode::Copy;
+            blank.aids.push(InkAid {
+                kind: "visual_model".into(),
+                value: "copy".into(),
+                at_ms: repository::now_ms(),
+            });
+            a.handwriting_store_draft(&run.scope(), &run.task(), &blank)
+                .unwrap();
+        } else {
+            // Native Show example event is an explicit request, not post-Compare reveal.
+            a.writing_model_revealed(run.id, run.round_id).unwrap();
+        }
+        let now = repository::now_ms();
+        a.foundation_finish_writing_checkpoint_at(first.item_session, true, now)
+            .unwrap();
+        let second = a.foundation_writing_checkpoint().unwrap().unwrap();
+        a.foundation_finish_writing_checkpoint_at(second.item_session, true, now + 1)
+            .unwrap();
+        let key = format!("foundation.writing.visit:{}", first.item_session);
+        let help = a.repo.get::<serde_json::Value>(&key).unwrap().unwrap();
+        assert_eq!(help["help_requested"], true);
+        assert!(help["originals"].as_array().unwrap().is_empty());
+        assert!(
+            a.handwriting_originals(&run.scope(), &run.task())
+                .unwrap()
+                .is_empty()
+        );
+        let later = a.foundation_writing_returns(now + rufren_core::DAY_MS + 10);
+        assert_eq!(later.len(), 1);
+        assert_eq!(later[0].task_id, "foundation-hand-print-ma");
+        assert_eq!(a.repo.library().unwrap().events, events);
+        let skip_key = format!("foundation.writing.visit:{}", second.item_session);
+        let mut skipped = a.repo.get::<serde_json::Value>(&skip_key).unwrap().unwrap();
+        assert_eq!(skipped["help_requested"], false);
+        // Older receipts missing this optional field must not infer a help request.
+        skipped.as_object_mut().unwrap().remove("help_requested");
+        a.repo.set(&skip_key, &skipped).unwrap();
+        assert_eq!(
+            a.foundation_writing_returns(now + rufren_core::DAY_MS + 10),
+            later
+        );
+    }
+}
+
+#[test]
+fn continuous_recall_repair_from_resumed_speaking_preserves_exact_stage_and_original() {
+    let mut a = app();
+    let checkpoint = start_checkpoint(&mut a, "f2-radio-no");
+    let first = a.prepare_foundation_writing().unwrap().unwrap();
+    a.writing_audio_completed(first.id, first.round_id, "foundation-kot")
+        .unwrap();
+    save(&mut a, &first, &drawing(&first, true));
+    a.writing_go_say(first.id, first.round_id).unwrap();
+    let speaking = a.active_handwriting().unwrap();
+    assert_eq!(speaking.stage, WritingStage::Say);
+    let resumed = AppState::from_repository(a.repo.clone()).unwrap();
+    resumed
+        .writing_new_round(first.id, first.round_id, Sequence::HearWriteCompareSay)
+        .unwrap();
+    let retry = resumed.active_handwriting().unwrap();
+    assert_eq!(retry.history.len(), 1);
+    assert_eq!(retry.history[0].stage, Some(WritingStage::Say));
+    assert_eq!(retry.history[0].original, speaking.original);
+    assert_eq!(retry.history[0].say, SayDisposition::NotReported);
+    assert_ne!(retry.round_id, first.round_id);
+    assert_eq!(retry.stage, WritingStage::Writing);
+    assert_eq!(
+        retry.pre_submission_cues,
+        Some(vec!["after_comparison".into()])
+    );
+    assert_eq!(
+        resumed.foundation_writing_checkpoint().unwrap().unwrap(),
+        checkpoint
     );
 }

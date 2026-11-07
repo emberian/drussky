@@ -305,6 +305,8 @@ pub(crate) struct WritingRound {
     pub attempt_id: Option<Uuid>,
     #[serde(default)]
     pub audio_completed: Option<bool>,
+    #[serde(default)]
+    pub pre_submission_cues: Option<Vec<String>>,
 }
 /// A read-only projection of an exact round; opening it never replaces the live round.
 #[derive(Clone, Debug, PartialEq)]
@@ -331,6 +333,13 @@ pub(crate) enum WritingReturnIntent {
         step: String,
         revision: String,
     },
+    FoundationCheckpoint {
+        checkpoint: Uuid,
+        item_session: Uuid,
+        anchor_session: Uuid,
+        step: String,
+        revision: String,
+    },
     Catalog,
 }
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
@@ -351,6 +360,8 @@ pub(crate) struct HandwritingActivity {
     pub original: Option<WritingOriginalRef>,
     pub audio_completed: bool,
     pub model_revealed: bool,
+    #[serde(default)]
+    pub pre_submission_cues: Option<Vec<String>>,
     #[serde(default)]
     pub entry_previewed: bool,
     #[serde(default)]
@@ -534,7 +545,7 @@ fn hash(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
 }
 impl AppState {
-    fn writing_load(&self, id: Uuid) -> Result<HandwritingActivity> {
+    pub(crate) fn writing_load(&self, id: Uuid) -> Result<HandwritingActivity> {
         let run = self
             .repo
             .get::<HandwritingActivity>(&activity_key(id))?
@@ -573,6 +584,100 @@ impl AppState {
             .into_iter()
             .rev()
             .find(|run| run.course_session == course && run.task_id == task.id))
+    }
+    /// A checkpoint has its own deterministic run, so catalog visits cannot steal
+    /// its partial drawing and a crash between pointer writes cannot duplicate it.
+    pub(crate) fn writing_checkpoint_run(
+        &self,
+        checkpoint: &crate::foundation_writing::FoundationWritingCheckpoint,
+    ) -> Result<Option<HandwritingActivity>> {
+        let id = checkpoint.run_id();
+        let Some(run) = self.repo.get::<HandwritingActivity>(&activity_key(id))? else {
+            return Ok(None);
+        };
+        run.validate()?;
+        if run.id != id
+            || run.course_session != checkpoint.item_session()
+            || run.course_step != checkpoint.anchor_step
+            || run.course_step_revision != checkpoint.anchor_revision
+            || run.task_id != checkpoint.item().task_id
+            || run.task_revision != checkpoint.item().task_revision
+        {
+            return Err(
+                "The saved checkpoint paper has another identity. Your drawings are kept.".into(),
+            );
+        }
+        Ok(Some(run))
+    }
+    fn prepare_foundation_writing_checkpoint(
+        &self,
+        checkpoint: &crate::foundation_writing::FoundationWritingCheckpoint,
+    ) -> Result<Option<HandwritingActivity>> {
+        let course = self.foundation_state()?;
+        checkpoint.validate(&course)?;
+        let task = handwriting_tasks()
+            .into_iter()
+            .find(|t| {
+                t.id == checkpoint.item().task_id && t.revision == checkpoint.item().task_revision
+            })
+            .ok_or("The checkpoint's writing model is unavailable.")?;
+        let mut run = if let Some(run) = self.writing_checkpoint_run(checkpoint)? {
+            run
+        } else {
+            let id = checkpoint.run_id();
+            let round_id = Uuid::new_v5(&id, b"initial-round");
+            HandwritingActivity {
+                version: 2,
+                id,
+                course_session: checkpoint.item_session(),
+                course_step: checkpoint.anchor_step.clone(),
+                course_step_revision: checkpoint.anchor_revision.clone(),
+                task_id: task.id,
+                task_revision: task.revision,
+                sequence: WritingSequence::HearWriteCompareSay,
+                stage: WritingStage::Writing,
+                round_id,
+                attempt_id: Uuid::new_v5(&round_id, b"initial-attempt"),
+                scope_id: format!("{id}:{round_id}"),
+                original: None,
+                audio_completed: false,
+                model_revealed: false,
+                pre_submission_cues: Some(vec![]),
+                entry_previewed: false,
+                return_intent: None,
+                say: SayDisposition::NotReported,
+                history: vec![],
+                native_instance: None,
+            }
+        };
+        if run.stage == WritingStage::Writing
+            && run.original.is_none()
+            && self
+                .repo
+                .get::<bool>(&format!(
+                    "foundation.writing.reference:{}",
+                    checkpoint.item_session()
+                ))?
+                .unwrap_or(false)
+        {
+            if let Some(cues) = &mut run.pre_submission_cues {
+                if !cues.iter().any(|cue| cue == "reference_material") {
+                    cues.push("reference_material".into());
+                }
+            }
+        }
+        run.return_intent = Some(WritingReturnIntent::FoundationCheckpoint {
+            checkpoint: checkpoint.id,
+            item_session: checkpoint.item_session(),
+            anchor_session: checkpoint.anchor_session,
+            step: checkpoint.anchor_step.clone(),
+            revision: checkpoint.anchor_revision.clone(),
+        });
+        self.repo.set(&activity_key(run.id), &run)?;
+        self.writing_prefer_run(&run)?;
+        self.repo.set("handwriting.active", &run.id)?;
+        self.repo.set("handwriting.surface", &"run")?;
+        Ok(Some(run))
     }
     pub(crate) fn active_handwriting(&self) -> Result<HandwritingActivity> {
         let id = self
@@ -613,6 +718,11 @@ impl AppState {
     }
     pub(crate) fn foundation_writing(&self) -> Result<Option<HandwritingActivity>> {
         let course = self.foundation_state()?;
+        if let Some(checkpoint) = &course.writing_checkpoint {
+            return Ok(self
+                .writing_checkpoint_run(checkpoint)?
+                .filter(|run| self.writing_returns_to_foundations(run).unwrap_or(false)));
+        }
         if course.review_resume.is_some() {
             return Ok(None);
         }
@@ -634,7 +744,13 @@ impl AppState {
     /// Prepare only the authored current teaching model for copying, before it is heard.
     /// This binds navigation intent without changing the run's original provenance.
     pub(crate) fn prepare_foundation_writing(&mut self) -> Result<Option<HandwritingActivity>> {
+        if self.foundation_recover_writing_transition()? {
+            return Ok(None);
+        }
         let course = self.foundation_state()?;
+        if let Some(checkpoint) = &course.writing_checkpoint {
+            return self.prepare_foundation_writing_checkpoint(checkpoint);
+        }
         if course.review_resume.is_some() {
             return Ok(None);
         }
@@ -653,6 +769,25 @@ impl AppState {
     }
     fn writing_returns_to_foundations(&self, run: &HandwritingActivity) -> Result<bool> {
         let course = self.foundation_state()?;
+        if let Some(WritingReturnIntent::FoundationCheckpoint {
+            checkpoint,
+            item_session,
+            anchor_session,
+            step,
+            revision,
+        }) = &run.return_intent
+        {
+            return Ok(course.writing_checkpoint.as_ref().is_some_and(|c| {
+                c.id == *checkpoint
+                    && c.item_session() == *item_session
+                    && c.run_id() == run.id
+                    && course.session == *anchor_session
+                    && course.step_id == *step
+                    && course.step_revision == *revision
+                    && c.item().task_id == run.task_id
+                    && c.item().task_revision == run.task_revision
+            }));
+        }
         let task = run.definition()?;
         if task.foundation_step_id != course.step_id
             || task.foundation_step_revision != course.step_revision
@@ -669,7 +804,9 @@ impl AppState {
                     && *step == course.step_id
                     && *revision == course.step_revision
             }
-            Some(WritingReturnIntent::Catalog) => false,
+            Some(
+                WritingReturnIntent::Catalog | WritingReturnIntent::FoundationCheckpoint { .. },
+            ) => false,
             None => {
                 !run.entry_previewed
                     && course.session == run.course_session
@@ -775,6 +912,11 @@ impl AppState {
                 original: None,
                 audio_completed: heard_course_model,
                 model_revealed: sequence == WritingSequence::SeeCopyHearSay,
+                pre_submission_cues: Some(if sequence == WritingSequence::SeeCopyHearSay {
+                    vec!["visual_model".into()]
+                } else {
+                    vec![]
+                }),
                 entry_previewed: self.page == Page::Handwriting
                     && self.repo.get::<String>("handwriting.surface")?.as_deref()
                         == Some("catalog"),
@@ -828,7 +970,12 @@ impl AppState {
         }
         run.audio_completed = true;
         self.repo.set(&activity_key(id), &run)?;
-        if self.writing_returns_to_foundations(&run)? {
+        if self.writing_returns_to_foundations(&run)?
+            && !matches!(
+                run.return_intent,
+                Some(WritingReturnIntent::FoundationCheckpoint { .. })
+            )
+        {
             self.foundation_replayed(asset)?;
         }
         Ok(())
@@ -839,6 +986,13 @@ impl AppState {
             return Err("The writing attempt changed.".into());
         }
         run.model_revealed = true;
+        if run.stage == WritingStage::Writing && run.original.is_none() {
+            if let Some(cues) = &mut run.pre_submission_cues {
+                if !cues.iter().any(|cue| cue == "visual_model") {
+                    cues.push("visual_model".into());
+                }
+            }
+        }
         self.repo.set(&activity_key(id), &run)
     }
     pub(crate) fn writing_check_original(
@@ -848,6 +1002,13 @@ impl AppState {
         original: &WritingOriginalRef,
     ) -> Result<()> {
         let run = self.active_handwriting()?;
+        if let Some(WritingReturnIntent::FoundationCheckpoint { item_session, .. }) =
+            &run.return_intent
+        {
+            if self.foundation_writing_transition_pending(*item_session)? {
+                return Err("This writing turn is already saved. Continue the lesson to open its next paper.".into());
+            }
+        }
         if run.id != id
             || run.round_id != round
             || original.scope_id != run.scope()
@@ -890,6 +1051,54 @@ impl AppState {
             return Err(
                 "Listen to the complete spoken prompt before comparing this drawing.".into(),
             );
+        }
+        // Seal assistance from the actual original before feedback reveals the answer.
+        // Legacy native archives do not establish an unassisted attempt.
+        if run.original.is_none() {
+            let artifact = self
+                .repo
+                .get::<serde_json::Value>(&original.local_key)?
+                .ok_or("The saved drawing is unavailable. Its reference is kept.")?;
+            let payload = artifact.get("payload").unwrap_or(&artifact);
+            if original.format == "web-pointer-ink-v2" {
+                if let Some(cues) = &mut run.pre_submission_cues {
+                    if let Some(aids) = payload.get("aids").and_then(|v| v.as_array()) {
+                        for aid in aids {
+                            let kind = aid.get("kind").and_then(|v| v.as_str()).unwrap_or("");
+                            if matches!(kind, "visual_model" | "meaning" | "stroke_model_replay")
+                                && !cues.iter().any(|cue| cue == kind)
+                            {
+                                cues.push(kind.into());
+                            }
+                        }
+                    } else {
+                        run.pre_submission_cues = None;
+                    }
+                }
+            } else {
+                let help = payload.get("model_help");
+                if help
+                    .and_then(|h| h.get("history_from_start"))
+                    .and_then(|v| v.as_bool())
+                    != Some(true)
+                {
+                    run.pre_submission_cues = None;
+                } else if help
+                    .and_then(|h| h.get("visible_at_start"))
+                    .and_then(|v| v.as_bool())
+                    == Some(true)
+                    || help
+                        .and_then(|h| h.get("revealed_at_ms"))
+                        .and_then(|v| v.as_array())
+                        .is_some_and(|v| !v.is_empty())
+                {
+                    if let Some(cues) = &mut run.pre_submission_cues {
+                        if !cues.iter().any(|cue| cue == "visual_model") {
+                            cues.push("visual_model".into());
+                        }
+                    }
+                }
+            }
         }
         run.original = Some(original);
         run.stage = WritingStage::Compare;
@@ -1005,9 +1214,21 @@ impl AppState {
         sequence: WritingSequence,
     ) -> Result<()> {
         let mut run = self.active_handwriting()?;
+        if let Some(WritingReturnIntent::FoundationCheckpoint { item_session, .. }) =
+            &run.return_intent
+        {
+            if self.foundation_writing_transition_pending(*item_session)? {
+                return Err(
+                    "This turn is already saved. Continue it before starting another.".into(),
+                );
+            }
+        }
         if run.id != id
             || run.round_id != round
-            || !matches!(run.stage, WritingStage::Compare | WritingStage::Complete)
+            || !matches!(
+                run.stage,
+                WritingStage::Compare | WritingStage::Say | WritingStage::Complete
+            )
         {
             return Err("Finish comparing this drawing before starting a fresh attempt.".into());
         }
@@ -1023,6 +1244,7 @@ impl AppState {
             stage: Some(run.stage),
             attempt_id: Some(run.attempt_id),
             audio_completed: Some(run.audio_completed),
+            pre_submission_cues: run.pre_submission_cues.clone(),
         });
         run.round_id = Uuid::new_v4();
         run.attempt_id = Uuid::new_v4();
@@ -1032,6 +1254,11 @@ impl AppState {
         run.original = None;
         run.audio_completed = false;
         run.model_revealed = sequence == WritingSequence::SeeCopyHearSay;
+        run.pre_submission_cues = Some(if sequence == WritingSequence::SeeCopyHearSay {
+            vec!["visual_model".into(), "after_comparison".into()]
+        } else {
+            vec!["after_comparison".into()]
+        });
         run.entry_previewed = true;
         run.say = SayDisposition::NotReported;
         run.native_instance = None;
@@ -1058,6 +1285,14 @@ impl AppState {
         }
         if run.stage != WritingStage::Complete {
             self.writing_say_done(id, round, disposition)?;
+        }
+        if matches!(
+            run.return_intent,
+            Some(WritingReturnIntent::FoundationCheckpoint { .. })
+        ) {
+            let completed = self.writing_load(id)?;
+            self.foundation_finish_writing_checkpoint(&completed)?;
+            return self.navigate(Page::Foundations);
         }
         if matches!(
             run.return_intent,
@@ -1367,8 +1602,69 @@ impl AppState {
         run.native_instance = instance;
         self.repo.set(&activity_key(id), &run)
     }
+    /// Explicit requests for the example are useful practice opportunities even
+    /// when the learner could not yet put ink on the page. They are not attempts.
+    pub(crate) fn writing_checkpoint_help_requested(
+        &self,
+        run: &HandwritingActivity,
+    ) -> Result<bool> {
+        if run.sequence == WritingSequence::HearWriteCompareSay
+            && run.stage == WritingStage::Writing
+            && run.model_revealed
+        {
+            return Ok(true);
+        }
+        if let Some(draft) = self.handwriting_draft(&run.scope(), &run.task())? {
+            if draft.aids.iter().any(|aid| {
+                matches!(
+                    aid.kind.as_str(),
+                    "visual_model" | "meaning" | "stroke_model_replay"
+                )
+            }) {
+                return Ok(true);
+            }
+        }
+        if let Some(checkpoint) = self
+            .repo
+            .get::<serde_json::Value>(&format!("handwriting.native.latest:{}", run.scope()))?
+        {
+            if checkpoint
+                .get("model_help")
+                .and_then(|h| h.get("revealed_at_ms"))
+                .and_then(|v| v.as_array())
+                .is_some_and(|times| !times.is_empty())
+            {
+                return Ok(true);
+            }
+        }
+        Ok(false)
+    }
+    pub(crate) fn writing_checkpoint_reference_access(&self) -> Result<()> {
+        let course = self.foundation_state()?;
+        if let Some(checkpoint) = &course.writing_checkpoint {
+            self.repo.set(
+                &format!("foundation.writing.reference:{}", checkpoint.item_session()),
+                &true,
+            )?;
+            if let Some(mut run) = self.writing_checkpoint_run(checkpoint)? {
+                if run.stage == WritingStage::Writing && run.original.is_none() {
+                    if let Some(cues) = &mut run.pre_submission_cues {
+                        if !cues.iter().any(|cue| cue == "reference_material") {
+                            cues.push("reference_material".into());
+                        }
+                    }
+                    self.repo.set(&activity_key(run.id), &run)?;
+                }
+            }
+        }
+        Ok(())
+    }
     fn writing_reference_use(&self) -> Result<()> {
+        self.writing_checkpoint_reference_access()?;
         let mut course = self.foundation_state()?;
+        if course.writing_checkpoint.is_some() {
+            return Ok(());
+        }
         let pack = rufren_content::foundations();
         if matches!(
             pack.episodes[course.episode].steps[course.step].action,

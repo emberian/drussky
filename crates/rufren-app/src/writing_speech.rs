@@ -419,6 +419,7 @@ mod writing_speech_tests {
             model_revealed: true,
             entry_previewed: true,
             return_intent: None,
+            pre_submission_cues: Some(vec!["visual_model".into()]),
             say: SayDisposition::NotReported,
             history: vec![],
             native_instance: None,

@@ -5,8 +5,8 @@ mod pk;
 use block2::RcBlock;
 use dioxus::mobile::{self as native_runtime, wry::WebViewExtIOS};
 use objc2::{
-    define_class, msg_send, rc::Retained, runtime::ProtocolObject, sel, AnyThread, DeclaredClass,
-    MainThreadOnly,
+    AnyThread, DeclaredClass, MainThreadOnly, define_class, msg_send, rc::Retained,
+    runtime::ProtocolObject, sel,
 };
 use objc2_core_foundation::{CGPoint, CGRect, CGSize};
 use objc2_foundation::{
@@ -35,6 +35,7 @@ struct State {
     request: NativeWritingRequest,
     inline: Cell<Option<NativeWritingHostRect>>,
     initial_inline_viewport: Cell<bool>,
+    automatic_inline_zoom: Cell<Option<f64>>,
     outbox: Rc<EventQueue>,
     controller: Retained<WritingController>,
     canvas: Retained<PKCanvasView>,
@@ -45,6 +46,8 @@ struct State {
     status: Retained<UILabel>,
     buttons: Vec<Retained<UIButton>>,
     player: RefCell<Option<Retained<AVAudioPlayer>>>,
+    audio_timer: RefCell<Option<Retained<NSTimer>>>,
+    model_help: RefCell<NativeWritingModelHelp>,
     sequence: Cell<u64>,
     latest_ack: Cell<u64>,
     pending: RefCell<BTreeMap<u64, Pending>>,
@@ -152,13 +155,15 @@ fn emit(s: &State, event: NativeWritingEvent) {
     if queue.scheduled.replace(true) {
         return;
     }
-    later(move || loop {
-        let event = queue.events.borrow_mut().pop_front();
-        match event {
-            Some(event) => (queue.callback)(event),
-            None => {
-                queue.scheduled.set(false);
-                break;
+    later(move || {
+        loop {
+            let event = queue.events.borrow_mut().pop_front();
+            match event {
+                Some(event) => (queue.callback)(event),
+                None => {
+                    queue.scheduled.set(false);
+                    break;
+                }
             }
         }
     });
@@ -202,6 +207,10 @@ define_class!(
         #[unsafe(method(audioPlayerDidFinishPlaying:successfully:))]
         fn audio_ended(&self,_player:&AVAudioPlayer,success:bool) {
             if let Some(s)=state(self.ivars().id) {
+                if !s.player.borrow().as_ref().is_some_and(|active| std::ptr::eq(&**active,_player)) {return;}
+                cancel_audio_timer(&s);
+                let player=s.player.borrow_mut().take();
+                if let Some(player)=player {player.setDelegate(None);}
                 if let Some(a)=&s.request.audio {
                     if success {emit(&s,NativeWritingEvent::AudioCompleted{instance_id:s.request.instance_id,audio_id:a.id.clone(),sha256:a.sha256.clone(),at_ms:now()});}
                     else {emit(&s,NativeWritingEvent::AudioStopped{instance_id:s.request.instance_id,audio_id:a.id.clone(),at_ms:now()});}
@@ -210,13 +219,13 @@ define_class!(
         }
         #[unsafe(method(audioPlayerDecodeErrorDidOccur:error:))]
         fn audio_error(&self,_player:&AVAudioPlayer,_error:Option<&objc2_foundation::NSError>) {
-            if let Some(s)=state(self.ivars().id) {fail(&s,"The spoken prompt could not finish playing. Your writing is kept.".into());}
+            if let Some(s)=state(self.ivars().id) {stop_audio(&s);fail(&s,"The spoken prompt could not finish playing. Your writing is kept.".into());}
         }
     }
     impl WritingController {
         #[unsafe(method(writingWillResignActive:))]
         fn will_resign(&self,_note:&NSNotification) {
-            if let Some(s)=state(self.ivars().id) {if !s.closing.get(){cancel_timer(&s);checkpoint(&s,NativeCheckpointReason::Autosave);}}
+            if let Some(s)=state(self.ivars().id) {if !s.closing.get(){stop_audio(&s);cancel_timer(&s);checkpoint(&s,NativeCheckpointReason::Autosave);}}
         }
         #[unsafe(method(viewDidLayoutSubviews))]
         fn laid_out(&self) {
@@ -307,7 +316,18 @@ fn layout(s: &State) {
         .setFrame(rect(x, canvas_y, w, (bottom - 148.0 - canvas_y).max(100.0)));
 }
 
-fn reveal(s: &State) {
+fn reveal(s: &Rc<State>) {
+    if s.requested.get().is_some() || s.comparison.get() {
+        return;
+    }
+    let previous = s.model_help.borrow().clone();
+    s.model_help.borrow_mut().revealed_at_ms.push(now());
+    // The assistance marker and partial ink must reach the native recovery
+    // journal before either native or HTML controls expose the answer.
+    if !checkpoint(s, NativeCheckpointReason::Autosave) {
+        s.model_help.replace(previous);
+        return;
+    }
     s.model_visible.set(true);
     s.model.setText(Some(&NSString::from_str(&model_text(s))));
     emit(
@@ -328,22 +348,46 @@ fn model_text(s: &State) -> String {
         "Write what you hear. You can show the model if you need it.".into()
     }
 }
+fn cancel_audio_timer(s: &State) {
+    if let Some(timer) = s.audio_timer.borrow_mut().take() {
+        timer.invalidate();
+    }
+}
 fn stop_audio(s: &State) {
-    if let Some(p) = s.player.borrow().as_ref() {
-        if p.isPlaying() {
-            p.stop();
-            if let Some(a) = &s.request.audio {
-                emit(
-                    s,
-                    NativeWritingEvent::AudioStopped {
-                        instance_id: s.request.instance_id,
-                        audio_id: a.id.clone(),
-                        at_ms: now(),
-                    },
-                );
-            }
+    cancel_audio_timer(s);
+    // An OS interruption can leave isPlaying false without a completion
+    // callback. Taking the owned player still releases the UI's playing gate.
+    if let Some(player) = s.player.borrow_mut().take() {
+        player.setDelegate(None);
+        player.stop();
+        if let Some(a) = &s.request.audio {
+            emit(
+                s,
+                NativeWritingEvent::AudioStopped {
+                    instance_id: s.request.instance_id,
+                    audio_id: a.id.clone(),
+                    at_ms: now(),
+                },
+            );
         }
     }
+}
+fn watch_audio(s: &State) {
+    let id = s.request.instance_id;
+    let block = RcBlock::new(move |_timer: std::ptr::NonNull<NSTimer>| {
+        if let Some(s) = state(id) {
+            stop_audio(&s);
+            fail(
+                &s,
+                "Playback was interrupted. Tap Listen to try again; your writing is kept.".into(),
+            );
+        }
+    });
+    let timer = unsafe { NSTimer::timerWithTimeInterval_repeats_block(15.0, false, &block) };
+    unsafe {
+        NSRunLoop::mainRunLoop().addTimer_forMode(&timer, NSRunLoopCommonModes);
+    }
+    s.audio_timer.replace(Some(timer));
 }
 fn listen(s: &Rc<State>) {
     if !s.request.allow_listen {
@@ -362,6 +406,7 @@ fn listen(s: &Rc<State>) {
             player.setDelegate(Some(ProtocolObject::from_ref(&*s.controller)));
             if player.play() {
                 s.player.replace(Some(player));
+                watch_audio(s);
                 emit(
                     s,
                     NativeWritingEvent::AudioStarted {
@@ -533,52 +578,65 @@ fn projection(s: &State, d: &PKDrawing) -> NativeWritingResult<NativeInkProjecti
     result.validate()?;
     Ok(result)
 }
-fn checkpoint(s: &Rc<State>, reason: NativeCheckpointReason) {
+fn checkpoint_failure(s: &State, reason: NativeCheckpointReason, message: String) {
+    // A failed Compare/Back must leave a recoverable editable sheet. Otherwise
+    // the save gate also disables Undo, preventing recovery from size limits.
+    if s.requested.get() == Some(reason) {
+        s.requested.set(None);
+        if !s.comparison.get() {
+            s.canvas.drawingGestureRecognizer().setEnabled(true);
+        }
+    }
+    fail(s, message);
+}
+fn checkpoint(s: &Rc<State>, reason: NativeCheckpointReason) -> bool {
     let drawing = s.canvas.drawing();
     if reason == NativeCheckpointReason::Compare && unsafe { drawing.strokes().is_empty() } {
         s.requested.set(None);
         s.canvas.drawingGestureRecognizer().setEnabled(true);
         fail(s, "Write a word or phrase before comparing.".into());
-        return;
+        return false;
     }
     let archive = unsafe { drawing.dataRepresentation() };
     if archive.len() > MAX_NATIVE_ARCHIVE_BYTES {
-        fail(
+        checkpoint_failure(
             s,
+            reason,
             "This native drawing is too large to save safely. Keep the paper open.".into(),
         );
-        return;
+        return false;
     }
     let bytes = archive.to_vec();
     let archive_sha256 = hash(&bytes);
     if reason == NativeCheckpointReason::Autosave
-        && s.latest
-            .borrow()
-            .as_ref()
-            .is_some_and(|old| old.archive_sha256 == archive_sha256)
+        && s.latest.borrow().as_ref().is_some_and(|old| {
+            old.archive_sha256 == archive_sha256
+                && old.model_help.as_ref() == Some(&*s.model_help.borrow())
+        })
     {
-        return;
+        return true;
     }
     let canonical = match projection(s, &drawing) {
         Ok(v) => v,
         Err(e) => {
-            fail(s, e);
-            return;
+            checkpoint_failure(s, reason, e);
+            return false;
         }
     };
     let Some(seq) = s.sequence.get().checked_add(1) else {
-        fail(
+        checkpoint_failure(
             s,
+            reason,
             "This writing session has too many revisions. Keep the paper open.".into(),
         );
-        return;
+        return false;
     };
     s.sequence.set(seq);
     let canonical_bytes = match serde_json::to_vec(&canonical) {
         Ok(b) => b,
         Err(_) => {
-            fail(s, "The native ink could not be encoded.".into());
-            return;
+            checkpoint_failure(s, reason, "The native ink could not be encoded.".into());
+            return false;
         }
     };
     let offset = s.canvas.contentOffset();
@@ -598,17 +656,19 @@ fn checkpoint(s: &Rc<State>, reason: NativeCheckpointReason) {
         canonical_sha256: hash(&canonical_bytes),
         zoom_scale: s.canvas.zoomScale(),
         content_offset: [offset.x, offset.y],
+        model_help: Some(s.model_help.borrow().clone()),
     };
     if let Err(e) = c.validate() {
-        fail(s, e);
-        return;
+        checkpoint_failure(s, reason, e);
+        return false;
     }
     if let Err(e) = journal_native(&s.request, &c) {
-        fail(
+        checkpoint_failure(
             s,
+            reason,
             format!("The native recovery could not be saved: {e}. Keep the paper open."),
         );
-        return;
+        return false;
     }
     s.latest.replace(Some(c.clone()));
     s.pending.borrow_mut().insert(
@@ -630,6 +690,7 @@ fn checkpoint(s: &Rc<State>, reason: NativeCheckpointReason) {
             checkpoint: c,
         },
     );
+    true
 }
 pub(crate) fn ack(
     instance: Uuid,
@@ -682,9 +743,10 @@ pub(crate) fn ack(
             }
             s.compared.replace(Some((pending.checkpoint_id, sequence)));
             s.canvas.drawingGestureRecognizer().setEnabled(false);
-            if !s.model_visible.get() {
-                reveal(&s);
-            }
+            // Comparison reveals the answer only after its immutable original
+            // is acknowledged. This is feedback, not help before the answer.
+            s.model_visible.set(true);
+            s.model.setText(Some(&NSString::from_str(&model_text(&s))));
             s.buttons[6].setTitle_forState(
                 Some(&NSString::from_str("Continue to speaking")),
                 UIControlState::Normal,
@@ -909,10 +971,13 @@ fn open(
         None
     };
     let latest_initial = request.initial.clone();
+    let model_help =
+        NativeWritingModelHelp::for_open(request.initial.as_ref(), request.model_visible, compared);
     let s = Rc::new(State {
         request,
         inline: Cell::new(host),
         initial_inline_viewport: Cell::new(host.is_some()),
+        automatic_inline_zoom: Cell::new(None),
         outbox: Rc::new(EventQueue {
             callback,
             events: RefCell::new(VecDeque::new()),
@@ -927,6 +992,8 @@ fn open(
         status: status_label,
         buttons,
         player: RefCell::new(None),
+        audio_timer: RefCell::new(None),
+        model_help: RefCell::new(model_help),
         sequence: Cell::new(initial_sequence),
         latest_ack: Cell::new(initial_sequence),
         pending: RefCell::new(BTreeMap::new()),
@@ -1046,6 +1113,12 @@ pub(crate) fn update_inline_rect(
         .controller
         .view()
         .ok_or("The inline paper view is unavailable.")?;
+    let offset_before_layout = s.canvas.contentOffset();
+    let follow_fit = native_viewport_still_fitted(
+        s.automatic_inline_zoom.get(),
+        s.canvas.zoomScale(),
+        [offset_before_layout.x, offset_before_layout.y],
+    );
     // The bridge subtracts visualViewport offsets from CSS client coordinates.
     // Keep the whole host frame so clipping never shifts ink coordinates.
     view.setFrame(rect(
@@ -1064,26 +1137,45 @@ pub(crate) fn update_inline_rect(
     );
     s.inline.set(Some(host));
     layout(&s);
-    if host.width > 0.0 && host.height > 0.0 && s.initial_inline_viewport.replace(false) {
-        // Wait for the actual inline bounds, not the controller's initial
-        // full-window frame. Only a fresh sheet is fitted: subsequent geometry
-        // updates preserve the learner's zoom and position.
-        if let Some(checkpoint) = &s.request.initial {
-            s.canvas
-                .setMinimumZoomScale(checkpoint.zoom_scale.min(0.25));
-            s.canvas.setMaximumZoomScale(checkpoint.zoom_scale.max(4.0));
-            s.canvas.setZoomScale(checkpoint.zoom_scale);
-            s.canvas.setContentOffset(CGPoint::new(
-                checkpoint.content_offset[0],
-                checkpoint.content_offset[1],
-            ));
-        } else {
-            let fit = ((host.width * sx / s.request.paper.width_points)
-                .min(host.height * sy / s.request.paper.height_points))
-            .clamp(0.1, 4.0);
+    if host.width > 0.0 && host.height > 0.0 {
+        let fit = ((host.width * sx / s.request.paper.width_points)
+            .min(host.height * sy / s.request.paper.height_points))
+        .clamp(0.1, 4.0);
+        if s.initial_inline_viewport.replace(false) {
+            // Restore exactly first. A restored viewport only follows future
+            // layout changes when it matches this host's untouched fitted view.
+            if let Some(checkpoint) = &s.request.initial {
+                s.canvas
+                    .setMinimumZoomScale(checkpoint.zoom_scale.min(0.25));
+                s.canvas.setMaximumZoomScale(checkpoint.zoom_scale.max(4.0));
+                s.canvas.setZoomScale(checkpoint.zoom_scale);
+                s.canvas.setContentOffset(CGPoint::new(
+                    checkpoint.content_offset[0],
+                    checkpoint.content_offset[1],
+                ));
+                s.automatic_inline_zoom.set(
+                    native_viewport_still_fitted(
+                        Some(fit),
+                        checkpoint.zoom_scale,
+                        checkpoint.content_offset,
+                    )
+                    .then_some(fit),
+                );
+            } else {
+                s.canvas.setMinimumZoomScale(fit.min(0.25));
+                s.canvas.setZoomScale(fit);
+                s.canvas.setContentOffset(CGPoint::new(0.0, 0.0));
+                s.automatic_inline_zoom.set(Some(fit));
+            }
+        } else if follow_fit {
+            // Hidden recall uses the full width; comparison adds the model.
+            // Keep the full word in view while leaving explicit zoom/pan alone.
             s.canvas.setMinimumZoomScale(fit.min(0.25));
             s.canvas.setZoomScale(fit);
             s.canvas.setContentOffset(CGPoint::new(0.0, 0.0));
+            s.automatic_inline_zoom.set(Some(fit));
+        } else {
+            s.automatic_inline_zoom.set(None);
         }
     }
     Ok(())

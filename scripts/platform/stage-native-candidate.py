@@ -168,7 +168,8 @@ def stage(args, config):
 
     environment = os.environ.copy()
     environment.update(config['build_environment'])
-    environment['CARGO_BUILD_JOBS'] = '2'
+    # Respect the caller's resource limit; a native pair builds serially.
+    environment.setdefault('CARGO_BUILD_JOBS', '1')
     try:
         captured = source_map()
         source = {**captured, 'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),

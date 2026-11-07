@@ -163,7 +163,7 @@ impl AppState {
     pub(crate) fn foundation_start_review_at(&mut self, step_id: &str, now: i64) -> Result<()> {
         self.refresh()?;
         let course = self.foundation_state()?;
-        if course.review_resume.is_some() {
+        if course.review_resume.is_some() || course.writing_checkpoint.is_some() {
             return self.navigate(Page::Foundations);
         }
         if course.pending.is_some() {

@@ -61,6 +61,9 @@ pub(crate) fn current(state: &AppState) -> Destination {
     }
 }
 pub(crate) fn open(state: &mut AppState, destination: Destination) -> Result<()> {
+    if destination != Destination::Today {
+        state.writing_checkpoint_reference_access()?;
+    }
     match destination {
         Destination::Today => state.navigate(Page::Today),
         Destination::Learn => state.navigate(Page::Lessons),
@@ -78,6 +81,18 @@ fn go(app: Signal<AppState>, destination: Destination) {
 }
 fn go_page(app: Signal<AppState>, page: Page) {
     crate::handwriting_view::nav_act(app, move |state| {
+        if matches!(
+            page,
+            Page::Lessons
+                | Page::LessonDetail
+                | Page::Teacher
+                | Page::Reader
+                | Page::Library
+                | Page::Practice
+                | Page::Studio
+        ) {
+            state.writing_checkpoint_reference_access()?;
+        }
         state.navigate(page)?;
         focus_page_heading();
         Ok(())
@@ -85,6 +100,7 @@ fn go_page(app: Signal<AppState>, page: Page) {
 }
 fn go_teacher(app: Signal<AppState>) {
     crate::handwriting_view::nav_act(app, move |state| {
+        state.writing_checkpoint_reference_access()?;
         state.navigate(Page::Teacher)?;
         state.repo.set("teacher_surface", &"lessons")?;
         focus_page_heading();

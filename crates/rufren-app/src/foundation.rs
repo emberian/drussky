@@ -115,6 +115,8 @@ pub(crate) struct FoundationState {
     pub review_resume: Option<Box<FoundationState>>,
     #[serde(default)]
     pub cannot_yet: bool,
+    #[serde(default)]
+    pub writing_checkpoint: Option<crate::foundation_writing::FoundationWritingCheckpoint>,
 }
 #[derive(Clone, Serialize, Deserialize)]
 pub(crate) struct FoundationPending {
@@ -195,6 +197,9 @@ fn foundation_upgrade_state(s: &mut FoundationState, pack: &FoundationPack) -> R
         changed = true;
     }
     foundation_validate_cursor(s, pack)?;
+    if let Some(checkpoint) = &s.writing_checkpoint {
+        checkpoint.validate(s)?;
+    }
     Ok(changed)
 }
 
@@ -222,6 +227,7 @@ impl Default for FoundationState {
             recording: None,
             review_resume: None,
             cannot_yet: false,
+            writing_checkpoint: None,
         }
     }
 }
@@ -311,6 +317,12 @@ impl AppState {
     }
     pub(crate) fn foundation_edit(&self, draft: Vec<String>) -> Result<()> {
         let mut s = self.foundation_state()?;
+        if s.writing_checkpoint.is_some() {
+            return Err(
+                "The lesson is on its listening-and-writing turn. Your course answer is kept."
+                    .into(),
+            );
+        }
         if s.pending.is_some() || s.feedback.is_some() {
             return Err("Save or retry the current response first.".into());
         }
@@ -322,6 +334,12 @@ impl AppState {
     }
     pub(crate) fn foundation_help(&mut self) -> Result<()> {
         let mut s = self.foundation_state()?;
+        if s.writing_checkpoint.is_some() {
+            return Err(
+                "The lesson is on its listening-and-writing turn. Your course answer is kept."
+                    .into(),
+            );
+        }
         if s.pending.is_some() {
             return Err("Finish saving your response before showing the model.".into());
         }
@@ -349,6 +367,12 @@ impl AppState {
     }
     pub(crate) fn foundation_replayed(&self, asset: &str) -> Result<()> {
         let mut s = self.foundation_state()?;
+        if s.writing_checkpoint.is_some() {
+            return Err(
+                "The lesson is on its listening-and-writing turn. Your course answer is kept."
+                    .into(),
+            );
+        }
         let pack = rufren_content::foundations();
         let stimulus = matches!(
             &pack.episodes[s.episode].steps[s.step].action,
@@ -367,6 +391,12 @@ impl AppState {
     }
     pub(crate) fn foundation_retry(&self) -> Result<()> {
         let mut s = self.foundation_state()?;
+        if s.writing_checkpoint.is_some() {
+            return Err(
+                "The lesson is on its listening-and-writing turn. Your course answer is kept."
+                    .into(),
+            );
+        }
         if s.pending.is_some() {
             return Err("Save the previous response before retrying.".into());
         }
@@ -580,6 +610,12 @@ impl AppState {
     }
     pub(crate) fn foundation_cannot_yet(&mut self, step: &FoundationStep) -> Result<()> {
         let mut s = self.foundation_state()?;
+        if s.writing_checkpoint.is_some() {
+            return Err(
+                "The lesson is on its listening-and-writing turn. Your course answer is kept."
+                    .into(),
+            );
+        }
         if s.pending.is_some() {
             return self.foundation_submit(step);
         }
@@ -595,6 +631,12 @@ impl AppState {
     }
     pub(crate) fn foundation_submit(&mut self, step: &FoundationStep) -> Result<()> {
         let mut s = self.foundation_state()?;
+        if s.writing_checkpoint.is_some() {
+            return Err(
+                "The lesson is on its listening-and-writing turn. Your course answer is kept."
+                    .into(),
+            );
+        }
         let pack = rufren_content::foundations();
         let actual = &pack.episodes[s.episode].steps[s.step];
         if actual != step {
@@ -824,6 +866,12 @@ impl AppState {
     ) -> Result<()> {
         metadata.validate().map_err(|e| e.to_string())?;
         let mut s = self.foundation_state()?;
+        if s.writing_checkpoint.is_some() {
+            return Err(
+                "The lesson is on its listening-and-writing turn. Your course answer is kept."
+                    .into(),
+            );
+        }
         let pack = rufren_content::foundations();
         let step = &pack.episodes[s.episode].steps[s.step];
         if !matches!(
@@ -875,6 +923,12 @@ impl AppState {
     }
     pub(crate) fn foundation_read_try(&mut self, step: &FoundationStep) -> Result<()> {
         let mut s = self.foundation_state()?;
+        if s.writing_checkpoint.is_some() {
+            return Err(
+                "The lesson is on its listening-and-writing turn. Your course answer is kept."
+                    .into(),
+            );
+        }
         if !matches!(step.action, FoundationAction::Read { .. }) {
             return Err("This is not a reading turn.".into());
         }
@@ -957,6 +1011,9 @@ impl AppState {
     }
     pub(crate) fn foundation_repeat_episode(&self) -> Result<()> {
         let mut s = self.foundation_state()?;
+        if s.writing_checkpoint.is_some() {
+            return Err("Finish or skip this writing turn before repeating the lesson.".into());
+        }
         if s.pending.is_some() {
             return Err("Save the current answer first.".into());
         }
@@ -980,7 +1037,10 @@ impl AppState {
         self.foundation_save(&s)
     }
     pub(crate) fn foundation_next(&self, skip: bool) -> Result<()> {
-        let mut s = self.foundation_state()?;
+        let s = self.foundation_state()?;
+        if s.writing_checkpoint.is_some() {
+            return Err("Finish or skip the current listening-and-writing turn first.".into());
+        }
         if s.pending.is_some() {
             return Err("Save your response before leaving this step.".into());
         }
@@ -1013,6 +1073,17 @@ impl AppState {
         if s.review_resume.is_some() {
             return self.foundation_finish_review(&s);
         }
+        if !skip && self.foundation_offer_writing_checkpoint(&s)? {
+            return Ok(());
+        }
+        self.foundation_advance(s, skip)
+    }
+    pub(crate) fn foundation_advance_after_writing(&self, s: FoundationState) -> Result<()> {
+        self.foundation_advance(s, false)
+    }
+    fn foundation_advance(&self, mut s: FoundationState, skip: bool) -> Result<()> {
+        let pack = rufren_content::foundations();
+        let step = &pack.episodes[s.episode].steps[s.step];
         s.encounters.push(format!(
             "{}:{}",
             step.id,

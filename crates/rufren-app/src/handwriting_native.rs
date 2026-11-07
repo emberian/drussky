@@ -140,6 +140,40 @@ impl NativeInkProjection {
         Ok(())
     }
 }
+/// What the native renderer actually showed before committing this snapshot.
+/// Missing legacy history must never be interpreted as an unaided response.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct NativeWritingModelHelp {
+    pub history_from_start: bool,
+    pub visible_at_start: bool,
+    pub revealed_at_ms: Vec<i64>,
+}
+impl NativeWritingModelHelp {
+    pub(crate) fn for_open(
+        initial: Option<&NativeWritingCheckpoint>,
+        model_visible: bool,
+        compared: bool,
+    ) -> Self {
+        let mut history = initial.and_then(|c| c.model_help.clone()).unwrap_or(Self {
+            history_from_start: initial.is_none(),
+            visible_at_start: model_visible,
+            revealed_at_ms: vec![],
+        });
+        // A saved activity can know that help appeared just before its latest
+        // ink checkpoint. Preserve that uncertainty rather than inventing a
+        // reveal time or promoting the resumed attempt to unaided recall.
+        if model_visible
+            && !compared
+            && !history.visible_at_start
+            && history.revealed_at_ms.is_empty()
+        {
+            history.history_from_start = false;
+            history.visible_at_start = true;
+        }
+        history
+    }
+}
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct NativeWritingCheckpoint {
@@ -158,6 +192,8 @@ pub(crate) struct NativeWritingCheckpoint {
     pub canonical_sha256: String,
     pub zoom_scale: f64,
     pub content_offset: [f64; 2],
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub model_help: Option<NativeWritingModelHelp>,
 }
 fn hash(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
@@ -203,6 +239,20 @@ impl NativeWritingCheckpoint {
         {
             return Err("The native drawing checkpoint identity or viewport is invalid.".into());
         }
+        if let Some(help) = &self.model_help {
+            if help.revealed_at_ms.len() > 64
+                || help
+                    .revealed_at_ms
+                    .iter()
+                    .any(|at| *at < 0 || *at > self.captured_at_ms)
+                || help
+                    .revealed_at_ms
+                    .windows(2)
+                    .any(|times| times[0] > times[1])
+            {
+                return Err("The native model-help history is invalid.".into());
+            }
+        }
         self.canonical.validate()?;
         if hash(&serde_json::to_vec(&self.canonical).map_err(|e| e.to_string())?)
             != self.canonical_sha256
@@ -212,6 +262,16 @@ impl NativeWritingCheckpoint {
         self.archive()?;
         Ok(())
     }
+}
+/// Follow layout changes only while the learner has left the fitted viewport alone.
+pub(crate) fn native_viewport_still_fitted(
+    automatic_zoom: Option<f64>,
+    current_zoom: f64,
+    offset: [f64; 2],
+) -> bool {
+    automatic_zoom.is_some_and(|zoom| {
+        (zoom - current_zoom).abs() < 1.0e-6 && offset.iter().all(|value| value.abs() < 1.0e-6)
+    })
 }
 /// CSS rectangle relative to the visual viewport, plus its dimensions, sampled together.
 /// Native layout never changes the drawing's paper coordinates or viewport.

@@ -20,8 +20,15 @@ pub(crate) fn Foundations(mut app: Signal<AppState>) -> Element {
     use_effect(move || {
         let current = { app.read().foundation_state() };
         if let Ok(current) = current {
-            if *displayed_session.peek() != Some(current.session) {
-                displayed_session.set(Some(current.session));
+            let visible_session = app
+                .read()
+                .foundation_writing_checkpoint()
+                .ok()
+                .flatten()
+                .map(|checkpoint| checkpoint.item_session)
+                .unwrap_or(current.session);
+            if *displayed_session.peek() != Some(visible_session) {
+                displayed_session.set(Some(visible_session));
                 audio_error.set(String::new());
                 playing.set(None);
                 paper_error.set(String::new());
@@ -40,6 +47,21 @@ pub(crate) fn Foundations(mut app: Signal<AppState>) -> Element {
         Ok(s) => s,
         Err(e) => return rsx! {p {role:"alert","{e}"}},
     };
+    // A listening-and-writing turn replaces the entire teaching subtree. Hiding
+    // just the model would leave the answer in the old title, notes or credits.
+    let checkpoint = app.read().foundation_writing_checkpoint();
+    match checkpoint {
+        Ok(Some(checkpoint)) => {
+            return rsx! {FoundationWritingCheckpoint {
+                key: "checkpoint-{checkpoint.item_session}",
+                app,
+                checkpoint,
+                paper_error: paper_error(),
+            }};
+        }
+        Err(error) => return rsx! {p {role:"alert", "{error}"}},
+        Ok(None) => (),
+    }
     let Some(episode) = pack.episodes.get(s.episode) else {
         return rsx! {p{"Saved episode unavailable."}};
     };
@@ -82,7 +104,11 @@ pub(crate) fn Foundations(mut app: Signal<AppState>) -> Element {
     } else {
         step.instruction.clone()
     };
-    let next_label = foundation_next_label(&pack, s.episode, s.step);
+    let next_label = if app.read().foundation_has_writing_checkpoint_after_current() {
+        "Next: listen and write".to_string()
+    } else {
+        foundation_next_label(&pack, s.episode, s.step)
+    };
     let section_label = if s.episode == 0 {
         if s.step < 4 {
             "Two letters"
@@ -291,6 +317,100 @@ pub(crate) fn Foundations(mut app: Signal<AppState>) -> Element {
 }
 
 #[component]
+fn FoundationWritingCheckpoint(
+    mut app: Signal<AppState>,
+    checkpoint: crate::foundation_writing::FoundationWritingCheckpointView,
+    paper_error: String,
+) -> Element {
+    let mut problem = use_signal(String::new);
+    let run = app.read().foundation_writing();
+    let item_session = checkpoint.item_session;
+    let writing = run
+        .as_ref()
+        .ok()
+        .and_then(|run| run.as_ref())
+        .is_none_or(|run| run.stage == crate::handwriting::WritingStage::Writing);
+    let complete = run
+        .as_ref()
+        .ok()
+        .and_then(|run| run.as_ref())
+        .is_some_and(|run| run.stage == crate::handwriting::WritingStage::Complete);
+    let is_return =
+        checkpoint.kind == crate::foundation_writing::FoundationWritingCheckpointKind::Return;
+    let lesson = app
+        .read()
+        .foundation_state()
+        .map(|state| state.episode + 1)
+        .unwrap_or(1);
+    let instruction = if complete {
+        "Your drawing is saved. Continue when you are ready.".to_string()
+    } else if !writing {
+        "Compare your drawing with the example, then try saying it.".to_string()
+    } else if run
+        .as_ref()
+        .ok()
+        .and_then(|run| run.as_ref())
+        .is_some_and(|run| {
+            run.sequence
+                == rufren_content::handwriting_tasks::FoundationHandwritingSequence::SeeCopyHearSay
+        })
+    {
+        "Use the example to practise the part you want to change. Then compare and say it again."
+            .to_string()
+    } else {
+        checkpoint.instruction.clone()
+    };
+    rsx! {
+        style {"{STYLE}"}
+        section {class:"card foundation-card foundation-with-paper",id:"foundation-card","data-writing-checkpoint":checkpoint.id.to_string(),
+            p {class:"eyebrow","SOUNDS & LETTERS"}
+            header {class:"foundation-heading",
+                h1 {id:"page-heading",tabindex:"-1","Listen and write"}
+                button {class:"text-button",onclick:move |_|checkpoint_nav(app,item_session,|a|a.navigate(Page::Today)),"Pause lesson"}
+            }
+            p {class:"foundation-progress",if is_return {"A familiar writing return"}else{"Lesson {lesson} · Writing turn {checkpoint.index+1} of {checkpoint.count}"}}
+            p {class:"foundation-instruction",id:"foundation-step-heading",tabindex:"-1","{instruction}"}
+            match run {
+                Ok(Some(run)) => rsx! {crate::handwriting_view::WritingExercise {
+                    app,run,embedded:true,allow_repair:true,
+                    comparison_focus:Some(checkpoint.comparison_focus.clone()),
+                    next_label:Some(checkpoint.next_label.clone()),
+                }},
+                Err(error) => rsx! {p {role:"alert","{error}"}},
+                Ok(None) => rsx! {p {role:"status","Preparing your paper…"}},
+            }
+            if !paper_error.is_empty() || !problem().is_empty() {
+                p {role:"alert","{paper_error} {problem}"}
+                button {class:"secondary",onclick:move |_|{
+                    let result={app.write().prepare_foundation_writing()};
+                    problem.set(result.err().unwrap_or_default());
+                },"Retry opening paper"}
+            }
+            if writing {div {class:"actions foundation-session-tools",
+                button {class:"text-button",onclick:move |_|checkpoint_nav(app,item_session,move |a|a.foundation_skip_writing_checkpoint(item_session)),"Continue without writing"}
+            }}
+        }
+    }
+}
+
+fn checkpoint_nav(
+    app: Signal<AppState>,
+    item_session: Uuid,
+    action: impl FnOnce(&mut AppState) -> crate::repository::Result<()> + 'static,
+) {
+    crate::handwriting_view::nav_act(app, move |state| {
+        if state
+            .foundation_writing_checkpoint()?
+            .is_some_and(|c| c.item_session == item_session)
+        {
+            action(state)
+        } else {
+            Ok(())
+        }
+    });
+}
+
+#[component]
 fn FoundationEntry(
     app: Signal<AppState>,
     session: Uuid,
@@ -317,7 +437,11 @@ fn foundation_act(
     f: impl FnOnce(&mut AppState) -> crate::repository::Result<()>,
 ) {
     act(app, |a| {
-        if a.foundation_state()?.session != session {
+        let state = a.foundation_state()?;
+        if state.writing_checkpoint.is_some() {
+            return Ok(());
+        }
+        if state.session != session {
             return Err("That foundation step has changed. Your current work is preserved.".into());
         }
         f(a)
@@ -364,7 +488,11 @@ fn foundation_nav(
     f: impl FnOnce(&mut AppState) -> crate::repository::Result<()> + 'static,
 ) {
     crate::handwriting_view::nav_act(app, move |state| {
-        if state.foundation_state()?.session != session {
+        let course = state.foundation_state()?;
+        if course.writing_checkpoint.is_some() {
+            return Ok(());
+        }
+        if course.session != session {
             return Err("That lesson step changed. Your work is kept.".into());
         }
         f(state)

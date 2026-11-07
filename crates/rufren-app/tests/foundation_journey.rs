@@ -46,6 +46,10 @@ mod teacher_revisit;
 mod foundation;
 #[path = "../src/foundation_review.rs"]
 mod foundation_review;
+#[path = "../src/foundation_writing.rs"]
+mod foundation_writing;
+#[path = "../src/handwriting.rs"]
+mod handwriting;
 use model::AppState;
 use repository::Repository;
 use rufren_content::FoundationAction;
@@ -191,6 +195,12 @@ fn all_episodes_can_be_practiced_without_microphone_or_teacher() {
             _ => (),
         }
         a.foundation_next(false).unwrap();
+        // This check walks authored course responses; dedicated handwriting journeys
+        // exercise the inserted paper. Explicitly skipping it is not an attempt.
+        while let Some(checkpoint) = a.foundation_writing_checkpoint().unwrap() {
+            a.foundation_skip_writing_checkpoint(checkpoint.item_session)
+                .unwrap();
+        }
         turns += 1;
         assert!(turns <= step_count);
     }

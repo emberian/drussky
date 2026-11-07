@@ -6,6 +6,7 @@ use std::collections::BTreeSet;
 use unicode_normalization::UnicodeNormalization;
 
 pub mod handwriting_tasks;
+pub mod handwriting_practice;
 pub mod foundations;
 pub use foundations::{foundations, FoundationAction, FoundationAsset, FoundationChoice, FoundationEpisode, FoundationPack, FoundationStep, FOUNDATION_JSON};
 
