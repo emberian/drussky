@@ -137,6 +137,9 @@ struct StrokeDemoOverlay: View {
 struct FormationHintLine: View {
     @ObservedObject var pad: PadController
     let letter: Course.Letter
+    /// How far to rise into the strip's empty bottom margin, and room to leave on the right.
+    var lift: CGFloat = 0
+    var clearTrailing: CGFloat = 0
     @State private var hint: String?
 
     var body: some View {
@@ -148,6 +151,8 @@ struct FormationHintLine: View {
                     .foregroundStyle(good ? Theme.good : Theme.accent)
                     .transition(.opacity)
                     .accessibilityIdentifier("formation-hint")
+                    .padding(.top, -lift)
+                    .padding(.trailing, clearTrailing)
             }
         }
         .animation(.easeOut(duration: 0.25), value: hint)

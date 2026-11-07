@@ -41,6 +41,18 @@ final class FormationCoachTests: XCTestCase {
         }
     }
 
+    /// The dashed guide is the model font's x-height, and the stroke models sit on it.
+    func testGuideLinesMatchTheModels() {
+        let m = StripMetrics(height: StripMetrics.designHeight)
+        XCTAssertEqual(m.xHeightY(cursive: false), models.lines.xHeight, accuracy: 0.6)
+        XCTAssertEqual(m.baselineY, models.lines.baseline, accuracy: 0.1)
+        XCTAssertEqual(m.capY, models.lines.cap, accuracy: 0.1)
+        let o = models.letter("о")!.bounds
+        XCTAssertEqual(o.minY, m.xHeightY(cursive: false), accuracy: 1.5)
+        let cursive = m.xHeightY(cursive: true)
+        XCTAssertTrue(cursive > m.capY + 5 && cursive < m.baselineY - 20, "cursive x-height \(cursive)")
+    }
+
     func testEveryModelWrittenAsModelledIsPraised() {
         for (glyph, _) in models.letters {
             let upper = glyph.uppercased()

@@ -327,6 +327,10 @@ struct WritingExercise: View {
                     .padding(.bottom, 2)
                 }
             }
+            if let coach {  // tucked into the strip's empty bottom margin, clear of "Write it again"
+                FormationHintLine(pad: pad, letter: coach.letter, lift: stripHeight * 0.08,
+                                  clearTrailing: result.status.isComplete ? 130 : 0)
+            }
             controls
         }
         .onAppear { pad.onChange = { _ in scheduleIdleCheck() } }
@@ -395,9 +399,7 @@ struct WritingExercise: View {
         .animation(.easeOut(duration: 0.2), value: pad.isEmpty)
         if let feedback = feedbackLine {
             feedback
-        }
-        if let coach { FormationHintLine(pad: pad, letter: coach.letter) }
-    }
+        }    }
 
     private var feedbackLine: AnyView? {
         if result.status == .correct, isRecall {
