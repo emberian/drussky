@@ -706,8 +706,11 @@ struct PassageExercise: View {
 
     private var text: String { slot.exercise.text ?? "" }
 
-    /// Words with the punctuation that follows them kept attached for display.
-    private var tokens: [String] { text.split(separator: " ").map(String.init) }
+    /// Lines (dialogue turns, verse) of words, punctuation kept attached for display.
+    private var lines: [[String]] {
+        text.split(separator: "\n", omittingEmptySubsequences: true)
+            .map { $0.split(separator: " ").map(String.init) }
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -715,7 +718,9 @@ struct PassageExercise: View {
                 Instruction(text: "Read it. Tap any word you want to check.")
                 HearButton(text: text, size: 40, label: "Whole text")
             }
-            FlowRow(spacing: 8) {
+            VStack(alignment: .leading, spacing: 6) {
+              ForEach(Array(lines.enumerated()), id: \.offset) { _, tokens in
+              FlowRow(spacing: 8) {
                 ForEach(Array(tokens.enumerated()), id: \.offset) { _, token in
                     let word = Self.bare(token)
                     Button { select(word) } label: {
@@ -728,6 +733,8 @@ struct PassageExercise: View {
                     }
                     .buttonStyle(.plain)
                 }
+              }
+              }
             }
             .padding(18)
             .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
