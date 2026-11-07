@@ -7,6 +7,7 @@ import UIKit
 ///   -qa-complete N     work through the first N pages (with synthetic handwriting)
 ///   -qa-partial K      also complete the first K exercises of the page after that
 ///   -qa-age D          pretend D days have passed since everything was learned
+///   -qa-history D      spread the completed pages over the last D days (knowledge-map history)
 @MainActor
 enum QA {
     static func value(_ flag: String) -> Int? {
@@ -32,7 +33,13 @@ enum QA {
         if has("-qa-finger") { book.settings.fingerDrawing = true }  // XCUITest can only touch, not Pencil
         guard has("-qa-reset") else { return }
         let pages = value("-qa-complete") ?? 0
-        for _ in 0..<pages {
+        let history = value("-qa-history").map { Double($0) * 86_400 }
+        for n in 0..<pages {
+            if let history {
+                var tick = 0.0
+                let start = Date().addingTimeInterval(-history * (1 - Double(n) / Double(max(1, pages))))
+                book.now = { tick += 40; return start.addingTimeInterval(tick) }
+            }
             complete(book, page: book.currentPage, upTo: Int.max)
             #if DEBUG
             if let days = value("-qa-age") { book.shiftMemories(byDays: Double(days)) }
@@ -48,6 +55,7 @@ enum QA {
                 guardCount += 1
             }
         }
+        book.now = Date.init
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
         book.saveNow()
     }
@@ -60,18 +68,32 @@ enum QA {
                 let drawing = SyntheticInk.drawing(for: RussianText.unstressed(target), height: 132, wobble: Double(i))
                 try? drawing.dataRepresentation().write(to: book.inkURL(page: page, exercise: i))
             }
+            // Now and then a wrong pick first, as a learner would.
+            if ex.kind == .listenPick, i % 4 == 1, let options = ex.options, let wrong = options.firstIndex(where: { $0 != ex.say }) {
+                book.record(page: pageIndex, exercise: i) { r in r.chosen = wrong; r.attempts += 1 }
+            }
             book.record(page: pageIndex, exercise: i) { r in
-                r.attempts = 1
+                r.attempts += 1
                 switch ex.kind {
                 case .listenPick: r.chosen = ex.options?.firstIndex(of: ex.say ?? ""); r.status = .correct
                 case .readMeaning: r.chosen = ex.answerIndex; r.status = .correct
                 case .readAloud: r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
                 case .dictation, .translate, .fill: r.status = i % 5 == 3 ? .missed : .correct
-                    if r.status == .missed { r.revealed = true }
+                    if r.status == .missed { r.revealed = true; r.recognized = misreading(ex.target ?? "") }
                 default: r.status = .done
                 }
             }
         }
+    }
+}
+
+extension QA {
+    /// A plausible misreading: one letter swapped for one learners mix up.
+    static func misreading(_ target: String) -> String {
+        let swaps: [Character: Character] = ["о": "а", "е": "и", "ы": "и", "ш": "щ", "ж": "ш", "т": "д", "у": "ю", "л": "п"]
+        var chars = Array(RussianText.unstressed(target).lowercased())
+        if let i = chars.indices.first(where: { swaps[chars[$0]] != nil }) { chars[i] = swaps[chars[i]]! }
+        return String(chars)
     }
 }
 

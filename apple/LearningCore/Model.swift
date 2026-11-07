@@ -126,7 +126,7 @@ public struct KnowledgeModel: Sendable {
             s.times.append(e.t)
             s.channels.insert(x.channel)
             confusions[key] = s
-            byComponent[x.produced, default: []].append(index)
+            for c in [x.target, x.produced] where !e.components.contains(c) { byComponent[c, default: []].append(index) }
         }
         switch e.type {
         case .help:
@@ -191,13 +191,16 @@ public struct KnowledgeModel: Sendable {
     public func hasEvidence(_ c: ComponentID) -> Bool { byComponent[c] != nil }
 
     /// Retrievability in `m` if practised there; otherwise an estimate from the strongest other
-    /// modality scaled by how well that modality has transferred to `m` so far.
-    public func estimatedRetrievability(_ c: ComponentID, _ m: Modality, at date: Date) -> (value: Double, estimated: Bool)? {
+    /// modality scaled by how well that modality has transferred to `m` so far. No estimate
+    /// until at least `minTrials` primed first tries back the transfer rate.
+    public func estimatedRetrievability(_ c: ComponentID, _ m: Modality, at date: Date,
+                                        minTrials: Int = 3) -> (value: Double, estimated: Bool)? {
         if let r = retrievability(c, m, at: date) { return (r, false) }
         let best = (modalitiesOf[c] ?? []).compactMap { from -> Double? in
             guard let r = retrievability(c, from, at: date) else { return nil }
-            let rate = transferCounts[ModalityPair(from: from, to: m)]?.primedRate ?? 0.5
-            return r * rate
+            let stat = transferCounts[ModalityPair(from: from, to: m)] ?? TransferStat(from: from, to: m)
+            guard stat.primedTrials >= minTrials else { return nil }
+            return r * stat.primedRate
         }.max()
         return best.map { ($0, true) }
     }

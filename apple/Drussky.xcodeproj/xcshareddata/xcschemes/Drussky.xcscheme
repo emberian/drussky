@@ -21,6 +21,20 @@
                ReferencedContainer = "container:Drussky.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6BBED7212AD3E6E4E9B6AC4A"
+               BuildableName = "LearningCore.framework"
+               BlueprintName = "LearningCore"
+               ReferencedContainer = "container:Drussky.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -39,6 +53,17 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "916C9E832ACF292A8DE5AE89"
+               BuildableName = "LearningCoreTests.xctest"
+               BlueprintName = "LearningCoreTests"
+               ReferencedContainer = "container:Drussky.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
          <TestableReference
             skipped = "NO"
             parallelizable = "NO">

@@ -98,9 +98,12 @@ struct Exercise: Codable, Sendable, Hashable {
     var reviewKey: String? = nil
     /// Passage glosses: word as written (lowercase, no stress) → meaning in context.
     var glosses: [String: String]? = nil
+    /// Grammar patterns the exercise practises (lemmas.json construction ids); when absent the
+    /// knowledge model tags it from its words.
+    var skills: [String]? = nil
 
     enum CodingKeys: String, CodingKey {
-        case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses
+        case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills
     }
 
     init(kind: ExerciseKind) { self.kind = kind }
@@ -120,6 +123,7 @@ struct Exercise: Codable, Sendable, Hashable {
         hint = try c.decodeIfPresent(String.self, forKey: .hint)
         reviewKey = try c.decodeIfPresent(String.self, forKey: .reviewKey)
         glosses = try c.decodeIfPresent([String: String].self, forKey: .glosses)
+        skills = try c.decodeIfPresent([String].self, forKey: .skills)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -142,6 +146,7 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(hint, forKey: .hint)
         try c.encodeIfPresent(reviewKey, forKey: .reviewKey)
         try c.encodeIfPresent(glosses, forKey: .glosses)
+        try c.encodeIfPresent(skills, forKey: .skills)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }

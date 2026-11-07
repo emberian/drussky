@@ -98,7 +98,8 @@ final class LearningCoreTests: XCTestCase {
         XCTAssertEqual(s.coldTrials, 1)
         XCTAssertGreaterThan(s.lift, 0)
         let m2 = KnowledgeModel(events: [outcome([a], say, .good, at: t0)])
-        let est = m2.estimatedRetrievability(a, write, at: day(1))!
+        XCTAssertNil(m2.estimatedRetrievability(a, write, at: day(1)), "no transfer evidence, no estimate")
+        let est = m2.estimatedRetrievability(a, write, at: day(1), minTrials: 0)!
         XCTAssertTrue(est.estimated)
         XCTAssertLessThan(est.value, m2.retrievability(a, say, at: day(1))!)
     }
