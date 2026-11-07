@@ -38,8 +38,10 @@ review page (Повторение). Review switches modality: hear→write, Engl
 
 The **?** beside each exercise (and *Ask about this page* at the bottom) asks Claude
 (`claude-opus-5-5`) about that exact exercise and your attempt. Questions and answers are
-written onto the page under *Вопросы*. Add an Anthropic API key in Settings; it lives in the
-device Keychain.
+written onto the page under *Вопросы*. The key lives in the device Keychain: type it in
+Settings, or drop it into the app's `Documents/tutor-key.txt` with
+`xcrun devicectl device copy to --domain-type appDataContainer --domain-identifier software.ember.drussky`
+and the next launch imports it and deletes the file.
 
 ## Inside the cover
 
@@ -66,8 +68,8 @@ cp -R .build/mac/Build/Products/Release-maccatalyst/Drussky.app ~/Applications/
 ```
 
 Tests: `DrusskyTests` covers text normalization, course integrity, audio coverage (every
-string the app or its reviews can speak), handwriting recognition on synthetic print (13/13)
-and cursive (11/12) ink, scheduling and persistence, notebook-recovery and redo
+string the app or its reviews can speak), handwriting recognition on synthetic print and cursive
+ink (on the iPad Pro M4: print 12/13, cursive 12/12), scheduling and persistence, notebook-recovery and redo
 regressions, speech recognition on recorded Russian (runs once speech recognition is
 allowed), and one live tutor answer (runs when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
 `DrusskyUITests` writes on the paper with real touch strokes, completes the exercise, and

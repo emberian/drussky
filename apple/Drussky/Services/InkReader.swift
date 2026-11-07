@@ -10,21 +10,41 @@ enum InkReader {
         var matches: Bool
     }
 
+    /// One way of showing the ink to the recognizer.
+    private struct Pass {
+        var tiles = 1
+        var height: CGFloat = 160
+        var accurate = true
+        var correction = false
+    }
+
     /// Recognizes the drawing and compares it to `target`. Returns nil for an empty drawing.
+    /// Recognizers differ between devices and OS versions, so several presentations are tried
+    /// in turn and the first that reads as the answer wins; if none does, the most common
+    /// reading is reported.
     static func read(_ drawing: PKDrawing, target: String) async -> Reading? {
         guard !drawing.strokes.isEmpty else { return nil }
         let single = RussianText.comparable(target).count == 1
-        // Recognizers return nothing for a lone glyph; tile it so it reads like a word.
-        let source = single ? tiled(drawing, times: 3) : drawing
-        let image = await MainActor.run { render(source) }
-        guard let cg = image?.cgImage else { return nil }
-        let candidates = await recognize(cg, hint: RussianText.unstressed(single ? String(repeating: target, count: 3) : target))
-        let matched = candidates.first {
-            single ? majority($0, of: target)
-                : RussianText.answerMatches($0, target)
+        let passes: [Pass] = single
+            ? [Pass(tiles: 3), Pass(tiles: 4, height: 260, correction: true), Pass(tiles: 1, height: 260),
+               Pass(tiles: 3, accurate: false), Pass(tiles: 6, height: 200)]
+            : [Pass(correction: RussianText.comparable(target).count > 3), Pass(height: 260, correction: true),
+               Pass(height: 260), Pass(accurate: false)]
+        var all: [String] = []
+        for pass in passes {
+            let source = pass.tiles > 1 ? tiled(drawing, times: pass.tiles) : drawing
+            let image = await MainActor.run { render(source, height: pass.height) }
+            guard let cg = image?.cgImage else { continue }
+            let hint = RussianText.unstressed(pass.tiles > 1 ? String(repeating: target, count: pass.tiles) : target)
+            let candidates = await recognize(cg, hint: hint, accurate: pass.accurate, correction: pass.correction)
+            all += candidates.filter { !all.contains($0) }
+            if let hit = candidates.first(where: { single ? (pass.tiles > 1 ? majority($0, of: target) : RussianText.matches($0, target))
+                                                          : RussianText.answerMatches($0, target) }) {
+                return Reading(best: single ? String(hit.prefix(1)) : hit, candidates: all, matches: true)
+            }
         }
-        let best = matched ?? candidates.first ?? ""
-        return Reading(best: single ? String(best.prefix(1)) : best, candidates: candidates, matches: matched != nil)
+        let best = all.first ?? ""
+        return Reading(best: single ? String(best.prefix(1)) : best, candidates: all, matches: false)
     }
 
     /// For tiled single letters: most of what was read is the target letter.
@@ -46,12 +66,12 @@ enum InkReader {
 
     /// Dark ink on white, padded, at a size the recognizer likes.
     @MainActor
-    static func render(_ drawing: PKDrawing) -> UIImage? {
+    static func render(_ drawing: PKDrawing, height: CGFloat = 160) -> UIImage? {
         var bounds = drawing.bounds.insetBy(dx: -24, dy: -24)
         if bounds.width < bounds.height * 1.2 {  // give short words some horizontal room
             bounds = bounds.insetBy(dx: -(bounds.height * 1.2 - bounds.width) / 2, dy: 0)
         }
-        let scale = max(1, min(3, 160 / max(bounds.height, 1)))
+        let scale = max(1, min(4, height / max(bounds.height, 1)))
         let traits = UITraitCollection(userInterfaceStyle: .light)
         var image: UIImage?
         traits.performAsCurrent { image = drawing.image(from: bounds, scale: scale) }
@@ -66,7 +86,7 @@ enum InkReader {
         }
     }
 
-    private static func recognize(_ image: CGImage, hint: String) async -> [String] {
+    private static func recognize(_ image: CGImage, hint: String, accurate: Bool, correction: Bool) async -> [String] {
         await withCheckedContinuation { (continuation: CheckedContinuation<[String], Never>) in
             let once = Once()
             let request = VNRecognizeTextRequest { request, _ in
@@ -83,9 +103,9 @@ enum InkReader {
                 var seen = Set<String>()
                 continuation.resume(returning: lines.filter { seen.insert($0).inserted })
             }
-            request.recognitionLevel = .accurate
+            request.recognitionLevel = accurate ? .accurate : .fast
             request.recognitionLanguages = ["ru-RU"]
-            request.usesLanguageCorrection = hint.count > 3
+            request.usesLanguageCorrection = correction
             request.customWords = [hint]
             request.minimumTextHeight = 0.1
             let handler = VNImageRequestHandler(cgImage: image)

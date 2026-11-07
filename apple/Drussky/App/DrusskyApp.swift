@@ -25,6 +25,16 @@ struct DrusskyApp: App {
     }
 }
 
+/// One-time provisioning: a key dropped into Documents/tutor-key.txt (e.g. with `devicectl
+/// device copy to`) moves into the Keychain and the file is deleted.
+@MainActor
+func importTutorKey() {
+    let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("tutor-key.txt")
+    guard let key = try? String(contentsOf: url, encoding: .utf8).trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+    if !key.isEmpty { Keychain.apiKey = key }
+    try? FileManager.default.removeItem(at: url)
+}
+
 @MainActor
 enum AppModel {
     case ready(Book, Voice, SpeechCheck)
@@ -33,6 +43,7 @@ enum AppModel {
     static func load() -> AppModel {
         Theme.registerFonts()
         Voice.configureSession()
+        importTutorKey()
         guard let url = Bundle.main.url(forResource: "course", withExtension: "json") else {
             return .failed("course.json is missing from the app bundle.")
         }
