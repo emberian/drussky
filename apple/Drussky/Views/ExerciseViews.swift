@@ -50,6 +50,15 @@ struct ExerciseRow: View {
         }
         .padding(.vertical, 18)
         .opacity(isActive || slot.result.status.isComplete ? 1 : 0.72)
+        .sensoryFeedback(trigger: slot.result.status) { old, new in
+            guard !old.isComplete else { return nil }
+            switch new {
+            case .correct: return .success
+            case .done: return .impact(weight: .light)
+            case .missed: return .warning
+            case .open: return nil
+            }
+        }
         .animation(.easeOut(duration: 0.25), value: isActive)
     }
 
@@ -136,28 +145,32 @@ struct RussianLine: View {
 struct MeetExercise: View {
     @Environment(Book.self) private var book
     @Environment(Voice.self) private var voice
+    @Environment(\.horizontalSizeClass) private var sizeClass
     let slot: ExerciseSlot
     let isActive: Bool
 
     var body: some View {
         if let letter = slot.exercise.letter.flatMap({ book.course.letter($0) }) {
             VStack(alignment: .leading, spacing: 14) {
-                HStack(alignment: .center, spacing: 28) {
+                let k: CGFloat = sizeClass == .compact ? 0.62 : 1
+                HStack(alignment: .center, spacing: 28 * k) {
                     HStack(alignment: .lastTextBaseline, spacing: 10) {
-                        Text(letter.upper).font(Theme.russian(96, weight: .regular))
-                        Text(letter.lower).font(Theme.russian(72, weight: .regular))
+                        Text(letter.upper).font(Theme.russian(96 * k, weight: .regular))
+                        Text(letter.lower).font(Theme.russian(72 * k, weight: .regular))
                     }
+                    .fixedSize()
                     .foregroundStyle(Theme.text)
                     VStack(alignment: .leading, spacing: 2) {
                         Text("\(letter.upper)\(letter.lower)")
-                            .font(Theme.cursive(54))
+                            .font(Theme.cursive(54 * k))
+                            .fixedSize()
                             .foregroundStyle(Theme.ink)
                         Text("handwritten")
                             .font(Theme.label(11))
                             .foregroundStyle(Theme.muted)
                     }
                     Spacer(minLength: 0)
-                    HearButton(text: letter.say, size: 60)
+                    HearButton(text: letter.say, size: 60 * k)
                 }
                 VStack(alignment: .leading, spacing: 6) {
                     Text(letter.sound)
@@ -255,6 +268,7 @@ struct WritingExercise: View {
     }
 
     private var ghostTimes: Int {
+        if ghostOverride != nil { return 1 }  // meet: one model, then free paper
         let len = RussianText.unstressed(ghost ?? "").count
         return len <= 3 ? 3 : len <= 6 ? 2 : 1
     }

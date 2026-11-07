@@ -94,6 +94,10 @@ struct PageView: View {
             Text(page.title)
                 .font(.system(size: compact ? 30 : 40, weight: .bold, design: .serif))
                 .foregroundStyle(Theme.text)
+            if page.number == 1 {
+                HowThisBookWorks()
+                    .padding(.vertical, 6)
+            }
             if let intro = page.intro {
                 Text(intro)
                     .font(.system(size: 18))
@@ -189,5 +193,28 @@ struct GradeStamp: View {
             .rotationEffect(.degrees(-10))
             .frame(width: 84, height: 84)
             .accessibilityLabel("Mark: \(Self.grade(for: page)) out of 5")
+    }
+}
+
+/// Three lines on the very first page, so nobody has to guess.
+struct HowThisBookWorks: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            row("pencil.and.scribble", "Write with your Pencil right on the lines. Each exercise ticks itself when it reads your writing; tap Done if it doesn't.")
+            row("speaker.wave.2", "Tap any speaker to hear it again, as often as you like.")
+            row("questionmark.bubble", "Stuck or curious? The ? beside an exercise asks your tutor.")
+            row("book.pages", "Finish the page, then turn it. Earlier pages keep everything you wrote.")
+        }
+        .padding(16)
+        .frame(maxWidth: 640, alignment: .leading)
+        .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
+    }
+
+    private func row(_ icon: String, _ text: String) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 12) {
+            Image(systemName: icon).foregroundStyle(Theme.accent).frame(width: 22)
+            Text(text).font(.system(size: 16)).foregroundStyle(Theme.text)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 }

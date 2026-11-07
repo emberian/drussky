@@ -6,6 +6,7 @@ struct BookView: View {
     @Environment(Book.self) private var book
     @State private var showContents = false
     @State private var showSettings = false
+    @Environment(\.horizontalSizeClass) private var sizeClass
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -14,8 +15,12 @@ struct BookView: View {
                 .ignoresSafeArea(edges: .bottom)
             topBar
         }
-        .sheet(isPresented: $showContents) { ContentsView() }
+        .sheet(isPresented: $showContents) { ContentsView().presentationSizing(.page) }
         .sheet(isPresented: $showSettings) { SettingsView() }
+        .onAppear {
+            showContents = QA.has("-qa-contents")
+            showSettings = QA.has("-qa-settings")
+        }
     }
 
     private var topBar: some View {
@@ -26,9 +31,11 @@ struct BookView: View {
                     .font(.system(size: 20, weight: .medium))
                     .frame(width: 44, height: 44)
             }
-            Text("Drussky")
-                .font(.system(size: 17, weight: .bold, design: .serif))
-                .foregroundStyle(Theme.text)
+            if sizeClass != .compact {
+                Text("Drussky")
+                    .font(.system(size: 17, weight: .bold, design: .serif))
+                    .foregroundStyle(Theme.text)
+            }
             Spacer()
             Button { withAnimation { book.turnBack() } } label: {
                 Image(systemName: "chevron.left").font(.system(size: 17, weight: .semibold)).frame(width: 44, height: 44)

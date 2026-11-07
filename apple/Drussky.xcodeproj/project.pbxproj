@@ -1,0 +1,558 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0619713939B412884AEF4DFF /* course.json in Resources */ = {isa = PBXBuildFile; fileRef = 386E28FC654C1880C29D1332 /* course.json */; };
+		21BFB9DFE5268BEBEE704E49 /* DrusskyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF549E6E6DDAEC172CF7EC /* DrusskyApp.swift */; };
+		244E83B48DE97484C52D0B55 /* ExerciseViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */; };
+		3297D52B73F2DBF6F5C384C5 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3337A7628485FC5AE5B0DC88 /* Book.swift */; };
+		468AD1224404ECA216F59893 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5018AED36BDE90A7727DEAE7 /* Assets.xcassets */; };
+		4AD1FD7CAF518B5E5BDE9FB6 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AE7A8C01467109460EB5B7 /* Course.swift */; };
+		4E705686838A634286DB9ACE /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688983BD7403A34D60ED8EBE /* BookView.swift */; };
+		5D05D4B8151EC7292B609E8E /* ContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A768443796062643225D742 /* ContentsView.swift */; };
+		5D6D5A01E7727D984F154F82 /* OFL-MarckScript.txt in Resources */ = {isa = PBXBuildFile; fileRef = EC2D2061E2C5FDFFA51D36EF /* OFL-MarckScript.txt */; };
+		5FB598889AC9BDE297B90C65 /* RussianText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A0EF4CCE1C2A07B42CEB2 /* RussianText.swift */; };
+		60A1C6C49A39C20B3DD445B8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */; };
+		8391837C952CE70C5C196344 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CAF74155006B1914D2F22E /* Voice.swift */; };
+		9AEF27A7EFA1034C131805E5 /* MarckScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */; };
+		A009ECABCA825B294FD93098 /* InkReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B8787FE5BD39DD4C776BD8 /* InkReader.swift */; };
+		AD8A2190D80258D2E1F620D1 /* Audio in Resources */ = {isa = PBXBuildFile; fileRef = 76FA98F7CF39CE01A5ADCC7A /* Audio */; };
+		BC4BD4EC630AE39955A764B6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8667B929B9319AC53CBBAA /* PageView.swift */; };
+		D3A0E99EAF001AFDB22943D0 /* SpeechCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */; };
+		DB3D064DB50315B07FD9D64C /* QA.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2183BBBE99C1790444D983 /* QA.swift */; };
+		E57A52723D5F7D80807A53B1 /* TutorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74264D1BFDC2677C7515FBED /* TutorView.swift */; };
+		E690EE7AE2CCA3D9C9372D1C /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5206CA36CCD17DFB27C030F /* Tutor.swift */; };
+		EF8F11688BA47BDDA76D86E3 /* WritingStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B7B2BCE090C576089B5D2 /* WritingStrip.swift */; };
+		F73DDD756EE8C9DD99177420 /* DrusskyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB7D30DEF9D3822201CE244 /* DrusskyTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D9ACC66A70FBCF4979353381 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DB5D2166543BCFE6145621D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3DF5E4E96FA9D5E45063EF5;
+			remoteInfo = Drussky;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		020DCB5CAE85CF08A1342CF2 /* DrusskyTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DrusskyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MarckScript-Regular.ttf"; sourceTree = "<group>"; };
+		27AE7A8C01467109460EB5B7 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		3337A7628485FC5AE5B0DC88 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		386E28FC654C1880C29D1332 /* course.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = course.json; sourceTree = "<group>"; };
+		3A768443796062643225D742 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
+		4B8667B929B9319AC53CBBAA /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		5018AED36BDE90A7727DEAE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5E5A0EF4CCE1C2A07B42CEB2 /* RussianText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianText.swift; sourceTree = "<group>"; };
+		688983BD7403A34D60ED8EBE /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
+		74264D1BFDC2677C7515FBED /* TutorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorView.swift; sourceTree = "<group>"; };
+		76FA98F7CF39CE01A5ADCC7A /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Audio; path = Drussky/Resources/Audio; sourceTree = SOURCE_ROOT; };
+		966160D52E50F1ED0AD393D5 /* Drussky.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Drussky.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViews.swift; sourceTree = "<group>"; };
+		D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		D5BF549E6E6DDAEC172CF7EC /* DrusskyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrusskyApp.swift; sourceTree = "<group>"; };
+		DC2183BBBE99C1790444D983 /* QA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QA.swift; sourceTree = "<group>"; };
+		E9B8787FE5BD39DD4C776BD8 /* InkReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkReader.swift; sourceTree = "<group>"; };
+		E9CAF74155006B1914D2F22E /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
+		EC2D2061E2C5FDFFA51D36EF /* OFL-MarckScript.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "OFL-MarckScript.txt"; sourceTree = "<group>"; };
+		EFB7D30DEF9D3822201CE244 /* DrusskyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrusskyTests.swift; sourceTree = "<group>"; };
+		F44B7B2BCE090C576089B5D2 /* WritingStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingStrip.swift; sourceTree = "<group>"; };
+		F5206CA36CCD17DFB27C030F /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
+		FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechCheck.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		06305DCDBD604A16CF5D89E8 /* DrusskyTests */ = {
+			isa = PBXGroup;
+			children = (
+				EFB7D30DEF9D3822201CE244 /* DrusskyTests.swift */,
+			);
+			path = DrusskyTests;
+			sourceTree = "<group>";
+		};
+		1F5F4280DFDE09F9376E8534 /* Drussky */ = {
+			isa = PBXGroup;
+			children = (
+				585F3D85E04CF81E23B463FE /* App */,
+				821816A06DA5B4F87E72816A /* Model */,
+				7788604B501CF50BEF8AE6CA /* Resources */,
+				9983B7D7DF1F94E1B107DEDB /* Services */,
+				3F7BC8E80380301E80C4E108 /* Views */,
+			);
+			path = Drussky;
+			sourceTree = "<group>";
+		};
+		3F7BC8E80380301E80C4E108 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				688983BD7403A34D60ED8EBE /* BookView.swift */,
+				3A768443796062643225D742 /* ContentsView.swift */,
+				C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */,
+				4B8667B929B9319AC53CBBAA /* PageView.swift */,
+				D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */,
+				74264D1BFDC2677C7515FBED /* TutorView.swift */,
+				F44B7B2BCE090C576089B5D2 /* WritingStrip.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		585F3D85E04CF81E23B463FE /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D5BF549E6E6DDAEC172CF7EC /* DrusskyApp.swift */,
+				DC2183BBBE99C1790444D983 /* QA.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		7788604B501CF50BEF8AE6CA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5018AED36BDE90A7727DEAE7 /* Assets.xcassets */,
+				76FA98F7CF39CE01A5ADCC7A /* Audio */,
+				386E28FC654C1880C29D1332 /* course.json */,
+				BD11DB255B4E8119378B74FD /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		821816A06DA5B4F87E72816A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3337A7628485FC5AE5B0DC88 /* Book.swift */,
+				27AE7A8C01467109460EB5B7 /* Course.swift */,
+				5E5A0EF4CCE1C2A07B42CEB2 /* RussianText.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9983B7D7DF1F94E1B107DEDB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E9B8787FE5BD39DD4C776BD8 /* InkReader.swift */,
+				FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */,
+				F5206CA36CCD17DFB27C030F /* Tutor.swift */,
+				E9CAF74155006B1914D2F22E /* Voice.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		BD11DB255B4E8119378B74FD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */,
+				EC2D2061E2C5FDFFA51D36EF /* OFL-MarckScript.txt */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		EB7E55D010BAEF213914079E = {
+			isa = PBXGroup;
+			children = (
+				1F5F4280DFDE09F9376E8534 /* Drussky */,
+				06305DCDBD604A16CF5D89E8 /* DrusskyTests */,
+				F9D5F14943E0FF3C0C7B3F7D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F9D5F14943E0FF3C0C7B3F7D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				966160D52E50F1ED0AD393D5 /* Drussky.app */,
+				020DCB5CAE85CF08A1342CF2 /* DrusskyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7F1163F3F26E0E43A8413C7F /* DrusskyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBC80FBD750C8310B5891B4B /* Build configuration list for PBXNativeTarget "DrusskyTests" */;
+			buildPhases = (
+				B60A46CFDF464BCCE1B117F8 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84B4FE280A6A728DFAC25021 /* PBXTargetDependency */,
+			);
+			name = DrusskyTests;
+			packageProductDependencies = (
+			);
+			productName = DrusskyTests;
+			productReference = 020DCB5CAE85CF08A1342CF2 /* DrusskyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D3DF5E4E96FA9D5E45063EF5 /* Drussky */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 867B468C6A870D5B1C0AA95C /* Build configuration list for PBXNativeTarget "Drussky" */;
+			buildPhases = (
+				FE28CF1795DE90050B308FFD /* Sources */,
+				57FA2E9CFBDA4DB3083391B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Drussky;
+			packageProductDependencies = (
+			);
+			productName = Drussky;
+			productReference = 966160D52E50F1ED0AD393D5 /* Drussky.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9DB5D2166543BCFE6145621D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					7F1163F3F26E0E43A8413C7F = {
+						DevelopmentTeam = 992772WV7K;
+						ProvisioningStyle = Automatic;
+					};
+					D3DF5E4E96FA9D5E45063EF5 = {
+						DevelopmentTeam = 992772WV7K;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = B7C2F03BD60FB8A94D165BA6 /* Build configuration list for PBXProject "Drussky" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EB7E55D010BAEF213914079E;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F9D5F14943E0FF3C0C7B3F7D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D3DF5E4E96FA9D5E45063EF5 /* Drussky */,
+				7F1163F3F26E0E43A8413C7F /* DrusskyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		57FA2E9CFBDA4DB3083391B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				468AD1224404ECA216F59893 /* Assets.xcassets in Resources */,
+				AD8A2190D80258D2E1F620D1 /* Audio in Resources */,
+				9AEF27A7EFA1034C131805E5 /* MarckScript-Regular.ttf in Resources */,
+				5D6D5A01E7727D984F154F82 /* OFL-MarckScript.txt in Resources */,
+				0619713939B412884AEF4DFF /* course.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B60A46CFDF464BCCE1B117F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F73DDD756EE8C9DD99177420 /* DrusskyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE28CF1795DE90050B308FFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3297D52B73F2DBF6F5C384C5 /* Book.swift in Sources */,
+				4E705686838A634286DB9ACE /* BookView.swift in Sources */,
+				5D05D4B8151EC7292B609E8E /* ContentsView.swift in Sources */,
+				4AD1FD7CAF518B5E5BDE9FB6 /* Course.swift in Sources */,
+				21BFB9DFE5268BEBEE704E49 /* DrusskyApp.swift in Sources */,
+				244E83B48DE97484C52D0B55 /* ExerciseViews.swift in Sources */,
+				A009ECABCA825B294FD93098 /* InkReader.swift in Sources */,
+				BC4BD4EC630AE39955A764B6 /* PageView.swift in Sources */,
+				DB3D064DB50315B07FD9D64C /* QA.swift in Sources */,
+				5FB598889AC9BDE297B90C65 /* RussianText.swift in Sources */,
+				D3A0E99EAF001AFDB22943D0 /* SpeechCheck.swift in Sources */,
+				60A1C6C49A39C20B3DD445B8 /* Theme.swift in Sources */,
+				E690EE7AE2CCA3D9C9372D1C /* Tutor.swift in Sources */,
+				E57A52723D5F7D80807A53B1 /* TutorView.swift in Sources */,
+				8391837C952CE70C5C196344 /* Voice.swift in Sources */,
+				EF8F11688BA47BDDA76D86E3 /* WritingStrip.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		84B4FE280A6A728DFAC25021 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3DF5E4E96FA9D5E45063EF5 /* Drussky */;
+			targetProxy = D9ACC66A70FBCF4979353381 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		050668EEA452A759F6C658E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 992772WV7K;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 2.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		091DF8E819928D033C4BF10C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 992772WV7K;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 2.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		3E19F22DDCE73C156B3C0102 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Drussky;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Drussky listens when you say Russian aloud, and keeps your recording on the page.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Drussky checks the Russian you say aloud.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.drussky;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4DB74A8A70FC4F692D7574C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Drussky;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Drussky listens when you say Russian aloud, and keeps your recording on the page.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Drussky checks the Russian you say aloud.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.drussky;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5D444824610C5F3D668C9112 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.drussky.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Drussky.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Drussky";
+			};
+			name = Debug;
+		};
+		8431748AF19EBABA256CC0F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.drussky.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Drussky.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Drussky";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		867B468C6A870D5B1C0AA95C /* Build configuration list for PBXNativeTarget "Drussky" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DB74A8A70FC4F692D7574C3 /* Debug */,
+				3E19F22DDCE73C156B3C0102 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B7C2F03BD60FB8A94D165BA6 /* Build configuration list for PBXProject "Drussky" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				091DF8E819928D033C4BF10C /* Debug */,
+				050668EEA452A759F6C658E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BBC80FBD750C8310B5891B4B /* Build configuration list for PBXNativeTarget "DrusskyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D444824610C5F3D668C9112 /* Debug */,
+				8431748AF19EBABA256CC0F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9DB5D2166543BCFE6145621D /* Project object */;
+}

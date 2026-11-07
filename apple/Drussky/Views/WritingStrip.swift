@@ -4,6 +4,9 @@ import UIKit
 
 /// Geometry of one ruled writing line, proportional to its height.
 struct StripMetrics {
+    /// Ink is stored in a strip of this height; taller or shorter strips scale the canvas so
+    /// writing always sits on its own lines, whatever the device or orientation.
+    static let designHeight: CGFloat = 132
     var height: CGFloat
     var capY: CGFloat { height * 0.17 }
     var xHeightY: CGFloat { height * 0.43 }
@@ -167,11 +170,18 @@ final class PaperStripView: UIView, UIPencilInteractionDelegate {
         self.ghostTimes = ghostTimes
         self.cursive = cursive
         setNeedsDisplay()
+        setNeedsLayout()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
         canvas.frame = bounds
+        let zoom = max(bounds.height, 1) / StripMetrics.designHeight
+        canvas.minimumZoomScale = zoom
+        canvas.maximumZoomScale = zoom
+        canvas.zoomScale = zoom
+        canvas.contentSize = bounds.size
+        canvas.contentOffset = .zero
     }
 
 
@@ -200,10 +210,11 @@ final class PaperStripView: UIView, UIPencilInteractionDelegate {
         ]
         let piece = NSAttributedString(string: ghost, attributes: attrs)
         let gap = font.pointSize * 0.8
-        var x: CGFloat = 16
+        let inset = 16 * metrics.height / StripMetrics.designHeight
+        var x: CGFloat = inset
         for _ in 0..<max(1, ghostTimes) {
             let size = piece.size()
-            guard x + size.width < w || x == 16 else { break }
+            guard x + size.width < w || x == inset else { break }
             piece.draw(at: CGPoint(x: x, y: metrics.baselineY - font.ascender))
             x += size.width + gap
         }
