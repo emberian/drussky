@@ -39,6 +39,16 @@
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D1%80%D0%B0%D1%82.ogg",
   "speaker": "Сергей Сахно, Vion Nicolas"
  },
+ "брать": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/a759a616c8e9.ogg",
+  "kind": "human_recording",
+  "title": "Ru-брать.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B1%D1%80%D0%B0%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
  "было": {
   "orig": ".local/drussky-audio/human/orig/70a914b9abe0.ogg",
   "kind": "human_recording",
@@ -118,6 +128,16 @@
   "license": "CC BY-SA 3.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D0%B4%D0%B0.ogg",
   "speaker": "Alexander Mikhalenko"
+ },
+ "восемнадцать": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/92b0b1c6efdd.ogg",
+  "kind": "human_recording",
+  "title": "Ru-восемнадцать.ogg",
+  "author": "Recorded by Сергей Сахно (RU / Свердловская область)",
+  "credit": "http://swac-collections.org/overview.php?lang=rus",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
+  "speaker": "Recorded by Сергей Сахно (RU / Свердловская область)"
  },
  "восемь": {
   "orig": ".local/drussky-audio/human/orig/bf759037cd57.ogg",
@@ -249,6 +269,16 @@
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D0%BE%D1%82%D0%BE%D0%B2.ogg",
   "speaker": "Myrkur"
  },
+ "гулять": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/91c32352266a.ogg",
+  "kind": "human_recording",
+  "title": "Ru-гулять.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B3%D1%83%D0%BB%D1%8F%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
  "да": {
   "orig": ".local/drussky-audio/human/orig/1df998d4d55b.ogg",
   "kind": "human_recording",
@@ -279,6 +309,16 @@
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B2%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
   "speaker": "Shtooka"
  },
+ "двенадцать": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/fbf5987ddfc6.ogg",
+  "kind": "human_recording",
+  "title": "Ru-двенадцать.ogg",
+  "author": "not stated; see source page",
+  "credit": null,
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B2%D0%B5%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
  "девяносто": {
   "orig": ".local/drussky-audio/human/orig/1551c9453c16.ogg",
   "kind": "human_recording",
@@ -287,6 +327,16 @@
   "credit": null,
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B5%D0%B2%D1%8F%D0%BD%D0%BE%D1%81%D1%82%D0%BE.ogg",
+  "speaker": "Shtooka"
+ },
+ "девятнадцать": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/4902105b8769.ogg",
+  "kind": "human_recording",
+  "title": "Ru-девятнадцать.ogg",
+  "author": "not stated; see source page",
+  "credit": null,
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
   "speaker": "Shtooka"
  },
  "девять": {
@@ -357,6 +407,16 @@
   "credit": "Audio sample provided by The Shtooka Project .",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%BE.ogg",
+  "speaker": "Shtooka"
+ },
+ "долго": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/03c4d7a4035b.ogg",
+  "kind": "human_recording",
+  "title": "Ru-долго.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%BE%D0%BB%D0%B3%D0%BE.ogg",
   "speaker": "Shtooka"
  },
  "дом": {
@@ -625,6 +685,16 @@
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B8.ogg",
   "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
+ "когда": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/6f4aafbde3db.ogg",
+  "kind": "human_recording",
+  "title": "Ru-когда.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D0%B3%D0%B4%D0%B0.ogg",
+  "speaker": "Shtooka"
+ },
  "космос": {
   "orig": ".local/drussky-audio/human/orig/2e1e3fa53558.ogg",
   "kind": "human_recording",
@@ -644,6 +714,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BA%D0%BE%D1%82.ogg",
   "speaker": "Shtooka"
+ },
+ "коты": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/10f1190edbea.wav",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Lvova-коты.wav",
+  "author": "Speaker: Lvova Recorder: Lvova",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Lvova-%D0%BA%D0%BE%D1%82%D1%8B.wav",
+  "speaker": "Lvova"
  },
  "кофе": {
   "orig": ".local/drussky-audio/human/orig/cde1388a83ee.ogg",
@@ -724,6 +804,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0.ogg",
   "speaker": "Shtooka"
+ },
+ "ложки": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/af0210587c31.ogg",
+  "kind": "human_recording",
+  "title": "Ru-ложки.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D0%BE%D0%B6%D0%BA%D0%B8.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "лук": {
   "orig": ".local/drussky-audio/human/orig/58feb8501605.ogg",
@@ -814,6 +904,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D0%B8%D1%80.ogg",
   "speaker": "Shtooka"
+ },
+ "мне": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/851275f98d89.wav",
+  "kind": "human_recording",
+  "title": "LL-Q7737 (rus)-Rominf-мне.wav",
+  "author": "Speaker: Rominf Recorder: Rominf",
+  "credit": "Own work ( Lingua Libre )",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Rominf-%D0%BC%D0%BD%D0%B5.wav",
+  "speaker": "Rominf"
  },
  "мо": {
   "orig": ".local/drussky-audio/human/orig/be979e81b22d.ogg",
@@ -984,6 +1084,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE.ogg",
   "speaker": "Shtooka"
+ },
+ "новое": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/345e7c0b96ae.ogg",
+  "kind": "human_recording",
+  "title": "Ru-новое.ogg",
+  "author": "1640max",
+  "credit": "Forvo",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5.ogg",
+  "speaker": "1640max"
  },
  "новый": {
   "orig": ".local/drussky-audio/human/orig/83dc78805495.ogg",
@@ -1265,6 +1375,16 @@
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0.ogg",
   "speaker": "Shtooka"
  },
+ "пока": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/edd69cc1224f.ogg",
+  "kind": "human_recording",
+  "title": "Ru-пока.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D0%BE%D0%BA%D0%B0.ogg",
+  "speaker": "Сергей Сахно, Vion Nicolas"
+ },
  "понимать": {
   "orig": ".local/drussky-audio/human/orig/ebb93935771d.ogg",
   "kind": "human_recording",
@@ -1344,6 +1464,16 @@
   "license": "CC BY-SA 4.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:LL-Q7737_(rus)-Tatiana_Kerbush-%D0%BF%D1%80%D0%B8%D1%8F%D1%82%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BF%D0%BF%D0%B5%D1%82%D0%B8%D1%82%D0%B0.wav",
   "speaker": "Tatiana Kerbush"
+ },
+ "прочитать": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/fe9dbda9b459.ogg",
+  "kind": "human_recording",
+  "title": "Ru-прочитать.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%80%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
  },
  "пятнадцать": {
   "orig": ".local/drussky-audio/human/orig/f8973750379b.ogg",
@@ -1445,6 +1575,36 @@
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%BE%D1%82.ogg",
   "speaker": "Shtooka"
  },
+ "с": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/ee3eb442b4f8.ogg",
+  "kind": "human_recording",
+  "title": "Ru-с.ogg",
+  "author": "Сергей Сахно, Vion Nicolas",
+  "credit": "The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81.ogg",
+  "speaker": "Сергей Сахно, Vion Nicolas"
+ },
+ "сахар": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/5521ad2326d4.ogg",
+  "kind": "human_recording",
+  "title": "Ru-сахар.ogg",
+  "author": "not stated; see source page",
+  "credit": null,
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B0%D1%85%D0%B0%D1%80.ogg",
+  "speaker": "Shtooka"
+ },
+ "сделать": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/17d57f27432a.ogg",
+  "kind": "human_recording",
+  "title": "Ru-сделать.ogg",
+  "author": "not stated; see source page",
+  "credit": null,
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
  "сегодня": {
   "orig": ".local/drussky-audio/human/orig/17d46cf16e89.ogg",
   "kind": "human_recording",
@@ -1454,6 +1614,16 @@
   "license": "CC BY 2.5",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B5%D0%B3%D0%BE%D0%B4%D0%BD%D1%8F.ogg",
   "speaker": "Rovdyr"
+ },
+ "семнадцать": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/a71a7688cb94.ogg",
+  "kind": "human_recording",
+  "title": "Ru-семнадцать.ogg",
+  "author": "not stated; see source page",
+  "credit": null,
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B5%D0%BC%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
  },
  "семь": {
   "orig": ".local/drussky-audio/human/orig/ffc1a4235306.ogg",
@@ -1494,6 +1664,16 @@
   "license": "CC BY-SA 4.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B8%D0%B3%D0%BD%D0%B0%D0%BB.ogg",
   "speaker": "1640max"
+ },
+ "сколько": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/aad728cc8e77.ogg",
+  "kind": "human_recording",
+  "title": "Ru-сколько.ogg",
+  "author": "not stated; see source page",
+  "credit": null,
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE.ogg",
+  "speaker": "Shtooka"
  },
  "следовательно": {
   "orig": ".local/drussky-audio/human/orig/5f1257212bf5.ogg",
@@ -1614,6 +1794,16 @@
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%82%D0%BE%D0%BB.ogg",
   "speaker": "Shtooka"
+ },
+ "столы": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/1a6131b1e8d5.ogg",
+  "kind": "human_recording",
+  "title": "Ru-столы.ogg",
+  "author": "Aleksey Pogrebnoj-Alexandroff",
+  "credit": "free open public sources",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%82%D0%BE%D0%BB%D1%8B.ogg",
+  "speaker": "Aleksey Pogrebnoj-Alexandroff"
  },
  "странный": {
   "orig": ".local/drussky-audio/human/orig/f51eaae60325.ogg",
@@ -2045,6 +2235,16 @@
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%B5.ogg",
   "speaker": "Shtooka"
  },
+ "четырнадцать": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/2a41dac8836d.ogg",
+  "kind": "human_recording",
+  "title": "Ru-четырнадцать.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
+ },
  "число": {
   "orig": ".local/drussky-audio/human/orig/9c7d8bf3ae4e.ogg",
   "kind": "human_recording",
@@ -2094,6 +2294,16 @@
   "license": "CC BY-SA 3.0",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D0%B0.ogg",
   "speaker": "Aleksey Pogrebnoj-Alexandroff"
+ },
+ "шестнадцать": {
+  "orig": ".local/drussky-audio/curriculum-human/orig/fdee5289b879.ogg",
+  "kind": "human_recording",
+  "title": "Ru-шестнадцать.ogg",
+  "author": "The Shtooka Project (speaker not identified)",
+  "credit": "Audio sample provided by The Shtooka Project .",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D0%B5%D1%81%D1%82%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
+  "speaker": "Shtooka"
  },
  "шесть": {
   "orig": ".local/drussky-audio/human/orig/37636d1f27f4.ogg",

@@ -8,7 +8,7 @@ def units(h):
     meet, ex, tr, cp, lp, dc, ra, tl, fl, rm, ps = (h[k] for k in ("meet", "ex", "tr", "cp", "lp", "dc", "ra", "tl", "fl", "rm", "ps"))
     U = []
 
-    U.append(("u17", "Yesterday", "был, была́, бы́ло, бы́ли · -л, -ла, -ли", [
+    U.append(("u17", "Yesterday, today, tomorrow", "сего́дня, вчера́, за́втра · был, была́ · чита́л, прочита́л · бу́ду", [
         ("Was: был, была́, бы́ло, бы́ли", "The past tense ignores я, ты, он: it changes for gender and number, like мой.", [
             ex("The past agrees with the subject's gender: он был, она' была', оно' бы'ло, они' бы'ли. Я and ты follow the gender of the person meant.",
                [("Я был до'ма.", "I was at home (said by a man)."), ("Я была' до'ма.", "I was at home (said by a woman)."), ("Они' бы'ли там.", "They were there.")]),
@@ -28,6 +28,16 @@ def units(h):
             tl("we knew", "мы зна'ли"), dc("Она' не зна'ла."), ra("Ро'бот ду'мал, а мы чита'ли."),
             rm("Вчера' мы говори'ли по-ру'сски.", ["Yesterday we spoke Russian.", "Today we speak Russian.", "Yesterday we read in Russian."]),
             cp("он ду'мал, она' ду'мала", 1),
+        ]),
+        ("u17-p2a", "Finished: прочита́л", "Most verbs come in pairs: one for the activity, one for getting it done.", [
+            ex("Чита'ть is reading as an activity; прочита'ть is reading something to the end. Я чита'л кни'гу says I was reading it; я прочита'л кни'гу says I finished it.",
+               [("Я чита'л кни'гу.", "I was reading a book."), ("Я прочита'л кни'гу.", "I read the book (to the end)."), ("Она' сде'лала зада'чу.", "She did the problem (and finished it).")]),
+            lp("прочита'ла", ["чита'ла", "прочита'ла", "чита'ли"]),
+            fl("Он до'лго чита'л, но не ", "прочита'л", ".", "He read for a long time, but didn't finish."),
+            fl("Мы ", "сде'лали", " зада'чу.", "We did the problem (and finished it)."),
+            dc("Она' прочита'ла кни'гу."), ra("Я чита'л, чита'л и прочита'л!"),
+            tl("to read (to the end)", "прочита'ть"), tl("to do (and finish), to get done", "сде'лать"),
+            rm("Ма'ма прочита'ла кни'гу.", ["Mom finished the book.", "Mom was reading the book.", "Mom is reading the book."]),
         ]),
         ("A tiny story", "A whole story in the past tense. Tap any word you want to check.", [
             ps("Вчера' ве'чером я был до'ма. Ма'ма чита'ла кни'гу, а па'па ду'мал. Кот спал на столе'. Пото'м мы у'жинали. Бы'ло о'чень вку'сно.",
@@ -50,6 +60,17 @@ def units(h):
             dc("Мы гуля'ли."), ra("Что ты де'лала вчера'? Я рабо'тала, а пото'м чита'ла."),
             fl("А он ", "гуля'л", ".", "And he went for a walk."),
             rm("Вчера' она' рабо'тала, а он гуля'л.", ["Yesterday she worked and he went for a walk.", "Yesterday he worked and she went for a walk.", "Today she works and he walks."]),
+        ]),
+        ("Tomorrow: бу́ду and прочита́ю", "Two futures: what you will be doing, and what you will get done.", [
+            ex("For an activity in the future, use бу'ду with the infinitive: за'втра я бу'ду чита'ть. A finishing verb with present endings is already future: я прочита'ю, I will read it through.",
+               [("За'втра я бу'ду рабо'тать.", "Tomorrow I'll be working."), ("Я прочита'ю кни'гу за'втра.", "I'll finish the book tomorrow."), ("Что ты бу'дешь де'лать?", "What will you do?")]),
+            lp("бу'ду", ["бу'ду", "был", "бу'дет"]), tl("I will (with an infinitive)", "бу'ду"),
+            fl("За'втра я ", "бу'ду", " рабо'тать.", "Tomorrow I will be working."),
+            fl("Что ты ", "бу'дешь", " де'лать?", "What will you do?"),
+            fl("Я ", "прочита'ю", " кни'гу за'втра.", "I'll finish the book tomorrow."),
+            dc("За'втра мы бу'дем гуля'ть."), ra("Что ты бу'дешь де'лать за'втра? Я бу'ду чита'ть."),
+            rm("За'втра я прочита'ю кни'гу.", ["Tomorrow I'll finish the book.", "Yesterday I finished the book.", "Tomorrow I'll be reading books."]),
+            tl("we will (with an infinitive)", "мы бу'дем"),
         ]),
     ]))
 
@@ -91,13 +112,13 @@ def units(h):
         ]),
     ]))
 
-    U.append(("u19", "Going places, and when", "идти́, ходи́ть, е́хать · сего́дня, вчера́, за́втра", [
+    U.append(("u19", "Going places", "идти́, ходи́ть, е́хать", [
         ("Today, yesterday, tomorrow", "Time words, and the four parts of the day.", [
             ex("Сего'дня is today, вчера' yesterday, за'втра tomorrow. For the time of day: у'тром, днём, ве'чером, но'чью.",
                [("сего'дня", "today"), ("за'втра у'тром", "tomorrow morning"), ("вчера' ве'чером", "yesterday evening")]),
             lp("за'втра", ["за'втра", "за'втрак", "вчера'"]), tl("today", "сего'дня"), tl("tomorrow", "за'втра"),
             tl("in the evening", "ве'чером"), fl("", "Сего'дня", " я до'ма.", "Today I am at home."),
-            dc("Я рабо'таю у'тром."), ra("Сего'дня у'тром я пил ко'фе, а днём рабо'тал."), tl("at night", "но'чью"),
+            dc("Я рабо'таю у'тром."), ra("Сего'дня я до'ма, а за'втра днём я рабо'таю."), tl("at night", "но'чью"),
             rm("За'втра ве'чером я рабо'таю.", ["Tomorrow evening I am working.", "Yesterday evening I worked.", "Tomorrow morning I am working."]),
         ]),
         ("On foot: идти́", "Идти́ is going on foot, right now, in one direction.", [
@@ -109,7 +130,7 @@ def units(h):
             fl("Я иду' в ", "парк", ".", "I am going to the park (where to?)."),
         ]),
         ("Again and again; by car or train", "Ходи́ть is going on foot regularly. Е́хать is going by transport.", [
-            ex("Ходи'ть is going on foot again and again: я хожу' в парк ка'ждый день. Е'хать is one trip by transport, now: я е'ду, ты е'дешь. For regular trips it is е'здить: я е'зжу.",
+            ex("Ходи'ть is going on foot again and again: я хожу' в парк ка'ждый день. Е'хать is going by car, bus or train: я е'ду, ты е'дешь.",
                [("Я хожу' в парк.", "I go to the park (regularly)."), ("Я е'ду домо'й.", "I'm going home (by car, bus or train)."), ("ка'ждый день", "every day")]),
             lp("е'ду", ["е'ду", "иду'", "хожу'"]), tl("I go (regularly, on foot)", "я хожу'"), tl("I am going (by transport)", "я е'ду"),
             fl("Ка'ждый день я ", "хожу'", " в парк.", "Every day I go to the park."),
@@ -131,7 +152,7 @@ def units(h):
     ]))
 
     U.append(("u20", "A signal from space", "a short story in four parts", [
-        ("The station Zvezda", "Part one. Read it aloud once, then tap what you need.", [
+        ("The station Zvezda", "Part one. Read it through for the gist, tapping what you need; then listen to it whole.", [
             ps("Ста'нция «Звезда'» лети'т вокру'г Земли'. На ста'нции рабо'тает Ми'ра. Ми'ра — ро'бот. Ка'ждое у'тро она' смо'трит на звёзды. Сего'дня она' слы'шит стра'нный сигна'л.",
                "The station Zvezda (Star) flies around the Earth. Mira works on the station. Mira is a robot. Every morning she looks at the stars. Today she hears a strange signal.",
                {"летит": "flies (it)", "вокруг": "around", "земли": "the Earth (after вокруг)", "станции": "station (after на: on the station)",
@@ -176,7 +197,7 @@ def units(h):
 
     U.append(("u21", "Mathematics", "чи'сла до ста · е́сли… то… · существу́ет", [
         ("Numbers to a hundred", "Tens, and how to build every number up to сто.", [
-            ex("Twenty to ninety: два'дцать, три'дцать, со'рок, пятьдеся'т, шестьдеся'т, се'мьдесят, во'семьдесят, девяно'сто; a hundred is сто. Join the rest: два'дцать оди'н, со'рок пять. Eleven to nineteen end in -на'дцать: оди'ннадцать, двена'дцать, трина'дцать, четы'рнадцать, пятна'дцать, шестна'дцать, семна'дцать, восемна'дцать, девятна'дцать.",
+            ex("Twenty to ninety: два'дцать, три'дцать, со'рок, пятьдеся'т, шестьдеся'т, се'мьдесят, во'семьдесят, девяно'сто; a hundred is сто. Join the rest: два'дцать оди'н, со'рок пять.",
                [("два'дцать", "twenty"), ("со'рок", "forty"), ("девяно'сто", "ninety"), ("сто", "a hundred")]),
             lp("со'рок", ["со'рок", "сто", "семь"]), tl("twenty", "два'дцать"), tl("fifteen", "пятна'дцать"), tl("a hundred", "сто"),
             fl("Де'сять плюс де'сять — ", "два'дцать", ".", "Ten plus ten is twenty."), dc("три'дцать пять"),
@@ -204,6 +225,18 @@ def units(h):
             dc("Существу'ет чётное число'."), ra("Для любо'го числа' существу'ет бо'льшее число'."), tl("bigger, greater (neuter)", "бо'льшее"), tl("prime number", "просто'е число'"),
             rm("Существу'ет просто'е чётное число': два.", ["There exists an even prime number: two.", "Every even number is prime.", "Two is not a number."]),
         ]),
+        ("u21-p3a", "Before the proof", "The three phrases the proof is built from, one clause at a time.", [
+            ex("Де'лится на два is is divisible by two. Кото'рое joins a description to a neuter noun: число', кото'рое де'лится на два. Два, умно'женное на три is two multiplied by three.",
+               [("Во'семь де'лится на два.", "Eight is divisible by two."), ("Шесть — э'то два, умно'женное на три.", "Six is two multiplied by three."),
+                ("Чётное число' — э'то число', кото'рое де'лится на два.", "An even number is a number that is divisible by two.")]),
+            rm("Де'вять не де'лится на два.", ["Nine is not divisible by two.", "Nine is divisible by three.", "Two is not divisible by nine."]),
+            fl("Во'семь ", "де'лится", " на два.", "Eight is divisible by two."),
+            fl("Во'семь — э'то два, умно'женное на ", "четы'ре", ".", "Eight is two multiplied by four."),
+            tl("multiplied by", "умно'женное на"), lp("кото'рое", ["кото'рое", "ка'ждое", "чётное"]),
+            dc("Де'сять де'лится на два."), ra("Чётное число' — э'то число', кото'рое де'лится на два."),
+            tl("which, that (with a neuter noun)", "кото'рое"),
+            fl("Де'вять — нечётное число', потому' что оно' не ", "де'лится", " на два.", "Nine is odd, because it is not divisible by two."),
+        ]),
         ("A tiny proof", "Your first Russian proof: the sum of two even numbers is even.", [
             ps("Тео'рема: су'мма двух чётных чи'сел — чётное число'. Доказа'тельство. Чётное число' — э'то число', кото'рое де'лится на два. Возьмём два чётных числа'. Ка'ждое из них — два, умно'женное на це'лое число'. Их су'мма — два, умно'женное на су'мму э'тих це'лых чи'сел. Зна'чит, су'мма то'же де'лится на два, то есть она' чётная. Что и тре'бовалось доказа'ть.",
                "Theorem: the sum of two even numbers is an even number. Proof. An even number is a number that is divisible by two. Take two even numbers. Each of them is two multiplied by a whole number. Their sum is two multiplied by the sum of those whole numbers. So the sum is also divisible by two, that is, it is even. Which was to be proved.",
@@ -216,21 +249,21 @@ def units(h):
             rm("Су'мма двух чётных чи'сел — чётное число'.", ["The sum of two even numbers is an even number.", "The sum of two odd numbers is an odd number.", "The product of two even numbers is odd."]),
             tl("sum", "су'мма"), tl("proof", "доказа'тельство"), tl("theorem", "тео'рема"),
             fl("Чётное число' де'лится на ", "два", ".", "An even number is divisible by two."),
-            ra("Что и тре'бовалось доказа'ть."), dc("Су'мма двух чётных чи'сел — чётное число'."), tl("that is, i.e.", "то есть"),
-            rm("Зна'чит, су'мма то'же де'лится на два.", ["So the sum is also divisible by two.", "So the product is also divisible by two.", "So the sum is not divisible by two."]),
+            ra("Что и тре'бовалось доказа'ть."), dc("Су'мма то'же де'лится на два."), tl("that is, i.e.", "то есть"),
+            ra("Су'мма двух чётных чи'сел — чётное число'."),
         ]),
     ]))
 
-    U.append(("u22", "Philosophy", "я ду́маю, что… · почему́? · потому́ что", [
+    U.append(("u22", "Philosophy", "Socrates, Tyutchev, Bulgakov", [
         ("I think that…", "Что joins a whole thought to the sentence: я ду́маю, что…", [
             ex("After ду'мать, знать or говори'ть, что means that, with a comma before it.",
-               [("Я ду'маю, что э'то пра'вда.", "I think that this is true."), ("Он говори'т, что не зна'ет.", "He says that he doesn't know."),
-                ("Мы зна'ем, что мир большо'й.", "We know that the world is big.")]),
-            lp("Я ду'маю, что э'то пра'вда.", ["Я ду'маю, что э'то пра'вда.", "Я зна'ю, что э'то пра'вда.", "Я ду'маю, что э'то непра'вда."]),
-            fl("Я ду'маю, ", "что", " мир большо'й.", "I think that the world is big."),
+               [("Я ду'маю, что э'то факт.", "I think that this is a fact."), ("Он говори'т, что не зна'ет.", "He says that he doesn't know."),
+                ("Мы зна'ем, что суп гото'в.", "We know that the soup is ready.")]),
+            lp("Я ду'маю, что э'то факт.", ["Я ду'маю, что э'то факт.", "Я зна'ю, что э'то факт.", "Я ду'маю, что э'то не факт."]),
+            fl("Я ду'маю, ", "что", " суп гото'в.", "I think that the soup is ready."),
             fl("Она' говори'т, что ", "зна'ет", ".", "She says that she knows."),
             tl("I think that…", "я ду'маю, что"), dc("Он говори'т, что не зна'ет."), ra("Я ду'маю, что ро'бот то'же ду'мает."),
-            rm("Ты ду'маешь, что э'то пра'вда?", ["Do you think that this is true?", "Do you know that this is true?", "You think that this is not true."]),
+            rm("Ты ду'маешь, что э'то факт?", ["Do you think that this is a fact?", "Do you know that this is a fact?", "You think that this is not a fact."]),
             cp("я ду'маю, что", 1),
         ]),
         ("Why? Because.", "Почему́? asks why; потому́ что answers.", [
@@ -239,7 +272,7 @@ def units(h):
             lp("потому' что", ["потому' что", "почему'", "пото'м"]), tl("why", "почему'"), tl("because", "потому' что"),
             fl("", "Почему'", " ты так ду'маешь?", "Why do you think so?"),
             fl("Я чита'ю, ", "потому' что", " люблю' кни'ги.", "I read because I love books."),
-            dc("Потому' что э'то пра'вда."), ra("Почему' ты так ду'маешь? Потому' что я зна'ю."),
+            dc("Потому' что э'то факт."), ra("Почему' ты так ду'маешь? Потому' что я зна'ю."),
             rm("Почему' ты здесь? Потому' что я хочу' знать.", ["Why are you here? Because I want to know.", "Where are you? I want to know.", "Why are you here? Because I know."]),
         ]),
         ("A dialogue", "Socrates asks a student a simple question that is not simple.", [
@@ -256,7 +289,7 @@ def units(h):
             fl("Что ", "тако'е", " му'дрость?", "What is wisdom?"), ra("Да, ка'жется, так."), dc("Му'дрый челове'к зна'ет."),
             lp("му'дрость", ["му'дрость", "му'дрый", "мысль"]),
         ]),
-        ("Real words: Tyutchev and Bulgakov", "Four lines by Fyodor Tyutchev (1866) about what reason cannot measure, and one line from Bulgakov.", [
+        ("Real words: Tyutchev and Bulgakov", "An excursion, not a test: four lines by Fyodor Tyutchev (1866) about what reason cannot measure, and one line from Bulgakov. Short poems are harder than they look.", [
             ps("Э'то стихи' Фёдора Тю'тчева.\nУмо'м Росси'ю не поня'ть,\nАрши'ном о'бщим не изме'рить:\nУ ней осо'бенная стать —\nВ Росси'ю мо'жно то'лько ве'рить.",
                "These are verses by Fyodor Tyutchev. Russia cannot be understood with the mind, nor measured with a common yardstick: she has a special character — one can only believe in Russia.",
                {"стихи": "poems, verses", "фёдора": "Fyodor (by Fyodor)", "тютчева": "Tyutchev (by Tyutchev)", "аршином": "with an arshin (an old Russian measuring rod)", "общим": "common, shared", "измерить": "to measure",
@@ -283,6 +316,10 @@ LEXICON = [
     W("мы у'жинали", "we had dinner"), W("бы'ло", "it was"), W("де'лать", "to do"), W("рабо'тать", "to work"),
     W("рабо'тал", "worked (he)"), W("де'лали", "did (plural)"), W("де'лал", "did, was doing (he)"), W("мы гуля'ли", "we went for a walk"),
     W("рабо'тала", "worked (she)"), W("гуля'л", "went for a walk (he)"),
+    W("чита'л", "read, was reading (he)"), W("зада'чу", "problem (as the object)"), W("прочита'ть", "to read (to the end)"), W("сде'лать", "to do (and finish), to get done"), W("прочита'л", "read to the end, finished (he)"),
+    W("прочита'ла", "read to the end, finished (she)"), W("сде'лали", "did and finished (plural)"), W("до'лго", "for a long time"),
+    W("бу'ду", "I will (with an infinitive)"), W("бу'дешь", "you (one person) will"), W("мы бу'дем", "we will (with an infinitive)"),
+    W("прочита'ю", "I will read (to the end)"), W("гуля'ть", "to go for a walk"),
     # u18
     W("в до'ме", "in the house"), W("на ку'хне", "in the kitchen"), W("на у'лице", "outside, in the street"),
     W("в го'роде", "in the city"), W("в ко'смосе", "in space"), W("на пла'нете", "on the planet"), W("в кни'ге", "in the book"),
@@ -312,7 +349,8 @@ LEXICON = [
     W("два'дцать", "twenty"), W("три'дцать", "thirty"), W("со'рок", "forty"), W("пятьдеся'т", "fifty"), W("шестьдеся'т", "sixty"),
     W("се'мьдесят", "seventy"), W("во'семьдесят", "eighty"), W("девяно'сто", "ninety"), W("сто", "a hundred"), W("пятна'дцать", "fifteen"),
     W("чётное", "even (of a number)"), W("нечётное", "odd (of a number)"), W("е'сли", "if"), W("то", "then (after е'сли)"),
-    W("де'лится на два", "is divisible by two"), W("существу'ет", "there exists, exists"), W("для любо'го числа'", "for any number"),
+    W("де'лится на два", "is divisible by two"), W("де'лится", "is divisible (на: by)"), W("умно'женное на", "multiplied by"),
+    W("кото'рое", "which, that (with a neuter noun)"), W("существу'ет", "there exists, exists"), W("для любо'го числа'", "for any number"),
     W("бо'льшее", "bigger, greater (neuter)"), W("просто'е число'", "prime number"), W("су'мма", "sum"),
     W("двух чётных чи'сел", "of two even numbers"), W("доказа'тельство", "proof"), W("тео'рема", "theorem"),
     W("Что и тре'бовалось доказа'ть.", "Which was to be proved (Q.E.D.)"), W("то есть", "that is, i.e."),

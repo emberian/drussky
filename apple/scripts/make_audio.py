@@ -175,9 +175,24 @@ def main():
     # Extra-speaker clips are built by make_variants.py; keep their provenance.
     variants_path = AUDIO / "variants.json"
     extra = {f for fs in json.loads(variants_path.read_text()).values() for f in fs} if variants_path.exists() else set()
+    old = json.loads((AUDIO / "sources.json").read_text()) if (AUDIO / "sources.json").exists() else {}
     if extra:
-        old = json.loads((AUDIO / "sources.json").read_text())
         sources.update({f: old[f] for f in extra if f in old})
+    # Library sentence clips are added by library_audio.py; keep them (course keys win the index).
+    library = {f: s for f, s in old.items() if s.get("set") == "library-sentences"}
+    sources.update(library)
+    for f, s in library.items():
+        index.setdefault(s["key"], f)
+    extra |= set(library)
+    # Other tools (library sentences, earlier course versions) may own entries this run did not
+    # produce: re-read both files now and keep every entry whose file still exists.
+    old_index = json.loads((AUDIO / "index.json").read_text()) if (AUDIO / "index.json").exists() else {}
+    old_sources = json.loads((AUDIO / "sources.json").read_text()) if (AUDIO / "sources.json").exists() else {}
+    for k, f in old_index.items():
+        if k not in index and (AUDIO / f).is_file():
+            index[k] = f
+    kept = set(index.values()) | extra
+    sources.update({f: v for f, v in old_sources.items() if f not in sources and f in kept})
     (AUDIO / "index.json").write_text(json.dumps(dict(sorted(index.items())), ensure_ascii=False, indent=1) + "\n")
     (AUDIO / "sources.json").write_text(json.dumps(dict(sorted(sources.items())), ensure_ascii=False, indent=1) + "\n")
     stale = {p.name for p in AUDIO.glob("*.m4a")} - set(index.values()) - extra
