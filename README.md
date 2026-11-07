@@ -1,6 +1,14 @@
 # Drussky
 
-Drussky (Dr. Russky) is Ember’s personal Russian learning app: start with no Russian, then build toward conversation and independent reading of stories, science fiction, mathematics and philosophy. The repository, crates, commands and existing artifact names remain `rufren`.
+Drussky (Dr. Russky) is Ember’s personal Russian learning app: start with no Russian, then build toward conversation and independent reading of stories, science fiction, mathematics and philosophy.
+
+**The app is now native: [`apple/`](apple/README.md).** One exercise book you write in with the Pencil, hear and speak — 16 units, 52 pages, every phrase recorded — running on the iPad (and iPhone, and Mac as an iPad app). Start there.
+
+The Rust/Dioxus implementation below (crates `rufren-*`) is the earlier cross-platform app. Its relay, speech tooling and research notes remain useful; its learner UI is superseded by the native workbook.
+
+---
+
+## Earlier Rust app
 
 The AI teacher supplies explanations, examples, corrections and practice. Short, untimed activities keep one immediate action visible, with replay, help and a smaller step close at hand. The intended learning loop is to **hear, read, draw, say, recall and construct language**, returning to useful material across sessions. Native-like pronunciation is a goal to evaluate, not a score the app can currently certify. A friend can be a conversation partner without preparing lessons or grading homework.
 
