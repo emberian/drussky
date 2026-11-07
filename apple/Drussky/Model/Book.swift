@@ -1,0 +1,337 @@
+import Foundation
+import Observation
+
+/// One page of the learner's workbook. Pages are instantiated from the course (plus
+/// generated review) when first reached, then frozen: they keep their exercises and results
+/// forever, so turning back shows exactly what was written there.
+struct BookPage: Codable, Identifiable, Sendable {
+    var id: String
+    var number: Int
+    var sourceID: String?
+    var unitTitle: String
+    var title: String
+    var intro: String?
+    var isReview: Bool
+    var exercises: [Exercise]
+    var results: [ExerciseResult]
+    var created: Date
+    var finished: Date?
+
+    var isFinished: Bool { finished != nil }
+    var firstOpenIndex: Int? { results.firstIndex { !$0.status.isComplete } }
+    var completedCount: Int { results.filter { $0.status.isComplete }.count }
+}
+
+struct ExerciseResult: Codable, Sendable, Hashable {
+    enum Status: String, Codable, Sendable {
+        case open, done, correct, missed
+        var isComplete: Bool { self != .open }
+    }
+    var status: Status = .open
+    var attempts: Int = 0
+    var recognized: String? = nil
+    var chosen: Int? = nil
+    var recording: String? = nil
+    var revealed: Bool = false
+    var updated: Date? = nil
+}
+
+/// Spaced-retrieval memory for one item ("letter:Ж", "word:кот").
+struct Memory: Codable, Sendable {
+    var key: String
+    var stability: Double   // days until the next review
+    var due: Date
+    var reps: Int = 0
+    var lapses: Int = 0
+    var seen: Date
+}
+
+struct Settings: Codable, Sendable, Equatable {
+    var fingerDrawing: Bool = false
+    var cursiveModels: Bool = false
+    var showStress: Bool = true
+}
+
+@MainActor
+@Observable
+final class Book {
+    let course: Course
+    private(set) var pages: [BookPage] = []
+    private(set) var memories: [String: Memory] = [:]
+    /// Index into course.pageSequence of the next authored page to instantiate.
+    private(set) var courseCursor: Int = 0
+    var currentPage: Int = 0 { didSet { scheduleSave() } }
+    var settings = Settings() { didSet { scheduleSave() } }
+
+    private let store: BookStore
+    private var saveTask: Task<Void, Never>?
+    var now: () -> Date = Date.init
+
+    init(course: Course, store: BookStore) {
+        self.course = course
+        self.store = store
+        if let saved = store.loadState() {
+            pages = saved.pages
+            memories = Dictionary(uniqueKeysWithValues: saved.memories.map { ($0.key, $0) })
+            courseCursor = saved.courseCursor
+            currentPage = min(saved.currentPage, max(0, saved.pages.count - 1))
+            settings = saved.settings
+        }
+        if pages.isEmpty { _ = appendNextPage() }
+    }
+
+    // MARK: Pages
+
+    var page: BookPage? { pages.indices.contains(currentPage) ? pages[currentPage] : nil }
+    var courseFinished: Bool { courseCursor >= course.pageSequence.count }
+
+    func goTo(_ index: Int) {
+        guard pages.indices.contains(index) else { return }
+        currentPage = index
+    }
+
+    /// Moves to the next page, creating it when the learner is on the last one.
+    @discardableResult
+    func turnForward() -> Bool {
+        if currentPage + 1 < pages.count { currentPage += 1; return true }
+        guard appendNextPage() else { return false }
+        currentPage = pages.count - 1
+        return true
+    }
+
+    func turnBack() { if currentPage > 0 { currentPage -= 1 } }
+
+    /// Appends either a review page (when much is due) or the next course page with a few
+    /// due reviews woven in. Returns false at the end of the course with nothing due.
+    private func appendNextPage() -> Bool {
+        let due = dueMemories()
+        let lastWasReview = pages.last?.isReview ?? true
+        if (due.count >= 10 && !lastWasReview) || (courseFinished && !due.isEmpty) {
+            let items = Array(due.prefix(8))
+            let exercises = items.enumerated().map { reviewExercise(for: $1, variant: $0) }
+            appendPage(sourceID: nil, unitTitle: "Повторение · Review", title: "Bring it back",
+                       intro: "Everything here is something you've met before. Reach for it before you check.",
+                       isReview: true, exercises: exercises)
+            return true
+        }
+        guard !courseFinished else { return false }
+        let (unit, source) = course.pageSequence[courseCursor]
+        courseCursor += 1
+        var exercises = source.exercises
+        let taughtHere = Set(source.exercises.compactMap { memoryKey(for: $0) })
+        let reviews = due.filter { !taughtHere.contains($0.key) }.prefix(3)
+        // Spread reviews through the page: after the opening, in the middle, near the end.
+        // Insert from the last slot backwards so earlier slot indices stay valid.
+        let slots = [min(2, exercises.count), exercises.count / 2 + 1, max(exercises.count - 1, 0)]
+        for (i, memory) in reviews.enumerated().reversed() {
+            exercises.insert(reviewExercise(for: memory, variant: memory.reps + i), at: min(slots[i], exercises.count))
+        }
+        appendPage(sourceID: source.id, unitTitle: unit.title, title: source.title, intro: source.intro,
+                   isReview: false, exercises: exercises)
+        return true
+    }
+
+    private func appendPage(sourceID: String?, unitTitle: String, title: String, intro: String?,
+                            isReview: Bool, exercises: [Exercise]) {
+        let number = pages.count + 1
+        pages.append(BookPage(id: String(format: "p%04d", number), number: number, sourceID: sourceID,
+                              unitTitle: unitTitle, title: title, intro: intro, isReview: isReview,
+                              exercises: exercises, results: exercises.map { _ in ExerciseResult() },
+                              created: now(), finished: nil))
+        scheduleSave()
+    }
+
+    // MARK: Results
+
+    func record(page pageIndex: Int, exercise index: Int, _ update: (inout ExerciseResult) -> Void) {
+        guard pages.indices.contains(pageIndex), pages[pageIndex].results.indices.contains(index) else { return }
+        let before = pages[pageIndex].results[index]
+        update(&pages[pageIndex].results[index])
+        pages[pageIndex].results[index].updated = now()
+        let after = pages[pageIndex].results[index]
+        if !before.status.isComplete && after.status.isComplete {
+            learn(from: pages[pageIndex].exercises[index], result: after.status)
+        }
+        if pages[pageIndex].finished == nil && pages[pageIndex].results.allSatisfy({ $0.status.isComplete }) {
+            pages[pageIndex].finished = now()
+        }
+        scheduleSave()
+    }
+
+    /// Re-opens a finished exercise so it can be attempted again (ink is kept by the view).
+    func reopen(page pageIndex: Int, exercise index: Int) {
+        record(page: pageIndex, exercise: index) { r in
+            r.status = .open
+            r.recognized = nil
+            r.chosen = nil
+        }
+    }
+
+    // MARK: Memory
+
+    func memoryKey(for exercise: Exercise) -> String? {
+        if let key = exercise.reviewKey { return key }
+        switch exercise.kind {
+        case .meet: return exercise.letter.map { "letter:\($0)" }
+        case .explain: return nil
+        default:
+            guard let target = exercise.target ?? exercise.text, let word = course.word(target) else { return nil }
+            return "word:\(RussianText.key(word.ru))"
+        }
+    }
+
+    private func learn(from exercise: Exercise, result: ExerciseResult.Status) {
+        guard let key = memoryKey(for: exercise) else { return }
+        let today = now()
+        var m = memories[key] ?? Memory(key: key, stability: 0.6, due: today.addingTimeInterval(0.6 * 86_400), seen: today)
+        switch result {
+        case .correct:
+            // Only reviews that were actually due grow the interval much; same-day repeats grow it a little.
+            let wasDue = m.due <= today
+            m.stability = min(180, m.stability * (wasDue ? 2.5 : 1.15) + (wasDue ? 0.5 : 0))
+            m.reps += 1
+        case .missed:
+            m.stability = max(0.3, m.stability * 0.4)
+            m.lapses += 1
+        case .done, .open:
+            break
+        }
+        m.due = today.addingTimeInterval(m.stability * 86_400)
+        memories[key] = m
+    }
+
+    func dueMemories() -> [Memory] {
+        let today = now()
+        return memories.values.filter { $0.due <= today }
+            .sorted { ($0.due.timeIntervalSince(today) / $0.stability) < ($1.due.timeIntervalSince(today) / $1.stability) }
+    }
+
+    var dueCount: Int { dueMemories().count }
+
+    /// A review exercise for a remembered item, varying the modality across repetitions.
+    func reviewExercise(for memory: Memory, variant: Int) -> Exercise {
+        let parts = memory.key.split(separator: ":", maxSplits: 1).map(String.init)
+        var ex: Exercise
+        if parts.first == "letter", let letter = course.letter(parts[1]) {
+            if variant % 2 == 0 {
+                ex = Exercise(kind: .dictation)
+                ex.text = letter.say.count <= 2 ? letter.lower : letter.say
+            } else {
+                ex = Exercise(kind: .listenPick)
+                ex.say = letter.say
+                let others = course.letters.filter { $0.upper != letter.upper && letterKnown($0.upper) }
+                    .shuffled().prefix(2).map(\.say)
+                ex.options = ([letter.say] + others).shuffled()
+            }
+        } else if let word = course.word(parts.count > 1 ? parts[1] : "") {
+            switch variant % 3 {
+            case 0: ex = Exercise(kind: .translate); ex.en = word.en; ex.answerText = word.ru
+            case 1: ex = Exercise(kind: .dictation); ex.text = word.ru
+            default: ex = Exercise(kind: .readAloud); ex.text = word.ru
+            }
+        } else {
+            ex = Exercise(kind: .explain)
+            ex.text = "Keep going."
+        }
+        ex.reviewKey = memory.key
+        return ex
+    }
+
+    func letterKnown(_ upper: String) -> Bool { memories["letter:\(upper)"] != nil }
+
+    // MARK: Ink & recordings
+
+    func inkURL(page: BookPage, exercise index: Int) -> URL { store.inkURL(pageID: page.id, index: index) }
+    func recordingURL(page: BookPage, exercise index: Int) -> URL { store.recordingURL(pageID: page.id, index: index) }
+
+    /// The learner's own handwriting of a letter: the ink from its `meet` exercise.
+    func inkForLetter(_ upper: String) -> URL? {
+        for page in pages {
+            for (i, ex) in page.exercises.enumerated() where ex.kind == .meet && ex.letter == upper {
+                let url = store.inkURL(pageID: page.id, index: i)
+                if FileManager.default.fileExists(atPath: url.path) { return url }
+            }
+        }
+        return nil
+    }
+
+    // MARK: Persistence
+
+    /// Zips the notebook folder (state, ink, recordings) for sharing.
+    func exportArchive() -> URL? {
+        var output: URL?
+        var error: NSError?
+        NSFileCoordinator().coordinate(readingItemAt: store.root, options: .forUploading, error: &error) { zipped in
+            let dest = FileManager.default.temporaryDirectory.appendingPathComponent("Drussky notebook.zip")
+            try? FileManager.default.removeItem(at: dest)
+            if (try? FileManager.default.copyItem(at: zipped, to: dest)) != nil { output = dest }
+        }
+        return output
+    }
+
+    private func scheduleSave() {
+        saveTask?.cancel()
+        saveTask = Task { [weak self] in
+            try? await Task.sleep(for: .milliseconds(400))
+            guard !Task.isCancelled else { return }
+            self?.saveNow()
+        }
+    }
+
+    func saveNow() {
+        store.saveState(.init(pages: pages, memories: Array(memories.values), courseCursor: courseCursor,
+                              currentPage: currentPage, settings: settings))
+    }
+
+    #if DEBUG
+    /// Test hook: pretend time has passed.
+    func shiftMemories(byDays days: Double) {
+        for key in memories.keys { memories[key]!.due.addTimeInterval(-days * 86_400) }
+    }
+    #endif
+}
+
+struct BookState: Codable {
+    var version = 1
+    var pages: [BookPage]
+    var memories: [Memory]
+    var courseCursor: Int
+    var currentPage: Int
+    var settings: Settings
+}
+
+/// Files under Application Support/Drussky: book.json, ink/, voice/.
+struct BookStore: Sendable {
+    let root: URL
+
+    static func standard() -> BookStore {
+        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        return BookStore(root: base.appendingPathComponent("Drussky", isDirectory: true))
+    }
+
+    init(root: URL) {
+        self.root = root
+        for dir in ["ink", "voice"] {
+            try? FileManager.default.createDirectory(at: root.appendingPathComponent(dir), withIntermediateDirectories: true)
+        }
+    }
+
+    var stateURL: URL { root.appendingPathComponent("book.json") }
+    func inkURL(pageID: String, index: Int) -> URL { root.appendingPathComponent("ink/\(pageID)-\(index).drawing") }
+    func recordingURL(pageID: String, index: Int) -> URL { root.appendingPathComponent("voice/\(pageID)-\(index).m4a") }
+
+    func loadState() -> BookState? {
+        guard let data = try? Data(contentsOf: stateURL) else { return nil }
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try? decoder.decode(BookState.self, from: data)
+    }
+
+    func saveState(_ state: BookState) {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        guard let data = try? encoder.encode(state) else { return }
+        try? data.write(to: stateURL, options: .atomic)
+    }
+}

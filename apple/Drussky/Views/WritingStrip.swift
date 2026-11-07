@@ -1,0 +1,216 @@
+import PencilKit
+import SwiftUI
+import UIKit
+
+/// Geometry of one ruled writing line, proportional to its height.
+struct StripMetrics {
+    var height: CGFloat
+    var capY: CGFloat { height * 0.17 }
+    var xHeightY: CGFloat { height * 0.43 }
+    var baselineY: CGFloat { height * 0.70 }
+    var descenderY: CGFloat { height * 0.90 }
+
+    func font(cursive: Bool) -> UIFont {
+        let probe = Theme.modelFont(size: 100, cursive: cursive)
+        let capPerPoint = max(probe.capHeight, 1) / 100
+        return Theme.modelFont(size: (baselineY - capY) / capPerPoint, cursive: cursive)
+    }
+
+    /// Height at which `text` (repeated `times`) fits `width` in the model font.
+    static func fitting(_ text: String, times: Int = 1, width: CGFloat, cursive: Bool, preferred: CGFloat) -> CGFloat {
+        let probe = StripMetrics(height: 100)
+        let font = probe.font(cursive: cursive)
+        let one = (RussianText.unstressed(text) as NSString).size(withAttributes: [.font: font]).width
+        let gap = font.pointSize * 0.8
+        let needed = one * CGFloat(max(times, 1)) + gap * CGFloat(max(times - 1, 0)) + 40
+        let scale = (width - 32) / max(needed, 1)
+        return max(72, min(preferred, 100 * scale))
+    }
+}
+
+/// Owns a strip's PencilKit canvas so SwiftUI controls (Undo, Clear, Check) can reach it.
+@MainActor
+final class PadController: ObservableObject {
+    @Published private(set) var isEmpty = true
+    @Published private(set) var strokeCount = 0
+    fileprivate weak var canvas: PKCanvasView?
+    let fileURL: URL
+    var onChange: ((PKDrawing) -> Void)?
+    private var saveTask: Task<Void, Never>?
+
+    init(fileURL: URL) {
+        self.fileURL = fileURL
+    }
+
+    var drawing: PKDrawing { canvas?.drawing ?? storedDrawing() }
+
+    func storedDrawing() -> PKDrawing {
+        guard let data = try? Data(contentsOf: fileURL), let d = try? PKDrawing(data: data) else { return PKDrawing() }
+        return d
+    }
+
+    func clear() {
+        canvas?.drawing = PKDrawing()
+        changed(PKDrawing())
+    }
+
+    func undo() { canvas?.undoManager?.undo() }
+
+    /// Replaces the ink (used by QA to inject synthetic writing).
+    func setDrawing(_ drawing: PKDrawing) {
+        canvas?.drawing = drawing
+        changed(drawing)
+    }
+
+    fileprivate func changed(_ drawing: PKDrawing) {
+        isEmpty = drawing.strokes.isEmpty
+        strokeCount = drawing.strokes.count
+        onChange?(drawing)
+        saveTask?.cancel()
+        let url = fileURL
+        let data = drawing.dataRepresentation()
+        let empty = drawing.strokes.isEmpty
+        saveTask = Task.detached(priority: .utility) {
+            try? await Task.sleep(for: .milliseconds(250))
+            guard !Task.isCancelled else { return }
+            if empty { try? FileManager.default.removeItem(at: url) } else { try? data.write(to: url, options: .atomic) }
+        }
+    }
+
+    fileprivate func attach(_ canvas: PKCanvasView) {
+        self.canvas = canvas
+        let d = storedDrawing()
+        canvas.drawing = d
+        isEmpty = d.strokes.isEmpty
+        strokeCount = d.strokes.count
+    }
+}
+
+/// A ruled line of exercise-book paper you write on with the Pencil.
+struct WritingStrip: UIViewRepresentable {
+    @ObservedObject var controller: PadController
+    var height: CGFloat
+    var ghost: String?
+    var ghostTimes: Int = 1
+    var cursive: Bool
+    var fingerDrawing: Bool
+    var locked = false
+
+    func makeUIView(context: Context) -> PaperStripView {
+        let view = PaperStripView()
+        controller.attach(view.canvas)
+        view.canvas.delegate = context.coordinator
+        context.coordinator.controller = controller
+        return view
+    }
+
+    func updateUIView(_ view: PaperStripView, context: Context) {
+        context.coordinator.controller = controller
+        view.configure(metrics: StripMetrics(height: height), ghost: ghost.map(RussianText.unstressed),
+                       ghostTimes: ghostTimes, cursive: cursive)
+        #if targetEnvironment(simulator)
+        view.canvas.drawingPolicy = .anyInput
+        #else
+        view.canvas.drawingPolicy = fingerDrawing ? .anyInput : .default
+        #endif
+        view.canvas.isUserInteractionEnabled = !locked
+    }
+
+    func sizeThatFits(_ proposal: ProposedViewSize, uiView: PaperStripView, context: Context) -> CGSize? {
+        CGSize(width: proposal.width ?? 600, height: height)
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    @MainActor
+    final class Coordinator: NSObject, PKCanvasViewDelegate {
+        var controller: PadController?
+        func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
+            controller?.changed(canvasView.drawing)
+        }
+    }
+}
+
+final class PaperStripView: UIView, UIPencilInteractionDelegate {
+    let canvas = PKCanvasView()
+    private var metrics = StripMetrics(height: 120)
+    private var ghost: String?
+    private var ghostTimes = 1
+    private var cursive = false
+    private let pen = PKInkingTool(.pen, color: Theme.inkUI.resolvedColor(with: .init(userInterfaceStyle: .light)), width: 4.5)
+    private var erasing = false
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        isOpaque = false
+        backgroundColor = .clear
+        contentMode = .redraw
+        canvas.backgroundColor = .clear
+        canvas.isOpaque = false
+        canvas.isScrollEnabled = false
+        canvas.tool = pen
+        canvas.overrideUserInterfaceStyle = .unspecified
+        addSubview(canvas)
+        let pencil = UIPencilInteraction()
+        pencil.delegate = self
+        addInteraction(pencil)
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (view: PaperStripView, _) in view.setNeedsDisplay() }
+    }
+
+    required init?(coder: NSCoder) { fatalError() }
+
+    func configure(metrics: StripMetrics, ghost: String?, ghostTimes: Int, cursive: Bool) {
+        guard metrics.height != self.metrics.height || ghost != self.ghost || ghostTimes != self.ghostTimes
+            || cursive != self.cursive else { return }
+        self.metrics = metrics
+        self.ghost = ghost
+        self.ghostTimes = ghostTimes
+        self.cursive = cursive
+        setNeedsDisplay()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        canvas.frame = bounds
+    }
+
+
+    override func draw(_ rect: CGRect) {
+        guard let ctx = UIGraphicsGetCurrentContext() else { return }
+        let w = bounds.width
+        let rule = Theme.ruleUI.resolvedColor(with: traitCollection)
+        func line(_ y: CGFloat, width: CGFloat, dash: [CGFloat]? = nil, alpha: CGFloat = 1) {
+            ctx.saveGState()
+            ctx.setStrokeColor(rule.withAlphaComponent(rule.cgColor.alpha * alpha).cgColor)
+            ctx.setLineWidth(width)
+            if let dash { ctx.setLineDash(phase: 0, lengths: dash) }
+            ctx.move(to: CGPoint(x: 0, y: y)); ctx.addLine(to: CGPoint(x: w, y: y))
+            ctx.strokePath()
+            ctx.restoreGState()
+        }
+        line(metrics.capY, width: 0.8, alpha: 0.55)
+        line(metrics.xHeightY, width: 0.8, dash: [5, 5], alpha: 0.6)
+        line(metrics.baselineY, width: 1.4)
+        line(metrics.descenderY, width: 0.6, alpha: 0.35)
+
+        guard let ghost, !ghost.isEmpty else { return }
+        let font = metrics.font(cursive: cursive)
+        let attrs: [NSAttributedString.Key: Any] = [
+            .font: font, .foregroundColor: Theme.ghostUI.resolvedColor(with: traitCollection),
+        ]
+        let piece = NSAttributedString(string: ghost, attributes: attrs)
+        let gap = font.pointSize * 0.8
+        var x: CGFloat = 16
+        for _ in 0..<max(1, ghostTimes) {
+            let size = piece.size()
+            guard x + size.width < w || x == 16 else { break }
+            piece.draw(at: CGPoint(x: x, y: metrics.baselineY - font.ascender))
+            x += size.width + gap
+        }
+    }
+
+    func pencilInteraction(_ interaction: UIPencilInteraction, didReceiveTap tap: UIPencilInteraction.Tap) {
+        erasing.toggle()
+        canvas.tool = erasing ? PKEraserTool(.vector) : pen
+    }
+}
