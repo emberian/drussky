@@ -13,11 +13,13 @@ final class SpeechCheck {
     private(set) var activeKey: String?
     private var recorder: AVAudioRecorder?
     private var meter: Timer?
+    private var session = 0
 
     var isRecording: Bool { phase == .recording }
 
     func start(to url: URL, key: String) async -> Bool {
-        guard await Self.permissions() else { return false }
+        guard phase != .listening, await Self.permissions() else { return false }
+        session += 1
         stopMeter()
         Voice.configureSession()
         let settings: [String: Any] = [
@@ -49,13 +51,17 @@ final class SpeechCheck {
         recorder = nil
         stopMeter()
         phase = .listening
+        let mine = session
         let heard = await Self.transcribe(url, hint: RussianText.unstressed(target))
-        phase = .finished
-        activeKey = nil
+        if session == mine {
+            phase = .finished
+            activeKey = nil
+        }
         return heard
     }
 
     func cancel() {
+        session += 1
         recorder?.stop()
         recorder = nil
         stopMeter()

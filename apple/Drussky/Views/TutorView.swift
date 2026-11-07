@@ -134,16 +134,20 @@ struct TutorSheet: View {
         let history = Array(turns.dropLast())
         let context = book.tutorContext(pageIndex: pageIndex, exercise: exercise)
         Task {
+            var failed = false
             do {
                 for try await chunk in Tutor.stream(history, context: context) {
                     turns[turns.count - 1].text += chunk
                 }
             } catch {
+                // A partial or refused answer is not an answer: drop it and give the question back.
+                failed = true
                 self.error = error.localizedDescription
-                if turns.last?.text.isEmpty == true { turns.removeLast(); turns.removeLast() }
+                turns.removeLast(2)
+                draft = q
             }
             streaming = false
-            if !turns.isEmpty { noteID = book.saveNote(page: pageIndex, id: noteID, exercise: exercise, turns: turns) }
+            if !failed && !turns.isEmpty { noteID = book.saveNote(page: pageIndex, id: noteID, exercise: exercise, turns: turns) }
         }
     }
 

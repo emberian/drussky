@@ -35,6 +35,8 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var recording: String? = nil
     var revealed: Bool = false
     var updated: Date? = nil
+    /// Set once the result has fed the memory model, so re-doing an exercise can't count twice.
+    var learned: Bool? = nil
 }
 
 /// Spaced-retrieval memory for one item ("letter:Ж", "word:кот").
@@ -135,7 +137,9 @@ final class Book {
     private func appendPage(sourceID: String?, unitTitle: String, title: String, intro: String?,
                             isReview: Bool, exercises: [Exercise]) {
         let number = pages.count + 1
-        pages.append(BookPage(id: String(format: "p%04d", number), number: number, sourceID: sourceID,
+        // A random suffix keeps ink/voice file names unique even if the notebook is ever restarted.
+        let id = String(format: "p%04d-", number) + UUID().uuidString.prefix(6).lowercased()
+        pages.append(BookPage(id: id, number: number, sourceID: sourceID,
                               unitTitle: unitTitle, title: title, intro: intro, isReview: isReview,
                               exercises: exercises, results: exercises.map { _ in ExerciseResult() },
                               created: now(), finished: nil))
@@ -150,9 +154,11 @@ final class Book {
         update(&pages[pageIndex].results[index])
         pages[pageIndex].results[index].updated = now()
         let after = pages[pageIndex].results[index]
-        if !before.status.isComplete && after.status.isComplete {
+        if !before.status.isComplete && after.status.isComplete && after.learned != true {
             learn(from: pages[pageIndex].exercises[index], result: after.status)
+            pages[pageIndex].results[index].learned = true
         }
+        if !after.status.isComplete { pages[pageIndex].finished = nil }
         if pages[pageIndex].finished == nil && pages[pageIndex].results.allSatisfy({ $0.status.isComplete }) {
             pages[pageIndex].finished = now()
         }
@@ -165,6 +171,7 @@ final class Book {
             r.status = .open
             r.recognized = nil
             r.chosen = nil
+            r.revealed = false
         }
     }
 
@@ -397,11 +404,21 @@ struct BookStore: Sendable {
     func inkURL(pageID: String, index: Int) -> URL { root.appendingPathComponent("ink/\(pageID)-\(index).drawing") }
     func recordingURL(pageID: String, index: Int) -> URL { root.appendingPathComponent("voice/\(pageID)-\(index).m4a") }
 
+    /// nil means "no notebook yet". A notebook that exists but can't be decoded is moved aside
+    /// (never overwritten) so an update can never silently erase it.
     func loadState() -> BookState? {
         guard let data = try? Data(contentsOf: stateURL) else { return nil }
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        return try? decoder.decode(BookState.self, from: data)
+        do {
+            return try decoder.decode(BookState.self, from: data)
+        } catch {
+            let stamp = ISO8601DateFormatter().string(from: Date()).replacingOccurrences(of: ":", with: "-")
+            let aside = root.appendingPathComponent("book-unreadable-\(stamp).json")
+            try? FileManager.default.moveItem(at: stateURL, to: aside)
+            try? "\(error)".write(to: aside.appendingPathExtension("error.txt"), atomically: true, encoding: .utf8)
+            return nil
+        }
     }
 
     func saveState(_ state: BookState) {

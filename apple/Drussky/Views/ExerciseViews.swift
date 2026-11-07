@@ -477,7 +477,7 @@ struct ListenPickExercise: View {
                 Instruction(text: "Which one did you hear?")
             }
             ChoiceGrid(options: options, chosen: slot.result.chosen, correct: options.firstIndex(of: ex.say ?? ""),
-                       russian: true, showStress: book.settings.showStress) { i in
+                       russian: true, showStress: book.settings.showStress, locked: slot.result.status.isComplete) { i in
                 choose(i, options: options)
             }
         }
@@ -505,7 +505,7 @@ struct ReadMeaningExercise: View {
             Instruction(text: "What does it mean?")
             RussianLine(text: ex.text ?? "", size: 34)
             ChoiceGrid(options: ex.options ?? [], chosen: slot.result.chosen, correct: ex.answerIndex,
-                       russian: false, showStress: true) { i in
+                       russian: false, showStress: true, locked: slot.result.status.isComplete) { i in
                 let right = i == ex.answerIndex
                 slot.record { r in
                     r.chosen = i
@@ -523,10 +523,11 @@ struct ChoiceGrid: View {
     let correct: Int?
     let russian: Bool
     let showStress: Bool
+    var locked = false
     let onChoose: (Int) -> Void
 
     var body: some View {
-        let finished = chosen != nil && chosen == correct
+        let finished = locked || (chosen != nil && chosen == correct)
         FlowRow(spacing: 12) {
             ForEach(Array(options.enumerated()), id: \.offset) { i, option in
                 let isChosen = chosen == i
@@ -590,6 +591,7 @@ struct ReadAloudExercise: View {
                     .frame(width: 80, height: 80)
                 }
                 .buttonStyle(.plain)
+                .disabled(speech.phase == .listening)
                 .accessibilityLabel(mine && speech.isRecording ? "Stop recording" : "Record")
                 if recordingExists {
                     Button { voice.playFile(slot.recordingURL, key: "mine-\(key)") } label: {
@@ -642,7 +644,7 @@ struct ReadAloudExercise: View {
                 r.attempts += 1
                 r.recording = slot.recordingURL.lastPathComponent
                 r.recognized = heard
-                if ok { r.status = r.attempts == 1 ? .correct : .done }
+                if ok && !r.status.isComplete { r.status = r.attempts == 1 ? .correct : .done }
             }
         } else {
             voice.stop()

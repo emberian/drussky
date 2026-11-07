@@ -98,4 +98,36 @@ final class DrusskyTests: XCTestCase {
         XCTAssertEqual(reopened.pages.count, book.pages.count)
         XCTAssertEqual(reopened.currentPage, book.currentPage)
     }
+
+    private func course() throws -> Course {
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "course", withExtension: "json"))
+        return try JSONDecoder().decode(Course.self, from: Data(contentsOf: url))
+    }
+
+    func testUnreadableNotebookIsMovedAsideNotOverwritten() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        let store = BookStore(root: root)
+        try Data("{ not a notebook".utf8).write(to: store.stateURL)
+        let book = Book(course: try course(), store: store)
+        book.saveNow()
+        let files = try FileManager.default.contentsOfDirectory(atPath: root.path)
+        XCTAssertTrue(files.contains { $0.hasPrefix("book-unreadable-") && $0.hasSuffix(".json") }, "\(files)")
+        let aside = try XCTUnwrap(files.first { $0.hasPrefix("book-unreadable-") && $0.hasSuffix(".json") })
+        XCTAssertEqual(try String(contentsOf: root.appendingPathComponent(aside), encoding: .utf8), "{ not a notebook")
+    }
+
+    func testRewritingAMissedAnswerHidesItAndCountsOnce() throws {
+        let book = Book(course: try course(), store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        let i = try XCTUnwrap(book.pages[0].exercises.firstIndex { [.dictation, .translate, .fill].contains($0.kind) && book.memoryKey(for: $0) != nil })
+        let key = try XCTUnwrap(book.memoryKey(for: book.pages[0].exercises[i]))
+        for j in book.pages[0].exercises.indices { book.record(page: 0, exercise: j) { $0.status = j == i ? .missed : .done; $0.revealed = j == i } }
+        XCTAssertTrue(book.pages[0].isFinished)
+        let lapses = book.memories[key]?.lapses
+        book.reopen(page: 0, exercise: i)
+        XCTAssertFalse(book.pages[0].results[i].revealed)
+        XCTAssertFalse(book.pages[0].isFinished, "an open exercise un-finishes the page")
+        book.record(page: 0, exercise: i) { $0.status = .correct }
+        XCTAssertEqual(book.memories[key]?.lapses, lapses)
+        XCTAssertEqual(book.memories[key]?.reps, 0, "a redo after being shown the answer is not a recall")
+    }
 }

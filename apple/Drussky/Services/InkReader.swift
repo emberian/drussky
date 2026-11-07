@@ -67,8 +67,10 @@ enum InkReader {
     }
 
     private static func recognize(_ image: CGImage, hint: String) async -> [String] {
-        await withCheckedContinuation { continuation in
+        await withCheckedContinuation { (continuation: CheckedContinuation<[String], Never>) in
+            let once = Once()
             let request = VNRecognizeTextRequest { request, _ in
+                guard once.claim() else { return }
                 let observations = (request.results as? [VNRecognizedTextObservation]) ?? []
                 // Join lines left-to-right; keep alternatives from the top line.
                 let sorted = observations.sorted { $0.boundingBox.minX < $1.boundingBox.minX }
@@ -88,8 +90,20 @@ enum InkReader {
             request.minimumTextHeight = 0.1
             let handler = VNImageRequestHandler(cgImage: image)
             DispatchQueue.global(qos: .userInitiated).async {
-                do { try handler.perform([request]) } catch { continuation.resume(returning: []) }
+                do { try handler.perform([request]) } catch { if once.claim() { continuation.resume(returning: []) } }
             }
         }
+    }
+}
+
+/// Lets exactly one of several callbacks resume a continuation.
+final class Once: @unchecked Sendable {
+    private let lock = NSLock()
+    private var done = false
+    func claim() -> Bool {
+        lock.lock(); defer { lock.unlock() }
+        if done { return false }
+        done = true
+        return true
     }
 }

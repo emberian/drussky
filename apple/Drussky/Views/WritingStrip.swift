@@ -54,6 +54,7 @@ final class PadController: ObservableObject {
 
     func clear() {
         canvas?.drawing = PKDrawing()
+        canvas?.undoManager?.removeAllActions()
         changed(PKDrawing())
     }
 
@@ -134,8 +135,15 @@ struct WritingStrip: UIViewRepresentable {
     }
 }
 
+/// Each strip keeps its own undo history; the window's shared one would let Undo on one
+/// exercise remove strokes from another.
+final class StripCanvas: PKCanvasView {
+    private let ownUndo = UndoManager()
+    override var undoManager: UndoManager? { ownUndo }
+}
+
 final class PaperStripView: UIView, UIPencilInteractionDelegate {
-    let canvas = PKCanvasView()
+    let canvas = StripCanvas()
     private var metrics = StripMetrics(height: 120)
     private var ghost: String?
     private var ghostTimes = 1
