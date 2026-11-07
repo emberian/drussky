@@ -129,6 +129,18 @@ struct HearButton: View {
                 if let label { Text(label).font(Theme.label(14)) }
             }
             .foregroundStyle(Theme.accent)
+            .overlay(alignment: .topTrailing) {
+                let voices = voice.speakerCount(text)
+                if voices > 1 && label == nil {
+                    Text("\(voices)")
+                        .font(.system(size: 9, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white)
+                        .frame(width: 15, height: 15)
+                        .background(Circle().fill(Theme.accent))
+                        .offset(x: 3, y: -3)
+                        .accessibilityLabel("\(voices) voices")
+                }
+            }
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label ?? "Hear \(RussianText.unstressed(text))")

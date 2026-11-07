@@ -221,4 +221,22 @@ final class DrusskyTests: XCTestCase {
         let round = try JSONDecoder().decode(Exercise.self, from: JSONEncoder().encode(ex))
         XCTAssertEqual(round.glosses, ex.glosses)
     }
+
+    func testTutorPhrasesAndKeeping() throws {
+        let answer = "Use [[она́|she]] for a woman and [[оно́|it]] for neuter things, e.g. [[окно́|window]]. Not [[она́|she]] twice."
+        let phrases = Tutor.phrases(in: answer)
+        XCTAssertEqual(phrases.map(\.ru), ["она́", "оно́", "окно́"])
+        XCTAssertEqual(phrases.first?.en, "she")
+        XCTAssertTrue(Tutor.displayMarkdown(answer).contains("](drussky-say:?t="))
+        XCTAssertEqual(Tutor.phrases(in: "Say спаси́бо and до свида́ния.").map(\.ru), ["спаси́бо", "до свида́ния"])
+
+        let book = Book(course: try course(), store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        book.keep("до свида́ния", en: "goodbye")
+        XCTAssertTrue(book.isKept("до свидания"))
+        XCTAssertEqual(book.word("до свидания")?.en, "goodbye")
+        book.shiftMemories(byDays: 2)
+        let review = book.reviewExercise(for: try XCTUnwrap(book.memories["word:до свидания"]), variant: 0)
+        XCTAssertEqual(review.kind, .translate)
+        XCTAssertEqual(review.answerText, "до свида́ния")
+    }
 }

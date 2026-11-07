@@ -13,6 +13,12 @@ struct ExerciseSlot {
     var result: ExerciseResult { page.results[index] }
 
     func record(_ update: (inout ExerciseResult) -> Void) { book.record(page: pageIndex, exercise: index, update) }
+    /// Records, then moves the page on if this finished the exercise (an explicit action).
+    func finish(_ update: (inout ExerciseResult) -> Void) {
+        let was = result.status.isComplete
+        record(update)
+        if !was && result.status.isComplete { book.requestAdvance(page: pageIndex) }
+    }
     var inkURL: URL { book.inkURL(page: page, exercise: index) }
     var recordingURL: URL { book.recordingURL(page: page, exercise: index) }
 }
@@ -26,7 +32,7 @@ struct ExerciseRow: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-            VStack(spacing: 14) {
+            VStack(spacing: 6) {
                 MarginMark(number: slot.index + 1, status: slot.result.status, isActive: isActive, isReview: slot.exercise.reviewKey != nil)
                 if slot.exercise.kind != .explain || isActive {
                     Button(action: onAsk) {
@@ -41,14 +47,14 @@ struct ExerciseRow: View {
             }
             .frame(width: marginWidth)
             .padding(.top, 4)
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 8) {
                 content
             }
             .padding(.leading, 18)
             .padding(.trailing, 8)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(.vertical, 18)
+        .padding(.vertical, 9)
         .opacity(isActive || slot.result.status.isComplete ? 1 : 0.72)
         .sensoryFeedback(trigger: slot.result.status) { old, new in
             guard !old.isComplete else { return nil }
@@ -152,45 +158,50 @@ struct MeetExercise: View {
 
     var body: some View {
         if let letter = slot.exercise.letter.flatMap({ book.course.letter($0) }) {
-            VStack(alignment: .leading, spacing: 14) {
-                let k: CGFloat = sizeClass == .compact ? 0.62 : 1
-                HStack(alignment: .center, spacing: 28 * k) {
-                    HStack(alignment: .lastTextBaseline, spacing: 10) {
+            VStack(alignment: .leading, spacing: 6) {
+                let compact = sizeClass == .compact
+                let k: CGFloat = compact ? 0.55 : 0.75
+                let letters = HStack(alignment: .center, spacing: 18 * k) {
+                    HStack(alignment: .lastTextBaseline, spacing: 8) {
                         Text(letter.upper).font(Theme.russian(96 * k, weight: .regular))
                         Text(letter.lower).font(Theme.russian(72 * k, weight: .regular))
                     }
                     .fixedSize()
                     .foregroundStyle(Theme.text)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("\(letter.upper)\(letter.lower)")
-                            .font(Theme.cursive(54 * k))
-                            .fixedSize()
-                            .foregroundStyle(Theme.ink)
-                        Text("handwritten")
-                            .font(Theme.label(11))
-                            .foregroundStyle(Theme.muted)
-                    }
-                    Spacer(minLength: 0)
-                    HearButton(text: letter.say, size: 60 * k)
+                    Text("\(letter.upper)\(letter.lower)")
+                        .font(Theme.cursive(54 * k))
+                        .fixedSize()
+                        .foregroundStyle(Theme.ink)
+                        .accessibilityLabel("handwritten \(letter.upper)")
+                    HearButton(text: letter.say, size: 52 * k)
                 }
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(letter.sound)
-                        .font(.system(size: 19, weight: .semibold))
+                let about = VStack(alignment: .leading, spacing: 4) {
+                    (Text(letter.sound).font(.system(size: 18, weight: .semibold))
+                     + Text("  ") + Text(Theme.stressed(letter.tip, show: book.settings.showStress)).font(.system(size: 17)))
                         .foregroundStyle(Theme.text)
-                    Text(Theme.stressed(letter.tip, show: book.settings.showStress))
-                        .font(.system(size: 17))
-                        .foregroundStyle(Theme.text.opacity(0.85))
+                        .fixedSize(horizontal: false, vertical: true)
                     if let example = letter.example, RussianText.letters(in: example).isSubset(of: knownLetters(adding: letter.upper)) {
                         HStack(spacing: 8) {
                             Text("as in").font(.system(size: 15)).foregroundStyle(Theme.muted)
-                            RussianLine(text: example, size: 24)
+                            RussianLine(text: example, size: 22)
                         }
+                    }
+                }
+                if compact {
+                    letters
+                    about
+                } else {
+                    HStack(alignment: .center, spacing: 28) {
+                        letters
+                        about.frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 WritingExercise(slot: slot, isActive: isActive, ghostOverride: "\(letter.upper) \(letter.lower)",
                                 instructionOverride: "Trace it, then write it a few more times on your own.")
             }
-            .onChange(of: isActive) { _, active in if active { voice.play(letter.say) } }
+            .onChange(of: book.advanceSignal) { _, _ in
+                if isActive && book.advancePage == slot.pageIndex { voice.play(letter.say) }
+            }
         }
     }
 
@@ -206,25 +217,24 @@ struct ExplainExercise: View {
     let slot: ExerciseSlot
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(Theme.stressed(slot.exercise.text ?? "", show: book.settings.showStress))
                 .font(.system(size: 18))
                 .lineSpacing(4)
                 .foregroundStyle(Theme.text)
                 .fixedSize(horizontal: false, vertical: true)
             if let examples = slot.exercise.examples, !examples.isEmpty {
-                VStack(alignment: .leading, spacing: 10) {
+                FlowRow(spacing: 18) {
                     ForEach(examples, id: \.self) { ex in
-                        HStack(spacing: 14) {
-                            RussianLine(text: ex.ru, size: 26)
-                            Text(ex.en).font(.system(size: 16)).foregroundStyle(Theme.muted)
+                        HStack(spacing: 8) {
+                            RussianLine(text: ex.ru, size: 24)
+                            Text(ex.en).font(.system(size: 15)).foregroundStyle(Theme.muted)
                         }
                     }
                 }
-                .padding(.leading, 4)
             }
         }
-        .padding(18)
+        .padding(14)
         .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
         .overlay(alignment: .leading) {
             Rectangle().fill(Theme.accent.opacity(0.5)).frame(width: 3).padding(.vertical, 12)
@@ -278,7 +288,7 @@ struct WritingExercise: View {
     private var stripHeight: CGFloat {
         let sizing = ghost ?? target
         let times = ghost != nil ? ghostTimes : (ex.kind == .copy ? max(ex.times ?? 1, 1) : 1)
-        let preferred: CGFloat = horizontalCompact ? 104 : 132
+        let preferred: CGFloat = horizontalCompact ? 96 : 112
         return StripMetrics.fitting(sizing, times: times, width: width, cursive: book.settings.cursiveModels, preferred: preferred)
     }
 
@@ -286,7 +296,7 @@ struct WritingExercise: View {
     private var horizontalCompact: Bool { sizeClass == .compact }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 4) {
             prompt
             ZStack(alignment: .topTrailing) {
                 WritingStrip(controller: pad, height: stripHeight, ghost: ghost, ghostTimes: ghostTimes,
@@ -301,11 +311,21 @@ struct WritingExercise: View {
                         .allowsHitTesting(false)
                 }
             }
+            .overlay(alignment: .bottomTrailing) {
+                if result.status.isComplete {
+                    Button { pad.clear(); lastReading = nil; slot.book.reopen(page: slot.pageIndex, exercise: slot.index) } label: {
+                        Label("Write it again", systemImage: "arrow.counterclockwise")
+                            .font(Theme.label(12)).foregroundStyle(Theme.muted.opacity(0.8))
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.bottom, 2)
+                }
+            }
             controls
         }
         .onAppear { pad.onChange = { _ in scheduleIdleCheck() } }
-        .onChange(of: isActive) { _, active in
-            if active, ex.kind == .dictation, let s = ex.spoken { voice.play(s) }
+        .onChange(of: book.advanceSignal) { _, _ in
+            if isActive, book.advancePage == slot.pageIndex, ex.kind == .dictation, let s = ex.spoken { voice.play(s) }
         }
     }
 
@@ -333,7 +353,7 @@ struct WritingExercise: View {
             VStack(alignment: .leading, spacing: 4) {
                 Instruction(text: "Write it in Russian.")
                 HStack(spacing: 12) {
-                    if let emoji = book.course.word(target)?.emoji { Text(emoji).font(.system(size: 40)) }
+                    if let emoji = book.word(target)?.emoji { Text(emoji).font(.system(size: 40)) }
                     Text(ex.en ?? "").font(.system(size: 28, weight: .semibold, design: .serif)).foregroundStyle(Theme.text)
                 }
             }
@@ -364,12 +384,8 @@ struct WritingExercise: View {
                 PillButton(title: "Clear", systemImage: "eraser") { pad.clear(); lastReading = nil }
             }
             Spacer(minLength: 0)
-            if result.status.isComplete {
-                Button("Write it again") { pad.clear(); lastReading = nil; slot.book.reopen(page: slot.pageIndex, exercise: slot.index) }
-                    .font(Theme.label(13)).foregroundStyle(Theme.muted)
-            }
         }
-        .frame(minHeight: 38)
+        .frame(minHeight: result.status.isComplete ? 0 : 34)
         .animation(.easeOut(duration: 0.2), value: pad.isEmpty)
         if let feedback = feedbackLine {
             feedback
@@ -399,7 +415,7 @@ struct WritingExercise: View {
                         if let s = ex.spoken { voice.play(s) }
                     }
                     PillButton(title: "I wrote it right", systemImage: "hand.thumbsup") {
-                        slot.record { $0.status = .correct; $0.recognized = reading }
+                        slot.finish { $0.status = .correct; $0.recognized = reading }
                     }
                 }
             })
@@ -430,7 +446,8 @@ struct WritingExercise: View {
             guard !result.status.isComplete else { return }
             let ok = reading.map { practice ? ($0.matches || RussianText.isRepetition($0.best, of: target)) : $0.matches } ?? false
             if ok {
-                slot.record { r in
+                let apply: ((inout ExerciseResult) -> Void) -> Void = manual ? slot.finish : slot.record
+                apply { r in
                     r.attempts += manual ? 1 : 0
                     r.status = practice ? .done : .correct
                     r.recognized = reading?.best
@@ -445,7 +462,7 @@ struct WritingExercise: View {
 
     private func finishPractice() {
         idleTask?.cancel()
-        slot.record { $0.status = .done }
+        slot.finish { $0.status = .done }
     }
 }
 
@@ -482,13 +499,15 @@ struct ListenPickExercise: View {
                 choose(i, options: options)
             }
         }
-        .onChange(of: isActive) { _, active in if active, let s = ex.say { voice.play(s) } }
+        .onChange(of: book.advanceSignal) { _, _ in
+            if isActive, book.advancePage == slot.pageIndex, let s = ex.say { voice.play(s) }
+        }
     }
 
     private func choose(_ i: Int, options: [String]) {
         let right = options[i] == slot.exercise.say
         if !right, let s = options[safe: i] { voice.play(s) }
-        slot.record { r in
+        slot.finish { r in
             r.chosen = i
             r.attempts += 1
             r.status = right ? (r.attempts == 1 ? .correct : .done) : (r.attempts >= 2 ? .missed : .open)
@@ -508,7 +527,7 @@ struct ReadMeaningExercise: View {
             ChoiceGrid(options: ex.options ?? [], chosen: slot.result.chosen, correct: ex.answerIndex,
                        russian: false, showStress: true, locked: slot.result.status.isComplete) { i in
                 let right = i == ex.answerIndex
-                slot.record { r in
+                slot.finish { r in
                     r.chosen = i
                     r.attempts += 1
                     r.status = right ? (r.attempts == 1 ? .correct : .done) : (r.attempts >= 2 ? .missed : .open)
@@ -629,8 +648,8 @@ struct ReadAloudExercise: View {
                     .font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.text)
                 if !slot.result.status.isComplete {
                     HStack(spacing: 10) {
-                        PillButton(title: "Sounded right", systemImage: "hand.thumbsup") { slot.record { $0.status = .done } }
-                        PillButton(title: "Move on", systemImage: "arrow.down") { slot.record { $0.status = .done } }
+                        PillButton(title: "Sounded right", systemImage: "hand.thumbsup") { slot.finish { $0.status = .done } }
+                        PillButton(title: "Move on", systemImage: "arrow.down") { slot.finish { $0.status = .done } }
                     }
                     Text("Compare yours with the model, then go again if you like.")
                         .font(.system(size: 13)).foregroundStyle(Theme.muted)
@@ -643,7 +662,7 @@ struct ReadAloudExercise: View {
         if speech.activeKey == key && speech.isRecording {
             let heard = await speech.finish(target: target)
             let ok = heard.map { RussianText.matches($0, target) } ?? false
-            slot.record { r in
+            slot.finish { r in
                 r.attempts += 1
                 r.recording = slot.recordingURL.lastPathComponent
                 r.recognized = heard
@@ -758,7 +777,7 @@ struct PassageExercise: View {
             }
             if !slot.result.status.isComplete {
                 PillButton(title: "I've read it", systemImage: "checkmark", prominent: true) {
-                    slot.record { $0.status = .done }
+                    slot.finish { $0.status = .done }
                 }
             }
         }
@@ -773,7 +792,7 @@ struct PassageExercise: View {
     private func gloss(for word: String) -> String? {
         let key = RussianText.key(word)
         if let g = slot.exercise.glosses?.first(where: { RussianText.key($0.key) == key })?.value { return g }
-        return book.course.word(word)?.en
+        return book.word(word)?.en
     }
 
     static func bare(_ token: String) -> String {

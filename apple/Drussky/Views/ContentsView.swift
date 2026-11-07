@@ -13,6 +13,7 @@ struct ContentsView: View {
                 VStack(alignment: .leading, spacing: 28) {
                     stats
                     alphabet
+                    if !book.customWords.isEmpty { keptWords }
                     pages
                 }
                 .padding(24)
@@ -55,6 +56,23 @@ struct ContentsView: View {
                 ForEach(book.course.letters) { letter in
                     LetterCell(letter: letter, known: book.letterKnown(letter.upper), ink: book.inkForLetter(letter.upper))
                         .onTapGesture { voice.play(letter.say) }
+                }
+            }
+        }
+    }
+
+    private var keptWords: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Words you kept").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
+            FlowRow(spacing: 10) {
+                ForEach(book.customWords, id: \.self) { w in
+                    HStack(spacing: 8) {
+                        HearButton(text: w.ru, size: 30)
+                        Text(Theme.stressed(w.ru, show: book.settings.showStress)).font(Theme.russian(20, weight: .medium))
+                        if !w.en.isEmpty { Text(w.en).font(.system(size: 14)).foregroundStyle(Theme.muted) }
+                    }
+                    .padding(.vertical, 6).padding(.horizontal, 10)
+                    .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
                 }
             }
         }

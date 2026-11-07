@@ -9,6 +9,9 @@ import Observation
 final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate {
     private(set) var speakingKey: String?
     private var index: [String: String] = [:]
+    /// Other speakers' recordings of the same word (variants.json); each tap plays the next voice.
+    private var variants: [String: [String]] = [:]
+    private var turn: [String: Int] = [:]
     /// Playback runs on its own queue: an audio-route stall (Bluetooth, a busy audio server)
     /// must never freeze the page. `player` is only touched on `audioQueue`.
     private let audioQueue = DispatchQueue(label: "software.ember.drussky.voice", qos: .userInitiated)
@@ -28,6 +31,11 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
            let map = try? JSONDecoder().decode([String: String].self, from: data) {
             index = map
         }
+        if let url = audioDir?.appendingPathComponent("variants.json"),
+           let data = try? Data(contentsOf: url),
+           let map = try? JSONDecoder().decode([String: [String]].self, from: data) {
+            variants = map
+        }
     }
 
     static func configureSession() {
@@ -38,6 +46,7 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
     }
 
     func hasRecording(_ text: String) -> Bool { index[RussianText.key(text)] != nil }
+    func speakerCount(_ text: String) -> Int { index[RussianText.key(text)] == nil ? 0 : 1 + (variants[RussianText.key(text)]?.count ?? 0) }
 
     func recordingURL(for text: String) -> URL? {
         index[RussianText.key(text)].flatMap { audioDir?.appendingPathComponent($0) }
@@ -47,9 +56,14 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         let key = RussianText.key(text)
         stop()
         speakingKey = key
-        if let file = index[key], let url = audioDir?.appendingPathComponent(file) {
-            start(url)
-            return
+        if let primary = index[key] {
+            let voices = [primary] + (variants[key] ?? [])
+            let n = turn[key, default: 0]
+            turn[key] = n + 1
+            if let url = audioDir?.appendingPathComponent(voices[n % voices.count]) {
+                start(url)
+                return
+            }
         }
         let utterance = AVSpeechUtterance(string: RussianText.unstressed(text))
         utterance.voice = Self.bestRussianVoice

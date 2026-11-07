@@ -4,7 +4,7 @@ import XCTest
 final class WritingUITests: XCTestCase {
     func testTouchWritingCompletesAndPersists() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-qa-reset"]
+        app.launchArguments = ["-qa-reset", "-qa-finger"]
         app.launch()
 
         let strip = app.descendants(matching: .any)["strip-0"].firstMatch
@@ -29,7 +29,7 @@ final class WritingUITests: XCTestCase {
 
         // Undo affects only this strip and survives as a real control.
         app.terminate()
-        app.launchArguments = []
+        app.launchArguments = ["-qa-keep", "-qa-finger"]  // QA notebook folder, not reset
         app.launch()
         XCTAssertTrue(app.buttons["Write it again"].firstMatch.waitForExistence(timeout: 15), "completion persisted across relaunch")
         attach(app, "relaunched")

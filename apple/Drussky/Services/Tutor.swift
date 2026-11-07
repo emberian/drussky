@@ -3,6 +3,37 @@ import Security
 
 /// Asks Claude (Messages API, streamed) for a short tutor answer about the current exercise.
 enum Tutor {
+    /// A Russian phrase the tutor marked up as [[ру́сский|english]].
+    struct Phrase: Hashable, Sendable {
+        var ru: String
+        var en: String
+    }
+
+    /// Phrases in an answer: the tutor's [[ru|en]] markup, or bare Cyrillic runs when it forgot.
+    static func phrases(in text: String) -> [Phrase] {
+        var out: [Phrase] = []
+        let marked = /\[\[([^|\]]+)\|([^\]]*)\]\]/
+        for m in text.matches(of: marked) {
+            out.append(Phrase(ru: String(m.1).trimmingCharacters(in: .whitespaces), en: String(m.2).trimmingCharacters(in: .whitespaces)))
+        }
+        if out.isEmpty {
+            let cyrillic = /[А-Яа-яЁё\u0301]+(?:[ -][А-Яа-яЁё\u0301]+)*/
+            for m in text.matches(of: cyrillic.matchingSemantics(.unicodeScalar)) { out.append(Phrase(ru: String(m.0), en: "")) }
+        }
+        var seen = Set<String>()
+        return out.filter { seen.insert(RussianText.key($0.ru)).inserted }
+    }
+
+    /// Markdown for display: markup becomes a tappable link that speaks the Russian.
+    static func displayMarkdown(_ text: String) -> String {
+        text.replacing(/\[\[([^|\]]+)\|([^\]]*)\]\]/) { m in
+            let ru = String(m.1)
+            let q = ru.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ru
+            let en = String(m.2)
+            return "[\(ru)](drussky-say:?t=\(q))" + (en.isEmpty ? "" : " (\(en))")
+        }
+    }
+
     static let model = "claude-opus-5-5"
 
     struct Turn: Codable, Sendable, Hashable {
@@ -30,7 +61,9 @@ enum Tutor {
         word in Cyrillic with a stress mark (´) on words of two or more syllables, and give a rough \
         pronunciation only when asked or when it is the point. Prefer one vivid example over a rule list. \
         If the learner's answer was wrong, say exactly what differs. Don't use letters they haven't met \
-        unless needed; if you do, say so briefly. No preamble, no sign-off.
+        unless needed; if you do, say so briefly. No preamble, no sign-off. \
+        Mark every Russian word or phrase in your answer as [[ру́сский|english]], with stress marks: \
+        the learner taps it to hear it and can keep it in their workbook. Use **bold** and short lists freely.
 
         Where the learner is right now:
         \(context)

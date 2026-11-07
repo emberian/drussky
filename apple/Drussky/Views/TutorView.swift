@@ -11,6 +11,7 @@ struct PageNote: Codable, Sendable, Hashable, Identifiable {
 /// "Ask the tutor" — a short conversation about one exercise (or the page), saved as a note.
 struct TutorSheet: View {
     @Environment(Book.self) private var book
+    @Environment(Voice.self) private var voice
     @Environment(\.dismiss) private var dismiss
     let pageIndex: Int
     let exercise: Int?
@@ -45,6 +46,13 @@ struct TutorSheet: View {
             }
             .safeAreaInset(edge: .bottom) { composer }
             .background(Theme.paper.ignoresSafeArea())
+            .environment(\.openURL, OpenURLAction { url in
+                guard url.scheme == "drussky-say",
+                      let t = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.first(where: { $0.name == "t" })?.value
+                else { return .systemAction }
+                voice.play(t)
+                return .handled
+            })
             .navigationTitle("Ask your tutor")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
@@ -91,14 +99,24 @@ struct TutorSheet: View {
                 .foregroundStyle(Theme.ink)
                 .frame(maxWidth: .infinity, alignment: .trailing)
         } else {
-            Text(Self.markdown(turn.text.isEmpty ? "…" : turn.text))
-                .font(.system(size: 17))
-                .lineSpacing(3)
-                .foregroundStyle(Theme.text)
-                .textSelection(.enabled)
-                .padding(16)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
+            VStack(alignment: .leading, spacing: 12) {
+                Text(Self.markdown(Tutor.displayMarkdown(turn.text.isEmpty ? "…" : turn.text)))
+                    .font(.system(size: 17))
+                    .lineSpacing(3)
+                    .foregroundStyle(Theme.text)
+                    .tint(Theme.accent)
+                    .textSelection(.enabled)
+                let phrases = streaming && turn == turns.last ? [] : Tutor.phrases(in: turn.text)
+                if !phrases.isEmpty {
+                    Divider()
+                    FlowRow(spacing: 8) {
+                        ForEach(phrases, id: \.self) { PhraseChip(phrase: $0) }
+                    }
+                }
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
         }
     }
 
@@ -175,7 +193,7 @@ struct PageNotesView: View {
                                     .font(Theme.cursive(22)).foregroundStyle(Theme.ink)
                             }
                             if let answer = note.turns.last(where: { $0.role == "assistant" }) {
-                                Text(TutorSheet.markdown(answer.text))
+                                Text(TutorSheet.markdown(Tutor.displayMarkdown(answer.text)))
                                     .font(.system(size: 15)).foregroundStyle(Theme.text.opacity(0.85))
                                     .lineLimit(4)
                                     .multilineTextAlignment(.leading)
@@ -190,5 +208,35 @@ struct PageNotesView: View {
             }
             .padding(.top, 28)
         }
+    }
+}
+
+/// A Russian phrase from an answer: hear it, keep it.
+struct PhraseChip: View {
+    @Environment(Book.self) private var book
+    let phrase: Tutor.Phrase
+
+    var body: some View {
+        let kept = book.isKept(phrase.ru)
+        HStack(spacing: 8) {
+            HearButton(text: phrase.ru, size: 30)
+            VStack(alignment: .leading, spacing: 0) {
+                Text(Theme.stressed(phrase.ru, show: book.settings.showStress)).font(Theme.russian(19, weight: .medium))
+                    .fixedSize()
+                if !phrase.en.isEmpty { Text(phrase.en).font(.system(size: 12)).foregroundStyle(Theme.muted) }
+            }
+            Button { book.keep(phrase.ru, en: phrase.en) } label: {
+                Label(kept ? "Kept" : "Keep", systemImage: kept ? "checkmark" : "plus")
+                    .font(Theme.label(12))
+                    .fixedSize()
+                    .padding(.horizontal, 10).padding(.vertical, 6)
+                    .background(Capsule().fill(kept ? Theme.good.opacity(0.15) : Theme.accent.opacity(0.12)))
+                    .foregroundStyle(kept ? Theme.good : Theme.accent)
+            }
+            .buttonStyle(.plain)
+            .disabled(kept)
+        }
+        .padding(.vertical, 4).padding(.horizontal, 8)
+        .background(RoundedRectangle(cornerRadius: 12).stroke(Theme.rule.opacity(0.4)))
     }
 }

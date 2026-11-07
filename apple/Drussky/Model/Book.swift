@@ -65,6 +65,12 @@ final class Book {
     private(set) var courseCursor: Int = 0
     var currentPage: Int = 0 { didSet { scheduleSave() } }
     var settings = Settings() { didSet { scheduleSave() } }
+    /// Bumped when the learner explicitly finishes something (Done, Check, a choice), so the
+    /// page moves on. Recognition ticking an exercise by itself never moves the page.
+    private(set) var customWords: [Course.Word] = []
+    private(set) var advanceSignal = 0
+    private(set) var advancePage = 0
+    func requestAdvance(page: Int) { advancePage = page; advanceSignal += 1 }
 
     private let store: BookStore
     private var saveTask: Task<Void, Never>?
@@ -79,6 +85,7 @@ final class Book {
             courseCursor = saved.courseCursor
             currentPage = min(saved.currentPage, max(0, saved.pages.count - 1))
             settings = saved.settings
+            customWords = saved.customWords ?? []
         }
         if pages.isEmpty { _ = appendNextPage() }
     }
@@ -184,7 +191,7 @@ final class Book {
         // Only what the learner produced becomes something to recall later.
         case .explain, .readMeaning, .passage: return nil
         default:
-            guard let target = exercise.target ?? exercise.text, let word = course.word(target) else { return nil }
+            guard let target = exercise.target ?? exercise.text, let word = word(target) else { return nil }
             return "word:\(RussianText.key(word.ru))"
         }
     }
@@ -244,8 +251,8 @@ final class Book {
                     .shuffled().prefix(2).map(\.say)
                 ex.options = ([letter.say] + others).shuffled()
             }
-        } else if let word = course.word(parts.count > 1 ? parts[1] : "") {
-            let askable = !ambiguousGlosses.contains(word.en.lowercased())
+        } else if let word = word(parts.count > 1 ? parts[1] : "") {
+            let askable = !word.en.isEmpty && !ambiguousGlosses.contains(word.en.lowercased())
             switch variant % 3 {
             case 0 where askable: ex = Exercise(kind: .translate); ex.en = word.en; ex.answerText = word.ru
             case 0, 1: ex = Exercise(kind: .dictation); ex.text = word.ru
@@ -258,6 +265,30 @@ final class Book {
         }
         ex.reviewKey = memory.key
         return ex
+    }
+
+    /// A word from the course or one the learner kept.
+    func word(_ ru: String) -> Course.Word? {
+        if let w = course.word(ru) { return w }
+        let key = RussianText.key(ru)
+        return customWords.first { RussianText.key($0.ru) == key }
+    }
+
+    func isKept(_ ru: String) -> Bool { word(ru) != nil && memories["word:\(RussianText.key(ru))"] != nil }
+
+    /// Keeps a word or phrase from a tutor answer: it joins the learner's words and is
+    /// reviewed like anything else they produced, starting tomorrow.
+    func keep(_ ru: String, en: String) {
+        let key = RussianText.key(ru)
+        guard !key.isEmpty else { return }
+        if course.word(ru) == nil && !customWords.contains(where: { RussianText.key($0.ru) == key }) {
+            customWords.append(Course.Word(ru: ru, en: en, emoji: nil, note: "kept from your tutor"))
+        }
+        let today = now()
+        if memories["word:\(key)"] == nil {
+            memories["word:\(key)"] = Memory(key: "word:\(key)", stability: 1, due: today.addingTimeInterval(86_400), seen: today)
+        }
+        scheduleSave()
     }
 
     func letterKnown(_ upper: String) -> Bool { memories["letter:\(upper)"] != nil }
@@ -365,7 +396,7 @@ final class Book {
 
     func saveNow() {
         store.saveState(.init(pages: pages, memories: Array(memories.values), courseCursor: courseCursor,
-                              currentPage: currentPage, settings: settings))
+                              currentPage: currentPage, settings: settings, customWords: customWords))
     }
 
     #if DEBUG
@@ -383,15 +414,18 @@ struct BookState: Codable {
     var courseCursor: Int
     var currentPage: Int
     var settings: Settings
+    /// Words the learner kept from tutor answers (optional: older notebooks lack it).
+    var customWords: [Course.Word]? = nil
 }
 
 /// Files under Application Support/Drussky: book.json, ink/, voice/.
 struct BookStore: Sendable {
     let root: URL
 
+    @MainActor
     static func standard() -> BookStore {
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-        return BookStore(root: base.appendingPathComponent("Drussky", isDirectory: true))
+        return BookStore(root: base.appendingPathComponent(QA.active ? "Drussky-QA" : "Drussky", isDirectory: true))
     }
 
     init(root: URL) {

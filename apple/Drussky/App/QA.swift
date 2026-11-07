@@ -16,6 +16,9 @@ enum QA {
     }
     static func has(_ flag: String) -> Bool { ProcessInfo.processInfo.arguments.contains(flag) }
 
+    /// Any QA launch works in its own notebook folder, so tests can never touch the learner's.
+    static var active: Bool { ProcessInfo.processInfo.arguments.contains { $0.hasPrefix("-qa-") } }
+
     static func prepare(store: BookStore) {
         #if DEBUG
         if let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"], !key.isEmpty { Keychain.apiKey = key }
@@ -26,6 +29,7 @@ enum QA {
     }
 
     static func apply(to book: Book) {
+        if has("-qa-finger") { book.settings.fingerDrawing = true }  // XCUITest can only touch, not Pencil
         guard has("-qa-reset") else { return }
         let pages = value("-qa-complete") ?? 0
         for _ in 0..<pages {

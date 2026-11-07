@@ -55,8 +55,9 @@ struct PageView: View {
                             DispatchQueue.main.async { proxy.scrollTo(active, anchor: UnitPoint(x: 0.5, y: 0.15)) }
                         }
                     }
-                    .onChange(of: active) { old, new in
-                        guard old != nil else { return }
+                    .onChange(of: book.advanceSignal) { _, _ in
+                        guard book.advancePage == pageIndex else { return }
+                        let new = book.pages[pageIndex].firstOpenIndex
                         Task {
                             try? await Task.sleep(for: .milliseconds(450))
                             withAnimation(.easeInOut(duration: 0.55)) {
@@ -70,12 +71,13 @@ struct PageView: View {
             .background(Theme.paper.ignoresSafeArea())
             .sheet(item: $asking) { target in
                 TutorSheet(pageIndex: pageIndex, exercise: target.exercise)
+                    .presentationSizing(.page)
             }
         }
     }
 
     private func header(_ page: BookPage) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack(alignment: .firstTextBaseline) {
                 Text(Self.russianDate(page.created))
                     .font(Theme.cursive(compact ? 26 : 32))
@@ -90,9 +92,9 @@ struct PageView: View {
                 .font(Theme.label(12))
                 .tracking(1.6)
                 .foregroundStyle(Theme.accent)
-                .padding(.top, 10)
+                .padding(.top, 4)
             Text(page.title)
-                .font(.system(size: compact ? 30 : 40, weight: .bold, design: .serif))
+                .font(.system(size: compact ? 28 : 34, weight: .bold, design: .serif))
                 .foregroundStyle(Theme.text)
             if page.number == 1 {
                 HowThisBookWorks()
