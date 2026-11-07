@@ -105,6 +105,7 @@ struct MapLayout {
         }
 
         band("Letters")
+        y += 14  // headroom for threads arcing over the first row
         let letters = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".compactMap { graph[ComponentID(.letter, String($0))] }
         let cols = max(1, min(17, Int(width / 50)))
         let cell = min(48, (width - CGFloat(cols - 1) * 6) / CGFloat(cols))
@@ -201,6 +202,23 @@ struct KnowledgeMap: View {
                 glow.fill(path, with: .color(Theme.good.opacity(0.22 * (s - 0.6) / 0.4)))
             }
         }
+        // Confusion threads.
+        for e in edges {
+            guard let a = layout.anchor(e.from, graph: tracker.graph), let b = layout.anchor(e.to, graph: tracker.graph),
+                  a.id != b.id else { continue }
+            let p = CGPoint(x: a.rect.midX, y: a.rect.minY + 2), q = CGPoint(x: b.rect.midX, y: b.rect.minY + 2)
+            let mid = CGPoint(x: (p.x + q.x) / 2, y: (p.y + q.y) / 2)
+            let d = hypot(q.x - p.x, q.y - p.y)
+            // Bow upward from the tops of its ends; nodes are drawn over the thread.
+            let bend = min(46, 10 + d * 0.22)
+            var normal = d > 0 ? CGPoint(x: -(q.y - p.y) / d, y: (q.x - p.x) / d) : .zero
+            if normal.y > 0 { normal = CGPoint(x: -normal.x, y: -normal.y) }
+            var path = Path()
+            path.move(to: p)
+            path.addQuadCurve(to: q, control: CGPoint(x: mid.x + normal.x * bend, y: mid.y + normal.y * bend))
+            let w = 1 + 1.5 * min(e.weight, 3) / 3
+            ctx.stroke(path, with: .color(Theme.redPen.opacity(0.45 + 0.3 * min(e.weight, 3) / 3)), lineWidth: w)
+        }
         let selectedEdges = selected.map { id in tracker.graph.edges(from: id) + tracker.graph.edges(to: id) } ?? []
         for e in selectedEdges where e.kind != .confusedWith {
             guard let a = layout.anchor(e.from, graph: tracker.graph), let b = layout.anchor(e.to, graph: tracker.graph) else { continue }
@@ -225,23 +243,6 @@ struct KnowledgeMap: View {
             default: Theme.russian(16)
             }
             ctx.draw(Text(n.label).font(font).foregroundStyle(color), at: CGPoint(x: n.rect.midX, y: n.rect.midY))
-        }
-        // Confusion threads.
-        for e in edges {
-            guard let a = layout.anchor(e.from, graph: tracker.graph), let b = layout.anchor(e.to, graph: tracker.graph),
-                  a.id != b.id else { continue }
-            let p = CGPoint(x: a.rect.midX, y: a.rect.minY + 2), q = CGPoint(x: b.rect.midX, y: b.rect.minY + 2)
-            let mid = CGPoint(x: (p.x + q.x) / 2, y: (p.y + q.y) / 2)
-            let d = hypot(q.x - p.x, q.y - p.y)
-            // Arc over the nodes, always bowing upward, so a thread never hides behind a row.
-            let bend = min(46, 10 + d * 0.22)
-            var normal = d > 0 ? CGPoint(x: -(q.y - p.y) / d, y: (q.x - p.x) / d) : .zero
-            if normal.y > 0 { normal = CGPoint(x: -normal.x, y: -normal.y) }
-            var path = Path()
-            path.move(to: p)
-            path.addQuadCurve(to: q, control: CGPoint(x: mid.x + normal.x * bend, y: mid.y + normal.y * bend))
-            let w = 1 + 1.5 * min(e.weight, 3) / 3
-            ctx.stroke(path, with: .color(Theme.redPen.opacity(0.45 + 0.3 * min(e.weight, 3) / 3)), lineWidth: w)
         }
     }
 
