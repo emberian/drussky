@@ -1,0 +1,2604 @@
+{
+ "a-51b4ea.m4a": {
+  "key": "а",
+  "from": "crates/rufren-app/assets/foundations/foundation-a.wav",
+  "kind": "human_recording",
+  "credit": "The Shtooka Project (individual speaker not identified on source page)",
+  "license": "CC BY 2.0 FR",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-а.ogg"
+ },
+ "a-u-tebya-ea1ea8.m4a": {
+  "key": "а у тебя",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "А у теб+я?"
+ },
+ "am-3d2299.m4a": {
+  "key": "ам",
+  "from": "crates/rufren-app/assets/foundations/foundation-am.wav",
+  "kind": "ai_generated_speech"
+ },
+ "ba-a1f9dc.m4a": {
+  "key": "ба",
+  "from": "crates/rufren-app/assets/foundations/foundation-a13-b-model.wav",
+  "kind": "ai_generated_speech"
+ },
+ "bolshoy-f99234.m4a": {
+  "key": "большой",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "больш+ой."
+ },
+ "brat-4fcce0.m4a": {
+  "key": "брат",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "бр+ат."
+ },
+ "cha-67fa59.m4a": {
+  "key": "ча",
+  "from": "crates/rufren-app/assets/foundations/foundation-a18-ch-model.wav",
+  "kind": "ai_generated_speech"
+ },
+ "chashka-6540e4.m4a": {
+  "key": "чашка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ч+ашка."
+ },
+ "chay-c90efe.m4a": {
+  "key": "чай",
+  "from": "crates/rufren-app/assets/foundations/foundation-a18-tea.wav",
+  "kind": "human_recording",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B0%D0%B9.ogg"
+ },
+ "chetyre-5cc4d7.m4a": {
+  "key": "четыре",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "чет+ыре."
+ },
+ "chislo-c2ab07.m4a": {
+  "key": "число",
+  "from": "crates/rufren-app/assets/foundations/foundation-a21-number.wav",
+  "kind": "ai_generated_speech"
+ },
+ "chitaem-972489.m4a": {
+  "key": "читаем",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "чит+аем."
+ },
+ "chitaesh-571142.m4a": {
+  "key": "читаешь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "чит+аешь."
+ },
+ "chitaet-012b94.m4a": {
+  "key": "читает",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "чит+ает."
+ },
+ "chitaete-e90c65.m4a": {
+  "key": "читаете",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "чит+аете."
+ },
+ "chitat-506c53.m4a": {
+  "key": "читать",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "чит+ать."
+ },
+ "chitayu-0a20e3.m4a": {
+  "key": "читаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "чит+аю."
+ },
+ "chitayut-182804.m4a": {
+  "key": "читают",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "чит+ают."
+ },
+ "chto-2e8900.m4a": {
+  "key": "что",
+  "from": "crates/rufren-app/assets/foundations/foundation-a19-what.wav",
+  "kind": "human_recording",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D1%82%D0%BE.ogg"
+ },
+ "chto-eto-43cd41.m4a": {
+  "key": "что это",
+  "from": "crates/rufren-app/assets/foundations/foundation-a19-what-this.wav",
+  "kind": "ai_generated_speech"
+ },
+ "chto-eto-eto-chay-9aa824.m4a": {
+  "key": "что это это чай",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Чт+о +это? +Это ч+ай."
+ },
+ "chto-eto-eto-lozhka-731169.m4a": {
+  "key": "что это это ложка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Чт+о +это? +Это л+ожка."
+ },
+ "chto-na-uzhin-130d47.m4a": {
+  "key": "что на ужин",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Чт+о на +ужин?"
+ },
+ "chto-na-uzhin-na-uzhin-sup-i-khleb-0e1bd0.m4a": {
+  "key": "что на ужин на ужин суп и хлеб",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Чт+о на +ужин? На +ужин с+уп и хл+еб."
+ },
+ "chto-na-zavtrak-e6396e.m4a": {
+  "key": "что на завтрак",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Чт+о на з+автрак?"
+ },
+ "chto-tam-eto-sup-a874dc.m4a": {
+  "key": "что там это суп",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Чт+о т+ам? +Это с+уп."
+ },
+ "chto-ty-dumaesh-bd2911.m4a": {
+  "key": "что ты думаешь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Чт+о т+ы д+умаешь?"
+ },
+ "da-d4f57d.m4a": {
+  "key": "да",
+  "from": "crates/rufren-app/assets/foundations/foundation-da.wav",
+  "kind": "ai_generated_speech"
+ },
+ "da-est-2fb5bd.m4a": {
+  "key": "да есть",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+а, +есть."
+ },
+ "da-eto-chay-43ab3f.m4a": {
+  "key": "да это чай",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+а, +это ч+ай."
+ },
+ "da-spasibo-207492.m4a": {
+  "key": "да спасибо",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+а, спас+ибо."
+ },
+ "desyat-devyat-vosem-sem-shest-pyat-chety-b4f1b2.m4a": {
+  "key": "десять девять восемь семь шесть пять четыре три два один",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+есять, д+евять, в+осемь, с+емь, ш+есть, п+ять, чет+ыре, тр+и, дв+а, од+ин!"
+ },
+ "desyat-f37f3a.m4a": {
+  "key": "десять",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+есять."
+ },
+ "devyat-d2c296.m4a": {
+  "key": "девять",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+евять"
+ },
+ "dobroe-utro-b1d3ed.m4a": {
+  "key": "доброе утро",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+оброе +утро."
+ },
+ "dobroe-utro-kak-dela-caf786.m4a": {
+  "key": "доброе утро как дела",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+оброе +утро! К+ак дел+а?"
+ },
+ "dobroe-utro-kofe-734dd3.m4a": {
+  "key": "доброе утро кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+оброе +утро! К+офе?"
+ },
+ "dobryy-vecher-1a5c81.m4a": {
+  "key": "добрый вечер",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+обрый в+ечер."
+ },
+ "dobryy-vecher-chto-na-uzhin-eed2d1.m4a": {
+  "key": "добрый вечер что на ужин",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+обрый в+ечер! Чт+о на +ужин?"
+ },
+ "dom-8e35c3.m4a": {
+  "key": "дом",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+ом."
+ },
+ "doma-e72723.m4a": {
+  "key": "дома",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+ома."
+ },
+ "dumaem-4dde47.m4a": {
+  "key": "думаем",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+умаем."
+ },
+ "dumaesh-60894c.m4a": {
+  "key": "думаешь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+умаешь."
+ },
+ "dumaet-0f98cd.m4a": {
+  "key": "думает",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+умает."
+ },
+ "dumaete-21b896.m4a": {
+  "key": "думаете",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+умаете."
+ },
+ "dumat-6fcaa5.m4a": {
+  "key": "думать",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+умать."
+ },
+ "dumayu-2b6585.m4a": {
+  "key": "думаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+умаю."
+ },
+ "dumayut-119fc4.m4a": {
+  "key": "думают",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+умают."
+ },
+ "dva-0c5d1b.m4a": {
+  "key": "два",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "дв+а."
+ },
+ "dva-plyus-dva-chetyre-c6fdc7.m4a": {
+  "key": "два плюс два четыре",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Дв+а пл+юс дв+а — чет+ыре."
+ },
+ "dva-plyus-dva-chetyre-eto-fakt-02e134.m4a": {
+  "key": "два плюс два четыре это факт",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Дв+а пл+юс дв+а — чет+ыре. +Это ф+акт."
+ },
+ "dva-plyus-dva-pyat-net-eto-nepravda-a6162e.m4a": {
+  "key": "два плюс два пять нет это неправда",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Дв+а пл+юс дв+а — п+ять? Н+ет, +это непр+авда."
+ },
+ "dva-plyus-tri-pyat-b34ef4.m4a": {
+  "key": "два плюс три пять",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Дв+а пл+юс тр+и — п+ять."
+ },
+ "e-1bc16a.m4a": {
+  "key": "э",
+  "from": "crates/rufren-app/assets/foundations/foundation-a9-eh-model.wav",
+  "kind": "human_recording",
+  "credit": "Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 2.5",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%8D.ogg"
+ },
+ "e-bea15c.m4a": {
+  "key": "е",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+е."
+ },
+ "eshchyo-74edea.m4a": {
+  "key": "ещё",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ещ+ё."
+ },
+ "eshchyo-kofe-da-pozhaluysta-60b24e.m4a": {
+  "key": "ещё кофе да пожалуйста",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Ещ+ё к+офе? — Д+а, пож+алуйста."
+ },
+ "eshchyo-kofe-pozhaluysta-e649d3.m4a": {
+  "key": "ещё кофе пожалуйста",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Ещ+ё к+офе, пож+алуйста."
+ },
+ "est-3d5105.m4a": {
+  "key": "есть",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+есть."
+ },
+ "eto-8f3028.m4a": {
+  "key": "это",
+  "from": "crates/rufren-app/assets/foundations/foundation-a9-this.wav",
+  "kind": "ai_generated_speech"
+ },
+ "eto-chay-c69a1e.m4a": {
+  "key": "это чай",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это ч+ай."
+ },
+ "eto-fakt-a43bb7.m4a": {
+  "key": "это факт",
+  "from": "crates/rufren-app/assets/foundations/foundation-a21-fact-question.wav",
+  "kind": "ai_generated_speech"
+ },
+ "eto-kot-4ef65f.m4a": {
+  "key": "это кот",
+  "from": "crates/rufren-app/assets/foundations/foundation-a9-this-cat.wav",
+  "kind": "ai_generated_speech"
+ },
+ "eto-mama-dc3727.m4a": {
+  "key": "это мама",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это м+ама."
+ },
+ "eto-moy-brat-db4c2c.m4a": {
+  "key": "это мой брат",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это м+ой бр+ат."
+ },
+ "eto-moy-chay-978e65.m4a": {
+  "key": "это мой чай",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это м+ой ч+ай."
+ },
+ "eto-moy-kofe-a-eto-tvoy-chay-bba646.m4a": {
+  "key": "это мой кофе а это твой чай",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это м+ой к+офе, а +это тв+ой ч+ай."
+ },
+ "eto-moya-chashka-dacc38.m4a": {
+  "key": "это моя чашка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это мо+я ч+ашка."
+ },
+ "eto-moya-kniga-b61c94.m4a": {
+  "key": "это моя книга",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это мо+я кн+ига."
+ },
+ "eto-moya-tarelka-9feeb4.m4a": {
+  "key": "это моя тарелка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это мо+я тар+елка."
+ },
+ "eto-nash-kot-5dec3a.m4a": {
+  "key": "это наш кот",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это н+аш к+от."
+ },
+ "eto-ne-chay-97f4fe.m4a": {
+  "key": "это не чай",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это не ч+ай."
+ },
+ "eto-ne-fakt-ced9c6.m4a": {
+  "key": "это не факт",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это не ф+акт."
+ },
+ "eto-ne-kot-b5a7b8.m4a": {
+  "key": "это не кот",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это не к+от."
+ },
+ "eto-ne-moy-chay-1296ae.m4a": {
+  "key": "это не мой чай",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это не м+ой ч+ай."
+ },
+ "eto-ne-moya-chashka-c78a10.m4a": {
+  "key": "это не моя чашка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это не мо+я ч+ашка."
+ },
+ "eto-ne-stol-eto-stul-71b41f.m4a": {
+  "key": "это не стол это стул",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это не ст+ол, +это ст+ул."
+ },
+ "eto-ne-stul-eto-stol-53d827.m4a": {
+  "key": "это не стул это стол",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это не ст+ул, +это ст+ол."
+ },
+ "eto-ne-syr-eto-tort-19f8ed.m4a": {
+  "key": "это не сыр это торт",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это не с+ыр, +это т+орт."
+ },
+ "eto-obekt-1b7300.m4a": {
+  "key": "это объект",
+  "from": "crates/rufren-app/assets/foundations/foundation-a19-this-object.wav",
+  "kind": "ai_generated_speech"
+ },
+ "eto-pravda-83e31e.m4a": {
+  "key": "это правда",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это пр+авда."
+ },
+ "eto-raketa-483697.m4a": {
+  "key": "это ракета",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это рак+ета."
+ },
+ "eto-robot-a-ne-brat-8e7458.m4a": {
+  "key": "это робот а не брат",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это р+обот, а не бр+ат."
+ },
+ "eto-robot-on-dumaet-i-govorit-ea45f5.m4a": {
+  "key": "это робот он думает и говорит",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это р+обот. +Он д+умает и говор+ит."
+ },
+ "eto-sup-net-eto-kasha-ad826a.m4a": {
+  "key": "это суп нет это каша",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это с+уп? Н+ет, +это к+аша."
+ },
+ "eto-tort-32d998.m4a": {
+  "key": "это торт",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это т+орт."
+ },
+ "eto-tvoy-brat-net-34ef13.m4a": {
+  "key": "это твой брат нет",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это тв+ой бр+ат? Н+ет."
+ },
+ "eto-tvoya-kniga-da-moya-1785ea.m4a": {
+  "key": "это твоя книга да моя",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это тво+я кн+ига? Д+а, мо+я."
+ },
+ "eto-tvoya-lozhka-e8a4de.m4a": {
+  "key": "это твоя ложка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это тво+я л+ожка?"
+ },
+ "fa-c0d26e.m4a": {
+  "key": "фа",
+  "from": "crates/rufren-app/assets/foundations/foundation-a19-f-model.wav",
+  "kind": "ai_generated_speech"
+ },
+ "fakt-f6f468.m4a": {
+  "key": "факт",
+  "from": "crates/rufren-app/assets/foundations/foundation-a19-fact.wav",
+  "kind": "ai_generated_speech"
+ },
+ "ga-5857ad.m4a": {
+  "key": "га",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "г+а."
+ },
+ "gde-c9a8de.m4a": {
+  "key": "где",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "гд+е."
+ },
+ "gde-chay-5bb1c9.m4a": {
+  "key": "где чай",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е ч+ай?"
+ },
+ "gde-khleb-on-tut-663dae.m4a": {
+  "key": "где хлеб он тут",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е хл+еб? +Он т+ут."
+ },
+ "gde-kniga-6923a8.m4a": {
+  "key": "где книга",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е кн+ига?"
+ },
+ "gde-kniga-vot-ona-c98a0f.m4a": {
+  "key": "где книга вот она",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е кн+ига? В+от он+а."
+ },
+ "gde-kofe-dbf680.m4a": {
+  "key": "где кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е к+офе?"
+ },
+ "gde-kot-cbe5af.m4a": {
+  "key": "где кот",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е к+от?"
+ },
+ "gde-mama-ona-doma-2104db.m4a": {
+  "key": "где мама она дома",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е м+ама? Он+а д+ома."
+ },
+ "gde-moloko-ono-tam-92ea4b.m4a": {
+  "key": "где молоко оно там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е молок+о? Он+о т+ам."
+ },
+ "gde-moloko-vot-ono-a5df70.m4a": {
+  "key": "где молоко вот оно",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е молок+о? В+от он+о."
+ },
+ "gde-moya-chashka-07f670.m4a": {
+  "key": "где моя чашка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е мо+я ч+ашка?"
+ },
+ "gde-moya-lozhka-dc2a6d.m4a": {
+  "key": "где моя ложка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е мо+я л+ожка?"
+ },
+ "gde-okno-vot-ono-af2839.m4a": {
+  "key": "где окно вот оно",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е окн+о? В+от он+о."
+ },
+ "gde-otets-on-doma-10bc38.m4a": {
+  "key": "где отец он дома",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е от+ец? +Он д+ома."
+ },
+ "gde-robot-vot-on-b62838.m4a": {
+  "key": "где робот вот он",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е р+обот? В+от +он."
+ },
+ "gde-stol-vot-on-c6c010.m4a": {
+  "key": "где стол вот он",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е ст+ол? В+от +он."
+ },
+ "gde-vasha-kukhnya-e2822f.m4a": {
+  "key": "где ваша кухня",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е в+аша к+ухня?"
+ },
+ "gde-voda-3d3c08.m4a": {
+  "key": "где вода",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е вод+а?"
+ },
+ "gde-voda-voda-tut-a65187.m4a": {
+  "key": "где вода вода тут",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е вод+а? Вод+а т+ут."
+ },
+ "gorod-b5ca89.m4a": {
+  "key": "город",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "г+ород."
+ },
+ "gotov-6aa18d.m4a": {
+  "key": "готов",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "гот+ов."
+ },
+ "govorim-9a56f8.m4a": {
+  "key": "говорим",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "говор+им."
+ },
+ "govorish-9b22e8.m4a": {
+  "key": "говоришь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "говор+ишь."
+ },
+ "govorit-ae07dc.m4a": {
+  "key": "говорить",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "говор+ить."
+ },
+ "govorit-b7b322.m4a": {
+  "key": "говорит",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "говор+ит."
+ },
+ "govorite-83dcc2.m4a": {
+  "key": "говорите",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "говор+ите."
+ },
+ "govoryat-e3eb7c.m4a": {
+  "key": "говорят",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "говор+ят."
+ },
+ "govoryu-8bbcfc.m4a": {
+  "key": "говорю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "говор+ю."
+ },
+ "i-a59e2c.m4a": {
+  "key": "и",
+  "from": "crates/rufren-app/assets/foundations/foundation-i.wav",
+  "kind": "human_recording",
+  "credit": "The Shtooka Project; individual speaker not identified on source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-и.ogg"
+ },
+ "ka-13c6c6.m4a": {
+  "key": "ка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "к+а."
+ },
+ "kak-0adcaf.m4a": {
+  "key": "как",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "к+ак."
+ },
+ "kak-dela-1cc857.m4a": {
+  "key": "как дела",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "К+ак дел+а?"
+ },
+ "kak-dela-khorosho-c4a074.m4a": {
+  "key": "как дела хорошо",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "К+ак дел+а? Хорош+о!"
+ },
+ "kak-dela-khorosho-spasibo-a-u-tebya-698da6.m4a": {
+  "key": "как дела хорошо спасибо а у тебя",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "К+ак дел+а? Хорош+о, спас+ибо. А у теб+я?"
+ },
+ "karta-4164bc.m4a": {
+  "key": "карта",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "к+арта."
+ },
+ "kasha-b93fe3.m4a": {
+  "key": "каша",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "к+аша."
+ },
+ "kha-c08051.m4a": {
+  "key": "ха",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "х+а."
+ },
+ "khleb-adc547.m4a": {
+  "key": "хлеб",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "хл+еб."
+ },
+ "khleb-syr-chay-kofe-5e1bb5.m4a": {
+  "key": "хлеб сыр чай кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Хл+еб, с+ыр, ч+ай, к+офе."
+ },
+ "khochesh-caf892.m4a": {
+  "key": "хочешь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "х+очешь."
+ },
+ "khochesh-kofe-a29b49.m4a": {
+  "key": "хочешь кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Х+очешь к+офе?"
+ },
+ "khochesh-kofe-da-khochu-spasibo-bf7e46.m4a": {
+  "key": "хочешь кофе да хочу спасибо",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Х+очешь к+офе? Д+а, хоч+у, спас+ибо."
+ },
+ "khochu-5e7d77.m4a": {
+  "key": "хочу",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "хоч+у."
+ },
+ "khochu-kofe-41d198.m4a": {
+  "key": "хочу кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Хоч+у к+офе."
+ },
+ "khor-96f8be.m4a": {
+  "key": "хор",
+  "from": "crates/rufren-app/assets/foundations/foundation-a15-choir.wav",
+  "kind": "human_recording",
+  "credit": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%85%D0%BE%D1%80.ogg"
+ },
+ "khorosho-6a4730.m4a": {
+  "key": "хорошо",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "хорош+о."
+ },
+ "khorosho-spasibo-b2ded2.m4a": {
+  "key": "хорошо спасибо",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Хорош+о, спас+ибо."
+ },
+ "kniga-2b8417.m4a": {
+  "key": "книга",
+  "from": "crates/rufren-app/assets/foundations/foundation-a14-book.wav",
+  "kind": "ai_generated_speech"
+ },
+ "kniga-ona-c4551a.m4a": {
+  "key": "книга она",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "кн+ига — он+а."
+ },
+ "kniga-tam-bb7fed.m4a": {
+  "key": "книга там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кн+ига т+ам."
+ },
+ "knigu-694023.m4a": {
+  "key": "книгу",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "кн+игу."
+ },
+ "kofe-a847d5.m4a": {
+  "key": "кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "к+офе."
+ },
+ "kosmos-050bdc.m4a": {
+  "key": "космос",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "к+осмос."
+ },
+ "kot-9e7f48.m4a": {
+  "key": "кот",
+  "from": "crates/rufren-app/assets/foundations/foundation-kot.wav",
+  "kind": "human_recording",
+  "credit": "The Shtooka Project (individual speaker not identified on source page)",
+  "license": "CC BY 2.0 FR",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-кот.ogg"
+ },
+ "kot-doma-ac1ef5.m4a": {
+  "key": "кот дома",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "К+от д+ома."
+ },
+ "kot-tam-325323.m4a": {
+  "key": "кот там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "К+от т+ам."
+ },
+ "kto-1ee849.m4a": {
+  "key": "кто",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "кт+о."
+ },
+ "kto-doma-a4b2a4.m4a": {
+  "key": "кто дома",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кт+о д+ома?"
+ },
+ "kto-eto-63025d.m4a": {
+  "key": "кто это",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кт+о +это?"
+ },
+ "kto-eto-chto-eto-a9fa66.m4a": {
+  "key": "кто это что это",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кт+о +это? Чт+о +это?"
+ },
+ "kto-eto-eto-kot-bc11c9.m4a": {
+  "key": "кто это это кот",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кт+о +это? +Это к+от."
+ },
+ "kto-eto-eto-sestra-9c53c4.m4a": {
+  "key": "кто это это сестра",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кт+о +это? +Это сестр+а."
+ },
+ "kto-govorit-b8f930.m4a": {
+  "key": "кто говорит",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кт+о говор+ит?"
+ },
+ "kto-tam-6c88e5.m4a": {
+  "key": "кто там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кт+о т+ам?"
+ },
+ "kto-tam-eto-mama-1992ca.m4a": {
+  "key": "кто там это мама",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кт+о т+ам? +Это м+ама."
+ },
+ "kto-tam-eto-moy-brat-e82b36.m4a": {
+  "key": "кто там это мой брат",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кт+о т+ам? +Это м+ой бр+ат."
+ },
+ "kukhnya-aed56e.m4a": {
+  "key": "кухня",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "к+ухня."
+ },
+ "la-0c3646.m4a": {
+  "key": "ла",
+  "from": "crates/rufren-app/assets/foundations/foundation-a10-l-model.wav",
+  "kind": "human_recording",
+  "credit": "Aleksey Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D0%B0.ogg"
+ },
+ "letit-e8b145.m4a": {
+  "key": "летит",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "лет+ит."
+ },
+ "lozhka-037c14.m4a": {
+  "key": "ложка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "л+ожка."
+ },
+ "luk-f2dac6.m4a": {
+  "key": "лук",
+  "from": "crates/rufren-app/assets/foundations/foundation-a16-onion.wav",
+  "kind": "human_recording",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%83%D0%BA.ogg"
+ },
+ "lyublyu-0d5dd1.m4a": {
+  "key": "люблю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "любл+ю."
+ },
+ "lyudi-8670f8.m4a": {
+  "key": "люди",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "л+юди."
+ },
+ "lyuk-b34bf0.m4a": {
+  "key": "люк",
+  "from": "crates/rufren-app/assets/foundations/foundation-a16-hatch.wav",
+  "kind": "human_recording",
+  "credit": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%8E%D0%BA.ogg"
+ },
+ "ma-b176b6.m4a": {
+  "key": "ма",
+  "from": "crates/rufren-app/assets/foundations/foundation-ma.wav",
+  "kind": "ai_generated_speech"
+ },
+ "mama-2241a2.m4a": {
+  "key": "мама",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ама."
+ },
+ "mama-chitaet-e1e769.m4a": {
+  "key": "мама читает",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ама чит+ает."
+ },
+ "mama-doma-ba6505.m4a": {
+  "key": "мама дома",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ама д+ома."
+ },
+ "mama-i-kot-1702e8.m4a": {
+  "key": "мама и кот",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ама и к+от."
+ },
+ "mama-tam-68e62f.m4a": {
+  "key": "мама там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ама т+ам."
+ },
+ "mat-99ef9a.m4a": {
+  "key": "мать",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ать."
+ },
+ "medlenno-8e7498.m4a": {
+  "key": "медленно",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+едленно."
+ },
+ "menya-f62570.m4a": {
+  "key": "меня",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "мен+я."
+ },
+ "mir-88eed5.m4a": {
+  "key": "мир",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ир."
+ },
+ "mir-ochen-bolshoy-451e0e.m4a": {
+  "key": "мир очень большой",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ир +очень больш+ой."
+ },
+ "mo-0e48a8.m4a": {
+  "key": "мо",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+о."
+ },
+ "moloko-c2d396.m4a": {
+  "key": "молоко",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "молок+о."
+ },
+ "moloko-tut-0bb956.m4a": {
+  "key": "молоко тут",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Молок+о т+ут."
+ },
+ "moy-5ff398.m4a": {
+  "key": "мой",
+  "from": "crates/rufren-app/assets/foundations/foundation-a17-my-m.wav",
+  "kind": "ai_generated_speech"
+ },
+ "moy-dom-2a0595.m4a": {
+  "key": "мой дом",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ой д+ом."
+ },
+ "moy-kofe-4faa7e.m4a": {
+  "key": "мой кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ой к+офе."
+ },
+ "moya-chashka-cf51d7.m4a": {
+  "key": "моя чашка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "мо+я ч+ашка."
+ },
+ "moya-d8cf06.m4a": {
+  "key": "моя",
+  "from": "crates/rufren-app/assets/foundations/foundation-a17-my-f.wav",
+  "kind": "ai_generated_speech"
+ },
+ "moya-kniga-bc556f.m4a": {
+  "key": "моя книга",
+  "from": "crates/rufren-app/assets/foundations/foundation-a17-my-book.wav",
+  "kind": "ai_generated_speech"
+ },
+ "moya-mama-39c767.m4a": {
+  "key": "моя мама",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "мо+я м+ама."
+ },
+ "moya-sestra-514342.m4a": {
+  "key": "моя сестра",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "мо+я сестр+а."
+ },
+ "moyo-e253e9.m4a": {
+  "key": "моё",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "мо+ё."
+ },
+ "moyo-moloko-a23752.m4a": {
+  "key": "моё молоко",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "мо+ё молок+о."
+ },
+ "moyo-okno-653a53.m4a": {
+  "key": "моё окно",
+  "from": "crates/rufren-app/assets/foundations/foundation-a17-my-window.wav",
+  "kind": "ai_generated_speech"
+ },
+ "mozhno-e1939f.m4a": {
+  "key": "можно",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ожно."
+ },
+ "mozhno-eshchyo-b3a7e4.m4a": {
+  "key": "можно ещё",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ожно ещ+ё?"
+ },
+ "my-chitaem-42f4aa.m4a": {
+  "key": "мы читаем",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-we-read.wav",
+  "kind": "ai_generated_speech"
+ },
+ "my-dumaem-8a0788.m4a": {
+  "key": "мы думаем",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-we-think.wav",
+  "kind": "ai_generated_speech"
+ },
+ "my-dumaem-oni-chitayut-4bfa62.m4a": {
+  "key": "мы думаем они читают",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ы д+умаем. Он+и чит+ают."
+ },
+ "my-fa0374.m4a": {
+  "key": "мы",
+  "from": "crates/rufren-app/assets/foundations/foundation-a12-we.wav",
+  "kind": "ai_generated_speech"
+ },
+ "my-govorim-1f413b.m4a": {
+  "key": "мы говорим",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ы говор+им."
+ },
+ "my-ne-chitaem-my-dumaem-ec2eff.m4a": {
+  "key": "мы не читаем мы думаем",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ы не чит+аем, м+ы д+умаем."
+ },
+ "my-ne-odni-00f23a.m4a": {
+  "key": "мы не одни",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ы не одн+и."
+ },
+ "my-ne-znaem-chto-eto-f9e4c5.m4a": {
+  "key": "мы не знаем что это",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ы не зн+аем, чт+о +это."
+ },
+ "my-tam-56db3f.m4a": {
+  "key": "мы там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ы т+ам."
+ },
+ "my-znaem-031584.m4a": {
+  "key": "мы знаем",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ы зн+аем."
+ },
+ "mysl-a9c7cc.m4a": {
+  "key": "мысль",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ысль."
+ },
+ "mysl-eto-ne-fakt-7d38b5.m4a": {
+  "key": "мысль это не факт",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ысль — +это не ф+акт."
+ },
+ "myslyu-21f0de.m4a": {
+  "key": "мыслю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ыслю."
+ },
+ "na-2d38cb.m4a": {
+  "key": "на",
+  "from": "crates/rufren-app/assets/foundations/foundation-na.wav",
+  "kind": "human_recording",
+  "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-на.ogg"
+ },
+ "na-uzhin-sup-4191f7.m4a": {
+  "key": "на ужин суп",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "На +ужин с+уп."
+ },
+ "na-zavtrak-kasha-38d10a.m4a": {
+  "key": "на завтрак каша",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "На з+автрак к+аша."
+ },
+ "nash-d38790.m4a": {
+  "key": "наш",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "н+аш."
+ },
+ "nash-dom-5d9602.m4a": {
+  "key": "наш дом",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "н+аш д+ом."
+ },
+ "nash-kot-tozhe-tut-29d3d4.m4a": {
+  "key": "наш кот тоже тут",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Н+аш к+от т+оже т+ут."
+ },
+ "nasha-fea07c.m4a": {
+  "key": "наша",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "н+аша."
+ },
+ "nasha-kukhnya-20f5b7.m4a": {
+  "key": "наша кухня",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "н+аша к+ухня."
+ },
+ "nasha-kukhnya-tut-870033.m4a": {
+  "key": "наша кухня тут",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Н+аша к+ухня т+ут."
+ },
+ "nashe-4305a3.m4a": {
+  "key": "наше",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "н+аше."
+ },
+ "ne-ce6256.m4a": {
+  "key": "не",
+  "from": "crates/rufren-app/assets/foundations/foundation-a9-e-model.wav",
+  "kind": "ai_generated_speech"
+ },
+ "nemnogo-e60898.m4a": {
+  "key": "немного",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "немн+ого."
+ },
+ "nepravda-999a58.m4a": {
+  "key": "неправда",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "непр+авда."
+ },
+ "net-ced07f.m4a": {
+  "key": "нет",
+  "from": "crates/rufren-app/assets/foundations/foundation-net.wav",
+  "kind": "ai_generated_speech"
+ },
+ "net-eto-kofe-bdb8d2.m4a": {
+  "key": "нет это кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, +это к+офе."
+ },
+ "net-eto-moyo-moloko-bfffe7.m4a": {
+  "key": "нет это моё молоко",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, +это мо+ё молок+о."
+ },
+ "net-ne-khochu-8d54b7.m4a": {
+  "key": "нет не хочу",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, не хоч+у."
+ },
+ "net-ne-khochu-spasibo-0846c2.m4a": {
+  "key": "нет не хочу спасибо",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, не хоч+у, спас+ибо."
+ },
+ "net-spasibo-b9436b.m4a": {
+  "key": "нет спасибо",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, спас+ибо."
+ },
+ "net-ya-ne-znayu-ea2709.m4a": {
+  "key": "нет я не знаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, +я не зн+аю."
+ },
+ "nichego-93534d.m4a": {
+  "key": "ничего",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ничег+о."
+ },
+ "noch-f9e174.m4a": {
+  "key": "ночь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "н+очь."
+ },
+ "noch-zvyozdy-kosmos-ochen-bolshoy-2b83ab.m4a": {
+  "key": "ночь звёзды космос очень большой",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Н+очь. Зв+ёзды. К+осмос +очень больш+ой."
+ },
+ "noga-3a7c8b.m4a": {
+  "key": "нога",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ног+а."
+ },
+ "normalno-a444ce.m4a": {
+  "key": "нормально",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "норм+ально."
+ },
+ "nos-8032e3.m4a": {
+  "key": "нос",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "н+ос."
+ },
+ "o-57afad.m4a": {
+  "key": "о",
+  "from": "crates/rufren-app/assets/foundations/foundation-o.wav",
+  "kind": "human_recording",
+  "credit": "Сергей Сахно, Vion Nicolas; The Shtooka Project",
+  "license": "CC BY 3.0 US",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-о.ogg"
+ },
+ "obed-71d3d5.m4a": {
+  "key": "обед",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "об+ед."
+ },
+ "obekt-a0f625.m4a": {
+  "key": "объект",
+  "from": "crates/rufren-app/assets/foundations/foundation-a19-object.wav",
+  "kind": "human_recording",
+  "credit": "1640max",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82.ogg"
+ },
+ "ochen-68fe9b.m4a": {
+  "key": "очень",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+очень."
+ },
+ "ochen-vkusno-30abd9.m4a": {
+  "key": "очень вкусно",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Очень вк+усно!"
+ },
+ "ochen-vkusno-spasibo-4b16fb.m4a": {
+  "key": "очень вкусно спасибо",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Очень вк+усно, спас+ибо!"
+ },
+ "odin-dva-tri-chetyre-pyat-3d1b73.m4a": {
+  "key": "один два три четыре пять",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Од+ин, дв+а, тр+и, чет+ыре, п+ять."
+ },
+ "odin-dva-tri-e8a637.m4a": {
+  "key": "один два три",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "од+ин, дв+а, тр+и."
+ },
+ "odin-ec47b9.m4a": {
+  "key": "один",
+  "from": "crates/rufren-app/assets/foundations/foundation-a21-one.wav",
+  "kind": "ai_generated_speech"
+ },
+ "odna-764dfe.m4a": {
+  "key": "одна",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "одн+а."
+ },
+ "odni-f36b3d.m4a": {
+  "key": "одни",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "одн+и."
+ },
+ "okno-f663f7.m4a": {
+  "key": "окно",
+  "from": "crates/rufren-app/assets/foundations/foundation-okno.wav",
+  "kind": "human_recording",
+  "credit": "The Shtooka Project; individual speaker not identified on source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-окно.ogg"
+ },
+ "okno-ono-f4509c.m4a": {
+  "key": "окно оно",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "окн+о — он+о."
+ },
+ "on-5f92b2.m4a": {
+  "key": "он",
+  "from": "crates/rufren-app/assets/foundations/foundation-on.wav",
+  "kind": "human_recording",
+  "credit": "The Shtooka Project; individual speaker not identified on source page",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-он.ogg"
+ },
+ "on-chitaet-bd60a6.m4a": {
+  "key": "он читает",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-he-reads.wav",
+  "kind": "ai_generated_speech"
+ },
+ "on-chitaet-knigu-bfb756.m4a": {
+  "key": "он читает книгу",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Он чит+ает кн+игу."
+ },
+ "on-ne-govorit-po-angliyski-a18f51.m4a": {
+  "key": "он не говорит по английски",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Он не говор+ит поангл+ийски."
+ },
+ "on-tam-7ab478.m4a": {
+  "key": "он там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Он т+ам."
+ },
+ "ona-9e75fd.m4a": {
+  "key": "она",
+  "from": "crates/rufren-app/assets/foundations/foundation-ona.wav",
+  "kind": "human_recording",
+  "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-она.ogg"
+ },
+ "ona-chitaet-ed4c19.m4a": {
+  "key": "она читает",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-compose-she-reads.wav",
+  "kind": "ai_generated_speech"
+ },
+ "ona-dumaet-daae93.m4a": {
+  "key": "она думает",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-compose-she-thinks.wav",
+  "kind": "ai_generated_speech"
+ },
+ "ona-tam-3fae46.m4a": {
+  "key": "она там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Он+а т+ам."
+ },
+ "ona-znaet-gde-kot-a0218c.m4a": {
+  "key": "она знает где кот",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Он+а зн+ает, гд+е к+от."
+ },
+ "oni-46f000.m4a": {
+  "key": "они",
+  "from": "crates/rufren-app/assets/foundations/foundation-oni.wav",
+  "kind": "human_recording",
+  "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-они.ogg"
+ },
+ "oni-chitayut-d60f7b.m4a": {
+  "key": "они читают",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-they-read.wav",
+  "kind": "ai_generated_speech"
+ },
+ "oni-dumayut-150d13.m4a": {
+  "key": "они думают",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-they-think.wav",
+  "kind": "ai_generated_speech"
+ },
+ "oni-govoryat-c3bf35.m4a": {
+  "key": "они говорят",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "он+и говор+ят."
+ },
+ "oni-ne-chitayut-353623.m4a": {
+  "key": "они не читают",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Он+и не чит+ают."
+ },
+ "oni-tam-1ef5a4.m4a": {
+  "key": "они там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Он+и т+ам."
+ },
+ "oni-znayut-f05faa.m4a": {
+  "key": "они знают",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "он+и зн+ают."
+ },
+ "ono-d69a4f.m4a": {
+  "key": "оно",
+  "from": "crates/rufren-app/assets/foundations/foundation-ono.wav",
+  "kind": "human_recording",
+  "credit": "1640max / Forvo",
+  "license": "CC BY-SA 4.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-оно.ogg"
+ },
+ "otets-e28872.m4a": {
+  "key": "отец",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "от+ец."
+ },
+ "oy-001dcf.m4a": {
+  "key": "ой",
+  "from": "crates/rufren-app/assets/foundations/foundation-a17-j-model.wav",
+  "kind": "ai_generated_speech"
+ },
+ "pa-b2b12d.m4a": {
+  "key": "па",
+  "from": "crates/rufren-app/assets/foundations/foundation-a13-p-model.wav",
+  "kind": "ai_generated_speech"
+ },
+ "papa-918d73.m4a": {
+  "key": "папа",
+  "from": "crates/rufren-app/assets/foundations/foundation-a13-dad.wav",
+  "kind": "ai_generated_speech"
+ },
+ "pereday-034040.m4a": {
+  "key": "передай",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "перед+ай."
+ },
+ "pereday-pozhaluysta-khleb-50471e.m4a": {
+  "key": "передай пожалуйста хлеб",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Перед+ай, пож+алуйста, хл+еб."
+ },
+ "pereday-pozhaluysta-sol-9ed5ee.m4a": {
+  "key": "передай пожалуйста соль",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Перед+ай, пож+алуйста, с+оль."
+ },
+ "planeta-3796ba.m4a": {
+  "key": "планета",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "пл+анета."
+ },
+ "plyus-9cb56d.m4a": {
+  "key": "плюс",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "пл+юс."
+ },
+ "po-angliyski-231d50.m4a": {
+  "key": "по английски",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "поангл+ийски."
+ },
+ "po-russki-a17950.m4a": {
+  "key": "по русски",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "пор+усски."
+ },
+ "ponimaesh-39d61e.m4a": {
+  "key": "понимаешь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "поним+аешь."
+ },
+ "ponimat-83514f.m4a": {
+  "key": "понимать",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "поним+ать."
+ },
+ "ponimayu-c585e9.m4a": {
+  "key": "понимаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "поним+аю."
+ },
+ "pozhaluysta-441aca.m4a": {
+  "key": "пожалуйста",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "пож+алуйста."
+ },
+ "pravda-ce605d.m4a": {
+  "key": "правда",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "пр+авда."
+ },
+ "priyatnogo-appetita-de00fa.m4a": {
+  "key": "приятного аппетита",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "при+ятного аппет+ита."
+ },
+ "priyatnogo-appetita-spasibo-i-tebe-e673e2.m4a": {
+  "key": "приятного аппетита спасибо и тебе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "При+ятного аппет+ита! Спас+ибо, и теб+е!"
+ },
+ "pyat-4464b0.m4a": {
+  "key": "пять",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "п+ять."
+ },
+ "pyat-eto-chislo-eto-fakt-974d39.m4a": {
+  "key": "пять это число это факт",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "П+ять — +это числ+о. +Это ф+акт."
+ },
+ "pyat-plyus-pyat-desyat-750117.m4a": {
+  "key": "пять плюс пять десять",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "П+ять пл+юс п+ять — д+есять."
+ },
+ "ra-114ce3.m4a": {
+  "key": "ра",
+  "from": "crates/rufren-app/assets/foundations/foundation-a11-r-model.wav",
+  "kind": "human_recording",
+  "credit": "Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%B0.ogg"
+ },
+ "raketa-161431.m4a": {
+  "key": "ракета",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "рак+ета."
+ },
+ "raketa-letit-9695db.m4a": {
+  "key": "ракета летит",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Рак+ета лет+ит."
+ },
+ "raketa-letit-v-kosmos-178d9a.m4a": {
+  "key": "ракета летит в космос",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Рак+ета лет+ит в к+осмос."
+ },
+ "raketa-tam-78d8df.m4a": {
+  "key": "ракета там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Рак+ета т+ам."
+ },
+ "robot-dumaet-da395e.m4a": {
+  "key": "робот думает",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Р+обот д+умает."
+ },
+ "robot-eto-obekt-b2e164.m4a": {
+  "key": "робот это объект",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Р+обот — +это объ+ект."
+ },
+ "robot-f69f79.m4a": {
+  "key": "робот",
+  "from": "crates/rufren-app/assets/foundations/foundation-a13-robot.wav",
+  "kind": "ai_generated_speech"
+ },
+ "robot-znaet-gde-raketa-cc610c.m4a": {
+  "key": "робот знает где ракета",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Р+обот зн+ает, гд+е рак+ета."
+ },
+ "rot-7942ac.m4a": {
+  "key": "рот",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "р+от."
+ },
+ "sa-1c0044.m4a": {
+  "key": "са",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "с+а."
+ },
+ "sel-a952c0.m4a": {
+  "key": "съел",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "съ+ел."
+ },
+ "sem-4cf209.m4a": {
+  "key": "семь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "с+емь."
+ },
+ "sestra-3fcff1.m4a": {
+  "key": "сестра",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "сестр+а."
+ },
+ "sha-33c674.m4a": {
+  "key": "ша",
+  "from": "crates/rufren-app/assets/foundations/foundation-a15-sh-model.wav",
+  "kind": "ai_generated_speech"
+ },
+ "shcha-9034d3.m4a": {
+  "key": "ща",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "щ+а."
+ },
+ "shchi-c6bf76.m4a": {
+  "key": "щи",
+  "from": "crates/rufren-app/assets/foundations/foundation-a18-soup.wav",
+  "kind": "human_recording",
+  "credit": "The Shtooka Project; individual speaker unreported (page wikitext)",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%89%D0%B8.ogg"
+ },
+ "shest-7d61d4.m4a": {
+  "key": "шесть",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ш+есть."
+ },
+ "shest-eto-chislo-cea39b.m4a": {
+  "key": "шесть это число",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Ш+есть — +это числ+о."
+ },
+ "shest-sem-7a49ec.m4a": {
+  "key": "шесть семь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ш+есть, с+емь."
+ },
+ "shest-sem-vosem-devyat-desyat-88451b.m4a": {
+  "key": "шесть семь восемь девять десять",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Ш+есть, с+емь, в+осемь, д+евять, д+есять."
+ },
+ "shum-03d768.m4a": {
+  "key": "шум",
+  "from": "crates/rufren-app/assets/foundations/foundation-a15-noise.wav",
+  "kind": "ai_generated_speech"
+ },
+ "sledovatelno-d078df.m4a": {
+  "key": "следовательно",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "сл+едовательно."
+ },
+ "slovo-f56eb6.m4a": {
+  "key": "слово",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "сл+ово."
+ },
+ "sok-69e824.m4a": {
+  "key": "сок",
+  "from": "crates/rufren-app/assets/foundations/foundation-a10-juice.wav",
+  "kind": "ai_generated_speech"
+ },
+ "sol-45d814.m4a": {
+  "key": "соль",
+  "from": "crates/rufren-app/assets/foundations/foundation-a17-salt.wav",
+  "kind": "human_recording",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "license": "CC BY 2.0 fr",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BE%D0%BB%D1%8C.ogg"
+ },
+ "son-e6e87d.m4a": {
+  "key": "сон",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "с+он."
+ },
+ "spasibo-00f66d.m4a": {
+  "key": "спасибо",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "спас+ибо."
+ },
+ "spasibo-i-tebe-64a60e.m4a": {
+  "key": "спасибо и тебе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Спас+ибо, и теб+е!"
+ },
+ "spasibo-mama-a31db3.m4a": {
+  "key": "спасибо мама",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Спас+ибо, м+ама!"
+ },
+ "spasibo-pozhaluysta-2e2a3a.m4a": {
+  "key": "спасибо пожалуйста",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Спас+ибо! — Пож+алуйста."
+ },
+ "spokoynoy-nochi-b14427.m4a": {
+  "key": "спокойной ночи",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "спок+ойной н+очи."
+ },
+ "stol-09721b.m4a": {
+  "key": "стол",
+  "from": "crates/rufren-app/assets/foundations/foundation-a10-table.wav",
+  "kind": "ai_generated_speech"
+ },
+ "stol-on-b1bd23.m4a": {
+  "key": "стол он",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ст+ол — +он."
+ },
+ "stul-b7723c.m4a": {
+  "key": "стул",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ст+ул."
+ },
+ "sup-f61df2.m4a": {
+  "key": "суп",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "с+уп."
+ },
+ "sushchestvuyu-20f6f9.m4a": {
+  "key": "существую",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "существ+ую."
+ },
+ "syr-4372c8.m4a": {
+  "key": "сыр",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "с+ыр"
+ },
+ "ta-1d9fc0.m4a": {
+  "key": "та",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "т+а."
+ },
+ "tak-d39566.m4a": {
+  "key": "так",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "т+ак."
+ },
+ "tam-fd8f30.m4a": {
+  "key": "там",
+  "from": "crates/rufren-app/assets/foundations/foundation-tam.wav",
+  "kind": "ai_generated_speech"
+ },
+ "tarelka-158aca.m4a": {
+  "key": "тарелка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "тар+елка."
+ },
+ "tebe-c053a9.m4a": {
+  "key": "тебе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "теб+е."
+ },
+ "tebya-a3a435.m4a": {
+  "key": "тебя",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "теб+я."
+ },
+ "tort-d56474.m4a": {
+  "key": "торт",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "т+орт."
+ },
+ "tozhe-135c15.m4a": {
+  "key": "тоже",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "т+оже."
+ },
+ "tri-e036c7.m4a": {
+  "key": "три",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "тр+и."
+ },
+ "tri-plyus-chetyre-sem-3e63bd.m4a": {
+  "key": "три плюс четыре семь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Тр+и пл+юс чет+ыре — с+емь."
+ },
+ "tsa-1b2982.m4a": {
+  "key": "ца",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "ц+а."
+ },
+ "tsirk-4bd0a7.m4a": {
+  "key": "цирк",
+  "from": "crates/rufren-app/assets/foundations/foundation-a18-circus.wav",
+  "kind": "ai_generated_speech"
+ },
+ "tut-91720c.m4a": {
+  "key": "тут",
+  "from": "crates/rufren-app/assets/foundations/foundation-a11-here.wav",
+  "kind": "ai_generated_speech"
+ },
+ "tvoy-brat-755bfd.m4a": {
+  "key": "твой брат",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "тв+ой бр+ат."
+ },
+ "tvoy-fa3010.m4a": {
+  "key": "твой",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "тв+ой."
+ },
+ "tvoy-kofe-1cd6ac.m4a": {
+  "key": "твой кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "тв+ой к+офе."
+ },
+ "tvoya-chashka-fa38a6.m4a": {
+  "key": "твоя чашка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "тво+я ч+ашка."
+ },
+ "tvoya-d279d6.m4a": {
+  "key": "твоя",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "тво+я."
+ },
+ "tvoyo-7a9796.m4a": {
+  "key": "твоё",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "тво+ё."
+ },
+ "tvoyo-moloko-aee3b5.m4a": {
+  "key": "твоё молоко",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "тво+ё молок+о."
+ },
+ "ty-ac60e9.m4a": {
+  "key": "ты",
+  "from": "crates/rufren-app/assets/foundations/foundation-ty.wav",
+  "kind": "human_recording",
+  "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-ты.ogg"
+ },
+ "ty-chitaesh-be0629.m4a": {
+  "key": "ты читаешь",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-you-read.wav",
+  "kind": "ai_generated_speech"
+ },
+ "ty-doma-da-ya-doma-87451c.m4a": {
+  "key": "ты дома да я дома",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Т+ы д+ома? Д+а, +я д+ома."
+ },
+ "ty-govorish-1dcdba.m4a": {
+  "key": "ты говоришь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "т+ы говор+ишь."
+ },
+ "ty-govorish-a-ya-dumayu-df97a9.m4a": {
+  "key": "ты говоришь а я думаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Т+ы говор+ишь, а +я д+умаю."
+ },
+ "ty-khochesh-376e1f.m4a": {
+  "key": "ты хочешь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "т+ы х+очешь."
+ },
+ "ty-khochesh-sup-80b76a.m4a": {
+  "key": "ты хочешь суп",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Т+ы х+очешь с+уп?"
+ },
+ "ty-ponimaesh-po-russki-60d9c8.m4a": {
+  "key": "ты понимаешь по русски",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Т+ы поним+аешь пор+усски?"
+ },
+ "ty-tam-c3bbd6.m4a": {
+  "key": "ты там",
+  "from": "crates/rufren-app/assets/foundations/foundation-a8-you-there.wav",
+  "kind": "ai_generated_speech"
+ },
+ "ty-znaesh-f95e91.m4a": {
+  "key": "ты знаешь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "т+ы зн+аешь?"
+ },
+ "ty-znaesh-gde-sol-f0cc32.m4a": {
+  "key": "ты знаешь где соль",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Т+ы зн+аешь, гд+е с+оль?"
+ },
+ "ty-znaesh-net-ne-znayu-d1c2db.m4a": {
+  "key": "ты знаешь нет не знаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Т+ы зн+аешь? Н+ет, не зн+аю."
+ },
+ "u-d944cd.m4a": {
+  "key": "у",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+у"
+ },
+ "u-menya-est-9ac7e7.m4a": {
+  "key": "у меня есть",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "у мен+я +есть."
+ },
+ "u-menya-est-brat-i-sestra-e5d1fb.m4a": {
+  "key": "у меня есть брат и сестра",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "У мен+я +есть бр+ат и сестр+а."
+ },
+ "u-menya-est-kofe-1f208d.m4a": {
+  "key": "у меня есть кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "У мен+я +есть к+офе."
+ },
+ "u-menya-est-kot-423ec0.m4a": {
+  "key": "у меня есть кот",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "У мен+я +есть к+от."
+ },
+ "u-menya-est-robot-8a1614.m4a": {
+  "key": "у меня есть робот",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "У мен+я +есть р+обот."
+ },
+ "u-menya-est-sestra-1c4f82.m4a": {
+  "key": "у меня есть сестра",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "У мен+я +есть сестр+а."
+ },
+ "u-tebya-est-chay-a637b4.m4a": {
+  "key": "у тебя есть чай",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "У теб+я +есть ч+ай?"
+ },
+ "u-tebya-est-khleb-f00b7c.m4a": {
+  "key": "у тебя есть хлеб",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "У теб+я +есть хл+еб?"
+ },
+ "u-tebya-est-kofe-93ec54.m4a": {
+  "key": "у тебя есть кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "У теб+я +есть к+офе?"
+ },
+ "u-tebya-est-sol-da-est-44758f.m4a": {
+  "key": "у тебя есть соль да есть",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "У теб+я +есть с+оль? Д+а, +есть."
+ },
+ "ulitsa-ee37f3.m4a": {
+  "key": "улица",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+улица."
+ },
+ "utro-b41931.m4a": {
+  "key": "утро",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+утро."
+ },
+ "uzhin-f44647.m4a": {
+  "key": "ужин",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+ужин."
+ },
+ "uzhin-gotov-33125d.m4a": {
+  "key": "ужин готов",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Ужин гот+ов!"
+ },
+ "v-f3d123.m4a": {
+  "key": "в",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в."
+ },
+ "va-d05cea.m4a": {
+  "key": "ва",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в+а."
+ },
+ "vash-e37fe4.m4a": {
+  "key": "ваш",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в+аш."
+ },
+ "vasha-5e6bd3.m4a": {
+  "key": "ваша",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в+аша."
+ },
+ "vashe-8b2a19.m4a": {
+  "key": "ваше",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в+аше."
+ },
+ "vashe-okno-4928b4.m4a": {
+  "key": "ваше окно",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в+аше окн+о"
+ },
+ "vkusno-39e926.m4a": {
+  "key": "вкусно",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "вк+усно."
+ },
+ "voda-5f3761.m4a": {
+  "key": "вода",
+  "from": "crates/rufren-app/assets/foundations/foundation-a12-water.wav",
+  "kind": "ai_generated_speech"
+ },
+ "vosem-d38592.m4a": {
+  "key": "восемь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в+осемь."
+ },
+ "vot-f9ad91.m4a": {
+  "key": "вот",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "в+от."
+ },
+ "vot-kot-i-mama-99f8a6.m4a": {
+  "key": "вот кот и мама",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "В+от к+от и м+ама."
+ },
+ "vot-ona-45e72a.m4a": {
+  "key": "вот она",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "В+от он+а."
+ },
+ "vsyo-a990af.m4a": {
+  "key": "всё",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "вс+ё"
+ },
+ "vy-cc86ef.m4a": {
+  "key": "вы",
+  "from": "crates/rufren-app/assets/foundations/foundation-a12-you.wav",
+  "kind": "ai_generated_speech"
+ },
+ "vy-chitaete-1eca04.m4a": {
+  "key": "вы читаете",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-you-pl-read.wav",
+  "kind": "ai_generated_speech"
+ },
+ "vy-dumaete-d11ed3.m4a": {
+  "key": "вы думаете",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-you-pl-think.wav",
+  "kind": "ai_generated_speech"
+ },
+ "vy-tam-140e35.m4a": {
+  "key": "вы там",
+  "from": "crates/rufren-app/assets/foundations/foundation-a12-you-there.wav",
+  "kind": "ai_generated_speech"
+ },
+ "vy-znaete-4857d7.m4a": {
+  "key": "вы знаете",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "В+ы зн+аете?"
+ },
+ "ya-4f566f.m4a": {
+  "key": "я",
+  "from": "crates/rufren-app/assets/foundations/foundation-ya.wav",
+  "kind": "human_recording",
+  "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+  "license": "CC BY 3.0 us",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-я.ogg"
+ },
+ "ya-chitayu-17f6c2.m4a": {
+  "key": "я читаю",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-i-read.wav",
+  "kind": "ai_generated_speech"
+ },
+ "ya-chitayu-i-ona-chitaet-4e6306.m4a": {
+  "key": "я читаю и она читает",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я чит+аю, и он+а чит+ает."
+ },
+ "ya-chitayu-ty-dumaesh-my-znaem-02b43b.m4a": {
+  "key": "я читаю ты думаешь мы знаем",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я чит+аю. Т+ы д+умаешь. М+ы зн+аем."
+ },
+ "ya-dumayu-b6c6a1.m4a": {
+  "key": "я думаю",
+  "from": "crates/rufren-app/assets/foundations/foundation-a20-i-think.wav",
+  "kind": "ai_generated_speech"
+ },
+ "ya-dumayu-chto-eto-fakt-2186e7.m4a": {
+  "key": "я думаю что это факт",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я д+умаю, чт+о +это ф+акт."
+ },
+ "ya-govoryu-635dd6.m4a": {
+  "key": "я говорю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+я говор+ю."
+ },
+ "ya-govoryu-po-angliyski-00f5af.m4a": {
+  "key": "я говорю по английски",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я говор+ю поангл+ийски."
+ },
+ "ya-govoryu-po-russki-c44791.m4a": {
+  "key": "я говорю по русски",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я говор+ю пор+усски."
+ },
+ "ya-khochu-49b90b.m4a": {
+  "key": "я хочу",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+я хоч+у."
+ },
+ "ya-khochu-kofe-0d7b20.m4a": {
+  "key": "я хочу кофе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я хоч+у к+офе."
+ },
+ "ya-khochu-sup-6e0508.m4a": {
+  "key": "я хочу суп",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я хоч+у с+уп."
+ },
+ "ya-lyublyu-moloko-e2d2b9.m4a": {
+  "key": "я люблю молоко",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я любл+ю молок+о."
+ },
+ "ya-lyublyu-sup-e71779.m4a": {
+  "key": "я люблю суп",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я любл+ю с+уп."
+ },
+ "ya-myslyu-sledovatelno-ya-sushchestvuyu-1b2411.m4a": {
+  "key": "я мыслю следовательно я существую",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я м+ыслю, сл+едовательно, +я существ+ую."
+ },
+ "ya-ne-chitayu-ya-dumayu-021f7b.m4a": {
+  "key": "я не читаю я думаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я не чит+аю, +я д+умаю."
+ },
+ "ya-ne-ponimayu-f46126.m4a": {
+  "key": "я не понимаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я не поним+аю."
+ },
+ "ya-ne-znayu-83ab9e.m4a": {
+  "key": "я не знаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+я не зн+аю."
+ },
+ "ya-ne-znayu-a-ty-znaesh-2e0058.m4a": {
+  "key": "я не знаю а ты знаешь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я не зн+аю. А т+ы зн+аешь?"
+ },
+ "ya-nemnogo-govoryu-po-russki-734744.m4a": {
+  "key": "я немного говорю по русски",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я немн+ого говор+ю пор+усски."
+ },
+ "ya-ponimayu-b5db25.m4a": {
+  "key": "я понимаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+я поним+аю."
+ },
+ "ya-tam-9b6559.m4a": {
+  "key": "я там",
+  "from": "crates/rufren-app/assets/foundations/foundation-a8-i-there.wav",
+  "kind": "ai_generated_speech"
+ },
+ "ya-tozhe-chitayu-489aae.m4a": {
+  "key": "я тоже читаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я т+оже чит+аю."
+ },
+ "ya-tut-ty-tam-0ef69e.m4a": {
+  "key": "я тут ты там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я т+ут. Т+ы т+ам."
+ },
+ "ya-ty-on-ona-ono-my-vy-oni-f30707.m4a": {
+  "key": "я ты он она оно мы вы они",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я, т+ы, +он, он+а, он+о, м+ы, в+ы, он+и."
+ },
+ "ya-znayu-865050.m4a": {
+  "key": "я знаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я зн+аю."
+ },
+ "ya-znayu-chto-nichego-ne-znayu-11e383.m4a": {
+  "key": "я знаю что ничего не знаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я зн+аю, чт+о ничег+о не зн+аю."
+ },
+ "ya-znayu-ty-znaesh-963ffb.m4a": {
+  "key": "я знаю ты знаешь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я зн+аю. Т+ы зн+аешь."
+ },
+ "yo-6baaab.m4a": {
+  "key": "ё",
+  "from": "crates/rufren-app/assets/foundations/foundation-a16-yo-model.wav",
+  "kind": "human_recording",
+  "credit": "Pogrebnoj-Alexandroff",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%91_(j%C9%B5).ogg"
+ },
+ "yu-baa96c.m4a": {
+  "key": "ю",
+  "from": "crates/rufren-app/assets/foundations/foundation-a16-yu-model.wav",
+  "kind": "human_recording",
+  "credit": "Cherus",
+  "license": "CC BY-SA 3.0",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-32-%D0%B1%D1%83%D0%BA%D0%B2%D0%B0-%D0%AE.ogg"
+ },
+ "za-a98e59.m4a": {
+  "key": "за",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "з+а."
+ },
+ "zadacha-888054.m4a": {
+  "key": "задача",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зад+ача."
+ },
+ "zavtrak-660e64.m4a": {
+  "key": "завтрак",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "з+автрак."
+ },
+ "zavtrak-gotov-bc48dc.m4a": {
+  "key": "завтрак готов",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "З+автрак гот+ов."
+ },
+ "zdes-1c3c90.m4a": {
+  "key": "здесь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зд+есь."
+ },
+ "zha-2505b9.m4a": {
+  "key": "жа",
+  "from": "crates/rufren-app/assets/foundations/foundation-a15-zh-model.wav",
+  "kind": "ai_generated_speech"
+ },
+ "zhuk-c7dc2e.m4a": {
+  "key": "жук",
+  "from": "crates/rufren-app/assets/foundations/foundation-a15-beetle.wav",
+  "kind": "ai_generated_speech"
+ },
+ "znaem-0ecb5b.m4a": {
+  "key": "знаем",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зн+аем."
+ },
+ "znaesh-9dd58d.m4a": {
+  "key": "знаешь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зн+аешь."
+ },
+ "znaet-f38dde.m4a": {
+  "key": "знает",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зн+ает."
+ },
+ "znaete-da14d8.m4a": {
+  "key": "знаете",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зн+аете."
+ },
+ "znat-69d4f1.m4a": {
+  "key": "знать",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зн+ать."
+ },
+ "znayu-8979f5.m4a": {
+  "key": "знаю",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зн+аю."
+ },
+ "znayut-95482e.m4a": {
+  "key": "знают",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зн+ают."
+ },
+ "zvezda-53096f.m4a": {
+  "key": "звезда",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "звезд+а."
+ },
+ "zvyozdy-82af27.m4a": {
+  "key": "звёзды",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "зв+ёзды."
+ },
+ "zvyozdy-tam-d44afa.m4a": {
+  "key": "звёзды там",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Зв+ёзды т+ам."
+ }
+}

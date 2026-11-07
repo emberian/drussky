@@ -1,0 +1,122 @@
+import Foundation
+import Security
+
+/// Asks Claude (Messages API, streamed) for a short tutor answer about the current exercise.
+enum Tutor {
+    static let model = "claude-opus-5-5"
+
+    struct Turn: Codable, Sendable, Hashable {
+        var role: String   // "user" | "assistant"
+        var text: String
+    }
+
+    enum Failure: LocalizedError {
+        case noKey, http(Int, String), refused
+        var errorDescription: String? {
+            switch self {
+            case .noKey: "Add your Anthropic API key in Settings to ask questions."
+            case .http(let code, let body): "The tutor couldn't answer (\(code)). \(body.prefix(160))"
+            case .refused: "The tutor declined to answer that one."
+            }
+        }
+    }
+
+    static func system(context: String) -> String {
+        """
+        You are the tutor inside Drussky, a Russian exercise book used by one adult learner, Ember: \
+        quick, curious, a beginner in Russian, interested in linguistics, science fiction, mathematics \
+        and philosophy. Working memory is sometimes stretched, so keep answers short and concrete: \
+        2–6 sentences, or a tiny table/list when it really helps. Answer in English. Write every Russian \
+        word in Cyrillic with a stress mark (´) on words of two or more syllables, and give a rough \
+        pronunciation only when asked or when it is the point. Prefer one vivid example over a rule list. \
+        If the learner's answer was wrong, say exactly what differs. Don't use letters they haven't met \
+        unless needed; if you do, say so briefly. No preamble, no sign-off.
+
+        Where the learner is right now:
+        \(context)
+        """
+    }
+
+    static func stream(_ turns: [Turn], context: String) -> AsyncThrowingStream<String, Error> {
+        AsyncThrowingStream { continuation in
+            let task = Task {
+                do {
+                    guard let key = Keychain.apiKey, !key.isEmpty else { throw Failure.noKey }
+                    var request = URLRequest(url: URL(string: "https://api.anthropic.com/v1/messages")!)
+                    request.httpMethod = "POST"
+                    request.setValue("application/json", forHTTPHeaderField: "content-type")
+                    request.setValue(key, forHTTPHeaderField: "x-api-key")
+                    request.setValue("2026-10-21", forHTTPHeaderField: "anthropic-version")
+                    request.setValue("server-side-fallback-2026-07-01", forHTTPHeaderField: "anthropic-beta")
+                    request.timeoutInterval = 120
+                    let body: [String: Any] = [
+                        "model": model,
+                        "max_tokens": 4000,
+                        "stream": true,
+                        "fallbacks": "default",
+                        "output_config": ["effort": "low"],
+                        "system": system(context: context),
+                        "messages": turns.map { ["role": $0.role, "content": $0.text] },
+                    ]
+                    request.httpBody = try JSONSerialization.data(withJSONObject: body)
+                    let (bytes, response) = try await URLSession.shared.bytes(for: request)
+                    let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+                    if status != 200 {
+                        var text = ""
+                        for try await line in bytes.lines { text += line; if text.count > 600 { break } }
+                        throw Failure.http(status, text)
+                    }
+                    for try await line in bytes.lines {
+                        guard line.hasPrefix("data: "), let data = line.dropFirst(6).data(using: .utf8),
+                              let event = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { continue }
+                        switch event["type"] as? String {
+                        case "content_block_delta":
+                            if let delta = event["delta"] as? [String: Any], delta["type"] as? String == "text_delta",
+                               let text = delta["text"] as? String {
+                                continuation.yield(text)
+                            }
+                        case "message_delta":
+                            if let delta = event["delta"] as? [String: Any], delta["stop_reason"] as? String == "refusal" {
+                                throw Failure.refused
+                            }
+                        case "error":
+                            let message = ((event["error"] as? [String: Any])?["message"] as? String) ?? "stream error"
+                            throw Failure.http(0, message)
+                        default: break
+                        }
+                    }
+                    continuation.finish()
+                } catch {
+                    continuation.finish(throwing: error)
+                }
+            }
+            continuation.onTermination = { _ in task.cancel() }
+        }
+    }
+}
+
+/// The API key lives in the Keychain, never in the notebook export.
+enum Keychain {
+    private static let service = "software.ember.drussky"
+    private static let account = "anthropic-api-key"
+
+    static var apiKey: String? {
+        get {
+            let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service,
+                                        kSecAttrAccount as String: account, kSecReturnData as String: true]
+            var out: AnyObject?
+            guard SecItemCopyMatching(query as CFDictionary, &out) == errSecSuccess, let data = out as? Data else { return nil }
+            return String(data: data, encoding: .utf8)
+        }
+        set {
+            let base: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service,
+                                       kSecAttrAccount as String: account]
+            SecItemDelete(base as CFDictionary)
+            guard let newValue, !newValue.isEmpty else { return }
+            var add = base
+            add[kSecValueData as String] = Data(newValue.utf8)
+            add[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+            SecItemAdd(add as CFDictionary, nil)
+        }
+    }
+}

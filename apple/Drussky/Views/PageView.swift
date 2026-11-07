@@ -8,6 +8,9 @@ struct PageView: View {
     let pageIndex: Int
     var topInset: CGFloat = 64
     @State private var lastActive: Int?
+    @State private var asking: AskTarget?
+
+    struct AskTarget: Identifiable { var exercise: Int?; var id: Int { exercise ?? -1 } }
 
     private var compact: Bool { sizeClass == .compact }
     private var marginWidth: CGFloat { compact ? 40 : 64 }
@@ -28,9 +31,12 @@ struct PageView: View {
                                 .padding(.bottom, 12)
                             ForEach(page.exercises.indices, id: \.self) { i in
                                 ExerciseRow(slot: ExerciseSlot(book: book, pageIndex: pageIndex, index: i),
-                                            isActive: active == i, marginWidth: marginWidth)
+                                            isActive: active == i, marginWidth: marginWidth,
+                                            onAsk: { asking = AskTarget(exercise: i) })
                                     .id(i)
                             }
+                            PageNotesView(pageIndex: pageIndex) { asking = AskTarget(exercise: $0) }
+                                .padding(.leading, marginWidth + 18)
                             footer(page)
                                 .padding(.leading, marginWidth + 18)
                                 .id("end")
@@ -44,7 +50,8 @@ struct PageView: View {
                     .scrollDismissesKeyboard(.immediately)
                     .onAppear {
                         lastActive = active
-                        if let active, active > 1 {
+                        if QA.has("-qa-bottom") { DispatchQueue.main.async { proxy.scrollTo("end", anchor: .bottom) } }
+                        if let active, active > 1, !QA.has("-qa-top") {
                             DispatchQueue.main.async { proxy.scrollTo(active, anchor: UnitPoint(x: 0.5, y: 0.15)) }
                         }
                     }
@@ -61,6 +68,9 @@ struct PageView: View {
                 }
             }
             .background(Theme.paper.ignoresSafeArea())
+            .sheet(item: $asking) { target in
+                TutorSheet(pageIndex: pageIndex, exercise: target.exercise)
+            }
         }
     }
 
@@ -125,6 +135,12 @@ struct PageView: View {
             }
             .buttonStyle(.plain)
             .disabled(book.courseFinished && pageIndex == book.pages.count - 1 && book.dueCount == 0)
+            Button { asking = AskTarget(exercise: nil) } label: {
+                Label("Ask about this page", systemImage: "questionmark.bubble")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(Theme.muted)
+            }
+            .buttonStyle(.plain)
         }
         .padding(.top, 30)
         .animation(.spring(response: 0.5, dampingFraction: 0.7), value: page.isFinished)

@@ -16,6 +16,7 @@ struct BookPage: Codable, Identifiable, Sendable {
     var results: [ExerciseResult]
     var created: Date
     var finished: Date?
+    var notes: [PageNote]? = nil
 
     var isFinished: Bool { finished != nil }
     var firstOpenIndex: Int? { results.firstIndex { !$0.status.isComplete } }
@@ -214,8 +215,10 @@ final class Book {
         var ex: Exercise
         if parts.first == "letter", let letter = course.letter(parts[1]) {
             if variant % 2 == 0 {
+                // Hear the letter's sound, write the letter.
                 ex = Exercise(kind: .dictation)
-                ex.text = letter.say.count <= 2 ? letter.lower : letter.say
+                ex.text = letter.lower
+                ex.say = letter.say
             } else {
                 ex = Exercise(kind: .listenPick)
                 ex.say = letter.say
@@ -238,6 +241,67 @@ final class Book {
     }
 
     func letterKnown(_ upper: String) -> Bool { memories["letter:\(upper)"] != nil }
+
+    // MARK: Tutor notes
+
+    func notes(page index: Int) -> [PageNote] { pages.indices.contains(index) ? (pages[index].notes ?? []) : [] }
+
+    @discardableResult
+    func saveNote(page index: Int, id: UUID?, exercise: Int?, turns: [Tutor.Turn]) -> UUID {
+        var notes = pages[index].notes ?? []
+        if let id, let i = notes.firstIndex(where: { $0.id == id }) {
+            notes[i].turns = turns
+            pages[index].notes = notes
+            scheduleSave()
+            return id
+        }
+        let note = PageNote(exercise: exercise, turns: turns, date: now())
+        notes.append(note)
+        pages[index].notes = notes
+        scheduleSave()
+        return note.id
+    }
+
+    /// Plain-language description of an exercise and the learner's attempt, for the tutor.
+    func describe(pageIndex: Int, exercise i: Int) -> [String] {
+        let page = pages[pageIndex]
+        let ex = page.exercises[i], r = page.results[i]
+        var lines: [String] = []
+        switch ex.kind {
+        case .meet: lines.append("Meeting the letter \(ex.letter ?? "") and tracing it.")
+        case .explain: lines.append("Reading a note: \(ex.text ?? "")")
+        case .trace: lines.append("Tracing «\(ex.text ?? "")».")
+        case .copy: lines.append("Copying «\(ex.text ?? "")».")
+        case .listenPick: lines.append("Hearing «\(ex.say ?? "")» and choosing among \((ex.options ?? []).joined(separator: ", ")).")
+        case .dictation: lines.append("Writing from dictation: «\(ex.text ?? "")».")
+        case .readAloud: lines.append("Reading aloud: «\(ex.text ?? "")».")
+        case .translate: lines.append("Writing the Russian for “\(ex.en ?? "")” (answer «\(ex.answerText ?? "")»).")
+        case .fill: lines.append("Filling the gap: \(ex.before ?? "")___\(ex.after ?? "") — “\(ex.hint ?? "")” (answer «\(ex.answerText ?? "")»).")
+        case .readMeaning: lines.append("Reading «\(ex.text ?? "")» and choosing its meaning from: \((ex.options ?? []).joined(separator: " / ")).")
+        }
+        switch r.status {
+        case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")
+        case .correct: lines.append("Got it right.")
+        case .done: lines.append("Finished.")
+        case .missed: lines.append("Missed it and was shown the answer.")
+        }
+        if let rec = r.recognized, !rec.isEmpty {
+            lines.append(ex.kind == .readAloud ? "Speech recognition heard: «\(rec)»." : "Handwriting recognition read: «\(rec)».")
+        }
+        if let c = r.chosen, let opts = ex.options, opts.indices.contains(c) { lines.append("Chose: \(opts[c]).") }
+        return lines
+    }
+
+    func tutorContext(pageIndex: Int, exercise: Int?) -> String {
+        let page = pages[pageIndex]
+        let met = course.letters.filter { letterKnown($0.upper) }.map(\.upper).joined(separator: " ")
+        var lines = ["Workbook page \(page.number): “\(page.title)” (\(page.unitTitle)).",
+                     "Letters met so far: \(met.isEmpty ? "none yet" : met)."]
+        if let intro = page.intro { lines.append("Page intro: \(intro)") }
+        if let exercise { lines += describe(pageIndex: pageIndex, exercise: exercise) }
+        else { lines.append("Exercises on the page: " + page.exercises.indices.map { describe(pageIndex: pageIndex, exercise: $0)[0] }.joined(separator: " ")) }
+        return lines.joined(separator: "\n")
+    }
 
     // MARK: Ink & recordings
 

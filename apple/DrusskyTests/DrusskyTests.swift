@@ -31,6 +31,32 @@ final class DrusskyTests: XCTestCase {
         }
     }
 
+    func testEverySpokenStringHasARecording() throws {
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "course", withExtension: "json"))
+        let course = try JSONDecoder().decode(Course.self, from: Data(contentsOf: url))
+        let voice = Voice()
+        var missing: [String] = []
+        var spoken: [String] = course.letters.map(\.say) + course.lexicon.map(\.ru)
+        for (_, page) in course.pageSequence {
+            for ex in page.exercises {
+                spoken += [ex.spoken].compactMap { $0 } + (ex.options ?? []).filter { _ in ex.kind == .listenPick }
+                spoken += (ex.examples ?? []).map(\.ru)
+            }
+        }
+        // Generated reviews speak too.
+        let book = Book(course: course, store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        for (i, letter) in course.letters.enumerated() {
+            let m = Memory(key: "letter:\(letter.upper)", stability: 1, due: .now, seen: .now)
+            spoken += [book.reviewExercise(for: m, variant: i).spoken].compactMap { $0 }
+        }
+        for word in course.lexicon {
+            let m = Memory(key: "word:\(RussianText.key(word.ru))", stability: 1, due: .now, seen: .now)
+            for v in 0..<3 { spoken += [book.reviewExercise(for: m, variant: v).spoken].compactMap { $0 } }
+        }
+        for s in Set(spoken) where !voice.hasRecording(s) { missing.append(s) }
+        XCTAssertTrue(missing.isEmpty, "no recording for: \(missing.sorted())")
+    }
+
     /// Vision reads Cyrillic ink. Synthetic ink is font outlines, so this is a lower bound on
     /// the pipeline working, not a measure of accuracy on real handwriting.
     func testInkReaderReadsSyntheticCyrillic() async throws {

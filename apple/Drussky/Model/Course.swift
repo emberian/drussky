@@ -154,7 +154,8 @@ struct Exercise: Codable, Sendable, Hashable {
     var spoken: String? {
         switch kind {
         case .listenPick: say
-        case .dictation, .readAloud, .trace, .copy, .readMeaning: text
+        case .dictation: say ?? text
+        case .readAloud, .trace, .copy, .readMeaning: text
         case .fill: [before, answerText, after].compactMap { $0 }.joined()
         case .translate: answerText
         default: nil

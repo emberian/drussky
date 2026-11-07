@@ -22,12 +22,25 @@ struct ExerciseRow: View {
     let slot: ExerciseSlot
     let isActive: Bool
     let marginWidth: CGFloat
+    var onAsk: () -> Void = {}
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-            MarginMark(number: slot.index + 1, status: slot.result.status, isActive: isActive, isReview: slot.exercise.reviewKey != nil)
-                .frame(width: marginWidth)
-                .padding(.top, 4)
+            VStack(spacing: 14) {
+                MarginMark(number: slot.index + 1, status: slot.result.status, isActive: isActive, isReview: slot.exercise.reviewKey != nil)
+                if slot.exercise.kind != .explain || isActive {
+                    Button(action: onAsk) {
+                        Image(systemName: "questionmark.bubble")
+                            .font(.system(size: 17))
+                            .foregroundStyle(Theme.muted.opacity(isActive ? 0.9 : 0.45))
+                            .frame(width: 40, height: 40)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Ask the tutor about exercise \(slot.index + 1)")
+                }
+            }
+            .frame(width: marginWidth)
+            .padding(.top, 4)
             VStack(alignment: .leading, spacing: 12) {
                 content
             }
@@ -263,6 +276,7 @@ struct WritingExercise: View {
                 WritingStrip(controller: pad, height: stripHeight, ghost: ghost, ghostTimes: ghostTimes,
                              cursive: book.settings.cursiveModels, fingerDrawing: book.settings.fingerDrawing)
                     .frame(height: stripHeight)
+                    .accessibilityIdentifier("strip-\(slot.index)")
                     .background(GeometryReader { g in Color.clear.onAppear { width = g.size.width }
                         .onChange(of: g.size.width) { _, w in width = w } })
                 if result.revealed || result.status == .missed {
@@ -322,25 +336,24 @@ struct WritingExercise: View {
 
     @ViewBuilder private var controls: some View {
         HStack(spacing: 10) {
-            if !result.status.isComplete {
+            if !result.status.isComplete && !pad.isEmpty {
                 if isRecall {
-                    PillButton(title: checking ? "Reading…" : "Check", systemImage: "checkmark", prominent: !pad.isEmpty) { check(manual: true) }
-                        .disabled(pad.isEmpty || checking)
+                    PillButton(title: checking ? "Reading…" : "Check", systemImage: "checkmark", prominent: true) { check(manual: true) }
+                        .disabled(checking)
                 } else {
-                    PillButton(title: "Done", systemImage: "checkmark", prominent: !pad.isEmpty) { finishPractice() }
-                        .disabled(pad.isEmpty)
+                    PillButton(title: "Done", systemImage: "checkmark", prominent: true) { finishPractice() }
                 }
+                PillButton(title: "Undo", systemImage: "arrow.uturn.backward") { pad.undo() }
+                PillButton(title: "Clear", systemImage: "eraser") { pad.clear(); lastReading = nil }
             }
-            PillButton(title: "Undo", systemImage: "arrow.uturn.backward") { pad.undo() }
-                .disabled(pad.isEmpty)
-            PillButton(title: "Clear", systemImage: "eraser") { pad.clear(); lastReading = nil }
-                .disabled(pad.isEmpty)
             Spacer(minLength: 0)
             if result.status.isComplete {
                 Button("Write it again") { pad.clear(); lastReading = nil; slot.book.reopen(page: slot.pageIndex, exercise: slot.index) }
                     .font(Theme.label(13)).foregroundStyle(Theme.muted)
             }
         }
+        .frame(minHeight: 38)
+        .animation(.easeOut(duration: 0.2), value: pad.isEmpty)
         if let feedback = feedbackLine {
             feedback
         }

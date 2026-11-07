@@ -138,6 +138,7 @@ struct SettingsView: View {
     @Environment(Book.self) private var book
     @Environment(\.dismiss) private var dismiss
     @State private var exportURL: URL?
+    @State private var apiKey = Keychain.apiKey ?? ""
 
     var body: some View {
         @Bindable var book = book
@@ -153,6 +154,17 @@ struct SettingsView: View {
                     Text("Stress marks (а́) show which syllable is strong. Russian books leave them out; learners' books keep them.")
                 }
                 Section {
+                    SecureField("Anthropic API key", text: $apiKey)
+                        .textContentType(.password)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .onChange(of: apiKey) { _, key in Keychain.apiKey = key.trimmingCharacters(in: .whitespacesAndNewlines) }
+                } header: {
+                    Text("Tutor")
+                } footer: {
+                    Text("The ? beside each exercise asks Claude (\(Tutor.model)) about it. The key stays in this device's Keychain; questions and answers are written onto the page.")
+                }
+                Section {
                     if let exportURL {
                         ShareLink(item: exportURL) { Label("Export my notebook", systemImage: "square.and.arrow.up") }
                     } else {
@@ -161,10 +173,60 @@ struct SettingsView: View {
                 } footer: {
                     Text("Your pages, handwriting and recordings, as one folder.")
                 }
+                Section {
+                    NavigationLink("Recordings and credits") { CreditsView() }
+                }
             }
             .navigationTitle("Settings")
             .task { book.saveNow(); exportURL = book.exportArchive() }
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         }
+    }
+}
+
+/// Attribution for the recorded Russian: human recordings (Wikimedia Commons) and the synthetic voice.
+struct CreditsView: View {
+    struct Source: Decodable {
+        var key: String
+        var kind: String
+        var credit: String?
+        var license: String?
+        var source_page: String?
+        var provider: String?
+    }
+
+    private var sources: [Source] {
+        guard let url = Bundle.main.url(forResource: "Audio", withExtension: nil)?.appendingPathComponent("sources.json"),
+              let data = try? Data(contentsOf: url),
+              let map = try? JSONDecoder().decode([String: Source].self, from: data) else { return [] }
+        return map.values.sorted { $0.key < $1.key }
+    }
+
+    var body: some View {
+        let all = sources
+        let human = all.filter { $0.kind == "human_recording" }
+        let providers = Set(all.compactMap(\.provider)).sorted()
+        List {
+            Section {
+                ForEach(human, id: \.key) { s in
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text(s.key).font(Theme.russian(20, weight: .medium))
+                        Text([s.credit, s.license].compactMap { $0 }.joined(separator: " · "))
+                            .font(.system(size: 13)).foregroundStyle(.secondary)
+                        if let page = s.source_page, let url = URL(string: page) {
+                            Link(page, destination: url).font(.system(size: 12)).lineLimit(1)
+                        }
+                    }
+                }
+            } header: { Text("Recorded by people (\(human.count))") }
+            Section {
+                ForEach(providers, id: \.self) { Text($0) }
+                Text("\(all.count - human.count) phrases").foregroundStyle(.secondary)
+            } header: { Text("Synthetic voice") }
+            Section {
+                Text("Marck Script by Denis Masharov, SIL Open Font License 1.1")
+            } header: { Text("Handwriting font") }
+        }
+        .navigationTitle("Credits")
     }
 }
