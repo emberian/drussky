@@ -6,8 +6,10 @@ converted to U+0301 on output. Run:  python3 apple/scripts/build_course.py
 """
 import json
 import re
+import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 OUT = Path(__file__).resolve().parents[1] / "Drussky/Resources/course.json"
 ACUTE = re.compile(r"([аеиоуыэюяАЕИОУЫЭЮЯ])'")
 
@@ -41,6 +43,11 @@ def ra(text): return {"kind": "read_aloud", "text": text}
 def tl(en, answer): return {"kind": "translate", "en": en, "answer": answer}
 def fl(before, answer, after, hint): return {"kind": "fill", "before": before, "after": after, "hint": hint, "answer": answer}
 def rm(text, options, answer=0): return {"kind": "read_meaning", "text": text, "options": options, "answer": answer}
+def ps(text, en, glosses=None):
+    e = {"kind": "passage", "text": text, "en": en}
+    if glosses:
+        e["glosses"] = glosses
+    return e
 
 
 # --- letters (alphabet order) ----------------------------------------------
@@ -546,6 +553,11 @@ U.append(("u16", "First readings", "ро́бот, число́, мысль, зв
         cp("Мы не одни'.", 1), ra("Мы не одни'."),
     ]),
 ]))
+
+
+import course_reading  # noqa: E402
+U += course_reading.units(dict(meet=meet, ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm, ps=ps))
+LEXICON += course_reading.LEXICON
 
 
 def build():

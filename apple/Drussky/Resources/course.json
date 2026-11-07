@@ -1078,6 +1078,579 @@
   {
    "ru": "одни́",
    "en": "alone (plural)"
+  },
+  {
+   "ru": "он был",
+   "en": "he was"
+  },
+  {
+   "ru": "она́ была́",
+   "en": "she was"
+  },
+  {
+   "ru": "бы́ли",
+   "en": "were (plural)"
+  },
+  {
+   "ru": "вчера́",
+   "en": "yesterday"
+  },
+  {
+   "ru": "ты был",
+   "en": "you (one person, a man) were"
+  },
+  {
+   "ru": "ду́мал",
+   "en": "thought, was thinking (he)"
+  },
+  {
+   "ru": "чита́ла",
+   "en": "read, was reading (she)"
+  },
+  {
+   "ru": "говори́ли",
+   "en": "spoke, were speaking (plural)"
+  },
+  {
+   "ru": "мы зна́ли",
+   "en": "we knew"
+  },
+  {
+   "ru": "она́ не зна́ла",
+   "en": "she didn't know"
+  },
+  {
+   "ru": "спал",
+   "en": "slept, was asleep (he, it)"
+  },
+  {
+   "ru": "на столе́",
+   "en": "on the table"
+  },
+  {
+   "ru": "пото́м",
+   "en": "then, afterwards"
+  },
+  {
+   "ru": "мы у́жинали",
+   "en": "we had dinner"
+  },
+  {
+   "ru": "бы́ло",
+   "en": "it was"
+  },
+  {
+   "ru": "де́лать",
+   "en": "to do"
+  },
+  {
+   "ru": "рабо́тать",
+   "en": "to work"
+  },
+  {
+   "ru": "рабо́тал",
+   "en": "worked (he)"
+  },
+  {
+   "ru": "де́лали",
+   "en": "did (plural)"
+  },
+  {
+   "ru": "де́лал",
+   "en": "did, was doing (he)"
+  },
+  {
+   "ru": "мы гуля́ли",
+   "en": "we went for a walk"
+  },
+  {
+   "ru": "рабо́тала",
+   "en": "worked (she)"
+  },
+  {
+   "ru": "гуля́л",
+   "en": "went for a walk (he)"
+  },
+  {
+   "ru": "в до́ме",
+   "en": "in the house"
+  },
+  {
+   "ru": "на ку́хне",
+   "en": "in the kitchen"
+  },
+  {
+   "ru": "на у́лице",
+   "en": "outside, in the street"
+  },
+  {
+   "ru": "в го́роде",
+   "en": "in the city"
+  },
+  {
+   "ru": "в ко́смосе",
+   "en": "in space"
+  },
+  {
+   "ru": "на пла́нете",
+   "en": "on the planet"
+  },
+  {
+   "ru": "в кни́ге",
+   "en": "in the book"
+  },
+  {
+   "ru": "мы живём",
+   "en": "we live"
+  },
+  {
+   "ru": "я живу́",
+   "en": "I live"
+  },
+  {
+   "ru": "ти́хо",
+   "en": "quiet, quietly"
+  },
+  {
+   "ru": "я ви́жу",
+   "en": "I see"
+  },
+  {
+   "ru": "ты ви́дишь",
+   "en": "you (one person) see"
+  },
+  {
+   "ru": "ви́дит",
+   "en": "sees (he, she)"
+  },
+  {
+   "ru": "звезду́",
+   "en": "star (as the object)"
+  },
+  {
+   "ru": "раке́ту",
+   "en": "rocket (as the object)"
+  },
+  {
+   "ru": "лю́бит",
+   "en": "loves (he, she)"
+  },
+  {
+   "ru": "ста́нция",
+   "en": "station"
+  },
+  {
+   "ru": "на ста́нции",
+   "en": "on the station"
+  },
+  {
+   "ru": "Земля́",
+   "en": "the Earth",
+   "emoji": "🌍"
+  },
+  {
+   "ru": "Зе́млю",
+   "en": "the Earth (as the object)"
+  },
+  {
+   "ru": "в окне́",
+   "en": "in the window"
+  },
+  {
+   "ru": "живёт",
+   "en": "lives (he, she, it)"
+  },
+  {
+   "ru": "Луна́",
+   "en": "the Moon",
+   "emoji": "🌕"
+  },
+  {
+   "ru": "сего́дня",
+   "en": "today",
+   "note": "said sevodnya"
+  },
+  {
+   "ru": "за́втра",
+   "en": "tomorrow"
+  },
+  {
+   "ru": "у́тром",
+   "en": "in the morning"
+  },
+  {
+   "ru": "ве́чером",
+   "en": "in the evening"
+  },
+  {
+   "ru": "днём",
+   "en": "in the daytime"
+  },
+  {
+   "ru": "но́чью",
+   "en": "at night"
+  },
+  {
+   "ru": "я рабо́таю",
+   "en": "I work, I am working"
+  },
+  {
+   "ru": "я иду́",
+   "en": "I am going (on foot)"
+  },
+  {
+   "ru": "ты идёшь",
+   "en": "you (one person) are going (on foot)"
+  },
+  {
+   "ru": "мы идём",
+   "en": "we are going (on foot)"
+  },
+  {
+   "ru": "вы идёте",
+   "en": "you (plural) are going (on foot)"
+  },
+  {
+   "ru": "они́ иду́т",
+   "en": "they are going (on foot)"
+  },
+  {
+   "ru": "куда́",
+   "en": "where to?"
+  },
+  {
+   "ru": "домо́й",
+   "en": "home (going there)"
+  },
+  {
+   "ru": "парк",
+   "en": "park",
+   "emoji": "🌳"
+  },
+  {
+   "ru": "в па́рке",
+   "en": "in the park"
+  },
+  {
+   "ru": "на рабо́ту",
+   "en": "to work (the place)"
+  },
+  {
+   "ru": "в го́род",
+   "en": "to the city"
+  },
+  {
+   "ru": "я хожу́",
+   "en": "I go (regularly, on foot)"
+  },
+  {
+   "ru": "я е́ду",
+   "en": "I am going (by transport)"
+  },
+  {
+   "ru": "мы е́дем",
+   "en": "we are going (by transport)"
+  },
+  {
+   "ru": "ты е́дешь",
+   "en": "you (one person) are going (by transport)"
+  },
+  {
+   "ru": "ка́ждый день",
+   "en": "every day"
+  },
+  {
+   "ru": "хо́дит",
+   "en": "goes regularly (he, she)"
+  },
+  {
+   "ru": "я ходи́ла",
+   "en": "I (a woman) went, and came back"
+  },
+  {
+   "ru": "опя́ть",
+   "en": "again"
+  },
+  {
+   "ru": "я е́хала",
+   "en": "I (a woman) was riding, driving"
+  },
+  {
+   "ru": "она́ шла",
+   "en": "she was walking"
+  },
+  {
+   "ru": "сигна́л",
+   "en": "signal",
+   "emoji": "📡"
+  },
+  {
+   "ru": "стра́нный",
+   "en": "strange (masculine)"
+  },
+  {
+   "ru": "Ми́ра",
+   "en": "Mira (a name)"
+  },
+  {
+   "ru": "слы́шит",
+   "en": "hears (he, she)"
+  },
+  {
+   "ru": "рабо́тает",
+   "en": "works (he, she)"
+  },
+  {
+   "ru": "слу́шает",
+   "en": "listens to (he, she)"
+  },
+  {
+   "ru": "шум",
+   "en": "noise"
+  },
+  {
+   "ru": "в сигна́ле",
+   "en": "in the signal"
+  },
+  {
+   "ru": "чи́сла",
+   "en": "numbers"
+  },
+  {
+   "ru": "просты́е чи́сла",
+   "en": "prime numbers"
+  },
+  {
+   "ru": "кто́-то",
+   "en": "someone"
+  },
+  {
+   "ru": "зна́чит",
+   "en": "so, that means"
+  },
+  {
+   "ru": "оди́ннадцать",
+   "en": "eleven"
+  },
+  {
+   "ru": "отве́т",
+   "en": "answer"
+  },
+  {
+   "ru": "пи́шет",
+   "en": "writes (he, she)"
+  },
+  {
+   "ru": "неде́ля",
+   "en": "week"
+  },
+  {
+   "ru": "ждёт",
+   "en": "waits (he, she)"
+  },
+  {
+   "ru": "трина́дцать",
+   "en": "thirteen"
+  },
+  {
+   "ru": "молчи́т",
+   "en": "is silent (he, she, it)"
+  },
+  {
+   "ru": "приве́т",
+   "en": "hello, hi"
+  },
+  {
+   "ru": "тепе́рь",
+   "en": "now"
+  },
+  {
+   "ru": "но́вый",
+   "en": "new (masculine)"
+  },
+  {
+   "ru": "но",
+   "en": "but"
+  },
+  {
+   "ru": "два́дцать",
+   "en": "twenty"
+  },
+  {
+   "ru": "три́дцать",
+   "en": "thirty"
+  },
+  {
+   "ru": "со́рок",
+   "en": "forty"
+  },
+  {
+   "ru": "пятьдеся́т",
+   "en": "fifty"
+  },
+  {
+   "ru": "шестьдеся́т",
+   "en": "sixty"
+  },
+  {
+   "ru": "се́мьдесят",
+   "en": "seventy"
+  },
+  {
+   "ru": "во́семьдесят",
+   "en": "eighty"
+  },
+  {
+   "ru": "девяно́сто",
+   "en": "ninety"
+  },
+  {
+   "ru": "сто",
+   "en": "a hundred"
+  },
+  {
+   "ru": "пятна́дцать",
+   "en": "fifteen"
+  },
+  {
+   "ru": "чётное",
+   "en": "even (of a number)"
+  },
+  {
+   "ru": "нечётное",
+   "en": "odd (of a number)"
+  },
+  {
+   "ru": "е́сли",
+   "en": "if"
+  },
+  {
+   "ru": "то",
+   "en": "then (after е́сли)"
+  },
+  {
+   "ru": "де́лится на два",
+   "en": "is divisible by two"
+  },
+  {
+   "ru": "существу́ет",
+   "en": "there exists, exists"
+  },
+  {
+   "ru": "для любо́го числа́",
+   "en": "for any number"
+  },
+  {
+   "ru": "бо́льшее",
+   "en": "bigger, greater (neuter)"
+  },
+  {
+   "ru": "просто́е число́",
+   "en": "prime number"
+  },
+  {
+   "ru": "су́мма",
+   "en": "sum"
+  },
+  {
+   "ru": "двух чётных чи́сел",
+   "en": "of two even numbers"
+  },
+  {
+   "ru": "доказа́тельство",
+   "en": "proof"
+  },
+  {
+   "ru": "тео́рема",
+   "en": "theorem"
+  },
+  {
+   "ru": "Что и тре́бовалось доказа́ть.",
+   "en": "Which was to be proved (Q.E.D.)"
+  },
+  {
+   "ru": "то есть",
+   "en": "that is, i.e."
+  },
+  {
+   "ru": "я ду́маю, что",
+   "en": "I think that…"
+  },
+  {
+   "ru": "почему́",
+   "en": "why"
+  },
+  {
+   "ru": "потому́ что",
+   "en": "because"
+  },
+  {
+   "ru": "так",
+   "en": "so, like this"
+  },
+  {
+   "ru": "кни́ги",
+   "en": "books"
+  },
+  {
+   "ru": "что тако́е",
+   "en": "what is (asking for a definition)"
+  },
+  {
+   "ru": "Что́бы быть справедли́вым, ну́жно быть му́дрым.",
+   "en": "To be just, one has to be wise."
+  },
+  {
+   "ru": "справедли́вость",
+   "en": "justice"
+  },
+  {
+   "ru": "му́дрый",
+   "en": "wise (masculine)"
+  },
+  {
+   "ru": "му́дрость",
+   "en": "wisdom"
+  },
+  {
+   "ru": "челове́к",
+   "en": "person, human being"
+  },
+  {
+   "ru": "ка́жется",
+   "en": "it seems"
+  },
+  {
+   "ru": "умо́м",
+   "en": "with the mind"
+  },
+  {
+   "ru": "Росси́ю",
+   "en": "Russia (as the object)"
+  },
+  {
+   "ru": "поня́ть",
+   "en": "to understand, to grasp"
+  },
+  {
+   "ru": "то́лько",
+   "en": "only"
+  },
+  {
+   "ru": "ве́рить",
+   "en": "to believe"
+  },
+  {
+   "ru": "ру́кописи",
+   "en": "manuscripts"
+  },
+  {
+   "ru": "горя́т",
+   "en": "burn (they)"
+  },
+  {
+   "ru": "Ру́кописи не горя́т.",
+   "en": "Manuscripts don't burn (Bulgakov)"
   }
  ],
  "units": [
@@ -4866,6 +5439,1942 @@
       {
        "kind": "read_aloud",
        "text": "Мы не одни́."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u17",
+   "title": "Yesterday",
+   "subtitle": "был, была́, бы́ло, бы́ли · -л, -ла, -ли",
+   "pages": [
+    {
+     "id": "u17-p1",
+     "title": "Was: был, была́, бы́ло, бы́ли",
+     "intro": "The past tense ignores я, ты, он: it changes for gender and number, like мой.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The past agrees with the subject's gender: он был, она́ была́, оно́ бы́ло, они́ бы́ли. Я and ты follow the gender of the person meant.",
+       "examples": [
+        {
+         "ru": "Я был до́ма.",
+         "en": "I was at home (said by a man)."
+        },
+        {
+         "ru": "Я была́ до́ма.",
+         "en": "I was at home (said by a woman)."
+        },
+        {
+         "ru": "Они́ бы́ли там.",
+         "en": "They were there."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "была́",
+       "options": [
+        "был",
+        "была́",
+        "бы́ли"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "he was",
+       "answer": "он был"
+      },
+      {
+       "kind": "translate",
+       "en": "she was",
+       "answer": "она́ была́"
+      },
+      {
+       "kind": "fill",
+       "before": "Вчера́ ма́ма ",
+       "after": " до́ма.",
+       "hint": "Yesterday mom was at home.",
+       "answer": "была́"
+      },
+      {
+       "kind": "fill",
+       "before": "Кот ",
+       "after": " тут.",
+       "hint": "The cat was here.",
+       "answer": "был"
+      },
+      {
+       "kind": "fill",
+       "before": "Мы ",
+       "after": " там.",
+       "hint": "We were there.",
+       "answer": "бы́ли"
+      },
+      {
+       "kind": "dictation",
+       "text": "Где ты был?"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Вчера́ я был до́ма, а она́ была́ там."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Где вы бы́ли вчера́?",
+       "options": [
+        "Where were you yesterday?",
+        "Where are you today?",
+        "Who was there yesterday?"
+       ],
+       "answer": 0
+      }
+     ]
+    },
+    {
+     "id": "u17-p2",
+     "title": "Did: -л, -ла, -ли",
+     "intro": "Most verbs make the past by swapping -ть for -л: чита́ть, чита́л.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Drop -ть and add -л, -ла, -ло or -ли: чита́ть, чита́л, чита́ла, чита́ли. The stress usually stays where it was.",
+       "examples": [
+        {
+         "ru": "Я чита́л.",
+         "en": "I was reading (man)."
+        },
+        {
+         "ru": "Она́ ду́мала.",
+         "en": "She was thinking."
+        },
+        {
+         "ru": "Мы зна́ли.",
+         "en": "We knew."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "чита́ла",
+       "options": [
+        "чита́л",
+        "чита́ла",
+        "чита́ли"
+       ]
+      },
+      {
+       "kind": "fill",
+       "before": "Вчера́ я ",
+       "after": " кни́гу.",
+       "hint": "Yesterday I (a woman) was reading a book.",
+       "answer": "чита́ла"
+      },
+      {
+       "kind": "fill",
+       "before": "Он ",
+       "after": ", что э́то факт.",
+       "hint": "He thought that it was a fact.",
+       "answer": "ду́мал"
+      },
+      {
+       "kind": "fill",
+       "before": "Они́ ",
+       "after": " по-ру́сски.",
+       "hint": "They were speaking Russian.",
+       "answer": "говори́ли"
+      },
+      {
+       "kind": "translate",
+       "en": "we knew",
+       "answer": "мы зна́ли"
+      },
+      {
+       "kind": "dictation",
+       "text": "Она́ не зна́ла."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Ро́бот ду́мал, а мы чита́ли."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Вчера́ мы говори́ли по-ру́сски.",
+       "options": [
+        "Yesterday we spoke Russian.",
+        "Today we speak Russian.",
+        "Yesterday we read in Russian."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "copy",
+       "text": "он ду́мал, она́ ду́мала",
+       "times": 1
+      }
+     ]
+    },
+    {
+     "id": "u17-p3",
+     "title": "A tiny story",
+     "intro": "A whole story in the past tense. Tap any word you want to check.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Вчера́ ве́чером я был до́ма. Ма́ма чита́ла кни́гу, а па́па ду́мал. Кот спал на столе́. Пото́м мы у́жинали. Бы́ло о́чень вку́сно.",
+       "en": "Yesterday evening I was at home. Mom was reading a book and dad was thinking. The cat was asleep on the table. Then we had dinner. It was very tasty.",
+       "glosses": {
+        "вечером": "in the evening",
+        "был": "was (he, or a man saying I)",
+        "читала": "was reading (she)",
+        "думал": "was thinking (he)",
+        "спал": "was sleeping (he, it)",
+        "столе": "table (after на: on the table)",
+        "ужинали": "had dinner (we)",
+        "было": "it was"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Ма́ма чита́ла кни́гу, а па́па ду́мал.",
+       "options": [
+        "Mom was reading a book and dad was thinking.",
+        "Dad was reading a book and mom was thinking.",
+        "Mom and dad were reading a book."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "fill",
+       "before": "Кот ",
+       "after": " на столе́.",
+       "hint": "The cat was asleep on the table.",
+       "answer": "спал"
+      },
+      {
+       "kind": "translate",
+       "en": "then, afterwards",
+       "answer": "пото́м"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Бы́ло о́чень вку́сно."
+      },
+      {
+       "kind": "dictation",
+       "text": "Мы у́жинали."
+      },
+      {
+       "kind": "translate",
+       "en": "yesterday",
+       "answer": "вчера́"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Что де́лал па́па?",
+       "options": [
+        "He was thinking.",
+        "He was reading a book.",
+        "He was asleep on the table."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "copy",
+       "text": "Бы́ло о́чень вку́сно.",
+       "times": 1
+      }
+     ]
+    },
+    {
+     "id": "u17-p4",
+     "title": "What did you do?",
+     "intro": "Де́лать is to do. Что ты де́лал? is What did you do?",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Что ты де́лал? asks a man, что ты де́лала? a woman, что вы де́лали? several people, or one person politely.",
+       "examples": [
+        {
+         "ru": "Что ты де́лал вчера́?",
+         "en": "What did you do yesterday?"
+        },
+        {
+         "ru": "Я рабо́тала.",
+         "en": "I worked (woman)."
+        },
+        {
+         "ru": "Мы гуля́ли.",
+         "en": "We went for a walk."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Что ты де́лал?",
+       "options": [
+        "Что вы де́лали?",
+        "Что ты де́лал?",
+        "Что ты де́лаешь?"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "to do",
+       "answer": "де́лать"
+      },
+      {
+       "kind": "translate",
+       "en": "to work",
+       "answer": "рабо́тать"
+      },
+      {
+       "kind": "fill",
+       "before": "Вчера́ я ",
+       "after": ".",
+       "hint": "Yesterday I (a man) worked.",
+       "answer": "рабо́тал"
+      },
+      {
+       "kind": "fill",
+       "before": "Что вы ",
+       "after": " вчера́?",
+       "hint": "What did you do yesterday?",
+       "answer": "де́лали"
+      },
+      {
+       "kind": "dictation",
+       "text": "Мы гуля́ли."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Что ты де́лала вчера́? Я рабо́тала, а пото́м чита́ла."
+      },
+      {
+       "kind": "fill",
+       "before": "А он ",
+       "after": ".",
+       "hint": "And he went for a walk.",
+       "answer": "гуля́л"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Вчера́ она́ рабо́тала, а он гуля́л.",
+       "options": [
+        "Yesterday she worked and he went for a walk.",
+        "Yesterday he worked and she went for a walk.",
+        "Today she works and he walks."
+       ],
+       "answer": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u18",
+   "title": "In, on, and what you see",
+   "subtitle": "в до́ме, на столе́ · ви́жу кни́гу",
+   "pages": [
+    {
+     "id": "u18-p1",
+     "title": "In and on: где?",
+     "intro": "After в (in) and на (on) answering где?, most nouns end in -е.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Где? takes в or на, and the noun ends in -е: дом, в до́ме; стол, на столе́; ку́хня, на ку́хне. Some places take на where English says in: на ку́хне, на у́лице.",
+       "examples": [
+        {
+         "ru": "в до́ме",
+         "en": "in the house"
+        },
+        {
+         "ru": "на столе́",
+         "en": "on the table"
+        },
+        {
+         "ru": "на ку́хне",
+         "en": "in the kitchen"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "на столе́",
+       "options": [
+        "на столе́",
+        "в до́ме",
+        "на ку́хне"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "in the house",
+       "answer": "в до́ме"
+      },
+      {
+       "kind": "translate",
+       "en": "on the table",
+       "answer": "на столе́"
+      },
+      {
+       "kind": "fill",
+       "before": "Ма́ма на ",
+       "after": ".",
+       "hint": "Mom is in the kitchen.",
+       "answer": "ку́хне"
+      },
+      {
+       "kind": "fill",
+       "before": "Кни́га ",
+       "after": " столе́.",
+       "hint": "The book is on the table.",
+       "answer": "на"
+      },
+      {
+       "kind": "dictation",
+       "text": "Кот в до́ме."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Где чай? Чай на столе́."
+      },
+      {
+       "kind": "translate",
+       "en": "outside, in the street",
+       "answer": "на у́лице"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Ро́бот на у́лице.",
+       "options": [
+        "The robot is outside.",
+        "The robot is in the house.",
+        "The robot is on the table."
+       ],
+       "answer": 0
+      }
+     ]
+    },
+    {
+     "id": "u18-p2",
+     "title": "In the city, in space",
+     "intro": "Feminine and masculine alike take -е: в го́роде, на пла́нете, в ко́смосе.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Nearly every noun takes -е after в or на for where: в го́роде, в ко́смосе, на пла́нете, в кни́ге. Nouns like ста́нция swap the final я for и: на ста́нции.",
+       "examples": [
+        {
+         "ru": "в го́роде",
+         "en": "in the city"
+        },
+        {
+         "ru": "в ко́смосе",
+         "en": "in space"
+        },
+        {
+         "ru": "на пла́нете",
+         "en": "on the planet"
+        },
+        {
+         "ru": "Я живу́ в го́роде.",
+         "en": "I live in a city."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "в ко́смосе",
+       "options": [
+        "в ко́смосе",
+        "в го́роде",
+        "в кни́ге"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "in space",
+       "answer": "в ко́смосе"
+      },
+      {
+       "kind": "translate",
+       "en": "in the city",
+       "answer": "в го́роде"
+      },
+      {
+       "kind": "fill",
+       "before": "Мы живём в ",
+       "after": ".",
+       "hint": "We live in a city.",
+       "answer": "го́роде"
+      },
+      {
+       "kind": "fill",
+       "before": "Ро́бот на ",
+       "after": ".",
+       "hint": "The robot is on the planet.",
+       "answer": "пла́нете"
+      },
+      {
+       "kind": "dictation",
+       "text": "Что в кни́ге?"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "В ко́смосе ти́хо."
+      },
+      {
+       "kind": "translate",
+       "en": "I live",
+       "answer": "я живу́"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Я живу́ в го́роде.",
+       "options": [
+        "I live in a city.",
+        "I work in a city.",
+        "I live in a house."
+       ],
+       "answer": 0
+      }
+     ]
+    },
+    {
+     "id": "u18-p3",
+     "title": "I see: ви́жу + what",
+     "intro": "The thing you see, read or love is the object: -а becomes -у.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "For the object, -а becomes -у and -я becomes -ю; masculine and neuter things stay as they are: я ви́жу стол, я ви́жу окно́, я ви́жу кни́гу. People and animals change too: я ви́жу бра́та.",
+       "examples": [
+        {
+         "ru": "Я ви́жу звезду́.",
+         "en": "I see a star."
+        },
+        {
+         "ru": "Я ви́жу дом.",
+         "en": "I see a house."
+        },
+        {
+         "ru": "Ты ви́дишь раке́ту?",
+         "en": "Do you see the rocket?"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "звезду́",
+       "options": [
+        "звезда́",
+        "звезду́",
+        "звёзды"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "I see",
+       "answer": "я ви́жу"
+      },
+      {
+       "kind": "fill",
+       "before": "Я ви́жу ",
+       "after": ".",
+       "hint": "I see a star.",
+       "answer": "звезду́"
+      },
+      {
+       "kind": "fill",
+       "before": "Ты ви́дишь ",
+       "after": "?",
+       "hint": "Do you see the rocket?",
+       "answer": "раке́ту"
+      },
+      {
+       "kind": "fill",
+       "before": "Она́ чита́ет ",
+       "after": ".",
+       "hint": "She is reading a book.",
+       "answer": "кни́гу"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я ви́жу дом."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Я ви́жу звезду́ и пла́нету."
+      },
+      {
+       "kind": "translate",
+       "en": "you (one person) see",
+       "answer": "ты ви́дишь"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Ма́ма лю́бит ко́фе и чай.",
+       "options": [
+        "Mom loves coffee and tea.",
+        "Mom drinks coffee and tea.",
+        "Mom loves tea and porridge."
+       ],
+       "answer": 0
+      }
+     ]
+    },
+    {
+     "id": "u18-p4",
+     "title": "The station",
+     "intro": "A short reading: a robot, a station, the Earth in the window.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Ста́нция в ко́смосе. На ста́нции живёт ро́бот. Он ви́дит Зе́млю в окне́. Ещё он ви́дит звёзды и Луну́. Ро́бот лю́бит Зе́млю.",
+       "en": "A station in space. A robot lives on the station. It sees the Earth in the window. It also sees the stars and the Moon. The robot loves the Earth.",
+       "glosses": {
+        "станции": "station (after на: on the station)",
+        "живёт": "lives (he, she, it)",
+        "окне": "window (after в: in the window)",
+        "ещё": "also, as well",
+        "космосе": "space (after в: in space)",
+        "луну": "the Moon (as the object)",
+        "он": "he; here: it (the robot)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "На ста́нции живёт ро́бот.",
+       "options": [
+        "A robot lives on the station.",
+        "A robot works in the city.",
+        "The station is inside a robot."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "translate",
+       "en": "station",
+       "answer": "ста́нция"
+      },
+      {
+       "kind": "fill",
+       "before": "Ро́бот ви́дит ",
+       "after": " в окне́.",
+       "hint": "The robot sees the Earth in the window.",
+       "answer": "Зе́млю"
+      },
+      {
+       "kind": "translate",
+       "en": "the Earth",
+       "answer": "Земля́"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Ро́бот лю́бит Зе́млю."
+      },
+      {
+       "kind": "dictation",
+       "text": "На ста́нции живёт ро́бот."
+      },
+      {
+       "kind": "translate",
+       "en": "the Moon",
+       "answer": "Луна́"
+      },
+      {
+       "kind": "copy",
+       "text": "на ста́нции",
+       "times": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u19",
+   "title": "Going places, and when",
+   "subtitle": "идти́, ходи́ть, е́хать · сего́дня, вчера́, за́втра",
+   "pages": [
+    {
+     "id": "u19-p1",
+     "title": "Today, yesterday, tomorrow",
+     "intro": "Time words, and the four parts of the day.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Сего́дня is today, вчера́ yesterday, за́втра tomorrow. For the time of day: у́тром, днём, ве́чером, но́чью.",
+       "examples": [
+        {
+         "ru": "сего́дня",
+         "en": "today"
+        },
+        {
+         "ru": "за́втра у́тром",
+         "en": "tomorrow morning"
+        },
+        {
+         "ru": "вчера́ ве́чером",
+         "en": "yesterday evening"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "за́втра",
+       "options": [
+        "за́втра",
+        "за́втрак",
+        "вчера́"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "today",
+       "answer": "сего́дня"
+      },
+      {
+       "kind": "translate",
+       "en": "tomorrow",
+       "answer": "за́втра"
+      },
+      {
+       "kind": "translate",
+       "en": "in the evening",
+       "answer": "ве́чером"
+      },
+      {
+       "kind": "fill",
+       "before": "",
+       "after": " я до́ма.",
+       "hint": "Today I am at home.",
+       "answer": "Сего́дня"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я рабо́таю у́тром."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Сего́дня у́тром я пил ко́фе, а днём рабо́тал."
+      },
+      {
+       "kind": "translate",
+       "en": "at night",
+       "answer": "но́чью"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "За́втра ве́чером я рабо́таю.",
+       "options": [
+        "Tomorrow evening I am working.",
+        "Yesterday evening I worked.",
+        "Tomorrow morning I am working."
+       ],
+       "answer": 0
+      }
+     ]
+    },
+    {
+     "id": "u19-p2",
+     "title": "On foot: идти́",
+     "intro": "Идти́ is going on foot, right now, in one direction.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "я иду́, ты идёшь, он идёт, мы идём, вы идёте, они́ иду́т. Куда́? asks where to; the answer is в or на with the object form (в парк, на рабо́ту), or simply домо́й.",
+       "examples": [
+        {
+         "ru": "Куда́ ты идёшь?",
+         "en": "Where are you going?"
+        },
+        {
+         "ru": "Я иду́ домо́й.",
+         "en": "I'm going home."
+        },
+        {
+         "ru": "Мы идём в парк.",
+         "en": "We're going to the park."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "идёт",
+       "options": [
+        "иду́",
+        "идёт",
+        "иду́т"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "I am going (on foot)",
+       "answer": "я иду́"
+      },
+      {
+       "kind": "fill",
+       "before": "Я в ",
+       "after": ".",
+       "hint": "I am in the park (where?).",
+       "answer": "па́рке"
+      },
+      {
+       "kind": "fill",
+       "before": "Куда́ ты ",
+       "after": "?",
+       "hint": "Where are you going?",
+       "answer": "идёшь"
+      },
+      {
+       "kind": "fill",
+       "before": "Я иду́ ",
+       "after": ".",
+       "hint": "I'm going home.",
+       "answer": "домо́й"
+      },
+      {
+       "kind": "dictation",
+       "text": "Мы идём в парк."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Куда́ вы идёте? Мы идём на рабо́ту."
+      },
+      {
+       "kind": "translate",
+       "en": "they are going (on foot)",
+       "answer": "они́ иду́т"
+      },
+      {
+       "kind": "fill",
+       "before": "Я иду́ в ",
+       "after": ".",
+       "hint": "I am going to the park (where to?).",
+       "answer": "парк"
+      }
+     ]
+    },
+    {
+     "id": "u19-p3",
+     "title": "Again and again; by car or train",
+     "intro": "Ходи́ть is going on foot regularly. Е́хать is going by transport.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Ходи́ть is going on foot again and again: я хожу́ в парк ка́ждый день. Е́хать is one trip by transport, now: я е́ду, ты е́дешь. For regular trips it is е́здить: я е́зжу.",
+       "examples": [
+        {
+         "ru": "Я хожу́ в парк.",
+         "en": "I go to the park (regularly)."
+        },
+        {
+         "ru": "Я е́ду домо́й.",
+         "en": "I'm going home (by car, bus or train)."
+        },
+        {
+         "ru": "ка́ждый день",
+         "en": "every day"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "е́ду",
+       "options": [
+        "е́ду",
+        "иду́",
+        "хожу́"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "I go (regularly, on foot)",
+       "answer": "я хожу́"
+      },
+      {
+       "kind": "translate",
+       "en": "I am going (by transport)",
+       "answer": "я е́ду"
+      },
+      {
+       "kind": "fill",
+       "before": "Ка́ждый день я ",
+       "after": " в парк.",
+       "hint": "Every day I go to the park.",
+       "answer": "хожу́"
+      },
+      {
+       "kind": "fill",
+       "before": "За́втра мы ",
+       "after": " в го́род.",
+       "hint": "Tomorrow we are going to the city (by car, bus or train).",
+       "answer": "е́дем"
+      },
+      {
+       "kind": "dictation",
+       "text": "Ты е́дешь домо́й?"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Он хо́дит в парк ка́ждый день."
+      },
+      {
+       "kind": "translate",
+       "en": "every day",
+       "answer": "ка́ждый день"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Он хо́дит на рабо́ту ка́ждый день.",
+       "options": [
+        "He goes to work every day.",
+        "He is going to work today.",
+        "He works every day."
+       ],
+       "answer": 0
+      }
+     ]
+    },
+    {
+     "id": "u19-p4",
+     "title": "Where did you go?",
+     "intro": "Motion in the past, and a short day in the life.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "In the past идти́ becomes шёл, шла, шли, and е́хать becomes е́хал. Ходи́л, from ходи́ть, means went and came back.",
+       "examples": [
+        {
+         "ru": "Вчера́ я ходи́л в парк.",
+         "en": "Yesterday I went to the park (man)."
+        },
+        {
+         "ru": "Она́ шла домо́й.",
+         "en": "She was walking home."
+        },
+        {
+         "ru": "Мы е́хали домо́й.",
+         "en": "We were driving home."
+        }
+       ]
+      },
+      {
+       "kind": "passage",
+       "text": "Вчера́ у́тром я ходи́ла в парк. Там бы́ло ти́хо. Пото́м я рабо́тала. Ве́чером мы бы́ли до́ма и чита́ли. За́втра я опя́ть иду́ в парк.",
+       "en": "Yesterday morning I went to the park. It was quiet there. Then I worked. In the evening we were at home and read. Tomorrow I'm going to the park again.",
+       "glosses": {
+        "ходила": "went and came back (she, or a woman saying I)",
+        "было": "it was",
+        "были": "were (they, we)",
+        "читали": "read, were reading (they, we)",
+        "иду": "I am going (on foot)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Пото́м я рабо́тала.",
+       "options": [
+        "Then I worked.",
+        "Then I walked home.",
+        "Then I went to work by bus."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "fill",
+       "before": "Вчера́ я ",
+       "after": " в парк.",
+       "hint": "Yesterday I (a woman) went to the park.",
+       "answer": "ходи́ла"
+      },
+      {
+       "kind": "translate",
+       "en": "again",
+       "answer": "опя́ть"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Там бы́ло ти́хо."
+      },
+      {
+       "kind": "dictation",
+       "text": "Я е́хала на рабо́ту."
+      },
+      {
+       "kind": "copy",
+       "text": "Она́ шла домо́й.",
+       "times": 1
+      },
+      {
+       "kind": "translate",
+       "en": "quiet, quietly",
+       "answer": "ти́хо"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u20",
+   "title": "A signal from space",
+   "subtitle": "a short story in four parts",
+   "pages": [
+    {
+     "id": "u20-p1",
+     "title": "The station Zvezda",
+     "intro": "Part one. Read it aloud once, then tap what you need.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Ста́нция «Звезда́» лети́т вокру́г Земли́. На ста́нции рабо́тает Ми́ра. Ми́ра — ро́бот. Ка́ждое у́тро она́ смо́трит на звёзды. Сего́дня она́ слы́шит стра́нный сигна́л.",
+       "en": "The station Zvezda (Star) flies around the Earth. Mira works on the station. Mira is a robot. Every morning she looks at the stars. Today she hears a strange signal.",
+       "glosses": {
+        "летит": "flies (it)",
+        "вокруг": "around",
+        "земли": "the Earth (after вокруг)",
+        "станции": "station (after на: on the station)",
+        "каждое": "every (with a neuter noun)",
+        "утро": "morning (каждое утро: every morning)",
+        "смотрит": "looks (на: at)",
+        "на": "on; here: at (смотрит на: looks at)",
+        "она": "she (Mira)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Сего́дня она́ слы́шит стра́нный сигна́л.",
+       "options": [
+        "Today she hears a strange signal.",
+        "Today she sends a strange signal.",
+        "Yesterday she heard a strange signal."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "translate",
+       "en": "signal",
+       "answer": "сигна́л"
+      },
+      {
+       "kind": "translate",
+       "en": "strange",
+       "answer": "стра́нный"
+      },
+      {
+       "kind": "fill",
+       "before": "Ми́ра ",
+       "after": " сигна́л.",
+       "hint": "Mira hears a signal.",
+       "answer": "слы́шит"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Ка́ждое у́тро она́ смо́трит на звёзды."
+      },
+      {
+       "kind": "dictation",
+       "text": "Ро́бот рабо́тает на ста́нции."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "сигна́л",
+       "options": [
+        "сигна́л",
+        "ста́нция",
+        "стра́нный"
+       ]
+      },
+      {
+       "kind": "copy",
+       "text": "стра́нный сигна́л",
+       "times": 1
+      }
+     ]
+    },
+    {
+     "id": "u20-p2",
+     "title": "Numbers in the noise",
+     "intro": "Part two. Mira listens closely.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Ми́ра слу́шает сигна́л. Э́то не шум: в сигна́ле есть чи́сла. Два, три, пять, семь, оди́ннадцать… Ми́ра ду́мает: «Э́то просты́е чи́сла. Зна́чит, там кто́-то есть».",
+       "en": "Mira listens to the signal. It isn't noise: there are numbers in the signal. Two, three, five, seven, eleven… Mira thinks: “These are prime numbers. So someone is out there.”",
+       "glosses": {
+        "сигнале": "signal (after в: in the signal)",
+        "есть": "there is, there are",
+        "простые": "prime (of numbers); simple",
+        "кто-то": "someone",
+        "там": "there; here: out there",
+        "думает": "thinks (he, she)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Э́то просты́е чи́сла.",
+       "options": [
+        "These are prime numbers.",
+        "These are simple words.",
+        "These are big numbers."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "translate",
+       "en": "prime numbers",
+       "answer": "просты́е чи́сла"
+      },
+      {
+       "kind": "translate",
+       "en": "numbers",
+       "answer": "чи́сла"
+      },
+      {
+       "kind": "fill",
+       "before": "Зна́чит, там ",
+       "after": " есть.",
+       "hint": "So someone is out there.",
+       "answer": "кто́-то"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Э́то не шум: в сигна́ле есть чи́сла."
+      },
+      {
+       "kind": "dictation",
+       "text": "Ми́ра слу́шает сигна́л."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "оди́ннадцать",
+       "options": [
+        "оди́ннадцать",
+        "оди́н",
+        "де́сять"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "so, that means",
+       "answer": "зна́чит"
+      }
+     ]
+    },
+    {
+     "id": "u20-p3",
+     "title": "The answer",
+     "intro": "Part three. Mira replies, and waits.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Ми́ра пи́шет отве́т: два, три, пять, семь, оди́ннадцать, трина́дцать. Она́ посыла́ет его́ к звёздам. Пото́м она́ ждёт. Оди́н день, два дня, неде́лю. Ко́смос молчи́т.",
+       "en": "Mira writes an answer: two, three, five, seven, eleven, thirteen. She sends it to the stars. Then she waits. One day, two days, a week. Space is silent.",
+       "glosses": {
+        "посылает": "sends (he, she)",
+        "его": "it (the answer); said yevo",
+        "к": "to, towards",
+        "звёздам": "stars (after к: to the stars)",
+        "дня": "days (after два)",
+        "неделю": "a week (for a week)",
+        "день": "day"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Ко́смос молчи́т.",
+       "options": [
+        "Space is silent.",
+        "Space is speaking.",
+        "The station is silent."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "translate",
+       "en": "answer",
+       "answer": "отве́т"
+      },
+      {
+       "kind": "fill",
+       "before": "Ми́ра пи́шет ",
+       "after": ".",
+       "hint": "Mira is writing an answer.",
+       "answer": "отве́т"
+      },
+      {
+       "kind": "translate",
+       "en": "week",
+       "answer": "неде́ля"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Пото́м она́ ждёт. Ко́смос молчи́т."
+      },
+      {
+       "kind": "dictation",
+       "text": "Она́ ждёт."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "трина́дцать",
+       "options": [
+        "трина́дцать",
+        "оди́ннадцать",
+        "три"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "thirteen",
+       "answer": "трина́дцать"
+      },
+      {
+       "kind": "copy",
+       "text": "Ко́смос молчи́т.",
+       "times": 1
+      }
+     ]
+    },
+    {
+     "id": "u20-p4",
+     "title": "Hello",
+     "intro": "Part four. A month later.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Че́рез ме́сяц прихо́дит но́вый сигна́л. В нём одно́ сло́во: «Приве́т». Ми́ра не зна́ет, кто э́то. Но тепе́рь она́ зна́ет: мы не одни́.",
+       "en": "A month later a new signal arrives. It has one word in it: “Hello.” Mira doesn't know who it is. But now she knows: we are not alone.",
+       "glosses": {
+        "через": "after, in (через месяц: a month later)",
+        "месяц": "month",
+        "приходит": "comes, arrives",
+        "нём": "it (after в: in it)",
+        "одно": "one (with a neuter noun)",
+        "одни": "alone (plural)",
+        "теперь": "now (as things now stand)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Ми́ра не зна́ет, кто э́то.",
+       "options": [
+        "Mira doesn't know who it is.",
+        "Mira knows who it is.",
+        "Nobody knows Mira."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "translate",
+       "en": "hello, hi",
+       "answer": "приве́т"
+      },
+      {
+       "kind": "translate",
+       "en": "now",
+       "answer": "тепе́рь"
+      },
+      {
+       "kind": "translate",
+       "en": "new (masculine)",
+       "answer": "но́вый"
+      },
+      {
+       "kind": "fill",
+       "before": "Но тепе́рь она́ ",
+       "after": ": мы не одни́.",
+       "hint": "But now she knows: we are not alone.",
+       "answer": "зна́ет"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Приве́т! Мы не одни́."
+      },
+      {
+       "kind": "dictation",
+       "text": "Э́то но́вый сигна́л."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "приве́т",
+       "options": [
+        "приве́т",
+        "отве́т",
+        "сигна́л"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u21",
+   "title": "Mathematics",
+   "subtitle": "чи́сла до ста · е́сли… то… · существу́ет",
+   "pages": [
+    {
+     "id": "u21-p1",
+     "title": "Numbers to a hundred",
+     "intro": "Tens, and how to build every number up to сто.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Twenty to ninety: два́дцать, три́дцать, со́рок, пятьдеся́т, шестьдеся́т, се́мьдесят, во́семьдесят, девяно́сто; a hundred is сто. Join the rest: два́дцать оди́н, со́рок пять. Eleven to nineteen end in -на́дцать: оди́ннадцать, двена́дцать, трина́дцать, четы́рнадцать, пятна́дцать, шестна́дцать, семна́дцать, восемна́дцать, девятна́дцать.",
+       "examples": [
+        {
+         "ru": "два́дцать",
+         "en": "twenty"
+        },
+        {
+         "ru": "со́рок",
+         "en": "forty"
+        },
+        {
+         "ru": "девяно́сто",
+         "en": "ninety"
+        },
+        {
+         "ru": "сто",
+         "en": "a hundred"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "со́рок",
+       "options": [
+        "со́рок",
+        "сто",
+        "семь"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "twenty",
+       "answer": "два́дцать"
+      },
+      {
+       "kind": "translate",
+       "en": "fifteen",
+       "answer": "пятна́дцать"
+      },
+      {
+       "kind": "translate",
+       "en": "a hundred",
+       "answer": "сто"
+      },
+      {
+       "kind": "fill",
+       "before": "Де́сять плюс де́сять — ",
+       "after": ".",
+       "hint": "Ten plus ten is twenty.",
+       "answer": "два́дцать"
+      },
+      {
+       "kind": "dictation",
+       "text": "три́дцать пять"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Два́дцать, три́дцать, со́рок, пятьдеся́т, шестьдеся́т, се́мьдесят, во́семьдесят, девяно́сто, сто."
+      },
+      {
+       "kind": "translate",
+       "en": "fifty",
+       "answer": "пятьдеся́т"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Девяно́сто плюс де́сять — сто.",
+       "options": [
+        "Ninety plus ten is a hundred.",
+        "Nineteen plus ten is twenty-nine.",
+        "Ninety minus ten is eighty."
+       ],
+       "answer": 0
+      }
+     ]
+    },
+    {
+     "id": "u21-p2",
+     "title": "Even, odd, if… then",
+     "intro": "Mathematical Russian is built from a handful of words.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Чётное число́ is an even number, нечётное an odd one. Е́сли A, то B is if A, then B.",
+       "examples": [
+        {
+         "ru": "Четы́ре — чётное число́.",
+         "en": "Four is an even number."
+        },
+        {
+         "ru": "Пять — нечётное число́.",
+         "en": "Five is an odd number."
+        },
+        {
+         "ru": "Е́сли число́ чётное, то оно́ де́лится на два.",
+         "en": "If a number is even, then it is divisible by two."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "нечётное",
+       "options": [
+        "чётное",
+        "нечётное",
+        "число́"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "even (of a number)",
+       "answer": "чётное"
+      },
+      {
+       "kind": "translate",
+       "en": "odd (of a number)",
+       "answer": "нечётное"
+      },
+      {
+       "kind": "translate",
+       "en": "if",
+       "answer": "е́сли"
+      },
+      {
+       "kind": "fill",
+       "before": "Шесть — ",
+       "after": " число́.",
+       "hint": "Six is an even number.",
+       "answer": "чётное"
+      },
+      {
+       "kind": "fill",
+       "before": "",
+       "after": " число́ чётное, то оно́ де́лится на два.",
+       "hint": "If a number is even, then it is divisible by two.",
+       "answer": "Е́сли"
+      },
+      {
+       "kind": "dictation",
+       "text": "Семь — нечётное число́."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Е́сли число́ чётное, то оно́ де́лится на два."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Е́сли пять — чётное число́, то я ро́бот.",
+       "options": [
+        "If five is an even number, then I am a robot.",
+        "Five is an even number, so I am a robot.",
+        "If I am a robot, then five is even."
+       ],
+       "answer": 0
+      }
+     ]
+    },
+    {
+     "id": "u21-p3",
+     "title": "For every, there exists",
+     "intro": "The two quantifiers: для любо́го and существу́ет.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Для любо́го числа́ is for any number; существу́ет число́ is there exists a number.",
+       "examples": [
+        {
+         "ru": "для любо́го числа́",
+         "en": "for any number"
+        },
+        {
+         "ru": "Существу́ет чётное число́.",
+         "en": "There exists an even number."
+        },
+        {
+         "ru": "Для любо́го числа́ существу́ет бо́льшее число́.",
+         "en": "For any number there exists a bigger number."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "существу́ет",
+       "options": [
+        "существу́ет",
+        "существу́ю",
+        "сле́довательно"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "there exists",
+       "answer": "существу́ет"
+      },
+      {
+       "kind": "translate",
+       "en": "for any number (any, not every)",
+       "answer": "для любо́го числа́"
+      },
+      {
+       "kind": "fill",
+       "before": "Для любо́го числа́ ",
+       "after": " бо́льшее число́.",
+       "hint": "For any number there exists a bigger number.",
+       "answer": "существу́ет"
+      },
+      {
+       "kind": "dictation",
+       "text": "Существу́ет чётное число́."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Для любо́го числа́ существу́ет бо́льшее число́."
+      },
+      {
+       "kind": "translate",
+       "en": "bigger, greater (neuter)",
+       "answer": "бо́льшее"
+      },
+      {
+       "kind": "translate",
+       "en": "prime number",
+       "answer": "просто́е число́"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Существу́ет просто́е чётное число́: два.",
+       "options": [
+        "There exists an even prime number: two.",
+        "Every even number is prime.",
+        "Two is not a number."
+       ],
+       "answer": 0
+      }
+     ]
+    },
+    {
+     "id": "u21-p4",
+     "title": "A tiny proof",
+     "intro": "Your first Russian proof: the sum of two even numbers is even.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Тео́рема: су́мма двух чётных чи́сел — чётное число́. Доказа́тельство. Чётное число́ — э́то число́, кото́рое де́лится на два. Возьмём два чётных числа́. Ка́ждое из них — два, умно́женное на це́лое число́. Их су́мма — два, умно́женное на су́мму э́тих це́лых чи́сел. Зна́чит, су́мма то́же де́лится на два, то есть она́ чётная. Что и тре́бовалось доказа́ть.",
+       "en": "Theorem: the sum of two even numbers is an even number. Proof. An even number is a number that is divisible by two. Take two even numbers. Each of them is two multiplied by a whole number. Their sum is two multiplied by the sum of those whole numbers. So the sum is also divisible by two, that is, it is even. Which was to be proved.",
+       "glosses": {
+        "двух": "two (of two)",
+        "чётных": "even (of even ...)",
+        "чисел": "numbers (of numbers)",
+        "которое": "which, that",
+        "возьмём": "let's take",
+        "числа": "numbers (after два)",
+        "каждое": "each (neuter)",
+        "из": "of, out of",
+        "них": "them",
+        "умноженное": "multiplied",
+        "целое": "whole (of a number): integer",
+        "их": "their",
+        "сумму": "sum (after на)",
+        "этих": "these, those (of these)",
+        "целых": "whole (of whole numbers)",
+        "чётная": "even (feminine)",
+        "она": "she; here: it (the sum)",
+        "что": "what; here: which (что и требовалось доказать: Q.E.D.)",
+        "и": "and; here: just, indeed",
+        "требовалось": "was required",
+        "доказать": "to prove",
+        "делится": "is divisible (на: by)",
+        "то": "that (то есть: that is)",
+        "есть": "is (то есть: that is)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Су́мма двух чётных чи́сел — чётное число́.",
+       "options": [
+        "The sum of two even numbers is an even number.",
+        "The sum of two odd numbers is an odd number.",
+        "The product of two even numbers is odd."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "translate",
+       "en": "sum",
+       "answer": "су́мма"
+      },
+      {
+       "kind": "translate",
+       "en": "proof",
+       "answer": "доказа́тельство"
+      },
+      {
+       "kind": "translate",
+       "en": "theorem",
+       "answer": "тео́рема"
+      },
+      {
+       "kind": "fill",
+       "before": "Чётное число́ де́лится на ",
+       "after": ".",
+       "hint": "An even number is divisible by two.",
+       "answer": "два"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Что и тре́бовалось доказа́ть."
+      },
+      {
+       "kind": "dictation",
+       "text": "Су́мма двух чётных чи́сел — чётное число́."
+      },
+      {
+       "kind": "translate",
+       "en": "that is, i.e.",
+       "answer": "то есть"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Зна́чит, су́мма то́же де́лится на два.",
+       "options": [
+        "So the sum is also divisible by two.",
+        "So the product is also divisible by two.",
+        "So the sum is not divisible by two."
+       ],
+       "answer": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u22",
+   "title": "Philosophy",
+   "subtitle": "я ду́маю, что… · почему́? · потому́ что",
+   "pages": [
+    {
+     "id": "u22-p1",
+     "title": "I think that…",
+     "intro": "Что joins a whole thought to the sentence: я ду́маю, что…",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "After ду́мать, знать or говори́ть, что means that, with a comma before it.",
+       "examples": [
+        {
+         "ru": "Я ду́маю, что э́то пра́вда.",
+         "en": "I think that this is true."
+        },
+        {
+         "ru": "Он говори́т, что не зна́ет.",
+         "en": "He says that he doesn't know."
+        },
+        {
+         "ru": "Мы зна́ем, что мир большо́й.",
+         "en": "We know that the world is big."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Я ду́маю, что э́то пра́вда.",
+       "options": [
+        "Я ду́маю, что э́то пра́вда.",
+        "Я зна́ю, что э́то пра́вда.",
+        "Я ду́маю, что э́то непра́вда."
+       ]
+      },
+      {
+       "kind": "fill",
+       "before": "Я ду́маю, ",
+       "after": " мир большо́й.",
+       "hint": "I think that the world is big.",
+       "answer": "что"
+      },
+      {
+       "kind": "fill",
+       "before": "Она́ говори́т, что ",
+       "after": ".",
+       "hint": "She says that she knows.",
+       "answer": "зна́ет"
+      },
+      {
+       "kind": "translate",
+       "en": "I think that…",
+       "answer": "я ду́маю, что"
+      },
+      {
+       "kind": "dictation",
+       "text": "Он говори́т, что не зна́ет."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Я ду́маю, что ро́бот то́же ду́мает."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Ты ду́маешь, что э́то пра́вда?",
+       "options": [
+        "Do you think that this is true?",
+        "Do you know that this is true?",
+        "You think that this is not true."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "copy",
+       "text": "я ду́маю, что",
+       "times": 1
+      }
+     ]
+    },
+    {
+     "id": "u22-p2",
+     "title": "Why? Because.",
+     "intro": "Почему́? asks why; потому́ что answers.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Почему́? is why?, and the answer starts with потому́ что, because. Почему́ ты так ду́маешь? is Why do you think so?",
+       "examples": [
+        {
+         "ru": "Почему́?",
+         "en": "Why?"
+        },
+        {
+         "ru": "Потому́ что э́то факт.",
+         "en": "Because it's a fact."
+        },
+        {
+         "ru": "Почему́ ты так ду́маешь?",
+         "en": "Why do you think so?"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "потому́ что",
+       "options": [
+        "потому́ что",
+        "почему́",
+        "пото́м"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "why",
+       "answer": "почему́"
+      },
+      {
+       "kind": "translate",
+       "en": "because",
+       "answer": "потому́ что"
+      },
+      {
+       "kind": "fill",
+       "before": "",
+       "after": " ты так ду́маешь?",
+       "hint": "Why do you think so?",
+       "answer": "Почему́"
+      },
+      {
+       "kind": "fill",
+       "before": "Я чита́ю, ",
+       "after": " люблю́ кни́ги.",
+       "hint": "I read because I love books.",
+       "answer": "потому́ что"
+      },
+      {
+       "kind": "dictation",
+       "text": "Потому́ что э́то пра́вда."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Почему́ ты так ду́маешь? Потому́ что я зна́ю."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Почему́ ты здесь? Потому́ что я хочу́ знать.",
+       "options": [
+        "Why are you here? Because I want to know.",
+        "Where are you? I want to know.",
+        "Why are you here? Because I know."
+       ],
+       "answer": 0
+      }
+     ]
+    },
+    {
+     "id": "u22-p3",
+     "title": "A dialogue",
+     "intro": "Socrates asks a student a simple question that is not simple.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "— Что тако́е справедли́вость? — спра́шивает Сокра́т.\n— Э́то когда́ ка́ждый получа́ет то, чего́ заслу́живает, — отвеча́ет учени́к.\n— А кто зна́ет, чего́ заслу́живает ка́ждый?\n— Наве́рное, му́дрый челове́к.\n— Зна́чит, что́бы быть справедли́вым, ну́жно быть му́дрым?\n— Да, ка́жется, так.\n— Тогда́ сна́чала ну́жно узна́ть, что тако́е му́дрость.",
+       "en": "“What is justice?” asks Socrates. “It's when everyone gets what they deserve,” answers the student. “And who knows what everyone deserves?” “A wise person, probably.” “So to be just, one has to be wise?” “Yes, it seems so.” “Then first we need to find out what wisdom is.”",
+       "glosses": {
+        "спрашивает": "asks",
+        "сократ": "Socrates",
+        "когда": "when",
+        "каждый": "everyone, each",
+        "получает": "gets, receives",
+        "то": "that (то, чего: what)",
+        "чего": "what (after заслуживает); said chevo",
+        "что": "what; that",
+        "заслуживает": "deserves",
+        "отвечает": "answers",
+        "ученик": "student, pupil",
+        "а": "and, but",
+        "наверное": "probably",
+        "чтобы": "in order to",
+        "быть": "to be",
+        "справедливым": "just, fair (after быть)",
+        "нужно": "one must, it is necessary",
+        "мудрым": "wise (after быть)",
+        "так": "so, like this",
+        "тогда": "then, in that case",
+        "сначала": "first, at first",
+        "узнать": "to find out",
+        "такое": "such (что такое: what is)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Что́бы быть справедли́вым, ну́жно быть му́дрым.",
+       "options": [
+        "To be just, one has to be wise.",
+        "To be wise, one has to be just.",
+        "A just person is never wise."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "copy",
+       "text": "Что́бы быть справедли́вым, ну́жно быть му́дрым.",
+       "times": 1
+      },
+      {
+       "kind": "translate",
+       "en": "justice",
+       "answer": "справедли́вость"
+      },
+      {
+       "kind": "translate",
+       "en": "wise (masculine)",
+       "answer": "му́дрый"
+      },
+      {
+       "kind": "translate",
+       "en": "wisdom",
+       "answer": "му́дрость"
+      },
+      {
+       "kind": "fill",
+       "before": "Что ",
+       "after": " му́дрость?",
+       "hint": "What is wisdom?",
+       "answer": "тако́е"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Да, ка́жется, так."
+      },
+      {
+       "kind": "dictation",
+       "text": "Му́дрый челове́к зна́ет."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "му́дрость",
+       "options": [
+        "му́дрость",
+        "му́дрый",
+        "мысль"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "u22-p4",
+     "title": "Real words: Tyutchev and Bulgakov",
+     "intro": "Four lines by Fyodor Tyutchev (1866) about what reason cannot measure, and one line from Bulgakov.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Э́то стихи́ Фёдора Тю́тчева.\nУмо́м Росси́ю не поня́ть,\nАрши́ном о́бщим не изме́рить:\nУ ней осо́бенная стать —\nВ Росси́ю мо́жно то́лько ве́рить.",
+       "en": "These are verses by Fyodor Tyutchev. Russia cannot be understood with the mind, nor measured with a common yardstick: she has a special character — one can only believe in Russia.",
+       "glosses": {
+        "стихи": "poems, verses",
+        "фёдора": "Fyodor (by Fyodor)",
+        "тютчева": "Tyutchev (by Tyutchev)",
+        "аршином": "with an arshin (an old Russian measuring rod)",
+        "общим": "common, shared",
+        "измерить": "to measure",
+        "у": "at, by (у ней, old-style: she has)",
+        "ней": "her (old form of неё)",
+        "особенная": "special, particular",
+        "стать": "build, bearing, character",
+        "в": "in (верить в: believe in)",
+        "можно": "one can"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Умо́м Росси́ю не поня́ть.",
+       "options": [
+        "Russia cannot be understood with the mind.",
+        "Russia can be understood with the mind.",
+        "The mind does not understand Russian."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "translate",
+       "en": "only",
+       "answer": "то́лько"
+      },
+      {
+       "kind": "translate",
+       "en": "to believe",
+       "answer": "ве́рить"
+      },
+      {
+       "kind": "fill",
+       "before": "В Росси́ю мо́жно то́лько ",
+       "after": ".",
+       "hint": "One can only believe in Russia.",
+       "answer": "ве́рить"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Умо́м Росси́ю не поня́ть."
+      },
+      {
+       "kind": "dictation",
+       "text": "Мо́жно то́лько ве́рить."
+      },
+      {
+       "kind": "explain",
+       "text": "Булга́ков, «Ма́стер и Маргари́та»: Ру́кописи не горя́т. Manuscripts don't burn.",
+       "examples": [
+        {
+         "ru": "Ру́кописи не горя́т.",
+         "en": "Manuscripts don't burn."
+        }
+       ]
+      },
+      {
+       "kind": "copy",
+       "text": "Ру́кописи не горя́т.",
+       "times": 1
       }
      ]
     }

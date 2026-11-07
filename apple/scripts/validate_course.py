@@ -31,6 +31,7 @@ KINDS = {
     "translate": ({"en", "answer"}, set()),
     "fill": ({"before", "after", "hint", "answer"}, set()),
     "read_meaning": ({"text", "options", "answer"}, set()),
+    "passage": ({"text", "en"}, {"glosses"}),
 }
 BANNED = re.compile(r"\b(optional|optionally|recording|recordings|recorded|accuracy|accurate|the app|this app|model voice|disclaimer|friend|friends|coach|tutor|might not|may not be)\b", re.I)
 
@@ -49,7 +50,8 @@ def key(s):
 
 
 def tokens(s):
-    return re.findall(r"[Ѐ-ӿ́]+", s)
+    w = "[\u0400-\u04FF\u0301]+"
+    return re.findall(w + "(?:-" + w + ")*", s)
 
 
 def letters_in(s):
@@ -86,7 +88,7 @@ def russian_fields(e):
     """(field label, string) pairs of Russian an exercise shows or speaks."""
     k = e["kind"]
     out = []
-    if k in ("trace", "copy", "dictation", "read_aloud", "read_meaning"):
+    if k in ("trace", "copy", "dictation", "read_aloud", "read_meaning", "passage"):
         out.append(("text", e["text"]))
     if k == "explain":
         out.append(("text", e["text"]))
@@ -111,7 +113,7 @@ def spoken_strings(course):
         for p in u["pages"]:
             for e in p["exercises"]:
                 k = e["kind"]
-                if k in ("trace", "copy", "dictation", "read_aloud", "read_meaning"):
+                if k in ("trace", "copy", "dictation", "read_aloud", "read_meaning", "passage"):
                     out.append(e["text"])
                 if k == "explain":
                     out += [x["ru"] for x in e.get("examples", [])]
@@ -241,6 +243,27 @@ def main():
                     for x in e.get("examples", []):
                         if set(x) != {"ru", "en"}:
                             err(w, "example keys")
+                if k == "passage":
+                    t = e["text"]
+                    n = len(re.findall(r"[.!?…]+[»\"]?(?=\s|$)", t))
+                    if not 2 <= n <= 8:
+                        err(w, f"passage has {n} sentences (need 2-8)")
+                    if any(not line.strip() or line != line.strip() for line in t.split("\n")):
+                        err(w, "passage lines must be non-empty with no stray spaces")
+                    if not e["en"].strip() or CYR.search(e["en"]):
+                        err(w, "en must be an English translation")
+                    glosses = e.get("glosses", {})
+                    for gk, gv in glosses.items():
+                        if gk != gk.lower() or ACUTE in gk or key(gk) != gk.replace("-", " ") or not gv.strip():
+                            err(w, f"gloss key {gk!r} must be lowercase, unstressed, unpunctuated, with a meaning")
+                    gkeys = {key(g) for g in glosses}
+                    words = {key(tok.strip(".,?!—–:;…«»\"()")) for tok in t.split()}
+                    words.discard("")
+                    for g in gkeys - words:
+                        err(w, f"gloss {g!r} not in the text")
+                    missing = sorted(x for x in words if x not in gkeys and x not in lex_keys)
+                    if missing:
+                        err(w, f"words with no gloss or lexicon entry: {missing}")
                 if k == "copy" and e["times"] not in (1, 2, 3):
                     err(w, "times must be 1-3")
                 if k == "listen_pick":

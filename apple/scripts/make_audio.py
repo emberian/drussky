@@ -52,7 +52,7 @@ def slug(k):
 
 # Unstressed monosyllables in running speech. Everything else gets an explicit
 # stress: with put_accent off, Silero otherwise reduces кот to "kat", чай to "chey".
-CLITICS = {"не", "и", "а", "у", "в", "на", "по", "но", "за", "к", "с", "о", "ни", "же", "ли", "бы"}
+CLITICS = {"не", "и", "а", "у", "в", "на", "по", "но", "за", "к", "с", "о", "ни", "же", "ли", "бы", "то", "из", "от", "до"}
 
 
 def silero_text(text):
@@ -65,7 +65,7 @@ def silero_text(text):
             out += ["+", v]
         else:
             out.append(c)
-    s = "".join(out)
+    s = " ".join("".join(out).split())  # passage line breaks become spaces
     s = re.sub(r"(?<=\w)-(?=\w)", "", s)  # по-русски -> порусски (Silero misreads the hyphen)
     parts = s.split(" ")
     words = []
@@ -156,7 +156,14 @@ def main():
                 loaded = gateway.load_model()
                 loaded.torch.set_num_threads(4)
                 flags = dict(gateway.EXPLICIT_FLAGS)
-            data, frames, signals = encode_wav(loaded.samples(synth, flags))
+            # Long texts (passages) are synthesized sentence by sentence and joined with short pauses.
+            parts = [synth] if len(synth) <= 160 else [x for x in re.split(r"(?<=[.!?…»])\s+", synth) if x.strip()]
+            samples = []
+            for i, part in enumerate(parts):
+                if i:
+                    samples += [0.0] * int(24000 * 0.35)
+                samples += loaded.samples(part, flags)
+            data, frames, signals = encode_wav(samples)
             assert signals["clipped_samples"] == 0, (text, signals)
             wav.with_suffix(".tmp").write_bytes(data)
             wav.with_suffix(".tmp").replace(wav)
