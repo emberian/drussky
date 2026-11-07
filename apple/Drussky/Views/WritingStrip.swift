@@ -9,9 +9,12 @@ struct StripMetrics {
     static let designHeight: CGFloat = 132
     var height: CGFloat
     var capY: CGFloat { height * 0.17 }
-    var xHeightY: CGFloat { height * 0.43 }
     var baselineY: CGFloat { height * 0.70 }
     var descenderY: CGFloat { height * 0.90 }
+
+    /// The dashed line: the model font's own x-height above the baseline, so small letters
+    /// fill exactly the space between the two.
+    func xHeightY(cursive: Bool) -> CGFloat { baselineY - font(cursive: cursive).xHeight }
 
     func font(cursive: Bool) -> UIFont {
         let probe = Theme.modelFont(size: 100, cursive: cursive)
@@ -213,7 +216,7 @@ final class PaperStripView: UIView, UIPencilInteractionDelegate {
             ctx.restoreGState()
         }
         line(metrics.capY, width: 0.8, alpha: 0.55)
-        line(metrics.xHeightY, width: 0.8, dash: [5, 5], alpha: 0.6)
+        line(metrics.xHeightY(cursive: cursive), width: 0.8, dash: [5, 5], alpha: 0.6)
         line(metrics.baselineY, width: 1.4)
         line(metrics.descenderY, width: 0.6, alpha: 0.35)
 
