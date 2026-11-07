@@ -31,6 +31,7 @@
 		E690EE7AE2CCA3D9C9372D1C /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5206CA36CCD17DFB27C030F /* Tutor.swift */; };
 		EF8F11688BA47BDDA76D86E3 /* WritingStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B7B2BCE090C576089B5D2 /* WritingStrip.swift */; };
 		F73DDD756EE8C9DD99177420 /* DrusskyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB7D30DEF9D3822201CE244 /* DrusskyTests.swift */; };
+		FB7F6E27A5068503D04C4C7A /* hershey-ink.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AA5D8D879AB04BFB06ECB4E /* hershey-ink.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		3337A7628485FC5AE5B0DC88 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		386E28FC654C1880C29D1332 /* course.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = course.json; sourceTree = "<group>"; };
 		3A768443796062643225D742 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
+		3AA5D8D879AB04BFB06ECB4E /* hershey-ink.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "hershey-ink.json"; sourceTree = "<group>"; };
 		4B8667B929B9319AC53CBBAA /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		5018AED36BDE90A7727DEAE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E5A0EF4CCE1C2A07B42CEB2 /* RussianText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianText.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				EFB7D30DEF9D3822201CE244 /* DrusskyTests.swift */,
+				3AA5D8D879AB04BFB06ECB4E /* hershey-ink.json */,
 			);
 			path = DrusskyTests;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			buildConfigurationList = BBC80FBD750C8310B5891B4B /* Build configuration list for PBXNativeTarget "DrusskyTests" */;
 			buildPhases = (
 				B60A46CFDF464BCCE1B117F8 /* Sources */,
+				11A79699D8AA6AD074A6F883 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -297,6 +301,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		11A79699D8AA6AD074A6F883 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB7F6E27A5068503D04C4C7A /* hershey-ink.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		57FA2E9CFBDA4DB3083391B3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;

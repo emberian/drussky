@@ -69,7 +69,8 @@ cp -R .build/mac/Build/Products/Release-maccatalyst/Drussky.app ~/Applications/
 
 Tests: `DrusskyTests` covers text normalization, course integrity, audio coverage (every
 string the app or its reviews can speak), handwriting recognition on synthetic print and cursive
-ink (on the iPad Pro M4: print 12/13, cursive 12/12), scheduling and persistence, notebook-recovery and redo
+ink and on 156 single-line pen-stroke samples with hand-like slant and wobble (on the iPad
+Pro M4: pen 155/156, cursive 12/12, print 12/13), scheduling and persistence, notebook-recovery and redo
 regressions, speech recognition on recorded Russian (runs once speech recognition is
 allowed), and one live tutor answer (runs when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
 `DrusskyUITests` writes on the paper with real touch strokes, completes the exercise, and

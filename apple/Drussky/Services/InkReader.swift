@@ -49,9 +49,13 @@ enum InkReader {
 
     /// For tiled single letters: most of what was read is the target letter.
     static func majority(_ heard: String, of target: String) -> Bool {
-        let want = RussianText.comparable(target).lowercased()
-        let got = RussianText.comparable(heard).lowercased().filter { !$0.isWhitespace }
-        return !got.isEmpty && got.filter { String($0) == want }.count * 2 > got.count
+        guard let want = RussianText.comparable(target).lowercased().first else { return false }
+        let got = RussianText.key(RussianText.foldMultiGlyph(heard)).filter { !$0.isWhitespace }
+        func isWant(_ c: Character) -> Bool {
+            let mapped = RussianText.comparable(String(c)).first
+            return mapped == want || (RussianText.lookalikes[Character(c.lowercased())]?.contains(want) ?? false)
+        }
+        return !got.isEmpty && got.filter(isWant).count * 2 > got.count
     }
 
     static func tiled(_ drawing: PKDrawing, times: Int) -> PKDrawing {

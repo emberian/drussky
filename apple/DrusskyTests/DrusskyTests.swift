@@ -171,8 +171,9 @@ final class DrusskyTests: XCTestCase {
     func testTutorAnswersLive() async throws {
         let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"] ?? ""
         try XCTSkipIf(key.isEmpty, "no tutor key supplied")
+        let previous = Keychain.apiKey
         Keychain.apiKey = key
-        defer { Keychain.apiKey = nil }
+        defer { Keychain.apiKey = previous }  // never wipe a key the app already has
         var answer = ""
         let context = "Workbook page 3: “Н: looks like H”. Letters met so far: А М О Т К Н.\nWriting the Russian for “she” (answer «она́»). Missed it and was shown the answer. Handwriting recognition read: «оно»."
         for try await chunk in Tutor.stream([.init(role: "user", text: "Why is it она and not оно?")], context: context) {
@@ -181,5 +182,30 @@ final class DrusskyTests: XCTestCase {
         print("TUTOR:", answer)
         XCTAssertGreaterThan(answer.count, 40)
         XCTAssertTrue(answer.contains("он"), "answer discusses the Russian forms")
+    }
+
+    /// Single-line pen strokes (Hershey Cyrillic) with per-variant slant, scale, drift and
+    /// wobble: closer to a hand than font outlines. 52 items × 3 variants.
+    func testInkReaderReadsPenStrokes() async throws {
+        let url = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "hershey-ink", withExtension: "json"))
+        let fixture = try JSONDecoder().decode([String: [[[[Double]]]]].self, from: Data(contentsOf: url))
+        let ink = PKInk(.pen, color: .black)
+        var hits = 0, total = 0
+        var misses: [String] = []
+        for (target, variants) in fixture.sorted(by: { $0.key < $1.key }) {
+            for strokes in variants {
+                let pk = strokes.map { pts in
+                    PKStroke(ink: ink, path: PKStrokePath(controlPoints: pts.enumerated().map { i, p in
+                        PKStrokePoint(location: CGPoint(x: p[0], y: p[1]), timeOffset: Double(i) * 0.01,
+                                      size: CGSize(width: 3.5, height: 3.5), opacity: 1, force: 1, azimuth: 0, altitude: .pi / 2)
+                    }, creationDate: Date()))
+                }
+                let reading = await InkReader.read(PKDrawing(strokes: pk), target: target)
+                total += 1
+                if reading?.matches == true { hits += 1 } else { misses.append("\(target)→\(reading?.best ?? "nil")") }
+            }
+        }
+        print("PEN hits: \(hits)/\(total) misses:", misses)
+        XCTAssertGreaterThanOrEqual(Double(hits) / Double(total), 0.75, "misses: \(misses)")
     }
 }

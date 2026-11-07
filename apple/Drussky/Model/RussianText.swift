@@ -45,7 +45,7 @@ enum RussianText {
     /// Latin (cursive т looks like m, и like u, д like g, а like a/o/G…). Lowercase keys.
     static let lookalikes: [Character: Set<Character>] = [
         "a": ["а", "э"], "b": ["б", "в", "ь"], "c": ["с", "а"], "d": ["д", "б"], "e": ["е", "ё", "э"], "g": ["д", "а"],
-        "h": ["н", "ч"], "i": ["і", "и", "г"], "k": ["к"], "l": ["л", "г"], "m": ["т", "м"], "n": ["п", "л", "т"],
+        "h": ["н", "ч"], "i": ["і", "и", "г", "т"], "k": ["к"], "l": ["л", "г"], "m": ["т", "м", "ш"], "n": ["п", "л", "т"],
         "o": ["о"], "p": ["р"], "r": ["г", "т"], "s": ["э", "з", "с"], "t": ["т", "э"], "u": ["и", "ц"], "v": ["в", "у"],
         "w": ["ш"], "x": ["х", "ж"], "y": ["у"], "z": ["г", "з"], "3": ["з", "э"], "6": ["б", "в"], "0": ["о"],
         "4": ["ч"], "9": ["д"],
@@ -53,11 +53,23 @@ enum RussianText {
 
     /// Position-by-position match of a recognizer's reading against the known answer, allowing
     /// each read glyph to stand for the Russian letters it is commonly confused with.
-    static func shapeMatches(_ heard: String, _ target: String) -> Bool {
-        var h = heard
-        for (pair, letter) in [("bl", "ы"), ("bI", "ы"), ("b|", "ы"), ("bi", "ы"), ("IO", "ю"), ("Io", "ю"), ("lo", "ю")] {
+    /// Readings where several Latin glyphs stand for one Russian letter (bl→ы, III→ш, IO→ю).
+    static func foldMultiGlyph(_ s: String) -> String {
+        var h = s
+        for (pair, letter) in [("bl", "ы"), ("bI", "ы"), ("b|", "ы"), ("bi", "ы"), ("III", "ш"), ("lll", "ш"), ("Ill", "ш"), ("IO", "ю"), ("Io", "ю"), ("lo", "ю")] {
             h = h.replacingOccurrences(of: pair, with: letter)
         }
+        return h
+    }
+
+    static func shapeMatches(_ heard: String, _ target: String) -> Bool {
+        // Multi-glyph readings (bl→ы, III→ш, IO→ю) are tried both applied and not, since the
+        // same pair can also be two real letters (IO in "ЧIO" is т+о).
+        let h = foldMultiGlyph(heard)
+        return shapeMatchesExact(h, target) || (h != heard && shapeMatchesExact(heard, target))
+    }
+
+    private static func shapeMatchesExact(_ h: String, _ target: String) -> Bool {
         let a = Array(key(h).replacingOccurrences(of: " ", with: ""))
         let b = Array(key(target).replacingOccurrences(of: "ё", with: "е").replacingOccurrences(of: " ", with: ""))
         guard !a.isEmpty, a.count == b.count else { return false }
