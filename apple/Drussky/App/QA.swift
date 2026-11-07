@@ -17,6 +17,9 @@ enum QA {
     static func has(_ flag: String) -> Bool { ProcessInfo.processInfo.arguments.contains(flag) }
 
     static func prepare(store: BookStore) {
+        #if DEBUG
+        if let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"], !key.isEmpty { Keychain.apiKey = key }
+        #endif
         guard has("-qa-reset") else { return }
         try? FileManager.default.removeItem(at: store.root)
         _ = BookStore(root: store.root)
