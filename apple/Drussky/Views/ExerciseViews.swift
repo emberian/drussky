@@ -78,6 +78,7 @@ struct ExerciseRow: View {
         case .readAloud: ReadAloudExercise(slot: slot, isActive: isActive)
         case .readMeaning: ReadMeaningExercise(slot: slot, isActive: isActive)
         case .passage: PassageExercise(slot: slot)
+        case .soundPair: SoundPairExercise(slot: slot, isActive: isActive)
         }
     }
 }

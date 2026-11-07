@@ -68,6 +68,8 @@ final class Book {
     /// Bumped when the learner explicitly finishes something (Done, Check, a choice), so the
     /// page moves on. Recognition ticking an exercise by itself never moves the page.
     private(set) var customWords: [Course.Word] = []
+    /// First-choice accuracy per sound contrast (SoundPairs.swift); written only by noteSoundPair.
+    var soundStats: [String: ContrastStat] = [:]
     /// While on, the Pencil writes anywhere on the page (margin notes) instead of in exercises.
     var marginMode = false
     private(set) var advanceSignal = 0
@@ -88,6 +90,7 @@ final class Book {
             currentPage = min(saved.currentPage, max(0, saved.pages.count - 1))
             settings = saved.settings
             customWords = saved.customWords ?? []
+            soundStats = saved.soundStats ?? [:]
         }
         if pages.isEmpty { _ = appendNextPage() }
     }
@@ -223,6 +226,7 @@ final class Book {
         let after = pages[pageIndex].results[index]
         if !before.status.isComplete && after.status.isComplete && after.learned != true {
             learn(from: pages[pageIndex].exercises[index], result: after.status)
+            noteSoundPair(pages[pageIndex].exercises[index], status: after.status)
             pages[pageIndex].results[index].learned = true
         }
         if !after.status.isComplete { pages[pageIndex].finished = nil }
@@ -249,7 +253,7 @@ final class Book {
         switch exercise.kind {
         case .meet: return exercise.letter.map { "letter:\($0)" }
         // Only what the learner produced becomes something to recall later.
-        case .explain, .readMeaning, .passage: return nil
+        case .explain, .readMeaning, .passage, .soundPair: return nil
         default:
             guard let target = exercise.target ?? exercise.text, let word = word(target) else { return nil }
             return "word:\(RussianText.key(word.ru))"
@@ -390,6 +394,8 @@ final class Book {
         case .fill: lines.append("Filling the gap: \(ex.before ?? "")___\(ex.after ?? "") — “\(ex.hint ?? "")” (answer «\(ex.answerText ?? "")»).")
         case .readMeaning: lines.append("Reading «\(ex.text ?? "")» and choosing its meaning from: \((ex.options ?? []).joined(separator: " / ")).")
         case .passage: lines.append("Reading a passage: «\(ex.text ?? "")» (translation: \(ex.en ?? "none")).")
+        case .soundPair: lines.append(ex.say.map { "Hearing «\($0)» and telling it from its minimal pair: \((ex.options ?? []).joined(separator: " / "))." }
+                                      ?? "Comparing minimal pairs: \((ex.examples ?? []).map(\.ru).joined(separator: ", ")).")
         }
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")
@@ -457,7 +463,8 @@ final class Book {
 
     func saveNow() {
         store.saveState(.init(pages: pages, memories: Array(memories.values), courseCursor: courseCursor,
-                              currentPage: currentPage, settings: settings, customWords: customWords))
+                              currentPage: currentPage, settings: settings, customWords: customWords,
+                              soundStats: soundStats.isEmpty ? nil : soundStats))
     }
 
     #if DEBUG
@@ -477,6 +484,8 @@ struct BookState: Codable {
     var settings: Settings
     /// Words the learner kept from tutor answers (optional: older notebooks lack it).
     var customWords: [Course.Word]? = nil
+    /// Sound-pair accuracy per contrast (optional: older notebooks lack it).
+    var soundStats: [String: ContrastStat]? = nil
 }
 
 /// Files under Application Support/Drussky: book.json, ink/, voice/.

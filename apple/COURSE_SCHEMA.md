@@ -107,3 +107,13 @@ rescaled by the tutor to the learner's current vocabulary.
 
 Levels follow CEFR (A1 A2 B1 B2 C1). `PrivatePack/` (git-ignored, never in a release build)
 has the same layout for material that is fine for personal study but not redistributable.
+
+# Sound pairs — `Drussky/Resources/pairs.json`
+
+Minimal pairs for listening (＋ → Sound pairs). `contrasts: [{id, name, note}]`,
+`pairs: [{contrast, words: [{ru, en}, {ru, en}], same?}]`; `same: true` marks homophones
+(луг / лук) that are shown on the teaching card but never asked. Words of 2+ syllables carry
+stress marks. Audio is keyed by the stress-marked form in `Audio/index-pairs.json` /
+`variants-pairs.json` / `sources-pairs.json` (`scripts/make_pair_audio.py`), so за́мок and
+замо́к never share a clip. Pages are generated locally (`sound_pair` exercises, never authored
+in course.json), from letters already met, weighted toward the contrasts missed most.
