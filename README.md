@@ -2,7 +2,7 @@
 
 Drussky (Dr. Russky) is Ember’s personal Russian learning app: start with no Russian, then build toward conversation and independent reading of stories, science fiction, mathematics and philosophy.
 
-**The app is now native: [`apple/`](apple/README.md).** One exercise book you write in with the Pencil, hear and speak — 16 units, 52 pages, every phrase recorded — running on the iPad (and iPhone, and Mac as an iPad app). Start there.
+**The app is now native: [`apple/`](apple/README.md).** One exercise book you write in with the Pencil, hear and speak — 22 units, 76 pages, every phrase recorded — running on the iPad (and iPhone, and Mac as an iPad app). Start there.
 
 The Rust/Dioxus implementation below (crates `rufren-*`) is the earlier cross-platform app. Its relay, speech tooling and research notes remain useful; its learner UI is superseded by the native workbook.
 

@@ -17,6 +17,7 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | fill | write the missing word in a sentence |
 | read aloud | say it; your take is kept, played back, and its rhythm drawn against the model's |
 | what does it mean | read Russian, choose its meaning |
+| passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound |
 
 Writing is read on-device by Apple's handwriting recognizer. It confirms a right answer by
 itself after a short pause; **Check** asks it explicitly. When it misreads you, *I wrote it
