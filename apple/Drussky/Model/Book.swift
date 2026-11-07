@@ -270,7 +270,14 @@ final class Book {
         // Only what the learner produced becomes something to recall later.
         case .explain, .readMeaning, .passage, .soundPair: return nil
         default:
-            guard let target = exercise.target ?? exercise.text, let word = word(target) else { return nil }
+            guard let target = exercise.target ?? exercise.text else { return nil }
+            guard let word = word(target) else {
+                // Recall answers that aren't lexicon entries (inflected forms like чита́ем)
+                // still come back — by ear, since there's no single English prompt for them.
+                let isRecall = [.dictation, .translate, .fill].contains(exercise.kind)
+                let short = RussianText.key(target).split(separator: " ").count <= 3
+                return isRecall && short ? "word:\(RussianText.key(target))" : nil
+            }
             return "word:\(RussianText.key(word.ru))"
         }
     }

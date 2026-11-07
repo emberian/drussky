@@ -311,4 +311,15 @@ final class DrusskyTests: XCTestCase {
         slot.finish { r in r.attempts += 1; r.recording = file; r.recognized = "мама"; r.status = .correct }
         XCTAssertEqual(book.pages[0].results[i].recording, file)
     }
+
+    func testInflectedFillAnswersComeBackByEar() throws {
+        let book = Book(course: try course(), store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        var fill = Exercise(kind: .fill); fill.before = "Мы "; fill.after = " книгу."; fill.hint = "We are reading a book."; fill.answerText = "чита́ем"
+        let key = try XCTUnwrap(book.memoryKey(for: fill))
+        XCTAssertEqual(key, "word:читаем")
+        let m = Memory(key: key, stability: 1, due: .now, seen: .now)
+        for v in 0..<3 { XCTAssertEqual(book.reviewExercise(for: m, variant: v).kind, .dictation) }
+        var trace = Exercise(kind: .trace); trace.text = "ма"
+        XCTAssertNil(book.memoryKey(for: trace), "tracing syllables doesn't create reviews")
+    }
 }
