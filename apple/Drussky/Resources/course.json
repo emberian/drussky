@@ -50,9 +50,9 @@
    "upper": "Е",
    "lower": "е",
    "say": "е",
-   "sound": "ye as in yes",
+   "sound": "ye at the start of a word; after a consonant, e that softens it",
    "family": "false_friend",
-   "tip": "Looks like E, sounds like ye in yes.",
+   "tip": "Looks like E: ye at the start of a word, a softening e after a consonant.",
    "example": "нет"
   },
   {
@@ -113,7 +113,7 @@
    "upper": "Л",
    "lower": "л",
    "say": "ла",
-   "sound": "l",
+   "sound": "l, deep, like the ll in full",
    "family": "new",
    "tip": "A tent with one leg bent: l.",
    "example": "стол"
@@ -247,7 +247,7 @@
    "upper": "Ъ",
    "lower": "ъ",
    "say": "объе́кт",
-   "sound": "no sound: it keeps the consonant before it hard",
+   "sound": "no sound of its own: the vowel after it starts with y, kept apart from the consonant",
    "family": "sign",
    "tip": "The hard sign: a little wall between a consonant and я, е, ё, ю.",
    "example": "объе́кт"
@@ -307,10 +307,6 @@
   {
    "ru": "там",
    "en": "there"
-  },
-  {
-   "ru": "так",
-   "en": "so, like this"
   },
   {
    "ru": "как",
@@ -398,11 +394,6 @@
    "emoji": "🚀"
   },
   {
-   "ru": "ка́рта",
-   "en": "map",
-   "emoji": "🗺️"
-  },
-  {
    "ru": "сок",
    "en": "juice",
    "emoji": "🧃"
@@ -411,11 +402,6 @@
    "ru": "нос",
    "en": "nose",
    "emoji": "👃"
-  },
-  {
-   "ru": "сон",
-   "en": "sleep, dream",
-   "emoji": "😴"
   },
   {
    "ru": "сыр",
@@ -438,7 +424,7 @@
   },
   {
    "ru": "у",
-   "en": "by, at"
+   "en": "at, by (as in у меня́ есть, I have)"
   },
   {
    "ru": "да",
@@ -475,11 +461,6 @@
    "note": "feminine: ends in -а"
   },
   {
-   "ru": "нога́",
-   "en": "leg, foot",
-   "emoji": "🦵"
-  },
-  {
    "ru": "го́род",
    "en": "city, town",
    "emoji": "🏙️"
@@ -487,7 +468,7 @@
   {
    "ru": "стол",
    "en": "table",
-   "emoji": "masculine: ends in a consonant"
+   "note": "masculine: ends in a consonant"
   },
   {
    "ru": "молоко́",
@@ -506,7 +487,8 @@
   {
    "ru": "па́па",
    "en": "dad",
-   "emoji": "👨"
+   "emoji": "👨",
+   "note": "masculine, despite the -а"
   },
   {
    "ru": "суп",
@@ -555,10 +537,6 @@
    "en": "I think"
   },
   {
-   "ru": "ду́маю",
-   "en": "I think"
-  },
-  {
    "ru": "что",
    "en": "what; that",
    "note": "said shto"
@@ -569,12 +547,12 @@
    "emoji": "🍵"
   },
   {
-   "ru": "чита́ю",
-   "en": "I read"
+   "ru": "я чита́ю",
+   "en": "I read, I am reading"
   },
   {
    "ru": "чита́ет",
-   "en": "reads (he, she)"
+   "en": "reads, is reading (he, she)"
   },
   {
    "ru": "наш",
@@ -586,10 +564,6 @@
    "emoji": "🪲"
   },
   {
-   "ru": "шум",
-   "en": "noise"
-  },
-  {
    "ru": "ка́ша",
    "en": "porridge",
    "emoji": "🥣"
@@ -599,8 +573,8 @@
    "en": "also, too"
   },
   {
-   "ru": "чита́ешь",
-   "en": "you read"
+   "ru": "ты чита́ешь",
+   "en": "you (one person) read"
   },
   {
    "ru": "ещё",
@@ -610,10 +584,6 @@
    "ru": "хлеб",
    "en": "bread",
    "emoji": "🍞"
-  },
-  {
-   "ru": "хор",
-   "en": "choir"
   },
   {
    "ru": "хорошо́",
@@ -627,15 +597,15 @@
    "ru": "соль",
    "en": "salt",
    "emoji": "🧂",
-   "note": "feminine, despite the consonant ending"
+   "note": "feminine: many nouns in -ь are"
   },
   {
    "ru": "есть",
-   "en": "there is; to eat"
+   "en": "there is (as in у меня́ есть, I have)"
   },
   {
    "ru": "здесь",
-   "en": "here"
+   "en": "here (= тут)"
   },
   {
    "ru": "звезда́",
@@ -643,12 +613,12 @@
    "emoji": "⭐"
   },
   {
-   "ru": "зна́ю",
+   "ru": "я зна́ю",
    "en": "I know"
   },
   {
-   "ru": "зна́ешь",
-   "en": "you know"
+   "ru": "ты зна́ешь",
+   "en": "you (one person) know"
   },
   {
    "ru": "цирк",
@@ -712,11 +682,11 @@
   },
   {
    "ru": "твой",
-   "en": "your (masculine, one person)"
+   "en": "your (one person; masculine)"
   },
   {
    "ru": "а",
-   "en": "and, while, but"
+   "en": "and, but (setting two things side by side)"
   },
   {
    "ru": "стул",
@@ -725,7 +695,7 @@
   },
   {
    "ru": "норма́льно",
-   "en": "okay, fine"
+   "en": "fine, okay"
   },
   {
    "ru": "А у тебя́?",
@@ -733,15 +703,15 @@
   },
   {
    "ru": "тебя́",
-   "en": "you (after у)"
+   "en": "you (as in у тебя́ есть, you have)"
   },
   {
    "ru": "твоя́",
-   "en": "your (feminine)"
+   "en": "your (one person; feminine)"
   },
   {
    "ru": "твоё",
-   "en": "your (neuter)"
+   "en": "your (one person; neuter)"
   },
   {
    "ru": "моя́ сестра́",
@@ -752,20 +722,20 @@
    "en": "our (feminine)"
   },
   {
-   "ru": "на́ше",
-   "en": "our (neuter)"
+   "ru": "на́ше окно́",
+   "en": "our window"
   },
   {
    "ru": "ваш",
-   "en": "your (plural, masculine)"
+   "en": "your (plural or polite; masculine)"
   },
   {
    "ru": "ва́ша",
-   "en": "your (plural, feminine)"
+   "en": "your (plural or polite; feminine)"
   },
   {
    "ru": "ва́ше",
-   "en": "your (plural, neuter)"
+   "en": "your (plural or polite; neuter)"
   },
   {
    "ru": "наш дом",
@@ -781,34 +751,22 @@
   },
   {
    "ru": "меня́",
-   "en": "me (after у)"
+   "en": "me (as in у меня́ есть, I have)"
   },
   {
    "ru": "чита́ть",
    "en": "to read"
   },
   {
-   "ru": "я чита́ю",
-   "en": "I read"
-  },
-  {
-   "ru": "он чита́ет",
-   "en": "he reads"
-  },
-  {
-   "ru": "ты чита́ешь",
-   "en": "you read"
-  },
-  {
-   "ru": "чита́ем",
+   "ru": "мы чита́ем",
    "en": "we read"
   },
   {
-   "ru": "чита́ете",
+   "ru": "вы чита́ете",
    "en": "you (plural) read"
   },
   {
-   "ru": "чита́ют",
+   "ru": "они́ чита́ют",
    "en": "they read"
   },
   {
@@ -816,37 +774,29 @@
    "en": "to think"
   },
   {
-   "ru": "ду́маешь",
-   "en": "you think"
-  },
-  {
-   "ru": "ду́мает",
-   "en": "thinks (he, she)"
-  },
-  {
-   "ru": "ду́маем",
-   "en": "we think"
-  },
-  {
-   "ru": "ду́маете",
-   "en": "you (plural) think"
-  },
-  {
-   "ru": "ду́мают",
-   "en": "they think"
-  },
-  {
-   "ru": "мы ду́маем",
-   "en": "we think"
+   "ru": "ты ду́маешь",
+   "en": "you (one person) think"
   },
   {
    "ru": "она́ ду́мает",
    "en": "she thinks"
   },
   {
+   "ru": "мы ду́маем",
+   "en": "we think"
+  },
+  {
+   "ru": "вы ду́маете",
+   "en": "you (plural) think"
+  },
+  {
+   "ru": "они́ ду́мают",
+   "en": "they think"
+  },
+  {
    "ru": "кни́гу",
    "en": "book (as the object)",
-   "note": "книга becomes книгу after a verb"
+   "note": "книга becomes книгу as the object of a verb"
   },
   {
    "ru": "знать",
@@ -861,20 +811,12 @@
    "en": "knows (he, she)"
   },
   {
-   "ru": "зна́ем",
-   "en": "we know"
-  },
-  {
-   "ru": "зна́ете",
-   "en": "you (plural) know"
-  },
-  {
-   "ru": "зна́ют",
-   "en": "they know"
-  },
-  {
    "ru": "мы зна́ем",
    "en": "we know"
+  },
+  {
+   "ru": "вы зна́ете",
+   "en": "you (plural) know"
   },
   {
    "ru": "они́ зна́ют",
@@ -889,27 +831,23 @@
    "en": "I speak"
   },
   {
-   "ru": "говорю́",
-   "en": "I speak"
-  },
-  {
-   "ru": "говори́шь",
-   "en": "you speak"
+   "ru": "ты говори́шь",
+   "en": "you (one person) speak"
   },
   {
    "ru": "говори́т",
    "en": "speaks (he, she)"
   },
   {
-   "ru": "говори́м",
+   "ru": "мы говори́м",
    "en": "we speak"
   },
   {
-   "ru": "говори́те",
+   "ru": "вы говори́те",
    "en": "you (plural) speak"
   },
   {
-   "ru": "говоря́т",
+   "ru": "они́ говоря́т",
    "en": "they speak"
   },
   {
@@ -921,12 +859,8 @@
    "en": "I understand"
   },
   {
-   "ru": "понима́ю",
-   "en": "I understand"
-  },
-  {
-   "ru": "понима́ешь",
-   "en": "you understand"
+   "ru": "ты понима́ешь",
+   "en": "you (one person) understand"
   },
   {
    "ru": "по-ру́сски",
@@ -970,7 +904,7 @@
   },
   {
    "ru": "тебе́",
-   "en": "to you"
+   "en": "to you (as in и тебе́, you too)"
   },
   {
    "ru": "вку́сно",
@@ -1012,7 +946,7 @@
   },
   {
    "ru": "на",
-   "en": "on; for (a meal)"
+   "en": "on; for (as in Что на у́жин?)"
   },
   {
    "ru": "гото́в",
@@ -1023,24 +957,12 @@
    "en": "I want"
   },
   {
-   "ru": "хочу́",
-   "en": "I want"
-  },
-  {
    "ru": "ты хо́чешь",
-   "en": "do you want?, you want"
-  },
-  {
-   "ru": "хо́чешь",
-   "en": "you want"
+   "en": "you (one person) want"
   },
   {
    "ru": "оди́н",
    "en": "one"
-  },
-  {
-   "ru": "одна́",
-   "en": "one (feminine)"
   },
   {
    "ru": "два",
@@ -1129,7 +1051,7 @@
   },
   {
    "ru": "мы́слю",
-   "en": "I think (formal)"
+   "en": "I think, I reason (as in Descartes)"
   },
   {
    "ru": "сле́довательно",
@@ -1230,7 +1152,7 @@
     {
      "id": "u1-p2",
      "title": "Т and К",
-     "intro": "Two more familiar shapes, and you can read real words: there, so, cat, how, who.",
+     "intro": "Two more familiar shapes, and you can read real words: there, cat, how, who.",
      "exercises": [
       {
        "kind": "meet",
@@ -1434,7 +1356,7 @@
        "kind": "fill",
        "before": "",
        "after": " там.",
-       "hint": "You are there.",
+       "hint": "You (one, familiar) are there.",
        "answer": "Ты"
       }
      ]
@@ -1599,7 +1521,7 @@
       },
       {
        "kind": "explain",
-       "text": "Э is a plain e; Е adds a y in front, like ye in yes. Э́то means this is or that is, with no verb needed.",
+       "text": "Э is a plain e. Е is ye at the start of a word, and after a consonant it is e that softens the consonant, as in не and нет. Э́то means this is or that is, with no verb needed.",
        "examples": [
         {
          "ru": "Э́то кот.",
@@ -1864,7 +1786,7 @@
       },
       {
        "kind": "explain",
-       "text": "A question keeps the word order of a statement. Где кот? is Where is the cat?",
+       "text": "Russian has no is and no do: Где кот? is Where is the cat?",
        "examples": [
         {
          "ru": "Где кот?",
@@ -2109,10 +2031,10 @@
       },
       {
        "kind": "read_meaning",
-       "text": "Э́то ро́бот, а не брат.",
+       "text": "Э́то ро́бот. Э́то не брат.",
        "options": [
-        "This is a robot, not a brother.",
-        "This is a brother, not a robot.",
+        "This is a robot. This is not a brother.",
+        "This is a brother. This is not a robot.",
         "The robot is at home."
        ],
        "answer": 0
@@ -2134,7 +2056,7 @@
       },
       {
        "kind": "explain",
-       "text": "Every noun is masculine, feminine or neuter, and my follows it: мой for a consonant ending, моя́ for -а, моё for -о.",
+       "text": "Every noun is masculine, feminine or neuter, and my follows it: мой for a consonant ending, моя́ for -а, моё for -о. Па́па is still мой: meaning beats ending.",
        "examples": [
         {
          "ru": "мой дом",
@@ -2184,9 +2106,9 @@
        "answer": "моя́"
       },
       {
-       "kind": "translate",
-       "en": "everything",
-       "answer": "всё"
+       "kind": "copy",
+       "text": "всё",
+       "times": 1
       }
      ]
     },
@@ -2201,7 +2123,7 @@
       },
       {
        "kind": "explain",
-       "text": "Five vowels come in pairs, plain and with a y: а/я, у/ю, э/е, о/ё, ы/и. The y-partner also softens the consonant before it.",
+       "text": "Five vowels come in pairs, hard and soft: а/я, у/ю, э/е, о/ё, ы/и. Four of the soft ones add a y at the start of a word; all five soften the consonant before them.",
        "examples": [
         {
          "ru": "да",
@@ -2298,6 +2220,10 @@
         {
          "ru": "Э́то чай.",
          "en": "This is tea."
+        },
+        {
+         "ru": "Я чита́ю.",
+         "en": "I am reading."
         }
        ]
       },
@@ -2365,8 +2291,18 @@
        "letter": "Ж"
       },
       {
-       "kind": "trace",
-       "text": "наш"
+       "kind": "explain",
+       "text": "То́же means too or also, and наш means our.",
+       "examples": [
+        {
+         "ru": "Я то́же.",
+         "en": "Me too."
+        },
+        {
+         "ru": "наш кот",
+         "en": "our cat"
+        }
+       ]
       },
       {
        "kind": "listen_pick",
@@ -2513,6 +2449,10 @@
         {
          "ru": "соль",
          "en": "salt"
+        },
+        {
+         "ru": "Я зна́ю.",
+         "en": "I know."
         }
        ]
       },
@@ -2522,7 +2462,7 @@
       },
       {
        "kind": "listen_pick",
-       "say": "есть",
+       "say": "здесь",
        "options": [
         "есть",
         "здесь",
@@ -2540,7 +2480,7 @@
       },
       {
        "kind": "dictation",
-       "text": "соль"
+       "text": "мать"
       },
       {
        "kind": "translate",
@@ -2602,8 +2542,8 @@
       },
       {
        "kind": "translate",
-       "en": "fact",
-       "answer": "факт"
+       "en": "father",
+       "answer": "оте́ц"
       },
       {
        "kind": "read_meaning",
@@ -2628,7 +2568,7 @@
       },
       {
        "kind": "explain",
-       "text": "In объе́кт the Ъ keeps б and е apart, so you say ob-yekt. That makes all 33 letters.",
+       "text": "In объе́кт the Ъ keeps б and е apart, so you say ab-YEKT. That makes all 33 letters.",
        "examples": [
         {
          "ru": "объе́кт",
@@ -2711,6 +2651,10 @@
        ]
       },
       {
+       "kind": "dictation",
+       "text": "лук"
+      },
+      {
        "kind": "listen_pick",
        "say": "щи",
        "options": [
@@ -2764,7 +2708,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Consonant at the end: он. Ending in -а or -я: она́. Ending in -о or -е: оно́.",
+       "text": "Consonant at the end: он; -а or -я: она́; -о or -е: оно́; -ь can be он or она́. Па́па is он: meaning beats ending.",
        "examples": [
         {
          "ru": "стол — он",
@@ -2817,7 +2761,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Где молоко́? Вот оно́."
+       "text": "Где па́па? Вот он."
       },
       {
        "kind": "dictation",
@@ -2855,6 +2799,10 @@
         {
          "ru": "моё молоко́",
          "en": "my milk"
+        },
+        {
+         "ru": "твой чай",
+         "en": "your tea"
         }
        ]
       },
@@ -2942,10 +2890,10 @@
       },
       {
        "kind": "fill",
-       "before": "Э́то не стол, ",
-       "after": " стул.",
+       "before": "Э́то не стол, э́то ",
+       "after": ".",
        "hint": "This is not a table, it's a chair.",
-       "answer": "э́то"
+       "answer": "стул"
       },
       {
        "kind": "translate",
@@ -3055,7 +3003,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Как дела́? is how are you, between people who know each other. Answer хорошо́, or норма́льно for so-so.",
+       "text": "Как дела́? is how are you, between people who know each other. Answer хорошо́ (good) or норма́льно (fine).",
        "examples": [
         {
          "ru": "Как дела́?",
@@ -3230,7 +3178,7 @@
        "kind": "fill",
        "before": "Э́то ",
        "after": " ло́жка?",
-       "hint": "Is this your spoon?",
+       "hint": "Is this your (one, familiar) spoon?",
        "answer": "твоя́"
       },
       {
@@ -3250,6 +3198,13 @@
        "text": "твой ко́фе"
       },
       {
+       "kind": "fill",
+       "before": "Э́то ",
+       "after": " окно́?",
+       "hint": "Is this your (one, familiar) window?",
+       "answer": "твоё"
+      },
+      {
        "kind": "read_aloud",
        "text": "Э́то твоя́ кни́га? Да, моя́."
       },
@@ -3267,7 +3222,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Наш is our, ваш is your when you say вы. Both take -а and -е like everything else.",
+       "text": "Наш is our, ваш is your when you say вы. Both add -а and -е: на́ша, на́ше, ва́ша, ва́ше.",
        "examples": [
         {
          "ru": "наш дом",
@@ -3303,6 +3258,11 @@
       },
       {
        "kind": "translate",
+       "en": "our window",
+       "answer": "на́ше окно́"
+      },
+      {
+       "kind": "translate",
        "en": "kitchen",
        "answer": "ку́хня"
       },
@@ -3310,7 +3270,7 @@
        "kind": "fill",
        "before": "Где ",
        "after": " ку́хня?",
-       "hint": "Where is your kitchen?",
+       "hint": "Where is your (plural/polite) kitchen?",
        "answer": "ва́ша"
       },
       {
@@ -3462,6 +3422,11 @@
        "answer": "я чита́ю"
       },
       {
+       "kind": "translate",
+       "en": "to read",
+       "answer": "чита́ть"
+      },
+      {
        "kind": "fill",
        "before": "Ма́ма ",
        "after": ".",
@@ -3474,7 +3439,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Я чита́ю, и она́ чита́ет."
+       "text": "Я чита́ю кни́гу."
       },
       {
        "kind": "read_meaning",
@@ -3538,6 +3503,11 @@
        "kind": "translate",
        "en": "we think",
        "answer": "мы ду́маем"
+      },
+      {
+       "kind": "translate",
+       "en": "to think",
+       "answer": "ду́мать"
       },
       {
        "kind": "dictation",
@@ -3626,6 +3596,11 @@
        "answer": "мы зна́ем"
       },
       {
+       "kind": "translate",
+       "en": "to know",
+       "answer": "знать"
+      },
+      {
        "kind": "read_meaning",
        "text": "Она́ зна́ет, где кот.",
        "options": [
@@ -3670,7 +3645,7 @@
        "options": [
         "ду́маю",
         "ду́мает",
-        "ду́мают"
+        "ду́маем"
        ]
       },
       {
@@ -3745,13 +3720,18 @@
       },
       {
        "kind": "copy",
-       "text": "ты говори́шь",
+       "text": "вы говори́те",
        "times": 1
       },
       {
        "kind": "translate",
        "en": "I speak",
        "answer": "я говорю́"
+      },
+      {
+       "kind": "translate",
+       "en": "to speak",
+       "answer": "говори́ть"
       },
       {
        "kind": "fill",
@@ -3823,6 +3803,11 @@
        "answer": "по-ру́сски"
       },
       {
+       "kind": "translate",
+       "en": "to understand",
+       "answer": "понима́ть"
+      },
+      {
        "kind": "fill",
        "before": "Я говорю́ ",
        "after": ".",
@@ -3831,7 +3816,7 @@
       },
       {
        "kind": "dictation",
-       "text": "Я не понима́ю."
+       "text": "Ты понима́ешь?"
       },
       {
        "kind": "read_aloud",
@@ -3872,8 +3857,8 @@
          "en": "This isn't tea."
         },
         {
-         "ru": "Нет, спаси́бо.",
-         "en": "No, thank you."
+         "ru": "Ме́дленно, пожа́луйста.",
+         "en": "Slowly, please."
         }
        ]
       },
@@ -4203,6 +4188,11 @@
        "answer": "у́жин"
       },
       {
+       "kind": "translate",
+       "en": "lunch",
+       "answer": "обе́д"
+      },
+      {
        "kind": "fill",
        "before": "Что на ",
        "after": "?",
@@ -4215,7 +4205,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Что на у́жин? На у́жин суп и хлеб."
+       "text": "У́жин гото́в! На у́жин суп и хлеб."
       },
       {
        "kind": "read_meaning",
@@ -4287,7 +4277,7 @@
       },
       {
        "kind": "translate",
-       "en": "you want",
+       "en": "you (one person) want",
        "answer": "ты хо́чешь"
       },
       {

@@ -149,9 +149,9 @@ struct SettingsView: View {
                     Toggle("Handwritten (cursive) models", isOn: $book.settings.cursiveModels)
                 }
                 Section {
-                    Toggle("Show stress marks", isOn: $book.settings.showStress)
+                    Toggle("Show stress", isOn: $book.settings.showStress)
                 } footer: {
-                    Text("Stress marks (а́) show which syllable is strong. Russian books leave them out; learners' books keep them.")
+                    Text("The stressed vowel is underlined in blue. Russian books leave stress unmarked; learners' books mark it.")
                 }
                 Section {
                     SecureField("Anthropic API key", text: $apiKey)

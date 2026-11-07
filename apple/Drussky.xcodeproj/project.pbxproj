@@ -19,6 +19,7 @@
 		5FB598889AC9BDE297B90C65 /* RussianText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A0EF4CCE1C2A07B42CEB2 /* RussianText.swift */; };
 		60A1C6C49A39C20B3DD445B8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */; };
 		8391837C952CE70C5C196344 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CAF74155006B1914D2F22E /* Voice.swift */; };
+		88A1445927806777FE3EB2A2 /* RhythmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D974078BE264B301B0782B /* RhythmView.swift */; };
 		9AEF27A7EFA1034C131805E5 /* MarckScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */; };
 		A009ECABCA825B294FD93098 /* InkReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B8787FE5BD39DD4C776BD8 /* InkReader.swift */; };
 		AD8A2190D80258D2E1F620D1 /* Audio in Resources */ = {isa = PBXBuildFile; fileRef = 76FA98F7CF39CE01A5ADCC7A /* Audio */; };
@@ -55,6 +56,7 @@
 		74264D1BFDC2677C7515FBED /* TutorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorView.swift; sourceTree = "<group>"; };
 		76FA98F7CF39CE01A5ADCC7A /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Audio; path = Drussky/Resources/Audio; sourceTree = SOURCE_ROOT; };
 		966160D52E50F1ED0AD393D5 /* Drussky.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Drussky.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97D974078BE264B301B0782B /* RhythmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmView.swift; sourceTree = "<group>"; };
 		C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViews.swift; sourceTree = "<group>"; };
 		D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		D5BF549E6E6DDAEC172CF7EC /* DrusskyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrusskyApp.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				3A768443796062643225D742 /* ContentsView.swift */,
 				C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */,
 				4B8667B929B9319AC53CBBAA /* PageView.swift */,
+				97D974078BE264B301B0782B /* RhythmView.swift */,
 				D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */,
 				74264D1BFDC2677C7515FBED /* TutorView.swift */,
 				F44B7B2BCE090C576089B5D2 /* WritingStrip.swift */,
@@ -286,6 +289,7 @@
 				A009ECABCA825B294FD93098 /* InkReader.swift in Sources */,
 				BC4BD4EC630AE39955A764B6 /* PageView.swift in Sources */,
 				DB3D064DB50315B07FD9D64C /* QA.swift in Sources */,
+				88A1445927806777FE3EB2A2 /* RhythmView.swift in Sources */,
 				5FB598889AC9BDE297B90C65 /* RussianText.swift in Sources */,
 				D3A0E99EAF001AFDB22943D0 /* SpeechCheck.swift in Sources */,
 				60A1C6C49A39C20B3DD445B8 /* Theme.swift in Sources */,

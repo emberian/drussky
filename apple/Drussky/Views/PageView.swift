@@ -99,7 +99,7 @@ struct PageView: View {
                     .padding(.vertical, 6)
             }
             if let intro = page.intro {
-                Text(intro)
+                Text(Theme.stressed(intro, show: book.settings.showStress))
                     .font(.system(size: 18))
                     .lineSpacing(3)
                     .foregroundStyle(Theme.text.opacity(0.82))

@@ -132,7 +132,7 @@ struct RussianLine: View {
     var size: CGFloat = 34
     var body: some View {
         HStack(alignment: .center, spacing: 14) {
-            Text(book.settings.showStress ? text : RussianText.unstressed(text))
+            Text(Theme.stressed(text, show: book.settings.showStress))
                 .font(Theme.russian(size, weight: .medium))
                 .foregroundStyle(Theme.text)
             HearButton(text: text, size: 40)
@@ -176,7 +176,7 @@ struct MeetExercise: View {
                     Text(letter.sound)
                         .font(.system(size: 19, weight: .semibold))
                         .foregroundStyle(Theme.text)
-                    Text(letter.tip)
+                    Text(Theme.stressed(letter.tip, show: book.settings.showStress))
                         .font(.system(size: 17))
                         .foregroundStyle(Theme.text.opacity(0.85))
                     if let example = letter.example, RussianText.letters(in: example).isSubset(of: knownLetters(adding: letter.upper)) {
@@ -201,11 +201,12 @@ struct MeetExercise: View {
 // MARK: - Explain
 
 struct ExplainExercise: View {
+    @Environment(Book.self) private var book
     let slot: ExerciseSlot
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(slot.exercise.text ?? "")
+            Text(Theme.stressed(slot.exercise.text ?? "", show: book.settings.showStress))
                 .font(.system(size: 18))
                 .lineSpacing(4)
                 .foregroundStyle(Theme.text)
@@ -338,7 +339,8 @@ struct WritingExercise: View {
         case .fill:
             VStack(alignment: .leading, spacing: 6) {
                 Instruction(text: "Write the missing word.")
-                (Text(ex.before ?? "") + Text(" ____ ").foregroundStyle(Theme.accent) + Text(ex.after ?? ""))
+                (Text(Theme.stressed(ex.before ?? "", show: book.settings.showStress)) + Text(" ____ ").foregroundStyle(Theme.accent)
+                    + Text(Theme.stressed(ex.after ?? "", show: book.settings.showStress)))
                     .font(Theme.russian(30, weight: .medium))
                     .foregroundStyle(Theme.text)
                 Text(ex.hint ?? "").font(.system(size: 16)).italic().foregroundStyle(Theme.muted)
@@ -529,7 +531,7 @@ struct ChoiceGrid: View {
             ForEach(Array(options.enumerated()), id: \.offset) { i, option in
                 let isChosen = chosen == i
                 let isRight = correct == i
-                let shown = showStress ? option : RussianText.unstressed(option)
+                let shown = russian ? Theme.stressed(option, show: showStress) : AttributedString(option)
                 Button { onChoose(i) } label: {
                     Text(shown)
                         .font(russian ? Theme.russian(30, weight: .medium) : .system(size: 18, weight: .medium))
@@ -567,7 +569,7 @@ struct ReadAloudExercise: View {
         let mine = speech.activeKey == key
         VStack(alignment: .leading, spacing: 12) {
             Instruction(text: slot.result.status.isComplete ? "Read it aloud." : "Read it aloud, then listen to check.")
-            Text(book.settings.showStress ? target : RussianText.unstressed(target))
+            Text(Theme.stressed(target, show: book.settings.showStress))
                 .font(Theme.russian(40, weight: .medium))
                 .foregroundStyle(Theme.text)
             HStack(spacing: 14) {

@@ -53,6 +53,24 @@ enum Theme {
         return base.fontDescriptor.withDesign(.rounded).map { UIFont(descriptor: $0, size: size) } ?? base
     }
 
+    /// Russian with its stressed vowel shown in the accent colour rather than with a combining
+    /// acute — at display sizes и́ is too easily read as й.
+    static func stressed(_ text: String, show: Bool, color: Color = Theme.accent) -> AttributedString {
+        var out = AttributedString()
+        for ch in text {
+            // "а́" is one Character (vowel + U+0301); strip the mark and colour the vowel.
+            let scalars = ch.unicodeScalars.filter { $0 != "\u{0301}" }
+            guard !scalars.isEmpty else { continue }
+            var piece = AttributedString(String(String.UnicodeScalarView(scalars)))
+            if show && scalars.count != ch.unicodeScalars.count {
+                piece.foregroundColor = color
+                piece.underlineStyle = .single
+            }
+            out += piece
+        }
+        return out
+    }
+
     static func registerFonts() {
         guard let url = Bundle.main.url(forResource: "MarckScript-Regular", withExtension: "ttf") else { return }
         CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)

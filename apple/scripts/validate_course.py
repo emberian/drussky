@@ -273,6 +273,31 @@ def main():
                     missing = [t for t in key(s).split() if t not in lex_tokens]
                     if missing:
                         err(w, f"words not in lexicon: {missing}")
+    # every lexicon entry is produced somewhere (written, said, or picked by ear), and glosses are distinct
+    produced = []
+    for u in course["units"]:
+        for p in u["pages"]:
+            for e in p["exercises"]:
+                k = e.get("kind")
+                if k in ("trace", "copy", "dictation", "read_aloud"):
+                    produced.append(key(e["text"]))
+                elif k in ("translate", "fill"):
+                    produced.append(key(e["answer"]))
+                    if k == "fill":
+                        produced.append(key(e["before"] + e["answer"] + e["after"]))
+                elif k == "listen_pick":
+                    produced.append(key(e["say"]))
+    padded = [f" {t} " for t in produced]
+    for wd in lexicon:
+        k = key(wd["ru"])
+        if not any(f" {k} " in t for t in padded):
+            err(f"lexicon {wd['ru']}", "never produced (no trace/copy/dictation/read_aloud/translate/fill/listen_pick target)")
+    glosses = {}
+    for wd in lexicon:
+        if wd["en"] in glosses:
+            err(f"lexicon {wd['ru']}", f"gloss {wd['en']!r} shared with {glosses[wd['en']]}")
+        glosses[wd["en"]] = wd["ru"]
+
     if sorted(met) != sorted(ALPHABET) or len(met) != 33:
         err("meet", f"letters met {len(met)}; missing {sorted(set(ALPHABET) - set(met))}")
 
