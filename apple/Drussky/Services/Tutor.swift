@@ -71,6 +71,10 @@ enum Tutor {
     }
 
     static func stream(_ turns: [Turn], context: String) -> AsyncThrowingStream<String, Error> {
+        stream(turns, system: system(context: context), maxTokens: 4000, effort: "low")
+    }
+
+    static func stream(_ turns: [Turn], system systemPrompt: String, maxTokens: Int, effort: String) -> AsyncThrowingStream<String, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {
@@ -84,11 +88,11 @@ enum Tutor {
                     request.timeoutInterval = 120
                     let body: [String: Any] = [
                         "model": model,
-                        "max_tokens": 4000,
+                        "max_tokens": maxTokens,
                         "stream": true,
                         "fallbacks": "default",
-                        "output_config": ["effort": "low"],
-                        "system": system(context: context),
+                        "output_config": ["effort": effort],
+                        "system": systemPrompt,
                         "messages": turns.map { ["role": $0.role, "content": $0.text] },
                     ]
                     request.httpBody = try JSONSerialization.data(withJSONObject: body)

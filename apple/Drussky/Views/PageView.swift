@@ -42,6 +42,7 @@ struct PageView: View {
                                 .id("end")
                         }
                         .frame(width: contentWidth)
+                        .overlay { MarginLayer(page: page, enabled: book.marginMode, fingerDrawing: book.settings.fingerDrawing) }
                         .padding(.top, topInset)
                         .padding(.bottom, 120)
                         .frame(maxWidth: .infinity)
@@ -218,5 +219,36 @@ struct HowThisBookWorks: View {
             Text(text).font(.system(size: 16)).foregroundStyle(Theme.text)
                 .fixedSize(horizontal: false, vertical: true)
         }
+    }
+}
+
+/// Owns the page's margin-ink controller so it survives re-renders.
+struct MarginLayer: View {
+    @Environment(Book.self) private var book
+    let page: BookPage
+    let enabled: Bool
+    let fingerDrawing: Bool
+    @StateObject private var controller: PadController
+
+    init(page: BookPage, enabled: Bool, fingerDrawing: Bool) {
+        self.page = page
+        self.enabled = enabled
+        self.fingerDrawing = fingerDrawing
+        _controller = StateObject(wrappedValue: PadController(fileURL: BookStore.standard().root.appendingPathComponent("ink/\(page.id)-margin.drawing")))
+    }
+
+    var body: some View {
+        MarginInk(controller: controller, enabled: enabled, fingerDrawing: fingerDrawing)
+            .allowsHitTesting(enabled)
+            .overlay(alignment: .top) {
+                if enabled {
+                    Text("Margin notes — write anywhere. Double-tap the Pencil to erase.")
+                        .font(Theme.label(12)).foregroundStyle(Theme.redPen)
+                        .padding(.horizontal, 12).padding(.vertical, 6)
+                        .background(Capsule().fill(Theme.card))
+                        .padding(.top, 4)
+                        .allowsHitTesting(false)
+                }
+            }
     }
 }

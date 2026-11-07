@@ -44,6 +44,17 @@ Settings, or drop it into the app's `Documents/tutor-key.txt` with
 `xcrun devicectl device copy to --domain-type appDataContainer --domain-identifier software.ember.drussky`
 and the next launch imports it and deletes the file.
 
+## Pages that write themselves
+
+The **＋** in the top bar asks the tutor for a new page, placed right after the current one:
+*A page from my mistakes* (built from what you've missed and find hardest) or *Read my own
+text…* (paste or Scan Text any Russian; it becomes a glossed passage with questions, and its
+new words join your reviews). Pages arrive in the course's own format and every exercise is
+checked before it goes in. The tutor's answers mark Russian as tappable phrases you can
+**Keep**. The **pencil** button turns the whole page into paper for margin notes (graphite;
+double-tap the Pencil to erase). Speakers with a small number cycle through several human
+voices.
+
 ## Inside the cover
 
 The book icon (top left) opens your alphabet — each letter in **your own handwriting** once

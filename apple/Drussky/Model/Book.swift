@@ -68,6 +68,8 @@ final class Book {
     /// Bumped when the learner explicitly finishes something (Done, Check, a choice), so the
     /// page moves on. Recognition ticking an exercise by itself never moves the page.
     private(set) var customWords: [Course.Word] = []
+    /// While on, the Pencil writes anywhere on the page (margin notes) instead of in exercises.
+    var marginMode = false
     private(set) var advanceSignal = 0
     private(set) var advancePage = 0
     func requestAdvance(page: Int) { advancePage = page; advanceSignal += 1 }
@@ -150,6 +152,22 @@ final class Book {
                               unitTitle: unitTitle, title: title, intro: intro, isReview: isReview,
                               exercises: exercises, results: exercises.map { _ in ExerciseResult() },
                               created: now(), finished: nil))
+        scheduleSave()
+    }
+
+    /// Puts a tutor-written page right after the current one and opens it. Its new words join
+    /// the learner's words so the page's exercises feed their reviews.
+    func insertWrittenPage(title: String, intro: String?, unitTitle: String, exercises: [Exercise], newWords: [Course.Word]) {
+        for w in newWords where word(w.ru) == nil && !w.en.isEmpty {
+            customWords.append(Course.Word(ru: w.ru, en: w.en, emoji: w.emoji, note: w.note ?? "from a written page"))
+        }
+        let at = min(currentPage + 1, pages.count)
+        let id = "w" + UUID().uuidString.prefix(8).lowercased()
+        pages.insert(BookPage(id: id, number: 0, sourceID: nil, unitTitle: unitTitle, title: title, intro: intro,
+                              isReview: false, exercises: exercises, results: exercises.map { _ in ExerciseResult() },
+                              created: now(), finished: nil), at: at)
+        for i in pages.indices { pages[i].number = i + 1 }
+        currentPage = at
         scheduleSave()
     }
 
@@ -359,6 +377,7 @@ final class Book {
 
     func inkURL(page: BookPage, exercise index: Int) -> URL { store.inkURL(pageID: page.id, index: index) }
     func recordingURL(page: BookPage, exercise index: Int) -> URL { store.recordingURL(pageID: page.id, index: index) }
+    func marginURL(page: BookPage) -> URL { store.root.appendingPathComponent("ink/\(page.id)-margin.drawing") }
 
     /// The learner's own handwriting of a letter: the ink from its `meet` exercise.
     func inkForLetter(_ upper: String) -> URL? {

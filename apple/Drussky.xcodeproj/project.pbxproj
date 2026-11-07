@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04B8F12C6DB12D2E379C3989 /* WritePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E2229B8B2ECBB7855A8CE2 /* WritePageView.swift */; };
 		0619713939B412884AEF4DFF /* course.json in Resources */ = {isa = PBXBuildFile; fileRef = 386E28FC654C1880C29D1332 /* course.json */; };
 		21BFB9DFE5268BEBEE704E49 /* DrusskyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF549E6E6DDAEC172CF7EC /* DrusskyApp.swift */; };
 		244E83B48DE97484C52D0B55 /* ExerciseViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */; };
+		26BFEDE0F6D7B36B2B32BD9F /* NewPagesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CABEA1EF7D21362DB90DEB5 /* NewPagesUITests.swift */; };
 		3297D52B73F2DBF6F5C384C5 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3337A7628485FC5AE5B0DC88 /* Book.swift */; };
 		468AD1224404ECA216F59893 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5018AED36BDE90A7727DEAE7 /* Assets.xcassets */; };
 		4AD1FD7CAF518B5E5BDE9FB6 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AE7A8C01467109460EB5B7 /* Course.swift */; };
@@ -18,6 +20,7 @@
 		5D6D5A01E7727D984F154F82 /* OFL-MarckScript.txt in Resources */ = {isa = PBXBuildFile; fileRef = EC2D2061E2C5FDFFA51D36EF /* OFL-MarckScript.txt */; };
 		5FB598889AC9BDE297B90C65 /* RussianText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A0EF4CCE1C2A07B42CEB2 /* RussianText.swift */; };
 		60A1C6C49A39C20B3DD445B8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */; };
+		7B7B3708DF0CE9C452DE40F7 /* PageWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EF908D6FA69AE1C9862EBA /* PageWriter.swift */; };
 		8391837C952CE70C5C196344 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CAF74155006B1914D2F22E /* Voice.swift */; };
 		88A1445927806777FE3EB2A2 /* RhythmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D974078BE264B301B0782B /* RhythmView.swift */; };
 		994826F3FE5E536C3DB865D6 /* ScreensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50738AFA47D87DDF551CCCAA /* ScreensUITests.swift */; };
@@ -57,6 +60,7 @@
 		1B90003DA1A2BC105BEF7BDF /* DrusskyUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DrusskyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MarckScript-Regular.ttf"; sourceTree = "<group>"; };
 		27AE7A8C01467109460EB5B7 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		2CABEA1EF7D21362DB90DEB5 /* NewPagesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPagesUITests.swift; sourceTree = "<group>"; };
 		3337A7628485FC5AE5B0DC88 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		386E28FC654C1880C29D1332 /* course.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = course.json; sourceTree = "<group>"; };
 		3A768443796062643225D742 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,7 @@
 		966160D52E50F1ED0AD393D5 /* Drussky.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Drussky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		966FF00557E4301350608DB9 /* LaunchProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchProbe.swift; sourceTree = "<group>"; };
 		97D974078BE264B301B0782B /* RhythmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmView.swift; sourceTree = "<group>"; };
+		B8EF908D6FA69AE1C9862EBA /* PageWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageWriter.swift; sourceTree = "<group>"; };
 		C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViews.swift; sourceTree = "<group>"; };
 		D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		D5BF549E6E6DDAEC172CF7EC /* DrusskyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrusskyApp.swift; sourceTree = "<group>"; };
@@ -79,6 +84,7 @@
 		E9CAF74155006B1914D2F22E /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		EC2D2061E2C5FDFFA51D36EF /* OFL-MarckScript.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "OFL-MarckScript.txt"; sourceTree = "<group>"; };
 		EFB7D30DEF9D3822201CE244 /* DrusskyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrusskyTests.swift; sourceTree = "<group>"; };
+		F0E2229B8B2ECBB7855A8CE2 /* WritePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePageView.swift; sourceTree = "<group>"; };
 		F44B7B2BCE090C576089B5D2 /* WritingStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingStrip.swift; sourceTree = "<group>"; };
 		F5206CA36CCD17DFB27C030F /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
 		FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechCheck.swift; sourceTree = "<group>"; };
@@ -89,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				966FF00557E4301350608DB9 /* LaunchProbe.swift */,
+				2CABEA1EF7D21362DB90DEB5 /* NewPagesUITests.swift */,
 				50738AFA47D87DDF551CCCAA /* ScreensUITests.swift */,
 			);
 			path = DrusskyUITests;
@@ -125,6 +132,7 @@
 				97D974078BE264B301B0782B /* RhythmView.swift */,
 				D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */,
 				74264D1BFDC2677C7515FBED /* TutorView.swift */,
+				F0E2229B8B2ECBB7855A8CE2 /* WritePageView.swift */,
 				F44B7B2BCE090C576089B5D2 /* WritingStrip.swift */,
 			);
 			path = Views;
@@ -164,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				E9B8787FE5BD39DD4C776BD8 /* InkReader.swift */,
+				B8EF908D6FA69AE1C9862EBA /* PageWriter.swift */,
 				FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */,
 				F5206CA36CCD17DFB27C030F /* Tutor.swift */,
 				E9CAF74155006B1914D2F22E /* Voice.swift */,
@@ -332,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B642A68EF4FACF87C704635A /* LaunchProbe.swift in Sources */,
+				26BFEDE0F6D7B36B2B32BD9F /* NewPagesUITests.swift in Sources */,
 				994826F3FE5E536C3DB865D6 /* ScreensUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +366,7 @@
 				244E83B48DE97484C52D0B55 /* ExerciseViews.swift in Sources */,
 				A009ECABCA825B294FD93098 /* InkReader.swift in Sources */,
 				BC4BD4EC630AE39955A764B6 /* PageView.swift in Sources */,
+				7B7B3708DF0CE9C452DE40F7 /* PageWriter.swift in Sources */,
 				DB3D064DB50315B07FD9D64C /* QA.swift in Sources */,
 				88A1445927806777FE3EB2A2 /* RhythmView.swift in Sources */,
 				5FB598889AC9BDE297B90C65 /* RussianText.swift in Sources */,
@@ -364,6 +375,7 @@
 				E690EE7AE2CCA3D9C9372D1C /* Tutor.swift in Sources */,
 				E57A52723D5F7D80807A53B1 /* TutorView.swift in Sources */,
 				8391837C952CE70C5C196344 /* Voice.swift in Sources */,
+				04B8F12C6DB12D2E379C3989 /* WritePageView.swift in Sources */,
 				EF8F11688BA47BDDA76D86E3 /* WritingStrip.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

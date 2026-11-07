@@ -239,3 +239,74 @@ final class PaperStripView: UIView, UIPencilInteractionDelegate {
         canvas.tool = erasing ? PKEraserTool(.vector) : pen
     }
 }
+
+
+// MARK: - Margin notes
+
+/// A pencil layer over the whole page: write anywhere, like the margins of a real notebook.
+/// Ink lives in a 900-pt-wide coordinate space and scales with the page width.
+struct MarginInk: UIViewRepresentable {
+    static let designWidth: CGFloat = 900
+    @ObservedObject var controller: PadController
+    var enabled: Bool
+    var fingerDrawing: Bool
+
+    func makeUIView(context: Context) -> MarginInkView {
+        let view = MarginInkView()
+        controller.attach(view.canvas)
+        view.canvas.delegate = context.coordinator
+        context.coordinator.controller = controller
+        return view
+    }
+
+    func updateUIView(_ view: MarginInkView, context: Context) {
+        context.coordinator.controller = controller
+        view.isUserInteractionEnabled = enabled
+        view.canvas.isUserInteractionEnabled = enabled
+        #if targetEnvironment(simulator)
+        view.canvas.drawingPolicy = .anyInput
+        #else
+        view.canvas.drawingPolicy = fingerDrawing ? .anyInput : .default
+        #endif
+    }
+
+    func makeCoordinator() -> WritingStrip.Coordinator { WritingStrip.Coordinator() }
+}
+
+final class MarginInkView: UIView, UIPencilInteractionDelegate {
+    let canvas = StripCanvas()
+    private let pencil = PKInkingTool(.pencil, color: UIColor(hex: 0x3A4A66), width: 3)
+    private var erasing = false
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .clear
+        canvas.backgroundColor = .clear
+        canvas.isOpaque = false
+        canvas.isScrollEnabled = false
+        canvas.tool = pencil
+        canvas.accessibilityElementsHidden = true
+        addSubview(canvas)
+        let interaction = UIPencilInteraction()
+        interaction.delegate = self
+        addInteraction(interaction)
+    }
+
+    required init?(coder: NSCoder) { fatalError() }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        canvas.frame = bounds
+        let zoom = max(bounds.width, 1) / MarginInk.designWidth
+        canvas.minimumZoomScale = zoom
+        canvas.maximumZoomScale = zoom
+        canvas.zoomScale = zoom
+        canvas.contentSize = bounds.size
+        canvas.contentOffset = .zero
+    }
+
+    func pencilInteraction(_ interaction: UIPencilInteraction, didReceiveTap tap: UIPencilInteraction.Tap) {
+        erasing.toggle()
+        canvas.tool = erasing ? PKEraserTool(.vector) : pencil
+    }
+}

@@ -6,6 +6,7 @@ struct BookView: View {
     @Environment(Book.self) private var book
     @State private var showContents = false
     @State private var showSettings = false
+    @State private var writeMode: WritePageSheet.Mode?
     @Environment(\.horizontalSizeClass) private var sizeClass
 
     var body: some View {
@@ -17,6 +18,9 @@ struct BookView: View {
         }
         .sheet(isPresented: $showContents) { ContentsView().presentationSizing(.page) }
         .sheet(isPresented: $showSettings) { SettingsView() }
+        .sheet(isPresented: Binding(get: { writeMode != nil }, set: { if !$0 { writeMode = nil } })) {
+            if let writeMode { WritePageSheet(mode: writeMode) }
+        }
         .onAppear {
             showContents = QA.has("-qa-contents")
             showSettings = QA.has("-qa-settings")
@@ -52,6 +56,19 @@ struct BookView: View {
             }
             .disabled(book.currentPage == book.pages.count - 1 && !(book.page?.isFinished ?? false))
             .accessibilityLabel("Next page")
+            Button { book.marginMode.toggle() } label: {
+                Image(systemName: book.marginMode ? "pencil.tip.crop.circle.fill" : "pencil.tip.crop.circle")
+                    .font(.system(size: 20, weight: .medium)).frame(width: 44, height: 44)
+                    .foregroundStyle(book.marginMode ? Theme.redPen : Theme.accent)
+            }
+            .accessibilityLabel(book.marginMode ? "Stop writing in the margins" : "Write in the margins")
+            Menu {
+                Button { writeMode = .practice } label: { Label("A page from my mistakes", systemImage: "wand.and.stars") }
+                Button { writeMode = .text } label: { Label("Read my own text…", systemImage: "doc.text") }
+            } label: {
+                Image(systemName: "plus.square.on.square").font(.system(size: 18, weight: .medium)).frame(width: 44, height: 44)
+            }
+            .accessibilityLabel("Add a page")
             Button { showSettings = true } label: {
                 Image(systemName: "gearshape").font(.system(size: 18, weight: .medium)).frame(width: 44, height: 44)
             }

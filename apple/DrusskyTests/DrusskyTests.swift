@@ -239,4 +239,28 @@ final class DrusskyTests: XCTestCase {
         XCTAssertEqual(review.kind, .translate)
         XCTAssertEqual(review.answerText, "до свида́ния")
     }
+
+    /// The tutor writes real pages (live API; runs only with TEST_RUNNER_DRUSSKY_TUTOR_KEY).
+    func testPageWriterLive() async throws {
+        let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"] ?? ""
+        try XCTSkipIf(key.isEmpty, "no tutor key supplied")
+        let previous = Keychain.apiKey
+        Keychain.apiKey = key
+        defer { Keychain.apiKey = previous }
+        let book = Book(course: try course(), store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        for p in 0..<6 { QA.complete(book, page: p, upTo: .max); book.turnForward() }
+
+        let (practice, pex) = try await PageWriter.write(.practice, book: book) { _ in }
+        print("PRACTICE:", practice.title, "|", pex.count, "of", practice.exercises.count, "usable |", pex.map(\.kind.rawValue))
+        XCTAssertGreaterThanOrEqual(pex.count, 6)
+
+        let story = "Робот проснулся ночью. На станции было тихо. Он посмотрел в окно и увидел звезду, которой вчера не было."
+        let (reading, rex) = try await PageWriter.write(.text(story), book: book) { _ in }
+        print("READING:", reading.title, "|", rex.count, "usable |", rex.map(\.kind.rawValue), "| new words:", reading.new_words?.map(\.ru) ?? [])
+        XCTAssertEqual(rex.first?.kind, .passage)
+        XCTAssertGreaterThanOrEqual(rex.count, 4)
+        book.insertWrittenPage(title: reading.title, intro: reading.intro, unitTitle: "Your text", exercises: rex, newWords: reading.new_words ?? [])
+        XCTAssertEqual(book.page?.unitTitle, "Your text")
+        XCTAssertEqual(book.pages.map(\.number), Array(1...book.pages.count))
+    }
 }
