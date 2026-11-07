@@ -137,6 +137,7 @@ struct LibraryTextHeader: View {
 /// Real texts to read, by level. Opening one makes a reading page — as written or rescaled.
 struct LibrarySheet: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(Book.self) private var book
     @State private var library = Library.load()
     @State private var topic = "all"
 
@@ -159,10 +160,14 @@ struct LibrarySheet: View {
                                     WritePageContent(source: .library(t), onDone: { dismiss() })
                                         .navigationTitle(t.title).navigationBarTitleDisplayMode(.inline)
                                 } label: {
-                                    VStack(alignment: .leading, spacing: 3) {
-                                        Text(t.title).font(Theme.russian(20, weight: .medium))
-                                        Text([t.author, t.title_en].compactMap { $0 }.joined(separator: " · "))
-                                            .font(.system(size: 14)).foregroundStyle(.secondary)
+                                    HStack {
+                                        VStack(alignment: .leading, spacing: 3) {
+                                            Text(t.title).font(Theme.russian(20, weight: .medium))
+                                            Text([t.author, t.title_en].compactMap { $0 }.joined(separator: " · "))
+                                                .font(.system(size: 14)).foregroundStyle(.secondary)
+                                        }
+                                        Spacer()
+                                        ReadabilityBadge(fraction: book.knowledge.readability(of: t.text))
                                     }
                                 }
                             }

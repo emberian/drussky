@@ -12,6 +12,7 @@ struct ContentsView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
                     stats
+                    KnowledgeSection()
                     alphabet
                     if !book.customWords.isEmpty { keptWords }
                     pages
@@ -156,6 +157,7 @@ struct SettingsView: View {
     @Environment(Book.self) private var book
     @Environment(\.dismiss) private var dismiss
     @State private var exportURL: URL?
+    @State private var graphURL: URL?
     @State private var apiKey = Keychain.apiKey ?? ""
 
     var body: some View {
@@ -192,11 +194,18 @@ struct SettingsView: View {
                     Text("Your pages, handwriting and recordings, as one folder.")
                 }
                 Section {
+                    if let graphURL {
+                        ShareLink(item: graphURL) { Label("Export knowledge graph", systemImage: "point.3.connected.trianglepath.dotted") }
+                    }
+                } footer: {
+                    Text("Every letter, word and pattern with its recall per modality, how they connect, and what you confuse, as JSON. The full answer log is events.jsonl in the notebook export.")
+                }
+                Section {
                     NavigationLink("Recordings and credits") { CreditsView() }
                 }
             }
             .navigationTitle("Settings")
-            .task { book.saveNow(); exportURL = book.exportArchive() }
+            .task { book.saveNow(); exportURL = book.exportArchive(); graphURL = book.knowledge.exportGraph() }
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         }
     }

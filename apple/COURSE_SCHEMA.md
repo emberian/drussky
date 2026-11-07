@@ -64,6 +64,11 @@ memorable line in the tutor's voice.
 | `read_meaning` | `text`, `options:[en…]`, `answer` (index) | Reads Russian, picks its meaning. |
 | `passage` | `text`, `en`, optional `glosses:{word: meaning}` | Reads a short text (2–8 sentences); taps any word to see its meaning and hear it; can play the whole text and reveal `en`. Words missing from `glosses` fall back to the lexicon. Gloss keys are the word as written, lowercase, without stress. |
 
+Any exercise may also carry an optional `skills: ["past", "negation"]`: the grammar patterns
+it practises, by construction id from `Resources/lemmas.json` (`gram:` prefix optional). When it is
+absent, the knowledge model tags the exercise from its words (lemma map plus a few word-order
+rules), so authoring it is only needed where the tagger would be wrong.
+
 ## Rules
 
 1. **Letters before use.** A Russian string in any exercise may only use letters already met
@@ -117,3 +122,11 @@ stress marks. Audio is keyed by the stress-marked form in `Audio/index-pairs.jso
 `variants-pairs.json` / `sources-pairs.json` (`scripts/make_pair_audio.py`), so за́мок and
 замо́к never share a clip. Pages are generated locally (`sound_pair` exercises, never authored
 in course.json), from letters already met, weighted toward the contrasts missed most.
+
+# Lemmas — `Drussky/Resources/lemmas.json`
+
+The knowledge model's inflection data: `forms` maps each inflected word as written (lowercase,
+unstressed) to `[lemma, construction…]`, so `"книгу": ["книга", "acc-u"]`. `constructions` lists
+the grammar patterns (`{id, name, note, requires?}`). `requires` gives the prerequisite edges, and
+from those the map's "ready next". Add a form here when the course or library introduces one;
+words absent from the map are their own lemma.

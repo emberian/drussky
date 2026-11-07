@@ -79,11 +79,15 @@ final class Book {
     private let store: BookStore
     private var saveTask: Task<Void, Never>?
     var now: () -> Date = Date.init
+    /// Knowledge components, evidence log (events.jsonl) and per-modality memory (Knowledge/).
+    let knowledge: KnowledgeTracker
 
     init(course: Course, store: BookStore) {
         self.course = course
         self.store = store
-        if let saved = store.loadState() {
+        let saved = store.loadState()
+        knowledge = KnowledgeTracker(course: course, root: store.root, customWords: saved?.customWords ?? [], now: Date.init)
+        if let saved {
             pages = saved.pages
             memories = Dictionary(uniqueKeysWithValues: saved.memories.map { ($0.key, $0) })
             courseCursor = saved.courseCursor
@@ -92,6 +96,8 @@ final class Book {
             customWords = saved.customWords ?? []
             soundStats = saved.soundStats ?? [:]
         }
+        knowledge.now = { [unowned self] in self.now() }
+        knowledge.backfill(pages: pages)
         if pages.isEmpty { _ = appendNextPage() }
     }
 
@@ -220,6 +226,7 @@ final class Book {
                               created: now(), finished: nil), at: at)
         for i in pages.indices { pages[i].number = i + 1 }
         currentPage = at
+        knowledge.refresh(customWords: customWords)
         scheduleSave()
     }
 
@@ -231,6 +238,7 @@ final class Book {
         update(&pages[pageIndex].results[index])
         pages[pageIndex].results[index].updated = now()
         let after = pages[pageIndex].results[index]
+        knowledge.observe(page: pages[pageIndex], index: index, before: before, after: after)
         if !before.status.isComplete && after.status.isComplete && after.learned != true {
             learn(from: pages[pageIndex].exercises[index], result: after.status)
             noteSoundPair(pages[pageIndex].exercises[index], status: after.status)
@@ -359,6 +367,7 @@ final class Book {
         if memories["word:\(key)"] == nil {
             memories["word:\(key)"] = Memory(key: "word:\(key)", stability: 1, due: today.addingTimeInterval(86_400), seen: today)
         }
+        knowledge.refresh(customWords: customWords)
         scheduleSave()
     }
 
@@ -379,6 +388,7 @@ final class Book {
         }
         let note = PageNote(exercise: exercise, turns: turns, date: now())
         notes.append(note)
+        knowledge.askedTutor(page: pages[index], exercise: exercise)
         pages[index].notes = notes
         scheduleSave()
         return note.id
@@ -425,6 +435,7 @@ final class Book {
         if let intro = page.intro { lines.append("Page intro: \(intro)") }
         if let exercise { lines += describe(pageIndex: pageIndex, exercise: exercise) }
         else { lines.append("Exercises on the page: " + page.exercises.indices.map { describe(pageIndex: pageIndex, exercise: $0)[0] }.joined(separator: " ")) }
+        lines.append(knowledge.summary(limit: 5))
         return lines.joined(separator: "\n")
     }
 

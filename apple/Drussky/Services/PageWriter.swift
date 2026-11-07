@@ -94,6 +94,7 @@ enum PageWriter {
         Hardest items lately: \(struggles.isEmpty ? "none recorded" : struggles).
         Recently missed answers: \(recentMisses.isEmpty ? "none" : recentMisses.joined(separator: ", ")).
         Current course page: \(book.page?.title ?? "") (\(book.page?.unitTitle ?? "")).
+        \(book.knowledge.summary())
         """
         switch request {
         case .practice:
@@ -101,7 +102,9 @@ enum PageWriter {
             \(state)
 
             Write a practice page of 8–10 exercises that brings back what they find hardest, mixing modalities \
-            (hear→write, English→write, see→say) and spacing repeats of the same item apart. Use only known words \
+            (hear→write, English→write, see→say) and spacing repeats of the same item apart. Put items they \
+            confuse side by side (a listen_pick between the two, then each written), and exercise each weak \
+            item in its weak modality. Use only known words \
             plus at most two new ones (list them in new_words). No passage.
             """
         case .text(let text):

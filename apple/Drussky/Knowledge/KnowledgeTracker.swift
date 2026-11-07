@@ -1,0 +1,155 @@
+import Foundation
+import LearningCore
+import Observation
+
+/// Drussky's knowledge model: the Russian domain, the evidence log in the notebook folder
+/// (`events.jsonl`) and the model folded from it. Book feeds it every graded result.
+@MainActor
+@Observable
+final class KnowledgeTracker {
+    private(set) var domain: RussianDomain
+    private(set) var model: KnowledgeModel
+    private let log: EventLog
+    private let course: Course
+    private let lemmas: Lemmas
+    private let pairs: SoundPairs
+    private var lastActivity: [String: Date] = [:]
+    private var keptCount: Int
+    var now: () -> Date
+
+    /// The memory groups drawn as growth series.
+    static let growthGroups: [(title: String, modalities: Set<Modality>)] = [
+        ("hear → write", [.hearWrite]), ("English → write", [.meaningWrite]), ("see → say", [.say]),
+        ("recognize", [.hearPick, .readPick]),
+    ]
+
+    init(course: Course, root: URL, customWords: [Course.Word], now: @escaping () -> Date) {
+        self.course = course
+        self.lemmas = Lemmas.load()
+        self.pairs = SoundPairs.load()
+        self.now = now
+        keptCount = customWords.count
+        domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords)
+        log = EventLog(url: root.appendingPathComponent("events.jsonl"))
+        model = KnowledgeModel(events: log.load())
+    }
+
+    var graph: KnowledgeGraph { domain.graph }
+    var logURL: URL { log.url }
+
+    /// Rebuilds the domain when the learner keeps new words, so they appear as components.
+    func refresh(customWords: [Course.Word]) {
+        guard customWords.count != keptCount else { return }
+        keptCount = customWords.count
+        domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords)
+    }
+
+    // MARK: Evidence
+
+    func observe(page: BookPage, index: Int, before: ExerciseResult, after: ExerciseResult) {
+        let t = now()
+        let latency = lastActivity[page.id].map { t.timeIntervalSince($0) }.flatMap { $0 >= 0 && $0 < 600 ? $0 : nil }
+        guard let event = domain.evidence(for: RussianAttempt(page: page, index: index, before: before, after: after,
+                                                             at: t, latency: latency)) else { return }
+        lastActivity[page.id] = t
+        record([event])
+    }
+
+    func askedTutor(page: BookPage, exercise index: Int?) {
+        guard let index, page.exercises.indices.contains(index) else { return }
+        let ex = page.exercises[index]
+        record([LearningEvent(t: now(), type: .help, item: "\(page.id)#\(index)", activity: ex.kind.rawValue,
+                              modality: RussianDomain.modality(for: ex.kind), components: domain.components(for: ex),
+                              help: ["tutor"])])
+    }
+
+    private func record(_ events: [LearningEvent]) {
+        log.append(events)
+        for e in events { model.apply(e) }
+    }
+
+    /// Reconstructs evidence for every finished result that has none yet (notebooks from before
+    /// the log existed, or results written while the log could not be). Idempotent: an item that
+    /// has any event already is skipped, and backfilled ids are deterministic.
+    @discardableResult
+    func backfill(pages: [BookPage]) -> Int {
+        let logged = model.items
+        let ids = Set(model.events.map(\.id))
+        var events: [LearningEvent] = []
+        for page in pages {
+            for (i, r) in page.results.enumerated() where r.status.isComplete && !logged.contains("\(page.id)#\(i)") {
+                let at = r.updated ?? page.finished ?? page.created
+                var before = ExerciseResult()
+                before.attempts = 0
+                if let e = domain.evidence(for: RussianAttempt(page: page, index: i, before: before, after: r, at: at, backfill: true)) {
+                    events.append(e)
+                }
+            }
+            for note in page.notes ?? [] {
+                guard let i = note.exercise, page.exercises.indices.contains(i), !ids.contains("bf-help:\(note.id)"),
+                      !logged.contains("\(page.id)#\(i)") else { continue }
+                let ex = page.exercises[i]
+                events.append(LearningEvent(id: "bf-help:\(note.id)", t: note.date, type: .help, source: "backfill",
+                                            item: "\(page.id)#\(i)", activity: ex.kind.rawValue,
+                                            modality: RussianDomain.modality(for: ex.kind),
+                                            components: domain.components(for: ex), help: ["tutor"]))
+            }
+        }
+        guard !events.isEmpty else { return 0 }
+        log.append(events)
+        model = KnowledgeModel(events: model.events + events)
+        return events.count
+    }
+
+    // MARK: Questions
+
+    func strength(_ id: ComponentID) -> Double? { model.strength(id, at: now()) }
+
+    /// Running-word coverage of a text by words currently retrievable (R ≥ 0.5 in some modality).
+    func readability(of text: String) -> Double { model.coverage(domain.tokens(in: text), at: now()) }
+
+    /// Words (lexemes and phrases) with any evidence.
+    var practisedWords: [ComponentID] {
+        graph.components.keys.filter { ($0.kind == .lexeme || $0.kind == .phrase) && model.hasEvidence($0) }.sorted()
+    }
+
+    func growth() -> (dates: [Date], series: [[Double]]) {
+        let end = now()
+        let dates = model.days(until: end)
+        let words = graph.components.keys.filter { $0.kind == .lexeme || $0.kind == .phrase }
+        return (dates, model.growth(of: Array(words), groups: Self.growthGroups.map(\.modalities), at: dates))
+    }
+
+    func label(_ id: ComponentID) -> String {
+        if let c = graph[id] { return id.kind == .letter ? String(c.label.prefix(1)) : c.label }
+        return id.key
+    }
+
+    /// A compact account of the model for the tutor and the page writer.
+    func summary(limit: Int = 8) -> String {
+        let t = now()
+        guard !model.events.isEmpty else { return "Knowledge model: no evidence yet." }
+        func r(_ x: Double) -> String { String(format: "%.2f", x) }
+        var lines: [String] = []
+        let weak = model.weakest(at: t, kinds: [.lexeme, .form, .phrase, .letter, .construction], limit: limit)
+            .map { "\(label($0.0.component)) (\($0.0.modality.title), recall \(r($0.1)))" }
+        if !weak.isEmpty { lines.append("Weakest memories now: " + weak.joined(separator: "; ") + ".") }
+        let pairs = model.contrastPairs(at: t, limit: 6).map { "\(label($0.0)) ↔ \(label($0.1))" }
+        if !pairs.isEmpty { lines.append("Confuses (practise side by side): " + pairs.joined(separator: ", ") + ".") }
+        let gaps = model.modalityGaps(at: t, among: domain.modalities, kinds: [.lexeme, .form, .phrase], limit: 6)
+            .map { "\(label($0.component)) (strong \($0.strong.title), weak \($0.weak.title))" }
+        if !gaps.isEmpty { lines.append("Modality gaps: " + gaps.joined(separator: "; ") + ".") }
+        let patterns = graph.components(of: .construction).compactMap { c in model.strength(c.id, at: t).map { (c.label, $0) } }
+            .sorted { $0.1 < $1.1 }.prefix(4).map { "\($0.0) \(r($0.1))" }
+        if !patterns.isEmpty { lines.append("Grammar patterns, weakest first: " + patterns.joined(separator: ", ") + ".") }
+        let next = model.frontier(graph, at: t, kinds: [.construction, .phrase, .lexeme], limit: 6).map(label)
+        if !next.isEmpty { lines.append("Ready to learn next (prerequisites strong): " + next.joined(separator: ", ") + ".") }
+        return "Knowledge model (FSRS recall per skill and modality):\n" + lines.joined(separator: "\n")
+    }
+
+    func exportGraph() -> URL? {
+        let doc = GraphExport(domain: domain.name, modalities: domain.modalities, graph: graph, model: model, at: now())
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("Drussky knowledge graph.json")
+        do { try doc.json().write(to: url, options: .atomic); return url } catch { return nil }
+    }
+}
