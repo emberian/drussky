@@ -90,10 +90,12 @@ final class SpeechCheck {
 
     private func stopMeter() { meter?.invalidate(); meter = nil; level = 0 }
 
-    static func permissions() async -> Bool {
+    /// Nonisolated on purpose: the system answers permission requests on a background queue,
+    /// and a main-actor closure there traps at runtime (Swift 6 isolation check).
+    nonisolated static func permissions() async -> Bool {
         let mic = await AVAudioApplication.requestRecordPermission()
-        let speech = await withCheckedContinuation { c in
-            SFSpeechRecognizer.requestAuthorization { c.resume(returning: $0 == .authorized) }
+        let speech = await withCheckedContinuation { (c: CheckedContinuation<Bool, Never>) in
+            SFSpeechRecognizer.requestAuthorization { @Sendable status in c.resume(returning: status == .authorized) }
         }
         return mic && speech
     }
@@ -106,6 +108,7 @@ final class SpeechCheck {
         if recognizer.supportsOnDeviceRecognition { request.requiresOnDeviceRecognition = true }
         return await withCheckedContinuation { continuation in
             var resumed = false
+            recognizer.queue = .main  // results land on the main actor this function runs on
             recognizer.recognitionTask(with: request) { result, error in
                 guard !resumed else { return }
                 if let result, result.isFinal {
