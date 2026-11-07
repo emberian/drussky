@@ -2,3 +2,5 @@
 *.xcodeproj/xcuserdata/
 *.xcodeproj/project.xcworkspace/xcuserdata/
 PrivatePack/
+# Bundled audio is rebuilt from the tracked manifests: python3 scripts/audio.py restore
+Drussky/Resources/Audio/*.m4a

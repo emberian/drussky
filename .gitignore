@@ -18,3 +18,8 @@ dist/
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
+
+# Audio is generated data: rebuild with apple/scripts/audio.py restore
+*.m4a
+*.wav
+*.ogg

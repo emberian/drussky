@@ -61,6 +61,22 @@ The book icon (top left) opens your alphabet — each letter in **your own handw
 you've met it — and every page so far with its mark. Settings: finger drawing, cursive
 models, stress marks, notebook export (pages, ink, recordings as a zip), credits.
 
+## Audio
+
+The clips (`Drussky/Resources/Audio/*.m4a`) are not in git; their manifests are. After cloning,
+before building:
+
+```sh
+.local/silero-tts/venv/bin/python apple/scripts/audio.py restore   # from the repo root
+```
+
+It rebuilds every clip named in `Audio/index*.json` / `variants*.json`: from the local original
+cache in `.local/` if present, else by downloading the recorded original (Wikimedia Commons,
+Tatoeba), else by re-synthesizing the recorded Silero input; then trims, levels and encodes it as
+the generators did. Plain `python3` works when nothing needs synthesis. `audio.py status --plan`
+shows what is missing and how it would come back; `audio.py verify` checks that every clip exists,
+decodes and has provenance.
+
 ## Building
 
 ```sh

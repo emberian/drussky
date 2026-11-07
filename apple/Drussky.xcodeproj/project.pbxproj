@@ -57,6 +57,7 @@
 		C7500491DCE324EF0FE52467 /* strokes.json in Resources */ = {isa = PBXBuildFile; fileRef = B9BFAF35608759712621C94D /* strokes.json */; };
 		C7A50DB49B573DC7BE60B579 /* KnowledgeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498F96495BEEB942967BA522 /* KnowledgeMapView.swift */; };
 		C9C00EFC1AA03C2C85489463 /* LearningCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A3C4AAD0A283ABF063186 /* LearningCoreTests.swift */; };
+		D1AA7E1AB37F8557A6B66B01 /* library.json in Resources */ = {isa = PBXBuildFile; fileRef = F66C50789A2CD8461AE31E6F /* library.json */; };
 		D3A0E99EAF001AFDB22943D0 /* SpeechCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */; };
 		DB3D064DB50315B07FD9D64C /* QA.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2183BBBE99C1790444D983 /* QA.swift */; };
 		E57A52723D5F7D80807A53B1 /* TutorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74264D1BFDC2677C7515FBED /* TutorView.swift */; };
@@ -185,6 +186,7 @@
 		F0E2229B8B2ECBB7855A8CE2 /* WritePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePageView.swift; sourceTree = "<group>"; };
 		F44B7B2BCE090C576089B5D2 /* WritingStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingStrip.swift; sourceTree = "<group>"; };
 		F5206CA36CCD17DFB27C030F /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
+		F66C50789A2CD8461AE31E6F /* library.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = library.json; sourceTree = "<group>"; };
 		F7B358D7400C07670977C09B /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechCheck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -295,6 +297,7 @@
 				76FA98F7CF39CE01A5ADCC7A /* Audio */,
 				386E28FC654C1880C29D1332 /* course.json */,
 				4DB996D908029A1780AC509E /* lemmas.json */,
+				F66C50789A2CD8461AE31E6F /* library.json */,
 				48B9C2E0AE3895D9F96B94A8 /* pairs.json */,
 				B9BFAF35608759712621C94D /* strokes.json */,
 				BD11DB255B4E8119378B74FD /* Fonts */,
@@ -553,6 +556,7 @@
 				0F5E7EA89A56898D930132AF /* PrivatePack in Resources */,
 				0619713939B412884AEF4DFF /* course.json in Resources */,
 				38A0E413208B3DC981A69072 /* lemmas.json in Resources */,
+				D1AA7E1AB37F8557A6B66B01 /* library.json in Resources */,
 				F082298B2B042C1136782201 /* pairs.json in Resources */,
 				C7500491DCE324EF0FE52467 /* strokes.json in Resources */,
 			);

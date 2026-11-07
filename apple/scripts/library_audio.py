@@ -3,8 +3,8 @@
 
   python3 apple/scripts/library_audio.py <takes.json> [--audio-dir DIR]
 
-takes.json: list of {ru, key, file, wav, speaker, license, audio_id, id, attribution_url} where `wav` is
-the take already trimmed and levelled by audio_level.level (see .local/drussky-library/tools/), `file` the
+takes.json: list of {ru, key, file, wav, raw, speaker, license, audio_id, id, attribution_url} where `raw` is
+the downloaded original and `wav` the take already trimmed and levelled by audio_level.level (see .local/drussky-library/tools/), `file` the
 m4a name (make_audio.slug(key) + ".m4a"). Default audio dir: Drussky/Resources/Audio; the private pack
 uses PrivatePack/Audio.
 
@@ -18,6 +18,8 @@ from pathlib import Path
 
 APPLE = Path(__file__).resolve().parents[1]
 SET = "library-sentences"
+sys.path.insert(0, str(APPLE / "scripts"))
+from audio_store import restore_fields  # noqa: E402
 
 
 def encode(wav, m4a):
@@ -54,6 +56,7 @@ def main():
             "source_page": f"https://tatoeba.org/en/sentences/show/{t['id']}",
             "audio_url": f"https://tatoeba.org/en/audio/download/{t['audio_id']}",
             "processing": "trimmed and levelled with scripts/audio_level.py, AAC 64 kbps; text confirmed by local Qwen3-ASR",
+            **restore_fields(t["raw"], url=f"https://tatoeba.org/en/audio/download/{t['audio_id']}"),
         }
     ip.write_text(json.dumps(dict(sorted(index.items())), ensure_ascii=False, indent=1) + "\n")
     sp.write_text(json.dumps(dict(sorted(sources.items())), ensure_ascii=False, indent=1) + "\n")

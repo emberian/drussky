@@ -234,6 +234,7 @@ def translit(s, n):
 def build():
     sys.path.insert(0, str(APPLE / "scripts"))
     from make_audio import to_m4a
+    from audio_store import Silero, commons_url, restore_fields, silero_fields
     want = words()
     cand = json.loads((WORK / "cand.json").read_text())
     meta = json.loads((WORK / "meta.json").read_text())
@@ -243,7 +244,7 @@ def build():
     main_variants = json.loads((AUDIO / "variants.json").read_text())
     used_titles = {v.get("title") for v in main_sources.values()}
     index, variants, sources = {}, {}, {}
-    loaded = None
+    silero = Silero(threads=2)
     for k, (form, pinned) in sorted(want.items()):
         # Voices the main audio already has for this word (only when stress cannot be confused).
         existing = []
@@ -268,7 +269,8 @@ def build():
             if not (AUDIO / name).exists():
                 to_m4a(find_orig(t), AUDIO / name)
             sources[name] = {"key": k, "kind": "human_recording", "title": t[5:], "author": spk,
-                             "license": m.get("license"), "source_page": m.get("page"), "speaker": spk}
+                             "license": m.get("license"), "source_page": m.get("page"), "speaker": spk,
+                             **restore_fields(find_orig(t), url=commons_url(t))}
             files.append(name)
         humans = len(existing) + len(files)
         for voice in SILERO_VOICES[: max(0, 2 - humans) + (1 if humans == 0 else 0)]:
@@ -278,20 +280,12 @@ def build():
                 wav = WORK / "wav" / (name[:-4] + ".wav")
                 wav.parent.mkdir(parents=True, exist_ok=True)
                 if not wav.exists():
-                    if loaded is None:
-                        sys.path.insert(0, str(MAIN / "scripts/speech"))
-                        import silero_gateway as gateway
-                        from silero_worker import encode_wav
-                        loaded = gateway.load_model()
-                    loaded.torch.manual_seed(42)
-                    with loaded.torch.inference_mode():
-                        audio = loaded.model.apply_tts(text=synth, speaker=voice, sample_rate=24000, **gateway.EXPLICIT_FLAGS)
-                    data, frames, signals = encode_wav(audio.detach().cpu().tolist())
-                    assert signals["clipped_samples"] == 0, (synth, signals)
+                    data, _ = silero.wav(synth, voice)
                     wav.write_bytes(data)
                     print("silero", voice, synth, flush=True)
                 to_m4a(wav, AUDIO / name)
-            sources[name] = {"key": k, "kind": "ai_generated_speech", "provider": f"Silero v5_6_ru, voice {voice} (CC BY-NC-SA 4.0)", "input": synth}
+            sources[name] = {"key": k, "kind": "ai_generated_speech", "provider": f"Silero v5_6_ru, voice {voice} (CC BY-NC-SA 4.0)", "input": synth,
+                             **restore_fields(WORK / "wav" / (name[:-4] + ".wav"), synth=silero_fields(synth, voice))}
             files.append(name)
         if not existing and files:
             index[k] = files[0]
@@ -318,6 +312,7 @@ def intonation(index, sources):
     """Copies the INTONATION clips in and files them as read-aloud models for their sentences."""
     sys.path.insert(0, str(APPLE / "scripts"))
     from make_audio import to_m4a
+    from audio_store import commons_url, restore_fields
     meta = json.loads((WORK / "meta.json").read_text())
     for name, (key, title) in INTONATION.items():
         if not (AUDIO / name).exists():
@@ -326,7 +321,8 @@ def intonation(index, sources):
         spk = speaker_of(title, m)
         index[key] = name
         sources[name] = {"key": key, "kind": "human_recording", "title": title[5:], "author": spk,
-                         "license": m.get("license"), "source_page": m.get("page"), "speaker": spk}
+                         "license": m.get("license"), "source_page": m.get("page"), "speaker": spk,
+                         **restore_fields(find_orig(title), url=commons_url(title))}
 
 
 if __name__ == "__main__":

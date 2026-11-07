@@ -972,6 +972,10 @@
    "en": "Once more, please."
   },
   {
+   "ru": "Поме́дленнее, пожа́луйста.",
+   "en": "Slower, please."
+  },
+  {
    "ru": "ещё раз",
    "en": "once more, again"
   },
@@ -1329,8 +1333,8 @@
    "en": "read, was reading (he)"
   },
   {
-   "ru": "зада́чу",
-   "en": "problem (as the object)"
+   "ru": "рабо́ту",
+   "en": "work (as the object)"
   },
   {
    "ru": "прочита́ть",
@@ -1357,8 +1361,12 @@
    "en": "for a long time"
   },
   {
-   "ru": "бу́ду",
+   "ru": "я бу́ду",
    "en": "I will (with an infinitive)"
+  },
+  {
+   "ru": "бу́ду",
+   "en": "will (I; with an infinitive)"
   },
   {
    "ru": "бу́дешь",
@@ -2747,24 +2755,24 @@
        "answer": "до́ма"
       },
       {
+       "kind": "passage",
+       "text": "Кто там? Э́то ма́ма. Ма́ма до́ма. А где кот? Кот тут.",
+       "en": "Who is there? It's mom. Mom is at home. And where is the cat? The cat is here."
+      },
+      {
        "kind": "read_meaning",
-       "text": "Кто до́ма?",
+       "text": "А где кот? Кот тут.",
        "options": [
-        "Where is the house?",
-        "Who is there?",
-        "Who is at home?"
+        "And where is the cat? The cat is here.",
+        "And who is the cat? The cat is mom.",
+        "And where is mom? Mom is at home."
        ],
-       "answer": 2
+       "answer": 0
       },
       {
        "kind": "copy",
        "text": "Где вода́? Вода́ тут.",
        "times": 1
-      },
-      {
-       "kind": "passage",
-       "text": "Кто там? Э́то ма́ма. Ма́ма до́ма. А где кот? Кот тут.",
-       "en": "Who is there? It's mom. Mom is at home. And where is the cat? The cat is here."
       }
      ]
     }
@@ -2918,7 +2926,7 @@
       },
       {
        "kind": "explain",
-       "text": "Five vowels come in pairs, hard and soft: а/я, у/ю, э/е, о/ё, ы/и. At the start of a word я, ю, е and ё begin with a y. After a consonant the soft letters make the consonant itself soft (three you will meet later always stay hard).",
+       "text": "Five vowels come in pairs, hard and soft: а/я, у/ю, э/е, о/ё, ы/и. At the start of a word or after a vowel (моя́, моё), я, ю, е and ё begin with a y. After a consonant the soft letters make the consonant itself soft (three you will meet later always stay hard).",
        "examples": [
         {
          "ru": "да",
@@ -3436,7 +3444,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Лук and люк have the same oo sound; the difference is the л, hard in лук and soft in люк. The vowel letter is only how the spelling shows it.",
+       "text": "Лук and люк have the same oo sound; the difference you hear is the л, hard in лук and soft in люк. The vowel letter is only how the spelling shows it.",
        "examples": [
         {
          "ru": "лук",
@@ -3507,7 +3515,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "A soft consonant is not a consonant plus y: the middle of the tongue rises toward the roof of the mouth while you say it. Брат and брать differ only in that т. At the end of a word б, в, г, д, ж, з lose their voice: хлеб ends in a p, го́род in a t.",
+       "text": "A soft consonant is not a consonant plus y: the middle of the tongue rises toward the roof of the mouth while you say it. Брат and брать differ only in that т. At the end of a word, and before a voiceless consonant, б, в, г, д, ж, з lose their voice: хлеб ends in a p, ло́жка says losh-ka.",
        "examples": [
         {
          "ru": "брат",
@@ -3522,8 +3530,8 @@
          "en": "bread"
         },
         {
-         "ru": "го́род",
-         "en": "city"
+         "ru": "ло́жка",
+         "en": "spoon"
         }
        ]
       },
@@ -3808,7 +3816,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Я не понима́ю is I don't understand. Ещё раз, пожа́луйста asks for it once more, and ме́дленно, пожа́луйста asks for it slowly.",
+       "text": "Я не понима́ю is I don't understand. Ещё раз, пожа́луйста asks for it once more, and поме́дленнее, пожа́луйста asks for it slower.",
        "examples": [
         {
          "ru": "Я не понима́ю.",
@@ -3819,8 +3827,8 @@
          "en": "Once more, please."
         },
         {
-         "ru": "Ме́дленно, пожа́луйста.",
-         "en": "Slowly, please."
+         "ru": "Поме́дленнее, пожа́луйста.",
+         "en": "Slower, please."
         }
        ]
       },
@@ -3833,13 +3841,13 @@
        "say": "Ещё раз, пожа́луйста.",
        "options": [
         "Ещё раз, пожа́луйста.",
-        "Ме́дленно, пожа́луйста.",
+        "Поме́дленнее, пожа́луйста.",
         "Я не понима́ю."
        ]
       },
       {
        "kind": "dictation",
-       "text": "Ме́дленно, пожа́луйста."
+       "text": "Поме́дленнее, пожа́луйста."
       },
       {
        "kind": "translate",
@@ -3871,7 +3879,7 @@
        "kind": "fill",
        "before": "Что ",
        "after": " «соль»?",
-       "hint": "What does the word for salt mean?",
+       "hint": "What does «sol'» mean?",
        "answer": "зна́чит"
       },
       {
@@ -4095,22 +4103,22 @@
        "times": 1
       },
       {
-       "kind": "read_meaning",
-       "text": "Ещё ко́фе? — Да, пожа́луйста.",
-       "options": [
-        "More coffee? — Yes, please.",
-        "More tea? — No, thanks.",
-        "Is the coffee tasty? — Yes."
-       ],
-       "answer": 0
-      },
-      {
        "kind": "passage",
        "text": "— До́брое у́тро! Ко́фе?\n— Да, пожа́луйста.\n— Вот ко́фе, хлеб и сыр.\n— Спаси́бо! О́чень вку́сно.\n— Ещё ко́фе?\n— Нет, спаси́бо.",
        "en": "“Good morning! Coffee?” “Yes, please.” “Here's coffee, bread and cheese.” “Thank you! Very tasty.” “More coffee?” “No, thanks.”",
        "glosses": {
         "доброе": "good (доброе утро: good morning)"
        }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "— Ещё ко́фе? — Нет, спаси́бо.",
+       "options": [
+        "“More coffee?” “Yes, please.”",
+        "“Is the coffee tasty?” “No.”",
+        "“More coffee?” “No, thanks.”"
+       ],
+       "answer": 2
       }
      ]
     },
@@ -4197,16 +4205,16 @@
     {
      "id": "u14-p5",
      "title": "What would you say?",
-     "intro": "Moments at the table. Answer each one the way you would, then check.",
+     "intro": "Moments at the table. Each has one phrase from these pages that fits: write it, then check.",
      "exercises": [
       {
        "kind": "translate",
-       "en": "Your housemate offers you coffee. Accept politely.",
+       "en": "Your housemate offers you coffee. Say yes, please.",
        "answer": "Да, пожа́луйста."
       },
       {
        "kind": "translate",
-       "en": "You'd like more porridge. Ask.",
+       "en": "You'd like more porridge. Ask whether you may have more.",
        "answer": "Мо́жно ещё?"
       },
       {
@@ -4220,19 +4228,19 @@
       },
       {
        "kind": "translate",
-       "en": "Someone thanks you. Reply.",
+       "en": "Someone thanks you. Say you're welcome.",
        "answer": "пожа́луйста"
       },
       {
        "kind": "fill",
-       "before": "— Прия́тного аппети́та! — Спаси́бо, ",
+       "before": "— Прия́тного аппети́та! — Спаси́бо, и ",
        "after": "!",
        "hint": "Enjoy your meal! — Thanks, you too!",
-       "answer": "и тебе́"
+       "answer": "тебе́"
       },
       {
        "kind": "translate",
-       "en": "You didn't catch that. Ask for it once more.",
+       "en": "You didn't catch that. Ask for it once more, please.",
        "answer": "Ещё раз, пожа́луйста."
       },
       {
@@ -4245,7 +4253,7 @@
       },
       {
        "kind": "translate",
-       "en": "Dinner is ready. Tell everyone.",
+       "en": "Dinner is ready. Announce it.",
        "answer": "У́жин гото́в!"
       }
      ]
@@ -4462,19 +4470,19 @@
        "times": 1
       },
       {
-       "kind": "read_meaning",
-       "text": "Э́то не моя́ ча́шка.",
-       "options": [
-        "This is my cup.",
-        "Where is my cup?",
-        "This is not my cup."
-       ],
-       "answer": 2
-      },
-      {
        "kind": "passage",
        "text": "Что э́то? Э́то стол. А э́то? Э́то не стол, э́то стул. Где моя́ ча́шка? Вот она́.",
        "en": "What is this? It's a table. And this? It's not a table, it's a chair. Where is my cup? Here it is."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Э́то не стол, э́то стул.",
+       "options": [
+        "This is not a chair, it's a table.",
+        "This is not my cup.",
+        "This is not a table, it's a chair."
+       ],
+       "answer": 2
       }
      ]
     },
@@ -4485,7 +4493,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Most plurals add -ы, or -и after к, г, х, ж, ш, ч, щ: стол, столы́; ча́шка, ча́шки. Neuter -о becomes -а: окно́, о́кна. The stress can move, so learn each plural by ear.",
+       "text": "A consonant adds -ы and -а becomes -ы: стол, столы́; -я and -ь become -и. After к, г, х, ж, ш, ч, щ it is always -и, never -ы: ча́шка, ча́шки. Neuter -о becomes -а, and the stress can move: окно́, о́кна.",
        "examples": [
         {
          "ru": "столы́",
@@ -4596,8 +4604,8 @@
        "say": "но́вое",
        "options": [
         "но́вый",
-        "но́вая",
-        "но́вое"
+        "но́вое",
+        "но́вые"
        ]
       },
       {
@@ -4877,7 +4885,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Eleven to nineteen are the number plus -на́дцать, with the stress on the number: оди́ннадцать, двена́дцать, трина́дцать. Twenty is два́дцать.",
+       "text": "Eleven to nineteen are the number plus -на́дцать; два becomes две, and a final ь drops: двена́дцать, пятна́дцать. The stress falls on that на except in оди́ннадцать and четы́рнадцать. Twenty is два́дцать.",
        "examples": [
         {
          "ru": "оди́ннадцать",
@@ -5491,7 +5499,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Swap есть for нет and change the ending: a consonant adds -а, -а becomes -ы (-и after к, ж, ш), -ь becomes -и, -о becomes -а. Ко́фе never changes.",
+       "text": "Swap есть for нет and change the ending: a consonant adds -а (хлеб, хле́ба), -й becomes -я (чай, ча́я), and -о becomes -а. -а becomes -ы, or -и after к, г, х, ж, ш, ч, щ, and -ь becomes -и (соль, со́ли). Ко́фе never changes.",
        "examples": [
         {
          "ru": "У меня́ нет хле́ба.",
@@ -7138,8 +7146,8 @@
          "en": "I read the book (to the end)."
         },
         {
-         "ru": "Она́ сде́лала зада́чу.",
-         "en": "She did the problem (and finished it)."
+         "ru": "Она́ сде́лала рабо́ту.",
+         "en": "She did the work (and finished it)."
         }
        ]
       },
@@ -7154,16 +7162,16 @@
       },
       {
        "kind": "fill",
-       "before": "Он до́лго чита́л, но не ",
+       "before": "Он до́лго чита́л кни́гу, но не ",
        "after": ".",
-       "hint": "He read for a long time, but didn't finish.",
+       "hint": "He read the book for a long time, but didn't finish it.",
        "answer": "прочита́л"
       },
       {
        "kind": "fill",
        "before": "Мы ",
-       "after": " зада́чу.",
-       "hint": "We did the problem (and finished it).",
+       "after": " рабо́ту.",
+       "hint": "We did the work (and finished it).",
        "answer": "сде́лали"
       },
       {
@@ -7358,7 +7366,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "For an activity in the future, use бу́ду with the infinitive: за́втра я бу́ду чита́ть. A finishing verb with present endings is already future: я прочита́ю, I will read it through.",
+       "text": "For an activity in the future, use бу́ду with the infinitive: за́втра я бу́ду чита́ть. Бу́ду goes бу́ду, бу́дешь, бу́дет, бу́дем, бу́дете, бу́дут. A finishing verb with present endings is already future: я прочита́ю, I will read it through.",
        "examples": [
         {
          "ru": "За́втра я бу́ду рабо́тать.",
@@ -7386,7 +7394,7 @@
       {
        "kind": "translate",
        "en": "I will (with an infinitive)",
-       "answer": "бу́ду"
+       "answer": "я бу́ду"
       },
       {
        "kind": "fill",
@@ -8229,7 +8237,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Де́лится на два is is divisible by two. Кото́рое joins a description to a neuter noun: число́, кото́рое де́лится на два. Два, умно́женное на три is two multiplied by three.",
+       "text": "Де́лится на два means is divisible by two. Кото́рое joins a description to a neuter noun: число́, кото́рое де́лится на два. Два, умно́женное на три is two multiplied by three.",
        "examples": [
         {
          "ru": "Во́семь де́лится на два.",
@@ -8242,6 +8250,10 @@
         {
          "ru": "Чётное число́ — э́то число́, кото́рое де́лится на два.",
          "en": "An even number is a number that is divisible by two."
+        },
+        {
+         "ru": "Пять — це́лое число́.",
+         "en": "Five is a whole number (an integer)."
         }
        ]
       },

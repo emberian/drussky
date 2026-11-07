@@ -7,22 +7,21 @@ course's explicit stress marks. Run with the Silero venv python:
 
   .local/silero-tts/venv/bin/python apple/scripts/make_audio.py [--plan]
 
---plan only prints what would be reused/generated. Existing generated WAVs in the
+--plan only prints what would be reused/generated. --missing touches only keys with no
+clip in index.json yet (everything already built is kept as it is, nothing re-encoded). Existing generated WAVs in the
 scratch directory are reused, so the script resumes after interruption.
 """
 import hashlib
 import re
 import json
-import subprocess
 import sys
-import wave
 from pathlib import Path
 
 APPLE = Path(__file__).resolve().parents[1]
 REPO = APPLE.parent
 sys.path.insert(0, str(APPLE / "scripts"))
 from validate_course import key, spoken_strings  # noqa: E402
-from audio_level import decode, level, to_wav  # noqa: E402
+from audio_store import MACOS_SETTINGS, Silero, commons_url, encode, restore_fields, silero_fields  # noqa: E402
 
 COURSE = APPLE / "Drussky/Resources/course.json"
 AUDIO = APPLE / "Drussky/Resources/Audio"
@@ -84,6 +83,13 @@ def silero_text(text):
     return s if s[-1] in ".?!…" else s + "."
 
 
+def human_restore(k, h):
+    """restore_fields arguments for a chosen human_audio.json take: a Commons URL, or the macOS input."""
+    if h["kind"] == "macos_tts":
+        return {"synth": {"input": k, "voice": "Milena", "synth": MACOS_SETTINGS}}
+    return {"url": commons_url(h["title"])}
+
+
 def plan():
     course = json.loads(COURSE.read_text())
     wanted = {}
@@ -108,17 +114,17 @@ def plan():
 
 def to_m4a(src, m4a):
     """Trim silence, level to a common loudness, encode AAC."""
-    pcm, _ = level(decode(src))
-    leveled = SCRATCH / "level" / (m4a.stem + ".wav")
-    leveled.parent.mkdir(parents=True, exist_ok=True)
-    leveled.write_bytes(to_wav(pcm))
-    tmp = m4a.with_suffix(".tmp.m4a")
-    subprocess.run(["afconvert", "-f", "m4af", "-d", "aac", "-b", "64000", str(leveled), str(tmp)], check=True)
-    tmp.replace(m4a)
+    encode(src, m4a, SCRATCH / "level")
 
 
 def main():
     wanted, human, reuse, generate, kinds, manifest = plan()
+    if "--missing" in sys.argv:
+        built = json.loads((AUDIO / "index.json").read_text())
+        have = {k for k, f in built.items() if (AUDIO / f).is_file()}
+        human = {k: v for k, v in human.items() if k not in have}
+        reuse = {k: v for k, v in reuse.items() if k not in have}
+        generate = {k: v for k, v in generate.items() if k not in have}
     print(f"{len(wanted)} keys: chosen human/macOS {len(human)}, reuse {len(reuse)} ({sum(kinds.get(v) == 'human_recording' for v in reuse.values())} human), generate {len(generate)}")
     if "--plan" in sys.argv:
         for k, s in generate.items():
@@ -133,7 +139,8 @@ def main():
         name = slug(k) + ".m4a"
         to_m4a(REPO / h["orig"], AUDIO / name)
         index[k] = name
-        sources[name] = {"key": k, **{f: h[f] for f in ("kind", "title", "author", "credit", "license", "source_page", "provider") if h.get(f)}}
+        sources[name] = {"key": k, **{f: h[f] for f in ("kind", "title", "author", "credit", "license", "source_page", "provider") if h.get(f)},
+                         **restore_fields(REPO / h["orig"], **human_restore(k, h))}
 
     for k, fid in reuse.items():
         name = slug(k) + ".m4a"
@@ -141,36 +148,24 @@ def main():
         index[k] = name
         p = credits.get(fid, {})
         sources[name] = {"key": k, "from": f"crates/rufren-app/assets/foundations/{fid}.wav", "kind": kinds.get(fid),
-                         **({"credit": p.get("credit"), "license": p.get("license"), "source_page": p.get("source_page")} if kinds.get(fid) == "human_recording" else {})}
+                         **({"credit": p.get("credit"), "license": p.get("license"), "source_page": p.get("source_page")} if kinds.get(fid) == "human_recording" else {}),
+                         **restore_fields(FOUNDATION / f"{fid}.wav")}
 
-    loaded = None
+    silero = Silero(threads=4)
     for n, (k, text) in enumerate(generate.items(), 1):
         name = slug(k)
         synth = SYNTH_FINAL.get(k) or silero_text(SYNTH_OVERRIDES.get(k, text))
         wav = SCRATCH / "wav" / f"{name}-{hashlib.sha1(synth.encode()).hexdigest()[:6]}.wav"
         if not wav.exists():
-            if loaded is None:
-                sys.path.insert(0, str(REPO / "scripts/speech"))
-                import silero_gateway as gateway
-                from silero_worker import encode_wav
-                loaded = gateway.load_model()
-                loaded.torch.set_num_threads(4)
-                flags = dict(gateway.EXPLICIT_FLAGS)
             # Long texts (passages) are synthesized sentence by sentence and joined with short pauses.
-            parts = [synth] if len(synth) <= 160 else [x for x in re.split(r"(?<=[.!?…»])\s+", synth) if x.strip()]
-            samples = []
-            for i, part in enumerate(parts):
-                if i:
-                    samples += [0.0] * int(24000 * 0.35)
-                samples += loaded.samples(part, flags)
-            data, frames, signals = encode_wav(samples)
-            assert signals["clipped_samples"] == 0, (text, signals)
+            data, frames = silero.wav(synth, "xenia")
             wav.with_suffix(".tmp").write_bytes(data)
             wav.with_suffix(".tmp").replace(wav)
             print(f"[{n}/{len(generate)}] {synth} {frames / 24000:.2f}s", flush=True)
         to_m4a(wav, AUDIO / f"{name}.m4a")
         index[k] = f"{name}.m4a"
-        sources[f"{name}.m4a"] = {"key": k, "kind": "ai_generated_speech", "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)", "input": synth}
+        sources[f"{name}.m4a"] = {"key": k, "kind": "ai_generated_speech", "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)", "input": synth,
+                                    **restore_fields(wav, synth=silero_fields(synth, "xenia"))}
 
     # Extra-speaker clips are built by make_variants.py; keep their provenance.
     variants_path = AUDIO / "variants.json"

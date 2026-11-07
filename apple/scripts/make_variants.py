@@ -19,6 +19,7 @@ APPLE = Path(__file__).resolve().parents[1]
 REPO = APPLE.parent
 sys.path.insert(0, str(APPLE / "scripts"))
 from make_audio import AUDIO, TRANSLIT, to_m4a  # noqa: E402
+from audio_store import commons_url, restore_fields  # noqa: E402
 
 CHOSEN = APPLE / "scripts/variant_audio.json"
 FIELDS = ("kind", "title", "author", "credit", "license", "source_page", "speaker")
@@ -46,7 +47,8 @@ def main():
             assert f != index[k] and f not in files, (k, f)
             if not (AUDIO / f).exists():
                 to_m4a(REPO / t["orig"], AUDIO / f)
-            sources[f] = {"key": k, "kind": "human_recording", **{x: t[x] for x in FIELDS[1:] if t.get(x)}}
+            sources[f] = {"key": k, "kind": "human_recording", **{x: t[x] for x in FIELDS[1:] if t.get(x)},
+                          **restore_fields(REPO / t["orig"], url=commons_url(t["title"]))}
             files.append(f)
         variants[k] = files
     (AUDIO / "variants.json").write_text(json.dumps(variants, ensure_ascii=False, indent=1) + "\n")
