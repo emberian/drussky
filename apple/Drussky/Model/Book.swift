@@ -143,6 +143,37 @@ final class Book {
         return true
     }
 
+    /// Ear training from human-recorded sentences, mostly made of words the learner knows:
+    /// write what you hear, and pick which of three similar sentences was said. Different
+    /// speakers each time (high-variability listening).
+    func earTraining(from sentences: [Library.Sentence], hasAudio: (String) -> Bool) -> [Exercise] {
+        let known = Set(memories.keys.filter { $0.hasPrefix("word:") }.map { String($0.dropFirst(5)) })
+            .union(customWords.map { RussianText.key($0.ru) })
+        func coverage(_ s: Library.Sentence) -> Double {
+            let words = RussianText.key(s.ru).split(separator: " ").map(String.init)
+            guard !words.isEmpty else { return 0 }
+            return Double(words.filter { known.contains($0) }.count) / Double(words.count)
+        }
+        let met = Set(course.letters.filter { letterKnown($0.upper) }.map(\.upper))
+        let pool = sentences.filter { hasAudio($0.ru) && RussianText.letters(in: $0.ru).isSubset(of: met)
+                                      && RussianText.key($0.ru).split(separator: " ").count <= 6 }
+            .sorted { coverage($0) > coverage($1) }
+        let chosen = Array(pool.prefix(14).shuffled().prefix(8))
+        var out: [Exercise] = []
+        for (i, s) in chosen.enumerated() {
+            if i % 2 == 0 {
+                var e = Exercise(kind: .dictation); e.text = s.ru
+                out.append(e)
+            } else {
+                let others = pool.filter { $0 != s }.sorted {
+                    abs($0.ru.count - s.ru.count) < abs($1.ru.count - s.ru.count) }.prefix(2).map(\.ru)
+                var e = Exercise(kind: .listenPick); e.say = s.ru; e.options = ([s.ru] + others).shuffled()
+                out.append(e)
+            }
+        }
+        return out
+    }
+
     /// Expertise reversal: scaffolds that help a novice get in the way once an item is secure.
     /// A word recalled right at least twice without a miss loses its support on later pages:
     /// trace → copy, copy → write it from hearing.
