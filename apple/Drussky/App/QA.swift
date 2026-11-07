@@ -35,6 +35,15 @@ enum QA {
             #endif
             book.turnForward()
         }
+        if let i = ProcessInfo.processInfo.arguments.firstIndex(of: "-qa-until"), i + 1 < ProcessInfo.processInfo.arguments.count {
+            let target = ProcessInfo.processInfo.arguments[i + 1]
+            var guardCount = 0
+            while book.page?.sourceID != target && guardCount < 300 {
+                complete(book, page: book.currentPage, upTo: Int.max)
+                book.turnForward()
+                guardCount += 1
+            }
+        }
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
         book.saveNow()
     }
