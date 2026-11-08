@@ -35,7 +35,6 @@ enum QA {
     }
 
     static func apply(to book: Book) {
-        if has("-qa-baseline") { _ = book.openBaseline(); return }
         if has("-qa-finger") { book.settings.fingerDrawing = true }  // XCUITest can only touch, not Pencil
         if has("-qa-cursive") { book.settings.cursiveModels = true }  // cursive ghosts, demo and hints (Cursive/)
         guard has("-qa-reset") else { return }
@@ -73,6 +72,10 @@ enum QA {
             book.insertWrittenPage(title: page.title, intro: page.intro, unitTitle: "Library · \(text.level) · read aloud",
                                    exercises: page.exercises, newWords: [])
         }
+        // -qa-baseline: the weekly sample page (Baseline/); -qa-construction: "Which ending fits?"
+        // (Constructions/), whatever the notebook has met so far.
+        if has("-qa-baseline") { _ = book.openBaseline() }
+        if has("-qa-construction") { _ = book.openConstructionPractice(force: true) }
         book.saveNow()
     }
 

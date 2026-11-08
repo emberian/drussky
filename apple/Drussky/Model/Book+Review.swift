@@ -12,9 +12,9 @@ extension Book {
     /// Each target as LearningCore sees it: the components its review exercises and the
     /// modalities it can be reviewed in.
     func reviewCandidates() -> [ReviewCandidate] {
-        if let cached = candidateCache, targets[ConstructionChoice.key] == nil { return cached }
+        if let cached = candidateCache { return cached }
         let domain = knowledge.domain
-        let out = targets.values.filter { $0.key != ConstructionChoice.key || !freshConstructionChoices.isEmpty }.sorted { $0.key < $1.key }.compactMap { t -> ReviewCandidate? in
+        let out = targets.values.sorted { $0.key < $1.key }.compactMap { t -> ReviewCandidate? in
             let components = domain.reviewComponents(forTarget: t.key)
             let modalities = reviewModalities(for: t.key)
             guard !components.isEmpty, !modalities.isEmpty else { return nil }
@@ -33,6 +33,7 @@ extension Book {
         })
         return knowledge.model.dueReviews(reviewCandidates(), at: now(), policy: reviewPolicy)
             .filter { !waiting.contains($0.id) }
+            // Construction choices come due only while an unseen sentence is left to decide.
             .filter { $0.id != ConstructionChoice.key || freshConstructionChoices.contains { !ConstructionChoice.reservedForProbe($0) } }
     }
 

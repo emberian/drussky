@@ -101,8 +101,6 @@ struct SyllableGrid: View {
     private func width(_ s: SpokenSyllable?) -> CGFloat { max(30, min(150, CGFloat((s?.end ?? 0) - (s?.start ?? 0)) * Self.perSecond)) }
 
     var body: some View {
-        // Duration and pitch are useful for comparison, but do not establish a stress error.
-        let misplaced = Set<Int>()
         HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(" ").russianFont(19).hidden()
@@ -122,10 +120,10 @@ struct SyllableGrid: View {
                                 .russianFont(19).foregroundStyle(Theme.text).lineLimit(1).fixedSize()
                             if let model = comparison.model, let modelURL {
                                 box(model[i], url: modelURL, key: "syl-m-\(takeURL.lastPathComponent)-\(i)", color: Theme.accent,
-                                    stressed: syl.isStressed, misplaced: false)
+                                    stressed: syl.isStressed)
                             }
                             box(comparison.take[i], url: takeURL, key: "syl-y-\(takeURL.lastPathComponent)-\(i)", color: Theme.ink,
-                                stressed: syl.isStressed, misplaced: misplaced.contains(i))
+                                stressed: syl.isStressed)
                         }
                         .frame(width: w, alignment: .leading)
                         .padding(.leading, gap ? 10 : 0)
@@ -136,7 +134,7 @@ struct SyllableGrid: View {
         .accessibilityElement(children: .contain)
     }
 
-    private func box(_ s: SpokenSyllable, url: URL, key: String, color: Color, stressed: Bool, misplaced: Bool) -> some View {
+    private func box(_ s: SpokenSyllable, url: URL, key: String, color: Color, stressed: Bool) -> some View {
         let playing = voice.speakingKey == key
         return Button {
             voice.playSegment(url, key: key, from: max(0, s.start - 0.03), to: s.end + 0.04)
@@ -156,7 +154,7 @@ struct SyllableGrid: View {
             .frame(width: width(s), height: 34)
             .background(RoundedRectangle(cornerRadius: 7).fill(color.opacity(0.08 + 0.42 * s.prominence)))
             .overlay(RoundedRectangle(cornerRadius: 7)
-                .stroke(misplaced ? Theme.redPen : (playing ? Theme.accent : .clear), lineWidth: misplaced || playing ? 2 : 0))
+                .stroke(playing ? Theme.accent : .clear, lineWidth: playing ? 2 : 0))
         }
         .buttonStyle(.plain)
         .accessibilityLabel(stressed ? "stressed syllable" : "syllable")

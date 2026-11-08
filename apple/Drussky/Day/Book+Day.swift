@@ -455,11 +455,8 @@ extension Book {
             }
             if waiting > 0 { return "\(waiting) reviews wait for tomorrow — today keeps to \(dayPolicy.reviewCap)." }
         }
-        let hour = Calendar.current.component(.hour, from: now())
-        let pref = HourlyPreference(events: knowledge.model.events)
-        if let best = pref.standout(knowledge.domain.modalities.filter { $0 != .copy }, hour: hour) {
-            return "Past answers in this time band favored \(best.title). Tasks and conditions differed; this is a scheduling estimate."
-        }
+        // The hour-of-day preference still orders a new day's page (Day.swift); it confounds
+        // task, choice and time, so it is not announced on the cover.
         return nil
     }
 }

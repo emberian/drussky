@@ -62,15 +62,17 @@ extension Book {
         }
     }
 
+    /// `force` (QA) opens it whatever the notebook has met, from the whole bank.
     @discardableResult
-    func openConstructionPractice() -> Bool {
-        guard canOpenConstructionPractice, freshConstructionChoices.count >= 3 else { return false }
+    func openConstructionPractice(force: Bool = false) -> Bool {
+        guard force || (canOpenConstructionPractice && freshConstructionChoices.count >= 3) else { return false }
         var intro = Exercise(kind: .explain)
         intro.text = "First follow one noun through three roles. Then choose an ending in new sentences: who or what, the direct object, or what is absent."
         // These explanations are text-only: no new spoken strings are requested.
         var examples = Exercise(kind: .explain)
         examples.text = "Кни́га здесь. — The book is here. Я чита́ю кни́гу. — I am reading the book. Здесь нет кни́ги. — There is no book here."
-        let choices = Array(freshConstructionChoices.filter { !ConstructionChoice.reservedForProbe($0) }.prefix(3))
+        let pool = force && freshConstructionChoices.count < 3 ? ConstructionChoice.bank : freshConstructionChoices
+        let choices = Array(pool.filter { !ConstructionChoice.reservedForProbe($0) }.prefix(3))
         var diary = Exercise(kind: .diary)
         diary.prompt = "Something you have, something you need, and something you cannot find. Use your own words."
         insertWrittenPage(title: "Which ending fits?", intro: "Follow the noun’s job in the sentence.", unitTitle: "Construction practice",

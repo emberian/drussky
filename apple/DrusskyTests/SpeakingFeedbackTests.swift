@@ -1,3 +1,4 @@
+import SwiftUI
 import XCTest
 @testable import Drussky
 
@@ -28,7 +29,14 @@ final class SpeakingFeedbackTests: XCTestCase {
         var report = WordLevelAnalyzer.report(target: "был", transcript: "бил", comparison: nil)
         report.tips = [PronunciationTip(message: "Old unsupported claim", contrast: "y-i", letterRange: 1..<2)]
         XCTAssertTrue(report.actionableTips.isEmpty)
-        XCTAssertEqual(SpokenText.marked("был", report: report, showStress: false), SpokenText.marked("был", report: nil, showStress: false))
+        // A word-level report draws its hypothesis in amber, never in red pen.
+        let hypothesis = SpokenText.marked("был", report: report, showStress: false)
+        XCTAssertFalse(hypothesis.runs.contains { $0.foregroundColor == Theme.redPen })
+        XCTAssertTrue(hypothesis.runs.contains { $0.foregroundColor == SpokenText.close })
+        // A phone-level report whose verdicts sit below the floor marks nothing at all.
+        var unsure = report
+        unsure.provenance = .phones
+        XCTAssertEqual(SpokenText.marked("был", report: unsure, showStress: false), SpokenText.marked("был", report: nil, showStress: false))
         // Omit the range to avoid depending on the standard library's range encoding.
         let tip = try JSONDecoder().decode(PronunciationTip.self, from: Data(#"{"message":"old","contrast":"stress"}"#.utf8))
         XCTAssertNil(tip.confidence)

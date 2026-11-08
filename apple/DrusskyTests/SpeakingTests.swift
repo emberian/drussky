@@ -282,7 +282,9 @@ final class SpeakingTests: XCTestCase {
         let wrong = try XCTUnwrap(voices.pairVoices("за́мок", exactStress: true).first)
         let miss = try await analyse(target: "замо́к", take: wrong, model: right, heard: "замок")
         XCTAssertEqual(miss.stressedSyllable, 0)
-        XCTAssertTrue(miss.tips.isEmpty, "uncalibrated prosody remains a playback comparison")
+        // The word-level stress hypothesis may sit in the raw report; uncalibrated prosody is shown
+        // only as a playback comparison, never as a correction.
+        XCTAssertTrue(miss.actionableTips.isEmpty, "uncalibrated prosody remains a playback comparison")
         let hit = try await analyse(target: "за́мок", take: wrong, model: wrong, heard: "замок")
         XCTAssertEqual(hit.stressedSyllable, 0)
         XCTAssertFalse(hit.tips.contains { $0.contrast == "stress" })
@@ -424,7 +426,8 @@ final class SpeakingTests: XCTestCase {
         let ref = ExerciseRef(pageID: book.page!.id, index: 0)
         let take = book.newTakeURL(ref)
         try Data("voice".utf8).write(to: take)
-        let sub = PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "i"), verdict: .substituted, letterRange: 1..<2)
+        // A confident substitution (above the display floor): the kind of sound verdict that leaves evidence.
+        let sub = PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "i", confidence: 0.99), verdict: .substituted, letterRange: 1..<2)
         let report = PronunciationReport(target: "был", transcript: "бил", expected: [], heard: [Phone(ipa: "b"), Phone(ipa: "i"), Phone(ipa: "l")],
                                          sounds: [sub], syllables: [], stressedSyllable: nil, accuracy: 0.6, tips: [])
         try JSONEncoder().encode(report).write(to: SpeakingTurn.reportURL(for: take))
