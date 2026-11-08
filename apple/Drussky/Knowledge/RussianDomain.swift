@@ -25,10 +25,13 @@ extension Modality {
     static let say: Modality = "see-say"
     static let hearPick: Modality = "hear-pick"
     static let readPick: Modality = "read-pick"
+    /// Writing one's own Russian (the diary), corrected by the tutor.
+    static let produce: Modality = "own-writing"
 
     var title: String {
         switch self {
         case .copy: "copy"
+        case .produce: "own writing"
         case .hearWrite: "hear → write"
         case .meaningWrite: "English → write"
         case .say: "see → say"
@@ -87,7 +90,7 @@ struct RussianAttempt {
 /// Russian, as Drussky teaches it, in LearningCore's terms.
 struct RussianDomain: KnowledgeDomain {
     let name = "drussky-ru"
-    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick]
+    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce]
     let graph: KnowledgeGraph
     let lemmas: Lemmas
     /// Every single word the graph knows as a word (lexicon tokens, lemma-map forms, pair words, kept words).
@@ -319,6 +322,7 @@ struct RussianDomain: KnowledgeDomain {
         case .listenPick, .soundPair: .hearPick
         case .readMeaning: .readPick
         case .explain, .passage: nil
+        case .diary: nil  // its evidence is built from the correction (DiaryKnowledge.swift)
         }
     }
 

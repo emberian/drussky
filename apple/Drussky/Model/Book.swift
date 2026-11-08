@@ -53,6 +53,8 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     /// Finished on the learner's own judgement ("I wrote it right", "Sounded right") after the
     /// checker couldn't confirm it.
     var selfAssessed: Bool? = nil
+    /// Diary: what the learner wrote and the tutor's red-pen correction (Diary/DiaryEntry.swift).
+    var diary: DiaryEntry? = nil
 
     var roundNumber: Int { round ?? 0 }
 
@@ -460,6 +462,7 @@ final class Book {
         case .passage: lines.append("Reading a passage: «\(ex.text ?? "")» (translation: \(ex.en ?? "none")).")
         case .soundPair: lines.append(ex.say.map { "Hearing «\($0)» and telling it from its minimal pair: \((ex.options ?? []).joined(separator: " / "))." }
                                       ?? "Comparing minimal pairs: \((ex.examples ?? []).map(\.ru).joined(separator: ", ")).")
+        case .diary: lines.append(DiaryEntry.describe(ex, r))
         }
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")

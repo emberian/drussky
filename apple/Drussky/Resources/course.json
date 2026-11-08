@@ -2375,6 +2375,10 @@
         "Who is this?"
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "What is this, and what is it not? Point at two things: Э́то… Э́то не…"
       }
      ]
     },
@@ -2434,6 +2438,10 @@
         "The world is there."
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Name three things in the room with э́то."
       }
      ]
     },
@@ -2517,6 +2525,10 @@
         "The cheese is there."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "Who is this? Introduce two people or animals."
       }
      ]
     }
@@ -2582,6 +2594,10 @@
        "after": ".",
        "hint": "Mom is at home.",
        "answer": "до́ма"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Who is at home right now, and who is not?"
       }
      ]
     },
@@ -2659,6 +2675,10 @@
         "The leg is there."
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Ask where two things are, and answer."
       }
      ]
     },
@@ -2723,6 +2743,10 @@
        "after": ".",
        "hint": "The milk is here.",
        "answer": "тут"
+      },
+      {
+       "kind": "diary",
+       "prompt": "What is here and what is there? Three short sentences."
       }
      ]
     },
@@ -2789,6 +2813,10 @@
        "kind": "copy",
        "text": "Где вода́? Вода́ тут.",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "A tiny dialogue: who is there, where is the cat?"
       }
      ]
     }
@@ -2857,6 +2885,10 @@
         "This is a robot. This is not a brother."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Who is in your family? Name them."
       }
      ]
     },
@@ -2928,6 +2960,10 @@
        "kind": "copy",
        "text": "всё",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three things that are yours, with мой, моя́ or моё."
       }
      ]
     },
@@ -3009,6 +3045,10 @@
        "after": " молоко́.",
        "hint": "I love milk.",
        "answer": "люблю́"
+      },
+      {
+       "kind": "diary",
+       "prompt": "What do you love? Two or three things."
       }
      ]
     }
@@ -3097,6 +3137,10 @@
         "Mom is reading."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "What is this? Ask and answer about two things, and say what you are reading."
       }
      ]
     },
@@ -3165,6 +3209,10 @@
        "after": " чита́ю.",
        "hint": "I am reading too.",
        "answer": "то́же"
+      },
+      {
+       "kind": "diary",
+       "prompt": "What is on the table at home? Use наш and то́же."
       }
      ]
     },
@@ -3234,6 +3282,10 @@
        "kind": "translate",
        "en": "more",
        "answer": "ещё"
+      },
+      {
+       "kind": "diary",
+       "prompt": "How are things? Answer, and say what there is more of."
       }
      ]
     }
@@ -3316,6 +3368,10 @@
        "after": ".",
        "hint": "I know.",
        "answer": "зна́ю"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Who is in your family, and what do you know?"
       }
      ]
     },
@@ -3377,6 +3433,10 @@
         "Who is father? He is here."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "Coffee, a street, a fact: three sentences with the new words."
       }
      ]
     },
@@ -3454,6 +3514,10 @@
        "kind": "copy",
        "text": "объе́кт",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Say hi to someone, ask how they are, say bye."
       }
      ]
     },
@@ -3525,6 +3589,10 @@
       {
        "kind": "dictation",
        "text": "звезда́"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Your favourite word so far, and why you like it (in Russian as far as you can)."
       }
      ]
     },
@@ -3600,6 +3668,10 @@
       {
        "kind": "read_aloud",
        "text": "Брат, брать. Лук, люк. Был, бил."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Write about bread, cheese and tea on a table."
       }
      ]
     }
@@ -3678,6 +3750,10 @@
         "Good night! Coffee?"
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "Good morning: what you say when you wake up, and what you say at night."
       }
      ]
     },
@@ -3746,6 +3822,10 @@
        "kind": "copy",
        "text": "Спаси́бо, и тебе́!",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Dinner is on the table. What do you say, and is it good?"
       }
      ]
     },
@@ -3823,6 +3903,10 @@
         "More! — Please."
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Ask for more of something, politely, and say thank you."
       }
      ]
     }
@@ -3914,6 +3998,10 @@
        "kind": "copy",
        "text": "Как э́то по-ру́сски?",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "You didn't understand. Write what you would say."
       }
      ]
     }
@@ -4003,6 +4091,10 @@
         "Is dinner tasty?"
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "What is for breakfast today? And for dinner?"
       }
      ]
     },
@@ -4080,6 +4172,10 @@
         "No, I don't want any, thanks."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "What do you want right now? Two sentences with хочу́."
       }
      ]
     },
@@ -4151,6 +4247,10 @@
         "“More coffee?” “No, thanks.”"
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "A whole little meal: from good morning to thank you."
       }
      ]
     },
@@ -4235,6 +4335,10 @@
         "Do you want coffee or tea?"
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Order coffee or tea the way you like it."
       }
      ]
     },
@@ -4291,6 +4395,10 @@
        "kind": "translate",
        "en": "Dinner is ready. Announce it.",
        "answer": "У́жин гото́в!"
+      },
+      {
+       "kind": "diary",
+       "prompt": "What did you eat today?"
       }
      ]
     }
@@ -4376,6 +4484,10 @@
         "Who is the robot?"
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three things around you: is each он, она́ or оно́? Say where each is."
       }
      ]
     },
@@ -4462,6 +4574,10 @@
         "This is my spoon."
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "What is on your table? Each thing with мой, моя́ or моё."
       }
      ]
     },
@@ -4523,6 +4639,10 @@
         "This is not a table, it's a chair."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Describe the room: this is…, this is not…"
       }
      ]
     },
@@ -4609,6 +4729,10 @@
         "The cups are here, and the spoons are there."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "Count what you see: cups, spoons, books, windows."
       }
      ]
     },
@@ -4697,6 +4821,10 @@
         "Is this a new window?"
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Describe three things as new or old."
       }
      ]
     }
@@ -4787,6 +4915,10 @@
         "Three plus three is six."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "How many of what is on your table? Count to five."
       }
      ]
     },
@@ -4866,6 +4998,10 @@
         "Six plus four is ten."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "Count the things in your room, up to ten."
       }
      ]
     },
@@ -4927,6 +5063,10 @@
         "Six plus two is eight."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three small sums, written out in words."
       }
      ]
     },
@@ -5013,6 +5153,10 @@
         "Nine plus nine is eighteen."
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "How old are the people and pets at home? Numbers to twenty."
       }
      ]
     }
@@ -5092,6 +5236,10 @@
        "kind": "copy",
        "text": "Кто там?",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Ask three questions with кто and что."
       }
      ]
     },
@@ -5157,6 +5305,10 @@
         "How is the bread?"
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Ask someone how they are and where something is; answer both."
       }
      ]
     },
@@ -5231,6 +5383,10 @@
         "Where is your brother?"
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two yes/no questions and their answers."
       }
      ]
     },
@@ -5312,6 +5468,10 @@
         "What is two plus two?"
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "When is breakfast, and how many cups are there? Ask and answer."
       }
      ]
     }
@@ -5392,6 +5552,10 @@
        "kind": "copy",
        "text": "моё окно́",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Whose things are these? Yours and mine."
       }
      ]
     },
@@ -5478,6 +5642,10 @@
         "Where is our cat?"
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "Describe your home with наш and на́ша."
       }
      ]
     },
@@ -5553,6 +5721,10 @@
         "I have a robot."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "What do you have at home? Three sentences with у меня́ есть."
       }
      ]
     },
@@ -5632,6 +5804,10 @@
         "There's coffee and milk."
        ],
        "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "What is there none of today? Use у меня́ нет."
       }
      ]
     }
@@ -5725,6 +5901,10 @@
         "He is thinking about a book."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "What are you reading today? Who else is reading?"
       }
      ]
     },
@@ -5826,6 +6006,10 @@
         "What do you think?"
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "What do we read, and what do they think?"
       }
      ]
     },
@@ -5924,6 +6108,10 @@
         "Where is the cat?"
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "What do you know, and what don't you know?"
       }
      ]
     },
@@ -5987,6 +6175,10 @@
         "They are not reading."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three people, three verbs: who reads, who thinks, who knows."
       }
      ]
     }
@@ -6079,6 +6271,10 @@
         "The robot is outside."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Where is everything? In the house, on the table."
       }
      ]
     },
@@ -6168,6 +6364,10 @@
         "I live in a city."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Where are you right now? In the city, at home, in space?"
       }
      ]
     },
@@ -6255,6 +6455,10 @@
         "Mom loves tea and porridge."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "What do you see from where you sit?"
       }
      ]
     },
@@ -6335,6 +6539,10 @@
        "kind": "copy",
        "text": "на ста́нции",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "A robot looks out of a window. What does it see?"
       }
      ]
     }
@@ -6428,6 +6636,10 @@
         "Who is speaking?"
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Who speaks in your home, and what do they say?"
       }
      ]
     },
@@ -6519,6 +6731,10 @@
         "I understand Russian."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "Which languages do you speak and understand, and how well?"
       }
      ]
     },
@@ -6595,6 +6811,10 @@
         "We don't know what this is."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three things that are not so: не and нет."
       }
      ]
     },
@@ -6671,6 +6891,10 @@
        "kind": "copy",
        "text": "я ду́маю, что",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "What do you think? Two sentences with я ду́маю, что…"
       }
      ]
     },
@@ -6747,6 +6971,10 @@
         "Why are you here? Because I want to know."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Why do you learn Russian? Answer with потому́ что."
       }
      ]
     }
@@ -6828,6 +7056,10 @@
        "kind": "copy",
        "text": "Раке́та лети́т.",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "A robot and a rocket: a two-sentence story."
       }
      ]
     },
@@ -6906,6 +7138,10 @@
        "kind": "copy",
        "text": "Э́то не факт.",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "A fact about numbers, in Russian."
       }
      ]
     },
@@ -6979,6 +7215,10 @@
        "kind": "translate",
        "en": "nothing",
        "answer": "ничего́"
+      },
+      {
+       "kind": "diary",
+       "prompt": "A thought you had today, in one sentence."
       }
      ]
     },
@@ -7053,6 +7293,10 @@
        "kind": "copy",
        "text": "Мы не одни́.",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "The night sky, in two or three sentences."
       }
      ]
     }
@@ -7147,6 +7391,10 @@
         "Tomorrow morning I am working."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "Your day: morning, afternoon, evening. What happens when?"
       }
      ]
     },
@@ -7238,6 +7486,10 @@
         "Who was there yesterday?"
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "Where were you yesterday? Who was with you?"
       }
      ]
     },
@@ -7333,6 +7585,10 @@
        "kind": "copy",
        "text": "он ду́мал, она́ ду́мала",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "What did you do yesterday? Three sentences in the past."
       }
      ]
     },
@@ -7421,6 +7677,10 @@
         "Mom finished the book."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "One thing you finished yesterday, and one you only did for a while."
       }
      ]
     },
@@ -7493,6 +7753,10 @@
        "kind": "copy",
        "text": "Бы́ло о́чень вку́сно.",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "A tiny story about yesterday, in three sentences."
       }
      ]
     },
@@ -7596,6 +7860,10 @@
         "Today she works and he walks."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "What did you do today? Ask the same of someone."
       }
      ]
     },
@@ -7687,6 +7955,10 @@
        "kind": "translate",
        "en": "we will (with an infinitive)",
        "answer": "мы бу́дем"
+      },
+      {
+       "kind": "diary",
+       "prompt": "What will you do tomorrow, and what will you get done?"
       }
      ]
     }
@@ -7782,6 +8054,10 @@
        "after": ".",
        "hint": "I am going to the park (where to?).",
        "answer": "парк"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Where are you going right now, and where is someone else going?"
       }
      ]
     },
@@ -7875,6 +8151,10 @@
         "He goes to work every day."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Where do you go every day, and how do you get there?"
       }
      ]
     },
@@ -7956,6 +8236,10 @@
        "kind": "translate",
        "en": "quiet, quietly",
        "answer": "ти́хо"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Where did you go today, and how?"
       }
      ]
     }
@@ -8035,6 +8319,10 @@
        "kind": "copy",
        "text": "стра́нный сигна́л",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Describe a station in space in three sentences."
       }
      ]
     },
@@ -8104,6 +8392,10 @@
        "kind": "translate",
        "en": "so, that means",
        "answer": "зна́чит"
+      },
+      {
+       "kind": "diary",
+       "prompt": "You hear numbers in the noise. Write what they are and what you think."
       }
      ]
     },
@@ -8179,6 +8471,10 @@
        "kind": "translate",
        "en": "thirteen",
        "answer": "трина́дцать"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Write a short message to send into space."
       }
      ]
     },
@@ -8249,6 +8545,10 @@
         "отве́т",
         "сигна́л"
        ]
+      },
+      {
+       "kind": "diary",
+       "prompt": "A month later: what happened? Two or three sentences."
       }
      ]
     }
@@ -8347,6 +8647,10 @@
         "Ninety plus ten is a hundred."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three numbers over twenty, written out, with a sum."
       }
      ]
     },
@@ -8428,6 +8732,10 @@
         "If five is an even number, then I am a robot."
        ],
        "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "An even number, an odd number, and an if-then sentence."
       }
      ]
     },
@@ -8511,6 +8819,10 @@
         "Two is not a number."
        ],
        "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "One sentence with для любо́го and one with существу́ет."
       }
      ]
     },
@@ -8598,6 +8910,10 @@
        "after": " на два.",
        "hint": "Nine is odd, because it is not divisible by two.",
        "answer": "де́лится"
+      },
+      {
+       "kind": "diary",
+       "prompt": "State a tiny mathematical claim in one clause."
       }
      ]
     },
@@ -8685,6 +9001,10 @@
       {
        "kind": "read_aloud",
        "text": "Су́мма двух чётных чи́сел — чётное число́."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Your own two-line proof of something simple."
       }
      ]
     }
@@ -8783,6 +9103,10 @@
         "му́дрый",
         "мысль"
        ]
+      },
+      {
+       "kind": "diary",
+       "prompt": "A question that is not simple, and a first attempt at an answer."
       }
      ]
     },
@@ -8859,6 +9183,10 @@
        "kind": "copy",
        "text": "Ру́кописи не горя́т.",
        "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Something you know, and something you don't, in your own words."
       }
      ]
     }

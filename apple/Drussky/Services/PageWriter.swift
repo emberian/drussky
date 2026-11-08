@@ -185,6 +185,7 @@ enum PageWriter {
                   options.indices.contains(i), options.count >= 2 else { return nil }
             return ex
         case .soundPair: return nil  // generated locally from pairs.json only
+        case .diary: return nonEmpty(ex.prompt) ? ex : nil
         case .passage:
             guard nonEmpty(ex.text), passageAnyLetters || lettersOK(ex.text) else { return nil }
             return ex

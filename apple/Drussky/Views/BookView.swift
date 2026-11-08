@@ -46,6 +46,7 @@ struct BookView: View {
             if QA.has("-qa-pairs") { makeSoundPairs() }
             if QA.has("-qa-intonation") { QA.intonationPage(book) }
             if let state = QA.string("-qa-speak") { QA.speakingPage(book, turn: speech, voice: voice, state: state) }
+            if QA.has("-qa-diary") { QA.diaryPages(book) }
         }
     }
 
@@ -114,6 +115,7 @@ struct BookView: View {
                 Button { showLibrary = true } label: { Label("Library", systemImage: "books.vertical") }
                 Button { makeEarTraining() } label: { Label("Ear training", systemImage: "ear") }
                 Button { makeSoundPairs() } label: { Label("Sound pairs", systemImage: "ear.badge.waveform") }
+                Button { book.insertDiaryPage() } label: { Label("Write in my diary", systemImage: "pencil.line") }
             } label: {
                 Image(systemName: "plus.square.on.square").font(.system(size: 18, weight: .medium)).frame(width: 44, height: 44)
             }
