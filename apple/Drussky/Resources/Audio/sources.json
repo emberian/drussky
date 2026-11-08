@@ -8758,6 +8758,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-eto-moy-chay-978e65.m4a": {
+  "key": "это мой чай",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+Это м+ой ч+ай.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-eto-moy-chay-978e65-b4d1e8.wav",
+  "orig_sha1": "37aa3afcfffa09b99a9d0105e315f9ba827fa233",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-etot-film-interesnee-chem-tot-no-on-idyo-73e5ea.m4a": {
   "key": "этот фильм интереснее чем тот но он идёт дольше сегодня у меня мало времени давай смотреть тот",
   "kind": "ai_generated_speech",
@@ -9058,6 +9070,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-net-spasibo-b9436b.m4a": {
+  "key": "нет спасибо",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, спас+ибо.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-net-spasibo-b9436b-769e0c.wav",
+  "orig_sha1": "90377b7c3a6819fb267b35360ce6a74521e363fb",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-net-ya-khochu-pobyt-doma-4ecee8.m4a": {
   "key": "нет я хочу побыть дома",
   "kind": "ai_generated_speech",
@@ -9067,6 +9091,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-net-ya-khochu-pobyt-doma-4ecee8-975e5f.wav",
   "orig_sha1": "50a4f308981707f3a618d3791d48fb520f973051",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-ona-tam-3fae46.m4a": {
+  "key": "она там",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Он+а т+ам.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ona-tam-3fae46-01a0c1.wav",
+  "orig_sha1": "1e0758748f3ac715b8da3f1c64339e2bb9940234",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },

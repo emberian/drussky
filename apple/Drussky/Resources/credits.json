@@ -12,7 +12,7 @@
     "apple/Drussky/Resources/Audio/index.json": "edc203faade8a5e2dce2a838b7c948acbcbf8222af3a0a568fd3cd4b475d73c3",
     "apple/Drussky/Resources/Audio/sources-narration.json": "87c00209b423cf0fb49dfb6772c773253abbf7d73139e61961f3732effa7f84a",
     "apple/Drussky/Resources/Audio/sources-pairs.json": "daa33bcccac52ab5b65f7f6e5db57c4e3aa2c381fad7e22114f98a3c1c4bf545",
-    "apple/Drussky/Resources/Audio/sources.json": "9414947175faa94872ddf441c6ccb68df278b77609ad6c43b0253b20b7e5e1b7",
+    "apple/Drussky/Resources/Audio/sources.json": "7d274b641cb7534bf25afcd9e22aa28312ed5a429cd5981b112b43fdbf76cd43",
     "apple/Drussky/Resources/Audio/variants-listening.json": "64271a039084681672dc5ed1ac6fc29550755012cdbc124dd4d7d96eefc7e520",
     "apple/Drussky/Resources/Audio/variants-pairs.json": "fb921471f3c39de680e8c912b6b2aa36a8755e3bb1e76707d72d2577d68644e1",
     "apple/Drussky/Resources/Audio/variants.json": "c5ee76791cb217f2168564ff07be5c8865a421566947e39315360a874098fb5b",
@@ -35,7 +35,7 @@
     "crates/rufren-app/assets/foundations/manifest.json": "bee9cbb3e6cb6ff6cf66f6db81c017fa7fe7521262670b279ccc4c4cd0c717e2"
   },
   "counts": {
-    "audio_files": 3878,
+    "audio_files": 3881,
     "by_manifest_recorded_license": {
       "sources.json": {
         "CC BY 2.0 fr": 144,
@@ -48,7 +48,7 @@
         "CC BY-SA 4.0": 104,
         "CC0": 22,
         "CC0 1.0": 40,
-        "MISSING": 3061,
+        "MISSING": 3064,
         "Public domain": 2
       },
       "sources-pairs.json": {
@@ -78,22 +78,18 @@
       "CC BY-SA 4.0": 141,
       "CC0": 25,
       "CC0 1.0": 40,
-      "MISSING": 3173,
+      "MISSING": 3176,
       "Public domain": 7
     },
     "attribution_required_audio": 633,
     "share_alike_audio": 222,
-    "missing_license_field_audio": 3173,
-    "silero_audio": 3173,
+    "missing_license_field_audio": 3176,
+    "silero_audio": 3176,
     "macos_audio": 0,
     "incomplete_human_authors": 0
   },
   "unresolved": {
-    "audio_references_without_provenance": [
-      "listening-aidar-eto-moy-chay-978e65.m4a",
-      "listening-aidar-net-spasibo-b9436b.m4a",
-      "listening-aidar-ona-tam-3fae46.m4a"
-    ],
+    "audio_references_without_provenance": [],
     "unidentified_synthesis": [],
     "human_audio_without_author_credit": [],
     "tatoeba_text_missing_contributors": []
@@ -15239,6 +15235,7 @@
             "listening-aidar-day-syr-pozhaluysta-7d9c48.m4a",
             "listening-aidar-dobroe-utro-kofe-gotov-sakhar-tut-a-molo-e1ad01.m4a",
             "listening-aidar-eto-moy-chay-56b1e0.m4a",
+            "listening-aidar-eto-moy-chay-978e65.m4a",
             "listening-aidar-etot-film-interesnee-chem-tot-no-on-idyo-73e5ea.m4a",
             "listening-aidar-i-u-menya-tozhe-net-fd301b.m4a",
             "listening-aidar-i-ya-tozhe-eshchyo-raz-pozhaluysta-9e2906.m4a",
@@ -15264,7 +15261,9 @@
             "listening-aidar-net-chaya-net-day-mne-chay-pozhaluysta-2636d5.m4a",
             "listening-aidar-net-mne-kofe-s-molokom-pozhaluysta-f720d5.m4a",
             "listening-aidar-net-pomedlennee-pozhaluysta-aa5ca0.m4a",
+            "listening-aidar-net-spasibo-b9436b.m4a",
             "listening-aidar-net-ya-khochu-pobyt-doma-4ecee8.m4a",
+            "listening-aidar-ona-tam-3fae46.m4a",
             "listening-aidar-ona-tam-499d91.m4a",
             "listening-aidar-pereday-khleb-pozhaluysta-73a63d.m4a",
             "listening-aidar-pereday-knigu-sestre-ona-khochet-eyo-pro-5c9f39.m4a",
