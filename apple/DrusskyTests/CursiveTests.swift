@@ -305,6 +305,14 @@ final class CursiveTests: XCTestCase {
         XCTAssertTrue(book.dueReviews().allSatisfy { $0.modality != .readCursive })
         XCTAssertFalse(book.reviewModalities(for: "word:мама").contains(.readCursive))
 
+        // The cursive pages' traces and copies are there to show the hand: fading never touches them.
+        var ctr = Exercise(kind: .trace); ctr.text = "сок"; ctr.cursive = true
+        var ccp = Exercise(kind: .copy); ccp.text = "сестра́"; ccp.times = 1; ccp.cursive = true
+        var plain = Exercise(kind: .trace); plain.text = "сок"
+        XCTAssertEqual(book.faded(ctr), ctr)
+        XCTAssertEqual(book.faded(ccp), ccp)
+        XCTAssertEqual(book.faded(plain).kind, .copy, "a secure word's print trace still fades")
+
         QA.complete(book, page: book.currentPage, upTo: .max)
         XCTAssertTrue(book.cursiveUnlocked)
         XCTAssertTrue(book.reviewModalities(for: "word:мама").contains(.readCursive))

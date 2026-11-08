@@ -353,20 +353,23 @@ struct WritingExercise: View {
     private var selfJudged: Bool { isRecall && book.settings.writingJudge == .myself }
     private var judging: Bool { selfJudged && checked && !pad.isEmpty && !result.status.isComplete }
 
+    /// A cursive copy shows the hand once on the line (the print word is above), then room to copy.
+    private var cursiveCopy: Bool { ex.kind == .copy && ex.cursive == true }
+
     private var ghost: String? {
         if let ghostOverride { return ghostOverride }
-        return ex.kind == .trace ? target : nil
+        return ex.kind == .trace || cursiveCopy ? target : nil
     }
 
     private var ghostTimes: Int {
-        if ghostOverride != nil { return 1 }  // meet: one model, then free paper
+        if ghostOverride != nil || cursiveCopy { return 1 }  // meet and cursive copy: one model, then free paper
         let len = RussianText.unstressed(ghost ?? "").count
         return len <= 3 ? 3 : len <= 6 ? 2 : 1
     }
 
     private var stripHeight: CGFloat {
         let sizing = ghost ?? target
-        let times = ghost != nil ? ghostTimes : (ex.kind == .copy ? max(ex.times ?? 1, 1) : 1)
+        let times = ghost != nil ? ghostTimes + (cursiveCopy ? max(ex.times ?? 1, 1) : 0) : (ex.kind == .copy ? max(ex.times ?? 1, 1) : 1)
         let preferred: CGFloat = horizontalCompact ? 96 : 112
         return StripMetrics.fitting(sizing, times: times, width: width, cursive: cursive, preferred: preferred)
     }

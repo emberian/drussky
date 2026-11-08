@@ -38,7 +38,10 @@ models, from `scripts/build_strokes_cursive.py --proof sheet.png`), *Watch it wr
 stroke by stroke, and the one formation hint speaks cursive ("м starts with the hook on the
 baseline", "т is three humps in one stroke"). The cursive unit sits after unit 10: letter families
 by shape, then words, then a note to copy. Reading handwriting is its own memory modality
-(*read-cursive*); a word taken for a look-alike is logged as a shape confusion.
+(*read-cursive*); a word taken for a look-alike is logged as a shape confusion. Once the unit's
+first page is finished, words never yet read in another hand come back as read-handwriting
+reviews after everything due (two per page at most) — picked among look-alikes until read twice,
+then printed back — and from then on FSRS schedules that memory like any other.
 
 Writing is read on-device by Apple's handwriting recognizer. For tracing and copying it ticks
 the line by itself after a short pause. For recall (dictation, translate, fill) **you are the

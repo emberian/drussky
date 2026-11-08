@@ -42,7 +42,8 @@ extension Book {
     /// A word whose recall is strong now (FSRS: present retrievability and stability in a recall
     /// modality, no unrecovered lapse) loses its support: trace → copy, copy → write it from hearing.
     func faded(_ ex: Exercise) -> Exercise {
-        guard [.trace, .copy].contains(ex.kind), let key = memoryKey(for: ex), targets[key] != nil else { return ex }
+        // A cursive trace or copy is there to show the hand, not to prop up a word: it never fades.
+        guard [.trace, .copy].contains(ex.kind), ex.cursive != true, let key = memoryKey(for: ex), targets[key] != nil else { return ex }
         let components = knowledge.domain.reviewComponents(forTarget: key)
         guard knowledge.model.isSecure(components, in: Self.recallModalities, at: now()) else { return ex }
         var e = ex

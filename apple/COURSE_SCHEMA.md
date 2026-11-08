@@ -87,7 +87,10 @@ same rule.
 A `trace` or `copy` may carry `cursive: true`: its ghost is then the cursive stroke model
 (`Resources/strokes-cursive.json`, built by `scripts/build_strokes_cursive.py`, joined up letter to
 letter) whatever the learner's cursive setting, and the one-hint coach compares with the cursive
-models. The cursive unit (`scripts/course_cursive.py`) is made of these; it introduces no words.
+models. A cursive `copy` shows the hand once on the line (the print word above it) and leaves room
+to copy; neither fades (trace → copy → dictation) however secure the word, since they teach the
+hand, not the word. The cursive unit (`scripts/course_cursive.py`) is made of these; it introduces
+no words.
 
 Any exercise may also carry an optional `skills: ["past", "negation"]`: the grammar patterns
 it practises, by construction id from `Resources/lemmas.json` (`gram:` prefix optional). When it is
