@@ -84,14 +84,14 @@ extension Book {
     /// A page of minimal-pair trials, weighted toward the contrasts the learner gets wrong.
     /// Only pairs written in letters already met, and with recordings of both words.
     /// `voices(form, exactStress)` is how many recordings exist for a word.
-    func soundPairsExercises(from data: SoundPairs, trials total: Int = 10,
+    func soundPairsExercises(from data: SoundPairs, trials total: Int = 10, only contrasts: Set<String>? = nil,
                              voices: (String, Bool) -> Int) -> [Exercise] {
         let met = Set(course.letters.filter { letterKnown($0.upper) }.map(\.upper))
         func readable(_ p: SoundPairs.Pair) -> Bool {
             p.words.allSatisfy { RussianText.letters(in: $0.ru).isSubset(of: met) }
         }
         let askable = data.pairs.filter { p in
-            p.same != true && p.words.count == 2 && readable(p) && p.words.allSatisfy { voices($0.ru, p.exactStress) > 0 }
+            p.same != true && p.words.count == 2 && (contrasts?.contains(p.contrast) ?? true) && readable(p) && p.words.allSatisfy { voices($0.ru, p.exactStress) > 0 }
         }
         let byContrast = Dictionary(grouping: askable, by: \.contrast)
         guard !byContrast.isEmpty else { return [] }

@@ -45,24 +45,21 @@ struct BookView: View {
             showSettings = QA.has("-qa-settings")
             if QA.has("-qa-pairs") { makeSoundPairs() }
             if QA.has("-qa-intonation") { QA.intonationPage(book) }
+            if let state = QA.string("-qa-speak") { QA.speakingPage(book, turn: speech, voice: voice, state: state) }
         }
     }
 
     @Environment(Voice.self) private var voice
+    @Environment(SpeakingTurn.self) private var speech
     @State private var notice: String?
     @State private var noticeTitle = "Ear training"
 
     private func makeSoundPairs() {
-        let data = SoundPairs.load()
-        let exercises = book.soundPairsExercises(from: data) { voice.pairVoices($0, exactStress: $1).count }
-        guard exercises.filter(\.isSoundPairTrial).count >= 4 else {
+        guard book.insertSoundPairsPage(voices: { voice.pairVoices($0, exactStress: $1).count }) else {
             noticeTitle = "Sound pairs"
             notice = "The pairs use letters you haven't met yet — a few more pages and they open up."
             return
         }
-        let names = Set(exercises.compactMap(\.hint)).compactMap { data.contrast($0)?.name }.sorted()
-        book.insertWrittenPage(title: "Sound pairs", intro: "Two words, one sound apart: \(names.joined(separator: " · ")). Hear one, pick it, then hear both. Each time a different voice.",
-                               unitTitle: "Listening", exercises: exercises, newWords: [])
     }
 
     private func makeEarTraining() {
@@ -139,7 +136,7 @@ struct BookView: View {
 struct PageCurl: UIViewControllerRepresentable {
     let book: Book
     @Environment(Voice.self) private var voice
-    @Environment(SpeechCheck.self) private var speech
+    @Environment(SpeakingTurn.self) private var speech
 
     func makeUIViewController(context: Context) -> UIPageViewController {
         let pvc = UIPageViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal,
@@ -160,7 +157,7 @@ struct PageCurl: UIViewControllerRepresentable {
         voice.stop()
         // A take being recorded (or waiting on permission) stops; one already being listened to
         // finishes and lands on its own exercise, which it addresses by id.
-        if speech.isRecording || speech.phase == .requesting { speech.cancel() }
+        speech.cancelCapture()
         let animated = UIView.areAnimationsEnabled && !UIAccessibility.isReduceMotionEnabled
         pvc.setViewControllers([host(target)], direction: direction, animated: animated)
     }
