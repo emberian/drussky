@@ -20,6 +20,11 @@ final class TalkTests: XCTestCase {
     // MARK: The dialogue
 
     func testResumingLearnerTurnWaitsForMicrophoneTap() async throws {
+        // Resuming checks for the tutor first (no key: the page says so instead); the turn itself
+        // never reaches the network, so any key will do for this test. The learner's own is restored.
+        let keyBefore = Keychain.apiKey
+        Keychain.apiKey = keyBefore ?? "qa-placeholder-key"
+        defer { Keychain.apiKey = keyBefore }
         let book = Book(course: try course(), store: tempStore())
         book.insertTalkPage()
         let ref = ExerciseRef(pageID: try XCTUnwrap(book.page).id, index: 0)
@@ -44,7 +49,9 @@ final class TalkTests: XCTestCase {
         XCTAssertEqual(session.status, .yourTurn)
     }
 
-    func testRetryAfterMissingKeyStartsAnotherAttempt() async throws {
+    /// Without a key nothing starts: the page says so, and "Try again" asks the same question
+    /// again instead of launching a request that would fail.
+    func testTryAgainWithoutKeyStaysUnavailable() async throws {
         try XCTSkipUnless((Keychain.apiKey ?? "").isEmpty, "requires a simulator with no tutor key")
         let book = Book(course: try course(), store: tempStore())
         book.insertTalkPage()
@@ -52,12 +59,9 @@ final class TalkTests: XCTestCase {
         let session = TalkSession(ref: ref, book: book, pageVoice: Voice(), voice: SilentTutorVoice())
         defer { session.cancel() }
         session.propose()
-        for _ in 0..<100 where session.status == .proposing {
-            try await Task.sleep(for: .milliseconds(10))
-        }
-        guard case .failed = session.status else { return XCTFail("Missing key must fail promptly: \(session.status)") }
+        guard case .unavailable = session.status else { return XCTFail("A missing key is an unavailable note, not a request: \(session.status)") }
         session.resume()
-        XCTAssertEqual(session.status, .proposing, "Try again must leave the failure state")
+        guard case .unavailable = session.status else { return XCTFail("Try again with the key still missing stays unavailable: \(session.status)") }
     }
 
     func testDialogueTurnOrderAndEnd() {
