@@ -108,7 +108,11 @@ final class ListeningTests: XCTestCase {
     func testEveryListeningStringHasAClipInItsVoice() throws {
         let voice = Voice()
         let strings = Listening.shared.spokenStrings
-        XCTAssertEqual(strings.count, 338, "the spoken inventory (research/artifacts/listening-spoken.txt)")
+        // The inventory file is the source of truth for the count; the app's list must match it line for line.
+        let inventory = try String(contentsOf: URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+            .appendingPathComponent("research/artifacts/listening-spoken.txt"), encoding: .utf8)
+            .split(separator: "\n").map(String.init).filter { !$0.isEmpty }
+        XCTAssertEqual(strings.count, inventory.count, "the spoken inventory (research/artifacts/listening-spoken.txt)")
         var missing: [String] = []
         for s in strings where !voice.hasRecording(s) { missing.append(s) }
         XCTAssertTrue(missing.isEmpty, "no clip: \(missing)")
@@ -177,7 +181,7 @@ final class ListeningTests: XCTestCase {
         XCTAssertEqual(event.modality, .hearPick)
         XCTAssertEqual(event.grade, .good)
         XCTAssertEqual(event.activity, "listening")
-        XCTAssertEqual(event.expected, "Дай сыр.")
+        XCTAssertEqual(event.expected, pick.heard.joined(separator: " "), "the heard line as written in listening.json")
         XCTAssertEqual(event.response, "сыр")
         XCTAssertEqual(event.latencyMs, 900)
         XCTAssertEqual(book.knowledge.model.trace(d.utteranceID("сыр")!, .hearPick)?.reviews.last?.grade, .good)
