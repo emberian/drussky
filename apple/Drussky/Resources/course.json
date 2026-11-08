@@ -9396,6 +9396,10 @@
       {
        "kind": "read_aloud",
        "text": "Писа́тель пи́шет письмо́."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
       }
      ]
     },
@@ -9489,6 +9493,10 @@
       {
        "kind": "read_aloud",
        "text": "Счита́ть — э́то чита́ть чи́сла."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
       }
      ]
     },
@@ -9576,6 +9584,10 @@
       {
        "kind": "read_aloud",
        "text": "Вход, вы́ход, перехо́д."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
       }
      ]
     },
@@ -9669,6 +9681,10 @@
       {
        "kind": "read_aloud",
        "text": "Учи́тель, учени́к, рабо́тник, зна́ние."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
       }
      ]
     },
@@ -9766,6 +9782,10 @@
       {
        "kind": "read_aloud",
        "text": "Тео́рия, филосо́фия, ло́гика, систе́ма, матема́тика."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
       }
      ]
     },
@@ -9863,6 +9883,10 @@
       {
        "kind": "read_aloud",
        "text": "Фу́нкция, структу́ра, аргуме́нт, абстра́кция."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
       }
      ]
     }
