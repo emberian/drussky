@@ -54,7 +54,10 @@ struct BookView: View {
             if QA.has("-qa-cognates") { show("Cognates", MorphologyPages.addCognates(book)) }
             if QA.has("-qa-pocket") { show("Pocket", PocketPage.insert(book: book, voice: voice)) }  // Devices
             showTyping = QA.has("-qa-typing")
-            if QA.has("-qa-grammar") { show("Grammar page", GrammarPages.addGrammar(book)) }
+            if QA.has("-qa-grammar") {  // -qa-grammar-partial K: the first K exercises of that page worked through
+                show("Grammar page", GrammarPages.addGrammar(book))
+                if let k = QA.value("-qa-grammar-partial") { QA.complete(book, page: book.currentPage, upTo: k) }
+            }
             if QA.has("-qa-handwriting") { show("Read handwriting", CursivePages.addHandwriting(book)) }
             showCursiveProof = QA.has("-qa-cursive-proof")
         }

@@ -216,6 +216,7 @@
 		F082298B2B042C1136782201 /* pairs.json in Resources */ = {isa = PBXBuildFile; fileRef = 48B9C2E0AE3895D9F96B94A8 /* pairs.json */; };
 		F0C25881DAFE9B8A2CDBFAAD /* Fluency.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD6E57962BF109332BE7408 /* Fluency.swift */; };
 		F197F995F977DAD386CAA8E6 /* strokes-cursive.json in Resources */ = {isa = PBXBuildFile; fileRef = 777B18E01A53D8D1009B7234 /* strokes-cursive.json */; };
+		F2EEEEE511E5D07479A142ED /* CursiveReviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B972BFFDF9F893A4FE88D09E /* CursiveReviews.swift */; };
 		F31218D01239020EF3145045 /* KeyboardMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4C59A4B8F7914260350E48 /* KeyboardMap.swift */; };
 		F325C06C2D3D858A0586DBD9 /* paradigms.json in Resources */ = {isa = PBXBuildFile; fileRef = B696905815C91A5BA9E64EF7 /* paradigms.json */; };
 		F40947EEACAF92CA9EE4E45E /* QA+Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A486012E7EC4C4678258B64 /* QA+Day.swift */; };
@@ -452,6 +453,7 @@
 		B6EBA6BAE7F7BE81B7197DCA /* BaselineExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaselineExercise.swift; sourceTree = "<group>"; };
 		B7E4B4C94DF35DCC875051DB /* PhoneSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneSet.swift; sourceTree = "<group>"; };
 		B8EF908D6FA69AE1C9862EBA /* PageWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageWriter.swift; sourceTree = "<group>"; };
+		B972BFFDF9F893A4FE88D09E /* CursiveReviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursiveReviews.swift; sourceTree = "<group>"; };
 		B9959937A9DC8B4AB3A21D8A /* QA+Intonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QA+Intonation.swift"; sourceTree = "<group>"; };
 		B9BFAF35608759712621C94D /* strokes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = strokes.json; sourceTree = "<group>"; };
 		BB1430660BCDA21C7FB31B2F /* RussianDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianDomain.swift; sourceTree = "<group>"; };
@@ -1042,6 +1044,7 @@
 				91A23953161FB821B21DEFAD /* CursiveGhost.swift */,
 				1DCDED0410A2CB04ED1226E8 /* CursiveModels.swift */,
 				1BCB6BFAB84BD656F5342AE8 /* CursiveProofView.swift */,
+				B972BFFDF9F893A4FE88D09E /* CursiveReviews.swift */,
 				0F3879BF21E9BAEAAC2F8420 /* CursiveTraps.swift */,
 				A831B321A71813F94AD4B496 /* HandwritingPage.swift */,
 				32CCE8190E689372B0710D7F /* HandwritingSample.swift */,
@@ -1390,6 +1393,7 @@
 				A970D02FBC8915AAA34012D5 /* CursiveGhost.swift in Sources */,
 				5135C9AF3E334418CABCC05F /* CursiveModels.swift in Sources */,
 				BA9B7A97EFC4727986CA5FDF /* CursiveProofView.swift in Sources */,
+				F2EEEEE511E5D07479A142ED /* CursiveReviews.swift in Sources */,
 				A1347A310E32E152967B8479 /* CursiveTraps.swift in Sources */,
 				6EA7D7CEF3BA9A686A2D0E52 /* DeskViews.swift in Sources */,
 				5F05E6BE1759231E41EEDA0B /* DiaryBook.swift in Sources */,

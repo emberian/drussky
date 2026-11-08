@@ -31,10 +31,11 @@ extension Book {
         let waiting = Set(pages.suffix(2).flatMap { page in
             page.exercises.indices.compactMap { i in page.results[i].status.isComplete ? nil : page.exercises[i].reviewKey }
         })
-        return knowledge.model.dueReviews(reviewCandidates(), at: now(), policy: reviewPolicy)
-            .filter { !waiting.contains($0.id) }
+        let due = knowledge.model.dueReviews(reviewCandidates(), at: now(), policy: reviewPolicy)
             // Construction choices come due only while an unseen sentence is left to decide.
             .filter { $0.id != ConstructionChoice.key || freshConstructionChoices.contains { !ConstructionChoice.reservedForProbe($0) } }
+        // Words never yet read in another hand, after everything due (Cursive/CursiveReviews.swift).
+        return (due + cursiveSeeds(excluding: Set(due.map(\.id)))).filter { !waiting.contains($0.id) }
     }
 
     var dueCount: Int { dueReviews().count }
@@ -43,7 +44,8 @@ extension Book {
     /// A word whose recall is strong now (FSRS: present retrievability and stability in a recall
     /// modality, no unrecovered lapse) loses its support: trace → copy, copy → write it from hearing.
     func faded(_ ex: Exercise) -> Exercise {
-        guard [.trace, .copy].contains(ex.kind), let key = memoryKey(for: ex), targets[key] != nil else { return ex }
+        // A cursive trace or copy is there to show the hand, not to prop up a word: it never fades.
+        guard [.trace, .copy].contains(ex.kind), ex.cursive != true, let key = memoryKey(for: ex), targets[key] != nil else { return ex }
         let components = knowledge.domain.reviewComponents(forTarget: key)
         guard knowledge.model.isSecure(components, in: Self.recallModalities, at: now()) else { return ex }
         var e = ex
@@ -80,6 +82,7 @@ extension Book {
         var m: Set<Modality> = [.hearWrite, .say, .hearPick]
         if askable(word) { m.insert(.meaningWrite) }
         if !word.en.isEmpty { m.insert(.readPick) }
+        if cursiveUnlocked, !value.contains(" ") { m.insert(.readCursive) }  // Cursive/CursiveReviews.swift
         return m
     }
 
@@ -128,6 +131,8 @@ extension Book {
             case .hearPick:
                 ex = Exercise(kind: .listenPick); ex.say = word.ru
                 ex.options = ([word.ru] + distractors(for: word, count: 2)).shuffled()
+            case .readCursive:
+                ex = cursiveReviewExercise(for: key, word: word.ru, variant: variant)
             case .readPick where !word.en.isEmpty:
                 let others = distractors(for: word, count: 2).compactMap { self.word($0)?.en }
                     .filter { $0.lowercased() != word.en.lowercased() }

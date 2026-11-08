@@ -22,7 +22,7 @@ enum DiaryTutor {
     curious, a beginner in Russian. They have just written a few words of their OWN Russian in their diary, \
     with a pencil. Correct it the way a kind, exact teacher marks homework in red pen. Reply with ONE JSON \
     object and nothing else:
-    {"corrected": "the whole text, corrected, with stress marks (U+0301) on every word of 2+ syllables, never on ё",
+    {"corrected": "the whole text, corrected, with stress marks (U+0301) on every word of 2+ syllables, never on ё or one-syllable words",
      "edits": [{"span": "their words exactly as written", "replacement": "the right form, stress-marked ('' to delete)",
                 "category": "spelling|ending|agreement|word-choice|word-order|stress|punctuation|other",
                 "why": "one line in English saying what differs and why", "en": "English meaning of the replacement",
@@ -33,6 +33,8 @@ enum DiaryTutor {
                 "pattern": "construction id when one fits, else a short slug"}]}
 
     Rules: keep their meaning and their words wherever they are right; fix what is wrong, never restyle. \
+    Accept natural Russian word order and omitted subject pronouns (e.g. «Чита́ю кни́гу.») when grammatical; \
+    do not force English SVO order. \
     Every `span` must be a verbatim substring of their text (a word or a few words), and the edits must not overlap. \
     Handwriting recognition may have mangled a letter: if the error looks like a recognizer slip (a Latin \
     look-alike, a lost soft sign), still correct it, category spelling, and say so in `why`. If the text is \

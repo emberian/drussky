@@ -38,9 +38,9 @@ struct DayState: Codable, Sendable, Equatable {
 /// many reviews a day asks for, when the course is left for what is ready or what is weak, which
 /// exercises are retention probes, and what the desk does when the learner tires.
 extension Book {
-    static let morningUnit = "Новый день · New day"
-    static let welcomeBackUnit = "С возвращением · Welcome back"
-    static let remediationUnit = "Подготовка · Getting ready"
+    static let morningUnit = "Но́вый день · New day"
+    static let welcomeBackUnit = "С возвраще́нием · Welcome back"
+    static let remediationUnit = "Подгото́вка · Getting ready"
 
     var dayPolicy: DayPolicy { DayPolicy(reviewCap: settings.dailyReviewCap ?? 25) }
     var probePolicy: ProbePolicy { ProbePolicy(enabled: settings.probes ?? true) }

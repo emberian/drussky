@@ -87,7 +87,10 @@ same rule.
 A `trace` or `copy` may carry `cursive: true`: its ghost is then the cursive stroke model
 (`Resources/strokes-cursive.json`, built by `scripts/build_strokes_cursive.py`, joined up letter to
 letter) whatever the learner's cursive setting, and the one-hint coach compares with the cursive
-models. The cursive unit (`scripts/course_cursive.py`) is made of these; it introduces no words.
+models. A cursive `copy` shows the hand once on the line (the print word above it) and leaves room
+to copy; neither fades (trace → copy → dictation) however secure the word, since they teach the
+hand, not the word. The cursive unit (`scripts/course_cursive.py`) is made of these; it introduces
+no words.
 
 Any exercise may also carry an optional `skills: ["past", "negation"]`: the grammar patterns
 it practises, by construction id from `Resources/lemmas.json` (`gram:` prefix optional). When it is
@@ -200,10 +203,13 @@ kinds against the same file.
 In the knowledge model, every inflected token fills its cell; `transform` and `paradigm_fill`
 name their cells outright (modality `cue-write`, or `cue-pick` for tiles and `cue_sort`), and a
 phrase put in the wrong bucket is a confusion between two uses. The inside cover's *Grammar*
-section draws every table, cells coloured by the recall of their pattern, a dot for cells the
-learner has produced; ＋ → *Grammar page* builds a page from the weakest cells of the tables
-whose words the learner knows, cases interleaved. `scripts/course_grammar.py` adds one authored
-page at the end of each unit that introduces a system (g1–g8).
+entry is a chip per table (cells met, tinted by mean recall) opening the table, cells coloured by
+the recall of their pattern, a dot for cells the learner has produced; ＋ → *Grammar page* builds
+a page from the weakest cells, cases interleaved, asking only words the learner has produced (the
+headword, or two of its forms) and only cells whose pattern they have met (the cell, or the same
+case in another table of the kind) — unmet rows are left for the course to introduce.
+`scripts/course_grammar.py` adds one authored page at the end of each unit that introduces a
+system (g1–g8).
 
 # Morphology — `Drussky/Resources/morphology.json`
 

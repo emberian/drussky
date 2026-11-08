@@ -38,7 +38,10 @@ models, from `scripts/build_strokes_cursive.py --proof sheet.png`), *Watch it wr
 stroke by stroke, and the one formation hint speaks cursive ("м starts with the hook on the
 baseline", "т is three humps in one stroke"). The cursive unit sits after unit 10: letter families
 by shape, then words, then a note to copy. Reading handwriting is its own memory modality
-(*read-cursive*); a word taken for a look-alike is logged as a shape confusion.
+(*read-cursive*); a word taken for a look-alike is logged as a shape confusion. Once the unit's
+first page is finished, words never yet read in another hand come back as read-handwriting
+reviews after everything due (two per page at most) — picked among look-alikes until read twice,
+then printed back — and from then on FSRS schedules that memory like any other.
 
 Writing is read on-device by Apple's handwriting recognizer. For tracing and copying it ticks
 the line by itself after a short pause. For recall (dictation, translate, fill) **you are the
@@ -207,11 +210,12 @@ the distance arithmetic is LearningCore's `Target`.
 ## Inside the cover
 
 The book icon (top left) opens your alphabet — each letter in **your own handwriting** once
-you've met it — and every page so far with its mark. **Grammar** draws the system behind the
-words: the three noun declensions, adjectives, pronouns, the two conjugations and the irregular
-verbs, past and imperative, and what each case does — tables that start empty and fill in as you
-meet and produce each cell (a cell glows by the recall of its pattern, a dot marks one you have
-written yourself); tap a cell for its examples with audio and history, a title for the whole table. **My Russian** collects every diary line
+you've met it — and every page so far with its mark. **Grammar** is one row of chips, one per
+table of the system behind the words (the three noun declensions, adjectives, pronouns, the two
+conjugations and the irregular verbs, past and imperative, what each case does), each counting
+the cells you have met; a chip opens its table, *All tables* opens them all. The tables start
+empty and fill in as you meet and produce each cell (a cell glows by the recall of its pattern, a
+dot marks one you have written yourself); tap a cell for its examples with audio and history. **My Russian** collects every diary line
 you have ever written, newest first, with its red pen, and what the pen keeps finding this
 week; it exports as Markdown. Settings: finger drawing, cursive
 models, stress marks, notebook export (pages, ink, recordings as a zip), the notebook as a PDF, credits.
@@ -314,9 +318,10 @@ chart), `-qa-tired` (the current page marked shortened);
 offline page toward it), `-qa-goal-first` (open its first page now); `-qa-judge` (ink on the first
 open recall exercise with Check tapped: the self-judgement panel), `-qa-hooks` (canned hooks on a few
 words; `-qa-contents -qa-node lex:кот` opens one), `-qa-fluency` (three weeks of synthetic fluency
-samples for the cover line and sparklines); `-qa-grammar` (a grammar
-page from the tables), `-qa-grammar-table decl1` / `-qa-grammar-cell decl1/gen-sg` (with
-`-qa-contents`: open that table or cell of the Grammar section).
+samples for the cover line and sparklines); `-qa-grammar` (a grammar page from the tables;
+`-qa-grammar-partial K` works through its first K exercises), `-qa-grammar-table decl1` /
+`-qa-grammar-cell decl1/gen-sg` / `-qa-grammar-all` (with `-qa-contents`: open that table, that
+cell, or every table of the Grammar section).
 
 ## Content
 

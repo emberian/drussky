@@ -42,7 +42,7 @@ struct ContentsView: View {
                 .frame(maxWidth: .infinity)
             }
             .background(GridPaper(marginX: nil))
-            .navigationTitle("Алфавит")
+            .navigationTitle("Алфави́т")
             .navigationDestination(isPresented: $showEvidence) {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 24) {
