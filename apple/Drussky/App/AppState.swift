@@ -67,6 +67,7 @@ final class AppState {
                 }
                 SpeechCheck.warmUp(with: voice.recordingURL(for: "спаси́бо"))
                 phase = .ready(book, voice, speech)
+                HookBatch.runIfDue(book)  // Hooks/: mnemonics for the most-lapsed words, once a day
             }
         } catch {
             phase = .failed("\(error)")

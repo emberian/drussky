@@ -357,6 +357,7 @@ struct RussianDomain: KnowledgeDomain {
         case .open, .missed, .skipped: return r.status == .missed ? .again : nil
         case .correct:
             if r.assisted == true { return nil }
+            if let a = SelfJudgement.assessment(r) { return a.grade }  // the learner judged; the reader modulates
             if r.selfAssessed == true { return .hard }
             return r.isRightFirstTime ? .good : .hard
         case .done:
@@ -480,7 +481,9 @@ struct RussianDomain: KnowledgeDomain {
                 ? ex.answerIndex.flatMap { ex.options?[safe: $0] } : (ex.kind == .soundPair ? ex.say : ex.target),
             response: response, latency: a.latency,
             help: a.after.revealed ? ["revealed"] : (a.after.assisted == true ? ["assisted"] : nil),
-            confusions: confusions.isEmpty ? nil : confusions, review: ex.reviewKey != nil ? true : nil)
+            confusions: confusions.isEmpty ? nil : confusions, review: ex.reviewKey != nil ? true : nil,
+            judge: finished && ex.kind.isWriting && ![.meet, .trace, .copy].contains(ex.kind) ? SelfJudgement.judge(a.after) : nil,
+            confidence: finished ? SelfJudgement.confidence(a.after) : nil)
     }
 
     func normalize(_ answer: String) -> String { RussianText.comparable(answer) }

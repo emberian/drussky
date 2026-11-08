@@ -53,6 +53,10 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     /// Finished on the learner's own judgement ("I wrote it right", "Sounded right") after the
     /// checker couldn't confirm it.
     var selfAssessed: Bool? = nil
+    /// The learner's own verdict after Check showed the model answer ("right" / "not-quite"),
+    /// and whether the reader's silent reading agreed (Judgement/SelfJudgement.swift).
+    var judged: String? = nil
+    var readerAgreed: Bool? = nil
     /// Diary: what the learner wrote and the tutor's red-pen correction (Diary/DiaryEntry.swift).
     var diary: DiaryEntry? = nil
 
@@ -94,6 +98,8 @@ struct Settings: Codable, Sendable, Equatable {
     var probes: Bool? = nil
     /// Times the model plays before the learner's turn to speak (0: straight to their turn).
     var modelRepeats: Int = 1
+    /// Who judges recall writing: "myself" (default) or "reader" (`Settings.writingJudge`, Judgement/).
+    var judge: String? = nil
 
     init() {}
 
@@ -107,6 +113,7 @@ struct Settings: Codable, Sendable, Equatable {
         desiredRetention = try c.decodeIfPresent(Double.self, forKey: .desiredRetention)
         dailyReviewCap = try c.decodeIfPresent(Int.self, forKey: .dailyReviewCap)
         probes = try c.decodeIfPresent(Bool.self, forKey: .probes)
+        judge = try c.decodeIfPresent(String.self, forKey: .judge)
     }
 }
 
@@ -137,6 +144,10 @@ final class Book {
     /// Texts the learner wants to read for real (Goal/); one is current.
     var goals: [Goal] = [] { didSet { scheduleSave() } }
     var currentGoalID: String? { didSet { scheduleSave() } }
+    /// Keyword mnemonics per word (Hooks/).
+    var hooks = HookShelf() { didSet { scheduleSave() } }
+    /// Fluency measurements: reading, writing and listening over weeks (Fluency/, metrics.jsonl).
+    let fluency: FluencyTracker
     private(set) var advanceSignal = 0
     private(set) var advancePageID: String?
     func requestAdvance(page id: String) { advancePageID = id; advanceSignal += 1 }
@@ -172,6 +183,7 @@ final class Book {
         case .unavailable(let p): problem = p; repairs = []
         }
         knowledge = KnowledgeTracker(course: course, root: store.root, customWords: saved?.customWords ?? [], now: Date.init)
+        fluency = FluencyTracker(root: store.root)
         if let saved {
             pages = saved.pages
             legacyMemories = saved.memories
@@ -184,9 +196,11 @@ final class Book {
             day = saved.day ?? DayState()
             goals = saved.goals ?? []
             currentGoalID = saved.currentGoalID
+            hooks = saved.hooks ?? HookShelf()
         }
         reindexPages()
         knowledge.now = { [unowned self] in self.now() }
+        fluency.now = { [unowned self] in self.now() }
         let writerErrors: @Sendable (String) -> Void = { [weak self] message in
             Task { @MainActor in self?.persistenceError = message }
         }
@@ -363,6 +377,7 @@ final class Book {
         if finishing { saveNow() } else { scheduleSave() }
         knowledge.observe(page: page, index: ref.index, before: before, after: after)
         deskObserved(ref, exercise: page.exercises[ref.index], result: after)  // probes, fatigue (Book+Day)
+        fluency.observe(page.exercises[ref.index], before: before, after: after, rate: NarrationPlayer.shared.rate)  // listening (Fluency/)
     }
 
     /// Replaces a page as a whole (the desk shortening one, Book+Day); its id never changes.
@@ -394,6 +409,8 @@ final class Book {
             r.chosen = nil
             r.revealed = false
             r.selfAssessed = nil
+            r.judged = nil
+            r.readerAgreed = nil
         }
     }
 
@@ -596,7 +613,8 @@ final class Book {
                                       currentPage: currentPage, settings: settings, customWords: customWords,
                                       soundStats: soundStats.isEmpty ? nil : soundStats,
                                       targets: targets.values.sorted { $0.key < $1.key }, day: day,
-                                      goals: goals.isEmpty ? nil : goals, currentGoalID: currentGoalID))
+                                      goals: goals.isEmpty ? nil : goals, currentGoalID: currentGoalID,
+                                      hooks: hooks.isEmpty ? nil : hooks))
             if persistenceError?.hasPrefix("notebook") == true { persistenceError = nil }
         } catch {
             persistenceError = "notebook: \((error as NSError).localizedDescription)"
@@ -633,6 +651,8 @@ struct BookState: Codable {
     /// Texts the learner wants to read ("your book"), and which is current (optional: older notebooks lack them).
     var goals: [Goal]? = nil
     var currentGoalID: String? = nil
+    /// Keyword mnemonics per word (optional: older notebooks lack them).
+    var hooks: HookShelf? = nil
 }
 
 /// Something the learner should be able to recall, and when they met it.

@@ -172,6 +172,7 @@ struct SettingsView: View {
                     Toggle("Draw with a finger too", isOn: $book.settings.fingerDrawing)
                     Toggle("Handwritten (cursive) models", isOn: $book.settings.cursiveModels)
                 }
+                JudgeSettingsSection()
                 DaySettingsSection()
                 Section {
                     Toggle("Show stress", isOn: $book.settings.showStress)
