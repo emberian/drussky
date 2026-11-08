@@ -175,9 +175,9 @@ enum PageWriter {
         switch ex.kind {
         case .meet: return nil  // letters are introduced only by the course
         case .explain:
-            guard nonEmpty(ex.text), lettersOK(ex.text) else { return nil }
+            guard nonEmpty(ex.text), readable(ex.text) else { return nil }
             var e = ex
-            e.examples = ex.examples?.filter { lettersOK($0.ru) }
+            e.examples = ex.examples?.filter { readable($0.ru) }
             return e
         case .trace, .copy, .dictation:
             return nonEmpty(ex.text) && lettersOK(ex.text) ? ex : nil

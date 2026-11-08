@@ -297,6 +297,9 @@ final class GoalTests: XCTestCase {
         let (written, exercises) = try await PageWriter.write(.goal(brief), book: book) { _ in }
         print("GOAL PAGE:", written.title, "|", exercises.count, "of", written.exercises.count, "kept |", exercises.map(\.kind.rawValue),
               "| new words:", written.new_words?.map(\.ru) ?? [])
+        for ex in written.exercises where !exercises.contains(ex) {
+            print("GOAL PAGE dropped:", ex.kind.rawValue, ex.text ?? ex.answerText ?? ex.say ?? "", ex.before ?? "", ex.after ?? "", ex.options ?? [])
+        }
         XCTAssertGreaterThanOrEqual(exercises.count, 4)
         for ex in exercises { XCTAssertNotNil(GoalPull.verify(ex, in: brief)) }
         book.insertGoalPage(written, exercises: exercises, goal: goal, sentences: brief.sentences)
