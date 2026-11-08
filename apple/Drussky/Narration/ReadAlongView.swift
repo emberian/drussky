@@ -137,7 +137,7 @@ struct ReadAlongView: View {
     private func tap(_ word: String, timing: Int?, token: PassageStructure.Token? = nil) {
         if structureOn, layer?.consumeSuppressedTap() == true { return }  // the tap that ends a long press
         selected = word
-        if structureOn, let token, let si = token.sentence, let s = structure?.sentence(si) { layer?.tapped(s, at: si, words: token.words) }
+        if structureOn, let structure, let token, let si = token.sentence, let s = structure.sentence(si) { layer?.tapped(s, at: si, words: token.words, in: structure) }
         guard let timing, let timings, let file = exercise.narration else { voice.play(word); return }
         voice.stop()
         if listenFirst, timing > revealedUpTo { return }  // not yet read: no peeking by tapping

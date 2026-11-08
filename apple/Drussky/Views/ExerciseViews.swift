@@ -852,6 +852,7 @@ struct PassageExercise: View {
                 // A human reading: the words light up as they are said (Narration/ReadAlongView.swift).
                 ReadAlongView(exercise: slot.exercise, owner: "\(slot.page.id)-\(slot.index)", selected: $selected,
                               structure: passage, layer: layer)
+                panel
             } else {
             HStack(spacing: 14) {
                 Instruction(text: "Read it. Tap any word you want to check.")
@@ -889,10 +890,8 @@ struct PassageExercise: View {
             .padding(18)
             .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
             .overlay { ReadingPassOverlay(pass: pass, text: text) }
+            panel
             ReadingPassBar(pass: pass, text: text)
-            }
-            if structureOn, let passage, layer.panel != nil {
-                StructurePanel(layer: layer, passage: passage)
             }
             if let selected {
                 HStack(spacing: 12) {
@@ -926,11 +925,18 @@ struct PassageExercise: View {
         .onChange(of: book.settings.showStructure) { _, on in if on != true { layer.reset() } }
     }
 
+    /// What a tap or long press opened in the structure layer, right under the text.
+    @ViewBuilder private var panel: some View {
+        if structureOn, let passage, layer.panel != nil {
+            StructurePanel(layer: layer, passage: passage)
+        }
+    }
+
     private func select(_ word: String, token: PassageStructure.Token? = nil) {
         if structureOn, layer.consumeSuppressedTap() { return }  // the tap that ends a long press
         selected = word
         voice.play(word)
-        if structureOn, let token, let si = token.sentence, let s = passage?.sentence(si) { layer.tapped(s, at: si, words: token.words) }
+        if structureOn, let passage, let token, let si = token.sentence, let s = passage.sentence(si) { layer.tapped(s, at: si, words: token.words, in: passage) }
     }
 
     private func gloss(for word: String) -> String? {

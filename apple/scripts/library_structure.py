@@ -180,6 +180,16 @@ def words_of(sentence):
     return [[m.start(), m.end()] for m in WORD.finditer(sentence)]
 
 
+def headword(w):
+    """A dictionary form as the app shows it: no acute on a one-syllable word or a word with ё
+    (morphology.json marks a few: съе́сть, вхо́д), NFC."""
+    w = unicodedata.normalize("NFC", w.strip())
+    plain = strip_stress(w)
+    if "ё" in plain.lower() or sum(c in VOWELS for c in plain.lower()) <= 1:
+        return plain
+    return w
+
+
 def check_stress(s):
     """Problems with the stress marking of a Russian string (validate_course's rule)."""
     problems = []
@@ -259,7 +269,7 @@ class Taught:
             if key(w) in own:
                 continue
             if key(w) in self.lexicon or key(w) in self.lemmas:
-                out.append(w)
+                out.append(headword(w))
             if len(out) >= limit:
                 break
         return out
@@ -406,7 +416,7 @@ def absorb(reply, batch, text_id, taught, problems):
             else:
                 entry["gloss"] = x["gloss"].strip()
                 rel = []
-                for cand in x.get("relatives", []):
+                for cand in map(headword, x.get("relatives", [])):
                     kc = key(cand)
                     if kc and kc != written and kc in taught.known_words and not check_stress(cand) and cand not in rel:
                         rel.append(cand)
@@ -484,6 +494,23 @@ def batches(sentences):
     return out
 
 
+def repair(data, texts):
+    """Headword normalisation of relatives, and entries for sentences no longer in the text dropped."""
+    for t in texts:
+        entry = data["texts"].get(t["id"])
+        if not entry:
+            continue
+        sentences = sentences_of(t["text"])
+        kept = []
+        for s in entry["sentences"]:
+            if s["index"] >= len(sentences) or sentences[s["index"]][1] != s["text"]:
+                continue
+            for x in s["roots"]:
+                x["relatives"] = [headword(r) for r in x["relatives"]]
+            kept.append(s)
+        entry["sentences"] = kept
+
+
 def done_indices(entry, sentences):
     """Sentence indices already annotated against the current text."""
     have = {s["index"]: s for s in entry.get("sentences", [])}
@@ -499,6 +526,7 @@ def main():
     ap.add_argument("--model", default=MODEL)
     ap.add_argument("--effort", default="high", choices=["low", "medium", "high", "xhigh", "max"])
     ap.add_argument("--plan", action="store_true", help="report what is done and what is left; no requests")
+    ap.add_argument("--repair", action="store_true", help="re-normalise stored relatives and drop entries for edited sentences; no requests")
     ap.add_argument("--pause", type=float, default=1.0, help="seconds between requests")
     args = ap.parse_args()
 
@@ -508,6 +536,10 @@ def main():
         texts = [t for t in texts if t["id"] in set(args.ids)]
     data = load_out(args.out)
     taught = Taught()
+    if args.repair:
+        repair(data, texts)
+        save_out(args.out, data)
+        return
 
     todo = []
     total = done = 0

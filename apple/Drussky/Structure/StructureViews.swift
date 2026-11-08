@@ -30,10 +30,10 @@ final class StructureLayer {
     func consumeSuppressedTap() -> Bool { Date().timeIntervalSince(lastLongPress) < 0.5 }
 
     /// The learner tapped a word with the layer on: pulse what it points at, open its paraphrase or frame.
-    func tapped(_ s: StructureSentence, at sentenceIndex: Int, words: Range<Int>) {
+    func tapped(_ s: StructureSentence, at sentenceIndex: Int, words: Range<Int>, in passage: PassageStructure) {
         guard let w = words.first else { return }
         var heads: Set<WordRef> = []
-        if let r = s.referent(at: w), r.headSentence == s.index { heads.insert(WordRef(sentence: sentenceIndex, word: r.head)) }
+        if let r = s.referent(at: w), let h = passage.head(of: r) { heads.insert(WordRef(sentence: h.sentence, word: h.word)) }
         if let d = s.desugaring(at: w) {
             // The flat Russian first; a second tap on the same construction adds the English.
             if case .desugar(sentenceIndex, d, false) = panel { panel = .desugar(sentence: sentenceIndex, d, english: true) }
@@ -80,7 +80,7 @@ final class StructureLayer {
         let clauses = s.chunks.filter { roles[$0.role]?.tier == "clause" }
         m.opens = clauses.filter { token.words.contains($0.first) }.count
         m.closes = clauses.filter { token.words.contains($0.last) }.count
-        m.isReferent = s.referent(at: w).map { $0.headSentence == s.index } ?? false
+        m.isReferent = s.referent(at: w).flatMap { passage.head(of: $0) } != nil
         m.pulsing = token.words.contains { pulsing.contains(WordRef(sentence: si, word: $0)) }
         return m
     }
@@ -230,11 +230,8 @@ struct StructureToggle: View {
             withAnimation(.easeOut(duration: 0.25)) { book.settings.showStructure = !on }
         } label: {
             Text(Theme.stressed("Структу́ра", show: book.settings.showStress, color: on ? Theme.accent : Theme.pencil))
-                .font(Theme.russian(14))
+                .font(Theme.russian(14, weight: on ? .semibold : .regular))
                 .foregroundStyle(on ? Theme.accent : Theme.pencil)
-                .overlay(alignment: .bottom) {
-                    Rectangle().fill(on ? Theme.accent : .clear).frame(height: 1).offset(y: 1)
-                }
                 .padding(.horizontal, 6).padding(.vertical, 4)
         }
         .buttonStyle(.plain)
@@ -309,8 +306,8 @@ struct StructurePanel: View {
             ForEach(Array((members.prefix(1) + clauses.prefix(1)).enumerated()), id: \.offset) { i, c in
                 if let r = roles[c.role] { label(r.ru, r.en, id: "\(c.role)-\(i)") }
             }
-            if let r = s.referent(at: w), r.headSentence == s.index {
-                label("→ \(s.word(r.head))", "points at \(s.word(r.head))", id: "ref")
+            if let r = s.referent(at: w), let h = passage.head(of: r), let hs = passage.sentence(h.sentence) {
+                label("→ \(hs.word(h.word))", "points at \(hs.word(h.word))", id: "ref")
             }
         }
         if let x = s.xray(at: w) {

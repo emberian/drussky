@@ -319,4 +319,11 @@ struct PassageStructure {
 
     func token(line: Int, index: Int) -> Token? { lines[safe: line]?[safe: index] }
     func sentence(_ i: Int?) -> StructureSentence? { i.flatMap { sentences[safe: $0] } }
+
+    /// Where a referent's head is on this page: the passage sentence and word, when the head's
+    /// sentence (an index within the library text) is one of those shown.
+    func head(of r: StructureSentence.Referent) -> (sentence: Int, word: Int)? {
+        guard let si = sentences.firstIndex(where: { $0.index == r.headSentence }) else { return nil }
+        return (si, r.head)
+    }
 }

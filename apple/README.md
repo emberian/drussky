@@ -22,7 +22,8 @@ what you wrote.
 | what does it mean | read Russian, choose its meaning |
 | diary (Дневник) | write a few words of *your own* Russian about a prompt, on ruled lines (or type); confirm or fix the recognizer's transcript, then the tutor marks it like homework — wrong spans underlined, the right form in red above, the corrected line, a word of praise, the pattern behind the biggest slip. Your ink stays. Every edit becomes evidence (own-writing modality, a confusion edge, the pattern), and corrected forms join your words for review. From unit 3 every page ends with one; ＋ → *Write in my diary* adds one now; *Not today* skips it |
 | read along | a library text read by a human (LibriVox volunteers, Commons readers): the word being said lights up, tap a word to hear from there, ¾ speed, or listen first with the text appearing as it is read; then write one of its sentences from the reader's voice and say one after the reader |
-| passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние) |
+| passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние). On a library text, «Структу́ра» in the margin shows its skeleton (below) |
+| who is meant (structure) | a library sentence with one pronoun or participle marked: tap the word it points to or agrees with; a wrong tap gets a second try, then the answer |
 | build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
 | talk (Разгово́р) | a spoken conversation with the tutor: pick one of three scenes made from your words, then 6–10 turns — the tutor speaks (short Russian, stress-marked, at most two new words a turn, a gentle «Вы хоте́ли сказа́ть…?» when you slip), you answer out loud hands-free, an eye icon whispers the English; afterwards every line of yours gets the red pen and at most one pronunciation tip. ＋ → *Talk* |
 | guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
@@ -72,6 +73,27 @@ recognizer's spelling, not a measurement of a sound: they are shown in amber as 
 the contrast's advice as something to try, and leave no evidence. Only the phone-level analyzer
 (`PhoneticAnalyzer`, when its model is bundled) asserts sound verdicts and logs speech confusions
 on their contrast; each report carries its `provenance`.
+
+## Show the structure
+
+Every library text carries a structure layer (`Resources/library-structure.json`, written offline by
+`scripts/library_structure.py` with Claude and checked by `scripts/validate_structure.py`; format in
+COURSE_SCHEMA.md). On any passage made from a library text — as written, read along, the first page of
+your book — «Структу́ра» in the text's margin reveals it without moving a word, as a teacher's pencil
+marks: the members of each sentence underlined the way a Russian school exercise book does it
+(подлежа́щее one line, сказу́емое two, дополне́ние dashed, определе́ние wavy, обстоя́тельство and
+prepositional phrases dash-dot), light brackets round subordinate, participial and gerund clauses and
+direct speech, a small ring on every pronoun, participle or relative word that points at something on
+the page. Tap a ringed word and its head pulses (even in the sentence before). Tap inside a participial
+or gerund construction and its flat Russian appears under the text («лев, кото́рый спал»); tap it again
+for the English. Tap a preposition or a governing verb and its case frame appears (по + Dat) with its
+dependents pulsed. Hold a word down for its roles (подлежа́щее · in the прида́точное) and its root x-ray
+— приста́вка + ко́рень + су́ффикс + оконча́ние, the root's meaning, and one or two words you already
+know on the same root. No English until you ask for it. The toggle stays as you left it.
+
+Reading pages made from a library text end with one or two *who is meant* questions: a pronoun or
+participle of one of its sentences is marked and you tap its head. The outcome is reading evidence on
+the `anaphora` / `participle` construction (and the pronoun), never a word to recall.
 
 ## Remembering
 
@@ -249,7 +271,8 @@ chart), `-qa-tired` (the current page marked shortened);
 `-qa-settings`, `-qa-goal <library id>` (make that text the learner's book), `-qa-goal-pull` (an
 offline page toward it), `-qa-goal-first` (open its first page now); `-qa-judge` (ink on the first
 open recall exercise with Check tapped: the self-judgement panel), `-qa-hooks` (canned hooks on a few
-words; `-qa-contents -qa-node lex:кот` opens one), `-qa-fluency` (three weeks of synthetic fluency
+words; `-qa-contents -qa-node lex:кот` opens one), `-qa-structure <library id>` (that text as written with
+«Структу́ра» on, then its *who is meant* questions), `-qa-fluency` (three weeks of synthetic fluency
 samples for the cover line and sparklines).
 
 ## Content

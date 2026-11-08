@@ -23,6 +23,7 @@
 		1B17EE0C4A43EBBA475C4904 /* Syllables.swift in Sources */ = {isa = PBXBuildFile; fileRef = C046DFDCF39E41471549DBBE /* Syllables.swift */; };
 		1B3182735727F75406BC851B /* Book+Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23202045AC2D23825B097954 /* Book+Review.swift */; };
 		1D702A73BD4AB9810C8F9CB1 /* Fatigue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B14260E7458E1C23DE86EBB /* Fatigue.swift */; };
+		1DB0CE8DE81FC6934FBDE0E2 /* StructureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FA3549C4EDD07C664EE013 /* StructureUITests.swift */; };
 		1EEF624391010B6013EBDAC0 /* RussianDomain+Morphology.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A3DB233136D4B558007FF3 /* RussianDomain+Morphology.swift */; };
 		1F9CA3B9DE2CC7B9D539A89B /* Prosody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA4246F9025E0C5685DD5E /* Prosody.swift */; };
 		207DD1C740CC1F2BD154A635 /* SelfJudgementPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1130EC3D62231FF5A680E9B /* SelfJudgementPanel.swift */; };
@@ -180,6 +181,7 @@
 		F40947EEACAF92CA9EE4E45E /* QA+Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A486012E7EC4C4678258B64 /* QA+Day.swift */; };
 		F4AFFA97BA152A966576EC5C /* RecoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD7AA6ADA8848A5C762E9FC /* RecoveryView.swift */; };
 		F5372D0ACA158ED77B8F7480 /* SoundPairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B06C5D704446F3E517821 /* SoundPairs.swift */; };
+		F5EB36CD9AB39A530D3FCAB5 /* StructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91531E98221ADBC31CE65D4E /* StructureTests.swift */; };
 		F73DDD756EE8C9DD99177420 /* DrusskyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB7D30DEF9D3822201CE244 /* DrusskyTests.swift */; };
 		F999F596AFD1FE53882E5C0E /* NotebookArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD210A3FE35B1CC0C06DAAA0 /* NotebookArchive.swift */; };
 		FB356AD0BFE81A45548E6B00 /* RussianDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1430660BCDA21C7FB31B2F /* RussianDomain.swift */; };
@@ -264,6 +266,7 @@
 		225B3DDBFAF078C80F670536 /* PractiseContrast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PractiseContrast.swift; sourceTree = "<group>"; };
 		22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MarckScript-Regular.ttf"; sourceTree = "<group>"; };
 		23202045AC2D23825B097954 /* Book+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+Review.swift"; sourceTree = "<group>"; };
+		24FA3549C4EDD07C664EE013 /* StructureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructureUITests.swift; sourceTree = "<group>"; };
 		26F2D22948EE4E31130F07F0 /* GoalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUITests.swift; sourceTree = "<group>"; };
 		27AE7A8C01467109460EB5B7 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		2A72E1E3C021AC9FA6611221 /* SpeechEvidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEvidence.swift; sourceTree = "<group>"; };
@@ -346,6 +349,7 @@
 		8CF686BE6829DB81620A8095 /* GrowthChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthChart.swift; sourceTree = "<group>"; };
 		8DFA9DF0E7DCE9FF9481F57B /* ReadAlongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAlongView.swift; sourceTree = "<group>"; };
 		8F8643EAB0D2E7F4D188F47E /* TutorVoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorVoice.swift; sourceTree = "<group>"; };
+		91531E98221ADBC31CE65D4E /* StructureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructureTests.swift; sourceTree = "<group>"; };
 		918ED22ABFE36A67575B2DD5 /* QA+Talk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QA+Talk.swift"; sourceTree = "<group>"; };
 		95547E2F5D4C7E37DA385A64 /* MorphologyExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphologyExercises.swift; sourceTree = "<group>"; };
 		966160D52E50F1ED0AD393D5 /* Drussky.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Drussky.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -480,6 +484,7 @@
 				2CABEA1EF7D21362DB90DEB5 /* NewPagesUITests.swift */,
 				DF4386B2C2EFF97F97EFBA05 /* OnDeviceUITests.swift */,
 				50738AFA47D87DDF551CCCAA /* ScreensUITests.swift */,
+				24FA3549C4EDD07C664EE013 /* StructureUITests.swift */,
 				7DC7E2413C536E90442237A8 /* TalkScreensUITests.swift */,
 			);
 			path = DrusskyUITests;
@@ -508,6 +513,7 @@
 				60BCBC595349471106942D83 /* SchedulingTests.swift */,
 				48C1AAC72C73F9142E86649A /* SoundPairsTests.swift */,
 				78469C049362D4CF53F878F5 /* SpeakingTests.swift */,
+				91531E98221ADBC31CE65D4E /* StructureTests.swift */,
 				358654DC3830360C3E88F33F /* TalkTests.swift */,
 				CBBAF25D3E573841A04CE3E4 /* wikisource-my.json */,
 			);
@@ -1091,6 +1097,7 @@
 				26BFEDE0F6D7B36B2B32BD9F /* NewPagesUITests.swift in Sources */,
 				2C8AB3FD4441C142825A5EA1 /* OnDeviceUITests.swift in Sources */,
 				994826F3FE5E536C3DB865D6 /* ScreensUITests.swift in Sources */,
+				1DB0CE8DE81FC6934FBDE0E2 /* StructureUITests.swift in Sources */,
 				084B99ED9B1B41C1CBD36575 /* TalkScreensUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1145,6 +1152,7 @@
 				9198CEE7AF9DA6393BF4DCD1 /* SchedulingTests.swift in Sources */,
 				61671DC2B12966C775E190F3 /* SoundPairsTests.swift in Sources */,
 				724FB7B921943C50CAD95F4D /* SpeakingTests.swift in Sources */,
+				F5EB36CD9AB39A530D3FCAB5 /* StructureTests.swift in Sources */,
 				C041D0334A14FBB5B5F82F58 /* TalkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
