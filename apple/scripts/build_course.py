@@ -676,6 +676,12 @@ for _uid, _page in course_grammar.pages(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, 
     next(u for u in U if u[0] == _uid)[3].append(_page)
 LEXICON += [w for w in course_grammar.LEXICON if w["ru"] not in {x["ru"] for x in LEXICON}]  # headwords units 24–30 may already teach
 
+# Home talk pages (h1-h6), one-stem consonant alternations (s1), and adjective/pronoun case pages (a1-a3).
+import course_home  # noqa: E402
+for _uid, _page in course_home.pages(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm)):
+    next(u for u in U if u[0] == _uid)[3].append(_page)
+LEXICON += [w for w in course_home.LEXICON if w["ru"] not in {x["ru"] for x in LEXICON}]
+
 
 # Course order. Page ids are written into learners' notebooks (sourceID), and the app walks
 # pages by index, so: ids come from where a page was first authored (uN-pK, counting only
@@ -785,6 +791,7 @@ DIARY_PROMPTS = {
 
 
 DIARY_PROMPTS.update(course_read.DIARY)
+DIARY_PROMPTS.update(course_home.DIARY_PROMPTS)
 
 
 def add_diary_lines(units):
