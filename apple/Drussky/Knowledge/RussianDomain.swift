@@ -484,7 +484,8 @@ struct RussianDomain: KnowledgeDomain {
             help: a.after.revealed ? ["revealed"] : (a.after.assisted == true ? ["assisted"] : nil),
             confusions: confusions.isEmpty ? nil : confusions, review: ex.reviewKey != nil ? true : nil,
             judge: finished && ex.kind.isWriting && ![.meet, .trace, .copy].contains(ex.kind) ? SelfJudgement.judge(a.after) : nil,
-            confidence: finished ? SelfJudgement.confidence(a.after) : nil)
+            confidence: finished ? SelfJudgement.confidence(a.after) : nil,
+            latencyMs: a.after.responseMs)
     }
 
     func normalize(_ answer: String) -> String { RussianText.comparable(answer) }

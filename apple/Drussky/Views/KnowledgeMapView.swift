@@ -84,6 +84,8 @@ struct MapLayout {
         var rect: CGRect
         var strength: Double?
         var round: Bool
+        /// Right and quick in some modality (`CompilationPolicy`): comes without thinking.
+        var compiled = false
     }
     struct Band { var title: String; var y: CGFloat }
 
@@ -102,7 +104,7 @@ struct MapLayout {
         func band(_ title: String) { bands.append(Band(title: title, y: y)); y += 22 }
         func add(_ id: ComponentID, _ label: String, _ rect: CGRect, round: Bool) {
             index[id] = nodes.count
-            nodes.append(Node(id: id, label: label, rect: rect, strength: model.strength(id, at: t), round: round))
+            nodes.append(Node(id: id, label: label, rect: rect, strength: model.strength(id, at: t), round: round, compiled: k.isCompiled(id)))
         }
 
         band("Letters")
@@ -192,7 +194,7 @@ struct KnowledgeMap: View {
         .accessibilityChildren {
             ForEach(layout.nodes, id: \.id) { node in
                 Button(node.label) { selected = node.id }
-                    .accessibilityValue(node.strength.map { "recall \(Int(($0 * 100).rounded())) percent" } ?? "not practised")
+                    .accessibilityValue(node.strength.map { "recall \(Int(($0 * 100).rounded())) percent" + (node.compiled ? ", comes without thinking" : "") } ?? "not practised")
             }
         }
     }
@@ -242,6 +244,10 @@ struct KnowledgeMap: View {
                 ctx.fill(path, with: .color(Theme.card))
                 ctx.fill(path, with: .color(Theme.accent.opacity(0.08 + 0.42 * s)))
                 ctx.stroke(path, with: .color(Theme.accent.opacity(0.25 + 0.5 * s)), lineWidth: n.id == selected ? 2 : 1)
+                // Compiled: a second, inner line — the teacher's double underline, nothing louder.
+                if n.compiled {
+                    ctx.stroke(shape(n).path(in: n.rect.insetBy(dx: 2.5, dy: 2.5)), with: .color(Theme.accent.opacity(0.55)), lineWidth: 0.8)
+                }
             } else {
                 ctx.stroke(path, with: .color(Theme.muted.opacity(0.28)), lineWidth: 1)
             }

@@ -396,7 +396,7 @@ struct WritingExercise: View {
                     idleTask?.cancel()
                     let reader = opinion?.revision == pad.revision ? opinion : nil
                     noteWritingFluency(matched: reader?.matched ?? false, reading: reader?.reading, confidence: nil)
-                    SelfJudgement.record(verdict, on: slot, reader: reader)
+                    SelfJudgement.record(verdict, on: slot, reader: reader, responseMs: pad.inkDurationMs)
                     if verdict == .notQuite, let s = ex.spoken { voice.play(s) }
                 }
             }
@@ -567,6 +567,7 @@ struct WritingExercise: View {
         if checking { pendingCheck = (pendingCheck ?? false) || manual; return }
         checking = true
         let drawing = pad.drawing, revision = pad.revision
+        let took = pad.inkDurationMs  // first stroke to the last before this check
         let target = self.target
         let practice = !isRecall
         let subjectDrop = ex.kind == .translate
@@ -590,6 +591,7 @@ struct WritingExercise: View {
                     r.attempts += manual ? 1 : 0
                     r.status = practice ? .done : .correct
                     r.recognized = reading?.best
+                    r.responseMs = took
                 }
                 lastReading = nil
             } else if manual {
@@ -597,6 +599,7 @@ struct WritingExercise: View {
                     r.attempts += 1
                     r.failedChecks = (r.failedChecks ?? 0) + 1
                     r.recognized = reading?.best
+                    r.responseMs = took
                 }
                 lastReading = reading?.best ?? ""
             } else if again == true {
@@ -647,10 +650,13 @@ struct ListenPickExercise: View {
     @Environment(Book.self) private var book
     let slot: ExerciseSlot
     let isActive: Bool
+    /// When the clip last finished (response latency runs from here to the tap).
+    @State private var clipEndedAt: Date?
 
     var body: some View {
         let ex = slot.exercise
         let options = ex.options ?? []
+        let clipKey = RussianText.audioKey(ex.say ?? "")
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 14) {
                 HearButton(text: ex.say ?? "", size: 52)
@@ -679,18 +685,25 @@ struct ListenPickExercise: View {
         .onChange(of: book.advanceSignal) { _, _ in
             if isActive, slot.isAdvanceTarget, let s = ex.say { voice.play(s) }
         }
+        .onChange(of: voice.speakingKey) { old, new in
+            // The clip of this exercise just ended: the clock for the tap starts now.
+            if old == clipKey, new == nil { clipEndedAt = Date() }
+        }
     }
 
     private func choose(_ i: Int, options: [String]) {
         let say = slot.exercise.say
         let right = options[i] == say
         let missedNow = !right && slot.result.attempts + 1 >= 2
+        let took = clipEndedAt.map { Int(Date().timeIntervalSince($0) * 1000) }
+        clipEndedAt = nil
         // A wrong pick plays what was picked; the last miss plays what it really was.
         if missedNow, let say { voice.play(say) } else if !right, let s = options[safe: i] { voice.play(s) }
         slot.finish { r in
             r.chosen = i
             r.attempts += 1
             r.status = right ? (r.attempts == 1 ? .correct : .done) : (r.attempts >= 2 ? .missed : .open)
+            r.responseMs = took
         }
     }
 }
@@ -698,6 +711,8 @@ struct ListenPickExercise: View {
 struct ReadMeaningExercise: View {
     let slot: ExerciseSlot
     let isActive: Bool
+    /// When the exercise came up (response latency runs from here to the tap).
+    @State private var shownAt: Date?
 
     var body: some View {
         let ex = slot.exercise
@@ -707,10 +722,13 @@ struct ReadMeaningExercise: View {
             ChoiceGrid(options: ex.options ?? [], chosen: slot.result.chosen, correct: ex.answerIndex,
                        russian: false, showStress: true, locked: slot.result.status.isComplete) { i in
                 let right = i == ex.answerIndex
+                let took = shownAt.map { Int(Date().timeIntervalSince($0) * 1000) }
+                shownAt = Date()  // a second pick is timed from the first
                 slot.finish { r in
                     r.chosen = i
                     r.attempts += 1
                     r.status = right ? (r.attempts == 1 ? .correct : .done) : (r.attempts >= 2 ? .missed : .open)
+                    r.responseMs = took
                 }
             }
             if slot.result.status == .missed, let answer = ex.answerIndex.flatMap({ ex.options?[safe: $0] }) {
@@ -722,6 +740,7 @@ struct ReadMeaningExercise: View {
                 }
             }
         }
+        .onChange(of: isActive, initial: true) { _, active in if active, shownAt == nil { shownAt = Date() } }
     }
 }
 
