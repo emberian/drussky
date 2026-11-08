@@ -86,7 +86,8 @@ enum QA {
                 r.attempts += 1
                 switch ex.kind {
                 case .listenPick: r.chosen = ex.options?.firstIndex(of: ex.say ?? ""); r.status = .correct
-                case .readMeaning: r.chosen = ex.answerIndex; r.status = .correct
+                case .readMeaning, .familyGuess: r.chosen = ex.answerIndex; r.status = .correct
+                case .buildWord: r.recognized = BuildWordCheck.assemble(ex.parts ?? []); r.status = .correct
                 case .readAloud: r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
                 case .dictation, .translate, .fill: r.status = i % 5 == 3 ? .missed : .correct
                     if r.status == .missed { r.revealed = true; r.recognized = misreading(ex.target ?? "") }

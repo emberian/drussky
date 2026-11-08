@@ -17,7 +17,9 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | fill | write the missing word in a sentence |
 | read aloud | say it; every take is kept, played back, and its rhythm and pitch drawn against the model's; *Skip for now* (ungraded) is always there |
 | what does it mean | read Russian, choose its meaning |
-| passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound |
+| passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние) |
+| build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
+| guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
 
 Writing is read on-device by Apple's handwriting recognizer. It confirms a right answer by
 itself after a short pause; **Check** asks it explicitly. When it misreads you, *I wrote it
@@ -57,7 +59,10 @@ and the next launch imports it and deletes the file.
 ## Pages that write themselves
 
 The **＋** in the top bar asks the tutor for a new page, placed right after the current one:
-*A page from my mistakes* (built from what you've missed and find hardest) or *Read my own
+*Word families* (roots you already have two words of, with their other members to guess and
+build; `Resources/morphology.json`, see COURSE_SCHEMA.md) and *Cognates* (the Greek and Latin of
+mathematics and philosophy, read as Russian) are built on the device without the tutor. The tutor
+writes *A page from my mistakes* (built from what you've missed and find hardest) or *Read my own
 text…* (paste or Scan Text any Russian; it becomes a glossed passage with questions, and its
 new words join your reviews). Pages arrive in the course's own format and every exercise is
 checked before it goes in. The tutor's answers mark Russian as tappable phrases you can

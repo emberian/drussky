@@ -34,6 +34,7 @@ extension Modality {
         case .say: "see → say"
         case .hearPick: "hear → pick"
         case .readPick: "read → pick"
+        case .build: "English → build"
         default: rawValue
         }
     }
@@ -87,10 +88,12 @@ struct RussianAttempt {
 /// Russian, as Drussky teaches it, in LearningCore's terms.
 struct RussianDomain: KnowledgeDomain {
     let name = "drussky-ru"
-    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick]
+    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .build]
     let graph: KnowledgeGraph
     let lemmas: Lemmas
-    /// Every single word the graph knows as a word (lexicon tokens, lemma-map forms, pair words, kept words).
+    /// Roots, affixes and segmentations (Morphology/).
+    let morphology: Morphology
+    /// Every single word the graph knows as a word (lexicon tokens, lemma-map forms, pair words, kept words, morphology lemmas).
     let words: Set<String>
     /// Lexicon key → its component (phrase or word).
     private let entryIDs: [String: ComponentID]
@@ -98,13 +101,15 @@ struct RussianDomain: KnowledgeDomain {
     private let byGloss: [String: [String]]
     private let letterSays: [String: String]
 
-    init(course: Course, lemmas: Lemmas, pairs: SoundPairs, customWords: [Course.Word] = []) {
+    init(course: Course, lemmas: Lemmas, pairs: SoundPairs, customWords: [Course.Word] = [], morphology: Morphology = .empty) {
         self.lemmas = lemmas
+        self.morphology = morphology
         let lexicon = course.lexicon + customWords
         var words = Set<String>()
         for w in lexicon { for t in RussianText.key(w.ru).split(separator: " ") { words.insert(String(t)) } }
         for (form, entry) in lemmas.forms { words.insert(form); if let l = entry.first { words.insert(l) } }
         for p in pairs.pairs { for w in p.words { words.insert(RussianText.key(w.ru)) } }
+        for key in morphology.lemmas.keys where !key.contains(" ") { words.insert(key) }
         self.words = words
         var gloss: [String: [String]] = [:]
         for w in lexicon where !w.en.isEmpty { gloss[w.en.lowercased(), default: []].append(RussianText.key(w.ru)) }
@@ -187,7 +192,9 @@ struct RussianDomain: KnowledgeDomain {
             }
         }
         entryIDs = entries
-        graph = KnowledgeGraph(components: comps, edges: edges)
+        // Roots, affixes and word families: a word's component is its lexeme (or the lexicon phrase it is).
+        let (mc, me) = Self.morphologyGraph(morphology) { entries[$0] ?? ComponentID(.lexeme, $0) }
+        graph = KnowledgeGraph(components: comps + mc, edges: edges + me)
     }
 
     // MARK: Words
@@ -212,6 +219,7 @@ struct RussianDomain: KnowledgeDomain {
     func lemma(of token: String) -> String? {
         if let l = lemmas.lemma(token) { return l }
         if words.contains(token) { return token }
+        if let e = morphology.entry(word: token) { return e.key }
         let endings = ["ами", "ями", "ого", "его", "ому", "ему", "ой", "ей", "ом", "ем", "ам", "ям", "ах", "ях",
                        "ую", "юю", "ые", "ие", "ый", "ий", "у", "ю", "е", "а", "я", "ы", "и", "о"]
         for e in endings where token.hasSuffix(e) && token.count > e.count + 2 {
@@ -259,6 +267,7 @@ struct RussianDomain: KnowledgeDomain {
         let target: String? = switch ex.kind {
         case .readMeaning: ex.text
         case .soundPair: ex.say
+        case .familyGuess: ex.word  // the new family member, not the sentence it sits in
         default: ex.target
         }
         guard let target else { return out }
@@ -290,6 +299,11 @@ struct RussianDomain: KnowledgeDomain {
             out.insert(ComponentID(.lexeme, String(key.dropFirst(5))), at: 0)
         }
         out += tags.sorted().map { ComponentID(.construction, $0) }
+        // Roots: every word is evidence for the root it is built on; a family guess names its
+        // root outright; building a word also exercises the affix tiles it is built from.
+        out += rootComponents(for: out)
+        if ex.kind == .familyGuess, let r = ex.root { out.append(ComponentID(.root, r)) }
+        if ex.kind == .buildWord, let parts = ex.parts { out += affixComponents(tiles: parts) }
         var seen = Set<ComponentID>()
         return out.filter { seen.insert($0).inserted }
     }
@@ -317,7 +331,8 @@ struct RussianDomain: KnowledgeDomain {
         case .translate, .fill: .meaningWrite
         case .readAloud: .say
         case .listenPick, .soundPair: .hearPick
-        case .readMeaning: .readPick
+        case .readMeaning, .familyGuess: .readPick
+        case .buildWord: .build
         case .explain, .passage: nil
         }
     }
@@ -343,7 +358,7 @@ struct RussianDomain: KnowledgeDomain {
         case .done:
             switch ex.kind {
             case .meet, .trace, .copy: return .good
-            case .listenPick, .readMeaning, .soundPair: return r.assisted == true ? nil : .again
+            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord: return r.assisted == true ? nil : .again
             case .explain, .passage: return nil
             default: return r.assisted == true ? nil : .hard  // finished, but not verified right first time
             }
@@ -448,11 +463,16 @@ struct RussianDomain: KnowledgeDomain {
         let item = "\(a.page.id)#\(a.index)"
         // Outcomes have one id per round, so a reconstructed one and a live one can't both count.
         let id = finished ? KnowledgeTracker.outcomeID(item: item, round: a.after.roundNumber) : UUID().uuidString
+        let grade = finished ? Self.grade(ex, a.after) : nil
+        // A root is credited by every word built on it, never blamed: missing one word is not
+        // forgetting the root (weak, one-way evidence).
+        var touched = components(for: ex)
+        if grade == nil || grade == .again { touched.removeAll { $0.kind == .root } }
         return LearningEvent(
             id: id, t: a.at, type: finished ? .outcome : .attempt,
             source: a.backfill ? "backfill" : "live", item: item, activity: ex.kind.rawValue, modality: modality,
-            components: components(for: ex), grade: finished ? Self.grade(ex, a.after) : nil,
-            correct: finished ? nil : false, attempt: a.after.attempts, expected: ex.kind == .readMeaning
+            components: touched, grade: grade,
+            correct: finished ? nil : false, attempt: a.after.attempts, expected: [.readMeaning, .familyGuess].contains(ex.kind)
                 ? ex.answerIndex.flatMap { ex.options?[safe: $0] } : (ex.kind == .soundPair ? ex.say : ex.target),
             response: response, latency: a.latency,
             help: a.after.revealed ? ["revealed"] : (a.after.assisted == true ? ["assisted"] : nil),

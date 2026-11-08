@@ -63,6 +63,8 @@ memorable line in the tutor's voice.
 | `fill` | `before`, `after`, `hint`, `answer` | Writes the missing word: `before` + ___ + `after`. `hint` is the English of the whole sentence. |
 | `read_meaning` | `text`, `options:[en…]`, `answer` (index) | Reads Russian, picks its meaning. |
 | `passage` | `text`, `en`, optional `glosses:{word: meaning}` | Reads a short text (2–8 sentences); taps any word to see its meaning and hear it; can play the whole text and reveal `en`. Words missing from `glosses` fall back to the lexicon. Gloss keys are the word as written, lowercase, without stress. |
+| `build_word` | `en`, `answer`, `parts:[tile…]`, optional `options:[tile…]`, `alternatives:[ru…]` | Sees the English, taps morpheme tiles into order (`пере-`, `пис`, `-а́ть`), checks. `parts` spell `answer` in order (hyphens and stress dropped); `options` is every tile offered, in display order (defaults to `parts`); `alternatives` are other words the tiles may spell that also count. `answer` must be in the lexicon and be a lemma or cognate of `morphology.json`. Right at the first check is recall; two misses show the word. |
+| `family_guess` | `text`, `word`, `root`, `options:[en…]`, `answer` (index), `en` | Reads a sentence with one new word (`word`, a `morphology.json` lemma built on `root`, a root the learner knows), guesses its meaning before being told (the pretesting effect), then sees the word taken apart. Every other word of `text` must be in the lexicon. |
 
 Any exercise may also carry an optional `skills: ["past", "negation"]`: the grammar patterns
 it practises, by construction id from `Resources/lemmas.json` (`gram:` prefix optional). When it is
@@ -122,6 +124,43 @@ stress marks. Audio is keyed by the stress-marked form in `Audio/index-pairs.jso
 `variants-pairs.json` / `sources-pairs.json` (`scripts/make_pair_audio.py`), so за́мок and
 замо́к never share a clip. Pages are generated locally (`sound_pair` exercises, never authored
 in course.json), from letters already met, weighted toward the contrasts missed most.
+
+# Morphology — `Drussky/Resources/morphology.json`
+
+Roots and word families, built by `scripts/build_morphology.py` from its author tables and
+checked by `scripts/validate_morphology.py` (sources and the segmentation policy:
+`scripts/morphology_sources.md`).
+
+```json
+{
+  "version": 1,
+  "roots":    [{ "id": "пис", "forms": ["пис", "пиш"], "gloss": "write", "label": "пис-/пиш-", "note": "…" }],
+  "prefixes": [{ "id": "пере", "forms": ["пере"], "gloss": "across; again, re-", "examples": ["перево́д", "…"] }],
+  "suffixes": [{ "id": "тель", "forms": ["тель"], "gloss": "one who does", "pos": "noun", "examples": ["учи́тель"] }],
+  "lemmas":   { "переписать": { "ru": "переписа́ть", "morphemes": ["пере", "пис", "а́", "ть"], "roots": ["пис"],
+                               "prefixes": ["пере"], "suffixes": ["ть"], "pos": "verb", "en": "to rewrite, to copy out",
+                               "family": "пис", "base": "писать", "example": { "ru": "…", "en": "…" }, "note": "…", "loan": "…" } },
+  "forms":    { "книгу": "книга" },
+  "cognates": [{ "ru": "филосо́фия", "en": "philosophy", "source": "Greek φιλοσοφία …", "rules": ["ph-f", "ia-iya"],
+                 "parts": [{ "tile": "фило-", "gloss": "love (φιλο-)" }, { "tile": "-со́фия", "gloss": "wisdom (σοφία)" }] }],
+  "rules":    [{ "id": "th-t", "pattern": "th → т", "note": "…", "examples": ["тео́рия", "…"] }],
+  "names":    ["филипок", "…"]
+}
+```
+
+`lemmas` is keyed by the headword without stress; `morphemes` spell `ru`; every root named is in
+`roots` and one morpheme is one of its `forms`; `family` is one of the lemma's roots (members of a
+family all carry its root), and a lemma with no root (да, здесь) has no family. `base` names the
+lemma it is derived from. Every course lexicon word (through `lemmas.json`), every lemma-map lemma
+and the 300 most frequent library words resolve to an entry (or a cognate, or a name).
+
+In the knowledge model (`RussianDomain`), roots are `root:<id>` components and affixes are
+`affix:пере-` / `affix:-тель`; a word has `contains-root`, `contains-affix` and `derived-from`
+edges. Producing a word right is evidence for its root, in the exercise's modality; a miss never
+is (missing one word is not forgetting the root). `build_word` has its own modality,
+`meaning-build`. The inside cover's *Word families* shows every root with a known member; the
+＋ menu's *Word families* and *Cognates* pages are built locally from roots with two known members
+and from cognates in letters already met.
 
 # Lemmas — `Drussky/Resources/lemmas.json`
 

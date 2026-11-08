@@ -184,7 +184,7 @@ enum PageWriter {
             guard nonEmpty(ex.text), lettersOK(ex.text), let options = ex.options, let i = ex.answerIndex,
                   options.indices.contains(i), options.count >= 2 else { return nil }
             return ex
-        case .soundPair: return nil  // generated locally from pairs.json only
+        case .soundPair, .buildWord, .familyGuess: return nil  // generated locally (pairs.json, morphology.json) only
         case .passage:
             guard nonEmpty(ex.text), passageAnyLetters || lettersOK(ex.text) else { return nil }
             return ex

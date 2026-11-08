@@ -32,6 +32,9 @@ KINDS = {
     "fill": ({"before", "after", "hint", "answer"}, set()),
     "read_meaning": ({"text", "options", "answer"}, set()),
     "passage": ({"text", "en"}, {"glosses"}),
+    # Morphology/ (see COURSE_SCHEMA.md): tiles → word, and a new word on a known root.
+    "build_word": ({"en", "answer", "parts"}, {"options", "alternatives"}),
+    "family_guess": ({"text", "word", "root", "options", "answer", "en"}, set()),
 }
 BANNED = re.compile(r"\b(optional|optionally|recording|recordings|recorded|accuracy|accurate|the app|this app|model voice|disclaimer|friend|friends|coach|tutor|might not|may not be)\b", re.I)
 
@@ -86,7 +89,11 @@ def letters_in(s):
 
 
 def check_stress(where, s):
-    for tok in tokens(s):
+    for m in re.finditer("[Ѐ-ӿ́]+(?:-[Ѐ-ӿ́]+)*", s):
+        tok = m.group(0)
+        # A morpheme written with a hyphen on one side (пере-, -ние) is a fragment, not a word.
+        if (m.start() > 0 and s[m.start() - 1] == "-") or (m.end() < len(s) and s[m.end()] == "-"):
+            continue
         low = tok.lower()
         for i, c in enumerate(low):
             if c == ACUTE and (i == 0 or low[i - 1] not in VOWELS):
@@ -103,6 +110,20 @@ def check_stress(where, s):
             err(where, f"{vowels}-syllable word needs exactly one stress mark: {tok!r}")
         elif vowels <= 1 and marks:
             err(where, f"monosyllable must not be marked: {tok!r}")
+
+
+def check_tile(where, tile):
+    """A morpheme tile ("пере-", "пис", "-а'тель") is a fragment: at most one stress mark, after a vowel."""
+    low = tile.replace("-", "").lower()
+    if low.count(ACUTE) > 1:
+        err(where, f"tile {tile!r} carries more than one stress mark")
+    for i, c in enumerate(low):
+        if c == ACUTE and (i == 0 or low[i - 1] not in VOWELS):
+            err(where, f"acute not after a vowel in tile {tile!r}")
+
+
+def tile_key(tile):
+    return key(tile).replace("-", "").replace(" ", "")
 
 
 def check_letters(where, s, known):
@@ -127,6 +148,10 @@ def russian_fields(e):
         out.append(("answer", e["answer"]))
     if k == "fill":
         out += [("before", e["before"]), ("after", e["after"])]
+    if k == "build_word":
+        out.append(("answer", e["answer"]))
+    if k == "family_guess":
+        out += [("text", e["text"]), ("word", e["word"])]
     return out
 
 
@@ -150,6 +175,10 @@ def spoken_strings(course):
                     out.append(e["answer"])
                 if k == "fill":
                     out += [e["answer"], e["before"] + e["answer"] + e["after"]]
+                if k == "build_word":
+                    out.append(e["answer"])
+                if k == "family_guess":
+                    out += [e["text"], e["word"]]
     return [s for s in out if s and CYR.search(s)]
 
 
@@ -207,6 +236,11 @@ def check_meaning_before_recall(course, lex_keys):
                     show_inside(e["text"])
                     for g in e.get("glosses", {}):
                         shown_tokens.add(key(g))
+                elif k == "build_word":
+                    show_entry(key(e["answer"]))  # the meaning is given; the word is assembled under it
+                elif k == "family_guess":
+                    show_entry(key(e["word"]))  # guessed, then told
+                    shown_tokens.add(key(e["word"]))
                 elif k in ("translate", "fill"):
                     recall = [e["answer"]]
                 elif k in ("dictation", "read_meaning"):
@@ -221,6 +255,9 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     path = Path(args[0]) if args else DEFAULT
     course = json.loads(path.read_text())
+    morph_path = path.parent / "morphology.json"
+    morphology = json.loads(morph_path.read_text()) if morph_path.exists() else {"roots": [], "lemmas": {}, "forms": {}, "cognates": []}
+    roots = {r["id"]: r for r in morphology["roots"]}
 
     if set(course) != {"version", "letters", "lexicon", "units"}:
         err("top", f"keys {sorted(course)}")
@@ -382,6 +419,54 @@ def main():
                         err(w, f"answer index {a!r} out of range")
                     if any(CYR.search(o) for o in e["options"]) or len(set(e["options"])) != len(e["options"]):
                         err(w, "options must be distinct English")
+                if k == "build_word":
+                    tiles = e.get("options", e["parts"])
+                    for tile in e["parts"] + tiles:
+                        check_tile(w, tile)
+                        check_letters(f"{w}.tiles", tile, known)
+                    if "".join(tile_key(x) for x in e["parts"]) != tile_key(e["answer"]):
+                        err(w, f"parts {e['parts']} do not spell {e['answer']!r}")
+                    if not all(x in tiles for x in e["parts"]) or len(set(tiles)) != len(tiles):
+                        err(w, "options must contain every part, without repeats")
+                    if key(e["answer"]) not in lex_keys:
+                        err(w, f"answer {e['answer']!r} not in lexicon")
+                    if CYR.search(e["en"]):
+                        err(w, "en must be English")
+                    for alt in e.get("alternatives", []):
+                        check_stress(w + ".alternatives", alt)
+                    lemma = morphology["lemmas"].get(key(e["answer"]))
+                    cognate = next((c for c in morphology["cognates"] if key(c["ru"]) == key(e["answer"])), None)
+                    if lemma:
+                        forms = {f for r in lemma["roots"] for f in roots.get(r, {}).get("forms", [])}
+                        if forms and not any(tile_key(x) in forms for x in e["parts"]):
+                            err(w, f"no tile of {e['parts']} is a root form of {lemma['roots']} ({sorted(forms)})")
+                    elif cognate:
+                        if cognate.get("parts") and {tile_key(x) for x in e["parts"]} != {tile_key(p["tile"]) for p in cognate["parts"]}:
+                            err(w, f"tiles {e['parts']} differ from morphology.json's parts for {e['answer']!r}")
+                    else:
+                        err(w, f"{e['answer']!r} is neither a lemma nor a cognate in morphology.json")
+                if k == "family_guess":
+                    wk = key(e["word"])
+                    toks = key(e["text"]).split()
+                    if wk not in toks:
+                        err(w, f"word {e['word']!r} is not in the text")
+                    if e["root"] not in roots:
+                        err(w, f"unknown root {e['root']!r}")
+                    entry = morphology["lemmas"].get(wk) or morphology["lemmas"].get(morphology["forms"].get(wk, ""))
+                    if not entry:
+                        err(w, f"{e['word']!r} has no morphology entry")
+                    elif e["root"] not in entry["roots"]:
+                        err(w, f"{e['word']!r} is not built on root {e['root']} (its roots: {entry['roots']})")
+                    a = e["answer"]
+                    if not isinstance(a, int) or isinstance(a, bool) or not 0 <= a < len(e["options"]):
+                        err(w, f"answer index {a!r} out of range")
+                    if any(CYR.search(o) for o in e["options"]) or len(set(e["options"])) != len(e["options"]):
+                        err(w, "options must be distinct English")
+                    if CYR.search(e["en"]):
+                        err(w, "en must be an English translation")
+                    missing = [x for x in toks if x != wk and x not in lex_tokens]
+                    if missing:
+                        err(w, f"words around the new one not in lexicon: {missing}")
                 if k in ("dictation", "translate", "fill", "read_meaning"):
                     s = e["text"] if k in ("dictation", "read_meaning") else (e["before"] + e["answer"] + e["after"] if k == "fill" else e["answer"])
                     missing = [t for t in key(s).split() if t not in lex_tokens]
@@ -402,6 +487,8 @@ def main():
                         produced.append(key(e["before"] + e["answer"] + e["after"]))
                 elif k == "listen_pick":
                     produced.append(key(e["say"]))
+                elif k == "build_word":
+                    produced.append(key(e["answer"]))
     padded = [f" {t} " for t in produced]
     for wd in lexicon:
         k = key(wd["ru"])

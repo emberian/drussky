@@ -69,6 +69,9 @@ enum ExerciseKind: String, Codable, Sendable {
     case passage
     /// Generated minimal-pair listening (SoundPairs.swift); never authored in course.json.
     case soundPair = "sound_pair"
+    /// Word building from morpheme tiles and guessing a new family member (Morphology/).
+    case buildWord = "build_word"
+    case familyGuess = "family_guess"
 
     /// Exercises answered with the pencil on ruled paper.
     var isWriting: Bool {
@@ -101,9 +104,17 @@ struct Exercise: Codable, Sendable, Hashable {
     /// Grammar patterns the exercise practises (lemmas.json construction ids); when absent the
     /// knowledge model tags it from its words.
     var skills: [String]? = nil
+    /// build_word: the morpheme tiles that spell `answer`, in order (`options` holds every tile offered);
+    /// `alternatives` are other words the tiles may also spell that count as right.
+    var parts: [String]? = nil
+    var alternatives: [String]? = nil
+    /// family_guess: the new family member inside `text`, and the root it shares with known words.
+    var word: String? = nil
+    var root: String? = nil
 
     enum CodingKeys: String, CodingKey {
         case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills
+        case parts, alternatives, word, root
     }
 
     init(kind: ExerciseKind) { self.kind = kind }
@@ -124,6 +135,10 @@ struct Exercise: Codable, Sendable, Hashable {
         reviewKey = try c.decodeIfPresent(String.self, forKey: .reviewKey)
         glosses = try c.decodeIfPresent([String: String].self, forKey: .glosses)
         skills = try c.decodeIfPresent([String].self, forKey: .skills)
+        parts = try c.decodeIfPresent([String].self, forKey: .parts)
+        alternatives = try c.decodeIfPresent([String].self, forKey: .alternatives)
+        word = try c.decodeIfPresent(String.self, forKey: .word)
+        root = try c.decodeIfPresent(String.self, forKey: .root)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -147,6 +162,10 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(reviewKey, forKey: .reviewKey)
         try c.encodeIfPresent(glosses, forKey: .glosses)
         try c.encodeIfPresent(skills, forKey: .skills)
+        try c.encodeIfPresent(parts, forKey: .parts)
+        try c.encodeIfPresent(alternatives, forKey: .alternatives)
+        try c.encodeIfPresent(word, forKey: .word)
+        try c.encodeIfPresent(root, forKey: .root)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }
@@ -156,7 +175,7 @@ struct Exercise: Codable, Sendable, Hashable {
         switch kind {
         case .meet: letter
         case .trace, .copy, .dictation, .readAloud: text
-        case .translate, .fill: answerText
+        case .translate, .fill, .buildWord: answerText
         case .listenPick: say
         default: nil
         }
@@ -167,9 +186,9 @@ struct Exercise: Codable, Sendable, Hashable {
         switch kind {
         case .listenPick: say
         case .dictation: say ?? text
-        case .readAloud, .trace, .copy, .readMeaning, .passage: text
+        case .readAloud, .trace, .copy, .readMeaning, .passage, .familyGuess: text
         case .fill: [before, answerText, after].compactMap { $0 }.joined()
-        case .translate: answerText
+        case .translate, .buildWord: answerText
         default: nil
         }
     }
