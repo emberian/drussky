@@ -23,7 +23,7 @@ authored new material only.
   "sound": "a tapped or rolled r",
   "family": "familiar | false_friend | new | sign",
   "tip": "Looks like P, sounds like r.",
-  "example": "ру́ка" }
+  "example": "рука́" }
 ```
 `say` is what the app speaks when the learner taps the letter: the letter's *sound* as a
 syllable or vowel (e.g. "ра" or "а"), not necessarily its alphabet name. `tip` is one short,

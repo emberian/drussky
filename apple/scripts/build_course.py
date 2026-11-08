@@ -178,7 +178,7 @@ LEXICON = [
     W("де'сять", "ten"), W("плюс", "plus"), W("двена'дцать", "twelve"), W("четы'рнадцать", "fourteen"),
     W("шестна'дцать", "sixteen"), W("семна'дцать", "seventeen"), W("восемна'дцать", "eighteen"), W("девятна'дцать", "nineteen"),
     # unit 16
-    W("ко'смос", "space (outer space)", "🌌"), W("пла'нета", "planet", "🪐"), W("лети'т", "flies (it)"),
+    W("ко'смос", "space (outer space)", "🌌"), W("плане'та", "planet", "🪐"), W("лети'т", "flies (it)"),
     W("в", "in, into"), W("число'", "number", "🔢"), W("зада'ча", "problem, task"), W("пра'вда", "truth; true"), W("непра'вда", "not true, a lie"),
     W("мысль", "thought", "💭"), W("ничего'", "nothing", None, "said nichevo"), W("мы'слю", "I think, I reason (as in Descartes)"),
     W("сле'довательно", "therefore"), W("существу'ю", "I exist"), W("ночь", "night", "🌙"),
@@ -231,7 +231,7 @@ U.append(("u2", "I, you, we", "я ты мы вы они́", [
 ]))
 
 U.append(("u3", "This is…", "э́то, не, нет · Р С", [
-    ("Э and Е", "Э says e as in bet and starts the most useful word in Russian, э́то. Е says ye and gives you no.", [
+    ("Э and Е", "Э says e as in bet and starts the most useful word in Russian, э́то. Е says ye at the start of a word, and softens the consonant before it in не and нет.", [
         meet("Э"), meet("Е"),
         ex("Э is a plain e. Е is ye at the start of a word, and after a consonant it is e that softens the consonant, as in не and нет. Э'то means this is or that is, with no verb needed.", [("Э'то кот.", "This is a cat."), ("Нет.", "No.")]),
         tr("э'то"), cp("нет"), lp("не", ["не", "нет", "на"]), ra("Э'то ма'ма."), dc("Э'то кот."),
@@ -253,15 +253,15 @@ U.append(("u3", "This is…", "э́то, не, нет · Р С", [
 
 U.append(("u4", "Where?", "У Д Г Л · тут, там, где", [
     ("У and Д", "У looks like y and says oo. Д is a little house that says d: yes, house, water.", [
-        meet("У"), meet("Д"), tr("тут"), lp("да", ["да", "дом", "тут"]), cp("до'ма"), ra("Я тут. Ты там."),
+        meet("У"), meet("Д"), tr("тут"), lp("да", ["да", "дом", "тут"]), cp("до'ма"), cp("вода'", 1), ra("Я тут. Ты там."),
         dc("дом"), tl("yes", "да"), tl("here", "тут"), fl("Ма'ма ", "до'ма", ".", "Mom is at home."),
     ]),
     ("Г and где?", "Г is an upside-down L and says g as in go. Its best word is где, where.", [
         meet("Г"),
-        ex("In the present, Russian leaves out is, and it asks questions without do: Где кот? is Where is the cat?", [("Где кот?", "Where is the cat?"), ("Кот до'ма.", "The cat is at home."), ("го'род", "city, town")]),
-        tr("где"), lp("кни'га", ["кни'га", "нога'", "го'род"]), cp("Где кни'га?", 1), ra("Где ма'ма? Она' до'ма."),
+        ex("In the present, Russian leaves out is, and it asks questions without do: Где кот? is Where is the cat?", [("Где кот?", "Where is the cat?"), ("Кот до'ма.", "The cat is at home."), ("кни'га", "book"), ("го'род", "city, town")]),
+        tr("где"), lp("кни'га", ["кни'га", "вода'", "го'род"]), cp("Где кни'га?", 1), ra("Где ма'ма? Она' до'ма."),
         dc("го'род"), tl("where", "где"), fl("", "Где", " вода'?", "Where is the water?"),
-        rm("Кни'га там.", ["The book is there.", "Where is the book?", "The leg is there."]),
+        rm("Кни'га там.", ["The book is there.", "Where is the book?", "The water is there."]),
     ]),
     ("Л: a tent", "Л says l and brings the table and the milk.", [
         meet("Л"), tr("стол"), lp("сло'во", ["молоко'", "сло'во", "стол"]), cp("молоко'"), ra("Молоко' тут."),
@@ -287,13 +287,13 @@ U.append(("u5", "New shapes", "П Б Й Ё Ю", [
     ]),
     ("Й and Ё: mine", "Й is the short y at the end of boy: мой, my. Ё says yo and is always stressed.", [
         meet("Й"), meet("Ё"),
-        ex("My follows the thing it owns: мой for a consonant ending, моя' for -а, моё for -о.", [("мой дом", "my house"), ("моя' кни'га", "my book"), ("моё окно'", "my window")]),
+        ex("Мой, моя', моё agree with the noun they describe: мой for a consonant ending (and male people like па'па), моя' for -а, моё for -о.", [("мой дом", "my house"), ("моя' кни'га", "my book"), ("моё окно'", "my window")]),
         tr("мой"), lp("моё", ["мой", "моя'", "моё"]), cp("моя' ма'ма", 1), ra("Э'то мой брат."), dc("моё окно'"),
         fl("Э'то ", "моя'", " кни'га.", "This is my book."), cp("всё", 1),
     ]),
     ("Ю and the vowel pairs", "Ю says yu, and completes a pattern: each plain vowel has a y-partner.", [
         meet("Ю"),
-        ex("Five vowels come in pairs, hard and soft: а/я, у/ю, э/е, о/ё, ы/и. At the start of a word or after a vowel (моя', моё), я, ю, е and ё begin with a y. After a consonant the soft letters make the consonant itself soft (three you will meet later always stay hard).", [("да", "yes"), ("я", "I"), ("тут", "here"), ("люблю'", "I love")]),
+        ex("Five vowels come in pairs, hard and soft: а/я, у/ю, э/е, о/ё, ы/и. At the start of a word or after a vowel (моя', моё), я, ю, е and ё begin with a y. After a consonant the soft letters make the consonant itself soft (three you will meet later always stay hard).", [("да", "yes"), ("я", "I"), ("тут", "here"), ("люблю'", "I love"), ("лю'ди", "people")]),
         tr("люблю'"), lp("лю'ди", ["лю'ди", "люблю'", "ду'маю"]), cp("ду'маю"), ra("Я ду'маю."), dc("люблю'"),
         tl("I think", "я ду'маю"),
         rm("Я люблю' суп.", ["I love soup.", "I think about soup.", "This is my soup."]),
@@ -311,7 +311,7 @@ U.append(("u6", "Hushing sounds", "Ч Ш Ж Щ Х", [
     ]),
     ("Ш and Ж", "Ш is three teeth: sh. Ж is a beetle: zh, as in pleasure.", [
         meet("Ш"), meet("Ж"),
-        ex("То'же means too or also, and наш means our.", [("Я то'же.", "Me too."), ("наш кот", "our cat")]), lp("жук", ["жук", "шум", "суп"]), cp("ка'ша"), ra("Наш кот то'же тут."),
+        ex("То'же means too or also (doing the same thing as someone else), and наш means our.", [("Я то'же.", "Me too."), ("наш кот", "our cat")]), lp("жук", ["жук", "шум", "суп"]), cp("ка'ша"), ra("Наш кот то'же тут."),
         dc("то'же"), tl("our", "наш"), tl("porridge", "ка'ша"), fl("Я ", "то'же", " чита'ю.", "I am reading too."),
     ]),
     ("Щ and Х", "Щ is a long soft sh and gives you ещё, more. Х is the ch of Scottish loch and gives you хорошо́, good.", [
@@ -626,11 +626,11 @@ U.append(("c1", "Keeping up", "я не понима́ю · ещё раз · ка
 
 U.append(("u16", "First readings", "ро́бот, число́, мысль, звезда́", [
     ("Robots and rockets", "Tiny readings from here on. Read each one for its meaning first; then say it and write it.", [
-        ex("Science fiction is kind to beginners: many of its words are already familiar.", [("ко'смос", "space"), ("пла'нета", "planet"), ("раке'та", "rocket")]),
+        ex("Science fiction is kind to beginners: many of its words are already familiar.", [("ко'смос", "space"), ("плане'та", "planet"), ("раке'та", "rocket")]),
         rm("Ро'бот ду'мает.", ["The robot is thinking.", "The robot is reading.", "The robot knows."]),
         tl("space (outer space)", "ко'смос"), ra("Э'то ро'бот. Он ду'мает и говори'т."), dc("Ро'бот зна'ет, где раке'та."),
-        lp("пла'нета", ["пла'нета", "раке'та", "звезда'"]),
-        fl("Раке'та лети'т в ", "ко'смос", ".", "The rocket is flying into space."), tl("planet", "пла'нета"),
+        lp("плане'та", ["плане'та", "раке'та", "звезда'"]),
+        fl("Раке'та лети'т в ", "ко'смос", ".", "The rocket is flying into space."), tl("planet", "плане'та"),
         cp("Раке'та лети'т.", 1),
     ]),
     ("Numbers and facts", "Mathematics in Russian is short and exact.", [

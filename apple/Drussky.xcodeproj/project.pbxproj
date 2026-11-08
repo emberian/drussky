@@ -49,6 +49,7 @@
 		3EF45AD99B7987B2B7E7D6A6 /* NarrationPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0691A5225B82CA3EDE62DE /* NarrationPlayer.swift */; };
 		3F4094C11649CBA3127B41ED /* LearningCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144663A43664AFA42BFFB0E4 /* LearningCore.framework */; };
 		4090CAB900D147F80FB12F87 /* HookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A942E4C65CC97AFF952469 /* HookTests.swift */; };
+		4114AC67767DAD66643C5DA2 /* cases.json in Resources */ = {isa = PBXBuildFile; fileRef = F4255F0179A14AE7FAB75EFD /* cases.json */; };
 		441B7A219FD42BA8C8280F21 /* FSRS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C8928C4C7D7EB62548D5F /* FSRS.swift */; };
 		44C1FFB01EA503282E7E8A8D /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C22C03FEEFDCCB3AD0B5CB0 /* Pitch.swift */; };
 		45D8EF0539ABAFBAC093C3D7 /* NarrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D373A172B6D6FFA72BCB7C0 /* NarrationTests.swift */; };
@@ -156,7 +157,6 @@
 		E57755767846D11D7A993BBF /* DiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839249538FC602F501C33C06 /* DiaryEntry.swift */; };
 		E57A52723D5F7D80807A53B1 /* TutorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74264D1BFDC2677C7515FBED /* TutorView.swift */; };
 		E690EE7AE2CCA3D9C9372D1C /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5206CA36CCD17DFB27C030F /* Tutor.swift */; };
-		EB77A6A2B82A241C69D12127 /* cases.json in Resources */ = {isa = PBXBuildFile; fileRef = 25B92368C207116CE0890702 /* cases.json */; };
 		EC5DEA629DDF914B9CA6C598 /* NotebookLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1095511DFC346F6F4748A8 /* NotebookLoading.swift */; };
 		EE2BF2C19B635513A48C4ACE /* EarlierAttempts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40296369FBA50E77B28E46CA /* EarlierAttempts.swift */; };
 		EE749A56F36F98151C1654CF /* MorphologyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8874D7D7DF143C8B8625E392 /* MorphologyTests.swift */; };
@@ -247,7 +247,6 @@
 		225B3DDBFAF078C80F670536 /* PractiseContrast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PractiseContrast.swift; sourceTree = "<group>"; };
 		22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MarckScript-Regular.ttf"; sourceTree = "<group>"; };
 		23202045AC2D23825B097954 /* Book+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+Review.swift"; sourceTree = "<group>"; };
-		25B92368C207116CE0890702 /* cases.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cases.json; sourceTree = "<group>"; };
 		26F2D22948EE4E31130F07F0 /* GoalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUITests.swift; sourceTree = "<group>"; };
 		27AE7A8C01467109460EB5B7 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		2A72E1E3C021AC9FA6611221 /* SpeechEvidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEvidence.swift; sourceTree = "<group>"; };
@@ -391,6 +390,7 @@
 		F0E2229B8B2ECBB7855A8CE2 /* WritePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePageView.swift; sourceTree = "<group>"; };
 		F2BEA4318EE4E5F5804F716C /* GoalAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAnalysis.swift; sourceTree = "<group>"; };
 		F37F8C75F2D3E5D4FFBC1002 /* morphology.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = morphology.json; sourceTree = "<group>"; };
+		F4255F0179A14AE7FAB75EFD /* cases.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cases.json; sourceTree = "<group>"; };
 		F44B7B2BCE090C576089B5D2 /* WritingStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingStrip.swift; sourceTree = "<group>"; };
 		F5206CA36CCD17DFB27C030F /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
 		F66C50789A2CD8461AE31E6F /* library.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = library.json; sourceTree = "<group>"; };
@@ -500,6 +500,14 @@
 			path = Goal;
 			sourceTree = "<group>";
 		};
+		0D7E8397FB565678EDE46751 /* research */ = {
+			isa = PBXGroup;
+			children = (
+				D10A5E81A7F8CF06C07B2AF5 /* ondevice */,
+			);
+			path = research;
+			sourceTree = "<group>";
+		};
 		1F5F4280DFDE09F9376E8534 /* Drussky */ = {
 			isa = PBXGroup;
 			children = (
@@ -540,6 +548,15 @@
 				5F571FE15D00A88ABFD04870 /* Target.swift */,
 			);
 			path = LearningCore;
+			sourceTree = "<group>";
+		};
+		3718A07A394EAD0D0C200E10 /* deputy-gemini */ = {
+			isa = PBXGroup;
+			children = (
+				0D7E8397FB565678EDE46751 /* research */,
+			);
+			name = "deputy-gemini";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		3969EB9BBBF54ABB6FE2C820 /* Diary */ = {
@@ -622,14 +639,6 @@
 				391F5D38FA3361CC9FAD7121 /* QA+Speaking.swift */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		64D68F8A9EF105E470220EDB /* ondevice */ = {
-			isa = PBXGroup;
-			children = (
-				25B92368C207116CE0890702 /* cases.json */,
-			);
-			path = ondevice;
 			sourceTree = "<group>";
 		};
 		7788604B501CF50BEF8AE6CA /* Resources */ = {
@@ -730,12 +739,12 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		D1F69A051C2155ACB2D1C5B2 /* research */ = {
+		D10A5E81A7F8CF06C07B2AF5 /* ondevice */ = {
 			isa = PBXGroup;
 			children = (
-				64D68F8A9EF105E470220EDB /* ondevice */,
+				F4255F0179A14AE7FAB75EFD /* cases.json */,
 			);
-			path = research;
+			path = ondevice;
 			sourceTree = "<group>";
 		};
 		E1AB1C171CE673558C089346 /* Speaking */ = {
@@ -769,23 +778,14 @@
 		EB7E55D010BAEF213914079E = {
 			isa = PBXGroup;
 			children = (
+				3718A07A394EAD0D0C200E10 /* deputy-gemini */,
 				1F5F4280DFDE09F9376E8534 /* Drussky */,
 				06305DCDBD604A16CF5D89E8 /* DrusskyTests */,
 				041A425F9E0F853F7382281E /* DrusskyUITests */,
 				342C98B4B33A6A227F691389 /* LearningCore */,
 				95FF0865FAD2E9BCB07154B4 /* LearningCoreTests */,
-				EDB8DDA42352D71B38BC86B1 /* rufren */,
 				F9D5F14943E0FF3C0C7B3F7D /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		EDB8DDA42352D71B38BC86B1 /* rufren */ = {
-			isa = PBXGroup;
-			children = (
-				D1F69A051C2155ACB2D1C5B2 /* research */,
-			);
-			name = rufren;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		F79CFD695EA72CFC61AF7B36 /* Fluency */ = {
@@ -970,7 +970,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB77A6A2B82A241C69D12127 /* cases.json in Resources */,
+				4114AC67767DAD66643C5DA2 /* cases.json in Resources */,
 				6EF796C73B06762063E17B86 /* goal-lemmas.json in Resources */,
 				FB7F6E27A5068503D04C4C7A /* hershey-ink.json in Resources */,
 				AA6E33B7B0AC8F4613172AA2 /* wikisource-my.json in Resources */,
