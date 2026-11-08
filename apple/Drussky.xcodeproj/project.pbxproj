@@ -159,6 +159,7 @@
 		94FC2915DD7121C310A786FF /* credits.json in Resources */ = {isa = PBXBuildFile; fileRef = F709F645B7B3B5B509D0BB1D /* credits.json */; };
 		950E912E7982B9C99ED74122 /* QA+Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF15E0F862C71C3A0ABBC47A /* QA+Goal.swift */; };
 		9537DA70BA1D85B3EAA30D13 /* WordFallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53173F4BB8F180AF3A5DCD9 /* WordFallback.swift */; };
+		95890FAB2B8C0B6C41693916 /* StressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553B86E3F2A1B128F013A8EE /* StressTests.swift */; };
 		96100FED741F768CDAF93423 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703C3E6E6CDD85F62432B43 /* Domain.swift */; };
 		994826F3FE5E536C3DB865D6 /* ScreensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50738AFA47D87DDF551CCCAA /* ScreensUITests.swift */; };
 		9AEF27A7EFA1034C131805E5 /* MarckScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */; };
@@ -396,6 +397,7 @@
 		50738AFA47D87DDF551CCCAA /* ScreensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensUITests.swift; sourceTree = "<group>"; };
 		519B44D98A8ECC269EECDF7C /* Listening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listening.swift; sourceTree = "<group>"; };
 		53BA4246F9025E0C5685DD5E /* Prosody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prosody.swift; sourceTree = "<group>"; };
+		553B86E3F2A1B128F013A8EE /* StressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressTests.swift; sourceTree = "<group>"; };
 		55AF3AF1845DC2F87D142527 /* MetricsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsTests.swift; sourceTree = "<group>"; };
 		59131D732869684D25DA9907 /* PhoneticAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneticAnalyzer.swift; sourceTree = "<group>"; };
 		595B06C5D704446F3E517821 /* SoundPairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPairs.swift; sourceTree = "<group>"; };
@@ -675,6 +677,7 @@
 				48C1AAC72C73F9142E86649A /* SoundPairsTests.swift */,
 				761BDD110647A9AC68A4A63C /* SpeakingFeedbackTests.swift */,
 				78469C049362D4CF53F878F5 /* SpeakingTests.swift */,
+				553B86E3F2A1B128F013A8EE /* StressTests.swift */,
 				91531E98221ADBC31CE65D4E /* StructureTests.swift */,
 				358654DC3830360C3E88F33F /* TalkTests.swift */,
 				CBBAF25D3E573841A04CE3E4 /* wikisource-my.json */,
@@ -1470,6 +1473,7 @@
 				61671DC2B12966C775E190F3 /* SoundPairsTests.swift in Sources */,
 				B4809BD1FF66C14D9BA83040 /* SpeakingFeedbackTests.swift in Sources */,
 				724FB7B921943C50CAD95F4D /* SpeakingTests.swift in Sources */,
+				95890FAB2B8C0B6C41693916 /* StressTests.swift in Sources */,
 				F5EB36CD9AB39A530D3FCAB5 /* StructureTests.swift in Sources */,
 				C041D0334A14FBB5B5F82F58 /* TalkTests.swift in Sources */,
 			);

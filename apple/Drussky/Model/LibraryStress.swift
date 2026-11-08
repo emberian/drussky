@@ -34,7 +34,7 @@ struct LibraryStress: Sendable {
         var sentences: [String: String] = [:]
         for (_, entry) in file.texts.sorted(by: { $0.key < $1.key }) {
             for s in entry.sentences where RussianStress.problems(source: s.text, stressed: s.stressed).isEmpty {
-                sentences[s.text] = s.stressed
+                sentences[RussianText.unstressed(s.text)] = s.stressed
             }
         }
         bySentence = sentences
@@ -144,9 +144,18 @@ enum RussianStress {
         }
     }
 
-    /// Everything wrong with `stressed` as the stress marking of `source`; empty when it is sound.
+    /// Offsets (in the unstressed text's scalars) of the letters that carry a mark.
+    static func markPositions(_ s: String) -> Set<Int> {
+        var out = Set<Int>(), n = 0
+        for u in s.unicodeScalars { if u == mark { out.insert(n - 1) } else { n += 1 } }
+        return out
+    }
+
+    /// Everything wrong with `stressed` as the stress marking of `source`; empty when it is sound. A
+    /// mark the source already carries (a Wikisource text marks the odd word: Верти́т) must still be there.
     static func problems(source: String, stressed: String) -> [String] {
-        guard RussianText.unstressed(stressed) == source else { return ["the text differs from the source once marks are removed"] }
+        guard RussianText.unstressed(stressed) == RussianText.unstressed(source) else { return ["the text differs from the source once marks are removed"] }
+        guard markPositions(source).isSubset(of: markPositions(stressed)) else { return ["a mark the source carries was moved or dropped"] }
         var out: [String] = []
         for w in Structure.wordStrings(in: stressed) {
             let scalars = Array(w.lowercased().unicodeScalars)

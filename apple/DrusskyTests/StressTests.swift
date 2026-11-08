@@ -1,3 +1,4 @@
+import SwiftUI
 import XCTest
 @testable import Drussky
 
@@ -31,6 +32,10 @@ final class StressTests: XCTestCase {
         bad("Всё ещё идёт.", "Всё ещё идё́т.")
         bad("Он сказал: «Иди».", "Он сказа́л: \"Иди́\".")
         bad("Он сказал.", "Он с́казал.")
+        // A source that already marks a word keeps that mark where it was.
+        ok("Верти́т хвостом.", "Верти́т хвосто́м.")
+        bad("Верти́т хвостом.", "Ве́ртит хвосто́м.")
+        bad("Верти́т хвостом.", "Вертит хвосто́м.")
         XCTAssertTrue(RussianStress.lacksStress("Мышь пробежала."))
         XCTAssertFalse(RussianStress.lacksStress("Мышь пробежа́ла."))
         XCTAssertFalse(RussianStress.lacksStress("Лев спал. Всё идёт."))
@@ -84,12 +89,15 @@ final class StressTests: XCTestCase {
         XCTAssertEqual(Narration.timedTokens(shown).map(\.word), Narration.timedTokens(text.text).map(\.word), "timed tokens are bare")
         // The rendering: marked vowels are underlined; nothing underlined with the toggle off, and the string is the bare text.
         let on = Theme.stressed(shown, show: true)
-        XCTAssertTrue(on.runs.contains { $0.underlineStyle == .single })
+        XCTAssertTrue(on.runs.contains { $0.swiftUI.underlineStyle == .single })
         XCTAssertEqual(String(on.characters), text.text)
+        let light = Theme.passageStressed(shown, show: true)
+        XCTAssertTrue(light.runs.contains { $0.swiftUI.underlineStyle != nil }, "a passage still underlines (its colour is faded; LineStyle equality ignores colour)")
+        XCTAssertEqual(String(light.characters), text.text)
         book.settings.showStress = false
         XCTAssertEqual(book.displayText(text.text), text.text)
         let off = Theme.stressed(book.displayText(text.text), show: false)
-        XCTAssertFalse(off.runs.contains { $0.underlineStyle != nil })
+        XCTAssertFalse(off.runs.contains { $0.swiftUI.underlineStyle != nil })
         XCTAssertEqual(String(off.characters), text.text)
         // A passage already carrying the tutor's marks is re-marked from the file, not doubled.
         let tutorVersion = "Лев спа́л. Мы́шь пробежа́ла ему по телу."
@@ -120,7 +128,7 @@ final class StressTests: XCTestCase {
         let book = freshBook()
         XCTAssertEqual(String(book.stressedLabel("пробежала").characters), "пробежала")
         XCTAssertEqual(LibraryStress.shared.stressed(word: "Пробежала"), "пробежа́ла")
-        XCTAssertTrue(book.stressedLabel("пробежала").runs.contains { $0.underlineStyle == .single })
+        XCTAssertTrue(book.stressedLabel("пробежала").runs.contains { $0.swiftUI.underlineStyle == .single })
     }
 
     func testGoalStressCacheRoundTrips() throws {
@@ -140,8 +148,9 @@ final class StressTests: XCTestCase {
         book.settings.showStress = true
         XCTAssertEqual(book.displayText(goal.text), "Соба́ка бежа́ла домо́й. Лев спал.\nНикто не знал.")
         XCTAssertEqual(String(book.stressedLabel("собака").characters), "собака")
-        XCTAssertTrue(book.stressedLabel("собака").runs.contains { $0.underlineStyle == .single }, "a goal word label takes the goal's mark")
+        XCTAssertTrue(book.stressedLabel("собака").runs.contains { $0.swiftUI.underlineStyle == .single }, "a goal word label takes the goal's mark")
         // Written to the notebook, read back by a fresh Book on the same folder; an edited bad line is dropped.
+        book.saveNow()
         let url = GoalStress.url(goalID: goal.id, root: book.store.root)
         XCTAssertTrue(FileManager.default.fileExists(atPath: url.path))
         var table = try JSONDecoder().decode(GoalStress.Table.self, from: Data(contentsOf: url))

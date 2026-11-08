@@ -12,6 +12,7 @@ mechanically, and stored for the app to show through its stress rendering (Model
   uv run apple/scripts/library_stress.py --ids tolstoy-lgun     # some texts (or "sentences" for Tatoeba)
   uv run apple/scripts/library_stress.py --library apple/PrivatePack/library.json --out apple/PrivatePack/library-stress.json --no-shelves
   python3 apple/scripts/library_stress.py --plan                # what is done, what is left (no SDK, no key)
+  python3 apple/scripts/library_stress.py --recheck             # disagreements against the course as it is now (no key)
 
 Output (default Drussky/Resources/library-stress.json), keyed by text id then sentence index, keeps the exact
 source sentence beside its stressed form, so editing a text invalidates its entry visibly (validate_stress.py).
@@ -128,11 +129,26 @@ def word_problems(tok):
     return out
 
 
+def mark_positions(s):
+    """Offsets in strip_stress(s) of the letters that carry a mark in s."""
+    out, n = set(), 0
+    for c in unicodedata.normalize("NFD", s):
+        if c == ACUTE:
+            out.add(n - 1)
+        elif unicodedata.combining(c) == 0:
+            n += 1
+    return out
+
+
 def problems(source, stressed):
-    """Everything wrong with `stressed` as the stress marking of `source`; empty when it is sound."""
+    """Everything wrong with `stressed` as the stress marking of `source`; empty when it is sound. A mark
+    the source already carries (a Wikisource text marks the odd word: Верти́т) must still be there."""
     stressed = unicodedata.normalize("NFC", stressed)
-    if strip_stress(stressed) != unicodedata.normalize("NFC", source):
+    source = unicodedata.normalize("NFC", source)
+    if strip_stress(stressed) != strip_stress(source):
         return ["the text differs from the source once marks are removed"]
+    if not mark_positions(source) <= mark_positions(stressed):
+        return ["a mark the source carries was moved or dropped"]
     out = []
     for m in WORD.finditer(stressed):
         tok = m.group(0)
@@ -147,20 +163,23 @@ def problems(source, stressed):
 # MARK: The course's stressed forms
 
 def course_forms(files=COURSE_FILES):
-    """bare lowercase word -> set of stressed spellings the course uses (only words that need a mark)."""
+    """bare lowercase word -> set of stressed spellings the course uses (only words that need a mark).
+    Morpheme lists (prefixes, suffixes, a lemma's morphemes) and fragments written with a hyphen
+    (-ме́нт, пере-) are not words and are left out."""
     forms = {}
 
     def walk(x):
         if isinstance(x, str):
-            if ACUTE in x:
+            if ACUTE in x and not (x.startswith("-") or x.endswith("-")):
                 for _, _, tok in cyrillic_words(unicodedata.normalize("NFC", x)):
                     if ACUTE in tok and not word_problems(tok):
                         bare = tok.replace(ACUTE, "").lower()
                         if needs_mark(bare):
                             forms.setdefault(bare, set()).add(tok.lower())
         elif isinstance(x, dict):
-            for v in x.values():
-                walk(v)
+            for k, v in x.items():
+                if k not in ("prefixes", "suffixes", "morphemes"):
+                    walk(v)
         elif isinstance(x, list):
             for v in x:
                 walk(v)
@@ -338,6 +357,21 @@ def batches(indices, size=MAX_SENTENCES):
     return [indices[k:k + size] for k in range(0, len(indices), size)]
 
 
+def recheck(data, forms):
+    """The disagreements section recomputed from the stored sentences against the course as it is now
+    (the course's own spellings change; a homograph the model named stays its call)."""
+    named = {}
+    for h in data.get("homographs", []):
+        named.setdefault((h["text"], h["index"]), set()).add(h["word"].lower().replace(ACUTE, ""))
+    out = []
+    for tid, entry in data["texts"].items():
+        for s in entry["sentences"]:
+            for tok, known in disagreements(s["stressed"], forms):
+                if tok.lower().replace(ACUTE, "") not in named.get((tid, s["index"]), set()):
+                    out.append({"text": tid, "index": s["index"], "word": tok, "course": known})
+    data["disagreements"] = out
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--library", type=Path, default=LIBRARY)
@@ -348,6 +382,7 @@ def main():
     ap.add_argument("--model", default=MODEL)
     ap.add_argument("--effort", default="high", choices=["low", "medium", "high", "xhigh", "max"])
     ap.add_argument("--plan", action="store_true", help="report what is done and what is left; no requests")
+    ap.add_argument("--recheck", action="store_true", help="recompute the disagreements against the course as it is now; no requests")
     ap.add_argument("--pause", type=float, default=0.5, help="seconds between requests")
     args = ap.parse_args()
 
@@ -357,6 +392,11 @@ def main():
         srcs = [s for s in srcs if s[0] in set(args.ids)]
     data = load_out(args.out)
     forms = course_forms()
+    if args.recheck:
+        recheck(data, forms)
+        save_out(args.out, data)
+        print(f"{len(data['disagreements'])} disagreements with the course", file=sys.stderr)
+        return
 
     todo = []
     total = done = trivial = 0
