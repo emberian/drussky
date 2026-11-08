@@ -657,7 +657,12 @@
    "audio": "a-my-chto-39f7a2.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/3464518"
+   "source": "https://tatoeba.org/en/sentences/show/3464518",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Spamster",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1542297"
   },
   {
    "ru": "О чём ты?",
@@ -665,7 +670,12 @@
    "audio": "o-chyom-ty-5b4d62.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5659"
+   "source": "https://tatoeba.org/en/sentences/show/5659",
+   "ru_author": "zmoo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "FEN1X64",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/24717"
   },
   {
    "ru": "Ты с нами?",
@@ -673,7 +683,12 @@
    "audio": "ty-s-nami-7ff94a.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/2649484"
+   "source": "https://tatoeba.org/en/sentences/show/2649484",
+   "ru_author": "Olya",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2649054"
   },
   {
    "ru": "Что с ней?",
@@ -681,7 +696,12 @@
    "audio": "chto-s-ney-3a686b.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/2805221"
+   "source": "https://tatoeba.org/en/sentences/show/2805221",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/312812"
   },
   {
    "ru": "Я был там.",
@@ -689,7 +709,12 @@
    "audio": "ya-byl-tam-e489a7.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/2606397"
+   "source": "https://tatoeba.org/en/sentences/show/2606397",
+   "ru_author": "Olya",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2247523"
   },
   {
    "ru": "Я не знал.",
@@ -697,7 +722,12 @@
    "audio": "ya-ne-znal-7127b2.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/2606676"
+   "source": "https://tatoeba.org/en/sentences/show/2606676",
+   "ru_author": "Olya",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2245692"
   },
   {
    "ru": "Я с тобой.",
@@ -705,7 +735,12 @@
    "audio": "ya-s-toboy-19db5b.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/3065016"
+   "source": "https://tatoeba.org/en/sentences/show/3065016",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Samer",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/607750"
   },
   {
    "ru": "А вот и мы!",
@@ -713,7 +748,12 @@
    "audio": "a-vot-i-my-32c0e0.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/444201"
+   "source": "https://tatoeba.org/en/sentences/show/444201",
+   "ru_author": "Hellerick",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/54174"
   },
   {
    "ru": "В чём дело?",
@@ -721,7 +761,12 @@
    "audio": "v-chyom-delo-bd7589.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/650601"
+   "source": "https://tatoeba.org/en/sentences/show/650601",
+   "ru_author": "salikh",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2234105"
   },
   {
    "ru": "Вот это да!",
@@ -729,7 +774,12 @@
    "audio": "vot-eto-da-46f330.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/469862"
+   "source": "https://tatoeba.org/en/sentences/show/469862",
+   "ru_author": "OlgaElwen",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Zifre",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/52027"
   },
   {
    "ru": "Где-то так.",
@@ -737,7 +787,12 @@
    "audio": "gde-to-tak-20d8c8.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/3545622"
+   "source": "https://tatoeba.org/en/sentences/show/3545622",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/32806"
   },
   {
    "ru": "Так и есть.",
@@ -745,7 +800,12 @@
    "audio": "tak-i-est-d8c1c6.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/929951"
+   "source": "https://tatoeba.org/en/sentences/show/929951",
+   "ru_author": "shanghainese",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "aandrusiak",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/618799"
   },
   {
    "ru": "Ты не один.",
@@ -753,7 +813,12 @@
    "audio": "ty-ne-odin-8ce41d.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/2629967"
+   "source": "https://tatoeba.org/en/sentences/show/2629967",
+   "ru_author": "Olya",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1895592"
   },
   {
    "ru": "Ты со мной?",
@@ -761,7 +826,12 @@
    "audio": "ty-so-mnoy-8e9605.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/2649482"
+   "source": "https://tatoeba.org/en/sentences/show/2649482",
+   "ru_author": "Olya",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2649055"
   },
   {
    "ru": "Это её дом.",
@@ -769,7 +839,12 @@
    "audio": "eto-eyo-dom-f84067.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/902286"
+   "source": "https://tatoeba.org/en/sentences/show/902286",
+   "ru_author": "joulin",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Luornu",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/11041602"
   },
   {
    "ru": "Это не так.",
@@ -777,7 +852,12 @@
    "audio": "eto-ne-tak-5000f1.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/1441496"
+   "source": "https://tatoeba.org/en/sentences/show/1441496",
+   "ru_author": "shanghainese",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/7492727"
   },
   {
    "ru": "Я ваш друг.",
@@ -785,7 +865,12 @@
    "audio": "ya-vash-drug-77accd.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/3291253"
+   "source": "https://tatoeba.org/en/sentences/show/3291253",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2248325"
   },
   {
    "ru": "Я его знаю?",
@@ -793,7 +878,12 @@
    "audio": "ya-ego-znayu-2cba6d.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/645292"
+   "source": "https://tatoeba.org/en/sentences/show/645292",
+   "ru_author": "shanghainese",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/307888"
   },
   {
    "ru": "Я их видел.",
@@ -801,7 +891,12 @@
    "audio": "ya-ikh-videl-016487.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/2527642"
+   "source": "https://tatoeba.org/en/sentences/show/2527642",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2247401"
   },
   {
    "ru": "Я тут один?",
@@ -809,7 +904,12 @@
    "audio": "ya-tut-odin-f0f89d.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/2629871"
+   "source": "https://tatoeba.org/en/sentences/show/2629871",
+   "ru_author": "Olya",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2208343"
   },
   {
    "ru": "Я хочу ещё.",
@@ -817,15 +917,25 @@
    "audio": "ya-khochu-eshchyo-dc3455.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/2513414"
+   "source": "https://tatoeba.org/en/sentences/show/2513414",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/521096"
   },
   {
    "ru": "А какая она?",
    "en": "What's she like?",
    "audio": "a-kakaya-ona-52edb5.m4a",
    "speaker": "EugeneGS",
-   "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/10297837"
+   "license": "text CC BY 2.0 FR / CC0 1.0 (Tatoeba); audio CC BY 4.0 (EugeneGS)",
+   "source": "https://tatoeba.org/en/sentences/show/10297837",
+   "ru_author": "ZegPhig",
+   "ru_license": "CC0 1.0",
+   "en_author": "ddnktr",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/10862602"
   },
   {
    "ru": "А мы как же?",
@@ -833,7 +943,12 @@
    "audio": "a-my-kak-zhe-edda80.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/3464517"
+   "source": "https://tatoeba.org/en/sentences/show/3464517",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Spamster",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1542297"
   },
   {
    "ru": "Ну давай же!",
@@ -841,7 +956,12 @@
    "audio": "nu-davay-zhe-969755.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/379110"
+   "source": "https://tatoeba.org/en/sentences/show/379110",
+   "ru_author": "Dorenda",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "FeuDRenais2",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/576689"
   },
   {
    "ru": "Вот мы здесь.",
@@ -849,7 +969,12 @@
    "audio": "vot-my-zdes-9337f3.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/338476"
+   "source": "https://tatoeba.org/en/sentences/show/338476",
+   "ru_author": "rednaxela",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/35562"
   },
   {
    "ru": "Всё на месте?",
@@ -857,7 +982,12 @@
    "audio": "vsyo-na-meste-95a2c8.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/3267948"
+   "source": "https://tatoeba.org/en/sentences/show/3267948",
+   "ru_author": "Inego",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2248440"
   },
   {
    "ru": "Как Ваш отец?",
@@ -865,7 +995,12 @@
    "audio": "kak-vash-otets-55e277.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/3530229"
+   "source": "https://tatoeba.org/en/sentences/show/3530229",
+   "ru_author": "Selena777",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1495893"
   },
   {
    "ru": "Мне это надо.",
@@ -873,7 +1008,12 @@
    "audio": "mne-eto-nado-5f2df7.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11048546"
+   "source": "https://tatoeba.org/en/sentences/show/11048546",
+   "ru_author": "ZegPhig",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2246009"
   },
   {
    "ru": "Ты видел это?",
@@ -881,7 +1021,12 @@
    "audio": "ty-videl-eto-37a522.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/3293922"
+   "source": "https://tatoeba.org/en/sentences/show/3293922",
+   "ru_author": "Inego",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1885968"
   },
   {
    "ru": "Это для меня?",
@@ -889,7 +1034,12 @@
    "audio": "eto-dlya-menya-c369e9.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/6891293"
+   "source": "https://tatoeba.org/en/sentences/show/6891293",
+   "ru_author": "nina99nv",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4500172"
   },
   {
    "ru": "Я люблю тебя!",
@@ -897,7 +1047,12 @@
    "audio": "ya-lyublyu-tebya-6927e9.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5568"
+   "source": "https://tatoeba.org/en/sentences/show/5568",
+   "ru_author": "al_ex_an_der",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "awael58",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1434"
   },
   {
    "ru": "Где вы сейчас?",
@@ -905,7 +1060,12 @@
    "audio": "gde-vy-seychas-c35af3.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/4867957"
+   "source": "https://tatoeba.org/en/sentences/show/4867957",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Najeebullah_anh",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/679375"
   },
   {
    "ru": "Где же ты был?",
@@ -913,7 +1073,12 @@
    "audio": "gde-zhe-ty-byl-ef0d9a.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/379127"
+   "source": "https://tatoeba.org/en/sentences/show/379127",
+   "ru_author": "Dorenda",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CM",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/577197"
   },
   {
    "ru": "Идёт ли дождь?",
@@ -921,7 +1086,12 @@
    "audio": "idyot-li-dozhd-6e6be5.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/1298844"
+   "source": "https://tatoeba.org/en/sentences/show/1298844",
+   "ru_author": "boobaloo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Vortarulo",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1289095"
   },
   {
    "ru": "Не может быть!",
@@ -929,7 +1099,12 @@
    "audio": "ne-mozhet-byt-e4446e.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5619"
+   "source": "https://tatoeba.org/en/sentences/show/5619",
+   "ru_author": "shanghainese",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CM",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2175"
   },
   {
    "ru": "У кого ты был?",
@@ -937,7 +1112,12 @@
    "audio": "u-kogo-ty-byl-3137eb.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/7746908"
+   "source": "https://tatoeba.org/en/sentences/show/7746908",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6123082"
   },
   {
    "ru": "Что нам нужно?",
@@ -945,15 +1125,25 @@
    "audio": "chto-nam-nuzhno-3157f0.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/6954297"
+   "source": "https://tatoeba.org/en/sentences/show/6954297",
+   "ru_author": "nina99nv",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "sundown",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/11201050"
   },
   {
    "ru": "Я ещё не дома.",
    "en": "I'm not home yet.",
    "audio": "ya-eshchyo-ne-doma-a2ae6f.m4a",
    "speaker": "EugeneGS",
-   "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11142524"
+   "license": "text CC BY 2.0 FR / CC0 1.0 (Tatoeba); audio CC BY 4.0 (EugeneGS)",
+   "source": "https://tatoeba.org/en/sentences/show/11142524",
+   "ru_author": "ZegPhig",
+   "ru_license": "CC0 1.0",
+   "en_author": "CM",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/7114271"
   },
   {
    "ru": "Я забыл слова.",
@@ -961,7 +1151,12 @@
    "audio": "ya-zabyl-slova-597f83.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/7462049"
+   "source": "https://tatoeba.org/en/sentences/show/7462049",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/7409893"
   },
   {
    "ru": "Кое-кто против.",
@@ -969,7 +1164,12 @@
    "audio": "koe-kto-protiv-aa5664.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332895"
+   "source": "https://tatoeba.org/en/sentences/show/13332895",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "sundown",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/10273741"
   },
   {
    "ru": "Кто хочет кофе?",
@@ -977,7 +1177,12 @@
    "audio": "kto-khochet-kofe-7c0005.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/8213743"
+   "source": "https://tatoeba.org/en/sentences/show/8213743",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8197867"
   },
   {
    "ru": "Кто это сказал?",
@@ -985,7 +1190,12 @@
    "audio": "kto-eto-skazal-2ade4f.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2420180"
+   "source": "https://tatoeba.org/en/sentences/show/2420180",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CM",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2576971"
   },
   {
    "ru": "Он очень новый.",
@@ -993,7 +1203,12 @@
    "audio": "on-ochen-novyy-1d3881.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6393375"
+   "source": "https://tatoeba.org/en/sentences/show/6393375",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3822075"
   },
   {
    "ru": "Так ты их знал?",
@@ -1001,7 +1216,12 @@
    "audio": "tak-ty-ikh-znal-7ddfac.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332463"
+   "source": "https://tatoeba.org/en/sentences/show/13332463",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3914008"
   },
   {
    "ru": "Так ты учитель?",
@@ -1009,7 +1229,12 @@
    "audio": "tak-ty-uchitel-898864.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332513"
+   "source": "https://tatoeba.org/en/sentences/show/13332513",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "jhomel",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/5102133"
   },
   {
    "ru": "У вас всё есть?",
@@ -1017,7 +1242,12 @@
    "audio": "u-vas-vsyo-est-4916c7.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2821947"
+   "source": "https://tatoeba.org/en/sentences/show/2821947",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/321176"
   },
   {
    "ru": "Это из Франции?",
@@ -1025,7 +1255,12 @@
    "audio": "eto-iz-frantsii-400fe5.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/700763"
+   "source": "https://tatoeba.org/en/sentences/show/700763",
+   "ru_author": "shanghainese",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Eldad",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/700754"
   },
   {
    "ru": "Я думал так же.",
@@ -1033,7 +1268,12 @@
    "audio": "ya-dumal-tak-zhe-558582.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6977513"
+   "source": "https://tatoeba.org/en/sentences/show/6977513",
+   "ru_author": "Pereskaz",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1961426"
   },
   {
    "ru": "Я почти уверен.",
@@ -1041,7 +1281,12 @@
    "audio": "ya-pochti-uveren-d22dc3.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/3267328"
+   "source": "https://tatoeba.org/en/sentences/show/3267328",
+   "ru_author": "Inego",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2247911"
   },
   {
    "ru": "А ты где сейчас?",
@@ -1049,7 +1294,12 @@
    "audio": "a-ty-gde-seychas-fc61ee.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/13306021"
+   "source": "https://tatoeba.org/en/sentences/show/13306021",
+   "ru_author": "EugeneGS",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Najeebullah_anh",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/679375"
   },
   {
    "ru": "Кто вам это дал?",
@@ -1057,7 +1307,12 @@
    "audio": "kto-vam-eto-dal-a13d3d.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2786112"
+   "source": "https://tatoeba.org/en/sentences/show/2786112",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1839632"
   },
   {
    "ru": "Кто не согласен?",
@@ -1065,7 +1320,12 @@
    "audio": "kto-ne-soglasen-96fe58.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/7853739"
+   "source": "https://tatoeba.org/en/sentences/show/7853739",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "DJ_Saidez",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/10848739"
   },
   {
    "ru": "Могу вам помочь?",
@@ -1073,7 +1333,12 @@
    "audio": "mogu-vam-pomoch-6a0894.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/13261712"
+   "source": "https://tatoeba.org/en/sentences/show/13261712",
+   "ru_author": "EugeneGS",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/25095"
   },
   {
    "ru": "Нет, не я, а ты!",
@@ -1081,7 +1346,12 @@
    "audio": "net-ne-ya-a-ty-94f8d6.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5457"
+   "source": "https://tatoeba.org/en/sentences/show/5457",
+   "ru_author": "Tonari",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Zifre",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1323"
   },
   {
    "ru": "Ничего не будет.",
@@ -1089,7 +1359,12 @@
    "audio": "nichego-ne-budet-c94b0e.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/3270832"
+   "source": "https://tatoeba.org/en/sentences/show/3270832",
+   "ru_author": "Inego",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2111582"
   },
   {
    "ru": "Они не в городе.",
@@ -1097,7 +1372,12 @@
    "audio": "oni-ne-v-gorode-4fb7b1.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/11568686"
+   "source": "https://tatoeba.org/en/sentences/show/11568686",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "araneo",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/12999659"
   },
   {
    "ru": "Скажи это снова.",
@@ -1105,7 +1385,12 @@
    "audio": "skazhi-eto-snova-195fe2.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/13208605"
+   "source": "https://tatoeba.org/en/sentences/show/13208605",
+   "ru_author": "EugeneGS",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2249856"
   },
   {
    "ru": "Где твоя комната?",
@@ -1113,7 +1398,12 @@
    "audio": "gde-tvoya-komnata-32b9d4.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/4714026"
+   "source": "https://tatoeba.org/en/sentences/show/4714026",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/70408"
   },
   {
    "ru": "Иди сейчас домой.",
@@ -1121,7 +1411,12 @@
    "audio": "idi-seychas-domoy-4b4519.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/12808407"
+   "source": "https://tatoeba.org/en/sentences/show/12808407",
+   "ru_author": "Alex_M",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1446762"
   },
   {
    "ru": "Ты этого не знал?",
@@ -1129,7 +1424,12 @@
    "audio": "ty-etogo-ne-znal-ee4cb9.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/380992"
+   "source": "https://tatoeba.org/en/sentences/show/380992",
+   "ru_author": "al_ex_an_der",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Zifre",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/277012"
   },
   {
    "ru": "Это не наш поезд.",
@@ -1137,7 +1437,12 @@
    "audio": "eto-ne-nash-poezd-d662cf.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/7768263"
+   "source": "https://tatoeba.org/en/sentences/show/7768263",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "ddnktr",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/11251789"
   },
   {
    "ru": "Это что-то новое?",
@@ -1145,7 +1450,12 @@
    "audio": "eto-chto-to-novoe-dbdcf1.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2890656"
+   "source": "https://tatoeba.org/en/sentences/show/2890656",
+   "ru_author": "Werther",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2064633"
   },
   {
    "ru": "Я больше не могу!",
@@ -1153,7 +1463,12 @@
    "audio": "ya-bolshe-ne-mogu-62712c.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/374627"
+   "source": "https://tatoeba.org/en/sentences/show/374627",
+   "ru_author": "zmoo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "sundown",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6207496"
   },
   {
    "ru": "Время всегда есть.",
@@ -1161,7 +1476,12 @@
    "audio": "vremya-vsegda-est-1b038b.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/3281820"
+   "source": "https://tatoeba.org/en/sentences/show/3281820",
+   "ru_author": "Inego",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2252643"
   },
   {
    "ru": "Эти деньги не мои.",
@@ -1169,7 +1489,12 @@
    "audio": "eti-dengi-ne-moi-3706a0.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/8499976"
+   "source": "https://tatoeba.org/en/sentences/show/8499976",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8000339"
   },
   {
    "ru": "Это по-французски?",
@@ -1177,7 +1502,12 @@
    "audio": "eto-po-frantsuzski-42f78b.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/700761"
+   "source": "https://tatoeba.org/en/sentences/show/700761",
+   "ru_author": "shanghainese",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Eldad",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/700754"
   },
   {
    "ru": "Я бы так и сказал.",
@@ -1185,7 +1515,12 @@
    "audio": "ya-by-tak-i-skazal-478b05.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5480"
+   "source": "https://tatoeba.org/en/sentences/show/5480",
+   "ru_author": "Ann74",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Zifre",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1346"
   },
   {
    "ru": "В этом нельзя идти.",
@@ -1193,7 +1528,12 @@
    "audio": "v-etom-nelzya-idti-487f7b.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11452489"
+   "source": "https://tatoeba.org/en/sentences/show/11452489",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Hybrid",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3402617"
   },
   {
    "ru": "Вам много не нужно.",
@@ -1201,7 +1541,12 @@
    "audio": "vam-mnogo-ne-nuzhno-461388.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/10285530"
+   "source": "https://tatoeba.org/en/sentences/show/10285530",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "whitefishglobal",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4823601"
   },
   {
    "ru": "Вам надо её купить.",
@@ -1209,7 +1554,12 @@
    "audio": "vam-nado-eyo-kupit-3d177a.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11458411"
+   "source": "https://tatoeba.org/en/sentences/show/11458411",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3150437"
   },
   {
    "ru": "Вы были вчера дома?",
@@ -1217,7 +1567,12 @@
    "audio": "vy-byli-vchera-doma-9a849c.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11612253"
+   "source": "https://tatoeba.org/en/sentences/show/11612253",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "mailohilohi",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4538735"
   },
   {
    "ru": "Деньги у него есть.",
@@ -1225,7 +1580,12 @@
    "audio": "dengi-u-nego-est-00347d.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11838069"
+   "source": "https://tatoeba.org/en/sentences/show/11838069",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "AryKiss",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1980102"
   },
   {
    "ru": "Есть кто в комнате?",
@@ -1233,7 +1593,12 @@
    "audio": "est-kto-v-komnate-8fcf17.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/9661477"
+   "source": "https://tatoeba.org/en/sentences/show/9661477",
+   "ru_author": "Ooneykcall",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/319502"
   },
   {
    "ru": "Как мне это делать?",
@@ -1241,7 +1606,12 @@
    "audio": "kak-mne-eto-delat-091917.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/9541437"
+   "source": "https://tatoeba.org/en/sentences/show/9541437",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Hybrid",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4076811"
   },
   {
    "ru": "Ничего им не давай.",
@@ -1249,7 +1619,12 @@
    "audio": "nichego-im-ne-davay-70706b.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11807836"
+   "source": "https://tatoeba.org/en/sentences/show/11807836",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8597028"
   },
   {
    "ru": "Он был здесь тогда.",
@@ -1257,7 +1632,12 @@
    "audio": "on-byl-zdes-togda-94389c.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6992331"
+   "source": "https://tatoeba.org/en/sentences/show/6992331",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/290934"
   },
   {
    "ru": "Они говорят правду.",
@@ -1265,7 +1645,12 @@
    "audio": "oni-govoryat-pravdu-0fb137.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/13212679"
+   "source": "https://tatoeba.org/en/sentences/show/13212679",
+   "ru_author": "EugeneGS",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "mailohilohi",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6108169"
   },
   {
    "ru": "Они о тебе говорят.",
@@ -1273,7 +1658,12 @@
    "audio": "oni-o-tebe-govoryat-c7ac49.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11245623"
+   "source": "https://tatoeba.org/en/sentences/show/11245623",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Hybrid",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3308545"
   },
   {
    "ru": "Помочь тебе с этим?",
@@ -1281,7 +1671,12 @@
    "audio": "pomoch-tebe-s-etim-2c50d8.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11153930"
+   "source": "https://tatoeba.org/en/sentences/show/11153930",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3360184"
   },
   {
    "ru": "Почему вас не было?",
@@ -1289,7 +1684,12 @@
    "audio": "pochemu-vas-ne-bylo-ec06b8.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11404534"
+   "source": "https://tatoeba.org/en/sentences/show/11404534",
+   "ru_author": "soweli_Elepanto",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/7538398"
   },
   {
    "ru": "Тебе всё это нужно?",
@@ -1297,7 +1697,12 @@
    "audio": "tebe-vsyo-eto-nuzhno-9225d2.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/9548650"
+   "source": "https://tatoeba.org/en/sentences/show/9548650",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "shekitten",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9548654"
   },
   {
    "ru": "Тебе надо там быть.",
@@ -1305,7 +1710,12 @@
    "audio": "tebe-nado-tam-byt-cb2f9e.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11823557"
+   "source": "https://tatoeba.org/en/sentences/show/11823557",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2954740"
   },
   {
    "ru": "Тебе она ещё нужна?",
@@ -1313,7 +1723,12 @@
    "audio": "tebe-ona-eshchyo-nuzhna-431766.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/10241950"
+   "source": "https://tatoeba.org/en/sentences/show/10241950",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "maaster",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8243559"
   },
   {
    "ru": "Тебе оно ещё нужно?",
@@ -1321,7 +1736,12 @@
    "audio": "tebe-ono-eshchyo-nuzhno-c2f0e2.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/10241954"
+   "source": "https://tatoeba.org/en/sentences/show/10241954",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "maaster",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8243559"
   },
   {
    "ru": "Теперь она не одна.",
@@ -1329,7 +1749,12 @@
    "audio": "teper-ona-ne-odna-a812e1.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6466366"
+   "source": "https://tatoeba.org/en/sentences/show/6466366",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/313662"
   },
   {
    "ru": "Туда не стоит идти.",
@@ -1337,7 +1762,12 @@
    "audio": "tuda-ne-stoit-idti-4e9295.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11771807"
+   "source": "https://tatoeba.org/en/sentences/show/11771807",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/41333"
   },
   {
    "ru": "Ты была вчера дома?",
@@ -1345,7 +1775,12 @@
    "audio": "ty-byla-vchera-doma-ab4aaf.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11612250"
+   "source": "https://tatoeba.org/en/sentences/show/11612250",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "mailohilohi",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4538735"
   },
   {
    "ru": "Ты его здесь купил?",
@@ -1353,7 +1788,12 @@
    "audio": "ty-ego-zdes-kupil-396e19.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13344487"
+   "source": "https://tatoeba.org/en/sentences/show/13344487",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "adamtrousers",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8485568"
   },
   {
    "ru": "Ты не можешь пойти?",
@@ -1361,7 +1801,12 @@
    "audio": "ty-ne-mozhesh-poyti-149e95.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11525947"
+   "source": "https://tatoeba.org/en/sentences/show/11525947",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9164597"
   },
   {
    "ru": "Ты не хочешь спать?",
@@ -1369,7 +1814,12 @@
    "audio": "ty-ne-khochesh-spat-56b1a5.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/9583498"
+   "source": "https://tatoeba.org/en/sentences/show/9583498",
+   "ru_author": "odexed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "DJ_Saidez",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9535608"
   },
   {
    "ru": "Ты ничего не забыл?",
@@ -1377,7 +1827,12 @@
    "audio": "ty-nichego-ne-zabyl-df3757.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2461226"
+   "source": "https://tatoeba.org/en/sentences/show/2461226",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2062760"
   },
   {
    "ru": "У вас сейчас дождь?",
@@ -1385,7 +1840,12 @@
    "audio": "u-vas-seychas-dozhd-41e572.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/10205424"
+   "source": "https://tatoeba.org/en/sentences/show/10205424",
+   "ru_author": "Wezel",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9817333"
   },
   {
    "ru": "У меня только этот.",
@@ -1393,7 +1853,12 @@
    "audio": "u-menya-tolko-etot-991615.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/10185517"
+   "source": "https://tatoeba.org/en/sentences/show/10185517",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3168136"
   },
   {
    "ru": "Что? Что ты сделал?",
@@ -1401,7 +1866,12 @@
    "audio": "chto-chto-ty-sdelal-b416e8.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/7590364"
+   "source": "https://tatoeba.org/en/sentences/show/7590364",
+   "ru_author": "odexed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "OsmanOmera",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/13172992"
   },
   {
    "ru": "Это было так давно.",
@@ -1409,7 +1879,12 @@
    "audio": "eto-bylo-tak-davno-b919bb.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/10196389"
+   "source": "https://tatoeba.org/en/sentences/show/10196389",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3129333"
   },
   {
    "ru": "Это немного не моё.",
@@ -1417,7 +1892,12 @@
    "audio": "eto-nemnogo-ne-moyo-2f5b96.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11859751"
+   "source": "https://tatoeba.org/en/sentences/show/11859751",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Hybrid",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4627443"
   },
   {
    "ru": "Я купил вам машину.",
@@ -1425,7 +1905,12 @@
    "audio": "ya-kupil-vam-mashinu-148522.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/10655408"
+   "source": "https://tatoeba.org/en/sentences/show/10655408",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9177211"
   },
   {
    "ru": "Я много чего купил.",
@@ -1433,7 +1918,12 @@
    "audio": "ya-mnogo-chego-kupil-313322.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11111792"
+   "source": "https://tatoeba.org/en/sentences/show/11111792",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4788028"
   },
   {
    "ru": "Я не знаю, что это.",
@@ -1441,7 +1931,12 @@
    "audio": "ya-ne-znayu-chto-eto-75559c.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/366844"
+   "source": "https://tatoeba.org/en/sentences/show/366844",
+   "ru_author": "Tassadar",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Dorenda",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/43145"
   },
   {
    "ru": "Я снова это сделал.",
@@ -1449,7 +1944,12 @@
    "audio": "ya-snova-eto-sdelal-566ad3.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11869464"
+   "source": "https://tatoeba.org/en/sentences/show/11869464",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4397649"
   },
   {
    "ru": "Я тебя тоже слышал.",
@@ -1457,7 +1957,12 @@
    "audio": "ya-tebya-tozhe-slyshal-799747.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/9501091"
+   "source": "https://tatoeba.org/en/sentences/show/9501091",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9500929"
   },
   {
    "ru": "Я тоже хотел пойти.",
@@ -1465,7 +1970,12 @@
    "audio": "ya-tozhe-khotel-poyti-d18a05.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/8075196"
+   "source": "https://tatoeba.org/en/sentences/show/8075196",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8071281"
   },
   {
    "ru": "Я тоже хочу помочь.",
@@ -1473,7 +1983,12 @@
    "audio": "ya-tozhe-khochu-pomoch-89ad7c.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/10832391"
+   "source": "https://tatoeba.org/en/sentences/show/10832391",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/12240127"
   },
   {
    "ru": "Можно ли вам помочь?",
@@ -1481,7 +1996,12 @@
    "audio": "mozhno-li-vam-pomoch-6bb2db.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/376527"
+   "source": "https://tatoeba.org/en/sentences/show/376527",
+   "ru_author": "zmoo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/25095"
   },
   {
    "ru": "Можно сделать и так.",
@@ -1489,7 +2009,12 @@
    "audio": "mozhno-sdelat-i-tak-7145fb.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6772982"
+   "source": "https://tatoeba.org/en/sentences/show/6772982",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "AlanF_US",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/10540678"
   },
   {
    "ru": "Сколько у вас людей?",
@@ -1497,7 +2022,12 @@
    "audio": "skolko-u-vas-lyudey-d05277.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/8805746"
+   "source": "https://tatoeba.org/en/sentences/show/8805746",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CM",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3730659"
   },
   {
    "ru": "Я всё ещё в Бостоне.",
@@ -1505,7 +2035,12 @@
    "audio": "ya-vsyo-eshchyo-v-bostone-d09bf4.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/7461845"
+   "source": "https://tatoeba.org/en/sentences/show/7461845",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/5958403"
   },
   {
    "ru": "Я вчера купил книгу.",
@@ -1513,7 +2048,12 @@
    "audio": "ya-vchera-kupil-knigu-a8f19b.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/376025"
+   "source": "https://tatoeba.org/en/sentences/show/376025",
+   "ru_author": "reiji",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/244674"
   },
   {
    "ru": "Где я могу найти это?",
@@ -1521,7 +2061,12 @@
    "audio": "gde-ya-mogu-nayti-eto-73990a.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/8057355"
+   "source": "https://tatoeba.org/en/sentences/show/8057355",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3823356"
   },
   {
    "ru": "Мне нужно идти спать.",
@@ -1529,7 +2074,12 @@
    "audio": "mne-nuzhno-idti-spat-cc94ca.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5529"
+   "source": "https://tatoeba.org/en/sentences/show/5529",
+   "ru_author": "Ann74",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "brauliobezerra",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1395"
   },
   {
    "ru": "Он только что пришёл.",
@@ -1537,7 +2087,12 @@
    "audio": "on-tolko-chto-prishyol-98bf99.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/375918"
+   "source": "https://tatoeba.org/en/sentences/show/375918",
+   "ru_author": "zmoo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CH",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8476255"
   },
   {
    "ru": "Они не такие, как мы.",
@@ -1545,7 +2100,12 @@
    "audio": "oni-ne-takie-kak-my-10a046.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/5494976"
+   "source": "https://tatoeba.org/en/sentences/show/5494976",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/5494241"
   },
   {
    "ru": "Простите, но я домой.",
@@ -1553,7 +2113,12 @@
    "audio": "prostite-no-ya-domoy-4a8682.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/11570417"
+   "source": "https://tatoeba.org/en/sentences/show/11570417",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Eldad",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/418862"
   },
   {
    "ru": "Рад снова вас видеть.",
@@ -1561,7 +2126,12 @@
    "audio": "rad-snova-vas-videt-591af0.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/4922769"
+   "source": "https://tatoeba.org/en/sentences/show/4922769",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/252747"
   },
   {
    "ru": "Спасибо за ваш ответ.",
@@ -1569,7 +2139,12 @@
    "audio": "spasibo-za-vash-otvet-982dcb.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/466740"
+   "source": "https://tatoeba.org/en/sentences/show/466740",
+   "ru_author": "Aqn",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/64012"
   },
   {
    "ru": "Хочу поехать в город.",
@@ -1577,7 +2152,12 @@
    "audio": "khochu-poekhat-v-gorod-b53a1d.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6387544"
+   "source": "https://tatoeba.org/en/sentences/show/6387544",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2011778"
   },
   {
    "ru": "Что ты хочешь делать?",
@@ -1585,7 +2165,12 @@
    "audio": "chto-ty-khochesh-delat-5d2506.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/329723"
+   "source": "https://tatoeba.org/en/sentences/show/329723",
+   "ru_author": "YURY0608",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/24759"
   },
   {
    "ru": "Я думал, я могу идти.",
@@ -1593,7 +2178,12 @@
    "audio": "ya-dumal-ya-mogu-idti-0b1b2a.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13336166"
+   "source": "https://tatoeba.org/en/sentences/show/13336166",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4667048"
   },
   {
    "ru": "Я думаю, что понимаю.",
@@ -1601,7 +2191,12 @@
    "audio": "ya-dumayu-chto-ponimayu-953d7c.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/11572146"
+   "source": "https://tatoeba.org/en/sentences/show/11572146",
+   "ru_author": "retr0ra1n",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2315143"
   },
   {
    "ru": "Знаете, сколько время?",
@@ -1609,7 +2204,12 @@
    "audio": "znaete-skolko-vremya-b65826.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/5861104"
+   "source": "https://tatoeba.org/en/sentences/show/5861104",
+   "ru_author": "lovermann",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2882528"
   },
   {
    "ru": "Как ты пришёл в школу?",
@@ -1617,7 +2217,12 @@
    "audio": "kak-ty-prishyol-v-shkolu-9a6a49.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/7987317"
+   "source": "https://tatoeba.org/en/sentences/show/7987317",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/38359"
   },
   {
    "ru": "Мы знаем твоего брата.",
@@ -1625,7 +2230,12 @@
    "audio": "my-znaem-tvoego-brata-16e0fa.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13351530"
+   "source": "https://tatoeba.org/en/sentences/show/13351530",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9362023"
   },
   {
    "ru": "Ты знаешь французский?",
@@ -1633,7 +2243,12 @@
    "audio": "ty-znaesh-frantsuzskiy-5d22c1.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2493967"
+   "source": "https://tatoeba.org/en/sentences/show/2493967",
+   "ru_author": "paul_lingvo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451680"
   },
   {
    "ru": "Ты можешь им доверять?",
@@ -1641,7 +2256,12 @@
    "audio": "ty-mozhesh-im-doveryat-818f90.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/5547662"
+   "source": "https://tatoeba.org/en/sentences/show/5547662",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3327414"
   },
   {
    "ru": "Ты можешь сделать это!",
@@ -1649,7 +2269,12 @@
    "audio": "ty-mozhesh-sdelat-eto-8f2308.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5525"
+   "source": "https://tatoeba.org/en/sentences/show/5525",
+   "ru_author": "poji",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "brauliobezerra",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1391"
   },
   {
    "ru": "Ты тоже должен помочь.",
@@ -1657,7 +2282,12 @@
    "audio": "ty-tozhe-dolzhen-pomoch-14f3cc.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13353371"
+   "source": "https://tatoeba.org/en/sentences/show/13353371",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3161674"
   },
   {
    "ru": "Я ничего не хочу есть.",
@@ -1665,7 +2295,12 @@
    "audio": "ya-nichego-ne-khochu-est-8c3bbf.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2519863"
+   "source": "https://tatoeba.org/en/sentences/show/2519863",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1830599"
   },
   {
    "ru": "Ещё раз, кто твой отец?",
@@ -1673,7 +2308,12 @@
    "audio": "eshchyo-raz-kto-tvoy-otets-647396.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6906934"
+   "source": "https://tatoeba.org/en/sentences/show/6906934",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "AlanF_US",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/10543646"
   },
   {
    "ru": "Мне это очень нравится.",
@@ -1681,7 +2321,12 @@
    "audio": "mne-eto-ochen-nravitsya-2ba92e.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5634"
+   "source": "https://tatoeba.org/en/sentences/show/5634",
+   "ru_author": "zmoo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8826656"
   },
   {
    "ru": "Не хочешь пойти вместе?",
@@ -1689,7 +2334,12 @@
    "audio": "ne-khochesh-poyti-vmeste-5dc605.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2504019"
+   "source": "https://tatoeba.org/en/sentences/show/2504019",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/714950"
   },
   {
    "ru": "Некоторые против этого.",
@@ -1697,7 +2347,12 @@
    "audio": "nekotorye-protiv-etogo-057044.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332698"
+   "source": "https://tatoeba.org/en/sentences/show/13332698",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "sundown",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/10273741"
   },
   {
    "ru": "Ни у кого нет вопросов?",
@@ -1705,7 +2360,12 @@
    "audio": "ni-u-kogo-net-voprosov-5b69d6.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13349725"
+   "source": "https://tatoeba.org/en/sentences/show/13349725",
+   "ru_author": "retr0ra1n",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "sundown",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/10982538"
   },
   {
    "ru": "Это было три дня назад.",
@@ -1713,7 +2373,12 @@
    "audio": "eto-bylo-tri-dnya-nazad-7b23e7.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/388116"
+   "source": "https://tatoeba.org/en/sentences/show/388116",
+   "ru_author": "al_ex_an_der",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/42824"
   },
   {
    "ru": "Я буду рад тебе помочь.",
@@ -1721,7 +2386,12 @@
    "audio": "ya-budu-rad-tebe-pomoch-c6d0ea.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/381235"
+   "source": "https://tatoeba.org/en/sentences/show/381235",
+   "ru_author": "al_ex_an_der",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/20678"
   },
   {
    "ru": "Я не хочу идти в школу.",
@@ -1729,7 +2399,12 @@
    "audio": "ya-ne-khochu-idti-v-shkolu-5db7a1.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5654"
+   "source": "https://tatoeba.org/en/sentences/show/5654",
+   "ru_author": "Tonari",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1860"
   },
   {
    "ru": "Я ненавижу французский.",
@@ -1737,7 +2412,12 @@
    "audio": "ya-nenavizhu-frantsuzskiy-551ee6.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2492501"
+   "source": "https://tatoeba.org/en/sentences/show/2492501",
+   "ru_author": "Lenin_1917",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451690"
   },
   {
    "ru": "Завтра я весь день дома.",
@@ -1745,7 +2425,12 @@
    "audio": "zavtra-ya-ves-den-doma-0beb27.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/4805546"
+   "source": "https://tatoeba.org/en/sentences/show/4805546",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2712944"
   },
   {
    "ru": "Мне много денег не надо.",
@@ -1753,7 +2438,12 @@
    "audio": "mne-mnogo-deneg-ne-nado-fde496.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13350554"
+   "source": "https://tatoeba.org/en/sentences/show/13350554",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4115132"
   },
   {
    "ru": "Он как раз это и сказал.",
@@ -1761,15 +2451,25 @@
    "audio": "on-kak-raz-eto-i-skazal-d75be6.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/381022"
+   "source": "https://tatoeba.org/en/sentences/show/381022",
+   "ru_author": "al_ex_an_der",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/43190"
   },
   {
    "ru": "Это же так работает, да?",
    "en": "That's how it works, right?",
    "audio": "eto-zhe-tak-rabotaet-da-a1583b.m4a",
    "speaker": "EugeneGS",
-   "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/11092110"
+   "license": "text CC BY 2.0 FR / CC0 1.0 (Tatoeba); audio CC BY 4.0 (EugeneGS)",
+   "source": "https://tatoeba.org/en/sentences/show/11092110",
+   "ru_author": "ZegPhig",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "ddnktr",
+   "en_license": "CC0 1.0",
+   "en_source": "https://tatoeba.org/en/sentences/show/10808841"
   },
   {
    "ru": "Это не французский язык.",
@@ -1777,7 +2477,12 @@
    "audio": "eto-ne-frantsuzskiy-yazyk-6a083f.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/5424849"
+   "source": "https://tatoeba.org/en/sentences/show/5424849",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451682"
   },
   {
    "ru": "Я понимаю по-французски.",
@@ -1785,7 +2490,12 @@
    "audio": "ya-ponimayu-po-frantsuzski-f22ea5.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/5960595"
+   "source": "https://tatoeba.org/en/sentences/show/5960595",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/5958308"
   },
   {
    "ru": "Время всегда можно найти.",
@@ -1793,7 +2503,12 @@
    "audio": "vremya-vsegda-mozhno-nayti-01dba3.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5492"
+   "source": "https://tatoeba.org/en/sentences/show/5492",
+   "ru_author": "afyodor",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "brauliobezerra",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1358"
   },
   {
    "ru": "Забыл, что хотел сказать.",
@@ -1801,7 +2516,12 @@
    "audio": "zabyl-chto-khotel-skazat-790f81.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2735899"
+   "source": "https://tatoeba.org/en/sentences/show/2735899",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2326576"
   },
   {
    "ru": "Он говорит по-французски?",
@@ -1809,7 +2529,12 @@
    "audio": "on-govorit-po-frantsuzski-aa7936.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/500885"
+   "source": "https://tatoeba.org/en/sentences/show/500885",
+   "ru_author": "elsteris",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/292639"
   },
   {
    "ru": "Твой французский хороший.",
@@ -1817,7 +2542,12 @@
    "audio": "tvoy-frantsuzskiy-khoroshiy-b92d3a.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2494033"
+   "source": "https://tatoeba.org/en/sentences/show/2494033",
+   "ru_author": "paul_lingvo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451665"
   },
   {
    "ru": "Тебе нравится это делать?",
@@ -1825,7 +2555,12 @@
    "audio": "tebe-nravitsya-eto-delat-fc029f.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/4864558"
+   "source": "https://tatoeba.org/en/sentences/show/4864558",
+   "ru_author": "venticello",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3738482"
   },
   {
    "ru": "Ты больше не моя девушка.",
@@ -1833,7 +2568,12 @@
    "audio": "ty-bolshe-ne-moya-devushka-9d8003.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13333232"
+   "source": "https://tatoeba.org/en/sentences/show/13333232",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6789941"
   },
   {
    "ru": "Ты знаешь, кто она такая?",
@@ -1841,7 +2581,12 @@
    "audio": "ty-znaesh-kto-ona-takaya-dab71b.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/337541"
+   "source": "https://tatoeba.org/en/sentences/show/337541",
+   "ru_author": "Yukarin",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/308085"
   },
   {
    "ru": "Ты слишком много думаешь.",
@@ -1849,7 +2594,12 @@
    "audio": "ty-slishkom-mnogo-dumaesh-9d9539.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/329907"
+   "source": "https://tatoeba.org/en/sentences/show/329907",
+   "ru_author": "YURY0608",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CM",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/240995"
   },
   {
    "ru": "У тебя сейчас есть время?",
@@ -1857,7 +2607,12 @@
    "audio": "u-tebya-seychas-est-vremya-f46ee4.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/5693649"
+   "source": "https://tatoeba.org/en/sentences/show/5693649",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/241534"
   },
   {
    "ru": "Я люблю французский язык.",
@@ -1865,7 +2620,12 @@
    "audio": "ya-lyublyu-frantsuzskiy-yazyk-7fa355.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2492505"
+   "source": "https://tatoeba.org/en/sentences/show/2492505",
+   "ru_author": "odexed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451688"
   },
   {
    "ru": "Я не понимаю этого слова.",
@@ -1873,7 +2633,12 @@
    "audio": "ya-ne-ponimayu-etogo-slova-d6e20b.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2805549"
+   "source": "https://tatoeba.org/en/sentences/show/2805549",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/57974"
   },
   {
    "ru": "Давай изучать французский.",
@@ -1881,7 +2646,12 @@
    "audio": "davay-izuchat-frantsuzskiy-b8151d.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2493976"
+   "source": "https://tatoeba.org/en/sentences/show/2493976",
+   "ru_author": "paul_lingvo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451676"
   },
   {
    "ru": "Делай точно, как я говорю.",
@@ -1889,7 +2659,12 @@
    "audio": "delay-tochno-kak-ya-govoryu-d1405e.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/5500151"
+   "source": "https://tatoeba.org/en/sentences/show/5500151",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3531925"
   },
   {
    "ru": "Думаю, что он сейчас дома.",
@@ -1897,7 +2672,12 @@
    "audio": "dumayu-chto-on-seychas-doma-7d08fe.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/13143491"
+   "source": "https://tatoeba.org/en/sentences/show/13143491",
+   "ru_author": "EugeneGS",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Baberino",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9976628"
   },
   {
    "ru": "Почему он говорит со мной?",
@@ -1905,7 +2685,12 @@
    "audio": "pochemu-on-govorit-so-mnoy-82e4aa.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/13191626"
+   "source": "https://tatoeba.org/en/sentences/show/13191626",
+   "ru_author": "EugeneGS",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "EugeneGS",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/13214511"
   },
   {
    "ru": "Просто скажи мне, что это.",
@@ -1913,7 +2698,12 @@
    "audio": "prosto-skazhi-mne-chto-eto-39bd5e.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/4861190"
+   "source": "https://tatoeba.org/en/sentences/show/4861190",
+   "ru_author": "odexed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3200042"
   },
   {
    "ru": "С кем ты хотел поговорить?",
@@ -1921,7 +2711,12 @@
    "audio": "s-kem-ty-khotel-pogovorit-20992e.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6465011"
+   "source": "https://tatoeba.org/en/sentences/show/6465011",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6065038"
   },
   {
    "ru": "Тебе ещё рано иметь права.",
@@ -1929,7 +2724,12 @@
    "audio": "tebe-eshchyo-rano-imet-prava-f6f2f7.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/11568267"
+   "source": "https://tatoeba.org/en/sentences/show/11568267",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6238662"
   },
   {
    "ru": "Тебе нравится французский?",
@@ -1937,7 +2737,12 @@
    "audio": "tebe-nravitsya-frantsuzskiy-ce31c6.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2493968"
+   "source": "https://tatoeba.org/en/sentences/show/2493968",
+   "ru_author": "paul_lingvo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451679"
   },
   {
    "ru": "Тебе это о чём-то говорит?",
@@ -1945,7 +2750,12 @@
    "audio": "tebe-eto-o-chyom-to-govorit-519a30.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/4843810"
+   "source": "https://tatoeba.org/en/sentences/show/4843810",
+   "ru_author": "Wezel",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3200892"
   },
   {
    "ru": "Я люблю, когда идёт дождь.",
@@ -1953,7 +2763,12 @@
    "audio": "ya-lyublyu-kogda-idyot-dozhd-8f43db.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/9033901"
+   "source": "https://tatoeba.org/en/sentences/show/9033901",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "mccarras",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9026082"
   },
   {
    "ru": "Я могу немного поговорить.",
@@ -1961,7 +2776,12 @@
    "audio": "ya-mogu-nemnogo-pogovorit-8ad44e.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6817723"
+   "source": "https://tatoeba.org/en/sentences/show/6817723",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "User5120",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2430519"
   },
   {
    "ru": "Я могу оставить сообщение?",
@@ -1969,7 +2789,12 @@
    "audio": "ya-mogu-ostavit-soobshchenie-f971f3.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/531650"
+   "source": "https://tatoeba.org/en/sentences/show/531650",
+   "ru_author": "Tonari",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/279055"
   },
   {
    "ru": "Вы не знаете их, не так ли?",
@@ -1977,7 +2802,12 @@
    "audio": "vy-ne-znaete-ikh-ne-tak-li-636727.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/4809380"
+   "source": "https://tatoeba.org/en/sentences/show/4809380",
+   "ru_author": "odexed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3913906"
   },
   {
    "ru": "Мы здесь, чтобы поговорить.",
@@ -1985,7 +2815,12 @@
    "audio": "my-zdes-chtoby-pogovorit-3ab1f1.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/7050065"
+   "source": "https://tatoeba.org/en/sentences/show/7050065",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2548493"
   },
   {
    "ru": "Так вы поэтому сюда пришли?",
@@ -1993,7 +2828,12 @@
    "audio": "tak-vy-poetomu-syuda-prishli-7e9279.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332558"
+   "source": "https://tatoeba.org/en/sentences/show/13332558",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6076571"
   },
   {
    "ru": "Так ты за этим сюда пришёл?",
@@ -2001,7 +2841,12 @@
    "audio": "tak-ty-za-etim-syuda-prishyol-763708.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332555"
+   "source": "https://tatoeba.org/en/sentences/show/13332555",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6076571"
   },
   {
    "ru": "У меня всё ещё есть вопрос.",
@@ -2009,7 +2854,12 @@
    "audio": "u-menya-vsyo-eshchyo-est-vopros-0d5edc.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6465419"
+   "source": "https://tatoeba.org/en/sentences/show/6465419",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3619340"
   },
   {
    "ru": "У тебя хороший французский.",
@@ -2017,7 +2867,12 @@
    "audio": "u-tebya-khoroshiy-frantsuzskiy-7a9559.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/4992930"
+   "source": "https://tatoeba.org/en/sentences/show/4992930",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451665"
   },
   {
    "ru": "Что вы этим хотите сказать?",
@@ -2025,7 +2880,12 @@
    "audio": "chto-vy-etim-khotite-skazat-c1d63e.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2474309"
+   "source": "https://tatoeba.org/en/sentences/show/2474309",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/43210"
   },
   {
    "ru": "Я ничего не сказал об этом.",
@@ -2033,7 +2893,12 @@
    "audio": "ya-nichego-ne-skazal-ob-etom-a2a7b9.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6453554"
+   "source": "https://tatoeba.org/en/sentences/show/6453554",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "AlanF_US",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/10549893"
   },
   {
    "ru": "Я хочу сделать это сегодня.",
@@ -2041,7 +2906,12 @@
    "audio": "ya-khochu-sdelat-eto-segodnya-2bcbc4.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/7997810"
+   "source": "https://tatoeba.org/en/sentences/show/7997810",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6270485"
   },
   {
    "ru": "Вы не хотите здесь работать?",
@@ -2049,7 +2919,12 @@
    "audio": "vy-ne-khotite-zdes-rabotat-863da5.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13337489"
+   "source": "https://tatoeba.org/en/sentences/show/13337489",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6066937"
   },
   {
    "ru": "Сейчас мой брат в Австралии.",
@@ -2057,7 +2932,12 @@
    "audio": "seychas-moy-brat-v-avstralii-6f6b0c.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/3052836"
+   "source": "https://tatoeba.org/en/sentences/show/3052836",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/250692"
   },
   {
    "ru": "Я и по-французски не говорю.",
@@ -2065,7 +2945,12 @@
    "audio": "ya-i-po-frantsuzski-ne-govoryu-4ddc89.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13353839"
+   "source": "https://tatoeba.org/en/sentences/show/13353839",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6265160"
   },
   {
    "ru": "Давай говорить по-французски.",
@@ -2073,7 +2958,12 @@
    "audio": "davay-govorit-po-frantsuzski-458780.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2493971"
+   "source": "https://tatoeba.org/en/sentences/show/2493971",
+   "ru_author": "paul_lingvo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451677"
   },
   {
    "ru": "Не могу сделать ничего лучше.",
@@ -2081,7 +2971,12 @@
    "audio": "ne-mogu-sdelat-nichego-luchshe-e70e46.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5583"
+   "source": "https://tatoeba.org/en/sentences/show/5583",
+   "ru_author": "Ann74",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "pauldhunt",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/895947"
   },
   {
    "ru": "Нет, я не могу этого сделать.",
@@ -2089,7 +2984,12 @@
    "audio": "net-ya-ne-mogu-etogo-sdelat-c6d324.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/10990256"
+   "source": "https://tatoeba.org/en/sentences/show/10990256",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/10989450"
   },
   {
    "ru": "Так ты знаешь, где его найти?",
@@ -2097,7 +2997,12 @@
    "audio": "tak-ty-znaesh-gde-ego-nayti-a9b543.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332551"
+   "source": "https://tatoeba.org/en/sentences/show/13332551",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8573328"
   },
   {
    "ru": "Ты можешь нам помочь или нет?",
@@ -2105,7 +3010,12 @@
    "audio": "ty-mozhesh-nam-pomoch-ili-net-4c5117.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/12796485"
+   "source": "https://tatoeba.org/en/sentences/show/12796485",
+   "ru_author": "Alex_M",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3328149"
   },
   {
    "ru": "Ты по-французски-то говоришь?",
@@ -2113,7 +3023,12 @@
    "audio": "ty-po-frantsuzski-to-govorish-a51222.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332574"
+   "source": "https://tatoeba.org/en/sentences/show/13332574",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2402234"
   },
   {
    "ru": "Это действительно стоит того?",
@@ -2121,7 +3036,12 @@
    "audio": "eto-deystvitelno-stoit-togo-43c6c7.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2981983"
+   "source": "https://tatoeba.org/en/sentences/show/2981983",
+   "ru_author": "odexed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/794169"
   },
   {
    "ru": "Это как раз то, чего я хотел.",
@@ -2129,7 +3049,12 @@
    "audio": "eto-kak-raz-to-chego-ya-khotel-5b29a9.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2418891"
+   "source": "https://tatoeba.org/en/sentences/show/2418891",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/277718"
   },
   {
    "ru": "Я очень рад, что пришёл сюда.",
@@ -2137,7 +3062,12 @@
    "audio": "ya-ochen-rad-chto-prishyol-syuda-250b1b.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/8050849"
+   "source": "https://tatoeba.org/en/sentences/show/8050849",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2543494"
   },
   {
    "ru": "Мне нравится французский язык.",
@@ -2145,7 +3075,12 @@
    "audio": "mne-nravitsya-frantsuzskiy-yazyk-5979af.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2492503"
+   "source": "https://tatoeba.org/en/sentences/show/2492503",
+   "ru_author": "Selena777",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451689"
   },
   {
    "ru": "Она не хочет говорить об этом.",
@@ -2153,7 +3088,12 @@
    "audio": "ona-ne-khochet-govorit-ob-etom-4a7c73.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/375916"
+   "source": "https://tatoeba.org/en/sentences/show/375916",
+   "ru_author": "zmoo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1891"
   },
   {
    "ru": "Тебе надо было что-то сказать.",
@@ -2161,7 +3101,12 @@
    "audio": "tebe-nado-bylo-chto-to-skazat-cbf9ee.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13345368"
+   "source": "https://tatoeba.org/en/sentences/show/13345368",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/12196697"
   },
   {
    "ru": "Ты же понимаешь, что я говорю?",
@@ -2169,7 +3114,12 @@
    "audio": "ty-zhe-ponimaesh-chto-ya-govoryu-aae005.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/11570668"
+   "source": "https://tatoeba.org/en/sentences/show/11570668",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1261496"
   },
   {
    "ru": "Через два-три дня будет лучше.",
@@ -2177,7 +3127,12 @@
    "audio": "cherez-dva-tri-dnya-budet-luchshe-5b0bd0.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13336372"
+   "source": "https://tatoeba.org/en/sentences/show/13336372",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "sundown",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8920040"
   },
   {
    "ru": "Это было очень трудно сделать.",
@@ -2185,7 +3140,12 @@
    "audio": "eto-bylo-ochen-trudno-sdelat-38ad4d.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13336201"
+   "source": "https://tatoeba.org/en/sentences/show/13336201",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6846859"
   },
   {
    "ru": "Я думаю, ты должен купить это.",
@@ -2193,7 +3153,12 @@
    "audio": "ya-dumayu-ty-dolzhen-kupit-eto-034d36.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/8021436"
+   "source": "https://tatoeba.org/en/sentences/show/8021436",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3869717"
   },
   {
    "ru": "Здесь не говорят по-французски.",
@@ -2201,7 +3166,12 @@
    "audio": "zdes-ne-govoryat-po-frantsuzski-5b3c62.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/7730212"
+   "source": "https://tatoeba.org/en/sentences/show/7730212",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/7729289"
   },
   {
    "ru": "Мне нравится, когда идёт дождь.",
@@ -2209,7 +3179,12 @@
    "audio": "mne-nravitsya-kogda-idyot-dozhd-c1da3c.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/9033900"
+   "source": "https://tatoeba.org/en/sentences/show/9033900",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "mccarras",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9026082"
   },
   {
    "ru": "Пожалуйста, скажи мне своё имя.",
@@ -2217,7 +3192,12 @@
    "audio": "pozhaluysta-skazhi-mne-svoyo-imya-a204dd.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/370367"
+   "source": "https://tatoeba.org/en/sentences/show/370367",
+   "ru_author": "reiji",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/250101"
   },
   {
    "ru": "Ты можешь читать по-французски?",
@@ -2225,7 +3205,12 @@
    "audio": "ty-mozhesh-chitat-po-frantsuzski-50db0d.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2493991"
+   "source": "https://tatoeba.org/en/sentences/show/2493991",
+   "ru_author": "paul_lingvo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2451673"
   },
   {
    "ru": "Хочешь, чтобы я купил это тебе?",
@@ -2233,7 +3218,12 @@
    "audio": "khochesh-chtoby-ya-kupil-eto-tebe-3ef3b0.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/12808331"
+   "source": "https://tatoeba.org/en/sentences/show/12808331",
+   "ru_author": "Alex_M",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6240018"
   },
   {
    "ru": "Здесь для нас больше ничего нет.",
@@ -2241,7 +3231,12 @@
    "audio": "zdes-dlya-nas-bolshe-nichego-net-e2f207.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/11567807"
+   "source": "https://tatoeba.org/en/sentences/show/11567807",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3287094"
   },
   {
    "ru": "Никто не знает, как это сделать.",
@@ -2249,7 +3244,12 @@
    "audio": "nikto-ne-znaet-kak-eto-sdelat-bd5fba.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6689551"
+   "source": "https://tatoeba.org/en/sentences/show/6689551",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3563096"
   },
   {
    "ru": "По-моему, я делаю что-то не так.",
@@ -2257,7 +3257,12 @@
    "audio": "po-moemu-ya-delayu-chto-to-ne-tak-c04cb2.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13345832"
+   "source": "https://tatoeba.org/en/sentences/show/13345832",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4011832"
   },
   {
    "ru": "Почему ты мне об этом не сказал?",
@@ -2265,7 +3270,12 @@
    "audio": "pochemu-ty-mne-ob-etom-ne-skazal-49c608.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/3514163"
+   "source": "https://tatoeba.org/en/sentences/show/3514163",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1495840"
   },
   {
    "ru": "Сколько лет назад это случилось?",
@@ -2273,7 +3283,12 @@
    "audio": "skolko-let-nazad-eto-sluchilos-4b1c60.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/6824516"
+   "source": "https://tatoeba.org/en/sentences/show/6824516",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6347398"
   },
   {
    "ru": "Это случилось на прошлой неделе.",
@@ -2281,7 +3296,12 @@
    "audio": "eto-sluchilos-na-proshloy-nedele-9a0d9e.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/4986634"
+   "source": "https://tatoeba.org/en/sentences/show/4986634",
+   "ru_author": "odexed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "sundown",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/10187408"
   },
   {
    "ru": "Я не хотел, чтобы это случилось.",
@@ -2289,7 +3309,12 @@
    "audio": "ya-ne-khotel-chtoby-eto-sluchilos-1f4bad.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5579"
+   "source": "https://tatoeba.org/en/sentences/show/5579",
+   "ru_author": "al_ex_an_der",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2291234"
   },
   {
    "ru": "Я спросил у него, как его зовут.",
@@ -2297,7 +3322,12 @@
    "audio": "ya-sprosil-u-nego-kak-ego-zovut-8558d1.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/374358"
+   "source": "https://tatoeba.org/en/sentences/show/374358",
+   "ru_author": "zmoo",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2291892"
   },
   {
    "ru": "Вы понимаете, что я хочу сказать?",
@@ -2305,7 +3335,12 @@
    "audio": "vy-ponimaete-chto-ya-khochu-skazat-2be0e5.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/2620230"
+   "source": "https://tatoeba.org/en/sentences/show/2620230",
+   "ru_author": "Olya",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2891083"
   },
   {
    "ru": "Думаю, нам всем надо это сделать.",
@@ -2313,7 +3348,12 @@
    "audio": "dumayu-nam-vsem-nado-eto-sdelat-1d828d.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/6704637"
+   "source": "https://tatoeba.org/en/sentences/show/6704637",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6347968"
   },
   {
    "ru": "Мы не можем сделать это без тебя.",
@@ -2321,7 +3361,12 @@
    "audio": "my-ne-mozhem-sdelat-eto-bez-tebya-78db5a.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/6600711"
+   "source": "https://tatoeba.org/en/sentences/show/6600711",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6352034"
   },
   {
    "ru": "Сколько времени сейчас в Бостоне?",
@@ -2329,7 +3374,12 @@
    "audio": "skolko-vremeni-seychas-v-bostone-53a61b.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/4910421"
+   "source": "https://tatoeba.org/en/sentences/show/4910421",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3023198"
   },
   {
    "ru": "У нас сегодня нет на это времени.",
@@ -2337,7 +3387,12 @@
    "audio": "u-nas-segodnya-net-na-eto-vremeni-63a810.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/6682358"
+   "source": "https://tatoeba.org/en/sentences/show/6682358",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6682110"
   },
   {
    "ru": "Я не знаю, будет ли у меня время.",
@@ -2345,7 +3400,12 @@
    "audio": "ya-ne-znayu-budet-li-u-menya-vremya-8b2f6b.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/5425"
+   "source": "https://tatoeba.org/en/sentences/show/5425",
+   "ru_author": "al_ex_an_der",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CM",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/531184"
   },
   {
    "ru": "Когда, вы говорите, это произошло?",
@@ -2353,7 +3413,12 @@
    "audio": "kogda-vy-govorite-eto-proizoshlo-72c06f.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/11569542"
+   "source": "https://tatoeba.org/en/sentences/show/11569542",
+   "ru_author": "retr0ra1n",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/7737025"
   },
   {
    "ru": "Кто тебе сказал, что я это сделал?",
@@ -2361,7 +3426,12 @@
    "audio": "kto-tebe-skazal-chto-ya-eto-sdelal-90ebe2.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/8416821"
+   "source": "https://tatoeba.org/en/sentences/show/8416821",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6270077"
   },
   {
    "ru": "Так вы действительно этого хотите?",
@@ -2369,7 +3439,12 @@
    "audio": "tak-vy-deystvitelno-etogo-khotite-d36fe3.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332462"
+   "source": "https://tatoeba.org/en/sentences/show/13332462",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2013098"
   },
   {
    "ru": "Так ты действительно этого хочешь?",
@@ -2377,7 +3452,12 @@
    "audio": "tak-ty-deystvitelno-etogo-khochesh-381f08.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332461"
+   "source": "https://tatoeba.org/en/sentences/show/13332461",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2013098"
   },
   {
    "ru": "У тебя есть что-то, что мне нужно.",
@@ -2385,7 +3465,12 @@
    "audio": "u-tebya-est-chto-to-chto-mne-nuzhno-f0ddd5.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/6770931"
+   "source": "https://tatoeba.org/en/sentences/show/6770931",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "maaster",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6741441"
   },
   {
    "ru": "Хотите, чтобы я купил это для вас?",
@@ -2393,7 +3478,12 @@
    "audio": "khotite-chtoby-ya-kupil-eto-dlya-vas-b83392.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/12808329"
+   "source": "https://tatoeba.org/en/sentences/show/12808329",
+   "ru_author": "Alex_M",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6240018"
   },
   {
    "ru": "Я действительно люблю свою работу.",
@@ -2401,7 +3491,12 @@
    "audio": "ya-deystvitelno-lyublyu-svoyu-rabotu-67401a.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/520845"
+   "source": "https://tatoeba.org/en/sentences/show/520845",
+   "ru_author": "stariy",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "Hybrid",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/5364985"
   },
   {
    "ru": "Я сейчас не могу говорить об этом.",
@@ -2409,7 +3504,12 @@
    "audio": "ya-seychas-ne-mogu-govorit-ob-etom-14cf69.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/8647834"
+   "source": "https://tatoeba.org/en/sentences/show/8647834",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2303626"
   },
   {
    "ru": "Говорите по-французски, пожалуйста.",
@@ -2417,7 +3517,12 @@
    "audio": "govorite-po-frantsuzski-pozhaluysta-5c85ff.m4a",
    "speaker": "Alex_M",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Alex_M)",
-   "source": "https://tatoeba.org/en/sentences/show/4476181"
+   "source": "https://tatoeba.org/en/sentences/show/4476181",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4044345"
   },
   {
    "ru": "Если хочешь, можешь остаться здесь.",
@@ -2425,7 +3530,12 @@
    "audio": "esli-khochesh-mozhesh-ostatsya-zdes-5e771f.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/7983890"
+   "source": "https://tatoeba.org/en/sentences/show/7983890",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "AlanF_US",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9963494"
   },
   {
    "ru": "Есть место, куда бы ты хотел пойти?",
@@ -2433,7 +3543,12 @@
    "audio": "est-mesto-kuda-by-ty-khotel-poyti-4f5ed4.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6856502"
+   "source": "https://tatoeba.org/en/sentences/show/6856502",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "sundown",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8893015"
   },
   {
    "ru": "Так ты знаешь, почему это произошло?",
@@ -2441,7 +3556,12 @@
    "audio": "tak-ty-znaesh-pochemu-eto-proizoshlo-68e76f.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13332549"
+   "source": "https://tatoeba.org/en/sentences/show/13332549",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6245686"
   },
   {
    "ru": "Это не то, что может сделать каждый.",
@@ -2449,7 +3569,12 @@
    "audio": "eto-ne-to-chto-mozhet-sdelat-kazhdyy-08ae5b.m4a",
    "speaker": "Inego",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (Inego)",
-   "source": "https://tatoeba.org/en/sentences/show/5590"
+   "source": "https://tatoeba.org/en/sentences/show/5590",
+   "ru_author": "al_ex_an_der",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1458"
   },
   {
    "ru": "Мы можем поговорить об этом на улице?",
@@ -2457,7 +3582,12 @@
    "audio": "my-mozhem-pogovorit-ob-etom-na-ulitse-0344e1.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/11566555"
+   "source": "https://tatoeba.org/en/sentences/show/11566555",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3181798"
   },
   {
    "ru": "Есть что-нибудь, что ты хочешь купить?",
@@ -2465,7 +3595,12 @@
    "audio": "est-chto-nibud-chto-ty-khochesh-kupit-55da9f.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/4384492"
+   "source": "https://tatoeba.org/en/sentences/show/4384492",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/4290055"
   },
   {
    "ru": "Когда я пришёл к ней, её не было дома.",
@@ -2473,7 +3608,12 @@
    "audio": "kogda-ya-prishyol-k-ney-eyo-ne-bylo-doma-b7afa1.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6397100"
+   "source": "https://tatoeba.org/en/sentences/show/6397100",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "AlanF_US",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9851383"
   },
   {
    "ru": "У меня не так много денег, как у тебя.",
@@ -2481,7 +3621,12 @@
    "audio": "u-menya-ne-tak-mnogo-deneg-kak-u-tebya-f42474.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13340867"
+   "source": "https://tatoeba.org/en/sentences/show/13340867",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/9628350"
   },
   {
    "ru": "Я не могу решить, хочу я идти или нет.",
@@ -2489,7 +3634,12 @@
    "audio": "ya-ne-mogu-reshit-khochu-ya-idti-ili-net-41ad3d.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13339572"
+   "source": "https://tatoeba.org/en/sentences/show/13339572",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "mccarras",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8987578"
   },
   {
    "ru": "Мне бы очень хотелось жить в Австралии.",
@@ -2497,7 +3647,12 @@
    "audio": "mne-by-ochen-khotelos-zhit-v-avstralii-800017.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13350665"
+   "source": "https://tatoeba.org/en/sentences/show/13350665",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/7159930"
   },
   {
    "ru": "Это было не так интересно, как я думал.",
@@ -2505,7 +3660,12 @@
    "audio": "eto-bylo-ne-tak-interesno-kak-ya-dumal-82b47b.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/7938122"
+   "source": "https://tatoeba.org/en/sentences/show/7938122",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/7922093"
   },
   {
    "ru": "Я понял, почему эта машина не работает.",
@@ -2513,7 +3673,12 @@
    "audio": "ya-ponyal-pochemu-eta-mashina-ne-rabotae-de4b74.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6459995"
+   "source": "https://tatoeba.org/en/sentences/show/6459995",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/48836"
   },
   {
    "ru": "Можешь ещё раз это сделать, я не против.",
@@ -2521,7 +3686,12 @@
    "audio": "mozhesh-eshchyo-raz-eto-sdelat-ya-ne-pro-5308a1.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13343199"
+   "source": "https://tatoeba.org/en/sentences/show/13343199",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6348109"
   },
   {
    "ru": "Как по-французски сказать \"я тебя люблю\"?",
@@ -2529,7 +3699,12 @@
    "audio": "kak-po-frantsuzski-skazat-ya-tebya-lyubl-242032.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/2816329"
+   "source": "https://tatoeba.org/en/sentences/show/2816329",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/2417967"
   },
   {
    "ru": "Я думаю, что ты можешь мне с этим помочь.",
@@ -2537,7 +3712,12 @@
    "audio": "ya-dumayu-chto-ty-mozhesh-mne-s-etim-pom-2a5ee0.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/13154206"
+   "source": "https://tatoeba.org/en/sentences/show/13154206",
+   "ru_author": "EugeneGS",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "josivangoncalves",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8200602"
   },
   {
    "ru": "Из-за этого у меня совсем не было времени.",
@@ -2545,7 +3725,12 @@
    "audio": "iz-za-etogo-u-menya-sovsem-ne-bylo-vreme-5f17bb.m4a",
    "speaker": "EugeneGS",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (EugeneGS)",
-   "source": "https://tatoeba.org/en/sentences/show/13279641"
+   "source": "https://tatoeba.org/en/sentences/show/13279641",
+   "ru_author": "EugeneGS",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "rul",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/13279638"
   },
   {
    "ru": "Я думаю, ты действительно хороший человек.",
@@ -2553,7 +3738,12 @@
    "audio": "ya-dumayu-ty-deystvitelno-khoroshiy-chel-5a65b5.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/7529754"
+   "source": "https://tatoeba.org/en/sentences/show/7529754",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/433386"
   },
   {
    "ru": "Я бы очень хотел пойти с тобой, но не могу.",
@@ -2561,7 +3751,12 @@
    "audio": "ya-by-ochen-khotel-poyti-s-toboy-no-ne-m-4502a7.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13341445"
+   "source": "https://tatoeba.org/en/sentences/show/13341445",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/8341419"
   },
   {
    "ru": "Я хочу когда-нибудь снова поехать в Бостон.",
@@ -2569,7 +3764,12 @@
    "audio": "ya-khochu-kogda-nibud-snova-poekhat-v-bo-a45a3c.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/3377459"
+   "source": "https://tatoeba.org/en/sentences/show/3377459",
+   "ru_author": "sharptoothed",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/3377617"
   },
   {
    "ru": "Мне было бы интересно узнать, как это сделать.",
@@ -2577,7 +3777,12 @@
    "audio": "mne-bylo-by-interesno-uznat-kak-eto-sdel-21e703.m4a",
    "speaker": "retr0ra1n",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC0 1.0 (retr0ra1n)",
-   "source": "https://tatoeba.org/en/sentences/show/13336344"
+   "source": "https://tatoeba.org/en/sentences/show/13336344",
+   "ru_author": "marafon",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/6657839"
   },
   {
    "ru": "Я совсем ничего не понял из того, что он сказал.",
@@ -2585,7 +3790,12 @@
    "audio": "ya-sovsem-nichego-ne-ponyal-iz-togo-chto-b5e77c.m4a",
    "speaker": "fjay69",
    "license": "text CC BY 2.0 FR (Tatoeba); audio CC BY 4.0 (fjay69)",
-   "source": "https://tatoeba.org/en/sentences/show/6400038"
+   "source": "https://tatoeba.org/en/sentences/show/6400038",
+   "ru_author": "fjay69",
+   "ru_license": "CC BY 2.0 FR",
+   "en_author": "CK",
+   "en_license": "CC BY 2.0 FR",
+   "en_source": "https://tatoeba.org/en/sentences/show/1978006"
   }
  ]
 }

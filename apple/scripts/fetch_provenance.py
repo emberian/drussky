@@ -27,7 +27,7 @@ UA = {"User-Agent": "DrusskyCredits/1.0 (https://ember.software; personal langua
 PAUSE = 0.6  # seconds between requests: under 2 per second
 TATOEBA = "https://tatoeba.org/en/api_v0/sentence/"
 COMMONS = "https://commons.wikimedia.org/w/api.php"
-SHTOOKA = "The Shtooka Project (individual speaker not identified)"
+SHTOOKA = "The Shtooka Project (speaker not identified)"  # as the other Shtooka takes already read
 SHTOOKA_CREDIT = "Audio sample provided by The Shtooka Project."
 
 

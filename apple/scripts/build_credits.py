@@ -131,6 +131,8 @@ def build():
         title = source.get("title") or source.get("key") or asset
         page = source.get("source_page")
         change = source.get("processing") or source.get("pipeline") or "Processing not recorded."
+        # What the licence claim rests on when that is itself open (the 1894 Lensky phonograph).
+        note = source.get("license_note")
         required = ident.startswith("CC-BY")
         attribution = f"{title} — {author}."
         if credit:
@@ -138,8 +140,10 @@ def build():
         attribution += f" Source: {page or 'not recorded'}. {raw_license or 'Licence not recorded'}"
         if url:
             attribution += f" ({url})"
+        if note:
+            attribution += f". {note}"
         attribution += f". Changes by the Drussky project: {change}"
-        key = (group, page, author, raw_license, title, credit, change)
+        key = (group, page, author, raw_license, title, credit, change, note)
         if key not in source_groups:
             entry = {"id": "recording-" + digest(json.dumps(key, ensure_ascii=False))[:16],
                      "title": title, "author": author, "recorded_author": raw_author,
@@ -148,8 +152,12 @@ def build():
                      "share_alike": "-SA-" in ident, "attribution": attribution,
                      "credit_status": "incomplete" if incomplete or not page or ident == "unknown" else "ready",
                      "changes": change, "assets": []}
+            if note:
+                entry["license_note"] = note
             if supplement:
                 entry["credit_evidence"] = supplement
+            elif source.get("author_evidence"):
+                entry["credit_evidence"] = {"author_evidence": source["author_evidence"]}
             source_groups[key] = entry
             groups[group].append(entry)
         source_groups[key]["assets"].append(asset)
@@ -220,21 +228,28 @@ def build():
         for lang in ("ru", "en"):
             if supplement and supplement[lang + "_sha256"] != digest(sentence[lang]):
                 raise ValueError(f"Stale Tatoeba {lang} evidence for {sid}")
-        en_id = supplement.get("en_id")
+        # library.json's own record (scripts/fetch_provenance.py: Tatoeba's owner and licence per
+        # sentence) is canonical; the evidence file only recovers the translation's id.
+        en_id = sentence.get("en_source", "").rsplit("/", 1)[-1] or supplement.get("en_id")
         en_url = f"https://tatoeba.org/en/sentences/show/{en_id}" if en_id else None
-        ru_authors, en_authors = supplement.get("ru_contributors", []), supplement.get("en_contributors", [])
+        ru_authors = [sentence["ru_author"]] if sentence.get("ru_author") else supplement.get("ru_contributors", [])
+        en_authors = [sentence["en_author"]] if sentence.get("en_author") else supplement.get("en_contributors", [])
+        ru_license = sentence.get("ru_license", "CC BY 2.0 FR")
+        en_license = sentence.get("en_license", "CC BY 2.0 FR")
+        ident, url = licence(ru_license)
+        licences = ru_license if ru_license == en_license else f"Russian {ru_license}; English {en_license}"
         complete = bool(ru_authors and en_authors and en_id)
         attribution = (f"Tatoeba: Russian sentence {sid}, by {', '.join(ru_authors) or 'contributors whose names are not yet recorded'} "
                        f"({sentence['source']}); English translation {en_id or 'ID not recorded'}, "
                        f"by {', '.join(en_authors) or 'contributors whose names are not yet recorded'} "
-                       f"({en_url or 'source not recorded'}). CC BY 2.0 FR "
-                       "(https://creativecommons.org/licenses/by/2.0/fr/). Texts selected and paired by Drussky.")
+                       f"({en_url or 'source not recorded'}). {licences}"
+                       f"{f' ({url})' if url else ''}. Texts selected and paired by Drussky.")
         groups["tatoeba_text"].append({
             "id": "tatoeba-" + sid, "title": sentence["ru"], "ru_id": sid, "en_id": en_id,
             "source_url": sentence["source"], "translation_source_url": en_url,
             "ru_contributors": ru_authors, "en_contributors": en_authors,
-            "license": "CC-BY-2.0-FR", "license_url": "https://creativecommons.org/licenses/by/2.0/fr/",
-            "attribution_required": True, "credit_status": "ready" if complete else "incomplete",
+            "license": ident, "license_url": url, "recorded_license": ru_license, "en_license": en_license,
+            "attribution_required": ident.startswith("CC-BY"), "credit_status": "ready" if complete else "incomplete",
             "attribution": attribution, "audio_asset": sentence["audio"],
             "note": "Audio speaker is credited separately and is not presumed to be the text author."})
 

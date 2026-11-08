@@ -192,6 +192,7 @@ struct SettingsView: View {
     @State private var graphURL: URL?
     @State private var restoreError: String?
     @State private var apiKey = Keychain.apiKey ?? ""
+    @State private var showSources = QA.has("-qa-sources")  // straight to «Исто́чники» for screenshots
 
     var body: some View {
         @Bindable var book = book
@@ -249,59 +250,13 @@ struct SettingsView: View {
                     Text("Every letter, word and pattern with its recall per modality, how they connect, and what you confuse, as JSON. The full answer log is events.jsonl in the notebook export.")
                 }
                 Section {
-                    NavigationLink("Recordings and credits") { CreditsView() }
+                    NavigationLink("Исто́чники · Sources") { CreditsView() }  // Views/CreditsView.swift
                 }
             }
             .navigationTitle("Settings")
+            .navigationDestination(isPresented: $showSources) { CreditsView() }
             .task { exportURL = await book.exportArchive(); graphURL = book.exportGraph() }
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         }
-    }
-}
-
-/// Attribution for the recorded Russian: human recordings (Wikimedia Commons) and the synthetic voice.
-struct CreditsView: View {
-    struct Source: Decodable {
-        var key: String
-        var kind: String
-        var credit: String?
-        var license: String?
-        var source_page: String?
-        var provider: String?
-    }
-
-    private var sources: [Source] {
-        guard let url = Bundle.main.url(forResource: "Audio", withExtension: nil)?.appendingPathComponent("sources.json"),
-              let data = try? Data(contentsOf: url),
-              let map = try? JSONDecoder().decode([String: Source].self, from: data) else { return [] }
-        return map.values.sorted { $0.key < $1.key }
-    }
-
-    var body: some View {
-        let all = sources
-        let human = all.filter { $0.kind == "human_recording" }
-        let providers = Set(all.compactMap(\.provider)).sorted()
-        List {
-            Section {
-                ForEach(human, id: \.key) { s in
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text(s.key).font(Theme.russian(20, weight: .medium))
-                        Text([s.credit, s.license].compactMap { $0 }.joined(separator: " · "))
-                            .font(.system(size: 13)).foregroundStyle(.secondary)
-                        if let page = s.source_page, let url = URL(string: page) {
-                            Link(page, destination: url).font(.system(size: 12)).lineLimit(1)
-                        }
-                    }
-                }
-            } header: { Text("Recorded by people (\(human.count))") }
-            Section {
-                ForEach(providers, id: \.self) { Text($0) }
-                Text("\(all.count - human.count) phrases").foregroundStyle(.secondary)
-            } header: { Text("Synthetic voice") }
-            Section {
-                Text("Marck Script by Denis Masharov, SIL Open Font License 1.1")
-            } header: { Text("Handwriting font") }
-        }
-        .navigationTitle("Credits")
     }
 }
