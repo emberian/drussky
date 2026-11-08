@@ -20,6 +20,7 @@ CHECKS = [
     ("math shelf (library schema)", [sys.executable, str(HERE / "validate_library.py"), str(RESOURCES / "math.json")]),
     ("math validator tests", [sys.executable, "-m", "unittest", "discover", "-s", str(HERE), "-p", "test_validate_math.py"]),
     ("series", [sys.executable, str(HERE / "validate_series.py")]),
+    ("kitchen", [sys.executable, str(HERE / "validate_series.py"), str(RESOURCES / "kitchen.json")]),
     ("morphology", [sys.executable, str(HERE / "validate_morphology.py")]),
 ]
 

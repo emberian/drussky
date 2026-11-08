@@ -6,13 +6,14 @@
       "title": "Ку́хня",
       "title_en": "The Kitchen",
       "summary_en": "In a small apartment kitchen, Katya (who actually knows how to cook soup and borscht), Max (a computer scientist who makes the morning coffee, forgets the milk, and reads mathematics at midnight), and their ginger cat Tima live out thirty overheard domestic moments — from morning coffee and lost keys to late-night tea, neighbours at the door, and kitchen proofs.",
+      "episode_word": "диало́г",
       "episodes": [
         {
           "id": "kukhnya-01",
           "number": 1,
           "title": "Сыр и Ти́ма",
           "title_en": "Cheese and Tima",
-          "after_page": "u3-p3",
+          "after_page": "u4-p2",
           "text": "— Макс, смотри́! Вот окно́, а на окне́ — сок, сыр и торт.\n— О, сыр! А где ми́ска, Ка́тя?\n— Ми́ска там. Но кто э́то там на окне́?\n— Так э́то Ти́ма! Кот сно́ва там, где сыр и мя́со!\n— Ти́ма, нет! Э́то не твоя́ ми́ска, э́то торт и сыр!",
           "en": "— Max, look! Here is the window, and on the windowsill are juice, cheese, and cake.\n— Oh, cheese! And where is the bowl, Katya?\n— The bowl is there. But who is that there on the windowsill?\n— Why, that is Tima! The cat is once again right where the cheese and meat are!\n— Tima, no! That is not your bowl, that is cake and cheese!",
           "glosses": {
@@ -77,14 +78,13 @@
           "title": "Где молоко́?",
           "title_en": "Where Is the Milk?",
           "after_page": "u4-p4",
-          "text": "— Ка́тя, у́тро! Где молоко́? Тут на столе́ то́лько вода́ и сок.\n— Ну как где? Молоко́ там, у окна́, и ма́сло там.\n— А где стака́н, ви́лка и таре́лка?\n— На столе́, Макс! Иди́ туда́, к окну́: там стака́н, ма́сло и молоко́.\n— О, да, молоко́ тут! Ла́дно, гото́во.",
-          "en": "— Katya, morning! Where is the milk? Here on the table there is only water and juice.\n— Well what do you mean, where? The milk is over there by the window, and the butter is there.\n— And where are the glass, the fork, and the plate?\n— On the table, Max! Go over there to the window: the glass, butter, and milk are there.\n— Oh, yes, the milk is here! Alright, it's ready.",
+          "text": "— Ка́тя, у́тро! Где молоко́? Тут на столе́ вода́ и сок.\n— Ну как где? Молоко́ там, у окна́, и ма́сло там.\n— А где стака́н, ви́лка и таре́лка?\n— На столе́, Макс! Иди́ туда́, к окну́: там стака́н, ма́сло и молоко́.\n— О, да, молоко́ тут! Ла́дно, гото́во.",
+          "en": "— Katya, morning! Where is the milk? Here on the table there is water and juice.\n— Well what do you mean, where? The milk is over there by the window, and the butter is there.\n— And where are the glass, the fork, and the plate?\n— On the table, Max! Go over there to the window: the glass, butter, and milk are there.\n— Oh, yes, the milk is here! Alright, it's ready.",
           "glosses": {
             "катя": "Katya",
             "утро": "morning",
             "на": "on",
             "столе": "table (prepositional: on the table)",
-            "только": "only",
             "ну": "well, come on (conversational particle)",
             "у": "by, near, at",
             "окна": "the window (genitive: by the window)",
@@ -110,7 +110,7 @@
           "questions": [
             {
               "kind": "read_meaning",
-              "text": "— Где молоко́? Тут на столе́ то́лько вода́ и сок.",
+              "text": "— Где молоко́? Тут на столе́ вода́ и сок.",
               "options": [
                 "Max is looking for the milk because he only sees water and juice on the table.",
                 "Max is asking Katya to buy water and juice in the city.",
@@ -147,8 +147,8 @@
           "title": "Бу́дем суп?",
           "title_en": "Shall We Have Soup?",
           "after_page": "u5-p3",
-          "text": "— Макс, иди́ сюда́! Обе́д на плите́. Бу́дем суп и сала́т?\n— Да, спаси́бо, Ка́тя! Я так люблю́ твой суп.\n— Ну дава́й, бери́ таре́лку и попро́буй. Он на плите́.\n— Ой, суп вку́сный! А где рис и сыр? Они́ на столе́?\n— Нет, там то́лько ма́сло и я́блоко. Дай таре́лку, вот твой суп!",
-          "en": "— Max, come here! Lunch is on the stove. Shall we have soup and salad?\n— Yes, thank you, Katya! I love your soup so much.\n— Well go ahead, take a plate and taste it. It is on the stove.\n— Oh, the soup is tasty! And where are the rice and cheese? Are they on the table?\n— No, there is only butter and an apple there. Hand me your plate, here is your soup!",
+          "text": "— Макс, иди́ сюда́! Обе́д на плите́. Бу́дем суп и сала́т?\n— Да, спаси́бо, Ка́тя! Я так люблю́ твой суп.\n— Ну дава́й, бери́ таре́лку и попро́буй. Он на плите́.\n— Ой, суп вку́сный! А где рис и сыр? Они́ на столе́?\n— Нет, там ма́сло и я́блоко. Дай таре́лку, вот твой суп!",
+          "en": "— Max, come here! Lunch is on the stove. Shall we have soup and salad?\n— Yes, thank you, Katya! I love your soup so much.\n— Well go ahead, take a plate and taste it. It is on the stove.\n— Oh, the soup is tasty! And where are the rice and cheese? Are they on the table?\n— No, there is butter and an apple there. Hand me your plate, here is your soup!",
           "glosses": {
             "макс": "Max",
             "иди": "come, go! (imperative)",
@@ -171,7 +171,6 @@
             "а": "and, what about",
             "рис": "rice",
             "столе": "table (prepositional: on the table)",
-            "только": "only",
             "масло": "butter",
             "яблоко": "apple",
             "дай": "give, hand me! (perfective imperative)"
@@ -459,7 +458,8 @@
             "сковорода": "frying pan, skillet",
             "кастрюля": "saucepan, pot",
             "возьми": "take! (perfective imperative)",
-            "от": "from, for ('kryshka ot kastryuli': the lid for the pot)"
+            "от": "from, for ('kryshka ot kastryuli': the lid for the pot)",
+            "кастрюли": "of the pan (genitive after от: the pan's lid)"
           },
           "notice": [
             "«Подожди́, скажи́ поме́дленнее!» — the real survival sentence when a native speaker rattles off three kitchen nouns at full speed.",
@@ -1137,7 +1137,8 @@
             "новую": "new (feminine accusative)",
             "пачку": "pack, box (accusative object)",
             "возьмите": "take! (polite/plural imperative to Vera Pavlovna)",
-            "живёте": "you live, you are doing (polite plural)"
+            "живёте": "you live, you are doing (polite plural)",
+            "тиму": "Tima (the cat, as the object)"
           },
           "notice": [
             "«Подержи́ Ти́му!» / «Дай па́чку» (to Max/Katya, «ты») vs. «Извини́те» / «Проходи́те» / «Возьми́те» (to the neighbour Vera Pavlovna, «вы» + name and patronymic).",
@@ -1184,7 +1185,7 @@
           "title": "Ночь, чай и звёзды",
           "title_en": "Night, Tea, and Stars",
           "after_page": "u16-p4",
-          "text": "— Ночь, ти́хо, а мы не спим. Смотри́ в окно́: каки́е больши́е звёзды!\n— Да, мир о́чень большо́й, а на́ша ку́хня ма́ленькая и тёплая. Нали́ть тебе́ ещё ча́ю с мя́той?\n— Нале́й! Я ду́маю о ко́смосе и о Дека́рте: я пью чай, сле́довательно, я существу́ю!\n— Ха-ха! Э́то краси́вая мысль, Макс. Но посу́ду за́втра всё равно́ мыть тебе́!\n— Э́то не филосо́фия, Ка́тя, э́то суро́вый факт!",
+          "text": "— Ночь, ти́хо, а мы не спим. Смотри́ в окно́: каки́е больши́е звёзды!\n— Да, мир о́чень большо́й, а на́ша ку́хня ма́ленькая и тёплая. Нали́ть тебе́ ещё ча́ю с мя́той?\n— Нале́й! Я ду́маю о ко́смосе и о Дека́рте: я пью чай, сле́довательно, я существу́ю!\n— Ха-ха́! Э́то краси́вая мысль, Макс. Но посу́ду за́втра всё равно́ мыть тебе́!\n— Э́то не филосо́фия, Ка́тя, э́то суро́вый факт!",
           "en": "— It's night, it's quiet, and we aren't sleeping. Look out the window: what big stars!\n— Yes, the world is very big, while our kitchen is small and warm. Shall I pour you more mint tea?\n— Pour some! I'm thinking about space and about Descartes: I drink tea, therefore I exist!\n— Ha-ha! That's a beautiful thought, Max. But tomorrow you still have to wash the dishes anyway!\n— That's not philosophy, Katya, that's a harsh fact!",
           "glosses": {
             "спим": "we are sleeping ('my ne spim': we're awake)",
@@ -1211,7 +1212,8 @@
             "мыть": "to wash ('myt' tebe': it's on you to wash)",
             "философия": "philosophy",
             "катя": "Katya",
-            "суровый": "harsh, stern (masculine)"
+            "суровый": "harsh, stern (masculine)",
+            "чаю": "some tea (partitive genitive after нали́ть)"
           },
           "notice": [
             "«Нали́ть тебе́ ещё ча́ю?» — dative + infinitive («нали́ть тебе́…?») is the warmest way to ask 'Shall I pour you…?', and «Нале́й!» answers 'Yes, pour some!'.",
@@ -1221,7 +1223,7 @@
           "questions": [
             {
               "kind": "read_meaning",
-              "text": "— Я пью чай, сле́довательно, я существу́ю! — Ха-ха! Э́то краси́вая мысль, Макс. Но посу́ду за́втра всё равно́ мыть тебе́!",
+              "text": "— Я пью чай, сле́довательно, я существу́ю! — Ха-ха́! Э́то краси́вая мысль, Макс. Но посу́ду за́втра всё равно́ мыть тебе́!",
               "options": [
                 "Max parodies Descartes over midnight tea, and Katya jokes that he still has to wash the dishes tomorrow anyway.",
                 "Max and Katya argue about mathematics and decide not to drink tea.",
@@ -1416,7 +1418,7 @@
           "title": "Курье́р звони́т",
           "title_en": "The Courier Is Calling",
           "after_page": "u20-p4",
-          "text": "— Макс, у тебя́ звони́т телефо́н! Возьми́ тру́бку, у меня́ ру́ки в муке́ и воде́.\n— Алло́, здра́вствуйте! Да, я вас слу́шаю.\n— Здра́вствуйте! Э́то курье́р. Я привёз ва́шу посы́лку и проду́кты, но домофо́н внизу́ не рабо́тает. Откро́йте, пожа́луйста!\n— Да, коне́чно, сейча́с откро́ю! Поднима́йтесь на тре́тий эта́ж.\n— Ка́тя, курье́р уже́ идёт сюда́! Встре́ть его́ у две́ри, а я пока́ вы́мою ру́ки.",
+          "text": "— Макс, у тебя́ звони́т телефо́н! Возьми́ тру́бку, у меня́ ру́ки в муке́ и воде́.\n— Алло́, здра́вствуйте! Да, я вас слу́шаю.\n— Здра́вствуйте! Э́то курье́р. Я привёз ва́шу посы́лку и проду́кты, но домофо́н внизу́ не рабо́тает. Откро́йте, пожа́луйста!\n— Да, коне́чно, сейча́с откро́ю! Поднима́йтесь на тре́тий эта́ж.\n— Ка́тя, курье́р уже́ идёт сюда́! Встреть его́ у две́ри, а я пока́ вы́мою ру́ки.",
           "en": "— Max, your phone is ringing! Pick up the phone, my hands are covered in flour and water.\n— Hello! Yes, I'm listening.\n— Hello! This is the delivery courier. I've brought your parcel and groceries, but the intercom downstairs isn't working. Please buzz me in!\n— Yes, of course, I'll open it right now! Come up to the third floor.\n— Katya, the courier is already coming up here! Meet him at the door, and meanwhile I'll wash my hands.",
           "glosses": {
             "макс": "Max",
@@ -1457,7 +1459,7 @@
           },
           "notice": [
             "«Возьми́ тру́бку, у меня́ ру́ки в муке́!» — «ру́ки в + prepositional» means 'my hands are covered in (flour / water / soap)'.",
-            "«Здра́вствуйте! Откро́йте… Поднима́йтесь!» (formal «вы» with the courier on the phone) vs. «Возьми́ тру́бку! Встре́ть его́!» (informal «ты» between Katya and Max).",
+            "«Здра́вствуйте! Откро́йте… Поднима́йтесь!» (formal «вы» with the courier on the phone) vs. «Возьми́ тру́бку! Встреть его́!» (informal «ты» between Katya and Max).",
             "«У тебя́ звони́т телефо́н» — Russian says 'At you the phone is ringing' rather than 'Your phone is ringing'."
           ],
           "questions": [
@@ -1483,7 +1485,7 @@
             },
             {
               "kind": "read_meaning",
-              "text": "— Поднима́йтесь на тре́тий эта́ж. … — Ка́тя, курье́р уже́ идёт сюда́! Встре́ть его́ у две́ри!",
+              "text": "— Поднима́йтесь на тре́тий эта́ж. … — Ка́тя, курье́р уже́ идёт сюда́! Встреть его́ у две́ри!",
               "options": [
                 "Max uses polite plural 'vy' with both the courier and Katya.",
                 "Max uses the polite '-tes'' imperative ('Podnimaites'') with the courier on the phone, then immediately switches to the bare 'ty' imperative ('Vstret'') when speaking to Katya at home.",
@@ -1532,7 +1534,8 @@
             "отдадим": "we will give away (perfective future)",
             "тиме": "to Tima (dative)",
             "требовалось": "was required",
-            "доказать": "to prove"
+            "доказать": "to prove",
+            "только": "only"
           },
           "notice": [
             "«Нас то́лько дво́е» (There are only two of us) — collective numerals («дво́е», «тро́е») with genitive pronouns («нас», «вас») count how many people are in a group.",
@@ -2000,7 +2003,9 @@
             "крепкий": "strong (of coffee or tea)",
             "впереди": "ahead",
             "готово": "ready (сейчас будет готово: it'll be ready in a moment)",
-            "садись": "sit down! (imperative)"
+            "садись": "sit down! (imperative)",
+            "для": "for (+ genitive)",
+            "согласен": "agreed, I agree (short adjective, said by a man)"
           },
           "notice": [
             "«Свари́ть ко́фе в ту́рке» — in Russian, you don't just 'make' coffee; you 'boil/brew' it («вари́ть / свари́ть ко́фе»), often in a «ту́рка» (cezve).",
@@ -2076,7 +2081,8 @@
             "расстраивайся": "get upset ('ne rasstraivaisya': don't be upset!)",
             "давай": "hand me, give me",
             "тряпку": "cloth, rag (accusative object)",
-            "вытру": "I will wipe (perfective future)"
+            "вытру": "I will wipe (perfective future)",
+            "говоришь": "you say, you are saying (ты)"
           },
           "notice": [
             "«Молоко́ убежа́ло!» (Literally 'The milk ran away!') — the universal Russian idiom for milk or coffee boiling over on the stove.",
@@ -2123,7 +2129,7 @@
           "title": "Теоре́ма о чи́стой ра́ковине",
           "title_en": "The Theorem of the Clean Sink",
           "after_page": "u29-p4",
-          "text": "— Макс, в ра́ковине опя́ть лежи́т гря́зная ча́шка из-под ко́фе! Ты говори́шь, что не пил ко́фе днём?\n— Предполо́жим, что я его́ не пил. Пусть мно́жество люде́й в на́шей кварти́ре состои́т из двух элеме́нтов: ты и я.\n— Допу́стим. Но я пила́ то́лько зелёный чай, а кот Ти́ма ко́фе не пьёт!\n— Тогда́ ча́шка не принадлежи́т ни тебе́, ни коту́, отку́да сле́дует, что ко́фе пил я. Получа́ем противоре́чие с мое́й па́мятью!\n— Сле́довательно, посу́ду мо́ет а́втор теоре́мы. Что и тре́бовалось доказа́ть!",
+          "text": "— Макс, в ра́ковине опя́ть лежи́т гря́зная ча́шка и́з-под ко́фе! Ты говори́шь, что не пил ко́фе днём?\n— Предполо́жим, что я его́ не пил. Пусть мно́жество люде́й в на́шей кварти́ре состои́т из двух элеме́нтов: ты и я.\n— Допу́стим. Но я пила́ то́лько зелёный чай, а кот Ти́ма ко́фе не пьёт!\n— Тогда́ ча́шка не принадлежи́т ни тебе́, ни коту́, отку́да сле́дует, что ко́фе пил я. Получа́ем противоре́чие с мое́й па́мятью!\n— Сле́довательно, посу́ду мо́ет а́втор теоре́мы. Что и тре́бовалось доказа́ть!",
           "en": "— Max, there's a dirty coffee cup lying in the sink again! Do you say you didn't drink coffee this afternoon?\n— Suppose that I didn't drink it. Let the set of people in our apartment consist of two elements: you and me.\n— Granted. But I only drank green tea, and Tima the cat doesn't drink coffee!\n— Then the cup belongs neither to you nor to the cat, from which it follows that I drank the coffee. We obtain a contradiction with my memory!\n— Therefore, the author of the theorem washes the dishes. Quod erat demonstrandum!",
           "glosses": {
             "макс": "Max",
@@ -2154,10 +2160,11 @@
             "автор": "author",
             "теоремы": "of the theorem (genitive)",
             "требовалось": "was required",
-            "доказать": "to prove"
+            "доказать": "to prove",
+            "откуда": "from where; here: from which (отку́да сле́дует — from which it follows)"
           },
           "notice": [
-            "«Ча́шка из-под ко́фе» / «ба́нка из-под варе́нья» — the compound preposition «из-под + genitive» names a container by what used to be inside it ('a dirty coffee cup', 'an empty jam jar').",
+            "«Ча́шка и́з-под ко́фе» / «ба́нка и́з-под варе́нья» — the compound preposition «и́з-под + genitive» names a container by what used to be inside it ('a dirty coffee cup', 'an empty jam jar').",
             "«Допу́стим» (Granted / Suppose so) — used both in formal mathematics and in everyday skeptical conversation.",
             "«Посу́ду мо́ет а́втор теоре́мы» — object first, subject last, delivering the punchline on who washes the dishes."
           ],
@@ -2184,7 +2191,7 @@
             },
             {
               "kind": "read_meaning",
-              "text": "— В ра́ковине опя́ть лежи́т гря́зная ча́шка из-под ко́фе!",
+              "text": "— В ра́ковине опя́ть лежи́т гря́зная ча́шка и́з-под ко́фе!",
               "options": [
                 "The cup is hidden underneath the coffee machine.",
                 "The compound preposition 'iz-pod + genitive' ('chashka iz-pod kofe') specifically means an empty or dirty container that recently held coffee.",
@@ -2233,7 +2240,8 @@
             "давай": "let's!",
             "завтракать": "to have breakfast ('davai zavtrakat'': let's have breakfast)",
             "горячий": "hot (masculine)",
-            "сырники": "syrniki, Russian cottage-cheese pancakes"
+            "сырники": "syrniki, Russian cottage-cheese pancakes",
+            "для": "for (+ genitive)"
           },
           "notice": [
             "«Не мо́жет быть!» (It can't be! / No way!) — the classic exclamation of delighted disbelief.",
