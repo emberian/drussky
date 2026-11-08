@@ -193,14 +193,18 @@ struct Paradigms: Sendable {
         return cell
     }
 
-    /// "genitive singular", "она́", "feminine": what a cue asks for, in words.
+    /// "genitive singular", "the ты form", "past · она́": what a cue asks for, in words.
     func cueLabel(table: Table, cell: String) -> String {
         let id = Self.cellID(inTable: cell)
         guard let c = table.cell(id) else { return cell }
         let row = table.rows.first { $0.id == c.row }?.label ?? c.row
         let col = table.cols.first { $0.id == c.col }?.label ?? c.col
-        if table.cols.count <= 1 { return row }
-        return "\(row) \(col)"
+        switch table.id {
+        case "past": return "past · \(row)"
+        case "imp": return "imperative · \(row)"
+        case "conj1", "conj2", "irregular": return "the \(row) form"
+        default: return table.cols.count <= 1 ? row : "\(row) \(col)"
+        }
     }
 
     /// Everything the course can ask about a word: the cells with a form, in table order.
