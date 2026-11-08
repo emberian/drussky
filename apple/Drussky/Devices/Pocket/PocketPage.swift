@@ -68,7 +68,7 @@ enum PocketPage {
         guard parts[0] == "word" else { return nil }
         let can = book.reviewModalities(for: review.id)
         if book.word(parts[1]) == nil {
-            guard hasAudio(parts[1]) else { return nil }
+            guard hasAudio(parts[1]), !RussianText.isFunctionWord(parts[1]) else { return nil }
             var ex = Exercise(kind: .readAloud); ex.text = parts[1]; ex.reviewKey = review.id
             return ex
         }

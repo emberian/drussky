@@ -202,6 +202,20 @@ final class ListeningTests: XCTestCase {
         XCTAssertEqual(again.page(id: book.page!.id)?.exercises.first?.listening?.kind, .questionOrStatement)
     }
 
+    /// "Play it first; then choose." is said once on a page of cards: under the first, and not
+    /// at all once a card is answered (Views/ListeningView.swift).
+    func testThePlayFirstHintIsSaidOncePerPage() throws {
+        let book = try freshBook()
+        let set = try XCTUnwrap(Listening.shared.sets.first)
+        book.open(Shelves.item(set, number: 1))
+        var page = try XCTUnwrap(book.page)
+        XCTAssertEqual(page.exercises.count, 6)
+        XCTAssertEqual(page.exercises.indices.filter { ListeningExercise.carriesPlayFirstHint(page, index: $0) }, [0])
+        book.record(page: book.currentPage, exercise: 0) { $0.chosen = 0; $0.attempts = 1; $0.status = .missed }
+        page = try XCTUnwrap(book.page)
+        XCTAssertTrue(page.exercises.indices.allSatisfy { !ListeningExercise.carriesPlayFirstHint(page, index: $0) }, "answered once: the page needs no hint")
+    }
+
     func testARightAnswerIsHearPickEvidenceOnTheHeardWords() throws {
         let book = try freshBook()
         let pick = try item(.pickObject)  // «Дай сыр.» → сыр

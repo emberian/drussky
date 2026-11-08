@@ -608,4 +608,22 @@ final class DayTests: XCTestCase {
         XCTAssertEqual(again.settings.dailyReviewCap, 30)
         XCTAssertEqual(again.day.lastOpeningKind, "welcome-back")
     }
+
+    /// The sharp hour's "one more new word" is a word, never a bare preposition or particle
+    /// («с»), however early the frontier offers one.
+    func testTheSharpHourWordIsNeverAFunctionWord() throws {
+        var offered = 0
+        for n in [1, 2, 3, 5, 8, 12] {
+            let book = studied(n)
+            book.day.sharpAt = book.now()
+            let frontier = book.knowledge.model.frontier(book.knowledge.graph, at: book.now(), kinds: [.lexeme], limit: 12)
+            if frontier.contains(where: { book.targets["word:\($0.key)"] == nil && RussianText.isFunctionWord($0.key) }) { offered += 1 }
+            for ex in book.extraNewItem(excluding: []) {
+                let text = try XCTUnwrap(ex.text)
+                XCTAssertEqual(ex.kind, .copy)
+                XCTAssertFalse(RussianText.isFunctionWord(text), "after \(n) pages the sharp hour offered «\(text)»")
+            }
+        }
+        XCTAssertGreaterThan(offered, 0, "the frontier never offered a function word, so nothing was refused")
+    }
 }
