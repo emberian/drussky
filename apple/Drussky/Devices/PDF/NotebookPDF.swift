@@ -168,6 +168,14 @@ enum NotebookPDF {
             if let prompt = ex.prompt { add(text(prompt, font: serif(12, .semibold), color: .text), after: 4) }
         case .talk:
             add(text(TalkConversation.describe(ex, r), font: serif(11), color: .text), after: 4)
+        case .paradigmFill:
+            add(text("«\(ex.word ?? "")» · \((ex.cells ?? []).joined(separator: ", "))", font: serif(13), color: .text))
+        case .transform:
+            add(text("\(ex.before ?? "")____\(ex.after ?? "")  ·  «\(ex.word ?? "")» → \(ex.cue ?? "")", font: serif(14, .medium), color: .text))
+            if let hint = ex.hint { add(text(hint, font: serif(10, .regular, italic: true), color: .muted)) }
+        case .cueSort:
+            add(text((ex.items ?? []).map { "«\($0.text)»" }.joined(separator: "  "), font: serif(12.5), color: .text))
+            add(text((ex.options ?? []).joined(separator: " / "), font: serif(10), color: .muted))
         case .meet, .dictation:
             break
         }
@@ -374,6 +382,9 @@ enum NotebookPDF {
         case .buildWord: "Build «\(ex.answerText ?? "")» (\(ex.en ?? ""))"
         case .familyGuess: "Guess «\(ex.word ?? "")» from its root \(ex.root ?? "")"
         case .talk: "Разгово́р · Talk"
+        case .paradigmFill: "Fill the table"
+        case .transform: "Write the form"
+        case .cueSort: "Sort by pattern"
         }
     }
 

@@ -672,7 +672,7 @@ LEXICON += course_read.LEXICON
 import course_grammar  # noqa: E402
 for _uid, _page in course_grammar.pages(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm)):
     next(u for u in U if u[0] == _uid)[3].append(_page)
-LEXICON += course_grammar.LEXICON
+LEXICON += [w for w in course_grammar.LEXICON if w["ru"] not in {x["ru"] for x in LEXICON}]  # headwords units 24–30 may already teach
 
 
 # Course order. Page ids are written into learners' notebooks (sourceID), and the app walks
