@@ -145,6 +145,8 @@ struct Settings: Codable, Sendable, Equatable {
 @Observable
 final class Book {
     let course: Course
+    /// Glosses the course gives to more than one word, once (Book+Review `askable`).
+    let ambiguousGlosses: Set<String>
     private(set) var pages: [BookPage] = []
     /// Everything the learner should be able to recall ("letter:Ж", "word:кот") and when they
     /// met it. When each comes back is LearningCore's FSRS over the evidence log, nothing here.
@@ -186,6 +188,11 @@ final class Book {
 
     let store: BookStore
     private var saveTask: Task<Void, Never>?
+    /// Page id → when it was first worked (its earliest event), found once per page (Book+Day).
+    @ObservationIgnored var pageFirstEvent: [String: Date] = [:]
+    /// Inside `batchingSaves`: `saveNow` only notes that a write is owed.
+    @ObservationIgnored private var deferringSaves = false
+    @ObservationIgnored private var saveOwed = false
     var now: () -> Date = Date.init
     /// Knowledge components, evidence log (events.jsonl) and per-modality memory (Knowledge/).
     let knowledge: KnowledgeTracker
@@ -211,6 +218,7 @@ final class Book {
     /// `now` is the book's clock (tests run it ahead); opening reads it for the day's shape.
     init(course: Course, store: BookStore, now: @escaping () -> Date = Date.init) {
         self.course = course
+        ambiguousGlosses = Self.ambiguousGlosses(in: course.lexicon)
         self.store = store
         self.now = now
         var saved: BookState?
@@ -739,9 +747,24 @@ final class Book {
         }
     }
 
+    /// Runs `body` with the notebook written once at its end instead of after every finished
+    /// exercise (QA completing a whole page at a go, where each answer otherwise re-encodes the
+    /// whole book). Evidence is still logged per exercise, after its result is in `pages`; only
+    /// the file writes are coalesced.
+    func batchingSaves<T>(_ body: () throws -> T) rethrows -> T {
+        if deferringSaves { return try body() }
+        deferringSaves = true
+        defer {
+            deferringSaves = false
+            if saveOwed { saveOwed = false; saveNow() }
+        }
+        return try body()
+    }
+
     func saveNow() {
         // A notebook that exists but couldn't be opened is never written over.
         guard problem == nil, !closed else { return }
+        if deferringSaves { saveOwed = true; return }
         saveTask?.cancel()
         do {
             try store.saveState(.init(pages: pages, memories: legacyMemories, courseCursor: courseCursor,

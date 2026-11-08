@@ -395,8 +395,13 @@ extension Book {
                       modality: .constructionChoice, drawn: drawn, due: drawn.addingTimeInterval(Double(days) * 86_400))
             }
         }
-        let started = knowledge.model.events.first { $0.item.hasPrefix(pageID + "#") }?.t
-        let estimate = Fatigue.estimate(events: knowledge.model.events, now: now(), pageStarted: started)
+        // Each answer estimates fatigue; neither the page's first event nor the session may cost a
+        // pass over the whole log every time.
+        if pageFirstEvent[pageID] == nil, let t = knowledge.model.events.first(where: { $0.item.hasPrefix(pageID + "#") })?.t {
+            pageFirstEvent[pageID] = t
+        }
+        let estimate = Fatigue.estimate(events: knowledge.model.events, now: now(), pageStarted: pageFirstEvent[pageID],
+                                        timeOrdered: knowledge.model.eventsAreTimeOrdered)
         day.fatigue = estimate
         switch estimate.level {
         case .tired where p == currentPage && pages[p].lightened == nil && day.shortened?[pageID] == nil && !lightening(of: pages[p]).isEmpty:

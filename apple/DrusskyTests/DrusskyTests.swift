@@ -72,10 +72,10 @@ final class DrusskyTests: XCTestCase {
     /// Vision reads Cyrillic ink. Synthetic ink is font outlines, so this is a lower bound on
     /// the pipeline working, not a measure of accuracy on real handwriting.
     func testInkReaderReadsCursiveCyrillic() async throws {
+        let words = ["кот", "мама", "окно", "она", "книга", "спасибо", "молоко", "Это кот", "где", "читаю", "хорошо", "звезда"]
+        let readings = await InkReader.readAll(words.map { .init(drawing: SyntheticInk.drawing(for: $0, height: 132, cursive: true), target: $0) })
         var hits: [String] = [], misses: [String] = []
-        for word in ["кот", "мама", "окно", "она", "книга", "спасибо", "молоко", "Это кот", "где", "читаю", "хорошо", "звезда"] {
-            let drawing = SyntheticInk.drawing(for: word, height: 132, cursive: true)
-            let reading = await InkReader.read(drawing, target: word)
+        for (word, reading) in zip(words, readings) {
             if reading?.matches == true { hits.append(word) } else { misses.append("\(word)→\(reading?.candidates ?? [])") }
         }
         print("CURSIVE hits:", hits.count, hits, "misses:", misses)
@@ -83,11 +83,10 @@ final class DrusskyTests: XCTestCase {
     }
 
     func testInkReaderReadsSyntheticCyrillic() async throws {
-        var hits: [String] = []
-        var misses: [String] = []
-        for word in ["кот", "мама", "окно", "она", "книга", "Это кот", "спасибо", "Я", "Ж", "ы", "щ", "Ф", "и"] {
-            let drawing = SyntheticInk.drawing(for: word, height: 132)
-            let reading = await InkReader.read(drawing, target: word)
+        let words = ["кот", "мама", "окно", "она", "книга", "Это кот", "спасибо", "Я", "Ж", "ы", "щ", "Ф", "и"]
+        let readings = await InkReader.readAll(words.map { .init(drawing: SyntheticInk.drawing(for: $0, height: 132), target: $0) })
+        var hits: [String] = [], misses: [String] = []
+        for (word, reading) in zip(words, readings) {
             if reading?.matches == true { hits.append(word) } else { misses.append("\(word)→\(reading?.best ?? "nil") \(reading?.candidates ?? [])") }
         }
         print("INK hits:", hits, "misses:", misses)
@@ -193,29 +192,6 @@ final class DrusskyTests: XCTestCase {
 
     /// Single-line pen strokes (Hershey Cyrillic) with per-variant slant, scale, drift and
     /// wobble: closer to a hand than font outlines. 52 items × 3 variants.
-    func testInkReaderReadsPenStrokes() async throws {
-        let url = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "hershey-ink", withExtension: "json"))
-        let fixture = try JSONDecoder().decode([String: [[[[Double]]]]].self, from: Data(contentsOf: url))
-        let ink = PKInk(.pen, color: .black)
-        var hits = 0, total = 0
-        var misses: [String] = []
-        for (target, variants) in fixture.sorted(by: { $0.key < $1.key }) {
-            for strokes in variants {
-                let pk = strokes.map { pts in
-                    PKStroke(ink: ink, path: PKStrokePath(controlPoints: pts.enumerated().map { i, p in
-                        PKStrokePoint(location: CGPoint(x: p[0], y: p[1]), timeOffset: Double(i) * 0.01,
-                                      size: CGSize(width: 3.5, height: 3.5), opacity: 1, force: 1, azimuth: 0, altitude: .pi / 2)
-                    }, creationDate: Date()))
-                }
-                let reading = await InkReader.read(PKDrawing(strokes: pk), target: target)
-                total += 1
-                if reading?.matches == true { hits += 1 } else { misses.append("\(target)→\(reading?.best ?? "nil")") }
-            }
-        }
-        print("PEN hits: \(hits)/\(total) misses:", misses)
-        XCTAssertGreaterThanOrEqual(Double(hits) / Double(total), 0.75, "misses: \(misses)")
-    }
-
     func testPassageDecodesAndStripsPunctuation() throws {
         let json = #"{"kind":"passage","text":"Робо́т ви́дел звезду́. «Что э́то?»","en":"The robot saw a star.","glosses":{"ви́дел":"saw","звезду":"star (object)"}}"#
         let ex = try JSONDecoder().decode(Exercise.self, from: Data(json.utf8))

@@ -4,8 +4,36 @@ import Foundation
 struct Course: Codable, Sendable {
     var version: Int
     var letters: [Letter]
-    var lexicon: [Word]
+    var lexicon: [Word] { didSet { keyedLexicon = Self.keyed(lexicon); wordsByKey = Self.index(keyedLexicon) } }
     var units: [Unit]
+    /// The lexicon with each entry's `RussianText.key`, in order, made once: `word(_:)` is on every
+    /// path that names a memory, and keying all 828 entries per call was most of the cost of
+    /// building a page of reviews (and of the review distractors' fallback pool).
+    private(set) var keyedLexicon: [(key: String, word: Word)]
+    /// Key → the first entry with that key (as `lexicon.first` was).
+    private var wordsByKey: [String: Word]
+
+    private enum CodingKeys: String, CodingKey { case version, letters, lexicon, units }
+
+    init(version: Int, letters: [Letter], lexicon: [Word], units: [Unit]) {
+        self.version = version
+        self.letters = letters
+        self.lexicon = lexicon
+        self.units = units
+        keyedLexicon = Self.keyed(lexicon)
+        wordsByKey = Self.index(keyedLexicon)
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(version: try c.decode(Int.self, forKey: .version), letters: try c.decode([Letter].self, forKey: .letters),
+                  lexicon: try c.decode([Word].self, forKey: .lexicon), units: try c.decode([Unit].self, forKey: .units))
+    }
+
+    private static func keyed(_ words: [Word]) -> [(key: String, word: Word)] { words.map { (RussianText.key($0.ru), $0) } }
+    private static func index(_ keyed: [(key: String, word: Word)]) -> [String: Word] {
+        Dictionary(keyed, uniquingKeysWith: { first, _ in first })
+    }
 
     struct Letter: Codable, Sendable, Hashable, Identifiable {
         var upper: String
@@ -50,10 +78,7 @@ struct Course: Codable, Sendable {
         letters.first { $0.upper == upper || $0.lower == upper }
     }
 
-    func word(_ ru: String) -> Word? {
-        let key = RussianText.key(ru)
-        return lexicon.first { RussianText.key($0.ru) == key }
-    }
+    func word(_ ru: String) -> Word? { wordsByKey[RussianText.key(ru)] }
 
     /// Flattened, ordered list of authored pages with their unit.
     var pageSequence: [(unit: Unit, page: Page)] {

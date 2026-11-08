@@ -117,6 +117,9 @@ public struct KnowledgeModel: Sendable {
     public static let primedThreshold = 0.7
 
     public private(set) var events: [LearningEvent] = []
+    /// `events` are in time order (as applied; a backfilled outcome older than its neighbours
+    /// clears this). Readers of the session's tail (`Fatigue`) may then stop at the first gap.
+    public private(set) var eventsAreTimeOrdered = true
     public private(set) var traces: [MemoryKey: MemoryTrace] = [:]
     public private(set) var confusions: [Pair: ConfusionStat] = [:]
     private var transferCounts: [ModalityPair: TransferStat] = [:]
@@ -140,6 +143,7 @@ public struct KnowledgeModel: Sendable {
     public mutating func apply(_ e: LearningEvent) {
         guard seenIDs.insert(e.id).inserted else { return }
         let index = events.count
+        if let last = events.last, e.t < last.t { eventsAreTimeOrdered = false }
         events.append(e)
         for c in Set(e.components) { byComponent[c, default: []].append(index) }
         for x in e.confusions ?? [] {
@@ -311,10 +315,9 @@ public struct KnowledgeModel: Sendable {
             let pre = graph.prerequisites(of: c.id)
             return !pre.isEmpty && pre.allSatisfy { (strength($0, at: date) ?? 0) >= ready }
         }
-        return unlocked.sorted {
-            let a = ($0.order, -graph.dependents(of: $0.id).count), b = ($1.order, -graph.dependents(of: $1.id).count)
-            return a != b ? a < b : $0.id < $1.id
-        }.prefix(limit).map(\.id)
+        // Sort keys once per candidate, not per comparison: `dependents(of:)` walks the edges.
+        let keyed = unlocked.map { (id: $0.id, key: ($0.order, -graph.dependents(of: $0.id).count)) }
+        return keyed.sorted { $0.key != $1.key ? $0.key < $1.key : $0.id < $1.id }.prefix(limit).map(\.id)
     }
 
     /// Practised strongly in one modality, weakly (or never) in another the learner has used.

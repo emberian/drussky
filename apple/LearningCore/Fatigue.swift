@@ -57,8 +57,8 @@ public enum Fatigue {
     ///   long     (minutes − 15) / 25          (40 minutes → 1)
     /// With fewer than `policy.minItems` outcomes only `long` counts.
     public static func estimate(events: [LearningEvent], now: Date, pageStarted: Date? = nil,
-                                policy: FatiguePolicy = FatiguePolicy()) -> FatigueEstimate {
-        let session = sessionEvents(events, now: now, policy: policy)
+                                policy: FatiguePolicy = FatiguePolicy(), timeOrdered: Bool = false) -> FatigueEstimate {
+        let session = sessionEvents(events, now: now, policy: policy, timeOrdered: timeOrdered)
         let outcomes = completions(in: session)
         let start = pageStarted ?? session.first?.t ?? now
         let minutes = max(0, now.timeIntervalSince(start) / 60)
@@ -113,7 +113,19 @@ public enum Fatigue {
 
     /// The events of the session that ends at the last event before `now` (if that was less than
     /// a session gap ago), in time order; events at the same instant keep their logged order.
-    public static func sessionEvents(_ events: [LearningEvent], now: Date, policy: FatiguePolicy = FatiguePolicy()) -> [LearningEvent] {
+    /// With `timeOrdered` the caller vouches that `events` already are in time order
+    /// (`KnowledgeModel.eventsAreTimeOrdered`): then only the session's own events are read, from
+    /// the end, instead of the whole log being sorted on every answer.
+    public static func sessionEvents(_ events: [LearningEvent], now: Date, policy: FatiguePolicy = FatiguePolicy(),
+                                     timeOrdered: Bool = false) -> [LearningEvent] {
+        if timeOrdered {
+            var end = events.count
+            while end > 0, events[end - 1].t > now { end -= 1 }
+            guard end > 0, now.timeIntervalSince(events[end - 1].t) < policy.sessionGap else { return [] }
+            var start = end - 1
+            while start > 0, events[start].t.timeIntervalSince(events[start - 1].t) < policy.sessionGap { start -= 1 }
+            return Array(events[start..<end])
+        }
         let past = events.enumerated().filter { $0.element.t <= now }
             .sorted { ($0.element.t, $0.offset) < ($1.element.t, $1.offset) }.map(\.element)
         guard let last = past.last, now.timeIntervalSince(last.t) < policy.sessionGap else { return [] }

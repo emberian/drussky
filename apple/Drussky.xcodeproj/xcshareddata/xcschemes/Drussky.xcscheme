@@ -80,6 +80,17 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "17F2F41148576B09E1B98697"
+               BuildableName = "DrusskySlowTests.xctest"
+               BlueprintName = "DrusskySlowTests"
+               ReferencedContainer = "container:Drussky.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "85DF0D55B3936D0C44F99785"
                BuildableName = "DrusskyUITests.xctest"
                BlueprintName = "DrusskyUITests"

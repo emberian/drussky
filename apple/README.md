@@ -381,9 +381,15 @@ then `.local/drussky-librivox/venv/bin/python apple/scripts/narration.py align <
 ```sh
 cd apple
 xcodegen generate
-# simulator
+# simulator tests: the fast loop (DrusskyTests + LearningCoreTests in one xcodebuild, ~70 s of test
+# time), the slow target, or all three unit-test targets; DRUSSKY_SIM picks the simulator
+scripts/test.sh            # fast
+scripts/test.sh slow       # DrusskySlowTests: Vision over hundreds of ink samples (~80 s), when ink or recognition code changes
+scripts/test.sh all
+# the same by hand (-collect-test-diagnostics never: otherwise a run can end with ten minutes of `simctl diagnose`)
 xcodebuild -project Drussky.xcodeproj -scheme Drussky \
-  -destination 'platform=iOS Simulator,name=Drussky iPad 13' -derivedDataPath .build/dd test
+  -destination 'platform=iOS Simulator,name=Drussky iPad 13' -derivedDataPath .build/dd \
+  -collect-test-diagnostics never -only-testing:DrusskyTests -only-testing:LearningCoreTests test
 # ember's iPad (team 992772WV7K, automatic signing). `Personal` is Release plus PrivatePack
 # (personal-study audio); plain Release and archives never contain PrivatePack.
 xcodebuild -project Drussky.xcodeproj -scheme Drussky -configuration Personal \
@@ -396,14 +402,17 @@ cp -R .build/mac/Build/Products/Release-maccatalyst/Drussky.app ~/Applications/
 ```
 
 Tests: `DrusskyTests` covers text normalization, course integrity, audio coverage (every
-string the app or its reviews can speak), handwriting recognition on synthetic print and cursive
-ink and on 156 single-line pen-stroke samples with hand-like slant and wobble (on the iPad
-Pro M4: pen 155/156, cursive 12/12, print 12/13), scheduling and persistence, notebook-recovery and redo
+string the app or its reviews can speak), handwriting recognition on a dozen words of synthetic
+print and cursive ink (cursive 12/12, print 12/13), scheduling and persistence, notebook-recovery and redo
 regressions, speech recognition on recorded Russian (runs once speech recognition is
 allowed), self-judgement evidence (verdict × reader → grade and confidence), hooks (parsing,
 storage, fading) and fluency (words a minute from onsets, strokes a second from ink, the metric
 log, the cover line), and live tutor calls — one answer, one diary correction, one hook and a
-small hook batch (run when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
+small hook batch (run when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set). `DrusskySlowTests` holds the
+recognition measurements that take as long as they have samples: 156 single-line pen-stroke
+samples with hand-like slant and wobble (on the iPad Pro M4: pen 155/156; simulator 153/156) and every
+bundled cursive hand × ten words with and without the sheared pass. Vision runs one recognition at a time
+whatever the concurrency, 0.15–0.5 s each on the simulator, so these are not made fast, only kept apart.
 `DrusskyUITests` writes on the paper with real touch strokes, completes the exercise, and
 checks it survives a relaunch.
 

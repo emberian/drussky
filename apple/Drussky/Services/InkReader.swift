@@ -30,7 +30,7 @@ enum InkReader {
     /// Recognizers differ between devices and OS versions, so several presentations are tried
     /// in turn and the first that reads as the answer wins; if none does, the most common
     /// reading is reported.
-    static func read(_ drawing: PKDrawing, target: String, subjectDrop: Bool = false) async -> Reading? {
+    static func read(_ drawing: PKDrawing, target: String, subjectDrop: Bool = false, cursivePass: Bool = InkReader.cursivePass) async -> Reading? {
         guard !drawing.strokes.isEmpty else { return nil }
         let single = RussianText.comparable(target).count == 1
         var passes: [Pass] = single
@@ -60,6 +60,40 @@ enum InkReader {
         }
         let best = all.first ?? ""
         return Reading(best: single ? String(best.prefix(1)) : best, candidates: all, matches: false, confidence: firstConfidence)
+    }
+
+    /// One drawing to read against its target (`readAll`).
+    struct Sample: Sendable {
+        var drawing: PKDrawing
+        var target: String
+        var cursivePass: Bool = InkReader.cursivePass
+    }
+
+    /// Reads many samples with up to `width` recognitions in flight, results in the samples' order.
+    /// Each `read` is independent (Vision takes one image per request), but Vision may still run
+    /// them one at a time: on the iOS simulator ten concurrent recognitions took exactly as long
+    /// as ten in a row (2026-11-08), so there a batch costs its samples × passes whatever `width`.
+    /// The tests over synthetic ink read this way; it keeps the per-sample pass choice with the
+    /// sample instead of in the `cursivePass` global.
+    static func readAll(_ samples: [Sample], width: Int = min(8, ProcessInfo.processInfo.activeProcessorCount)) async -> [Reading?] {
+        var results = [Reading?](repeating: nil, count: samples.count)
+        await withTaskGroup(of: (Int, Reading?).self) { group in
+            var next = 0
+            while next < min(max(1, width), samples.count) {
+                let i = next, s = samples[i]
+                group.addTask { (i, await read(s.drawing, target: s.target, cursivePass: s.cursivePass)) }
+                next += 1
+            }
+            for await (i, reading) in group {
+                results[i] = reading
+                if next < samples.count {
+                    let j = next, s = samples[j]
+                    group.addTask { (j, await read(s.drawing, target: s.target, cursivePass: s.cursivePass)) }
+                    next += 1
+                }
+            }
+        }
+        return results
     }
 
     /// For tiled single letters: most of what was read is the target letter.

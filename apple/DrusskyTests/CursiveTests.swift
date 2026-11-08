@@ -6,7 +6,8 @@ import XCTest
 
 /// Russian cursive: the stroke data and its joins, the written-through layout, the cursive coach,
 /// the read_handwriting exercise (decoding, rendering, look-alikes, the page from known words),
-/// the bundled handwriting fonts and their licences, and recognition on synthetic cursive.
+/// and the bundled handwriting fonts and their licences (recognition on synthetic cursive:
+/// DrusskySlowTests/InkReaderSlowTests).
 @MainActor
 final class CursiveTests: XCTestCase {
     private var m: CursiveModels!
@@ -364,54 +365,5 @@ final class CursiveTests: XCTestCase {
             XCTAssertTrue(CursiveFonts.hasCyrillic(e.postscript), "\(e.family) has Cyrillic")
         }
         XCTAssertEqual(CursiveFonts.names.count, 5)
-    }
-
-    // MARK: Recognition
-
-    /// Synthetic cursive from each bundled hand and from the stroke models, read by Vision with
-    /// the normal passes and with the upright-sheared pass added. A measurement first: the
-    /// assertion is only that the pipeline reads some cursive at all.
-    func testInkReaderOnCursiveHands() async throws {
-        CursiveFonts.register()
-        let words = ["кот", "мама", "окно", "она", "книга", "спасибо", "молоко", "где", "хорошо", "звезда"]
-        var report: [String] = []
-        var strokesHits = (off: 0, on: 0), fontHits = (off: 0, on: 0), total = 0
-        for pass in [false, true] {
-            InkReader.cursivePass = pass
-            defer { InkReader.cursivePass = false }
-            for name in CursiveFonts.names {
-                var hits = 0
-                for w in words {
-                    let d = SyntheticInk.drawing(for: w, height: 132, wobble: 1, font: name)
-                    if await InkReader.read(d, target: w)?.matches == true { hits += 1 }
-                }
-                report.append("\(name) pass=\(pass): \(hits)/\(words.count)")
-                if pass { fontHits.on += hits } else { fontHits.off += hits; total += words.count }
-            }
-            var hits = 0
-            for (i, w) in words.enumerated() {
-                let d = strokeInk(w, slant: CGFloat(i % 3) * 0.12, jitter: 0.6)
-                if await InkReader.read(d, target: w)?.matches == true { hits += 1 }
-            }
-            report.append("stroke models pass=\(pass): \(hits)/\(words.count)")
-            if pass { strokesHits.on = hits } else { strokesHits.off = hits }
-        }
-        print("CURSIVE-HANDS", report.joined(separator: " | "), "fonts total \(total)")
-        XCTAssertGreaterThan(fontHits.off + strokesHits.off, 0)
-    }
-
-    /// The models written through as pen strokes, slanted a little more and jittered.
-    private func strokeInk(_ text: String, slant: CGFloat, jitter: CGFloat) -> PKDrawing {
-        let ink = PKInk(.pen, color: .black)
-        var n = 0
-        let strokes = CursiveLayout.strokes(text, in: m, x0: 16).map { pts in
-            PKStroke(ink: ink, path: PKStrokePath(controlPoints: pts.enumerated().map { i, p in
-                n += 1
-                let x = p.x + (m.lines.baseline - p.y) * slant + sin(Double(n) * 0.8) * jitter
-                return PKStrokePoint(location: CGPoint(x: x, y: p.y + cos(Double(n) * 0.6) * jitter), timeOffset: Double(i) * 0.01,
-                                     size: CGSize(width: 3.5, height: 3.5), opacity: 1, force: 1, azimuth: 0, altitude: .pi / 2)
-            }, creationDate: Date()))
-        }
-        return PKDrawing(strokes: strokes)
     }
 }

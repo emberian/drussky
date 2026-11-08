@@ -100,11 +100,28 @@ targets:
       # The on-device tutor benchmark's cases (research/ONDEVICE_TUTOR.md), run by OnDeviceTutorTests where the model exists.
       - path: ../research/ondevice/cases.json
         buildPhase: resources
+        # Pinned to this group: left to createIntermediateGroups, xcodegen would nest it under a
+        # group named after the checkout directory, so the pbxproj differed per worktree.
+        group: DrusskyTests
     dependencies:
       - target: Drussky
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: software.ember.drussky.tests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Drussky.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Drussky"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+  # Vision over hundreds of ink samples (InkReaderSlowTests): minutes on the simulator, apart from
+  # the fast loop. scripts/test.sh slow.
+  DrusskySlowTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [DrusskySlowTests]
+    dependencies:
+      - target: Drussky
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: software.ember.drussky.slowtests
         GENERATE_INFOPLIST_FILE: YES
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Drussky.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Drussky"
         BUNDLE_LOADER: "$(TEST_HOST)"
@@ -127,4 +144,4 @@ schemes:
         Drussky: all
         LearningCore: all
     test:
-      targets: [LearningCoreTests, DrusskyTests, DrusskyUITests]
+      targets: [LearningCoreTests, DrusskyTests, DrusskySlowTests, DrusskyUITests]

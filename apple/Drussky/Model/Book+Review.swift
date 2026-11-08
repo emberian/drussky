@@ -61,9 +61,9 @@ extension Book {
     private func sayable(_ letter: Course.Letter) -> Bool { RussianText.key(letter.say).hasPrefix(letter.lower) }
 
     /// English glosses shared by more than one entry can't be asked as "write it in Russian".
-    private var ambiguousGlosses: Set<String> {
+    static func ambiguousGlosses(in lexicon: [Course.Word]) -> Set<String> {
         var seen: [String: Int] = [:]
-        for w in course.lexicon { seen[w.en.lowercased(), default: 0] += 1 }
+        for w in lexicon { seen[w.en.lowercased(), default: 0] += 1 }
         return Set(seen.filter { $0.value > 1 }.keys)
     }
 
@@ -160,10 +160,19 @@ extension Book {
         let own = RussianText.key(word.ru)
         let met = targets.keys.filter { $0.hasPrefix("word:") }.map { String($0.dropFirst(5)) }
         var pool = met.compactMap { self.word($0) }.filter { RussianText.key($0.ru) != own }
-        if pool.count < count { pool += course.lexicon.filter { RussianText.key($0.ru) != own } }
-        let sorted = pool.sorted { abs($0.ru.count - word.ru.count) < abs($1.ru.count - word.ru.count) }
+        if pool.count < count { pool += course.keyedLexicon.filter { $0.key != own }.map(\.word) }  // keys made once, not per call
+        // The count × 3 closest in length (earlier entries first among equals), then a few at random.
+        let length = word.ru.count
+        var closest: [(word: Course.Word, distance: Int)] = []
+        for w in pool {
+            let d = abs(w.ru.count - length)
+            guard closest.count < count * 3 || d < closest[closest.count - 1].distance else { continue }
+            let at = closest.firstIndex { $0.distance > d } ?? closest.count
+            closest.insert((w, d), at: at)
+            if closest.count > count * 3 { closest.removeLast() }
+        }
         var out: [String] = []
-        for w in sorted.prefix(count * 3).shuffled() where !out.contains(w.ru) && out.count < count { out.append(w.ru) }
+        for w in closest.map(\.word).shuffled() where !out.contains(w.ru) && out.count < count { out.append(w.ru) }
         return out
     }
 }

@@ -106,44 +106,47 @@ enum QA {
 
     static func complete(_ book: Book, page pageIndex: Int, upTo limit: Int) {
         let page = book.pages[pageIndex]
-        for (i, ex) in page.exercises.enumerated() where i < limit {
-            if ex.kind.isWriting || (ex.kind == .readHandwriting && ex.options == nil), let target = ex.kind == .meet ? ex.letter.map({ l in
-                book.course.letter(l).map { "\($0.upper) \($0.lower)" } ?? l }) : ex.target {
-                let drawing = SyntheticInk.drawing(for: RussianText.unstressed(target), height: 132, wobble: Double(i))
-                try? drawing.dataRepresentation().write(to: book.inkURL(page: page, exercise: i))
-            }
-            // Now and then a wrong pick first, as a learner would.
-            // -qa-misses: choices missed twice (the correction screen).
-            if has("-qa-misses"), [.listenPick, .readMeaning].contains(ex.kind), let options = ex.options,
-               let wrong = options.indices.first(where: { ex.kind == .listenPick ? options[$0] != ex.say : $0 != ex.answerIndex }) {
-                book.record(page: pageIndex, exercise: i) { r in r.chosen = wrong; r.attempts += 1 }
-                book.record(page: pageIndex, exercise: i) { r in r.chosen = wrong; r.attempts += 1; r.status = .missed }
-                continue
-            }
-            if ex.kind == .listenPick, i % 4 == 1, let options = ex.options, let wrong = options.firstIndex(where: { $0 != ex.say }) {
-                book.record(page: pageIndex, exercise: i) { r in r.chosen = wrong; r.attempts += 1 }
-            }
-            book.record(page: pageIndex, exercise: i) { r in
-                r.attempts += 1
-                switch ex.kind {
-                case .listenPick: r.chosen = ex.options?.firstIndex(of: ex.say ?? ""); r.status = .correct
-                case .readMeaning, .familyGuess, .constructionChoice, .structure: r.chosen = ex.answerIndex; r.status = .correct
-                case .readHandwriting:
-                    r.chosen = ex.options?.firstIndex { RussianText.key($0) == RussianText.key(ex.text ?? "") }
-                    r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
-                case .buildWord: r.recognized = BuildWordCheck.assemble(ex.parts ?? []); r.status = .correct
-                case .paradigmFill: r.recognized = (ex.cells ?? []).map { "\($0)=✓\(ex.forms?[$0] ?? "")" }.joined(separator: ";"); r.status = .correct
-                case .cueSort: r.recognized = (ex.items ?? []).indices.map { "\($0):\(ex.items![$0].answer)" }.joined(separator: ","); r.status = .correct
-                case .readAloud: r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
-                case .listening:  // every decision right, as the card records them (Model/Listening.swift)
-                    if let item = ex.listening {
-                        if item.kind == .message { r.recognized = (0..<item.decisionCount).map { String(item.answer($0) ?? 0) }.joined(separator: ",") }
-                        else { r.chosen = item.answer }
+        // One notebook write for the page (Book.batchingSaves), not one per answer.
+        book.batchingSaves {
+            for (i, ex) in page.exercises.enumerated() where i < limit {
+                if ex.kind.isWriting || (ex.kind == .readHandwriting && ex.options == nil), let target = ex.kind == .meet ? ex.letter.map({ l in
+                    book.course.letter(l).map { "\($0.upper) \($0.lower)" } ?? l }) : ex.target {
+                    let drawing = SyntheticInk.drawing(for: RussianText.unstressed(target), height: 132, wobble: Double(i))
+                    try? drawing.dataRepresentation().write(to: book.inkURL(page: page, exercise: i))
+                }
+                // Now and then a wrong pick first, as a learner would.
+                // -qa-misses: choices missed twice (the correction screen).
+                if has("-qa-misses"), [.listenPick, .readMeaning].contains(ex.kind), let options = ex.options,
+                   let wrong = options.indices.first(where: { ex.kind == .listenPick ? options[$0] != ex.say : $0 != ex.answerIndex }) {
+                    book.record(page: pageIndex, exercise: i) { r in r.chosen = wrong; r.attempts += 1 }
+                    book.record(page: pageIndex, exercise: i) { r in r.chosen = wrong; r.attempts += 1; r.status = .missed }
+                    continue
+                }
+                if ex.kind == .listenPick, i % 4 == 1, let options = ex.options, let wrong = options.firstIndex(where: { $0 != ex.say }) {
+                    book.record(page: pageIndex, exercise: i) { r in r.chosen = wrong; r.attempts += 1 }
+                }
+                book.record(page: pageIndex, exercise: i) { r in
+                    r.attempts += 1
+                    switch ex.kind {
+                    case .listenPick: r.chosen = ex.options?.firstIndex(of: ex.say ?? ""); r.status = .correct
+                    case .readMeaning, .familyGuess, .constructionChoice, .structure: r.chosen = ex.answerIndex; r.status = .correct
+                    case .readHandwriting:
+                        r.chosen = ex.options?.firstIndex { RussianText.key($0) == RussianText.key(ex.text ?? "") }
+                        r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
+                    case .buildWord: r.recognized = BuildWordCheck.assemble(ex.parts ?? []); r.status = .correct
+                    case .paradigmFill: r.recognized = (ex.cells ?? []).map { "\($0)=✓\(ex.forms?[$0] ?? "")" }.joined(separator: ";"); r.status = .correct
+                    case .cueSort: r.recognized = (ex.items ?? []).indices.map { "\($0):\(ex.items![$0].answer)" }.joined(separator: ","); r.status = .correct
+                    case .readAloud: r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
+                    case .listening:  // every decision right, as the card records them (Model/Listening.swift)
+                        if let item = ex.listening {
+                            if item.kind == .message { r.recognized = (0..<item.decisionCount).map { String(item.answer($0) ?? 0) }.joined(separator: ",") }
+                            else { r.chosen = item.answer }
+                        }
+                        r.status = .correct
+                    case .dictation, .translate, .fill, .transform: r.status = i % 5 == 3 ? .missed : .correct
+                        if r.status == .missed { r.revealed = true; r.recognized = misreading(ex.target ?? "") }
+                    default: r.status = .done
                     }
-                    r.status = .correct
-                case .dictation, .translate, .fill, .transform: r.status = i % 5 == 3 ? .missed : .correct
-                    if r.status == .missed { r.revealed = true; r.recognized = misreading(ex.target ?? "") }
-                default: r.status = .done
                 }
             }
         }
