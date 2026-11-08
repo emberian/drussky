@@ -61,7 +61,7 @@ enum Theme {
 
     /// Russian with its stressed vowel shown in the accent colour rather than with a combining
     /// acute — at display sizes и́ is too easily read as й.
-    static func stressed(_ text: String, show: Bool, color: Color = Theme.accent) -> AttributedString {
+    static func stressed(_ text: String, show: Bool, color: Color = Theme.accent, light: Bool = false) -> AttributedString {
         var out = AttributedString()
         for ch in text {
             // "а́" is one Character (vowel + U+0301); strip the mark and colour the vowel.
@@ -70,12 +70,16 @@ enum Theme {
             var piece = AttributedString(String(String.UnicodeScalarView(scalars)))
             if show && scalars.count != ch.unicodeScalars.count {
                 piece.foregroundColor = color
-                piece.underlineStyle = .single
+                piece.underlineStyle = light ? Text.LineStyle(pattern: .solid, color: color.opacity(0.4)) : .single
             }
             out += piece
         }
         return out
     }
+
+    /// Stress in a passage: a whole text carries a mark on nearly every word, so the underline is
+    /// faded to keep the page from reading as a row of dashes; the vowel keeps its colour.
+    static func passageStressed(_ text: String, show: Bool) -> AttributedString { stressed(text, show: show, light: true) }
 
     /// Marck Script and the handwriting fonts (Resources/Fonts/fonts.json, all OFL).
     static func registerFonts() { CursiveFonts.register() }

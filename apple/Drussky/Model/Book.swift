@@ -162,6 +162,8 @@ final class Book {
     /// Texts the learner wants to read for real (Goal/); one is current.
     var goals: [Goal] = [] { didSet { scheduleSave() } }
     var currentGoalID: String? { didSet { scheduleSave() } }
+    /// Each goal's stress table (Goal/GoalStress.swift), read from goals/<id>.stress.json on first use; not in book.json.
+    var goalStress: [String: GoalStress.Table] = [:]
     /// Keyword mnemonics per word (Hooks/).
     var hooks = HookShelf() { didSet { scheduleSave() } }
     /// Fluency measurements: reading, writing and listening over weeks (Fluency/, metrics.jsonl).
@@ -545,10 +547,14 @@ final class Book {
     }
 
     /// A word as a label elsewhere (a map chip, a goal rung): the course's stressed form when the
-    /// word is one of ours, shown the way the page shows stress; a text's own word otherwise.
+    /// word is one of ours, else the one the library (or a goal's table) stresses it with, shown
+    /// the way the page shows stress; a text's own word otherwise.
     func stressedLabel(_ text: String) -> AttributedString {
         let ru = word(text)?.ru
-        let form = ru.map { RussianText.unstressed($0) == RussianText.unstressed(text) ? $0 : text } ?? text
+        var form = ru.map { RussianText.unstressed($0) == RussianText.unstressed(text) ? $0 : text } ?? text
+        if RussianStress.lacksStress(form), let s = LibraryStress.shared.stressed(word: form) ?? goalStressed(word: form) {
+            form = form.first?.isUppercase == true ? s.prefix(1).uppercased() + s.dropFirst() : s
+        }
         return Theme.stressed(form, show: settings.showStress)
     }
 

@@ -120,6 +120,7 @@ struct GoalSection: View {
         .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
         .accessibilityIdentifier("goal-panel")
         .task(id: "\(goal.id)-\(goal.lemmaCache?.count ?? 0)") {
+            book.ensureGoalStress(goal)  // its sentences' stress marks (GoalStress.swift), once, when the tutor is reachable
             guard filling == nil, !a.tokensNeedingLemmas.isEmpty else { return }
             do {
                 let entries = try await GoalLemmaTable.fill(goal, analysis: a) { done, total in filling = (done, total) }
@@ -319,7 +320,7 @@ struct GoalPullHeader: View {
             Text(goal.title).font(Theme.russian(28, weight: .semibold)).foregroundStyle(Theme.text)
             if let author = goal.author { Text(author).font(.system(size: 15)).foregroundStyle(Theme.muted) }
             if let window {
-                Text(d.analysis.sentenceText(window))
+                Text(Theme.passageStressed(book.stressed(passage: d.analysis.sentenceText(window)), show: book.settings.showStress))
                     .font(Theme.russian(19)).foregroundStyle(Theme.text.opacity(0.85))
                     .padding(14).frame(maxWidth: .infinity, alignment: .leading)
                     .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
@@ -333,7 +334,7 @@ struct GoalPullHeader: View {
             if !words.isEmpty {
                 FlowRow(spacing: 8) {
                     ForEach(words, id: \.rung.lemma) { w in
-                        Text(w.rung.gloss.map { "\(w.rung.example.lowercased()) · \($0)" } ?? w.rung.example.lowercased())
+                        Text(book.stressedLabel(w.rung.example.lowercased()) + AttributedString(w.rung.gloss.map { " · \($0)" } ?? ""))
                             .font(Theme.russian(15)).foregroundStyle(Theme.text)
                             .padding(.horizontal, 10).padding(.vertical, 4)
                             .background(Capsule().fill(Theme.card))

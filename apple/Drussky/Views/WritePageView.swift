@@ -167,6 +167,7 @@ struct WritePageContent: View {
 }
 
 struct LibraryTextHeader: View {
+    @Environment(Book.self) private var book
     let text: Library.Text
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -174,7 +175,9 @@ struct LibraryTextHeader: View {
             Text([text.author, text.year.map(String.init)].compactMap { $0 }.joined(separator: ", "))
                 .font(.system(size: 15)).foregroundStyle(Theme.muted)
             if let s = text.summary_en { Text(s).font(.system(size: 17)).foregroundStyle(Theme.text) }
-            Text(String(text.text.prefix(420)) + (text.text.count > 420 ? "…" : ""))
+            // The opening of the text with its stored stress marks (Model/LibraryStress.swift); a mark is part of its vowel, so the cut falls where it did.
+            let preview = book.displayText(text.text)
+            Text(Theme.passageStressed(String(preview.prefix(420)) + (preview.count > 420 ? "…" : ""), show: book.settings.showStress))
                 .font(Theme.russian(19)).foregroundStyle(Theme.text.opacity(0.85))
                 .padding(14)
                 .frame(maxWidth: .infinity, alignment: .leading)
