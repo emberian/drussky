@@ -782,6 +782,10 @@
    "en": "our window"
   },
   {
+   "ru": "на́ше",
+   "en": "our (neuter)"
+  },
+  {
    "ru": "ваш",
    "en": "your (plural or polite; masculine)"
   },
@@ -2187,12 +2191,12 @@
       },
       {
        "kind": "copy",
-       "text": "они́",
+       "text": "и",
        "times": 2
       },
       {
        "kind": "read_aloud",
-       "text": "Вы там."
+       "text": "вот"
       },
       {
        "kind": "dictation",
@@ -2398,7 +2402,7 @@
       },
       {
        "kind": "copy",
-       "text": "раке́та",
+       "text": "торт",
        "times": 2
       },
       {
@@ -2457,6 +2461,14 @@
         {
          "ru": "оно́",
          "en": "it"
+        },
+        {
+         "ru": "сестра́",
+         "en": "sister"
+        },
+        {
+         "ru": "сыр",
+         "en": "cheese"
         }
        ]
       },
@@ -2543,7 +2555,7 @@
       },
       {
        "kind": "copy",
-       "text": "вода́",
+       "text": "до́ма",
        "times": 2
       },
       {
@@ -2593,6 +2605,10 @@
         {
          "ru": "Кот до́ма.",
          "en": "The cat is at home."
+        },
+        {
+         "ru": "го́род",
+         "en": "city, town"
         }
        ]
       },
@@ -2661,7 +2677,7 @@
       },
       {
        "kind": "listen_pick",
-       "say": "молоко́",
+       "say": "сло́во",
        "options": [
         "молоко́",
         "сло́во",
@@ -2798,7 +2814,7 @@
       },
       {
        "kind": "trace",
-       "text": "па́па"
+       "text": "брат"
       },
       {
        "kind": "listen_pick",
@@ -2816,7 +2832,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Спаси́бо, ма́ма!"
+       "text": "ро́бот"
       },
       {
        "kind": "dictation",
@@ -3027,6 +3043,10 @@
         {
          "ru": "Я чита́ю.",
          "en": "I am reading."
+        },
+        {
+         "ru": "Он чита́ет.",
+         "en": "He is reading."
         }
        ]
       },
@@ -3314,7 +3334,7 @@
       },
       {
        "kind": "trace",
-       "text": "факт"
+       "text": "у́лица"
       },
       {
        "kind": "listen_pick",
@@ -3332,7 +3352,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Э́то факт."
+       "text": "оте́ц"
       },
       {
        "kind": "dictation",
@@ -3749,6 +3769,10 @@
         {
          "ru": "Мо́жно ещё?",
          "en": "May I have more?"
+        },
+        {
+         "ru": "Переда́й соль.",
+         "en": "Pass the salt."
         }
        ]
       },
@@ -3920,6 +3944,10 @@
         {
          "ru": "За́втрак гото́в.",
          "en": "Breakfast is ready."
+        },
+        {
+         "ru": "обе́д",
+         "en": "lunch"
         }
        ]
       },
@@ -3998,6 +4026,10 @@
         {
          "ru": "Нет, не хочу́.",
          "en": "No, I don't."
+        },
+        {
+         "ru": "ты хо́чешь",
+         "en": "you want"
         }
        ]
       },
@@ -4138,6 +4170,10 @@
         {
          "ru": "чай с са́харом",
          "en": "tea with sugar"
+        },
+        {
+         "ru": "са́хар",
+         "en": "sugar"
         },
         {
          "ru": "Мне чай, пожа́луйста.",
@@ -4367,6 +4403,10 @@
         {
          "ru": "твой чай",
          "en": "your tea"
+        },
+        {
+         "ru": "стул",
+         "en": "chair"
         }
        ]
       },
@@ -4504,6 +4544,10 @@
          "en": "cups"
         },
         {
+         "ru": "таре́лки",
+         "en": "plates"
+        },
+        {
          "ru": "кни́ги",
          "en": "books"
         },
@@ -4592,6 +4636,10 @@
         {
          "ru": "но́вые ло́жки",
          "en": "new spoons"
+        },
+        {
+         "ru": "ста́рый стол",
+         "en": "an old table"
         }
        ]
       },
@@ -4687,6 +4735,10 @@
         {
          "ru": "пять",
          "en": "five"
+        },
+        {
+         "ru": "два плюс три",
+         "en": "two plus three"
         }
        ]
       },
@@ -4868,13 +4920,13 @@
       },
       {
        "kind": "read_meaning",
-       "text": "Шесть — э́то число́.",
+       "text": "Шесть плюс два — во́семь.",
        "options": [
-        "Six is a number.",
-        "Six is a fact.",
-        "Seven is a number."
+        "Six plus two is seven.",
+        "Six plus three is eight.",
+        "Six plus two is eight."
        ],
-       "answer": 0
+       "answer": 2
       }
      ]
     },
@@ -4898,6 +4950,10 @@
         {
          "ru": "пятна́дцать",
          "en": "fifteen"
+        },
+        {
+         "ru": "девятна́дцать",
+         "en": "nineteen"
         },
         {
          "ru": "два́дцать",
@@ -5357,6 +5413,14 @@
          "en": "our kitchen"
         },
         {
+         "ru": "на́ше молоко́",
+         "en": "our milk"
+        },
+        {
+         "ru": "ва́ша кни́га",
+         "en": "your book"
+        },
+        {
          "ru": "ва́ше окно́",
          "en": "your window"
         }
@@ -5512,6 +5576,10 @@
         {
          "ru": "Молока́ нет.",
          "en": "There's no milk."
+        },
+        {
+         "ru": "Ча́я и сы́ра нет.",
+         "en": "There's no tea and no cheese."
         }
        ]
       },
@@ -5584,6 +5652,10 @@
        "text": "Drop -ть from чита́ть and add the ending for who is doing it: я -ю, ты -ешь, он and она́ -ет.",
        "examples": [
         {
+         "ru": "чита́ть",
+         "en": "to read"
+        },
+        {
          "ru": "я чита́ю",
          "en": "I read"
         },
@@ -5594,6 +5666,10 @@
         {
          "ru": "она́ чита́ет",
          "en": "she reads"
+        },
+        {
+         "ru": "чита́ю кни́гу",
+         "en": "I read a book"
         }
        ]
       },
@@ -5664,6 +5740,26 @@
         {
          "ru": "мы чита́ем",
          "en": "we read"
+        },
+        {
+         "ru": "вы чита́ете",
+         "en": "you read"
+        },
+        {
+         "ru": "ду́мать",
+         "en": "to think"
+        },
+        {
+         "ru": "ты ду́маешь",
+         "en": "you think"
+        },
+        {
+         "ru": "она́ ду́мает",
+         "en": "she thinks"
+        },
+        {
+         "ru": "мы ду́маем",
+         "en": "we think"
         },
         {
          "ru": "вы ду́маете",
@@ -5743,6 +5839,10 @@
        "text": "Не goes right before the verb: я не зна́ю, I don't know.",
        "examples": [
         {
+         "ru": "знать",
+         "en": "to know"
+        },
+        {
          "ru": "я зна́ю",
          "en": "I know"
         },
@@ -5753,6 +5853,22 @@
         {
          "ru": "ты зна́ешь?",
          "en": "do you know?"
+        },
+        {
+         "ru": "он зна́ет",
+         "en": "he knows"
+        },
+        {
+         "ru": "мы зна́ем",
+         "en": "we know"
+        },
+        {
+         "ru": "вы зна́ете",
+         "en": "you know"
+        },
+        {
+         "ru": "они́ зна́ют",
+         "en": "they know"
         }
        ]
       },
@@ -5901,6 +6017,10 @@
         {
          "ru": "на ку́хне",
          "en": "in the kitchen"
+        },
+        {
+         "ru": "на у́лице",
+         "en": "outside, in the street"
         }
        ]
       },
@@ -5982,6 +6102,10 @@
         {
          "ru": "на пла́нете",
          "en": "on the planet"
+        },
+        {
+         "ru": "в кни́ге",
+         "en": "in the book"
         },
         {
          "ru": "Я живу́ в го́роде.",
@@ -6067,6 +6191,10 @@
         {
          "ru": "Ты ви́дишь раке́ту?",
          "en": "Do you see the rocket?"
+        },
+        {
+         "ru": "Он лю́бит чай.",
+         "en": "He loves tea."
         }
        ]
       },
@@ -6160,6 +6288,20 @@
        "answer": 0
       },
       {
+       "kind": "explain",
+       "text": "As the object, Земля́ becomes Зе́млю and Луна́ becomes Луну́.",
+       "examples": [
+        {
+         "ru": "Земля́",
+         "en": "the Earth"
+        },
+        {
+         "ru": "Луна́",
+         "en": "the Moon"
+        }
+       ]
+      },
+      {
        "kind": "translate",
        "en": "station",
        "answer": "ста́нция"
@@ -6213,12 +6355,20 @@
        "text": "я говорю́, ты говори́шь, он говори́т, мы говори́м, вы говори́те, они́ говоря́т. The stress stays on the end throughout.",
        "examples": [
         {
+         "ru": "говори́ть",
+         "en": "to speak"
+        },
+        {
          "ru": "я говорю́",
          "en": "I speak"
         },
         {
          "ru": "ты говори́шь",
          "en": "you speak"
+        },
+        {
+         "ru": "мы говори́м",
+         "en": "we speak"
         },
         {
          "ru": "они́ говоря́т",
@@ -6301,6 +6451,18 @@
         {
          "ru": "Я не понима́ю.",
          "en": "I don't understand."
+        },
+        {
+         "ru": "понима́ть",
+         "en": "to understand"
+        },
+        {
+         "ru": "ты понима́ешь",
+         "en": "you understand"
+        },
+        {
+         "ru": "по-англи́йски",
+         "en": "in English"
         }
        ]
       },
@@ -6689,6 +6851,10 @@
         {
          "ru": "Э́то пра́вда.",
          "en": "That's true."
+        },
+        {
+         "ru": "Э́то непра́вда.",
+         "en": "That's not true."
         }
        ]
       },
@@ -6822,6 +6988,24 @@
      "intro": "One last reading, about the night sky.",
      "exercises": [
       {
+       "kind": "explain",
+       "text": "Ночь is night, and большо́й is big. Звёзды is stars.",
+       "examples": [
+        {
+         "ru": "ночь",
+         "en": "night"
+        },
+        {
+         "ru": "большо́й",
+         "en": "big"
+        },
+        {
+         "ru": "звёзды",
+         "en": "stars"
+        }
+       ]
+      },
+      {
        "kind": "read_meaning",
        "text": "Ночь. Звёзды. Ко́смос о́чень большо́й.",
        "options": [
@@ -6869,10 +7053,6 @@
        "kind": "copy",
        "text": "Мы не одни́.",
        "times": 1
-      },
-      {
-       "kind": "read_aloud",
-       "text": "Мы не одни́."
       }
      ]
     }
@@ -6903,6 +7083,14 @@
         {
          "ru": "вчера́ ве́чером",
          "en": "yesterday evening"
+        },
+        {
+         "ru": "но́чью",
+         "en": "at night"
+        },
+        {
+         "ru": "я рабо́таю",
+         "en": "I work"
         }
        ]
       },
@@ -6982,6 +7170,14 @@
         {
          "ru": "Они́ бы́ли там.",
          "en": "They were there."
+        },
+        {
+         "ru": "он был",
+         "en": "he was"
+        },
+        {
+         "ru": "она́ была́",
+         "en": "she was"
         }
        ]
       },
@@ -7063,8 +7259,20 @@
          "en": "She was thinking."
         },
         {
+         "ru": "Он ду́мал.",
+         "en": "He was thinking."
+        },
+        {
          "ru": "Мы зна́ли.",
          "en": "We knew."
+        },
+        {
+         "ru": "Она́ не зна́ла.",
+         "en": "She didn't know."
+        },
+        {
+         "ru": "Они́ говори́ли.",
+         "en": "They were talking."
         }
        ]
       },
@@ -7148,6 +7356,18 @@
         {
          "ru": "Она́ сде́лала рабо́ту.",
          "en": "She did the work (and finished it)."
+        },
+        {
+         "ru": "прочита́ть",
+         "en": "to read to the end"
+        },
+        {
+         "ru": "сде́лать",
+         "en": "to get done"
+        },
+        {
+         "ru": "Мы сде́лали.",
+         "en": "We got it done."
         }
        ]
       },
@@ -7261,13 +7481,13 @@
       },
       {
        "kind": "read_meaning",
-       "text": "Что де́лал па́па?",
+       "text": "Что чита́ла ма́ма?",
        "options": [
-        "He was reading a book.",
-        "He was thinking.",
-        "He was asleep on the table."
+        "She was reading a book.",
+        "She was thinking.",
+        "She was asleep on the table."
        ],
-       "answer": 1
+       "answer": 0
       },
       {
        "kind": "copy",
@@ -7296,6 +7516,26 @@
         {
          "ru": "Мы гуля́ли.",
          "en": "We went for a walk."
+        },
+        {
+         "ru": "де́лать",
+         "en": "to do"
+        },
+        {
+         "ru": "рабо́тать",
+         "en": "to work"
+        },
+        {
+         "ru": "Он рабо́тал.",
+         "en": "He worked."
+        },
+        {
+         "ru": "Вы де́лали.",
+         "en": "You did."
+        },
+        {
+         "ru": "Он гуля́л.",
+         "en": "He went for a walk."
         }
        ]
       },
@@ -7379,6 +7619,14 @@
         {
          "ru": "Что ты бу́дешь де́лать?",
          "en": "What will you do?"
+        },
+        {
+         "ru": "мы бу́дем",
+         "en": "we will"
+        },
+        {
+         "ru": "гуля́ть",
+         "en": "to go for a walk"
         }
        ]
       },
@@ -7469,6 +7717,14 @@
         {
          "ru": "Мы идём в парк.",
          "en": "We're going to the park."
+        },
+        {
+         "ru": "в па́рке",
+         "en": "in the park"
+        },
+        {
+         "ru": "они́ иду́т",
+         "en": "they are going"
         }
        ]
       },
@@ -7549,6 +7805,18 @@
         {
          "ru": "ка́ждый день",
          "en": "every day"
+        },
+        {
+         "ru": "ты е́дешь",
+         "en": "you are going (by transport)"
+        },
+        {
+         "ru": "мы е́дем",
+         "en": "we are going (by transport)"
+        },
+        {
+         "ru": "он хо́дит",
+         "en": "he goes (regularly)"
         }
        ]
       },
@@ -7630,6 +7898,10 @@
         {
          "ru": "Мы е́хали домо́й.",
          "en": "We were driving home."
+        },
+        {
+         "ru": "я е́хала",
+         "en": "I was riding (a woman)"
         }
        ]
       },
@@ -7877,6 +8149,11 @@
        "answer": "отве́т"
       },
       {
+       "kind": "copy",
+       "text": "неде́ля",
+       "times": 1
+      },
+      {
        "kind": "translate",
        "en": "week",
        "answer": "неде́ля"
@@ -7902,11 +8179,6 @@
        "kind": "translate",
        "en": "thirteen",
        "answer": "трина́дцать"
-      },
-      {
-       "kind": "copy",
-       "text": "Ко́смос молчи́т.",
-       "times": 1
       }
      ]
     },
@@ -8001,8 +8273,16 @@
          "en": "twenty"
         },
         {
+         "ru": "три́дцать",
+         "en": "thirty"
+        },
+        {
          "ru": "со́рок",
          "en": "forty"
+        },
+        {
+         "ru": "пятьдеся́т",
+         "en": "fifty"
         },
         {
          "ru": "девяно́сто",
@@ -8171,6 +8451,10 @@
         {
          "ru": "Для любо́го числа́ существу́ет бо́льшее число́.",
          "en": "For any number there exists a bigger number."
+        },
+        {
+         "ru": "просто́е число́",
+         "en": "prime number"
         }
        ]
       },

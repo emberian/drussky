@@ -11,7 +11,7 @@ def units(h):
     U.append(("u17", "Yesterday, today, tomorrow", "сего́дня, вчера́, за́втра · был, была́ · чита́л, прочита́л · бу́ду", [
         ("Was: был, была́, бы́ло, бы́ли", "The past tense ignores я, ты, он: it changes for gender and number, like мой.", [
             ex("The past agrees with the subject's gender: он был, она' была', оно' бы'ло, они' бы'ли. Я and ты follow the gender of the person meant.",
-               [("Я был до'ма.", "I was at home (said by a man)."), ("Я была' до'ма.", "I was at home (said by a woman)."), ("Они' бы'ли там.", "They were there.")]),
+               [("Я был до'ма.", "I was at home (said by a man)."), ("Я была' до'ма.", "I was at home (said by a woman)."), ("Они' бы'ли там.", "They were there."), ("он был", "he was"), ("она' была'", "she was")]),
             lp("была'", ["был", "была'", "бы'ли"]), tl("he was", "он был"), tl("she was", "она' была'"),
             fl("Вчера' ма'ма ", "была'", " до'ма.", "Yesterday mom was at home."),
             fl("Кот ", "был", " тут.", "The cat was here."), fl("Мы ", "бы'ли", " там.", "We were there."),
@@ -20,7 +20,7 @@ def units(h):
         ]),
         ("Did: -л, -ла, -ли", "Most verbs make the past by swapping -ть for -л: чита́ть, чита́л.", [
             ex("Drop -ть and add -л, -ла, -ло or -ли: чита'ть, чита'л, чита'ла, чита'ли. The stress usually stays where it was.",
-               [("Я чита'л.", "I was reading (man)."), ("Она' ду'мала.", "She was thinking."), ("Мы зна'ли.", "We knew.")]),
+               [("Я чита'л.", "I was reading (man)."), ("Она' ду'мала.", "She was thinking."), ("Он ду'мал.", "He was thinking."), ("Мы зна'ли.", "We knew."), ("Она' не зна'ла.", "She didn't know."), ("Они' говори'ли.", "They were talking.")]),
             lp("чита'ла", ["чита'л", "чита'ла", "чита'ли"]),
             fl("Вчера' я ", "чита'ла", " кни'гу.", "Yesterday I (a woman) was reading a book."),
             fl("Он ", "ду'мал", ", что э'то факт.", "He thought that it was a fact."),
@@ -31,7 +31,7 @@ def units(h):
         ]),
         ("u17-p2a", "Finished: прочита́л", "Most verbs come in pairs: one for the activity, one for getting it done.", [
             ex("Чита'ть is reading as an activity; прочита'ть is reading something to the end. Я чита'л кни'гу says I was reading it; я прочита'л кни'гу says I finished it.",
-               [("Я чита'л кни'гу.", "I was reading a book."), ("Я прочита'л кни'гу.", "I read the book (to the end)."), ("Она' сде'лала рабо'ту.", "She did the work (and finished it).")]),
+               [("Я чита'л кни'гу.", "I was reading a book."), ("Я прочита'л кни'гу.", "I read the book (to the end)."), ("Она' сде'лала рабо'ту.", "She did the work (and finished it)."), ("прочита'ть", "to read to the end"), ("сде'лать", "to get done"), ("Мы сде'лали.", "We got it done.")]),
             lp("прочита'ла", ["чита'ла", "прочита'ла", "чита'ли"]),
             fl("Он до'лго чита'л кни'гу, но не ", "прочита'л", ".", "He read the book for a long time, but didn't finish it."),
             fl("Мы ", "сде'лали", " рабо'ту.", "We did the work (and finished it)."),
@@ -47,12 +47,12 @@ def units(h):
             rm("Ма'ма чита'ла кни'гу, а па'па ду'мал.", ["Mom was reading a book and dad was thinking.", "Dad was reading a book and mom was thinking.", "Mom and dad were reading a book."]),
             fl("Кот ", "спал", " на столе'.", "The cat was asleep on the table."), tl("then, afterwards", "пото'м"),
             ra("Бы'ло о'чень вку'сно."), dc("Мы у'жинали."), tl("yesterday", "вчера'"),
-            rm("Что де'лал па'па?", ["He was thinking.", "He was reading a book.", "He was asleep on the table."]),
+            rm("Что чита'ла ма'ма?", ["She was reading a book.", "She was thinking.", "She was asleep on the table."]),
             cp("Бы'ло о'чень вку'сно.", 1),
         ]),
         ("What did you do?", "Де́лать is to do. Что ты де́лал? is What did you do?", [
             ex("Что ты де'лал? asks a man, что ты де'лала? a woman, что вы де'лали? several people, or one person politely.",
-               [("Что ты де'лал вчера'?", "What did you do yesterday?"), ("Я рабо'тала.", "I worked (woman)."), ("Мы гуля'ли.", "We went for a walk.")]),
+               [("Что ты де'лал вчера'?", "What did you do yesterday?"), ("Я рабо'тала.", "I worked (woman)."), ("Мы гуля'ли.", "We went for a walk."), ("де'лать", "to do"), ("рабо'тать", "to work"), ("Он рабо'тал.", "He worked."), ("Вы де'лали.", "You did."), ("Он гуля'л.", "He went for a walk.")]),
             lp("Что ты де'лал?", ["Что вы де'лали?", "Что ты де'лал?", "Что ты де'лаешь?"]),
             tl("to do", "де'лать"), tl("to work", "рабо'тать"),
             fl("Вчера' я ", "рабо'тал", ".", "Yesterday I (a man) worked."),
@@ -63,7 +63,7 @@ def units(h):
         ]),
         ("Tomorrow: бу́ду and прочита́ю", "Two futures: what you will be doing, and what you will get done.", [
             ex("For an activity in the future, use бу'ду with the infinitive: за'втра я бу'ду чита'ть. Бу'ду goes бу'ду, бу'дешь, бу'дет, бу'дем, бу'дете, бу'дут. A finishing verb with present endings is already future: я прочита'ю, I will read it through.",
-               [("За'втра я бу'ду рабо'тать.", "Tomorrow I'll be working."), ("Я прочита'ю кни'гу за'втра.", "I'll finish the book tomorrow."), ("Что ты бу'дешь де'лать?", "What will you do?")]),
+               [("За'втра я бу'ду рабо'тать.", "Tomorrow I'll be working."), ("Я прочита'ю кни'гу за'втра.", "I'll finish the book tomorrow."), ("Что ты бу'дешь де'лать?", "What will you do?"), ("мы бу'дем", "we will"), ("гуля'ть", "to go for a walk")]),
             lp("бу'ду", ["бу'ду", "был", "бу'дет"]), tl("I will (with an infinitive)", "я бу'ду"),
             fl("За'втра я ", "бу'ду", " рабо'тать.", "Tomorrow I will be working."),
             fl("Что ты ", "бу'дешь", " де'лать?", "What will you do?"),
@@ -77,7 +77,7 @@ def units(h):
     U.append(("u18", "In, on, and what you see", "в до́ме, на столе́ · ви́жу кни́гу", [
         ("In and on: где?", "After в (in) and на (on) answering где?, most nouns end in -е.", [
             ex("Где? takes в or на, and the noun ends in -е: дом, в до'ме; стол, на столе'; ку'хня, на ку'хне. Some places take на where English says in: на ку'хне, на у'лице.",
-               [("в до'ме", "in the house"), ("на столе'", "on the table"), ("на ку'хне", "in the kitchen")]),
+               [("в до'ме", "in the house"), ("на столе'", "on the table"), ("на ку'хне", "in the kitchen"), ("на у'лице", "outside, in the street")]),
             lp("на столе'", ["на столе'", "в до'ме", "на ку'хне"]), tl("in the house", "в до'ме"), tl("on the table", "на столе'"),
             fl("Ма'ма на ", "ку'хне", ".", "Mom is in the kitchen."), fl("Кни'га ", "на", " столе'.", "The book is on the table."),
             dc("Кот в до'ме."), ra("Где чай? Чай на столе'."), tl("outside, in the street", "на у'лице"),
@@ -85,7 +85,7 @@ def units(h):
         ]),
         ("In the city, in space", "Feminine and masculine alike take -е: в го́роде, на пла́нете, в ко́смосе.", [
             ex("Nearly every noun takes -е after в or на for where: в го'роде, в ко'смосе, на пла'нете, в кни'ге. Nouns like ста'нция swap the final я for и: на ста'нции.",
-               [("в го'роде", "in the city"), ("в ко'смосе", "in space"), ("на пла'нете", "on the planet"), ("Я живу' в го'роде.", "I live in a city.")]),
+               [("в го'роде", "in the city"), ("в ко'смосе", "in space"), ("на пла'нете", "on the planet"), ("в кни'ге", "in the book"), ("Я живу' в го'роде.", "I live in a city.")]),
             lp("в ко'смосе", ["в ко'смосе", "в го'роде", "в кни'ге"]), tl("in space", "в ко'смосе"), tl("in the city", "в го'роде"),
             fl("Мы живём в ", "го'роде", ".", "We live in a city."), fl("Ро'бот на ", "пла'нете", ".", "The robot is on the planet."),
             dc("Что в кни'ге?"), ra("В ко'смосе ти'хо."), tl("I live", "я живу'"),
@@ -93,7 +93,7 @@ def units(h):
         ]),
         ("I see: ви́жу + what", "The thing you see, read or love is the object: -а becomes -у.", [
             ex("For the object, -а becomes -у and -я becomes -ю; masculine and neuter things stay as they are: я ви'жу стол, я ви'жу окно', я ви'жу кни'гу. People and animals change too: я ви'жу бра'та.",
-               [("Я ви'жу звезду'.", "I see a star."), ("Я ви'жу дом.", "I see a house."), ("Ты ви'дишь раке'ту?", "Do you see the rocket?")]),
+               [("Я ви'жу звезду'.", "I see a star."), ("Я ви'жу дом.", "I see a house."), ("Ты ви'дишь раке'ту?", "Do you see the rocket?"), ("Он лю'бит чай.", "He loves tea.")]),
             lp("звезду'", ["звезда'", "звезду'", "звёзды"]), tl("I see", "я ви'жу"),
             fl("Я ви'жу ", "звезду'", ".", "I see a star."), fl("Ты ви'дишь ", "раке'ту", "?", "Do you see the rocket?"),
             fl("Она' чита'ет ", "кни'гу", ".", "She is reading a book."), dc("Я ви'жу дом."), ra("Я ви'жу звезду' и пла'нету."),
@@ -106,6 +106,7 @@ def units(h):
                {"станции": "station (after на: on the station)", "живёт": "lives (he, she, it)", "окне": "window (after в: in the window)",
                 "ещё": "also, as well", "космосе": "space (after в: in space)", "луну": "the Moon (as the object)", "он": "he; here: it (the robot)"}),
             rm("На ста'нции живёт ро'бот.", ["A robot lives on the station.", "A robot works in the city.", "The station is inside a robot."]),
+            ex("As the object, Земля' becomes Зе'млю and Луна' becomes Луну'.", [("Земля'", "the Earth"), ("Луна'", "the Moon")]),
             tl("station", "ста'нция"), fl("Ро'бот ви'дит ", "Зе'млю", " в окне'.", "The robot sees the Earth in the window."),
             tl("the Earth", "Земля'"), ra("Ро'бот лю'бит Зе'млю."), dc("На ста'нции живёт ро'бот."), tl("the Moon", "Луна'"),
             cp("на ста'нции", 1),
@@ -115,7 +116,7 @@ def units(h):
     U.append(("u19", "Going places", "идти́, ходи́ть, е́хать", [
         ("Today, yesterday, tomorrow", "Time words, and the four parts of the day.", [
             ex("Сего'дня is today, вчера' yesterday, за'втра tomorrow. For the time of day: у'тром, днём, ве'чером, но'чью.",
-               [("сего'дня", "today"), ("за'втра у'тром", "tomorrow morning"), ("вчера' ве'чером", "yesterday evening")]),
+               [("сего'дня", "today"), ("за'втра у'тром", "tomorrow morning"), ("вчера' ве'чером", "yesterday evening"), ("но'чью", "at night"), ("я рабо'таю", "I work")]),
             lp("за'втра", ["за'втра", "за'втрак", "вчера'"]), tl("today", "сего'дня"), tl("tomorrow", "за'втра"),
             tl("in the evening", "ве'чером"), fl("", "Сего'дня", " я до'ма.", "Today I am at home."),
             dc("Я рабо'таю у'тром."), ra("Сего'дня я до'ма, а за'втра днём я рабо'таю."), tl("at night", "но'чью"),
@@ -123,7 +124,7 @@ def units(h):
         ]),
         ("On foot: идти́", "Идти́ is going on foot, right now, in one direction.", [
             ex("я иду', ты идёшь, он идёт, мы идём, вы идёте, они' иду'т. Куда'? asks where to; the answer is в or на with the object form (в парк, на рабо'ту), or simply домо'й.",
-               [("Куда' ты идёшь?", "Where are you going?"), ("Я иду' домо'й.", "I'm going home."), ("Мы идём в парк.", "We're going to the park.")]),
+               [("Куда' ты идёшь?", "Where are you going?"), ("Я иду' домо'й.", "I'm going home."), ("Мы идём в парк.", "We're going to the park."), ("в па'рке", "in the park"), ("они' иду'т", "they are going")]),
             lp("идёт", ["иду'", "идёт", "иду'т"]), tl("I am going (on foot)", "я иду'"), fl("Я в ", "па'рке", ".", "I am in the park (where?)."),
             fl("Куда' ты ", "идёшь", "?", "Where are you going?"), fl("Я иду' ", "домо'й", ".", "I'm going home."),
             dc("Мы идём в парк."), ra("Куда' вы идёте? Мы идём на рабо'ту."), tl("they are going (on foot)", "они' иду'т"),
@@ -131,7 +132,7 @@ def units(h):
         ]),
         ("Again and again; by car or train", "Ходи́ть is going on foot regularly. Е́хать is going by transport.", [
             ex("Ходи'ть is going on foot again and again: я хожу' в парк ка'ждый день. Е'хать is going by car, bus or train: я е'ду, ты е'дешь.",
-               [("Я хожу' в парк.", "I go to the park (regularly)."), ("Я е'ду домо'й.", "I'm going home (by car, bus or train)."), ("ка'ждый день", "every day")]),
+               [("Я хожу' в парк.", "I go to the park (regularly)."), ("Я е'ду домо'й.", "I'm going home (by car, bus or train)."), ("ка'ждый день", "every day"), ("ты е'дешь", "you are going (by transport)"), ("мы е'дем", "we are going (by transport)"), ("он хо'дит", "he goes (regularly)")]),
             lp("е'ду", ["е'ду", "иду'", "хожу'"]), tl("I go (regularly, on foot)", "я хожу'"), tl("I am going (by transport)", "я е'ду"),
             fl("Ка'ждый день я ", "хожу'", " в парк.", "Every day I go to the park."),
             fl("За'втра мы ", "е'дем", " в го'род.", "Tomorrow we are going to the city (by car, bus or train)."),
@@ -140,7 +141,7 @@ def units(h):
         ]),
         ("Where did you go?", "Motion in the past, and a short day in the life.", [
             ex("In the past идти' becomes шёл, шла, шли, and е'хать becomes е'хал. Ходи'л, from ходи'ть, means went and came back.",
-               [("Вчера' я ходи'л в парк.", "Yesterday I went to the park (man)."), ("Она' шла домо'й.", "She was walking home."), ("Мы е'хали домо'й.", "We were driving home.")]),
+               [("Вчера' я ходи'л в парк.", "Yesterday I went to the park (man)."), ("Она' шла домо'й.", "She was walking home."), ("Мы е'хали домо'й.", "We were driving home."), ("я е'хала", "I was riding (a woman)")]),
             ps("Вчера' у'тром я ходи'ла в парк. Там бы'ло ти'хо. Пото'м я рабо'тала. Ве'чером мы бы'ли до'ма и чита'ли. За'втра я опя'ть иду' в парк.",
                "Yesterday morning I went to the park. It was quiet there. Then I worked. In the evening we were at home and read. Tomorrow I'm going to the park again.",
                {"ходила": "went and came back (she, or a woman saying I)", "было": "it was", 
@@ -179,9 +180,9 @@ def units(h):
                {"посылает": "sends (he, she)", "его": "it (the answer); said yevo", "к": "to, towards", "звёздам": "stars (after к: to the stars)",
                 "дня": "days (after два)", "неделю": "a week (for a week)", "день": "day"}),
             rm("Ко'смос молчи'т.", ["Space is silent.", "Space is speaking.", "The station is silent."]),
-            tl("answer", "отве'т"), fl("Ми'ра пи'шет ", "отве'т", ".", "Mira is writing an answer."), tl("week", "неде'ля"),
+            tl("answer", "отве'т"), fl("Ми'ра пи'шет ", "отве'т", ".", "Mira is writing an answer."), cp("неде'ля", 1), tl("week", "неде'ля"),
             ra("Пото'м она' ждёт. Ко'смос молчи'т."), dc("Она' ждёт."),
-            lp("трина'дцать", ["трина'дцать", "оди'ннадцать", "три"]), tl("thirteen", "трина'дцать"), cp("Ко'смос молчи'т.", 1),
+            lp("трина'дцать", ["трина'дцать", "оди'ннадцать", "три"]), tl("thirteen", "трина'дцать"),
         ]),
         ("Hello", "Part four. A month later.", [
             ps("Че'рез ме'сяц прихо'дит но'вый сигна'л. В нём одно' сло'во: «Приве'т». Ми'ра не зна'ет, кто э'то. Но тепе'рь она' зна'ет: мы не одни'.",
@@ -198,7 +199,7 @@ def units(h):
     U.append(("u21", "Mathematics", "чи'сла до ста · е́сли… то… · существу́ет", [
         ("Numbers to a hundred", "Tens, and how to build every number up to сто.", [
             ex("Twenty to ninety: два'дцать, три'дцать, со'рок, пятьдеся'т, шестьдеся'т, се'мьдесят, во'семьдесят, девяно'сто; a hundred is сто. Join the rest: два'дцать оди'н, со'рок пять.",
-               [("два'дцать", "twenty"), ("со'рок", "forty"), ("девяно'сто", "ninety"), ("сто", "a hundred")]),
+               [("два'дцать", "twenty"), ("три'дцать", "thirty"), ("со'рок", "forty"), ("пятьдеся'т", "fifty"), ("девяно'сто", "ninety"), ("сто", "a hundred")]),
             lp("со'рок", ["со'рок", "сто", "семь"]), tl("twenty", "два'дцать"), tl("fifteen", "пятна'дцать"), tl("a hundred", "сто"),
             fl("Де'сять плюс де'сять — ", "два'дцать", ".", "Ten plus ten is twenty."), dc("три'дцать пять"),
             ra("Два'дцать, три'дцать, со'рок, пятьдеся'т, шестьдеся'т, се'мьдесят, во'семьдесят, девяно'сто, сто."),
@@ -218,7 +219,7 @@ def units(h):
         ("For every, there exists", "The two quantifiers: для любо́го and существу́ет.", [
             ex("Для любо'го числа' is for any number; существу'ет число' is there exists a number.",
                [("для любо'го числа'", "for any number"), ("Существу'ет чётное число'.", "There exists an even number."),
-                ("Для любо'го числа' существу'ет бо'льшее число'.", "For any number there exists a bigger number.")]),
+                ("Для любо'го числа' существу'ет бо'льшее число'.", "For any number there exists a bigger number."), ("просто'е число'", "prime number")]),
             lp("существу'ет", ["существу'ет", "существу'ю", "сле'довательно"]), tl("there exists", "существу'ет"),
             tl("for any number (any, not every)", "для любо'го числа'"),
             fl("Для любо'го числа' ", "существу'ет", " бо'льшее число'.", "For any number there exists a bigger number."),

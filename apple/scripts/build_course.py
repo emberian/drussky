@@ -140,7 +140,7 @@ LEXICON = [
     W("когда'", "when"), W("ско'лько", "how many, how much"), W("бу'дет", "will be (as in ско'лько бу'дет…? what is…?)"),
     # unit 10
     W("твоя'", "your (one person; feminine)"), W("твоё", "your (one person; neuter)"), W("моя' сестра'", "my sister"),
-    W("на'ша", "our (feminine)"), W("на'ше окно'", "our window"), W("ваш", "your (plural or polite; masculine)"),
+    W("на'ша", "our (feminine)"), W("на'ше окно'", "our window"), W("на'ше", "our (neuter)"), W("ваш", "your (plural or polite; masculine)"),
     W("ва'ша", "your (plural or polite; feminine)"), W("ва'ше", "your (plural or polite; neuter)"), W("наш дом", "our house"),
     W("ку'хня", "kitchen"), W("у меня' есть", "I have"), W("меня'", "me (as in у меня' есть, I have)"),
     W("у меня' нет", "I don't have", None, "the thing lacked changes its ending: нет хле'ба"), W("хле'ба", "bread (after нет: no bread)"),
@@ -215,7 +215,7 @@ U.append(("u2", "I, you, we", "я ты мы вы они́", [
         fl("", "Ты", " там.", "You (one, familiar) are there."),
     ]),
     ("И and В", "И looks like a backwards N and says ee. В looks like B and says v. Together: you, they, and.", [
-        meet("И"), meet("В"), tr("вы"), lp("они'", ["они'", "она'", "оно'"]), cp("они'"), ra("Вы там."),
+        meet("И"), meet("В"), tr("вы"), lp("они'", ["они'", "она'", "оно'"]), cp("и"), ra("вот"),
         dc("вот"), tl("they", "они'"),
         rm("Вот кот и ма'ма.", ["Here are the cat and mom.", "The cat is there.", "Who is mom?"]),
         fl("Ма'ма ", "и", " кот.", "Mom and the cat."),
@@ -237,13 +237,13 @@ U.append(("u3", "This is…", "э́то, не, нет · Р С", [
         tl("no", "нет"), rm("Э'то не кот.", ["This is not a cat.", "This is a cat.", "Who is this?"]),
     ]),
     ("Р: looks like P", "Р is a tapped r: the tip of the tongue flicks once behind the teeth. Now: world, cake, rocket.", [
-        meet("Р"), tr("мир"), lp("рот", ["рот", "кот", "торт"]), cp("раке'та"), ra("Э'то раке'та."),
+        meet("Р"), tr("мир"), lp("рот", ["рот", "кот", "торт"]), cp("торт"), ra("Э'то раке'та."),
         dc("мир"), tl("rocket", "раке'та"), fl("Э'то ", "торт", ".", "This is a cake."),
         rm("Раке'та там.", ["The rocket is there.", "The cake is there.", "The world is there."]),
     ]),
     ("С, and the lazy о", "С looks like C and always says s. Unstressed о has a surprise too.", [
         meet("С"),
-        ex("Only a stressed о is a full o. Unstressed, it relaxes to a: окно' sounds like akno, она' like ana.", [("окно'", "window"), ("она'", "she"), ("оно'", "it")]),
+        ex("Only a stressed о is a full o. Unstressed, it relaxes to a: окно' sounds like akno, она' like ana.", [("окно'", "window"), ("она'", "she"), ("оно'", "it"), ("сестра'", "sister"), ("сыр", "cheese")]),
         tr("сок"), lp("нос", ["нос", "сок", "сон"]), cp("окно'"), ra("Кто э'то? Э'то сестра'."),
         dc("сыр"), tl("juice", "сок"), tl("window", "окно'"),
         rm("Э'то не сыр, э'то торт.", ["This is not cheese, this is cake.", "This is cheese, not cake.", "The cheese is there."]),
@@ -252,18 +252,18 @@ U.append(("u3", "This is…", "э́то, не, нет · Р С", [
 
 U.append(("u4", "Where?", "У Д Г Л · тут, там, где", [
     ("У and Д", "У looks like y and says oo. Д is a little house that says d: yes, house, water.", [
-        meet("У"), meet("Д"), tr("тут"), lp("да", ["да", "дом", "тут"]), cp("вода'"), ra("Я тут. Ты там."),
+        meet("У"), meet("Д"), tr("тут"), lp("да", ["да", "дом", "тут"]), cp("до'ма"), ra("Я тут. Ты там."),
         dc("дом"), tl("yes", "да"), tl("here", "тут"), fl("Ма'ма ", "до'ма", ".", "Mom is at home."),
     ]),
     ("Г and где?", "Г is an upside-down L and says g as in go. Its best word is где, where.", [
         meet("Г"),
-        ex("In the present, Russian leaves out is, and it asks questions without do: Где кот? is Where is the cat?", [("Где кот?", "Where is the cat?"), ("Кот до'ма.", "The cat is at home.")]),
+        ex("In the present, Russian leaves out is, and it asks questions without do: Где кот? is Where is the cat?", [("Где кот?", "Where is the cat?"), ("Кот до'ма.", "The cat is at home."), ("го'род", "city, town")]),
         tr("где"), lp("кни'га", ["кни'га", "нога'", "го'род"]), cp("Где кни'га?", 1), ra("Где ма'ма? Она' до'ма."),
         dc("го'род"), tl("where", "где"), fl("", "Где", " вода'?", "Where is the water?"),
         rm("Кни'га там.", ["The book is there.", "Where is the book?", "The leg is there."]),
     ]),
     ("Л: a tent", "Л says l and brings the table and the milk.", [
-        meet("Л"), tr("стол"), lp("молоко'", ["молоко'", "сло'во", "стол"]), cp("молоко'"), ra("Молоко' тут."),
+        meet("Л"), tr("стол"), lp("сло'во", ["молоко'", "сло'во", "стол"]), cp("молоко'"), ra("Молоко' тут."),
         dc("сло'во"), tl("table", "стол"), tl("milk", "молоко'"),
         rm("Где молоко'? Оно' там.", ["Where is the milk? It is there.", "Where is the table? It is here.", "The milk is at home."]),
         fl("Молоко' ", "тут", ".", "The milk is here."),
@@ -280,7 +280,7 @@ U.append(("u4", "Where?", "У Д Г Л · тут, там, где", [
 
 U.append(("u5", "New shapes", "П Б Й Ё Ю", [
     ("П and Б", "П is a doorway and says p. Б looks like a 6 and says b. They bring dad, soup and thank you.", [
-        meet("П"), meet("Б"), tr("па'па"), lp("суп", ["суп", "сыр", "сок"]), cp("спаси'бо"), ra("Спаси'бо, ма'ма!"),
+        meet("П"), meet("Б"), tr("брат"), lp("суп", ["суп", "сыр", "сок"]), cp("спаси'бо"), ra("ро'бот"),
         dc("брат"), tl("thank you", "спаси'бо"), tl("soup", "суп"),
         rm("Э'то ро'бот. Э'то не брат.", ["This is a robot. This is not a brother.", "This is a brother. This is not a robot.", "The robot is at home."]),
     ]),
@@ -303,7 +303,7 @@ U.append(("u5", "New shapes", "П Б Й Ё Ю", [
 U.append(("u6", "Hushing sounds", "Ч Ш Ж Щ Х", [
     ("Ч: what?", "Ч says ch as in chair. In что, what, it is said sh: shto.", [
         meet("Ч"),
-        ex("Что is spelled with ч but said shto. Что э'то? is the question you will ask most.", [("Что э'то?", "What is this?"), ("Э'то чай.", "This is tea."), ("Я чита'ю.", "I am reading.")]),
+        ex("Что is spelled with ч but said shto. Что э'то? is the question you will ask most.", [("Что э'то?", "What is this?"), ("Э'то чай.", "This is tea."), ("Я чита'ю.", "I am reading."), ("Он чита'ет.", "He is reading.")]),
         tr("что"), lp("чай", ["чай", "что", "чита'ю"]), cp("Что э'то?", 1), ra("Что э'то? Э'то чай."), dc("чай"),
         tl("what", "что"), fl("Я ", "чита'ю", ".", "I am reading."),
         rm("Ма'ма чита'ет.", ["Mom is reading.", "Mom is thinking.", "Mom is at home."]),
@@ -329,7 +329,7 @@ U.append(("u7", "The last letters", "З Ь Ц Ф Ъ", [
         dc("мать"), tl("star", "звезда'"), fl("Я ", "зна'ю", ".", "I know."),
     ]),
     ("Ц and Ф", "Ц is ts as in cats. Ф is a circle on a pole: f. Now: fact, coffee, street.", [
-        meet("Ц"), meet("Ф"), tr("факт"), lp("цирк", ["цирк", "факт", "ко'фе"]), cp("ко'фе"), ra("Э'то факт."),
+        meet("Ц"), meet("Ф"), tr("у'лица"), lp("цирк", ["цирк", "факт", "ко'фе"]), cp("ко'фе"), ra("оте'ц"),
         dc("у'лица"), tl("coffee", "ко'фе"), tl("father", "оте'ц"),
         rm("Где оте'ц? Он до'ма.", ["Where is father? He is at home.", "Where is the street? It is there.", "Who is father? He is here."]),
     ]),
@@ -365,7 +365,7 @@ U.append(("u8", "It: он, она́, оно́", "gender by ending", [
         rm("Где ро'бот? Вот он.", ["Where is the robot? Here it is.", "Where is the robot? Here she is.", "Who is the robot?"]),
     ]),
     ("On the table", "Table things and their genders. Each one with мой, моя́ or моё.", [
-        ex("Ко'фе ends in -е but is masculine: мой ко'фе. Everything else here follows its ending.", [("мой ко'фе", "my coffee"), ("моя' ча'шка", "my cup"), ("моё молоко'", "my milk"), ("твой чай", "your tea")]),
+        ex("Ко'фе ends in -е but is masculine: мой ко'фе. Everything else here follows its ending.", [("мой ко'фе", "my coffee"), ("моя' ча'шка", "my cup"), ("моё молоко'", "my milk"), ("твой чай", "your tea"), ("стул", "chair")]),
         tr("ча'шка"), tl("cup", "ча'шка"), lp("ло'жка", ["ло'жка", "ча'шка", "ка'ша"]), cp("таре'лка", 1),
         tl("spoon", "ло'жка"), fl("Э'то ", "моя'", " ча'шка.", "This is my cup."),
         ra("Э'то мой ко'фе, а э'то твой чай."), dc("таре'лка"),
@@ -381,14 +381,14 @@ U.append(("u8", "It: он, она́, оно́", "gender by ending", [
     ]),
     ("Two cups: plurals", "More than one: most plurals end in -ы or -и.", [
         ex("A consonant adds -ы and -а becomes -ы: стол, столы'; -я and -ь become -и. After к, г, х, ж, ш, ч, щ it is always -и, never -ы: ча'шка, ча'шки. Neuter -о becomes -а, and the stress can move: окно', о'кна.",
-           [("столы'", "tables"), ("ча'шки", "cups"), ("кни'ги", "books"), ("о'кна", "windows")]),
+           [("столы'", "tables"), ("ча'шки", "cups"), ("таре'лки", "plates"), ("кни'ги", "books"), ("о'кна", "windows")]),
         tr("ча'шки"), lp("ло'жки", ["ло'жка", "ло'жки", "ча'шки"]), tl("tables", "столы'"), tl("windows", "о'кна"),
         fl("Вот ", "таре'лки", ".", "Here are the plates."), dc("Где ло'жки?"), ra("Тут ча'шки, а там таре'лки."), cp("коты'", 1),
         rm("Ло'жки тут, а ча'шки там.", ["The spoons are here, and the cups are there.", "The spoon is here, and the cup is there.", "The cups are here, and the spoons are there."]),
     ]),
     ("A new cup: но́вый, но́вая, но́вое", "Describing words follow the noun's gender, just like мой.", [
         ex("Adjectives match the noun: но'вый стол, но'вая ча'шка, но'вое окно', and for plurals но'вые ча'шки. Ста'рый, old, works the same way.",
-           [("но'вый стул", "a new chair"), ("но'вая ча'шка", "a new cup"), ("но'вое окно'", "a new window"), ("но'вые ло'жки", "new spoons")]),
+           [("но'вый стул", "a new chair"), ("но'вая ча'шка", "a new cup"), ("но'вое окно'", "a new window"), ("но'вые ло'жки", "new spoons"), ("ста'рый стол", "an old table")]),
         tr("но'вая ча'шка"), lp("но'вое", ["но'вый", "но'вое", "но'вые"]), tl("new (masculine)", "но'вый"),
         fl("Э'то ", "но'вая", " таре'лка.", "This is a new plate."), fl("Вот ", "но'вые", " ло'жки.", "Here are the new spoons."),
         dc("Э'то но'вый стул."), ra("Мой стол ста'рый, а стул но'вый."), tl("old (masculine)", "ста'рый"),
@@ -434,7 +434,7 @@ U.append(("u10", "Mine and yours", "мой, твой, наш, ваш · у ме�
         dc("твой ко'фе"), fl("Э'то ", "твоё", " окно'?", "Is this your (one, familiar) window?"), ra("Э'то твоя' кни'га? Да, моя'."), cp("моё окно'", 1),
     ]),
     ("Our and your", "Наш and ваш follow the same pattern: на́ша, на́ше, ва́ша, ва́ше.", [
-        ex("Наш is our, ваш is your when you say вы. Both add -а and -е: на'ша, на'ше, ва'ша, ва'ше.", [("наш дом", "our house"), ("на'ша ку'хня", "our kitchen"), ("ва'ше окно'", "your window")]),
+        ex("Наш is our, ваш is your when you say вы. Both add -а and -е: на'ша, на'ше, ва'ша, ва'ше.", [("наш дом", "our house"), ("на'ша ку'хня", "our kitchen"), ("на'ше молоко'", "our milk"), ("ва'ша кни'га", "your book"), ("ва'ше окно'", "your window")]),
         tr("на'ша ку'хня"), lp("ваш", ["наш", "ваш", "на'ша"]), tl("our house", "наш дом"), tl("our window", "на'ше окно'"), tl("kitchen", "ку'хня"),
         fl("Где ", "ва'ша", " ку'хня?", "Where is your (plural/polite) kitchen?"), ra("На'ша ку'хня тут."), dc("ва'ше окно'"),
         rm("Э'то наш кот.", ["This is our cat.", "This is your cat.", "Where is our cat?"]),
@@ -448,7 +448,7 @@ U.append(("u10", "Mine and yours", "мой, твой, наш, ваш · у ме�
     ]),
     ("I don't have: у меня́ нет", "For none, есть becomes нет, and the thing you lack changes its ending.", [
         ex("Swap есть for нет and change the ending: a consonant adds -а (хлеб, хле'ба), -й becomes -я (чай, ча'я), and -о becomes -а. -а becomes -ы, or -и after к, г, х, ж, ш, ч, щ, and -ь becomes -и (соль, со'ли). Ко'фе never changes.",
-           [("У меня' нет хле'ба.", "I have no bread."), ("У тебя' нет со'ли?", "Don't you have any salt?"), ("Молока' нет.", "There's no milk.")]),
+           [("У меня' нет хле'ба.", "I have no bread."), ("У тебя' нет со'ли?", "Don't you have any salt?"), ("Молока' нет.", "There's no milk."), ("Ча'я и сы'ра нет.", "There's no tea and no cheese.")]),
         tr("у меня' нет"), lp("У меня' нет хле'ба.", ["У меня' нет хле'ба.", "У меня' есть хлеб.", "У тебя' нет хле'ба?"]),
         tl("I don't have", "у меня' нет"), fl("У меня' нет ", "со'ли", ".", "I have no salt."), fl("У тебя' нет ", "ча'я", "?", "Don't you have any tea?"),
         dc("У меня' нет сы'ра."), ra("У тебя' есть молоко'? Нет, молока' нет."),
@@ -458,21 +458,21 @@ U.append(("u10", "Mine and yours", "мой, твой, наш, ваш · у ме�
 
 U.append(("u11", "Doing things", "чита́ть, ду́мать, знать", [
     ("Reading: я чита́ю", "One verb, six endings. Learn them on чита́ть, to read, and they work for hundreds of verbs.", [
-        ex("Drop -ть from чита'ть and add the ending for who is doing it: я -ю, ты -ешь, он and она' -ет.", [("я чита'ю", "I read"), ("ты чита'ешь", "you read"), ("она' чита'ет", "she reads")]),
+        ex("Drop -ть from чита'ть and add the ending for who is doing it: я -ю, ты -ешь, он and она' -ет.", [("чита'ть", "to read"), ("я чита'ю", "I read"), ("ты чита'ешь", "you read"), ("она' чита'ет", "she reads"), ("чита'ю кни'гу", "I read a book")]),
         tr("я чита'ю"), lp("ты чита'ешь", ["я чита'ю", "ты чита'ешь", "он чита'ет"]), cp("он чита'ет", 1),
         tl("I read", "я чита'ю"), tl("to read", "чита'ть"), fl("Ма'ма ", "чита'ет", ".", "Mom is reading."), dc("Ты чита'ешь."),
         ra("Я чита'ю кни'гу."),
         rm("Он чита'ет кни'гу.", ["He is reading a book.", "She is reading a book.", "He is thinking about a book."]),
     ]),
     ("We, you, they", "The plural endings: мы чита'ем, вы чита'ете, они' чита'ют.", [
-        ex("мы чита'ем, вы чита'ете, они' чита'ют. Ду'мать, to think, works the same way.", [("мы чита'ем", "we read"), ("вы ду'маете", "you think"), ("они' ду'мают", "they think")]),
+        ex("мы чита'ем, вы чита'ете, они' чита'ют. Ду'мать, to think, works the same way.", [("мы чита'ем", "we read"), ("вы чита'ете", "you read"), ("ду'мать", "to think"), ("ты ду'маешь", "you think"), ("она' ду'мает", "she thinks"), ("мы ду'маем", "we think"), ("вы ду'маете", "you think"), ("они' ду'мают", "they think")]),
         lp("они' чита'ют", ["мы чита'ем", "вы чита'ете", "они' чита'ют"]), fl("Мы ", "чита'ем", ".", "We are reading."),
         fl("Они' ", "ду'мают", ".", "They are thinking."), tl("we think", "мы ду'маем"), tl("to think", "ду'мать"), dc("Вы чита'ете?"),
         ra("Мы ду'маем. Они' чита'ют."), cp("вы ду'маете", 1),
         rm("Что ты ду'маешь?", ["What do you think?", "What are you reading?", "Who is thinking?"]),
     ]),
     ("Knowing: знать", "Знать, to know, has the same endings. Я зна́ю and я не зна́ю carry a lot of conversations.", [
-        ex("Не goes right before the verb: я не зна'ю, I don't know.", [("я зна'ю", "I know"), ("я не зна'ю", "I don't know"), ("ты зна'ешь?", "do you know?")]),
+        ex("Не goes right before the verb: я не зна'ю, I don't know.", [("знать", "to know"), ("я зна'ю", "I know"), ("я не зна'ю", "I don't know"), ("ты зна'ешь?", "do you know?"), ("он зна'ет", "he knows"), ("мы зна'ем", "we know"), ("вы зна'ете", "you know"), ("они' зна'ют", "they know")]),
         tr("я не зна'ю"), lp("я не зна'ю", ["я зна'ю", "я не зна'ю", "ты зна'ешь"]), tl("I don't know", "я не зна'ю"),
         fl("Ты ", "зна'ешь", ", где соль?", "Do you know where the salt is?"), dc("Они' зна'ют."),
         ra("Я не зна'ю. А ты зна'ешь?"), tl("we know", "мы зна'ем"), tl("to know", "знать"),
@@ -489,13 +489,13 @@ U.append(("u11", "Doing things", "чита́ть, ду́мать, знать", [
 
 U.append(("u12", "Speaking and understanding", "говори́ть, понима́ть, не", [
     ("Speaking: говори́ть", "Some verbs take и where чита́ть has е: говори́шь, говори́т. Same idea, different vowel.", [
-        ex("я говорю', ты говори'шь, он говори'т, мы говори'м, вы говори'те, они' говоря'т. The stress stays on the end throughout.", [("я говорю'", "I speak"), ("ты говори'шь", "you speak"), ("они' говоря'т", "they speak")]),
+        ex("я говорю', ты говори'шь, он говори'т, мы говори'м, вы говори'те, они' говоря'т. The stress stays on the end throughout.", [("говори'ть", "to speak"), ("я говорю'", "I speak"), ("ты говори'шь", "you speak"), ("мы говори'м", "we speak"), ("они' говоря'т", "they speak")]),
         tr("я говорю'"), lp("говори'т", ["говорю'", "говори'т", "говоря'т"]), cp("вы говори'те", 1),
         tl("I speak", "я говорю'"), tl("to speak", "говори'ть"), fl("Мы ", "говори'м", ".", "We are talking."), dc("Они' говоря'т."),
         ra("Ты говори'шь, а я ду'маю."), rm("Кто говори'т?", ["Who is speaking?", "Who is reading?", "Who knows?"]),
     ]),
     ("In Russian: по-ру́сски", "По-ру́сски means in Russian. Now you can say what you speak and what you understand.", [
-        ex("Понима'ть, to understand, goes like чита'ть: я понима'ю, ты понима'ешь. По-ру'сски and по-англи'йски name the language.", [("Я говорю' по-ру'сски.", "I speak Russian."), ("Я понима'ю.", "I understand."), ("Я не понима'ю.", "I don't understand.")]),
+        ex("Понима'ть, to understand, goes like чита'ть: я понима'ю, ты понима'ешь. По-ру'сски and по-англи'йски name the language.", [("Я говорю' по-ру'сски.", "I speak Russian."), ("Я понима'ю.", "I understand."), ("Я не понима'ю.", "I don't understand."), ("понима'ть", "to understand"), ("ты понима'ешь", "you understand"), ("по-англи'йски", "in English")]),
         lp("Я не понима'ю.", ["Я понима'ю.", "Я не понима'ю.", "Я не зна'ю."]), tl("I understand", "я понима'ю"),
         tl("in Russian", "по-ру'сски"), tl("to understand", "понима'ть"), fl("Я говорю' ", "по-англи'йски", ".", "I speak English."), dc("Ты понима'ешь?"),
         ra("Я немно'го говорю' по-ру'сски."), cp("по-ру'сски"),
@@ -526,7 +526,7 @@ U.append(("u13", "At the table", "до́брое у́тро · прия́тно�
         fl("", "О'чень", " вку'сно!", "Very tasty!"), tl("very", "о'чень"), cp("Спаси'бо, и тебе'!", 1),
     ]),
     ("Please, and more", "Пожа́луйста is please and also you're welcome. Ещё asks for more.", [
-        ex("Пожа'луйста is said pa-ZHA-lu-sta, often just pa-ZHAL-sta. It is also the answer to спаси'бо.", [("Ещё ко'фе, пожа'луйста.", "More coffee, please."), ("Спаси'бо! — Пожа'луйста.", "Thank you! — You're welcome."), ("Мо'жно ещё?", "May I have more?")]),
+        ex("Пожа'луйста is said pa-ZHA-lu-sta, often just pa-ZHAL-sta. It is also the answer to спаси'бо.", [("Ещё ко'фе, пожа'луйста.", "More coffee, please."), ("Спаси'бо! — Пожа'луйста.", "Thank you! — You're welcome."), ("Мо'жно ещё?", "May I have more?"), ("Переда'й соль.", "Pass the salt.")]),
         tr("пожа'луйста"), lp("Мо'жно ещё?", ["Мо'жно ещё?", "Ещё ко'фе, пожа'луйста.", "О'чень вку'сно!"]),
         tl("please", "пожа'луйста"), tl("May I have more?", "Мо'жно ещё?"), dc("Ещё ко'фе, пожа'луйста."),
         ra("Переда'й, пожа'луйста, соль."), fl("Переда'й, пожа'луйста, ", "хлеб", ".", "Pass the bread, please."),
@@ -536,13 +536,13 @@ U.append(("u13", "At the table", "до́брое у́тро · прия́тно�
 
 U.append(("u14", "Breakfast and dinner", "за́втрак, у́жин, хочу́", [
     ("Breakfast and dinner", "Two meals, two words, and the question what's for dinner?", [
-        ex("За'втрак is breakfast, у'жин is dinner. Что на у'жин? asks what's for dinner.", [("Что на за'втрак?", "What's for breakfast?"), ("На у'жин суп.", "There's soup for dinner."), ("За'втрак гото'в.", "Breakfast is ready.")]),
+        ex("За'втрак is breakfast, у'жин is dinner. Что на у'жин? asks what's for dinner.", [("Что на за'втрак?", "What's for breakfast?"), ("На у'жин суп.", "There's soup for dinner."), ("За'втрак гото'в.", "Breakfast is ready."), ("обе'д", "lunch")]),
         tr("за'втрак"), lp("у'жин", ["у'жин", "за'втрак", "обе'д"]), tl("breakfast", "за'втрак"), tl("dinner", "у'жин"), tl("lunch", "обе'д"),
         fl("Что на ", "у'жин", "?", "What's for dinner?"), dc("На за'втрак ка'ша."), ra("У'жин гото'в! На у'жин суп и хлеб."),
         rm("У'жин гото'в!", ["Dinner is ready!", "Breakfast is ready!", "Is dinner tasty?"]),
     ]),
     ("I want: хочу́", "Хоте́ть, to want, is irregular, but two forms do most of the work: хочу́ and хо́чешь.", [
-        ex("Я хочу' is I want; хо'чешь? is do you want? What you want comes after: хочу' ко'фе.", [("Я хочу' ко'фе.", "I want coffee."), ("Хо'чешь ко'фе?", "Do you want coffee?"), ("Нет, не хочу'.", "No, I don't.")]),
+        ex("Я хочу' is I want; хо'чешь? is do you want? What you want comes after: хочу' ко'фе.", [("Я хочу' ко'фе.", "I want coffee."), ("Хо'чешь ко'фе?", "Do you want coffee?"), ("Нет, не хочу'.", "No, I don't."), ("ты хо'чешь", "you want")]),
         tr("я хочу'"), lp("Хо'чешь ко'фе?", ["Хо'чешь ко'фе?", "Хочу' ко'фе.", "Где ко'фе?"]), tl("I want", "я хочу'"),
         fl("Я ", "хочу'", " суп.", "I want soup."), dc("Ты хо'чешь суп?"), ra("Хо'чешь ко'фе? Да, хочу', спаси'бо."),
         tl("you (one person) want", "ты хо'чешь"),
@@ -561,7 +561,7 @@ U.append(("u14", "Breakfast and dinner", "за́втрак, у́жин, хочу
     ]),
     ("Coffee with milk", "С is with; мне is for me. Two small words for every breakfast.", [
         ex("С means with, and the word after it changes: молоко', с молоко'м; са'хар, с са'харом. Мне is for me: мне чай, пожа'луйста.",
-           [("ко'фе с молоко'м", "coffee with milk"), ("чай с са'харом", "tea with sugar"), ("Мне чай, пожа'луйста.", "Tea for me, please.")]),
+           [("ко'фе с молоко'м", "coffee with milk"), ("чай с са'харом", "tea with sugar"), ("са'хар", "sugar"), ("Мне чай, пожа'луйста.", "Tea for me, please.")]),
         tr("с молоко'м"), lp("с са'харом", ["с са'харом", "с молоко'м", "са'хар"]), tl("with milk", "с молоко'м"), tl("sugar", "са'хар"),
         fl("Ко'фе ", "с молоко'м", "?", "Coffee with milk?"), fl("", "Мне", " чай, пожа'луйста.", "Tea for me, please."),
         dc("Мне ко'фе с молоко'м, пожа'луйста."), ra("Чай с са'харом? Да, пожа'луйста."),
@@ -582,7 +582,7 @@ U.append(("u14", "Breakfast and dinner", "за́втрак, у́жин, хочу
 
 U.append(("u15", "Numbers", "1–10", [
     ("One to five", "Оди́н, два, три, четы́ре, пять. Count something on the table.", [
-        ex("Оди'н changes with gender like мой: оди'н стол, одна' ча'шка.", [("оди'н", "one"), ("два", "two"), ("три", "three"), ("четы'ре", "four"), ("пять", "five")]),
+        ex("Оди'н changes with gender like мой: оди'н стол, одна' ча'шка.", [("оди'н", "one"), ("два", "two"), ("три", "three"), ("четы'ре", "four"), ("пять", "five"), ("два плюс три", "two plus three")]),
         tr("оди'н, два, три"), lp("три", ["два", "три", "пять"]), tl("four", "четы'ре"), dc("пять"), cp("четы'ре"),
         ra("Оди'н, два, три, четы'ре, пять."), tl("two", "два"),
         rm("Два плюс три — пять.", ["Two plus three is five.", "Two plus two is four.", "Three plus three is six."]),
@@ -598,11 +598,11 @@ U.append(("u15", "Numbers", "1–10", [
         lp("де'сять", ["де'вять", "де'сять", "шесть"]), dc("Три плюс четы'ре — семь."),
         fl("Два плюс два — ", "четы'ре", ".", "Two plus two is four."),
         ra("Де'сять, де'вять, во'семь, семь, шесть, пять, четы'ре, три, два, оди'н!"),
-        rm("Шесть — э'то число'.", ["Six is a number.", "Six is a fact.", "Seven is a number."]),
+        rm("Шесть плюс два — во'семь.", ["Six plus two is eight.", "Six plus two is seven.", "Six plus three is eight."]),
     ]),
     ("Eleven to twenty", "Eleven to nineteen are a number on ten: оди́ннадцать is one-on-ten.", [
         ex("Eleven to nineteen are the number plus -на'дцать; два becomes две, and a final ь drops: двена'дцать, пятна'дцать. The stress falls on that на except in оди'ннадцать and четы'рнадцать. Twenty is два'дцать.",
-           [("оди'ннадцать", "eleven"), ("двена'дцать", "twelve"), ("пятна'дцать", "fifteen"), ("два'дцать", "twenty")]),
+           [("оди'ннадцать", "eleven"), ("двена'дцать", "twelve"), ("пятна'дцать", "fifteen"), ("девятна'дцать", "nineteen"), ("два'дцать", "twenty")]),
         lp("двена'дцать", ["два", "двена'дцать", "два'дцать"]), tr("трина'дцать"),
         tl("eleven", "оди'ннадцать"), tl("twelve", "двена'дцать"), tl("twenty", "два'дцать"), dc("пятна'дцать"),
         fl("Де'сять плюс пять — ", "пятна'дцать", ".", "Ten plus five is fifteen."),
@@ -633,7 +633,7 @@ U.append(("u16", "First readings", "ро́бот, число́, мысль, зв
         cp("Раке'та лети'т.", 1),
     ]),
     ("Numbers and facts", "Mathematics in Russian is short and exact.", [
-        ex("Число' is a number, зада'ча a problem to solve. Пра'вда is truth, or simply that's true.", [("число'", "number"), ("зада'ча", "problem, task"), ("Э'то пра'вда.", "That's true.")]),
+        ex("Число' is a number, зада'ча a problem to solve. Пра'вда is truth, or simply that's true.", [("число'", "number"), ("зада'ча", "problem, task"), ("Э'то пра'вда.", "That's true."), ("Э'то непра'вда.", "That's not true.")]),
         rm("Два плюс два — четы'ре. Э'то факт.", ["Two plus two is four. That's a fact.", "Two plus two is five. That's not true.", "Two plus four is six. That's true."]),
         tl("number", "число'"), dc("Э'то пра'вда?"), ra("Пять — э'то число'. Э'то факт."),
         fl("Два плюс два — пять? Нет, э'то ", "непра'вда", ".", "Two plus two is five? No, that's not true."),
@@ -648,10 +648,11 @@ U.append(("u16", "First readings", "ро́бот, число́, мысль, зв
         tl("nothing", "ничего'"),
     ]),
     ("Stars", "One last reading, about the night sky.", [
+        ex("Ночь is night, and большо'й is big. Звёзды is stars.", [("ночь", "night"), ("большо'й", "big"), ("звёзды", "stars")]),
         rm("Ночь. Звёзды. Ко'смос о'чень большо'й.", ["Night. Stars. Space is very big.", "Morning. The sun. Space is very small.", "Night. A rocket. The world is big."]),
         tl("night", "ночь"), tl("big", "большо'й"), dc("Звёзды там."), ra("Ночь. Звёзды. Ко'смос о'чень большо'й."),
         fl("Мир о'чень ", "большо'й", ".", "The world is very big."), lp("звёзды", ["звёзды", "звезда'", "ночь"]),
-        cp("Мы не одни'.", 1), ra("Мы не одни'."),
+        cp("Мы не одни'.", 1),
     ]),
 ]))
 

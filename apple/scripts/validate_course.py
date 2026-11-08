@@ -153,6 +153,70 @@ def spoken_strings(course):
     return [s for s in out if s and CYR.search(s)]
 
 
+def check_meaning_before_recall(course, lex_keys):
+    """Every word the learner must RECALL (translate/fill answer, dictation and read_meaning text)
+    was first PRESENTED with its meaning, earlier in course order or earlier on the same page.
+
+    Presented, mirroring where the app shows a gloss: a trace/copy/read_aloud target or a
+    listen_pick `say` that is itself a lexicon entry (MeaningTag looks the whole target up), a
+    meet card's letter example, every lexicon entry inside an explain example (its English is
+    shown beside it), and every word of a passage (each is tappable for its gloss). A recalled
+    string passes when it splits into presented lexicon entries, or tokens of presented
+    multiword entries (меня from у меня есть, читаем from мы читаем)."""
+    letters = {l["upper"]: l for l in course["letters"]}
+    shown, shown_tokens = set(), set()
+
+    def show_entry(k):
+        if k in lex_keys:
+            shown.add(k)
+            shown_tokens.update(k.split())
+
+    def show_inside(s):
+        toks = key(s).split()
+        for i in range(len(toks)):
+            for j in range(i + 1, len(toks) + 1):
+                show_entry(" ".join(toks[i:j]))
+
+    def missing(s):
+        toks = key(s).split()
+        best = [None] * (len(toks) + 1)  # best[i]: fewest unshown tokens covering toks[i:]
+        best[len(toks)] = []
+        for i in range(len(toks) - 1, -1, -1):
+            opts = [best[j] for j in range(i + 1, len(toks) + 1) if " ".join(toks[i:j]) in shown]
+            if toks[i] in shown_tokens:
+                opts.append(best[i + 1])
+            opts.append([toks[i]] + best[i + 1])
+            best[i] = min(opts, key=len)
+        return best[0]
+
+    for u in course["units"]:
+        for p in u["pages"]:
+            for n, e in enumerate(p["exercises"], 1):
+                k = e.get("kind")
+                recall = []
+                if k == "meet" and e.get("letter") in letters and letters[e["letter"]].get("example"):
+                    show_entry(key(letters[e["letter"]]["example"]))
+                elif k in ("trace", "copy", "read_aloud"):
+                    show_entry(key(e["text"]))
+                elif k == "listen_pick":
+                    show_entry(key(e["say"]))
+                elif k == "explain":
+                    for x in e.get("examples", []):
+                        show_inside(x["ru"])
+                elif k == "passage":
+                    show_inside(e["text"])
+                    for g in e.get("glosses", {}):
+                        shown_tokens.add(key(g))
+                elif k in ("translate", "fill"):
+                    recall = [e["answer"]]
+                elif k in ("dictation", "read_meaning"):
+                    recall = [e["text"]]
+                for r in recall:
+                    gap = missing(r)
+                    if gap:
+                        err(f"{p['id']}#{n} {k}", f"recalls {gap} before its meaning was shown (in {r!r})")
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     path = Path(args[0]) if args else DEFAULT
@@ -323,6 +387,7 @@ def main():
                     missing = [t for t in key(s).split() if t not in lex_tokens]
                     if missing:
                         err(w, f"words not in lexicon: {missing}")
+    check_meaning_before_recall(course, lex_keys)
     # every lexicon entry is produced somewhere (written, said, or picked by ear), and glosses are distinct
     produced = []
     for u in course["units"]:
