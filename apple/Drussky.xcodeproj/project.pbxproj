@@ -49,7 +49,6 @@
 		310171A76D46FBEDF46218B0 /* FluencyTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67AD69B1E4D8FCF2FDB1EEF /* FluencyTracker.swift */; };
 		31A0270F65D88613D595C1FF /* Morphology.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F569EA5CC0476813A129C37 /* Morphology.swift */; };
 		3297D52B73F2DBF6F5C384C5 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3337A7628485FC5AE5B0DC88 /* Book.swift */; };
-		3383ADEC833FCBB0D7417CAA /* cases.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F25BF1A94FC580FF7D9CBA9 /* cases.json */; };
 		349048FBC6F904A4F950AEB3 /* GrammarExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED21F514A3F479406B7BFEC /* GrammarExercises.swift */; };
 		379757D2A5A0C84D2E2B6332 /* MyRussianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C0343BB6363018301B82B7 /* MyRussianView.swift */; };
 		38A0E413208B3DC981A69072 /* lemmas.json in Resources */ = {isa = PBXBuildFile; fileRef = 4DB996D908029A1780AC509E /* lemmas.json */; };
@@ -208,6 +207,7 @@
 		E57755767846D11D7A993BBF /* DiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839249538FC602F501C33C06 /* DiaryEntry.swift */; };
 		E57A52723D5F7D80807A53B1 /* TutorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74264D1BFDC2677C7515FBED /* TutorView.swift */; };
 		E690EE7AE2CCA3D9C9372D1C /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5206CA36CCD17DFB27C030F /* Tutor.swift */; };
+		EB77A6A2B82A241C69D12127 /* cases.json in Resources */ = {isa = PBXBuildFile; fileRef = 25B92368C207116CE0890702 /* cases.json */; };
 		EC08CAB2A25970C45BFE4156 /* Compilation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036AE3BAF9155294D5EA636A /* Compilation.swift */; };
 		EC5DEA629DDF914B9CA6C598 /* NotebookLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1095511DFC346F6F4748A8 /* NotebookLoading.swift */; };
 		EE2BF2C19B635513A48C4ACE /* EarlierAttempts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40296369FBA50E77B28E46CA /* EarlierAttempts.swift */; };
@@ -318,6 +318,7 @@
 		22AB7E271321F155E869C1B5 /* CursiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursiveTests.swift; sourceTree = "<group>"; };
 		22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MarckScript-Regular.ttf"; sourceTree = "<group>"; };
 		23202045AC2D23825B097954 /* Book+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+Review.swift"; sourceTree = "<group>"; };
+		25B92368C207116CE0890702 /* cases.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cases.json; sourceTree = "<group>"; };
 		261D26C847B1553A4AFED3BA /* ConstructionChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructionChoice.swift; sourceTree = "<group>"; };
 		26F2D22948EE4E31130F07F0 /* GoalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUITests.swift; sourceTree = "<group>"; };
 		27AE7A8C01467109460EB5B7 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -406,7 +407,6 @@
 		7D7935D1CE7CBFB9F633EC2E /* FamilyPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyPages.swift; sourceTree = "<group>"; };
 		7DC7E2413C536E90442237A8 /* TalkScreensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkScreensUITests.swift; sourceTree = "<group>"; };
 		7EDAAEC9EBE96E2118D1766E /* FluencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluencyTests.swift; sourceTree = "<group>"; };
-		7F25BF1A94FC580FF7D9CBA9 /* cases.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cases.json; sourceTree = "<group>"; };
 		802978B020CCE7FE58229877 /* PhoneRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneRecognizer.swift; sourceTree = "<group>"; };
 		839249538FC602F501C33C06 /* DiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEntry.swift; sourceTree = "<group>"; };
 		84A5F088589077DA6E84C059 /* FormationCoach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationCoach.swift; sourceTree = "<group>"; };
@@ -764,6 +764,14 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		64D68F8A9EF105E470220EDB /* ondevice */ = {
+			isa = PBXGroup;
+			children = (
+				25B92368C207116CE0890702 /* cases.json */,
+			);
+			path = ondevice;
+			sourceTree = "<group>";
+		};
 		6574F3A89314AC1051DB01F2 /* Typing */ = {
 			isa = PBXGroup;
 			children = (
@@ -810,15 +818,6 @@
 				BD11DB255B4E8119378B74FD /* Fonts */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		7FC31DED5E31739CCFA7CC7D /* deputy-codex */ = {
-			isa = PBXGroup;
-			children = (
-				A36718C2B12718CE033847F2 /* research */,
-			);
-			name = "deputy-codex";
-			path = ..;
 			sourceTree = "<group>";
 		};
 		8162BB3B3759D18CA5E901FE /* OnDevice */ = {
@@ -895,14 +894,6 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		A36718C2B12718CE033847F2 /* research */ = {
-			isa = PBXGroup;
-			children = (
-				B14971D1E615363F922CCA88 /* ondevice */,
-			);
-			path = research;
-			sourceTree = "<group>";
-		};
 		AAF5561BB78D985F3A4AF455 /* Judgement */ = {
 			isa = PBXGroup;
 			children = (
@@ -922,14 +913,6 @@
 				DB91D25E1B7A1CB3C067D321 /* RussianDomain+Grammar.swift */,
 			);
 			path = Grammar;
-			sourceTree = "<group>";
-		};
-		B14971D1E615363F922CCA88 /* ondevice */ = {
-			isa = PBXGroup;
-			children = (
-				7F25BF1A94FC580FF7D9CBA9 /* cases.json */,
-			);
-			path = ondevice;
 			sourceTree = "<group>";
 		};
 		BD11DB255B4E8119378B74FD /* Fonts */ = {
@@ -982,6 +965,14 @@
 			path = Pocket;
 			sourceTree = "<group>";
 		};
+		D1F69A051C2155ACB2D1C5B2 /* research */ = {
+			isa = PBXGroup;
+			children = (
+				64D68F8A9EF105E470220EDB /* ondevice */,
+			);
+			path = research;
+			sourceTree = "<group>";
+		};
 		E1AB1C171CE673558C089346 /* Speaking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1015,14 +1006,23 @@
 		EB7E55D010BAEF213914079E = {
 			isa = PBXGroup;
 			children = (
-				7FC31DED5E31739CCFA7CC7D /* deputy-codex */,
 				1F5F4280DFDE09F9376E8534 /* Drussky */,
 				06305DCDBD604A16CF5D89E8 /* DrusskyTests */,
 				041A425F9E0F853F7382281E /* DrusskyUITests */,
 				342C98B4B33A6A227F691389 /* LearningCore */,
 				95FF0865FAD2E9BCB07154B4 /* LearningCoreTests */,
+				EDB8DDA42352D71B38BC86B1 /* rufren */,
 				F9D5F14943E0FF3C0C7B3F7D /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		EDB8DDA42352D71B38BC86B1 /* rufren */ = {
+			isa = PBXGroup;
+			children = (
+				D1F69A051C2155ACB2D1C5B2 /* research */,
+			);
+			name = rufren;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F79CFD695EA72CFC61AF7B36 /* Fluency */ = {
@@ -1225,7 +1225,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3383ADEC833FCBB0D7417CAA /* cases.json in Resources */,
+				EB77A6A2B82A241C69D12127 /* cases.json in Resources */,
 				6EF796C73B06762063E17B86 /* goal-lemmas.json in Resources */,
 				FB7F6E27A5068503D04C4C7A /* hershey-ink.json in Resources */,
 				AA6E33B7B0AC8F4613172AA2 /* wikisource-my.json in Resources */,
