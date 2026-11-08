@@ -275,8 +275,8 @@ final class DayTests: XCTestCase {
         XCTAssertEqual(estimate.level, .tired, "\(estimate)")
         let page = book.pages[p]
         let line = try XCTUnwrap(book.deskLine(for: p))
-        XCTAssertTrue(line.hasPrefix("Shorter page today"), line)
-        XCTAssertEqual(book.coverLine, "Shorter page today — you've been at it a while.")
+        XCTAssertEqual(line, "2 reviews now use choices. 3 reviews wait for later.")
+        XCTAssertEqual(book.coverLine, "Some reviews were shortened or left for later today.")
         // Two of the remaining reviews became recognition; the rest were left for later, never graded.
         let remaining = Array(9..<14)
         XCTAssertEqual(remaining.filter { page.exercises[$0].kind == .listenPick || page.exercises[$0].kind == .readMeaning }, [9, 10])
@@ -294,6 +294,25 @@ final class DayTests: XCTestCase {
         clock = clock.addingTimeInterval(300)
         book.record(page: p, exercise: 9) { $0.attempts = 1; $0.chosen = 0; $0.status = .done }
         XCTAssertEqual(book.pages[p].results[10].status, .open)
+    }
+
+    func testNoShorteningNoticeWhenNoReviewsCanChange() throws {
+        let book = Book(course: course, store: tempStore())
+        var ex = Exercise(kind: .dictation); ex.text = "кот"
+        book.insertWrittenPage(title: "New work", intro: nil, unitTitle: "QA",
+                               exercises: Array(repeating: ex, count: 10), newWords: [])
+        let p = book.currentPage
+        var clock = book.now()
+        book.now = { clock }
+        for i in 0..<8 {
+            clock = clock.addingTimeInterval(300)
+            book.record(page: p, exercise: i) { $0.attempts = 1; $0.failedChecks = 1; $0.recognized = "кит" }
+            book.record(page: p, exercise: i) { $0.attempts = 2; $0.revealed = true; $0.status = .missed }
+        }
+        XCTAssertEqual(book.day.fatigue?.level, .tired)
+        XCTAssertNil(book.deskLine(for: p), "A page with no reviews was not shortened")
+        XCTAssertNil(book.day.lastShortened)
+        XCTAssertEqual(book.pages[p].results.filter { $0.status == .open }.count, 2)
     }
 
     /// Shortening never takes an exercise the learner has begun: ink on its strip (the writing may be

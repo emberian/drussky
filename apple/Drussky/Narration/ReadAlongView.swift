@@ -55,6 +55,7 @@ struct ReadAlongView: View {
                     Text(player.rate == 1 ? "1×" : "¾×")
                         .font(Theme.label(14)).monospacedDigit()
                         .padding(.horizontal, 10).padding(.vertical, 7)
+                        .frame(minWidth: 44, minHeight: 44)
                         .background(Capsule().fill(Theme.accent.opacity(player.rate == 1 ? 0.10 : 0.22)))
                         .foregroundStyle(Theme.accent)
                 }
@@ -65,7 +66,7 @@ struct ReadAlongView: View {
                 } label: {
                     Image(systemName: listenFirst ? "eye.slash" : "eye")
                         .font(.system(size: 16, weight: .semibold))
-                        .frame(width: 36, height: 34)
+                        .frame(width: 44, height: 44)
                         .background(Capsule().fill(Theme.accent.opacity(listenFirst ? 0.22 : 0.10)))
                         .foregroundStyle(Theme.accent)
                 }
@@ -101,7 +102,7 @@ struct ReadAlongView: View {
         let hidden = listenFirst && (timing.map { $0 > revealedUpTo } ?? (revealedUpTo < 0))
         Button { tap(word, timing: timing) } label: {
             Text(Theme.stressed(token, show: book.settings.showStress))
-                .russianFont(28, weight: isNow ? .semibold : .regular)
+                .russianFont(28)
                 .foregroundStyle(isNow ? Theme.accent : Theme.text)
                 .opacity(hidden ? 0 : 1)
                 .padding(.vertical, 2).padding(.horizontal, 3)
@@ -121,10 +122,10 @@ struct ReadAlongView: View {
     }
 
     private func tap(_ word: String, timing: Int?) {
+        if listenFirst, timing.map({ $0 > revealedUpTo }) ?? (revealedUpTo < 0) { return }
         selected = word
         guard let timing, let timings, let file = exercise.narration else { voice.play(word); return }
         voice.stop()
-        if listenFirst, timing > revealedUpTo { return }  // not yet read: no peeking by tapping
         player.play(file, from: max(0, timings.words[timing].start - 0.05), owner: owner)
     }
 
@@ -170,6 +171,8 @@ struct NarrationClipButton: View {
                     .offset(x: 3, y: -3)
                     .accessibilityHidden(true)
             }
+            .frame(minWidth: 44, minHeight: 44)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label ?? "Hear the reader")

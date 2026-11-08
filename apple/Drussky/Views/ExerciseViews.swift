@@ -26,11 +26,9 @@ struct ExerciseSlot {
     var result: ExerciseResult { page.results[index] }
 
     func record(_ update: (inout ExerciseResult) -> Void) { book.record(ref, update) }
-    /// Records, then moves the page on if this finished the exercise (an explicit action).
+    /// Finish in place. Answering an exercise is not a request to move the paper or play the next one.
     func finish(_ update: (inout ExerciseResult) -> Void) {
-        let was = book.result(ref)?.status.isComplete ?? true
         record(update)
-        if !was && book.result(ref)?.status.isComplete == true { book.requestAdvance(page: ref.pageID) }
     }
     /// Whether an advance signal is for this exercise's page.
     var isAdvanceTarget: Bool { book.advancePageID == ref.pageID }
@@ -172,29 +170,28 @@ struct RussianLine: View {
     @Environment(Book.self) private var book
     var text: String
     var size: CGFloat = 34
-    /// Show the meaning beside the word: first contact with a word is an introduction.
+    /// Show the meaning below the word: first contact with a word is an introduction.
     var gloss: Bool = false
     var body: some View {
-        HStack(alignment: .center, spacing: 14) {
-            Text(Theme.stressed(text, show: book.settings.showStress))
-                .russianFont(size, weight: .medium)
-                .foregroundStyle(Theme.text)
-            HearButton(text: text, size: 40)
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .center, spacing: 14) {
+                Text(Theme.stressed(text, show: book.settings.showStress))
+                    .russianFont(size, weight: .medium)
+                    .foregroundStyle(Theme.text)
+                HearButton(text: text, size: 40)
+            }
             if gloss { MeaningTag(text: text) }
         }
     }
 }
 
-/// "· cat 🐈" — the meaning of a course word (or a kept word), wherever it is presented.
+/// The meaning of a course word (or a kept word), wherever it is presented.
 struct MeaningTag: View {
     @Environment(Book.self) private var book
     var text: String
     var body: some View {
         if let w = book.word(text) ?? book.word(RussianText.unstressed(text)) {
-            HStack(spacing: 6) {
-                Text(w.en).font(.system(size: 17, weight: .medium)).foregroundStyle(Theme.muted)
-                if let e = w.emoji { Text(e).font(.system(size: 20)) }
-            }
+            Text(w.en).font(.system(size: 17, weight: .medium)).foregroundStyle(Theme.muted)
             .accessibilityLabel("means \(w.en)")
         }
     }
@@ -236,7 +233,7 @@ struct MeetExercise: View {
                         .foregroundStyle(Theme.text)
                         .fixedSize(horizontal: false, vertical: true)
                     if let example = letter.example, RussianText.letters(in: example).isSubset(of: knownLetters(adding: letter.upper)) {
-                        HStack(spacing: 8) {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text("as in").scaledFont(15).foregroundStyle(Theme.muted)
                             RussianLine(text: example, size: 22, gloss: true)
                         }
@@ -282,7 +279,7 @@ struct ExplainExercise: View {
             if let examples = slot.exercise.examples, !examples.isEmpty {
                 FlowRow(spacing: 18) {
                     ForEach(examples, id: \.self) { ex in
-                        HStack(spacing: 8) {
+                        VStack(alignment: .leading, spacing: 4) {
                             RussianLine(text: ex.ru, size: 24)
                             Text(ex.en).scaledFont(15).foregroundStyle(Theme.muted)
                         }
@@ -426,9 +423,11 @@ struct WritingExercise: View {
         case .meet:
             Instruction(text: instructionOverride ?? "Trace it.")
         case .trace:
-            HStack(spacing: 14) {
-                Instruction(text: "Trace, saying it as you write.")
-                HearButton(text: target, size: 36)
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 14) {
+                    Instruction(text: "Trace, saying it as you write.")
+                    HearButton(text: target, size: 36)
+                }
                 MeaningTag(text: target)
             }
         case .copy:
@@ -449,7 +448,6 @@ struct WritingExercise: View {
             VStack(alignment: .leading, spacing: 4) {
                 Instruction(text: "Write it in Russian.")
                 HStack(spacing: 12) {
-                    if let emoji = book.word(target)?.emoji { Text(emoji).scaledFont(40) }
                     Text(ex.en ?? "").scaledFont(28, weight: .semibold, design: .serif).foregroundStyle(Theme.text)
                 }
             }
@@ -468,7 +466,7 @@ struct WritingExercise: View {
     }
 
     @ViewBuilder private var controls: some View {
-        HStack(spacing: 10) {
+        FlowRow(spacing: 10) {
             if !result.status.isComplete && !pad.isEmpty && !judging {
                 if selfJudged {
                     PillButton(title: "Check", systemImage: "checkmark", prominent: true) { checked = true; readSilently() }
@@ -482,9 +480,9 @@ struct WritingExercise: View {
                 PillButton(title: "Undo", systemImage: "arrow.uturn.backward") { pad.undo() }
                 PillButton(title: "Clear", systemImage: "eraser") { pad.clear(); lastReading = nil }
             }
-            Spacer(minLength: 0)
         }
-        .frame(minHeight: result.status.isComplete ? 0 : 34)
+        .frame(minHeight: 44)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .animation(.easeOut(duration: 0.2), value: pad.isEmpty)
         if let feedback = feedbackLine {
             feedback
@@ -510,7 +508,7 @@ struct WritingExercise: View {
             return AnyView(VStack(alignment: .leading, spacing: 8) {
                 Text(reading.isEmpty ? "I can't make that out yet." : "That reads to me as «\(reading)».")
                     .scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
-                HStack(spacing: 10) {
+                FlowRow(spacing: 10) {
                     PillButton(title: "Try again", systemImage: "arrow.counterclockwise") { pad.clear(); lastReading = nil }
                     PillButton(title: "Show me", systemImage: "eye", tint: Theme.redPen) {
                         slot.record { $0.revealed = true; $0.status = .missed }
@@ -630,9 +628,10 @@ struct WritingExercise: View {
 
 /// The teacher's correction, written in red above the line.
 struct Correction: View {
+    @Environment(Book.self) private var book
     let text: String
     var body: some View {
-        Text(RussianText.unstressed(text))
+        Text(Theme.stressed(text, show: book.settings.showStress))
             .font(Theme.cursive(38))
             .foregroundStyle(Theme.redPen)
             .rotationEffect(.degrees(-2))

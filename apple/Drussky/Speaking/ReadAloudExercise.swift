@@ -41,8 +41,8 @@ struct ReadAloudExercise: View {
                 } else {
                     HearButton(text: target, size: 40)
                 }
-                MeaningTag(text: target)
             }
+            MeaningTag(text: target)
             HStack(alignment: .center, spacing: 16) {
                 TurnButton(phase: mine ? turn.phase : .idle, level: mine ? turn.level : 0) { tap() }
                 TurnStatus(phase: mine ? turn.phase : .idle, problem: turn.problem(for: key), hasTake: recordingExists,
@@ -98,7 +98,7 @@ struct ReadAloudExercise: View {
                      : "I heard «\(heard)».")
                     .scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
                 if !slot.result.status.isComplete {
-                    HStack(spacing: 10) {
+                    FlowRow(spacing: 10) {
                         PillButton(title: "Sounded right to me", systemImage: "hand.thumbsup") {
                             slot.finish { $0.status = .done; $0.selfAssessed = true }
                         }

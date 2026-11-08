@@ -118,7 +118,10 @@ final class TalkSession {
 
     /// Picks up a conversation left in the middle.
     func resume() {
-        guard status == .paused else { return }
+        switch status {
+        case .paused, .failed, .unavailable: break
+        default: return
+        }
         switch dialogue.phase {
         case .tutorTurn: tutorTurn()
         case .learnerTurn: yourTurn()
@@ -190,18 +193,30 @@ final class TalkSession {
     /// Says a tutor line again (tap the speaker on it).
     func replay(_ line: TalkLine) {
         guard !isLive || status == .yourTurn else { return }
+        mic.cancel()
+        speaker?.cancel()
         voice.stop()
-        Task { await voice.speak(line.ru) }
+        speaker = Task {
+            guard !Task.isCancelled else { return }
+            await voice.speak(line.ru)
+        }
     }
 
     // MARK: The learner's turn
 
-    /// Hands over the microphone: a cue, then listening until the voice stops. The last tutor
-    /// line is the recognizer's hint (the reply usually reuses its words).
+    /// Leave time to read, replay or compose a reply. Only a microphone tap starts capture.
     func yourTurn() {
         guard !dialogue.isOver else { return }
         task = nil
+        mic.cancel()
         status = .yourTurn
+    }
+
+    /// The last tutor line is the recognizer's hint (the reply usually reuses its words).
+    private func startCapture() {
+        guard status == .yourTurn else { return }
+        speaker?.cancel()
+        voice.stop()
         let mine = run
         let hint = conversation.tutorLines.last?.ru ?? "Да."
         let request = SpeakingTurn.Request(key: key, target: hint, takeURL: book.newTakeURL(ref), model: nil, repeats: 0)
@@ -221,14 +236,18 @@ final class TalkSession {
     /// A take that held no recognisable Russian, kept if the learner then types what they said.
     private var pendingTake: String?
 
-    /// The microphone's one button while it is the learner's turn: ends the take early.
-    func tap() { _ = mic.tap(key) }
+    /// Start when ready, or stop a take early. An interrupted/failed take can be retried.
+    func tap() {
+        guard status == .yourTurn else { return }
+        if !mic.tap(key) { startCapture() }
+    }
 
     /// Nothing came through: try the turn again.
     func again() {
         guard status == .notHeard || status == .paused else { return }
         pendingTake = nil
         yourTurn()
+        startCapture()
     }
 
     /// The learner types the line instead (the recognizer gave up, or there is no microphone).

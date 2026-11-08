@@ -46,14 +46,12 @@ extension Book {
             r.diary?.correction = correction
             r.status = verified && correction.edits.isEmpty ? .correct : .done
         }
-        requestAdvance(page: ref.pageID)
     }
 
     /// Finishes a line nobody corrected (no key, or the learner chose to keep it as written).
     func keepDiaryUncorrected(_ ref: ExerciseRef) {
         guard result(ref)?.diary != nil else { return }
         record(ref) { $0.status = .done }
-        requestAdvance(page: ref.pageID)
     }
 
     /// ＋ → Write in my diary: a page with one diary line, its prompt chosen from what the
@@ -61,7 +59,7 @@ extension Book {
     func insertDiaryPage() {
         var ex = Exercise(kind: .diary)
         ex.prompt = DiaryPrompts.pick(for: self)
-        insertWrittenPage(title: "Дневник · Diary", intro: "A few words of your own Russian. Write what you can; your tutor marks it in red.",
+        insertWrittenPage(title: "Дневни́к", intro: "Write a few words in Russian. Send them to your tutor for corrections, or keep them as written.",
                           unitTitle: "My Russian", exercises: [ex], newWords: [])
     }
 

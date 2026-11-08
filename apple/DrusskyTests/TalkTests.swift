@@ -19,6 +19,47 @@ final class TalkTests: XCTestCase {
 
     // MARK: The dialogue
 
+    func testResumingLearnerTurnWaitsForMicrophoneTap() async throws {
+        let book = Book(course: try course(), store: tempStore())
+        book.insertTalkPage()
+        let ref = ExerciseRef(pageID: try XCTUnwrap(book.page).id, index: 0)
+        var saved = TalkConversation(turns: 6)
+        saved.scene = TalkScene(title: "A cat", ru: "Кот")
+        let line = TalkLine(role: .tutor, ru: "Где кот?", at: book.now())
+        saved.lines = [line]
+        book.saveTalk(ref, saved)
+        let session = TalkSession(ref: ref, book: book, pageVoice: Voice(), voice: SilentTutorVoice())
+        defer { session.cancel() }
+
+        session.appear(autoStart: false)
+        XCTAssertEqual(session.status, .paused)
+        session.resume()
+        await Task.yield()
+        XCTAssertEqual(session.status, .yourTurn)
+        XCTAssertEqual(session.mic.phase, .idle, "Reading the reply must not start capture or request microphone permission")
+
+        session.mic.pose(.hearing, key: session.key)
+        session.replay(line)
+        XCTAssertEqual(session.mic.phase, .idle, "Replaying the tutor must not record the tutor as the learner")
+        XCTAssertEqual(session.status, .yourTurn)
+    }
+
+    func testRetryAfterMissingKeyStartsAnotherAttempt() async throws {
+        try XCTSkipUnless((Keychain.apiKey ?? "").isEmpty, "requires a simulator with no tutor key")
+        let book = Book(course: try course(), store: tempStore())
+        book.insertTalkPage()
+        let ref = ExerciseRef(pageID: try XCTUnwrap(book.page).id, index: 0)
+        let session = TalkSession(ref: ref, book: book, pageVoice: Voice(), voice: SilentTutorVoice())
+        defer { session.cancel() }
+        session.propose()
+        for _ in 0..<100 where session.status == .proposing {
+            try await Task.sleep(for: .milliseconds(10))
+        }
+        guard case .failed = session.status else { return XCTFail("Missing key must fail promptly: \(session.status)") }
+        session.resume()
+        XCTAssertEqual(session.status, .proposing, "Try again must leave the failure state")
+    }
+
     func testDialogueTurnOrderAndEnd() {
         var d = TalkDialogue(totalTurns: 6)
         XCTAssertEqual(d.phase, .choosingScene)

@@ -41,7 +41,6 @@ extension Book {
         // debounce, so the next opening finds it (and can reconstruct its evidence from the report).
         saveNow()
         if !wasComplete, result(ref)?.status.isComplete == true {
-            requestAdvance(page: ref.pageID)
             return .finished
         }
         return .recorded

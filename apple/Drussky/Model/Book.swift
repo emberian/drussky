@@ -150,6 +150,7 @@ final class Book {
     var hooks = HookShelf() { didSet { scheduleSave() } }
     /// Fluency measurements: reading, writing and listening over weeks (Fluency/, metrics.jsonl).
     let fluency: FluencyTracker
+    /// Explicit navigation only. Completion and asynchronous feedback leave the paper in place.
     private(set) var advanceSignal = 0
     private(set) var advancePageID: String?
     func requestAdvance(page id: String) { advancePageID = id; advanceSignal += 1 }

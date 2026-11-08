@@ -7,7 +7,6 @@ struct PageView: View {
     @Environment(\.horizontalSizeClass) private var sizeClass
     let pageIndex: Int
     var topInset: CGFloat = 64
-    @State private var lastActive: Int?
     @State private var asking: AskTarget?
 
     struct AskTarget: Identifiable { var exercise: Int?; var id: Int { exercise ?? -1 } }
@@ -50,21 +49,19 @@ struct PageView: View {
                     }
                     .scrollDismissesKeyboard(.immediately)
                     .onAppear {
-                        lastActive = active
                         if QA.has("-qa-bottom") { DispatchQueue.main.async { proxy.scrollTo("end", anchor: .bottom) } }
-                        if let active, active > 1, !QA.has("-qa-top") {
+                        if let active, active > 1, !QA.has("-qa-top"), !QA.has("-qa-bottom") {
                             DispatchQueue.main.async { proxy.scrollTo(active, anchor: UnitPoint(x: 0.5, y: 0.15)) }
                         }
                     }
                     .onChange(of: book.advanceSignal) { _, _ in
-                        guard book.advancePageID == book.pages[pageIndex].id else { return }
-                        let new = book.pages[pageIndex].firstOpenIndex
-                        Task {
-                            try? await Task.sleep(for: .milliseconds(450))
-                            withAnimation(.easeInOut(duration: 0.55)) {
-                                if let new { proxy.scrollTo(new, anchor: UnitPoint(x: 0.5, y: 0.15)) }
-                                else { proxy.scrollTo("end", anchor: .bottom) }
-                            }
+                        // Only an explicit Next button requests this; finishing stays in place.
+                        guard book.currentPage == pageIndex,
+                              book.advancePageID == page.id else { return }
+                        if let next = book.pages[pageIndex].firstOpenIndex {
+                            proxy.scrollTo(next, anchor: UnitPoint(x: 0.5, y: 0.15))
+                        } else {
+                            proxy.scrollTo("end", anchor: .bottom)
                         }
                     }
                 }
@@ -84,7 +81,7 @@ struct PageView: View {
                     .font(Theme.cursive(compact ? 26 : 32))
                     .foregroundStyle(Theme.ink)
                 Spacer()
-                Text(page.isReview ? "Повторение" : "Классная работа")
+                Text(page.isReview ? "Повторе́ние" : "Кла́ссная рабо́та")
                     .font(Theme.cursive(compact ? 22 : 28))
                     .foregroundStyle(Theme.ink)
             }
@@ -170,7 +167,11 @@ struct PageView: View {
         let f = DateFormatter()
         f.locale = Locale(identifier: "ru_RU")
         f.setLocalizedDateFormatFromTemplate("d MMMM")
-        return f.string(from: date)
+        let months = ["января": "января́", "февраля": "февраля́", "марта": "ма́рта",
+                      "апреля": "апре́ля", "мая": "ма́я", "июня": "ию́ня", "июля": "ию́ля",
+                      "августа": "а́вгуста", "сентября": "сентября́", "октября": "октября́",
+                      "ноября": "ноября́", "декабря": "декабря́"]
+        return f.string(from: date).split(separator: " ").map { months[String($0)] ?? String($0) }.joined(separator: " ")
     }
 }
 
@@ -206,10 +207,10 @@ struct GradeStamp: View {
 
     static func praise(for page: BookPage) -> String {
         switch grade(for: page) {
-        case 5?: "Отлично!"
-        case 4?: "Хорошо!"
-        case .some: "Молодец — дальше!"
-        case nil: "Готово!"
+        case 5?: "Отли́чно"
+        case 4?: "Хорошо́"
+        case .some: "Да́льше"
+        case nil: "Гото́во"
         }
     }
 
@@ -227,7 +228,7 @@ struct GradeStamp: View {
 struct HowThisBookWorks: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            row("pencil.and.scribble", "Write with your Pencil right on the lines. Each exercise ticks itself when it reads your writing; tap Done if it doesn't.")
+            row("pencil.and.scribble", "Write on the lines. Tracing and copying tick themselves; tap Done when you're ready. For answers from memory, tap Check and compare with the Russian.")
             row("speaker.wave.2", "Tap any speaker to hear it again, as often as you like.")
             row("questionmark.bubble", "Stuck or curious? The ? beside an exercise asks your tutor.")
             row("book.pages", "Finish the page, then turn it. Earlier pages keep everything you wrote.")

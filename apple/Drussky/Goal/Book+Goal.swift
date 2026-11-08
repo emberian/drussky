@@ -145,7 +145,7 @@ extension Book {
         let d = distance(for: goal)
         guard force || d.firstPageReady else { return false }
         let ex = firstPageExercise(for: goal)
-        insertWrittenPage(title: goal.title, intro: "You can read the first page of your book. Take it slowly; tap any word you want to check.",
+        insertWrittenPage(title: goal.title, intro: "The first page of your book. Tap any word for help with its meaning and sound.",
                           unitTitle: "Your book · \(goal.author ?? "")".trimmingCharacters(in: CharacterSet(charactersIn: " ·")),
                           exercises: [ex], newWords: [], sourceID: "goal-first:\(goal.id)", beforeCurrentIfUntouched: true)
         updateGoal(id: goal.id) { $0.firstPageOpened = now() }

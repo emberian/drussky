@@ -2,8 +2,8 @@
 
 A Russian exercise book you write in. Open it and you are on today's page: numbered
 exercises down a squared тетрадь page, answered in place — with the Pencil on ruled lines,
-by ear, or aloud. Finished exercises get a red tick; a finished page gets a red mark
-(5 — Отлично!), or a red tick (Готово!) when nothing on it was graded — practice, skips, speaking
+by ear, or aloud. Finished exercises stay in place and get a red tick; a finished page gets a red mark
+(5 — Отли́чно), or a red tick (Гото́во) when nothing on it was graded — practice, skips, speaking
 you judged yourself, a diary line nobody corrected. A diary line the tutor marked counts, and three
 or more corrections on it count as a miss. Turn the page with the arrow; turning back shows exactly
 what you wrote.
@@ -24,7 +24,7 @@ what you wrote.
 | read along | a library text read by a human (LibriVox volunteers, Commons readers): the word being said lights up, tap a word to hear from there, ¾ speed, or listen first with the text appearing as it is read; then write one of its sentences from the reader's voice and say one after the reader |
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние) |
 | build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
-| talk (Разгово́р) | a spoken conversation with the tutor: pick one of three scenes made from your words, then 6–10 turns — the tutor speaks (short Russian, stress-marked, at most two new words a turn, a gentle «Вы хоте́ли сказа́ть…?» when you slip), you answer out loud hands-free, an eye icon whispers the English; afterwards every line of yours gets the red pen and at most one pronunciation tip. ＋ → *Talk* |
+| talk (Разгово́р) | a spoken conversation with the tutor: pick one of three scenes made from your words, then 6–10 turns — the tutor speaks (short Russian, stress-marked, at most two new words a turn, a gentle «Вы хоте́ли сказа́ть…?» when you slip), you tap the microphone when ready and answer out loud, an eye icon whispers the English; afterwards every line of yours gets the red pen and at most one pronunciation tip. ＋ → *Talk* |
 | guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
 
 Writing is read on-device by Apple's handwriting recognizer. For tracing and copying it ticks
@@ -128,8 +128,8 @@ voices.
 ＋ → *Talk* (`Drussky/Talk/`) is a spoken conversation with the tutor on the page. The tutor
 proposes three scenes built from the words you know; then it speaks (one or two short sentences,
 stress-marked, within your vocabulary plus at most two new words, usually ending in a question),
-the soft tone says it is your turn, and the same hands-free microphone as *read aloud* takes your
-answer (no model to play, no target to compare: `TalkSession` runs its own `SpeakingTurn`). Speech
+the learner taps the microphone when ready, then the soft tone cues the same hands-free
+capture as *read aloud* (no model to play, no target to compare: `TalkSession` runs its own `SpeakingTurn`). Speech
 recognition transcribes it, the tutor answers what was understood and repairs gently («Вы хоте́ли
 сказа́ть …?»). It stays in Russian; the eye beside each line whispers the English and the new words
 (each keepable). After 6–10 turns the tutor says goodbye and the whole transcript is marked like a
@@ -156,9 +156,8 @@ said so far are already saved and the page offers to continue.
 The inside cover asks for one text you want to read for real — from the Library, pasted or
 scanned, or a ru.wikisource link (fetched through the MediaWiki parse API and cleaned to its
 paragraphs). It becomes *your book*, kept in the notebook (several allowed; one current), and
-the cover shows **Distance to your book**: the share of its words you know, how many new words
-stand between you and its first page, how many of its sentences you could read now, a ladder
-of the next twenty words worth knowing (occurrences in the text, weighted toward the first
+the cover keeps **Your book** beside a ladder
+of the next twenty words to practise (occurrences in the text, weighted toward the first
 page) and the grammar patterns it leans on. The text's words are lemmatized by the course's
 tables, then by the tutor (`claude-sonnet-5-5`, 300 forms per call, cached in the goal with a
 short gloss), with a rule-based stemmer standing in until that arrives.
@@ -170,7 +169,7 @@ contiguous stretch of the text; anything invented is dropped. Without a key, an 
 teaches the words through their own sentences. The book also writes one by itself when a
 brand-new course page would teach nothing toward the goal while a readable stretch waits (at
 most one in three pages). When the first five sentences are each ≥90% known, the book opens
-them as a page of their own — *You can read the first page of your book* — with tap-to-gloss
+them as a page of their own — *The first page of your book* — with tap-to-gloss
 and a red «Пе́рвая страни́ца» stamp. Policies and thresholds: `Drussky/Goal/Goal.swift`;
 the distance arithmetic is LearningCore's `Target`.
 
@@ -237,11 +236,11 @@ small hook batch (run when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
 `DrusskyUITests` writes on the paper with real touch strokes, completes the exercise, and
 checks it survives a relaunch.
 
-QA launch arguments (simulator): `-qa-reset`, `-qa-complete N` (work through N pages with
+QA launch arguments (simulator): `-qa-reset`, `-qa-no-key` (Debug: hides the tutor key for this launch without changing Keychain), `-qa-complete N` (work through N pages with
 synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-contents`,
 `-qa-settings`, `-qa-diary` (three diary pages with canned red-pen corrections, no key
 needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian);
-`-qa-talk scene|mid|marked` (a Talk page posed from a canned conversation: the scene choice, the
+`-qa-talk empty|scene|mid|marked` (a Talk page posed from a canned conversation: the scene choice, the
 middle of a dialogue, the marked transcript);
 `-qa-settings`; `-qa-day N` / `-qa-away D` (the pages were done N or D days ago, then the page is
 turned: a morning or welcome-back page), `-qa-probes` (a synthetic answered probe set for the cover

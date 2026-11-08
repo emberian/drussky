@@ -10,6 +10,7 @@ import UIKit
 ///   -qa-history D      spread the completed pages over the last D days (knowledge-map history)
 ///   -qa-misses         choice exercises are missed twice (the correction under the choices)
 ///   -qa-corrupt        an undecodable book.json in the QA folder (the recovery screen)
+///   -qa-no-key         hide the tutor key for this Debug launch without changing Keychain
 ///   -qa-day N / -qa-away D / -qa-probes / -qa-tired   the day's shape (QA+Day.swift)
 @MainActor
 enum QA {
@@ -25,7 +26,7 @@ enum QA {
 
     static func prepare(store: BookStore) {
         #if DEBUG
-        if let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"], !key.isEmpty { Keychain.apiKey = key }
+        if !has("-qa-no-key"), let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"], !key.isEmpty { Keychain.apiKey = key }
         // -qa-corrupt: a notebook that exists but can't be decoded (the recovery screen).
         if has("-qa-corrupt") { try? Data("{ \"version\": 1, \"pages\": [".utf8).write(to: store.stateURL) }
         #endif

@@ -141,6 +141,8 @@ struct HearButton: View {
                         .accessibilityLabel("\(voices) voices")
                 }
             }
+            .frame(minWidth: 44, minHeight: 44)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label ?? "Hear \(RussianText.unstressed(text))")
@@ -163,6 +165,7 @@ struct PillButton: View {
             }
             .font(Theme.label(14))
             .padding(.horizontal, 14).padding(.vertical, 9)
+            .frame(minHeight: 44)
             .foregroundStyle(prominent ? Color.white : tint)
             .background(Capsule().fill(prominent ? tint : tint.opacity(0.10)))
         }

@@ -40,7 +40,7 @@ struct TalkExercise: View {
     // MARK: Header
 
     private var header: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 10) {
+        VStack(alignment: .leading, spacing: 4) {
             Text("Разгово́р").font(Theme.cursive(compact ? 24 : 28)).foregroundStyle(Theme.ink)
             if let scene = conversation?.scene {
                 Text(Theme.stressed(scene.ru.isEmpty ? scene.title : scene.ru, show: book.settings.showStress))
@@ -58,7 +58,12 @@ struct TalkExercise: View {
         switch s.status {
         case .unavailable(let why):
             Label(why, systemImage: "wifi.slash").scaledFont(15).foregroundStyle(Theme.muted)
-            if !slot.result.status.isComplete { HStack { skipButton(s) } }
+            if !slot.result.status.isComplete {
+                FlowRow(spacing: 10) {
+                    PillButton(title: "Try again", systemImage: "arrow.counterclockwise") { s.resume() }
+                    skipButton(s)
+                }
+            }
         case .idle:
             HStack(spacing: 10) {
                 PillButton(title: "Start", systemImage: "bubble.left.and.bubble.right", prominent: true) { s.propose() }
@@ -66,6 +71,7 @@ struct TalkExercise: View {
             }
         case .proposing:
             waiting("Your tutor is thinking of a scene…")
+            skipButton(s)
         case .choosing:
             scenes(s)
         case .paused, .thinking, .speaking, .yourTurn, .notHeard, .marking, .done, .failed:
@@ -144,6 +150,8 @@ struct TalkExercise: View {
                     Image(systemName: "speaker.wave.2.fill").font(.system(size: 14, weight: .semibold))
                         .foregroundStyle(Theme.accent).frame(width: 30, height: 30)
                         .background(Circle().fill(Theme.accent.opacity(0.12)))
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel("Hear it again")
@@ -151,7 +159,8 @@ struct TalkExercise: View {
                     .foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
                 Button { toggle(line.id) } label: {
                     Image(systemName: shown ? "eye.fill" : "eye").font(.system(size: 14)).foregroundStyle(Theme.muted)
-                        .frame(width: 30, height: 30)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(shown ? "Hide the English" : "Whisper the English")
@@ -231,7 +240,7 @@ struct TalkExercise: View {
                 TurnButton(phase: s.mic.phase, level: s.mic.level) { s.tap() }
                 TurnStatus(phase: s.mic.phase, problem: s.mic.problem(for: s.key), hasTake: false, repeats: 0) { s.tap() }
             }
-            HStack(spacing: 10) {
+            FlowRow(spacing: 10) {
                 PillButton(title: "Type instead", systemImage: "keyboard") { s.mic.cancel(); typing = true; focused = true }
                 PillButton(title: "End the conversation", systemImage: "hand.wave") { s.endNow() }
             }
@@ -239,7 +248,7 @@ struct TalkExercise: View {
         case .notHeard:
             Text(s.mic.problem(for: s.key) == .micDenied ? "Talking needs the microphone: Settings → Drussky → Microphone. You can type your lines instead."
                  : "I didn't catch Russian there.").scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
-            HStack(spacing: 10) {
+            FlowRow(spacing: 10) {
                 PillButton(title: "Say it again", systemImage: "mic", prominent: true) { s.again() }
                 PillButton(title: "Type it", systemImage: "keyboard") { typing = true; focused = true }
                 PillButton(title: "End the conversation", systemImage: "hand.wave") { s.endNow() }
@@ -252,6 +261,9 @@ struct TalkExercise: View {
             }
         case .marking:
             waiting("Your tutor is marking it…")
+            PillButton(title: "Keep it unmarked", systemImage: "checkmark") { s.keepUnmarked() }
+        case .thinking, .speaking:
+            PillButton(title: "Pause", systemImage: "pause") { s.cancel() }
         case .done:
             afterwards(s)
         case .failed(let message):
@@ -282,7 +294,7 @@ struct TalkExercise: View {
                 .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
                 .onSubmit { s.submitTyped(); typing = false }
                 .accessibilityLabel("Your line")
-            PillButton(title: "Say", systemImage: "paperplane", prominent: true) { s.submitTyped(); typing = false }
+            PillButton(title: "Send", systemImage: "paperplane", prominent: true) { s.submitTyped(); typing = false }
                 .disabled(RussianText.letters(in: s.typedDraft).isEmpty)
         }
     }
@@ -327,6 +339,8 @@ struct TakeButton: View {
             Image(systemName: playing ? "stop.fill" : "play.fill").font(.system(size: 12, weight: .bold))
                 .foregroundStyle(Theme.ink).frame(width: 28, height: 28)
                 .background(Circle().fill(Theme.ink.opacity(0.1)))
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(playing ? "Stop" : "Hear your take")

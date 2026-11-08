@@ -2,11 +2,13 @@ import Foundation
 
 extension QA {
     /// `-qa-talk STATE`: a Talk page held in one state, no key or microphone needed.
+    ///   empty    a fresh page (combine with -qa-no-key to exercise missing-key recovery)
     ///   scene    the three proposed scenes
     ///   mid      four lines in, the learner's turn
     ///   marked   the finished conversation with its red pen and a tip
     static func talkPage(_ book: Book, state: String) {
         book.insertTalkPage()
+        guard state != "empty" else { return }
         guard let page = book.page else { return }
         let ref = ExerciseRef(pageID: page.id, index: 0)
         var c = TalkConversation(turns: 6)
