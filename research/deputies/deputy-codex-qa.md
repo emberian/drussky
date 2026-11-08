@@ -121,3 +121,11 @@ Still open, seen on the walkthrough: library words in the goal rungs and goal-pu
 remains statistics-first; read-aloud still hands the microphone over after the model plays;
 `testEverySpokenStringHasARecording` is red on `main` too (23 grammar-lane sentences whose clips
 and index entries are being generated in the main checkout, uncommitted).
+
+Second merge (main `81d635a`, commit `4bbed6d`): both intents kept again — the first-page
+ProgressView and the coverage statistics row went (the cover is not a gauge; `ReadingEvidence.label`
+gives the first page one honest phrase), main's tutor prompt, first-page copy and «Try the first page»
+label stayed, praise is stressed without exclamation marks, the desk line keeps its counts and the
+cover line main's wording; the inside cover now begins with the learner's pages and alphabet.
+Re-shot: `talk-no-key`, `goal-cover`, `contents`, `diary-marked` (iPad + iPhone), `goal-pull` (iPad).
+DrusskyTests 235 run / 7 skipped / 0 failures; LearningCoreTests 33 / 0 (two separate invocations).
