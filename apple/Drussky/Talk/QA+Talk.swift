@@ -2,17 +2,25 @@ import Foundation
 
 extension QA {
     /// `-qa-talk STATE`: a Talk page held in one state, no key or microphone needed.
+    ///   fresh    nothing yet (`-qa-nokey` / `-qa-offline` pose the one-line note without touching the Keychain or the network)
     ///   scene    the three proposed scenes
     ///   mid      four lines in, the learner's turn
     ///   marked   the finished conversation with its red pen and a tip
     static func talkPage(_ book: Book, state: String) {
         book.insertTalkPage()
-        guard let page = book.page else { return }
+        guard state != "fresh", let page = book.page else { return }
         let ref = ExerciseRef(pageID: page.id, index: 0)
         var c = TalkConversation(turns: 6)
-        c.proposed = [TalkScene(title: "At breakfast", ru: "За за́втраком"),
-                      TalkScene(title: "In a shop", ru: "В магази́не"),
-                      TalkScene(title: "About a book you read", ru: "О кни́ге, кото́рую вы чита́ли")]
+        c.proposed = [TalkScene(title: "At breakfast", ru: "За за́втраком", goal: "Find out what there is to drink and order one thing",
+                                frames: [TalkFrame(ru: "Что есть …?", en: "what is there …?"), TalkFrame(ru: "Я хочу́ …", en: "I want …"),
+                                         TalkFrame(ru: "А … есть?", en: "and is there …?")],
+                                secret: "There is tea, juice and coffee, but the milk is finished; there is bread and cheese."),
+                      TalkScene(title: "In a shop", ru: "В магази́не", goal: "Find out whether they have bread, and how much it costs",
+                                frames: [TalkFrame(ru: "У вас есть …?", en: "do you have …?"), TalkFrame(ru: "Ско́лько сто́ит …?", en: "how much is …?")],
+                                secret: "The shop has bread (40 roubles) and milk, but no cheese today."),
+                      TalkScene(title: "About a book you read", ru: "О кни́ге, кото́рую вы чита́ли", goal: "Tell them what you are reading and find out what they read",
+                                frames: [TalkFrame(ru: "Я чита́ю …", en: "I am reading …"), TalkFrame(ru: "А что вы чита́ете?", en: "and what do you read?")],
+                                secret: "You read a book about space; you don't like poetry.")]
         guard state != "scene" else { book.saveTalk(ref, c); return }
         let t0 = Date().addingTimeInterval(-300)
         c.scene = c.proposed?[0]
@@ -39,6 +47,8 @@ extension QA {
         ]
         c.ended = t0.addingTimeInterval(70)
         c.marked = t0.addingTimeInterval(80)
+        c.outcome = TalkOutcome(reached: true, conveyed: "You ordered coffee and bread, and asked for milk and sugar — your partner understood the order; the milk being finished never came up.",
+                                clarified: "whether you meant «с молоко́м и с са́харом»")
         c.praise = "You held a whole conversation, and хочу́ ко́фе came out exactly right."
         c.teach = [DiaryTeach(title: "With: с + instrumental", note: "After с (with) the noun changes its ending: [[с молоко́м|with milk]], [[с са́харом|with sugar]].", pattern: "instr")]
         let date = c.marked!

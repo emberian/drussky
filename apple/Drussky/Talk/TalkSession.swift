@@ -56,6 +56,17 @@ final class TalkSession {
     private var run = 0
 
     var key: String { "\(ref.pageID)-\(ref.index)-talk" }
+
+    /// Endpointing for a hesitant beginner in conversation: a thought may pause for a second
+    /// and a half before it goes on, an answer may run to twelve seconds, and the "your turn"
+    /// may wait ten seconds for a first word. A tap still ends the turn at once.
+    static let endpointing: VoiceActivity.Config = {
+        var c = VoiceActivity.Config()
+        c.trailingSilence = 1.5
+        c.maxSpeech = 12
+        c.waitLimit = 10
+        return c
+    }()
     var isLive: Bool { [.proposing, .thinking, .speaking, .yourTurn, .marking].contains(status) }
 
     init(ref: ExerciseRef, book: Book, pageVoice: Voice, voice: (any TutorVoice)? = nil, analyzer: (any PronunciationAnalyzer)? = nil) {
@@ -90,12 +101,13 @@ final class TalkSession {
     }
 
     var unavailableReason: String? {
-        if !Reachability.shared.isOnline { return TalkTutor.Failure.offline.localizedDescription }
-        if (Keychain.apiKey ?? "").isEmpty { return "Talk needs your tutor: add your Anthropic API key in Settings." }
+        if !Reachability.shared.isOnline || QA.has("-qa-offline") { return TalkTutor.Failure.offline.localizedDescription }
+        if (Keychain.apiKey ?? "").isEmpty || QA.has("-qa-nokey") { return "Talk needs your tutor: add your Anthropic API key in Settings." }
         return nil
     }
 
     func propose() {
+        if let why = unavailableReason { status = .unavailable(why); return }
         begin(.proposing) { [self] mine in
             do {
                 let scenes = try await TalkTutor.proposeScenes(book: book)
@@ -118,7 +130,8 @@ final class TalkSession {
 
     /// Picks up a conversation left in the middle.
     func resume() {
-        guard status == .paused else { return }
+        guard status == .paused || status == .unavailable("") || isUnavailable else { return }
+        if let why = unavailableReason { status = .unavailable(why); return }
         switch dialogue.phase {
         case .tutorTurn: tutorTurn()
         case .learnerTurn: yourTurn()
@@ -127,6 +140,8 @@ final class TalkSession {
         case .cancelled: break
         }
     }
+
+    private var isUnavailable: Bool { if case .unavailable = status { return true } else { return false } }
 
     // MARK: The tutor's turn
 
@@ -187,11 +202,18 @@ final class TalkSession {
         }
     }
 
-    /// Says a tutor line again (tap the speaker on it).
+    /// Says a tutor line again (tap the speaker on it). While it is the learner's turn the
+    /// microphone closes first and reopens after: nothing is captured while the tutor speaks.
     func replay(_ line: TalkLine) {
         guard !isLive || status == .yourTurn else { return }
         voice.stop()
-        Task { await voice.speak(line.ru) }
+        let reopen = status == .yourTurn
+        if reopen { mic.cancel() }
+        let mine = run
+        Task { @MainActor in
+            await voice.speak(line.ru)
+            if reopen, run == mine, status == .yourTurn { yourTurn() }
+        }
     }
 
     // MARK: The learner's turn
@@ -204,7 +226,8 @@ final class TalkSession {
         status = .yourTurn
         let mine = run
         let hint = conversation.tutorLines.last?.ru ?? "Да."
-        let request = SpeakingTurn.Request(key: key, target: hint, takeURL: book.newTakeURL(ref), model: nil, repeats: 0)
+        let request = SpeakingTurn.Request(key: key, target: hint, takeURL: book.newTakeURL(ref), model: nil, repeats: 0,
+                                           config: Self.endpointing)
         mic.begin(request, voice: pageVoice) { [self] take in
             guard run == mine else { return }
             let heard = (take.heard ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
@@ -273,6 +296,7 @@ final class TalkSession {
 
     /// The red pen over the transcript, then one pronunciation tip per take at most.
     func mark() {
+        if let why = unavailableReason { status = .failed(why); return }
         begin(.marking) { [self] mine in
             do {
                 let m = try await TalkTutor.mark(conversation, book: book)
@@ -282,6 +306,7 @@ final class TalkSession {
                     k += 1
                     if let c = m.lines[k] { conversation.lines[i].correction = c }
                 }
+                conversation.outcome = m.outcome
                 conversation.praise = m.praise.isEmpty ? nil : m.praise
                 conversation.teach = m.teach.isEmpty ? nil : m.teach
                 conversation.model = TalkTutor.markModel
