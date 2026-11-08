@@ -87,7 +87,7 @@ struct ConstructionChoiceExercise: View {
         let ex = slot.exercise
         VStack(alignment: .leading, spacing: 12) {
             Instruction(text: "Choose the form for one thing in this sentence.")
-            Text(ex.text ?? "").russianFont(28).foregroundStyle(Theme.text)
+            Text(Theme.stressed(ex.text ?? "", show: true)).russianFont(28).foregroundStyle(Theme.text)
             if let meaning = ex.en { Text(meaning).scaledFont(16).foregroundStyle(Theme.muted) }
             ChoiceGrid(options: ex.options ?? [], chosen: slot.result.chosen, correct: ex.answerIndex,
                        russian: true, showStress: true, locked: slot.result.status.isComplete) { chosen in
@@ -99,7 +99,7 @@ struct ConstructionChoiceExercise: View {
                 }
             }
             if slot.result.status.isComplete {
-                Text(ex.word ?? "").russianFont(23)
+                Text(Theme.stressed(ex.word ?? "", show: true)).russianFont(23)
                 Text(ex.hint ?? "").scaledFont(16).foregroundStyle(Theme.muted)
             }
         }
