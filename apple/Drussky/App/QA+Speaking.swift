@@ -1,11 +1,6 @@
 import Foundation
 
 extension QA {
-    static func string(_ flag: String) -> String? {
-        let args = ProcessInfo.processInfo.arguments
-        guard let i = args.firstIndex(of: flag), i + 1 < args.count else { return nil }
-        return args[i + 1]
-    }
 
     /// `-qa-speak STATE`: a read-aloud page held in one state of the speaking turn, for
     /// screenshots without a microphone.
