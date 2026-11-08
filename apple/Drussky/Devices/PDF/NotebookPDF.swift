@@ -166,6 +166,8 @@ enum NotebookPDF {
             if let built = r.recognized { add(text(built, font: cursive(18), color: .ink)) }
         case .diary:
             if let prompt = ex.prompt { add(text(prompt, font: serif(12, .semibold), color: .text), after: 4) }
+        case .talk:
+            add(text(TalkConversation.describe(ex, r), font: serif(11), color: .text), after: 4)
         case .meet, .dictation:
             break
         }
@@ -371,6 +373,7 @@ enum NotebookPDF {
         case .diary: "Дневник"
         case .buildWord: "Build «\(ex.answerText ?? "")» (\(ex.en ?? ""))"
         case .familyGuess: "Guess «\(ex.word ?? "")» from its root \(ex.root ?? "")"
+        case .talk: "Разгово́р · Talk"
         }
     }
 
