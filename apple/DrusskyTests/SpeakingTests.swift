@@ -11,7 +11,7 @@ final class SpeakingTests: XCTestCase {
 
     // MARK: Signals
 
-    private var rng = SystemRandomNumberGenerator()
+    private var rng = SeededGenerator(seed: 0x5EED_CAFE)
 
     private func silence(_ s: Double) -> [Float] { [Float](repeating: 0, count: Int(s * sr)) }
 
@@ -160,12 +160,16 @@ final class SpeakingTests: XCTestCase {
     // MARK: Alignment
 
     private func clip(_ name: String) throws -> [Float] {
-        let url = try XCTUnwrap(Bundle.main.url(forResource: name, withExtension: "m4a", subdirectory: "Audio"), "\(name).m4a")
+        let url = try clipURL(name)
         return try XCTUnwrap(Pitch.samples(url))
     }
 
     private func clipURL(_ name: String) throws -> URL {
-        try XCTUnwrap(Bundle.main.url(forResource: name, withExtension: "m4a", subdirectory: "Audio"), "\(name).m4a")
+        let voices = Voice()
+        if let url = voices.recordingURL(for: name) ?? voices.pairVoices(name, exactStress: false).first {
+            return url
+        }
+        return try XCTUnwrap(Bundle.main.url(forResource: name, withExtension: "m4a", subdirectory: "Audio"), "\(name).m4a")
     }
 
     /// Overlap-add time warp: output time u reads the input at `source(u)` seconds.
@@ -189,7 +193,7 @@ final class SpeakingTests: XCTestCase {
     }
 
     func testAlignmentFollowsAnUnevenStretch() throws {
-        for name in ["moloko-c2d396", "spasibo-00f66d"] {
+        for name in ["молоко́", "спаси́бо"] {
             let x = try clip(name)
             let T = Double(x.count) / Acoustics.sampleRate
             // First half 1.4× slower, second half 0.8×: a learner who drags the start and rushes the end.
@@ -206,7 +210,7 @@ final class SpeakingTests: XCTestCase {
     }
 
     func testSyllablesCarryOntoAStretchedCopy() throws {
-        let x = try clip("moloko-c2d396")
+        let x = try clip("молоко́")
         let T = Double(x.count) / Acoustics.sampleRate
         let y = warp(x, to: T * 1.3) { $0 / 1.3 }
         let c = try XCTUnwrap(ProsodyComparison.compute(target: "молоко́", take: y, model: x))
@@ -240,15 +244,18 @@ final class SpeakingTests: XCTestCase {
     }
 
     func testAnotherSpeakerSayingItWell() async throws {
-        let model = try clipURL("moloko-c2d396")
+        let voices = Voice()
+        let model = try clipURL("молоко́")
+        let variantTakes = Array(voices.pairVoices("молоко́", exactStress: false).dropFirst())
+        XCTAssertGreaterThanOrEqual(variantTakes.count, 3)
         var stressedRight = 0
-        for take in ["moloko-aleksey-pogrebnoj-al-f0a170", "moloko-doctorandusmanhattan-ee42ca", "moloko-1apollinariya1-21adf8"] {
-            let r = try await analyse(target: "молоко́", take: try clipURL(take), model: model, heard: "молоко")
+        for take in variantTakes {
+            let r = try await analyse(target: "молоко́", take: take, model: model, heard: "молоко")
             XCTAssertTrue(r.isWordLevel)
             XCTAssertEqual(r.syllables.map(\.text), ["мо", "ло", "ко́"])
             XCTAssertEqual(r.accuracy, 1)
             XCTAssertTrue(r.sounds.allSatisfy { $0.verdict == .good })
-            XCTAssertFalse(r.tips.contains { $0.contrast != nil && $0.contrast != "stress" }, take)
+            XCTAssertFalse(r.tips.contains { $0.contrast != nil && $0.contrast != "stress" }, take.lastPathComponent)
             let starts = r.syllables.compactMap(\.start), ends = r.syllables.compactMap(\.end)
             XCTAssertEqual(starts.count, 3)
             XCTAssertEqual(starts, starts.sorted())
@@ -259,7 +266,7 @@ final class SpeakingTests: XCTestCase {
     }
 
     func testALetterHeardAsAnother() async throws {
-        let r = try await analyse(target: "был", take: try clipURL("bil-cdd458"), model: try clipURL("byl-8826ed"), heard: "бил")
+        let r = try await analyse(target: "был", take: try clipURL("бил"), model: try clipURL("был"), heard: "бил")
         let sub = try XCTUnwrap(r.sounds.first { $0.verdict == .substituted })
         XCTAssertEqual(sub.letterRange, 1..<2)
         XCTAssertEqual(sub.expected?.ipa, "ɨ")
@@ -291,7 +298,8 @@ final class SpeakingTests: XCTestCase {
     }
 
     func testNothingRecognisedStillComparesProsody() async throws {
-        let r = try await analyse(target: "спаси́бо", take: try clipURL("spasibo-00f66d"), model: try clipURL("spasibo-00f66d"), heard: nil)
+        let spasibo = try clipURL("спаси́бо")
+        let r = try await analyse(target: "спаси́бо", take: spasibo, model: spasibo, heard: nil)
         XCTAssertTrue(r.sounds.isEmpty)
         XCTAssertEqual(r.syllables.count, 3)
         XCTAssertEqual(r.stressedSyllable, 1)
@@ -366,7 +374,7 @@ final class SpeakingTests: XCTestCase {
                                     syllables: [], stressedSyllable: nil, accuracy: 1, tips: [])
             }
         }
-        let take = try clipURL("byl-8826ed")
+        let take = try clipURL("был")
         let (report, heard) = await SpeakingTurn.analyse(take: take, target: "был", model: nil, primary: Phones(), recognise: { _, _ in "был" })
         XCTAssertEqual(heard, "был")
         XCTAssertEqual(report?.transcript, "был", "the words heard travel with the report")

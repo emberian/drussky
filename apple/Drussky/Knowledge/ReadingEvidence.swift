@@ -21,7 +21,7 @@ enum ReadingEvidence {
         return modalities.contains { modality in
             guard let trace = direct.trace(id, modality), let last = trace.review(at: date),
                   last.grade == .good || last.grade == .easy else { return false }
-            return trace.retrievability(at: date) >= recallThreshold
+            return trace.strength(at: date) >= recallThreshold
         }
     }
 

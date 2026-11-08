@@ -41,4 +41,36 @@ final class SpeakingFeedbackTests: XCTestCase {
         let tip = try JSONDecoder().decode(PronunciationTip.self, from: Data(#"{"message":"old","contrast":"stress"}"#.utf8))
         XCTAssertNil(tip.confidence)
     }
+
+    func testPhoneStressFindingBecomesActionableWhileWordHypothesisStaysHidden() {
+        let target = "за́мок"
+        let expected = RussianG2P.transcribe(target)
+        let sounds = expected.sounds.map {
+            PhoneJudgement(expected: Phone(ipa: $0.ipa, confidence: 0.99),
+                           heard: Phone(ipa: $0.ipa, confidence: 0.99),
+                           verdict: .good, letterRange: $0.letters)
+        }
+        let mistakes: [(Mistake?, Float)] = expected.sounds.map { _ in (nil, 3) }
+
+        // A high-confidence phone-level stress finding becomes an actionable tip.
+        let highStress = Prosody.Finding(word: 0, expected: 0, heard: 1, strength: 4.0)
+        let tips = Tips.make(target: target, expected: expected, sounds: sounds, mistakes: mistakes, stress: [highStress])
+        XCTAssertEqual(tips.first?.contrast, "stress")
+        XCTAssertTrue(SpeakingFeedback.permits(tips.first?.confidence))
+
+        var phoneReport = WordLevelAnalyzer.report(target: target, transcript: target, comparison: nil)
+        phoneReport.provenance = .phones
+        phoneReport.tips = tips
+        XCTAssertEqual(phoneReport.actionableTips.map(\.contrast), ["stress"])
+
+        // A low-confidence phone-level stress finding stays out.
+        let lowStress = Prosody.Finding(word: 0, expected: 0, heard: 1, strength: 1.6)
+        XCTAssertTrue(Tips.make(target: target, expected: expected, sounds: sounds, mistakes: mistakes, stress: [lowStress]).isEmpty)
+
+        // Word-level hypotheses carry an explicit confidence below the floor and stay hidden.
+        let wordReport = WordLevelAnalyzer.report(target: "был", transcript: "бил", comparison: nil)
+        XCTAssertFalse(wordReport.tips.isEmpty)
+        XCTAssertEqual(wordReport.tips.first?.confidence, SpeakingFeedback.wordHypothesisConfidence)
+        XCTAssertTrue(wordReport.actionableTips.isEmpty)
+    }
 }

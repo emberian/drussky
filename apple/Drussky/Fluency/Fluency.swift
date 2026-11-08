@@ -26,10 +26,21 @@ enum Fluency {
 
     static let week: TimeInterval = 7 * 86_400
 
-    /// A passage's component: its first words, so the same text measured twice is one series.
+    /// A passage's component: its first four words (plus a deterministic FNV-1a hex suffix when
+    /// longer than four words), so the same text measured twice is one series while two passages
+    /// sharing an opening stay distinct.
     static func passageID(_ text: String) -> ComponentID {
-        let words = RussianText.key(text).split(separator: " ").prefix(4).joined(separator: " ")
-        return ComponentID("passage", words.isEmpty ? "—" : words)
+        let normalized = RussianText.key(text)
+        let tokens = normalized.split(separator: " ")
+        guard !tokens.isEmpty else { return ComponentID("passage", "—") }
+        let head = tokens.prefix(4).joined(separator: " ")
+        guard tokens.count > 4 else { return ComponentID("passage", head) }
+        var hash: UInt32 = 2_166_136_261
+        for byte in normalized.utf8 {
+            hash ^= UInt32(byte)
+            hash = hash &* 16_777_619
+        }
+        return ComponentID("passage", "\(head)#\(String(format: "%08x", hash))")
     }
 
     /// Words in a Russian text: whitespace tokens that carry a letter.

@@ -11,7 +11,7 @@ import Foundation
 ///   S′f (G=1)  = min(w11·D^(−w12)·((S+1)^w13 − 1)·e^(w14·(1−R)),  S / e^(w17·w18))
 ///   same day   S′ = S·e^(w17·(G − 3 + w18))
 ///   interval   I(r) = S/F·(r^(1/C) − 1)        (I(0.9) = S)
-public struct FSRS: Sendable {
+public struct FSRS: Codable, Sendable, Hashable {
     public var w: [Double]
     public static let decay = -0.5
     public static let factor = 19.0 / 81.0
@@ -23,6 +23,15 @@ public struct FSRS: Sendable {
 
     public init(w: [Double] = FSRS.defaultWeights) {
         precondition(w.count == 19, "FSRS-5 has 19 parameters")
+        self.w = w
+    }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let w = try c.decode([Double].self, forKey: .w)
+        guard w.count == 19 else {
+            throw DecodingError.dataCorruptedError(forKey: .w, in: c, debugDescription: "FSRS-5 has 19 parameters")
+        }
         self.w = w
     }
 

@@ -101,7 +101,7 @@ final class TalkSession {
     }
 
     var unavailableReason: String? {
-        if !Reachability.shared.isOnline || QA.has("-qa-offline") { return TalkTutor.Failure.offline.localizedDescription }
+        if !Connectivity.shared.online || QA.has("-qa-offline") { return TalkTutor.Failure.offline.localizedDescription }
         if (Keychain.apiKey ?? "").isEmpty { return "Talk needs your tutor: add your Anthropic API key in Settings." }
         return nil
     }

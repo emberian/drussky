@@ -190,4 +190,133 @@ final class KnowledgeTests: XCTestCase {
         XCTAssertEqual(policy.floor(for: .hearWrite), 8_000)
         XCTAssertEqual(policy.floor(for: .copy), 0, "copying is never compiled")
     }
+
+    func testSnapshotAndTailReplayMatchesFullFold() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        let t0 = Date(timeIntervalSince1970: 1_800_000_000)
+        func day(_ d: Double) -> Date { t0.addingTimeInterval(d * 86_400) }
+        let tracker = KnowledgeTracker(course: course, root: root, customWords: [], now: { t0 })
+        XCTAssertEqual(tracker.foldCount, 1)
+        XCTAssertFalse(tracker.loadedFromSnapshot)
+
+        let kot = ComponentID(.lexeme, "кот")
+        let rot = ComponentID(.lexeme, "рот")
+        let dom = ComponentID(.lexeme, "дом")
+        let sok = ComponentID(.lexeme, "сок")
+
+        var initialEvents: [LearningEvent] = []
+        for i in 0..<22 {
+            let comp = i % 2 == 0 ? kot : dom
+            let mod: Modality = i % 3 == 0 ? .hearPick : .hearWrite
+            let conf: [Confusion]? = i == 3 ? [Confusion(target: kot, produced: rot, channel: "choice")] : nil
+            let grade: Grade = i == 3 ? .again : .good
+            initialEvents.append(LearningEvent(id: "ev-\(i)", t: day(Double(i)), type: .outcome, item: "p1#\(i)",
+                                               modality: mod, components: [comp], grade: grade, confusions: conf,
+                                               latencyMs: 1200 + i * 50))
+        }
+        // Leave a pending help event before the snapshot so tail replay must honour `helped`.
+        initialEvents.append(LearningEvent(id: "ev-help", t: day(22), type: .help, item: "p1#helped",
+                                           modality: .meaningWrite, components: [sok], help: ["tutor"]))
+        tracker.record(initialEvents)
+        tracker.saveSnapshot()
+        XCTAssertTrue(FileManager.default.fileExists(atPath: tracker.snapshotURL.path))
+        XCTAssertEqual(tracker.eventsSinceSnapshot, 0)
+
+        let tailEvents: [LearningEvent] = [
+            LearningEvent(id: "tail-0", t: day(23), type: .outcome, item: "p1#helped",
+                          modality: .meaningWrite, components: [sok], grade: .easy, latencyMs: 900),
+            LearningEvent(id: "tail-1", t: day(24), type: .attempt, item: "p2#0",
+                          modality: .hearWrite, components: [dom], correct: false,
+                          confusions: [Confusion(target: dom, produced: kot, channel: "writing")]),
+            LearningEvent(id: "tail-2", t: day(24.1), type: .outcome, item: "p2#0",
+                          modality: .hearWrite, components: [dom], grade: .again,
+                          confusions: [Confusion(target: dom, produced: kot, channel: "writing")], latencyMs: 3400),
+            LearningEvent(id: "tail-3", t: day(25), type: .outcome, item: "p2#1",
+                          modality: .meaningWrite, components: [kot], grade: .good, latencyMs: 1100),
+        ]
+        tracker.record(tailEvents)
+        XCTAssertEqual(tracker.eventsSinceSnapshot, 4)
+
+        let reloaded = KnowledgeTracker(course: course, root: root, customWords: [], now: { day(26) })
+        XCTAssertTrue(reloaded.loadedFromSnapshot)
+        XCTAssertEqual(reloaded.foldCount, 0, "snapshot load with tail replay does not perform a full fold")
+        XCTAssertEqual(reloaded.tailReplayedCount, 4)
+
+        let scratch = KnowledgeModel(events: EventLog(url: reloaded.logURL).load(), fsrs: reloaded.model.fsrs)
+        let probeDate = day(26)
+        XCTAssertEqual(reloaded.model, scratch)
+        XCTAssertEqual(reloaded.model.events, scratch.events)
+        XCTAssertEqual(reloaded.model.traces, scratch.traces)
+        XCTAssertEqual(reloaded.model.confusions, scratch.confusions)
+        XCTAssertEqual(reloaded.model.transfer, scratch.transfer)
+        XCTAssertEqual(reloaded.model.confusionEdges(at: probeDate), scratch.confusionEdges(at: probeDate))
+        for key in scratch.traces.keys {
+            XCTAssertEqual(reloaded.model.retrievability(key.component, key.modality, at: probeDate) ?? -1,
+                           scratch.retrievability(key.component, key.modality, at: probeDate) ?? -1, accuracy: 1e-12)
+        }
+        // Help before snapshot capped the tail outcome from .easy to .hard.
+        XCTAssertEqual(reloaded.model.trace(sok, .meaningWrite)?.reviews.first?.grade, .hard)
+
+        // Appending past the 50-event threshold automatically writes a fresh snapshot.
+        let more = (0..<46).map { j in
+            LearningEvent(id: "auto-\(j)", t: day(30 + Double(j) * 0.1), type: .outcome, item: "p3#\(j)",
+                          modality: .hearWrite, components: [kot], grade: .good)
+        }
+        reloaded.record(more)
+        XCTAssertEqual(reloaded.eventsSinceSnapshot, 0)
+        let afterAuto = KnowledgeTracker(course: course, root: root, customWords: [], now: { day(40) })
+        XCTAssertTrue(afterAuto.loadedFromSnapshot)
+        XCTAssertEqual(afterAuto.tailReplayedCount, 0)
+        XCTAssertEqual(afterAuto.foldCount, 0)
+    }
+
+    func testSnapshotFallbackWhenFSRSWeightsChangeOrLogIsTruncated() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        let t0 = Date(timeIntervalSince1970: 1_800_000_000)
+        let kot = ComponentID(.lexeme, "кот")
+        let tracker = KnowledgeTracker(course: course, root: root, customWords: [], now: { t0 })
+        let events = (0..<25).map { i in
+            LearningEvent(id: "e-\(i)", t: t0.addingTimeInterval(Double(i) * 86_400), type: .outcome,
+                          item: "p#\(i)", modality: .hearWrite, components: [kot], grade: .good)
+        }
+        tracker.record(events)
+        tracker.saveSnapshot()
+
+        // Changing FSRS weights invalidates the snapshot and falls back to a full fold (and writes a new snapshot since count >= 20).
+        let scaled = FSRS().scalingStability(by: 0.85)
+        let withNewWeights = KnowledgeTracker(course: course, root: root, customWords: [], fsrs: scaled, now: { t0 })
+        XCTAssertFalse(withNewWeights.loadedFromSnapshot)
+        XCTAssertEqual(withNewWeights.foldCount, 1)
+        XCTAssertEqual(withNewWeights.model.fsrs, scaled)
+        XCTAssertEqual(withNewWeights.model, KnowledgeModel(events: EventLog(url: withNewWeights.logURL).load(), fsrs: scaled))
+
+        // Subsequent launch with the same scaled FSRS loads from the refreshed snapshot.
+        let warmScaled = KnowledgeTracker(course: course, root: root, customWords: [], fsrs: scaled, now: { t0 })
+        XCTAssertTrue(warmScaled.loadedFromSnapshot)
+        XCTAssertEqual(warmScaled.foldCount, 0)
+
+        // Truncating events.jsonl below the snapshot's byteOffset invalidates the snapshot and falls back to a full fold.
+        let log = EventLog(url: tracker.logURL)
+        try FileManager.default.removeItem(at: log.url)
+        XCTAssertTrue(log.append(Array(events.prefix(5))))
+        let afterTruncate = KnowledgeTracker(course: course, root: root, customWords: [], fsrs: scaled, now: { t0 })
+        XCTAssertFalse(afterTruncate.loadedFromSnapshot)
+        XCTAssertEqual(afterTruncate.foldCount, 1)
+        XCTAssertEqual(afterTruncate.model.events.count, 5)
+    }
+
+    func testBookLaunchWithStabilityScaleFoldsOnce() {
+        let store = tempStore()
+        let book = Book(course: course, store: store)
+        var d = Exercise(kind: .dictation); d.text = "кот"
+        book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [d], newWords: [])
+        book.record(page: book.currentPage, exercise: 0) { $0.attempts = 1; $0.recognized = "кот"; $0.status = .correct }
+        // Set a learned stabilityScale in day state without rebuilding in-process, so snapshot on disk has unscaled FSRS.
+        book.day.stabilityScale = 0.85
+        book.saveNow()
+
+        let reopened = Book(course: course, store: store)
+        XCTAssertEqual(reopened.knowledge.foldCount, 1, "Book.init folds once directly with scaled FSRS")
+        XCTAssertEqual(reopened.knowledge.model.fsrs, FSRS().scalingStability(by: 0.85))
+    }
 }

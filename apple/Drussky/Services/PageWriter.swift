@@ -15,7 +15,7 @@ enum PageWriter {
     }
 
     /// Rescaling is a rewriting job; Sonnet 5.5 does it quickly and well.
-    static let rescaleModel = "claude-sonnet-5-5"
+    static let rescaleModel = Tutor.sonnetModel
 
     struct Written: Decodable {
         var title: String
@@ -57,9 +57,8 @@ enum PageWriter {
     }
 
     static let system = """
-    You write single pages for Drussky, a Russian exercise book used by one adult English speaker (quick, \
-    curious; wants to read Russian science fiction, mathematics and philosophy). Reply with ONE JSON object \
-    and nothing else: {"title": "...", "intro": "one or two warm, direct sentences", "exercises": [...], \
+    You write single pages for Drussky, a Russian exercise book used by \(TutorIdentity.pageWriterSummary). Reply with ONE JSON \
+    object and nothing else: {"title": "...", "intro": "one or two warm, direct sentences", "exercises": [...], \
     "new_words": [{"ru": "...", "en": "..."}]}.
 
     Exercise kinds and their fields (use exactly these names):

@@ -14,9 +14,8 @@ enum Syllables {
     static let vowels: Set<Character> = Set("аеёиоуыэюяАЕЁИОУЫЭЮЯ")
     private static let sonorants: Set<Character> = Set("рлмнРЛМН")
     private static let signs: Set<Character> = Set("ьъЬЪ")
-    /// Unstressed little words that lean on their neighbour.
-    private static let clitics: Set<String> = ["а", "и", "но", "не", "ни", "на", "по", "за", "у", "о", "до", "из", "от",
-                                               "же", "ли", "бы", "во", "со", "ко", "об", "без", "при", "для", "про"]
+    /// Unstressed little words that lean on their neighbour (`RussianText.clitics`).
+    private static let clitics: Set<String> = RussianText.clitics
 
     static func base(_ c: Character) -> Character { Character(String(c.unicodeScalars.prefix(1))) }
     static func isVowel(_ c: Character) -> Bool { vowels.contains(base(c)) }

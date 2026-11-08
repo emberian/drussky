@@ -1,3 +1,4 @@
+import LearningCore
 import XCTest
 @testable import Drussky
 
@@ -49,7 +50,7 @@ final class SoundPairsTests: XCTestCase {
 
     func testSilenceAndNoiseAreUnvoiced() {
         XCTAssertTrue(Pitch.track([Float](repeating: 0, count: 16_000)).allSatisfy { $0 == nil })
-        var rng = SystemRandomNumberGenerator()
+        var rng = SeededGenerator(seed: 0x5EED_CAFE)
         let noise = (0..<16_000).map { _ in Float.random(in: -0.3...0.3, using: &rng) }
         let voiced = Pitch.track(noise).compactMap { $0 }.count
         XCTAssertLessThan(voiced, 4, "white noise has no pitch")

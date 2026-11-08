@@ -24,13 +24,13 @@ final class DiaryTests: XCTestCase {
         XCTAssertEqual(round.prompt, ex.prompt)
 
         let c = try course()
-        var unitsSeen = 0
-        for unit in c.units {
-            defer { unitsSeen += 1 }
+        let firstDiaryUnit = try XCTUnwrap(c.units.firstIndex { $0.pages.contains { $0.exercises.contains { $0.kind == .diary } } })
+        XCTAssertGreaterThanOrEqual(firstDiaryUnit, 1, "initial alphabet units have no diary prompt")
+        for (unitIndex, unit) in c.units.enumerated() where !unit.id.hasPrefix("g") && unit.id != Book.cursiveUnitID {
             for page in unit.pages {
                 let diaries = page.exercises.filter { $0.kind == .diary }
-                if unitsSeen < 2 {
-                    XCTAssertTrue(diaries.isEmpty, "\(page.id): no diary before unit 3")
+                if unitIndex < firstDiaryUnit {
+                    XCTAssertTrue(diaries.isEmpty, "\(page.id): no diary before unit \(unit.id)")
                 } else {
                     XCTAssertEqual(diaries.count, 1, "\(page.id): one diary line")
                     XCTAssertEqual(page.exercises.last?.kind, .diary, "\(page.id): the diary closes the page")

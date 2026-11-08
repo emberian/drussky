@@ -5,11 +5,7 @@ import Foundation
 struct ClaudeBackend: TutorBackend {
     var provenance: TutorProvenance { .claude }
 
-    static let glossSystem = """
-    You are a Russian glossary. You receive one Russian word and the sentence it appears in. Reply with ONE JSON \
-    object and nothing else: {"gloss": "1–4 English words for the meaning in this context", "lemma": "dictionary \
-    form in Cyrillic"}.
-    """
+    static let glossSystem = TutorIdentity.glossSystem
 
     private func collect(_ stream: AsyncThrowingStream<String, Error>) async throws -> String {
         var raw = ""
@@ -35,7 +31,7 @@ struct ClaudeBackend: TutorBackend {
         let raw = try await collect(Tutor.stream([.init(role: "user", text: user)], system: DiaryTutor.system,
                                                  maxTokens: 4000, effort: "medium"))
         guard var c = await DiaryTutor.parse(raw, at: date) else { throw DiaryTutor.Failure.unreadable }
-        c.model = Tutor.model
+        c.model = Tutor.opusModel
         return c
     }
 

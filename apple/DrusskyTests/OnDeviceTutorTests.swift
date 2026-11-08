@@ -25,7 +25,9 @@ final class OnDeviceTutorTests: XCTestCase {
     func testOfflineOnlyGlossesFallBackToTheDevice() {
         let offline = conditions(onDevice: true, online: false, key: true)
         XCTAssertEqual(TutorRouter.route(.gloss, offline), .onDevice)
-        for task in [TutorTask.quickAnswer, .diaryCorrection, .lemmatize] {
+        XCTAssertEqual(TutorRouter.route(.diaryCorrection, offline), .onDevice)
+        XCTAssertEqual(TutorRouter.backend(for: .diaryCorrection, offline)?.provenance, .onDevice)
+        for task in [TutorTask.quickAnswer, .lemmatize] {
             guard case .unavailable(let why) = TutorRouter.route(task, offline) else { return XCTFail("\(task) must wait for the network") }
             XCTAssertTrue(why.contains("offline"), why)
         }
@@ -34,8 +36,8 @@ final class OnDeviceTutorTests: XCTestCase {
     func testNoKeyReadsLikeTheOldMessageExceptForGlosses() {
         let noKey = conditions(onDevice: true, online: true, key: false)
         XCTAssertEqual(TutorRouter.route(.gloss, noKey), .onDevice)
+        XCTAssertEqual(TutorRouter.route(.diaryCorrection, noKey), .onDevice)
         XCTAssertEqual(TutorRouter.route(.quickAnswer, noKey), .unavailable(Tutor.Failure.noKey.errorDescription ?? ""))
-        XCTAssertEqual(TutorRouter.route(.diaryCorrection, noKey), .unavailable(Tutor.Failure.noKey.errorDescription ?? ""))
     }
 
     func testNoDeviceModelAndNoClaudeIsUnavailableForEverything() {

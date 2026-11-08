@@ -37,7 +37,11 @@ final class FluencyTests: XCTestCase {
         XCTAssertEqual(Fluency.wpm(words: 40, seconds: 30)!, 80, accuracy: 1e-9)
         XCTAssertNil(Fluency.wpm(words: 40, seconds: 0.1), "a tap is not a reading")
         XCTAssertEqual(Fluency.wordCount("Робот просну́лся но́чью. — На станции 3 было тихо…"), 7)
-        XCTAssertEqual(Fluency.passageID("Ро́бот проснулся ночью. На станции было тихо."), Fluency.passageID("робот проснулся ночью на станции"))
+        XCTAssertEqual(Fluency.passageID("Ро́бот проснулся ночью. На станции было тихо."),
+                       Fluency.passageID("робот проснулся ночью на станции было тихо"))
+        XCTAssertNotEqual(Fluency.passageID("Ро́бот проснулся ночью. На станции было тихо."),
+                          Fluency.passageID("Ро́бот проснулся ночью. На улице шёл снег."),
+                          "passages sharing their first four words must not collide")
         XCTAssertNotEqual(Fluency.passageID("Робот проснулся"), Fluency.passageID("Кот проснулся"))
     }
 

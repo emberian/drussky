@@ -1,8 +1,11 @@
 import Foundation
+import LearningCore
 
 /// Words that could be misread for another in a quick hand: the лишишься problem, where
 /// и ш л м т п н all become the same zigzag, о and а one bowl, д and б one oval with a tail.
 enum CursiveTraps {
+    /// Letters that blur together in a quick cursive hand (minims и ш л м т п н, bowls а о, loops д б).
+    static let minimLetters: Set<Character> = Set("ишлмтпнаодб")
     /// A small letter and the ones a reader mistakes it for in handwriting.
     static let lookalikes: [Character: [Character]] = [
         "и": ["ш", "л", "н", "п"], "ш": ["и", "т", "щ"], "л": ["м", "и", "а"], "м": ["л", "ш"], "т": ["ш", "п", "м"],

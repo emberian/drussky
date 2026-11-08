@@ -9,10 +9,7 @@ import FoundationModels
 @available(iOS 26.0, macOS 26.0, *)
 enum OnDevicePrompts {
     /// Shared with every session: who the learner is, how to write Russian.
-    static let persona = """
-    You are the on-device tutor inside Drussky, a Russian exercise book used by one adult English speaker, \
-    Ember, a beginner in Russian. Answer in English. Write Russian words in Cyrillic. Be short and exact.
-    """
+    static let persona = TutorIdentity.onDevicePersona
 
     static let gloss = persona + """
 

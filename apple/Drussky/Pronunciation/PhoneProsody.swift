@@ -12,6 +12,15 @@ enum Prosody {
         var expected: Int     // syllable index
         var heard: Int
         var strength: Float
+        var confidence: Double
+
+        init(word: Int, expected: Int, heard: Int, strength: Float, confidence: Double? = nil) {
+            self.word = word
+            self.expected = expected
+            self.heard = heard
+            self.strength = strength
+            self.confidence = confidence ?? Double(1 / (1 + Foundation.exp(-strength)))
+        }
     }
 
     struct Result {

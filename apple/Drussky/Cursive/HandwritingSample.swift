@@ -1,3 +1,4 @@
+import LearningCore
 import SwiftUI
 import UIKit
 
@@ -30,9 +31,7 @@ struct HandwritingSample: Equatable, Sendable {
 
     /// A seed for an exercise that has none: stable across launches (unlike `hashValue`).
     static func seed(for text: String, index: Int) -> UInt64 {
-        var h: UInt64 = 0xcbf2_9ce4_8422_2325
-        for b in Array((RussianText.key(text) + "#\(index)").utf8) { h = (h ^ UInt64(b)) &* 0x0000_0100_0000_01b3 }
-        return h
+        SeededGenerator.seed("\(RussianText.key(text))#\(index)")
     }
 
     static func make(text: String, seed: UInt64, fonts: [String] = CursiveFonts.names, strokes: Bool = CursiveModels.shared != nil) -> HandwritingSample {

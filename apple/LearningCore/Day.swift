@@ -161,12 +161,12 @@ extension KnowledgeModel {
         return weak.sorted { $0.1 != $1.1 ? $0.1 < $1.1 : $0.0 < $1.0 }.map(\.0)
     }
 
-    /// The components of `pageComponents` not yet learned (strength < 0.5) whose prerequisites
-    /// are all strong: the page's own frontier.
+    /// The components of `pageComponents` not yet learned (strength < 0.5, not relearning) whose
+    /// prerequisites are all strong: the page's own frontier.
     public func readyNewComponents(of pageComponents: [ComponentID], in graph: KnowledgeGraph, at date: Date,
                                    policy: FrontierPolicy = FrontierPolicy()) -> [ComponentID] {
         pageComponents.filter { c in
-            guard (strength(c, at: date) ?? 0) < 0.5 else { return false }
+            guard (strength(c, at: date) ?? 0) < 0.5, !traces(of: c).values.contains(where: \.isRelearning) else { return false }
             let pre = graph.prerequisites(of: c)
             return !pre.isEmpty && pre.allSatisfy { (strength($0, at: date) ?? 0) >= policy.ready }
         }
@@ -180,7 +180,11 @@ extension KnowledgeModel {
         let weak = weakPrerequisites(of: pageComponents, in: graph, at: date, policy: policy)
         if weak.count >= policy.minWeak { return .remediate(Array(weak.prefix(policy.maxRemediation))) }
         if dueCount >= day.reviewPageThreshold {
-            let fresh = pageComponents.filter { (strength($0, at: date) ?? 0) < 0.5 && !graph.prerequisites(of: $0).isEmpty }
+            let fresh = pageComponents.filter {
+                (strength($0, at: date) ?? 0) < 0.5
+                    && !traces(of: $0).values.contains(where: \.isRelearning)
+                    && !graph.prerequisites(of: $0).isEmpty
+            }
             let ready = readyNewComponents(of: pageComponents, in: graph, at: date, policy: policy)
             if !fresh.isEmpty, ready.count == fresh.count { return .preferCourse }
         }

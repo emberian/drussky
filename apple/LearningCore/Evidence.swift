@@ -134,6 +134,41 @@ public struct EventLog: Sendable {
         return data.split(separator: UInt8(ascii: "\n")).compactMap { try? decoder.decode(LearningEvent.self, from: Data($0)) }
     }
 
+    public var byteCount: UInt64? {
+        guard FileManager.default.fileExists(atPath: url.path) else { return 0 }
+        guard let attrs = try? FileManager.default.attributesOfItem(atPath: url.path),
+              let size = (attrs[.size] as? NSNumber)?.uint64Value else { return nil }
+        return size
+    }
+
+    public func loadTail(fromByteOffset offset: UInt64) -> [LearningEvent]? {
+        let fm = FileManager.default
+        if offset == 0 {
+            return fm.fileExists(atPath: url.path) ? load() : []
+        }
+        guard let handle = try? FileHandle(forReadingFrom: url) else { return nil }
+        defer { try? handle.close() }
+        do {
+            let size = try handle.seekToEnd()
+            guard size >= offset else { return nil }
+            try handle.seek(toOffset: offset - 1)
+            guard let prev = try handle.read(upToCount: 1), prev.count == 1, prev[prev.startIndex] == 0x0A else {
+                return nil
+            }
+            guard size > offset else { return [] }
+            guard let tail = try handle.readToEnd() else { return [] }
+            let decoder = Self.decoder()
+            var events: [LearningEvent] = []
+            for line in tail.split(separator: UInt8(ascii: "\n")) where !line.isEmpty {
+                guard let e = try? decoder.decode(LearningEvent.self, from: Data(line)) else { return nil }
+                events.append(e)
+            }
+            return events
+        } catch {
+            return nil
+        }
+    }
+
     @discardableResult
     public func append(_ events: [LearningEvent]) -> Bool {
         guard !events.isEmpty else { return true }

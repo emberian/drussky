@@ -64,7 +64,7 @@ struct ContentsView: View {
     }
 
     private var lettersMet: Int { book.course.letters.filter { book.letterKnown($0.upper) }.count }
-    private var wordsMet: Int { book.targets.keys.filter { $0.hasPrefix("word:") }.count }
+    private var wordsMet: Int { book.wordsMetCount }
 
     private var stats: some View {
         HStack(spacing: 28) {

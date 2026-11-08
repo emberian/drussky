@@ -176,4 +176,57 @@ final class SchedulingTests: XCTestCase {
         XCTAssertEqual(book.reviewModalities(for: "word:ж"), [])
         XCTAssertFalse(book.reviewCandidates().contains { $0.id == "word:ж" })
     }
+
+    func testGrammarCellsAndRootsEnterReviewScheduleAndWordsMetFollowsKnowledgeModel() throws {
+        let book = newBook()
+        // Recognition-only evidence in KnowledgeModel (not in book.targets) still counts in wordsMetCount.
+        var rm = Exercise(kind: .readMeaning)
+        rm.text = "кни́га"; rm.options = ["book", "table"]; rm.answerIndex = 0
+        var tf = Exercise(kind: .transform)
+        tf.word = "кни́га"; tf.paradigm = "decl1"; tf.cue = "gen-sg"; tf.answerText = "кни́ги"
+        var bw = Exercise(kind: .buildWord)
+        bw.en = "a writer"; bw.answerText = "писа́тель"; bw.parts = ["пис", "-а́-", "-тель"]; bw.options = bw.parts
+        book.insertWrittenPage(title: "g", intro: nil, unitTitle: "g", exercises: [rm, tf, bw], newWords: [])
+        let p = book.currentPage
+        book.record(page: p, exercise: 0) { $0.attempts = 1; $0.chosen = 0; $0.status = .correct }
+        XCTAssertNil(book.targets["word:книга"])
+        XCTAssertGreaterThanOrEqual(book.wordsMetCount, 1, "wordsMetCount includes words with evidence in KnowledgeModel")
+
+        // Practising a grammar transform and a root buildWord schedules gram:decl1-gen-sg and root:пис.
+        book.record(page: p, exercise: 1) { $0.attempts = 1; $0.revealed = true; $0.status = .missed }
+        book.record(page: p, exercise: 2) { $0.attempts = 1; $0.recognized = "писатель"; $0.status = .correct }
+        XCTAssertTrue(book.reviewCandidates().contains { $0.id == "gram:decl1-gen-sg" })
+        XCTAssertTrue(book.reviewCandidates().contains { $0.id == "root:пис" })
+
+        book.advanceClock(byDays: 10)
+        let dueIDs = Set(book.dueReviews().map(\.id))
+        XCTAssertTrue(dueIDs.contains("gram:decl1-gen-sg"), "due grammar cell is included in dueReviews/dueCount")
+        XCTAssertTrue(dueIDs.contains("root:пис"), "due root is included in dueReviews/dueCount")
+        XCTAssertGreaterThanOrEqual(book.dueCount, 2)
+
+        let gramEx = book.reviewExercise(for: "gram:decl1-gen-sg", modality: .transform, variant: 0)
+        XCTAssertEqual(gramEx.kind, .transform)
+        XCTAssertEqual(gramEx.reviewKey, "gram:decl1-gen-sg")
+        XCTAssertTrue( book.knowledge.domain.components(for: gramEx).contains(ComponentID(.construction, "decl1-gen-sg")) )
+
+        let classifyEx = book.reviewExercise(for: "gram:decl1-gen-sg", modality: .classify, variant: 0)
+        XCTAssertEqual(classifyEx.kind, .paradigmFill)
+        XCTAssertNotNil(classifyEx.options)
+
+        let rootEx = book.reviewExercise(for: "root:пис", modality: .build, variant: 0)
+        XCTAssertEqual(rootEx.kind, .buildWord)
+        XCTAssertEqual(rootEx.reviewKey, "root:пис")
+        XCTAssertTrue( book.knowledge.domain.components(for: rootEx).contains(ComponentID(.root, "пис")) )
+
+        // Weakest words ranks a lapsed word ahead of a strong word.
+        book.keep("стол", en: "table")
+        review(book, "стол", key: "word:стол") { $0.attempts = 1; $0.status = .correct }
+        review(book, "кни́га", key: "word:книга") { $0.attempts = 1; $0.status = .correct }
+        book.advanceClock(byDays: 1)
+        review(book, "кни́га", key: "word:книга") { $0.attempts = 1; $0.revealed = true; $0.status = .missed }
+        let weakest = book.weakestWords(limit: 4).map { RussianText.key($0.ru) }
+        let idxKniga = try XCTUnwrap(weakest.firstIndex(of: "книга"))
+        let idxStol = try XCTUnwrap(weakest.firstIndex(of: "стол"))
+        XCTAssertLessThan(idxKniga, idxStol, "the relearning word comes ahead of the strong word in weakestWords")
+    }
 }

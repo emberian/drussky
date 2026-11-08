@@ -309,11 +309,12 @@ extension Book {
         knowledge.rebuild(fsrs: FSRS().scalingStability(by: k))
     }
 
-    /// One bounded step at most once per probe period.
-    private func nudgeParameters() {
+    /// One bounded step at most once per probe period, using only observations since the last nudge.
+    func nudgeParameters() {
         if let last = day.lastNudge, now().timeIntervalSince(last) < probePolicy.every { return }
         let current = day.stabilityScale ?? 1
-        let k = ParameterNudge.scale(current: current, calibration: calibration, minObservations: probePolicy.minObservations)
+        let recent = Calibration(observations: day.probes.observations(since: day.lastNudge))
+        let k = ParameterNudge.scale(current: current, calibration: recent, minObservations: max(20, probePolicy.minObservations))
         guard k != current else { return }
         day.stabilityScale = k
         day.lastNudge = now()

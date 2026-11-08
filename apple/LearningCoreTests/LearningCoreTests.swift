@@ -246,4 +246,23 @@ extension LearningCoreTests {
         XCTAssertEqual(d.knownKeys, 1)
         XCTAssertEqual(d.ladder.map(\.key), [a])
     }
+
+    func testOneAgainReviewIsRelearningNotKnownNotSecureWeakPrerequisiteAndNotReadyNew() {
+        let g = graph
+        let soon = t0.addingTimeInterval(60)
+        // Component `a` has only one `.again` review; `b` is strong.
+        let m = KnowledgeModel(events: [outcome([a], write, .again, at: t0), outcome([b], write, .good, at: t0)])
+        XCTAssertEqual(m.trace(a, write)?.isRelearning, true)
+        XCTAssertLessThan(m.strength(a, at: soon) ?? 1, FrontierPolicy().weak)
+        XCTAssertFalse(m.knows(Target.Unit(key: a), at: soon), "not known")
+        XCTAssertFalse(m.isSecure([a], in: [write], at: soon), "not secure")
+        XCTAssertEqual(m.weakPrerequisites(of: [ab], in: g, at: soon), [a], "weak prerequisite")
+        XCTAssertTrue(m.readyNewComponents(of: [ab], in: g, at: soon).isEmpty, "not ready-new when prerequisite has one .again")
+        XCTAssertTrue(m.frontier(g, at: soon).isEmpty)
+
+        // Even when all prerequisites of `ab` are strong, `ab` itself after one `.again` review is relearning, not ready-new.
+        let m2 = KnowledgeModel(events: [outcome([a, b], write, .good, at: t0), outcome([ab], write, .again, at: t0)])
+        XCTAssertTrue(m2.readyNewComponents(of: [ab], in: g, at: soon).isEmpty, "not ready-new when the component itself is relearning")
+        XCTAssertFalse(m2.frontier(g, at: soon).contains(ab))
+    }
 }

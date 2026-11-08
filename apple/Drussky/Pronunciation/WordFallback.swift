@@ -19,14 +19,17 @@ enum WordFallback {
                 let m = opts.errors.first { Set(PhoneSet.spellings($0.ipa)).contains(h) }
                 let d = PhoneSet.distance(s.ipa, h)
                 let verdict: PhoneJudgement.Verdict = ok || d <= 0.1 ? .good : (m == nil && d < 0.4 ? .close : .substituted)
-                sounds.append(PhoneJudgement(expected: Phone(ipa: s.ipa), heard: Phone(ipa: h), verdict: verdict, letterRange: s.letters))
+                // Word-level G2P alignment is a hypothesis, not a phone measurement: give it a modest
+                // explicit confidence below SpeakingFeedback.confidenceFloor so it stays hidden by design.
+                let c = SpeakingFeedback.wordHypothesisConfidence
+                sounds.append(PhoneJudgement(expected: Phone(ipa: s.ipa, confidence: c), heard: Phone(ipa: h, confidence: c), verdict: verdict, letterRange: s.letters))
                 mistakes.append((verdict == .substituted ? (m ?? Mistake(ipa: h, kind: .other)) : nil, verdict == .substituted ? -3 : 3))
             case .delete(let i):
                 let s = expected.sounds[i]
-                sounds.append(PhoneJudgement(expected: Phone(ipa: s.ipa), heard: nil, verdict: .missing, letterRange: s.letters))
+                sounds.append(PhoneJudgement(expected: Phone(ipa: s.ipa, confidence: SpeakingFeedback.wordHypothesisConfidence), heard: nil, verdict: .missing, letterRange: s.letters))
                 mistakes.append((nil, -3))
             case .insert(let j):
-                sounds.append(PhoneJudgement(expected: nil, heard: Phone(ipa: b[j]), verdict: .extra, letterRange: nil))
+                sounds.append(PhoneJudgement(expected: nil, heard: Phone(ipa: b[j], confidence: SpeakingFeedback.wordHypothesisConfidence), verdict: .extra, letterRange: nil))
             }
         }
         let expectedCount = max(1, sounds.filter { $0.expected != nil }.count)

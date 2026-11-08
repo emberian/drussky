@@ -21,7 +21,7 @@ extension Book {
     /// (letters that blur in cursive: и ш л м т п н, а о, д б), stable in order.
     func cursiveSeeds(excluding due: Set<String>) -> [DueReview] {
         guard cursiveUnlocked else { return [] }
-        let tricky = Set("ишлмтпнаодб")
+        let tricky = CursiveTraps.minimLetters
         let candidates = reviewCandidates().filter { c in
             c.id.hasPrefix("word:") && !c.id.contains(" ") && !due.contains(c.id) && c.modalities.contains(.readCursive)
                 && c.components.allSatisfy { knowledge.model.trace($0, .readCursive) == nil }

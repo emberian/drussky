@@ -11,7 +11,7 @@ public struct MemoryKey: Hashable, Sendable, Codable, Comparable {
     public static func < (a: Self, b: Self) -> Bool { (a.component, a.modality) < (b.component, b.modality) }
 }
 
-public struct Review: Sendable, Hashable {
+public struct Review: Codable, Sendable, Hashable {
     public var t: Date
     public var grade: Grade
     /// The state after this review.
@@ -26,7 +26,7 @@ public struct Review: Sendable, Hashable {
 /// the right answers come (`latencyEMA`), which FSRS does not see: a form produced after six
 /// seconds of working it out and one produced in 600 ms are the same grade and a different
 /// state of knowledge (`CompilationPolicy`).
-public struct MemoryTrace: Sendable, Hashable {
+public struct MemoryTrace: Codable, Sendable, Hashable {
     public private(set) var reviews: [Review] = []
     /// Exponential moving average of the latency of right answers, in milliseconds; nil until one
     /// was measured.
@@ -58,6 +58,14 @@ public struct MemoryTrace: Sendable, Hashable {
         return FSRS.retrievability(elapsedDays: date.timeIntervalSince(r.t) / 86_400, stability: r.state.stability)
     }
 
+    /// Present strength of demonstrated recall at `date`: 0 before the first review or when every
+    /// review at or before `date` was `.again` (never yet recalled), otherwise `retrievability(at: date)`.
+    public func strength(at date: Date) -> Double {
+        guard let r = review(at: date),
+              reviews.contains(where: { $0.t <= date && $0.grade != .again }) else { return 0 }
+        return FSRS.retrievability(elapsedDays: date.timeIntervalSince(r.t) / 86_400, stability: r.state.stability)
+    }
+
     mutating func add(_ grade: Grade, at t: Date, fsrs: FSRS, latencyMs: Int? = nil, alpha: Double = CompilationPolicy.defaultAlpha) {
         let prev = reviews.last
         let elapsed = prev.map { t.timeIntervalSince($0.t) / 86_400 } ?? 0
@@ -80,7 +88,7 @@ public struct MemoryTrace: Sendable, Hashable {
     }
 }
 
-public struct ConfusionStat: Sendable, Hashable {
+public struct ConfusionStat: Codable, Sendable, Hashable {
     public var target: ComponentID
     public var produced: ComponentID
     public var count = 0
@@ -92,6 +100,8 @@ public struct ConfusionStat: Sendable, Hashable {
         times.filter { $0 <= date }.reduce(0) { $0 + pow(0.5, date.timeIntervalSince($1) / 86_400 / halfLife) }
     }
 }
+
+public typealias ConfusionEdge = ConfusionStat
 
 /// Does strength in one modality carry over to the first try in another?
 public struct TransferStat: Sendable, Hashable, Codable {
@@ -112,7 +122,7 @@ public struct TransferStat: Sendable, Hashable, Codable {
 
 /// Everything the evidence says, folded event by event. Pure value: replaying the same log
 /// gives the same model.
-public struct KnowledgeModel: Sendable {
+public struct KnowledgeModel: Codable, Sendable, Equatable {
     public let fsrs: FSRS
     public static let primedThreshold = 0.7
 
@@ -128,8 +138,26 @@ public struct KnowledgeModel: Sendable {
     private var helped: Set<String> = []
     private var seenIDs: Set<String> = []
 
-    public struct Pair: Hashable, Sendable { public var target: ComponentID; public var produced: ComponentID }
-    struct ModalityPair: Hashable, Sendable { var from: Modality; var to: Modality }
+    public struct Pair: Codable, Hashable, Sendable { public var target: ComponentID; public var produced: ComponentID }
+    struct ModalityPair: Codable, Hashable, Sendable { var from: Modality; var to: Modality }
+
+    public struct Snapshot: Codable, Sendable, Equatable {
+        public static let currentVersion = 1
+        public var version: Int = Snapshot.currentVersion
+        public var fsrs: FSRS
+        public var byteOffset: UInt64
+        public var lastEventID: String?
+        public var model: KnowledgeModel
+
+        public init(version: Int = Snapshot.currentVersion, fsrs: FSRS? = nil, byteOffset: UInt64,
+                    lastEventID: String? = nil, model: KnowledgeModel) {
+            self.version = version
+            self.fsrs = fsrs ?? model.fsrs
+            self.byteOffset = byteOffset
+            self.lastEventID = lastEventID ?? model.events.last?.id
+            self.model = model
+        }
+    }
 
     public init(events: [LearningEvent] = [], fsrs: FSRS = FSRS()) {
         self.fsrs = fsrs
@@ -208,10 +236,10 @@ public struct KnowledgeModel: Sendable {
         trace(c, m).map { $0.retrievability(at: date) }
     }
 
-    /// Best retrievability over modalities; nil when there is no evidence at all.
+    /// Best demonstrated strength over modalities; nil when there is no evidence at all.
     public func strength(_ c: ComponentID, at date: Date, in modalities: Set<Modality>? = nil) -> Double? {
         let rs = (modalitiesOf[c] ?? []).filter { modalities?.contains($0) ?? true }
-            .compactMap { retrievability(c, $0, at: date) }
+            .compactMap { trace(c, $0)?.strength(at: date) }
         return rs.max()
     }
 
@@ -309,7 +337,9 @@ public struct KnowledgeModel: Sendable {
     public func frontier(_ graph: KnowledgeGraph, at date: Date, ready: Double = 0.8,
                          kinds: Set<ComponentKind>? = nil, limit: Int = 12) -> [ComponentID] {
         let candidates = graph.components.values.filter { c in
-            (kinds?.contains(c.id.kind) ?? true) && (strength(c.id, at: date) ?? 0) < 0.5
+            (kinds?.contains(c.id.kind) ?? true)
+                && (strength(c.id, at: date) ?? 0) < 0.5
+                && !traces(of: c.id).values.contains(where: \.isRelearning)
         }
         let unlocked = candidates.filter { c in
             let pre = graph.prerequisites(of: c.id)

@@ -53,15 +53,9 @@ enum RussianG2P {
         "б": "b", "в": "v", "г": "ɡ", "д": "d", "ж": "ʐ", "з": "z", "й": "j", "к": "k", "л": "l", "м": "m",
         "н": "n", "п": "p", "р": "r", "с": "s", "т": "t", "ф": "f", "х": "x", "ц": "ts", "ч": "tɕ", "ш": "ʂ", "щ": "ɕː",
     ]
-    /// Unstressed function words; one-letter prepositions join the next word's phonology.
-    static let clitics: Set<String> = [
-        "в", "во", "к", "ко", "с", "со", "у", "о", "об", "обо", "на", "за", "по", "до", "из", "от", "без", "для", "под",
-        "над", "при", "про", "через", "не", "ни", "и", "а", "но", "да", "же", "ли", "бы", "то",
-    ]
-    static let proclitics: Set<String> = [
-        "в", "во", "к", "ко", "с", "со", "у", "о", "об", "обо", "на", "за", "по", "до", "из", "от", "без", "для", "под",
-        "над", "при", "про", "через", "не", "ни",
-    ]
+    /// Unstressed function words; prepositions and negation particles join the next word's phonology.
+    static let clitics: Set<String> = RussianText.clitics
+    static let proclitics: Set<String> = RussianText.proclitics
     /// Whole-word respellings (stress marks are kept from the target).
     static let respell: [String: String] = [
         "что": "што", "чтобы": "штобы", "ничто": "ништо", "конечно": "конешно", "скучно": "скушно",

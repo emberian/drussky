@@ -1,6 +1,22 @@
 import Foundation
 import Security
 
+/// Shared learner persona and prompt contracts across Claude and on-device tutors.
+enum TutorIdentity {
+    static let learnerName = "Ember"
+    static let learnerSummary = "one adult learner, \(learnerName): quick, curious, a beginner in Russian, interested in linguistics, science fiction, mathematics and philosophy"
+    static let pageWriterSummary = "one adult English speaker (quick, curious; wants to read Russian science fiction, mathematics and philosophy)"
+    static let onDevicePersona = """
+    You are the on-device tutor inside Drussky, a Russian exercise book used by one adult English speaker, \
+    \(learnerName), a beginner in Russian. Answer in English. Write Russian words in Cyrillic. Be short and exact.
+    """
+    static let glossSystem = """
+    You are a Russian glossary. You receive one Russian word and the sentence it appears in. Reply with ONE JSON \
+    object and nothing else: {"gloss": "1–4 English words for the meaning in this context", "lemma": "dictionary \
+    form in Cyrillic"}.
+    """
+}
+
 /// Asks Claude (Messages API, streamed) for a short tutor answer about the current exercise.
 enum Tutor {
     /// A Russian phrase the tutor marked up as [[ру́сский|english]].
@@ -34,7 +50,12 @@ enum Tutor {
         }
     }
 
-    static let model = "claude-opus-5-5"
+    static let opusModel = "claude-opus-5-5"
+    static let sonnetModel = "claude-sonnet-5-5"
+    static let model = opusModel
+    static let messagesURL = URL(string: "https://api.anthropic.com/v1/messages")!
+    static let anthropicVersion = "2026-10-21"
+    static let anthropicBeta = "server-side-fallback-2026-07-01"
 
     struct Turn: Codable, Sendable, Hashable {
         var role: String   // "user" | "assistant"
@@ -56,9 +77,8 @@ enum Tutor {
 
     static func system(context: String) -> String {
         """
-        You are the tutor inside Drussky, a Russian exercise book used by one adult learner, Ember: \
-        quick, curious, a beginner in Russian, interested in linguistics, science fiction, mathematics \
-        and philosophy. Working memory is sometimes stretched, so keep answers short and concrete: \
+        You are the tutor inside Drussky, a Russian exercise book used by \(TutorIdentity.learnerSummary). \
+        Working memory is sometimes stretched, so keep answers short and concrete: \
         2–6 sentences, or a tiny table/list when it really helps. Answer in English. Write every Russian \
         word in Cyrillic with a stress mark (U+0301) on words of two or more syllables (never on ё or \
         one-syllable words), and give a rough pronunciation only when asked or when it is the point. \
@@ -84,12 +104,12 @@ enum Tutor {
             let task = Task {
                 do {
                     guard let key = Keychain.apiKey, !key.isEmpty else { throw Failure.noKey }
-                    var request = URLRequest(url: URL(string: "https://api.anthropic.com/v1/messages")!)
+                    var request = URLRequest(url: messagesURL)
                     request.httpMethod = "POST"
                     request.setValue("application/json", forHTTPHeaderField: "content-type")
                     request.setValue(key, forHTTPHeaderField: "x-api-key")
-                    request.setValue("2026-10-21", forHTTPHeaderField: "anthropic-version")
-                    request.setValue("server-side-fallback-2026-07-01", forHTTPHeaderField: "anthropic-beta")
+                    request.setValue(anthropicVersion, forHTTPHeaderField: "anthropic-version")
+                    request.setValue(anthropicBeta, forHTTPHeaderField: "anthropic-beta")
                     request.timeoutInterval = 120
                     let body: [String: Any] = [
                         "model": model,

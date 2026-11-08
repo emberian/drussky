@@ -14,7 +14,7 @@ public struct ProbePolicy: Sendable, Equatable {
     public var minObservations: Int
 
     public init(enabled: Bool = true, every: TimeInterval = 7 * 86_400,
-                delays: [TimeInterval] = [86_400, 7 * 86_400, 30 * 86_400], sampleSize: Int = 6, minObservations: Int = 12) {
+                delays: [TimeInterval] = [86_400, 7 * 86_400, 30 * 86_400], sampleSize: Int = 6, minObservations: Int = 20) {
         self.enabled = enabled
         self.every = every
         self.delays = delays
@@ -60,15 +60,22 @@ public struct Probe: Codable, Sendable, Hashable, Identifiable {
 }
 
 /// Deterministic pseudo-randomness for sampling (SplitMix64), so a seed reproduces a draw.
-struct SeededGenerator: RandomNumberGenerator {
+public struct SeededGenerator: RandomNumberGenerator, Sendable {
     private var state: UInt64
-    init(seed: UInt64) { state = seed }
-    mutating func next() -> UInt64 {
+    public init(seed: UInt64) { state = seed }
+    public mutating func next() -> UInt64 {
         state &+= 0x9E37_79B9_7F4A_7C15
         var z = state
         z = (z ^ (z >> 30)) &* 0xBF58_476D_1CE4_E5B9
         z = (z ^ (z >> 27)) &* 0x94D0_49BB_1331_11EB
         return z ^ (z >> 31)
+    }
+
+    /// Stable FNV-1a 64-bit hash of `string` for deterministic seeding across launches.
+    public static func seed(_ string: String) -> UInt64 {
+        var h: UInt64 = 0xcbf2_9ce4_8422_2325
+        for b in string.utf8 { h = (h ^ UInt64(b)) &* 0x0000_0100_0000_01b3 }
+        return h
     }
 }
 
@@ -158,12 +165,17 @@ public struct ProbeLedger: Codable, Sendable, Equatable {
         return probes[i]
     }
 
-    public var observations: [Calibration.Observation] {
+    public func observations(since cutoff: Date? = nil) -> [Calibration.Observation] {
         probes.compactMap { p in
             guard let r = p.predicted, let ok = p.observed else { return nil }
+            if let cutoff {
+                guard let answered = p.answered, answered > cutoff else { return nil }
+            }
             return Calibration.Observation(modality: p.modality, predicted: r, observed: ok)
         }
     }
+
+    public var observations: [Calibration.Observation] { observations(since: nil) }
 }
 
 /// Predicted recall against observed outcomes: a reliability curve per modality and overall.

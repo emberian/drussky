@@ -57,14 +57,14 @@ public struct DueReview: Sendable, Hashable {
 }
 
 extension MemoryTrace {
-    /// The last review was a lapse: the trace is relearning.
-    public var isRelearning: Bool { reviews.count > 1 && reviews.last?.grade == .again }
+    /// The last review was a miss or lapse: the trace is relearning.
+    public var isRelearning: Bool { reviews.last?.grade == .again }
 
     /// When this trace next wants a review. A lapse brings it back after the relearning step;
     /// otherwise when predicted recall reaches `retention`.
     public func nextReview(_ policy: ReviewPolicy) -> Date? {
         guard let last, let s = state?.stability else { return nil }
-        if reviews.last?.grade == .again { return last.addingTimeInterval(policy.relearningStep) }
+        if isRelearning { return last.addingTimeInterval(policy.relearningStep) }
         return last.addingTimeInterval(FSRS.interval(stability: s, desiredRetention: policy.retention) * 86_400)
     }
 }
@@ -99,16 +99,16 @@ extension KnowledgeModel {
         return out.sorted { $0.priority != $1.priority ? $0.priority > $1.priority : $0.id < $1.id }
     }
 
-    /// Secure now: every component has, in one of `modalities`, a trace with present recall at
-    /// least `recall`, stability at least `stability` days, and no unrecovered lapse.
+    /// Secure now: every component has, in one of `modalities`, a trace with present strength at
+    /// least `recall` and stability at least `stability` days.
     /// (Present memory, not lifetime counts: an old lapse since recovered doesn't count.)
     public func isSecure(_ components: [ComponentID], in modalities: Set<Modality>, at date: Date,
                          recall: Double = 0.85, stability: Double = 2) -> Bool {
         guard !components.isEmpty else { return false }
         return components.allSatisfy { c in
             modalities.contains { m in
-                guard let t = trace(c, m), let s = t.state, t.reviews.last?.grade != .again else { return false }
-                return s.stability >= stability && t.retrievability(at: date) >= recall
+                guard let t = trace(c, m), let s = t.state, !t.isRelearning else { return false }
+                return s.stability >= stability && t.strength(at: date) >= recall
             }
         }
     }

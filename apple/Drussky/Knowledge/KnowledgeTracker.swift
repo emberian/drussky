@@ -21,7 +21,15 @@ final class KnowledgeTracker {
     private var unwritten: [LearningEvent] = []
     /// Set while some evidence is only in memory; cleared once it reaches events.jsonl.
     private(set) var logProblem: String?
+    let snapshotURL: URL
+    private(set) var foldCount = 0
+    private(set) var loadedFromSnapshot = false
+    private(set) var tailReplayedCount = 0
+    private(set) var eventsSinceSnapshot = 0
     var now: () -> Date
+
+    static let initialSnapshotThreshold = 20
+    static let snapshotInterval = 50
 
     /// The memory groups drawn as growth series.
     static let growthGroups: [(title: String, modalities: Set<Modality>)] = [
@@ -29,7 +37,7 @@ final class KnowledgeTracker {
         ("recognize", [.hearPick, .readPick, .readCursive]),
     ]
 
-    init(course: Course, root: URL, customWords: [Course.Word], now: @escaping () -> Date) {
+    init(course: Course, root: URL, customWords: [Course.Word], fsrs: FSRS = FSRS(), now: @escaping () -> Date) {
         self.course = course
         self.lemmas = Lemmas.load()
         self.pairs = SoundPairs.load()
@@ -39,7 +47,32 @@ final class KnowledgeTracker {
         keptCount = customWords.count
         domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords, morphology: morphology, paradigms: paradigms)
         log = EventLog(url: root.appendingPathComponent("events.jsonl"))
-        model = KnowledgeModel(events: log.load())
+        snapshotURL = root.appendingPathComponent("knowledge-snapshot.json")
+        if let data = try? Data(contentsOf: snapshotURL),
+           let snapshot = try? EventLog.decoder().decode(KnowledgeModel.Snapshot.self, from: data),
+           snapshot.version == KnowledgeModel.Snapshot.currentVersion,
+           snapshot.fsrs == fsrs,
+           snapshot.model.fsrs == fsrs,
+           snapshot.model.events.last?.id == snapshot.lastEventID,
+           snapshot.model.events.isEmpty == (snapshot.byteOffset == 0),
+           let tail = log.loadTail(fromByteOffset: snapshot.byteOffset) {
+            var restored = snapshot.model
+            for e in tail { restored.apply(e) }
+            model = restored
+            loadedFromSnapshot = true
+            tailReplayedCount = tail.count
+            eventsSinceSnapshot = tail.count
+        } else {
+            let events = log.load()
+            model = KnowledgeModel(events: events, fsrs: fsrs)
+            foldCount = 1
+            loadedFromSnapshot = false
+            tailReplayedCount = 0
+            eventsSinceSnapshot = events.count
+            if events.count >= Self.initialSnapshotThreshold {
+                saveSnapshot()
+            }
+        }
     }
 
     var graph: KnowledgeGraph { domain.graph }
@@ -87,10 +120,17 @@ final class KnowledgeTracker {
     /// is dropped rather than written into the restored notebook.
     func close() { isClosed = true }
 
+    private static func normalize(_ event: LearningEvent) -> LearningEvent {
+        var copy = event
+        copy.t = Date(timeIntervalSince1970: floor(event.t.timeIntervalSince1970))
+        return copy
+    }
+
     func record(_ events: [LearningEvent]) {
         guard !isClosed else { return }
-        append(events)
-        for e in events { model.apply(e) }
+        let normalized = events.map(Self.normalize)
+        for e in normalized { model.apply(e) }
+        append(normalized)
     }
 
     private func append(_ events: [LearningEvent]) {
@@ -99,6 +139,10 @@ final class KnowledgeTracker {
         if log.append(batch) {
             unwritten = []
             logProblem = nil
+            eventsSinceSnapshot += batch.count
+            if eventsSinceSnapshot >= Self.snapshotInterval {
+                saveSnapshot()
+            }
         } else {
             unwritten = batch
             logProblem = "\(batch.count) answer(s) not yet written to events.jsonl"
@@ -109,6 +153,23 @@ final class KnowledgeTracker {
     func retryPendingEvents() {
         guard !unwritten.isEmpty else { return }
         append([])
+    }
+
+    func saveSnapshot() {
+        guard !isClosed, unwritten.isEmpty, let byteOffset = log.byteCount else { return }
+        if !model.events.isEmpty && byteOffset == 0 { return }
+        let snapshot = KnowledgeModel.Snapshot(fsrs: model.fsrs, byteOffset: byteOffset,
+                                               lastEventID: model.events.last?.id, model: model)
+        guard let data = try? EventLog.encoder().encode(snapshot) else { return }
+        try? FileManager.default.createDirectory(at: snapshotURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+        if (try? data.write(to: snapshotURL, options: .atomic)) != nil {
+            eventsSinceSnapshot = 0
+        }
+    }
+
+    func saveSnapshotIfDirty() {
+        guard eventsSinceSnapshot > 0 else { return }
+        saveSnapshot()
     }
 
     /// The id of the outcome a completed result's round yields, live or reconstructed.
@@ -166,9 +227,12 @@ final class KnowledgeTracker {
             }
         }
         guard !events.isEmpty else { return 0 }
-        append(events)
-        model = KnowledgeModel(events: model.events + events, fsrs: model.fsrs)
-        return events.count
+        let normalized = events.map(Self.normalize)
+        model = KnowledgeModel(events: model.events + normalized, fsrs: model.fsrs)
+        foldCount += 1
+        append(normalized)
+        saveSnapshot()
+        return normalized.count
     }
 
     // MARK: Questions
@@ -220,7 +284,11 @@ final class KnowledgeTracker {
     }
 
     /// Refolds the log with other FSRS parameters (learned from retention probes, Book+Day).
-    func rebuild(fsrs: FSRS) { model = KnowledgeModel(events: model.events, fsrs: fsrs) }
+    func rebuild(fsrs: FSRS) {
+        model = KnowledgeModel(events: model.events, fsrs: fsrs)
+        foldCount += 1
+        saveSnapshot()
+    }
 
     func exportGraph(calibration: Calibration? = nil) -> URL? {
         var doc = GraphExport(domain: domain.name, modalities: domain.modalities, graph: graph, model: model, at: now())

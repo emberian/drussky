@@ -49,7 +49,8 @@ final class DayTests: XCTestCase {
     /// day, the welcome-back page, a tutor-written page handed in with its diary line in the
     /// middle — the book keeps one order.
     func testEveryComposedPageKeepsOneOrder() throws {
-        let book = studied(10)  // into unit 3: course pages carry their own prompted diary line
+        let diaryStart = try XCTUnwrap(course.pageSequence.firstIndex { $0.page.exercises.contains { $0.kind == .diary } })
+        let book = studied(diaryStart)  // into the first unit where course pages carry their own prompted diary line
         book.day.sharpAt = book.now()
         XCTAssertTrue(book.turnForward())
         let ordinary = try XCTUnwrap(book.pages.last)
@@ -613,7 +614,7 @@ final class DayTests: XCTestCase {
     /// («с»), however early the frontier offers one.
     func testTheSharpHourWordIsNeverAFunctionWord() throws {
         var offered = 0
-        for n in [1, 2, 3, 5, 8, 12] {
+        for n in 1...min(15, course.pageSequence.count) {
             let book = studied(n)
             book.day.sharpAt = book.now()
             let frontier = book.knowledge.model.frontier(book.knowledge.graph, at: book.now(), kinds: [.lexeme], limit: 12)

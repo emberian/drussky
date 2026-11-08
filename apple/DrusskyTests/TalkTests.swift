@@ -351,6 +351,49 @@ final class TalkTests: XCTestCase {
         XCTAssertEqual(again2.knowledge.backfill(pages: again2.pages), 0)
     }
 
+    func testSceneUnlockingFollowsCourseUnitOrderAndReadsKnowledgeWords() throws {
+        let book = Book(course: try course(), store: tempStore())
+        // Fresh book starts on u1 (index 0 in course.units).
+        XCTAssertEqual(book.currentUnitID, "u1")
+        XCTAssertTrue(TalkScenes.isUnlocked(afterUnit: 1, in: book))
+        XCTAssertFalse(TalkScenes.isUnlocked(afterUnit: 13, in: book))
+        XCTAssertFalse(TalkScenes.isUnlocked(afterUnit: 8, in: book))
+
+        // In course.json, u13 ("At the table") sits before u14 and before u8 ("It: он, она́, оно́").
+        // Reaching u13 unlocks u13 without unlocking u14 or u8 (which has a smaller number but comes later).
+        var ex = Exercise(kind: .readMeaning)
+        ex.text = "хлеб"; ex.options = ["bread", "water"]; ex.answerIndex = 0
+        book.insertWrittenPage(title: "Table", intro: nil, unitTitle: "At the table",
+                               exercises: [ex], newWords: [], sourceID: "u13-p1")
+        book.record(page: book.currentPage, exercise: 0) { $0.attempts = 1; $0.chosen = 0; $0.status = .correct }
+        XCTAssertEqual(book.currentUnitID, "u13")
+        XCTAssertTrue(TalkScenes.isUnlocked(afterUnit: 13, in: book), "u13 is reached")
+        XCTAssertFalse(TalkScenes.isUnlocked(afterUnit: 14, in: book), "u14 comes after u13 in course.units")
+        XCTAssertFalse(TalkScenes.isUnlocked(afterUnit: 8, in: book), "u8 comes after u13 in course.units despite 8 < 13")
+        XCTAssertFalse(TalkScenes.isUnlocked(afterUnit: 12, in: book))
+        XCTAssertEqual(TalkScenes.available(for: book).map(\.title), ["Here and there", "At the table"])
+
+        // Visiting cursive (u31) early unlocks u31 itself without unlocking u8..u30.
+        book.insertWrittenPage(title: "Cursive", intro: nil, unitTitle: "Cursive",
+                               exercises: [ex], newWords: [], sourceID: "u31-p1")
+        XCTAssertTrue(TalkScenes.isUnlocked(unit: "u31", in: book))
+        XCTAssertFalse(TalkScenes.isUnlocked(afterUnit: 8, in: book), "early cursive visit must not unlock u8..u30")
+        XCTAssertFalse(TalkScenes.isUnlocked(afterUnit: 12, in: book))
+
+        // A grammar page id like "g1" (inside u8) resolves through course.pageSequence to u8's position.
+        book.insertWrittenPage(title: "Grammar", intro: nil, unitTitle: "Grammar",
+                               exercises: [ex], newWords: [], sourceID: "g1")
+        XCTAssertTrue(TalkScenes.isUnlocked(unit: "g1", in: book))
+        XCTAssertTrue(TalkScenes.isUnlocked(afterUnit: 14, in: book), "u14 precedes u8 (which holds g1)")
+        XCTAssertTrue(TalkScenes.isUnlocked(afterUnit: 8, in: book))
+        XCTAssertFalse(TalkScenes.isUnlocked(afterUnit: 12, in: book), "u12 still lies ahead of u8")
+
+        // Words practised only via recognition (in KnowledgeModel, not in book.targets) still appear in TalkTutor state.
+        XCTAssertNil(book.targets["word:хлеб"])
+        XCTAssertTrue(TalkTutor.knownWords(book).contains { RussianText.key($0.ru) == "хлеб" })
+        XCTAssertTrue(TalkTutor.scenesState(book).contains("хлеб"))
+    }
+
     // MARK: Live
 
     /// A two-turn exchange through the app's own session: scenes, the tutor's opener spoken
@@ -397,7 +440,8 @@ final class TalkTests: XCTestCase {
         XCTAssertNotNil(opener.latency?.firstSpeech)
 
         // The learner's audio: a bundled clip of «до́брое у́тро», heard by the recognizer when allowed.
-        let clip = try XCTUnwrap(Bundle.main.url(forResource: "dobroe-utro-b1d3ed", withExtension: "m4a", subdirectory: "Audio"))
+        let clip = try XCTUnwrap(Voice().recordingURL(for: "до́брое у́тро")
+            ?? Bundle.main.url(forResource: "dobroe-utro-b1d3ed", withExtension: "m4a", subdirectory: "Audio"))
         var heard = "Доброе утро"
         if SFSpeechRecognizer.authorizationStatus() == .authorized, let h = await SpeechCheck.transcribe(clip, hint: "доброе утро"), !h.isEmpty { heard = h }
         print("TALK learner clip heard as:", heard)

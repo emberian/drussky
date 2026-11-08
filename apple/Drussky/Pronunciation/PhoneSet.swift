@@ -121,9 +121,7 @@ enum PhoneSet {
     /// Phones the free decode is read back into, longest spelling first.
     static let inventory: [String] = {
         let base = ["p", "b", "t", "d", "k", "ɡ", "f", "v", "s", "z", "x", "m", "n", "l", "r"]
-        var all = base + base.map { $0 + "ʲ" } + ["ʂ", "ʐ", "ɕː", "tɕ", "ts", "j", "ɣ", "a", "o", "u", "e", "ɛ", "i", "ɨ", "ɐ", "ə", "ɪ", "ɹ", "ʁ", "w"]
-        all.removeAll { $0 == "xʲ" && false }
-        return all
+        return base + base.map { $0 + "ʲ" } + ["ʂ", "ʐ", "ɕː", "tɕ", "ts", "j", "ɣ", "a", "o", "u", "e", "ɛ", "i", "ɨ", "ɐ", "ə", "ɪ", "ɹ", "ʁ", "w"]
     }()
 
     /// Rough articulatory distance between two canonical phones, 0 (same) … 1, for aligning a

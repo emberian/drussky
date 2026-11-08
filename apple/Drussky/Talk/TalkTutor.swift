@@ -25,10 +25,17 @@ enum TalkTutor {
 
     // MARK: Where the learner is
 
+    /// Words the learner has practised in the knowledge model or kept as review targets.
+    static func knownWords(_ book: Book) -> [Course.Word] {
+        var keys = Set(book.knowledge.practisedWords.map(\.key))
+        for k in book.targets.keys where k.hasPrefix("word:") { keys.insert(String(k.dropFirst(5))) }
+        return keys.sorted().compactMap { book.word($0) }
+    }
+
     /// The learner's state, shared by every prompt: letters, words, what the model knows.
     static func state(_ book: Book) -> String {
         let met = book.course.letters.filter { book.letterKnown($0.upper) }.map(\.upper).joined(separator: " ")
-        let known = book.targets.keys.sorted().filter { $0.hasPrefix("word:") }.compactMap { book.word(String($0.dropFirst(5))) }
+        let known = knownWords(book)
             .prefix(200).map { "\($0.ru) = \($0.en)" }.joined(separator: "; ")
         let patterns = Lemmas.load().constructions.map { "\($0.id) (\($0.name))" }.joined(separator: ", ")
         return """
@@ -76,7 +83,7 @@ enum TalkTutor {
     /// Scenes need only the words (not the constructions or the knowledge summary): a smaller
     /// prompt, measurably faster to first token (README, "Talk").
     static func scenesState(_ book: Book) -> String {
-        let known = book.targets.keys.sorted().filter { $0.hasPrefix("word:") }.compactMap { book.word(String($0.dropFirst(5))) }
+        let known = knownWords(book)
             .prefix(200).map { "\($0.ru) = \($0.en)" }.joined(separator: "; ")
         return "Words they know: \(known.isEmpty ? "none yet" : known)."
     }

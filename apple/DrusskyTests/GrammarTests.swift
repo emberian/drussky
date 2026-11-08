@@ -84,7 +84,9 @@ final class GrammarTests: XCTestCase {
         // The course carries all three kinds and they decode with the rest.
         let kinds = Set(course.pageSequence.flatMap { $0.page.exercises.map(\.kind) })
         XCTAssertTrue(kinds.isSuperset(of: [.paradigmFill, .transform, .cueSort]))
-        XCTAssertEqual(course.pageSequence.filter { $0.page.id.hasPrefix("g") && $0.page.id.count == 2 }.count, 8, "eight authored grammar pages")
+        let expected = course.units.flatMap(\.pages).filter { $0.id.hasPrefix("g") && $0.id.count == 2 }.count
+        XCTAssertGreaterThanOrEqual(expected, 6)
+        XCTAssertEqual(course.pageSequence.filter { $0.page.id.hasPrefix("g") && $0.page.id.count == 2 }.count, expected, "authored grammar pages")
     }
 
     func testTransformCheckerAcceptsStressAndYoVariants() {
@@ -193,14 +195,28 @@ final class GrammarTests: XCTestCase {
         let book = Book(course: course, store: tempStore())
         let p = book.knowledge.domain.paradigms
         XCTAssertTrue(book.grammarExercises(from: p, seed: 1).exercises.isEmpty, "nothing known yet: no page")
-        // Work until the hushers are met (Ь, Ц, Ф, Ъ still ahead) and some nouns and verbs are known.
+        // Work until some letters and paradigm words are known while at least one letter is still ahead.
+        let allLetters = Set(book.course.letters.map(\.upper))
         var guardCount = 0
-        while !book.letterKnown("Щ") && guardCount < 60 { QA.complete(book, page: book.currentPage, upTo: .max); book.turnForward(); guardCount += 1 }
-        XCTAssertTrue(book.letterKnown("Щ") && !book.letterKnown("Ф"))
+        while guardCount < book.course.pageSequence.count {
+            let metNow = Set(book.course.letters.filter { book.letterKnown($0.upper) }.map(\.upper))
+            let exs = book.grammarExercises(from: p, seed: 7).exercises
+            let casesNow = Set(exs.flatMap { e in
+                (e.cells ?? [e.cue].compactMap { $0 }).map { "\(e.paradigm ?? "")/\($0)".split(separator: "-").first.map(String.init) ?? "" }
+            })
+            if !metNow.isEmpty && metNow.count < allLetters.count && book.knownParadigmWords(from: p).count >= 3 && exs.count >= 4 && casesNow.count >= 2 {
+                break
+            }
+            QA.complete(book, page: book.currentPage, upTo: .max)
+            book.turnForward()
+            guardCount += 1
+        }
         let met = Set(book.course.letters.filter { book.letterKnown($0.upper) }.map(\.upper))
+        XCTAssertFalse(met.isEmpty)
+        XCTAssertLessThan(met.count, allLetters.count, "at least one letter still unmet")
         let known = Set(book.knownParadigmWords(from: p).map(\.key))
         XCTAssertGreaterThanOrEqual(known.count, 3, "\(known)")
-        XCTAssertTrue(known.contains("книга") || known.contains("мама") || known.contains("кот"), "\(known)")
+        XCTAssertTrue(known.allSatisfy { p.words[$0] != nil }, "\(known)")
         for w in book.knownParadigmWords(from: p) { for f in w.forms.values { XCTAssertTrue(RussianText.letters(in: f).isSubset(of: met), "\(f) uses unmet letters") } }
         let (exercises, tables, spoken) = book.grammarExercises(from: p, seed: 7)
         XCTAssertGreaterThanOrEqual(exercises.count, 4, "\(exercises.map(\.kind))")

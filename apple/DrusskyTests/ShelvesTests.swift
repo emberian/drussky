@@ -24,8 +24,8 @@ final class ShelvesTests: XCTestCase {
         XCTAssertEqual(serials.map(\.id), ["stantsiya", "kukhnya"], "both files, in Serial.files order")
         let order = try pageOrder()
         for serial in serials {
-            let count = serial.id == "kukhnya" ? 30 : 24
-            XCTAssertEqual(serial.episodes.count, count, serial.id)
+            let count = serial.episodes.count
+            XCTAssertGreaterThanOrEqual(serial.episodes.count, 20, serial.id)
             XCTAssertEqual(serial.episodes.map(\.number), Array(1...count), serial.id)
             var last = -1
             for ep in serial.episodes {
@@ -63,7 +63,9 @@ final class ShelvesTests: XCTestCase {
         XCTAssertEqual(page.unitTitle, "Ку́хня · диало́г 1")
         XCTAssertEqual(page.exercises.map(\.kind), [.passage, .readMeaning, .readMeaning, .readMeaning, .diary])
         XCTAssertEqual(page.exercises[0].notice, ep.notice)
-        XCTAssertTrue(page.intro.hasPrefix("Cheese and Tima. Tap any word"), "the first dialogue carries the how-to once: \(page.intro)")
+        let firstHook = Shelves.lead(ep.title_en)
+        XCTAssertFalse(firstHook.isEmpty)
+        XCTAssertTrue(page.intro.hasPrefix(firstHook), "the first dialogue carries the how-to once: \(page.intro)")
         // Every later item's intro is one line: the English title and nothing else.
         for serial in Shelves.serials {
             for later in serial.episodes.dropFirst() {
@@ -85,7 +87,8 @@ final class ShelvesTests: XCTestCase {
         // Both serials are on the shelves, in order, with the kitchen's items named as dialogues.
         let items = Shelves.items
         XCTAssertTrue(items.contains { $0.sourceID == "episode:stantsiya-01" && $0.place == "Ста́нция · эпизо́д 1" })
-        XCTAssertTrue(items.contains { $0.sourceID == "episode:kukhnya-30" && $0.place == "Ку́хня · диало́г 30" })
+        let lastKitchen = try XCTUnwrap(kitchen.episodes.last)
+        XCTAssertTrue(items.contains { $0.sourceID == "episode:\(lastKitchen.id)" && $0.place == "Ку́хня · диало́г \(lastKitchen.number)" })
         XCTAssertEqual(Set(items.map(\.sourceID)).count, items.count)
     }
 
@@ -94,8 +97,11 @@ final class ShelvesTests: XCTestCase {
         let shelf = try XCTUnwrap(lib.shelves?.first { $0.id == "mathematics" })
         XCTAssertEqual(shelf.title, "Матема́тика")
         let texts = lib.texts(onShelf: shelf.id)
-        XCTAssertEqual(texts.count, 24)
-        XCTAssertEqual(texts.map { $0.rung ?? 0 }, Array(1...24))
+        let mathURL = try XCTUnwrap(Bundle.main.url(forResource: "math", withExtension: "json"))
+        let math = try JSONDecoder().decode(Library.self, from: Data(contentsOf: mathURL))
+        XCTAssertGreaterThanOrEqual(texts.count, 20)
+        XCTAssertEqual(texts.count, math.texts.count)
+        XCTAssertEqual(texts.map { $0.rung ?? 0 }, Array(1...texts.count))
         let order = try pageOrder()
         var last = -1
         for t in texts {

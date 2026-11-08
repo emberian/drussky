@@ -1,4 +1,5 @@
 import Foundation
+import LearningCore
 import SwiftUI
 
 /// The listening strand (`Resources/listening.json`, COURSE_SCHEMA.md "Listening"): twelve sets
@@ -205,12 +206,7 @@ extension Listening {
     /// asking-or-telling cards still come out strictly alternating statement and question, the
     /// last two of them trade places: the pattern must not answer the card.
     static func ordered(_ items: [ListeningItem]) -> [ListeningItem] {
-        func fnv(_ s: String) -> UInt64 {
-            var h: UInt64 = 0xcbf29ce484222325
-            for b in s.utf8 { h ^= UInt64(b); h = h &* 0x100000001b3 }
-            return h
-        }
-        var out = items.enumerated().sorted { (fnv($0.element.id), $0.offset) < (fnv($1.element.id), $1.offset) }.map(\.element)
+        var out = items.enumerated().sorted { (SeededGenerator.seed($0.element.id), $0.offset) < (SeededGenerator.seed($1.element.id), $1.offset) }.map(\.element)
         let trials = out.indices.filter { out[$0].kind == .questionOrStatement }
         let played = trials.map { out[$0].played ?? 0 }
         let alternates = played.count >= 4 && zip(played, played.dropFirst()).allSatisfy { $0 != $1 }

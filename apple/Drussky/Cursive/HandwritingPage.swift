@@ -1,4 +1,5 @@
 import Foundation
+import LearningCore
 
 /// "Read handwriting" from the ＋ menu: words the learner already has, each in a different hand,
 /// to print or to pick among look-alikes.
@@ -31,7 +32,7 @@ extension Book {
         let words = handwritingWords()
         guard words.count >= 4 else { return [] }
         var rng = SeededGenerator(seed: seed ?? UInt64(now().timeIntervalSince1970))
-        let tricky = Set("ишлмтпнаодб")
+        let tricky = CursiveTraps.minimLetters
         let ranked = words.shuffled(using: &rng).sorted { a, b in
             RussianText.key(a).filter(tricky.contains).count > RussianText.key(b).filter(tricky.contains).count
         }

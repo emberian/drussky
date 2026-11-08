@@ -1,6 +1,5 @@
 import AVFoundation
 import Foundation
-import Network
 import Observation
 
 /// Speaks the tutor's lines. The system voice is the first implementation; a narrator engine
@@ -114,21 +113,4 @@ final class SilentTutorVoice: TutorVoice {
     var name: String { "Silent" }
     func speak(_ text: String) async { spoken.append(text) }
     func stop() {}
-}
-
-/// Whether the tutor can be reached at all: Talk is unavailable offline, with one line saying so.
-@MainActor
-@Observable
-final class Reachability {
-    static let shared = Reachability()
-    private(set) var isOnline = true
-    private let monitor = NWPathMonitor()
-
-    private init() {
-        monitor.pathUpdateHandler = { [weak self] path in
-            let online = path.status == .satisfied
-            Task { @MainActor in self?.isOnline = online }
-        }
-        monitor.start(queue: DispatchQueue(label: "software.ember.drussky.reachability"))
-    }
 }

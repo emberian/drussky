@@ -137,6 +137,8 @@ struct Serial: Codable, Sendable, Hashable, Identifiable {
     var summary_en: String?
     /// What one item is called («эпизо́д» unless the file says, e.g., «диало́г»).
     var episode_word: String? = nil
+    /// What one item is called in English ("episode" unless the file says, e.g., "dialogue").
+    var episode_word_en: String? = nil
     var episodes: [Episode]
 
     struct Episode: Codable, Sendable, Hashable, Identifiable {
@@ -157,7 +159,7 @@ struct Serial: Codable, Sendable, Hashable, Identifiable {
 
     var itemWord: String { episode_word ?? "эпизо́д" }
     /// The same word for an English line ("24 episodes", "30 dialogues").
-    var itemWordEn: String { ["диало́г": "dialogue"][episode_word ?? ""] ?? "episode" }
+    var itemWordEn: String { episode_word_en ?? (["диало́г": "dialogue"][episode_word ?? ""] ?? "episode") }
     /// «Ста́нция · эпизо́д 3»
     func place(of ep: Episode) -> String { "\(title) · \(itemWord) \(ep.number)" }
 

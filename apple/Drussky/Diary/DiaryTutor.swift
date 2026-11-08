@@ -42,8 +42,8 @@ enum DiaryTutor {
     slip, not a list of rules. No preamble, no sign-off.
     """
 
-    /// What the tutor is told about where the learner is.
-    static func prompt(entry text: String, prompt: String, book: Book) -> String {
+    /// Summary of the learner's letters, vocabulary, constructions, and recent confusions.
+    static func briefing(book: Book) -> String {
         let met = book.course.letters.filter { book.letterKnown($0.upper) }.map(\.upper).joined(separator: " ")
         let known = book.targets.keys.sorted().filter { $0.hasPrefix("word:") }.compactMap { book.word(String($0.dropFirst(5))) }
             .prefix(160).map { "\($0.ru) = \($0.en)" }.joined(separator: "; ")
@@ -53,6 +53,13 @@ enum DiaryTutor {
         Words they know: \(known.isEmpty ? "none yet" : known).
         Construction ids: \(patterns).
         \(book.knowledge.summary(limit: 5))
+        """
+    }
+
+    /// What the tutor is told about where the learner is.
+    static func prompt(entry text: String, prompt: String, book: Book) -> String {
+        """
+        \(briefing(book: book))
 
         The diary prompt was: “\(prompt)”
         They wrote:
@@ -62,18 +69,17 @@ enum DiaryTutor {
         """
     }
 
-    /// Asks for the correction and parses it. `progress` gets the streamed character count.
-    static func correct(text: String, prompt: String, book: Book, progress: @escaping (Int) -> Void = { _ in }) async throws -> DiaryCorrection {
-        // Corrections are Claude's alone (OnDevice/TutorBackend.swift says why); offline they wait.
-        if case .unavailable(let why) = TutorRouter.route(.diaryCorrection, .live) { throw Failure.unavailable(why) }
-        var raw = ""
-        for try await chunk in Tutor.stream([.init(role: "user", text: Self.prompt(entry: text, prompt: prompt, book: book))],
-                                            system: system, maxTokens: 4000, effort: "medium") {
-            raw += chunk
-            progress(raw.count)
+    /// Asks for the correction via `TutorRouter.backend(for: .diaryCorrection)` and parses it.
+    static func correct(text: String, prompt: String, book: Book,
+                        conditions: TutorConditions? = nil,
+                        progress: @escaping (Int) -> Void = { _ in }) async throws -> DiaryCorrection {
+        let cond = conditions ?? .live
+        if case .unavailable(let why) = TutorRouter.route(.diaryCorrection, cond) { throw Failure.unavailable(why) }
+        guard let backend = TutorRouter.backend(for: .diaryCorrection, cond) else {
+            throw Failure.unavailable(Tutor.Failure.noKey.errorDescription ?? "")
         }
-        guard var c = parse(raw, at: book.now()) else { throw Failure.unreadable }
-        c.model = Tutor.model
+        let c = try await backend.correctDiary(text: text, prompt: prompt, briefing: briefing(book: book), at: book.now())
+        progress(c.corrected.count)
         return c
     }
 

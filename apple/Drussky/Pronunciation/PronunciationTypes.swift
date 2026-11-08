@@ -45,6 +45,10 @@ struct PronunciationTip: Codable, Sendable, Hashable {
 /// Raw reports remain available for evaluation; uncertain claims never become corrections.
 enum SpeakingFeedback {
     static let confidenceFloor = 0.95
+    /// Word-level findings (from a recognized word transcript rather than phone posteriors) are
+    /// hypotheses: they carry a modest explicit confidence below `confidenceFloor` so they stay
+    /// hidden from `actionableTips` by design.
+    static let wordHypothesisConfidence = 0.5
     static func permits(_ confidence: Double?) -> Bool {
         guard let confidence, confidence.isFinite else { return false }
         return confidence >= confidenceFloor && confidence <= 1

@@ -79,9 +79,10 @@ enum GoalPull {
             return "«\(w.rung.example)»\(gloss) — in: \(w.sentence)"
         }.joined(separator: "\n")
         let patterns = brief.patterns.map { "\($0.construction.name): \($0.construction.note)" }.joined(separator: "; ")
+        let thresholdPct = Int((Goal.readableThreshold * 100).rounded())
         let passage = brief.passage.map {
             """
-            This stretch is now ≥80% known to them; it is the page's passage:
+            This stretch is now ≥\(thresholdPct)% known to them; it is the page's passage:
             ---
             \($0)
             ---

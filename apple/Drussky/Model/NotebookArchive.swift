@@ -66,6 +66,28 @@ enum NotebookArchive {
         guard missing.isEmpty else {
             throw NotebookError(message: "\(missing.count) of its \(named) recordings are missing (\(missing.prefix(3).joined(separator: ", ")))")
         }
+        for file in ["library.json", "goal.json", "typing.json"] {
+            let url = folder.appendingPathComponent(file)
+            guard fm.fileExists(atPath: url.path) else { continue }
+            guard let data = try? Data(contentsOf: url),
+                  (try? JSONSerialization.jsonObject(with: data)) != nil else {
+                throw NotebookError(message: "its \(file) is damaged")
+            }
+        }
+        for file in ["events.jsonl", "metrics.jsonl"] {
+            let url = folder.appendingPathComponent(file)
+            guard fm.fileExists(atPath: url.path) else { continue }
+            guard let text = try? String(contentsOf: url, encoding: .utf8) else {
+                throw NotebookError(message: "its \(file) is damaged")
+            }
+            for line in text.split(whereSeparator: \.isNewline) {
+                let trimmed = line.trimmingCharacters(in: .whitespaces)
+                guard !trimmed.isEmpty else { continue }
+                guard (try? JSONSerialization.jsonObject(with: Data(trimmed.utf8))) != nil else {
+                    throw NotebookError(message: "its \(file) is damaged")
+                }
+            }
+        }
         let events = EventLog(url: folder.appendingPathComponent("events.jsonl")).load().count
         return Candidate(folder: folder, pages: state.pages.count,
                          completed: state.pages.reduce(0) { $0 + $1.completedCount }, events: events,

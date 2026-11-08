@@ -17,21 +17,27 @@ enum RussianText {
         return cleaned.split(whereSeparator: \.isWhitespace).joined(separator: " ")
     }
 
-    /// Latin letters that handwriting recognizers commonly return for Cyrillic shapes.
+    /// Single-character Latin/digit confusables that handwriting recognizers commonly return for Cyrillic shapes.
     static let homoglyphs: [Character: Character] = [
         "A": "А", "a": "а", "B": "В", "b": "ь", "C": "С", "c": "с", "E": "Е", "e": "е",
         "H": "Н", "K": "К", "k": "к", "M": "М", "m": "т", "O": "О", "o": "о", "P": "Р",
         "p": "р", "T": "Т", "X": "Х", "x": "х", "y": "у", "Y": "У", "u": "и", "n": "п",
-        "r": "г", "3": "З", "6": "б", "0": "О",
+        "r": "г", "3": "з", "6": "б", "0": "о", "4": "ч", "9": "д",
     ]
 
-    /// Comparison form for handwriting/speech answers: key() with homoglyphs mapped and ё→е.
+    /// Multi-glyph Latin sequences that stand for a single Cyrillic letter (bl→ы, III→ш, IO/lo→ю, ll→п).
+    /// Ordered longest-first so three-stroke `III`/`lll`/`Ill` folds to `ш` before `ll` folds to `п`.
+    static let multiGlyphSubstitutions: [(String, String)] = [
+        ("bl", "ы"), ("bI", "ы"), ("b|", "ы"), ("bi", "ы"),
+        ("III", "ш"), ("lll", "ш"), ("Ill", "ш"),
+        ("IO", "ю"), ("Io", "ю"), ("lo", "ю"),
+        ("ll", "п"),
+    ]
+
+    /// Comparison form for handwriting/speech answers: multi-glyphs and homoglyphs mapped, then key() with ё→е.
     static func comparable(_ s: String) -> String {
-        var s = s
-        for (pair, letter) in [("bl", "ы"), ("bI", "ы"), ("b|", "ы"), ("bi", "ы"), ("IO", "Ю"), ("Io", "ю"), ("3", "з")] {
-            s = s.replacingOccurrences(of: pair, with: letter)
-        }
-        let mapped = String(s.map { homoglyphs[$0] ?? $0 })
+        let folded = foldMultiGlyph(s)
+        let mapped = String(folded.map { homoglyphs[$0] ?? $0 })
         return key(mapped).replacingOccurrences(of: "ё", with: "е")
     }
 
@@ -45,7 +51,7 @@ enum RussianText {
     /// Latin (cursive т looks like m, и like u, д like g, а like a/o/G…). Lowercase keys.
     static let lookalikes: [Character: Set<Character>] = [
         "a": ["а", "э"], "b": ["б", "в", "ь"], "c": ["с", "а"], "d": ["д", "б"], "e": ["е", "ё", "э"], "g": ["д", "а"],
-        "h": ["н", "ч"], "i": ["і", "и", "г", "т"], "k": ["к"], "l": ["л", "г"], "m": ["т", "м", "ш"], "n": ["п", "л", "т"],
+        "h": ["н", "ч"], "i": ["і", "и", "г", "т"], "k": ["к"], "l": ["л", "г", "п"], "m": ["т", "м", "ш"], "n": ["п", "л", "т"],
         "o": ["о"], "p": ["р"], "r": ["г", "т"], "s": ["э", "з", "с"], "t": ["т", "э"], "u": ["и", "ц"], "v": ["в", "у"],
         "w": ["ш"], "x": ["х", "ж"], "y": ["у"], "z": ["г", "з"], "3": ["з", "э"], "6": ["б", "в"], "0": ["о"],
         "4": ["ч"], "9": ["д"],
@@ -53,10 +59,10 @@ enum RussianText {
 
     /// Position-by-position match of a recognizer's reading against the known answer, allowing
     /// each read glyph to stand for the Russian letters it is commonly confused with.
-    /// Readings where several Latin glyphs stand for one Russian letter (bl→ы, III→ш, IO→ю).
+    /// Readings where several Latin glyphs stand for one Russian letter (bl→ы, III→ш, IO→ю, ll→п).
     static func foldMultiGlyph(_ s: String) -> String {
         var h = s
-        for (pair, letter) in [("bl", "ы"), ("bI", "ы"), ("b|", "ы"), ("bi", "ы"), ("III", "ш"), ("lll", "ш"), ("Ill", "ш"), ("IO", "ю"), ("Io", "ю"), ("lo", "ю")] {
+        for (pair, letter) in multiGlyphSubstitutions {
             h = h.replacingOccurrences(of: pair, with: letter)
         }
         return h
@@ -131,11 +137,27 @@ enum RussianText {
         return false
     }
 
-    // MARK: Function words
+    // MARK: Function words & prosodic clitics
 
-    /// Prepositions, conjunctions and particles the course meets. да and нет are words.
-    private static let functionWords: Set<String> = Set(("о об обо с со в во на к ко у из от до за по для про без под над при через "
-        + "и а но или не ни же ж ли бы б ну вот ведь уж").split(separator: " ").map(String.init))
+    /// Prepositions and negation particles that lean forward onto the following word
+    /// (joining its phonological word for voicing assimilation and pretonic vowel reduction).
+    static let proclitics: Set<String> = [
+        "в", "во", "к", "ко", "с", "со", "у", "о", "об", "обо", "на", "за", "по", "до",
+        "из", "от", "без", "для", "под", "над", "при", "про", "через", "не", "ни",
+    ]
+
+    /// Particles that lean back onto the preceding host word without carrying stress.
+    static let enclitics: Set<String> = ["же", "ж", "ли", "бы", "б", "то"]
+
+    /// Unstressed prosodic clitics (proclitics, enclitics, and short coordinating conjunctions)
+    /// that do not carry independent word stress in `RussianG2P` or `Syllables`.
+    static let clitics: Set<String> = proclitics.union(enclitics).union(["и", "а", "но", "да"])
+
+    /// Prepositions, conjunctions and particles taught inside phrases rather than scheduled as
+    /// standalone vocabulary items (`да` and `нет` are standalone words, not function words).
+    static let functionWords: Set<String> = proclitics
+        .union(enclitics.subtracting(["то"]))
+        .union(["и", "а", "но", "или", "ну", "вот", "ведь", "уж"])
 
     /// A word learned inside phrases («в ко́смосе», «о рабо́те»), never recalled on its own: one
     /// of the function words above, or any single Cyrillic letter. Multi-word entries are not.

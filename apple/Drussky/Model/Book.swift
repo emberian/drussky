@@ -229,7 +229,8 @@ final class Book {
         case .loaded(let state, let fixed): saved = state; problem = nil; repairs = fixed
         case .unavailable(let p): problem = p; repairs = []
         }
-        knowledge = KnowledgeTracker(course: course, root: store.root, customWords: saved?.customWords ?? [], now: Date.init)
+        let initialFSRS = (saved?.day?.stabilityScale).map { FSRS().scalingStability(by: $0) } ?? FSRS()
+        knowledge = KnowledgeTracker(course: course, root: store.root, customWords: saved?.customWords ?? [], fsrs: initialFSRS, now: Date.init)
         fluency = FluencyTracker(root: store.root)
         if let saved {
             pages = saved.pages
@@ -254,7 +255,6 @@ final class Book {
         let ink = store.ink
         Task { await ink.setFailureHandler(writerErrors) }
         guard problem == nil else { return }
-        applyLearnedParameters()
         knowledge.backfill(pages: pages, takeReport: { [store] file in Book.savedReport(of: file, in: store) })
         reconcileProbes()
         noteSessionStart()
@@ -726,6 +726,7 @@ final class Book {
         let failures = await store.ink.flush()
         if let f = failures.first { persistenceError = f }
         knowledge.retryPendingEvents()
+        knowledge.saveSnapshotIfDirty()
     }
 
     /// Zips the notebook folder (state, ink, recordings, events) for sharing, after flushing.
@@ -780,6 +781,7 @@ final class Book {
                                       goals: goals.isEmpty ? nil : goals, currentGoalID: currentGoalID,
                                       hooks: hooks.isEmpty ? nil : hooks))
             if persistenceError?.hasPrefix("notebook") == true { persistenceError = nil }
+            knowledge.saveSnapshotIfDirty()
         } catch {
             persistenceError = "notebook: \((error as NSError).localizedDescription)"
         }

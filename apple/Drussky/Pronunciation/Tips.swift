@@ -15,8 +15,14 @@ enum Tips {
             return String(chars[a..<b]).lowercased()
         }
         var candidates: [(Float, PronunciationTip)] = []
-        // Prosody differences have no calibrated confidence: keep them for playback,
-        // without telling the learner they stressed the wrong syllable.
+        for f in stress where SpeakingFeedback.permits(f.confidence) {
+            guard f.expected < expected.syllables.count, f.heard < expected.syllables.count else { continue }
+            let want = expected.syllables[f.expected], got = expected.syllables[f.heard]
+            let w = word(f.word)
+            let msg = "In «\(w)», the stress is on «\(want.text)» — make it longer and louder than «\(got.text)»."
+            candidates.append((f.strength + 1.5, PronunciationTip(message: msg, contrast: "stress",
+                                                                  letterRange: want.letters, confidence: f.confidence)))
+        }
         var e = 0
         for j in sounds {
             guard let exp = j.expected else { continue }
@@ -68,7 +74,7 @@ enum Tips {
 
     static func message(_ m: Mistake, letters l: String, word w: String, expected: String, sound s: ExpectedSound) -> String {
         switch m.kind {
-        case .yi where expected == "ɨ" || expected == "ɨ":
+        case .yi where expected == "ɨ":
             return "Your «\(l)» in «\(w)» came out like и. Keep the lips spread, but pull the whole tongue back, as if starting to say у."
         case .yi:
             return "Your «\(l)» in «\(w)» came out like ы. Push the tongue forward and up, and soften the consonant before it."

@@ -3,18 +3,76 @@ import PencilKit
 import UIKit
 
 /// Launch-argument hooks for simulator QA and screenshots. Inert without the arguments.
-///   -qa-reset          start from an empty notebook
-///   -qa-complete N     work through the first N pages (with synthetic handwriting)
-///   -qa-partial K      also complete the first K exercises of the page after that
-///   -qa-age D          pretend D days have passed since everything was learned
-///   -qa-history D      spread the completed pages over the last D days (knowledge-map history)
-///   -qa-misses         choice exercises are missed twice (the correction under the choices)
-///   -qa-corrupt        an undecodable book.json in the QA folder (the recovery screen)
-///   -qa-nokey         hide the tutor key for this Debug launch without changing Keychain
-///   -qa-day N / -qa-away D / -qa-probes / -qa-tired   the day's shape (QA+Day.swift)
-///   -qa-sources        open Settings on «Исто́чники · Sources» (Views/CreditsView.swift)
+/// See `QA.knownFlags` below for the full catalog of supported `-qa-*` launch arguments.
 @MainActor
 enum QA {
+    /// Canonical catalog of all `-qa-*` launch arguments recognized across the app and QA extensions.
+    static let knownFlags: [(flag: String, summary: String)] = [
+        // Notebook & progression (QA.swift)
+        ("-qa-reset", "start from an empty QA notebook"),
+        ("-qa-complete", "work through the first N pages with synthetic handwriting"),
+        ("-qa-partial", "complete the first K exercises of the current page"),
+        ("-qa-until", "complete pages forward until reaching the given source page ID"),
+        ("-qa-age", "pretend D days have passed since everything was learned"),
+        ("-qa-history", "spread completed pages over the last D days"),
+        ("-qa-misses", "miss choice exercises twice to show the correction state"),
+        ("-qa-corrupt", "write an undecodable book.json in the QA folder to show the recovery screen"),
+        ("-qa-nokey", "hide DRUSSKY_TUTOR_KEY for this Debug launch without changing Keychain"),
+        ("-qa-finger", "enable finger drawing in settings"),
+        ("-qa-cursive", "enable cursive writing models in settings"),
+        // Shelves, serials, listening & baseline (QA.swift, ReadAlongView.swift)
+        ("-qa-series", "open episode N of «Ста́нция» as a page"),
+        ("-qa-kitchen", "open dialogue N of «Ку́хня» as a page"),
+        ("-qa-math", "open rung N of the mathematics shelf as a page"),
+        ("-qa-listening", "open set N of the listening strand as a page"),
+        ("-qa-listening-week", "open the weekly baseline page with reserved listening set N"),
+        ("-qa-narration", "insert the read-along page for the given library text ID"),
+        ("-qa-narration-at", "show the read-along page paused at MS milliseconds"),
+        ("-qa-baseline", "open the weekly baseline sample page"),
+        ("-qa-construction", "open 'Which ending fits?' construction practice"),
+        // Sheets & navigation (BookView.swift, ContentsView.swift, KnowledgeMapView.swift, GrammarMapView.swift, WordFamiliesView.swift)
+        ("-qa-contents", "open the Contents sheet on launch"),
+        ("-qa-library", "open Contents on the Library tab"),
+        ("-qa-shelves", "open Contents on the Shelves tab"),
+        ("-qa-map", "open the Knowledge Map sheet"),
+        ("-qa-map-select", "select the given component key in the Knowledge Map"),
+        ("-qa-grammar", "open the Grammar Map sheet"),
+        ("-qa-grammar-word", "select the given lemma in the Grammar Map"),
+        ("-qa-families", "open the Word Families sheet"),
+        ("-qa-family-root", "select the given root in Word Families"),
+        ("-qa-my-russian", "open the «Мой ру́сский» learner portrait sheet"),
+        ("-qa-settings", "open the Settings sheet"),
+        ("-qa-sources", "open Settings on «Исто́чники · Sources»"),
+        ("-qa-pronunciation", "open the Sound Pairs sheet"),
+        ("-qa-drill", "open the Sound Pairs sheet on the given contrast ID"),
+        // Typing (PageView.swift, TypedAnswer.swift)
+        ("-qa-type", "enable keyboard typing mode on the current page"),
+        ("-qa-type-text", "prefill the typed answer field with the given text"),
+        ("-qa-type-submit", "prefill and submit the given typed answer"),
+        ("-qa-typing-drill", "open the Cyrillic keyboard typing drill"),
+        // Day shape & return after break (QA+Day.swift)
+        ("-qa-day", "simulate N days of practice"),
+        ("-qa-away", "simulate returning after D days away"),
+        ("-qa-probes", "seed return-after-break diagnostic probes"),
+        ("-qa-tired", "simulate a tired session with misses"),
+        // Speaking & intonation (QA+Speaking.swift, QA+Intonation.swift)
+        ("-qa-speak", "open a speaking exercise page for the given word"),
+        ("-qa-speak-attempt", "seed a speaking attempt state (good, close, tryagain, words, silent)"),
+        ("-qa-speak-compare", "seed a take-vs-model prosody comparison"),
+        ("-qa-intonation", "open an intonation practice page for the given phrase"),
+        // Fluency, self-judgement & hooks (QA+Instruments.swift)
+        ("-qa-judge", "seed self-judgement state on writing exercises"),
+        ("-qa-hooks", "seed memory hooks"),
+        ("-qa-fluency", "seed reading, writing, speaking, and listening fluency series"),
+        // Diary, structure, goal & talk (QA+Diary.swift, QA+Structure.swift, QA+Goal.swift, QA+Talk.swift)
+        ("-qa-diary", "open a diary page and seed an entry or red-pen correction"),
+        ("-qa-structure", "open a sentence-structure exercise page for the given item ID"),
+        ("-qa-goal", "seed a reading goal fixture"),
+        ("-qa-goal-sheet", "open the Reading Goal sheet"),
+        ("-qa-goal-pull", "pull a local reading goal page"),
+        ("-qa-talk", "open a conversation scenario page for the given scenario ID"),
+        ("-qa-talk-done", "seed a completed conversation scenario with tutor marking"),
+    ]
     static func value(_ flag: String) -> Int? {
         let args = ProcessInfo.processInfo.arguments
         guard let i = args.firstIndex(of: flag), i + 1 < args.count else { return nil }
