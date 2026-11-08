@@ -104,6 +104,7 @@ struct TalkExercise: View {
                         VStack(alignment: .leading, spacing: 6) {
                             Text(Theme.stressed(scene.ru.isEmpty ? scene.title : scene.ru, show: book.settings.showStress))
                                 .russianFont(22, weight: .medium).foregroundStyle(Theme.text)
+                                .fixedSize(horizontal: false, vertical: true)  // a long scene wraps, never «кото́рую вы чит…»
                             if !scene.ru.isEmpty { Text(scene.title).scaledFont(14).foregroundStyle(Theme.muted) }
                             if let goal = scene.goal {
                                 Label(goal, systemImage: "target").scaledFont(14, weight: .medium).foregroundStyle(Theme.text)
