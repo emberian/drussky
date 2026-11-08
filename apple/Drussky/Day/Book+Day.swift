@@ -400,7 +400,7 @@ extension Book {
         let estimate = Fatigue.estimate(events: knowledge.model.events, now: now(), pageStarted: started)
         day.fatigue = estimate
         switch estimate.level {
-        case .tired where p == currentPage && day.shortened?[pageID] == nil: shorten(page: p, estimate)
+        case .tired where p == currentPage && day.shortened?[pageID] == nil: shorten(page: p)
         case .sharp: day.sharpAt = now()
         default: break
         }
@@ -411,7 +411,7 @@ extension Book {
     /// Begun means any mark at all: an attempt or check, a take, or ink on the strip (the writing
     /// may still be under the recognizer). A replaced exercise starts a new round, so a check or
     /// take that began on the old one lands nowhere (`record` and `commitTake` compare rounds).
-    private func shorten(page p: Int, _ estimate: FatigueEstimate) {
+    private func shorten(page p: Int) {
         var page = pages[p]
         let probeItems = Set(day.probes.probes.compactMap(\.item))
         let untouched = page.exercises.indices.filter { i in
@@ -420,6 +420,8 @@ extension Book {
                 && r.recognized == nil && r.recording == nil && !probeItems.contains("\(page.id)#\(i)")
                 && !FileManager.default.fileExists(atPath: store.inkURL(pageID: page.id, index: i).path)
         }
+        var choices = 0
+        var deferred = 0
         for i in untouched.prefix(2) {
             let ex = page.exercises[i]
             guard let key = ex.reviewKey, [.dictation, .translate, .fill, .readAloud].contains(ex.kind) else { continue }
@@ -427,14 +429,20 @@ extension Book {
             guard let m = [Modality.hearPick, .readPick].first(where: { can.contains($0) }) else { continue }
             page.exercises[i] = reviewExercise(for: key, modality: m, variant: i)
             page.results[i].round = page.results[i].roundNumber + 1
+            choices += 1
         }
         for i in untouched.dropFirst(2) {
             page.results[i].status = .skipped
             page.results[i].updated = now()
+            deferred += 1
         }
+        guard choices + deferred > 0 else { return }
         if page.finished == nil && page.results.allSatisfy({ $0.status.isComplete }) { page.finished = now() }
         replace(page: page, at: p)
-        let line = "Some reviews are left for a later page."
+        var changes: [String] = []
+        if choices > 0 { changes.append("\(choices) review\(choices == 1 ? " now uses" : "s now use") choices.") }
+        if deferred > 0 { changes.append("\(deferred) review\(deferred == 1 ? " waits" : "s wait") for later.") }
+        let line = changes.joined(separator: " ")
         day.shortened = (day.shortened ?? [:]).merging([page.id: line]) { _, new in new }
         day.lastShortened = now()
     }

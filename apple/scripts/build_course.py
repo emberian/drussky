@@ -699,7 +699,7 @@ PAGE_MOVES = [
 DIARY_FROM_UNIT = 2  # index into UNIT_ORDER
 DIARY_PROMPTS = {
     "u3-p1": "What is this, and what is it not? Point at two things: Э'то… Э'то не…",
-    "u3-p2": "Name three things in the room with э'то.",
+    "u3-p2": "Name a cat, a cake and a rocket using this page's pattern. They can be imagined.",
     "u3-p3": "Who is this? Introduce two people or animals.",
     "u4-p1": "Who is at home right now, and who is not?",
     "u4-p2": "Ask where two things are, and answer.",

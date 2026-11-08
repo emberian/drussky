@@ -2,8 +2,8 @@
 
 A Russian exercise book you write in. Open it and you are on today's page: numbered
 exercises down a squared тетрадь page, answered in place — with the Pencil on ruled lines,
-by ear, or aloud. Finished exercises get a red tick; a finished page gets a red mark
-(5 — Отлично!), or a red tick (Готово!) when nothing on it was graded — practice, skips, speaking
+by ear, or aloud. Finished exercises stay in place and get a red tick; a finished page gets a red mark
+(5 — Отли́чно), or a red tick (Гото́во) when nothing on it was graded — practice, skips, speaking
 you judged yourself, a diary line nobody corrected. A diary line the tutor marked counts, and three
 or more corrections on it count as a miss. Turn the page with the arrow; turning back shows exactly
 what you wrote.
@@ -24,7 +24,7 @@ what you wrote.
 | read along | a library text read by a human (LibriVox volunteers, Commons readers): the word being said lights up, tap a word to hear from there, ¾ speed, or listen first with the text appearing as it is read; then write one of its sentences from the reader's voice and say one after the reader |
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние) |
 | build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
-| talk (Разгово́р) | a spoken conversation with the tutor: pick one of three scenes made from your words, then 6–10 turns — the tutor speaks (short Russian, stress-marked, at most two new words a turn, a gentle «Вы хоте́ли сказа́ть…?» when you slip), you answer out loud hands-free, an eye icon whispers the English; afterwards every line of yours gets the red pen and at most one pronunciation tip. ＋ → *Talk* |
+| talk (Разгово́р) | a spoken conversation with the tutor: pick one of three scenes made from your words, then 6–10 turns — the tutor speaks (short Russian, stress-marked, at most two new words a turn, a gentle «Вы хоте́ли сказа́ть…?» when you slip), you tap the microphone when ready and answer out loud, an eye icon whispers the English; afterwards every line of yours gets the red pen and at most one pronunciation tip. ＋ → *Talk* |
 | guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
 | fill the table | a declension or conjugation table with some cells given; write the missing forms in small ruled cells (or tap tiles into them); a miss shows the row with the right cell marked |
 | the form | «кни́га» → genitive singular, or a sentence with a gap that forces the case: write the form |
@@ -150,11 +150,13 @@ the shop has, which film they prefer) and you have a goal, told to you in Englis
 card with two or three phrase frames you may need (from your own words first). The partner
 answers the meaning you actually express from its facts, asks you to clarify when a line is
 unclear, says no when its facts say no, and is not obliged to agree. It speaks one or two short
-stress-marked sentences within your vocabulary plus at most two new words; the soft tone says it
-is your turn and the same hands-free microphone as *read aloud* takes your answer with a
-conversation profile (`TalkSession.endpointing`: a pause of 1.5 s ends the turn rather than 0.7 s,
-up to 12 s of speech, 10 s to start; "Still listening… a pause is fine; tap when you've finished";
-nothing is captured while the tutor speaks, and replaying a line closes the microphone first).
+stress-marked sentences within your vocabulary plus at most two new words; then it is your turn
+and the microphone stays idle until you tap it — time to read the line, replay it or think.
+Your tap starts the same hands-free capture as *read aloud*, with a conversation profile
+(`TalkSession.endpointing`: a pause of 1.5 s ends the turn rather than 0.7 s, up to 12 s of
+speech, 10 s to start; "Still listening… a pause is fine; tap when you've finished"; nothing is
+captured while the tutor speaks, and replaying a line closes the microphone, which waits for
+your next tap).
 Speech recognition transcribes it, the eye beside each line whispers the English and the new
 words (each keepable); typing a line is always there. After 6–10 turns the tutor says goodbye and
 the transcript is marked: first whether you reached your goal and what came across, judged from
@@ -211,8 +213,7 @@ QA: `-qa-series N` / `-qa-math N` open episode N / rung N as a page.
 The inside cover asks for one text you want to read for real — from the Library, pasted or
 scanned, or a ru.wikisource link (fetched through the MediaWiki parse API and cleaned to its
 paragraphs). It becomes *your book*, kept in the notebook (several allowed; one current), and
-the cover shows **Distance to your book**: production-backed coverage of its actual forms, words
-still to practice on its first page, sentences at 95%+ coverage, a ladder
+the cover keeps **Your book** with a ladder
 of the next twenty words worth knowing (occurrences in the text, weighted toward the first
 page) and the grammar patterns it leans on. The text's words are lemmatized by the course's
 tables, then by the tutor (`claude-sonnet-5-5`, 300 forms per call, cached in the goal with a
@@ -327,12 +328,12 @@ small hook batch (run when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
 `DrusskyUITests` writes on the paper with real touch strokes, completes the exercise, and
 checks it survives a relaunch.
 
-QA launch arguments (simulator): `-qa-reset`, `-qa-complete N` (work through N pages with
+QA launch arguments (simulator): `-qa-reset`, `-qa-no-key` (Debug: hides the tutor key for this launch without changing Keychain), `-qa-complete N` (work through N pages with
 synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-contents`,
 `-qa-settings`, `-qa-diary` (three diary pages with canned red-pen corrections, no key
 needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian);
 `-qa-talk fresh|scene|mid|marked` (a Talk page: untouched, the scene choice, the middle of a dialogue, the
-marked transcript; `-qa-nokey` / `-qa-offline` pose the unavailable note);
+marked transcript; `-qa-nokey` hides the tutor key for the launch without touching the Keychain, `-qa-offline` poses the offline note);
 `-qa-settings`; `-qa-day N` / `-qa-away D` (the pages were done N or D days ago, then the page is
 turned: a morning or welcome-back page), `-qa-probes` (a synthetic answered probe set for the cover
 chart), `-qa-tired` (the current page marked shortened);

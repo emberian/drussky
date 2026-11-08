@@ -163,6 +163,7 @@ final class Book {
     var hooks = HookShelf() { didSet { scheduleSave() } }
     /// Fluency measurements: reading, writing and listening over weeks (Fluency/, metrics.jsonl).
     let fluency: FluencyTracker
+    /// Explicit navigation only. Completion and asynchronous feedback leave the paper in place.
     private(set) var advanceSignal = 0
     private(set) var advancePageID: String?
     func requestAdvance(page id: String) { advancePageID = id; advanceSignal += 1 }
@@ -507,6 +508,14 @@ final class Book {
             phraseIndex = index
         }
         return phraseIndex?[key]
+    }
+
+    /// A word as a label elsewhere (a map chip, a goal rung): the course's stressed form when the
+    /// word is one of ours, shown the way the page shows stress; a text's own word otherwise.
+    func stressedLabel(_ text: String) -> AttributedString {
+        let ru = word(text)?.ru
+        let form = ru.map { RussianText.unstressed($0) == RussianText.unstressed(text) ? $0 : text } ?? text
+        return Theme.stressed(form, show: settings.showStress)
     }
 
     func isKept(_ ru: String) -> Bool { word(ru) != nil && targets["word:\(RussianText.key(ru))"] != nil }

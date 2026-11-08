@@ -19,6 +19,51 @@ final class TalkTests: XCTestCase {
 
     // MARK: The dialogue
 
+    func testResumingLearnerTurnWaitsForMicrophoneTap() async throws {
+        // Resuming checks for the tutor first (no key: the page says so instead); the turn itself
+        // never reaches the network, so any key will do for this test. The learner's own is restored.
+        let keyBefore = Keychain.apiKey
+        Keychain.apiKey = keyBefore ?? "qa-placeholder-key"
+        defer { Keychain.apiKey = keyBefore }
+        let book = Book(course: try course(), store: tempStore())
+        book.insertTalkPage()
+        let ref = ExerciseRef(pageID: try XCTUnwrap(book.page).id, index: 0)
+        var saved = TalkConversation(turns: 6)
+        saved.scene = TalkScene(title: "A cat", ru: "Кот")
+        let line = TalkLine(role: .tutor, ru: "Где кот?", at: book.now())
+        saved.lines = [line]
+        book.saveTalk(ref, saved)
+        let session = TalkSession(ref: ref, book: book, pageVoice: Voice(), voice: SilentTutorVoice())
+        defer { session.cancel() }
+
+        session.appear(autoStart: false)
+        XCTAssertEqual(session.status, .paused)
+        session.resume()
+        await Task.yield()
+        XCTAssertEqual(session.status, .yourTurn)
+        XCTAssertEqual(session.mic.phase, .idle, "Reading the reply must not start capture or request microphone permission")
+
+        session.mic.pose(.hearing, key: session.key)
+        session.replay(line)
+        XCTAssertEqual(session.mic.phase, .idle, "Replaying the tutor must not record the tutor as the learner")
+        XCTAssertEqual(session.status, .yourTurn)
+    }
+
+    /// Without a key nothing starts: the page says so, and "Try again" asks the same question
+    /// again instead of launching a request that would fail.
+    func testTryAgainWithoutKeyStaysUnavailable() async throws {
+        try XCTSkipUnless((Keychain.apiKey ?? "").isEmpty, "requires a simulator with no tutor key")
+        let book = Book(course: try course(), store: tempStore())
+        book.insertTalkPage()
+        let ref = ExerciseRef(pageID: try XCTUnwrap(book.page).id, index: 0)
+        let session = TalkSession(ref: ref, book: book, pageVoice: Voice(), voice: SilentTutorVoice())
+        defer { session.cancel() }
+        session.propose()
+        guard case .unavailable = session.status else { return XCTFail("A missing key is an unavailable note, not a request: \(session.status)") }
+        session.resume()
+        guard case .unavailable = session.status else { return XCTFail("Try again with the key still missing stays unavailable: \(session.status)") }
+    }
+
     func testDialogueTurnOrderAndEnd() {
         var d = TalkDialogue(totalTurns: 6)
         XCTAssertEqual(d.phase, .choosingScene)

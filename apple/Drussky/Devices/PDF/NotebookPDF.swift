@@ -398,7 +398,7 @@ enum NotebookPDF {
         case .constructionChoice: "Which ending fits?"
         case .passage: "Read"
         case .soundPair: ex.say != nil ? "Sound pair · «\(ex.say ?? "")»" : "Sound pair"
-        case .diary: "Дневник"
+        case .diary: "Дневни́к"
         case .buildWord: "Build «\(ex.answerText ?? "")» (\(ex.en ?? ""))"
         case .familyGuess: "Guess «\(ex.word ?? "")» from its root \(ex.root ?? "")"
         case .talk: "Разгово́р · Talk"

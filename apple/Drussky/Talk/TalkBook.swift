@@ -12,7 +12,7 @@ extension Book {
     /// ＋ → Talk: a page with one conversation, placed right after the current page.
     func insertTalkPage() {
         let ex = Exercise(kind: .talk)
-        insertWrittenPage(title: "Разгово́р · Talk", intro: "A short conversation with your tutor, in Russian, out loud. Pick a scene; answer when it's your turn; afterwards the whole dialogue is marked in red.",
+        insertWrittenPage(title: "Разгово́р", intro: "Pick a scene. Read or replay your tutor's line, then tap the microphone when you're ready to answer. You can type instead.",
                           unitTitle: "My Russian", exercises: [ex], newWords: [])
     }
 
@@ -52,19 +52,16 @@ extension Book {
             r.talk = conversation
             r.status = clean ? .correct : .done
         }
-        requestAdvance(page: ref.pageID)
     }
 
     /// Ended without the pen (no network afterwards, or the learner chose so): finished, ungraded.
     func keepTalkUnmarked(_ ref: ExerciseRef) {
         guard result(ref)?.talk != nil else { return }
         record(ref) { $0.status = .done }
-        requestAdvance(page: ref.pageID)
     }
 
     /// Nothing said: left for now.
     func skipTalk(_ ref: ExerciseRef) {
         record(ref) { $0.status = .skipped }
-        requestAdvance(page: ref.pageID)
     }
 }

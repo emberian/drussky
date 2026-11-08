@@ -13,6 +13,12 @@ struct ContentsView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
+                    // The learner's own pages and the alphabet come first: this cover is an index
+                    // before it is an account of them (statistics and estimates follow, or sit
+                    // behind "Practice evidence and estimates").
+                    pages
+                    alphabet
+                    if !book.customWords.isEmpty { keptWords }
                     stats
                     VStack(alignment: .leading, spacing: 8) {
                         Button("What I could do this week") {
@@ -32,11 +38,8 @@ struct ContentsView: View {
                     GoalSection()
                     ShelvesSection()  // «Ста́нция», «Матема́тика» (Views/ShelfViews.swift)
                     MyRussianSection()
-                    alphabet
-                    if !book.customWords.isEmpty { keptWords }
                     Button("Practice evidence and estimates") { showEvidence = true }
                         .foregroundStyle(Theme.muted).accessibilityIdentifier("practice-evidence")
-                    pages
                 }
                 .padding(24)
                 .frame(maxWidth: 900)
