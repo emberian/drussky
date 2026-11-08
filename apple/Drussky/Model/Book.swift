@@ -61,6 +61,8 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var diary: DiaryEntry? = nil
     /// Talk: the spoken conversation with the tutor (Talk/TalkTypes.swift).
     var talk: TalkConversation? = nil
+    /// Answered on a keyboard rather than with the Pencil (Devices/Typing); evidence goes under `type`.
+    var typed: Bool? = nil
 
     var roundNumber: Int { round ?? 0 }
 

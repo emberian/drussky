@@ -180,7 +180,37 @@ The book icon (top left) opens your alphabet — each letter in **your own handw
 you've met it — and every page so far with its mark. **My Russian** collects every diary line
 you have ever written, newest first, with its red pen, and what the pen keeps finding this
 week; it exports as Markdown. Settings: finger drawing, cursive
-models, stress marks, notebook export (pages, ink, recordings as a zip), credits.
+models, stress marks, notebook export (pages, ink, recordings as a zip), the notebook as a PDF, credits.
+
+## On paper, in a pocket, at a keyboard (`Drussky/Devices/`)
+
+**Print your тетрадь.** Settings → *Export notebook as PDF* (A4 or Letter; the local one is
+picked) lays every page out as it is in the book — squared paper, red margin, dated header,
+numbered exercises with your ink on their ruled lines, red ticks and corrections, the diary's red
+pen, the tutor's questions, the mark — and hands it to the share sheet. *Print this page* at the
+foot of any page does one page. Ink is zoomed from its strip so nothing written is cut off, and a
+page is laid out as blocks that are never split across sheets (`NotebookPDF.paginate`).
+
+**Pocket (iPhone).** On a phone, ＋ → *Pocket: listen and speak* writes a page with nothing to
+write: due items as *listen and pick* or *say it* (a dictation or translation that is due is said
+instead), real-voice sentences of known words to pick or repeat, sound pairs on the weakest
+contrasts, and one passage already read, to hear again — sized for five to ten minutes
+(`PocketPage`). The full page is still there behind it.
+
+**Typing Russian.** With a hardware keyboard (always on the Mac; an iPad with a keyboard), every
+writing exercise offers *Type it instead*: a field that is checked exactly like handwriting, with a
+small ЙЦУКЕН map under it lighting the next key you need (a wrong key lights *delete*). Type on the
+system Russian layout, or switch on the **phonetic** scheme and type Latin
+(`Transliteration`): `a b v g d e zh z i j k l m n o p r s t u f h c ch sh sch y`, `yo yu ya ' ''`
+for `ё ю я ь ъ`, `eh` for э, `x` for х — `ya chitayu` → я читаю, `novyj` → новый, `zhizn'` → жизнь.
+A typed answer is recorded under its own `type` modality: knowing how to type a word is not
+knowing how to write it. ＋ → *Typing drill* (keyboard devices) runs home row → all letters → your
+own words, one line at a time, with words per minute shown after each line and the median speed
+of each day as a thin line (kept in `typing.json` in the notebook folder). The Pencil stays
+first on the iPad: the strip is always there and typing is a button under it.
+
+QA: `-qa-pocket` inserts a pocket page, `-qa-typing` opens the drill, `-qa-keyboard` pretends a
+keyboard is attached (simulator).
 
 ## Audio
 

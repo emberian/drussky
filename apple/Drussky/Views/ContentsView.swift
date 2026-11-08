@@ -211,6 +211,7 @@ struct SettingsView: View {
                 } footer: {
                     Text("Your pages, handwriting, recordings and answer log, as one zip. Restoring checks an export first and keeps the current notebook beside it.")
                 }
+                PDFExportSection()  // Devices/PDF
                 Section {
                     if let graphURL {
                         ShareLink(item: graphURL) { Label("Export knowledge graph", systemImage: "point.3.connected.trianglepath.dotted") }

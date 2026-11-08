@@ -228,9 +228,10 @@ struct MeetExercise: View {
                         .foregroundStyle(Theme.ink)
                         .accessibilityLabel("handwritten \(letter.upper)")
                     HearButton(text: letter.say, size: 52 * k)
-                    WatchStrokesButton(demo: demo)
+                    if !compact { WatchStrokesButton(demo: demo) }  // on a phone it sits under the letters: the row must fit 390 pt
                 }
                 let about = VStack(alignment: .leading, spacing: 4) {
+                    if compact { WatchStrokesButton(demo: demo) }
                     (Text(letter.sound).font(.system(size: 18, weight: .semibold))
                      + Text("  ") + Text(Theme.stressed(letter.tip, show: book.settings.showStress)).font(.system(size: 17)))
                         .foregroundStyle(Theme.text)
@@ -400,6 +401,7 @@ struct WritingExercise: View {
                     if verdict == .notQuite, let s = ex.spoken { voice.play(s) }
                 }
             }
+            if KeyboardPresence.shared.present { TypedAnswer(slot: slot, isActive: isActive) }  // Devices/Typing: a hardware keyboard may answer
             if (result.inkAttempts ?? 0) > 0 {
                 EarlierAttempts(urls: (1...(result.inkAttempts ?? 0)).map { slot.book.inkAttemptURL(slot.ref, attempt: $0) },
                                 height: stripHeight * 0.4)
