@@ -13289,6 +13289,655 @@
    "pos": "noun",
    "en": "function",
    "loan": "Latin functio, a performing"
+  },
+  "давать": {
+   "ru": "дава́ть",
+   "morphemes": [
+    "дава́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to give (imperfective); дава'й: let's"
+  },
+  "ладно": {
+   "ru": "ла́дно",
+   "morphemes": [
+    "ла́дно"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "part",
+   "en": "alright"
+  },
+  "конечно": {
+   "ru": "коне́чно",
+   "morphemes": [
+    "коне́чно"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adv",
+   "en": "of course"
+  },
+  "держать": {
+   "ru": "держа́ть",
+   "morphemes": [
+    "держа́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to hold"
+  },
+  "чайник": {
+   "ru": "ча́йник",
+   "morphemes": [
+    "ча́йник"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "kettle, teapot"
+  },
+  "плита": {
+   "ru": "плита́",
+   "morphemes": [
+    "плита́"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "stove, cooker"
+  },
+  "шкаф": {
+   "ru": "шкаф",
+   "morphemes": [
+    "шкаф"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "cupboard, cabinet"
+  },
+  "кружка": {
+   "ru": "кру́жка",
+   "morphemes": [
+    "кру́жка"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "mug"
+  },
+  "вилка": {
+   "ru": "ви́лка",
+   "morphemes": [
+    "ви́лка"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "fork"
+  },
+  "нож": {
+   "ru": "нож",
+   "morphemes": [
+    "нож"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "knife"
+  },
+  "ой": {
+   "ru": "ой",
+   "morphemes": [
+    "ой"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "part",
+   "en": "oh, oops"
+  },
+  "пахнуть": {
+   "ru": "па́хнуть",
+   "morphemes": [
+    "па́хнуть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to smell"
+  },
+  "пельмени": {
+   "ru": "пельме́ни",
+   "morphemes": [
+    "пельме́ни"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "pelmeni, dumplings"
+  },
+  "сметана": {
+   "ru": "смета́на",
+   "morphemes": [
+    "смета́на"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "sour cream"
+  },
+  "картошка": {
+   "ru": "карто́шка",
+   "morphemes": [
+    "карто́шка"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "potatoes"
+  },
+  "масло": {
+   "ru": "ма́сло",
+   "morphemes": [
+    "ма́сло"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "butter; oil"
+  },
+  "яйцо": {
+   "ru": "яйцо́",
+   "morphemes": [
+    "яйцо́"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "egg"
+  },
+  "лимон": {
+   "ru": "лимо́н",
+   "morphemes": [
+    "лимо́н"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "lemon"
+  },
+  "чуть": {
+   "ru": "чуть",
+   "morphemes": [
+    "чуть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adv",
+   "en": "barely, a little (чуть-чуть: a tiny bit)"
+  },
+  "остаться": {
+   "ru": "оста́ться",
+   "morphemes": [
+    "оста́ться"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to remain, to be left"
+  },
+  "холодильник": {
+   "ru": "холоди́льник",
+   "morphemes": [
+    "холоди́льник"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "fridge"
+  },
+  "список": {
+   "ru": "спи́сок",
+   "morphemes": [
+    "спи́сок"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "list"
+  },
+  "магазин": {
+   "ru": "магази́н",
+   "morphemes": [
+    "магази́н"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "shop, store"
+  },
+  "купить": {
+   "ru": "купи́ть",
+   "morphemes": [
+    "купи́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to buy"
+  },
+  "кипеть": {
+   "ru": "кипе́ть",
+   "morphemes": [
+    "кипе́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to boil (intransitive)"
+  },
+  "холодный": {
+   "ru": "холо́дный",
+   "morphemes": [
+    "холо́дный"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "cold"
+  },
+  "чистый": {
+   "ru": "чи́стый",
+   "morphemes": [
+    "чи́стый"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "clean"
+  },
+  "грязный": {
+   "ru": "гря́зный",
+   "morphemes": [
+    "гря́зный"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "dirty"
+  },
+  "положить": {
+   "ru": "положи́ть",
+   "morphemes": [
+    "положи́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to put, to lay down"
+  },
+  "класть": {
+   "ru": "класть",
+   "morphemes": [
+    "класть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to put, to lay down (imperfective)"
+  },
+  "поставить": {
+   "ru": "поста́вить",
+   "morphemes": [
+    "поста́вить"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to put, to stand upright"
+  },
+  "брать": {
+   "ru": "брать",
+   "morphemes": [
+    "брать"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to take (imperfective)"
+  },
+  "налить": {
+   "ru": "нали́ть",
+   "morphemes": [
+    "нали́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to pour"
+  },
+  "попробовать": {
+   "ru": "попро́бовать",
+   "morphemes": [
+    "попро́бовать"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to taste, to try"
+  },
+  "садиться": {
+   "ru": "сади́ться",
+   "morphemes": [
+    "сади́ться"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to sit down"
+  },
+  "выключить": {
+   "ru": "вы́ключить",
+   "morphemes": [
+    "вы́ключить"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to turn off, to switch off"
+  },
+  "трогать": {
+   "ru": "тро́гать",
+   "morphemes": [
+    "тро́гать"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to touch"
+  },
+  "осторожно": {
+   "ru": "осторо́жно",
+   "morphemes": [
+    "осторо́жно"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adv",
+   "en": "carefully; careful!"
+  },
+  "помыть": {
+   "ru": "помы́ть",
+   "morphemes": [
+    "помы́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to wash (perfective)"
+  },
+  "посуда": {
+   "ru": "посу́да",
+   "morphemes": [
+    "посу́да"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "the dishes"
+  },
+  "мыть": {
+   "ru": "мыть",
+   "morphemes": [
+    "мыть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to wash"
+  },
+  "вытереть": {
+   "ru": "вы́тереть",
+   "morphemes": [
+    "вы́тереть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to wipe"
+  },
+  "кормить": {
+   "ru": "корми́ть",
+   "morphemes": [
+    "корми́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to feed"
+  },
+  "покормить": {
+   "ru": "покорми́ть",
+   "morphemes": [
+    "покорми́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to feed (perfective)"
+  },
+  "убежать": {
+   "ru": "убежа́ть",
+   "morphemes": [
+    "убежа́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to run away; to boil over"
+  },
+  "расстраиваться": {
+   "ru": "расстра́иваться",
+   "morphemes": [
+    "расстра́иваться"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to get upset"
+  },
+  "тряпка": {
+   "ru": "тря́пка",
+   "morphemes": [
+    "тря́пка"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "cloth, rag"
+  },
+  "поздно": {
+   "ru": "по́здно",
+   "morphemes": [
+    "по́здно"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adv",
+   "en": "late"
+  },
+  "здравствуйте": {
+   "ru": "здра́вствуйте",
+   "morphemes": [
+    "здра́вствуйте"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "part",
+   "en": "hello (polite or plural)"
+  },
+  "извинить": {
+   "ru": "извини́ть",
+   "morphemes": [
+    "извини́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to excuse, to forgive"
+  },
+  "проходить": {
+   "ru": "проходи́ть",
+   "morphemes": [
+    "проходи́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to pass through; to come in"
+  },
+  "вообще": {
+   "ru": "вообще́",
+   "morphemes": [
+    "вообще́"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adv",
+   "en": "at all, in general"
+  },
+  "ключ": {
+   "ru": "ключ",
+   "morphemes": [
+    "ключ"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "key"
+  },
+  "телефон": {
+   "ru": "телефо́н",
+   "morphemes": [
+    "телефо́н"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "phone"
+  },
+  "звонить": {
+   "ru": "звони́ть",
+   "morphemes": [
+    "звони́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to ring, to call"
+  },
+  "дверь": {
+   "ru": "дверь",
+   "morphemes": [
+    "дверь"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "door"
+  },
+  "соседка": {
+   "ru": "сосе́дка",
+   "morphemes": [
+    "сосе́дка"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "neighbour (a woman)"
+  },
+  "курьер": {
+   "ru": "курье́р",
+   "morphemes": [
+    "курье́р"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "courier"
+  },
+  "подержать": {
+   "ru": "подержа́ть",
+   "morphemes": [
+    "подержа́ть"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "verb",
+   "en": "to hold (for a moment)"
   }
  },
  "forms": {
@@ -13731,7 +14380,78 @@
   "единственное": "единственный",
   "пустое": "пустой",
   "подожди": "подождать",
-  "мышление": "мышление"
+  "мышление": "мышление",
+  "давай": "давать",
+  "готово": "готов",
+  "держи": "держать",
+  "плите": "плита",
+  "плиту": "плита",
+  "шкафу": "шкаф",
+  "лимоном": "лимон",
+  "сахара": "сахар",
+  "пахнет": "пахнуть",
+  "кончилось": "кончаться",
+  "осталось": "остаться",
+  "кипит": "кипеть",
+  "любишь": "любить",
+  "пишешь": "писать",
+  "ходишь": "ходить",
+  "положи": "положить",
+  "клади": "класть",
+  "поставь": "поставить",
+  "возьми": "взять",
+  "возьмите": "взять",
+  "бери": "брать",
+  "дай": "дать",
+  "налей": "налить",
+  "попробуй": "попробовать",
+  "садись": "садиться",
+  "садитесь": "садиться",
+  "выключи": "выключить",
+  "трогай": "трогать",
+  "иди": "идти",
+  "помою": "помыть",
+  "посуду": "посуда",
+  "вытру": "вытереть",
+  "кормил": "кормить",
+  "покормил": "покормить",
+  "покорми": "покормить",
+  "кота": "кот",
+  "съел": "съесть",
+  "убежало": "убежать",
+  "расстраивайся": "расстраиваться",
+  "извините": "извинить",
+  "проходите": "проходить",
+  "откройте": "открыть",
+  "ключи": "ключ",
+  "звонит": "звонить",
+  "подержи": "подержать",
+  "этому": "этот",
+  "этим": "этот",
+  "этих": "этот",
+  "моего": "мой",
+  "моему": "мой",
+  "мою": "мой",
+  "моим": "мой",
+  "моём": "мой",
+  "моих": "мой",
+  "нашего": "наш",
+  "нашему": "наш",
+  "нашим": "наш",
+  "нашем": "наш",
+  "наши": "наш",
+  "наших": "наш",
+  "нового": "новый",
+  "новому": "новый",
+  "новой": "новый",
+  "новую": "новый",
+  "новым": "новый",
+  "новом": "новый",
+  "новых": "новый",
+  "большие": "большой",
+  "больших": "большой",
+  "учителю": "учитель",
+  "книгах": "книга"
  },
  "cognates": [
   {
