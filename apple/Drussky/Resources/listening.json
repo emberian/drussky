@@ -52,7 +52,7 @@
             }
           ],
           "played": 1,
-          "question": "Someone calls toward the next room. Is the speaker asking or telling?",
+          "question": "Talking at home: is the speaker asking or telling?",
           "options": [
             "Statement",
             "Question"
@@ -133,7 +133,7 @@
             }
           ],
           "played": 0,
-          "question": "Someone points toward the next room. Is the speaker asking or telling?",
+          "question": "Checking on the others at home: is the speaker asking or telling?",
           "options": [
             "Statement",
             "Question"
@@ -180,13 +180,14 @@
         {
           "id": "listen-02-01",
           "kind": "pick_object",
-          "en": "Give me the cheese.",
+          "en": "Give me the cheese, please.",
           "after_page": "u4-p4",
           "voice_hint": "any",
           "glosses": {
-            "дай": "give (informal singular request)"
+            "дай": "give (informal singular request)",
+            "пожалуйста": "please"
           },
-          "ru": "Дай сыр.",
+          "ru": "Дай, пожа́луйста, сыр.",
           "question": "Which thing is wanted?",
           "options": [
             "сок",
@@ -200,14 +201,14 @@
         {
           "id": "listen-02-02",
           "kind": "pick_object",
-          "en": "Give me the juice.",
+          "en": "And give me the juice.",
           "after_page": "u4-p4",
           "voice_hint": "any",
           "glosses": {
             "дай": "give (informal singular request)",
             "мне": "to me; for me"
           },
-          "ru": "Дай мне сок.",
+          "ru": "А мне дай сок.",
           "question": "Which thing is wanted?",
           "options": [
             "сыр",
@@ -221,13 +222,14 @@
         {
           "id": "listen-02-03",
           "kind": "pick_object",
-          "en": "Cake, please.",
+          "en": "Cake for me, please.",
           "after_page": "u4-p4",
           "voice_hint": "any",
           "glosses": {
+            "мне": "to me; for me",
             "пожалуйста": "please"
           },
-          "ru": "Торт, пожа́луйста.",
+          "ru": "Мне торт, пожа́луйста.",
           "question": "Which thing is wanted?",
           "options": [
             "торт",
@@ -235,13 +237,13 @@
             "сок"
           ],
           "answer": 0,
-          "crucial_span": "Торт",
-          "why": "Торт is the requested thing, even without a verb."
+          "crucial_span": "торт",
+          "why": "торт is the requested thing, even without a verb."
         },
         {
           "id": "listen-02-04",
           "kind": "pick_object",
-          "en": "Give me the cheese, please.",
+          "en": "The cake is here, and give me the cheese, please.",
           "after_page": "u4-p4",
           "voice_hint": "unfamiliar",
           "glosses": {
@@ -249,7 +251,7 @@
             "мне": "to me; for me",
             "пожалуйста": "please"
           },
-          "ru": "Дай мне сыр, пожа́луйста.",
+          "ru": "Торт тут, а дай мне сыр, пожа́луйста.",
           "question": "Which thing is wanted?",
           "options": [
             "сок",
@@ -257,8 +259,8 @@
             "торт"
           ],
           "answer": 1,
-          "crucial_span": "сыр",
-          "why": "сыр names the requested food inside a longer request."
+          "crucial_span": "дай мне сыр",
+          "why": "торт is already here; дай мне сыр requests the cheese."
         },
         {
           "id": "listen-02-05",
@@ -290,13 +292,13 @@
         {
           "id": "listen-02-06",
           "kind": "pick_object",
-          "en": "Give me juice, not cheese.",
+          "en": "No, not cheese — give me juice.",
           "after_page": "u4-p4",
           "voice_hint": "any",
           "glosses": {
             "дай": "give (informal singular request)"
           },
-          "ru": "Дай сок, а не сыр.",
+          "ru": "Нет, не сыр — дай сок.",
           "question": "Which thing is wanted?",
           "options": [
             "сыр",
@@ -304,8 +306,8 @@
             "сок"
           ],
           "answer": 2,
-          "crucial_span": "а не сыр",
-          "why": "а не rejects the cheese; the juice is wanted."
+          "crucial_span": "не сыр — дай сок",
+          "why": "не сыр rejects the cheese; дай сок names the wanted drink."
         },
         {
           "id": "listen-02-07",
@@ -368,9 +370,9 @@
           "after_page": "u4-p4",
           "voice_hint": "unfamiliar",
           "glosses": {
-            "положи": "put; set down (informal singular request)"
+            "поставь": "put; set upright (informal singular request)"
           },
-          "ru": "Положи́ торт на стол.",
+          "ru": "Поста́вь торт на стол.",
           "question": "Which result follows the instruction?",
           "scene": [
             {
@@ -426,13 +428,14 @@
         {
           "id": "listen-03-01",
           "kind": "pick_object",
-          "en": "Bread, please.",
+          "en": "Give me the bread, please.",
           "after_page": "u7-p4",
           "voice_hint": "any",
           "glosses": {
+            "дай": "give (informal singular request)",
             "пожалуйста": "please"
           },
-          "ru": "Хлеб, пожа́луйста.",
+          "ru": "Дай хлеб, пожа́луйста.",
           "question": "Which thing is wanted?",
           "options": [
             "соль",
@@ -440,20 +443,20 @@
             "чай"
           ],
           "answer": 1,
-          "crucial_span": "Хлеб",
-          "why": "Хлеб is bread."
+          "crucial_span": "Дай хлеб",
+          "why": "хлеб is the requested bread."
         },
         {
           "id": "listen-03-02",
           "kind": "pick_object",
-          "en": "Give me tea, please.",
+          "en": "Tea for me, please.",
           "after_page": "u7-p4",
           "voice_hint": "any",
           "glosses": {
-            "дай": "give (informal singular request)",
+            "мне": "to me; for me",
             "пожалуйста": "please"
           },
-          "ru": "Дай чай, пожа́луйста.",
+          "ru": "Мне чай, пожа́луйста.",
           "question": "Which thing is wanted?",
           "options": [
             "чай",
@@ -461,19 +464,20 @@
             "ко́фе"
           ],
           "answer": 0,
-          "crucial_span": "чай",
+          "crucial_span": "Мне чай",
           "why": "чай names the requested drink."
         },
         {
           "id": "listen-03-03",
           "kind": "pick_object",
-          "en": "Salt, not bread, please.",
+          "en": "Give me the salt, please, not the bread.",
           "after_page": "u7-p4",
           "voice_hint": "any",
           "glosses": {
+            "дай": "give (informal singular request)",
             "пожалуйста": "please"
           },
-          "ru": "Соль, а не хлеб, пожа́луйста.",
+          "ru": "Дай соль, пожа́луйста, а не хлеб.",
           "question": "Which thing is wanted?",
           "options": [
             "хлеб",
@@ -481,7 +485,7 @@
             "соль"
           ],
           "answer": 2,
-          "crucial_span": "Соль, а не",
+          "crucial_span": "соль, пожа́луйста, а не хлеб",
           "why": "а не excludes bread; salt is wanted."
         },
         {
@@ -574,24 +578,23 @@
         {
           "id": "listen-03-06",
           "kind": "who_needs",
-          "en": "A: Where is the bread? Give me bread, please.\nB: Here is the bread.",
+          "en": "A: And where is the bread? Give it to me, please.\nB: Here it is.",
           "after_page": "u7-p4",
           "voice_hint": "any",
           "glosses": {
             "дай": "give (informal singular request)",
-            "мне": "to me; for me",
             "пожалуйста": "please"
           },
           "lines": [
             {
               "speaker": "A",
-              "ru": "Где хлеб? Дай мне хлеб, пожа́луйста.",
-              "en": "Where is the bread? Give me bread, please."
+              "ru": "А где хлеб? Дай, пожа́луйста.",
+              "en": "And where is the bread? Give it to me, please."
             },
             {
               "speaker": "B",
-              "ru": "Вот хлеб.",
-              "en": "Here is the bread."
+              "ru": "Вот он.",
+              "en": "Here it is."
             }
           ],
           "question": "Who asks for bread?",
@@ -601,8 +604,8 @@
             "Both"
           ],
           "answer": 0,
-          "crucial_span": "Дай мне хлеб",
-          "why": "A makes the request; B provides the bread."
+          "crucial_span": "А где хлеб? Дай",
+          "why": "A makes the request; B hands over the bread."
         },
         {
           "id": "listen-03-07",
@@ -639,7 +642,7 @@
         {
           "id": "listen-03-08",
           "kind": "who_needs",
-          "en": "A: Give me cheese, please.\nB: Cheese for me too, please.",
+          "en": "A: Give me cheese, please.\nB: And cheese for me too, please.",
           "after_page": "u7-p4",
           "voice_hint": "unfamiliar",
           "glosses": {
@@ -655,8 +658,8 @@
             },
             {
               "speaker": "B",
-              "ru": "Мне то́же сыр, пожа́луйста.",
-              "en": "Cheese for me too, please."
+              "ru": "И мне то́же сыр, пожа́луйста.",
+              "en": "And cheese for me too, please."
             }
           ],
           "question": "Who wants cheese?",
@@ -680,7 +683,7 @@
         {
           "id": "listen-04-01",
           "kind": "who_needs",
-          "en": "A: Do you want tea?\nB: No, coffee with milk, please.",
+          "en": "A: Do you want tea?\nB: No, coffee with milk for me, please.",
           "after_page": "u14-p5",
           "voice_hint": "any",
           "glosses": {},
@@ -692,8 +695,8 @@
             },
             {
               "speaker": "B",
-              "ru": "Нет, ко́фе с молоко́м, пожа́луйста.",
-              "en": "No, coffee with milk, please."
+              "ru": "Нет, мне ко́фе с молоко́м, пожа́луйста.",
+              "en": "No, coffee with milk for me, please."
             }
           ],
           "question": "Who wants coffee with milk?",
@@ -709,20 +712,20 @@
         {
           "id": "listen-04-02",
           "kind": "who_needs",
-          "en": "A: Pass me the salt, please.\nB: Here is the salt.",
+          "en": "A: Pass the salt, please.\nB: Here you go.",
           "after_page": "u14-p5",
           "voice_hint": "any",
           "glosses": {},
           "lines": [
             {
               "speaker": "A",
-              "ru": "Переда́й мне соль, пожа́луйста.",
-              "en": "Pass me the salt, please."
+              "ru": "Переда́й, пожа́луйста, соль.",
+              "en": "Pass the salt, please."
             },
             {
               "speaker": "B",
-              "ru": "Вот соль.",
-              "en": "Here is the salt."
+              "ru": "Вот, пожа́луйста.",
+              "en": "Here you go."
             }
           ],
           "question": "Who needs the salt passed to them?",
@@ -732,13 +735,13 @@
             "Both"
           ],
           "answer": 0,
-          "crucial_span": "Переда́й мне соль",
+          "crucial_span": "Переда́й, пожа́луйста, соль",
           "why": "A asks B to pass the salt."
         },
         {
           "id": "listen-04-03",
           "kind": "who_needs",
-          "en": "A: I want soup. And you?\nB: I want soup too.",
+          "en": "A: I want soup. And you?\nB: Yes, I want some too.",
           "after_page": "u14-p5",
           "voice_hint": "any",
           "glosses": {},
@@ -750,8 +753,8 @@
             },
             {
               "speaker": "B",
-              "ru": "Я то́же хочу́ суп.",
-              "en": "I want soup too."
+              "ru": "Да, я то́же хочу́.",
+              "en": "Yes, I want some too."
             }
           ],
           "question": "Who wants soup?",
@@ -761,17 +764,17 @@
             "Both"
           ],
           "answer": 2,
-          "crucial_span": "то́же хочу́ суп",
+          "crucial_span": "я то́же хочу́",
           "why": "B agrees with A about soup."
         },
         {
           "id": "listen-04-04",
           "kind": "pick_object",
-          "en": "Pass the sugar, please, not the salt.",
+          "en": "Not the salt — pass the sugar, please.",
           "after_page": "u14-p5",
           "voice_hint": "unfamiliar",
           "glosses": {},
-          "ru": "Переда́й са́хар, пожа́луйста, а не соль.",
+          "ru": "Не соль, а са́хар переда́й, пожа́луйста.",
           "question": "Which thing is wanted?",
           "options": [
             "соль",
@@ -779,7 +782,7 @@
             "са́хар"
           ],
           "answer": 2,
-          "crucial_span": "Переда́й са́хар",
+          "crucial_span": "Не соль, а са́хар",
           "why": "The request is for sugar; salt is explicitly excluded."
         },
         {
@@ -812,11 +815,13 @@
         {
           "id": "listen-04-06",
           "kind": "correction",
-          "en": "I want tea. No, coffee, please.",
+          "en": "I want tea. Oh, no — coffee, please.",
           "after_page": "u14-p5",
           "voice_hint": "any",
-          "glosses": {},
-          "ru": "Я хочу́ чай. Нет, ко́фе, пожа́луйста.",
+          "glosses": {
+            "ой": "oh, oops"
+          },
+          "ru": "Хочу́ чай. Ой, нет — ко́фе, пожа́луйста.",
           "question": "What is the final drink request?",
           "options": [
             "Tea",
@@ -824,8 +829,8 @@
             "Milk"
           ],
           "answer": 1,
-          "crucial_span": "Нет, ко́фе",
-          "why": "Нет replaces the first choice with coffee."
+          "crucial_span": "Ой, нет — ко́фе",
+          "why": "Ой, нет replaces the first choice with coffee."
         },
         {
           "id": "listen-04-07",
@@ -833,11 +838,13 @@
           "en": "A: I want more soup. And you?\nB: No, thank you.",
           "after_page": "u14-p5",
           "voice_hint": "any",
-          "glosses": {},
+          "glosses": {
+            "супа": "soup (partitive genitive after ещё: some more soup)"
+          },
           "lines": [
             {
               "speaker": "A",
-              "ru": "Я хочу́ ещё суп. А ты?",
+              "ru": "Я хочу́ ещё су́па. А ты?",
               "en": "I want more soup. And you?"
             },
             {
@@ -853,13 +860,13 @@
             "Both"
           ],
           "answer": 0,
-          "crucial_span": "хочу́ ещё суп",
+          "crucial_span": "хочу́ ещё су́па",
           "why": "Only A asks for more; B declines."
         },
         {
           "id": "listen-04-08",
           "kind": "who_needs",
-          "en": "A: Pass the bread, please.\nB: All right. And pass me the salt.",
+          "en": "A: Pass the bread, please.\nB: Here you go. And pass me the salt.",
           "after_page": "u14-p5",
           "voice_hint": "unfamiliar",
           "glosses": {},
@@ -871,8 +878,8 @@
             },
             {
               "speaker": "B",
-              "ru": "Хорошо́. А мне переда́й соль.",
-              "en": "All right. And pass me the salt."
+              "ru": "Вот, пожа́луйста. А мне переда́й соль.",
+              "en": "Here you go. And pass me the salt."
             }
           ],
           "question": "Who needs the salt?",
@@ -896,7 +903,7 @@
         {
           "id": "listen-05-01",
           "kind": "who_needs",
-          "en": "A: I have no bread.\nB: I have some. Here is the bread.",
+          "en": "A: I have no bread.\nB: And I do have some. Here you go.",
           "after_page": "u10-p4",
           "voice_hint": "any",
           "glosses": {},
@@ -908,8 +915,8 @@
             },
             {
               "speaker": "B",
-              "ru": "У меня́ есть. Вот хлеб.",
-              "en": "I have some. Here is the bread."
+              "ru": "А у меня́ есть. Вот, пожа́луйста.",
+              "en": "And I do have some. Here you go."
             }
           ],
           "question": "Who needs bread?",
@@ -925,11 +932,12 @@
         {
           "id": "listen-05-02",
           "kind": "who_needs",
-          "en": "A: Do you have tea?\nB: No. Give me tea, please.",
+          "en": "A: Do you have tea?\nB: No, there is no tea. Give me tea, please.",
           "after_page": "u10-p4",
           "voice_hint": "any",
           "glosses": {
-            "дай": "give (informal singular request)"
+            "дай": "give (informal singular request)",
+            "чая": "tea (after нет)"
           },
           "lines": [
             {
@@ -939,8 +947,8 @@
             },
             {
               "speaker": "B",
-              "ru": "Нет. Дай мне чай, пожа́луйста.",
-              "en": "No. Give me tea, please."
+              "ru": "Нет, ча́я нет. Дай мне чай, пожа́луйста.",
+              "en": "No, there is no tea. Give me tea, please."
             }
           ],
           "question": "Who asks for tea?",
@@ -956,7 +964,7 @@
         {
           "id": "listen-05-03",
           "kind": "who_needs",
-          "en": "A: I have no salt.\nB: I have none either.",
+          "en": "A: I have no salt.\nB: And I have none either.",
           "after_page": "u10-p4",
           "voice_hint": "any",
           "glosses": {},
@@ -968,8 +976,8 @@
             },
             {
               "speaker": "B",
-              "ru": "У меня́ то́же нет.",
-              "en": "I have none either."
+              "ru": "И у меня́ то́же нет.",
+              "en": "And I have none either."
             }
           ],
           "question": "Who is without salt?",
@@ -1107,14 +1115,14 @@
         {
           "id": "listen-05-06",
           "kind": "pick_object",
-          "en": "Give me the spoon, please.",
+          "en": "The cup and plate are here, and give me the spoon, please.",
           "after_page": "u10-p4",
           "voice_hint": "any",
           "glosses": {
             "дай": "give (informal singular request)",
             "ложку": "spoon (direct object)"
           },
-          "ru": "Дай мне ло́жку, пожа́луйста.",
+          "ru": "Ча́шка и таре́лка есть, а дай мне ло́жку, пожа́луйста.",
           "question": "Which thing is wanted?",
           "options": [
             "ча́шка",
@@ -1122,47 +1130,48 @@
             "таре́лка"
           ],
           "answer": 1,
-          "crucial_span": "ло́жку",
-          "why": "ло́жку is the accusative of ло́жка."
+          "crucial_span": "дай мне ло́жку",
+          "why": "ча́шка and таре́лка are already present; ло́жку (accusative of ло́жка) is the requested object."
         },
         {
           "id": "listen-05-07",
           "kind": "question_or_statement",
-          "en": "You have coffee.",
+          "en": "There is still coffee.",
           "after_page": "u10-p4",
           "voice_hint": "any",
           "glosses": {},
           "forms": [
             {
-              "ru": "У тебя́ есть ко́фе.",
-              "en": "You have coffee."
+              "ru": "Ко́фе ещё есть.",
+              "en": "There is still coffee."
             },
             {
-              "ru": "У тебя́ есть ко́фе?",
-              "en": "Do you have coffee?"
+              "ru": "Ко́фе ещё есть?",
+              "en": "Is there still coffee?"
             }
           ],
           "played": 0,
-          "question": "A visitor is checking what drinks are available. Is the speaker asking or telling?",
+          "question": "Two people are in the kitchen before breakfast. Is the speaker asking or telling?",
           "options": [
             "Statement",
             "Question"
           ],
           "answer": 0,
-          "crucial_span": "У тебя́ есть ко́фе.",
+          "crucial_span": "Ко́фе ещё есть.",
           "why": "The same words ask for confirmation with IK-3, or tell you something with IK-1; listen to the pitch movement."
         },
         {
           "id": "listen-05-08",
           "kind": "correction",
-          "en": "Give me two cups. No, three cups, please.",
+          "en": "Give me two cups. Oh, no — three, please.",
           "after_page": "u10-p4",
           "voice_hint": "unfamiliar",
           "glosses": {
             "дай": "give (informal singular request)",
-            "две": "two (feminine)"
+            "две": "two (feminine)",
+            "ой": "oh, oops"
           },
-          "ru": "Дай две ча́шки. Нет, три ча́шки, пожа́луйста.",
+          "ru": "Дай две ча́шки. Ой, нет — три, пожа́луйста.",
           "question": "How many cups are finally wanted?",
           "options": [
             "Two",
@@ -1170,7 +1179,7 @@
             "Three"
           ],
           "answer": 2,
-          "crucial_span": "Нет, три ча́шки",
+          "crucial_span": "Ой, нет — три",
           "why": "The correction changes two cups to three."
         }
       ]
@@ -1213,7 +1222,7 @@
         {
           "id": "listen-06-02",
           "kind": "who_needs",
-          "en": "A: I do not know where the book is.\nB: It is on the table.",
+          "en": "A: I do not know where the book is.\nB: Here it is, on the table.",
           "after_page": "u12-p3",
           "voice_hint": "any",
           "glosses": {},
@@ -1225,8 +1234,8 @@
             },
             {
               "speaker": "B",
-              "ru": "Она́ на столе́.",
-              "en": "It is on the table."
+              "ru": "А вот она́, на столе́.",
+              "en": "Here it is, on the table."
             }
           ],
           "question": "Who needs help finding the book?",
@@ -1254,7 +1263,7 @@
             },
             {
               "speaker": "B",
-              "ru": "Я то́же. Ещё раз, пожа́луйста.",
+              "ru": "И я то́же. Ещё раз, пожа́луйста.",
               "en": "Neither do I. Once more, please."
             }
           ],
@@ -1265,7 +1274,7 @@
             "Both"
           ],
           "answer": 2,
-          "crucial_span": "Я то́же",
+          "crucial_span": "И я то́же",
           "why": "B shares A’s difficulty."
         },
         {
@@ -1329,11 +1338,13 @@
         {
           "id": "listen-06-05",
           "kind": "message",
-          "en": "Hi. I am at home, in the kitchen. The tea is on the table.",
+          "en": "Hi. I am already at home, in the kitchen. The tea is on the table.",
           "after_page": "u12-p3",
           "voice_hint": "any",
-          "glosses": {},
-          "ru": "Приве́т. Я до́ма, на ку́хне. Чай на столе́.",
+          "glosses": {
+            "уже": "already"
+          },
+          "ru": "Приве́т. Я уже́ до́ма, на ку́хне. Чай на столе́.",
           "questions": [
             {
               "kind": "gist",
@@ -1344,7 +1355,7 @@
                 "At the station"
               ],
               "answer": 1,
-              "crucial_span": "Я до́ма",
+              "crucial_span": "Я уже́ до́ма",
               "why": "The speaker says they are at home."
             },
             {
@@ -1366,13 +1377,14 @@
         {
           "id": "listen-06-06",
           "kind": "message",
-          "en": "I am reading a book. Mom is in the kitchen. She wants tea.",
+          "en": "Listen, I am here reading a book, and Mom is in the kitchen. She wants tea.",
           "after_page": "u12-p3",
           "voice_hint": "any",
           "glosses": {
+            "слушай": "listen; hey",
             "хочет": "wants (he, she)"
           },
-          "ru": "Я чита́ю кни́гу. Ма́ма на ку́хне. Она́ хо́чет чай.",
+          "ru": "Слу́шай, я тут чита́ю кни́гу, а ма́ма на ку́хне. Она́ хо́чет чай.",
           "questions": [
             {
               "kind": "gist",
@@ -1383,7 +1395,7 @@
                 "Walking"
               ],
               "answer": 0,
-              "crucial_span": "Я чита́ю кни́гу",
+              "crucial_span": "я тут чита́ю кни́гу",
               "why": "Я identifies the reader."
             },
             {
@@ -1405,13 +1417,14 @@
         {
           "id": "listen-06-07",
           "kind": "correction",
-          "en": "The book is on the table. No, on the chair.",
+          "en": "The book is on the table. Oh, no — on the chair.",
           "after_page": "u12-p3",
           "voice_hint": "any",
           "glosses": {
+            "ой": "oh, oops",
             "стуле": "on the chair (after on)"
           },
-          "ru": "Кни́га на столе́. Нет, на сту́ле.",
+          "ru": "Кни́га на столе́. Ой, нет — на сту́ле.",
           "question": "Where is the book after the correction?",
           "options": [
             "On the table",
@@ -1419,7 +1432,7 @@
             "In the kitchen"
           ],
           "answer": 1,
-          "crucial_span": "Нет, на сту́ле",
+          "crucial_span": "Ой, нет — на сту́ле",
           "why": "The chair replaces the table as the location."
         },
         {
@@ -1432,7 +1445,7 @@
           "lines": [
             {
               "speaker": "A",
-              "ru": "Я не зна́ю, где соль. А ты?",
+              "ru": "Я не зна́ю, где соль. А ты зна́ешь?",
               "en": "I do not know where the salt is. Do you?"
             },
             {
@@ -1462,11 +1475,11 @@
         {
           "id": "listen-07-01",
           "kind": "message",
-          "en": "Hi. Today I am working at home. Tomorrow we will go for a walk.",
+          "en": "Hi. Today I am working at home. And tomorrow we will go for a walk.",
           "after_page": "u17-p5",
           "voice_hint": "any",
           "glosses": {},
-          "ru": "Приве́т. Сего́дня я рабо́таю до́ма. За́втра бу́дем гуля́ть.",
+          "ru": "Приве́т. Сего́дня я рабо́таю до́ма. А за́втра бу́дем гуля́ть.",
           "questions": [
             {
               "kind": "gist",
@@ -1477,7 +1490,7 @@
                 "A meal yesterday"
               ],
               "answer": 1,
-              "crucial_span": "Сего́дня я рабо́таю до́ма. За́втра бу́дем гуля́ть",
+              "crucial_span": "Сего́дня я рабо́таю до́ма. А за́втра бу́дем гуля́ть",
               "why": "The speaker separates today’s work from tomorrow’s walk."
             },
             {
@@ -1489,21 +1502,21 @@
                 "Tomorrow"
               ],
               "answer": 2,
-              "crucial_span": "За́втра бу́дем гуля́ть",
+              "crucial_span": "А за́втра бу́дем гуля́ть",
               "why": "За́втра places the walk tomorrow."
             }
           ],
-          "crucial_span": "За́втра бу́дем гуля́ть",
+          "crucial_span": "А за́втра бу́дем гуля́ть",
           "why": "За́втра places the walk tomorrow."
         },
         {
           "id": "listen-07-02",
           "kind": "message",
-          "en": "Yesterday I was reading the book. I did not finish it. Today I will read some more.",
+          "en": "Yesterday I was reading the book, but I have not finished it yet. Today I will read some more.",
           "after_page": "u17-p5",
           "voice_hint": "any",
           "glosses": {},
-          "ru": "Вчера́ я чита́ла кни́гу. Не прочита́ла. Сего́дня бу́ду чита́ть ещё.",
+          "ru": "Вчера́ я чита́ла кни́гу, но ещё не прочита́ла. Сего́дня бу́ду чита́ть ещё.",
           "questions": [
             {
               "kind": "gist",
@@ -1514,7 +1527,7 @@
                 "She did not start it"
               ],
               "answer": 1,
-              "crucial_span": "Не прочита́ла",
+              "crucial_span": "но ещё не прочита́ла",
               "why": "The completed action is explicitly negated."
             },
             {
@@ -1536,11 +1549,13 @@
         {
           "id": "listen-07-03",
           "kind": "correction",
-          "en": "Tomorrow morning I will be at home. No, in the evening.",
+          "en": "Tomorrow morning I will be at home. Oh, no, not in the morning — in the evening.",
           "after_page": "u17-p5",
           "voice_hint": "any",
-          "glosses": {},
-          "ru": "За́втра у́тром бу́ду до́ма. Нет, ве́чером.",
+          "glosses": {
+            "ой": "oh, oops"
+          },
+          "ru": "За́втра у́тром бу́ду до́ма. Ой, нет, не у́тром — ве́чером.",
           "question": "When will the speaker be home?",
           "options": [
             "Tomorrow morning",
@@ -1548,13 +1563,13 @@
             "Tomorrow evening"
           ],
           "answer": 2,
-          "crucial_span": "Нет, ве́чером",
+          "crucial_span": "Ой, нет, не у́тром — ве́чером",
           "why": "Only the time of day changes; tomorrow remains."
         },
         {
           "id": "listen-07-04",
           "kind": "who_needs",
-          "en": "A: I do not understand what he is saying.\nB: I understand. He wants tea.",
+          "en": "A: I do not understand what he is saying.\nB: And I do understand. He wants tea.",
           "after_page": "u17-p5",
           "voice_hint": "unfamiliar",
           "glosses": {
@@ -1568,8 +1583,8 @@
             },
             {
               "speaker": "B",
-              "ru": "Я понима́ю. Он хо́чет чай.",
-              "en": "I understand. He wants tea."
+              "ru": "А я понима́ю. Он хо́чет чай.",
+              "en": "And I do understand. He wants tea."
             }
           ],
           "question": "Who needs help understanding?",
@@ -1585,14 +1600,15 @@
         {
           "id": "listen-07-05",
           "kind": "message",
-          "en": "The soup is ready. I have already had dinner. The bread is on the table.",
+          "en": "Listen, the soup is ready. I have already had dinner, and the bread is on the table.",
           "after_page": "u17-p5",
           "voice_hint": "any",
           "glosses": {
+            "слушай": "listen; hey",
             "уже": "already; yet (with not)",
             "ужинала": "had dinner (female speaker)"
           },
-          "ru": "Суп гото́в. Я уже́ у́жинала. Хлеб на столе́.",
+          "ru": "Слу́шай, суп гото́в. Я уже́ у́жинала, а хлеб на столе́.",
           "questions": [
             {
               "kind": "gist",
@@ -1603,7 +1619,7 @@
                 "Dinner is tomorrow"
               ],
               "answer": 1,
-              "crucial_span": "Суп гото́в",
+              "crucial_span": "суп гото́в",
               "why": "The soup is ready to eat."
             },
             {
@@ -1625,18 +1641,20 @@
         {
           "id": "listen-07-06",
           "kind": "question_or_statement",
-          "en": "Did you finish the book?",
+          "en": "Have you already finished the book?",
           "after_page": "u17-p5",
           "voice_hint": "any",
-          "glosses": {},
+          "glosses": {
+            "уже": "already"
+          },
           "forms": [
             {
-              "ru": "Ты прочита́л кни́гу.",
-              "en": "You finished the book."
+              "ru": "Ты уже́ прочита́л кни́гу.",
+              "en": "You have already finished the book."
             },
             {
-              "ru": "Ты прочита́л кни́гу?",
-              "en": "Did you finish the book?"
+              "ru": "Ты уже́ прочита́л кни́гу?",
+              "en": "Have you already finished the book?"
             }
           ],
           "played": 1,
@@ -1646,19 +1664,20 @@
             "Question"
           ],
           "answer": 1,
-          "crucial_span": "Ты прочита́л кни́гу?",
+          "crucial_span": "Ты уже́ прочита́л кни́гу?",
           "why": "The same words ask for confirmation with IK-3, or tell you something with IK-1; listen to the pitch movement."
         },
         {
           "id": "listen-07-07",
           "kind": "correction",
-          "en": "Yesterday we went walking. No, yesterday we worked; we went walking today.",
+          "en": "Yesterday we went walking. Oh, no, yesterday we worked, and we went walking today.",
           "after_page": "u17-p5",
           "voice_hint": "any",
           "glosses": {
+            "ой": "oh, oops",
             "работали": "worked (plural past)"
           },
-          "ru": "Вчера́ мы гуля́ли. Нет, вчера́ мы рабо́тали, гуля́ли сего́дня.",
+          "ru": "Вчера́ мы гуля́ли. Ой, нет, вчера́ мы рабо́тали, а гуля́ли сего́дня.",
           "question": "What happened yesterday?",
           "options": [
             "Work",
@@ -1672,11 +1691,11 @@
         {
           "id": "listen-07-08",
           "kind": "message",
-          "en": "Tomorrow I will read at home. In the evening we will speak Russian. Will you be home too?",
+          "en": "Tomorrow I will read at home. And in the evening we will speak Russian. Will you be home too?",
           "after_page": "u17-p5",
           "voice_hint": "unfamiliar",
           "glosses": {},
-          "ru": "За́втра я бу́ду чита́ть до́ма. Ве́чером бу́дем говори́ть по-ру́сски. Ты то́же бу́дешь до́ма?",
+          "ru": "За́втра я бу́ду чита́ть до́ма. А ве́чером бу́дем говори́ть по-ру́сски. Ты то́же бу́дешь до́ма?",
           "questions": [
             {
               "kind": "gist",
@@ -1687,7 +1706,7 @@
                 "Working in the city"
               ],
               "answer": 1,
-              "crucial_span": "Ве́чером бу́дем говори́ть по-ру́сски",
+              "crucial_span": "А ве́чером бу́дем говори́ть по-ру́сски",
               "why": "The evening plan is speaking Russian."
             },
             {
@@ -1717,15 +1736,17 @@
         {
           "id": "listen-08-01",
           "kind": "message",
-          "en": "I am walking to the shop. There is no bread at home. After the shop I will be home.",
+          "en": "Listen, I am walking to the shop right now. There is no bread at home. After the shop I will be home.",
           "after_page": "u19-p4",
           "voice_hint": "any",
           "glosses": {
             "магазин": "shop",
             "магазина": "the shop (after after)",
-            "после": "after"
+            "после": "after",
+            "сейчас": "right now",
+            "слушай": "listen; hey"
           },
-          "ru": "Я иду́ в магази́н. До́ма нет хле́ба. По́сле магази́на бу́ду до́ма.",
+          "ru": "Слу́шай, я сейча́с иду́ в магази́н. До́ма нет хле́ба. По́сле магази́на бу́ду до́ма.",
           "questions": [
             {
               "kind": "gist",
@@ -1758,11 +1779,13 @@
         {
           "id": "listen-08-02",
           "kind": "correction",
-          "en": "We are going to the city. No, I am going, and you will be home.",
+          "en": "We are going to the city. That is, no: I am going, and you will be home.",
           "after_page": "u19-p4",
           "voice_hint": "any",
-          "glosses": {},
-          "ru": "Мы е́дем в го́род. Нет, я е́ду, а ты бу́дешь до́ма.",
+          "glosses": {
+            "то": "that (то есть: that is, I mean)"
+          },
+          "ru": "Мы е́дем в го́род. То есть нет: я е́ду, а ты бу́дешь до́ма.",
           "question": "Who is going to the city?",
           "options": [
             "Both people",
@@ -1847,11 +1870,14 @@
         {
           "id": "listen-08-05",
           "kind": "correction",
-          "en": "I will be home at seven. No, at eight.",
+          "en": "Listen, I will be home at seven. Oh, no, not at seven — at eight.",
           "after_page": "u19-p4",
           "voice_hint": "any",
-          "glosses": {},
-          "ru": "Я бу́ду до́ма в семь. Нет, в во́семь.",
+          "glosses": {
+            "ой": "oh, oops",
+            "слушай": "listen; hey"
+          },
+          "ru": "Слу́шай, я бу́ду до́ма в семь. Ой, нет, не в семь — в во́семь.",
           "question": "What is the final arrival time?",
           "options": [
             "Seven",
@@ -1859,20 +1885,21 @@
             "Eight"
           ],
           "answer": 2,
-          "crucial_span": "Нет, в во́семь",
+          "crucial_span": "Ой, нет, не в семь — в во́семь",
           "why": "Eight replaces seven."
         },
         {
           "id": "listen-08-06",
           "kind": "message",
-          "en": "I am walking home. We already have bread. There is no milk; buy milk, please.",
+          "en": "Listen, I am walking home. We already have bread, and there is no milk — buy milk, please.",
           "after_page": "u19-p4",
           "voice_hint": "any",
           "glosses": {
             "купи": "buy (informal singular request)",
+            "слушай": "listen; hey",
             "уже": "already; yet (with not)"
           },
-          "ru": "Я иду́ домо́й. Хлеб уже́ есть. Молока́ нет, купи́ молоко́, пожа́луйста.",
+          "ru": "Слу́шай, я иду́ домо́й. Хлеб уже́ есть, а молока́ нет — купи́ молоко́, пожа́луйста.",
           "questions": [
             {
               "kind": "gist",
@@ -1905,7 +1932,7 @@
         {
           "id": "listen-08-07",
           "kind": "who_needs",
-          "en": "A: I do not know where the shop is.\nB: I know. Let’s go!",
+          "en": "A: I do not know where the shop is.\nB: And I do know. Let’s go!",
           "after_page": "u19-p4",
           "voice_hint": "any",
           "glosses": {
@@ -1919,8 +1946,8 @@
             },
             {
               "speaker": "B",
-              "ru": "Я зна́ю. Идём!",
-              "en": "I know. Let’s go!"
+              "ru": "А я зна́ю. Идём!",
+              "en": "And I do know. Let’s go!"
             }
           ],
           "question": "Who needs help finding the shop?",
@@ -1971,7 +1998,7 @@
         {
           "id": "listen-09-01",
           "kind": "who_needs",
-          "en": "A: I need the book, and my brother needs bread.\nB: All right, I will give you the book.",
+          "en": "A: I need the book, and my brother needs the chair.\nB: All right, I will give you the book.",
           "after_page": "u24-p5",
           "voice_hint": "any",
           "glosses": {
@@ -1982,8 +2009,8 @@
           "lines": [
             {
               "speaker": "A",
-              "ru": "Мне нужна́ кни́га, а бра́ту ну́жен хлеб.",
-              "en": "I need the book, and my brother needs bread."
+              "ru": "Мне нужна́ кни́га, а бра́ту ну́жен стул.",
+              "en": "I need the book, and my brother needs the chair."
             },
             {
               "speaker": "B",
@@ -2078,13 +2105,14 @@
         {
           "id": "listen-09-04",
           "kind": "correction",
-          "en": "Give the book to my brother. No, to my sister, please.",
+          "en": "Give the book to my brother. Oh, no — to my sister, please.",
           "after_page": "u24-p5",
           "voice_hint": "unfamiliar",
           "glosses": {
-            "дай": "give (informal singular request)"
+            "дай": "give (informal singular request)",
+            "ой": "oh, oops"
           },
-          "ru": "Дай кни́гу бра́ту. Нет, сестре́, пожа́луйста.",
+          "ru": "Дай кни́гу бра́ту. Ой, нет — сестре́, пожа́луйста.",
           "question": "Who should finally receive the book?",
           "options": [
             "Sister",
@@ -2092,19 +2120,19 @@
             "Speaker"
           ],
           "answer": 0,
-          "crucial_span": "Нет, сестре́",
+          "crucial_span": "Ой, нет — сестре́",
           "why": "The corrected dative names the sister as recipient."
         },
         {
           "id": "listen-09-05",
           "kind": "follow",
-          "en": "Put the book on the table. Put the bread on the chair.",
+          "en": "Put the book on the table, and put the bread on the chair.",
           "after_page": "u24-p5",
           "voice_hint": "any",
           "glosses": {
             "положи": "put; set down (informal singular request)"
           },
-          "ru": "Положи́ кни́гу на стол. Хлеб положи́ на стул.",
+          "ru": "Положи́ кни́гу на стол, а хлеб положи́ на стул.",
           "question": "Which result follows the instruction?",
           "scene": [
             {
@@ -2152,7 +2180,7 @@
             }
           ],
           "answer": 1,
-          "crucial_span": "Хлеб",
+          "crucial_span": "а хлеб положи́ на стул",
           "why": "The second instruction moves bread to the chair."
         },
         {
@@ -2162,9 +2190,10 @@
           "after_page": "u24-p5",
           "voice_hint": "any",
           "glosses": {
-            "говорила": "spoke (feminine past)"
+            "говорила": "spoke (feminine past)",
+            "поговорить": "to talk, have a chat (perfective)"
           },
-          "ru": "Я говори́ла с сестро́й о рабо́те. За́втра она́ бу́дет до́ма. Мо́жно говори́ть с ней у́тром.",
+          "ru": "Я говори́ла с сестро́й о рабо́те. За́втра она́ бу́дет до́ма. Мо́жно поговори́ть с ней у́тром.",
           "questions": [
             {
               "kind": "gist",
@@ -2175,7 +2204,7 @@
                 "Dinner at work"
               ],
               "answer": 0,
-              "crucial_span": "Мо́жно говори́ть с ней у́тром",
+              "crucial_span": "Мо́жно поговори́ть с ней у́тром",
               "why": "The message gives a time to talk with the sister."
             },
             {
@@ -2197,13 +2226,14 @@
         {
           "id": "listen-09-07",
           "kind": "correction",
-          "en": "I spoke with my brother about the book. No, with my sister.",
+          "en": "I spoke with my brother about the book. Oh, no — with my sister.",
           "after_page": "u24-p5",
           "voice_hint": "any",
           "glosses": {
-            "говорил": "spoke (masculine past)"
+            "говорил": "spoke (masculine past)",
+            "ой": "oh, oops"
           },
-          "ru": "Я говори́л с бра́том о кни́ге. Нет, с сестро́й.",
+          "ru": "Я говори́л с бра́том о кни́ге. Ой, нет — с сестро́й.",
           "question": "What is corrected?",
           "options": [
             "The topic: work",
@@ -2211,7 +2241,7 @@
             "The person: sister"
           ],
           "answer": 2,
-          "crucial_span": "Нет, с сестро́й",
+          "crucial_span": "Ой, нет — с сестро́й",
           "why": "The conversation partner changes, while the book remains the topic."
         },
         {
@@ -2229,7 +2259,7 @@
             },
             {
               "speaker": "B",
-              "ru": "Я то́же не понима́ю.",
+              "ru": "И я то́же не понима́ю.",
               "en": "I do not understand it either."
             }
           ],
@@ -2240,7 +2270,7 @@
             "Both"
           ],
           "answer": 2,
-          "crucial_span": "то́же не понима́ю",
+          "crucial_span": "И я то́же не понима́ю",
           "why": "Both speakers lack the word’s meaning."
         }
       ]
@@ -2275,14 +2305,16 @@
         {
           "id": "listen-10-02",
           "kind": "message",
-          "en": "Hi, I will be home at seven. Buy bread, please. No, we already have bread; buy only milk.",
+          "en": "Hi, I will be home at seven. Buy bread, please. Oh, no, we already have bread — buy only milk.",
           "after_page": "u25-p4",
           "voice_hint": "any",
           "glosses": {
+            "же": "actually, after all (emphatic particle)",
             "купи": "buy (informal singular request)",
+            "ой": "oh, oops",
             "уже": "already; yet (with not)"
           },
-          "ru": "Приве́т, я бу́ду до́ма в семь. Купи́ хлеб, пожа́луйста. Нет, хлеб уже́ есть, купи́ то́лько молоко́.",
+          "ru": "Приве́т, я бу́ду до́ма в семь. Купи́ хлеб, пожа́луйста. Ой, нет, хлеб же уже́ есть — купи́ то́лько молоко́.",
           "questions": [
             {
               "kind": "gist",
@@ -2346,11 +2378,13 @@
         {
           "id": "listen-10-04",
           "kind": "correction",
-          "en": "Write to my brother. No, tell him when you will be home.",
+          "en": "Write to my brother. No, better tell him when you will be home.",
           "after_page": "u25-p4",
           "voice_hint": "unfamiliar",
-          "glosses": {},
-          "ru": "Напиши́ бра́ту. Нет, скажи́ ему́, когда́ бу́дешь до́ма.",
+          "glosses": {
+            "лучше": "better; rather"
+          },
+          "ru": "Напиши́ бра́ту. Нет, лу́чше скажи́ ему́, когда́ бу́дешь до́ма.",
           "question": "What is the final instruction?",
           "options": [
             "Write a letter",
@@ -2442,7 +2476,7 @@
           "glosses": {
             "напишем": "we will write (to completion)"
           },
-          "ru": "Бу́дем чита́ть у́тром. Нет, сна́чала напи́шем письмо́, а пото́м бу́дем чита́ть.",
+          "ru": "Бу́дем чита́ть у́тром. Нет, снача́ла напи́шем письмо́, а пото́м бу́дем чита́ть.",
           "question": "What comes first in the revised plan?",
           "options": [
             "Reading",
@@ -2450,22 +2484,23 @@
             "Writing a letter"
           ],
           "answer": 2,
-          "crucial_span": "сна́чала напи́шем письмо́",
-          "why": "Сна́чала marks writing as the first task."
+          "crucial_span": "снача́ла напи́шем письмо́",
+          "why": "Снача́ла marks writing as the first task."
         },
         {
           "id": "listen-10-08",
           "kind": "message",
-          "en": "Do not buy the book. I have this book. Tomorrow I will give it to you.",
+          "en": "Listen, do not buy this book. I have it. Tomorrow I will give it to you.",
           "after_page": "u25-p4",
           "voice_hint": "unfamiliar",
           "glosses": {
             "дам": "I will give",
             "её": "her; it (feminine direct object)",
             "покупай": "buy (imperfective request; with not: do not buy)",
-            "эта": "this (feminine)"
+            "слушай": "listen; hey",
+            "эту": "this (feminine direct object)"
           },
-          "ru": "Не покупа́й кни́гу. У меня́ есть э́та кни́га. За́втра дам её тебе́.",
+          "ru": "Слу́шай, не покупа́й э́ту кни́гу. Она́ у меня́ есть. За́втра дам её тебе́.",
           "questions": [
             {
               "kind": "gist",
@@ -2476,7 +2511,7 @@
                 "Write a book"
               ],
               "answer": 0,
-              "crucial_span": "У меня́ есть э́та кни́га. За́втра дам её тебе́",
+              "crucial_span": "Она́ у меня́ есть. За́втра дам её тебе́",
               "why": "The speaker offers their copy."
             },
             {
@@ -2506,11 +2541,12 @@
         {
           "id": "listen-11-01",
           "kind": "disagreement",
-          "en": "A: Let’s go to the city after work.\nB: No, I want to be at home.",
+          "en": "A: Let’s go to the city after work.\nB: No, I want to stay at home.",
           "after_page": "u27-p5",
           "voice_hint": "any",
           "glosses": {
             "давай": "let us; come on (proposal)",
+            "побыть": "to stay for a while, spend time",
             "пойдём": "let us go; we will go (on foot)"
           },
           "lines": [
@@ -2521,8 +2557,8 @@
             },
             {
               "speaker": "B",
-              "ru": "Нет, я хочу́ быть до́ма.",
-              "en": "No, I want to be at home."
+              "ru": "Нет, я хочу́ побы́ть до́ма.",
+              "en": "No, I want to stay at home."
             }
           ],
           "question": "What do they each want?",
@@ -2532,7 +2568,7 @@
             "A: city; B: stay home"
           ],
           "answer": 2,
-          "crucial_span": "я хочу́ быть до́ма",
+          "crucial_span": "я хочу́ побы́ть до́ма",
           "why": "B rejects the outing and prefers home."
         },
         {
@@ -2663,20 +2699,23 @@
         {
           "id": "listen-11-06",
           "kind": "who_needs",
-          "en": "A: I need to read this letter, but I do not understand it.\nB: I do not understand either; this is difficult.",
+          "en": "A: I need to read this letter, but I do not understand anything.\nB: I do not understand either; it is very difficult.",
           "after_page": "u27-p5",
           "voice_hint": "any",
-          "glosses": {},
+          "glosses": {
+            "ничего": "nothing; anything (with not)",
+            "очень": "very"
+          },
           "lines": [
             {
               "speaker": "A",
-              "ru": "Мне ну́жно прочита́ть э́то письмо́, но я не понима́ю.",
-              "en": "I need to read this letter, but I do not understand it."
+              "ru": "Мне ну́жно прочита́ть э́то письмо́, но я ничего́ не понима́ю.",
+              "en": "I need to read this letter, but I do not understand anything."
             },
             {
               "speaker": "B",
-              "ru": "Я то́же не понима́ю, э́то тру́дно.",
-              "en": "I do not understand either; this is difficult."
+              "ru": "Я то́же не понима́ю, о́чень тру́дно.",
+              "en": "I do not understand either; it is very difficult."
             }
           ],
           "question": "Who needs help with the letter?",
@@ -2692,7 +2731,7 @@
         {
           "id": "listen-11-07",
           "kind": "disagreement",
-          "en": "A: We need a new table.\nB: I disagree. The old table is still good.",
+          "en": "A: We need a new table.\nB: And I disagree. The old table is still good.",
           "after_page": "u27-p5",
           "voice_hint": "any",
           "glosses": {
@@ -2706,8 +2745,8 @@
             },
             {
               "speaker": "B",
-              "ru": "Не согла́сна. Ста́рый стол ещё хоро́ший.",
-              "en": "I disagree. The old table is still good."
+              "ru": "А я не согла́сна. Ста́рый стол ещё хоро́ший.",
+              "en": "And I disagree. The old table is still good."
             }
           ],
           "question": "Who argues for keeping the old table?",
@@ -2723,13 +2762,15 @@
         {
           "id": "listen-11-08",
           "kind": "message",
-          "en": "I like the book you are reading. But today I need to work. Let’s talk about it tomorrow.",
+          "en": "I really like the book you are reading. But today I need to work. Let’s talk about it tomorrow.",
           "after_page": "u27-p5",
           "voice_hint": "unfamiliar",
           "glosses": {
+            "давай": "let us; come on (proposal)",
+            "очень": "very",
             "поговорим": "let us talk; we will talk"
           },
-          "ru": "Мне нра́вится кни́га, кото́рую ты чита́ешь. Но сего́дня мне ну́жно рабо́тать. Поговори́м о ней за́втра.",
+          "ru": "Мне о́чень нра́вится кни́га, кото́рую ты чита́ешь. Но сего́дня мне ну́жно рабо́тать. Дава́й поговори́м о ней за́втра.",
           "questions": [
             {
               "kind": "gist",
@@ -2752,11 +2793,11 @@
                 "Watching a film"
               ],
               "answer": 1,
-              "crucial_span": "Поговори́м о ней за́втра",
+              "crucial_span": "Дава́й поговори́м о ней за́втра",
               "why": "О ней refers back to the book."
             }
           ],
-          "crucial_span": "Поговори́м о ней за́втра",
+          "crucial_span": "Дава́й поговори́м о ней за́втра",
           "why": "О ней refers back to the book."
         }
       ]
@@ -2782,7 +2823,7 @@
             },
             {
               "speaker": "B",
-              "ru": "Понима́ю, но я ду́маю ина́че: сна́чала ну́жно прочита́ть всё письмо́.",
+              "ru": "Понима́ю, но я ду́маю ина́че: снача́ла ну́жно прочита́ть всё письмо́.",
               "en": "I understand, but I think differently: first we need to read the whole letter."
             }
           ],
@@ -2793,19 +2834,20 @@
             "Call tomorrow"
           ],
           "answer": 1,
-          "crucial_span": "сна́чала ну́жно прочита́ть всё письмо́",
+          "crucial_span": "снача́ла ну́жно прочита́ть всё письмо́",
           "why": "B acknowledges A but proposes reading before answering."
         },
         {
           "id": "listen-12-02",
           "kind": "message",
-          "en": "I said the meeting was at seven. That is wrong: it starts at eight. I will be there at seven to read everything.",
+          "en": "I said the meeting was at seven. That is a mistake: it starts at eight. And I will be there at seven to read everything.",
           "after_page": "u30-p4",
           "voice_hint": "any",
           "glosses": {
-            "встреча": "meeting; get-together"
+            "встреча": "meeting; get-together",
+            "ошибка": "mistake"
           },
-          "ru": "Я сказа́л, что встре́ча в семь. Э́то непра́вда: она́ начина́ется в во́семь. Я бу́ду там в семь, что́бы всё прочита́ть.",
+          "ru": "Я сказа́л, что встре́ча в семь. Э́то оши́бка: она́ начина́ется в во́семь. А я бу́ду там в семь, что́бы всё прочита́ть.",
           "questions": [
             {
               "kind": "gist",
@@ -3008,26 +3050,28 @@
         {
           "id": "listen-12-08",
           "kind": "disagreement",
-          "en": "A: So, tomorrow we are going to the city.\nB: No, I have not agreed yet. I need to think.\nA: All right, let’s talk tomorrow.\nB: Yes, let’s talk tomorrow.",
+          "en": "A: So, tomorrow we are going to the city.\nB: Wait, I have not agreed yet. I need to think.\nA: All right, let’s talk tomorrow.\nB: Yes, let’s talk tomorrow.",
           "after_page": "u30-p4",
           "voice_hint": "unfamiliar",
           "glosses": {
+            "значит": "so, that means",
+            "ладно": "all right, okay",
             "поговорим": "let us talk; we will talk"
           },
           "lines": [
             {
               "speaker": "A",
-              "ru": "Ита́к, за́втра идём в го́род.",
+              "ru": "Зна́чит, за́втра идём в го́род.",
               "en": "So, tomorrow we are going to the city."
             },
             {
               "speaker": "B",
-              "ru": "Нет, я ещё не согла́сна. Мне ну́жно поду́мать.",
-              "en": "No, I have not agreed yet. I need to think."
+              "ru": "Подожди́, я ещё не согла́сна. Мне ну́жно поду́мать.",
+              "en": "Wait, I have not agreed yet. I need to think."
             },
             {
               "speaker": "A",
-              "ru": "Хорошо́, поговори́м за́втра.",
+              "ru": "Ла́дно, поговори́м за́втра.",
               "en": "All right, let’s talk tomorrow."
             },
             {
@@ -3059,11 +3103,11 @@
         {
           "id": "listen-week-01-01",
           "kind": "message",
-          "en": "Hi. The soup is ready. I want bread.",
+          "en": "Hi. The soup is ready. I also want bread; pass it, please.",
           "after_page": "u14-p5",
           "voice_hint": "unfamiliar",
           "glosses": {},
-          "ru": "Приве́т. Суп гото́в. Я хочу́ хлеб.",
+          "ru": "Приве́т. Суп гото́в. Я хочу́ ещё хлеб, переда́й, пожа́луйста.",
           "questions": [
             {
               "kind": "gist",
@@ -3073,7 +3117,7 @@
               "accept_en": [
                 "Bread."
               ],
-              "crucial_span": "Я хочу́ хлеб",
+              "crucial_span": "Я хочу́ ещё хлеб",
               "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
             },
             {
@@ -3131,11 +3175,11 @@
         {
           "id": "listen-week-01-03",
           "kind": "message",
-          "en": "Mom is at home. I am at home too. Pass me the salt, please.",
+          "en": "Mom is at home, and I am at home too. Dinner is ready. Pass me the salt, please.",
           "after_page": "u14-p5",
           "voice_hint": "unfamiliar",
           "glosses": {},
-          "ru": "Ма́ма до́ма. Я то́же до́ма. Переда́й мне соль, пожа́луйста.",
+          "ru": "Ма́ма до́ма, и я то́же до́ма. У́жин гото́в. Переда́й мне соль, пожа́луйста.",
           "questions": [
             {
               "kind": "gist",
@@ -3201,11 +3245,11 @@
         {
           "id": "listen-week-01-05",
           "kind": "message",
-          "en": "I want tea with milk. I do not want bread. Cheese, please.",
+          "en": "I want tea with milk. I do not want bread. And cheese for me, please.",
           "after_page": "u14-p5",
           "voice_hint": "unfamiliar",
           "glosses": {},
-          "ru": "Я хочу́ чай с молоко́м. Хлеб не хочу́. Сыр, пожа́луйста.",
+          "ru": "Я хочу́ чай с молоко́м. Хлеб не хочу́. А мне сыр, пожа́луйста.",
           "questions": [
             {
               "kind": "gist",
@@ -3215,7 +3259,7 @@
               "accept_en": [
                 "Cheese, not bread."
               ],
-              "crucial_span": "Хлеб не хочу́. Сыр, пожа́луйста",
+              "crucial_span": "Хлеб не хочу́. А мне сыр, пожа́луйста",
               "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
             },
             {
@@ -3244,13 +3288,13 @@
         {
           "id": "listen-week-02-01",
           "kind": "message",
-          "en": "The book is on the table. I am in the kitchen. I am reading a letter.",
+          "en": "The book is on the table. And I am in the kitchen, reading a letter.",
           "after_page": "u12-p3",
           "voice_hint": "unfamiliar",
           "glosses": {
             "письмо": "letter; written message"
           },
-          "ru": "Кни́га на столе́. Я на ку́хне. Я чита́ю письмо́.",
+          "ru": "Кни́га на столе́. А я на ку́хне, чита́ю письмо́.",
           "questions": [
             {
               "kind": "gist",
@@ -3353,13 +3397,13 @@
         {
           "id": "listen-week-02-04",
           "kind": "message",
-          "en": "Mom is reading in the kitchen. I am not reading; I am thinking. The cat is on the chair.",
+          "en": "Mom is reading in the kitchen. And I am not reading; I am thinking. And the cat is on the chair.",
           "after_page": "u12-p3",
           "voice_hint": "unfamiliar",
           "glosses": {
             "стуле": "on the chair (after on)"
           },
-          "ru": "Ма́ма чита́ет на ку́хне. Я не чита́ю, я ду́маю. Кот на сту́ле.",
+          "ru": "Ма́ма чита́ет на ку́хне. А я не чита́ю, я ду́маю. И кот на сту́ле.",
           "questions": [
             {
               "kind": "gist",
@@ -3380,11 +3424,11 @@
               "accept_en": [
                 "On the chair."
               ],
-              "crucial_span": "Кот на сту́ле",
+              "crucial_span": "кот на сту́ле",
               "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
             }
           ],
-          "crucial_span": "Кот на сту́ле",
+          "crucial_span": "кот на сту́ле",
           "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
         },
         {
@@ -3472,11 +3516,13 @@
         {
           "id": "listen-week-03-02",
           "kind": "message",
-          "en": "Tomorrow morning I will be home. During the day I am working. In the evening we will talk.",
+          "en": "Tomorrow morning I will be home. During the day I am working. And in the evening we will talk.",
           "after_page": "u17-p5",
           "voice_hint": "unfamiliar",
-          "glosses": {},
-          "ru": "За́втра у́тром я бу́ду до́ма. Днём рабо́таю. Ве́чером бу́дем говори́ть.",
+          "glosses": {
+            "поговорим": "let us talk; we will talk"
+          },
+          "ru": "За́втра у́тром я бу́ду до́ма. Днём рабо́таю. А ве́чером поговори́м.",
           "questions": [
             {
               "kind": "gist",
@@ -3486,7 +3532,7 @@
               "accept_en": [
                 "Talking in the evening."
               ],
-              "crucial_span": "Ве́чером бу́дем говори́ть",
+              "crucial_span": "А ве́чером поговори́м",
               "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
             },
             {
@@ -3507,13 +3553,13 @@
         {
           "id": "listen-week-03-03",
           "kind": "message",
-          "en": "I was reading but did not finish the book. It is very interesting. Tomorrow I will read more.",
+          "en": "I was reading the book, but have not finished it yet. It is very interesting. Tomorrow I will read more.",
           "after_page": "u17-p5",
           "voice_hint": "unfamiliar",
           "glosses": {
             "интересная": "interesting (feminine)"
           },
-          "ru": "Я чита́л, но не прочита́л кни́гу. Она́ о́чень интере́сная. За́втра бу́ду чита́ть ещё.",
+          "ru": "Я чита́л кни́гу, но ещё не прочита́л. Она́ о́чень интере́сная. За́втра бу́ду чита́ть ещё.",
           "questions": [
             {
               "kind": "gist",
@@ -3523,7 +3569,7 @@
               "accept_en": [
                 "No."
               ],
-              "crucial_span": "не прочита́л кни́гу",
+              "crucial_span": "но ещё не прочита́л",
               "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
             },
             {
@@ -3582,14 +3628,14 @@
         {
           "id": "listen-week-03-05",
           "kind": "message",
-          "en": "In the morning I spoke with my brother. He will work tomorrow. Today he is at home.",
+          "en": "In the morning I spoke with my brother. He will work tomorrow. And today he is at home.",
           "after_page": "u17-p5",
           "voice_hint": "unfamiliar",
           "glosses": {
             "братом": "brother (after with)",
             "говорила": "spoke (feminine past)"
           },
-          "ru": "У́тром я говори́ла с бра́том. Он бу́дет рабо́тать за́втра. Сего́дня он до́ма.",
+          "ru": "У́тром я говори́ла с бра́том. Он бу́дет рабо́тать за́втра. А сего́дня он до́ма.",
           "questions": [
             {
               "kind": "gist",
@@ -3610,11 +3656,11 @@
               "accept_en": [
                 "At home."
               ],
-              "crucial_span": "Сего́дня он до́ма",
+              "crucial_span": "сего́дня он до́ма",
               "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
             }
           ],
-          "crucial_span": "Сего́дня он до́ма",
+          "crucial_span": "сего́дня он до́ма",
           "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
         }
       ]
@@ -3628,14 +3674,14 @@
         {
           "id": "listen-week-04-01",
           "kind": "message",
-          "en": "We are going to the city tomorrow. My sister is going with us. My brother will be home.",
+          "en": "Tomorrow we are going to the city. My sister is going with us, and my brother will be home.",
           "after_page": "u24-p5",
           "voice_hint": "unfamiliar",
           "glosses": {
             "едет": "is going by transport (he/she)",
             "нами": "us (after with)"
           },
-          "ru": "Мы е́дем в го́род за́втра. Сестра́ е́дет с на́ми. Брат бу́дет до́ма.",
+          "ru": "За́втра мы е́дем в го́род. Сестра́ е́дет с на́ми, а брат бу́дет до́ма.",
           "questions": [
             {
               "kind": "gist",
@@ -3656,11 +3702,11 @@
               "accept_en": [
                 "The brother."
               ],
-              "crucial_span": "Брат бу́дет до́ма",
+              "crucial_span": "брат бу́дет до́ма",
               "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
             }
           ],
-          "crucial_span": "Брат бу́дет до́ма",
+          "crucial_span": "брат бу́дет до́ма",
           "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
         },
         {
@@ -3745,11 +3791,13 @@
         {
           "id": "listen-week-04-04",
           "kind": "message",
-          "en": "We will talk about work at seven. No, at eight. At seven I will still be in the city.",
+          "en": "We will talk about work at seven. Oh, no — at eight. At seven I will still be in the city.",
           "after_page": "u24-p5",
           "voice_hint": "unfamiliar",
-          "glosses": {},
-          "ru": "Мы бу́дем говори́ть о рабо́те в семь. Нет, в во́семь. В семь я ещё бу́ду в го́роде.",
+          "glosses": {
+            "ой": "oh, oops"
+          },
+          "ru": "Мы бу́дем говори́ть о рабо́те в семь. Ой, нет — в во́семь. В семь я ещё бу́ду в го́роде.",
           "questions": [
             {
               "kind": "gist",
@@ -3759,7 +3807,7 @@
               "accept_en": [
                 "Eight."
               ],
-              "crucial_span": "Нет, в во́семь",
+              "crucial_span": "Ой, нет — в во́семь",
               "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
             },
             {
@@ -3825,14 +3873,15 @@
         {
           "id": "listen-week-05-01",
           "kind": "message",
-          "en": "Buy three books. No, two: I already have one.",
+          "en": "Buy three books. Oh, no, two: I already have one.",
           "after_page": "u27-p5",
           "voice_hint": "unfamiliar",
           "glosses": {
             "купи": "buy (informal singular request)",
+            "ой": "oh, oops",
             "уже": "already; yet (with not)"
           },
-          "ru": "Купи́ три кни́ги. Нет, две: одна́ у меня́ уже́ есть.",
+          "ru": "Купи́ три кни́ги. Ой, нет, две: одна́ у меня́ уже́ есть.",
           "questions": [
             {
               "kind": "gist",
@@ -3842,7 +3891,7 @@
               "accept_en": [
                 "Two."
               ],
-              "crucial_span": "Нет, две",
+              "crucial_span": "Ой, нет, две",
               "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
             },
             {
@@ -3870,7 +3919,7 @@
             "пиши": "write (informal singular request; with not: do not write)",
             "прочитай": "read to the end (informal singular request)"
           },
-          "ru": "У́тром прочита́й письмо́. Пото́м напиши́ отве́т. То́лько не пиши́ сейча́с, сна́чала ну́жно всё поня́ть.",
+          "ru": "У́тром прочита́й письмо́. Пото́м напиши́ отве́т. То́лько не пиши́ сейча́с, снача́ла ну́жно всё поня́ть.",
           "questions": [
             {
               "kind": "gist",
@@ -3880,7 +3929,7 @@
               "accept_en": [
                 "Read and understand the letter."
               ],
-              "crucial_span": "сна́чала ну́жно всё поня́ть",
+              "crucial_span": "снача́ла ну́жно всё поня́ть",
               "why": "Accept an English paraphrase that preserves this meaning; spelling and sentence form do not matter."
             },
             {
@@ -3978,13 +4027,13 @@
         {
           "id": "listen-week-05-05",
           "kind": "message",
-          "en": "Pass the book to my sister. She wants to read it. I only need the book on Monday.",
+          "en": "Pass the book to my sister. She wants to read it. And I only need it on Monday.",
           "after_page": "u27-p5",
           "voice_hint": "unfamiliar",
           "glosses": {
             "её": "her; it (feminine direct object)"
           },
-          "ru": "Переда́й кни́гу сестре́. Она́ хо́чет её прочита́ть. Мне кни́га нужна́ то́лько в понеде́льник.",
+          "ru": "Переда́й кни́гу сестре́. Она́ хо́чет её прочита́ть. А мне она́ нужна́ то́лько в понеде́льник.",
           "questions": [
             {
               "kind": "gist",
@@ -4027,9 +4076,10 @@
           "after_page": "u30-p4",
           "voice_hint": "unfamiliar",
           "glosses": {
-            "поговорим": "let us talk; we will talk"
+            "поговорим": "let us talk; we will talk",
+            "поговорить": "to talk, have a chat (perfective)"
           },
-          "ru": "Я согла́сен, что нам ну́жно говори́ть. Но не сейча́с: я ещё не прочита́л письмо́. Поговори́м по́сле рабо́ты.",
+          "ru": "Я согла́сен, что нам ну́жно поговори́ть. Но не сейча́с: я ещё не прочита́л письмо́. Поговори́м по́сле рабо́ты.",
           "questions": [
             {
               "kind": "gist",
@@ -4107,7 +4157,7 @@
             "поможет": "will help",
             "решить": "decide; resolve (to completion)"
           },
-          "ru": "Ты права́, э́та рабо́та ва́жная. Тем не ме́нее я не хочу́ начина́ть сего́дня. Сна́чала ну́жно реши́ть, кто нам помо́жет.",
+          "ru": "Ты права́, э́та рабо́та ва́жная. Тем не ме́нее я не хочу́ начина́ть сего́дня. Снача́ла ну́жно реши́ть, кто нам помо́жет.",
           "questions": [
             {
               "kind": "gist",
@@ -4147,7 +4197,7 @@
             "новой": "new (feminine oblique form)",
             "решили": "decided (plural past)"
           },
-          "ru": "Мы говори́ли о но́вой кни́ге. Брат хо́чет её купи́ть, а я хочу́ сна́чала прочита́ть кни́гу, кото́рая у нас уже́ есть. Мы ещё не реши́ли, что де́лать.",
+          "ru": "Мы говори́ли о но́вой кни́ге. Брат хо́чет её купи́ть, а я хочу́ снача́ла прочита́ть кни́гу, кото́рая у нас уже́ есть. Мы ещё не реши́ли, что де́лать.",
           "questions": [
             {
               "kind": "gist",
@@ -4188,7 +4238,7 @@
             "поедете": "you will go (plural/polite, by transport)",
             "поеду": "I will go (by transport)"
           },
-          "ru": "Я сказа́ла, что не хочу́ е́хать с ва́ми. Не так: я хочу́, но не могу́ в суббо́ту. Е́сли вы пое́дете в воскресе́нье, я пое́ду то́же.",
+          "ru": "Я сказа́ла, что не хочу́ е́хать с ва́ми. Э́то не так: я хочу́, но не могу́ в суббо́ту. Е́сли вы пое́дете в воскресе́нье, я то́же пое́ду.",
           "questions": [
             {
               "kind": "gist",
