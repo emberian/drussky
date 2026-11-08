@@ -55,7 +55,10 @@ struct BookView: View {
             if QA.has("-qa-pocket") { show("Pocket", PocketPage.insert(book: book, voice: voice)) }  // Devices
             showTyping = QA.has("-qa-typing")
             if QA.has("-qa-grammar") { show("Grammar page", GrammarPages.addGrammar(book)) }
+            if QA.has("-qa-handwriting") { show("Read handwriting", CursivePages.addHandwriting(book)) }
+            showCursiveProof = QA.has("-qa-cursive-proof")
         }
+        .sheet(isPresented: $showCursiveProof) { CursiveProofView().presentationSizing(.page) }
         .onChange(of: book.currentPage) { _, _ in
             // The goal (Goal/): its first page opens when readable; a brand-new course page that
             // adds nothing toward it gives way to a page written from the goal's own sentences.
@@ -68,6 +71,7 @@ struct BookView: View {
     @Environment(SpeakingTurn.self) private var speech
     @State private var notice: String?
     @State private var noticeTitle = "Ear training"
+    @State private var showCursiveProof = false
 
     /// Shows a page maker's notice when it couldn't make a page.
     private func show(_ title: String, _ problem: String?) {
@@ -142,7 +146,8 @@ struct BookView: View {
                 Button { book.insertTalkPage() } label: { Label("Talk", systemImage: "bubble.left.and.bubble.right") }
                 Button { show("Word families", MorphologyPages.addFamilies(book)) } label: { Label("Word families", systemImage: "tree") }
                 Button { show("Cognates", MorphologyPages.addCognates(book)) } label: { Label("Cognates", systemImage: "character.book.closed") }
-                if sizeClass == .compact { Button { show("Pocket", PocketPage.insert(book: book, voice: voice)) } label: { Label("Pocket: listen and speak", systemImage: "iphone.radiowaves.left.and.right") } }  // Devices
+                Button { show("Read handwriting", CursivePages.addHandwriting(book)) } label: { Label("Read handwriting", systemImage: "scribble.variable") }
+                if sizeClass == .compact { Button { show("Pocket", PocketPage.insert(book: book, voice: voice)) } label: { Label("Pocket: listen and speak", systemImage: "iphone.radiowaves.left.and.right") } }  // Devices/Pocket
                 if KeyboardPresence.shared.present { Button { showTyping = true } label: { Label("Typing drill", systemImage: "keyboard") } }  // Devices/Typing
                 Button { show("Grammar page", GrammarPages.addGrammar(book)) } label: { Label("Grammar page", systemImage: "tablecells") }
             } label: {

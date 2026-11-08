@@ -658,6 +658,7 @@ U.append(("u16", "First readings", "ро́бот, число́, мысль, зв
 ]))
 
 
+import course_cursive  # noqa: E402
 import course_families  # noqa: E402
 import course_read  # noqa: E402
 import course_reading  # noqa: E402
@@ -667,6 +668,7 @@ U += course_families.units(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl,
 LEXICON += course_families.LEXICON
 U += course_read.units(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm, ps=ps))
 LEXICON += course_read.LEXICON
+U += course_cursive.units(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra))  # no words of its own: cursive teaches the hand, not vocabulary
 
 # Grammar pages (Resources/paradigms.json): one at the end of each unit that introduces a system.
 import course_grammar  # noqa: E402
@@ -681,7 +683,7 @@ LEXICON += [w for w in course_grammar.LEXICON if w["ru"] not in {x["ru"] for x i
 # a page or a unit happens here rather than by editing its position in U. Never insert or move
 # anything before the earliest page a learner may not have reached yet.
 UNIT_ORDER = ["u1", "u2", "u3", "u4", "u5", "u6", "u7", "u13", "c1", "u14", "u8", "u15", "u9", "u10",
-              "u11", "u18", "u12", "u16", "u17", "u19", "u20", "u21", "u22", "u23",
+              "u31", "u11", "u18", "u12", "u16", "u17", "u19", "u20", "u21", "u22", "u23",
               "u24", "u25", "u26", "u27", "u28", "u29", "u30"]
 # (page id, into unit, before page id or None for the end)
 PAGE_MOVES = [
@@ -778,6 +780,7 @@ DIARY_PROMPTS = {
     "u21-p4": "Your own two-line proof of something simple.",
     "u22-p3": "A question that is not simple, and a first attempt at an answer.",
     "u22-p4": "Something you know, and something you don't, in your own words.",
+    **course_cursive.DIARY_PROMPTS,
 }
 
 

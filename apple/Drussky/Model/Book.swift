@@ -553,6 +553,7 @@ final class Book {
         case .paradigmFill: lines.append("Filling the \(ex.paradigm ?? "") table of «\(ex.word ?? "")»: cells \((ex.cells ?? []).joined(separator: ", ")) (answers \((ex.cells ?? []).compactMap { ex.forms?[$0] }.joined(separator: ", "))).")
         case .transform: lines.append("Writing «\(ex.word ?? "")» in the \(ex.cue ?? "") cell (answer «\(ex.answerText ?? "")»)" + (ex.before != nil ? " in \(ex.before ?? "")___\(ex.after ?? "")." : "."))
         case .cueSort: lines.append("Sorting \((ex.items ?? []).map { "«\($0.text)»" }.joined(separator: ", ")) into: \((ex.options ?? []).joined(separator: " / ")).")
+        case .readHandwriting: lines.append("Reading «\(ex.text ?? "")» in someone's handwriting" + (ex.options.map { " and choosing among: \($0.joined(separator: " / "))." } ?? " and printing it."))
         }
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")

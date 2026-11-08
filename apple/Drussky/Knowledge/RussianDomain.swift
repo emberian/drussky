@@ -38,6 +38,7 @@ extension Modality {
         case .hearPick: "hear → pick"
         case .readPick: "read → pick"
         case .build: "English → build"
+        case .readCursive: "read handwriting"
         case .type: "typed"
         case .transform: "cue → write"
         case .classify: "cue → pick"
@@ -94,7 +95,7 @@ struct RussianAttempt {
 /// Russian, as Drussky teaches it, in LearningCore's terms.
 struct RussianDomain: KnowledgeDomain {
     let name = "drussky-ru"
-    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .speak, .type, .transform, .classify]
+    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .speak, .type, .transform, .classify, .readCursive]
     let graph: KnowledgeGraph
     let lemmas: Lemmas
     /// Roots, affixes and segmentations (Morphology/).
@@ -349,6 +350,7 @@ struct RussianDomain: KnowledgeDomain {
         case .transform: .transform
         case .paradigmFill: .transform  // tiles report .classify through evidence(for:)
         case .cueSort: .classify
+        case .readHandwriting: .readCursive
         case .explain, .passage: nil
         case .diary: nil  // its evidence is built from the correction (DiaryKnowledge.swift)
         case .talk: nil  // its evidence is built per turn and from the marking (Talk/TalkKnowledge.swift)
@@ -377,7 +379,7 @@ struct RussianDomain: KnowledgeDomain {
         case .done:
             switch ex.kind {
             case .meet, .trace, .copy: return .good
-            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord: return r.assisted == true ? nil : .again
+            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord, .readHandwriting: return r.assisted == true ? nil : .again
             case .explain, .passage: return nil
             default: return r.assisted == true ? nil : .hard  // finished, but not verified right first time
             }
@@ -412,6 +414,8 @@ struct RussianDomain: KnowledgeDomain {
             return words.isEmpty ? letterSubstitutions(target, response) : words
         case .cueSort:
             return sortConfusions(ex, response: response)
+        case .readHandwriting:
+            return cursiveConfusions(ex, response: response)
         default:
             return []
         }

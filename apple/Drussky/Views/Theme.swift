@@ -71,10 +71,8 @@ enum Theme {
         return out
     }
 
-    static func registerFonts() {
-        guard let url = Bundle.main.url(forResource: "MarckScript-Regular", withExtension: "ttf") else { return }
-        CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
-    }
+    /// Marck Script and the handwriting fonts (Resources/Fonts/fonts.json, all OFL).
+    static func registerFonts() { CursiveFonts.register() }
 }
 
 extension UIColor {

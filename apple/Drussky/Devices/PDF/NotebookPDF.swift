@@ -176,6 +176,11 @@ enum NotebookPDF {
         case .cueSort:
             add(text((ex.items ?? []).map { "«\($0.text)»" }.joined(separator: "  "), font: serif(12.5), color: .text))
             add(text((ex.options ?? []).joined(separator: " / "), font: serif(10), color: .muted))
+        case .readHandwriting:  // the hand it was shown in is not on paper; the word is, in cursive
+            add(text(RussianText.unstressed(ex.text ?? ""), font: cursive(18), color: .ink))
+            if let options = ex.options {
+                add(choices(options, chosen: r.chosen, correct: options.firstIndex { RussianText.key($0) == RussianText.key(ex.text ?? "") }, russian: true))
+            }
         case .meet, .dictation:
             break
         }
@@ -252,7 +257,7 @@ enum NotebookPDF {
             let a = text("\(page.completedCount) of \(page.exercises.count) done", font: rounded(9), color: .muted)
             return Block(kind: .footer, height: 16, ink: nil) { rect in a.draw(at: CGPoint(x: x, y: rect.minY)) }
         }
-        let grade = text("\(GradeStamp.grade(for: page))", font: cursive(54), color: .redPen)
+        let grade = text(GradeStamp.grade(for: page).map { "\($0)" } ?? "", font: cursive(54), color: .redPen)
         let praise = text(GradeStamp.praise(for: page), font: cursive(22), color: .redPen)
         var parts = ["\(page.exercises.count) exercises"]
         let firstTry = page.results.filter(\.isRightFirstTime).count
@@ -385,6 +390,7 @@ enum NotebookPDF {
         case .paradigmFill: "Fill the table"
         case .transform: "Write the form"
         case .cueSort: "Sort by pattern"
+        case .readHandwriting: ex.options != nil ? "Read the handwriting and pick the word" : "Read the handwriting and print it"
         }
     }
 

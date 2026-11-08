@@ -68,6 +68,7 @@ memorable line in the tutor's voice.
 | `paradigm_fill` | `word`, `paradigm`, `forms:{cell: form}`, `cells:[cell…]`, optional `options:[form…]` | Sees a `paradigms.json` table of `word` with every cell of `forms` drawn (its ending shown small in each); the cells in `cells` are empty and to be produced — written with the Pencil in a small ruled cell each, or, when `options` is present, filled by tapping tiles (every asked form, plus tiles that don't belong). One **Check** grades the table; all right at the first check is recall, a later success practice, a second miss shows the forms in red with the paradigm row. `forms` must equal the word's forms in `paradigms.json`; `paradigm` is its table (`past`/`imp` for a verb's past and imperative cells). |
 | `transform` | `word`, `cue`, `answer`, optional `paradigm`, `before`, `after`, `hint` | Sees `word` and a grammatical cue («кни́га» → genitive singular), or a sentence with a gap that forces the form (`before` ___ `after`, `hint` its English), and writes the form. `answer` is `word`'s `cue` cell in `paradigms.json`; the checker accepts it with or without stress marks and with ё written е. A miss shows the paradigm row with the right cell marked. |
 | `cue_sort` | `options:[bucket…]`, `items:[{text, answer}]`, optional `paradigm` | Sorts phrases into the case use (or table) they show: tap a phrase, then its bucket. Buckets are `paradigms.json` use titles (у меня́ есть, в / на + where …) or table titles. A wrong bucket sends the phrase back once; twice places it in red. Flawless is recall, slips are practice, a phrase placed for you is a miss. Every word of every item must be in the lexicon. |
+| `read_handwriting` | `text`, optional `options:[ru…]`, optional `seed` | Reads `text` (a word or short line) rendered in somebody's handwriting — one of the bundled OFL handwriting fonts or the cursive stroke models written through, slanted, sized and inked by `seed` (a non-negative integer; absent, one is derived from the text). Without `options` the learner prints the word on the ruled line (recognized, counts as writing); with `options` (2+, `text` among them, the others look-alikes such as ма́ша for ма́ма) they pick it. Knowledge modality `read-cursive`. Pages from ＋ → *Read handwriting* are built locally from known words. |
 | `diary` | `prompt` | Дневник: writes a few words of their *own* Russian on ruled lines about `prompt` (English, or Russian obeying rules 1–2). The recognizer proposes a transcript they confirm or fix; the tutor returns a red-pen correction (corrected text, edits with a category and a reason, one line of praise, 0–2 patterns to teach), drawn over their ink, which stays. The prompt is never spoken. At most one per page, always last, and not counted in rule 5. From unit 3 on, `build_course.py` adds one to every page (`DIARY_PROMPTS`). |
 
 A `passage` may carry a human reading: `narration` (an `Audio/` clip) and `words` (its word-timing
@@ -82,6 +83,11 @@ stretch (chunk dictation, shadowing). These exercises are made locally from a na
 text whose bare form (outer punctuation and stress marks off) contains a letter; digits, `***` and
 dashes have no entry. `scripts/narration.py` writes and checks it; `Narration.swift` applies the
 same rule.
+
+A `trace` or `copy` may carry `cursive: true`: its ghost is then the cursive stroke model
+(`Resources/strokes-cursive.json`, built by `scripts/build_strokes_cursive.py`, joined up letter to
+letter) whatever the learner's cursive setting, and the one-hint coach compares with the cursive
+models. The cursive unit (`scripts/course_cursive.py`) is made of these; it introduces no words.
 
 Any exercise may also carry an optional `skills: ["past", "negation"]`: the grammar patterns
 it practises, by construction id from `Resources/lemmas.json` (`gram:` prefix optional). When it is
