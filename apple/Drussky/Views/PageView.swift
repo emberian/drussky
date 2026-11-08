@@ -84,7 +84,7 @@ struct PageView: View {
                     .font(Theme.cursive(compact ? 26 : 32))
                     .foregroundStyle(Theme.ink)
                 Spacer()
-                Text(page.isReview ? "Повторение" : "Классная работа")
+                Text(page.isReview ? "Повторе́ние" : "Кла́ссная рабо́та")
                     .font(Theme.cursive(compact ? 22 : 28))
                     .foregroundStyle(Theme.ink)
             }
@@ -208,9 +208,9 @@ struct GradeStamp: View {
 
     static func praise(for page: BookPage) -> String {
         switch grade(for: page) {
-        case 5?: "Отлично!"
-        case 4?: "Хорошо!"
-        case .some: "Молодец — дальше!"
+        case 5?: "Отли́чно!"
+        case 4?: "Хорошо́!"
+        case .some: "Молоде́ц — да́льше!"
         case nil: "Готово!"
         }
     }

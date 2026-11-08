@@ -26,7 +26,7 @@ struct ContentsView: View {
                 .frame(maxWidth: .infinity)
             }
             .background(GridPaper(marginX: nil))
-            .navigationTitle("Алфавит")
+            .navigationTitle("Алфави́т")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
             }

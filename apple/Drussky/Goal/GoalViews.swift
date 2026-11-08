@@ -241,7 +241,7 @@ struct GoalPicker: View {
                     .padding(10).frame(minHeight: 260)
                     .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
                     .overlay(alignment: .topLeading) {
-                        if text.isEmpty { Text("Вставьте текст…").font(Theme.russian(19)).foregroundStyle(Theme.muted).padding(18).allowsHitTesting(false) }
+                        if text.isEmpty { Text("Вста́вьте текст…").font(Theme.russian(19)).foregroundStyle(Theme.muted).padding(18).allowsHitTesting(false) }
                     }
                 makeButton(enabled: RussianText.letters(in: text).count >= 5) {
                     Goal(title: title.isEmpty ? String(text.prefix(40)).trimmingCharacters(in: .whitespacesAndNewlines) : title,

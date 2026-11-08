@@ -459,7 +459,7 @@ U.append(("u10", "Mine and yours", "мой, твой, наш, ваш · у ме�
 
 U.append(("u11", "Doing things", "чита́ть, ду́мать, знать", [
     ("Reading: я чита́ю", "One verb, six endings. Learn them on чита́ть, to read, and they work for hundreds of verbs.", [
-        ex("Drop -ть from чита'ть and add the ending for who is doing it: я -ю, ты -ешь, он and она' -ет.", [("чита'ть", "to read"), ("я чита'ю", "I read"), ("ты чита'ешь", "you read"), ("она' чита'ет", "she reads"), ("чита'ю кни'гу", "I read a book")]),
+        ex("Drop -ть from чита'ть and add the ending for who is doing it: я -ю, ты -ешь, он and она' -ет. Notice that кни'га becomes кни'гу when it is the thing being read.", [("чита'ть", "to read"), ("я чита'ю", "I read"), ("ты чита'ешь", "you read"), ("она' чита'ет", "she reads"), ("чита'ю кни'гу", "I read a book")]),
         tr("я чита'ю"), lp("ты чита'ешь", ["я чита'ю", "ты чита'ешь", "он чита'ет"]), cp("он чита'ет", 1),
         tl("I read", "я чита'ю"), tl("to read", "чита'ть"), fl("Ма'ма ", "чита'ет", ".", "Mom is reading."), dc("Ты чита'ешь."),
         ra("Я чита'ю кни'гу."),
@@ -496,7 +496,7 @@ U.append(("u12", "Speaking and understanding", "говори́ть, понима
         ra("Ты говори'шь, а я ду'маю."), rm("Кто говори'т?", ["Who is speaking?", "Who is reading?", "Who knows?"]),
     ]),
     ("In Russian: по-ру́сски", "По-ру́сски means in Russian. Now you can say what you speak and what you understand.", [
-        ex("Понима'ть, to understand, goes like чита'ть: я понима'ю, ты понима'ешь. По-ру'сски and по-англи'йски name the language.", [("Я говорю' по-ру'сски.", "I speak Russian."), ("Я понима'ю.", "I understand."), ("Я не понима'ю.", "I don't understand."), ("понима'ть", "to understand"), ("ты понима'ешь", "you understand"), ("по-англи'йски", "in English")]),
+        ex("You already know я не понима'ю; the full verb понима'ть (to understand) goes like чита'ть: я понима'ю, ты понима'ешь. По-ру'сски and по-англи'йски name the language.", [("Я говорю' по-ру'сски.", "I speak Russian."), ("Я понима'ю.", "I understand."), ("Я не понима'ю.", "I don't understand."), ("понима'ть", "to understand"), ("ты понима'ешь", "you understand"), ("по-англи'йски", "in English")]),
         lp("Я не понима'ю.", ["Я понима'ю.", "Я не понима'ю.", "Я не зна'ю."]), tl("I understand", "я понима'ю"),
         tl("in Russian", "по-ру'сски"), tl("to understand", "понима'ть"), fl("Я говорю' ", "по-англи'йски", ".", "I speak English."), dc("Ты понима'ешь?"),
         ra("Я немно'го говорю' по-ру'сски."), cp("по-ру'сски"),
@@ -658,6 +658,7 @@ U.append(("u16", "First readings", "ро́бот, число́, мысль, зв
 ]))
 
 
+import course_cursive  # noqa: E402
 import course_families  # noqa: E402
 import course_read  # noqa: E402
 import course_reading  # noqa: E402
@@ -667,6 +668,13 @@ U += course_families.units(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl,
 LEXICON += course_families.LEXICON
 U += course_read.units(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm, ps=ps))
 LEXICON += course_read.LEXICON
+U += course_cursive.units(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra))  # no words of its own: cursive teaches the hand, not vocabulary
+
+# Grammar pages (Resources/paradigms.json): one at the end of each unit that introduces a system.
+import course_grammar  # noqa: E402
+for _uid, _page in course_grammar.pages(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm)):
+    next(u for u in U if u[0] == _uid)[3].append(_page)
+LEXICON += [w for w in course_grammar.LEXICON if w["ru"] not in {x["ru"] for x in LEXICON}]  # headwords units 24–30 may already teach
 
 
 # Course order. Page ids are written into learners' notebooks (sourceID), and the app walks
@@ -675,7 +683,7 @@ LEXICON += course_read.LEXICON
 # a page or a unit happens here rather than by editing its position in U. Never insert or move
 # anything before the earliest page a learner may not have reached yet.
 UNIT_ORDER = ["u1", "u2", "u3", "u4", "u5", "u6", "u7", "u13", "c1", "u14", "u8", "u15", "u9", "u10",
-              "u11", "u18", "u12", "u16", "u17", "u19", "u20", "u21", "u22", "u23",
+              "u31", "u11", "u18", "u12", "u16", "u17", "u19", "u20", "u21", "u22", "u23",
               "u24", "u25", "u26", "u27", "u28", "u29", "u30"]
 # (page id, into unit, before page id or None for the end)
 PAGE_MOVES = [
@@ -772,6 +780,7 @@ DIARY_PROMPTS = {
     "u21-p4": "Your own two-line proof of something simple.",
     "u22-p3": "A question that is not simple, and a first attempt at an answer.",
     "u22-p4": "Something you know, and something you don't, in your own words.",
+    **course_cursive.DIARY_PROMPTS,
 }
 
 

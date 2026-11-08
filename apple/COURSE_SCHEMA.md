@@ -65,6 +65,10 @@ memorable line in the tutor's voice.
 | `passage` | `text`, `en`, optional `glosses:{word: meaning}` | Reads a short text (2–8 sentences); taps any word to see its meaning and hear it; can play the whole text and reveal `en`. Words missing from `glosses` fall back to the lexicon. Gloss keys are the word as written, lowercase, without stress. |
 | `build_word` | `en`, `answer`, `parts:[tile…]`, optional `options:[tile…]`, `alternatives:[ru…]` | Sees the English, taps morpheme tiles into order (`пере-`, `пис`, `-а́ть`), checks. `parts` spell `answer` in order (hyphens and stress dropped); `options` is every tile offered, in display order (defaults to `parts`); `alternatives` are other words the tiles may spell that also count. `answer` must be in the lexicon and be a lemma or cognate of `morphology.json`. Right at the first check is recall; two misses show the word. |
 | `family_guess` | `text`, `word`, `root`, `options:[en…]`, `answer` (index), `en` | Reads a sentence with one new word (`word`, a `morphology.json` lemma built on `root`, a root the learner knows), guesses its meaning before being told (the pretesting effect), then sees the word taken apart. Every other word of `text` must be in the lexicon. |
+| `paradigm_fill` | `word`, `paradigm`, `forms:{cell: form}`, `cells:[cell…]`, optional `options:[form…]` | Sees a `paradigms.json` table of `word` with every cell of `forms` drawn (its ending shown small in each); the cells in `cells` are empty and to be produced — written with the Pencil in a small ruled cell each, or, when `options` is present, filled by tapping tiles (every asked form, plus tiles that don't belong). One **Check** grades the table; all right at the first check is recall, a later success practice, a second miss shows the forms in red with the paradigm row. `forms` must equal the word's forms in `paradigms.json`; `paradigm` is its table (`past`/`imp` for a verb's past and imperative cells). |
+| `transform` | `word`, `cue`, `answer`, optional `paradigm`, `before`, `after`, `hint` | Sees `word` and a grammatical cue («кни́га» → genitive singular), or a sentence with a gap that forces the form (`before` ___ `after`, `hint` its English), and writes the form. `answer` is `word`'s `cue` cell in `paradigms.json`; the checker accepts it with or without stress marks and with ё written е. A miss shows the paradigm row with the right cell marked. |
+| `cue_sort` | `options:[bucket…]`, `items:[{text, answer}]`, optional `paradigm` | Sorts phrases into the case use (or table) they show: tap a phrase, then its bucket. Buckets are `paradigms.json` use titles (у меня́ есть, в / на + where …) or table titles. A wrong bucket sends the phrase back once; twice places it in red. Flawless is recall, slips are practice, a phrase placed for you is a miss. Every word of every item must be in the lexicon. |
+| `read_handwriting` | `text`, optional `options:[ru…]`, optional `seed` | Reads `text` (a word or short line) rendered in somebody's handwriting — one of the bundled OFL handwriting fonts or the cursive stroke models written through, slanted, sized and inked by `seed` (a non-negative integer; absent, one is derived from the text). Without `options` the learner prints the word on the ruled line (recognized, counts as writing); with `options` (2+, `text` among them, the others look-alikes such as ма́ша for ма́ма) they pick it. Knowledge modality `read-cursive`. Pages from ＋ → *Read handwriting* are built locally from known words. |
 | `diary` | `prompt` | Дневник: writes a few words of their *own* Russian on ruled lines about `prompt` (English, or Russian obeying rules 1–2). The recognizer proposes a transcript they confirm or fix; the tutor returns a red-pen correction (corrected text, edits with a category and a reason, one line of praise, 0–2 patterns to teach), drawn over their ink, which stays. The prompt is never spoken. At most one per page, always last, and not counted in rule 5. From unit 3 on, `build_course.py` adds one to every page (`DIARY_PROMPTS`). |
 
 A `passage` may carry a human reading: `narration` (an `Audio/` clip) and `words` (its word-timing
@@ -79,6 +83,14 @@ stretch (chunk dictation, shadowing). These exercises are made locally from a na
 text whose bare form (outer punctuation and stress marks off) contains a letter; digits, `***` and
 dashes have no entry. `scripts/narration.py` writes and checks it; `Narration.swift` applies the
 same rule.
+
+A `trace` or `copy` may carry `cursive: true`: its ghost is then the cursive stroke model
+(`Resources/strokes-cursive.json`, built by `scripts/build_strokes_cursive.py`, joined up letter to
+letter) whatever the learner's cursive setting, and the one-hint coach compares with the cursive
+models. A cursive `copy` shows the hand once on the line (the print word above it) and leaves room
+to copy; neither fades (trace → copy → dictation) however secure the word, since they teach the
+hand, not the word. The cursive unit (`scripts/course_cursive.py`) is made of these; it introduces
+no words.
 
 Any exercise may also carry an optional `skills: ["past", "negation"]`: the grammar patterns
 it practises, by construction id from `Resources/lemmas.json` (`gram:` prefix optional). When it is
@@ -226,6 +238,54 @@ stress marks. Audio is keyed by the stress-marked form in `Audio/index-pairs.jso
 `variants-pairs.json` / `sources-pairs.json` (`scripts/make_pair_audio.py`), so за́мок and
 замо́к never share a clip. Pages are generated locally (`sound_pair` exercises, never authored
 in course.json), from letters already met, weighted toward the contrasts missed most.
+
+# Paradigms — `Drussky/Resources/paradigms.json`
+
+Russian inflection as a visible system, built by `scripts/build_paradigms.py` from its author
+tables and checked by `scripts/validate_paradigms.py` against hand-copied Wiktionary tables
+(sources and policy: `scripts/paradigm_sources.md`).
+
+```json
+{
+  "version": 1,
+  "components": [{ "id": "decl1-gen-sg", "name": "I gen sg", "note": "Nouns I, genitive singular: -ы / -и / -ии", "requires": ["decl1-nom-sg"] }],
+  "tables": [{ "id": "decl1", "kind": "noun", "title": "Nouns I · -а / -я", "subtitle": "…", "note": "the rule in two sentences",
+               "rows": [{ "id": "gen", "label": "genitive", "gloss": "of; after нет, у, для, numbers" }], "cols": [{ "id": "sg", "label": "singular" }],
+               "cells": [{ "id": "gen-sg", "row": "gen", "col": "sg", "ending": "-ы / -и / -ии", "components": ["gram:decl1-gen-sg", "gram:genitive"], "words": ["книга", "…"] }],
+               "words": ["книга", "…"] }],
+  "words": { "книга": { "ru": "кни́га", "en": "book", "table": "decl1", "pos": "noun", "gender": "f", "animate": false,
+                        "forms": { "nom-sg": "кни́га", "gen-sg": "кни́ги", "…": "…", "prep-pl": "кни́гах" } },
+             "читать": { "ru": "чита́ть", "table": "conj1", "pos": "verb", "forms": { "inf": "чита́ть", "1sg": "чита́ю", "…": "…", "past-f": "чита́ла", "imp-sg": "чита́й" } } },
+  "uses": [{ "id": "have", "case": "gen", "title": "у меня́ есть", "component": "gram:have", "legacy": [], "rule": "…",
+             "examples": [{ "ru": "У меня́ есть кни́га.", "en": "I have a book.", "word": "я", "cell": "gen" }],
+             "gaps": [{ "before": "У ", "answer": "меня́", "after": " есть кни́га.", "hint": "I have a book.", "word": "я", "cell": "gen" }] }],
+  "exceptions": { "мать": "the stem grows: ма́тери, ма́терью", "кофе": "indeclinable" },
+  "forms": { "книги": [["книга", "gen-sg"], ["книга", "nom-pl"], ["книга", "acc-pl"]] }
+}
+```
+
+Thirteen tables: Nouns I, II, III (six cases × two numbers), adjectives (six cases × m f n pl),
+personal pronouns, мой and наш (твой and ваш follow them), Verbs I and II (present), the
+irregular verbs (хоте́ть, есть, дать, мочь, идти́, е́хать), past, imperative, and the case uses
+the course teaches. A cell names the component it exercises first (`gram:decl1-gen-sg`, unit
+"Grammar", with prerequisite edges from `requires`) and the course's older coarse pattern after
+it (`gram:genitive`); pronoun and irregular-verb cells are the forms themselves (`form:меня`).
+`forms` indexes every written form to the cells it fills; the lemma map's tags narrow homographs
+(книги as `plural` is the nominative plural, not the genitive singular). Every inflected token of
+course.json and library.json whose lemma has a table is a cell of it or a listed exception;
+`validate_paradigms.py` enforces that, and `validate_course.py` checks the three grammar exercise
+kinds against the same file.
+
+In the knowledge model, every inflected token fills its cell; `transform` and `paradigm_fill`
+name their cells outright (modality `cue-write`, or `cue-pick` for tiles and `cue_sort`), and a
+phrase put in the wrong bucket is a confusion between two uses. The inside cover's *Grammar*
+entry is a chip per table (cells met, tinted by mean recall) opening the table, cells coloured by
+the recall of their pattern, a dot for cells the learner has produced; ＋ → *Grammar page* builds
+a page from the weakest cells, cases interleaved, asking only words the learner has produced (the
+headword, or two of its forms) and only cells whose pattern they have met (the cell, or the same
+case in another table of the kind) — unmet rows are left for the course to introduce.
+`scripts/course_grammar.py` adds one authored page at the end of each unit that introduces a
+system (g1–g8).
 
 # Morphology — `Drussky/Resources/morphology.json`
 

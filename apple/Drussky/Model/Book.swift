@@ -66,6 +66,11 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var talk: TalkConversation? = nil
     /// Answered on a keyboard rather than with the Pencil (Devices/Typing); evidence goes under `type`.
     var typed: Bool? = nil
+    /// How long the latest response took, in milliseconds, as the exercise measures it (writing:
+    /// first stroke to last before Check; choosing by ear: clip's end to tap; choosing a meaning or
+    /// checking a built word: shown to tap; saying: cue to voice onset). Becomes the event's
+    /// `latencyMs`; reset when the exercise is reopened.
+    var responseMs: Int? = nil
 
     var roundNumber: Int { round ?? 0 }
 
@@ -448,6 +453,7 @@ final class Book {
             r.revealed = false
             r.selfAssessed = nil
             r.judged = nil
+            r.responseMs = nil
             r.readerAgreed = nil
         }
     }
@@ -570,6 +576,10 @@ final class Book {
         case .buildWord: lines.append("Building «\(ex.answerText ?? "")» (“\(ex.en ?? "")”) from the tiles \((ex.options ?? ex.parts ?? []).joined(separator: " ")).")
         case .talk: lines.append(TalkConversation.describe(ex, r))
         case .familyGuess: lines.append("Guessing what «\(ex.word ?? "")» means in «\(ex.text ?? "")» from its root \(ex.root ?? ""), choosing among: \((ex.options ?? []).joined(separator: " / ")).")
+        case .paradigmFill: lines.append("Filling the \(ex.paradigm ?? "") table of «\(ex.word ?? "")»: cells \((ex.cells ?? []).joined(separator: ", ")) (answers \((ex.cells ?? []).compactMap { ex.forms?[$0] }.joined(separator: ", "))).")
+        case .transform: lines.append("Writing «\(ex.word ?? "")» in the \(ex.cue ?? "") cell (answer «\(ex.answerText ?? "")»)" + (ex.before != nil ? " in \(ex.before ?? "")___\(ex.after ?? "")." : "."))
+        case .cueSort: lines.append("Sorting \((ex.items ?? []).map { "«\($0.text)»" }.joined(separator: ", ")) into: \((ex.options ?? []).joined(separator: " / ")).")
+        case .readHandwriting: lines.append("Reading «\(ex.text ?? "")» in someone's handwriting" + (ex.options.map { " and choosing among: \($0.joined(separator: " / "))." } ?? " and printing it."))
         }
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")

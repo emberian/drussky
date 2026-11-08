@@ -92,7 +92,7 @@ def units(h):
             rm("Я живу' в го'роде.", ["I live in a city.", "I work in a city.", "I live in a house."]),
         ]),
         ("I see: ви́жу + what", "The thing you see, read or love is the object: -а becomes -у.", [
-            ex("For the object, -а becomes -у and -я becomes -ю; masculine and neuter things stay as they are: я ви'жу стол, я ви'жу окно', я ви'жу кни'гу. People and animals change too: я ви'жу бра'та.",
+            ex("For the object, -а becomes -у and -я becomes -ю; inanimate masculine and neuter nouns stay as they are: я ви'жу стол, я ви'жу окно', я ви'жу кни'гу. Living masculine nouns take -а instead: брат, я ви'жу бра'та.",
                [("Я ви'жу звезду'.", "I see a star."), ("Я ви'жу дом.", "I see a house."), ("Ты ви'дишь раке'ту?", "Do you see the rocket?"), ("Он лю'бит чай.", "He loves tea.")]),
             lp("звезду'", ["звезда'", "звезду'", "звёзды"]), tl("I see", "я ви'жу"),
             fl("Я ви'жу ", "звезду'", ".", "I see a star."), fl("Ты ви'дишь ", "раке'ту", "?", "Do you see the rocket?"),
@@ -101,12 +101,12 @@ def units(h):
             rm("Ма'ма лю'бит ко'фе и чай.", ["Mom loves coffee and tea.", "Mom drinks coffee and tea.", "Mom loves tea and porridge."]),
         ]),
         ("The station", "A short reading: a robot, a station, the Earth in the window.", [
+            ex("As the object, Земля' becomes Зе'млю (note the stress shift) and Луна' becomes Луну'.", [("Земля'", "the Earth"), ("Луна'", "the Moon")]),
             ps("Ста'нция в ко'смосе. На ста'нции живёт ро'бот. Он ви'дит Зе'млю в окне'. Ещё он ви'дит звёзды и Луну'. Ро'бот лю'бит Зе'млю.",
                "A station in space. A robot lives on the station. It sees the Earth in the window. It also sees the stars and the Moon. The robot loves the Earth.",
                {"станции": "station (after на: on the station)", "живёт": "lives (he, she, it)", "окне": "window (after в: in the window)",
                 "ещё": "also, as well", "космосе": "space (after в: in space)", "луну": "the Moon (as the object)", "он": "he; here: it (the robot)"}),
             rm("На ста'нции живёт ро'бот.", ["A robot lives on the station.", "A robot works in the city.", "The station is inside a robot."]),
-            ex("As the object, Земля' becomes Зе'млю and Луна' becomes Луну'.", [("Земля'", "the Earth"), ("Луна'", "the Moon")]),
             tl("station", "ста'нция"), fl("Ро'бот ви'дит ", "Зе'млю", " в окне'.", "The robot sees the Earth in the window."),
             tl("the Earth", "Земля'"), ra("Ро'бот лю'бит Зе'млю."), dc("На ста'нции живёт ро'бот."), tl("the Moon", "Луна'"),
             cp("на ста'нции", 1),
@@ -240,7 +240,7 @@ def units(h):
             fl("Де'вять — нечётное число', потому' что оно' не ", "де'лится", " на два.", "Nine is odd, because it is not divisible by two."),
         ]),
         ("A tiny proof", "Your first Russian proof: the sum of two even numbers is even.", [
-            ps("Тео'рема: су'мма двух чётных чи'сел — чётное число'. Доказа'тельство. Чётное число' — э'то число', кото'рое де'лится на два. Возьмём два чётных числа'. Ка'ждое из них — два, умно'женное на це'лое число'. Их су'мма — два, умно'женное на су'мму э'тих це'лых чи'сел. Зна'чит, су'мма то'же де'лится на два, то есть она' чётная. Что и тре'бовалось доказа'ть.",
+            ps("Теоре'ма: су'мма двух чётных чи'сел — чётное число'. Доказа'тельство. Чётное число' — э'то число', кото'рое де'лится на два. Возьмём два чётных числа'. Ка'ждое из них — два, умно'женное на це'лое число'. Их су'мма — два, умно'женное на су'мму э'тих це'лых чи'сел. Зна'чит, су'мма то'же де'лится на два, то есть она' чётная. Что и тре'бовалось доказа'ть.",
                "Theorem: the sum of two even numbers is an even number. Proof. An even number is a number that is divisible by two. Take two even numbers. Each of them is two multiplied by a whole number. Their sum is two multiplied by the sum of those whole numbers. So the sum is also divisible by two, that is, it is even. Which was to be proved.",
                {"двух": "two (of two)", "чётных": "even (of even ...)", "чисел": "numbers (of numbers)", "которое": "which, that",
                 "возьмём": "let's take", "числа": "numbers (after два)", "каждое": "each (neuter)", "из": "of, out of", "них": "them",
@@ -249,7 +249,7 @@ def units(h):
                 "что": "what; here: which (что и требовалось доказать: Q.E.D.)", "и": "and; here: just, indeed", "требовалось": "was required",
                 "доказать": "to prove", "делится": "is divisible (на: by)", "то": "that (то есть: that is)", "есть": "is (то есть: that is)"}),
             rm("Су'мма двух чётных чи'сел — чётное число'.", ["The sum of two even numbers is an even number.", "The sum of two odd numbers is an odd number.", "The product of two even numbers is odd."]),
-            tl("sum", "су'мма"), tl("proof", "доказа'тельство"), tl("theorem", "тео'рема"),
+            tl("sum", "су'мма"), tl("proof", "доказа'тельство"), tl("theorem", "теоре'ма"),
             fl("Чётное число' де'лится на ", "два", ".", "An even number is divisible by two."),
             ra("Что и тре'бовалось доказа'ть."), dc("Су'мма то'же де'лится на два."), tl("that is, i.e.", "то есть"),
             ra("Су'мма двух чётных чи'сел — чётное число'."),
@@ -278,7 +278,7 @@ def units(h):
             rm("Почему' ты здесь? Потому' что я хочу' знать.", ["Why are you here? Because I want to know.", "Where are you? I want to know.", "Why are you here? Because I know."]),
         ]),
         ("A dialogue", "Socrates asks a student a simple question that is not simple.", [
-            ps("— Что тако'е справедли'вость? — спра'шивает Сокра'т.\n— Э'то когда' ка'ждый получа'ет то, чего' заслу'живает, — отвеча'ет учени'к.\n— А кто зна'ет, чего' заслу'живает ка'ждый?\n— Наве'рное, му'дрый челове'к.\n— Зна'чит, что'бы быть справедли'вым, ну'жно быть му'дрым?\n— Да, ка'жется, так.\n— Тогда' сна'чала ну'жно узна'ть, что тако'е му'дрость.",
+            ps("— Что тако'е справедли'вость? — спра'шивает Сокра'т.\n— Э'то когда' ка'ждый получа'ет то, чего' заслу'живает, — отвеча'ет учени'к.\n— А кто зна'ет, чего' заслу'живает ка'ждый?\n— Наве'рное, му'дрый челове'к.\n— Зна'чит, что'бы быть справедли'вым, ну'жно быть му'дрым?\n— Да, ка'жется, так.\n— Тогда' снача'ла ну'жно узна'ть, что тако'е му'дрость.",
                "“What is justice?” asks Socrates. “It's when everyone gets what they deserve,” answers the student. “And who knows what everyone deserves?” “A wise person, probably.” “So to be just, one has to be wise?” “Yes, it seems so.” “Then first we need to find out what wisdom is.”",
                {"спрашивает": "asks", "сократ": "Socrates", "когда": "when", "каждый": "everyone, each", "получает": "gets, receives",
                 "то": "that (то, чего: what)", "чего": "what (after заслуживает); said chevo", "что": "what; that", "заслуживает": "deserves", "отвечает": "answers", "ученик": "student, pupil",
@@ -354,7 +354,7 @@ LEXICON = [
     W("де'лится на два", "is divisible by two"), W("де'лится", "is divisible (на: by)"), W("умно'женное на", "multiplied by"),
     W("кото'рое", "which, that (with a neuter noun)"), W("существу'ет", "there exists, exists"), W("для любо'го числа'", "for any number"),
     W("бо'льшее", "bigger, greater (neuter)"), W("просто'е число'", "prime number"), W("су'мма", "sum"),
-    W("двух чётных чи'сел", "of two even numbers"), W("доказа'тельство", "proof"), W("тео'рема", "theorem"),
+    W("двух чётных чи'сел", "of two even numbers"), W("доказа'тельство", "proof"), W("теоре'ма", "theorem"),
     W("Что и тре'бовалось доказа'ть.", "Which was to be proved (Q.E.D.)"), W("то есть", "that is, i.e."),
     # u22
     W("я ду'маю, что", "I think that…"), W("почему'", "why"), W("потому' что", "because"), W("так", "so, like this"),

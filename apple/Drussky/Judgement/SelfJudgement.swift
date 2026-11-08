@@ -93,12 +93,13 @@ enum SelfJudgement {
     /// Records the learner's verdict. Right finishes the exercise (the page may move on); Not
     /// quite marks it missed with the answer shown, so the red version can be copied once.
     @MainActor
-    static func record(_ verdict: Verdict, on slot: ExerciseSlot, reader: ReaderOpinion?) {
+    static func record(_ verdict: Verdict, on slot: ExerciseSlot, reader: ReaderOpinion?, responseMs: Int? = nil) {
         let update: (inout ExerciseResult) -> Void = { r in
             r.attempts += 1
             r.judged = verdict.rawValue
             r.readerAgreed = reader?.matched
             r.recognized = reader?.reading
+            r.responseMs = responseMs  // first stroke to the last before Check
             switch verdict {
             case .right: r.status = .correct
             case .notQuite: r.status = .missed; r.revealed = true

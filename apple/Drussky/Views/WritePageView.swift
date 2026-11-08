@@ -58,7 +58,7 @@ struct WritePageContent: View {
                         .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
                         .overlay(alignment: .topLeading) {
                             if text.isEmpty {
-                                Text("Вставьте текст…").font(Theme.russian(20)).foregroundStyle(Theme.muted)
+                                Text("Вста́вьте текст…").font(Theme.russian(20)).foregroundStyle(Theme.muted)
                                     .padding(18).allowsHitTesting(false)
                             }
                         }
