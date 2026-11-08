@@ -15,6 +15,7 @@
 		06745BE5AABEEF3C7CA5117C /* GoalPull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B668B0AC8B000ED86B6FA64 /* GoalPull.swift */; };
 		080857C7B29EBA0ABC74DA89 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4312A2031F555291D5E2BBD2 /* Tips.swift */; };
 		084B99ED9B1B41C1CBD36575 /* TalkScreensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7E2413C536E90442237A8 /* TalkScreensUITests.swift */; };
+		0958A440B412FD013E39854C /* math.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F8BE754BB0B17978686CA11 /* math.json */; };
 		09FD56B0A4364BF3B758EFC4 /* QA+Intonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9959937A9DC8B4AB3A21D8A /* QA+Intonation.swift */; };
 		0B2FCFBABE5C8D2D2CDB150B /* KnowledgeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A83A72A8552601FEA690DD5 /* KnowledgeTracker.swift */; };
 		0CB0451AAA82012CC656D059 /* SpeechEvidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72E1E3C021AC9FA6611221 /* SpeechEvidence.swift */; };
@@ -108,6 +109,7 @@
 		9198CEE7AF9DA6393BF4DCD1 /* SchedulingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BCBC595349471106942D83 /* SchedulingTests.swift */; };
 		92980B402E85929B77E4BABB /* SelfJudgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E8B3F1EFB9748968FD8006 /* SelfJudgement.swift */; };
 		92CFB455D3B5D4B25F00477D /* GoalViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75343E5B3FE7857ACB306C0 /* GoalViews.swift */; };
+		9366E45F03E144F3FA6A43C3 /* cases.json in Resources */ = {isa = PBXBuildFile; fileRef = 380F8256595A288662AE5313 /* cases.json */; };
 		94F3034C33E0AE976AD5AD04 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF59C448E62B8B1337E944EF /* Metrics.swift */; };
 		950E912E7982B9C99ED74122 /* QA+Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF15E0F862C71C3A0ABBC47A /* QA+Goal.swift */; };
 		9537DA70BA1D85B3EAA30D13 /* WordFallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53173F4BB8F180AF3A5DCD9 /* WordFallback.swift */; };
@@ -166,7 +168,6 @@
 		E57755767846D11D7A993BBF /* DiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839249538FC602F501C33C06 /* DiaryEntry.swift */; };
 		E57A52723D5F7D80807A53B1 /* TutorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74264D1BFDC2677C7515FBED /* TutorView.swift */; };
 		E690EE7AE2CCA3D9C9372D1C /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5206CA36CCD17DFB27C030F /* Tutor.swift */; };
-		EB77A6A2B82A241C69D12127 /* cases.json in Resources */ = {isa = PBXBuildFile; fileRef = 25B92368C207116CE0890702 /* cases.json */; };
 		EC5DEA629DDF914B9CA6C598 /* NotebookLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1095511DFC346F6F4748A8 /* NotebookLoading.swift */; };
 		EE2BF2C19B635513A48C4ACE /* EarlierAttempts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40296369FBA50E77B28E46CA /* EarlierAttempts.swift */; };
 		EE749A56F36F98151C1654CF /* MorphologyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8874D7D7DF143C8B8625E392 /* MorphologyTests.swift */; };
@@ -259,7 +260,6 @@
 		225B3DDBFAF078C80F670536 /* PractiseContrast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PractiseContrast.swift; sourceTree = "<group>"; };
 		22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MarckScript-Regular.ttf"; sourceTree = "<group>"; };
 		23202045AC2D23825B097954 /* Book+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+Review.swift"; sourceTree = "<group>"; };
-		25B92368C207116CE0890702 /* cases.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cases.json; sourceTree = "<group>"; };
 		26F2D22948EE4E31130F07F0 /* GoalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUITests.swift; sourceTree = "<group>"; };
 		27AE7A8C01467109460EB5B7 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		2A72E1E3C021AC9FA6611221 /* SpeechEvidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEvidence.swift; sourceTree = "<group>"; };
@@ -273,6 +273,7 @@
 		3379BF8559CD7EE91958FA67 /* LearningCoreTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = LearningCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		358654DC3830360C3E88F33F /* TalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkTests.swift; sourceTree = "<group>"; };
 		37192A6446B8BCE506389373 /* StrokeDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeDemoView.swift; sourceTree = "<group>"; };
+		380F8256595A288662AE5313 /* cases.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cases.json; sourceTree = "<group>"; };
 		386E28FC654C1880C29D1332 /* course.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = course.json; sourceTree = "<group>"; };
 		391F5D38FA3361CC9FAD7121 /* QA+Speaking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QA+Speaking.swift"; sourceTree = "<group>"; };
 		3A486012E7EC4C4678258B64 /* QA+Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QA+Day.swift"; sourceTree = "<group>"; };
@@ -306,6 +307,7 @@
 		5E5A0EF4CCE1C2A07B42CEB2 /* RussianText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianText.swift; sourceTree = "<group>"; };
 		5E757C2ECC4E90F4CCAF0F66 /* OnDeviceBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDeviceBackend.swift; sourceTree = "<group>"; };
 		5F571FE15D00A88ABFD04870 /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		5F8BE754BB0B17978686CA11 /* math.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = math.json; sourceTree = "<group>"; };
 		5F8F27DFE795F60DBEF19FB0 /* Book+Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+Goal.swift"; sourceTree = "<group>"; };
 		60BCBC595349471106942D83 /* SchedulingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingTests.swift; sourceTree = "<group>"; };
 		6202CFB6A7A40D46E098BDA2 /* TakeCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeCapture.swift; sourceTree = "<group>"; };
@@ -565,6 +567,14 @@
 			path = LearningCore;
 			sourceTree = "<group>";
 		};
+		3492DFD4B6F4E233A89D6B71 /* ondevice */ = {
+			isa = PBXGroup;
+			children = (
+				380F8256595A288662AE5313 /* cases.json */,
+			);
+			path = ondevice;
+			sourceTree = "<group>";
+		};
 		3969EB9BBBF54ABB6FE2C820 /* Diary */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,14 +657,6 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		64D68F8A9EF105E470220EDB /* ondevice */ = {
-			isa = PBXGroup;
-			children = (
-				25B92368C207116CE0890702 /* cases.json */,
-			);
-			path = ondevice;
-			sourceTree = "<group>";
-		};
 		7788604B501CF50BEF8AE6CA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,6 +665,7 @@
 				386E28FC654C1880C29D1332 /* course.json */,
 				4DB996D908029A1780AC509E /* lemmas.json */,
 				F66C50789A2CD8461AE31E6F /* library.json */,
+				5F8BE754BB0B17978686CA11 /* math.json */,
 				9D96FA709CFA23129F0B83F4 /* Models */,
 				F37F8C75F2D3E5D4FFBC1002 /* morphology.json */,
 				48B9C2E0AE3895D9F96B94A8 /* pairs.json */,
@@ -768,14 +771,6 @@
 			path = Talk;
 			sourceTree = "<group>";
 		};
-		D1F69A051C2155ACB2D1C5B2 /* research */ = {
-			isa = PBXGroup;
-			children = (
-				64D68F8A9EF105E470220EDB /* ondevice */,
-			);
-			path = research;
-			sourceTree = "<group>";
-		};
 		E1AB1C171CE673558C089346 /* Speaking */ = {
 			isa = PBXGroup;
 			children = (
@@ -795,6 +790,15 @@
 			path = Speaking;
 			sourceTree = "<group>";
 		};
+		E3AEEDCC0E5E107F81387EC4 /* deputy-codex-math */ = {
+			isa = PBXGroup;
+			children = (
+				F032C646095E57A90B362122 /* research */,
+			);
+			name = "deputy-codex-math";
+			path = ..;
+			sourceTree = "<group>";
+		};
 		EAE7E43FD27A1C87EF14F290 /* Knowledge */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,23 +811,22 @@
 		EB7E55D010BAEF213914079E = {
 			isa = PBXGroup;
 			children = (
+				E3AEEDCC0E5E107F81387EC4 /* deputy-codex-math */,
 				1F5F4280DFDE09F9376E8534 /* Drussky */,
 				06305DCDBD604A16CF5D89E8 /* DrusskyTests */,
 				041A425F9E0F853F7382281E /* DrusskyUITests */,
 				342C98B4B33A6A227F691389 /* LearningCore */,
 				95FF0865FAD2E9BCB07154B4 /* LearningCoreTests */,
-				EDB8DDA42352D71B38BC86B1 /* rufren */,
 				F9D5F14943E0FF3C0C7B3F7D /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		EDB8DDA42352D71B38BC86B1 /* rufren */ = {
+		F032C646095E57A90B362122 /* research */ = {
 			isa = PBXGroup;
 			children = (
-				D1F69A051C2155ACB2D1C5B2 /* research */,
+				3492DFD4B6F4E233A89D6B71 /* ondevice */,
 			);
-			name = rufren;
-			path = ..;
+			path = research;
 			sourceTree = "<group>";
 		};
 		F79CFD695EA72CFC61AF7B36 /* Fluency */ = {
@@ -1008,7 +1011,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB77A6A2B82A241C69D12127 /* cases.json in Resources */,
+				9366E45F03E144F3FA6A43C3 /* cases.json in Resources */,
 				6EF796C73B06762063E17B86 /* goal-lemmas.json in Resources */,
 				FB7F6E27A5068503D04C4C7A /* hershey-ink.json in Resources */,
 				AA6E33B7B0AC8F4613172AA2 /* wikisource-my.json in Resources */,
@@ -1028,6 +1031,7 @@
 				0619713939B412884AEF4DFF /* course.json in Resources */,
 				38A0E413208B3DC981A69072 /* lemmas.json in Resources */,
 				D1AA7E1AB37F8557A6B66B01 /* library.json in Resources */,
+				0958A440B412FD013E39854C /* math.json in Resources */,
 				8BAC5E538054E8F350BC56E7 /* morphology.json in Resources */,
 				F082298B2B042C1136782201 /* pairs.json in Resources */,
 				C7500491DCE324EF0FE52467 /* strokes.json in Resources */,
