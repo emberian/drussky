@@ -91,7 +91,7 @@ struct RussianAttempt {
 /// Russian, as Drussky teaches it, in LearningCore's terms.
 struct RussianDomain: KnowledgeDomain {
     let name = "drussky-ru"
-    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build]
+    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .speak]
     let graph: KnowledgeGraph
     let lemmas: Lemmas
     /// Roots, affixes and segmentations (Morphology/).
@@ -338,6 +338,7 @@ struct RussianDomain: KnowledgeDomain {
         case .buildWord: .build
         case .explain, .passage: nil
         case .diary: nil  // its evidence is built from the correction (DiaryKnowledge.swift)
+        case .talk: nil  // its evidence is built per turn and from the marking (Talk/TalkKnowledge.swift)
         }
     }
 

@@ -93,7 +93,7 @@ enum Tutor {
                         "stream": true,
                         "fallbacks": "default",
                         "output_config": ["effort": effort],
-                        "system": systemPrompt,
+                        "system": [["type": "text", "text": systemPrompt, "cache_control": ["type": "ephemeral"]]],  // the stable prefix of every call is cached
                         "messages": turns.map { ["role": $0.role, "content": $0.text] },
                     ]
                     request.httpBody = try JSONSerialization.data(withJSONObject: body)

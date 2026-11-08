@@ -56,6 +56,7 @@ final class KnowledgeTracker {
         let t = now()
         let latency = lastActivity[page.id].map { t.timeIntervalSince($0) }.flatMap { $0 >= 0 && $0 < 600 ? $0 : nil }
         if page.exercises[safe: index]?.kind == .diary { record(diaryEvidence(page: page, index: index, before: before, after: after, at: t)); return }
+        if page.exercises[safe: index]?.kind == .talk { record(talkEvidence(page: page, index: index, before: before, after: after, at: t)); return }
         guard let event = domain.evidence(for: RussianAttempt(page: page, index: index, before: before, after: after,
                                                              at: t, latency: latency)) else { return }
         lastActivity[page.id] = t
@@ -77,7 +78,7 @@ final class KnowledgeTracker {
                               help: ["tutor"])])
     }
 
-    private func record(_ events: [LearningEvent]) {
+    func record(_ events: [LearningEvent]) {
         append(events)
         for e in events { model.apply(e) }
     }
@@ -122,6 +123,7 @@ final class KnowledgeTracker {
                 var before = ExerciseResult()
                 before.attempts = 0
                 if page.exercises[i].kind == .diary { events += diaryEvidence(page: page, index: i, before: before, after: r, at: at, backfill: true) }
+                else if page.exercises[i].kind == .talk { events += talkEvidence(page: page, index: i, before: before, after: r, at: at, backfill: true) }
                 else if let e = domain.evidence(for: RussianAttempt(page: page, index: i, before: before, after: r, at: at, backfill: true)) {
                     events.append(e)
                 }

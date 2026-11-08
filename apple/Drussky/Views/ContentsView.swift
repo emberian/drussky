@@ -187,6 +187,7 @@ struct SettingsView: View {
                 } footer: {
                     Text("Before your turn to say something aloud. You can always skip it with a tap.")
                 }
+                TalkVoiceSection()
                 Section {
                     SecureField("Anthropic API key", text: $apiKey)
                         .textContentType(.password)

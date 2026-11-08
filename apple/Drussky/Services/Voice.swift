@@ -205,7 +205,7 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
 
     static let bestRussianVoice: AVSpeechSynthesisVoice? = {
         let voices = AVSpeechSynthesisVoice.speechVoices().filter { $0.language.hasPrefix("ru") }
-        return voices.max { $0.quality.rawValue < $1.quality.rawValue } ?? AVSpeechSynthesisVoice(language: "ru-RU")
+        return RussianVoicePick.best(voices) ?? AVSpeechSynthesisVoice(language: "ru-RU")
     }()
 
     nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {

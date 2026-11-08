@@ -97,6 +97,7 @@ struct ExerciseRow: View {
         case .diary: DiaryExercise(slot: slot, isActive: isActive)
         case .buildWord: BuildWordExercise(slot: slot, isActive: isActive)
         case .familyGuess: FamilyGuessExercise(slot: slot, isActive: isActive)
+        case .talk: TalkExercise(slot: slot, isActive: isActive)
         }
     }
 }
