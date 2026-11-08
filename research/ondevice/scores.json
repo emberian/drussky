@@ -1,0 +1,948 @@
+{
+ "gloss/on-device": {
+  "ok": 40,
+  "n": 50,
+  "errors": 0,
+  "mean_seconds": 0.7735689210891724
+ },
+ "gloss/claude": {
+  "ok": 49,
+  "n": 50,
+  "errors": 0,
+  "mean_seconds": 1.8280969762802124
+ },
+ "gloss/verdicts": {
+  "od:gloss-1": "ok",
+  "od:gloss-2": "wrong",
+  "od:gloss-3": "ok",
+  "od:gloss-4": "ok",
+  "od:gloss-5": "wrong",
+  "od:gloss-6": "ok",
+  "od:gloss-7": "ok",
+  "od:gloss-8": "ok",
+  "od:gloss-9": "ok",
+  "od:gloss-10": "ok",
+  "od:gloss-11": "ok",
+  "od:gloss-12": "ok",
+  "od:gloss-13": "ok",
+  "od:gloss-14": "ok",
+  "od:gloss-15": "ok",
+  "od:gloss-16": "ok",
+  "od:gloss-17": "ok",
+  "od:gloss-18": "ok",
+  "od:gloss-19": "ok",
+  "od:gloss-20": "wrong",
+  "od:gloss-21": "ok",
+  "od:gloss-22": "ok",
+  "od:gloss-23": "wrong",
+  "od:gloss-24": "ok",
+  "od:gloss-25": "ok",
+  "od:gloss-26": "ok",
+  "od:gloss-27": "ok",
+  "od:gloss-28": "ok",
+  "od:gloss-29": "ok",
+  "od:gloss-30": "ok",
+  "od:gloss-31": "ok",
+  "od:gloss-32": "wrong",
+  "od:gloss-33": "ok",
+  "od:gloss-34": "ok",
+  "od:gloss-35": "wrong",
+  "od:gloss-36": "ok",
+  "od:gloss-37": "ok",
+  "od:gloss-38": "ok",
+  "od:gloss-39": "ok",
+  "od:gloss-40": "ok",
+  "od:gloss-41": "ok",
+  "od:gloss-42": "ok",
+  "od:gloss-43": "wrong",
+  "od:gloss-44": "ok",
+  "od:gloss-45": "ok",
+  "od:gloss-46": "ok",
+  "od:gloss-47": "ok",
+  "od:gloss-48": "wrong",
+  "od:gloss-49": "wrong",
+  "od:gloss-50": "wrong",
+  "cl:gloss-1": "ok",
+  "cl:gloss-2": "ok",
+  "cl:gloss-3": "ok",
+  "cl:gloss-4": "ok",
+  "cl:gloss-5": "ok",
+  "cl:gloss-6": "ok",
+  "cl:gloss-7": "ok",
+  "cl:gloss-8": "ok",
+  "cl:gloss-9": "ok",
+  "cl:gloss-10": "ok",
+  "cl:gloss-11": "ok",
+  "cl:gloss-12": "ok",
+  "cl:gloss-13": "ok",
+  "cl:gloss-14": "ok",
+  "cl:gloss-15": "ok",
+  "cl:gloss-16": "ok",
+  "cl:gloss-17": "ok",
+  "cl:gloss-18": "ok",
+  "cl:gloss-19": "ok",
+  "cl:gloss-20": "ok",
+  "cl:gloss-21": "ok",
+  "cl:gloss-22": "ok",
+  "cl:gloss-23": "ok",
+  "cl:gloss-24": "ok",
+  "cl:gloss-25": "ok",
+  "cl:gloss-26": "ok",
+  "cl:gloss-27": "ok",
+  "cl:gloss-28": "wrong",
+  "cl:gloss-29": "ok",
+  "cl:gloss-30": "ok",
+  "cl:gloss-31": "ok",
+  "cl:gloss-32": "ok",
+  "cl:gloss-33": "ok",
+  "cl:gloss-34": "ok",
+  "cl:gloss-35": "ok",
+  "cl:gloss-36": "ok",
+  "cl:gloss-37": "ok",
+  "cl:gloss-38": "ok",
+  "cl:gloss-39": "ok",
+  "cl:gloss-40": "ok",
+  "cl:gloss-41": "ok",
+  "cl:gloss-42": "ok",
+  "cl:gloss-43": "ok",
+  "cl:gloss-44": "ok",
+  "cl:gloss-45": "ok",
+  "cl:gloss-46": "ok",
+  "cl:gloss-47": "ok",
+  "cl:gloss-48": "ok",
+  "cl:gloss-49": "ok",
+  "cl:gloss-50": "ok"
+ },
+ "ending/on-device": {
+  "correct": 0,
+  "partial": 5,
+  "wrong": 15,
+  "n": 20,
+  "mean_seconds": 1.3301973938941956
+ },
+ "ending/claude": {
+  "correct": 20,
+  "partial": 0,
+  "wrong": 0,
+  "n": 20,
+  "mean_seconds": 3.7483903527259828
+ },
+ "ending/verdicts": {
+  "od:ending-1": "wrong",
+  "od:ending-2": "partial",
+  "od:ending-3": "wrong",
+  "od:ending-4": "wrong",
+  "od:ending-5": "partial",
+  "od:ending-6": "wrong",
+  "od:ending-7": "wrong",
+  "od:ending-8": "wrong",
+  "od:ending-9": "wrong",
+  "od:ending-10": "wrong",
+  "od:ending-11": "wrong",
+  "od:ending-12": "wrong",
+  "od:ending-13": "wrong",
+  "od:ending-14": "partial",
+  "od:ending-15": "partial",
+  "od:ending-16": "wrong",
+  "od:ending-17": "wrong",
+  "od:ending-18": "partial",
+  "od:ending-19": "wrong",
+  "od:ending-20": "wrong",
+  "cl:ending-1": "correct",
+  "cl:ending-2": "correct",
+  "cl:ending-3": "correct",
+  "cl:ending-4": "correct",
+  "cl:ending-5": "correct",
+  "cl:ending-6": "correct",
+  "cl:ending-7": "correct",
+  "cl:ending-8": "correct",
+  "cl:ending-9": "correct",
+  "cl:ending-10": "correct",
+  "cl:ending-11": "correct",
+  "cl:ending-12": "correct",
+  "cl:ending-13": "correct",
+  "cl:ending-14": "correct",
+  "cl:ending-15": "correct",
+  "cl:ending-16": "correct",
+  "cl:ending-17": "correct",
+  "cl:ending-18": "correct",
+  "cl:ending-19": "correct",
+  "cl:ending-20": "correct"
+ },
+ "diary/on-device": {
+  "caught": 6,
+  "planted": 9,
+  "false_edits": 6,
+  "corrected_ok": 7,
+  "n": 10,
+  "unreadable": 0,
+  "mean_seconds": 5.113305115699768,
+  "rows": [
+   {
+    "id": "diary-1",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 4.985151052474976
+   },
+   {
+    "id": "diary-2",
+    "caught": 0,
+    "planted": 1,
+    "false": 1,
+    "corrected_ok": false,
+    "unreadable": false,
+    "seconds": 4.177870988845825
+   },
+   {
+    "id": "diary-3",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 4.5570679903030396
+   },
+   {
+    "id": "diary-4",
+    "caught": 0,
+    "planted": 1,
+    "false": 1,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 4.957957029342651
+   },
+   {
+    "id": "diary-5",
+    "caught": 1,
+    "planted": 1,
+    "false": 1,
+    "corrected_ok": false,
+    "unreadable": false,
+    "seconds": 6.941720008850098
+   },
+   {
+    "id": "diary-6",
+    "caught": 1,
+    "planted": 1,
+    "false": 1,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 5.8368459939956665
+   },
+   {
+    "id": "diary-7",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 4.793723940849304
+   },
+   {
+    "id": "diary-8",
+    "caught": 0,
+    "planted": 1,
+    "false": 1,
+    "corrected_ok": false,
+    "unreadable": false,
+    "seconds": 4.437456011772156
+   },
+   {
+    "id": "diary-9",
+    "caught": 1,
+    "planted": 1,
+    "false": 1,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 7.565921068191528
+   },
+   {
+    "id": "diary-10",
+    "caught": 0,
+    "planted": 0,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 2.8793370723724365
+   }
+  ]
+ },
+ "diary/claude": {
+  "caught": 9,
+  "planted": 9,
+  "false_edits": 0,
+  "corrected_ok": 10,
+  "n": 10,
+  "unreadable": 0,
+  "mean_seconds": 5.695431327819824,
+  "rows": [
+   {
+    "id": "diary-1",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 6.177548885345459
+   },
+   {
+    "id": "diary-2",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 4.310740947723389
+   },
+   {
+    "id": "diary-3",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 5.76530909538269
+   },
+   {
+    "id": "diary-4",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 5.130674362182617
+   },
+   {
+    "id": "diary-5",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 4.841042995452881
+   },
+   {
+    "id": "diary-6",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 6.15496301651001
+   },
+   {
+    "id": "diary-7",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 6.00045108795166
+   },
+   {
+    "id": "diary-8",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 6.234049081802368
+   },
+   {
+    "id": "diary-9",
+    "caught": 1,
+    "planted": 1,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 5.7180259227752686
+   },
+   {
+    "id": "diary-10",
+    "caught": 0,
+    "planted": 0,
+    "false": 0,
+    "corrected_ok": true,
+    "unreadable": false,
+    "seconds": 6.621507883071899
+   }
+  ]
+ },
+ "lemma/on-device": {
+  "ok": 12,
+  "n": 40,
+  "mean_seconds": 0.30785475075244906,
+  "rows": [
+   {
+    "id": "lemma-1",
+    "form": "лев",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-4",
+    "form": "пробежала",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-7",
+    "form": "телу",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-10",
+    "form": "и",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-13",
+    "form": "стала",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-16",
+    "form": "пустил",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-19",
+    "form": "если",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-22",
+    "form": "пустишь",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-25",
+    "form": "добро",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-28",
+    "form": "что",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-31",
+    "form": "потом",
+    "got": "время",
+    "ok": false,
+    "seconds": 0.6309415102005005
+   },
+   {
+    "id": "lemma-34",
+    "form": "льва",
+    "got": "лива",
+    "ok": false,
+    "seconds": 0.6309415102005005
+   },
+   {
+    "id": "lemma-37",
+    "form": "к",
+    "got": "к",
+    "ok": true,
+    "seconds": 0.6309415102005005
+   },
+   {
+    "id": "lemma-40",
+    "form": "львиный",
+    "got": "ливый",
+    "ok": false,
+    "seconds": 0.6309415102005005
+   },
+   {
+    "id": "lemma-43",
+    "form": "перегрызла",
+    "got": "перегрызать",
+    "ok": false,
+    "seconds": 0.6309415102005005
+   },
+   {
+    "id": "lemma-46",
+    "form": "смеялся",
+    "got": "смеяться",
+    "ok": true,
+    "seconds": 0.6309415102005005
+   },
+   {
+    "id": "lemma-49",
+    "form": "могла",
+    "got": "мочь",
+    "ok": true,
+    "seconds": 0.6309415102005005
+   },
+   {
+    "id": "lemma-52",
+    "form": "видишь",
+    "got": "видеть",
+    "ok": true,
+    "seconds": 0.6309415102005005
+   },
+   {
+    "id": "lemma-55",
+    "form": "мыши",
+    "got": "мышь",
+    "ok": true,
+    "seconds": 0.6309415102005005
+   },
+   {
+    "id": "lemma-58",
+    "form": "слив",
+    "got": "сливовать",
+    "ok": false,
+    "seconds": 0.6309415102005005
+   },
+   {
+    "id": "lemma-61",
+    "form": "дать",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-64",
+    "form": "обеда",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-67",
+    "form": "на",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-70",
+    "form": "никогда",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-73",
+    "form": "нюхал",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-76",
+    "form": "хотелось",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-79",
+    "form": "мимо",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-82",
+    "form": "было",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-85",
+    "form": "удержался",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-88",
+    "form": "сливу",
+    "got": "",
+    "ok": false,
+    "seconds": 0
+   },
+   {
+    "id": "lemma-91",
+    "form": "обедом",
+    "got": "объезд",
+    "ok": false,
+    "seconds": 0.6004774928092956
+   },
+   {
+    "id": "lemma-94",
+    "form": "видит",
+    "got": "видеть",
+    "ok": true,
+    "seconds": 0.6004774928092956
+   },
+   {
+    "id": "lemma-97",
+    "form": "отцу",
+    "got": "отец",
+    "ok": true,
+    "seconds": 0.6004774928092956
+   },
+   {
+    "id": "lemma-100",
+    "form": "слово",
+    "got": "слово",
+    "ok": true,
+    "seconds": 0.6004774928092956
+   },
+   {
+    "id": "lemma-103",
+    "form": "напечатано",
+    "got": "написать",
+    "ok": false,
+    "seconds": 0.6004774928092956
+   },
+   {
+    "id": "lemma-106",
+    "form": "через",
+    "got": "через",
+    "ok": true,
+    "seconds": 0.6004774928092956
+   },
+   {
+    "id": "lemma-109",
+    "form": "постройка",
+    "got": "постройка",
+    "ok": true,
+    "seconds": 0.6004774928092956
+   },
+   {
+    "id": "lemma-112",
+    "form": "великий",
+    "got": "великий",
+    "ok": true,
+    "seconds": 0.6004774928092956
+   },
+   {
+    "id": "lemma-115",
+    "form": "первый",
+    "got": "первый",
+    "ok": true,
+    "seconds": 0.6004774928092956
+   },
+   {
+    "id": "lemma-118",
+    "form": "мировое",
+    "got": "мирный",
+    "ok": false,
+    "seconds": 0.6004774928092956
+   }
+  ]
+ },
+ "lemma/claude": {
+  "ok": 40,
+  "n": 40,
+  "mean_seconds": 0.18827502131462098,
+  "rows": [
+   {
+    "id": "lemma-1",
+    "form": "лев",
+    "got": "лев",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-4",
+    "form": "пробежала",
+    "got": "пробежать",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-7",
+    "form": "телу",
+    "got": "тело",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-10",
+    "form": "и",
+    "got": "и",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-13",
+    "form": "стала",
+    "got": "стать",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-16",
+    "form": "пустил",
+    "got": "пустить",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-19",
+    "form": "если",
+    "got": "если",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-22",
+    "form": "пустишь",
+    "got": "пустить",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-25",
+    "form": "добро",
+    "got": "добро",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-28",
+    "form": "что",
+    "got": "что",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-31",
+    "form": "потом",
+    "got": "потом",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-34",
+    "form": "льва",
+    "got": "лев",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-37",
+    "form": "к",
+    "got": "к",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-40",
+    "form": "львиный",
+    "got": "львиный",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-43",
+    "form": "перегрызла",
+    "got": "перегрызть",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-46",
+    "form": "смеялся",
+    "got": "смеяться",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-49",
+    "form": "могла",
+    "got": "мочь",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-52",
+    "form": "видишь",
+    "got": "видеть",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-55",
+    "form": "мыши",
+    "got": "мышь",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-58",
+    "form": "слив",
+    "got": "слива",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-61",
+    "form": "дать",
+    "got": "дать",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-64",
+    "form": "обеда",
+    "got": "обед",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-67",
+    "form": "на",
+    "got": "на",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-70",
+    "form": "никогда",
+    "got": "никогда",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-73",
+    "form": "нюхал",
+    "got": "нюхать",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-76",
+    "form": "хотелось",
+    "got": "хотеться",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-79",
+    "form": "мимо",
+    "got": "мимо",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-82",
+    "form": "было",
+    "got": "быть",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-85",
+    "form": "удержался",
+    "got": "удержаться",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-88",
+    "form": "сливу",
+    "got": "слива",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-91",
+    "form": "обедом",
+    "got": "обед",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-94",
+    "form": "видит",
+    "got": "видеть",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-97",
+    "form": "отцу",
+    "got": "отец",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-100",
+    "form": "слово",
+    "got": "слово",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-103",
+    "form": "напечатано",
+    "got": "напечатать",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-106",
+    "form": "через",
+    "got": "через",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-109",
+    "form": "постройка",
+    "got": "постройка",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-112",
+    "form": "великий",
+    "got": "великий",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-115",
+    "form": "первый",
+    "got": "первый",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   },
+   {
+    "id": "lemma-118",
+    "form": "мировое",
+    "got": "мировой",
+    "ok": true,
+    "seconds": 0.18827502131462098
+   }
+  ]
+ }
+}

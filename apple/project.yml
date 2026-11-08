@@ -95,7 +95,11 @@ targets:
   DrusskyTests:
     type: bundle.unit-test
     platform: iOS
-    sources: [DrusskyTests]
+    sources:
+      - DrusskyTests
+      # The on-device tutor benchmark's cases (research/ONDEVICE_TUTOR.md), run by OnDeviceTutorTests where the model exists.
+      - path: ../research/ondevice/cases.json
+        buildPhase: resources
     dependencies:
       - target: Drussky
     settings:

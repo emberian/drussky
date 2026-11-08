@@ -22,7 +22,8 @@ enum GoalLemmaTable {
     /// there is nothing to do or no key).
     static func fill(_ goal: Goal, analysis: GoalAnalysis, progress: @escaping (Int, Int) -> Void = { _, _ in }) async throws -> Goal {
         let missing = analysis.tokensNeedingLemmas.filter { goal.lemmaCache?[$0] == nil }
-        guard !missing.isEmpty, Keychain.apiKey?.isEmpty == false, !filling.contains(goal.id) else { return goal }
+        // Claude's job (OnDevice/TutorBackend.swift: the on-device model lemmatized 12 of 40 forms); offline it waits.
+        guard !missing.isEmpty, TutorRouter.route(.lemmatize, .live) == .claude, !filling.contains(goal.id) else { return goal }
         filling.insert(goal.id)
         defer { filling.remove(goal.id) }
         var updated = goal
@@ -47,6 +48,11 @@ enum GoalLemmaTable {
         }
         guard let json = PageWriter.extractJSON(raw), let data = json.data(using: .utf8),
               let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { throw PageWriter.Failure.unreadable }
+        return entries(in: object, asked: forms)
+    }
+
+    /// The contract object (form → [lemma, gloss] or lemma) read into entries; forms not asked for are ignored.
+    static func entries(in object: [String: Any], asked forms: [String]) -> [String: Goal.LemmaEntry] {
         var out: [String: Goal.LemmaEntry] = [:]
         let asked = Set(forms)
         for (k, v) in object {

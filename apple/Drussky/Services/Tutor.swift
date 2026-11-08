@@ -39,6 +39,8 @@ enum Tutor {
     struct Turn: Codable, Sendable, Hashable {
         var role: String   // "user" | "assistant"
         var text: String
+        /// Who answered (OnDevice/TutorBackend.swift); nil on questions and on notes from before it was recorded.
+        var provenance: TutorProvenance? = nil
     }
 
     enum Failure: LocalizedError {
