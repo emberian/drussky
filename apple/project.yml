@@ -52,8 +52,13 @@ targets:
       - path: Drussky
         excludes:
           - "Resources/Audio"
+          - "Resources/Models"
           - "*.entitlements"
       - path: Drussky/Resources/Audio
+        type: folder
+        buildPhase: resources
+      # The phone recognizer (not in git): python3 scripts/models.py fetch
+      - path: Drussky/Resources/Models
         type: folder
         buildPhase: resources
     settings:
