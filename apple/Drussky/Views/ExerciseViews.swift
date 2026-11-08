@@ -854,11 +854,22 @@ struct PassageExercise: View {
                               structure: passage, layer: layer)
                 panel
             } else {
-            HStack(spacing: 14) {
-                Instruction(text: "Read it. Tap any word you want to check.")
-                HearButton(text: text, size: 40, label: "Whole text")
-                Spacer(minLength: 0)
-                if passage != nil { StructureToggle() }
+            // One row where it fits (iPad); the instruction on its own line above the controls on a phone.
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 14) {
+                    Instruction(text: "Read it. Tap any word you want to check.").fixedSize()
+                    HearButton(text: text, size: 40, label: "Whole text")
+                    Spacer(minLength: 0)
+                    if passage != nil { StructureToggle() }
+                }
+                VStack(alignment: .leading, spacing: 8) {
+                    Instruction(text: "Read it. Tap any word you want to check.")
+                    HStack(spacing: 14) {
+                        HearButton(text: text, size: 40, label: "Whole text")
+                        Spacer(minLength: 0)
+                        if passage != nil { StructureToggle() }
+                    }
+                }
             }
             VStack(alignment: .leading, spacing: 6) {
               ForEach(Array(lines.enumerated()), id: \.offset) { li, tokens in

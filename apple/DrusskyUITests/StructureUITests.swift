@@ -23,12 +23,12 @@ final class StructureUITests: XCTestCase {
         let second = words.element(boundBy: 1)
         XCTAssertTrue(second.waitForExistence(timeout: 5))
         second.press(forDuration: 0.8)
-        XCTAssertTrue(app.otherElements["structure-panel"].firstMatch.waitForExistence(timeout: 4)
-                      || app.staticTexts["structure-panel"].firstMatch.waitForExistence(timeout: 1)
-                      || app.descendants(matching: .any)["structure-panel"].firstMatch.waitForExistence(timeout: 1),
-                      "a long press opens the word's panel")
+        let panel = app.descendants(matching: .any)["structure-panel"].firstMatch
+        XCTAssertTrue(panel.waitForExistence(timeout: 4), "a long press opens the word's panel")
+        if !panel.isHittable { app.swipeUp() }  // a phone: the panel sits under the text, below the fold
         sleep(1)
         shoot(app, "structure-xray")
+        if !toggle.isHittable { app.swipeDown() }
 
         // Off: the text stays exactly where it was, bare.
         toggle.tap()
@@ -38,9 +38,9 @@ final class StructureUITests: XCTestCase {
 
         // The referent question under the passage.
         let probe = app.buttons["structure-probe"].firstMatch
-        var tries = 0
-        while !probe.exists && tries < 6 { app.swipeUp(); tries += 1 }
         XCTAssertTrue(probe.waitForExistence(timeout: 5), "the page asks who is meant")
+        var tries = 0
+        while !probe.isHittable && tries < 8 { app.swipeUp(); tries += 1 }
         sleep(1)
         shoot(app, "structure-question")
         let head = app.buttons["structure-head"].firstMatch
@@ -49,6 +49,19 @@ final class StructureUITests: XCTestCase {
             sleep(1)
             shoot(app, "structure-answered")
         }
+    }
+
+    /// The same layer over a human reading: the read-along page of a narrated text with «Структу́ра» on.
+    func testReadAlongWithStructure() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-qa-reset", "-qa-structure", "tolstoy-muravei-i-golubka", "-qa-narration", "tolstoy-muravei-i-golubka"]
+        app.launch()
+        XCTAssertTrue(app.buttons["narration-play"].firstMatch.waitForExistence(timeout: 20), "the read-along page opens")
+        let toggle = app.buttons["structure-toggle"].firstMatch
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5), "a narrated text offers the toggle too")
+        XCTAssertEqual(toggle.label, "Hide the structure")
+        sleep(2)
+        shoot(app, "structure-read-along")
     }
 
     private func shoot(_ app: XCUIApplication, _ name: String) {

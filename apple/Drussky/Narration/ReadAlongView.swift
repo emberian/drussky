@@ -75,7 +75,6 @@ struct ReadAlongView: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(listenFirst ? "Show the text" : "Listen first, text hidden")
-                if structure != nil, layer != nil { StructureToggle() }
             }
             VStack(alignment: .leading, spacing: 6) {
                 let map = mapping
@@ -92,8 +91,12 @@ struct ReadAlongView: View {
             .onChange(of: current) { _, now in
                 if let now, now > revealedUpTo { revealedUpTo = now }
             }
-            if let timings, let reader = timings.reader {
-                Text("Read by \(reader) · \(Int(timings.duration.rounded())) s").font(Theme.label(12)).foregroundStyle(Theme.muted)
+            HStack(alignment: .firstTextBaseline) {
+                if let timings, let reader = timings.reader {
+                    Text("Read by \(reader) · \(Int(timings.duration.rounded())) s").font(Theme.label(12)).foregroundStyle(Theme.muted)
+                }
+                Spacer(minLength: 0)
+                if structure != nil, layer != nil { StructureToggle() }
             }
         }
         .onAppear(perform: qaSeek)
