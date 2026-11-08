@@ -128,7 +128,7 @@ ROOTS = [
     R("мест", "мест мещ", "place", "ме'сто place, вме'сте together (in one place)."),
     R("сторон", "сторон стран", "side; country", "сторона' side, страна' country, стра'нный strange (from the other side)."),
     R("ин", "ин", "other", "ино'й other, иногда' sometimes, ина'че otherwise."),
-    R("кон", "кон", "end", "коне'ц end, коне'чный finite, бесконе'чный infinite, зако'н law, наконе'ц at last."),
+    R("кон", "кон конч", "end", "коне'ц end, коне'чный finite, бесконе'чный infinite, зако'н law, наконе'ц at last."),
     R("перед", "перед пред прежд", "front, before"),
     R("зад", "зад", "back, behind"),
     R("кол", "кол", "wheel, circle", "о'коло around, колесо' wheel, кольцо' ring."),
@@ -195,7 +195,7 @@ ROOTS = [
     R("пят", "пят", "five"), R("шест", "шест", "six"), R("сем", "сем седьм", "seven"),
     R("восем", "восем восьм", "eight"), R("девят", "девят девя", "nine"),
     R("десят", "десят дцать", "ten", "-дцать in оди'ннадцать … два'дцать is десять worn down: one-on-ten."),
-    R("сто", "сто сот", "hundred"),
+    R("сто", "сто сот ст", "hundred", "сто a hundred, две'сти two hundred (две + сти), со'тня a hundred of."),
     R("сорок", "сорок", "forty (a bundle of forty furs)"),
     R("рус", "рус", "Russian"),
     R("англ", "англ", "English"),
@@ -211,6 +211,34 @@ ROOTS = [
     R("син", "син", "blue"),
     R("жд", "жд жид", "wait"),
     R("гул", "гул", "stroll"),
+    # units 24-30
+    R("род", "род рожд", "birth, kin", "роди'ться to be born, роди'тели parents, наро'д a people, роди'тельный паде'ж the genitive (the case of origin)."),
+    R("вин", "вин", "guilt; cause", "вина' guilt, вини'тельный паде'ж the accusative (the case of the one blamed, a calque of accusativus)."),
+    R("твор", "твор", "create, make", "твори'ть to create, тво'рчество creative work, твори'тельный паде'ж the instrumental (the case of the maker's tool)."),
+    R("лож", "лож леж лаг лог", "lie, put", "лежа'ть to lie, положи'ть to put, предло'г a preposition (what is put before), принадлежа'ть to belong."),
+    R("реч", "реч рек рок", "speak", "речь speech, уро'к a lesson (what was agreed, у + рек), противоре'чие contradiction (speaking against)."),
+    R("сред", "сред серед", "middle", "среда' Wednesday (the middle day), середи'на the middle, сре'дний average, среди' among."),
+    R("втор", "втор", "second", "второ'й second, вто'рник Tuesday (the second day), повтори'ть to repeat."),
+    R("крес", "крес", "rise, kindle", "воскресе'нье Sunday (the day of resurrection), воскре'снуть to rise again."),
+    R("дей", "дей дея", "do, act", "де'йствие an action, де'йствительность reality (what acts), де'йствительно indeed."),
+    R("свобод", "свобод", "free"),
+    R("вис", "вис вес", "hang; weigh", "висе'ть to hang, вес weight, зави'сеть to depend (hang on), незави'симо independently."),
+    R("яв", "яв явл", "appear, show", "явля'ться to be (formally: to appear as), явле'ние a phenomenon, я'вно obviously."),
+    R("стекл", "стекл", "glass"),
+    R("войн", "войн воев", "war", "война' war, во'ин a warrior."),
+    R("труд", "труд", "labour, toil", "труд labour, тру'дный difficult (taking toil), тру'дно it is hard."),
+    R("важ", "важ", "weight, importance", "ва'жный important, ва'жно it matters."),
+    R("быстр", "быстр", "fast"),
+    R("дешев", "дешев дешёв", "cheap"),
+    R("дорог2", "дорог", "dear, expensive", "дорого'й dear or expensive; spelled like доро'га road, a different root."),
+    R("глас", "глас голос", "voice", "го'лос voice, согла'сен agreed (of one voice), гла'сный a vowel."),
+    R("нрав", "нрав", "temper, liking", "нрав temper, нра'виться to be liked, нра'вственность morality."),
+    R("зов", "зов зыв зв", "call", "звать to call, назва'ние a name, называ'ться to be called."),
+    R("реш", "реш", "decide, solve", "реши'ть to decide or solve, реше'ние a decision, зада'ча реша'ется the problem is solved."),
+    R("вар", "вар", "boil, cook", "вари'ть to boil, самова'р samovar (self-boiler)."),
+    R("кры", "кры кров", "cover", "крыть to cover, откры'ть to open (uncover), кры'ша roof, кров shelter."),
+    R("руб", "руб рубл", "chop", "руби'ть to chop, рубль a rouble (a chopped piece of silver)."),
+    R("пуст", "пуст", "empty; let go", "пусто'й empty, пусть let (from пусти'ть, to let go), пусты'ня desert."),
 ]
 ROOT_IDS = {r["id"] for r in ROOTS}
 
@@ -240,7 +268,7 @@ PREFIXES = [
     P("воз", "воз вз вс", "up", "во'здух взять"),
     P("между", "между меж", "between, inter-", "междунаро'дный"),
     P("после", "после", "after", "после'дний"),
-    P("полу", "полу", "half, semi-", "полуо'стров"),
+    P("полу", "полу пол", "half, semi-", "полуо'стров полчаса'"),
     P("само", "само", "self", "самолёт"),
     P("ни", "ни", "not any", "никогда' ничего'"),
 ]
@@ -702,6 +730,122 @@ for lemma, forms in [
     ("Ми'ра", "мира"), ("хоро'ший", "хорошая"), ("мать", "матери"), ("лев", "лев"),
 ]:
     head = lemma.replace("'", "").lower()
+    for f in forms.split():
+        FORMS.setdefault(f, head)
+
+# --- units 24-30: cases, aspect, numbers, description, reading machinery, mathematics, philosophy ---
+# grammar words
+M("[пад]|е'ж", "noun", "case (grammatical)", base="падать", note="A calque of Latin casus, a falling: the forms a noun falls into.")
+M("[род]|и'|тельн|ый", "adj", "genitive (case); parental", example=("Роди'тельный паде'ж отвеча'ет на вопро'с чего'?", "The genitive answers the question of what?"))
+M("[да']|тельн|ый", "adj", "dative (case)", base="дать", example=("Да'тельный паде'ж: кому'?", "The dative case: to whom?"))
+M("[вин]|и'|тельн|ый", "adj", "accusative (case)", example=("Вини'тельный паде'ж: кого'? что?", "The accusative case: whom? what?"))
+M("[твор]|и'|тельн|ый", "adj", "instrumental (case)", example=("Твори'тельный паде'ж: кем? чем?", "The instrumental case: by whom? with what?"))
+M("пред|[ло'ж]|н|ый", "adj", "prepositional (case)", example=("Предло'жный паде'ж: о ком? о чём?", "The prepositional case: about whom? about what?"))
+M("при|над|[леж]|а'|ть", "verb", "to belong", example=("Число' принадлежи'т мно'жеству.", "The number belongs to the set."))
+M("пред|по|[лож]|и'|ть", "verb", "to suppose", example=("Предполо'жим, что э'то непра'вда.", "Suppose this is not true."))
+M("о|пре|[дел]|я'|ть", "verb", "to determine, to define", base="определение", family="дели", example=("Бытие' определя'ет созна'ние.", "Being determines consciousness."))
+M("у|[ро'к]", "noun", "lesson", family="реч", example=("Уро'к начина'ется в де'вять.", "The lesson begins at nine."))
+M("проти'во|[реч]|и|е", "noun", "contradiction", example=("Получа'ем противоре'чие.", "We obtain a contradiction."))
+M("[сле'д]|ств|ие", "noun", "corollary, consequence", base="следовать", example=("Сле'дствие тео'ремы.", "A corollary of the theorem."))
+M("про|из|[вед]|е'|ние", "noun", "product (of multiplication); a work", example=("Произведе'ние двух чётных чи'сел чётное.", "The product of two even numbers is even."))
+M("[един]|и'ц|а", "noun", "one (the number); a unit", base="единый", family="один", example=("Едини'ца — не просто'е число'.", "One is not a prime number."))
+M("[еди'н]|ственн|ый", "adj", "the only, unique", base="единый", family="один", example=("Два — еди'нственное чётное просто'е число'.", "Two is the only even prime."))
+M("[пуст]|о'й", "adj", "empty", example=("Пусто'е мно'жество.", "The empty set."))
+M("[пуст]|ь", "part", "let (in a proof)", base="пустой", note="From пусти'ть, to let go: let it be so.")
+M("[ма'л]|о", "adv", "few, little", base="маленький", example=("У меня' ма'ло вре'мени.", "I have little time."))
+M("ме'нее", "adv", "less (formal)", note="Тем не ме'нее, nevertheless.")
+M("одна'ко", "conj", "however")
+M("по|э'тому", "adv", "therefore, so", note="По + э'тому: by this.")
+M("ита'к", "conj", "thus, so then", note="И + так.")
+M("от|ку'да", "adv", "from where", base="куда")
+M("на|при|[ме'р]", "adv", "for example", base="пример")
+# verbs
+M("[нра'в]|и|ть|ся", "verb", "to please, to be liked", example=("Мне нра'вится матема'тика.", "I like mathematics."))
+M("на|[зыв]|а'|ть|ся", "verb", "to be called", example=("Как э'то называ'ется?", "What is this called?"))
+M("на|[ход]|и'|ть|ся", "verb", "to be located", base="ходить", example=("Где нахо'дится ста'нция?", "Where is the station located?"))
+M("на|[чин]|а'|ть|ся", "verb", "to begin (itself)", base="начать", family="ча", example=("Уро'к начина'ется.", "The lesson is beginning."))
+M("[конч]|а'|ть|ся", "verb", "to end (itself)", base="конец", family="кон", example=("Фильм конча'ется.", "The film is ending."))
+M("[уч]|и'|ть|ся", "verb", "to study, to learn", base="учить", example=("Я учу'сь чита'ть по-ру'сски.", "I am learning to read Russian."))
+M("[явл]|я'|ть|ся", "verb", "to be (formal: to appear as)", example=("Челове'к явля'ется мы'слящим существо'м.", "A human being is a thinking creature."))
+M("[реш]|а'|ть", "verb", "to decide; to solve", example=("Кто реша'ет, что ну'жно?", "Who decides what is needed?"))
+M("[вар]|и'|ть", "verb", "to boil, to cook", example=("Вари'те де'сять мину'т.", "Cook for ten minutes."))
+M("от|[кры']|ть", "verb", "to open (uncover)", example=("Откры'й окно'.", "Open the window."))
+M("от|[кры']|т|ый", "adj", "open, opened", base="открыть", example=("Откры'тое окно'.", "An open window."))
+M("[сто']|и|ть", "verb", "to cost", base="стоять", family="ста", example=("Ско'лько э'то сто'ит?", "How much does this cost?"))
+M("подо|[жд]|а'|ть", "verb", "to wait a bit", base="ждать", example=("Подожди' меня'!", "Wait for me!"))
+# adjectives and adverbs
+M("интере'с|н|ый", "adj", "interesting", loan="Latin interesse, to be between (through French intérêt)")
+M("[ва'ж]|н|ый", "adj", "important", example=("Э'то ва'жный вопро'с.", "This is an important question."))
+M("[тру'д]|н|ый", "adj", "difficult", example=("Э'то тру'дная зада'ча.", "This is a difficult problem."))
+M("[бы'стр]|ый", "adj", "fast, quick", example=("Бы'стрый отве'т.", "A quick answer."))
+M("[дешёв]|ый", "adj", "cheap", example=("Хлеб дешёвый.", "The bread is cheap."))
+M("[дорог]|о'й", "adj", "dear; expensive", family="дорог2", example=("Кни'ги дороги'е.", "The books are expensive."))
+M("[прав]", "adj", "right, correct (short form)", base="правда", example=("Ты прав.", "You are right."))
+M("со|[гла'с]|н|ый", "adj", "agreeing (short form: согла'сен)", example=("Я согла'сен.", "I agree."))
+M("[свобо'д]|н|ый", "adj", "free", base="свобода")
+M("[втор]|о'й", "num", "second", example=("Второ'й уро'к.", "The second lesson."))
+M("[тр]|е'т|ий", "num", "third", family="тр", example=("Тре'тье ма'я.", "The third of May."))
+# nouns
+M("[мышл]|е'|ние", "noun", "thinking (as a faculty)", base="мыслить", family="мысл")
+M("с|[мысл]", "noun", "meaning, sense", base="мысль", example=("В чём смысл жи'зни?", "What is the meaning of life?"))
+M("со|[зна']|ние", "noun", "consciousness", base="знание", example=("Бытие' определя'ет созна'ние.", "Being determines consciousness."))
+M("[бы]|ти|е'", "noun", "being, existence", base="быть")
+M("[сущ]|еств|о'", "noun", "creature, being", base="существовать")
+M("[свобо'д]|а", "noun", "freedom")
+M("[крас]|от|а'", "noun", "beauty", base="красивый", example=("Мир спасёт красота'.", "Beauty will save the world."))
+M("воз|[мо'ж]|н|ость", "noun", "possibility", base="можно", family="мог")
+M("не|об|[ход]|и'м|ость", "noun", "necessity", base="ходить", note="What cannot be gone around.")
+M("[де'й]|ств|и|тельн|ость", "noun", "reality, actuality")
+M("[де'й]|ств|и|тельн|о", "adv", "indeed, really", base="действительность")
+M("не|за|[ви'с]|им|о", "adv", "independently", note="Not hanging on anything.")
+M("[стекл]|о'", "noun", "glass", example=("Го'род из стекла'.", "A city of glass."))
+M("[войн]|а'", "noun", "war")
+M("[ру'ч]|к|а", "noun", "pen; little hand", base="рука", family="рук")
+M("[рубл]|ь", "noun", "rouble")
+M("пол|[час]|а'", "noun", "half an hour", base="час")
+M("по|не|[де'л]|ьник", "noun", "Monday", base="неделя", family="дел", note="The day after the week's rest.")
+M("[вто'р]|ник", "noun", "Tuesday", base="второй")
+M("[сред]|а'", "noun", "Wednesday; environment", note="The middle day.")
+M("[четве'р]|г", "noun", "Thursday", base="четыре", family="четыр")
+M("[пя'т]|ниц|а", "noun", "Friday", base="пять", family="пят")
+M("суббо'та", "noun", "Saturday", loan="Hebrew shabbat, through Greek")
+M("вос|[крес]|е'нь|е", "noun", "Sunday; resurrection")
+M("[дв]|е'|[ст]|и", "num", "two hundred", family="дв")
+M("[три']|[ст]|а", "num", "three hundred", family="тр")
+for w, en, src in [("янва'рь", "January", "Latin Ianuarius"), ("февра'ль", "February", "Latin Februarius"), ("март", "March", "Latin Martius"),
+                   ("апре'ль", "April", "Latin Aprilis"), ("май", "May", "Latin Maius"), ("ию'нь", "June", "Latin Iunius"), ("ию'ль", "July", "Latin Iulius"),
+                   ("а'вгуст", "August", "Latin Augustus"), ("сентя'брь", "September", "Latin September"), ("октя'брь", "October", "Latin October"),
+                   ("ноя'брь", "November", "Latin November"), ("дека'брь", "December", "Latin December"),
+                   ("ле'мма", "lemma", "Greek λῆμμα, a thing taken"), ("ми'нус", "minus", "Latin minus, less"), ("литр", "litre", "French litre"),
+                   ("килогра'мм", "kilogram", "French kilogramme"), ("меню'", "menu", "French menu"), ("фильм", "film", "English film"),
+                   ("инжене'р", "engineer", "French ingénieur, through German"), ("буты'лка", "bottle", "Polish butelka, from French bouteille"),
+                   ("фу'нкция", "function", "Latin functio, a performing")]:
+    M(w, "noun", en, loan=src)
+
+for lemma, forms in [
+    ("брат", "брате брату братом"), ("сестра'", "сестре сестрой сестры"), ("го'род", "города"), ("обе'д", "обеда"), ("кни'га", "книг"),
+    ("рабо'та", "работы работе"), ("вре'мя", "времени"), ("стол", "стола столов"), ("окно'", "окон"), ("я", "мной"), ("ты", "тобой"),
+    ("писа'ть", "пишу писал"), ("написа'ть", "написал написала написанное напишу напиши"), ("знать", "знал"), ("ждать", "ждали"),
+    ("уви'деть", "увидели увидит увидите"), ("узна'ть", "узнаем"), ("поду'мать", "подумала подумаю"), ("поня'ть", "понял поймёшь"),
+    ("хоте'ть", "хочет"), ("сде'лать", "сделает"), ("сказа'ть", "сказал скажи скажите скажу"), ("говори'ть", "говори"), ("слу'шать", "слушай"),
+    ("смотре'ть", "смотри смотрел"), ("чита'ть", "читай читая читающий"), ("прочита'ть", "прочитав прочитавший"), ("молча'ть", "молчала"),
+    ("понима'ть", "понимает"), ("жить", "живущий"), ("учи'тель", "учителем"), ("писа'тель", "писателем"), ("како'й", "какое"),
+    ("тот", "та те тем"), ("кото'рый", "которая которой котором которые"), ("са'мый", "самая"), ("зада'ча", "задачи"), ("час", "часа часов"),
+    ("мину'та", "минут"), ("у'тро", "утра"), ("ве'чер", "вечера"), ("май", "мая"), ("пе'рвый", "первое первых"), ("второ'й", "второе вторых"),
+    ("тре'тий", "третье"), ("пя'тница", "пятницу"), ("суббо'та", "субботу"), ("рубль", "рубля рублей"), ("сто'ить", "стоит стоят"),
+    ("ру'чка", "ручкой"), ("свобо'дный", "свободным"), ("существо'", "существом"), ("мы'слить", "мыслящим"), ("мно'жество", "множеству"),
+    ("чётный", "чётным"), ("просто'й", "простых"), ("пять", "пяти"), ("три", "трёх"), ("четы'ре", "четырём"), ("семь", "семи"),
+    ("то'чка", "точке"), ("фу'нкция", "функции"), ("нра'виться", "нравится нравятся"), ("называ'ться", "называется"), ("находи'ться", "находится"),
+    ("начина'ться", "начинается"), ("конча'ться", "кончается"), ("учи'ться", "учусь"), ("явля'ться", "является"), ("реша'ть", "решает"),
+    ("сле'довать", "следует"), ("получа'ть", "получаем"), ("принадлежа'ть", "принадлежит"), ("определя'ть", "определяет"), ("предположи'ть", "предположим"),
+    ("спасти'", "спасёт"), ("вари'ть", "варите"), ("откры'тый", "открыто открытое"), ("стекло'", "стекла"), ("война'", "войны"),
+    ("дорого'й", "дорого"), ("дешёвый", "дёшево"), ("бы'стрый", "быстро"), ("ва'жный", "важно"), ("тру'дный", "трудно труднее"),
+    ("интере'сный", "интересно интереснее интересная"), ("хоро'ший", "лучше"), ("плохо'й", "хуже"), ("ма'ленький", "меньше"), ("ста'рый", "старше"),
+    ("молодо'й", "моложе"), ("до'лжен", "должна"), ("прав", "права"), ("согла'сный", "согласен согласна"), ("ну'жный", "нужен нужна"),
+    ("ино'й", "иначе"), ("бесконе'чный", "бесконечно"), ("коне'чный", "конечное"), ("еди'нственный", "единственное"), ("пусто'й", "пустое"),
+    ("подожда'ть", "подожди"), ("мышле'ние", "мышление"),
+]:
+    head = lemma.replace("'", "").replace("|", "").lower()
     for f in forms.split():
         FORMS.setdefault(f, head)
 

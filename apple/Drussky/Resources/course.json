@@ -2107,8 +2107,12 @@
    "en": "with you (one person)"
   },
   {
-   "ru": "руко́й",
-   "en": "by hand"
+   "ru": "ру́чка",
+   "en": "pen"
+  },
+  {
+   "ru": "ру́чкой",
+   "en": "with a pen (instrumental)"
   },
   {
    "ru": "стать",
@@ -2133,6 +2137,10 @@
   {
    "ru": "на стол",
    "en": "onto the table"
+  },
+  {
+   "ru": "на рабо́те",
+   "en": "at work"
   },
   {
    "ru": "о",
@@ -2251,7 +2259,7 @@
    "en": "I will write (and finish)"
   },
   {
-   "ru": "скажу́",
+   "ru": "я скажу́",
    "en": "I will say"
   },
   {
@@ -2447,6 +2455,54 @@
    "en": "the first of May"
   },
   {
+   "ru": "янва́рь",
+   "en": "January"
+  },
+  {
+   "ru": "февра́ль",
+   "en": "February"
+  },
+  {
+   "ru": "март",
+   "en": "March"
+  },
+  {
+   "ru": "апре́ль",
+   "en": "April"
+  },
+  {
+   "ru": "май",
+   "en": "May"
+  },
+  {
+   "ru": "ию́нь",
+   "en": "June"
+  },
+  {
+   "ru": "ию́ль",
+   "en": "July"
+  },
+  {
+   "ru": "а́вгуст",
+   "en": "August"
+  },
+  {
+   "ru": "сентя́брь",
+   "en": "September"
+  },
+  {
+   "ru": "октя́брь",
+   "en": "October"
+  },
+  {
+   "ru": "ноя́брь",
+   "en": "November"
+  },
+  {
+   "ru": "дека́брь",
+   "en": "December"
+  },
+  {
    "ru": "второ́е",
    "en": "the second (date)"
   },
@@ -2483,7 +2539,7 @@
    "en": "expensive; dearly"
   },
   {
-   "ru": "де́шево",
+   "ru": "дёшево",
    "en": "cheap, cheaply"
   },
   {
@@ -2591,11 +2647,11 @@
    "en": "right, correct (a woman is)"
   },
   {
-   "ru": "согла́сен",
+   "ru": "я согла́сен",
    "en": "I agree (a man speaking)"
   },
   {
-   "ru": "согла́сна",
+   "ru": "я согла́сна",
    "en": "I agree (a woman speaking)"
   },
   {
@@ -2879,7 +2935,11 @@
    "en": "even (after называется)"
   },
   {
-   "ru": "е́сли и то́лько е́сли",
+   "ru": "едини́ца",
+   "en": "one (the number); a unit"
+  },
+  {
+   "ru": "тогда́ и то́лько тогда́, когда́",
    "en": "if and only if"
   },
   {
@@ -2935,8 +2995,16 @@
    "en": "unique, the only (neuter)"
   },
   {
-   "ru": "ра́вно",
-   "en": "equals"
+   "ru": "равно́",
+   "en": "equals (the number after it goes into the dative)"
+  },
+  {
+   "ru": "четырём",
+   "en": "four (dative, after равно)"
+  },
+  {
+   "ru": "семи́",
+   "en": "seven (dative, after равно)"
   },
   {
    "ru": "ми́нус",
@@ -11040,16 +11108,8 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "The genitive answers чего́? and кого́?. Нет, у, из and по́сле take it, and so do мно́го and ма́ло: a masculine noun adds -а, a feminine -а becomes -ы or -и, and a plural often loses its ending altogether.",
+       "text": "The genitive answers чего́? and кого́?. Нет, у, из and по́сле take it, and so do мно́го and ма́ло: a masculine noun adds -а, a feminine -а becomes -ы or -и, and a plural often loses its ending altogether. Вре́мя, time, is irregular: learn нет вре́мени as one piece.",
        "examples": [
-        {
-         "ru": "вре́мя",
-         "en": "time"
-        },
-        {
-         "ru": "нет вре́мени",
-         "en": "there is no time"
-        },
         {
          "ru": "у бра́та",
          "en": "at my brother's; my brother has"
@@ -11073,6 +11133,14 @@
         {
          "ru": "мно́го рабо́ты",
          "en": "a lot of work"
+        },
+        {
+         "ru": "вре́мя",
+         "en": "time"
+        },
+        {
+         "ru": "нет вре́мени",
+         "en": "there is no time"
         },
         {
          "ru": "ма́ло вре́мени",
@@ -11108,10 +11176,10 @@
       },
       {
        "kind": "fill",
-       "before": "Я из ",
+       "before": "Я ",
        "after": ".",
        "hint": "I am from the city.",
-       "answer": "го́рода"
+       "answer": "из го́рода"
       },
       {
        "kind": "dictation",
@@ -11280,8 +11348,12 @@
          "en": "with you"
         },
         {
-         "ru": "Я пишу́ руко́й.",
-         "en": "I write by hand."
+         "ru": "ру́чка",
+         "en": "pen"
+        },
+        {
+         "ru": "Я пишу́ ру́чкой.",
+         "en": "I write with a pen."
         }
        ]
       },
@@ -11305,7 +11377,7 @@
       },
       {
        "kind": "dictation",
-       "text": "Я пишу́ руко́й."
+       "text": "Я пишу́ ру́чкой."
       },
       {
        "kind": "translate",
@@ -11337,7 +11409,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Я пишу́ письмо́ руко́й. Со мной брат, с тобо́й сестра́."
+       "text": "Э́то моя́ ру́чка. Я пишу́ письмо́ ру́чкой. Со мной брат, с тобо́й сестра́."
       },
       {
        "kind": "read_meaning",
@@ -11362,8 +11434,16 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "В and на take two cases: где? takes the prepositional (-е), куда́? the accusative, which for most nouns is the plain form. О, about, also takes the prepositional: о кни́ге, о тебе́.",
+       "text": "В and на take two cases: где? takes the prepositional (-е), куда́? the accusative: plain for masculine and neuter things, -у for feminine ones (в го́род, на рабо́ту). О, about, also takes the prepositional: о кни́ге, о тебе́.",
        "examples": [
+        {
+         "ru": "Я на рабо́те. Я иду́ на рабо́ту.",
+         "en": "I am at work. I am going to work."
+        },
+        {
+         "ru": "на рабо́те",
+         "en": "at work"
+        },
         {
          "ru": "Кот на столе́. Кот идёт на стол.",
          "en": "The cat is on the table. The cat is getting onto the table."
@@ -11400,11 +11480,11 @@
       },
       {
        "kind": "listen_pick",
-       "say": "на стол",
+       "say": "на рабо́ту",
        "options": [
-        "на стол",
-        "на столе́",
-        "стол"
+        "на рабо́ту",
+        "на рабо́те",
+        "рабо́та"
        ]
       },
       {
@@ -11419,10 +11499,10 @@
       },
       {
        "kind": "fill",
-       "before": "Кни́га на ",
+       "before": "Кни́га ",
        "after": ".",
        "hint": "The book is on the table.",
-       "answer": "столе́"
+       "answer": "на столе́"
       },
       {
        "kind": "fill",
@@ -11437,7 +11517,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Где кот? На столе́. Куда́ идёт кот? На стол. Я ду́маю о бра́те."
+       "text": "Где ты? На рабо́те. Куда́ ты идёшь? На рабо́ту. Кот идёт на стол. Я ду́маю о бра́те."
       },
       {
        "kind": "read_meaning",
@@ -11635,9 +11715,9 @@
       },
       {
        "kind": "fill",
-       "before": "Я ви́жу, что ты хо́чешь ",
+       "before": "Я понима́ю, что ты хо́чешь ",
        "after": ".",
-       "hint": "I see what you want to say.",
+       "hint": "I understand what you want to say.",
        "answer": "сказа́ть"
       },
       {
@@ -11742,7 +11822,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Я поду́мал и по́нял. Она́ говори́ла и сказа́ла."
+       "text": "Я поду́мал и по́нял. Она́ до́лго говори́ла и наконе́ц сказа́ла: «Да»."
       },
       {
        "kind": "read_meaning",
@@ -11820,7 +11900,7 @@
       {
        "kind": "translate",
        "en": "I will say",
-       "answer": "скажу́"
+       "answer": "я скажу́"
       },
       {
        "kind": "translate",
@@ -11928,12 +12008,12 @@
       },
       {
        "kind": "translate",
-       "en": "Wait!",
+       "en": "Wait! (to one person, informal)",
        "answer": "подожди́"
       },
       {
        "kind": "translate",
-       "en": "Look!",
+       "en": "Look! (to one person, informal)",
        "answer": "смотри́"
       },
       {
@@ -12038,17 +12118,17 @@
       },
       {
        "kind": "fill",
-       "before": "У меня́ две ",
+       "before": "У меня́ ",
        "after": ".",
        "hint": "I have two books.",
-       "answer": "кни́ги"
+       "answer": "две кни́ги"
       },
       {
        "kind": "fill",
-       "before": "В до́ме пять ",
+       "before": "В до́ме ",
        "after": ".",
        "hint": "There are five windows in the house.",
-       "answer": "о́кон"
+       "answer": "пять о́кон"
       },
       {
        "kind": "dictation",
@@ -12240,6 +12320,14 @@
         {
          "ru": "тре́тье",
          "en": "the third (date)"
+        },
+        {
+         "ru": "янва́рь, февра́ль, март, апре́ль, май, ию́нь",
+         "en": "January, February, March, April, May, June"
+        },
+        {
+         "ru": "ию́ль, а́вгуст, сентя́брь, октя́брь, ноя́брь, дека́брь",
+         "en": "July, August, September, October, November, December"
         }
        ]
       },
@@ -12259,8 +12347,8 @@
       },
       {
        "kind": "translate",
-       "en": "Sunday",
-       "answer": "воскресе́нье"
+       "en": "May",
+       "answer": "май"
       },
       {
        "kind": "fill",
@@ -12271,10 +12359,10 @@
       },
       {
        "kind": "fill",
-       "before": "Мы е́дем в го́род в ",
+       "before": "Мы е́дем в го́род ",
        "after": ".",
        "hint": "We're going to the city on Saturday.",
-       "answer": "суббо́ту"
+       "answer": "в суббо́ту"
       },
       {
        "kind": "dictation",
@@ -12282,7 +12370,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Како́й сего́дня день? Понеде́льник. Понеде́льник, вто́рник, среда́, четве́рг, пя́тница, суббо́та, воскресе́нье. Како́е сего́дня число́? Пе́рвое ма́я."
+       "text": "Како́й сего́дня день? Понеде́льник. Понеде́льник, вто́рник, среда́, четве́рг, пя́тница, суббо́та, воскресе́нье. Янва́рь, февра́ль, март, апре́ль, май, ию́нь, ию́ль, а́вгуст, сентя́брь, октя́брь, ноя́брь, дека́брь. Како́е сего́дня число́? Пе́рвое ма́я, второ́е, тре́тье."
       },
       {
        "kind": "read_meaning",
@@ -12296,7 +12384,7 @@
       },
       {
        "kind": "copy",
-       "text": "пе́рвое, второ́е, тре́тье",
+       "text": "ма́я, ию́ня, сентября́",
        "times": 1
       },
       {
@@ -12335,7 +12423,7 @@
          "en": "The books are expensive."
         },
         {
-         "ru": "де́шево",
+         "ru": "дёшево",
          "en": "cheap, cheaply"
         },
         {
@@ -12391,17 +12479,17 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Ско́лько сто́ит литр воды́? Два́дцать рубле́й. Э́то де́шево. А кни́ги сто́ят до́рого."
+       "text": "Ско́лько сто́ит литр воды́? Два́дцать рубле́й. Э́то дёшево. А кни́ги сто́ят до́рого."
       },
       {
        "kind": "read_meaning",
-       "text": "Кни́ги сто́ят до́рого, а хлеб — де́шево.",
+       "text": "Кни́ги сто́ят до́рого, а хлеб — дёшево.",
        "options": [
+        "Books are expensive, but bread is cheap.",
         "Books are cheap, but bread is expensive.",
-        "Books and bread cost the same.",
-        "Books are expensive, but bread is cheap."
+        "Books and bread cost the same."
        ],
-       "answer": 2
+       "answer": 0
       },
       {
        "kind": "copy",
@@ -12434,10 +12522,11 @@
       },
       {
        "kind": "passage",
-       "text": "Ка́ша. Возьми́те молоко́ и соль. Нале́йте молоко́ в кастрю́лю. Вари́те де́сять мину́т. Пото́м доба́вьте са́хар. Прия́тного аппети́та!",
-       "en": "Porridge. Take milk and salt. Pour the milk into a saucepan. Cook for ten minutes. Then add sugar. Enjoy your meal!",
+       "text": "Ка́ша. Возьми́те рис, молоко́ и соль. Нале́йте молоко́ в кастрю́лю. Вари́те де́сять мину́т. Пото́м доба́вьте са́хар. Прия́тного аппети́та!",
+       "en": "Porridge. Take rice, milk and salt. Pour the milk into a saucepan. Cook for ten minutes. Then add sugar. Enjoy your meal!",
        "glosses": {
         "возьмите": "take (polite imperative)",
+        "рис": "rice",
         "налейте": "pour (polite imperative)",
         "кастрюлю": "saucepan (into the saucepan)",
         "варите": "cook, boil (polite imperative)",
@@ -12459,10 +12548,10 @@
       },
       {
        "kind": "fill",
-       "before": "Вари́те де́сять ",
+       "before": "Вари́те ",
        "after": ".",
        "hint": "Cook for ten minutes.",
-       "answer": "мину́т"
+       "answer": "де́сять мину́т"
       },
       {
        "kind": "translate",
@@ -12620,7 +12709,7 @@
     {
      "id": "u27-p2",
      "title": "Short forms: прав, ну́жен, до́лжен",
-     "intro": "A handful of adjectives have a short form used only to say what someone is; adverbs end in -о.",
+     "intro": "Adjectives have a short form used only as a predicate; here are the ones you will hear most. Adverbs end in -о.",
      "exercises": [
       {
        "kind": "explain",
@@ -12691,7 +12780,7 @@
       {
        "kind": "translate",
        "en": "I agree (a man speaking)",
-       "answer": "согла́сен"
+       "answer": "я согла́сен"
       },
       {
        "kind": "translate",
@@ -12909,10 +12998,10 @@
       },
       {
        "kind": "fill",
-       "before": "Э́то го́род, в ",
+       "before": "Э́то го́род, ",
        "after": " живёт мой брат.",
        "hint": "This is the city where my brother lives.",
-       "answer": "кото́ром"
+       "answer": "в кото́ром"
       },
       {
        "kind": "dictation",
@@ -13170,31 +13259,23 @@
        ]
       },
       {
-       "kind": "read_meaning",
-       "text": "Э́то письмо́, напи́санное бра́том.",
+       "kind": "listen_pick",
+       "say": "чита́я",
        "options": [
-        "This is a letter written by my brother.",
-        "This is a letter my brother is writing.",
-        "This is a letter to my brother."
+        "чита́я",
+        "чита́ющий",
+        "прочита́в"
+       ]
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Чита́я письмо́, она́ молча́ла.",
+       "options": [
+        "Having read the letter, she spoke.",
+        "While reading the letter, she was silent.",
+        "She was reading a letter about silence."
        ],
-       "answer": 0
-      },
-      {
-       "kind": "translate",
-       "en": "while reading",
-       "answer": "чита́я"
-      },
-      {
-       "kind": "translate",
-       "en": "having read (to the end)",
-       "answer": "прочита́в"
-      },
-      {
-       "kind": "fill",
-       "before": "Ро́бот, ",
-       "after": " на ста́нции, ви́дит Зе́млю.",
-       "hint": "The robot living on the station sees the Earth.",
-       "answer": "живу́щий"
+       "answer": 1
       },
       {
        "kind": "fill",
@@ -13204,16 +13285,28 @@
        "answer": "откры́то"
       },
       {
+       "kind": "fill",
+       "before": "Э́то письмо́, напи́санное ",
+       "after": ".",
+       "hint": "This is a letter written by my brother.",
+       "answer": "бра́том"
+      },
+      {
        "kind": "dictation",
-       "text": "Прочита́в кни́гу, я поду́мала."
+       "text": "Э́то письмо́ написа́л брат."
       },
       {
        "kind": "read_aloud",
-       "text": "Чита́ющий, прочита́вший, напи́санный, откры́тый. Чита́я, она́ молча́ла."
+       "text": "Чита́ющий, прочита́вший, живу́щий. Напи́санный, откры́тый. Чита́я, она́ молча́ла. Прочита́в, она́ поду́мала."
       },
       {
        "kind": "copy",
        "text": "напи́санное письмо́, откры́тое окно́",
+       "times": 1
+      },
+      {
+       "kind": "copy",
+       "text": "чита́ющий, прочита́вший, чита́я, прочита́в",
        "times": 1
       },
       {
@@ -13293,10 +13386,10 @@
       },
       {
        "kind": "fill",
-       "before": "Я ",
-       "after": " сказа́л: э́то факт!",
+       "before": "Я же ",
+       "after": ": э́то факт!",
        "hint": "I did say so: it's a fact!",
-       "answer": "же"
+       "answer": "сказа́л"
       },
       {
        "kind": "dictation",
@@ -13304,7 +13397,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Кни́гу чита́ет ма́ма. Ма́ма чита́ет кни́гу. Чита́ет ма́ма кни́гу!"
+       "text": "Кни́гу чита́ет ма́ма. Ма́ма чита́ет кни́гу. Ма́ма кни́гу чита́ет."
       },
       {
        "kind": "read_meaning",
@@ -13396,7 +13489,7 @@
        "kind": "fill",
        "before": "",
        "after": " ждёт, уви́дит.",
-       "hint": "The one who waits will see.",
+       "hint": "The one who waits will see (two words: that one, who).",
        "answer": "Тот, кто"
       },
       {
@@ -13549,7 +13642,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "A definition has one shape: X называ́ется Y, е́сли… . Мно́жество is a set, элеме́нт an element, принадлежи́т is belongs to; пусто́е мно́жество is the empty set. Е́сли и то́лько е́сли is if and only if.",
+       "text": "A definition has one shape: X называ́ется Y, е́сли… . Мно́жество is a set, элеме́нт an element, принадлежи́т is belongs to; пусто́е мно́жество is the empty set. If and only if is тогда́ и то́лько тогда́, когда́ (the calque е́сли и то́лько е́сли is also heard).",
        "examples": [
         {
          "ru": "определе́ние",
@@ -13572,11 +13665,15 @@
          "en": "A number is called even if it is divisible by two."
         },
         {
-         "ru": "Число́ называ́ется просты́м, е́сли оно́ де́лится то́лько на оди́н и на себя́.",
+         "ru": "едини́ца",
+         "en": "one (the number); a unit"
+        },
+        {
+         "ru": "Число́ называ́ется просты́м, е́сли оно́ де́лится то́лько на едини́цу и на само́ себя́.",
          "en": "A number is called prime if it is divisible only by one and by itself."
         },
         {
-         "ru": "е́сли и то́лько е́сли",
+         "ru": "тогда́ и то́лько тогда́, когда́",
          "en": "if and only if"
         },
         {
@@ -13624,7 +13721,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Определе́ние. Число́ называ́ется просты́м, е́сли оно́ де́лится то́лько на оди́н и на себя́."
+       "text": "Определе́ние. Число́ называ́ется просты́м, е́сли оно́ де́лится то́лько на едини́цу и на само́ себя́."
       },
       {
        "kind": "read_meaning",
@@ -13638,7 +13735,7 @@
       },
       {
        "kind": "copy",
-       "text": "определе́ние, мно́жество, е́сли и то́лько е́сли",
+       "text": "определе́ние, едини́ца, тогда́ и то́лько тогда́, когда́",
        "times": 1
       },
       {
@@ -13762,7 +13859,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Для всех and для любо́го say for all; существу́ет says there exists; еди́нственный is unique. Ра́вно is equals, бо́льше and ме́ньше are greater than and less than (with the genitive), and зна́чение фу́нкции в то́чке is the value of the function at a point.",
+       "text": "Для всех and для любо́го say for all; существу́ет says there exists; еди́нственный is unique. Равно́ is equals, бо́льше and ме́ньше are greater than and less than (with the genitive), and зна́чение фу́нкции в то́чке is the value of the function at a point.",
        "examples": [
         {
          "ru": "для всех",
@@ -13773,12 +13870,20 @@
          "en": "There exists a unique even prime number."
         },
         {
-         "ru": "ра́вно",
-         "en": "equals"
+         "ru": "равно́",
+         "en": "equals (the number after it goes into the dative)"
         },
         {
-         "ru": "Два плюс два ра́вно четы́ре.",
+         "ru": "Два плюс два равно́ четырём.",
          "en": "Two plus two equals four."
+        },
+        {
+         "ru": "четырём",
+         "en": "four (dative, after равно)"
+        },
+        {
+         "ru": "семи́",
+         "en": "seven (dative, after равно)"
         },
         {
          "ru": "ми́нус",
@@ -13808,13 +13913,13 @@
        "options": [
         "бо́льше",
         "ме́ньше",
-        "ра́вно"
+        "равно́"
        ]
       },
       {
        "kind": "translate",
        "en": "equals",
-       "answer": "ра́вно"
+       "answer": "равно́"
       },
       {
        "kind": "translate",
@@ -13831,13 +13936,13 @@
       {
        "kind": "fill",
        "before": "Де́сять ми́нус три ",
-       "after": " семь.",
-       "hint": "Ten minus three equals seven.",
-       "answer": "ра́вно"
+       "after": " семи́.",
+       "hint": "Ten minus three equals seven (equals, not will be).",
+       "answer": "равно́"
       },
       {
        "kind": "dictation",
-       "text": "Три ме́ньше пяти́, а пять бо́льше трёх."
+       "text": "Три ме́ньше пяти́. Два плюс два равно́ четырём."
       },
       {
        "kind": "read_aloud",
@@ -13845,7 +13950,7 @@
       },
       {
        "kind": "read_meaning",
-       "text": "Зна́чение фу́нкции в то́чке два ра́вно четы́ре.",
+       "text": "Зна́чение фу́нкции в то́чке два равно́ четырём.",
        "options": [
         "The function has two values: two and four.",
         "The value of the function at the point two equals four.",
@@ -13871,23 +13976,22 @@
      "exercises": [
       {
        "kind": "passage",
-       "text": "Тео́рема: просты́х чи́сел бесконе́чно мно́го.\nДоказа́тельство: предполо́жим, что их коне́чное число́. Пусть да́нное число́ — произведе́ние всех просты́х чи́сел плюс оди́н. Тогда́ оно́ не де́лится ни на одно́ из них. Зна́чит, оно́ само́ просто́е и́ли де́лится на просто́е число́, кото́рого нет в на́шем спи́ске. Получа́ем противоре́чие. Что и тре́бовалось доказа́ть.",
-       "en": "Theorem: there are infinitely many primes.\nProof: suppose there are finitely many of them. Let the given number be the product of all the primes plus one. Then it is not divisible by any one of them. So it is itself prime, or divisible by a prime that is not in our list. We obtain a contradiction. Which was to be proved.",
+       "text": "Тео́рема: просты́х чи́сел бесконе́чно мно́го.\nДоказа́тельство: предполо́жим, что их коне́чное число́. Рассмо́трим число́: произведе́ние всех просты́х чи́сел плюс оди́н. Тогда́ оно́ не де́лится ни на одно́ из них. Зна́чит, оно́ само́ просто́е и́ли де́лится на просто́е число́, кото́рого нет среди́ них. Получа́ем противоре́чие. Что и тре́бовалось доказа́ть.",
+       "en": "Theorem: there are infinitely many primes.\nProof: suppose there are finitely many of them. Consider the number: the product of all the primes plus one. Then it is not divisible by any one of them. So it is itself prime, or divisible by a prime that is not among them. We obtain a contradiction. Which was to be proved.",
        "glosses": {
         "простых": "prime (простых чисел: of prime numbers)",
         "чисел": "numbers (of numbers)",
         "бесконечно": "infinitely",
         "их": "of them",
         "конечное": "finite (neuter)",
-        "данное": "the given (neuter)",
+        "рассмотрим": "let us consider",
         "произведение": "product (of multiplication)",
         "ни": "not (ни на одно: not by any one)",
         "них": "them (из них: of them)",
         "само": "itself",
         "простое": "prime (simple)",
         "которого": "which (которого нет: which is not)",
-        "нашем": "our (в нашем списке: in our list)",
-        "списке": "list (in the list)",
+        "среди": "among",
         "требовалось": "was required",
         "доказать": "to prove"
        }
@@ -13925,7 +14029,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Пусть да́нное число́ — произведе́ние всех просты́х чи́сел плюс оди́н."
+       "text": "Рассмо́трим число́: произведе́ние всех просты́х чи́сел плюс оди́н."
       },
       {
        "kind": "copy",
@@ -13952,7 +14056,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "The suffixes from the word-family unit build the nouns of philosophy: -ость from an adjective (де́йствительный, де́йствительность), -ние and -ие from a verb (мы́слить, мышле́ние; знать, зна́ние; быть, бытие́). И́стина is truth as a philosopher means it; пра́вда is truth as a person tells it.",
+       "text": "Philosophy's nouns are built with three suffixes: -ость turns an adjective into a quality (де́йствительный, де́йствительность), -ние and -ие turn a verb into an act or a state (мы́слить, мышле́ние; знать, зна́ние; быть, бытие́). И́стина is truth as a philosopher means it; пра́вда is truth as a person tells it.",
        "examples": [
         {
          "ru": "и́стина",
@@ -13996,7 +14100,7 @@
         },
         {
          "ru": "Бытие́ определя́ет созна́ние.",
-         "en": "Being determines consciousness (Marx)."
+         "en": "Being determines consciousness (a maxim after Marx)."
         },
         {
          "ru": "определя́ет",
@@ -14136,7 +14240,7 @@
        "kind": "fill",
        "before": "Что ",
        "after": " и́стина?",
-       "hint": "What is truth?",
+       "hint": "What is truth? (with the philosopher's is)",
        "answer": "есть"
       },
       {
@@ -14245,7 +14349,7 @@
        "kind": "fill",
        "before": "",
        "after": " я согла́сен.",
-       "hint": "Therefore I agree.",
+       "hint": "Therefore, so, I agree.",
        "answer": "Поэ́тому"
       },
       {
@@ -14313,8 +14417,8 @@
       },
       {
        "kind": "passage",
-       "text": "Лев Толсто́й в «И́споведи» спра́шивает: «Есть ли в мое́й жи́зни тако́й смысл, кото́рый не уничтожа́лся бы неизбе́жно предстоя́щей мне сме́ртью?» Достое́вский в «Идио́те» отвеча́ет: «Мир спасёт красота́».",
-       "en": "Leo Tolstoy asks in A Confession: “Is there any meaning in my life that would not be destroyed by the death that inevitably awaits me?” Dostoevsky answers in The Idiot: “Beauty will save the world.”",
+       "text": "Лев Толсто́й в «И́споведи» спра́шивает: «Есть ли в мое́й жи́зни тако́й смысл, кото́рый не уничтожа́лся бы неизбе́жно предстоя́щей мне сме́ртью?» Достое́вский в «Идио́те», слова́ми кня́зя Мы́шкина, отвеча́ет: «Мир спасёт красота́».",
+       "en": "Leo Tolstoy asks in A Confession: “Is there any meaning in my life that would not be destroyed by the death that inevitably awaits me?” Dostoevsky answers in The Idiot, in words attributed to Prince Myshkin: “Beauty will save the world.”",
        "glosses": {
         "лев": "Leo (Lev)",
         "толстой": "Tolstoy",
@@ -14331,6 +14435,9 @@
         "смертью": "death (by death)",
         "достоевский": "Dostoevsky",
         "идиоте": "The Idiot (in The Idiot)",
+        "словами": "in the words (of)",
+        "князя": "prince (of Prince)",
+        "мышкина": "Myshkin (of Myshkin)",
         "отвечает": "answers",
         "спасёт": "will save",
         "красота": "beauty"

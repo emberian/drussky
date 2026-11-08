@@ -951,11 +951,12 @@
   {
    "id": "кон",
    "forms": [
-    "кон"
+    "кон",
+    "конч"
    ],
    "gloss": "end",
    "note": "коне́ц end, коне́чный finite, бесконе́чный infinite, зако́н law, наконе́ц at last.",
-   "label": "кон-"
+   "label": "кон-/конч-"
   },
   {
    "id": "перед",
@@ -1588,10 +1589,12 @@
    "id": "сто",
    "forms": [
     "сто",
-    "сот"
+    "сот",
+    "ст"
    ],
    "gloss": "hundred",
-   "label": "сто-/сот-"
+   "note": "сто a hundred, две́сти two hundred (две + сти), со́тня a hundred of.",
+   "label": "сто-/сот-/ст-"
   },
   {
    "id": "сорок",
@@ -1731,6 +1734,262 @@
    ],
    "gloss": "stroll",
    "label": "гул-"
+  },
+  {
+   "id": "род",
+   "forms": [
+    "род",
+    "рожд"
+   ],
+   "gloss": "birth, kin",
+   "note": "роди́ться to be born, роди́тели parents, наро́д a people, роди́тельный паде́ж the genitive (the case of origin).",
+   "label": "род-/рожд-"
+  },
+  {
+   "id": "вин",
+   "forms": [
+    "вин"
+   ],
+   "gloss": "guilt; cause",
+   "note": "вина́ guilt, вини́тельный паде́ж the accusative (the case of the one blamed, a calque of accusativus).",
+   "label": "вин-"
+  },
+  {
+   "id": "твор",
+   "forms": [
+    "твор"
+   ],
+   "gloss": "create, make",
+   "note": "твори́ть to create, тво́рчество creative work, твори́тельный паде́ж the instrumental (the case of the maker's tool).",
+   "label": "твор-"
+  },
+  {
+   "id": "лож",
+   "forms": [
+    "лож",
+    "леж",
+    "лаг",
+    "лог"
+   ],
+   "gloss": "lie, put",
+   "note": "лежа́ть to lie, положи́ть to put, предло́г a preposition (what is put before), принадлежа́ть to belong.",
+   "label": "лож-/леж-/лаг-"
+  },
+  {
+   "id": "реч",
+   "forms": [
+    "реч",
+    "рек",
+    "рок"
+   ],
+   "gloss": "speak",
+   "note": "речь speech, уро́к a lesson (what was agreed, у + рек), противоре́чие contradiction (speaking against).",
+   "label": "реч-/рек-/рок-"
+  },
+  {
+   "id": "сред",
+   "forms": [
+    "сред",
+    "серед"
+   ],
+   "gloss": "middle",
+   "note": "среда́ Wednesday (the middle day), середи́на the middle, сре́дний average, среди́ among.",
+   "label": "сред-/серед-"
+  },
+  {
+   "id": "втор",
+   "forms": [
+    "втор"
+   ],
+   "gloss": "second",
+   "note": "второ́й second, вто́рник Tuesday (the second day), повтори́ть to repeat.",
+   "label": "втор-"
+  },
+  {
+   "id": "крес",
+   "forms": [
+    "крес"
+   ],
+   "gloss": "rise, kindle",
+   "note": "воскресе́нье Sunday (the day of resurrection), воскре́снуть to rise again.",
+   "label": "крес-"
+  },
+  {
+   "id": "дей",
+   "forms": [
+    "дей",
+    "дея"
+   ],
+   "gloss": "do, act",
+   "note": "де́йствие an action, де́йствительность reality (what acts), де́йствительно indeed.",
+   "label": "дей-/дея-"
+  },
+  {
+   "id": "свобод",
+   "forms": [
+    "свобод"
+   ],
+   "gloss": "free",
+   "label": "свобод-"
+  },
+  {
+   "id": "вис",
+   "forms": [
+    "вис",
+    "вес"
+   ],
+   "gloss": "hang; weigh",
+   "note": "висе́ть to hang, вес weight, зави́сеть to depend (hang on), незави́симо independently.",
+   "label": "вис-/вес-"
+  },
+  {
+   "id": "яв",
+   "forms": [
+    "яв",
+    "явл"
+   ],
+   "gloss": "appear, show",
+   "note": "явля́ться to be (formally: to appear as), явле́ние a phenomenon, я́вно obviously.",
+   "label": "яв-/явл-"
+  },
+  {
+   "id": "стекл",
+   "forms": [
+    "стекл"
+   ],
+   "gloss": "glass",
+   "label": "стекл-"
+  },
+  {
+   "id": "войн",
+   "forms": [
+    "войн",
+    "воев"
+   ],
+   "gloss": "war",
+   "note": "война́ war, во́ин a warrior.",
+   "label": "войн-/воев-"
+  },
+  {
+   "id": "труд",
+   "forms": [
+    "труд"
+   ],
+   "gloss": "labour, toil",
+   "note": "труд labour, тру́дный difficult (taking toil), тру́дно it is hard.",
+   "label": "труд-"
+  },
+  {
+   "id": "важ",
+   "forms": [
+    "важ"
+   ],
+   "gloss": "weight, importance",
+   "note": "ва́жный important, ва́жно it matters.",
+   "label": "важ-"
+  },
+  {
+   "id": "быстр",
+   "forms": [
+    "быстр"
+   ],
+   "gloss": "fast",
+   "label": "быстр-"
+  },
+  {
+   "id": "дешев",
+   "forms": [
+    "дешев",
+    "дешёв"
+   ],
+   "gloss": "cheap",
+   "label": "дешев-/дешёв-"
+  },
+  {
+   "id": "дорог2",
+   "forms": [
+    "дорог"
+   ],
+   "gloss": "dear, expensive",
+   "note": "дорого́й dear or expensive; spelled like доро́га road, a different root.",
+   "label": "дорог-"
+  },
+  {
+   "id": "глас",
+   "forms": [
+    "глас",
+    "голос"
+   ],
+   "gloss": "voice",
+   "note": "го́лос voice, согла́сен agreed (of one voice), гла́сный a vowel.",
+   "label": "глас-/голос-"
+  },
+  {
+   "id": "нрав",
+   "forms": [
+    "нрав"
+   ],
+   "gloss": "temper, liking",
+   "note": "нрав temper, нра́виться to be liked, нра́вственность morality.",
+   "label": "нрав-"
+  },
+  {
+   "id": "зов",
+   "forms": [
+    "зов",
+    "зыв",
+    "зв"
+   ],
+   "gloss": "call",
+   "note": "звать to call, назва́ние a name, называ́ться to be called.",
+   "label": "зов-/зыв-/зв-"
+  },
+  {
+   "id": "реш",
+   "forms": [
+    "реш"
+   ],
+   "gloss": "decide, solve",
+   "note": "реши́ть to decide or solve, реше́ние a decision, зада́ча реша́ется the problem is solved.",
+   "label": "реш-"
+  },
+  {
+   "id": "вар",
+   "forms": [
+    "вар"
+   ],
+   "gloss": "boil, cook",
+   "note": "вари́ть to boil, самова́р samovar (self-boiler).",
+   "label": "вар-"
+  },
+  {
+   "id": "кры",
+   "forms": [
+    "кры",
+    "кров"
+   ],
+   "gloss": "cover",
+   "note": "крыть to cover, откры́ть to open (uncover), кры́ша roof, кров shelter.",
+   "label": "кры-/кров-"
+  },
+  {
+   "id": "руб",
+   "forms": [
+    "руб",
+    "рубл"
+   ],
+   "gloss": "chop",
+   "note": "руби́ть to chop, рубль a rouble (a chopped piece of silver).",
+   "label": "руб-/рубл-"
+  },
+  {
+   "id": "пуст",
+   "forms": [
+    "пуст"
+   ],
+   "gloss": "empty; let go",
+   "note": "пусто́й empty, пусть let (from пусти́ть, to let go), пусты́ня desert.",
+   "label": "пуст-"
   }
  ],
  "prefixes": [
@@ -2015,11 +2274,13 @@
   {
    "id": "полу",
    "forms": [
-    "полу"
+    "полу",
+    "пол"
    ],
    "gloss": "half, semi-",
    "examples": [
-    "полуо́стров"
+    "полуо́стров",
+    "полчаса́"
    ]
   },
   {
@@ -11253,6 +11514,1781 @@
    "suffixes": [],
    "pos": "noun",
    "en": "fishing net"
+  },
+  "падеж": {
+   "ru": "паде́ж",
+   "morphemes": [
+    "пад",
+    "е́ж"
+   ],
+   "roots": [
+    "пад"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "case (grammatical)",
+   "family": "пад",
+   "base": "падать",
+   "note": "A calque of Latin casus, a falling: the forms a noun falls into."
+  },
+  "родительный": {
+   "ru": "роди́тельный",
+   "morphemes": [
+    "род",
+    "и́",
+    "тельн",
+    "ый"
+   ],
+   "roots": [
+    "род"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "тельн"
+   ],
+   "pos": "adj",
+   "en": "genitive (case); parental",
+   "family": "род",
+   "example": {
+    "ru": "Роди́тельный паде́ж отвеча́ет на вопро́с чего́?",
+    "en": "The genitive answers the question of what?"
+   }
+  },
+  "дательный": {
+   "ru": "да́тельный",
+   "morphemes": [
+    "да́",
+    "тельн",
+    "ый"
+   ],
+   "roots": [
+    "да"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "тельн"
+   ],
+   "pos": "adj",
+   "en": "dative (case)",
+   "family": "да",
+   "base": "дать",
+   "example": {
+    "ru": "Да́тельный паде́ж: кому́?",
+    "en": "The dative case: to whom?"
+   }
+  },
+  "винительный": {
+   "ru": "вини́тельный",
+   "morphemes": [
+    "вин",
+    "и́",
+    "тельн",
+    "ый"
+   ],
+   "roots": [
+    "вин"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "тельн"
+   ],
+   "pos": "adj",
+   "en": "accusative (case)",
+   "family": "вин",
+   "example": {
+    "ru": "Вини́тельный паде́ж: кого́? что?",
+    "en": "The accusative case: whom? what?"
+   }
+  },
+  "творительный": {
+   "ru": "твори́тельный",
+   "morphemes": [
+    "твор",
+    "и́",
+    "тельн",
+    "ый"
+   ],
+   "roots": [
+    "твор"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "тельн"
+   ],
+   "pos": "adj",
+   "en": "instrumental (case)",
+   "family": "твор",
+   "example": {
+    "ru": "Твори́тельный паде́ж: кем? чем?",
+    "en": "The instrumental case: by whom? with what?"
+   }
+  },
+  "предложный": {
+   "ru": "предло́жный",
+   "morphemes": [
+    "пред",
+    "ло́ж",
+    "н",
+    "ый"
+   ],
+   "roots": [
+    "лож"
+   ],
+   "prefixes": [
+    "пред"
+   ],
+   "suffixes": [
+    "н"
+   ],
+   "pos": "adj",
+   "en": "prepositional (case)",
+   "family": "лож",
+   "example": {
+    "ru": "Предло́жный паде́ж: о ком? о чём?",
+    "en": "The prepositional case: about whom? about what?"
+   }
+  },
+  "принадлежать": {
+   "ru": "принадлежа́ть",
+   "morphemes": [
+    "при",
+    "над",
+    "леж",
+    "а́",
+    "ть"
+   ],
+   "roots": [
+    "лож"
+   ],
+   "prefixes": [
+    "при",
+    "над"
+   ],
+   "suffixes": [
+    "ть"
+   ],
+   "pos": "verb",
+   "en": "to belong",
+   "family": "лож",
+   "example": {
+    "ru": "Число́ принадлежи́т мно́жеству.",
+    "en": "The number belongs to the set."
+   }
+  },
+  "предположить": {
+   "ru": "предположи́ть",
+   "morphemes": [
+    "пред",
+    "по",
+    "лож",
+    "и́",
+    "ть"
+   ],
+   "roots": [
+    "лож"
+   ],
+   "prefixes": [
+    "пред",
+    "по"
+   ],
+   "suffixes": [
+    "ть"
+   ],
+   "pos": "verb",
+   "en": "to suppose",
+   "family": "лож",
+   "example": {
+    "ru": "Предполо́жим, что э́то непра́вда.",
+    "en": "Suppose this is not true."
+   }
+  },
+  "определять": {
+   "ru": "определя́ть",
+   "morphemes": [
+    "о",
+    "пре",
+    "дел",
+    "я́",
+    "ть"
+   ],
+   "roots": [
+    "дели"
+   ],
+   "prefixes": [
+    "о",
+    "пре"
+   ],
+   "suffixes": [
+    "ть"
+   ],
+   "pos": "verb",
+   "en": "to determine, to define",
+   "family": "дели",
+   "base": "определение",
+   "example": {
+    "ru": "Бытие́ определя́ет созна́ние.",
+    "en": "Being determines consciousness."
+   }
+  },
+  "урок": {
+   "ru": "уро́к",
+   "morphemes": [
+    "у",
+    "ро́к"
+   ],
+   "roots": [
+    "реч"
+   ],
+   "prefixes": [
+    "у"
+   ],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "lesson",
+   "family": "реч",
+   "example": {
+    "ru": "Уро́к начина́ется в де́вять.",
+    "en": "The lesson begins at nine."
+   }
+  },
+  "противоречие": {
+   "ru": "проти́воречие",
+   "morphemes": [
+    "проти́во",
+    "реч",
+    "и",
+    "е"
+   ],
+   "roots": [
+    "реч"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "contradiction",
+   "family": "реч",
+   "example": {
+    "ru": "Получа́ем противоре́чие.",
+    "en": "We obtain a contradiction."
+   }
+  },
+  "следствие": {
+   "ru": "сле́дствие",
+   "morphemes": [
+    "сле́д",
+    "ств",
+    "ие"
+   ],
+   "roots": [
+    "след"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "corollary, consequence",
+   "family": "след",
+   "base": "следовать",
+   "example": {
+    "ru": "Сле́дствие тео́ремы.",
+    "en": "A corollary of the theorem."
+   }
+  },
+  "произведение": {
+   "ru": "произведе́ние",
+   "morphemes": [
+    "про",
+    "из",
+    "вед",
+    "е́",
+    "ние"
+   ],
+   "roots": [
+    "вед"
+   ],
+   "prefixes": [
+    "про",
+    "из"
+   ],
+   "suffixes": [
+    "ние"
+   ],
+   "pos": "noun",
+   "en": "product (of multiplication); a work",
+   "family": "вед",
+   "example": {
+    "ru": "Произведе́ние двух чётных чи́сел чётное.",
+    "en": "The product of two even numbers is even."
+   }
+  },
+  "единица": {
+   "ru": "едини́ца",
+   "morphemes": [
+    "един",
+    "и́ц",
+    "а"
+   ],
+   "roots": [
+    "один"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "one (the number); a unit",
+   "family": "один",
+   "base": "единый",
+   "example": {
+    "ru": "Едини́ца — не просто́е число́.",
+    "en": "One is not a prime number."
+   }
+  },
+  "единственный": {
+   "ru": "еди́нственный",
+   "morphemes": [
+    "еди́н",
+    "ственн",
+    "ый"
+   ],
+   "roots": [
+    "один"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "the only, unique",
+   "family": "один",
+   "base": "единый",
+   "example": {
+    "ru": "Два — еди́нственное чётное просто́е число́.",
+    "en": "Two is the only even prime."
+   }
+  },
+  "пустой": {
+   "ru": "пусто́й",
+   "morphemes": [
+    "пуст",
+    "о́й"
+   ],
+   "roots": [
+    "пуст"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "empty",
+   "family": "пуст",
+   "example": {
+    "ru": "Пусто́е мно́жество.",
+    "en": "The empty set."
+   }
+  },
+  "пусть": {
+   "ru": "пусть",
+   "morphemes": [
+    "пуст",
+    "ь"
+   ],
+   "roots": [
+    "пуст"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "part",
+   "en": "let (in a proof)",
+   "family": "пуст",
+   "base": "пустой",
+   "note": "From пусти́ть, to let go: let it be so."
+  },
+  "мало": {
+   "ru": "ма́ло",
+   "morphemes": [
+    "ма́л",
+    "о"
+   ],
+   "roots": [
+    "мал"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "о"
+   ],
+   "pos": "adv",
+   "en": "few, little",
+   "family": "мал",
+   "base": "маленький",
+   "example": {
+    "ru": "У меня́ ма́ло вре́мени.",
+    "en": "I have little time."
+   }
+  },
+  "менее": {
+   "ru": "ме́нее",
+   "morphemes": [
+    "ме́нее"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adv",
+   "en": "less (formal)",
+   "note": "Тем не ме́нее, nevertheless."
+  },
+  "однако": {
+   "ru": "одна́ко",
+   "morphemes": [
+    "одна́ко"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "conj",
+   "en": "however"
+  },
+  "поэтому": {
+   "ru": "поэ́тому",
+   "morphemes": [
+    "по",
+    "э́тому"
+   ],
+   "roots": [],
+   "prefixes": [
+    "по"
+   ],
+   "suffixes": [],
+   "pos": "adv",
+   "en": "therefore, so",
+   "note": "По + э́тому: by this."
+  },
+  "итак": {
+   "ru": "ита́к",
+   "morphemes": [
+    "ита́к"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "conj",
+   "en": "thus, so then",
+   "note": "И + так."
+  },
+  "откуда": {
+   "ru": "отку́да",
+   "morphemes": [
+    "от",
+    "ку́да"
+   ],
+   "roots": [],
+   "prefixes": [
+    "от"
+   ],
+   "suffixes": [],
+   "pos": "adv",
+   "en": "from where",
+   "base": "куда"
+  },
+  "например": {
+   "ru": "наприме́р",
+   "morphemes": [
+    "на",
+    "при",
+    "ме́р"
+   ],
+   "roots": [
+    "мер"
+   ],
+   "prefixes": [
+    "на",
+    "при"
+   ],
+   "suffixes": [],
+   "pos": "adv",
+   "en": "for example",
+   "family": "мер",
+   "base": "пример"
+  },
+  "нравиться": {
+   "ru": "нра́виться",
+   "morphemes": [
+    "нра́в",
+    "и",
+    "ть",
+    "ся"
+   ],
+   "roots": [
+    "нрав"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ть",
+    "ся"
+   ],
+   "pos": "verb",
+   "en": "to please, to be liked",
+   "family": "нрав",
+   "example": {
+    "ru": "Мне нра́вится матема́тика.",
+    "en": "I like mathematics."
+   }
+  },
+  "называться": {
+   "ru": "называ́ться",
+   "morphemes": [
+    "на",
+    "зыв",
+    "а́",
+    "ть",
+    "ся"
+   ],
+   "roots": [
+    "зов"
+   ],
+   "prefixes": [
+    "на"
+   ],
+   "suffixes": [
+    "ть",
+    "ся"
+   ],
+   "pos": "verb",
+   "en": "to be called",
+   "family": "зов",
+   "example": {
+    "ru": "Как э́то называ́ется?",
+    "en": "What is this called?"
+   }
+  },
+  "находиться": {
+   "ru": "находи́ться",
+   "morphemes": [
+    "на",
+    "ход",
+    "и́",
+    "ть",
+    "ся"
+   ],
+   "roots": [
+    "ход"
+   ],
+   "prefixes": [
+    "на"
+   ],
+   "suffixes": [
+    "ть",
+    "ся"
+   ],
+   "pos": "verb",
+   "en": "to be located",
+   "family": "ход",
+   "base": "ходить",
+   "example": {
+    "ru": "Где нахо́дится ста́нция?",
+    "en": "Where is the station located?"
+   }
+  },
+  "начинаться": {
+   "ru": "начина́ться",
+   "morphemes": [
+    "на",
+    "чин",
+    "а́",
+    "ть",
+    "ся"
+   ],
+   "roots": [
+    "ча"
+   ],
+   "prefixes": [
+    "на"
+   ],
+   "suffixes": [
+    "ть",
+    "ся"
+   ],
+   "pos": "verb",
+   "en": "to begin (itself)",
+   "family": "ча",
+   "base": "начать",
+   "example": {
+    "ru": "Уро́к начина́ется.",
+    "en": "The lesson is beginning."
+   }
+  },
+  "кончаться": {
+   "ru": "конча́ться",
+   "morphemes": [
+    "конч",
+    "а́",
+    "ть",
+    "ся"
+   ],
+   "roots": [
+    "кон"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ть",
+    "ся"
+   ],
+   "pos": "verb",
+   "en": "to end (itself)",
+   "family": "кон",
+   "base": "конец",
+   "example": {
+    "ru": "Фильм конча́ется.",
+    "en": "The film is ending."
+   }
+  },
+  "учиться": {
+   "ru": "учи́ться",
+   "morphemes": [
+    "уч",
+    "и́",
+    "ть",
+    "ся"
+   ],
+   "roots": [
+    "уч"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ть",
+    "ся"
+   ],
+   "pos": "verb",
+   "en": "to study, to learn",
+   "family": "уч",
+   "base": "учить",
+   "example": {
+    "ru": "Я учу́сь чита́ть по-ру́сски.",
+    "en": "I am learning to read Russian."
+   }
+  },
+  "являться": {
+   "ru": "явля́ться",
+   "morphemes": [
+    "явл",
+    "я́",
+    "ть",
+    "ся"
+   ],
+   "roots": [
+    "яв"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ть",
+    "ся"
+   ],
+   "pos": "verb",
+   "en": "to be (formal: to appear as)",
+   "family": "яв",
+   "example": {
+    "ru": "Челове́к явля́ется мы́слящим существо́м.",
+    "en": "A human being is a thinking creature."
+   }
+  },
+  "решать": {
+   "ru": "реша́ть",
+   "morphemes": [
+    "реш",
+    "а́",
+    "ть"
+   ],
+   "roots": [
+    "реш"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ть"
+   ],
+   "pos": "verb",
+   "en": "to decide; to solve",
+   "family": "реш",
+   "example": {
+    "ru": "Кто реша́ет, что ну́жно?",
+    "en": "Who decides what is needed?"
+   }
+  },
+  "варить": {
+   "ru": "вари́ть",
+   "morphemes": [
+    "вар",
+    "и́",
+    "ть"
+   ],
+   "roots": [
+    "вар"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ть"
+   ],
+   "pos": "verb",
+   "en": "to boil, to cook",
+   "family": "вар",
+   "example": {
+    "ru": "Вари́те де́сять мину́т.",
+    "en": "Cook for ten minutes."
+   }
+  },
+  "открыть": {
+   "ru": "откры́ть",
+   "morphemes": [
+    "от",
+    "кры́",
+    "ть"
+   ],
+   "roots": [
+    "кры"
+   ],
+   "prefixes": [
+    "от"
+   ],
+   "suffixes": [
+    "ть"
+   ],
+   "pos": "verb",
+   "en": "to open (uncover)",
+   "family": "кры",
+   "example": {
+    "ru": "Откры́й окно́.",
+    "en": "Open the window."
+   }
+  },
+  "открытый": {
+   "ru": "откры́тый",
+   "morphemes": [
+    "от",
+    "кры́",
+    "т",
+    "ый"
+   ],
+   "roots": [
+    "кры"
+   ],
+   "prefixes": [
+    "от"
+   ],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "open, opened",
+   "family": "кры",
+   "base": "открыть",
+   "example": {
+    "ru": "Откры́тое окно́.",
+    "en": "An open window."
+   }
+  },
+  "стоить": {
+   "ru": "сто́ить",
+   "morphemes": [
+    "сто́",
+    "и",
+    "ть"
+   ],
+   "roots": [
+    "ста"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ть"
+   ],
+   "pos": "verb",
+   "en": "to cost",
+   "family": "ста",
+   "base": "стоять",
+   "example": {
+    "ru": "Ско́лько э́то сто́ит?",
+    "en": "How much does this cost?"
+   }
+  },
+  "подождать": {
+   "ru": "подожда́ть",
+   "morphemes": [
+    "подо",
+    "жд",
+    "а́",
+    "ть"
+   ],
+   "roots": [
+    "жд"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ть"
+   ],
+   "pos": "verb",
+   "en": "to wait a bit",
+   "family": "жд",
+   "base": "ждать",
+   "example": {
+    "ru": "Подожди́ меня́!",
+    "en": "Wait for me!"
+   }
+  },
+  "интересный": {
+   "ru": "интере́сный",
+   "morphemes": [
+    "интере́с",
+    "н",
+    "ый"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "interesting",
+   "loan": "Latin interesse, to be between (through French intérêt)"
+  },
+  "важный": {
+   "ru": "ва́жный",
+   "morphemes": [
+    "ва́ж",
+    "н",
+    "ый"
+   ],
+   "roots": [
+    "важ"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "н"
+   ],
+   "pos": "adj",
+   "en": "important",
+   "family": "важ",
+   "example": {
+    "ru": "Э́то ва́жный вопро́с.",
+    "en": "This is an important question."
+   }
+  },
+  "трудный": {
+   "ru": "тру́дный",
+   "morphemes": [
+    "тру́д",
+    "н",
+    "ый"
+   ],
+   "roots": [
+    "труд"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "н"
+   ],
+   "pos": "adj",
+   "en": "difficult",
+   "family": "труд",
+   "example": {
+    "ru": "Э́то тру́дная зада́ча.",
+    "en": "This is a difficult problem."
+   }
+  },
+  "быстрый": {
+   "ru": "бы́стрый",
+   "morphemes": [
+    "бы́стр",
+    "ый"
+   ],
+   "roots": [
+    "быстр"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "fast, quick",
+   "family": "быстр",
+   "example": {
+    "ru": "Бы́стрый отве́т.",
+    "en": "A quick answer."
+   }
+  },
+  "дешёвый": {
+   "ru": "дешёвый",
+   "morphemes": [
+    "дешёв",
+    "ый"
+   ],
+   "roots": [
+    "дешев"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "cheap",
+   "family": "дешев",
+   "example": {
+    "ru": "Хлеб дешёвый.",
+    "en": "The bread is cheap."
+   }
+  },
+  "дорогой": {
+   "ru": "дорого́й",
+   "morphemes": [
+    "дорог",
+    "о́й"
+   ],
+   "roots": [
+    "дорог2"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "dear; expensive",
+   "family": "дорог2",
+   "example": {
+    "ru": "Кни́ги дороги́е.",
+    "en": "The books are expensive."
+   }
+  },
+  "прав": {
+   "ru": "прав",
+   "morphemes": [
+    "прав"
+   ],
+   "roots": [
+    "прав"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "adj",
+   "en": "right, correct (short form)",
+   "family": "прав",
+   "base": "правда",
+   "example": {
+    "ru": "Ты прав.",
+    "en": "You are right."
+   }
+  },
+  "согласный": {
+   "ru": "согла́сный",
+   "morphemes": [
+    "со",
+    "гла́с",
+    "н",
+    "ый"
+   ],
+   "roots": [
+    "глас"
+   ],
+   "prefixes": [
+    "со"
+   ],
+   "suffixes": [
+    "н"
+   ],
+   "pos": "adj",
+   "en": "agreeing (short form: согла'сен)",
+   "family": "глас",
+   "example": {
+    "ru": "Я согла́сен.",
+    "en": "I agree."
+   }
+  },
+  "свободный": {
+   "ru": "свобо́дный",
+   "morphemes": [
+    "свобо́д",
+    "н",
+    "ый"
+   ],
+   "roots": [
+    "свобод"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "н"
+   ],
+   "pos": "adj",
+   "en": "free",
+   "family": "свобод",
+   "base": "свобода"
+  },
+  "второй": {
+   "ru": "второ́й",
+   "morphemes": [
+    "втор",
+    "о́й"
+   ],
+   "roots": [
+    "втор"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "num",
+   "en": "second",
+   "family": "втор",
+   "example": {
+    "ru": "Второ́й уро́к.",
+    "en": "The second lesson."
+   }
+  },
+  "третий": {
+   "ru": "тре́тий",
+   "morphemes": [
+    "тр",
+    "е́т",
+    "ий"
+   ],
+   "roots": [
+    "тр"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "num",
+   "en": "third",
+   "family": "тр",
+   "example": {
+    "ru": "Тре́тье ма́я.",
+    "en": "The third of May."
+   }
+  },
+  "мышление": {
+   "ru": "мышле́ние",
+   "morphemes": [
+    "мышл",
+    "е́",
+    "ние"
+   ],
+   "roots": [
+    "мысл"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ние"
+   ],
+   "pos": "noun",
+   "en": "thinking (as a faculty)",
+   "family": "мысл",
+   "base": "мыслить"
+  },
+  "смысл": {
+   "ru": "смысл",
+   "morphemes": [
+    "с",
+    "мысл"
+   ],
+   "roots": [
+    "мысл"
+   ],
+   "prefixes": [
+    "с"
+   ],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "meaning, sense",
+   "family": "мысл",
+   "base": "мысль",
+   "example": {
+    "ru": "В чём смысл жи́зни?",
+    "en": "What is the meaning of life?"
+   }
+  },
+  "сознание": {
+   "ru": "созна́ние",
+   "morphemes": [
+    "со",
+    "зна́",
+    "ние"
+   ],
+   "roots": [
+    "зна"
+   ],
+   "prefixes": [
+    "со"
+   ],
+   "suffixes": [
+    "ние"
+   ],
+   "pos": "noun",
+   "en": "consciousness",
+   "family": "зна",
+   "base": "знание",
+   "example": {
+    "ru": "Бытие́ определя́ет созна́ние.",
+    "en": "Being determines consciousness."
+   }
+  },
+  "бытие": {
+   "ru": "бытие́",
+   "morphemes": [
+    "бы",
+    "ти",
+    "е́"
+   ],
+   "roots": [
+    "бы"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ти"
+   ],
+   "pos": "noun",
+   "en": "being, existence",
+   "family": "бы",
+   "base": "быть"
+  },
+  "существо": {
+   "ru": "существо́",
+   "morphemes": [
+    "сущ",
+    "еств",
+    "о́"
+   ],
+   "roots": [
+    "сущ"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "о"
+   ],
+   "pos": "noun",
+   "en": "creature, being",
+   "family": "сущ",
+   "base": "существовать"
+  },
+  "свобода": {
+   "ru": "свобо́да",
+   "morphemes": [
+    "свобо́д",
+    "а"
+   ],
+   "roots": [
+    "свобод"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "freedom",
+   "family": "свобод"
+  },
+  "красота": {
+   "ru": "красота́",
+   "morphemes": [
+    "крас",
+    "от",
+    "а́"
+   ],
+   "roots": [
+    "крас"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "beauty",
+   "family": "крас",
+   "base": "красивый",
+   "example": {
+    "ru": "Мир спасёт красота́.",
+    "en": "Beauty will save the world."
+   }
+  },
+  "возможность": {
+   "ru": "возмо́жность",
+   "morphemes": [
+    "воз",
+    "мо́ж",
+    "н",
+    "ость"
+   ],
+   "roots": [
+    "мог"
+   ],
+   "prefixes": [
+    "воз"
+   ],
+   "suffixes": [
+    "н",
+    "ость"
+   ],
+   "pos": "noun",
+   "en": "possibility",
+   "family": "мог",
+   "base": "можно"
+  },
+  "необходимость": {
+   "ru": "необходи́мость",
+   "morphemes": [
+    "не",
+    "об",
+    "ход",
+    "и́м",
+    "ость"
+   ],
+   "roots": [
+    "ход"
+   ],
+   "prefixes": [
+    "не",
+    "об"
+   ],
+   "suffixes": [
+    "ость"
+   ],
+   "pos": "noun",
+   "en": "necessity",
+   "family": "ход",
+   "base": "ходить",
+   "note": "What cannot be gone around."
+  },
+  "действительность": {
+   "ru": "де́йствительность",
+   "morphemes": [
+    "де́й",
+    "ств",
+    "и",
+    "тельн",
+    "ость"
+   ],
+   "roots": [
+    "дей"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "тельн",
+    "ость"
+   ],
+   "pos": "noun",
+   "en": "reality, actuality",
+   "family": "дей"
+  },
+  "действительно": {
+   "ru": "де́йствительно",
+   "morphemes": [
+    "де́й",
+    "ств",
+    "и",
+    "тельн",
+    "о"
+   ],
+   "roots": [
+    "дей"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "тельн",
+    "о"
+   ],
+   "pos": "adv",
+   "en": "indeed, really",
+   "family": "дей",
+   "base": "действительность"
+  },
+  "независимо": {
+   "ru": "незави́симо",
+   "morphemes": [
+    "не",
+    "за",
+    "ви́с",
+    "им",
+    "о"
+   ],
+   "roots": [
+    "вис"
+   ],
+   "prefixes": [
+    "не",
+    "за"
+   ],
+   "suffixes": [
+    "о"
+   ],
+   "pos": "adv",
+   "en": "independently",
+   "family": "вис",
+   "note": "Not hanging on anything."
+  },
+  "стекло": {
+   "ru": "стекло́",
+   "morphemes": [
+    "стекл",
+    "о́"
+   ],
+   "roots": [
+    "стекл"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "о"
+   ],
+   "pos": "noun",
+   "en": "glass",
+   "family": "стекл",
+   "example": {
+    "ru": "Го́род из стекла́.",
+    "en": "A city of glass."
+   }
+  },
+  "война": {
+   "ru": "война́",
+   "morphemes": [
+    "войн",
+    "а́"
+   ],
+   "roots": [
+    "войн"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "war",
+   "family": "войн"
+  },
+  "ручка": {
+   "ru": "ру́чка",
+   "morphemes": [
+    "ру́ч",
+    "к",
+    "а"
+   ],
+   "roots": [
+    "рук"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "pen; little hand",
+   "family": "рук",
+   "base": "рука"
+  },
+  "рубль": {
+   "ru": "рубль",
+   "morphemes": [
+    "рубл",
+    "ь"
+   ],
+   "roots": [
+    "руб"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "rouble",
+   "family": "руб"
+  },
+  "полчаса": {
+   "ru": "полчаса́",
+   "morphemes": [
+    "пол",
+    "час",
+    "а́"
+   ],
+   "roots": [
+    "час"
+   ],
+   "prefixes": [
+    "пол"
+   ],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "half an hour",
+   "family": "час",
+   "base": "час"
+  },
+  "понедельник": {
+   "ru": "понеде́льник",
+   "morphemes": [
+    "по",
+    "не",
+    "де́л",
+    "ьник"
+   ],
+   "roots": [
+    "дел"
+   ],
+   "prefixes": [
+    "по",
+    "не"
+   ],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "Monday",
+   "family": "дел",
+   "base": "неделя",
+   "note": "The day after the week's rest."
+  },
+  "вторник": {
+   "ru": "вто́рник",
+   "morphemes": [
+    "вто́р",
+    "ник"
+   ],
+   "roots": [
+    "втор"
+   ],
+   "prefixes": [],
+   "suffixes": [
+    "ник"
+   ],
+   "pos": "noun",
+   "en": "Tuesday",
+   "family": "втор",
+   "base": "второй"
+  },
+  "среда": {
+   "ru": "среда́",
+   "morphemes": [
+    "сред",
+    "а́"
+   ],
+   "roots": [
+    "сред"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "Wednesday; environment",
+   "family": "сред",
+   "note": "The middle day."
+  },
+  "четверг": {
+   "ru": "четве́рг",
+   "morphemes": [
+    "четве́р",
+    "г"
+   ],
+   "roots": [
+    "четыр"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "Thursday",
+   "family": "четыр",
+   "base": "четыре"
+  },
+  "пятница": {
+   "ru": "пя́тница",
+   "morphemes": [
+    "пя́т",
+    "ниц",
+    "а"
+   ],
+   "roots": [
+    "пят"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "Friday",
+   "family": "пят",
+   "base": "пять"
+  },
+  "суббота": {
+   "ru": "суббо́та",
+   "morphemes": [
+    "суббо́та"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "Saturday",
+   "loan": "Hebrew shabbat, through Greek"
+  },
+  "воскресенье": {
+   "ru": "воскресе́нье",
+   "morphemes": [
+    "вос",
+    "крес",
+    "е́нь",
+    "е"
+   ],
+   "roots": [
+    "крес"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "Sunday; resurrection",
+   "family": "крес"
+  },
+  "двести": {
+   "ru": "две́сти",
+   "morphemes": [
+    "дв",
+    "е́",
+    "ст",
+    "и"
+   ],
+   "roots": [
+    "дв",
+    "дв"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "num",
+   "en": "two hundred",
+   "family": "дв"
+  },
+  "триста": {
+   "ru": "три́ста",
+   "morphemes": [
+    "три́",
+    "ст",
+    "а"
+   ],
+   "roots": [
+    "тр",
+    "тр"
+   ],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "num",
+   "en": "three hundred",
+   "family": "тр"
+  },
+  "январь": {
+   "ru": "янва́рь",
+   "morphemes": [
+    "янва́рь"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "January",
+   "loan": "Latin Ianuarius"
+  },
+  "февраль": {
+   "ru": "февра́ль",
+   "morphemes": [
+    "февра́ль"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "February",
+   "loan": "Latin Februarius"
+  },
+  "март": {
+   "ru": "март",
+   "morphemes": [
+    "март"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "March",
+   "loan": "Latin Martius"
+  },
+  "апрель": {
+   "ru": "апре́ль",
+   "morphemes": [
+    "апре́ль"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "April",
+   "loan": "Latin Aprilis"
+  },
+  "май": {
+   "ru": "май",
+   "morphemes": [
+    "май"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "May",
+   "loan": "Latin Maius"
+  },
+  "июнь": {
+   "ru": "ию́нь",
+   "morphemes": [
+    "ию́нь"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "June",
+   "loan": "Latin Iunius"
+  },
+  "июль": {
+   "ru": "ию́ль",
+   "morphemes": [
+    "ию́ль"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "July",
+   "loan": "Latin Iulius"
+  },
+  "август": {
+   "ru": "а́вгуст",
+   "morphemes": [
+    "а́вгуст"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "August",
+   "loan": "Latin Augustus"
+  },
+  "сентябрь": {
+   "ru": "сентя́брь",
+   "morphemes": [
+    "сентя́брь"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "September",
+   "loan": "Latin September"
+  },
+  "октябрь": {
+   "ru": "октя́брь",
+   "morphemes": [
+    "октя́брь"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "October",
+   "loan": "Latin October"
+  },
+  "ноябрь": {
+   "ru": "ноя́брь",
+   "morphemes": [
+    "ноя́брь"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "November",
+   "loan": "Latin November"
+  },
+  "декабрь": {
+   "ru": "дека́брь",
+   "morphemes": [
+    "дека́брь"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "December",
+   "loan": "Latin December"
+  },
+  "лемма": {
+   "ru": "ле́мма",
+   "morphemes": [
+    "ле́мма"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "lemma",
+   "loan": "Greek λῆμμα, a thing taken"
+  },
+  "минус": {
+   "ru": "ми́нус",
+   "morphemes": [
+    "ми́нус"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "minus",
+   "loan": "Latin minus, less"
+  },
+  "литр": {
+   "ru": "литр",
+   "morphemes": [
+    "литр"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "litre",
+   "loan": "French litre"
+  },
+  "килограмм": {
+   "ru": "килогра́мм",
+   "morphemes": [
+    "килогра́мм"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "kilogram",
+   "loan": "French kilogramme"
+  },
+  "меню": {
+   "ru": "меню́",
+   "morphemes": [
+    "меню́"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "menu",
+   "loan": "French menu"
+  },
+  "фильм": {
+   "ru": "фильм",
+   "morphemes": [
+    "фильм"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "film",
+   "loan": "English film"
+  },
+  "инженер": {
+   "ru": "инжене́р",
+   "morphemes": [
+    "инжене́р"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "engineer",
+   "loan": "French ingénieur, through German"
+  },
+  "бутылка": {
+   "ru": "буты́лка",
+   "morphemes": [
+    "буты́лка"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "bottle",
+   "loan": "Polish butelka, from French bouteille"
+  },
+  "функция": {
+   "ru": "фу́нкция",
+   "morphemes": [
+    "фу́нкция"
+   ],
+   "roots": [],
+   "prefixes": [],
+   "suffixes": [],
+   "pos": "noun",
+   "en": "function",
+   "loan": "Latin functio, a performing"
   }
  },
  "forms": {
@@ -11554,7 +13590,147 @@
   "стать": "стать",
   "хорошая": "хороший",
   "матери": "мать",
-  "лев": "лев"
+  "лев": "лев",
+  "брате": "брат",
+  "брату": "брат",
+  "братом": "брат",
+  "сестре": "сестра",
+  "сестрой": "сестра",
+  "сестры": "сестра",
+  "города": "город",
+  "обеда": "обед",
+  "книг": "книга",
+  "работы": "работа",
+  "работе": "работа",
+  "времени": "время",
+  "стола": "стол",
+  "столов": "стол",
+  "окон": "окно",
+  "мной": "я",
+  "тобой": "ты",
+  "пишу": "писать",
+  "писал": "писать",
+  "написал": "написать",
+  "написала": "написать",
+  "написанное": "написать",
+  "напишу": "написать",
+  "напиши": "написать",
+  "знал": "знать",
+  "ждали": "ждать",
+  "увидели": "увидеть",
+  "увидит": "увидеть",
+  "увидите": "увидеть",
+  "узнаем": "узнать",
+  "подумала": "подумать",
+  "подумаю": "подумать",
+  "понял": "понять",
+  "поймёшь": "понять",
+  "хочет": "хотеть",
+  "сделает": "сделать",
+  "скажи": "сказать",
+  "скажите": "сказать",
+  "скажу": "сказать",
+  "говори": "говорить",
+  "слушай": "слушать",
+  "смотри": "смотреть",
+  "смотрел": "смотреть",
+  "читай": "читать",
+  "читая": "читать",
+  "читающий": "читать",
+  "прочитав": "прочитать",
+  "прочитавший": "прочитать",
+  "молчала": "молчать",
+  "понимает": "понимать",
+  "живущий": "жить",
+  "учителем": "учитель",
+  "писателем": "писатель",
+  "какое": "какой",
+  "та": "тот",
+  "те": "тот",
+  "тем": "тот",
+  "которая": "который",
+  "которой": "который",
+  "котором": "который",
+  "которые": "который",
+  "самая": "самый",
+  "задачи": "задача",
+  "часа": "час",
+  "часов": "час",
+  "минут": "минута",
+  "утра": "утро",
+  "вечера": "вечер",
+  "мая": "май",
+  "первое": "первый",
+  "первых": "первый",
+  "второе": "второй",
+  "вторых": "второй",
+  "третье": "третий",
+  "пятницу": "пятница",
+  "субботу": "суббота",
+  "рубля": "рубль",
+  "рублей": "рубль",
+  "стоит": "стоить",
+  "стоят": "стоить",
+  "ручкой": "ручка",
+  "свободным": "свободный",
+  "существом": "существо",
+  "мыслящим": "мыслить",
+  "множеству": "множество",
+  "чётным": "чётный",
+  "простых": "простой",
+  "пяти": "пять",
+  "трёх": "три",
+  "четырём": "четыре",
+  "семи": "семь",
+  "точке": "точка",
+  "функции": "функция",
+  "нравится": "нравиться",
+  "нравятся": "нравиться",
+  "называется": "называться",
+  "находится": "находиться",
+  "начинается": "начинаться",
+  "кончается": "кончаться",
+  "учусь": "учиться",
+  "является": "являться",
+  "решает": "решать",
+  "следует": "следовать",
+  "получаем": "получать",
+  "принадлежит": "принадлежать",
+  "определяет": "определять",
+  "предположим": "предположить",
+  "спасёт": "спасти",
+  "варите": "варить",
+  "открыто": "открытый",
+  "открытое": "открытый",
+  "стекла": "стекло",
+  "войны": "война",
+  "дорого": "дорогой",
+  "дёшево": "дешёвый",
+  "быстро": "быстрый",
+  "важно": "важный",
+  "трудно": "трудный",
+  "труднее": "трудный",
+  "интересно": "интересный",
+  "интереснее": "интересный",
+  "интересная": "интересный",
+  "лучше": "хороший",
+  "хуже": "плохой",
+  "меньше": "маленький",
+  "старше": "старый",
+  "моложе": "молодой",
+  "должна": "должен",
+  "права": "прав",
+  "согласен": "согласный",
+  "согласна": "согласный",
+  "нужен": "нужный",
+  "нужна": "нужный",
+  "иначе": "иной",
+  "бесконечно": "бесконечный",
+  "конечное": "конечный",
+  "единственное": "единственный",
+  "пустое": "пустой",
+  "подожди": "подождать",
+  "мышление": "мышление"
  },
  "cognates": [
   {

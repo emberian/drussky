@@ -159,6 +159,17 @@
   "orig_sha1": "f71c5c7b68a2054f227e5d158ffd415be2875a6b",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "aprel-54d196.m4a": {
+  "key": "апрель",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "апр+ель.",
+  "orig": ".local/drussky-audio/wav/aprel-54d196-05c286.wav",
+  "orig_sha1": "2fadbaab62399b096d1a25a77ac9588d7f0f55eb",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "argument-d562bd.m4a": {
   "key": "аргумент",
   "kind": "ai_generated_speech",
@@ -166,6 +177,17 @@
   "input": "аргум+ент.",
   "orig": ".local/drussky-audio/wav/argument-d562bd-aac955.wav",
   "orig_sha1": "ae72d5e73bd0dc2a530df6204fbccf5e7c134fcf",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "avgust-4c19ee.m4a": {
+  "key": "август",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+август.",
+  "orig": ".local/drussky-audio/wav/avgust-4c19ee-831c16.wav",
+  "orig_sha1": "b6436ae45af12979f5326c187d0fb69adef9bb8f",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -372,6 +394,17 @@
   "orig": ".local/drussky-audio/human/orig/1d71c2c04254.wav",
   "orig_sha1": "11fa3ccdaac15cee6123d665abcfa408b32e4f6e",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/LL-Q7737_%28rus%29-Tatiana_Kerbush-%D0%B1%D1%80%D0%B0%D1%82.wav",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "bratom-d6f415.m4a": {
+  "key": "братом",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "бр+атом.",
+  "orig": ".local/drussky-audio/wav/bratom-d6f415-7b0353.wav",
+  "orig_sha1": "68d71af89ebdcb8cab8fe20368dfeb81df72efff",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "bratu-9e9950.m4a": {
@@ -923,6 +956,17 @@
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Ru-%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "chetyryom-66bd05.m4a": {
+  "key": "четырём",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "четыр+ём.",
+  "orig": ".local/drussky-audio/wav/chetyryom-66bd05-3ea029.wav",
+  "orig_sha1": "415659539f3b24b182d5ab211aabc133e5e65905",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "chisla-5e766d.m4a": {
   "key": "числа",
   "kind": "ai_generated_speech",
@@ -965,6 +1009,17 @@
   "input": "Числ+о назыв+ается прост+ым, +если он+о д+елится т+олько на од+ин и на себ+я.",
   "orig": ".local/drussky-audio/wav/chislo-nazyvaetsya-prostym-esli-ono-deli-70a3e0-f40ef5.wav",
   "orig_sha1": "d405aa2d05e09e40bd5c1eeeb36dd9fd114477f1",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "chislo-nazyvaetsya-prostym-esli-ono-deli-afb64f.m4a": {
+  "key": "число называется простым если оно делится только на единицу и на само себя",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Числ+о назыв+ается прост+ым, +если он+о д+елится т+олько на един+ицу и на сам+о себ+я.",
+  "orig": ".local/drussky-audio/wav/chislo-nazyvaetsya-prostym-esli-ono-deli-afb64f-66c062.wav",
+  "orig_sha1": "26a43dc564695713aeed2654248489314a939080",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -1191,6 +1246,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "chitayushchiy-prochitavshiy-chitaya-proc-30f53c.m4a": {
+  "key": "читающий прочитавший читая прочитав",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "чит+ающий, прочит+авший, чит+ая, прочит+ав.",
+  "orig": ".local/drussky-audio/wav/chitayushchiy-prochitavshiy-chitaya-proc-30f53c-f212a2.wav",
+  "orig_sha1": "231379b0123623d9af4cc17a0e1fc16559efdfe5",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "chitayushchiy-prochitavshiy-napisannyy-o-f791ed.m4a": {
   "key": "читающий прочитавший написанный открытый читая она молчала",
   "kind": "ai_generated_speech",
@@ -1198,6 +1264,17 @@
   "input": "Чит+ающий, прочит+авший, нап+исанный, откр+ытый. Чит+ая, он+а молч+ала.",
   "orig": ".local/drussky-audio/wav/chitayushchiy-prochitavshiy-napisannyy-o-f791ed-a04826.wav",
   "orig_sha1": "133d3d036f659fd97ead2d938ad765718f56b8d3",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "chitayushchiy-prochitavshiy-zhivushchiy-5c332f.m4a": {
+  "key": "читающий прочитавший живущий написанный открытый читая она молчала прочитав она подумала",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Чит+ающий, прочит+авший, жив+ущий. Нап+исанный, откр+ытый. Чит+ая, он+а молч+ала. Прочит+ав, он+а под+умала.",
+  "orig": ".local/drussky-audio/wav/chitayushchiy-prochitavshiy-zhivushchiy-5c332f-a8520c.wav",
+  "orig_sha1": "b90179ab77590e8661435391da9b2aef19595485",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -1914,6 +1991,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "dekabr-53b4af.m4a": {
+  "key": "декабрь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "дек+абрь.",
+  "orig": ".local/drussky-audio/wav/dekabr-53b4af-695ff3.wav",
+  "orig_sha1": "7f03ad310662b5fec8c1c7842664e25881dae85e",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "delal-223b08.m4a": {
   "key": "делал",
   "kind": "ai_generated_speech",
@@ -2122,6 +2210,17 @@
   "input": "Д+есять м+инус тр+и р+авно с+емь.",
   "orig": ".local/drussky-audio/wav/desyat-minus-tri-ravno-sem-429541-a3a9bc.wav",
   "orig_sha1": "22ab47517929e324a750ee39b2c8e499b0565f7b",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "desyat-minus-tri-ravno-semi-ec9cca.m4a": {
+  "key": "десять минус три равно семи",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+есять м+инус тр+и равн+о сем+и.",
+  "orig": ".local/drussky-audio/wav/desyat-minus-tri-ravno-semi-ec9cca-8c30a9.wav",
+  "orig_sha1": "6be5b3b24d15ca0162b3620b38adcc0646af8987",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -2912,6 +3011,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "dva-plyus-dva-ravno-chetyryom-ce4921.m4a": {
+  "key": "два плюс два равно четырём",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Дв+а пл+юс дв+а равн+о четыр+ём.",
+  "orig": ".local/drussky-audio/wav/dva-plyus-dva-ravno-chetyryom-ce4921-208a24.wav",
+  "orig_sha1": "6ced29e8676e3dbaa8afdbac4660d742dd5c3026",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "dva-plyus-tri-4a5acf.m4a": {
   "key": "два плюс три",
   "kind": "ai_generated_speech",
@@ -3074,6 +3184,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "dyoshevo-247a50.m4a": {
+  "key": "дёшево",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+ёшево.",
+  "orig": ".local/drussky-audio/wav/dyoshevo-247a50-03c0d6.wav",
+  "orig_sha1": "c9a497aede6b1f16d96e5256031b86df6b2800c6",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "e-1bc16a.m4a": {
   "key": "э",
   "kind": "human_recording",
@@ -3106,6 +3227,17 @@
   "input": "+едем.",
   "orig": ".local/drussky-audio/wav/edem-ba3134-d5573a.wav",
   "orig_sha1": "42ebd7a5cf5155ffc6961d39af4b5e02b02c8f04",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "edinitsa-268350.m4a": {
+  "key": "единица",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "един+ица.",
+  "orig": ".local/drussky-audio/wav/edinitsa-268350-ba5cd9.wav",
+  "orig_sha1": "ff26f32cfa41661440c8e2d3ab6b33e84d9afacb",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -3931,6 +4063,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "eto-moya-ruchka-ya-pishu-pismo-ruchkoy-s-f107bf.m4a": {
+  "key": "это моя ручка я пишу письмо ручкой со мной брат с тобой сестра",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это мо+я р+учка. +Я пиш+у письм+о р+учкой. С+о мн+ой бр+ат, с тоб+ой сестр+а.",
+  "orig": ".local/drussky-audio/wav/eto-moya-ruchka-ya-pishu-pismo-ruchkoy-s-f107bf-b1f6c8.wav",
+  "orig_sha1": "4d275011de0a57bac474bfb4097c61b55d9addf8",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "eto-moya-tarelka-9feeb4.m4a": {
   "key": "это моя тарелка",
   "kind": "ai_generated_speech",
@@ -4238,6 +4381,17 @@
   "kind": "ai_generated_speech",
   "orig": "crates/rufren-app/assets/foundations/foundation-a9-this-window.wav",
   "orig_sha1": "f7444a17c6c066c8f97cfee755da5409c3501bc8",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "eto-pismo-napisal-brat-5e5a1a.m4a": {
+  "key": "это письмо написал брат",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это письм+о напис+ал бр+ат.",
+  "orig": ".local/drussky-audio/wav/eto-pismo-napisal-brat-5e5a1a-e14dff.wav",
+  "orig_sha1": "ab769f9b76c5422dd5e22c5e5788bd313713e7ce",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eto-pismo-napisannoe-bratom-eff4b0.m4a": {
@@ -4591,6 +4745,17 @@
   "orig": ".local/drussky-audio/human/orig/7996c58e7282.ogg",
   "orig_sha1": "4e1b3e6309b7d2704fd77da6b3da3aedacbde4ff",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Ru-%D1%84%D0%B0%D0%BA%D1%82.ogg",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "fevral-b42442.m4a": {
+  "key": "февраль",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "февр+аль.",
+  "orig": ".local/drussky-audio/wav/fevral-b42442-8d7a22.wav",
+  "orig_sha1": "c9f4571e2a629bcb3a3a3f014b5ebbe61d9a98c4",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "film-70ca1f.m4a": {
@@ -4986,6 +5151,17 @@
   "input": "Гд+е т+ы б+ыл?",
   "orig": ".local/drussky-audio/wav/gde-ty-byl-49cf72-e9c613.wav",
   "orig_sha1": "dca08d72f090ad665506b62fa49dc312c3752436",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "gde-ty-na-rabote-kuda-ty-idyosh-na-rabot-f9214a.m4a": {
+  "key": "где ты на работе куда ты идёшь на работу кот идёт на стол я думаю о брате",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Гд+е т+ы? На раб+оте. Куд+а т+ы ид+ёшь? На раб+оту. К+от ид+ёт на ст+ол. +Я д+умаю о бр+ате.",
+  "orig": ".local/drussky-audio/wav/gde-ty-na-rabote-kuda-ty-idyosh-na-rabot-f9214a-0c0b08.wav",
+  "orig_sha1": "532e3a412af7b0a3852f9edb6992a62b87a7971e",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -5661,6 +5837,39 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "iyul-avgust-sentyabr-oktyabr-noyabr-deka-bb6641.m4a": {
+  "key": "июль август сентябрь октябрь ноябрь декабрь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "и+юль, +август, сент+ябрь, окт+ябрь, но+ябрь, дек+абрь.",
+  "orig": ".local/drussky-audio/wav/iyul-avgust-sentyabr-oktyabr-noyabr-deka-bb6641-aa98eb.wav",
+  "orig_sha1": "80a83d2fbb05601cdba7cf9782c6a8a457094104",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "iyul-e8d84a.m4a": {
+  "key": "июль",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "и+юль.",
+  "orig": ".local/drussky-audio/wav/iyul-e8d84a-3e5b9f.wav",
+  "orig_sha1": "8520b2c8a01c1a871d87cc3e8db75c500da41cb1",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "iyun-57782a.m4a": {
+  "key": "июнь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "и+юнь.",
+  "orig": ".local/drussky-audio/wav/iyun-57782a-996310.wav",
+  "orig_sha1": "a19ee5dc177997806c008e78e494fd99b357829c",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "iz-goroda-e3f313.m4a": {
   "key": "из города",
   "kind": "ai_generated_speech",
@@ -5945,6 +6154,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "kakoy-segodnya-den-ponedelnik-ponedelnik-a11b45.m4a": {
+  "key": "какой сегодня день понедельник понедельник вторник среда четверг пятница суббота воскресенье январь февраль март апрель май июнь июль август сентябрь октябрь ноябрь декабрь какое сегодня число первое мая второе третье",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Как+ой сег+одня д+ень? Понед+ельник. Понед+ельник, вт+орник, сред+а, четв+ерг, п+ятница, субб+ота, воскрес+енье. Янв+арь, февр+аль, м+арт, апр+ель, м+ай, и+юнь, и+юль, +август, сент+ябрь, окт+ябрь, но+ябрь, дек+абрь. Как+ое сег+одня числ+о? П+ервое м+ая, втор+ое, тр+етье.",
+  "orig": ".local/drussky-audio/wav/kakoy-segodnya-den-ponedelnik-ponedelnik-a11b45-b8aa4d.wav",
+  "orig_sha1": "c2c182d8bd1aef733f2fa93e0611aa87a0bf9256",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "kasha-aleksey-pogrebnoj-al-6d71d0.m4a": {
   "key": "каша",
   "kind": "human_recording",
@@ -5979,6 +6199,17 @@
   "input": "К+аша. Возьм+ите молок+о и с+оль. Нал+ейте молок+о в кастр+юлю. Вар+ите д+есять мин+ут. Пот+ом доб+авьте с+ахар. При+ятного аппет+ита!",
   "orig": ".local/drussky-audio/wav/kasha-vozmite-moloko-i-sol-naleyte-molok-aa5a7a-c371ca.wav",
   "orig_sha1": "727ffad5a1b474b0783eea2d504f520f93c6ac39",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "kasha-vozmite-ris-moloko-i-sol-naleyte-m-020055.m4a": {
+  "key": "каша возьмите рис молоко и соль налейте молоко в кастрюлю варите десять минут потом добавьте сахар приятного аппетита",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "К+аша. Возьм+ите р+ис, молок+о и с+оль. Нал+ейте молок+о в кастр+юлю. Вар+ите д+есять мин+ут. Пот+ом доб+авьте с+ахар. При+ятного аппет+ита!",
+  "orig": ".local/drussky-audio/wav/kasha-vozmite-ris-moloko-i-sol-naleyte-m-020055-54f2e4.wav",
+  "orig_sha1": "56223ed1a76eaf1e5172f908366d81d2c03393a4",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -6489,6 +6720,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "knigi-stoyat-dorogo-a-khleb-dyoshevo-a93121.m4a": {
+  "key": "книги стоят дорого а хлеб дёшево",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кн+иги ст+оят д+орого, а хл+еб — д+ёшево.",
+  "orig": ".local/drussky-audio/wav/knigi-stoyat-dorogo-a-khleb-dyoshevo-a93121-40fdd9.wav",
+  "orig_sha1": "e162c5bdaa2e565b1eb82f0d95fd25d599d70055",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "knigi-stoyat-dorogo-e6b35c.m4a": {
   "key": "книги стоят дорого",
   "kind": "ai_generated_speech",
@@ -6529,6 +6771,17 @@
   "input": "Кн+игу чит+ает м+ама. М+ама чит+ает кн+игу. Чит+ает м+ама кн+игу!",
   "orig": ".local/drussky-audio/wav/knigu-chitaet-mama-mama-chitaet-knigu-ch-c197e1-ea1371.wav",
   "orig_sha1": "a4996eff1ee305b9b85fbf724a7247f86e6c1ebd",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "knigu-chitaet-mama-mama-chitaet-knigu-ma-d5c481.m4a": {
+  "key": "книгу читает мама мама читает книгу мама книгу читает",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кн+игу чит+ает м+ама. М+ама чит+ает кн+игу. М+ама кн+игу чит+ает.",
+  "orig": ".local/drussky-audio/wav/knigu-chitaet-mama-mama-chitaet-knigu-ma-d5c481-6e18dc.wav",
+  "orig_sha1": "ed06d76574b0236b20b0e4775116f8a25057b94b",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -7327,6 +7580,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "lev-tolstoy-v-ispovedi-sprashivaet-est-l-b63c28.m4a": {
+  "key": "лев толстой в исповеди спрашивает есть ли в моей жизни такой смысл который не уничтожался бы неизбежно предстоящей мне смертью достоевский в идиоте словами князя мышкина отвечает мир спасёт красота",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Л+ев Толст+ой в «+Исповеди» спр+ашивает: «+Есть ли в мо+ей ж+изни так+ой см+ысл, кот+орый не уничтож+ался бы неизб+ежно предсто+ящей мн+е см+ертью?» Досто+евский в «Иди+оте», слов+ами кн+язя М+ышкина, отвеч+ает: «М+ир спас+ёт красот+а».",
+  "orig": ".local/drussky-audio/wav/lev-tolstoy-v-ispovedi-sprashivaet-est-l-b63c28-b35c70.wav",
+  "orig_sha1": "f86550ee745ba51506113717be5710c360157206",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "lev-tolstoy-v-ispovedi-sprashivaet-est-l-fada59.m4a": {
   "key": "лев толстой в исповеди спрашивает есть ли в моей жизни такой смысл который не уничтожался бы неизбежно предстоящей мне смертью достоевский в идиоте отвечает мир спасёт красота",
   "kind": "ai_generated_speech",
@@ -7771,6 +8035,17 @@
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/LL-Q7737_%28rus%29-Tatiana_Kerbush-%D0%BC%D0%B0%D0%BC%D0%B0.wav",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "mart-f52913.m4a": {
+  "key": "март",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+арт.",
+  "orig": ".local/drussky-audio/wav/mart-f52913-c93c26.wav",
+  "orig_sha1": "148f2db1d522d634c14beb587db7a4077a98114d",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "mat-99ef9a.m4a": {
   "key": "мать",
   "kind": "human_recording",
@@ -7802,6 +8077,28 @@
   "input": "Матем+атика интер+еснее, ч+ем ф+ильм.",
   "orig": ".local/drussky-audio/wav/matematika-interesnee-chem-film-14f54a-d55dfd.wav",
   "orig_sha1": "e1412331219d5db9b70d7a74454b5ae8538dffa8",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "may-a52fce.m4a": {
+  "key": "май",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ай.",
+  "orig": ".local/drussky-audio/wav/may-a52fce-b2e1bd.wav",
+  "orig_sha1": "f5387b0e881c72bf341ca8e48c109ea2dc9caaa4",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "maya-iyunya-sentyabrya-4dab5c.m4a": {
+  "key": "мая июня сентября",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "м+ая, и+юня, сентябр+я.",
+  "orig": ".local/drussky-audio/wav/maya-iyunya-sentyabrya-4dab5c-66bb9b.wav",
+  "orig_sha1": "27bf5458ae2b9b8fed5885603359b3b365a1e32a",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -14359,7 +14656,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "morph-ty-mozhesh-mne-pomoch-342377.m4a": {
-  "key": "ты можешь мне помочь",
+  "key": "ты можешь мне помочь?",
   "kind": "ai_generated_speech",
   "set": "morphology",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
@@ -16126,6 +16423,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "na-rabote-824d19.m4a": {
+  "key": "на работе",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "на раб+оте.",
+  "orig": ".local/drussky-audio/wav/na-rabote-824d19-06314e.wav",
+  "orig_sha1": "d332fe23111a50d36857b524ee2f06cdcd8647c9",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "na-rabotu-e28115.m4a": {
   "key": "на работу",
   "kind": "ai_generated_speech",
@@ -17230,6 +17538,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "noyabr-9ac5e8.m4a": {
+  "key": "ноябрь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "но+ябрь.",
+  "orig": ".local/drussky-audio/wav/noyabr-9ac5e8-5a79ee.wav",
+  "orig_sha1": "15a184960e663f7b43b668d8aff0d281307dbd97",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "nravitsya-dd475d.m4a": {
   "key": "нравится",
   "kind": "ai_generated_speech",
@@ -17765,6 +18084,17 @@
   "input": "+окон.",
   "orig": ".local/drussky-audio/wav/okon-ae517a-04dcd5.wav",
   "orig_sha1": "b2a494850a51e3a8aac0fd3e296eede203db2b04",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "oktyabr-8257f6.m4a": {
+  "key": "октябрь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "окт+ябрь.",
+  "orig": ".local/drussky-audio/wav/oktyabr-8257f6-732568.wav",
+  "orig_sha1": "de2a785e07ea088c76c9b116ace733139cf2f222",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -18604,6 +18934,17 @@
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Ru-%D0%BE%D0%BD%D0%BE.ogg",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "opredelenie-chislo-nazyvaetsya-prostym-e-26c83f.m4a": {
+  "key": "определение число называется простым если оно делится только на единицу и на само себя",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Определ+ение. Числ+о назыв+ается прост+ым, +если он+о д+елится т+олько на един+ицу и на сам+о себ+я.",
+  "orig": ".local/drussky-audio/wav/opredelenie-chislo-nazyvaetsya-prostym-e-26c83f-3ef5ad.wav",
+  "orig_sha1": "6f802394c943d737fa2328fb81063904acc77b7e",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "opredelenie-chislo-nazyvaetsya-prostym-e-f26e4b.m4a": {
   "key": "определение число называется простым если оно делится только на один и на себя",
   "kind": "ai_generated_speech",
@@ -18611,6 +18952,17 @@
   "input": "Определ+ение. Числ+о назыв+ается прост+ым, +если он+о д+елится т+олько на од+ин и на себ+я.",
   "orig": ".local/drussky-audio/wav/opredelenie-chislo-nazyvaetsya-prostym-e-f26e4b-518a2d.wav",
   "orig_sha1": "831ce1614f97189deaec858a83ec4dc0544aa501",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "opredelenie-edinitsa-togda-i-tolko-togda-9bffe1.m4a": {
+  "key": "определение единица тогда и только тогда когда",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "определ+ение, един+ица, тогд+а и т+олько тогд+а, когд+а.",
+  "orig": ".local/drussky-audio/wav/opredelenie-edinitsa-togda-i-tolko-togda-9bffe1-e11c69.wav",
+  "orig_sha1": "b3de56896414b80a69658fdbc40dc3e2ecb9ffbb",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -20593,6 +20945,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "rassmotrim-chislo-proizvedenie-vsekh-pro-b85089.m4a": {
+  "key": "рассмотрим число произведение всех простых чисел плюс один",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Рассм+отрим числ+о: произвед+ение вс+ех прост+ых ч+исел пл+юс од+ин.",
+  "orig": ".local/drussky-audio/wav/rassmotrim-chislo-proizvedenie-vsekh-pro-b85089-616d29.wav",
+  "orig_sha1": "927755a40882d81dd3bb37ac0fc8e5e83f010f8f",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "reshaet-382a26.m4a": {
   "key": "решает",
   "kind": "ai_generated_speech",
@@ -20842,6 +21205,28 @@
   "input": "рубл+ей.",
   "orig": ".local/drussky-audio/wav/rubley-75ab23-00c2d0.wav",
   "orig_sha1": "a6157bf0299f25da1518b5b5576950d2e05dceb5",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "ruchka-bd35d6.m4a": {
+  "key": "ручка",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "р+учка.",
+  "orig": ".local/drussky-audio/wav/ruchka-bd35d6-8d326b.wav",
+  "orig_sha1": "0c187003553e3707b6d1a29be8f7a52f7492b575",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "ruchkoy-08aed5.m4a": {
+  "key": "ручкой",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "р+учкой.",
+  "orig": ".local/drussky-audio/wav/ruchkoy-08aed5-7f0461.wav",
+  "orig_sha1": "5237a1a18a0e8a1a7af8aadc950b40fa6d0d469e",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -21276,6 +21661,17 @@
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Ru-%D1%81%D0%B5%D0%BC%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.ogg",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "semi-9e2ab1.m4a": {
+  "key": "семи",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "сем+и.",
+  "orig": ".local/drussky-audio/wav/semi-9e2ab1-571a45.wav",
+  "orig_sha1": "cb38e6519788da1208b9c938868a5477ab5bac9b",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "semnadtsat-4997d2.m4a": {
   "key": "семнадцать",
   "kind": "human_recording",
@@ -21286,6 +21682,17 @@
   "orig": ".local/drussky-audio/curriculum-human/orig/a71a7688cb94.ogg",
   "orig_sha1": "713dd1cc2880f13fb28a1411bd5ee1540c402810",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Ru-%D1%81%D0%B5%D0%BC%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "sentyabr-d756a7.m4a": {
+  "key": "сентябрь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "сент+ябрь.",
+  "orig": ".local/drussky-audio/wav/sentyabr-d756a7-8aa1cc.wav",
+  "orig_sha1": "e3dbf8db8adc55bf48b93d7a53dcd03dfb18c170",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "sestra-3fcff1.m4a": {
@@ -21774,6 +22181,17 @@
   "orig": ".local/drussky-library/tatoeba/public/raw/1267775.mp3",
   "orig_sha1": "8febab1ee088e41fd8a30396786318bf1b4adc42",
   "orig_url": "https://tatoeba.org/en/audio/download/1267775",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "skolko-stoit-litr-vody-dvadtsat-rubley-e-1c82b4.m4a": {
+  "key": "сколько стоит литр воды двадцать рублей это дёшево а книги стоят дорого",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Ск+олько ст+оит л+итр вод+ы? Дв+адцать рубл+ей. +Это д+ёшево. А кн+иги ст+оят д+орого.",
+  "orig": ".local/drussky-audio/wav/skolko-stoit-litr-vody-dvadtsat-rubley-e-1c82b4-50fe04.wav",
+  "orig_sha1": "b2d36ac7bfe0b3b7c5c07a340badf93b0ea2749e",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "skolko-stoit-litr-vody-dvadtsat-rubley-e-7d091a.m4a": {
@@ -23423,6 +23841,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "teorema-prostykh-chisel-beskonechno-mnog-67718e.m4a": {
+  "key": "теорема простых чисел бесконечно много доказательство предположим что их конечное число рассмотрим число произведение всех простых чисел плюс один тогда оно не делится ни на одно из них значит оно само простое или делится на простое число которого нет среди них получаем противоречие что и требовалось доказать",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Те+орема: прост+ых ч+исел бескон+ечно мн+ого. Доказ+ательство: предпол+ожим, чт+о +их кон+ечное числ+о. Рассм+отрим числ+о: произвед+ение вс+ех прост+ых ч+исел пл+юс од+ин. Тогд+а он+о не д+елится ни на одн+о из н+их. Зн+ачит, он+о сам+о прост+ое +или д+елится на прост+ое числ+о, кот+орого н+ет сред+и н+их. Получ+аем противор+ечие. Чт+о и тр+ебовалось доказ+ать.",
+  "orig": ".local/drussky-audio/wav/teorema-prostykh-chisel-beskonechno-mnog-67718e-c8176c.wav",
+  "orig_sha1": "5840487f866e04f8fc6f58b63bff66bcaab3c6ef",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "teorema-summa-dvukh-chyotnykh-chisel-chy-cccc36.m4a": {
   "key": "теорема сумма двух чётных чисел чётное число доказательство чётное число это число которое делится на два возьмём два чётных числа каждое из них два умноженное на целое число их сумма два умноженное на сумму этих целых чисел значит сумма тоже делится на два то есть она чётная что и требовалось доказать",
   "kind": "ai_generated_speech",
@@ -23550,6 +23979,17 @@
   "orig": ".local/drussky-audio/human/orig/b53ca06f6211.ogg",
   "orig_sha1": "a4786de9617d0ff0be3be05615e84d3d38c94682",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Ru-%D1%82%D0%BE_%D0%B5%D1%81%D1%82%D1%8C.ogg",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "togda-i-tolko-togda-kogda-31aa49.m4a": {
+  "key": "тогда и только тогда когда",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "тогд+а и т+олько тогд+а, когд+а.",
+  "orig": ".local/drussky-audio/wav/togda-i-tolko-togda-kogda-31aa49-77c777.wav",
+  "orig_sha1": "850cb805d5402d2bd412277125167b67d191c9d2",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "togda-summa-tozhe-chyotnaya-0e727f.m4a": {
@@ -23741,6 +24181,17 @@
   "input": "Тр+и м+еньше пят+и, а п+ять б+ольше тр+ёх.",
   "orig": ".local/drussky-audio/wav/tri-menshe-pyati-a-pyat-bolshe-tryokh-e53ba4-674ca9.wav",
   "orig_sha1": "1c1b90f498bfbbb055aeb71419a7c9793da1a3f5",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "tri-menshe-pyati-dva-plyus-dva-ravno-che-78b995.m4a": {
+  "key": "три меньше пяти два плюс два равно четырём",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Тр+и м+еньше пят+и. Дв+а пл+юс дв+а равн+о четыр+ём.",
+  "orig": ".local/drussky-audio/wav/tri-menshe-pyati-dva-plyus-dva-ravno-che-78b995-61b24a.wav",
+  "orig_sha1": "2a5c0d15015b357feb48966a00dea12041e1b2bd",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -28142,6 +28593,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "ya-na-rabote-ya-idu-na-rabotu-6c5306.m4a": {
+  "key": "я на работе я иду на работу",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я на раб+оте. +Я ид+у на раб+оту.",
+  "orig": ".local/drussky-audio/wav/ya-na-rabote-ya-idu-na-rabotu-6c5306-a94332.wav",
+  "orig_sha1": "218b22ba65098ea0b9ff359060fd0fd53efd86ae",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "ya-napisala-pismo-bratu-o-gorode-279e53.m4a": {
   "key": "я написала письмо брату о городе",
   "kind": "ai_generated_speech",
@@ -28483,6 +28945,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "ya-pishu-ruchkoy-dd1108.m4a": {
+  "key": "я пишу ручкой",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я пиш+у р+учкой.",
+  "orig": ".local/drussky-audio/wav/ya-pishu-ruchkoy-dd1108-6853ac.wav",
+  "orig_sha1": "dcf85d9ec58b62efb41bdb801323ec65b0b2450a",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "ya-pishu-rukoy-447b66.m4a": {
   "key": "я пишу рукой",
   "kind": "ai_generated_speech",
@@ -28524,6 +28997,17 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "ya-podumal-i-ponyal-ona-dolgo-govorila-i-212387.m4a": {
+  "key": "я подумал и понял она долго говорила и наконец сказала да",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я под+умал и п+онял. Он+а д+олго говор+ила и након+ец сказ+ала: «Д+а».",
+  "orig": ".local/drussky-audio/wav/ya-podumal-i-ponyal-ona-dolgo-govorila-i-212387-f2b17f.wav",
+  "orig_sha1": "beb72c3f3f1064fdbed89a9caa541cfcfb12de53",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "ya-podumal-i-ponyal-ona-govorila-i-skaza-bfbd89.m4a": {
   "key": "я подумал и понял она говорила и сказала",
   "kind": "ai_generated_speech",
@@ -28553,6 +29037,17 @@
   "input": "+я поним+аю.",
   "orig": ".local/drussky-audio/wav/ya-ponimayu-b5db25-ae8bd5.wav",
   "orig_sha1": "192cbb627aecb86cb3ac05188081b100a5096fc4",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "ya-ponimayu-chto-ty-khochesh-skazat-e4d407.m4a": {
+  "key": "я понимаю что ты хочешь сказать",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я поним+аю, чт+о т+ы х+очешь сказ+ать.",
+  "orig": ".local/drussky-audio/wav/ya-ponimayu-chto-ty-khochesh-skazat-e4d407-7182e5.wav",
+  "orig_sha1": "18fb1468f4dfc48eecaeb1da0de4c02ac20bb021",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -29270,6 +29765,28 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "yanvar-dc5c58.m4a": {
+  "key": "январь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "янв+арь.",
+  "orig": ".local/drussky-audio/wav/yanvar-dc5c58-b15c00.wav",
+  "orig_sha1": "06919a4e97109e42331fb858c01192ef24e442f6",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "yanvar-fevral-mart-aprel-may-iyun-7805d2.m4a": {
+  "key": "январь февраль март апрель май июнь",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "янв+арь, февр+аль, м+арт, апр+ель, м+ай, и+юнь.",
+  "orig": ".local/drussky-audio/wav/yanvar-fevral-mart-aprel-may-iyun-7805d2-e6328a.wav",
+  "orig_sha1": "51a1a491be6e42ab055c96247893dbe66ac1c05f",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "yavlyaetsya-4872ed.m4a": {
   "key": "является",
   "kind": "ai_generated_speech",
@@ -29738,6 +30255,17 @@
   "input": "зн+ачение ф+ункции в т+очке дв+а.",
   "orig": ".local/drussky-audio/wav/znachenie-funktsii-v-tochke-dva-69a898-efa25e.wav",
   "orig_sha1": "82b6660b8bb92435db84ccb08ad5ed46e4b4f02a",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "znachenie-funktsii-v-tochke-dva-ravno-ch-18a2a9.m4a": {
+  "key": "значение функции в точке два равно четырём",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Зн+ачение ф+ункции в т+очке дв+а равн+о четыр+ём.",
+  "orig": ".local/drussky-audio/wav/znachenie-funktsii-v-tochke-dva-ravno-ch-18a2a9-7c1e92.wav",
+  "orig_sha1": "f2a93bb77347f3bf5390125d46c9daf2d0ead39d",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
