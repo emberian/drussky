@@ -14,6 +14,7 @@ struct ReadAloudExercise: View {
     let isActive: Bool
     @State private var report: PronunciationReport?
     @State private var noPairs = false
+    @State private var starting = false
     /// Shadowing: the human reader's sentence cut from the narration, used as the model.
     @State private var narrationChunk: URL?
     private var modelURL: URL? { narrationChunk ?? voice.recordingURL(for: target) }
@@ -109,14 +110,22 @@ struct ReadAloudExercise: View {
     }
 
     private func tap() {
-        if turn.tap(key) { return }
+        if turn.tap(key) || starting { return }
+        starting = true
+        Task { await start(); starting = false }
+    }
+
+    /// Shadowing a narrated sentence waits for the reader's chunk: the model the learner hears
+    /// is the one the take is compared with.
+    private func start() async {
+        if slot.exercise.narration != nil, narrationChunk == nil { narrationChunk = await Narration.chunkURL(for: slot.exercise) }
         let ref = slot.ref, book = slot.book, round = slot.result.roundNumber, target = self.target
         let request = SpeakingTurn.Request(key: key, target: target, takeURL: book.newTakeURL(ref),
                                            model: modelURL, repeats: book.settings.modelRepeats)
         turn.begin(request, voice: voice) { take in
             // Resolved by id and round: the page may have turned or the exercise been reopened.
             book.commitTake(ref, round: round, file: take.file.lastPathComponent, heard: take.heard, target: target,
-                            recognitionAllowed: take.recognitionAllowed, timedOut: take.timedOut)
+                            recognitionAllowed: take.recognitionAllowed, timedOut: take.timedOut, onsetMs: take.onsetMs)
             if let r = take.report, let page = book.page(id: ref.pageID) {
                 book.knowledge.heard(page: page, index: ref.index, take: take.file.lastPathComponent, report: r,
                                      attempt: book.result(ref)?.attempts ?? 0)
@@ -263,15 +272,21 @@ struct TurnStatus: View {
 enum SpokenText {
     static let close = Color(Theme.dynamic(0xB26A00, 0xF2B45A))
 
-    /// Stress stays blue. Only sound verdicts above the confidence floor can add colour;
-    /// uncertain sounds and transcript-only alignments leave the target unmarked.
+    /// The target with the stressed vowel in blue (as everywhere) and each sound's verdict on
+    /// its letters: came out as another or not at all in red, close in amber, right in green —
+    /// only where the verdict clears the confidence floor; an uncertain sound leaves its letters
+    /// unmarked. A word-level report only marks the letters the recognizer heard as others, in
+    /// amber with a dotted line (a hypothesis, not a verdict): it cannot vouch for the rest either.
     static func marked(_ text: String, report: PronunciationReport?, showStress: Bool) -> AttributedString {
         var verdicts: [Int: PhoneJudgement.Verdict] = [:]
         if let report {
             let rank: [PhoneJudgement.Verdict: Int] = [.good: 0, .close: 1, .extra: 1, .substituted: 2, .missing: 2]
             for s in report.sounds {
                 guard let r = s.letterRange else { continue }
-                if s.verdict == .substituted || s.verdict == .missing || s.verdict == .extra {
+                if report.isWordLevel {
+                    // The recognizer's spelling: a hypothesis about these letters, amber and dotted below.
+                    guard s.verdict == .substituted || s.verdict == .missing else { continue }
+                } else if s.verdict == .substituted || s.verdict == .missing || s.verdict == .extra {
                     guard s.supportsCorrection else { continue }
                 } else {
                     guard SpeakingFeedback.permits(s.expected?.confidence) else { continue }
@@ -294,6 +309,9 @@ enum SpokenText {
                 piece.underlineStyle = .single
             }
             switch verdicts[i] {
+            case .substituted? where wordLevel, .missing? where wordLevel:
+                piece.foregroundColor = close
+                piece.underlineStyle = Text.LineStyle(pattern: .dot, color: close)
             case .substituted?:
                 piece.foregroundColor = Theme.redPen
                 piece.underlineStyle = Text.LineStyle(pattern: .solid, color: Theme.redPen)

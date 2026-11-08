@@ -8,9 +8,7 @@ struct WordFamiliesSection: View {
     @State private var openRoot: String?
 
     var body: some View {
-        let k = book.knowledge
-        let m = k.domain.morphology
-        let hubs = Self.hubs(k, m)
+        let hubs = Self.hubs(book)
         if !hubs.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Word families").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
@@ -47,14 +45,17 @@ struct WordFamiliesSection: View {
         var unknown: [String]
     }
 
-    @MainActor static func hubs(_ k: KnowledgeTracker, _ m: Morphology) -> [Hub] {
+    /// Known members by the book's one criterion (`Book.knownLemmas`), which page generation uses too.
+    @MainActor static func hubs(_ book: Book) -> [Hub] {
+        let k = book.knowledge, m = k.domain.morphology
         let t = k.now()
+        let knownLemmas = book.knownLemmas
         return m.families.compactMap { fam -> Hub? in
             guard let root = m.root(fam) else { return nil }
             var known: [(String, Double)] = [], unknown: [String] = []
             for member in m.members(of: fam) {
                 let id = ComponentID(.lexeme, member)
-                if k.model.hasEvidence(id) { known.append((member, k.model.strength(id, at: t) ?? 0)) } else { unknown.append(member) }
+                if knownLemmas.contains(member) { known.append((member, k.model.strength(id, at: t) ?? 0)) } else { unknown.append(member) }
             }
             guard !known.isEmpty else { return nil }
             return Hub(root: root, strength: k.model.strength(ComponentID(.root, fam), at: t), known: known.sorted { $0.1 > $1.1 }, unknown: unknown)
@@ -152,7 +153,7 @@ struct FamilyView: View {
     private func row(_ e: Morphology.Entry, _ k: KnowledgeTracker, _ t: Date) -> some View {
         let id = ComponentID(.lexeme, e.key)
         let strength = k.model.strength(id, at: t)
-        let known = k.model.hasEvidence(id)
+        let known = book.knownLemmas.contains(e.key)
         return HStack(alignment: .firstTextBaseline, spacing: 12) {
             HearButton(text: e.ru, size: 30)
             VStack(alignment: .leading, spacing: 3) {

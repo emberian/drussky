@@ -81,6 +81,14 @@ struct PronunciationReport: Codable, Sendable {
     /// Where the speech begins/ends in the original recording (seconds), after trimming.
     var speechStart: Double?
     var speechEnd: Double?
+    /// How the report was made (nil in reports saved before this field: read as `words` unless
+    /// heard phones are present, see `isWordLevel`).
+    var provenance: Provenance? = nil
+
+    /// `phones`: the sounds themselves were judged (asserted verdicts, evidence). `words`: recognised
+    /// words were compared with the target letter by letter — a hypothesis about what was heard,
+    /// never a measurement of a sound, so its verdicts are shown as uncertain and leave no evidence.
+    enum Provenance: String, Codable, Sendable { case phones, words }
 }
 
 protocol PronunciationAnalyzer: Sendable {

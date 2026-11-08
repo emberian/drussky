@@ -173,6 +173,7 @@ struct NarrationClipButton: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label ?? "Hear the reader")
+        .onDisappear { if player.owner == owner, player.isPlaying { player.pause() } }
     }
 }
 

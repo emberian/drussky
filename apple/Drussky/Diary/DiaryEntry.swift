@@ -37,6 +37,22 @@ struct DiaryCorrection: Codable, Sendable, Hashable {
     var teach: [DiaryTeach]
     var model: String? = nil
     var at: Date
+    /// Whether the marks account for the corrected line (`isConsistent`), decided when the
+    /// correction lands. false: kept for the learner to read, but it grades nothing. nil: from
+    /// before the check existed (read as consistent).
+    var verified: Bool? = nil
+
+    /// Whether the marks account for the corrected line: every span is found in `text`, and the
+    /// text with each span replaced reads as `corrected` (stress, case, punctuation and ё/е
+    /// aside). With no edits, `corrected` must be the text itself. A reply with changed text but
+    /// missing or malformed edits fails this, and must not award the replacement's words as
+    /// produced right (DiaryBook.finishDiary, DiaryKnowledge).
+    func isConsistent(with text: String) -> Bool {
+        func norm(_ s: String) -> String { RussianText.key(s).replacingOccurrences(of: "ё", with: "е") }
+        guard unplaced(in: text).isEmpty else { return false }
+        let applied = segments(of: text).map { seg in seg.edit.map { " " + edits[$0].replacement + " " } ?? seg.text }.joined()
+        return norm(applied) == norm(corrected)
+    }
 
     /// A span of the learner's text (as they wrote it) that the teacher marks, with the edit.
     struct Segment: Hashable {

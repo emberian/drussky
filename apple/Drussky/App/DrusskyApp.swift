@@ -15,7 +15,10 @@ struct DrusskyApp: App {
                         .environment(voice)
                         .environment(speech)
                         .id(ObjectIdentifier(book))
-                        .onChange(of: scenePhase) { _, phase in if phase != .active { app.flushForBackground() } }
+                        .onChange(of: scenePhase) { _, phase in
+                            // Back in front: a new day may have begun while the app sat in the background.
+                            if phase == .active { book.noteSessionStart() } else { app.flushForBackground() }
+                        }
                 case .recovery(let problem):
                     NotebookRecoveryView(problem: problem)
                 case .failed(let message):

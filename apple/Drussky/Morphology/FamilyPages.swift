@@ -4,17 +4,21 @@ import LearningCore
 /// Pages built locally from morphology.json: word families from roots the learner already has
 /// two words of, and the Greek/Latin cognates of mathematics and philosophy.
 extension Book {
-    /// Lemmas the learner has produced (course targets and kept words), as morphology headwords.
+    /// Lemmas the learner has shown they know, as morphology headwords: the memory model has
+    /// evidence on the word (the same criterion the families view draws by). A word a generated
+    /// page merely proposes is vocabulary (`customWords`), not knowledge, until an exercise on it
+    /// is finished; a word met in an inflected form counts through its lemma.
     var knownLemmas: Set<String> {
-        var out = Set<String>()
-        let m = knowledge.domain.morphology
+        let m = knowledge.domain.morphology, model = knowledge.model, domain = knowledge.domain
+        var out = Set(m.lemmas.keys.filter { model.hasEvidence(ComponentID(.lexeme, $0)) })
         for key in targets.keys where key.hasPrefix("word:") {
-            for t in String(key.dropFirst(5)).split(separator: " ") {
-                let tok = String(t)
-                if let e = m.entry(word: knowledge.domain.lemma(of: tok) ?? tok) { out.insert(e.key) }
+            for t in String(key.dropFirst(5)).split(separator: " ").map(String.init) {
+                let lemma = domain.lemma(of: t) ?? t
+                guard model.hasEvidence(domain.wordID(t)) || model.hasEvidence(ComponentID(.lexeme, lemma)),
+                      let e = m.entry(word: lemma) else { continue }
+                out.insert(e.key)
             }
         }
-        for w in customWords { if let e = m.entry(word: RussianText.key(w.ru)) { out.insert(e.key) } }
         return out
     }
 

@@ -129,7 +129,7 @@ struct ContentsView: View {
                         if page.isFinished && page.isBaseline {
                             Text("Sample kept").font(Theme.label(12)).foregroundStyle(Theme.muted)
                         } else if page.isFinished {
-                            Text("\(GradeStamp.grade(for: page))").font(Theme.cursive(30)).foregroundStyle(Theme.redPen)
+                            Text(GradeStamp.mark(for: page)).font(Theme.cursive(30)).foregroundStyle(Theme.redPen)
                         } else {
                             Text("\(page.completedCount)/\(page.exercises.count)")
                                 .font(.system(size: 14, design: .rounded)).foregroundStyle(Theme.muted)
@@ -216,6 +216,7 @@ struct SettingsView: View {
                 } footer: {
                     Text("Before your turn to say something aloud. You can always skip it with a tap.")
                 }
+                TalkVoiceSection()
                 Section {
                     SecureField("Anthropic API key", text: $apiKey)
                         .textContentType(.password)
@@ -238,6 +239,7 @@ struct SettingsView: View {
                 } footer: {
                     Text("Your pages, handwriting, recordings and answer log, as one zip. Restoring checks an export first and keeps the current notebook beside it.")
                 }
+                PDFExportSection()  // Devices/PDF
                 Section {
                     if let graphURL {
                         ShareLink(item: graphURL) { Label("Export knowledge graph", systemImage: "point.3.connected.trianglepath.dotted") }

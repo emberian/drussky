@@ -29,7 +29,10 @@ class PagePurposeTests(unittest.TestCase):
         self.assertEqual(page['purpose'], 'reading')
         self.assertEqual(page['exercises'][-1]['kind'], 'diary')
         body = page['exercises'][:-1]
-        self.assertTrue(all(e['kind'] in ('explain', 'read_meaning') for e in body))
+        # Recognition, hearing and reading aloud: nothing on it demands producing a participle with the Pencil.
+        self.assertTrue(all(e['kind'] in ('explain', 'read_meaning', 'listen_pick', 'read_aloud') for e in body))
+        self.assertFalse(any(validate.is_writing(e) for e in body))
+        self.assertGreater(sum(e['kind'] == 'read_meaning' for e in body) * 2, len(body))
         self.assertTrue(6 <= len(body) <= 10)
         # English option order rotates through the authored helper, so position is not the answer.
         self.assertGreater(len({e['answer'] for e in body if e['kind'] == 'read_meaning'}), 1)

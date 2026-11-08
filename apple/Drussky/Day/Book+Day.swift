@@ -16,6 +16,11 @@ struct DayState: Codable, Sendable, Equatable {
     /// Pages the desk shortened (page id → the line shown on the page), and when it last did.
     var shortened: [String: String]? = nil
     var lastShortened: Date? = nil
+    /// The opening the next new page owes this day ("morning" / "welcome-back", with the days
+    /// away), decided when the session began and consumed when the page is composed.
+    var pendingOpening: String? = nil
+    var pendingOpeningDays: Int? = nil
+    var pendingOpeningSince: Date? = nil
 
     /// In-session only.
     var fatigue: FatigueEstimate? = nil
@@ -23,6 +28,7 @@ struct DayState: Codable, Sendable, Equatable {
 
     enum CodingKeys: String, CodingKey {
         case probes, stabilityScale, lastNudge, lastOpening, lastOpeningKind, deferredAtOpening, shortened, lastShortened
+        case pendingOpening, pendingOpeningDays, pendingOpeningSince
     }
 
     init() {}
@@ -58,11 +64,72 @@ extension Book {
     /// next course page needs. False: nothing special, the ordinary flow decides.
     func appendComposedPage() -> Bool {
         guard !pages.isEmpty else { return false }
-        switch DayShape.shape(lastActivity: lastActivity, now: now(), policy: dayPolicy) {
+        switch pendingShape() ?? DayShape.shape(lastActivity: lastActivity, now: now(), policy: dayPolicy) {
         case .welcomeBack(let days): return appendWelcomeBack(days: days)
         case .morning: return appendMorningPage()
-        case .ordinary: return appendRemediationIfNeeded()
+        case .ordinary: return appendRemediationIfNeeded() || appendConsolidationIfNeeded()
         }
+    }
+
+    static let consolidationUnit = "Закрепление · Settling in"
+
+    /// A heavy day: much due, or the learner tiring (Fatigue). New material stacked on knowledge
+    /// that is right but still slow costs most on such a day.
+    var dayIsHeavy: Bool { dueReviews().count >= dayPolicy.reviewPageThreshold || day.fatigue?.level == .tired }
+
+    /// The next course page leans on things the learner knows but has not yet made quick
+    /// (`CompilationPolicy`: right, timed, still over the floor). On a heavy day they come back
+    /// first, within the day's allowance, instead of the new page being stacked on them. Never
+    /// twice in a row, never on a light day, nothing when no latency was ever measured.
+    func appendConsolidationIfNeeded() -> Bool {
+        guard dayIsHeavy, let (_, source) = nextCoursePage, pages.last?.unitTitle != Self.consolidationUnit else { return false }
+        let slow = knowledge.model.uncompiledPrerequisites(of: pageComponents(of: source), in: knowledge.graph, at: now(),
+                                                            policy: knowledge.compilation)
+        let keys = Array(slow.compactMap(targetKey).prefix(min(6, reviewAllowance())))
+        guard !keys.isEmpty else { return false }
+        let exercises = keys.enumerated().map { reviewExercise(for: $1, modality: nil, variant: pages.count + $0) }
+        appendPage(sourceID: nil, unitTitle: Self.consolidationUnit, title: "Make these quick",
+                   intro: "You know these, and the next page leans on them. One pass so they come without thinking; then on.",
+                   isReview: true, exercises: exercises)
+        return true
+    }
+
+    /// The components a course page introduces or exercises, each once.
+    func pageComponents(of source: Course.Page) -> [ComponentID] {
+        var seen = Set<ComponentID>()
+        return source.exercises.flatMap { knowledge.domain.components(for: $0) }.filter { seen.insert($0).inserted }
+    }
+
+    /// At the start of a session (launch, back to the foreground): what the next new page owes
+    /// the day is decided now, from the last thing done before this session, and kept until that
+    /// page is composed. The first answer of the day may well land on the page left open; that
+    /// answer must not turn a twelve-day absence into an ordinary afternoon.
+    func noteSessionStart() {
+        if let since = day.pendingOpeningSince, !isToday(since) { clearPendingOpening() }  // a decision from another day
+        guard !isToday(day.lastOpening) else { return }  // today's opening page already exists
+        switch DayShape.shape(lastActivity: lastActivity, now: now(), policy: dayPolicy) {
+        case .ordinary: break  // activity already today: keep whatever was decided earlier today
+        case .morning: setPendingOpening("morning", days: nil)
+        case .welcomeBack(let days): setPendingOpening("welcome-back", days: days)
+        }
+    }
+
+    /// The opening decided at session start, if it is today's and still owed.
+    private func pendingShape() -> DayShape? {
+        guard let kind = day.pendingOpening, isToday(day.pendingOpeningSince), !isToday(day.lastOpening) else { return nil }
+        return kind == "welcome-back" ? .welcomeBack(days: day.pendingOpeningDays ?? 0) : .morning
+    }
+
+    private func setPendingOpening(_ kind: String, days: Int?) {
+        day.pendingOpening = kind
+        day.pendingOpeningDays = days
+        day.pendingOpeningSince = startOfToday
+    }
+
+    private func clearPendingOpening() {
+        day.pendingOpening = nil
+        day.pendingOpeningDays = nil
+        day.pendingOpeningSince = nil
     }
 
     /// Reviews still allowed today: the daily cap less the reviews already placed on today's
@@ -112,11 +179,12 @@ extension Book {
     }
 
     /// After a long absence: a stratified sample of what is due, to see where memory stands,
-    /// rather than everything at once.
+    /// rather than everything at once — and never more than the day's allowance.
     private func appendWelcomeBack(days: Int) -> Bool {
         let due = dueReviews()
         guard !due.isEmpty else { return appendMorningPage() }
-        let comp = DayComposition.welcomeBack(due: due, policy: dayPolicy)
+        let comp = DayComposition.welcomeBack(due: due, allowance: reviewAllowance(), policy: dayPolicy)
+        guard !comp.reviews.isEmpty else { return appendMorningPage() }  // nothing allowed today: the course goes on
         let exercises = comp.reviews.enumerated().map { reviewExercise(for: $1.id, modality: $1.modality, variant: pages.count + $0) }
         let waiting = comp.deferred.count
         let intro = "\(days) days away. A few of the things you knew, to see where they stand"
@@ -129,11 +197,12 @@ extension Book {
     }
 
     /// Several things the next course page leans on are weak: a short page bringing them back
-    /// (built locally from the review exercises) before the course goes on.
+    /// (built locally from the review exercises) before the course goes on. These are reviews
+    /// too: the page takes only what is left of the day's allowance.
     private func appendRemediationIfNeeded() -> Bool {
         guard let (_, source) = nextCoursePage, pages.last?.unitTitle != Self.remediationUnit else { return false }
         guard case .remediate(let weak) = frontierDecision(for: source) else { return false }
-        let keys = weak.compactMap(targetKey)
+        let keys = Array(weak.compactMap(targetKey).prefix(reviewAllowance()))
         guard keys.count >= FrontierPolicy().minWeak else { return false }
         let exercises = keys.enumerated().map { reviewExercise(for: $1, modality: nil, variant: pages.count + $0) }
         appendPage(sourceID: nil, unitTitle: Self.remediationUnit, title: "Before the next page",
@@ -149,10 +218,8 @@ extension Book {
     }
 
     private func frontierDecision(for source: Course.Page) -> FrontierDecision {
-        var seen = Set<ComponentID>()
-        let components = source.exercises.flatMap { knowledge.domain.components(for: $0) }.filter { seen.insert($0).inserted }
-        return knowledge.model.frontierDecision(pageComponents: components, in: knowledge.graph, dueCount: dueReviews().count,
-                                                at: now(), day: dayPolicy)
+        knowledge.model.frontierDecision(pageComponents: pageComponents(of: source), in: knowledge.graph, dueCount: dueReviews().count,
+                                         at: now(), day: dayPolicy)
     }
 
     /// The review target a component is recalled through, if the learner has met it.
@@ -176,6 +243,7 @@ extension Book {
         day.lastOpening = startOfToday
         day.lastOpeningKind = kind
         day.deferredAtOpening = deferred
+        clearPendingOpening()
     }
 
     /// While the learner is sharp (Fatigue, within the last 20 minutes): one word from the
@@ -256,35 +324,68 @@ extension Book {
 
     // MARK: The desk
 
-    /// After every finished exercise: a probe's outcome is recorded against what was predicted,
-    /// and the session is read for fatigue. Tired: this page shortens. Sharp: the next page may
-    /// bring one more new word.
-    func deskObserved(_ ref: ExerciseRef, exercise: Exercise, result: ExerciseResult) {
-        guard result.status.isComplete, exercise.baseline == nil else { return }
-        if day.probes.probes.contains(where: { $0.item == ref.item && $0.answered == nil }) {
-            let grade = RussianDomain.grade(exercise, result)
-            var predicted: Double?
-            if grade != nil, let key = exercise.reviewKey, let m = RussianDomain.modality(for: exercise.kind) {
-                // Retrievability just before this very review, as the trace recorded it.
-                predicted = knowledge.domain.reviewComponents(forTarget: key)
-                    .compactMap { knowledge.model.trace($0, m)?.reviews.last?.recallBefore }.min()
-            }
-            let components = Set(exercise.reviewKey.map { knowledge.domain.reviewComponents(forTarget: $0) } ?? [])
-            let lastExposure = knowledge.model.events.last { event in
-                event.item != ref.item && !components.isDisjoint(with: event.components)
-            }?.t
-            var assistance: [String] = []
-            if result.assisted == true { assistance.append("answer previously shown") }
-            if result.readerAgreed == false { assistance.append("reader disagreement") }
-            if knowledge.model.events.contains(where: { $0.item == ref.item && $0.type == .help }) { assistance.append("tutor") }
-            day.probes.observe(item: ref.item, predicted: predicted, observed: grade.map(\.isSuccess), at: now(),
-                               lastExposure: lastExposure,
-                               firstAttempt: result.attempts <= 1 && result.roundNumber == 0 && (result.failedChecks ?? 0) == 0,
-                               assistance: assistance, context: exercise.word ?? exercise.text)
-            nudgeParameters()
+    /// A finished exercise that was a probe: its outcome is recorded against what was predicted
+    /// (retrievability just before it, read before the outcome is folded in). Called by `record`
+    /// before the result is saved, so the result and its observation reach the notebook in one
+    /// write. True when a probe was observed. A weekly sample is never a probe.
+    func observeProbe(_ ref: ExerciseRef, exercise: Exercise, result: ExerciseResult) -> Bool {
+        guard result.status.isComplete, exercise.baseline == nil,
+              day.probes.probes.contains(where: { $0.item == ref.item && $0.answered == nil }) else { return false }
+        let grade = RussianDomain.grade(exercise, result)
+        var predicted: Double?
+        if grade != nil, let key = exercise.reviewKey, let m = RussianDomain.modality(for: exercise.kind) {
+            predicted = knowledge.domain.reviewComponents(forTarget: key).compactMap { knowledge.model.retrievability($0, m, at: now()) }.min()
         }
-        guard let p = index(ofPage: ref.pageID) else { return }
+        // Provenance: the scheduled delay is not the time since the last logged practice, and a
+        // first unaided attempt is not a retry with help.
+        let components = Set(exercise.reviewKey.map { knowledge.domain.reviewComponents(forTarget: $0) } ?? [])
+        let lastExposure = knowledge.model.events.last { $0.item != ref.item && !components.isDisjoint(with: $0.components) }?.t
+        var assistance: [String] = []
+        if result.assisted == true { assistance.append("answer previously shown") }
+        if result.readerAgreed == false { assistance.append("reader disagreement") }
+        if knowledge.model.events.contains(where: { $0.item == ref.item && $0.type == .help }) { assistance.append("tutor") }
+        day.probes.observe(item: ref.item, predicted: predicted, observed: grade.map(\.isSuccess), at: now(),
+                           lastExposure: lastExposure,
+                           firstAttempt: result.attempts <= 1 && result.roundNumber == 0 && (result.failedChecks ?? 0) == 0,
+                           assistance: assistance, context: exercise.word ?? exercise.text)
+        return true
+    }
+
+    /// Probes placed on an exercise that finished without their observation being saved (a crash
+    /// between the result's save and the day's, in notebooks from before the two were one write):
+    /// observed now from the saved result and the trace's retrievability just before its outcome.
+    /// Without this they would stay placed and unanswered for ever, counting for nothing.
+    func reconcileProbes() {
+        var changed = false
+        for probe in day.probes.probes where probe.item != nil && probe.answered == nil {
+            let parts = probe.item!.split(separator: "#", maxSplits: 1).map(String.init)
+            guard parts.count == 2, let i = Int(parts[1]), let page = page(id: parts[0]),
+                  page.exercises.indices.contains(i), page.results[i].status.isComplete else { continue }
+            let ex = page.exercises[i], r = page.results[i]
+            let at = r.updated ?? page.finished ?? page.created
+            let grade = RussianDomain.grade(ex, r)
+            var predicted: Double?
+            if grade != nil, let key = ex.reviewKey, let m = RussianDomain.modality(for: ex.kind) {
+                // The review the outcome made, found by its time (the log's clock runs a hair after the result's).
+                predicted = knowledge.domain.reviewComponents(forTarget: key).compactMap { c -> Double? in
+                    guard let review = knowledge.model.trace(c, m)?.review(at: at.addingTimeInterval(1)), review.t >= at.addingTimeInterval(-1) else { return nil }
+                    return review.recallBefore
+                }.min()
+            }
+            day.probes.observe(item: probe.item!, predicted: predicted, observed: grade.map(\.isSuccess), at: at)
+            changed = true
+        }
+        if changed { saveNow() }
+    }
+
+    /// After every result: the session is read for fatigue. Tired: this page shortens. Sharp: the
+    /// next page may bring one more new word. A probe just observed may nudge the memory model.
+    func deskObserved(_ ref: ExerciseRef, probed: Bool) {
+        if probed { nudgeParameters() }
+        guard let p = index(ofPage: ref.pageID), pages[p].results[safe: ref.index]?.status.isComplete == true,
+              let exercise = pages[p].exercises[safe: ref.index], exercise.baseline == nil else { return }
         let pageID = pages[p].id
+        // The construction page done: two delayed checks in reserved new sentences, at 7 and 30 days.
         if probePolicy.enabled, exercise.kind == .constructionChoice, pages[p].sourceID == ConstructionChoice.key,
            !day.probes.probes.contains(where: { $0.id.hasPrefix("construction-transfer:") }),
            pages[p].exercises.indices.filter({ pages[p].exercises[$0].kind == .constructionChoice })
@@ -307,13 +408,17 @@ extension Book {
 
     /// The page shortens: of the reviews not yet begun, two stay as recognition (hear or read and
     /// pick) instead of recall, the rest are left for a fresher hour (skipped, never graded).
+    /// Begun means any mark at all: an attempt or check, a take, or ink on the strip (the writing
+    /// may still be under the recognizer). A replaced exercise starts a new round, so a check or
+    /// take that began on the old one lands nowhere (`record` and `commitTake` compare rounds).
     private func shorten(page p: Int, _ estimate: FatigueEstimate) {
         var page = pages[p]
         let probeItems = Set(day.probes.probes.compactMap(\.item))
         let untouched = page.exercises.indices.filter { i in
             let r = page.results[i]
             return !r.status.isComplete && page.exercises[i].reviewKey != nil && r.attempts == 0 && (r.failedChecks ?? 0) == 0
-                && r.recognized == nil && !probeItems.contains("\(page.id)#\(i)")
+                && r.recognized == nil && r.recording == nil && !probeItems.contains("\(page.id)#\(i)")
+                && !FileManager.default.fileExists(atPath: store.inkURL(pageID: page.id, index: i).path)
         }
         for i in untouched.prefix(2) {
             let ex = page.exercises[i]
@@ -321,6 +426,7 @@ extension Book {
             let can = reviewModalities(for: key)
             guard let m = [Modality.hearPick, .readPick].first(where: { can.contains($0) }) else { continue }
             page.exercises[i] = reviewExercise(for: key, modality: m, variant: i)
+            page.results[i].round = page.results[i].roundNumber + 1
         }
         for i in untouched.dropFirst(2) {
             page.results[i].status = .skipped

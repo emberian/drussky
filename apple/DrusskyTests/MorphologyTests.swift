@@ -146,7 +146,7 @@ final class MorphologyTests: XCTestCase {
 
     /// Pages are built only from roots with two known members, in letters already met, and
     /// their tiles spell their answers.
-    func testGeneratedPagesUseOnlyKnownLettersAndRoots() {
+    func testGeneratedPagesUseOnlyKnownLettersAndRoots() throws {
         let book = Book(course: course, store: tempStore())
         let m = book.knowledge.domain.morphology
         XCTAssertTrue(book.wordFamilyExercises(from: m).exercises.isEmpty, "nothing known yet: no page")
@@ -196,5 +196,28 @@ final class MorphologyTests: XCTestCase {
             if e.kind == .buildWord { XCTAssertTrue(BuildWordCheck.matches(e.parts ?? [], answer: e.answerText ?? "")) }
         }
         XCTAssertEqual(cog.isEmpty, cogWords.isEmpty)
+
+        // Making a page proposes its new words as vocabulary; it does not make them known. Only a
+        // finished exercise on one does — and the families view draws by the same criterion.
+        let knownBefore = book.knownLemmas
+        XCTAssertNil(MorphologyPages.addFamilies(book))
+        let familyPage = book.page!
+        XCTAssertEqual(book.knownLemmas, knownBefore, "an unanswered page teaches nothing yet")
+        for w in book.customWords.filter({ $0.note?.hasPrefix("from the family") == true }).compactMap({ m.entry(word: RussianText.key($0.ru))?.key }) {
+            XCTAssertFalse(book.knownLemmas.contains(w), "\(w) counted known on being proposed")
+        }
+        XCTAssertFalse(familyPage.exercises.isEmpty)
+        for hub in WordFamiliesSection.hubs(book) { for (w, _) in hub.known { XCTAssertTrue(knownBefore.contains(w), "\(w) shown known without evidence") } }
+        // A page proposing a family member the learner hasn't met: vocabulary until an exercise on
+        // it is finished, and then known to generation and view alike.
+        let fresh = try XCTUnwrap(m.lemmas.values.sorted { $0.key < $1.key }
+            .first { $0.family != nil && !$0.en.isEmpty && !knownBefore.contains($0.key) && RussianText.letters(in: $0.ru).isSubset(of: met) })
+        var d = Exercise(kind: .dictation); d.text = fresh.ru
+        book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [d], newWords: [Course.Word(ru: fresh.ru, en: fresh.en)])
+        XCTAssertNotNil(book.word(fresh.ru), "proposed")
+        XCTAssertFalse(book.knownLemmas.contains(fresh.key), "not known")
+        book.record(page: book.currentPage, exercise: 0) { $0.attempts = 1; $0.recognized = fresh.ru; $0.status = .correct }
+        XCTAssertTrue(book.knownLemmas.contains(fresh.key), "answered: now known")
+        XCTAssertTrue(WordFamiliesSection.hubs(book).contains { $0.known.contains { $0.0 == fresh.key } })
     }
 }

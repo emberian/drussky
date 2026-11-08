@@ -146,4 +146,48 @@ final class KnowledgeTests: XCTestCase {
         XCTAssertEqual(book.knowledge.readability(of: "Я читаю книгу."), 1)
         XCTAssertEqual(book.knowledge.readability(of: "Я читаю книгу. Книга на столе."), 3.0 / 6.0, accuracy: 1e-9)
     }
+
+    /// How long the answer took travels from the result into the log (and back through a backfill),
+    /// feeds the trace's running average, and is reset when the exercise is reopened.
+    func testResponseLatencyTravelsToTheLogAndBack() throws {
+        let store = tempStore()
+        let book = Book(course: course, store: store)
+        var d = Exercise(kind: .dictation); d.text = "кот"
+        book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [d], newWords: [])
+        let ref = ExerciseRef(pageID: book.page!.id, index: 0)
+        // A failed check first (an attempt, timed), then the right answer (an outcome, timed).
+        book.record(ref) { $0.attempts = 1; $0.failedChecks = 1; $0.recognized = "кат"; $0.responseMs = 4200 }
+        book.record(ref) { $0.attempts = 2; $0.recognized = "кот"; $0.status = .correct; $0.responseMs = 3100 }
+        let events = book.knowledge.model.events.filter { $0.item == ref.item }
+        XCTAssertEqual(events.map(\.latencyMs), [4200, 3100])
+        let trace = try XCTUnwrap(book.knowledge.model.trace(ComponentID(.lexeme, "кот"), .hearWrite))
+        XCTAssertEqual(trace.reviews.last?.latencyMs, 3100)
+        XCTAssertEqual(trace.latencySamples, 0, "right after a failed check is `hard`: not how fast the knowledge comes")
+        XCTAssertEqual(book.result(ref)?.responseMs, 3100)
+        book.saveNow()
+        let saved = try BookStore.decoder().decode(BookState.self, from: Data(contentsOf: store.stateURL))
+        XCTAssertEqual(saved.pages.last?.results[0].responseMs, 3100, "persisted with the result")
+        // A crash between the save and the log: the backfilled outcome carries the latency too.
+        let log = EventLog(url: book.knowledge.logURL)
+        let kept = log.load().filter { $0.type != .outcome || $0.item != ref.item }
+        try FileManager.default.removeItem(at: log.url)
+        XCTAssertTrue(log.append(kept))
+        let again = Book(course: course, store: store)
+        let rebuilt = try XCTUnwrap(again.knowledge.model.events.first { $0.id == KnowledgeTracker.outcomeID(item: ref.item, round: 0) })
+        XCTAssertEqual(rebuilt.source, "backfill")
+        XCTAssertEqual(rebuilt.latencyMs, 3100)
+        // Reopened: a new round, its own timing.
+        again.reopen(ref)
+        XCTAssertNil(again.result(ref)?.responseMs)
+        again.record(ref) { $0.attempts = 1; $0.failedChecks = nil; $0.recognized = "кот"; $0.status = .correct; $0.responseMs = 900 }
+        let t = try XCTUnwrap(again.knowledge.model.trace(ComponentID(.lexeme, "кот"), .hearWrite))
+        XCTAssertEqual(t.latencySamples, 1)
+        XCTAssertEqual(t.latencyEMA ?? 0, 900, accuracy: 1e-9)
+        XCTAssertFalse(again.knowledge.isCompiled(ComponentID(.lexeme, "кот")), "one quick answer is not compiled")
+        // The margin wording: untimed says nothing; timed and slow says so; compiled says so.
+        let policy = again.knowledge.compilation
+        XCTAssertFalse(t.hasLatencyEvidence(policy))
+        XCTAssertEqual(policy.floor(for: .hearWrite), 8_000)
+        XCTAssertEqual(policy.floor(for: .copy), 0, "copying is never compiled")
+    }
 }

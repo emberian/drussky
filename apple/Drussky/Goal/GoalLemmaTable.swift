@@ -18,16 +18,16 @@ enum GoalLemmaTable {
     the nominative, gloss "name". Keep every key exactly as given.
     """
 
-    /// Fills the missing entries of the goal's table; returns the updated goal (unchanged when
-    /// there is nothing to do or no key).
-    static func fill(_ goal: Goal, analysis: GoalAnalysis, progress: @escaping (Int, Int) -> Void = { _, _ in }) async throws -> Goal {
+    /// The entries missing from the goal's table, from the tutor (empty when there is nothing to
+    /// do or no key). The caller merges them into the goal as it is by then (`Book.mergeLemmas`):
+    /// the goal passed in is a snapshot and may be stale by the time this returns.
+    static func fill(_ goal: Goal, analysis: GoalAnalysis, progress: @escaping (Int, Int) -> Void = { _, _ in }) async throws -> [String: Goal.LemmaEntry] {
         let missing = analysis.tokensNeedingLemmas.filter { goal.lemmaCache?[$0] == nil }
         // Claude's job (OnDevice/TutorBackend.swift: the on-device model lemmatized 12 of 40 forms); offline it waits.
-        guard !missing.isEmpty, TutorRouter.route(.lemmatize, .live) == .claude, !filling.contains(goal.id) else { return goal }
+        guard !missing.isEmpty, TutorRouter.route(.lemmatize, .live) == .claude, !filling.contains(goal.id) else { return [:] }
         filling.insert(goal.id)
         defer { filling.remove(goal.id) }
-        var updated = goal
-        var table = updated.lemmaCache ?? [:]
+        var table: [String: Goal.LemmaEntry] = [:]
         var done = 0
         for chunk in stride(from: 0, to: missing.count, by: batch).map({ Array(missing[$0..<min($0 + batch, missing.count)]) }) {
             let entries = try await lemmatize(chunk)
@@ -35,8 +35,7 @@ enum GoalLemmaTable {
             done += chunk.count
             progress(done, missing.count)
         }
-        updated.lemmaCache = table
-        return updated
+        return table
     }
 
     /// One call: forms → entries. Forms the tutor skipped are simply absent.

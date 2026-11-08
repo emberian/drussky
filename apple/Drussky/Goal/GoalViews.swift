@@ -129,9 +129,9 @@ struct GoalSection: View {
         .task(id: "\(goal.id)-\(goal.lemmaCache?.count ?? 0)") {
             guard filling == nil, !a.tokensNeedingLemmas.isEmpty else { return }
             do {
-                let updated = try await GoalLemmaTable.fill(goal, analysis: a) { done, total in filling = (done, total) }
+                let entries = try await GoalLemmaTable.fill(goal, analysis: a) { done, total in filling = (done, total) }
                 filling = nil
-                if updated.lemmaCache?.count != goal.lemmaCache?.count { book.update(goal: updated) }
+                book.mergeLemmas(goalID: goal.id, entries)  // into the goal as it is now, not the snapshot
             } catch { filling = nil }
         }
     }

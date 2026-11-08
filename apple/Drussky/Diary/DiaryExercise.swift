@@ -250,6 +250,10 @@ struct RedPen: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             marked
+            if correction.verified == false {
+                Label("The tutor's marks don't match this line as written, so it stays ungraded. Read it as a suggestion.", systemImage: "questionmark.circle")
+                    .scaledFont(13).foregroundStyle(Theme.muted)
+            }
             if !correction.edits.isEmpty {
                 HStack(alignment: .firstTextBaseline, spacing: 12) {
                     Text(RussianText.unstressed(correction.corrected))

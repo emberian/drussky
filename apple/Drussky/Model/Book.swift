@@ -59,6 +59,15 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var readerAgreed: Bool? = nil
     /// Diary: what the learner wrote and the tutor's red-pen correction (Diary/DiaryEntry.swift).
     var diary: DiaryEntry? = nil
+    /// Talk: the spoken conversation with the tutor (Talk/TalkTypes.swift).
+    var talk: TalkConversation? = nil
+    /// Answered on a keyboard rather than with the Pencil (Devices/Typing); evidence goes under `type`.
+    var typed: Bool? = nil
+    /// How long the latest response took, in milliseconds, as the exercise measures it (writing:
+    /// first stroke to last before Check; choosing by ear: clip's end to tap; choosing a meaning or
+    /// checking a built word: shown to tap; saying: cue to voice onset). Becomes the event's
+    /// `latencyMs`; reset when the exercise is reopened.
+    var responseMs: Int? = nil
     var baseline: BaselineResponse? = nil
 
     var roundNumber: Int { round ?? 0 }
@@ -165,6 +174,9 @@ final class Book {
     /// The last failure writing the notebook or its ink; shown until a later write succeeds.
     private(set) var persistenceError: String?
     private var closed = false
+    /// Closed books (before a restore swaps the folder) take no results and log no evidence: the
+    /// folder their paths name is no longer theirs.
+    var isClosed: Bool { closed }
     private var pageIndexByID: [String: Int] = [:]
 
     /// Opens the notebook in `store`, or reports why it can't be opened without touching it.
@@ -174,9 +186,11 @@ final class Book {
         return .success(book)
     }
 
-    init(course: Course, store: BookStore) {
+    /// `now` is the book's clock (tests run it ahead); opening reads it for the day's shape.
+    init(course: Course, store: BookStore, now: @escaping () -> Date = Date.init) {
         self.course = course
         self.store = store
+        self.now = now
         var saved: BookState?
         switch store.load() {
         case .missing: problem = nil; repairs = []
@@ -209,8 +223,23 @@ final class Book {
         Task { await ink.setFailureHandler(writerErrors) }
         guard problem == nil else { return }
         applyLearnedParameters()
-        knowledge.backfill(pages: pages)
+        knowledge.backfill(pages: pages, takeReport: { [store] file in Book.savedReport(of: file, in: store) })
+        reconcileProbes()
+        noteSessionStart()
         if pages.isEmpty { _ = appendNextPage() }
+    }
+
+    /// The report saved beside a take, with when the take was made (the file's own date), for
+    /// evidence that was never logged (`KnowledgeTracker.backfill`).
+    nonisolated static func savedReport(of file: String, in store: BookStore) -> (report: PronunciationReport, at: Date)? {
+        let take = store.root.appendingPathComponent("voice/\(file)")
+        guard let data = try? Data(contentsOf: SpeakingTurn.reportURL(for: take)),
+              let report = try? JSONDecoder().decode(PronunciationReport.self, from: data) else { return nil }
+        let fm = FileManager.default
+        let date = ((try? fm.attributesOfItem(atPath: take.path))?[.modificationDate] as? Date)
+            ?? ((try? fm.attributesOfItem(atPath: SpeakingTurn.reportURL(for: take).path))?[.modificationDate] as? Date)
+        guard let date else { return nil }
+        return (report, date)
     }
 
     // MARK: Pages
@@ -325,13 +354,17 @@ final class Book {
     }
 
     /// Puts a tutor-written page right after the current one and opens it. Its new words join
-    /// the learner's words so the page's exercises feed their reviews.
+    /// the learner's words so the page's exercises feed their reviews. With
+    /// `beforeCurrentIfUntouched`, a page the book inserts by itself on reaching a page nobody
+    /// has started goes in front of that page instead, so the learner turns forward onto it
+    /// afterwards rather than leaving it behind.
     func insertWrittenPage(title: String, intro: String?, unitTitle: String, exercises: [Exercise], newWords: [Course.Word],
-                           sourceID: String? = nil) {
+                           sourceID: String? = nil, beforeCurrentIfUntouched: Bool = false) {
         for w in newWords where word(w.ru) == nil && !w.en.isEmpty {
             customWords.append(Course.Word(ru: w.ru, en: w.en, emoji: w.emoji, note: w.note ?? "from a written page"))
         }
-        let at = min(currentPage + 1, pages.count)
+        let untouched = page?.results.allSatisfy { $0.status == .open && $0.attempts == 0 && $0.recognized == nil } ?? false
+        let at = beforeCurrentIfUntouched && untouched ? currentPage : min(currentPage + 1, pages.count)
         let id = "w" + UUID().uuidString.prefix(8).lowercased()
         pages.insert(BookPage(id: id, number: 0, sourceID: sourceID, unitTitle: unitTitle, title: title, intro: intro,
                               isReview: false, exercises: exercises, results: exercises.map { _ in ExerciseResult() },
@@ -355,13 +388,16 @@ final class Book {
     /// it may read anything on the book (an inout borrow of `pages` here was an exclusivity trap).
     /// A result that finishes is saved before its outcome is logged: if the app dies in between,
     /// the next launch finds the saved result and logs the missing outcome (never the reverse).
+    /// A probe's observation is part of that same save: the result and what it measured are
+    /// never split by a crash. Nothing is recorded in a closed book.
     func record(_ ref: ExerciseRef, _ update: (inout ExerciseResult) -> Void) {
-        guard let p = pageIndexByID[ref.pageID], pages[p].results.indices.contains(ref.index) else { return }
+        guard !closed, let p = pageIndexByID[ref.pageID], pages[p].results.indices.contains(ref.index) else { return }
         let before = pages[p].results[ref.index]
         var after = before
         update(&after)
         after.updated = now()
         let finishing = !before.status.isComplete && after.status.isComplete
+        var probed = false
         if finishing {
             let exercise = pages[p].exercises[ref.index]
             introduce(exercise)
@@ -369,6 +405,7 @@ final class Book {
                 noteSoundPair(exercise, status: after.status)
                 after.learned = true
             }
+            probed = observeProbe(ref, exercise: exercise, result: after)  // Book+Day: before the save below
         }
         var page = pages[p]
         page.results[ref.index] = after
@@ -377,7 +414,7 @@ final class Book {
         pages[p] = page
         if finishing { saveNow() } else { scheduleSave() }
         knowledge.observe(page: page, index: ref.index, before: before, after: after)
-        deskObserved(ref, exercise: page.exercises[ref.index], result: after)  // probes, fatigue (Book+Day)
+        deskObserved(ref, probed: probed)  // fatigue, parameter nudges (Book+Day)
         fluency.observe(page.exercises[ref.index], before: before, after: after, rate: NarrationPlayer.shared.rate)  // listening (Fluency/)
     }
 
@@ -412,6 +449,7 @@ final class Book {
             r.revealed = false
             r.selfAssessed = nil
             r.judged = nil
+            r.responseMs = nil
             r.readerAgreed = nil
         }
     }
@@ -514,7 +552,12 @@ final class Book {
                                       ?? "Comparing minimal pairs: \((ex.examples ?? []).map(\.ru).joined(separator: ", ")).")
         case .diary: lines.append(DiaryEntry.describe(ex, r))
         case .buildWord: lines.append("Building «\(ex.answerText ?? "")» (“\(ex.en ?? "")”) from the tiles \((ex.options ?? ex.parts ?? []).joined(separator: " ")).")
+        case .talk: lines.append(TalkConversation.describe(ex, r))
         case .familyGuess: lines.append("Guessing what «\(ex.word ?? "")» means in «\(ex.text ?? "")» from its root \(ex.root ?? ""), choosing among: \((ex.options ?? []).joined(separator: " / ")).")
+        case .paradigmFill: lines.append("Filling the \(ex.paradigm ?? "") table of «\(ex.word ?? "")»: cells \((ex.cells ?? []).joined(separator: ", ")) (answers \((ex.cells ?? []).compactMap { ex.forms?[$0] }.joined(separator: ", "))).")
+        case .transform: lines.append("Writing «\(ex.word ?? "")» in the \(ex.cue ?? "") cell (answer «\(ex.answerText ?? "")»)" + (ex.before != nil ? " in \(ex.before ?? "")___\(ex.after ?? "")." : "."))
+        case .cueSort: lines.append("Sorting \((ex.items ?? []).map { "«\($0.text)»" }.joined(separator: ", ")) into: \((ex.options ?? []).joined(separator: " / ")).")
+        case .readHandwriting: lines.append("Reading «\(ex.text ?? "")» in someone's handwriting" + (ex.options.map { " and choosing among: \($0.joined(separator: " / "))." } ?? " and printing it."))
         }
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")
@@ -591,12 +634,14 @@ final class Book {
         return NotebookArchive.export(root: store.root)
     }
 
-    /// Stops all writing (before the folder is replaced by a restore).
+    /// Stops all writing (before the folder is replaced by a restore): the notebook, the ink, and
+    /// the evidence log. Anything that lands afterwards (a late take, a late check) is refused.
     func close() async {
         await flush()
         await store.ink.close()
         saveTask?.cancel()
         closed = true
+        knowledge.close()
     }
 
     private func scheduleSave() {

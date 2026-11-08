@@ -43,7 +43,7 @@ struct WordLevelAnalyzer: PronunciationAnalyzer {
             sounds: sounds, syllables: syllables, stressedSyllable: comparison?.takeStress,
             accuracy: judged.isEmpty ? 0 : Double(good) / Double(judged.count),
             tips: tips(target: target, sounds: sounds, comparison: comparison),
-            speechStart: comparison?.takeSpeech?.lowerBound, speechEnd: comparison?.takeSpeech?.upperBound)
+            speechStart: comparison?.takeSpeech?.lowerBound, speechEnd: comparison?.takeSpeech?.upperBound, provenance: .words)
     }
 
     // MARK: Letters
@@ -107,15 +107,49 @@ struct WordLevelAnalyzer: PronunciationAnalyzer {
 
     // MARK: Tips
 
+    /// What the recognizer's words suggest. They are a hypothesis: a recognizer that writes «бил»
+    /// for «был» may have misheard a good ы, so the tip says what was heard and offers the
+    /// contrast's advice as something to try, never as a verdict on the sound.
     static func tips(target: String, sounds: [PhoneJudgement], comparison: ProsodyComparison?) -> [PronunciationTip] {
-        // A word recognizer's spelling is not a measurement of individual sounds.
-        // Retain the transcript and alignment; offer playback rather than accent corrections.
-        return []
+        var tips: [PronunciationTip] = []
+        // A letter heard as another, contrast first (those have a page to practise).
+        let subs = sounds.filter { $0.verdict == .substituted }
+        let ranked = subs.sorted { a, b in
+            let ca = letter(of: a, in: target).map { SoundContrasts.id(expected: $0, heard: heardLetter(a)) } ?? nil
+            let cb = letter(of: b, in: target).map { SoundContrasts.id(expected: $0, heard: heardLetter(b)) } ?? nil
+            return (ca != nil ? 0 : 1) < (cb != nil ? 0 : 1)
+        }
+        if let s = ranked.first, let want = letter(of: s, in: target) {
+            let got = heardLetter(s)
+            let contrast = SoundContrasts.id(expected: want, heard: got)
+            var message = got.map { "The recognizer heard «\($0)» where «\(want)» should be — it may have misheard, or the «\(want)» may want attention." }
+                ?? "The recognizer didn't make out the «\(want)»."
+            if let c = contrast, let advice = SoundContrasts.advice(c) { message += " If so: " + advice }
+            tips.append(PronunciationTip(message: message, contrast: contrast, letterRange: s.letterRange))
+        } else if let missing = sounds.first(where: { $0.verdict == .missing }), let want = letter(of: missing, in: target) {
+            tips.append(PronunciationTip(message: "The recognizer didn't catch the «\(want)» — it may have been quiet or misheard. Listen to the model once more and say it again.",
+                                         contrast: nil, letterRange: missing.letterRange))
+        }
+        if let c = comparison {
+            if let miss = c.stressMisses.first {
+                let want = c.syllables[miss.expected], got = c.syllables[miss.heard]
+                let word = c.syllables.filter { $0.word == miss.word }.map(\.text).joined()
+                let lead = c.syllables.filter({ $0.word == miss.word }).count == c.syllables.count ? "" : "In «\(word)», "
+                let body = "the stress is on «\(want.text)» — make it longer and louder than «\(got.text)»."
+                tips.append(PronunciationTip(message: lead.isEmpty ? body.prefix(1).uppercased() + body.dropFirst() : lead + body,
+                                             contrast: "stress", letterRange: want.letters))
+            } else if let k = c.missedRise {
+                tips.append(PronunciationTip(message: "The model's voice climbs on «\(c.syllables[k].text)»; let yours climb there too.",
+                                             contrast: nil, letterRange: c.syllables[k].letters))
+            }
+        }
+        return Array(tips.prefix(2))
     }
 }
 
 extension PronunciationReport {
-    /// A report from words heard rather than sounds heard: its letter verdicts only flag
-    /// letters that came out as others, never vouch for the rest.
-    var isWordLevel: Bool { heard.isEmpty }
+    /// A report from words heard rather than sounds heard: its letter verdicts are the
+    /// recognizer's hypothesis (shown as uncertain, never evidence) and vouch for nothing.
+    /// Reports saved before `provenance` existed are read by whether they carry heard phones.
+    var isWordLevel: Bool { provenance.map { $0 == .words } ?? heard.isEmpty }
 }

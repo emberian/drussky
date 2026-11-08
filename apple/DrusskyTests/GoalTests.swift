@@ -128,7 +128,7 @@ final class GoalTests: XCTestCase {
         // Knowing the rest opens the first page. спит is outside the course: the page that teaches it
         // lists it as a new word (as the tutor's pages do), and the goal's table knows its lemma.
         var g = goal; g.lemmaCache = ["спит": .init(lemma: "спать", en: "sleeps")]
-        book.update(goal: g)
+        book.mergeLemmas(goalID: goal.id, g.lemmaCache!)
         XCTAssertEqual(book.distance(for: g).ladder.map(\.lemma), ["кот", "спать"])
         var more: [Exercise] = []
         for w in ["кот", "спит"] { var d = Exercise(kind: .dictation); d.text = w; more.append(d) }
@@ -212,6 +212,62 @@ final class GoalTests: XCTestCase {
         XCTAssertEqual(book.currentGoal?.pulledPages, [book.page!.id])
     }
 
+    /// A page the book pulls by itself on reaching a brand-new course page goes in front of it:
+    /// the course page is not left behind untouched with its source counted as delivered.
+    func testAnAutomaticGoalPageGoesBeforeTheUntouchedCoursePage() throws {
+        let book = Book(course: try course(), store: tempStore())
+        QA.complete(book, page: 0, upTo: .max)
+        book.turnForward()
+        let course = try XCTUnwrap(book.page)
+        XCTAssertTrue(course.results.allSatisfy { $0.status == .open })
+        var goal = Goal(title: "Лев и мышь", author: "Толстой", origin: .library, source: "x",
+                        text: try libraryText("tolstoy-lev-i-mysh").text, created: book.now())
+        goal.lemmaCache = ["спал": .init(lemma: "спать", en: "slept"), "мышь": .init(lemma: "мышь", en: "mouse"),
+                           "пробежала": .init(lemma: "пробежать", en: "ran past"), "телу": .init(lemma: "тело", en: "body")]
+        book.addGoal(goal)
+        let d = book.distance(for: goal)
+        let brief = GoalPull.Brief(goal: goal, distance: d, patterns: [])
+        let page = GoalPull.localPage(brief, met: Set(book.course.letters.map(\.upper)), allMet: true)
+        XCTAssertGreaterThanOrEqual(page.exercises.count, 3)
+        let written = PageWriter.Written(title: page.title, intro: page.intro, exercises: page.exercises, new_words: nil)
+        book.insertGoalPage(written, exercises: page.exercises, goal: goal, sentences: brief.sentences, auto: true)
+        XCTAssertTrue(book.page!.isGoalPage)
+        XCTAssertEqual(book.pages[book.currentPage + 1].id, course.id, "the course page is next")
+        XCTAssertEqual(book.pages.map(\.number), Array(1...book.pages.count))
+        XCTAssertTrue(book.turnForward())
+        XCTAssertEqual(book.page?.id, course.id, "turning forward resumes it")
+        // The first page of the goal, opened by the book, does the same; a manual page goes after.
+        book.turnBack()
+        XCTAssertTrue(book.openFirstPageIfReady(force: true))
+        XCTAssertTrue(book.page!.isGoalFirstPage)
+        XCTAssertTrue(book.pages[book.currentPage + 1].isGoalPage)
+        book.goTo(book.index(ofPage: course.id)!)
+        book.insertGoalPage(written, exercises: page.exercises, goal: goal, sentences: brief.sentences)
+        XCTAssertEqual(book.pages[book.currentPage - 1].id, course.id, "asked for: after the current page")
+    }
+
+    /// Lemma filling and page writing hold goal snapshots across their awaits; each lands as a
+    /// patch on the goal as it is then, so neither undoes the other.
+    func testAsyncGoalUpdatesDoNotOverwriteEachOther() throws {
+        let book = Book(course: try course(), store: tempStore())
+        let goal = Goal(title: "t", origin: .pasted, text: "Кот спит. Мама читает.", created: book.now())
+        book.addGoal(goal)
+        let snapshot = try XCTUnwrap(book.currentGoal)   // taken by the page writer before its await
+        book.mergeLemmas(goalID: goal.id, ["спит": .init(lemma: "спать", en: "sleeps")])  // lemma filling lands first
+        book.notePulled(pageID: "w1", goalID: snapshot.id, sentences: 0..<1)                 // then the page
+        XCTAssertEqual(book.currentGoal?.lemmaCache?["спит"]?.lemma, "спать", "the lemma filled meanwhile survives")
+        XCTAssertEqual(book.currentGoal?.pulledPages, ["w1"])
+        XCTAssertEqual(book.currentGoal?.usedSentences, [0])
+        // And the other order: the page first, then the lemmas.
+        book.notePulled(pageID: "w2", goalID: goal.id, sentences: 1..<2)
+        book.mergeLemmas(goalID: goal.id, ["читает": .init(lemma: "читать", en: "reads")])
+        XCTAssertEqual(book.currentGoal?.pulledPages, ["w1", "w2"])
+        XCTAssertEqual(book.currentGoal?.usedSentences, [0, 1])
+        XCTAssertEqual(book.currentGoal?.lemmaCache?.count, 2)
+        book.updateGoal(id: "nobody") { $0.title = "x" }
+        XCTAssertEqual(book.goals.count, 1)
+    }
+
     // MARK: Persistence
 
     func testGoalsPersistAndOldNotebooksDecode() throws {
@@ -289,7 +345,7 @@ final class GoalTests: XCTestCase {
         let book = Book(course: try course(), store: tempStore())
         for p in 0..<8 { QA.complete(book, page: p, upTo: .max); book.turnForward() }
         var goal = Goal(library: try libraryText("tolstoy-lev-i-mysh"), created: book.now())
-        goal = try await GoalLemmaTable.fill(goal, analysis: book.analysis(for: goal))
+        goal.lemmaCache = try await GoalLemmaTable.fill(goal, analysis: book.analysis(for: goal))
         book.addGoal(goal)
         XCTAssertFalse(goal.lemmaCache?.isEmpty ?? true)
         let d = book.distance(for: goal)

@@ -29,9 +29,20 @@ extension Book {
         if currentGoalID == id { currentGoalID = goals.first?.id }
     }
 
-    func update(goal: Goal) {
-        guard let i = goals.firstIndex(where: { $0.id == goal.id }) else { return }
-        goals[i] = goal
+    /// Changes the stored goal with this id in place. Work that spans an await (lemma filling, a
+    /// page being written) never holds a whole goal across it: it patches the fields it owns, so
+    /// two such updates landing in either order keep each other's progress.
+    func updateGoal(id: String, _ patch: (inout Goal) -> Void) {
+        guard let i = goals.firstIndex(where: { $0.id == id }) else { return }
+        var g = goals[i]
+        patch(&g)
+        goals[i] = g
+    }
+
+    /// Lemma entries the tutor supplied, merged into the goal's table (newer entries win).
+    func mergeLemmas(goalID: String, _ entries: [String: Goal.LemmaEntry]) {
+        guard !entries.isEmpty else { return }
+        updateGoal(id: goalID) { g in g.lemmaCache = (g.lemmaCache ?? [:]).merging(entries) { _, new in new } }
     }
 
     // MARK: Distance
@@ -77,19 +88,24 @@ extension Book {
 
     // MARK: Pages toward the goal
 
-    /// Records a page written toward the goal and the sentences its passage used.
-    func notePulled(pageID: String, goal: Goal, sentences: Range<Int>?) {
-        var g = goal
-        g.pulledPages = (g.pulledPages ?? []) + [pageID]
-        if let sentences { g.usedSentences = Array(Set((g.usedSentences ?? []) + Array(sentences))).sorted() }
-        update(goal: g)
+    /// Records a page written toward the goal and the sentences its passage used, on the goal as
+    /// it is now (the brief's snapshot may predate lemma entries filled in meanwhile).
+    func notePulled(pageID: String, goalID: String, sentences: Range<Int>?) {
+        updateGoal(id: goalID) { g in
+            g.pulledPages = (g.pulledPages ?? []) + [pageID]
+            if let sentences { g.usedSentences = Array(Set((g.usedSentences ?? []) + Array(sentences))).sorted() }
+        }
     }
 
-    /// Inserts a page written toward `goal` after the current one.
-    func insertGoalPage(_ written: PageWriter.Written, exercises: [Exercise], goal: Goal, sentences: Range<Int>?) {
+    /// Inserts a page written toward `goal`. A page the book pulled by itself (`auto`), on reaching
+    /// a brand-new course page, goes in front of that page: the learner reads it first and turns
+    /// forward onto the course page, which otherwise stayed behind untouched while its reviews
+    /// still counted toward the day and its source counted as delivered.
+    func insertGoalPage(_ written: PageWriter.Written, exercises: [Exercise], goal: Goal, sentences: Range<Int>?, auto: Bool = false) {
         insertWrittenPage(title: written.title, intro: written.intro, unitTitle: "Toward your book",
-                          exercises: exercises, newWords: written.new_words ?? [], sourceID: "goal:\(goal.id)")
-        if let id = page?.id { notePulled(pageID: id, goal: goal, sentences: sentences) }
+                          exercises: exercises, newWords: written.new_words ?? [], sourceID: "goal:\(goal.id)",
+                          beforeCurrentIfUntouched: auto)
+        if let id = page?.id { notePulled(pageID: id, goalID: goal.id, sentences: sentences) }
     }
 
     /// The first page of the goal as a passage with tap-to-gloss: the original sentences, every
@@ -119,20 +135,21 @@ extension Book {
         return ex
     }
 
-    /// When the first page is readable (≥ 0.98 production-backed form coverage in each of its sentences) and hasn't opened
-    /// yet, opens it as a page right after the current one. With `force`, opens it regardless
-    /// (QA). Returns whether a page was inserted.
+    /// When the first page is readable (≥ 0.98 production-backed form coverage in each of its
+    /// sentences) and hasn't opened yet, opens it as a page beside the current one: in front of it
+    /// when that page is untouched (it was just made for the learner, who turns forward onto it
+    /// afterwards), after it otherwise. With `force`, opens it regardless (QA). Returns whether a
+    /// page was inserted.
     @discardableResult
     func openFirstPageIfReady(force: Bool = false) -> Bool {
-        guard var goal = currentGoal, goal.firstPageOpened == nil else { return false }
+        guard let goal = currentGoal, goal.firstPageOpened == nil else { return false }
         let d = distance(for: goal)
         guard force || d.firstPageReady else { return false }
         let ex = firstPageExercise(for: goal)
         insertWrittenPage(title: goal.title, intro: "Try the first page of your book. Take it slowly; tap any word you want to check.",
                           unitTitle: "Your book · \(goal.author ?? "")".trimmingCharacters(in: CharacterSet(charactersIn: " ·")),
-                          exercises: [ex], newWords: [], sourceID: "goal-first:\(goal.id)")
-        goal.firstPageOpened = now()
-        update(goal: goal)
+                          exercises: [ex], newWords: [], sourceID: "goal-first:\(goal.id)", beforeCurrentIfUntouched: true)
+        updateGoal(id: goal.id) { $0.firstPageOpened = now() }
         return true
     }
 }

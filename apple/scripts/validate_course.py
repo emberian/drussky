@@ -19,12 +19,21 @@ VOWELS = set("аеёиоуыэюя")
 CYR = re.compile(r"[Ѐ-ӿ]")
 PUNCT = set(".,?!—–-\"«»:;…()")
 FAMILIES = {"familiar", "false_friend", "new", "sign"}
-WRITING = {"meet", "trace", "copy", "dictation", "translate", "fill"}
+WRITING = {"meet", "trace", "copy", "dictation", "translate", "fill", "transform", "paradigm_fill"}
+
+
+def is_writing(e):
+    """Written with the Pencil (a paradigm table filled from tiles is not)."""
+    k = e.get("kind")
+    if k == "read_handwriting":
+        return "options" not in e  # printed back on the line; with options it is a pick
+    return k in WRITING and not (k == "paradigm_fill" and "options" in e)
 KINDS = {
     "meet": ({"letter"}, set()),
     "explain": ({"text"}, {"examples"}),
-    "trace": ({"text"}, set()),
-    "copy": ({"text", "times"}, set()),
+    # `cursive`: the ghost is the cursive stroke model whatever the setting (the cursive unit).
+    "trace": ({"text"}, {"cursive"}),
+    "copy": ({"text", "times"}, {"cursive"}),
     "listen_pick": ({"say", "options"}, set()),
     "dictation": ({"text"}, set()),
     "read_aloud": ({"text"}, set()),
@@ -36,6 +45,13 @@ KINDS = {
     # Morphology/ (see COURSE_SCHEMA.md): tiles → word, and a new word on a known root.
     "build_word": ({"en", "answer", "parts"}, {"options", "alternatives"}),
     "family_guess": ({"text", "word", "root", "options", "answer", "en"}, set()),
+    # Grammar/ (see COURSE_SCHEMA.md): a table to fill, a form from a cue, phrases sorted by pattern.
+    "paradigm_fill": ({"word", "paradigm", "forms", "cells"}, {"options"}),
+    "transform": ({"word", "cue", "answer"}, {"paradigm", "before", "after", "hint"}),
+    "cue_sort": ({"options", "items"}, {"paradigm"}),
+    # Cursive/ (see COURSE_SCHEMA.md): a word or line in someone's handwriting, printed back
+    # (no options: counts as writing) or picked among look-alikes.
+    "read_handwriting": ({"text"}, {"options", "seed"}),
 }
 BANNED = re.compile(r"\b(optional|optionally|recording|recordings|recorded|accuracy|accurate|the app|this app|model voice|disclaimer|friend|friends|coach|tutor|might not|may not be)\b", re.I)
 
@@ -153,6 +169,17 @@ def russian_fields(e):
         out.append(("answer", e["answer"]))
     if k == "family_guess":
         out += [("text", e["text"]), ("word", e["word"])]
+    if k == "paradigm_fill":
+        out.append(("word", e["word"]))
+        out += [(f"forms.{c}", f) for c, f in e["forms"].items()]
+        out += [("options", o) for o in e.get("options", [])]
+    if k == "transform":
+        out += [("word", e["word"]), ("answer", e["answer"]), ("before", e.get("before", "")), ("after", e.get("after", ""))]
+    if k == "cue_sort":
+        out += [("items", it["text"]) for it in e["items"]]
+    if k == "read_handwriting":
+        out.append(("text", e["text"]))
+        out += [("options", o) for o in e.get("options", [])]
     return out
 
 
@@ -180,6 +207,10 @@ def spoken_strings(course):
                     out.append(e["answer"])
                 if k == "family_guess":
                     out += [e["text"], e["word"]]
+                if k == "transform":
+                    out.append(e["answer"])
+                if k == "read_handwriting":
+                    out.append(e["text"])
     return [s for s in out if s and CYR.search(s)]
 
 
@@ -242,9 +273,15 @@ def check_meaning_before_recall(course, lex_keys):
                 elif k == "family_guess":
                     show_entry(key(e["word"]))  # guessed, then told
                     shown_tokens.add(key(e["word"]))
+                elif k in ("paradigm_fill", "transform"):
+                    recall = [e["word"]]  # the headword must be known; its forms are the system being learned
+                    for f in ([e["answer"]] if k == "transform" else list(e["forms"].values())):
+                        for part in f.split(" / "):
+                            show_entry(key(part))
+                            shown_tokens.add(key(part))
                 elif k in ("translate", "fill"):
                     recall = [e["answer"]]
-                elif k in ("dictation", "read_meaning"):
+                elif k in ("dictation", "read_meaning", "read_handwriting"):
                     recall = [e["text"]]
                 for r in recall:
                     gap = missing(r)
@@ -252,16 +289,20 @@ def check_meaning_before_recall(course, lex_keys):
                         err(f"{p['id']}#{n} {k}", f"recalls {gap} before its meaning was shown (in {r!r})")
 
 
-def check_page_purpose(where, page):
-    """Composition follows the learning purpose; diary lines remain outside the count."""
-    body = [e for e in page["exercises"] if e.get("kind") != "diary"]
+def check_page_purpose(where, page, body=None):
+    """Composition follows the learning purpose; diary lines remain outside the count.
+    A writing page (the default) is mostly Pencil work (`is_writing`: a tiled paradigm is not)
+    and mixes in hearing and speaking; a reading page is mostly reading tasks; an oral page is
+    mostly listening and speaking with at least one spoken response."""
+    if body is None:
+        body = [e for e in page["exercises"] if e.get("kind") != "diary"]
     kinds = [e.get("kind") for e in body]
     purpose = page.get("purpose", "writing")
     if purpose not in {"writing", "reading", "oral"}:
         err(where, f"unknown page purpose {purpose!r}")
         return
     if purpose == "writing":
-        writing = sum(k in WRITING for k in kinds)
+        writing = sum(is_writing(e) for e in body)
         if writing * 2 <= len(body):
             err(where, f"writing is {writing}/{len(body)}, not a majority")
         if not {"listen_pick", "dictation"} & set(kinds):
@@ -283,6 +324,8 @@ def main():
     morph_path = path.parent / "morphology.json"
     morphology = json.loads(morph_path.read_text()) if morph_path.exists() else {"roots": [], "lemmas": {}, "forms": {}, "cognates": []}
     roots = {r["id"]: r for r in morphology["roots"]}
+    par_path = path.parent / "paradigms.json"
+    paradigms = json.loads(par_path.read_text()) if par_path.exists() else {"words": {}, "uses": [], "tables": []}
 
     if set(course) != {"version", "letters", "lexicon", "units"}:
         err("top", f"keys {sorted(course)}")
@@ -361,7 +404,7 @@ def main():
             body = [e for e in exs if e.get("kind") != "diary"]
             if not 6 <= len(body) <= 10:
                 err(pw, f"{len(body)} exercises (need 6-10)")
-            check_page_purpose(pw, p)
+            check_page_purpose(pw, p, body)
             for n, e in enumerate(exs, 1):
                 w = f"{pw}#{n} {e.get('kind')}"
                 k = e.get("kind")
@@ -499,8 +542,77 @@ def main():
                     missing = [x for x in toks if x != wk and x not in lex_tokens]
                     if missing:
                         err(w, f"words around the new one not in lexicon: {missing}")
-                if k in ("dictation", "translate", "fill", "read_meaning"):
-                    s = e["text"] if k in ("dictation", "read_meaning") else (e["before"] + e["answer"] + e["after"] if k == "fill" else e["answer"])
+                if k in ("paradigm_fill", "transform"):
+                    par_word = paradigms["words"].get(key(e["word"]))
+                    if not par_word:
+                        err(w, f"{e['word']!r} is not a paradigms.json word")
+                    else:
+                        if par_word["ru"] != e["word"]:
+                            err(w, f"word {e['word']!r} is written {par_word['ru']!r} in paradigms.json")
+                        table_id = e.get("paradigm")
+                        own = ({par_word["table"], "past", "imp"} if par_word["pos"] == "verb" else {par_word["table"]}) \
+                            | {t["id"] for t in paradigms["tables"] if key(e["word"]) in t["words"]}
+                        if table_id and table_id not in own:
+                            err(w, f"table {table_id!r} is not {e['word']}'s ({sorted(own)})")
+                        cells = e["cells"] if k == "paradigm_fill" else [e["cue"]]
+                        for c in cells:
+                            if c not in par_word["forms"]:
+                                err(w, f"{e['word']} has no cell {c!r}")
+                        if k == "paradigm_fill":
+                            for c, f in e["forms"].items():
+                                if par_word["forms"].get(c) != f:
+                                    err(w, f"forms[{c}] = {f!r}, paradigms.json says {par_word['forms'].get(c)!r}")
+                            if not set(e["cells"]) <= set(e["forms"]) or not e["cells"]:
+                                err(w, "cells must be a non-empty subset of forms")
+                            if "options" in e:
+                                answers = [e["forms"][c] for c in e["cells"]]
+                                if not all(a in e["options"] for a in answers) or len(set(e["options"])) != len(e["options"]):
+                                    err(w, "options must hold every asked form once, without repeats")
+                        else:
+                            want = par_word["forms"].get(e["cue"], "").split(" / ")
+                            if e["answer"] not in want:
+                                err(w, f"answer {e['answer']!r} is not {e['word']} {e['cue']} = {want}")
+                            if ("before" in e) != ("after" in e) or ("before" in e and "hint" not in e):
+                                err(w, "a gap needs before, after and hint together")
+                            if e.get("before") and not e["before"].endswith(" "):
+                                err(w, "before must end with a space")
+                            if e.get("after") and not (e["after"][0] in " " or e["after"][0] in PUNCT):
+                                err(w, "after must start with a space or punctuation")
+                            if e.get("hint") and CYR.search(e["hint"]):
+                                err(w, "hint must be English")
+                            toks = [t for t in key(e.get("before", "") + " " + e.get("after", "")).split() if t not in lex_tokens]
+                            if toks:
+                                err(w, f"words around the gap not in lexicon: {toks}")
+                if k == "cue_sort":
+                    titles = {u["title"] for u in paradigms["uses"]} | {u["id"] for u in paradigms["uses"]} | {t["title"] for t in paradigms["tables"]} | {t["id"] for t in paradigms["tables"]}
+                    if len(set(e["options"])) != len(e["options"]) or len(e["options"]) < 2:
+                        err(w, "options must be 2+ distinct buckets")
+                    for o in e["options"]:
+                        if o not in titles:
+                            err(w, f"bucket {o!r} is no paradigms.json use or table")
+                    if len(e["items"]) < 2:
+                        err(w, "at least two items")
+                    for it in e["items"]:
+                        if set(it) != {"text", "answer"} or not isinstance(it["answer"], int) or not 0 <= it["answer"] < len(e["options"]):
+                            err(w, f"item {it!r}")
+                        missing = [t for t in key(it["text"]).split() if t not in lex_tokens]
+                        if missing:
+                            err(w, f"words not in lexicon: {missing}")
+                    if len({it["answer"] for it in e["items"]}) < 2:
+                        err(w, "items must fall into at least two buckets")
+                if k in ("trace", "copy") and "cursive" in e and e["cursive"] is not True:
+                    err(w, "cursive must be true when present")
+                if k == "read_handwriting":
+                    if "seed" in e and (not isinstance(e["seed"], int) or isinstance(e["seed"], bool) or e["seed"] < 0):
+                        err(w, f"seed {e['seed']!r} must be a non-negative integer")
+                    if "options" in e:
+                        okeys = [key(o) for o in e["options"]]
+                        if len(okeys) < 2 or len(set(okeys)) != len(okeys):
+                            err(w, f"options must be 2+ and distinct: {okeys}")
+                        if key(e["text"]) not in okeys:
+                            err(w, "text not among options")
+                if k in ("dictation", "translate", "fill", "read_meaning", "read_handwriting"):
+                    s = e["text"] if k in ("dictation", "read_meaning", "read_handwriting") else (e["before"] + e["answer"] + e["after"] if k == "fill" else e["answer"])
                     missing = [t for t in key(s).split() if t not in lex_tokens]
                     if missing:
                         err(w, f"words not in lexicon: {missing}")
@@ -521,6 +633,11 @@ def main():
                     produced.append(key(e["say"]))
                 elif k == "build_word":
                     produced.append(key(e["answer"]))
+                elif k == "transform":
+                    produced.append(key(e["answer"]))
+                elif k == "paradigm_fill":
+                    produced.append(key(e["word"]))  # the headword's table is filled under it
+                    produced += [key(e["forms"][c]) for c in e["cells"]]
     padded = [f" {t} " for t in produced]
     for wd in lexicon:
         k = key(wd["ru"])

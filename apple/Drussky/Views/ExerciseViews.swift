@@ -106,6 +106,11 @@ struct ExerciseRow: View {
         case .diary: DiaryExercise(slot: slot, isActive: isActive)
         case .buildWord: BuildWordExercise(slot: slot, isActive: isActive)
         case .familyGuess: FamilyGuessExercise(slot: slot, isActive: isActive)
+        case .readHandwriting: ReadHandwritingExercise(slot: slot, isActive: isActive)
+        case .talk: TalkExercise(slot: slot, isActive: isActive)
+        case .transform: WritingExercise(slot: slot, isActive: isActive)  // Grammar/: a form from a cue, on the strip
+        case .paradigmFill: ParadigmFillExercise(slot: slot, isActive: isActive)
+        case .cueSort: CueSortExercise(slot: slot, isActive: isActive)
         }
         }
     }
@@ -237,9 +242,10 @@ struct MeetExercise: View {
                         .foregroundStyle(Theme.ink)
                         .accessibilityLabel("handwritten \(letter.upper)")
                     HearButton(text: letter.say, size: 52 * k)
-                    WatchStrokesButton(demo: demo)
+                    if !compact { WatchStrokesButton(demo: demo, cursive: cursive) }  // on a phone it sits under the letters: the row must fit 390 pt
                 }
                 let about = VStack(alignment: .leading, spacing: 4) {
+                    if compact { WatchStrokesButton(demo: demo) }
                     (Text(letter.sound).font(.system(size: 18, weight: .semibold))
                      + Text("  ") + Text(Theme.stressed(letter.tip, show: book.settings.showStress)).font(.system(size: 17)))
                         .foregroundStyle(Theme.text)
@@ -262,13 +268,16 @@ struct MeetExercise: View {
                 }
                 WritingExercise(slot: slot, isActive: isActive, ghostOverride: "\(letter.upper) \(letter.lower)",
                                 instructionOverride: "Trace it, then write it a few more times on your own.",
-                                coach: LetterCoach(letter: letter, demo: demo))
+                                coach: LetterCoach(letter: letter, demo: demo, cursive: cursive))
             }
             .onChange(of: book.advanceSignal) { _, _ in
                 if isActive && slot.isAdvanceTarget { voice.play(letter.say) }
             }
         }
     }
+
+    /// The cursive setting, or a page that asks for cursive on its own (Cursive/).
+    private var cursive: Bool { book.settings.cursiveModels || slot.exercise.cursive == true }
 
     private func knownLetters(adding upper: String) -> Set<String> {
         Set(book.targets.keys.filter { $0.hasPrefix("letter:") }.map { String($0.dropFirst(7)) }).union([upper])
@@ -346,7 +355,9 @@ struct WritingExercise: View {
     private var ex: Exercise { slot.exercise }
     private var result: ExerciseResult { slot.result }
     private var target: String { ex.target ?? "" }
-    private var isRecall: Bool { [.dictation, .translate, .fill].contains(ex.kind) }
+    private var isRecall: Bool { [.dictation, .translate, .fill, .transform, .readHandwriting].contains(ex.kind) }
+    /// The cursive setting, or an exercise that asks for cursive on its own (Cursive/).
+    private var cursive: Bool { book.settings.cursiveModels || ex.cursive == true }
     /// Recall judged by the learner after Check, the reader hinting (Judgement/SelfJudgement.swift).
     private var selfJudged: Bool { isRecall && book.settings.writingJudge == .myself }
     private var judging: Bool { selfJudged && checked && !pad.isEmpty && !result.status.isComplete }
@@ -366,7 +377,7 @@ struct WritingExercise: View {
         let sizing = ghost ?? target
         let times = ghost != nil ? ghostTimes : (ex.kind == .copy ? max(ex.times ?? 1, 1) : 1)
         let preferred: CGFloat = horizontalCompact ? 96 : 112
-        return StripMetrics.fitting(sizing, times: times, width: width, cursive: book.settings.cursiveModels, preferred: preferred)
+        return StripMetrics.fitting(sizing, times: times, width: width, cursive: cursive, preferred: preferred)
     }
 
     @Environment(\.horizontalSizeClass) private var sizeClass
@@ -378,7 +389,7 @@ struct WritingExercise: View {
             if isRecall { HookLine(word: target) }  // Hooks/: a fading mnemonic before the recall
             ZStack(alignment: .topTrailing) {
                 WritingStrip(controller: pad, height: stripHeight, ghost: ghost, ghostTimes: ghostTimes,
-                             cursive: book.settings.cursiveModels, fingerDrawing: book.settings.fingerDrawing, locked: judging)
+                             cursive: cursive, fingerDrawing: book.settings.fingerDrawing, locked: judging)
                     .frame(height: stripHeight)
                     .accessibilityIdentifier("strip-\(slot.index)")
                     .background(GeometryReader { g in Color.clear.onAppear { width = g.size.width }
@@ -405,17 +416,18 @@ struct WritingExercise: View {
                     idleTask?.cancel()
                     let reader = opinion?.revision == pad.revision ? opinion : nil
                     noteWritingFluency(matched: reader?.matched ?? false, reading: reader?.reading, confidence: nil)
-                    SelfJudgement.record(verdict, on: slot, reader: reader)
+                    SelfJudgement.record(verdict, on: slot, reader: reader, responseMs: pad.inkDurationMs)
                     if verdict == .notQuite, let s = ex.spoken { voice.play(s) }
                 }
             }
+            if KeyboardPresence.shared.present { TypedAnswer(slot: slot, isActive: isActive) }  // Devices/Typing: a hardware keyboard may answer
             if (result.inkAttempts ?? 0) > 0 {
                 EarlierAttempts(urls: (1...(result.inkAttempts ?? 0)).map { slot.book.inkAttemptURL(slot.ref, attempt: $0) },
                                 height: stripHeight * 0.4)
             }
-            // Formation hints compare with the print stroke models: never against cursive guides.
-            if let coach, !book.settings.cursiveModels {  // tucked into the strip's empty bottom margin, clear of "Write it again"
-                FormationHintLine(pad: pad, letter: coach.letter, lift: stripHeight * 0.08,
+            // Formation hints compare with the stroke models of the hand shown: print or cursive.
+            if let coach {  // tucked into the strip's empty bottom margin, clear of "Write it again"
+                FormationHintLine(pad: pad, letter: coach.letter, cursive: cursive, lift: stripHeight * 0.08,
                                   clearTrailing: result.status.isComplete ? 130 : 0)
             }
             controls
@@ -424,7 +436,7 @@ struct WritingExercise: View {
         .onChange(of: pad.isEmpty) { _, empty in if checked && !empty { readSilently() } }  // ink already on the strip when Check stands
         .onChange(of: book.advanceSignal) { _, _ in
             guard isActive, slot.isAdvanceTarget, ex.kind == .dictation else { return }
-            if ex.narration != nil { NarrationPlayer.shared.play(exercise: ex, owner: "\(slot.page.id)-\(slot.index)") }
+            if ex.narration != nil { voice.stop(); NarrationPlayer.shared.play(exercise: ex, owner: "\(slot.page.id)-\(slot.index)") }
             else if let s = ex.spoken { voice.play(s) }
         }
     }
@@ -471,6 +483,8 @@ struct WritingExercise: View {
                     .foregroundStyle(Theme.text)
                 Text(ex.hint ?? "").scaledFont(16).italic().foregroundStyle(Theme.muted)
             }
+        case .transform:
+            TransformPrompt(exercise: ex)
         default:
             EmptyView()
         }
@@ -509,10 +523,13 @@ struct WritingExercise: View {
                 .font(Theme.label(14)).foregroundStyle(Theme.good))
         }
         if result.status == .missed {
-            return AnyView(HStack(spacing: 10) {
-                Text("Copy the red version once, beside yours. It will come back soon.")
-                    .scaledFont(15).foregroundStyle(Theme.redPen)
-                if let s = ex.spoken { HearButton(text: s, size: 32) }
+            return AnyView(VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 10) {
+                    Text("Copy the red version once, beside yours. It will come back soon.")
+                        .scaledFont(15).foregroundStyle(Theme.redPen)
+                    if let s = ex.spoken { HearButton(text: s, size: 32) }
+                }
+                GrammarRowHint(exercise: ex)  // Grammar/: the paradigm row of a missed form, its cell marked
             })
         }
         if let reading = lastReading, !result.status.isComplete {
@@ -576,6 +593,7 @@ struct WritingExercise: View {
         if checking { pendingCheck = (pendingCheck ?? false) || manual; return }
         checking = true
         let drawing = pad.drawing, revision = pad.revision
+        let took = pad.inkDurationMs  // first stroke to the last before this check
         let target = self.target
         let practice = !isRecall
         let subjectDrop = ex.kind == .translate
@@ -599,6 +617,7 @@ struct WritingExercise: View {
                     r.attempts += manual ? 1 : 0
                     r.status = practice ? .done : .correct
                     r.recognized = reading?.best
+                    r.responseMs = took
                 }
                 lastReading = nil
             } else if manual {
@@ -606,6 +625,7 @@ struct WritingExercise: View {
                     r.attempts += 1
                     r.failedChecks = (r.failedChecks ?? 0) + 1
                     r.recognized = reading?.best
+                    r.responseMs = took
                 }
                 lastReading = reading?.best ?? ""
             } else if again == true {
@@ -656,10 +676,13 @@ struct ListenPickExercise: View {
     @Environment(Book.self) private var book
     let slot: ExerciseSlot
     let isActive: Bool
+    /// When the clip last finished (response latency runs from here to the tap).
+    @State private var clipEndedAt: Date?
 
     var body: some View {
         let ex = slot.exercise
         let options = ex.options ?? []
+        let clipKey = RussianText.audioKey(ex.say ?? "")
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 14) {
                 HearButton(text: ex.say ?? "", size: 52)
@@ -688,18 +711,25 @@ struct ListenPickExercise: View {
         .onChange(of: book.advanceSignal) { _, _ in
             if isActive, slot.isAdvanceTarget, let s = ex.say { voice.play(s) }
         }
+        .onChange(of: voice.speakingKey) { old, new in
+            // The clip of this exercise just ended: the clock for the tap starts now.
+            if old == clipKey, new == nil { clipEndedAt = Date() }
+        }
     }
 
     private func choose(_ i: Int, options: [String]) {
         let say = slot.exercise.say
         let right = options[i] == say
         let missedNow = !right && slot.result.attempts + 1 >= 2
+        let took = clipEndedAt.map { Int(Date().timeIntervalSince($0) * 1000) }
+        clipEndedAt = nil
         // A wrong pick plays what was picked; the last miss plays what it really was.
         if missedNow, let say { voice.play(say) } else if !right, let s = options[safe: i] { voice.play(s) }
         slot.finish { r in
             r.chosen = i
             r.attempts += 1
             r.status = right ? (r.attempts == 1 ? .correct : .done) : (r.attempts >= 2 ? .missed : .open)
+            r.responseMs = took
         }
     }
 }
@@ -707,6 +737,8 @@ struct ListenPickExercise: View {
 struct ReadMeaningExercise: View {
     let slot: ExerciseSlot
     let isActive: Bool
+    /// When the exercise came up (response latency runs from here to the tap).
+    @State private var shownAt: Date?
 
     var body: some View {
         let ex = slot.exercise
@@ -716,10 +748,13 @@ struct ReadMeaningExercise: View {
             ChoiceGrid(options: ex.options ?? [], chosen: slot.result.chosen, correct: ex.answerIndex,
                        russian: false, showStress: true, locked: slot.result.status.isComplete) { i in
                 let right = i == ex.answerIndex
+                let took = shownAt.map { Int(Date().timeIntervalSince($0) * 1000) }
+                shownAt = Date()  // a second pick is timed from the first
                 slot.finish { r in
                     r.chosen = i
                     r.attempts += 1
                     r.status = right ? (r.attempts == 1 ? .correct : .done) : (r.attempts >= 2 ? .missed : .open)
+                    r.responseMs = took
                 }
             }
             if slot.result.status == .missed, let answer = ex.answerIndex.flatMap({ ex.options?[safe: $0] }) {
@@ -731,6 +766,7 @@ struct ReadMeaningExercise: View {
                 }
             }
         }
+        .onChange(of: isActive, initial: true) { _, active in if active, shownAt == nil { shownAt = Date() } }
     }
 }
 
