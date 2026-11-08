@@ -134,6 +134,9 @@ final class Book {
     var soundStats: [String: ContrastStat] = [:]
     /// While on, the Pencil writes anywhere on the page (margin notes) instead of in exercises.
     var marginMode = false
+    /// Texts the learner wants to read for real (Goal/); one is current.
+    var goals: [Goal] = [] { didSet { scheduleSave() } }
+    var currentGoalID: String? { didSet { scheduleSave() } }
     private(set) var advanceSignal = 0
     private(set) var advancePageID: String?
     func requestAdvance(page id: String) { advancePageID = id; advanceSignal += 1 }
@@ -179,6 +182,8 @@ final class Book {
             customWords = saved.customWords ?? []
             soundStats = saved.soundStats ?? [:]
             day = saved.day ?? DayState()
+            goals = saved.goals ?? []
+            currentGoalID = saved.currentGoalID
         }
         reindexPages()
         knowledge.now = { [unowned self] in self.now() }
@@ -306,13 +311,14 @@ final class Book {
 
     /// Puts a tutor-written page right after the current one and opens it. Its new words join
     /// the learner's words so the page's exercises feed their reviews.
-    func insertWrittenPage(title: String, intro: String?, unitTitle: String, exercises: [Exercise], newWords: [Course.Word]) {
+    func insertWrittenPage(title: String, intro: String?, unitTitle: String, exercises: [Exercise], newWords: [Course.Word],
+                           sourceID: String? = nil) {
         for w in newWords where word(w.ru) == nil && !w.en.isEmpty {
             customWords.append(Course.Word(ru: w.ru, en: w.en, emoji: w.emoji, note: w.note ?? "from a written page"))
         }
         let at = min(currentPage + 1, pages.count)
         let id = "w" + UUID().uuidString.prefix(8).lowercased()
-        pages.insert(BookPage(id: id, number: 0, sourceID: nil, unitTitle: unitTitle, title: title, intro: intro,
+        pages.insert(BookPage(id: id, number: 0, sourceID: sourceID, unitTitle: unitTitle, title: title, intro: intro,
                               isReview: false, exercises: exercises, results: exercises.map { _ in ExerciseResult() },
                               created: now(), finished: nil), at: at)
         for i in pages.indices { pages[i].number = i + 1 }
@@ -587,7 +593,8 @@ final class Book {
             try store.saveState(.init(pages: pages, memories: legacyMemories, courseCursor: courseCursor,
                                       currentPage: currentPage, settings: settings, customWords: customWords,
                                       soundStats: soundStats.isEmpty ? nil : soundStats,
-                                      targets: targets.values.sorted { $0.key < $1.key }, day: day))
+                                      targets: targets.values.sorted { $0.key < $1.key }, day: day,
+                                      goals: goals.isEmpty ? nil : goals, currentGoalID: currentGoalID))
             if persistenceError?.hasPrefix("notebook") == true { persistenceError = nil }
         } catch {
             persistenceError = "notebook: \((error as NSError).localizedDescription)"
@@ -621,6 +628,9 @@ struct BookState: Codable {
     var targets: [ReviewTarget]? = nil
     /// Day shape, probes, learned parameters (optional: older notebooks lack it).
     var day: DayState? = nil
+    /// Texts the learner wants to read ("your book"), and which is current (optional: older notebooks lack them).
+    var goals: [Goal]? = nil
+    var currentGoalID: String? = nil
 }
 
 /// Something the learner should be able to recall, and when they met it.

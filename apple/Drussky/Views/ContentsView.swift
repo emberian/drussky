@@ -13,6 +13,7 @@ struct ContentsView: View {
                 VStack(alignment: .leading, spacing: 28) {
                     stats
                     DeskNotes()
+                    GoalSection()
                     KnowledgeSection()
                     MyRussianSection()
                     alphabet

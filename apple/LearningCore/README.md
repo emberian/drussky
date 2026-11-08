@@ -43,6 +43,10 @@ Knowing a word by ear is not knowing how to write it, so each modality has its o
 - **Growth**: on each day, the sum over components of the best R within a modality group,
   giving the expected number recallable.
 - **Coverage**: the share of a text's tokens with some candidate component at R ≥ 0.5.
+- **Targets** (`Target.swift`): something the learner wants to be able to do, as weighted units
+  (each a key — the thing to learn — with candidate components that cover it) grouped into
+  segments (sentences). `distance(to:)` gives coverage by weight, distinct keys known, each
+  segment's known share, and a ladder of unknown keys by the weight they would unlock.
 
 ## Time and the learner
 
