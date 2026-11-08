@@ -26,11 +26,9 @@ struct ExerciseSlot {
     var result: ExerciseResult { page.results[index] }
 
     func record(_ update: (inout ExerciseResult) -> Void) { book.record(ref, update) }
-    /// Records, then moves the page on if this finished the exercise (an explicit action).
+    /// Finish in place. Answering an exercise is not a request to move the paper or play the next one.
     func finish(_ update: (inout ExerciseResult) -> Void) {
-        let was = book.result(ref)?.status.isComplete ?? true
         record(update)
-        if !was && book.result(ref)?.status.isComplete == true { book.requestAdvance(page: ref.pageID) }
     }
     /// Whether an advance signal is for this exercise's page.
     var isAdvanceTarget: Bool { book.advancePageID == ref.pageID }
@@ -108,9 +106,11 @@ struct ExerciseRow: View {
         case .familyGuess: FamilyGuessExercise(slot: slot, isActive: isActive)
         case .readHandwriting: ReadHandwritingExercise(slot: slot, isActive: isActive)
         case .talk: TalkExercise(slot: slot, isActive: isActive)
+        case .structure: StructureExercise(slot: slot, isActive: isActive)
         case .transform: WritingExercise(slot: slot, isActive: isActive)  // Grammar/: a form from a cue, on the strip
         case .paradigmFill: ParadigmFillExercise(slot: slot, isActive: isActive)
         case .cueSort: CueSortExercise(slot: slot, isActive: isActive)
+        case .listening: ListeningExercise(slot: slot, isActive: isActive)  // Views/ListeningView.swift
         }
         }
     }
@@ -186,29 +186,28 @@ struct RussianLine: View {
     @Environment(Book.self) private var book
     var text: String
     var size: CGFloat = 34
-    /// Show the meaning beside the word: first contact with a word is an introduction.
+    /// Show the meaning below the word: first contact with a word is an introduction.
     var gloss: Bool = false
     var body: some View {
-        HStack(alignment: .center, spacing: 14) {
-            Text(Theme.stressed(text, show: book.settings.showStress))
-                .russianFont(size, weight: .medium)
-                .foregroundStyle(Theme.text)
-            HearButton(text: text, size: 40)
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .center, spacing: 14) {
+                Text(Theme.stressed(text, show: book.settings.showStress))
+                    .russianFont(size, weight: .medium)
+                    .foregroundStyle(Theme.text)
+                HearButton(text: text, size: 40)
+            }
             if gloss { MeaningTag(text: text) }
         }
     }
 }
 
-/// "· cat 🐈" — the meaning of a course word (or a kept word), wherever it is presented.
+/// The meaning of a course word (or a kept word), wherever it is presented.
 struct MeaningTag: View {
     @Environment(Book.self) private var book
     var text: String
     var body: some View {
         if let w = book.word(text) ?? book.word(RussianText.unstressed(text)) {
-            HStack(spacing: 6) {
-                Text(w.en).font(.system(size: 17, weight: .medium)).foregroundStyle(Theme.muted)
-                if let e = w.emoji { Text(e).font(.system(size: 20)) }
-            }
+            Text(w.en).font(.system(size: 17, weight: .medium)).foregroundStyle(Theme.muted)
             .accessibilityLabel("means \(w.en)")
         }
     }
@@ -251,7 +250,7 @@ struct MeetExercise: View {
                         .foregroundStyle(Theme.text)
                         .fixedSize(horizontal: false, vertical: true)
                     if let example = letter.example, RussianText.letters(in: example).isSubset(of: knownLetters(adding: letter.upper)) {
-                        HStack(spacing: 8) {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text("as in").scaledFont(15).foregroundStyle(Theme.muted)
                             RussianLine(text: example, size: 22, gloss: true)
                         }
@@ -300,9 +299,11 @@ struct ExplainExercise: View {
             if let examples = slot.exercise.examples, !examples.isEmpty {
                 FlowRow(spacing: 18) {
                     ForEach(examples, id: \.self) { ex in
-                        HStack(spacing: 8) {
+                        VStack(alignment: .leading, spacing: 4) {
                             RussianLine(text: ex.ru, size: 24)
-                                .fixedSize()  // a word, never "м…": the flow row gives each example its own width
+                                // A word takes its own width in the flow row, never "м…"; a sentence wider
+                                // than the page (a dialogue line on a phone) wraps instead of being clipped.
+                                .fixedSize(horizontal: false, vertical: true)
                             Text(ex.en).scaledFont(15).foregroundStyle(Theme.muted)
                         }
                     }
@@ -451,9 +452,11 @@ struct WritingExercise: View {
         case .meet:
             Instruction(text: instructionOverride ?? "Trace it.")
         case .trace:
-            HStack(spacing: 14) {
-                Instruction(text: "Trace, saying it as you write.")
-                HearButton(text: target, size: 36)
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 14) {
+                    Instruction(text: "Trace, saying it as you write.")
+                    HearButton(text: target, size: 36)
+                }
                 MeaningTag(text: target)
             }
         case .copy:
@@ -474,7 +477,6 @@ struct WritingExercise: View {
             VStack(alignment: .leading, spacing: 4) {
                 Instruction(text: "Write it in Russian.")
                 HStack(spacing: 12) {
-                    if let emoji = book.word(target)?.emoji { Text(emoji).scaledFont(40) }
                     Text(ex.en ?? "").scaledFont(28, weight: .semibold, design: .serif).foregroundStyle(Theme.text)
                 }
             }
@@ -495,7 +497,7 @@ struct WritingExercise: View {
     }
 
     @ViewBuilder private var controls: some View {
-        HStack(spacing: 10) {
+        FlowRow(spacing: 10) {
             if !result.status.isComplete && !pad.isEmpty && !judging {
                 if selfJudged {
                     PillButton(title: "Check", systemImage: "checkmark", prominent: true) { checked = true; readSilently() }
@@ -509,9 +511,9 @@ struct WritingExercise: View {
                 PillButton(title: "Undo", systemImage: "arrow.uturn.backward") { pad.undo() }
                 PillButton(title: "Clear", systemImage: "eraser") { pad.clear(); lastReading = nil }
             }
-            Spacer(minLength: 0)
         }
-        .frame(minHeight: result.status.isComplete ? 0 : 34)
+        .frame(minHeight: 44)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .animation(.easeOut(duration: 0.2), value: pad.isEmpty)
         if let feedback = feedbackLine {
             feedback
@@ -540,7 +542,7 @@ struct WritingExercise: View {
             return AnyView(VStack(alignment: .leading, spacing: 8) {
                 Text(reading.isEmpty ? "I can't make that out yet." : "That reads to me as «\(reading)».")
                     .scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
-                HStack(spacing: 10) {
+                FlowRow(spacing: 10) {
                     PillButton(title: "Try again", systemImage: "arrow.counterclockwise") { pad.clear(); lastReading = nil }
                     PillButton(title: "Show me", systemImage: "eye", tint: Theme.redPen) {
                         slot.record { $0.revealed = true; $0.status = .missed }
@@ -663,9 +665,10 @@ struct WritingExercise: View {
 
 /// The teacher's correction, written in red above the line.
 struct Correction: View {
+    @Environment(Book.self) private var book
     let text: String
     var body: some View {
-        Text(RussianText.unstressed(text))
+        Text(Theme.stressed(text, show: book.settings.showStress))
             .font(Theme.cursive(38))
             .foregroundStyle(Theme.redPen)
             .rotationEffect(.degrees(-2))
@@ -811,20 +814,24 @@ struct ChoiceGrid: View {
     let russian: Bool
     let showStress: Bool
     var locked = false
+    /// A pick not judged yet (a message's answers are judged together at the end): the chosen one
+    /// is shown as chosen, with no mark and no colour of right or wrong.
+    var neutral = false
     let onChoose: (Int) -> Void
 
     var body: some View {
         let finished = locked || (chosen != nil && chosen == correct)
+        let judged = finished || !neutral
         FlowRow(spacing: 12) {
             ForEach(Array(options.enumerated()), id: \.offset) { i, option in
                 let isChosen = chosen == i
                 let isRight = correct == i
                 let revealed = finished && isRight && !isChosen
                 let shown = russian ? Theme.stressed(option, show: showStress) : AttributedString(option)
-                let color: Color = isChosen ? (isRight ? Theme.good : Theme.redPen) : (revealed ? Theme.good : Theme.text)
+                let color: Color = isChosen ? (judged ? (isRight ? Theme.good : Theme.redPen) : Theme.accent) : (revealed ? Theme.good : Theme.text)
                 Button { onChoose(i) } label: {
                     HStack(spacing: 8) {
-                        if isChosen || revealed {
+                        if (isChosen && judged) || revealed {
                             Image(systemName: isRight ? "checkmark" : "xmark").font(.system(size: 15, weight: .bold))
                         }
                         Group {
@@ -840,9 +847,10 @@ struct ChoiceGrid: View {
                                 style: StrokeStyle(lineWidth: isChosen || revealed ? 2.5 : 1, dash: revealed ? [6, 4] : [])))
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier("choice-\(i)")
                 .allowsHitTesting(!finished)  // not .disabled: the marked answers stay full strength
-                .sensoryFeedback(isRight ? .success : .error, trigger: isChosen)
-                .accessibilityValue(isChosen ? (isRight ? "your choice, right" : "your choice, wrong") : revealed ? "the right answer" : "")
+                .sensoryFeedback(judged ? (isRight ? .success : .error) : .selection, trigger: isChosen)
+                .accessibilityValue(isChosen ? (judged ? (isRight ? "your choice, right" : "your choice, wrong") : "your choice") : revealed ? "the right answer" : "")
             }
         }
     }
@@ -855,11 +863,17 @@ struct ChoiceGrid: View {
 struct FlowRow: Layout {
     var spacing: CGFloat = 10
 
+    /// Each child is offered the row's width, never more: a child that would wrap (a scene card
+    /// with a long title) reports the height it will really take, so rows below do not overlap it.
+    private func fit(_ s: LayoutSubview, in width: CGFloat) -> CGSize {
+        s.sizeThatFits(ProposedViewSize(width: width.isFinite ? width : nil, height: nil))
+    }
+
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let maxW = proposal.width ?? .infinity
         var x: CGFloat = 0, y: CGFloat = 0, rowH: CGFloat = 0, widest: CGFloat = 0
         for s in subviews {
-            let size = s.sizeThatFits(.unspecified)
+            let size = fit(s, in: maxW)
             if x > 0 && x + size.width > maxW { x = 0; y += rowH + spacing; rowH = 0 }
             x += size.width + spacing
             rowH = max(rowH, size.height)
@@ -871,7 +885,7 @@ struct FlowRow: Layout {
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         var x = bounds.minX, y = bounds.minY, rowH: CGFloat = 0
         for s in subviews {
-            let size = s.sizeThatFits(.unspecified)
+            let size = fit(s, in: bounds.width)
             if x > bounds.minX && x + size.width > bounds.maxX { x = bounds.minX; y += rowH + spacing; rowH = 0 }
             s.place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(size))
             x += size.width + spacing
@@ -895,8 +909,12 @@ struct PassageExercise: View {
     @State private var selected: String?
     @State private var showTranslation = false
     @State private var pass = ReadingPass()  // Fluency/: a finger-follow reading pass, words a minute
+    /// The «Структу́ра» layer (Structure/): the text's sentences found in library-structure.json, and what is open.
+    @State private var passage: PassageStructure?
+    @State private var layer = StructureLayer()
 
     private var text: String { slot.exercise.text ?? "" }
+    private var structureOn: Bool { passage != nil && book.settings.showStructure == true }
 
     /// Lines (dialogue turns, verse) of words, punctuation kept attached for display.
     private var lines: [[String]] {
@@ -908,17 +926,36 @@ struct PassageExercise: View {
         VStack(alignment: .leading, spacing: 14) {
             if slot.exercise.narration != nil, slot.exercise.words != nil {
                 // A human reading: the words light up as they are said (Narration/ReadAlongView.swift).
-                ReadAlongView(exercise: slot.exercise, owner: "\(slot.page.id)-\(slot.index)", selected: $selected)
+                ReadAlongView(exercise: slot.exercise, owner: "\(slot.page.id)-\(slot.index)", selected: $selected,
+                              structure: passage, layer: layer)
+                panel
             } else {
-            HStack(spacing: 14) {
-                Instruction(text: "Read it. Tap any word you want to check.")
-                HearButton(text: text, size: 40, label: "Whole text")
+            // One row where it fits (iPad); the instruction on its own line above the controls on a phone.
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 14) {
+                    Instruction(text: "Read it. Tap any word you want to check.").fixedSize()
+                    HearButton(text: text, size: 40, label: "Whole text")
+                    Spacer(minLength: 0)
+                    if passage != nil { StructureToggle() }
+                }
+                VStack(alignment: .leading, spacing: 8) {
+                    Instruction(text: "Read it. Tap any word you want to check.")
+                    HStack(spacing: 14) {
+                        HearButton(text: text, size: 40, label: "Whole text")
+                        Spacer(minLength: 0)
+                        if passage != nil { StructureToggle() }
+                    }
+                }
             }
             VStack(alignment: .leading, spacing: 6) {
-              ForEach(Array(lines.enumerated()), id: \.offset) { _, tokens in
+              ForEach(Array(lines.enumerated()), id: \.offset) { li, tokens in
               FlowRow(spacing: 8) {
-                ForEach(Array(tokens.enumerated()), id: \.offset) { _, token in
+                ForEach(Array(tokens.enumerated()), id: \.offset) { ti, token in
                     let word = Self.bare(token)
+                    let tok = passage?.token(line: li, index: ti)
+                    let mark = structureOn && passage != nil
+                        ? layer.mark(for: tok, previous: passage?.token(line: li, index: ti - 1), next: passage?.token(line: li, index: ti + 1),
+                                     in: passage!, roles: Structure.shared.roles) : .none
                     let shown = Text(Theme.stressed(token, show: book.settings.showStress))
                         .russianFont(28)
                         .foregroundStyle(Theme.text)
@@ -926,11 +963,16 @@ struct PassageExercise: View {
                     if word.isEmpty {
                         shown  // a dash or a lone quotation mark: nothing to look up
                     } else {
-                        Button { select(word) } label: {
+                        Button { select(word, token: tok) } label: {
                             shown.background(RoundedRectangle(cornerRadius: 6)
                                 .fill(selected == word ? Theme.accent.opacity(0.15) : .clear))
+                                .structureMarks(mark, on: structureOn)
                         }
                         .buttonStyle(.plain)
+                        .simultaneousGesture(LongPressGesture(minimumDuration: 0.45).onEnded { _ in
+                            guard structureOn, let tok, let si = tok.sentence, let s = passage?.sentence(si) else { return }
+                            layer.longPressed(s, at: si, words: tok.words)
+                        })
                     }
                 }
               }
@@ -939,8 +981,10 @@ struct PassageExercise: View {
             .padding(18)
             .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
             .overlay { ReadingPassOverlay(pass: pass, text: text) }
+            panel
             ReadingPassBar(pass: pass, text: text)
             if let frames = slot.exercise.frames, !frames.isEmpty { PassageFrames(frames: frames) }
+            if let notice = slot.exercise.notice, !notice.isEmpty, slot.result.status.isComplete { PassageNotice(lines: notice) }
             }
             if let selected {
                 HStack(spacing: 12) {
@@ -969,11 +1013,23 @@ struct PassageExercise: View {
             }
         }
         .animation(.easeOut(duration: 0.2), value: selected)
+        .animation(.easeOut(duration: 0.2), value: layer.panel)
+        .onAppear { if passage == nil { passage = PassageStructure(text: text) } }
+        .onChange(of: book.settings.showStructure) { _, on in if on != true { layer.reset() } }
     }
 
-    private func select(_ word: String) {
+    /// What a tap or long press opened in the structure layer, right under the text.
+    @ViewBuilder private var panel: some View {
+        if structureOn, let passage, layer.panel != nil {
+            StructurePanel(layer: layer, passage: passage)
+        }
+    }
+
+    private func select(_ word: String, token: PassageStructure.Token? = nil) {
+        if structureOn, layer.consumeSuppressedTap() { return }  // the tap that ends a long press
         selected = word
         voice.play(word)
+        if structureOn, let passage, let token, let si = token.sentence, let s = passage.sentence(si) { layer.tapped(s, at: si, words: token.words, in: passage) }
     }
 
     /// The page's own gloss first, then the lexicon, then a phrase of the lexicon the word is taught
@@ -990,6 +1046,26 @@ struct PassageExercise: View {
     /// The token without the punctuation around it: «Что», э́то?», „так“, ’вот’ and (A) all read clean.
     static func bare(_ token: String) -> String {
         token.trimmingCharacters(in: .punctuationCharacters)
+    }
+}
+
+/// What to hear in a dialogue just read: one to three lines, the stressed Russian first and the
+/// English after it, as the file wrote them. Shown only once the passage is marked read.
+struct PassageNotice: View {
+    @Environment(Book.self) private var book
+    let lines: [String]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("WHAT TO HEAR").font(Theme.label(11)).tracking(1.4).foregroundStyle(Theme.muted)
+            ForEach(Array(lines.enumerated()), id: \.offset) { _, line in
+                Text(Theme.stressed(line, show: book.settings.showStress)).scaledFont(15).foregroundStyle(Theme.text.opacity(0.85))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.leading, 6)
+        .frame(maxWidth: 640, alignment: .leading)
+        .transition(.opacity)
     }
 }
 

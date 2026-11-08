@@ -1,26 +1,31 @@
 import Foundation
 
-/// The shelves beside the course: «Ста́нция», a serial read one episode at a time, and
-/// «Матема́тика», readings in rungs. Each item is meant to follow one course page (`after_page`)
-/// and becomes an ordinary page: the passage with its glosses and translation, its questions as
-/// read_meaning exercises, and (for an episode) a diary line about what comes next — so what the
+/// The shelves beside the course: «Ста́нция» and «Ку́хня», serials read one episode at a time,
+/// «Матема́тика», readings in rungs, and «На слух», listening sets (Listening.swift). Each item is
+/// meant to follow one course page (`after_page`) and becomes an ordinary page: the passage with
+/// its glosses and translation, its questions as read_meaning exercises, and (for an episode) a
+/// diary line about what comes next; a listening set, one card per heard situation — so what the
 /// learner does there reaches the knowledge tracker like anything else on a page. Nothing is
 /// gated: the Library opens any item, ready or not; the course only offers.
 enum Shelves {
     static let serials = Serial.load()
     static let library = Library.load()
+    static var listening: Listening { Listening.shared }
 
     /// One thing on a shelf, as the Library, the ＋ menu and a page's footer name it.
     struct Item: Hashable, Identifiable, Sendable {
-        enum Kind: Sendable { case episode, reading }
+        enum Kind: Sendable { case episode, reading, listening }
         var kind: Kind
         var sourceID: String
         var afterPage: String
-        /// «Ста́нция · эпизо́д 3» / «Матема́тика · ступе́нь 2»
+        /// «Ста́нция · эпизо́д 3» / «Матема́тика · ступе́нь 2» / «На слух · 4»
         var place: String
         var title: String
         var titleEn: String?
         var id: String { sourceID }
+
+        /// What the learner does with it, for the offer card and the rows.
+        var verb: String { kind == .listening ? "listen" : "read" }
     }
 
     static func sourceID(episode: Serial.Episode) -> String { "episode:\(episode.id)" }
@@ -28,7 +33,7 @@ enum Shelves {
 
     static func item(_ ep: Serial.Episode, in serial: Serial) -> Item {
         Item(kind: .episode, sourceID: sourceID(episode: ep), afterPage: ep.after_page,
-             place: "\(serial.title) · эпизо́д \(ep.number)", title: ep.title, titleEn: ep.title_en)
+             place: serial.place(of: ep), title: ep.title, titleEn: ep.title_en)
     }
 
     static func item(_ text: Library.Text, on shelf: Library.Collection) -> Item {
@@ -36,15 +41,31 @@ enum Shelves {
              place: "\(shelf.title) · ступе́нь \(text.rung ?? 0)", title: text.title, titleEn: text.title_en)
     }
 
+    /// Listening set `number` (1-based, file order) as a shelf item.
+    static func item(_ set: ListeningSet, number: Int) -> Item {
+        Item(kind: .listening, sourceID: Listening.sourceID(set), afterPage: set.after_page,
+             place: Listening.place(number), title: set.title, titleEn: set.title_en)
+    }
+
+    /// The listening sets in order, each with its number.
+    static var listeningItems: [Item] { listening.sets.enumerated().map { item($1, number: $0 + 1) } }
+
     /// Every shelf item in its shelf's order.
     static var items: [Item] {
         serials.flatMap { s in s.episodes.map { item($0, in: s) } }
             + (library.shelves ?? []).flatMap { c in library.texts(onShelf: c.id).map { item($0, on: c) } }
+            + listeningItems
     }
 
     static func item(sourceID: String) -> Item? { items.first { $0.sourceID == sourceID } }
 
     // MARK: Pages
+
+    /// The English title as the first words of an intro: "A set. " / "The Milk Boiled Over! " / "".
+    static func lead(_ titleEn: String?) -> String {
+        guard let t = titleEn, !t.isEmpty else { return "" }
+        return t.last.map { ".!?…".contains($0) } == true ? "\(t) " : "\(t). "
+    }
 
     struct Page {
         var title: String
@@ -60,12 +81,14 @@ enum Shelves {
         passage.text = ep.text
         passage.en = ep.en
         passage.glosses = ep.glosses
+        passage.notice = (ep.notice?.isEmpty ?? true) ? nil : ep.notice
         var diary = Exercise(kind: .diary)
         diary.prompt = ep.prompt
-        let about = ep.title_en.map { "\($0). " } ?? ""
+        let about = lead(ep.title_en)
+        let hear = passage.notice == nil ? "" : " Once you have read it, what to hear in it is listed under the text."
         return Page(title: ep.title,
-                    intro: "\(about)Read it; tap any word you want to check. Then three questions about what it said, and a line of your own about what comes next.",
-                    unitTitle: "\(serial.title) · эпизо́д \(ep.number)",
+                    intro: "\(about)Read it; tap any word you want to check.\(hear) Then three questions about what it said, and a line of your own about what comes next.",
+                    unitTitle: serial.place(of: ep),
                     exercises: [passage] + ep.questions.map { var q = $0; q.kind = .readMeaning; return q } + [diary],
                     sourceID: sourceID(episode: ep))
     }
@@ -87,7 +110,7 @@ enum Shelves {
             e.hint = q.explanation
             return e
         }
-        let about = text.title_en.map { "\($0). " } ?? ""
+        let about = lead(text.title_en)
         let frameNote = frames.isEmpty ? "" : " How its phrases are read is listed under the text."
         return Page(title: text.title,
                     intro: "\(about)Read it; tap any word you want to check.\(frameNote) Then three questions about what it says.",
@@ -133,8 +156,12 @@ extension Book {
             if let next = Shelves.library.texts(onShelf: shelf.id).map({ Shelves.item($0, on: shelf) }).first(where: { !hasOpened($0) }),
                isReady(next) { out.append(next) }
         }
+        if let next = nextListeningSet(), isReady(next) { out.append(next) }
         return out
     }
+
+    /// The first listening set not yet opened.
+    func nextListeningSet() -> Shelves.Item? { Shelves.listeningItems.first { !hasOpened($0) } }
 
     /// Items ready now that no earlier page has offered yet: written onto a new page's footer
     /// when it is composed (`appendPage`), once; never inserted.
@@ -157,6 +184,10 @@ extension Book {
                 if let text = Shelves.library.texts(onShelf: shelf.id).first(where: { Shelves.sourceID(reading: $0) == item.sourceID }) {
                     insert(Shelves.page(for: text, on: shelf)); return
                 }
+            }
+        case .listening:
+            if let i = Shelves.listening.sets.firstIndex(where: { Listening.sourceID($0) == item.sourceID }) {
+                insert(Listening.page(for: Shelves.listening.sets[i], number: i + 1))
             }
         }
     }

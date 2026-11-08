@@ -155,8 +155,10 @@ struct WritePageContent: View {
                 case .goal: "Toward your book"
                 }
             }()
+            // A library text read as written also asks who is meant (Structure/), from its own sentences.
+            let questions: [Exercise] = if case .library(let t) = source, case .text = request { Structure.shared.exercises(for: t.id) } else { [] }
             book.insertWrittenPage(title: page.title, intro: page.intro, unitTitle: unit,
-                                   exercises: exercises, newWords: page.new_words ?? [])
+                                   exercises: exercises + questions, newWords: page.new_words ?? [])
             onDone()
         } catch {
             self.error = error.localizedDescription
@@ -202,7 +204,7 @@ struct LibrarySheet: View {
                         NavigationLink {
                             SerialView(serial: serial, onDone: { dismiss() })
                         } label: {
-                            shelfRow(serial.title, serial.title_en, "\(serial.episodes.count) episodes · a serial, one episode per course page")
+                            shelfRow(serial.title, serial.title_en, "\(serial.episodes.count) \(serial.itemWordEn)s · a serial, one per course page")
                         }
                     }
                     ForEach(library.shelves ?? []) { shelf in
@@ -210,6 +212,13 @@ struct LibrarySheet: View {
                             ShelfView(shelf: shelf, onDone: { dismiss() })
                         } label: {
                             shelfRow(shelf.title, shelf.title_en, "\(library.texts(onShelf: shelf.id).count) readings in rungs")
+                        }
+                    }
+                    if !Shelves.listeningItems.isEmpty {
+                        NavigationLink {
+                            ListeningShelfView(onDone: { dismiss() })
+                        } label: {
+                            shelfRow("На слух", "Listening", "\(Shelves.listeningItems.count) sets of things said once · answer what they meant")
                         }
                     }
                 }

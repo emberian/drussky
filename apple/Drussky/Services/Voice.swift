@@ -83,6 +83,16 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         index[RussianText.audioKey(text)].flatMap { audioDir?.appendingPathComponent($0) }
     }
 
+    /// A particular synthetic speaker's clip of `text` — the listening strand keeps A and B apart
+    /// and a voice stable across replays. Listening clips are filed as `listening-<voice>-…` in
+    /// index.json or variants-listening.json (scripts/make_listening_audio.py); nil when that
+    /// speaker never recorded the text, and the caller falls back to `play(_:)`.
+    func recordingURL(for text: String, voice name: String) -> URL? {
+        let key = RussianText.audioKey(text)
+        let files = (index[key].map { [$0] } ?? []) + (variants[key] ?? [])
+        return files.first { $0.hasPrefix("listening-\(name)-") }.flatMap { audioDir?.appendingPathComponent($0) }
+    }
+
     func play(_ text: String) {
         let key = RussianText.audioKey(text)
         stop()
@@ -107,11 +117,12 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
     }
 
     /// Starts `url` and returns the token of the sequence it begins (see `continueSequence`).
+    /// `rate` slows a clip (0.75 for the listening strand's slower pace) without changing its pitch.
     @discardableResult
-    func playFile(_ url: URL, key: String) -> Int {
+    func playFile(_ url: URL, key: String, rate: Float = 1) -> Int {
         stop()
         speakingKey = key
-        start(url)
+        start(url, rate: rate)
         return sequence
     }
 
@@ -138,8 +149,8 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
     /// Plays `url` and returns once it has finished, been stopped, or been replaced; false if
     /// it was stopped or replaced (so a sequence knows to end).
     @discardableResult
-    func playFileToEnd(_ url: URL, key: String) async -> Bool {
-        let token = playFile(url, key: key)
+    func playFileToEnd(_ url: URL, key: String, rate: Float = 1) async -> Bool {
+        let token = playFile(url, key: key, rate: rate)
         await untilDone(token)
         return sequence == token
     }
@@ -178,7 +189,7 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         }
     }
 
-    private func start(_ url: URL) {
+    private func start(_ url: URL, rate: Float = 1) {
         audioQueue.async { [weak self] in
             guard let self else { return }
             self.deck.player?.stop()
@@ -187,6 +198,7 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
                 return
             }
             p.delegate = self
+            if rate != 1 { p.enableRate = true; p.rate = rate }
             self.deck.player = p
             p.play()
         }

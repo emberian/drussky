@@ -195,6 +195,23 @@ enum NotebookPDF {
             if let options = ex.options {
                 add(choices(options, chosen: r.chosen, correct: options.firstIndex { RussianText.key($0) == RussianText.key(ex.text ?? "") }, russian: true))
             }
+        case .listening:  // what was heard is on paper once answered; the choices as made
+            if let item = ex.listening {
+                if r.status.isComplete { add(text(item.transcript, font: serif(12.5), color: .text), after: 3) }
+                let picks = ListeningItem.picks(r)
+                for i in 0..<item.decisionCount {
+                    if let prompt = item.kind == .message ? item.questions?[safe: i]?.prompt : item.question {
+                        add(text(prompt, font: serif(10, .regular, italic: true), color: .muted))
+                    }
+                    add(choices(item.options(i), chosen: picks[safe: i] ?? nil, correct: item.answer(i), russian: item.kind == .pickObject))
+                }
+            }
+        case .structure:  // the sentence with the word asked about and its head, as chosen
+            add(text(ex.text ?? "", font: serif(12.5), color: .text), after: 3)
+            if let p = Structure.probe(of: ex) {
+                let chosen = r.chosen.flatMap { Structure.wordStrings(in: ex.text ?? "")[safe: $0] }
+                add(text("«\(p.probe)» → «\(p.head)»" + (chosen.map { $0 == p.head ? "" : "  (tapped «\($0)»)" } ?? ""), font: rounded(9.5), color: r.status == .missed ? .redPen : .muted))
+            }
         case .meet, .dictation:
             break
         }
@@ -398,7 +415,7 @@ enum NotebookPDF {
         case .constructionChoice: "Which ending fits?"
         case .passage: "Read"
         case .soundPair: ex.say != nil ? "Sound pair · «\(ex.say ?? "")»" : "Sound pair"
-        case .diary: "Дневник"
+        case .diary: "Дневни́к"
         case .buildWord: "Build «\(ex.answerText ?? "")» (\(ex.en ?? ""))"
         case .familyGuess: "Guess «\(ex.word ?? "")» from its root \(ex.root ?? "")"
         case .talk: "Разгово́р · Talk"
@@ -406,6 +423,8 @@ enum NotebookPDF {
         case .transform: "Write the form"
         case .cueSort: "Sort by pattern"
         case .readHandwriting: ex.options != nil ? "Read the handwriting and pick the word" : "Read the handwriting and print it"
+        case .listening: "На слух · \(ex.listening?.question ?? ex.listening?.questions?.first?.prompt ?? "Listen")"
+        case .structure: "Who is meant · «\(ex.word ?? "")»"
         }
     }
 

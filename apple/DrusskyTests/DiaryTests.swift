@@ -192,7 +192,7 @@ final class DiaryTests: XCTestCase {
         nothingAssessed.results[2].diary!.correction!.verified = false
         XCTAssertNil(GradeStamp.grade(for: nothingAssessed))
         XCTAssertEqual(GradeStamp.mark(for: nothingAssessed), "✓")
-        XCTAssertEqual(GradeStamp.praise(for: nothingAssessed), "Готово!")
+        XCTAssertEqual(GradeStamp.praise(for: nothingAssessed), "Гото́во")
         // A page finished by the learner's own judgement alone is complete, not graded.
         var said = Exercise(kind: .readAloud); said.text = "кот"
         book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [said], newWords: [])

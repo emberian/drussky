@@ -136,18 +136,18 @@ def build_course_snapshots(course: dict) -> tuple[dict[str, int], dict[str, set[
     return page_index, letters_by_page, words_by_page, lex_single
 
 
-def validate() -> int:
+def validate(series_path: pathlib.Path = SERIES_PATH) -> int:
     errs: list[str] = []
 
     if not COURSE_PATH.exists():
         print(f"MISSING {COURSE_PATH}", file=sys.stderr)
         return 1
-    if not SERIES_PATH.exists():
-        print(f"MISSING {SERIES_PATH}", file=sys.stderr)
+    if not series_path.exists():
+        print(f"MISSING {series_path}", file=sys.stderr)
         return 1
 
     course = json.loads(COURSE_PATH.read_text(encoding="utf-8"))
-    data = json.loads(SERIES_PATH.read_text(encoding="utf-8"))
+    data = json.loads(series_path.read_text(encoding="utf-8"))
     lemmas_map: dict[str, str] = {}
     if LEMMAS_PATH.exists():
         # forms maps an inflected form to [lemma, construction]; older files mapped to the lemma string.
@@ -244,8 +244,22 @@ def validate() -> int:
             ep_words = words(text)
             wcount = len(ep_words)
             total_words += wcount
-            if not (100 <= wcount <= 250):
-                errs.append(f"{loc}: word count must be 100..250, got {wcount}")
+            # «Ку́хня» is overheard dialogue, short by design; a serial episode is a reading.
+            min_w, max_w = (25, 80) if sid == "kukhnya" else (100, 250)
+            if not (min_w <= wcount <= max_w):
+                errs.append(f"{loc}: word count must be {min_w}..{max_w}, got {wcount}")
+
+            # Optional: one to three stressed things to notice, shown after the passage is read.
+            notice = ep.get("notice")
+            if notice is not None:
+                if not isinstance(notice, list) or not (1 <= len(notice) <= 3):
+                    errs.append(f"{loc}: 'notice' must be a list of 1..3 strings")
+                else:
+                    for ni, item in enumerate(notice, start=1):
+                        if not isinstance(item, str) or not item.strip():
+                            errs.append(f"{loc} notice#{ni}: empty notice string")
+                        else:
+                            check_stress(item, f"{loc} notice#{ni}", errs)
 
             glosses = ep.get("glosses")
             if not isinstance(glosses, dict):
@@ -339,9 +353,9 @@ def validate() -> int:
             print(f"  - {e}", file=sys.stderr)
         return 1
 
-    print("\nOK: series.json passed all schema, stress, letter, gloss, and question checks.")
+    print(f"\nOK: {series_path.name} passed all schema, stress, letter, gloss, and question checks.")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(validate())
+    sys.exit(validate(pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else SERIES_PATH))

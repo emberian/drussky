@@ -10,6 +10,7 @@ import UIKit
 ///   -qa-history D      spread the completed pages over the last D days (knowledge-map history)
 ///   -qa-misses         choice exercises are missed twice (the correction under the choices)
 ///   -qa-corrupt        an undecodable book.json in the QA folder (the recovery screen)
+///   -qa-nokey         hide the tutor key for this Debug launch without changing Keychain
 ///   -qa-day N / -qa-away D / -qa-probes / -qa-tired   the day's shape (QA+Day.swift)
 ///   -qa-sources        open Settings on «Исто́чники · Sources» (Views/CreditsView.swift)
 @MainActor
@@ -26,7 +27,7 @@ enum QA {
 
     static func prepare(store: BookStore) {
         #if DEBUG
-        if let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"], !key.isEmpty { Keychain.apiKey = key }
+        if !has("-qa-nokey"), let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"], !key.isEmpty { Keychain.apiKey = key }
         // -qa-corrupt: a notebook that exists but can't be decoded (the recovery screen).
         if has("-qa-corrupt") { try? Data("{ \"version\": 1, \"pages\": [".utf8).write(to: store.stateURL) }
         #endif
@@ -63,23 +64,32 @@ enum QA {
         }
         book.now = Date.init
         openDay(book)
+        // -qa-series N / -qa-kitchen N / -qa-math N: episode N of «Ста́нция» / dialogue N of «Ку́хня» / rung N of
+        // the mathematics shelf, as a page (Model/Shelves.swift); -qa-partial then applies to it.
+        for (flag, serialID) in [("-qa-series", "stantsiya"), ("-qa-kitchen", "kukhnya")] {
+            if let n = value(flag), let serial = Shelves.serials.first(where: { $0.id == serialID }),
+               let ep = serial.episodes.first(where: { $0.number == n }) {
+                book.open(Shelves.item(ep, in: serial))
+            }
+        }
+        if let n = value("-qa-math"), let shelf = Shelves.library.shelves?.first,
+           let text = Shelves.library.texts(onShelf: shelf.id).first(where: { $0.rung == n }) {
+            book.open(Shelves.item(text, on: shelf))
+        }
+        // -qa-listening N: set N of the listening strand as a page (Model/Listening.swift); -qa-partial
+        // then applies to it. -qa-listening-week N: the weekly sample page with reserved set N's messages.
+        if let n = value("-qa-listening"), let set = Listening.shared.set(number: n) { book.open(Shelves.item(set, number: n)) }
+        if let n = value("-qa-listening-week"), let set = Listening.shared.weeklySet(number: n) { _ = book.openBaseline(listening: set) }
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
         applyGoal(to: book)
         applyInstruments(to: book)  // -qa-judge, -qa-hooks, -qa-fluency (Fluency/QA+Instruments.swift)
+        applyStructure(to: book)  // -qa-structure ID (Structure/QA+Structure.swift)
         // -qa-narration ID: the read-along page of that library text, right after the current page
         // (-qa-narration-at MS shows it paused at that moment of the reading).
         if let id = string("-qa-narration"), let text = Library.load().texts.first(where: { $0.id == id }) {
             let page = Narration.page(for: text)
             book.insertWrittenPage(title: page.title, intro: page.intro, unitTitle: "Library · \(text.level) · read aloud",
                                    exercises: page.exercises, newWords: [])
-        }
-        // -qa-series N / -qa-math N: episode N of the serial / rung N of the mathematics shelf, as a page (Model/Shelves.swift).
-        if let n = value("-qa-series"), let serial = Shelves.serials.first, let ep = serial.episodes.first(where: { $0.number == n }) {
-            book.open(Shelves.item(ep, in: serial))
-        }
-        if let n = value("-qa-math"), let shelf = Shelves.library.shelves?.first,
-           let text = Shelves.library.texts(onShelf: shelf.id).first(where: { $0.rung == n }) {
-            book.open(Shelves.item(text, on: shelf))
         }
         // -qa-baseline: the weekly sample page (Baseline/); -qa-construction: "Which ending fits?"
         // (Constructions/), whatever the notebook has met so far.
@@ -117,7 +127,7 @@ enum QA {
                 r.attempts += 1
                 switch ex.kind {
                 case .listenPick: r.chosen = ex.options?.firstIndex(of: ex.say ?? ""); r.status = .correct
-                case .readMeaning, .familyGuess, .constructionChoice: r.chosen = ex.answerIndex; r.status = .correct
+                case .readMeaning, .familyGuess, .constructionChoice, .structure: r.chosen = ex.answerIndex; r.status = .correct
                 case .readHandwriting:
                     r.chosen = ex.options?.firstIndex { RussianText.key($0) == RussianText.key(ex.text ?? "") }
                     r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
@@ -125,6 +135,12 @@ enum QA {
                 case .paradigmFill: r.recognized = (ex.cells ?? []).map { "\($0)=✓\(ex.forms?[$0] ?? "")" }.joined(separator: ";"); r.status = .correct
                 case .cueSort: r.recognized = (ex.items ?? []).indices.map { "\($0):\(ex.items![$0].answer)" }.joined(separator: ","); r.status = .correct
                 case .readAloud: r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
+                case .listening:  // every decision right, as the card records them (Model/Listening.swift)
+                    if let item = ex.listening {
+                        if item.kind == .message { r.recognized = (0..<item.decisionCount).map { String(item.answer($0) ?? 0) }.joined(separator: ",") }
+                        else { r.chosen = item.answer }
+                    }
+                    r.status = .correct
                 case .dictation, .translate, .fill, .transform: r.status = i % 5 == 3 ? .missed : .correct
                     if r.status == .missed { r.revealed = true; r.recognized = misreading(ex.target ?? "") }
                 default: r.status = .done

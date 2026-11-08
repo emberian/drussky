@@ -66,7 +66,7 @@ enum GoalPull {
             return ex  // an English prompt to write about the text; no Russian to verify
         case .readHandwriting:
             return inText(ex.text, text) ? ex : nil
-        case .meet, .soundPair, .buildWord, .familyGuess, .talk, .paradigmFill, .transform, .cueSort, .constructionChoice:
+        case .meet, .soundPair, .buildWord, .familyGuess, .talk, .paradigmFill, .transform, .cueSort, .constructionChoice, .listening, .structure:
             return nil  // generated locally, never from a goal text
         }
     }

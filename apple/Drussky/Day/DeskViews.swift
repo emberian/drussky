@@ -9,7 +9,7 @@ struct DeskLine: View {
 
     var body: some View {
         if let line = book.deskLine(for: pageIndex) {
-            Label(line, systemImage: "moon.zzz")
+            Text(line)
                 .scaledFont(15)
                 .foregroundStyle(Theme.muted)
                 .fixedSize(horizontal: false, vertical: true)

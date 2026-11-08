@@ -2,8 +2,8 @@
 
 A Russian exercise book you write in. Open it and you are on today's page: numbered
 exercises down a squared тетрадь page, answered in place — with the Pencil on ruled lines,
-by ear, or aloud. Finished exercises get a red tick; a finished page gets a red mark
-(5 — Отлично!), or a red tick (Готово!) when nothing on it was graded — practice, skips, speaking
+by ear, or aloud. Finished exercises stay in place and get a red tick; a finished page gets a red mark
+(5 — Отли́чно), or a red tick (Гото́во) when nothing on it was graded — practice, skips, speaking
 you judged yourself, a diary line nobody corrected. A diary line the tutor marked counts, and three
 or more corrections on it count as a miss. Turn the page with the arrow; turning back shows exactly
 what you wrote.
@@ -18,13 +18,14 @@ what you wrote.
 | dictation | hear it, write it — no model |
 | translate | see English, write the Russian from memory |
 | fill | write the missing word in a sentence |
-| read aloud | one tap: hear the model, a soft cue, then just say it (it stops when you do); every take is kept, compared with the model syllable by syllable, with a tip or two; *Skip for now* (ungraded) is always there |
+| read aloud | tap: hear the model (the microphone stays closed), then *Your turn: tap to say it*; on that tap a soft cue, then just say it (it stops when you do); every take is kept, compared with the model syllable by syllable, with a tip or two; *Skip for now* (ungraded) is always there |
 | what does it mean | read Russian, choose its meaning |
 | diary (Дневник) | write a few words of *your own* Russian about a prompt, on ruled lines (or type); confirm or fix the recognizer's transcript, then the tutor marks it like homework — wrong spans underlined, the right form in red above, the corrected line, a word of praise, the pattern behind the biggest slip. Your ink stays. Every edit becomes evidence (own-writing modality, a confusion edge, the pattern), and corrected forms join your words for review. From unit 3 every page ends with one; ＋ → *Write in my diary* adds one now; *Not today* skips it |
 | read along | a library text read by a human (LibriVox volunteers, Commons readers): the word being said lights up, tap a word to hear from there, ¾ speed, or listen first with the text appearing as it is read; then write one of its sentences from the reader's voice and say one after the reader |
-| passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние) |
+| passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние). On a library text, «Структу́ра» in the margin shows its skeleton (below) |
+| who is meant (structure) | a library sentence with one pronoun or participle marked: tap the word it points to or agrees with; a wrong tap gets a second try, then the answer |
 | build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
-| talk (Разгово́р) | a spoken conversation with the tutor: pick one of three scenes made from your words, then 6–10 turns — the tutor speaks (short Russian, stress-marked, at most two new words a turn, a gentle «Вы хоте́ли сказа́ть…?» when you slip), you answer out loud hands-free, an eye icon whispers the English; afterwards every line of yours gets the red pen and at most one pronunciation tip. ＋ → *Talk* |
+| talk (Разгово́р) | a spoken conversation with the tutor: pick one of three scenes made from your words, then 6–10 turns — the tutor speaks (short Russian, stress-marked, at most two new words a turn, a gentle «Вы хоте́ли сказа́ть…?» when you slip), you tap the microphone when ready and answer out loud, an eye icon whispers the English; afterwards every line of yours gets the red pen and at most one pronunciation tip. ＋ → *Talk* |
 | guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
 | fill the table | a declension or conjugation table with some cells given; write the missing forms in small ruled cells (or tap tiles into them); a miss shows the row with the right cell marked |
 | the form | «кни́га» → genitive singular, or a sentence with a gap that forces the case: write the form |
@@ -67,8 +68,10 @@ the recognizer read it; a sentence said aloud records words a minute from its sy
 sentence written from the reader's voice records whether you caught it at 1× or ¾×. Small sparklines
 on the word's history and one line inside the cover ("You read about 20% faster than last week").
 
-Saying something aloud is hands-free (`Speaking/`): the model plays (Settings: 0–3 times,
-tap to skip), a soft tone says it's your turn, and the microphone (AVAudioEngine) measures the
+Saying something aloud is hands-free once you have said you are ready (`Speaking/`): the model
+plays with the microphone closed (Settings: 0–3 times, tap to skip), the page waits for your tap
+(`SpeakingTurn.Phase.ready`; with no model to play, the tap that started the turn is that tap), then
+a soft tone says it's your turn, and the microphone (AVAudioEngine) measures the
 room for a quarter second, starts the take at your first sound and ends it after 0.7 s of quiet
 (6 s at most, longer for long sentences); a tap stops it early. A voice is confirmed only by
 periodic sound, so a knock or a breath never starts a take, but a leading с is kept. The take is
@@ -88,6 +91,27 @@ recognizer's spelling, not a measurement of a sound: they are shown in amber as 
 the contrast's advice as something to try, and leave no evidence. Only the phone-level analyzer
 (`PhoneticAnalyzer`, when its model is bundled) asserts sound verdicts and logs speech confusions
 on their contrast; each report carries its `provenance`.
+
+## Show the structure
+
+Every library text carries a structure layer (`Resources/library-structure.json`, written offline by
+`scripts/library_structure.py` with Claude and checked by `scripts/validate_structure.py`; format in
+COURSE_SCHEMA.md). On any passage made from a library text — as written, read along, the first page of
+your book — «Структу́ра» in the text's margin reveals it without moving a word, as a teacher's pencil
+marks: the members of each sentence underlined the way a Russian school exercise book does it
+(подлежа́щее one line, сказу́емое two, дополне́ние dashed, определе́ние wavy, обстоя́тельство and
+prepositional phrases dash-dot), light brackets round subordinate, participial and gerund clauses and
+direct speech, a small ring on every pronoun, participle or relative word that points at something on
+the page. Tap a ringed word and its head pulses (even in the sentence before). Tap inside a participial
+or gerund construction and its flat Russian appears under the text («лев, кото́рый спал»); tap it again
+for the English. Tap a preposition or a governing verb and its case frame appears (по + Dat) with its
+dependents pulsed. Hold a word down for its roles (подлежа́щее · in the прида́точное) and its root x-ray
+— приста́вка + ко́рень + су́ффикс + оконча́ние, the root's meaning, and one or two words you already
+know on the same root. No English until you ask for it. The toggle stays as you left it.
+
+Reading pages made from a library text end with one or two *who is meant* questions: a pronoun or
+participle of one of its sentences is marked and you tap its head. The outcome is reading evidence on
+the `anaphora` / `participle` construction (and the pronoun), never a word to recall.
 
 ## Remembering
 
@@ -150,11 +174,13 @@ the shop has, which film they prefer) and you have a goal, told to you in Englis
 card with two or three phrase frames you may need (from your own words first). The partner
 answers the meaning you actually express from its facts, asks you to clarify when a line is
 unclear, says no when its facts say no, and is not obliged to agree. It speaks one or two short
-stress-marked sentences within your vocabulary plus at most two new words; the soft tone says it
-is your turn and the same hands-free microphone as *read aloud* takes your answer with a
-conversation profile (`TalkSession.endpointing`: a pause of 1.5 s ends the turn rather than 0.7 s,
-up to 12 s of speech, 10 s to start; "Still listening… a pause is fine; tap when you've finished";
-nothing is captured while the tutor speaks, and replaying a line closes the microphone first).
+stress-marked sentences within your vocabulary plus at most two new words; then it is your turn
+and the microphone stays idle until you tap it — time to read the line, replay it or think.
+Your tap starts the same hands-free capture as *read aloud*, with a conversation profile
+(`TalkSession.endpointing`: a pause of 1.5 s ends the turn rather than 0.7 s, up to 12 s of
+speech, 10 s to start; "Still listening… a pause is fine; tap when you've finished"; nothing is
+captured while the tutor speaks, and replaying a line closes the microphone, which waits for
+your next tap).
 Speech recognition transcribes it, the eye beside each line whispers the English and the new
 words (each keepable); typing a line is always there. After 6–10 turns the tutor says goodbye and
 the transcript is marked: first whether you reached your goal and what came across, judged from
@@ -204,15 +230,67 @@ with what each is ready after, every one openable ahead of time), from ＋ → *
 N* (the next episode), and from one row per shelf inside the cover. Nothing on the shelves is
 voiced yet; the speaker falls back to the synthetic voice as it does for any unrecorded string.
 
-QA: `-qa-series N` / `-qa-math N` open episode N / rung N as a page.
+**«Ку́хня»** (`Resources/kitchen.json`) is a second serial in the same format: 30 overheard
+domestic dialogues of 25–80 words, one per course page, each with one to three things to hear
+(«Дава́й + perfective future = let's …») listed under the passage once it is read.
+
+QA: `-qa-series N` / `-qa-kitchen N` / `-qa-math N` open episode N / dialogue N / rung N as a
+page (`-qa-partial 1` then marks its passage read).
+
+## Listening: «На слух»
+
+A third shelf (`Resources/listening.json`, `Model/Listening.swift`, `Views/ListeningView.swift`):
+twelve sets of six to eight short situations said once, each set ready after one course page.
+Seven kinds, one calm card each — the English task, **Play** (nothing plays until you tap),
+**Replay**, **Slower** (¾ speed, same voice), the choices, and only after the answer the words:
+
+| kind | you hear | you answer |
+|---|---|---|
+| which thing (`pick_object`) | a request («Дай сыр.») | the noun asked for, among taught nouns (Russian, stressed) |
+| who needs what (`who_needs`) | two people, A then B, two voices; badges light as each speaks | A, B or both |
+| follow (`follow`) | an instruction over a small scene — things on a tray, places to put them, as word chips | which result follows (one object's new place, or unchanged) |
+| asking or telling (`question_or_statement`) | one of two identical sentences, as a statement (IK-1) or a yes/no question (IK-3) | Statement / Question; afterwards both forms, same voice, side by side |
+| voice message (`message`) | two to four sentences | two or three English questions (gist and detail), judged together once all are answered |
+| a correction (`correction`) | a sentence with a self-repair («Я хочу́ чай. Нет, ко́фе.») | the final meaning |
+| who wants what (`disagreement`) | two people who do not agree | what each wants or what was actually agreed |
+
+After the answer the stressed transcript appears in place with the deciding span underlined in
+red and one line of *why* under it (for a message, the missed question's span, not the item's);
+the right choice is marked, the translation and the item's glosses follow. Nothing scrolls or
+moves. A miss offers *Try it again* (ungraded). Every answer is `hear-pick` evidence on the words
+and constructions of the heard turn (a heard word is not evidence of its letters); a miss is
+`again` on the words of the crucial span only; *asking or telling* is one skill of its own,
+`sound:intonation`, whatever the words. A card is never a thing to recall later, and the tutor
+never writes one.
+
+A set is offered once at the foot of the next page after its course page is finished (the same
+calm card as an episode: *You can listen to this now · Listen*), is listed in ＋ → *Library*
+and on the cover's Shelves row («На слух · 12 sets · what is ready next»), and ＋ → *На слух · N*
+opens the next one. Six reserved sets of five unheard messages (`weekly_samples`) never appear
+there: once the course has finished a reserved set's page, **What I could do this week** takes
+its five messages as the sample's listening part — played by text in a voice the course never
+uses (aidar), answered in English on the ruled lines, the Russian and the model meanings shown
+only after the first response is sealed, never graded — and falls back to the bank of human
+recordings until then. Each set is used once.
+
+Voices: `voice_hint: any` keeps the course voice (xenia); `unfamiliar` moves to aidar; an
+exchange is always two voices (xenia/aidar, or aidar/baya when unfamiliar), and a replay keeps
+the speaker. `scripts/make_listening_audio.py` makes the clips with the same rule
+(`ListeningItem.voice(forLine:)`): 288 Silero clips for the 338 strings (the other 50 already had
+course clips), filed as `listening-<voice>-…` in `Audio/index.json` or, where the text already
+has a course clip in another voice, in `Audio/variants-listening.json` — the mechanism
+`variants.json` uses for other speakers of one word; `Voice.recordingURL(for:voice:)` picks the
+speaker by that prefix. `make_morphology_audio.py --voice=xenia|aidar|baya` is the shared
+generator. `scripts/validate_listening.py` is the content gate (in `check_content.py`) and
+writes the spoken inventory `research/artifacts/listening-spoken.txt`. QA: `-qa-listening N`
+opens set N; `-qa-listening-week N` opens the weekly sample with reserved set N's messages.
 
 ## Your book
 
 The inside cover asks for one text you want to read for real — from the Library, pasted or
 scanned, or a ru.wikisource link (fetched through the MediaWiki parse API and cleaned to its
 paragraphs). It becomes *your book*, kept in the notebook (several allowed; one current), and
-the cover shows **Distance to your book**: production-backed coverage of its actual forms, words
-still to practice on its first page, sentences at 95%+ coverage, a ladder
+the cover keeps **Your book** with a ladder
 of the next twenty words worth knowing (occurrences in the text, weighted toward the first
 page) and the grammar patterns it leans on. The text's words are lemmatized by the course's
 tables, then by the tutor (`claude-sonnet-5-5`, 300 forms per call, cached in the goal with a
@@ -327,19 +405,20 @@ small hook batch (run when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
 `DrusskyUITests` writes on the paper with real touch strokes, completes the exercise, and
 checks it survives a relaunch.
 
-QA launch arguments (simulator): `-qa-reset`, `-qa-complete N` (work through N pages with
+QA launch arguments (simulator): `-qa-reset`, `-qa-no-key` (Debug: hides the tutor key for this launch without changing Keychain), `-qa-complete N` (work through N pages with
 synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-contents`,
 `-qa-settings`, `-qa-diary` (three diary pages with canned red-pen corrections, no key
 needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian);
 `-qa-talk fresh|scene|mid|marked` (a Talk page: untouched, the scene choice, the middle of a dialogue, the
-marked transcript; `-qa-nokey` / `-qa-offline` pose the unavailable note);
+marked transcript; `-qa-nokey` hides the tutor key for the launch without touching the Keychain, `-qa-offline` poses the offline note);
 `-qa-settings`; `-qa-day N` / `-qa-away D` (the pages were done N or D days ago, then the page is
 turned: a morning or welcome-back page), `-qa-probes` (a synthetic answered probe set for the cover
 chart), `-qa-tired` (the current page marked shortened);
 `-qa-settings`, `-qa-goal <library id>` (make that text the learner's book), `-qa-goal-pull` (an
 offline page toward it), `-qa-goal-first` (open its first page now); `-qa-judge` (ink on the first
 open recall exercise with Check tapped: the self-judgement panel), `-qa-hooks` (canned hooks on a few
-words; `-qa-contents -qa-node lex:кот` opens one), `-qa-fluency` (three weeks of synthetic fluency
+words; `-qa-contents -qa-node lex:кот` opens one), `-qa-structure <library id>` (that text as written with
+«Структу́ра» on, then its *who is meant* questions), `-qa-fluency` (three weeks of synthetic fluency
 samples for the cover line and sparklines); `-qa-grammar` (a grammar page from the tables;
 `-qa-grammar-partial K` works through its first K exercises), `-qa-grammar-table decl1` /
 `-qa-grammar-cell decl1/gen-sg` / `-qa-grammar-all` (with `-qa-contents`: open that table, that
@@ -351,7 +430,8 @@ cell, or every table of the Grammar section).
 `scripts/validate_course.py` (schema in `COURSE_SCHEMA.md`: letters before use, stress
 marks, page sizes, answer integrity). `scripts/check_content.py` runs every content validator
 at once: the course, the library (`validate_library.py`), the mathematics shelf
-(`validate_math.py` and its unit tests), the serial (`validate_series.py`) and morphology. Hand-printed stroke models for all 66 letter forms
+(`validate_math.py` and its unit tests), the serials (`validate_series.py`), morphology and
+listening (`validate_listening.py`). Hand-printed stroke models for all 66 letter forms
 (`Drussky/Resources/strokes.json`) are built by `scripts/build_strokes.py`. Audio lives in `Drussky/Resources/Audio/` with
 `index.json` (audio key → file) and `sources.json` (provenance and licences). The audio key is
 the normalized text plus `?` for a rising (yes/no) question, so «Э́то чай?» and «Э́то чай.» are
@@ -371,9 +451,10 @@ the spoken task keeps its first recording. Saving locks the first response and r
 notes, with a separate reflection field. Help, previous familiarity, replay starts and rough weekly
 exposure remain with the sample. These tasks do not grade vocabulary or change recall traces.
 `-qa-baseline` opens the flow in the QA notebook; `-qa-contents -qa-evidence` opens the estimates back page. There are currently two parallel reading sets;
-after those, the app asks for new material rather than presenting a repeat as unseen. Listening
-material is absent from the authored course, but may have been heard in the library; familiarity
-is self-reported, not inferred.
+after those, the app asks for new material rather than presenting a repeat as unseen. The five
+messages come from the listening strand's reserved sets once the course has reached one
+(«На слух», above), else from the bank of human recordings; familiarity is self-reported, not
+inferred.
 
 Goal and library vocabulary coverage require successful production of the **actual written form**
 in hear→write, English→write or see→say, with current predicted recall at least 0.85. Copying,

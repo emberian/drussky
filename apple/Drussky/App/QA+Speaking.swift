@@ -4,7 +4,7 @@ extension QA {
 
     /// `-qa-speak STATE`: a read-aloud page held in one state of the speaking turn, for
     /// screenshots without a microphone.
-    ///   idle | model | yourturn | listening | analysing   молоко́, no take yet
+    ///   idle | model | ready | yourturn | listening | analysing   молоко́, no take yet
     ///   report          молоко́, another speaker's recording as the take
     ///   report-sound    был, with a recording of бил as the take (heard «бил»)
     ///   report-stress   замо́к, with a recording of за́мок as the take
@@ -25,6 +25,7 @@ extension QA {
             try? await Task.sleep(for: .seconds(1.5))
             switch state {
             case "model": turn.pose(.model(1, of: 2), key: key)
+            case "ready": turn.pose(.ready, key: key)
             case "yourturn": turn.pose(.cue, key: key)
             case "listening": turn.pose(.hearing, key: key, level: 0.55)
             case "analysing": turn.pose(.analysing, key: key)

@@ -3201,6 +3201,484 @@
   {
    "ru": "рабо́та",
    "en": "work (the noun)"
+  },
+  {
+   "ru": "дава́й",
+   "en": "let's; go on"
+  },
+  {
+   "ru": "пить",
+   "en": "to drink"
+  },
+  {
+   "ru": "ла́дно",
+   "en": "alright"
+  },
+  {
+   "ru": "коне́чно",
+   "en": "of course"
+  },
+  {
+   "ru": "гото́во",
+   "en": "done, it's ready"
+  },
+  {
+   "ru": "на, держи́",
+   "en": "here, take it"
+  },
+  {
+   "ru": "ча́йник",
+   "en": "kettle, teapot",
+   "emoji": "🫖"
+  },
+  {
+   "ru": "кру́жка",
+   "en": "mug"
+  },
+  {
+   "ru": "на плите́",
+   "en": "on the stove"
+  },
+  {
+   "ru": "в шкафу́",
+   "en": "in the cupboard"
+  },
+  {
+   "ru": "ви́лка",
+   "en": "fork",
+   "emoji": "🍴"
+  },
+  {
+   "ru": "нож",
+   "en": "knife",
+   "emoji": "🔪"
+  },
+  {
+   "ru": "ну",
+   "en": "well (the particle)"
+  },
+  {
+   "ru": "ой",
+   "en": "oh, oops"
+  },
+  {
+   "ru": "без",
+   "en": "without"
+  },
+  {
+   "ru": "без молока́",
+   "en": "without milk"
+  },
+  {
+   "ru": "без са́хара",
+   "en": "without sugar"
+  },
+  {
+   "ru": "с лимо́ном",
+   "en": "with lemon"
+  },
+  {
+   "ru": "па́хнет",
+   "en": "smells (it smells)"
+  },
+  {
+   "ru": "пельме́ни",
+   "en": "pelmeni, dumplings",
+   "emoji": "🥟"
+  },
+  {
+   "ru": "смета́на",
+   "en": "sour cream"
+  },
+  {
+   "ru": "карто́шка",
+   "en": "potatoes",
+   "emoji": "🥔"
+  },
+  {
+   "ru": "ма́сло",
+   "en": "butter",
+   "emoji": "🧈"
+  },
+  {
+   "ru": "яйцо́",
+   "en": "egg",
+   "emoji": "🥚"
+  },
+  {
+   "ru": "ко́нчилось",
+   "en": "it has run out, it's all gone"
+  },
+  {
+   "ru": "оста́лось",
+   "en": "is left, remains"
+  },
+  {
+   "ru": "чуть-чу́ть",
+   "en": "a tiny bit"
+  },
+  {
+   "ru": "вообще́ нет",
+   "en": "none at all"
+  },
+  {
+   "ru": "холоди́льник",
+   "en": "fridge"
+  },
+  {
+   "ru": "пусто́й",
+   "en": "empty (masculine)"
+  },
+  {
+   "ru": "спи́сок",
+   "en": "list"
+  },
+  {
+   "ru": "магази́н",
+   "en": "shop, store"
+  },
+  {
+   "ru": "купи́ть",
+   "en": "to buy"
+  },
+  {
+   "ru": "кипи́т",
+   "en": "is boiling"
+  },
+  {
+   "ru": "горя́чий",
+   "en": "hot (of things)"
+  },
+  {
+   "ru": "холо́дный",
+   "en": "cold"
+  },
+  {
+   "ru": "чи́стый",
+   "en": "clean (masculine)"
+  },
+  {
+   "ru": "гря́зный",
+   "en": "dirty (masculine)"
+  },
+  {
+   "ru": "люби́ть",
+   "en": "to love"
+  },
+  {
+   "ru": "ты лю́бишь",
+   "en": "you (one person) love"
+  },
+  {
+   "ru": "ты пи́шешь",
+   "en": "you (one person) write"
+  },
+  {
+   "ru": "ходи́ть",
+   "en": "to go (regularly, on foot)"
+  },
+  {
+   "ru": "ты хо́дишь",
+   "en": "you (one person) go (regularly)"
+  },
+  {
+   "ru": "положи́",
+   "en": "put, lay down (perfective imperative)"
+  },
+  {
+   "ru": "клади́",
+   "en": "put, lay down (imperfective imperative)"
+  },
+  {
+   "ru": "поста́вь",
+   "en": "put, stand upright (perfective imperative)"
+  },
+  {
+   "ru": "возьми́",
+   "en": "take (perfective imperative)"
+  },
+  {
+   "ru": "бери́",
+   "en": "take, help yourself (imperfective imperative)"
+  },
+  {
+   "ru": "дай",
+   "en": "give, hand me (imperative)"
+  },
+  {
+   "ru": "нале́й",
+   "en": "pour (imperative)"
+  },
+  {
+   "ru": "попро́буй",
+   "en": "taste it, try it (imperative)"
+  },
+  {
+   "ru": "сади́сь",
+   "en": "sit down (imperative, to one person)"
+  },
+  {
+   "ru": "вы́ключи",
+   "en": "turn off, switch off (imperative)"
+  },
+  {
+   "ru": "плиту́",
+   "en": "stove (as the object)"
+  },
+  {
+   "ru": "не тро́гай",
+   "en": "don't touch"
+  },
+  {
+   "ru": "осторо́жно",
+   "en": "careful, watch out"
+  },
+  {
+   "ru": "иди́ сюда́",
+   "en": "come here"
+  },
+  {
+   "ru": "помо́ю",
+   "en": "I will wash"
+  },
+  {
+   "ru": "посу́ду",
+   "en": "the dishes (as the object)"
+  },
+  {
+   "ru": "мыть",
+   "en": "to wash"
+  },
+  {
+   "ru": "вы́тру",
+   "en": "I will wipe"
+  },
+  {
+   "ru": "корми́л",
+   "en": "fed, was feeding (he)"
+  },
+  {
+   "ru": "покорми́л",
+   "en": "fed (and it's done; he)"
+  },
+  {
+   "ru": "покорми́",
+   "en": "feed (imperative)"
+  },
+  {
+   "ru": "кота́",
+   "en": "cat (as the object)"
+  },
+  {
+   "ru": "съел",
+   "en": "ate up (he)"
+  },
+  {
+   "ru": "убежа́ло",
+   "en": "boiled over (literally: ran away)"
+  },
+  {
+   "ru": "не расстра́ивайся",
+   "en": "don't be upset"
+  },
+  {
+   "ru": "тря́пка",
+   "en": "cloth, rag"
+  },
+  {
+   "ru": "по́здно",
+   "en": "late (it is late)"
+  },
+  {
+   "ru": "пора́ спать",
+   "en": "time for bed"
+  },
+  {
+   "ru": "здра́вствуйте",
+   "en": "hello (polite or plural)"
+  },
+  {
+   "ru": "извини́те",
+   "en": "excuse me, sorry (polite)"
+  },
+  {
+   "ru": "проходи́те",
+   "en": "come in (polite imperative)"
+  },
+  {
+   "ru": "сади́тесь",
+   "en": "sit down (polite imperative)"
+  },
+  {
+   "ru": "возьми́те",
+   "en": "take (polite imperative)"
+  },
+  {
+   "ru": "откро́йте",
+   "en": "open (polite imperative)"
+  },
+  {
+   "ru": "ключи́",
+   "en": "keys",
+   "emoji": "🔑"
+  },
+  {
+   "ru": "телефо́н",
+   "en": "phone",
+   "emoji": "📱"
+  },
+  {
+   "ru": "звони́т",
+   "en": "is ringing; is calling"
+  },
+  {
+   "ru": "дверь",
+   "en": "door",
+   "emoji": "🚪"
+  },
+  {
+   "ru": "сосе́дка",
+   "en": "neighbour (a woman)"
+  },
+  {
+   "ru": "курье́р",
+   "en": "courier"
+  },
+  {
+   "ru": "подержи́",
+   "en": "hold it a moment (imperative)"
+  },
+  {
+   "ru": "свет",
+   "en": "light"
+  },
+  {
+   "ru": "э́того",
+   "en": "this (masculine or neuter genitive)"
+  },
+  {
+   "ru": "э́тому",
+   "en": "this (masculine or neuter dative)"
+  },
+  {
+   "ru": "э́той",
+   "en": "this (feminine, any case but nominative and accusative)"
+  },
+  {
+   "ru": "моего́",
+   "en": "my (masculine or neuter genitive)"
+  },
+  {
+   "ru": "моему́",
+   "en": "my (masculine or neuter dative)"
+  },
+  {
+   "ru": "мое́й",
+   "en": "my (feminine, any case but nominative and accusative)"
+  },
+  {
+   "ru": "на́шего",
+   "en": "our (masculine or neuter genitive)"
+  },
+  {
+   "ru": "на́шему",
+   "en": "our (masculine or neuter dative)"
+  },
+  {
+   "ru": "но́вого",
+   "en": "new (masculine or neuter genitive)"
+  },
+  {
+   "ru": "но́вому",
+   "en": "new (masculine or neuter dative)"
+  },
+  {
+   "ru": "но́вой",
+   "en": "new (feminine, any case but nominative and accusative)"
+  },
+  {
+   "ru": "учи́телю",
+   "en": "to the teacher (dative)"
+  },
+  {
+   "ru": "э́ту",
+   "en": "this (feminine accusative)"
+  },
+  {
+   "ru": "мою́",
+   "en": "my (feminine accusative)"
+  },
+  {
+   "ru": "но́вую",
+   "en": "new (feminine accusative)"
+  },
+  {
+   "ru": "э́тим",
+   "en": "this (masculine or neuter instrumental)"
+  },
+  {
+   "ru": "мои́м",
+   "en": "my (masculine or neuter instrumental)"
+  },
+  {
+   "ru": "на́шим",
+   "en": "our (masculine or neuter instrumental)"
+  },
+  {
+   "ru": "но́вым",
+   "en": "new (masculine or neuter instrumental)"
+  },
+  {
+   "ru": "э́том",
+   "en": "this (masculine or neuter prepositional)"
+  },
+  {
+   "ru": "моём",
+   "en": "my (masculine or neuter prepositional)"
+  },
+  {
+   "ru": "на́шем",
+   "en": "our (masculine or neuter prepositional)"
+  },
+  {
+   "ru": "но́вом",
+   "en": "new (masculine or neuter prepositional)"
+  },
+  {
+   "ru": "мои́",
+   "en": "my (plural)"
+  },
+  {
+   "ru": "на́ши",
+   "en": "our (plural)"
+  },
+  {
+   "ru": "э́тих",
+   "en": "these (genitive or prepositional)"
+  },
+  {
+   "ru": "мои́х",
+   "en": "my (plural genitive or prepositional)"
+  },
+  {
+   "ru": "на́ших",
+   "en": "our (plural genitive or prepositional)"
+  },
+  {
+   "ru": "но́вых",
+   "en": "new (plural genitive or prepositional)"
+  },
+  {
+   "ru": "больши́е",
+   "en": "big (plural)"
+  },
+  {
+   "ru": "больши́х",
+   "en": "big (plural genitive or prepositional)"
+  },
+  {
+   "ru": "кни́гах",
+   "en": "in books (prepositional plural)"
   }
  ],
  "units": [
@@ -3762,7 +4240,7 @@
       },
       {
        "kind": "diary",
-       "prompt": "Name three things in the room with э́то."
+       "prompt": "Name a cat, a cake and a rocket using this page's pattern. They can be imagined."
       }
      ]
     },
@@ -5238,6 +5716,103 @@
        "prompt": "Ask for more of something, politely, and say thank you."
       }
      ]
+    },
+    {
+     "id": "h1",
+     "title": "Let's have tea: дава́й",
+     "intro": "The word that starts anything two people do together at home, and the kitchen around it.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Дава́й plus a verb's dictionary form proposes doing something together: Дава́й пить чай! On its own, Дава́й! is yes, let's; ла́дно is a relaxed alright and коне́чно of course. На, держи́! goes with handing something over.",
+       "examples": [
+        {
+         "ru": "— Дава́й пить чай! — Дава́й!",
+         "en": "— Let's have tea! — Let's!"
+        },
+        {
+         "ru": "— Чай? — Нет, ко́фе. — Ла́дно, ко́фе.",
+         "en": "— Tea? — No, coffee. — Alright, coffee."
+        },
+        {
+         "ru": "— Где кру́жка? — В шкафу́.",
+         "en": "— Where's the mug? — In the cupboard."
+        },
+        {
+         "ru": "Ча́йник на плите́. Гото́во!",
+         "en": "The kettle is on the stove. Done!"
+        },
+        {
+         "ru": "— Мо́жно нож? — Коне́чно. На, держи́!",
+         "en": "— Can I have the knife? — Of course. Here you go!"
+        },
+        {
+         "ru": "Ло́жка, ви́лка и нож тут.",
+         "en": "The spoon, the fork and the knife are here."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Дава́й пить чай!",
+       "options": [
+        "Дава́й пить чай!",
+        "Дава́й пить ко́фе!",
+        "Мо́жно чай?"
+       ]
+      },
+      {
+       "kind": "fill",
+       "before": "— ",
+       "after": " пить чай! — Дава́й!",
+       "hint": "— Let's have tea! — Let's!",
+       "answer": "Дава́й"
+      },
+      {
+       "kind": "translate",
+       "en": "alright",
+       "answer": "ла́дно"
+      },
+      {
+       "kind": "translate",
+       "en": "of course",
+       "answer": "коне́чно"
+      },
+      {
+       "kind": "dictation",
+       "text": "Ча́йник на плите́."
+      },
+      {
+       "kind": "fill",
+       "before": "— Где кру́жка? — ",
+       "after": ".",
+       "hint": "— Where's the mug? — In the cupboard.",
+       "answer": "В шкафу́"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "— Дава́й пить чай! — Дава́й! А где кру́жка? — В шкафу́. — Ла́дно. Ча́йник на плите́… Гото́во! На, держи́!"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "— Мо́жно нож? — Коне́чно. На, держи́!",
+       "options": [
+        "— Where's the knife? — Here, on the shelf.",
+        "— Can I have the knife? — Of course. Here you go!",
+        "— Can I have a fork? — No, sorry."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "copy",
+       "text": "ло́жка, ви́лка, нож",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Propose tea or coffee to someone at home with дава́й, and write their reply."
+      }
+     ]
     }
    ]
   },
@@ -5840,6 +6415,113 @@
       {
        "kind": "diary",
        "prompt": "Two sentences of your own, with words from this page."
+      }
+     ]
+    },
+    {
+     "id": "h2",
+     "title": "Salt or sugar? же, ведь, ну",
+     "intro": "Three little words that carry the warmth and impatience of table talk, and the food that sits on the table.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Же leans on the word before it (Она́ же тут! — it's right here), and ведь appeals to what you both know (Э́то ведь соль! — that's salt, after all). Ну is well: Ну ла́дно. Бу́дешь? with a food word asks will you have some, and без is without: the word after it changes its ending, без молока́, без са́хара.",
+       "examples": [
+        {
+         "ru": "— Где соль? — Она́ же тут, на столе́!",
+         "en": "— Where's the salt? — It's right here, on the table!"
+        },
+        {
+         "ru": "— Э́то ведь соль, а не са́хар! — Ой!",
+         "en": "— That's salt, not sugar! — Oops!"
+        },
+        {
+         "ru": "— Ну ла́дно, чай без са́хара.",
+         "en": "— Well, alright, tea without sugar."
+        },
+        {
+         "ru": "— Ко́фе с молоко́м и́ли без молока́? — Без, спаси́бо.",
+         "en": "— Coffee with milk or without? — Without, thanks."
+        },
+        {
+         "ru": "Чай с лимо́ном, пожа́луйста.",
+         "en": "Tea with lemon, please."
+        },
+        {
+         "ru": "— Бу́дешь пельме́ни? — Бу́ду! А смета́на есть?",
+         "en": "— Will you have pelmeni? — I will! And is there sour cream?"
+        },
+        {
+         "ru": "Вку́сно па́хнет! Что на у́жин? — Карто́шка.",
+         "en": "Smells delicious! What's for dinner? — Potatoes."
+        },
+        {
+         "ru": "— Что на за́втрак? — Яйцо́ и ка́ша. Ма́сло на столе́.",
+         "en": "— What's for breakfast? — An egg and porridge. The butter is on the table."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Э́то ведь соль!",
+       "options": [
+        "Э́то ведь соль!",
+        "Она́ же тут!",
+        "Ну ла́дно!"
+       ]
+      },
+      {
+       "kind": "fill",
+       "before": "— Где соль? — Она́ ",
+       "after": " тут, на столе́!",
+       "hint": "— Where's the salt? — It's right here, on the table!",
+       "answer": "же"
+      },
+      {
+       "kind": "fill",
+       "before": "— Э́то ",
+       "after": " соль, а не са́хар! — Ой!",
+       "hint": "— That's salt, not sugar! — Oops!",
+       "answer": "ведь"
+      },
+      {
+       "kind": "fill",
+       "before": "— ",
+       "after": " чай? — Бу́ду!",
+       "hint": "— Will you have tea? — I will!",
+       "answer": "Бу́дешь"
+      },
+      {
+       "kind": "translate",
+       "en": "egg",
+       "answer": "яйцо́"
+      },
+      {
+       "kind": "translate",
+       "en": "without sugar",
+       "answer": "без са́хара"
+      },
+      {
+       "kind": "dictation",
+       "text": "Чай с лимо́ном, без са́хара."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "— Вку́сно па́хнет! Что на у́жин? — Карто́шка. Бу́дешь пельме́ни? — Бу́ду! А смета́на есть? — Коне́чно, она́ же тут. — Ой, э́то ведь ма́сло! — Ну ла́дно."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "— Ко́фе с молоко́м и́ли без молока́? — Без, спаси́бо.",
+       "options": [
+        "— Coffee or tea? — Tea, thanks.",
+        "— Coffee with milk or without? — Without, thanks.",
+        "— Coffee with sugar? — Yes, please."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Ask someone at home what they will have with бу́дешь, and answer with же, ведь or ну."
       }
      ]
     }
@@ -6721,6 +7403,109 @@
       {
        "kind": "diary",
        "prompt": "How old are the people and pets at home? Numbers to twenty."
+      }
+     ]
+    },
+    {
+     "id": "h3",
+     "title": "Out of milk: ко́нчилось",
+     "intro": "What to say when the fridge is empty, the kettle is boiling and the cup is not clean.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Ко́нчилось is it has run out: Молоко́ ко́нчилось; оста́лось чуть-чу́ть is there's a tiny bit left, and вообще́ нет is none at all. Ча́йник кипи́т is the kettle's boiling. Горя́чий, холо́дный, чи́стый and гря́зный (hot, cold, clean, dirty) end like но́вый and change the same way.",
+       "examples": [
+        {
+         "ru": "— Молоко́ ко́нчилось? — Нет, оста́лось чуть-чу́ть.",
+         "en": "— Has the milk run out? — No, there's a tiny bit left."
+        },
+        {
+         "ru": "— А хлеб есть? — Вообще́ нет.",
+         "en": "— And is there bread? — None at all."
+        },
+        {
+         "ru": "Холоди́льник пусто́й!",
+         "en": "The fridge is empty!"
+        },
+        {
+         "ru": "Спи́сок в магази́н: купи́ть молоко́, хлеб и сыр.",
+         "en": "The shopping list: buy milk, bread and cheese."
+        },
+        {
+         "ru": "Ча́йник кипи́т!",
+         "en": "The kettle is boiling!"
+        },
+        {
+         "ru": "Суп горя́чий, а сок холо́дный.",
+         "en": "The soup is hot, and the juice is cold."
+        },
+        {
+         "ru": "Стол чи́стый, а нож гря́зный.",
+         "en": "The table is clean, but the knife is dirty."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Молоко́ ко́нчилось!",
+       "options": [
+        "Молоко́ ко́нчилось!",
+        "Ча́йник кипи́т!",
+        "Холоди́льник пусто́й!"
+       ]
+      },
+      {
+       "kind": "fill",
+       "before": "— Молоко́ ",
+       "after": "? — Нет, оста́лось чуть-чу́ть.",
+       "hint": "— Has the milk run out? — No, there's a tiny bit left.",
+       "answer": "ко́нчилось"
+      },
+      {
+       "kind": "fill",
+       "before": "— А хлеб есть? — ",
+       "after": ".",
+       "hint": "— And is there bread? — None at all.",
+       "answer": "Вообще́ нет"
+      },
+      {
+       "kind": "fill",
+       "before": "Ча́йник ",
+       "after": "! Дава́й пить чай!",
+       "hint": "The kettle's boiling! Let's have tea!",
+       "answer": "кипи́т"
+      },
+      {
+       "kind": "dictation",
+       "text": "Стол чи́стый, а нож гря́зный."
+      },
+      {
+       "kind": "translate",
+       "en": "clean (masculine)",
+       "answer": "чи́стый"
+      },
+      {
+       "kind": "copy",
+       "text": "Спи́сок в магази́н: молоко́, хлеб, сыр.",
+       "times": 1
+      },
+      {
+       "kind": "read_aloud",
+       "text": "— Молоко́ ко́нчилось! — Оста́лось чуть-чу́ть? — Нет, вообще́ нет. Холоди́льник пусто́й! — Ла́дно, вот спи́сок: купи́ть молоко́, хлеб и сыр."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Суп горя́чий, а сок холо́дный.",
+       "options": [
+        "The soup is cold, and the juice is hot.",
+        "The soup is hot, and the juice is cold.",
+        "The soup is tasty, and the juice is fresh."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Open the fridge: what has run out, what is left, and what is hot, cold, clean or dirty."
       }
      ]
     }
@@ -9282,6 +10067,107 @@
      ]
     },
     {
+     "id": "s1",
+     "title": "One stem, one shift: люблю́, пишу́, хожу́, хочу́",
+     "intro": "Four verbs look irregular only in the я form, where the last consonant of the stem changes. Learn the shift and the stem stays one.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Some verbs change the last consonant of the stem in the я form: б grows an л (люби́ть: люблю́, but лю́бишь), д becomes ж (ходи́ть: хожу́, хо́дишь; ви́деть: ви́жу, ви́дишь), т becomes ч (хоте́ть: хочу́, хо́чешь). In писа́ть the с becomes ш in every present form: пишу́, пи́шешь, пи́шет. The stress often jumps back after the я form: люблю́, лю́бишь.",
+       "examples": [
+        {
+         "ru": "люби́ть: я люблю́, ты лю́бишь",
+         "en": "to love: I love, you love"
+        },
+        {
+         "ru": "писа́ть: я пишу́, ты пи́шешь",
+         "en": "to write: I write, you write"
+        },
+        {
+         "ru": "ходи́ть: я хожу́, ты хо́дишь",
+         "en": "to go (regularly, on foot): I go, you go"
+        },
+        {
+         "ru": "ви́деть: я ви́жу, ты ви́дишь",
+         "en": "to see: I see, you see"
+        },
+        {
+         "ru": "хоте́ть: я хочу́, ты хо́чешь",
+         "en": "to want: I want, you want"
+        },
+        {
+         "ru": "Я пишу́ по-ру́сски, то́лько ме́дленно.",
+         "en": "I write in Russian, only slowly."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "ты лю́бишь",
+       "options": [
+        "ты лю́бишь",
+        "я люблю́",
+        "ты ви́дишь"
+       ]
+      },
+      {
+       "kind": "fill",
+       "before": "Ты лю́бишь чай, а я ",
+       "after": " ко́фе.",
+       "hint": "You love tea, and I love coffee.",
+       "answer": "люблю́"
+      },
+      {
+       "kind": "fill",
+       "before": "Я пишу́ по-ру́сски, а ты ",
+       "after": " по-англи́йски.",
+       "hint": "I write in Russian, and you write in English.",
+       "answer": "пи́шешь"
+      },
+      {
+       "kind": "fill",
+       "before": "Ты хо́дишь в магази́н, а я ",
+       "after": " в цирк.",
+       "hint": "You go to the shop, and I go to the circus.",
+       "answer": "хожу́"
+      },
+      {
+       "kind": "fill",
+       "before": "Что ты ",
+       "after": "? — Я ви́жу звезду́.",
+       "hint": "What do you see? — I see a star.",
+       "answer": "ви́дишь"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я хожу́ в магази́н."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Я люблю́, ты лю́бишь. Я пишу́, ты пи́шешь. Я хожу́, ты хо́дишь. Я ви́жу, ты ви́дишь. Я хочу́, ты хо́чешь."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "— Ты пи́шешь по-ру́сски? — Пишу́, то́лько ме́дленно.",
+       "options": [
+        "— Do you read Russian? — I do, only slowly.",
+        "— Do you write in Russian? — No, I only speak it.",
+        "— Do you write in Russian? — I do, only slowly."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "copy",
+       "text": "Люби́ть — люблю́, лю́бишь; ходи́ть — хожу́, хо́дишь; писа́ть — пишу́, пи́шешь.",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Four short lines about today with я люблю́, я пишу́, я хожу́ and я хочу́."
+      }
+     ]
+    },
+    {
      "id": "u22-p1",
      "title": "I think that…",
      "intro": "Что joins a whole thought to the sentence: я ду́маю, что…",
@@ -10538,6 +11424,216 @@
        "prompt": "Two sentences of your own, with words from this page."
       }
      ]
+    },
+    {
+     "id": "h4",
+     "title": "Pass, put, take: kitchen imperatives",
+     "intro": "Half of what is said in a kitchen is an imperative, and its aspect tells you what kind of request it is.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The perfective asks for one concrete step right now (положи́ нож на стол, возьми́ хлеб, поста́вь ча́йник); the imperfective is an open invitation or a warning with не (бери́ хлеб — help yourself; не тро́гай — don't touch). Клади́ and положи́ are for things laid flat, поста́вь for things that stand. Дай is give, hand me.",
+       "examples": [
+        {
+         "ru": "— Положи́ нож на стол. — Ла́дно.",
+         "en": "— Put the knife on the table. — Alright."
+        },
+        {
+         "ru": "— Куда́? — Клади́ сюда́.",
+         "en": "— Where to? — Put it here."
+        },
+        {
+         "ru": "Поста́вь ча́йник, пожа́луйста.",
+         "en": "Put the kettle on, please."
+        },
+        {
+         "ru": "Сади́сь, бери́ хлеб!",
+         "en": "Sit down, help yourself to bread!"
+        },
+        {
+         "ru": "Возьми́ сыр и положи́ на стол.",
+         "en": "Take the cheese and put it on the table."
+        },
+        {
+         "ru": "— Дай нож, пожа́луйста. — На, держи́!",
+         "en": "— Give me the knife, please. — Here you go!"
+        },
+        {
+         "ru": "Нале́й чай и попро́буй суп.",
+         "en": "Pour the tea and taste the soup."
+        },
+        {
+         "ru": "Осторо́жно, горя́чий! Не тро́гай!",
+         "en": "Careful, it's hot! Don't touch!"
+        },
+        {
+         "ru": "Иди́ сюда́! Вы́ключи плиту́!",
+         "en": "Come here! Turn off the stove!"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Положи́ нож на стол.",
+       "options": [
+        "Положи́ нож на стол.",
+        "Поста́вь ча́йник.",
+        "Возьми́ нож."
+       ]
+      },
+      {
+       "kind": "fill",
+       "before": "Сади́сь, ",
+       "after": " хлеб!",
+       "hint": "Sit down, help yourself to bread!",
+       "answer": "бери́"
+      },
+      {
+       "kind": "fill",
+       "before": "— ",
+       "after": " сыр и положи́ на стол. — Ла́дно.",
+       "hint": "— Take the cheese and put it on the table. — Alright.",
+       "answer": "Возьми́"
+      },
+      {
+       "kind": "fill",
+       "before": "Осторо́жно, горя́чий! Не ",
+       "after": "!",
+       "hint": "Careful, it's hot! Don't touch!",
+       "answer": "тро́гай"
+      },
+      {
+       "kind": "dictation",
+       "text": "Поста́вь ча́йник, пожа́луйста."
+      },
+      {
+       "kind": "translate",
+       "en": "come here",
+       "answer": "иди́ сюда́"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "— Иди́ сюда́! Поста́вь ча́йник и нале́й чай. — Ла́дно. — Осторо́жно, горя́чий! Попро́буй суп. — Вку́сно! — Сади́сь, бери́ хлеб. Дай нож, пожа́луйста. — На, держи́. — И вы́ключи плиту́!"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "— Дай нож, пожа́луйста. — На, держи́!",
+       "options": [
+        "— Give me the knife, please. — Here you go!",
+        "— Where's the knife? — On the table.",
+        "— Give me the bread, please. — Help yourself!"
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "copy",
+       "text": "положи́ — клади́, возьми́ — бери́",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three kitchen requests for tonight: one with положи́ or поста́вь, one with возьми́ or бери́, and one warning with не."
+      }
+     ]
+    },
+    {
+     "id": "h5",
+     "title": "Chores: Дава́й я помо́ю посу́ду!",
+     "intro": "Volunteering for a job, saying what you'll do meanwhile, and the past tense checking whether the cat got fed.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Дава́й я plus a perfective я-form volunteers for a job: Дава́й я помо́ю посу́ду! (and мыть посу́ду is doing the dishes in general). Пока́ in the middle of a sentence is meanwhile: А я пока́ вы́тру стол. In the past the two aspects split the same way: Ты корми́л кота́? asks whether it happened at all, Покорми́л! reports it done.",
+       "examples": [
+        {
+         "ru": "— Дава́й я помо́ю посу́ду! — Дава́й. А я пока́ вы́тру стол.",
+         "en": "— Let me wash the dishes! — Go on. And meanwhile I'll wipe the table."
+        },
+        {
+         "ru": "Я не люблю́ мыть посу́ду.",
+         "en": "I don't like doing the dishes."
+        },
+        {
+         "ru": "— Ты корми́л кота́? — Покорми́л! Он всё съел.",
+         "en": "— Did you feed the cat? — I did! He ate it all."
+        },
+        {
+         "ru": "Покорми́ кота́, пожа́луйста.",
+         "en": "Feed the cat, please."
+        },
+        {
+         "ru": "— Ой, молоко́ убежа́ло! — Не расстра́ивайся. Где тря́пка?",
+         "en": "— Oh no, the milk's boiled over! — Don't be upset. Where's the cloth?"
+        },
+        {
+         "ru": "Уже́ по́здно. Пора́ спать!",
+         "en": "It's late already. Time for bed!"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Дава́й я помо́ю посу́ду!",
+       "options": [
+        "Дава́й я помо́ю посу́ду!",
+        "Я не люблю́ мыть посу́ду.",
+        "Ты корми́л кота́?"
+       ]
+      },
+      {
+       "kind": "fill",
+       "before": "— Дава́й я ",
+       "after": " посу́ду! — Дава́й.",
+       "hint": "— Let me wash the dishes! — Go on.",
+       "answer": "помо́ю"
+      },
+      {
+       "kind": "fill",
+       "before": "— Ты ",
+       "after": " кота́? — Покорми́л!",
+       "hint": "— Did you feed the cat? — I did!",
+       "answer": "корми́л"
+      },
+      {
+       "kind": "fill",
+       "before": "— Ой, молоко́ ",
+       "after": "! — Не расстра́ивайся.",
+       "hint": "— Oh no, the milk's boiled over! — Don't be upset.",
+       "answer": "убежа́ло"
+      },
+      {
+       "kind": "dictation",
+       "text": "Уже́ по́здно. Пора́ спать!"
+      },
+      {
+       "kind": "translate",
+       "en": "to wash",
+       "answer": "мыть"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "— Дава́й я помо́ю посу́ду! — Дава́й. А я пока́ вы́тру стол. Где тря́пка? — Вот. Ты корми́л кота́? — Ещё нет. — Покорми́ кота́! — Покорми́л. Он всё съел. — Уже́ по́здно, пора́ спать."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "— Ты корми́л кота́? — Покорми́л! Он всё съел.",
+       "options": [
+        "— Did you feed the cat? — I did! He ate it all.",
+        "— Did you feed the cat? — No, he isn't hungry.",
+        "— Did you see the cat? — Yes! He is asleep."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "copy",
+       "text": "корми́л — покорми́л, мыть — помо́ю",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Volunteer for one chore with Дава́й я…, and say what the other person can do meanwhile with А я пока́…"
+      }
+     ]
     }
    ]
   },
@@ -10952,6 +12048,105 @@
       {
        "kind": "diary",
        "prompt": "Two sentences of your own, with words from this page."
+      }
+     ]
+    },
+    {
+     "id": "h6",
+     "title": "The neighbour and the courier: ты and вы",
+     "intro": "At home everything is ты. When the neighbour knocks or the courier rings, the same sentence switches to вы in the same breath.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "At home everything is ты (подержи́ кота́, вы́ключи свет). When a neighbour knocks or the courier calls, the same sentence switches to вы, and the imperative grows -те: возьми́ → возьми́те, сади́сь → сади́тесь, проходи́ → проходи́те. Здра́вствуйте and извини́те are the вы forms of hello and sorry, so they come out by themselves for anyone you'd call вы.",
+       "examples": [
+        {
+         "ru": "Подержи́ кота́! Кто́-то звони́т в дверь.",
+         "en": "Hold the cat! Someone's ringing at the door."
+        },
+        {
+         "ru": "— Здра́вствуйте! — Здра́вствуйте, проходи́те, сади́тесь.",
+         "en": "— Hello! — Hello, come in, sit down."
+        },
+        {
+         "ru": "Э́то сосе́дка. Сади́тесь, вот чай. Возьми́те хлеб.",
+         "en": "It's the neighbour. Sit down, here's tea. Take some bread."
+        },
+        {
+         "ru": "— Э́то курье́р. Откро́йте, пожа́луйста. — Сейча́с!",
+         "en": "— It's the courier. Open up, please. — Just a moment!"
+        },
+        {
+         "ru": "— Извини́те, э́то не ваш телефо́н? — Мой! Спаси́бо!",
+         "en": "— Excuse me, isn't this your phone? — Mine! Thank you!"
+        },
+        {
+         "ru": "Вы́ключи свет и дай ключи́.",
+         "en": "Turn off the light and give me the keys."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Проходи́те, сади́тесь.",
+       "options": [
+        "Проходи́те, сади́тесь.",
+        "Здра́вствуйте!",
+        "Откро́йте, пожа́луйста."
+       ]
+      },
+      {
+       "kind": "fill",
+       "before": "— ",
+       "after": ", проходи́те, сади́тесь.",
+       "hint": "— Hello, come in, sit down.",
+       "answer": "Здра́вствуйте"
+      },
+      {
+       "kind": "fill",
+       "before": "— Э́то курье́р. ",
+       "after": ", пожа́луйста. — Сейча́с!",
+       "hint": "— It's the courier. Open up, please. — Just a moment!",
+       "answer": "Откро́йте"
+      },
+      {
+       "kind": "fill",
+       "before": "Вы́ключи свет и дай ",
+       "after": ".",
+       "hint": "Turn off the light and give me the keys.",
+       "answer": "ключи́"
+      },
+      {
+       "kind": "dictation",
+       "text": "Телефо́н звони́т!"
+      },
+      {
+       "kind": "translate",
+       "en": "excuse me, sorry (polite)",
+       "answer": "извини́те"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "— Кто́-то звони́т в дверь. Подержи́ кота́! — Ла́дно. — Здра́вствуйте! — Здра́вствуйте, э́то сосе́дка. Проходи́те, сади́тесь. — Спаси́бо. Извини́те, э́то не ваш телефо́н? — Мой! Спаси́бо!"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "— Извини́те, э́то не ваш телефо́н? — Мой! Спаси́бо!",
+       "options": [
+        "— Sorry, is this your phone? — No, it isn't mine.",
+        "— Excuse me, where is your phone? — At home.",
+        "— Excuse me, isn't this your phone? — Mine! Thank you!"
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "copy",
+       "text": "возьми́ — возьми́те, сади́сь — сади́тесь",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two lines at the door: one in ты to someone at home, one in вы to the neighbour or the courier."
       }
      ]
     }
@@ -13164,6 +14359,390 @@
       {
        "kind": "diary",
        "prompt": "A day of yours that uses every case: with whom, to whom, about what."
+      }
+     ]
+    },
+    {
+     "id": "a1",
+     "title": "Adjectives of and to: -ого, -ому, -ой",
+     "intro": "You know у бра́та and бра́ту. Now the adjective and the little words э́тот and мой go along with the noun.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "In the genitive, masculine and neuter adjectives end in -ого (said -ово), and э́тот, мой, наш follow: из э́того но́вого го́рода, у моего́ бра́та. In the dative they end in -ому: э́тому но́вому учи́телю, моему́ бра́ту. A feminine adjective takes -ой in both, with э́той and мое́й beside it: у мое́й сестры́, нет э́той но́вой кни́ги.",
+       "examples": [
+        {
+         "ru": "э́тот но́вый дом — э́та но́вая кни́га",
+         "en": "this new house — this new book"
+        },
+        {
+         "ru": "Я из э́того но́вого го́рода.",
+         "en": "I am from this new city."
+        },
+        {
+         "ru": "У моего́ бра́та нет вре́мени.",
+         "en": "My brother has no time."
+        },
+        {
+         "ru": "Он из на́шего го́рода.",
+         "en": "He is from our city."
+        },
+        {
+         "ru": "У мое́й сестры́ мно́го книг.",
+         "en": "My sister has many books."
+        },
+        {
+         "ru": "У меня́ нет э́той но́вой кни́ги.",
+         "en": "I don't have this new book."
+        },
+        {
+         "ru": "Я пишу́ письмо́ моему́ бра́ту.",
+         "en": "I am writing a letter to my brother."
+        },
+        {
+         "ru": "Я пишу́ письмо́ на́шему но́вому учи́телю.",
+         "en": "I am writing a letter to our new teacher."
+        },
+        {
+         "ru": "Я пишу́ письмо́ мое́й сестре́.",
+         "en": "I am writing a letter to my sister."
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "но́вый",
+       "paradigm": "adj",
+       "forms": {
+        "nom-m": "но́вый",
+        "gen-m": "но́вого",
+        "dat-m": "но́вому",
+        "nom-f": "но́вая",
+        "gen-f": "но́вой",
+        "dat-f": "но́вой"
+       },
+       "cells": [
+        "gen-m",
+        "dat-m",
+        "gen-f"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "но́вый",
+       "cue": "gen-m",
+       "answer": "но́вого",
+       "before": "Я из э́того ",
+       "after": " го́рода.",
+       "hint": "I am from this new city."
+      },
+      {
+       "kind": "transform",
+       "word": "но́вый",
+       "cue": "dat-m",
+       "answer": "но́вому",
+       "before": "Я пишу́ письмо́ э́тому ",
+       "after": " учи́телю.",
+       "hint": "I am writing a letter to this new teacher."
+      },
+      {
+       "kind": "fill",
+       "before": "У ",
+       "after": " бра́та нет вре́мени.",
+       "hint": "My brother has no time.",
+       "answer": "моего́"
+      },
+      {
+       "kind": "fill",
+       "before": "У меня́ нет ",
+       "after": " но́вой кни́ги.",
+       "hint": "I don't have this new book.",
+       "answer": "э́той"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я пишу́ письмо́ мое́й сестре́."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "э́тому",
+       "options": [
+        "э́того",
+        "э́тому",
+        "э́той"
+       ]
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Э́то письмо́ моему́ бра́ту.",
+       "options": [
+        "This letter is from my brother.",
+        "This is my brother's letter.",
+        "This letter is to my brother."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Э́тот дом но́вый, и э́та кни́га то́же но́вая. Я из э́того го́рода, а он из на́шего. У моего́ бра́та нет вре́мени, а у мое́й сестры́ мно́го книг. Я пишу́ письмо́ на́шему но́вому учи́телю."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences about people at home: one with у моего́… or нет э́той…, one with моему́… or э́тому…"
+      }
+     ]
+    },
+    {
+     "id": "a2",
+     "title": "Adjectives with and in: -ую, -ым, -ом",
+     "intro": "One ending to watch: the feminine object takes -ую, and everything else feminine stays -ой.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The object of a verb, when feminine, takes -ую: э́ту но́вую кни́гу, and мой gives мою́. With с (with) and о (about), masculine and neuter take -ым and -ом: с мои́м бра́том, в э́том но́вом до́ме, о на́шем го́роде. The feminine keeps -ой for all of those: с э́той но́вой ру́чкой, о мое́й но́вой рабо́те.",
+       "examples": [
+        {
+         "ru": "Я чита́ю э́ту но́вую кни́гу.",
+         "en": "I am reading this new book."
+        },
+        {
+         "ru": "Я люблю́ мою́ рабо́ту.",
+         "en": "I love my job."
+        },
+        {
+         "ru": "Я иду́ в парк с мои́м бра́том.",
+         "en": "I am going to the park with my brother."
+        },
+        {
+         "ru": "Я говорю́ с э́тим но́вым учи́телем.",
+         "en": "I am talking with this new teacher."
+        },
+        {
+         "ru": "Он говори́т с на́шим учи́телем.",
+         "en": "He is talking with our teacher."
+        },
+        {
+         "ru": "Я живу́ в э́том но́вом до́ме.",
+         "en": "I live in this new house."
+        },
+        {
+         "ru": "Я чита́ю о на́шем го́роде.",
+         "en": "I am reading about our city."
+        },
+        {
+         "ru": "Я ду́маю о моём бра́те.",
+         "en": "I am thinking about my brother."
+        },
+        {
+         "ru": "Я пишу́ письмо́ э́той но́вой ру́чкой.",
+         "en": "I am writing a letter with this new pen."
+        },
+        {
+         "ru": "Я ду́маю о мое́й но́вой рабо́те.",
+         "en": "I am thinking about my new job."
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "но́вый",
+       "paradigm": "adj",
+       "forms": {
+        "nom-m": "но́вый",
+        "instr-m": "но́вым",
+        "prep-m": "но́вом",
+        "nom-f": "но́вая",
+        "acc-f": "но́вую",
+        "instr-f": "но́вой",
+        "prep-f": "но́вой"
+       },
+       "cells": [
+        "instr-m",
+        "prep-m",
+        "acc-f"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "но́вый",
+       "cue": "acc-f",
+       "answer": "но́вую",
+       "before": "Я чита́ю э́ту ",
+       "after": " кни́гу.",
+       "hint": "I am reading this new book."
+      },
+      {
+       "kind": "transform",
+       "word": "но́вый",
+       "cue": "prep-m",
+       "answer": "но́вом",
+       "before": "Я чита́ю о на́шем ",
+       "after": " го́роде.",
+       "hint": "I am reading about our new city."
+      },
+      {
+       "kind": "fill",
+       "before": "Я говорю́ с ",
+       "after": " но́вым учи́телем.",
+       "hint": "I am talking with this new teacher.",
+       "answer": "э́тим"
+      },
+      {
+       "kind": "fill",
+       "before": "Я ду́маю о ",
+       "after": " но́вой рабо́те.",
+       "hint": "I am thinking about my new job.",
+       "answer": "мое́й"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я живу́ в э́том но́вом до́ме."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "но́вую",
+       "options": [
+        "но́вую",
+        "но́вой",
+        "но́вым"
+       ]
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Я пишу́ письмо́ э́той но́вой ру́чкой.",
+       "options": [
+        "I am writing a letter with this new pen.",
+        "I am writing a letter to this new teacher.",
+        "I am writing about this new pen."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Я чита́ю э́ту но́вую кни́гу о на́шем го́роде. Я живу́ в э́том но́вом до́ме. Я иду́ в парк с мои́м бра́том, а он говори́т с на́шим учи́телем. Я ду́маю о моём бра́те и люблю́ мою́ рабо́ту."
+      },
+      {
+       "kind": "diary",
+       "prompt": "What are you reading or using tonight (э́ту… -ую), and where are you (в э́том… -ом or в э́той… -ой)?"
+      }
+     ]
+    },
+    {
+     "id": "a3",
+     "title": "Adjectives in the plural: -ые, -ых",
+     "intro": "In the plural, gender disappears: one set of endings for everything, and -ых serves two cases at once.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "In the plural, gender is gone: one ending for all. Nominative and the inanimate object end in -ые (-ие after к, г, х and the hushing letters): э́ти мои́ но́вые кни́ги, на́ши больши́е зада́чи. Genitive and prepositional share -ых / -их, and э́ти, мои́, на́ши follow: нет э́тих но́вых книг, в на́ших кни́гах.",
+       "examples": [
+        {
+         "ru": "Э́ти но́вые кни́ги — мои́.",
+         "en": "These new books are mine."
+        },
+        {
+         "ru": "А э́ти больши́е — на́ши.",
+         "en": "And these big ones are ours."
+        },
+        {
+         "ru": "Э́ти зада́чи больши́е.",
+         "en": "These problems are big."
+        },
+        {
+         "ru": "У меня́ нет э́тих но́вых книг.",
+         "en": "I don't have these new books."
+        },
+        {
+         "ru": "Мно́го на́ших книг на столе́.",
+         "en": "Many of our books are on the table."
+        },
+        {
+         "ru": "В э́тих кни́гах мно́го чи́сел.",
+         "en": "In these books there are many numbers."
+        },
+        {
+         "ru": "В мои́х больши́х кни́гах мно́го зада́ч.",
+         "en": "In my big books there are many problems."
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "мой",
+       "paradigm": "poss-мой",
+       "forms": {
+        "nom-m": "мой",
+        "nom-pl": "мои́",
+        "gen-pl": "мои́х",
+        "prep-pl": "мои́х"
+       },
+       "cells": [
+        "nom-pl",
+        "gen-pl"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "но́вый",
+       "cue": "gen-pl",
+       "answer": "но́вых",
+       "before": "У меня́ нет э́тих ",
+       "after": " книг.",
+       "hint": "I don't have these new books."
+      },
+      {
+       "kind": "transform",
+       "word": "большо́й",
+       "cue": "nom-pl",
+       "answer": "больши́е",
+       "before": "Э́ти ",
+       "after": " кни́ги — на́ши.",
+       "hint": "These big books are ours."
+      },
+      {
+       "kind": "fill",
+       "before": "В ",
+       "after": " кни́гах мно́го чи́сел.",
+       "hint": "In these books there are many numbers.",
+       "answer": "э́тих"
+      },
+      {
+       "kind": "fill",
+       "before": "Э́ти но́вые кни́ги — ",
+       "after": ".",
+       "hint": "These new books are mine.",
+       "answer": "мои́"
+      },
+      {
+       "kind": "dictation",
+       "text": "В э́тих но́вых кни́гах мно́го чи́сел."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "но́вых",
+       "options": [
+        "но́вые",
+        "но́вых",
+        "но́вой"
+       ]
+      },
+      {
+       "kind": "read_meaning",
+       "text": "У меня́ нет э́тих но́вых книг.",
+       "options": [
+        "I don't have these new books.",
+        "I have these new books.",
+        "I don't have this new book."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Э́ти но́вые кни́ги — мои́, а э́ти больши́е — на́ши. В э́тих больши́х кни́гах мно́го чи́сел. Мно́го на́ших книг на столе́, а мои́х книг до́ма нет: они́ на рабо́те."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two plural sentences about your books: one with э́ти… -ые, one with нет э́тих… -ых or в э́тих… -ых."
       }
      ]
     }

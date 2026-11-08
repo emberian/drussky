@@ -50,7 +50,11 @@ final class DayTests: XCTestCase {
         let course = page.exercises.indices.filter { page.exercises[$0].reviewKey == nil }
         XCTAssertFalse(course.isEmpty)
         XCTAssertTrue(course.allSatisfy { $0 >= n })
-        XCTAssertTrue(probes(page, book).allSatisfy { $0 > course.last! }, "probes, if any, come last")
+        let diaries = page.exercises.indices.filter { page.exercises[$0].kind == .diary }
+        XCTAssertEqual(diaries.count, 1, "one diary line closes the page, never two")
+        XCTAssertEqual(diaries.last, page.exercises.indices.last, "the diary line is the last thing on the page")
+        let work = course.filter { !diaries.contains($0) }
+        XCTAssertTrue(probes(page, book).allSatisfy { $0 > work.last! && $0 < diaries.last! }, "probes, if any, come after the work and before the diary")
         XCTAssertTrue(page.intro?.hasPrefix("A new day.") ?? false, page.intro ?? "")
         let keys = page.exercises.compactMap(\.reviewKey)
         XCTAssertEqual(Set(keys).count, keys.count, "no item twice, probes included")
@@ -275,7 +279,7 @@ final class DayTests: XCTestCase {
         XCTAssertEqual(estimate.level, .tired, "\(estimate)")
         let page = book.pages[p]
         let line = try XCTUnwrap(book.deskLine(for: p))
-        XCTAssertTrue(line == "Some reviews are left for a later page.", line)
+        XCTAssertEqual(line, "2 reviews now use choices. 3 reviews wait for later.")
         XCTAssertEqual(book.coverLine, "Some reviews were left for a later page.")
         // Two of the remaining reviews became recognition; the rest were left for later, never graded.
         let remaining = Array(9..<14)
@@ -294,6 +298,25 @@ final class DayTests: XCTestCase {
         clock = clock.addingTimeInterval(300)
         book.record(page: p, exercise: 9) { $0.attempts = 1; $0.chosen = 0; $0.status = .done }
         XCTAssertEqual(book.pages[p].results[10].status, .open)
+    }
+
+    func testNoShorteningNoticeWhenNoReviewsCanChange() throws {
+        let book = Book(course: course, store: tempStore())
+        var ex = Exercise(kind: .dictation); ex.text = "кот"
+        book.insertWrittenPage(title: "New work", intro: nil, unitTitle: "QA",
+                               exercises: Array(repeating: ex, count: 10), newWords: [])
+        let p = book.currentPage
+        var clock = book.now()
+        book.now = { clock }
+        for i in 0..<8 {
+            clock = clock.addingTimeInterval(300)
+            book.record(page: p, exercise: i) { $0.attempts = 1; $0.failedChecks = 1; $0.recognized = "кит" }
+            book.record(page: p, exercise: i) { $0.attempts = 2; $0.revealed = true; $0.status = .missed }
+        }
+        XCTAssertEqual(book.day.fatigue?.level, .tired)
+        XCTAssertNil(book.deskLine(for: p), "A page with no reviews was not shortened")
+        XCTAssertNil(book.day.lastShortened)
+        XCTAssertEqual(book.pages[p].results.filter { $0.status == .open }.count, 2)
     }
 
     /// Shortening never takes an exercise the learner has begun: ink on its strip (the writing may be

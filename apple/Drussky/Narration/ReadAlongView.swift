@@ -11,6 +11,9 @@ struct ReadAlongView: View {
     let owner: String
     /// The word the learner tapped (gloss shown by the passage view).
     @Binding var selected: String?
+    /// The «Структу́ра» layer over the same words (Structure/), when the text has one.
+    var structure: PassageStructure? = nil
+    var layer: StructureLayer? = nil
     @State private var listenFirst = false
     @State private var revealedUpTo = -1
     private let player = NarrationPlayer.shared
@@ -19,6 +22,7 @@ struct ReadAlongView: View {
     private var timings: WordTimings? { exercise.words.flatMap(Narration.timings) }
     private var mapping: [Int?]? { timings.flatMap { Narration.map(text, onto: $0) } }
     private var mine: Bool { player.file == exercise.narration && player.owner == owner }
+    private var structureOn: Bool { structure != nil && layer != nil && book.settings.showStructure == true }
     private var current: Int? {
         guard mine, let timings else { return nil }
         return Narration.wordIndex(at: player.time, in: timings.words)
@@ -55,6 +59,7 @@ struct ReadAlongView: View {
                     Text(player.rate == 1 ? "1×" : "¾×")
                         .font(Theme.label(14)).monospacedDigit()
                         .padding(.horizontal, 10).padding(.vertical, 7)
+                        .frame(minWidth: 44, minHeight: 44)
                         .background(Capsule().fill(Theme.accent.opacity(player.rate == 1 ? 0.10 : 0.22)))
                         .foregroundStyle(Theme.accent)
                 }
@@ -65,7 +70,7 @@ struct ReadAlongView: View {
                 } label: {
                     Image(systemName: listenFirst ? "eye.slash" : "eye")
                         .font(.system(size: 16, weight: .semibold))
-                        .frame(width: 36, height: 34)
+                        .frame(width: 44, height: 44)
                         .background(Capsule().fill(Theme.accent.opacity(listenFirst ? 0.22 : 0.10)))
                         .foregroundStyle(Theme.accent)
                 }
@@ -74,10 +79,10 @@ struct ReadAlongView: View {
             }
             VStack(alignment: .leading, spacing: 6) {
                 let map = mapping
-                ForEach(Array(lines.enumerated()), id: \.offset) { _, line in
+                ForEach(Array(lines.enumerated()), id: \.offset) { li, line in
                     FlowRow(spacing: 8) {
                         ForEach(Array(line.tokens.enumerated()), id: \.offset) { j, tok in
-                            wordView(tok, timing: map?[line.base + j])
+                            wordView(tok, timing: map?[line.base + j], line: li, index: j)
                         }
                     }
                 }
@@ -87,28 +92,41 @@ struct ReadAlongView: View {
             .onChange(of: current) { _, now in
                 if let now, now > revealedUpTo { revealedUpTo = now }
             }
-            if let timings, let reader = timings.reader {
-                Text("Read by \(reader) · \(Int(timings.duration.rounded())) s").font(Theme.label(12)).foregroundStyle(Theme.muted)
+            HStack(alignment: .firstTextBaseline) {
+                if let timings, let reader = timings.reader {
+                    Text("Read by \(reader) · \(Int(timings.duration.rounded())) s").font(Theme.label(12)).foregroundStyle(Theme.muted)
+                }
+                Spacer(minLength: 0)
+                if structure != nil, layer != nil { StructureToggle() }
             }
         }
         .onAppear(perform: qaSeek)
         .onDisappear { if mine { player.pause() } }
     }
 
-    @ViewBuilder private func wordView(_ token: String, timing: Int?) -> some View {
+    @ViewBuilder private func wordView(_ token: String, timing: Int?, line: Int, index: Int) -> some View {
         let word = PassageExercise.bare(token)
         let isNow = timing != nil && timing == current
         let hidden = listenFirst && (timing.map { $0 > revealedUpTo } ?? (revealedUpTo < 0))
-        Button { tap(word, timing: timing) } label: {
+        let tok = structure?.token(line: line, index: index)
+        let mark: StructureMark = structureOn && !hidden
+            ? layer!.mark(for: tok, previous: structure!.token(line: line, index: index - 1), next: structure!.token(line: line, index: index + 1),
+                          in: structure!, roles: Structure.shared.roles) : .none
+        Button { tap(word, timing: timing, token: tok) } label: {
             Text(Theme.stressed(token, show: book.settings.showStress))
-                .russianFont(28, weight: isNow ? .semibold : .regular)
+                .russianFont(28)
                 .foregroundStyle(isNow ? Theme.accent : Theme.text)
                 .opacity(hidden ? 0 : 1)
                 .padding(.vertical, 2).padding(.horizontal, 3)
                 .background(RoundedRectangle(cornerRadius: 6)
                     .fill(isNow ? Theme.accent.opacity(0.18) : selected == word && !hidden ? Theme.accent.opacity(0.10) : hidden ? Theme.muted.opacity(0.12) : .clear))
+                .structureMarks(mark, on: structureOn && !hidden)
         }
         .buttonStyle(.plain)
+        .simultaneousGesture(LongPressGesture(minimumDuration: 0.45).onEnded { _ in
+            guard structureOn, !hidden, let tok, let si = tok.sentence, let s = structure?.sentence(si) else { return }
+            layer?.longPressed(s, at: si, words: tok.words)
+        })
         .accessibilityLabel(hidden ? "hidden word" : RussianText.unstressed(word))
         .accessibilityIdentifier(isNow ? "narration-current-word" : "narration-word")
     }
@@ -120,11 +138,13 @@ struct ReadAlongView: View {
         else if let file = exercise.narration { player.play(file, owner: owner) }
     }
 
-    private func tap(_ word: String, timing: Int?) {
+    private func tap(_ word: String, timing: Int?, token: PassageStructure.Token? = nil) {
+        if structureOn, layer?.consumeSuppressedTap() == true { return }  // the tap that ends a long press
+        if listenFirst, timing.map({ $0 > revealedUpTo }) ?? (revealedUpTo < 0) { return }
         selected = word
+        if structureOn, let structure, let token, let si = token.sentence, let s = structure.sentence(si) { layer?.tapped(s, at: si, words: token.words, in: structure) }
         guard let timing, let timings, let file = exercise.narration else { voice.play(word); return }
         voice.stop()
-        if listenFirst, timing > revealedUpTo { return }  // not yet read: no peeking by tapping
         player.play(file, from: max(0, timings.words[timing].start - 0.05), owner: owner)
     }
 
@@ -170,6 +190,8 @@ struct NarrationClipButton: View {
                     .offset(x: 3, y: -3)
                     .accessibilityHidden(true)
             }
+            .frame(minWidth: 44, minHeight: 44)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label ?? "Hear the reader")

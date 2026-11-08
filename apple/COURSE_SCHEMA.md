@@ -222,16 +222,108 @@ explanation. The page's `sourceID` is `reading:<id>`.
                    "prompt": "What happens next …" }] }] }
 ```
 
+`Resources/kitchen.json` («Ку́хня», 30 overheard dialogues) has the same shape; its series
+object adds `episode_word: "диало́г"` (what one item is called; absent means «эпизо́д») and
+each episode may carry `notice`: one to three stressed strings, Russian first and the English
+after, listed under the passage once it has been read (*What to hear*). Dialogue lines start
+with «— » and run 25–80 words; a serial episode 100–250. `Serial.files` names the files.
+
 Episodes are numbered from 1 and their `after_page`s are non-decreasing in course order.
 `text` and the question texts carry stress on every polysyllable without ё; episodes before
 the alphabet is complete use only letters met by `after_page`; every word of `text` not in the
 course lexicon by `after_page` is in `glosses` (lowercase, unstressed keys); `en`, options and
 glosses are English (Russian only inside a gloss's parenthesis). `questions` are three
-`read_meaning` exercises in the course's own format. `scripts/validate_series.py` checks all
-of this and prints per-episode coverage. In the app (`Serial.load()`, `Shelves.page(for:in:)`)
+`read_meaning` exercises in the course's own format. `scripts/validate_series.py [file]` checks
+all of this and prints per-episode coverage. In the app (`Serial.load()`, `Shelves.page(for:in:)`)
 an episode is a page — `passage` (text, en, glosses), the three questions, a `diary` with the
 prompt — with `sourceID` `episode:<id>`; a page's Optional `offers` lists the shelf items its
 footer offered when it was composed.
+
+# Listening — `Drussky/Resources/listening.json`
+
+```json
+{ "version": 1,
+  "sets": [{ "id": "listen-02", "title": "Дай, пожа́луйста", "title_en": "Pass me the right thing", "after_page": "u4-p4",
+             "items": [{ "id": "listen-02-01", "kind": "pick_object", "en": "Give me the cheese.", "after_page": "u4-p4",
+                         "voice_hint": "any", "glosses": { "дай": "give (informal singular request)" },
+                         "ru": "Дай сыр.", "question": "Which thing is wanted?", "options": ["сок", "сыр", "торт"], "answer": 1,
+                         "crucial_span": "сыр", "why": "сыр names the cheese." }] }],
+  "weekly_samples": [{ "id": "listen-week-01", "title": "Пе́рвые сообще́ния", "title_en": "Unheard messages 1", "after_page": "u14-p5",
+                       "items": [ /* five `message` items whose questions have response_mode, answer_en, accept_en */ ] }] }
+```
+
+Authored content (editable like `math.json`), the exact contract in
+`research/deputies/deputy-codex-listening.md`. Every item has `id`, `kind`, `en` (the translation
+of what is played; A/B-labelled lines for an exchange), `after_page`, `voice_hint` (`any` |
+`unfamiliar`), `glosses` (lowercase unstressed surface form → meaning; may be `{}`),
+`crucial_span` (an exact stressed substring of a heard turn) and `why`. The rest depends on
+`kind`, and a field a kind does not use is **absent**, never an empty placeholder; indices are
+zero-based:
+
+| kind | fields |
+|---|---|
+| `pick_object` | `ru`, `question`, `options` (3–4 taught nouns, stressed), `answer` |
+| `who_needs`, `disagreement` | `lines: [{speaker: "A"\|"B", ru, en}]` (2–4, both speakers), `question`, `options` (English), `answer` |
+| `follow` | `ru`, `question`, `scene: [{id, ru, en, role: "object"\|"place"}]`, `options` (English results), `outcomes: [{object, place\|null}]` parallel to `options`, `answer` |
+| `question_or_statement` | `forms: [{ru, en}]` (exactly two: the statement ending `.`, the question ending `?`), `played` (0\|1), `question`, `options: ["Statement", "Question"]`, `answer` = `played` |
+| `message` | `ru` (2–4 sentences), `questions: [{kind: gist\|detail, prompt, options, answer, crucial_span, why}]` (2–3); the item-level span/why are a fallback |
+| `correction` | `ru` (a statement and its self-repair in one clip), `question`, `options` (English), `answer` |
+
+Weekly messages replace a question's `options`/`answer` with `response_mode: "english_text"`,
+`answer_en` and `accept_en` (examples, not a whitelist). `scripts/validate_listening.py` checks
+the schema, stress, exact surface-form coverage by `after_page`, course order, answers, spans,
+scene references, intonation pairs (distinct audio keys) and the isolation of the reserved
+messages from everything else, and `--write-inventory` writes the 338 playback strings to
+`research/artifacts/listening-spoken.txt`.
+
+In the app (`Listening.load()`, `ListeningItem` with Optional kind-specific fields) a set is a
+page of `listening` exercises — each carries its item in the Optional `listening` field, in a
+fixed order that is not the authored one — with `sourceID` `listening:<set-id>`, offered once like
+an episode. A result keeps one choice in `chosen`, or a message's choices in `recognized`
+("1,2") committed together. Reserved sets are never pages; `openBaseline()` takes a reached set's
+five messages as `BaselineTask`s (kind `listening`, the new Optional `text` played by text in the
+voice `speaker` names).
+
+# Structure — `Drussky/Resources/library-structure.json`
+
+The skeleton of every library sentence, written offline by `scripts/library_structure.py` (Claude,
+`claude-opus-5-5`, structured JSON, one paragraph-sized request at a time, resumable) and checked by
+`scripts/validate_structure.py`. The app lays it over any passage made from a library text — as written,
+read along, the goal's first page — by the sentence's text alone (`Structure.swift`), and the
+«Структу́ра» toggle on the page draws it as a teacher's pencil marks (`StructureViews.swift`).
+
+```json
+{
+  "version": 1, "model": "claude-opus-5-5",
+  "roles": { "subject": { "ru": "подлежа́щее", "en": "subject", "tier": "member" }, "participial_clause": { "…": "…", "tier": "clause" } },
+  "texts": {
+    "tolstoy-lev-i-mysh": { "sentences": [
+      { "index": 1, "text": "Мышь пробежала ему по телу.", "words": [[0, 4], [5, 14], [15, 18], [19, 21], [22, 26]],
+        "chunks": [{ "words": [0, 0], "span": [0, 4], "role": "subject" }, { "words": [3, 4], "span": [19, 26], "role": "prepositional_phrase" }],
+        "referents": [{ "word": 2, "head": 0, "headSentence": 0, "kind": "pronoun" }],
+        "desugar": [{ "words": [3, 7], "span": [19, 50], "kind": "participle", "ru": "лев, кото́рый спал", "en": "the lion that was sleeping" }],
+        "roots": [{ "word": 1, "prefix": "про", "root": "беж", "suffix": "а", "inflection": "ла", "rootID": "бег", "gloss": "run",
+                    "relatives": ["бе́гать", "побежа́ть"], "source": "morphology" }],
+        "governance": [{ "head": 3, "dependents": [4], "frame": "по + Dat", "case": "dat" }] } ] } }
+}
+```
+
+`index` is the sentence's position in the text (paragraphs split on `\n`, sentences by
+`GoalAnalysis.splitSentences`, which the script ports); `text` is the exact source sentence, so an edited
+text invalidates its entry visibly. `words` are the sentence's words as `[start, end)` Unicode-scalar
+offsets — runs of letters, digits and stress marks, hyphenated compounds as one word (`Structure.words(in:)`
+is the same rule) — and every other index refers to them. Member chunks (tier `member`: subject, predicate,
+object, attribute, adverbial, prepositional_phrase, …) cover the words without overlapping; clause chunks
+(subordinate, relative, participial, gerund, coordinate, direct speech, parenthetical) nest. A referent's
+head may be in an earlier sentence of the same text (`headSentence`). Paraphrases and frames carry stress
+marks on polysyllables and none on ё. An x-ray's four pieces spell the word as written; when
+`morphology.json` knows the word, its root, gloss and taught relatives come from there (`source:
+"morphology"`), otherwise from the model, relatives restricted to words the course teaches.
+
+The `structure` exercise is generated from it (never authored): `{"kind":"structure","text":"<sentence>",
+"probe":<word index of the pronoun or participle>,"answer":<word index of its head>,"word":"<probe as
+written>","skills":["anaphora"|"participle"]}` — the learner taps the head; right first time is a
+read-pick `good` on the construction (and the pronoun), right after a wrong tap `again`.
 
 # Sound pairs — `Drussky/Resources/pairs.json`
 

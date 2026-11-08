@@ -676,6 +676,12 @@ for _uid, _page in course_grammar.pages(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, 
     next(u for u in U if u[0] == _uid)[3].append(_page)
 LEXICON += [w for w in course_grammar.LEXICON if w["ru"] not in {x["ru"] for x in LEXICON}]  # headwords units 24–30 may already teach
 
+# Home talk pages (h1-h6), one-stem consonant alternations (s1), and adjective/pronoun case pages (a1-a3).
+import course_home  # noqa: E402
+for _uid, _page in course_home.pages(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm)):
+    next(u for u in U if u[0] == _uid)[3].append(_page)
+LEXICON += [w for w in course_home.LEXICON if w["ru"] not in {x["ru"] for x in LEXICON}]
+
 
 # Course order. Page ids are written into learners' notebooks (sourceID), and the app walks
 # pages by index, so: ids come from where a page was first authored (uN-pK, counting only
@@ -699,7 +705,7 @@ PAGE_MOVES = [
 DIARY_FROM_UNIT = 2  # index into UNIT_ORDER
 DIARY_PROMPTS = {
     "u3-p1": "What is this, and what is it not? Point at two things: Э'то… Э'то не…",
-    "u3-p2": "Name three things in the room with э'то.",
+    "u3-p2": "Name a cat, a cake and a rocket using this page's pattern. They can be imagined.",
     "u3-p3": "Who is this? Introduce two people or animals.",
     "u4-p1": "Who is at home right now, and who is not?",
     "u4-p2": "Ask where two things are, and answer.",
@@ -785,6 +791,7 @@ DIARY_PROMPTS = {
 
 
 DIARY_PROMPTS.update(course_read.DIARY)
+DIARY_PROMPTS.update(course_home.DIARY_PROMPTS)
 
 
 def add_diary_lines(units):

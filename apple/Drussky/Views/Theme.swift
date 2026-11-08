@@ -23,6 +23,8 @@ enum Theme {
     static let redPenUI = dynamic(0xC8372D, 0xFF7A68)
     static let goodUI = dynamic(0x2E7D4F, 0x5EE2A0)
     static let cardUI = dynamic(0xFFFFFF, 0x152131, alpha: 0.75, darkAlpha: 0.85)
+    /// Graphite: a teacher's pencil marks on the page (the structure layer).
+    static let pencilUI = dynamic(0x3A4150, 0xC3CEDC, alpha: 0.55, darkAlpha: 0.55)
 
     static let paper = Color(paperUI)
     static let desk = Color(deskUI)
@@ -36,6 +38,7 @@ enum Theme {
     static let rule = Color(ruleUI)
     static let grid = Color(gridUI)
     static let margin = Color(marginUI)
+    static let pencil = Color(pencilUI)
 
     static let gridStep: CGFloat = 22
 
@@ -139,6 +142,8 @@ struct HearButton: View {
                         .accessibilityLabel("\(voices) voices")
                 }
             }
+            .frame(minWidth: 44, minHeight: 44)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label ?? "Hear \(RussianText.unstressed(text))")
@@ -161,6 +166,7 @@ struct PillButton: View {
             }
             .font(Theme.label(14))
             .padding(.horizontal, 14).padding(.vertical, 9)
+            .frame(minHeight: 44)
             .foregroundStyle(prominent ? Color.white : tint)
             .background(Capsule().fill(prominent ? tint : tint.opacity(0.10)))
         }

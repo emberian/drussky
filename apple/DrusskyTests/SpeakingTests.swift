@@ -443,6 +443,25 @@ final class SpeakingTests: XCTestCase {
         XCTAssertEqual(Book(course: course, store: store).knowledge.model.events.filter { $0.id == id }.count, 1, "never doubled")
     }
 
+    /// After the model has played the turn waits in `.ready` with nothing listening; the tap is
+    /// what opens the microphone, and a cancel releases the wait.
+    func testReadyWaitsForTheTapAndIsNotCapturing() {
+        let turn = SpeakingTurn()
+        turn.pose(.ready, key: "k")
+        XCTAssertFalse(turn.isCapturing, "nothing listens while the page waits for the tap")
+        XCTAssertTrue(turn.isBusy)
+        XCTAssertTrue(turn.isActive("k"))
+        XCTAssertTrue(turn.tap("k"), "the tap belongs to this turn")
+        XCTAssertFalse(turn.tap("other"), "another exercise's tap starts its own turn")
+        turn.cancel()
+        XCTAssertEqual(turn.phase, .idle)
+        XCTAssertFalse(turn.isActive("k"))
+        var plain = SpeakingTurn.Request(key: "k", target: "Да.", takeURL: URL(fileURLWithPath: "/tmp/x.m4a"), model: nil, repeats: 0)
+        XCTAssertEqual(plain.repeats, 0, "with no model the starting tap is the tap: no ready wait")
+        plain.repeats = 1
+        XCTAssertEqual(plain.repeats, 1)
+    }
+
     func testSettingsFromBeforeSpeakingOpen() throws {
         let old = #"{"fingerDrawing":true,"cursiveModels":false,"showStress":false}"#
         let s = try JSONDecoder().decode(Settings.self, from: Data(old.utf8))

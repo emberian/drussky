@@ -113,6 +113,8 @@ struct Settings: Codable, Sendable, Equatable {
     var modelRepeats: Int = 1
     /// Who judges recall writing: "myself" (default) or "reader" (`Settings.writingJudge`, Judgement/).
     var judge: String? = nil
+    /// The «Структу́ра» layer on reading pages, as last left (Structure/).
+    var showStructure: Bool? = nil
 
     init() {}
 
@@ -127,6 +129,7 @@ struct Settings: Codable, Sendable, Equatable {
         dailyReviewCap = try c.decodeIfPresent(Int.self, forKey: .dailyReviewCap)
         probes = try c.decodeIfPresent(Bool.self, forKey: .probes)
         judge = try c.decodeIfPresent(String.self, forKey: .judge)
+        showStructure = try c.decodeIfPresent(Bool.self, forKey: .showStructure)
     }
 }
 
@@ -163,6 +166,7 @@ final class Book {
     var hooks = HookShelf() { didSet { scheduleSave() } }
     /// Fluency measurements: reading, writing and listening over weeks (Fluency/, metrics.jsonl).
     let fluency: FluencyTracker
+    /// Explicit navigation only. Completion and asynchronous feedback leave the paper in place.
     private(set) var advanceSignal = 0
     private(set) var advancePageID: String?
     func requestAdvance(page id: String) { advancePageID = id; advanceSignal += 1 }
@@ -307,7 +311,9 @@ final class Book {
             exercises.insert(reviewExercise(for: item.id, modality: item.modality, variant: pages.count + i),
                              at: min(slots[i], exercises.count))
         }
-        exercises += extraNewItem(excluding: taughtHere)  // one more new word while the learner is sharp
+        // One more new word while the learner is sharp — before the page's closing diary line, when it has one.
+        let diaryAt = exercises.last?.kind == .diary ? exercises.count - 1 : exercises.count
+        exercises.insert(contentsOf: extraNewItem(excluding: taughtHere), at: diaryAt)
         appendPage(sourceID: source.id, unitTitle: unit.title, title: source.title, intro: source.intro,
                    isReview: false, exercises: exercises)
         return true
@@ -349,7 +355,11 @@ final class Book {
         let number = pages.count + 1
         // A random suffix keeps ink/voice file names unique even if the notebook is ever restarted.
         let id = String(format: "p%04d-", number) + UUID().uuidString.prefix(6).lowercased()
-        let exercises = exercises + probeExercises(pageID: id, among: exercises)  // retention probes due now
+        // Retention probes due now go after the page's work but before its closing diary line, so
+        // the free line stays the last thing on the page.
+        let diaryTail = exercises.last?.kind == .diary ? Array(exercises.suffix(1)) : []
+        let body = Array(exercises.dropLast(diaryTail.count))
+        let exercises = body + probeExercises(pageID: id, among: body) + diaryTail
         let offers = shelfOffers()  // an episode or reading the course has reached (Model/Shelves.swift)
         pages.append(BookPage(id: id, number: number, sourceID: sourceID,
                               unitTitle: unitTitle, title: title, intro: intro, isReview: isReview,
@@ -468,7 +478,7 @@ final class Book {
         case .constructionChoice: return ConstructionChoice.key
         case .meet: return exercise.letter.map { "letter:\($0)" }
         // Only what the learner produced becomes something to recall later.
-        case .explain, .readMeaning, .passage, .soundPair: return nil
+        case .explain, .readMeaning, .passage, .soundPair, .listening, .structure: return nil
         default:
             guard let target = exercise.target ?? exercise.text else { return nil }
             guard let word = word(target) else {
@@ -507,6 +517,14 @@ final class Book {
             phraseIndex = index
         }
         return phraseIndex?[key]
+    }
+
+    /// A word as a label elsewhere (a map chip, a goal rung): the course's stressed form when the
+    /// word is one of ours, shown the way the page shows stress; a text's own word otherwise.
+    func stressedLabel(_ text: String) -> AttributedString {
+        let ru = word(text)?.ru
+        let form = ru.map { RussianText.unstressed($0) == RussianText.unstressed(text) ? $0 : text } ?? text
+        return Theme.stressed(form, show: settings.showStress)
     }
 
     func isKept(_ ru: String) -> Bool { word(ru) != nil && targets["word:\(RussianText.key(ru))"] != nil }
@@ -580,10 +598,14 @@ final class Book {
         case .buildWord: lines.append("Building «\(ex.answerText ?? "")» (“\(ex.en ?? "")”) from the tiles \((ex.options ?? ex.parts ?? []).joined(separator: " ")).")
         case .talk: lines.append(TalkConversation.describe(ex, r))
         case .familyGuess: lines.append("Guessing what «\(ex.word ?? "")» means in «\(ex.text ?? "")» from its root \(ex.root ?? ""), choosing among: \((ex.options ?? []).joined(separator: " / ")).")
+        case .structure:
+            let p = Structure.probe(of: ex)
+            lines.append("Reading «\(ex.text ?? "")» and tapping the word that «\(p?.probe ?? ex.word ?? "")» refers to or agrees with (answer «\(p?.head ?? "")»).")
         case .paradigmFill: lines.append("Filling the \(ex.paradigm ?? "") table of «\(ex.word ?? "")»: cells \((ex.cells ?? []).joined(separator: ", ")) (answers \((ex.cells ?? []).compactMap { ex.forms?[$0] }.joined(separator: ", "))).")
         case .transform: lines.append("Writing «\(ex.word ?? "")» in the \(ex.cue ?? "") cell (answer «\(ex.answerText ?? "")»)" + (ex.before != nil ? " in \(ex.before ?? "")___\(ex.after ?? "")." : "."))
         case .cueSort: lines.append("Sorting \((ex.items ?? []).map { "«\($0.text)»" }.joined(separator: ", ")) into: \((ex.options ?? []).joined(separator: " / ")).")
         case .readHandwriting: lines.append("Reading «\(ex.text ?? "")» in someone's handwriting" + (ex.options.map { " and choosing among: \($0.joined(separator: " / "))." } ?? " and printing it."))
+        case .listening: lines.append(ListeningItem.describe(ex, r))
         }
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")

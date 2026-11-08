@@ -102,7 +102,7 @@ final class TalkSession {
 
     var unavailableReason: String? {
         if !Reachability.shared.isOnline || QA.has("-qa-offline") { return TalkTutor.Failure.offline.localizedDescription }
-        if (Keychain.apiKey ?? "").isEmpty || QA.has("-qa-nokey") { return "Talk needs your tutor: add your Anthropic API key in Settings." }
+        if (Keychain.apiKey ?? "").isEmpty { return "Talk needs your tutor: add your Anthropic API key in Settings." }
         return nil
     }
 
@@ -128,9 +128,13 @@ final class TalkSession {
         tutorTurn()
     }
 
-    /// Picks up a conversation left in the middle.
+    /// Picks up a conversation left in the middle, or tries again after a failure or an
+    /// unavailable note (the reason is checked afresh: still no key means still unavailable).
     func resume() {
-        guard status == .paused || status == .unavailable("") || isUnavailable else { return }
+        switch status {
+        case .paused, .failed, .unavailable: break
+        default: return
+        }
         if let why = unavailableReason { status = .unavailable(why); return }
         switch dialogue.phase {
         case .tutorTurn: tutorTurn()
@@ -140,8 +144,6 @@ final class TalkSession {
         case .cancelled: break
         }
     }
-
-    private var isUnavailable: Bool { if case .unavailable = status { return true } else { return false } }
 
     // MARK: The tutor's turn
 
@@ -203,27 +205,35 @@ final class TalkSession {
     }
 
     /// Says a tutor line again (tap the speaker on it). While it is the learner's turn the
-    /// microphone closes first and reopens after: nothing is captured while the tutor speaks.
+    /// microphone closes first and stays closed: nothing is captured while the tutor speaks,
+    /// and the next take starts only with the learner's own tap.
     func replay(_ line: TalkLine) {
         guard !isLive || status == .yourTurn else { return }
+        mic.cancel()
+        speaker?.cancel()
         voice.stop()
-        let reopen = status == .yourTurn
-        if reopen { mic.cancel() }
-        let mine = run
-        Task { @MainActor in
+        let voice = self.voice
+        speaker = Task { @MainActor in
+            guard !Task.isCancelled else { return }
             await voice.speak(line.ru)
-            if reopen, run == mine, status == .yourTurn { yourTurn() }
         }
     }
 
     // MARK: The learner's turn
 
-    /// Hands over the microphone: a cue, then listening until the voice stops. The last tutor
-    /// line is the recognizer's hint (the reply usually reuses its words).
+    /// Leave time to read, replay or compose a reply. Only a microphone tap starts capture.
     func yourTurn() {
         guard !dialogue.isOver else { return }
         task = nil
+        mic.cancel()
         status = .yourTurn
+    }
+
+    /// The last tutor line is the recognizer's hint (the reply usually reuses its words).
+    private func startCapture() {
+        guard status == .yourTurn else { return }
+        speaker?.cancel()
+        voice.stop()
         let mine = run
         let hint = conversation.tutorLines.last?.ru ?? "Да."
         let request = SpeakingTurn.Request(key: key, target: hint, takeURL: book.newTakeURL(ref), model: nil, repeats: 0,
@@ -244,14 +254,18 @@ final class TalkSession {
     /// A take that held no recognisable Russian, kept if the learner then types what they said.
     private var pendingTake: String?
 
-    /// The microphone's one button while it is the learner's turn: ends the take early.
-    func tap() { _ = mic.tap(key) }
+    /// Start when ready, or stop a take early. An interrupted/failed take can be retried.
+    func tap() {
+        guard status == .yourTurn else { return }
+        if !mic.tap(key) { startCapture() }
+    }
 
     /// Nothing came through: try the turn again.
     func again() {
         guard status == .notHeard || status == .paused else { return }
         pendingTake = nil
         yourTurn()
+        startCapture()
     }
 
     /// The learner types the line instead (the recognizer gave up, or there is no microphone).

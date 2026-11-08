@@ -11,6 +11,9 @@ struct BaselineTask: Codable, Sendable, Hashable {
     var passage: String? = nil
     var audio: String? = nil
     var speaker: String? = nil
+    /// A message played by its text (a listening.json weekly message, Model/Listening.swift) in
+    /// the voice `speaker` names, when `audio` names no file.
+    var text: String? = nil
 }
 
 /// The first attempt is immutable once sealed. Reflection is separate from that original.
@@ -35,13 +38,20 @@ extension BookPage {
 extension Book {
     /// Existing unfinished samples resume in place; no repeated material is labelled unseen.
     @discardableResult
-    func openBaseline() -> Bool {
+    func openBaseline(listening forced: ListeningSet? = nil) -> Bool {
         if let index = pages.firstIndex(where: { $0.isBaseline && !$0.isFinished }) {
             goTo(index); return true
         }
         let used = Set(pages.flatMap { $0.exercises.compactMap { $0.baseline?.id } })
         guard let reading = BaselineBank.readings.first(where: { !used.contains($0.id) }) else { return false }
-        let tasks = [reading] + BaselineBank.listening.filter { !used.contains($0.id) }.prefix(5) + [
+        // Five unheard messages: the reserved listening set at the highest support level the course
+        // has reached (Model/Listening.swift `weekly_samples`), none of it used before; the bank of
+        // human recordings when no reserved set is reached yet or all reached ones are spent.
+        let weekly = forced ?? Listening.shared.weekly_samples.last { set in
+            finished(coursePage: set.after_page) && !set.items.contains { used.contains($0.id) }
+        }
+        let messages = weekly.map { $0.items.map(BaselineBank.message) } ?? Array(BaselineBank.listening.filter { !used.contains($0.id) }.prefix(5))
+        let tasks = [reading] + messages + [
             BaselineTask(id: "speak-\(reading.id)", kind: .speaking,
                          prompt: "You need to borrow a book. In Russian, ask where it is and explain when you can return it. Choose the details yourself; speak without a script.",
                          questions: [], reference: ["Could a listener tell which book you wanted, what you asked, and when you would return it? Note what they understood and any clarification they needed."]),
@@ -102,5 +112,15 @@ enum BaselineBank {
 
     private static func message(_ ru: String, _ audio: String, _ speaker: String, _ question: String, _ answer: String) -> BaselineTask {
         BaselineTask(id: audio, kind: .listening, prompt: "Listen before reading. Write what you understood.", questions: [question], reference: [ru, answer], audio: audio, speaker: speaker)
+    }
+
+    /// A reserved weekly message as a sample: its questions answered in English on the lines, the
+    /// Russian and the model meanings shown only once the first response is sealed. Never graded.
+    static func message(_ item: ListeningItem) -> BaselineTask {
+        let questions = item.questions ?? []
+        let reference = [item.ru ?? "", item.en] + questions.map { q in "\(q.prompt) — \(q.answer_en ?? "")" }
+        return BaselineTask(id: item.id, kind: .listening, prompt: "Listen before reading. Answer in English, in your own words.",
+                            questions: questions.map(\.prompt), reference: reference.filter { !$0.isEmpty },
+                            speaker: item.voice(), text: item.ru)
     }
 }

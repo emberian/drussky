@@ -132,6 +132,8 @@ def check_stress(where, s):
 def check_tile(where, tile):
     """A morpheme tile ("пере-", "пис", "-а'тель") is a fragment: at most one stress mark, after a vowel."""
     low = tile.replace("-", "").lower()
+    if "ё" in low and ACUTE in low:
+        err(where, f"ё tile must not carry an acute: {tile!r}")
     if low.count(ACUTE) > 1:
         err(where, f"tile {tile!r} carries more than one stress mark")
     for i, c in enumerate(low):
@@ -225,7 +227,7 @@ def check_meaning_before_recall(course, lex_keys):
     string passes when it splits into presented lexicon entries, or tokens of presented
     multiword entries (меня from у меня есть, читаем from мы читаем)."""
     letters = {l["upper"]: l for l in course["letters"]}
-    shown, shown_tokens = set(), set()
+    shown, shown_tokens, met = set(), set(), set()
 
     def show_entry(k):
         if k in lex_keys:
@@ -255,8 +257,13 @@ def check_meaning_before_recall(course, lex_keys):
             for n, e in enumerate(p["exercises"], 1):
                 k = e.get("kind")
                 recall = []
-                if k == "meet" and e.get("letter") in letters and letters[e["letter"]].get("example"):
-                    show_entry(key(letters[e["letter"]]["example"]))
+                if k == "meet" and e.get("letter") in letters:
+                    met.add(e["letter"])
+                    example = letters[e["letter"]].get("example")
+                    # MeetExercise hides examples containing letters not yet met. A hidden
+                    # word cannot prepare the learner for recall later in the book.
+                    if example and letters_in(example).issubset(met):
+                        show_entry(key(example))
                 elif k in ("trace", "copy", "read_aloud"):
                     show_entry(key(e["text"]))
                 elif k == "listen_pick":

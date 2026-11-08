@@ -144,6 +144,7 @@ struct RussianDomain: KnowledgeDomain {
 
         var comps: [Component] = [Component(id: ConstructionChoice.component, label: "Choosing -а / -у / -и (-ы)",
                                            gloss: "Subject, direct object, or absence after нет")]
+        comps.append(Self.intonation)  // asking or telling, by ear (RussianDomain+Listening.swift)
 
         var edges: [Edge] = ["acc-u", "genitive"].map {
             Edge(ComponentID(.construction, $0), ConstructionChoice.component, .prerequisite)
@@ -282,10 +283,12 @@ struct RussianDomain: KnowledgeDomain {
         var out: [ComponentID] = []
         if ex.kind == .soundPair, let contrast = ex.hint { out.append(ComponentID(.sound, contrast)) }
         if [.paradigmFill, .cueSort].contains(ex.kind) { return grammarComponents(for: ex) }  // Grammar/: the word, its cells, their patterns
+        if ex.kind == .listening { return listeningComponents(for: ex, result: nil) }  // the words of the heard turn
         let target: String? = switch ex.kind {
         case .readMeaning: ex.text
         case .soundPair: ex.say
         case .familyGuess: ex.word  // the new family member, not the sentence it sits in
+        case .structure: ex.word  // the pronoun or participle asked about, not the sentence
         default: ex.target
         }
         guard let target else { return out }
@@ -351,8 +354,9 @@ struct RussianDomain: KnowledgeDomain {
         case .dictation: .hearWrite
         case .translate, .fill: .meaningWrite
         case .readAloud: .say
-        case .listenPick, .soundPair: .hearPick
+        case .listenPick, .soundPair, .listening: .hearPick  // listening: meaning by ear (Knowledge/RussianDomain+Listening.swift)
         case .readMeaning, .familyGuess: .readPick
+        case .structure: .readPick  // reading a sentence's structure: who is meant
         case .buildWord: .build
         case .constructionChoice: .constructionChoice
         case .transform: .transform
@@ -387,7 +391,7 @@ struct RussianDomain: KnowledgeDomain {
         case .done:
             switch ex.kind {
             case .meet, .trace, .copy: return .good
-            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord, .readHandwriting, .constructionChoice: return r.assisted == true ? nil : .again
+            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord, .readHandwriting, .constructionChoice, .listening, .structure: return r.assisted == true ? nil : .again
             case .explain, .passage: return nil
             default: return r.assisted == true ? nil : .hard  // finished, but not verified right first time
             }
@@ -396,6 +400,7 @@ struct RussianDomain: KnowledgeDomain {
 
     /// What the learner gave, as text.
     static func response(_ ex: Exercise, _ r: ExerciseResult) -> String? {
+        if ex.kind == .listening { return ListeningItem.response(ex, r) }
         if let c = r.chosen, let options = ex.options, options.indices.contains(c) { return options[c] }
         return r.recognized
     }
@@ -424,6 +429,8 @@ struct RussianDomain: KnowledgeDomain {
             return sortConfusions(ex, response: response)
         case .readHandwriting:
             return cursiveConfusions(ex, response: response)
+        case .listening:
+            return listeningConfusions(ex, response: response)
         default:
             return []
         }
@@ -502,13 +509,16 @@ struct RussianDomain: KnowledgeDomain {
         // A root is credited by every word built on it, never blamed: missing one word is not
         // forgetting the root (weak, one-way evidence).
         var touched = components(for: ex)
+        // A missed listening item blames the span that decided it, not the whole turn.
+        if ex.kind == .listening, wrongish { touched = listeningComponents(for: ex, result: a.after) }
         if grade == nil || grade == .again { touched.removeAll { $0.kind == .root } }
         return LearningEvent(
             id: id, t: a.at, type: finished ? .outcome : .attempt,
             source: a.backfill ? "backfill" : "live", item: item, activity: ex.kind.rawValue, modality: modality,
             components: touched, grade: grade,
             correct: finished ? nil : false, attempt: a.after.attempts, expected: [.readMeaning, .familyGuess].contains(ex.kind)
-                ? ex.answerIndex.flatMap { ex.options?[safe: $0] } : (ex.kind == .soundPair ? ex.say : ex.target),
+                ? ex.answerIndex.flatMap { ex.options?[safe: $0] } : ex.kind == .structure ? Structure.probe(of: ex)?.head
+                : (ex.kind == .soundPair ? ex.say : ex.kind == .listening ? ex.listening?.transcript : ex.target),
             response: response, latency: a.latency,
             help: a.after.revealed ? ["revealed"] : (a.after.assisted == true ? ["assisted"] : nil),
             confusions: confusions.isEmpty ? nil : confusions, review: ex.reviewKey != nil ? true : nil,

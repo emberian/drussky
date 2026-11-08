@@ -17,7 +17,9 @@
     {"id": "prep-e", "name": "в / на + -е", "note": "Where something is: в доме, на столе, на кухне.", "requires": ["gender"]},
     {"id": "time-instr", "name": "утром · вечером", "note": "Times of day as instrumental: утром, днём, вечером, ночью."},
     {"id": "have", "name": "у меня есть", "note": "Having: “at me there is”."},
-    {"id": "genitive", "name": "genitive", "note": "Of, for, after numbers: двух чисел, для любого числа.", "requires": ["gender"]}
+    {"id": "genitive", "name": "genitive", "note": "Of, for, after numbers: двух чисел, для любого числа.", "requires": ["gender"]},
+    {"id": "anaphora", "name": "он · она́ · его́ · кото́рый — who is meant", "note": "A pronoun, possessive or relative word points at a noun said before; its gender and number say which.", "requires": ["gender"]},
+    {"id": "participle", "name": "прича́стие -щий -вший -нный", "note": "A verb turned adjective: «спя́щий лев» is «лев, кото́рый спит»; it agrees with its noun like an adjective.", "requires": ["gender", "past"]}
   ],
   "forms": {
     "говорили": ["говорить", "past"], "говорим": ["говорить", "pres-1pl"], "говорит": ["говорить", "pres-3sg"],

@@ -33,7 +33,7 @@ extension QA {
             book.now = { base.addingTimeInterval(-s.daysAgo * 86_400) }
             var ex = Exercise(kind: .diary)
             ex.prompt = s.prompt
-            book.insertWrittenPage(title: "Дневни́к · Diary", intro: "A few words of your own Russian. Write what you can; your tutor marks it in red.",
+            book.insertWrittenPage(title: "Дневни́к", intro: "Write a few words in Russian. Send them to your tutor for corrections, or keep them as written.",
                                    unitTitle: "My Russian", exercises: [ex], newWords: [])
             guard let page = book.page else { continue }
             try? diaryInk(s.wrote).dataRepresentation().write(to: book.inkURL(page: page, exercise: 0))

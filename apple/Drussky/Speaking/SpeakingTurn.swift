@@ -1,10 +1,11 @@
 import AVFoundation
 import Observation
 
-/// One read-aloud turn, hands-free: the model plays (skippable, as many times as the learner
-/// set), a soft cue says it's their turn, and the microphone takes the voice from its first
-/// sound to the silence after it. The take is trimmed, written as the page's recording and
-/// analysed; the result goes back to the exercise it began on.
+/// One read-aloud turn: the model plays (skippable, as many times as the learner set) with the
+/// microphone closed, then the page waits for their tap; on it a soft cue sounds and the
+/// microphone takes the voice from its first sound to the silence after it. The take is
+/// trimmed, written as the page's recording and analysed; the result goes back to the exercise
+/// it began on. With no model to play, the tap that began the turn is that tap.
 ///
 /// The app's one microphone: starting a turn anywhere ends any other. A page turn ends a turn
 /// still listening (nothing is kept); one already being analysed finishes and lands on its own
@@ -18,6 +19,8 @@ final class SpeakingTurn {
         case preparing
         /// Playing the model: this time, of how many.
         case model(Int, of: Int)
+        /// The model has played; nothing is listening until the learner taps.
+        case ready
         /// The "your turn" cue.
         case cue
         /// Listening, no voice yet.
@@ -69,6 +72,8 @@ final class SpeakingTurn {
     private weak var voice: Voice?
     private var skipModel = false
     private var tapped = false
+    /// The turn waiting in `.ready` for its tap (`tap` resumes it; `cancel` releases it).
+    private var readiness: CheckedContinuation<Void, Never>?
     /// Reports of takes analysed this run, by file name (each is also saved beside its take).
     private var reports: [String: PronunciationReport] = [:]
 
@@ -117,6 +122,9 @@ final class SpeakingTurn {
         case .model:
             skipModel = true
             voice?.stop()
+        case .ready:
+            readiness?.resume()
+            readiness = nil
         case .cue, .waiting, .hearing:
             tapped = true
             capture?.stopNow()
@@ -139,6 +147,8 @@ final class SpeakingTurn {
         task?.cancel()
         task = nil
         if case .model = phase { voice?.stop() }
+        readiness?.resume()
+        readiness = nil
         capture?.shutdown()
         capture = nil
         phase = .idle
@@ -158,7 +168,7 @@ final class SpeakingTurn {
     }
 
     private func interrupt() {
-        guard let key = activeKey, phase != .analysing, phase != .idle, phase != .preparing, phase != .cue else { return }
+        guard let key = activeKey, phase != .analysing, phase != .idle, phase != .preparing, phase != .cue, phase != .ready else { return }
         cancel()
         problem = (key, .interrupted)
     }
@@ -190,6 +200,15 @@ final class SpeakingTurn {
             if k < r.repeats && !skipModel { try? await Task.sleep(for: .milliseconds(350)) }
         }
         guard session == mine else { return }
+
+        // The learner is still listening: nothing opens until they say they are ready. A tap
+        // that skipped the model is a skip, not a go. With no model, their tap began the turn.
+        if r.repeats > 0 {
+            voice.stop()
+            phase = .ready
+            await withCheckedContinuation { (c: CheckedContinuation<Void, Never>) in readiness = c }
+            guard session == mine else { return }
+        }
 
         // Your turn. Nothing else may be sounding into the microphone (a narration still reading).
         voice.stop()

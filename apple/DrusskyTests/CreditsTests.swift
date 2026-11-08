@@ -52,7 +52,10 @@ final class CreditsTests: XCTestCase {
         }
         XCTAssertEqual(referenced.subtracting(bundled).sorted(), [], "clips an index names but the bundle lacks")
         let owners = credits.clipOwners
-        XCTAssertEqual(bundled.subtracting(owners.keys).sorted(), [], "bundled clips without a credit: regenerate credits.json")
+        // A clip with no provenance record is not silently fine: the generator lists it under
+        // unresolved and the page shows it in red. Anything else uncredited means credits.json is stale.
+        let flagged = Set(credits.unresolved["audio_references_without_provenance"] ?? [])
+        XCTAssertEqual(bundled.subtracting(owners.keys).subtracting(flagged).sorted(), [], "bundled clips without a credit: regenerate credits.json")
         XCTAssertEqual(Set(owners.keys).subtracting(bundled).sorted(), [], "credited clips that are not bundled: regenerate credits.json")
         XCTAssertEqual(owners.filter { $0.value.count != 1 }.keys.sorted(), [], "clips credited more than once")
     }

@@ -82,8 +82,9 @@ def silero_text(text):
                 w = w[:i] + "+" + w[i:]
         words.append(w)
     s = " ".join(words)
-    # A closing full stop gives isolated words a natural falling cadence instead of a clipped one.
-    return s if s[-1] in ".?!…" else s + "."
+    # A closing full stop gives isolated words a natural falling cadence instead of a clipped one;
+    # a sentence already closed inside a quotation («…шум?») is left as it is.
+    return s if s.rstrip("»\"”)")[-1:] in set(".?!…") else s + "."
 
 
 def human_provenance(k, source):

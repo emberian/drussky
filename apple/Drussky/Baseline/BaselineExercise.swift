@@ -25,7 +25,10 @@ struct BaselineExercise: View {
     private var responseLines: Int { task.kind == .listening ? 2 : 4 }
     private var sealed: Bool { slot.result.baseline?.sealed != nil }
     private var audioURL: URL? {
-        task.audio.flatMap { Bundle.main.url(forResource: "Audio", withExtension: nil)?.appendingPathComponent($0) }
+        if let text = task.text {  // a reserved message, in the voice the sample names (Model/Listening.swift)
+            return task.speaker.flatMap { voice.recordingURL(for: text, voice: $0) } ?? voice.recordingURL(for: text)
+        }
+        return task.audio.flatMap { Bundle.main.url(forResource: "Audio", withExtension: nil)?.appendingPathComponent($0) }
             .flatMap { FileManager.default.fileExists(atPath: $0.path) ? $0 : nil }
     }
 

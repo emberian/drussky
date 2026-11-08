@@ -151,13 +151,9 @@ struct SoundPairExercise: View {
             r.attempts += 1
             r.status = right ? .correct : .missed
         }
-        // Hear what it was, then the other member, in that speaker's voice where possible; the
-        // page moves on only when that comparison has finished (or the learner taps Next).
+        // Hear both, then leave time to compare. Only Next moves the page.
         let answer = ex.answerIndex ?? 0
-        let book = slot.book, page = slot.ref.pageID
-        playBoth(options[safe: answer] ?? "", options[safe: 1 - answer] ?? "", exactStress: exact, first: ex.times) {
-            book.requestAdvance(page: page)
-        }
+        playBoth(options[safe: answer] ?? "", options[safe: 1 - answer] ?? "", exactStress: exact, first: ex.times)
     }
 
     // MARK: Playback
@@ -176,20 +172,17 @@ struct SoundPairExercise: View {
         voice.playFile(urls[n % urls.count], key: RussianText.pairKey(word))
     }
 
-    /// One word, then the other, as one sequence: anything else played meanwhile (the next
-    /// trial, a page turn) ends it, and `then` runs only if it played to the end.
-    private func playBoth(_ a: String, _ b: String, exactStress: Bool, first: Int? = nil, then: (@MainActor () -> Void)? = nil) {
+    /// One word, then the other. Anything else played meanwhile cancels the comparison.
+    private func playBoth(_ a: String, _ b: String, exactStress: Bool, first: Int? = nil) {
         playback?.cancel()
         let ua = clips(a, exactStress: exactStress), ub = clips(b, exactStress: exactStress)
-        guard let x = ua[safe: (first ?? 0) % max(1, ua.count)], let y = ub[safe: (first ?? 0) % max(1, ub.count)] else { then?(); return }
+        guard let x = ua[safe: (first ?? 0) % max(1, ua.count)], let y = ub[safe: (first ?? 0) % max(1, ub.count)] else { return }
         let voice = self.voice
         let token = voice.playFile(x, key: RussianText.pairKey(a))
         playback = Task { @MainActor in
             try? await Task.sleep(for: .seconds(Self.duration(x) + 0.45))
-            guard !Task.isCancelled, voice.continueSequence(y, key: RussianText.pairKey(b), token: token) else { return }
-            try? await Task.sleep(for: .seconds(Self.duration(y) + 0.35))
-            guard !Task.isCancelled, voice.sequence == token else { return }
-            then?()
+            guard !Task.isCancelled else { return }
+            _ = voice.continueSequence(y, key: RussianText.pairKey(b), token: token)
         }
     }
 

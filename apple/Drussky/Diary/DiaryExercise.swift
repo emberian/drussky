@@ -18,7 +18,6 @@ struct DiaryExercise: View {
     @State private var typed = ""
     @State private var sending = false
     @State private var error: String?
-    @State private var idleTask: Task<Void, Never>?
     @FocusState private var focused: Bool
 
     init(slot: ExerciseSlot, isActive: Bool) {
@@ -62,14 +61,13 @@ struct DiaryExercise: View {
                 Label("Not today — nothing written here.", systemImage: "minus.circle").scaledFont(14).foregroundStyle(Theme.muted)
             }
         }
-        .onAppear { pad.onChange = { _ in scheduleIdleRead() } }
     }
 
     // MARK: Prompt
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text("Дневни́к").font(Theme.cursive(compact ? 24 : 28)).foregroundStyle(Theme.ink)
                 Instruction(text: "Write a few words of your own Russian.")
             }
@@ -98,13 +96,16 @@ struct DiaryExercise: View {
                     .padding(12)
                     .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
                     .accessibilityLabel("Diary text")
-                HStack(spacing: 10) {
+                FlowRow(spacing: 10) {
                     PillButton(title: sending ? "Sending…" : "Send to my tutor", systemImage: "paperplane", prominent: true) {
                         send(text: typed, recognized: nil, typed: true)
                     }
                     .disabled(sending || RussianText.letters(in: typed).isEmpty)
+                    PillButton(title: "Keep as written", systemImage: "checkmark") {
+                        send(text: typed, recognized: nil, typed: true, correct: false)
+                    }
+                    .disabled(sending || RussianText.letters(in: typed).isEmpty)
                     PillButton(title: "Use the Pencil", systemImage: "pencil") { typing = false }
-                    Spacer(minLength: 0)
                     skipButton
                 }
                 if let error { Text(error).scaledFont(14).foregroundStyle(Theme.redPen) }
@@ -112,7 +113,7 @@ struct DiaryExercise: View {
         } else if let draft {
             proposal(draft)
         } else {
-            HStack(spacing: 10) {
+            FlowRow(spacing: 10) {
                 if hasInk {
                     PillButton(title: reading ? "Reading…" : "Read my writing", systemImage: "text.viewfinder", prominent: true) { Task { await readInk() } }
                         .disabled(reading)
@@ -121,10 +122,9 @@ struct DiaryExercise: View {
                 } else {
                     PillButton(title: "Type instead", systemImage: "keyboard") { typing = true; focused = true }
                 }
-                Spacer(minLength: 0)
                 if isActive || hasInk { skipButton }
             }
-            .frame(minHeight: 34)
+            .frame(minHeight: 44)
         }
     }
 
@@ -141,9 +141,13 @@ struct DiaryExercise: View {
                 .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
                 .accessibilityLabel("What I read")
             Text("Fix anything I misread, then send it.").scaledFont(13).foregroundStyle(Theme.muted)
-            HStack(spacing: 10) {
+            FlowRow(spacing: 10) {
                 PillButton(title: sending ? "Sending…" : "Send to my tutor", systemImage: "paperplane", prominent: true) {
                     send(text: draft ?? "", recognized: recognized, typed: false)
+                }
+                .disabled(sending || RussianText.letters(in: draft ?? "").isEmpty)
+                PillButton(title: "Keep as written", systemImage: "checkmark") {
+                    send(text: draft ?? "", recognized: recognized, typed: false, correct: false)
                 }
                 .disabled(sending || RussianText.letters(in: draft ?? "").isEmpty)
                 PillButton(title: "Read it again", systemImage: "arrow.counterclockwise") { Task { await readInk() } }
@@ -161,7 +165,7 @@ struct DiaryExercise: View {
 
     private func writtenLine(_ text: String, note: String?) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            HStack(alignment: .firstTextBaseline, spacing: 10) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text("You wrote:").scaledFont(14, weight: .medium).foregroundStyle(Theme.muted)
                 Text(text).russianFont(22, weight: .medium).foregroundStyle(Theme.text)
             }
@@ -186,16 +190,6 @@ struct DiaryExercise: View {
 
     // MARK: Actions
 
-    private func scheduleIdleRead() {
-        idleTask?.cancel()
-        guard !result.status.isComplete, entry == nil, !pad.isEmpty, draft == nil else { return }
-        idleTask = Task {
-            try? await Task.sleep(for: .milliseconds(2200))
-            guard !Task.isCancelled else { return }
-            await readInk()
-        }
-    }
-
     private func readInk() async {
         guard !reading, !pad.isEmpty else { return }
         reading = true
@@ -208,14 +202,15 @@ struct DiaryExercise: View {
         draft = text
     }
 
-    private func send(text: String, recognized: String?, typed: Bool) {
+    private func send(text: String, recognized: String?, typed: Bool, correct: Bool = true) {
         let clean = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !clean.isEmpty else { return }
         error = nil
         let entry = DiaryEntry(prompt: prompt, text: clean, recognized: recognized == clean ? nil : recognized,
                                typed: typed ? true : nil, submitted: book.now())
         book.submitDiary(slot.ref, entry: entry)
-        Task { await correct(entry) }
+        if correct { Task { await self.correct(entry) } }
+        else { book.keepDiaryUncorrected(slot.ref) }
     }
 
     private func correct(_ entry: DiaryEntry) async {
@@ -256,7 +251,7 @@ struct RedPen: View {
             }
             if !correction.edits.isEmpty {
                 HStack(alignment: .firstTextBaseline, spacing: 12) {
-                    Text(RussianText.unstressed(correction.corrected))
+                    Text(Theme.stressed(correction.corrected, show: book.settings.showStress))
                         .font(Theme.cursive(compact ? 28 : 36)).foregroundStyle(Theme.redPen)
                         .rotationEffect(.degrees(-1.5))
                         .fixedSize(horizontal: false, vertical: true)
@@ -311,7 +306,7 @@ struct RedPen: View {
 
     private func mark(_ span: String, edit: DiaryEdit, chosen: Bool) -> some View {
         VStack(alignment: .center, spacing: -4) {
-            Text(edit.replacement.isEmpty ? "—" : RussianText.unstressed(edit.replacement))
+            Text(Theme.stressed(edit.replacement.isEmpty ? "—" : edit.replacement, show: book.settings.showStress))
                 .font(Theme.cursive(compact ? 20 : 26)).foregroundStyle(Theme.redPen)
                 .rotationEffect(.degrees(-2))
                 .fixedSize()
@@ -328,7 +323,7 @@ struct RedPen: View {
         HStack(spacing: 8) {
             Text(e.span).russianFont(20).foregroundStyle(Theme.text).strikethrough(true, color: Theme.redPen)
             Image(systemName: "arrow.right").font(.system(size: 13, weight: .bold)).foregroundStyle(Theme.redPen)
-            Text(e.replacement.isEmpty ? "—" : RussianText.unstressed(e.replacement)).font(Theme.cursive(24)).foregroundStyle(Theme.redPen)
+            Text(Theme.stressed(e.replacement.isEmpty ? "—" : e.replacement, show: book.settings.showStress)).font(Theme.cursive(24)).foregroundStyle(Theme.redPen)
         }
     }
 
