@@ -140,6 +140,13 @@ struct ParadigmFillExercise: View {
             controls
             feedback
         }
+        // The column's width, measured on the root (whose width the cells cannot change), sizes the cells.
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { w in
+            let cols = CGFloat(max(1, table.map { t in t.cols.filter { c in t.rows.contains { forms[cellID(row: $0.id, col: c.id, t)] != nil } }.count } ?? 1))
+            let width = max(120, (w - 80) / cols - 8)
+            if abs(width - cellWidth) > 1 { cellWidth = width }
+        }
         .onAppear(perform: restore)
         .animation(.easeOut(duration: 0.2), value: placed)
     }
@@ -168,7 +175,6 @@ struct ParadigmFillExercise: View {
                 }
             }
         }
-        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { w in cellWidth = max(120, (w - 80) / CGFloat(max(cols.count, 1)) - 8) }
     }
 
     /// A verb's past and imperative cells carry their table's prefix (past-f); noun cells are row-col.

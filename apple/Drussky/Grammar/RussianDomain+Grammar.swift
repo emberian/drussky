@@ -52,14 +52,25 @@ extension RussianDomain {
             }
         case .cueSort:
             for item in ex.items ?? [] {
-                guard let option = ex.options?[safe: item.answer], let use = paradigms.uses.first(where: { $0.title == option || $0.id == option }) else { continue }
-                if let id = use.componentID { add(id) }
-                for l in use.legacy { if let id = ComponentID(l) { add(id) } }
+                guard let option = ex.options?[safe: item.answer] else { continue }
+                for id in bucketComponents(option) { add(id) }
             }
         default:
             break
         }
         return out
+    }
+
+    /// What a cue_sort bucket stands for: a case use (its component and the older pattern it also
+    /// exemplifies), or a table (sorting words by declension exercises its nominative singular).
+    func bucketComponents(_ option: String) -> [ComponentID] {
+        if let use = paradigms.uses.first(where: { $0.title == option || $0.id == option }) {
+            return [use.componentID].compactMap { $0 } + use.legacy.compactMap { ComponentID($0) }
+        }
+        if let table = paradigms.tables.first(where: { $0.title == option || $0.id == option }), let first = table.cells.first?.component {
+            return [first]
+        }
+        return []
     }
 
     /// cue_sort: a phrase put in the wrong bucket is a confusion between two patterns.
@@ -68,8 +79,7 @@ extension RussianDomain {
         let parts = response.split(separator: ":").compactMap { Int($0) }
         guard parts.count == 2, let item = ex.items?[safe: parts[0]], let options = ex.options,
               let want = options[safe: item.answer], let got = options[safe: parts[1]], want != got,
-              let a = paradigms.uses.first(where: { $0.title == want || $0.id == want })?.componentID,
-              let b = paradigms.uses.first(where: { $0.title == got || $0.id == got })?.componentID, a != b else { return [] }
+              let a = bucketComponents(want).first, let b = bucketComponents(got).first, a != b else { return [] }
         return [Confusion(target: a, produced: b, channel: .choice)]
     }
 
