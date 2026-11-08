@@ -22,11 +22,14 @@ extension Book {
     func addGoal(_ goal: Goal) {
         goals.append(goal)
         currentGoalID = goal.id
+        ensureGoalStress(goal)
     }
 
     func removeGoal(id: String) {
         goals.removeAll { $0.id == id }
         if currentGoalID == id { currentGoalID = goals.first?.id }
+        goalStress[id] = nil
+        GoalStress.remove(goalID: id, root: store.root)
     }
 
     /// Changes the stored goal with this id in place. Work that spans an await (lemma filling, a
@@ -106,6 +109,7 @@ extension Book {
                           exercises: exercises, newWords: written.new_words ?? [], sourceID: "goal:\(goal.id)",
                           beforeCurrentIfUntouched: auto)
         if let id = page?.id { notePulled(pageID: id, goalID: goal.id, sentences: sentences) }
+        ensureGoalStress(goal)
     }
 
     /// The first page of the goal as a passage with tap-to-gloss: the original sentences, every
@@ -150,6 +154,7 @@ extension Book {
                           unitTitle: "Your book · \(goal.author ?? "")".trimmingCharacters(in: CharacterSet(charactersIn: " ·")),
                           exercises: [ex], newWords: [], sourceID: "goal-first:\(goal.id)", beforeCurrentIfUntouched: true)
         updateGoal(id: goal.id) { $0.firstPageOpened = now() }
+        ensureGoalStress(goal)
         return true
     }
 }

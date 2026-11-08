@@ -668,7 +668,7 @@ struct Correction: View {
     @Environment(Book.self) private var book
     let text: String
     var body: some View {
-        Text(Theme.stressed(text, show: book.settings.showStress))
+        Text(Theme.stressed(book.stressed(passage: text), show: book.settings.showStress))
             .font(Theme.cursive(38))
             .foregroundStyle(Theme.redPen)
             .rotationEffect(.degrees(-2))
@@ -695,13 +695,14 @@ struct ListenPickExercise: View {
                 HearButton(text: ex.say ?? "", size: 52)
                 Instruction(text: "Which one did you hear?")
             }
-            ChoiceGrid(options: options, chosen: slot.result.chosen, correct: options.firstIndex(of: ex.say ?? ""),
+            // Shown with their stored marks (a Tatoeba sentence's, Model/LibraryStress.swift); chosen by position.
+            ChoiceGrid(options: options.map { book.stressed(passage: $0) }, chosen: slot.result.chosen, correct: options.firstIndex(of: ex.say ?? ""),
                        russian: true, showStress: book.settings.showStress, locked: slot.result.status.isComplete) { i in
                 choose(i, options: options)
             }
             if slot.result.status.isComplete, let say = ex.say, slot.result.status != .missed {
                 HStack(spacing: 8) {
-                    Text(Theme.stressed(say, show: book.settings.showStress)).russianFont(22, weight: .medium)
+                    Text(Theme.stressed(book.stressed(passage: say), show: book.settings.showStress)).russianFont(22, weight: .medium)
                     MeaningTag(text: say)
                 }
             }
@@ -709,7 +710,7 @@ struct ListenPickExercise: View {
                 ChoiceCorrection(slot: slot) {
                     HStack(spacing: 10) {
                         Text("It was").scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
-                        Text(Theme.stressed(say, show: book.settings.showStress)).russianFont(22, weight: .medium).foregroundStyle(Theme.good)
+                        Text(Theme.stressed(book.stressed(passage: say), show: book.settings.showStress)).russianFont(22, weight: .medium).foregroundStyle(Theme.good)
                         HearButton(text: say, size: 34)
                     }
                 }
@@ -917,9 +918,11 @@ struct PassageExercise: View {
     private var text: String { slot.exercise.text ?? "" }
     private var structureOn: Bool { passage != nil && book.settings.showStructure == true }
 
-    /// Lines (dialogue turns, verse) of words, punctuation kept attached for display.
+    /// Lines (dialogue turns, verse) of words, punctuation kept attached for display. Built from
+    /// the text with its stored stress marks (Model/LibraryStress.swift) while «Show stress» is on;
+    /// marks only sit inside words, so the tokens line up with the bare text's (structure, timings).
     private var lines: [[String]] {
-        text.split(separator: "\n", omittingEmptySubsequences: true)
+        book.displayText(text).split(separator: "\n", omittingEmptySubsequences: true)
             .map { $0.split(separator: " ").map(String.init) }
     }
 
@@ -957,7 +960,7 @@ struct PassageExercise: View {
                     let mark = structureOn && passage != nil
                         ? layer.mark(for: tok, previous: passage?.token(line: li, index: ti - 1), next: passage?.token(line: li, index: ti + 1),
                                      in: passage!, roles: Structure.shared.roles) : .none
-                    let shown = Text(Theme.stressed(token, show: book.settings.showStress))
+                    let shown = Text(Theme.passageStressed(token, show: book.settings.showStress))
                         .russianFont(Theme.passageSize(compact: sizeClass == .compact))
                         .foregroundStyle(Theme.text)
                         .padding(.vertical, 2).padding(.horizontal, 3)
@@ -1045,6 +1048,7 @@ struct PassageExercise: View {
     }
 
     /// The token without the punctuation around it: «Что», э́то?», „так“, ’вот’ and (A) all read clean.
+    /// Stress marks stay (the gloss, ink and audio keys strip them themselves).
     static func bare(_ token: String) -> String {
         token.trimmingCharacters(in: .punctuationCharacters)
     }

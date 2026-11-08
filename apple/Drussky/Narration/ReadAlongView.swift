@@ -28,11 +28,13 @@ struct ReadAlongView: View {
         guard mine, let timings else { return nil }
         return Narration.wordIndex(at: player.time, in: timings.words)
     }
-    /// Lines (dialogue turns, verse) of tokens, each with the index of its first token in the whole text.
+    /// Lines (dialogue turns, verse) of tokens, each with the index of its first token in the whole
+    /// text. From the text with its stored stress marks while «Show stress» is on (Model/LibraryStress.swift);
+    /// marks sit inside words, so the tokens zip with the bare text's timings.
     private var lines: [(base: Int, tokens: [String])] {
         var out: [(Int, [String])] = []
         var base = 0
-        for line in text.split(separator: "\n", omittingEmptySubsequences: true) {
+        for line in book.displayText(text).split(separator: "\n", omittingEmptySubsequences: true) {
             let toks = Narration.tokens(String(line)).map(String.init)
             out.append((base, toks))
             base += toks.count
@@ -114,7 +116,7 @@ struct ReadAlongView: View {
             ? layer!.mark(for: tok, previous: structure!.token(line: line, index: index - 1), next: structure!.token(line: line, index: index + 1),
                           in: structure!, roles: Structure.shared.roles) : .none
         Button { tap(word, timing: timing, token: tok) } label: {
-            Text(Theme.stressed(token, show: book.settings.showStress))
+            Text(Theme.passageStressed(token, show: book.settings.showStress))
                 .russianFont(Theme.passageSize(compact: sizeClass == .compact))
                 .foregroundStyle(isNow ? Theme.accent : Theme.text)
                 .opacity(hidden ? 0 : 1)

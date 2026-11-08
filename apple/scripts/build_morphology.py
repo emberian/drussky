@@ -107,7 +107,7 @@ ROOTS = [
     R("звезд", "звезд звёзд", "star"),
     R("лун", "лун", "moon"),
     R("земл", "земл зем", "earth, land"),
-    R("вод", "вод", "water", "вода' water, подво'дный underwater; not во'дить, which is lead."),
+    R("вод", "вод", "water", "вода' water, подво'дный underwater; not води'ть, which is lead."),
     R("мор", "мор", "sea"),
     R("лёд", "лёд льд", "ice"),
     R("дух", "дух дыш душ", "breath, spirit", "дух spirit, во'здух air, душа' soul, дыша'ть to breathe."),

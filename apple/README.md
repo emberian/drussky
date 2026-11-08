@@ -92,6 +92,16 @@ the contrast's advice as something to try, and leave no evidence. Only the phone
 (`PhoneticAnalyzer`, when its model is bundled) asserts sound verdicts and logs speech confusions
 on their contrast; each report carries its `provenance`.
 
+## Stress on library Russian
+
+The course marks the stress of every word it wrote; the texts that came from outside — the 48 library
+texts, the Tatoeba sentences, a narrated reading, the first page of your book — carry a stress layer
+instead (`Resources/library-stress.json`, written offline by `scripts/library_stress.py` with Claude and
+verified mechanically by `scripts/validate_stress.py`; format in COURSE_SCHEMA.md). The source text is
+never altered: with «Show stress» on, a passage shows each polysyllable's stressed vowel the way the
+exercises do, a shade lighter so a whole page does not read as a row of dashes; off, the text reads as
+written. Your own book is marked by the tutor once it is reachable and remembered in the notebook.
+
 ## Show the structure
 
 Every library text carries a structure layer (`Resources/library-structure.json`, written offline by

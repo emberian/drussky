@@ -66,5 +66,29 @@ class TeachingOrderTests(unittest.TestCase):
         self.assertEqual(validator.errors, [])
 
 
+class StressVariantTests(unittest.TestCase):
+    def setUp(self):
+        validator.errors.clear()
+
+    def test_two_stresses_for_one_form_is_an_error_unless_a_homograph(self):
+        course = {"lexicon": [{"ru": "была́"}, {"ru": "за́мок"}], "units": [{"pages": [{"exercises": [
+            {"kind": "paradigm_fill", "options": ["бы́ла", "замо́к"]}]}]}]}
+        validator.check_stress_variants(course)
+        self.assertEqual(len(validator.errors), 1)
+        self.assertIn("'была'", validator.errors[0])
+        self.assertIn("бы́ла", validator.errors[0])
+        self.assertIn("была́", validator.errors[0])
+
+    def test_morpheme_pieces_and_fragments_are_not_words(self):
+        morphology = {"lemmas": {"откуда": {"ru": "отку́да", "morphemes": ["от", "ку́да"]}},
+                      "roots": [{"note": "куда́ where to; пере- is a prefix, -ку́да is not a word"}]}
+        validator.check_stress_variants(morphology)
+        self.assertEqual(validator.errors, [])
+
+    def test_the_same_stress_twice_is_not_a_variant(self):
+        validator.check_stress_variants({"a": "Росси́я"}, {"b": "росси́я"})
+        self.assertEqual(validator.errors, [])
+
+
 if __name__ == "__main__":
     unittest.main()
