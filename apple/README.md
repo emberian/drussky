@@ -206,7 +206,12 @@ with what each is ready after, every one openable ahead of time), from ＋ → *
 N* (the next episode), and from one row per shelf inside the cover. Nothing on the shelves is
 voiced yet; the speaker falls back to the synthetic voice as it does for any unrecorded string.
 
-QA: `-qa-series N` / `-qa-math N` open episode N / rung N as a page.
+**«Ку́хня»** (`Resources/kitchen.json`) is a second serial in the same format: 30 overheard
+domestic dialogues of 25–80 words, one per course page, each with one to three things to hear
+(«Дава́й + perfective future = let's …») listed under the passage once it is read.
+
+QA: `-qa-series N` / `-qa-kitchen N` / `-qa-math N` open episode N / dialogue N / rung N as a
+page (`-qa-partial 1` then marks its passage read).
 
 ## Your book
 

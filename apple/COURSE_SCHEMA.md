@@ -222,13 +222,19 @@ explanation. The page's `sourceID` is `reading:<id>`.
                    "prompt": "What happens next …" }] }] }
 ```
 
+`Resources/kitchen.json` («Ку́хня», 30 overheard dialogues) has the same shape; its series
+object adds `episode_word: "диало́г"` (what one item is called; absent means «эпизо́д») and
+each episode may carry `notice`: one to three stressed strings, Russian first and the English
+after, listed under the passage once it has been read (*What to hear*). Dialogue lines start
+with «— » and run 25–80 words; a serial episode 100–250. `Serial.files` names the files.
+
 Episodes are numbered from 1 and their `after_page`s are non-decreasing in course order.
 `text` and the question texts carry stress on every polysyllable without ё; episodes before
 the alphabet is complete use only letters met by `after_page`; every word of `text` not in the
 course lexicon by `after_page` is in `glosses` (lowercase, unstressed keys); `en`, options and
 glosses are English (Russian only inside a gloss's parenthesis). `questions` are three
-`read_meaning` exercises in the course's own format. `scripts/validate_series.py` checks all
-of this and prints per-episode coverage. In the app (`Serial.load()`, `Shelves.page(for:in:)`)
+`read_meaning` exercises in the course's own format. `scripts/validate_series.py [file]` checks
+all of this and prints per-episode coverage. In the app (`Serial.load()`, `Shelves.page(for:in:)`)
 an episode is a page — `passage` (text, en, glosses), the three questions, a `diary` with the
 prompt — with `sourceID` `episode:<id>`; a page's Optional `offers` lists the shelf items its
 footer offered when it was composed.

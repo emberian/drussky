@@ -21,7 +21,7 @@ struct ShelfOfferCard: View {
                                 Text(Theme.stressed("«\(item.title)»", show: book.settings.showStress)).russianFont(22, weight: .medium).foregroundStyle(Theme.text)
                                 if let en = item.titleEn { Text(en).scaledFont(14).foregroundStyle(Theme.muted) }
                             }
-                            Text(item.kind == .episode ? "You can read this episode now." : "You can read this now.")
+                            Text("You can read this now.")
                                 .scaledFont(14).foregroundStyle(Theme.muted)
                         }
                         Spacer(minLength: 8)
@@ -49,7 +49,7 @@ struct SerialView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     if let en = serial.title_en { Text(en).font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.text) }
                     if let s = serial.summary_en { Text(s).font(.system(size: 15)).foregroundStyle(Theme.muted) }
-                    Text("Each episode is ready after one page of the course; the next in line is offered at the foot of a page when you get there. Read ahead whenever you like — the glosses carry you.")
+                    Text("Each \(serial.itemWordEn) is ready after one page of the course; the next in line is offered at the foot of a page when you get there. Read ahead whenever you like — the glosses carry you.")
                         .font(.system(size: 13)).foregroundStyle(Theme.muted)
                 }
                 .listRowBackground(Color.clear)
@@ -158,7 +158,7 @@ struct ShelvesSection: View {
                 NavigationLink {
                     SerialView(serial: serial, onDone: { dismiss() })
                 } label: {
-                    row(title: serial.title, titleEn: serial.title_en, items: items, unit: "episode")
+                    row(title: serial.title, titleEn: serial.title_en, items: items, unit: serial.itemWordEn)
                 }
                 .buttonStyle(.plain)
             }

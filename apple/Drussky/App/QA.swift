@@ -63,6 +63,18 @@ enum QA {
         }
         book.now = Date.init
         openDay(book)
+        // -qa-series N / -qa-kitchen N / -qa-math N: episode N of «Ста́нция» / dialogue N of «Ку́хня» / rung N of
+        // the mathematics shelf, as a page (Model/Shelves.swift); -qa-partial then applies to it.
+        for (flag, serialID) in [("-qa-series", "stantsiya"), ("-qa-kitchen", "kukhnya")] {
+            if let n = value(flag), let serial = Shelves.serials.first(where: { $0.id == serialID }),
+               let ep = serial.episodes.first(where: { $0.number == n }) {
+                book.open(Shelves.item(ep, in: serial))
+            }
+        }
+        if let n = value("-qa-math"), let shelf = Shelves.library.shelves?.first,
+           let text = Shelves.library.texts(onShelf: shelf.id).first(where: { $0.rung == n }) {
+            book.open(Shelves.item(text, on: shelf))
+        }
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
         applyGoal(to: book)
         applyInstruments(to: book)  // -qa-judge, -qa-hooks, -qa-fluency (Fluency/QA+Instruments.swift)
@@ -72,14 +84,6 @@ enum QA {
             let page = Narration.page(for: text)
             book.insertWrittenPage(title: page.title, intro: page.intro, unitTitle: "Library · \(text.level) · read aloud",
                                    exercises: page.exercises, newWords: [])
-        }
-        // -qa-series N / -qa-math N: episode N of the serial / rung N of the mathematics shelf, as a page (Model/Shelves.swift).
-        if let n = value("-qa-series"), let serial = Shelves.serials.first, let ep = serial.episodes.first(where: { $0.number == n }) {
-            book.open(Shelves.item(ep, in: serial))
-        }
-        if let n = value("-qa-math"), let shelf = Shelves.library.shelves?.first,
-           let text = Shelves.library.texts(onShelf: shelf.id).first(where: { $0.rung == n }) {
-            book.open(Shelves.item(text, on: shelf))
         }
         // -qa-baseline: the weekly sample page (Baseline/); -qa-construction: "Which ending fits?"
         // (Constructions/), whatever the notebook has met so far.

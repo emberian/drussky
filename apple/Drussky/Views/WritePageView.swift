@@ -202,7 +202,7 @@ struct LibrarySheet: View {
                         NavigationLink {
                             SerialView(serial: serial, onDone: { dismiss() })
                         } label: {
-                            shelfRow(serial.title, serial.title_en, "\(serial.episodes.count) episodes · a serial, one episode per course page")
+                            shelfRow(serial.title, serial.title_en, "\(serial.episodes.count) \(serial.itemWordEn)s · a serial, one per course page")
                         }
                     }
                     ForEach(library.shelves ?? []) { shelf in

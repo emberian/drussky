@@ -19,27 +19,57 @@ final class ShelvesTests: XCTestCase {
         Dictionary(uniqueKeysWithValues: try course().pageSequence.enumerated().map { ($1.page.id, $0) })
     }
 
-    func testSerialDecodesEpisodesInCourseOrder() throws {
+    func testSerialsDecodeEpisodesInCourseOrder() throws {
         let serials = Serial.load()
-        let serial = try XCTUnwrap(serials.first { $0.id == "stantsiya" })
-        XCTAssertEqual(serial.title, "Ста́нция")
-        XCTAssertEqual(serial.episodes.count, 24)
-        XCTAssertEqual(serial.episodes.map(\.number), Array(1...24))
+        XCTAssertEqual(serials.map(\.id), ["stantsiya", "kukhnya"], "both files, in Serial.files order")
         let order = try pageOrder()
-        var last = -1
-        for ep in serial.episodes {
-            let pos = try XCTUnwrap(order[ep.after_page], "\(ep.id): after_page \(ep.after_page) is no course page")
-            XCTAssertGreaterThanOrEqual(pos, last, "\(ep.id) is ready before the episode before it")
-            last = pos
-            XCTAssertFalse(ep.text.isEmpty); XCTAssertFalse(ep.en.isEmpty); XCTAssertFalse(ep.glosses.isEmpty); XCTAssertFalse(ep.prompt.isEmpty)
-            XCTAssertEqual(ep.questions.count, 3, ep.id)
-            for q in ep.questions {
-                XCTAssertEqual(q.kind, .readMeaning, ep.id)
-                XCTAssertNotNil(q.text, ep.id)
-                XCTAssertEqual(q.options?.count, 3, ep.id)
-                XCTAssertTrue((0..<3).contains(q.answerIndex ?? -1), ep.id)
+        for serial in serials {
+            let count = serial.id == "kukhnya" ? 30 : 24
+            XCTAssertEqual(serial.episodes.count, count, serial.id)
+            XCTAssertEqual(serial.episodes.map(\.number), Array(1...count), serial.id)
+            var last = -1
+            for ep in serial.episodes {
+                let pos = try XCTUnwrap(order[ep.after_page], "\(ep.id): after_page \(ep.after_page) is no course page")
+                XCTAssertGreaterThanOrEqual(pos, last, "\(ep.id) is ready before the one before it")
+                last = pos
+                XCTAssertFalse(ep.text.isEmpty); XCTAssertFalse(ep.en.isEmpty); XCTAssertFalse(ep.glosses.isEmpty); XCTAssertFalse(ep.prompt.isEmpty)
+                XCTAssertEqual(ep.questions.count, 3, ep.id)
+                for q in ep.questions {
+                    XCTAssertEqual(q.kind, .readMeaning, ep.id)
+                    XCTAssertNotNil(q.text, ep.id)
+                    XCTAssertEqual(q.options?.count, 3, ep.id)
+                    XCTAssertTrue((0..<3).contains(q.answerIndex ?? -1), ep.id)
+                }
+                if let notice = ep.notice { XCTAssertTrue((1...3).contains(notice.count), ep.id) }
             }
         }
+        let station = try XCTUnwrap(serials.first)
+        XCTAssertEqual(station.title, "Ста́нция")
+        XCTAssertEqual(station.place(of: station.episodes[2]), "Ста́нция · эпизо́д 3")
+        XCTAssertTrue(station.episodes.allSatisfy { $0.notice == nil })
+        let kitchen = try XCTUnwrap(serials.last)
+        XCTAssertEqual(kitchen.title, "Ку́хня")
+        XCTAssertEqual(kitchen.place(of: kitchen.episodes[0]), "Ку́хня · диало́г 1")
+        XCTAssertEqual(kitchen.itemWordEn, "dialogue")
+        XCTAssertTrue(kitchen.episodes.allSatisfy { $0.notice?.isEmpty == false }, "every dialogue says what to hear")
+        XCTAssertTrue(kitchen.episodes.allSatisfy { $0.text.hasPrefix("— ") }, "dialogue lines start with a dash")
+    }
+
+    func testDialogueCarriesWhatToHearOnItsPassage() throws {
+        let kitchen = try XCTUnwrap(Shelves.serials.first { $0.id == "kukhnya" })
+        let ep = kitchen.episodes[0]
+        let page = Shelves.page(for: ep, in: kitchen)
+        XCTAssertEqual(page.sourceID, "episode:kukhnya-01")
+        XCTAssertEqual(page.unitTitle, "Ку́хня · диало́г 1")
+        XCTAssertEqual(page.exercises.map(\.kind), [.passage, .readMeaning, .readMeaning, .readMeaning, .diary])
+        XCTAssertEqual(page.exercises[0].notice, ep.notice)
+        let data = try JSONEncoder().encode(page.exercises[0])
+        XCTAssertEqual(try JSONDecoder().decode(Exercise.self, from: data).notice, ep.notice)
+        // Both serials are on the shelves, in order, with the kitchen's items named as dialogues.
+        let items = Shelves.items
+        XCTAssertTrue(items.contains { $0.sourceID == "episode:stantsiya-01" && $0.place == "Ста́нция · эпизо́д 1" })
+        XCTAssertTrue(items.contains { $0.sourceID == "episode:kukhnya-30" && $0.place == "Ку́хня · диало́г 30" })
+        XCTAssertEqual(Set(items.map(\.sourceID)).count, items.count)
     }
 
     func testMathShelfDecodesWithItsSupport() throws {
@@ -156,6 +186,7 @@ final class ShelvesTests: XCTestCase {
         XCTAssertEqual(book.page?.sourceID, first.sourceID)
         XCTAssertEqual(book.page?.exercises.count, 5)
         XCTAssertEqual(book.nextEpisode(of: serial)?.number, 2)
+        // The kitchen's first dialogue follows u4-p2, so it is not ready yet and nothing else is offered.
         XCTAssertTrue(book.shelfOffers().isEmpty)
         // The notebook keeps the offers through a save and load.
         book.saveNow()

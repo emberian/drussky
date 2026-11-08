@@ -139,6 +139,8 @@ struct Exercise: Codable, Sendable, Hashable {
     /// Passage: how its phrases and notation are read, listed quietly under the text (a shelf
     /// reading's `how_read` and `notation`, Model/Shelves.swift).
     var frames: [Frame]? = nil
+    /// Passage: things to hear in it (a dialogue's `notice`), shown once it has been read.
+    var notice: [String]? = nil
 
     struct Frame: Codable, Sendable, Hashable {
         var ru: String
@@ -165,7 +167,7 @@ struct Exercise: Codable, Sendable, Hashable {
     enum CodingKeys: String, CodingKey {
         case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills, prompt
         case narration, words, span
-        case parts, alternatives, word, root, frames, baseline
+        case parts, alternatives, word, root, frames, notice, baseline
         case paradigm, cue, cells, forms, items
         case cursive, seed
     }
@@ -197,6 +199,7 @@ struct Exercise: Codable, Sendable, Hashable {
         word = try c.decodeIfPresent(String.self, forKey: .word)
         root = try c.decodeIfPresent(String.self, forKey: .root)
         frames = try c.decodeIfPresent([Frame].self, forKey: .frames)
+        notice = try c.decodeIfPresent([String].self, forKey: .notice)
         paradigm = try c.decodeIfPresent(String.self, forKey: .paradigm)
         cue = try c.decodeIfPresent(String.self, forKey: .cue)
         cells = try c.decodeIfPresent([String].self, forKey: .cells)
@@ -237,6 +240,7 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(word, forKey: .word)
         try c.encodeIfPresent(root, forKey: .root)
         try c.encodeIfPresent(frames, forKey: .frames)
+        try c.encodeIfPresent(notice, forKey: .notice)
         try c.encodeIfPresent(paradigm, forKey: .paradigm)
         try c.encodeIfPresent(cue, forKey: .cue)
         try c.encodeIfPresent(cells, forKey: .cells)

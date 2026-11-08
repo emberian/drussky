@@ -946,6 +946,7 @@ struct PassageExercise: View {
             .overlay { ReadingPassOverlay(pass: pass, text: text) }
             ReadingPassBar(pass: pass, text: text)
             if let frames = slot.exercise.frames, !frames.isEmpty { PassageFrames(frames: frames) }
+            if let notice = slot.exercise.notice, !notice.isEmpty, slot.result.status.isComplete { PassageNotice(lines: notice) }
             }
             if let selected {
                 HStack(spacing: 12) {
@@ -995,6 +996,26 @@ struct PassageExercise: View {
     /// The token without the punctuation around it: «Что», э́то?», „так“, ’вот’ and (A) all read clean.
     static func bare(_ token: String) -> String {
         token.trimmingCharacters(in: .punctuationCharacters)
+    }
+}
+
+/// What to hear in a dialogue just read: one to three lines, the stressed Russian first and the
+/// English after it, as the file wrote them. Shown only once the passage is marked read.
+struct PassageNotice: View {
+    @Environment(Book.self) private var book
+    let lines: [String]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("WHAT TO HEAR").font(Theme.label(11)).tracking(1.4).foregroundStyle(Theme.muted)
+            ForEach(Array(lines.enumerated()), id: \.offset) { _, line in
+                Text(Theme.stressed(line, show: book.settings.showStress)).scaledFont(15).foregroundStyle(Theme.text.opacity(0.85))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.leading, 6)
+        .frame(maxWidth: 640, alignment: .leading)
+        .transition(.opacity)
     }
 }
 

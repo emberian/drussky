@@ -28,7 +28,7 @@ enum Shelves {
 
     static func item(_ ep: Serial.Episode, in serial: Serial) -> Item {
         Item(kind: .episode, sourceID: sourceID(episode: ep), afterPage: ep.after_page,
-             place: "\(serial.title) · эпизо́д \(ep.number)", title: ep.title, titleEn: ep.title_en)
+             place: serial.place(of: ep), title: ep.title, titleEn: ep.title_en)
     }
 
     static func item(_ text: Library.Text, on shelf: Library.Collection) -> Item {
@@ -60,12 +60,14 @@ enum Shelves {
         passage.text = ep.text
         passage.en = ep.en
         passage.glosses = ep.glosses
+        passage.notice = (ep.notice?.isEmpty ?? true) ? nil : ep.notice
         var diary = Exercise(kind: .diary)
         diary.prompt = ep.prompt
         let about = ep.title_en.map { "\($0). " } ?? ""
+        let hear = passage.notice == nil ? "" : " Once you have read it, what to hear in it is listed under the text."
         return Page(title: ep.title,
-                    intro: "\(about)Read it; tap any word you want to check. Then three questions about what it said, and a line of your own about what comes next.",
-                    unitTitle: "\(serial.title) · эпизо́д \(ep.number)",
+                    intro: "\(about)Read it; tap any word you want to check.\(hear) Then three questions about what it said, and a line of your own about what comes next.",
+                    unitTitle: serial.place(of: ep),
                     exercises: [passage] + ep.questions.map { var q = $0; q.kind = .readMeaning; return q } + [diary],
                     sourceID: sourceID(episode: ep))
     }

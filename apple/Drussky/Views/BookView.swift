@@ -146,7 +146,7 @@ struct BookView: View {
                 ForEach(Shelves.serials) { serial in  // the next episode of the serial (Model/Shelves.swift)
                     if let ep = book.nextEpisode(of: serial) {
                         Button { book.open(Shelves.item(ep, in: serial)) } label: {
-                            Label(RussianText.unstressed("\(serial.title) · эпизо́д \(ep.number)"), systemImage: "sparkles")
+                            Label(RussianText.unstressed(serial.place(of: ep)), systemImage: "sparkles")
                         }
                     }
                 }

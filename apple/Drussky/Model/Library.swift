@@ -128,6 +128,8 @@ struct Serial: Codable, Sendable, Hashable, Identifiable {
     var title: String
     var title_en: String?
     var summary_en: String?
+    /// What one item is called («эпизо́д» unless the file says, e.g., «диало́г»).
+    var episode_word: String? = nil
     var episodes: [Episode]
 
     struct Episode: Codable, Sendable, Hashable, Identifiable {
@@ -142,14 +144,26 @@ struct Serial: Codable, Sendable, Hashable, Identifiable {
         /// Ordinary read_meaning exercises, in the course's own format.
         var questions: [Exercise]
         var prompt: String
+        /// One to three things to hear in the dialogue, stressed Russian with the English after.
+        var notice: [String]? = nil
     }
+
+    var itemWord: String { episode_word ?? "эпизо́д" }
+    /// The same word for an English line ("24 episodes", "30 dialogues").
+    var itemWordEn: String { ["диало́г": "dialogue"][episode_word ?? ""] ?? "episode" }
+    /// «Ста́нция · эпизо́д 3»
+    func place(of ep: Episode) -> String { "\(title) · \(itemWord) \(ep.number)" }
 
     private struct File: Codable { var version: Int; var series: [Serial] }
 
-    /// The bundled serials (series.json).
+    /// The bundled serials, in this order: «Ста́нция» (series.json), «Ку́хня» (kitchen.json).
+    static let files = ["series", "kitchen"]
+
     static func load() -> [Serial] {
-        guard let url = Bundle.main.url(forResource: "series", withExtension: "json"), let data = try? Data(contentsOf: url),
-              let file = try? JSONDecoder().decode(File.self, from: data) else { return [] }
-        return file.series
+        files.flatMap { name -> [Serial] in
+            guard let url = Bundle.main.url(forResource: name, withExtension: "json"), let data = try? Data(contentsOf: url),
+                  let file = try? JSONDecoder().decode(File.self, from: data) else { return [] }
+            return file.series
+        }
     }
 }
