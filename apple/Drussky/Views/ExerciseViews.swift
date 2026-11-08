@@ -77,7 +77,7 @@ struct ExerciseRow: View {
             case .correct: return .success
             case .done: return .impact(weight: .light)
             case .missed: return .warning
-            case .open: return nil
+            case .open, .skipped: return nil
             }
         }
         .animation(.easeOut(duration: 0.25), value: isActive)
@@ -118,6 +118,10 @@ struct MarginMark: View {
                     .font(.system(size: 17, weight: .bold, design: .rounded))
                     .foregroundStyle(Theme.redPen)
                     .overlay(Circle().stroke(Theme.redPen, lineWidth: 1.6).frame(width: 30, height: 30))
+            case .skipped:
+                Image(systemName: "minus")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundStyle(Theme.muted)
             case .open:
                 Text("\(number)")
                     .font(.system(size: 17, weight: .bold, design: .rounded))
@@ -135,6 +139,17 @@ struct MarginMark: View {
         }
         .animation(.spring(response: 0.35, dampingFraction: 0.6), value: status)
         .accessibilityLabel("Exercise \(number)")
+        .accessibilityValue(Self.spoken(status))
+    }
+
+    static func spoken(_ status: ExerciseResult.Status) -> String {
+        switch status {
+        case .open: "not done yet"
+        case .done: "done"
+        case .correct: "right"
+        case .missed: "missed, answer shown"
+        case .skipped: "skipped"
+        }
     }
 }
 
@@ -143,7 +158,7 @@ struct Instruction: View {
     var text: String
     var body: some View {
         Text(text)
-            .font(.system(size: 15, weight: .medium))
+            .scaledFont(15, weight: .medium)
             .foregroundStyle(Theme.muted)
     }
 }
@@ -156,7 +171,7 @@ struct RussianLine: View {
     var body: some View {
         HStack(alignment: .center, spacing: 14) {
             Text(Theme.stressed(text, show: book.settings.showStress))
-                .font(Theme.russian(size, weight: .medium))
+                .russianFont(size, weight: .medium)
                 .foregroundStyle(Theme.text)
             HearButton(text: text, size: 40)
         }
@@ -200,7 +215,7 @@ struct MeetExercise: View {
                         .fixedSize(horizontal: false, vertical: true)
                     if let example = letter.example, RussianText.letters(in: example).isSubset(of: knownLetters(adding: letter.upper)) {
                         HStack(spacing: 8) {
-                            Text("as in").font(.system(size: 15)).foregroundStyle(Theme.muted)
+                            Text("as in").scaledFont(15).foregroundStyle(Theme.muted)
                             RussianLine(text: example, size: 22)
                         }
                     }
@@ -238,7 +253,7 @@ struct ExplainExercise: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(Theme.stressed(slot.exercise.text ?? "", show: book.settings.showStress))
-                .font(.system(size: 18))
+                .scaledFont(18)
                 .lineSpacing(4)
                 .foregroundStyle(Theme.text)
                 .fixedSize(horizontal: false, vertical: true)
@@ -247,7 +262,7 @@ struct ExplainExercise: View {
                     ForEach(examples, id: \.self) { ex in
                         HStack(spacing: 8) {
                             RussianLine(text: ex.ru, size: 24)
-                            Text(ex.en).font(.system(size: 15)).foregroundStyle(Theme.muted)
+                            Text(ex.en).scaledFont(15).foregroundStyle(Theme.muted)
                         }
                     }
                 }
@@ -349,7 +364,8 @@ struct WritingExercise: View {
                 EarlierAttempts(urls: (1...(result.inkAttempts ?? 0)).map { slot.book.inkAttemptURL(slot.ref, attempt: $0) },
                                 height: stripHeight * 0.4)
             }
-            if let coach {  // tucked into the strip's empty bottom margin, clear of "Write it again"
+            // Formation hints compare with the print stroke models: never against cursive guides.
+            if let coach, !book.settings.cursiveModels {  // tucked into the strip's empty bottom margin, clear of "Write it again"
                 FormationHintLine(pad: pad, letter: coach.letter, lift: stripHeight * 0.08,
                                   clearTrailing: result.status.isComplete ? 130 : 0)
             }
@@ -385,8 +401,8 @@ struct WritingExercise: View {
             VStack(alignment: .leading, spacing: 4) {
                 Instruction(text: "Write it in Russian.")
                 HStack(spacing: 12) {
-                    if let emoji = book.word(target)?.emoji { Text(emoji).font(.system(size: 40)) }
-                    Text(ex.en ?? "").font(.system(size: 28, weight: .semibold, design: .serif)).foregroundStyle(Theme.text)
+                    if let emoji = book.word(target)?.emoji { Text(emoji).scaledFont(40) }
+                    Text(ex.en ?? "").scaledFont(28, weight: .semibold, design: .serif).foregroundStyle(Theme.text)
                 }
             }
         case .fill:
@@ -394,9 +410,9 @@ struct WritingExercise: View {
                 Instruction(text: "Write the missing word.")
                 (Text(Theme.stressed(ex.before ?? "", show: book.settings.showStress)) + Text(" ____ ").foregroundStyle(Theme.accent)
                     + Text(Theme.stressed(ex.after ?? "", show: book.settings.showStress)))
-                    .font(Theme.russian(30, weight: .medium))
+                    .russianFont(30, weight: .medium)
                     .foregroundStyle(Theme.text)
-                Text(ex.hint ?? "").font(.system(size: 16)).italic().foregroundStyle(Theme.muted)
+                Text(ex.hint ?? "").scaledFont(16).italic().foregroundStyle(Theme.muted)
             }
         default:
             EmptyView()
@@ -425,20 +441,21 @@ struct WritingExercise: View {
 
     private var feedbackLine: AnyView? {
         if result.status == .correct, isRecall {
-            return AnyView(Text(result.isRightFirstTime ? "Right first time." : result.assisted == true ? "Written again after seeing it." : "Got it.")
+            return AnyView(Text(result.isRightFirstTime ? "Right first time." : result.assisted == true ? "Written again after seeing it."
+                                : result.selfAssessed == true ? "Marked right by you." : "Got it.")
                 .font(Theme.label(14)).foregroundStyle(Theme.good))
         }
         if result.status == .missed {
             return AnyView(HStack(spacing: 10) {
                 Text("Copy the red version once, beside yours. It will come back soon.")
-                    .font(.system(size: 15)).foregroundStyle(Theme.redPen)
+                    .scaledFont(15).foregroundStyle(Theme.redPen)
                 if let s = ex.spoken { HearButton(text: s, size: 32) }
             })
         }
         if let reading = lastReading, !result.status.isComplete {
             return AnyView(VStack(alignment: .leading, spacing: 8) {
                 Text(reading.isEmpty ? "I can't make that out yet." : "That reads to me as «\(reading)».")
-                    .font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.text)
+                    .scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
                 HStack(spacing: 10) {
                     PillButton(title: "Try again", systemImage: "arrow.counterclockwise") { pad.clear(); lastReading = nil }
                     PillButton(title: "Show me", systemImage: "eye", tint: Theme.redPen) {
@@ -446,7 +463,7 @@ struct WritingExercise: View {
                         if let s = ex.spoken { voice.play(s) }
                     }
                     PillButton(title: "I wrote it right", systemImage: "hand.thumbsup") {
-                        slot.finish { $0.status = .correct; $0.recognized = reading }
+                        slot.finish { $0.status = .correct; $0.selfAssessed = true; $0.recognized = reading }
                     }
                 }
             })
@@ -474,9 +491,10 @@ struct WritingExercise: View {
         let drawing = pad.drawing, revision = pad.revision
         let target = self.target
         let practice = !isRecall
+        let subjectDrop = ex.kind == .translate
         let ref = slot.ref, book = slot.book, round = result.roundNumber
         Task {
-            let reading = await InkReader.read(drawing, target: target)
+            let reading = await InkReader.read(drawing, target: target, subjectDrop: subjectDrop)
             checking = false
             let again = pendingCheck
             pendingCheck = nil
@@ -563,6 +581,15 @@ struct ListenPickExercise: View {
                        russian: true, showStress: book.settings.showStress, locked: slot.result.status.isComplete) { i in
                 choose(i, options: options)
             }
+            if slot.result.status == .missed, let say = ex.say {
+                ChoiceCorrection(slot: slot) {
+                    HStack(spacing: 10) {
+                        Text("It was").scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
+                        Text(Theme.stressed(say, show: book.settings.showStress)).russianFont(22, weight: .medium).foregroundStyle(Theme.good)
+                        HearButton(text: say, size: 34)
+                    }
+                }
+            }
         }
         .onChange(of: book.advanceSignal) { _, _ in
             if isActive, slot.isAdvanceTarget, let s = ex.say { voice.play(s) }
@@ -570,8 +597,11 @@ struct ListenPickExercise: View {
     }
 
     private func choose(_ i: Int, options: [String]) {
-        let right = options[i] == slot.exercise.say
-        if !right, let s = options[safe: i] { voice.play(s) }
+        let say = slot.exercise.say
+        let right = options[i] == say
+        let missedNow = !right && slot.result.attempts + 1 >= 2
+        // A wrong pick plays what was picked; the last miss plays what it really was.
+        if missedNow, let say { voice.play(say) } else if !right, let s = options[safe: i] { voice.play(s) }
         slot.finish { r in
             r.chosen = i
             r.attempts += 1
@@ -598,10 +628,34 @@ struct ReadMeaningExercise: View {
                     r.status = right ? (r.attempts == 1 ? .correct : .done) : (r.attempts >= 2 ? .missed : .open)
                 }
             }
+            if slot.result.status == .missed, let answer = ex.answerIndex.flatMap({ ex.options?[safe: $0] }) {
+                ChoiceCorrection(slot: slot) {
+                    HStack(spacing: 8) {
+                        Text("It means").scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
+                        Text(answer).scaledFont(17, weight: .semibold).foregroundStyle(Theme.good)
+                    }
+                }
+            }
         }
     }
 }
 
+/// After a missed choice: the answer, said and shown, and an optional (ungraded) try again.
+struct ChoiceCorrection<Content: View>: View {
+    let slot: ExerciseSlot
+    @ViewBuilder let content: Content
+
+    var body: some View {
+        HStack(spacing: 14) {
+            content
+            PillButton(title: "Try it again", systemImage: "arrow.counterclockwise") { slot.book.reopen(slot.ref) }
+                .accessibilityHint("Practice only; it isn't graded")
+        }
+    }
+}
+
+/// Choices that say, by shape as well as colour, which one was picked and which was right.
+/// Once the exercise is over the right answer is always marked, picked or not.
 struct ChoiceGrid: View {
     let options: [String]
     let chosen: Int?
@@ -617,21 +671,30 @@ struct ChoiceGrid: View {
             ForEach(Array(options.enumerated()), id: \.offset) { i, option in
                 let isChosen = chosen == i
                 let isRight = correct == i
+                let revealed = finished && isRight && !isChosen
                 let shown = russian ? Theme.stressed(option, show: showStress) : AttributedString(option)
+                let color: Color = isChosen ? (isRight ? Theme.good : Theme.redPen) : (revealed ? Theme.good : Theme.text)
                 Button { onChoose(i) } label: {
-                    Text(shown)
-                        .font(russian ? Theme.russian(30, weight: .medium) : .system(size: 18, weight: .medium))
-                        .padding(.horizontal, russian ? 26 : 18).padding(.vertical, russian ? 12 : 14)
-                        .frame(minWidth: russian ? 84 : 0)
-                        .foregroundStyle(isChosen ? (isRight ? Theme.good : Theme.redPen) : Theme.text)
-                        .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
-                        .overlay(RoundedRectangle(cornerRadius: 14)
-                            .stroke(isChosen ? (isRight ? Theme.good : Theme.redPen) : Theme.rule.opacity(0.5),
-                                    lineWidth: isChosen ? 2.5 : 1))
+                    HStack(spacing: 8) {
+                        if isChosen || revealed {
+                            Image(systemName: isRight ? "checkmark" : "xmark").font(.system(size: 15, weight: .bold))
+                        }
+                        Group {
+                            if russian { Text(shown).russianFont(30, weight: .medium) } else { Text(shown).scaledFont(18, weight: .medium) }
+                        }
+                    }
+                    .padding(.horizontal, russian ? 26 : 18).padding(.vertical, russian ? 12 : 14)
+                    .frame(minWidth: russian ? 84 : 0)
+                    .foregroundStyle(color)
+                    .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
+                    .overlay(RoundedRectangle(cornerRadius: 14)
+                        .stroke(isChosen || revealed ? color : Theme.rule.opacity(0.5),
+                                style: StrokeStyle(lineWidth: isChosen || revealed ? 2.5 : 1, dash: revealed ? [6, 4] : [])))
                 }
                 .buttonStyle(.plain)
-                .disabled(finished)
+                .allowsHitTesting(!finished)  // not .disabled: the marked answers stay full strength
                 .sensoryFeedback(isRight ? .success : .error, trigger: isChosen)
+                .accessibilityValue(isChosen ? (isRight ? "your choice, right" : "your choice, wrong") : revealed ? "the right answer" : "")
             }
         }
     }
@@ -656,7 +719,7 @@ struct ReadAloudExercise: View {
         VStack(alignment: .leading, spacing: 12) {
             Instruction(text: slot.result.status.isComplete ? "Read it aloud." : "Read it aloud, then listen to check.")
             Text(Theme.stressed(target, show: book.settings.showStress))
-                .font(Theme.russian(40, weight: .medium))
+                .russianFont(40, weight: .medium)
                 .foregroundStyle(Theme.text)
             HStack(spacing: 14) {
                 Button { Task { await toggle() } } label: {
@@ -690,34 +753,48 @@ struct ReadAloudExercise: View {
                 RhythmView(modelURL: voice.recordingURL(for: target), mineURL: slot.recordingURL, version: slot.result.attempts)
             }
             if denied {
-                Text("Drussky needs the microphone and speech recognition, in Settings → Drussky.")
-                    .font(.system(size: 14)).foregroundStyle(Theme.redPen)
+                Label("Recording needs the microphone: Settings → Drussky → Microphone.", systemImage: "mic.slash")
+                    .scaledFont(14).foregroundStyle(Theme.redPen)
             }
             if let heard = slot.result.recognized, slot.result.attempts > 0 {
                 heardLine(heard)
             } else if slot.result.attempts > 0 && !slot.result.status.isComplete && speech.phase != .listening {
                 heardLine("")
+            } else if !slot.result.status.isComplete && (isActive || denied) {
+                // Always a way past it, graded or not: no microphone, a quiet room, not today.
+                skipButton
+            }
+            if slot.result.status == .skipped {
+                Label("Skipped for now — not graded.", systemImage: "minus.circle").scaledFont(14).foregroundStyle(Theme.muted)
             }
         }
+    }
+
+    private var skipButton: some View {
+        PillButton(title: "Skip for now", systemImage: "arrow.down") { slot.finish { $0.status = .skipped } }
+            .accessibilityHint("Leaves this exercise ungraded")
     }
 
     @ViewBuilder private func heardLine(_ heard: String) -> some View {
         let ok = RussianText.matches(heard, target)
         VStack(alignment: .leading, spacing: 8) {
             if ok {
-                Text("Heard «\(heard)». ").font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.good)
+                Label("Heard «\(heard)».", systemImage: "checkmark").scaledFont(15, weight: .medium).foregroundStyle(Theme.good)
             } else {
                 Text(heard.isEmpty
-                     ? (speech.lastTimedOut ? "The Russian listener is still getting ready. Compare yours with the model by ear this time." : "I didn't catch Russian there.")
+                     ? (speech.recognitionDenied ? "Speech recognition is off, so nothing checks this one. Compare yours with the model by ear."
+                        : speech.lastTimedOut ? "The Russian listener is still getting ready. Compare yours with the model by ear this time." : "I didn't catch Russian there.")
                      : "I heard «\(heard)».")
-                    .font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.text)
+                    .scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
                 if !slot.result.status.isComplete {
                     HStack(spacing: 10) {
-                        PillButton(title: "Sounded right", systemImage: "hand.thumbsup") { slot.finish { $0.status = .done } }
-                        PillButton(title: "Move on", systemImage: "arrow.down") { slot.finish { $0.status = .done } }
+                        PillButton(title: "Sounded right to me", systemImage: "hand.thumbsup") {
+                            slot.finish { $0.status = .done; $0.selfAssessed = true }
+                        }
+                        skipButton
                     }
-                    Text("Compare yours with the model, then go again if you like.")
-                        .font(.system(size: 13)).foregroundStyle(Theme.muted)
+                    Text("Compare yours with the model, then go again if you like. Skipping isn't graded.")
+                        .scaledFont(13).foregroundStyle(Theme.muted)
                 }
             }
         }
@@ -806,7 +883,7 @@ struct PassageExercise: View {
                     let word = Self.bare(token)
                     Button { select(word) } label: {
                         Text(Theme.stressed(token, show: book.settings.showStress))
-                            .font(Theme.russian(28))
+                            .russianFont(28)
                             .foregroundStyle(Theme.text)
                             .padding(.vertical, 2).padding(.horizontal, 3)
                             .background(RoundedRectangle(cornerRadius: 6)
@@ -821,8 +898,8 @@ struct PassageExercise: View {
             .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
             if let selected {
                 HStack(spacing: 12) {
-                    Text(selected).font(Theme.russian(24, weight: .medium)).foregroundStyle(Theme.text)
-                    Text(gloss(for: selected) ?? "—").font(.system(size: 17)).foregroundStyle(Theme.muted)
+                    Text(selected).russianFont(24, weight: .medium).foregroundStyle(Theme.text)
+                    Text(gloss(for: selected) ?? "—").scaledFont(17).foregroundStyle(Theme.muted)
                     HearButton(text: selected, size: 34)
                 }
                 .transition(.opacity)
@@ -833,7 +910,7 @@ struct PassageExercise: View {
                 }
                 .font(Theme.label(14)).foregroundStyle(Theme.accent)
                 if showTranslation {
-                    Text(en).font(.system(size: 17)).italic().foregroundStyle(Theme.text.opacity(0.85))
+                    Text(en).scaledFont(17).italic().foregroundStyle(Theme.text.opacity(0.85))
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }

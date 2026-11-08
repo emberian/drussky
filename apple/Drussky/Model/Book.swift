@@ -27,6 +27,8 @@ struct BookPage: Codable, Identifiable, Sendable {
 struct ExerciseResult: Codable, Sendable, Hashable {
     enum Status: String, Codable, Sendable {
         case open, done, correct, missed
+        /// Left for now on purpose (no microphone, not today): finished, never graded.
+        case skipped
         var isComplete: Bool { self != .open }
     }
     var status: Status = .open
@@ -48,12 +50,15 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var takes: [String]? = nil
     /// Earlier writings kept when the exercise was reopened (ink/<page>-<i>~<n>.drawing, n = 1…).
     var inkAttempts: Int? = nil
+    /// Finished on the learner's own judgement ("I wrote it right", "Sounded right") after the
+    /// checker couldn't confirm it.
+    var selfAssessed: Bool? = nil
 
     var roundNumber: Int { round ?? 0 }
 
     /// Right on the first try, by the checker, never having been shown the answer.
     var isRightFirstTime: Bool {
-        status == .correct && attempts <= 1 && (failedChecks ?? 0) == 0 && assisted != true && !revealed
+        status == .correct && attempts <= 1 && (failedChecks ?? 0) == 0 && assisted != true && !revealed && selfAssessed != true
     }
 }
 
@@ -344,6 +349,7 @@ final class Book {
             r.recognized = nil
             r.chosen = nil
             r.revealed = false
+            r.selfAssessed = nil
         }
     }
 
@@ -445,7 +451,8 @@ final class Book {
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")
         case .correct: lines.append("Got it right.")
-        case .done: lines.append("Finished.")
+        case .done: lines.append(r.selfAssessed == true ? "Finished; they judged it right themselves." : "Finished.")
+        case .skipped: lines.append("Skipped for now (not graded).")
         case .missed: lines.append("Missed it and was shown the answer.")
         }
         if let rec = r.recognized, !rec.isEmpty {

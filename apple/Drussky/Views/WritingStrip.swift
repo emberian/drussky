@@ -194,6 +194,8 @@ final class PaperStripView: UIView, UIPencilInteractionDelegate {
     private var ghost: String?
     private var ghostTimes = 1
     private var cursive = false
+    // PencilKit takes ink colours in their light-appearance form and adapts them on screen in
+    // dark mode (the stored drawing keeps the light colour; nothing is recoloured on disk).
     private let pen = PKInkingTool(.pen, color: Theme.inkUI.resolvedColor(with: .init(userInterfaceStyle: .light)), width: 4.5)
     private var erasing = false
 

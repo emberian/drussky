@@ -8,6 +8,8 @@ import UIKit
 ///   -qa-partial K      also complete the first K exercises of the page after that
 ///   -qa-age D          pretend D days have passed since everything was learned
 ///   -qa-history D      spread the completed pages over the last D days (knowledge-map history)
+///   -qa-misses         choice exercises are missed twice (the correction under the choices)
+///   -qa-corrupt        an undecodable book.json in the QA folder (the recovery screen)
 @MainActor
 enum QA {
     static func value(_ flag: String) -> Int? {
@@ -70,6 +72,13 @@ enum QA {
                 try? drawing.dataRepresentation().write(to: book.inkURL(page: page, exercise: i))
             }
             // Now and then a wrong pick first, as a learner would.
+            // -qa-misses: choices missed twice (the correction screen).
+            if has("-qa-misses"), [.listenPick, .readMeaning].contains(ex.kind), let options = ex.options,
+               let wrong = options.indices.first(where: { ex.kind == .listenPick ? options[$0] != ex.say : $0 != ex.answerIndex }) {
+                book.record(page: pageIndex, exercise: i) { r in r.chosen = wrong; r.attempts += 1 }
+                book.record(page: pageIndex, exercise: i) { r in r.chosen = wrong; r.attempts += 1; r.status = .missed }
+                continue
+            }
             if ex.kind == .listenPick, i % 4 == 1, let options = ex.options, let wrong = options.firstIndex(where: { $0 != ex.say }) {
                 book.record(page: pageIndex, exercise: i) { r in r.chosen = wrong; r.attempts += 1 }
             }

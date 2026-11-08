@@ -49,6 +49,33 @@ def key(s):
     return " ".join(s.split())
 
 
+# Question words (and their forms) that make a question "falling" (Russian IK-2, like a
+# statement) when they open it, after any leading conjunction or preposition.
+WH_WORDS = set("кто кого кому кем ком что чего чему чем чём где куда откуда когда почему зачем отчего как "
+               "какой какая какое какие какого каком какую каким каких какому чей чья чьё чьи сколько "
+               "который которая которое которые".split())
+LEAD_WORDS = set("а и но ну так о об обо с со в во на к ко у от до из за по для про".split())
+
+
+def rising_question(s):
+    """Same as RussianText.isRisingQuestion: the text ends in a question without a fronted
+    question word (yes/no, "А ты?"), which is said with a rise, unlike a statement."""
+    t = (s or "").replace(ACUTE, "").replace("+", "").rstrip("»\"”) \n")
+    if not t.endswith("?"):
+        return False
+    last = re.split(r"[.!?…]\s+", t[:-1])[-1]
+    words = key(last).split()
+    while words and words[0] in LEAD_WORDS:
+        words = words[1:]
+    return not (words and words[0] in WH_WORDS)
+
+
+def audio_key(s):
+    """Same as RussianText.audioKey: the index key of a clip. A rising question and the
+    statement with the same words are different clips ("это чай?" vs "это чай")."""
+    return key(s) + ("?" if rising_question(s) else "")
+
+
 def tokens(s):
     w = "[\u0400-\u04FF\u0301]+"
     return re.findall(w + "(?:-" + w + ")*", s)
@@ -327,7 +354,7 @@ def main():
     if "--audio" in sys.argv:
         audio = path.parent / "Audio"
         index = json.loads((audio / "index.json").read_text())
-        for s in sorted({key(s) for s in spoken_strings(course)}):
+        for s in sorted({audio_key(s) for s in spoken_strings(course)}):
             f = index.get(s)
             if not f:
                 err("audio", f"no recording for {s!r}")

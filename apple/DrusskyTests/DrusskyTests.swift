@@ -18,9 +18,9 @@ final class DrusskyTests: XCTestCase {
         XCTAssertFalse(RussianText.matches("оно", "она"), "pronouns stay distinct")
         XCTAssertFalse(RussianText.matches("OHO", "она"))
         XCTAssertFalse(RussianText.matches("mama", "папа"))
-        XCTAssertTrue(RussianText.answerMatches("читаю", "Я чита́ю."))
-        XCTAssertTrue(RussianText.answerMatches("я читаю", "чита́ю"))
-        XCTAssertFalse(RussianText.answerMatches("ты читаешь", "Я чита́ю."))
+        XCTAssertTrue(RussianText.answerMatches("читаю", "Я чита́ю.", subjectDrop: true))
+        XCTAssertTrue(RussianText.answerMatches("я читаю", "чита́ю", subjectDrop: true))
+        XCTAssertFalse(RussianText.answerMatches("ты читаешь", "Я чита́ю.", subjectDrop: true))
     }
 
     func testCourseDecodesAndIsWellFormed() throws {

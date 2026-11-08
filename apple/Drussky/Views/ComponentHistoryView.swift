@@ -68,22 +68,35 @@ struct ComponentHistoryView: View {
             ForEach(shown, id: \.self) { m in
                 let est = k.model.estimatedRetrievability(id, m, at: t)
                 let trace = traces[m]
-                HStack(spacing: 12) {
-                    Text(m.title).font(.system(size: 14, weight: .medium)).foregroundStyle(Theme.text).frame(width: 130, alignment: .leading)
-                    RecallBar(value: est?.value ?? 0, estimated: est?.estimated ?? true)
-                        .frame(height: 10)
-                    Text(est.map { "\(Int(($0.value * 100).rounded()))%" } ?? "–")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded)).monospacedDigit()
-                        .foregroundStyle(est?.estimated == true ? Theme.muted : Theme.text).frame(width: 44, alignment: .trailing)
-                    Group {
-                        if let trace, let s = trace.state {
-                            Text("holds \(Self.days(s.stability)) · \(trace.reviews.count)× · \(trace.lapses) lapse\(trace.lapses == 1 ? "" : "s")")
-                        } else {
-                            Text("estimated from other ways")
-                        }
+                let title = Text(m.title).scaledFont(14, weight: .medium).foregroundStyle(Theme.text)
+                let bar = RecallBar(value: est?.value ?? 0, estimated: est?.estimated ?? true).frame(height: 10)
+                let percent = Text(est.map { "\(Int(($0.value * 100).rounded()))%" } ?? "–")
+                    .scaledFont(14, weight: .semibold, design: .rounded).monospacedDigit()
+                    .foregroundStyle(est?.estimated == true ? Theme.muted : Theme.text)
+                let detail = Group {
+                    if let trace, let s = trace.state {
+                        Text("holds \(Self.days(s.stability)) · \(trace.reviews.count)× · \(trace.lapses) lapse\(trace.lapses == 1 ? "" : "s")")
+                    } else {
+                        Text("estimated from other ways")
                     }
-                    .font(.system(size: 12)).foregroundStyle(Theme.muted).frame(width: 190, alignment: .leading)
                 }
+                .scaledFont(12).foregroundStyle(Theme.muted)
+                // Columns when they fit; stacked when the sheet is narrow (iPhone, Split View) or
+                // the text is large.
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 12) {
+                        title.lineLimit(1).fixedSize().frame(minWidth: 130, alignment: .leading)
+                        bar.frame(minWidth: 80)
+                        percent.lineLimit(1).fixedSize().frame(minWidth: 44, alignment: .trailing)
+                        detail.lineLimit(1).fixedSize().frame(minWidth: 190, alignment: .leading)
+                    }
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack { title; Spacer(minLength: 8); percent }
+                        bar
+                        detail.fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                .accessibilityElement(children: .combine)
             }
         }
     }
@@ -110,6 +123,7 @@ struct ComponentHistoryView: View {
                         let color: Color = switch e.grade {
                         case .again?: Theme.redPen
                         case .hard?: Color(Theme.dynamic(0xB7791F, 0xE0A84A))
+                        case nil: Theme.muted  // finished, not graded (skipped, or rewritten after being shown)
                         default: Theme.good
                         }
                         ctx.fill(Path(ellipseIn: CGRect(x: x - 5, y: size.height / 2 - 5, width: 10, height: 10)), with: .color(color))

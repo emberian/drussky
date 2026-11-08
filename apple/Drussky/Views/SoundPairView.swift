@@ -26,10 +26,10 @@ struct SoundPairExercise: View {
         return VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .firstTextBaseline, spacing: 10) {
                 Text(contrastName).font(.system(size: 22, weight: .semibold, design: .serif)).foregroundStyle(Theme.text)
-                Text("tap each word; hear them side by side").font(.system(size: 14)).foregroundStyle(Theme.muted)
+                Text("tap each word; hear them side by side").scaledFont(14).foregroundStyle(Theme.muted)
             }
             if let note = ex.text {
-                Text(note).font(.system(size: 16)).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
+                Text(note).scaledFont(16).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
             }
             Grid(alignment: .leading, horizontalSpacing: 14, verticalSpacing: 6) {
                 ForEach(Array(stride(from: 0, to: examples.count - 1, by: 2)), id: \.self) { i in
@@ -55,8 +55,8 @@ struct SoundPairExercise: View {
     private func wordCell(_ w: Course.Example, exactStress: Bool) -> some View {
         Button { play(w.ru, exactStress: exactStress, voice: nil) } label: {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(Theme.stressed(w.ru, show: true)).font(Theme.russian(26, weight: .medium)).foregroundStyle(Theme.text)
-                Text(w.en).font(.system(size: 14)).foregroundStyle(Theme.muted).lineLimit(1)
+                Text(Theme.stressed(w.ru, show: true)).russianFont(26, weight: .medium).foregroundStyle(Theme.text)
+                Text(w.en).scaledFont(14).foregroundStyle(Theme.muted).lineLimit(1)
             }
         }
         .buttonStyle(.plain)
@@ -92,6 +92,7 @@ struct SoundPairExercise: View {
         .onChange(of: book.advanceSignal) { _, _ in
             if isActive, slot.isAdvanceTarget, !done { play(ex.say ?? "", exactStress: exact, voice: ex.times) }
         }
+        .onDisappear { playback?.cancel() }
     }
 
     private func option(_ i: Int, _ word: String, answer: Int, done: Bool) -> some View {
@@ -101,8 +102,8 @@ struct SoundPairExercise: View {
         return Button { choose(i) } label: {
             VStack(spacing: 2) {
                 Text(Theme.stressed(word, show: exact || book.settings.showStress))
-                    .font(Theme.russian(30, weight: .medium))
-                Text(ex.glosses?[RussianText.pairKey(word)] ?? "").font(.system(size: 14)).foregroundStyle(Theme.muted)
+                    .russianFont(30, weight: .medium)
+                Text(ex.glosses?[RussianText.pairKey(word)] ?? "").scaledFont(14).foregroundStyle(Theme.muted)
             }
             .foregroundStyle(color)
             .padding(.horizontal, 22).padding(.vertical, 10)
@@ -135,20 +136,28 @@ struct SoundPairExercise: View {
                 Label("Another voice", systemImage: "person.2.wave.2").font(Theme.label(13))
             }
             .buttonStyle(.bordered).tint(Theme.accent)
+            Button { playback?.cancel(); voice.stop(); book.requestAdvance(page: slot.ref.pageID) } label: {
+                Label("Next", systemImage: "arrow.down").font(Theme.label(13))
+            }
+            .buttonStyle(.bordered).tint(Theme.accent)
         }
         .foregroundStyle(Theme.text)
     }
 
     private func choose(_ i: Int) {
         let right = i == ex.answerIndex
-        slot.finish { r in
+        slot.record { r in
             r.chosen = i
             r.attempts += 1
             r.status = right ? .correct : .missed
         }
-        // Hear what it was, then the other member, in that speaker's voice where possible.
+        // Hear what it was, then the other member, in that speaker's voice where possible; the
+        // page moves on only when that comparison has finished (or the learner taps Next).
         let answer = ex.answerIndex ?? 0
-        playBoth(options[safe: answer] ?? "", options[safe: 1 - answer] ?? "", exactStress: exact, first: ex.times)
+        let book = slot.book, page = slot.ref.pageID
+        playBoth(options[safe: answer] ?? "", options[safe: 1 - answer] ?? "", exactStress: exact, first: ex.times) {
+            book.requestAdvance(page: page)
+        }
     }
 
     // MARK: Playback
@@ -167,16 +176,20 @@ struct SoundPairExercise: View {
         voice.playFile(urls[n % urls.count], key: RussianText.pairKey(word))
     }
 
-    private func playBoth(_ a: String, _ b: String, exactStress: Bool, first: Int? = nil) {
+    /// One word, then the other, as one sequence: anything else played meanwhile (the next
+    /// trial, a page turn) ends it, and `then` runs only if it played to the end.
+    private func playBoth(_ a: String, _ b: String, exactStress: Bool, first: Int? = nil, then: (@MainActor () -> Void)? = nil) {
         playback?.cancel()
         let ua = clips(a, exactStress: exactStress), ub = clips(b, exactStress: exactStress)
-        guard let x = ua[safe: (first ?? 0) % max(1, ua.count)], let y = ub[safe: (first ?? 0) % max(1, ub.count)] else { return }
+        guard let x = ua[safe: (first ?? 0) % max(1, ua.count)], let y = ub[safe: (first ?? 0) % max(1, ub.count)] else { then?(); return }
         let voice = self.voice
+        let token = voice.playFile(x, key: RussianText.pairKey(a))
         playback = Task { @MainActor in
-            voice.playFile(x, key: RussianText.pairKey(a))
             try? await Task.sleep(for: .seconds(Self.duration(x) + 0.45))
-            guard !Task.isCancelled else { return }
-            voice.playFile(y, key: RussianText.pairKey(b))
+            guard !Task.isCancelled, voice.continueSequence(y, key: RussianText.pairKey(b), token: token) else { return }
+            try? await Task.sleep(for: .seconds(Self.duration(y) + 0.35))
+            guard !Task.isCancelled, voice.sequence == token else { return }
+            then?()
         }
     }
 

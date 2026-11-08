@@ -9,13 +9,13 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 
 | exercise | you |
 |---|---|
-| meet | see a letter in print and handwriting, hear it, *watch it written* stroke by stroke, trace it once, then write it freely; one formation hint (start, order, direction, size, baseline) appears under the line |
+| meet | see a letter in print and handwriting, hear it, *watch it printed* stroke by stroke, trace it once, then write it freely; one formation hint (start, order, direction, size, baseline) compares it with the print model (no hints against cursive guides) |
 | trace / copy | write over a faint model, or beside a shown one |
 | listen and pick | hear a syllable or word, tap which it was |
 | dictation | hear it, write it — no model |
 | translate | see English, write the Russian from memory |
 | fill | write the missing word in a sentence |
-| read aloud | say it; your take is kept, played back, and its rhythm drawn against the model's |
+| read aloud | say it; every take is kept, played back, and its rhythm and pitch drawn against the model's; *Skip for now* (ungraded) is always there |
 | what does it mean | read Russian, choose its meaning |
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound |
 
@@ -26,7 +26,10 @@ answer in red above your line and brings the item back soon.
 
 Speech is transcribed by Apple's Russian recognizer (on-device where supported). It tells you
 what it heard; it does not grade an accent. The rhythm strip shows loudness over time for the
-model and for you: stressed syllables are the long, loud ones.
+model and for you: stressed syllables are the long, loud ones. The pitch line reports what it
+measures (the biggest climb and where it peaks) without judging whether you asked a question.
+If recognition can't confirm a take you can mark it *Sounded right to me* (counted, as unverified)
+or skip it (not counted).
 
 ## Remembering
 
@@ -122,7 +125,10 @@ synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-cont
 `scripts/validate_course.py` (schema in `COURSE_SCHEMA.md`: letters before use, stress
 marks, page sizes, answer integrity). Hand-printed stroke models for all 66 letter forms
 (`Drussky/Resources/strokes.json`) are built by `scripts/build_strokes.py`. Audio lives in `Drussky/Resources/Audio/` with
-`index.json` (normalized text → file) and `sources.json` (provenance and licences); every
+`index.json` (audio key → file) and `sources.json` (provenance and licences). The audio key is
+the normalized text plus `?` for a rising (yes/no) question, so «Э́то чай?» and «Э́то чай.» are
+different clips (`RussianText.audioKey`, `validate_course.audio_key`; `scripts/audio_identity.py`
+files every clip by what its own provenance says it says). Every
 string the app can speak, including generated reviews, has a recording — a unit test
 enforces it. `scripts/make_audio.py` (local Silero) generates missing ones.
 

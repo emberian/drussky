@@ -103,7 +103,7 @@ struct PageView: View {
             }
             if let intro = page.intro {
                 Text(Theme.stressed(intro, show: book.settings.showStress))
-                    .font(.system(size: 18))
+                    .scaledFont(18)
                     .lineSpacing(3)
                     .foregroundStyle(Theme.text.opacity(0.82))
                     .fixedSize(horizontal: false, vertical: true)
@@ -122,7 +122,7 @@ struct PageView: View {
                             .font(Theme.cursive(34))
                             .foregroundStyle(Theme.redPen)
                         Text(summary(page))
-                            .font(.system(size: 15))
+                            .scaledFont(15)
                             .foregroundStyle(Theme.muted)
                     }
                 }
@@ -144,7 +144,7 @@ struct PageView: View {
             .disabled(book.courseFinished && pageIndex == book.pages.count - 1 && book.dueCount == 0)
             Button { asking = AskTarget(exercise: nil) } label: {
                 Label("Ask about this page", systemImage: "questionmark.bubble")
-                    .font(.system(size: 15, weight: .medium))
+                    .scaledFont(15, weight: .medium)
                     .foregroundStyle(Theme.muted)
             }
             .buttonStyle(.plain)
@@ -159,6 +159,8 @@ struct PageView: View {
         var parts = [page.exercises.count == 1 ? "1 exercise" : "\(page.exercises.count) exercises"]
         if firstTry > 0 { parts.append("\(firstTry) right first time") }
         if missed > 0 { parts.append("\(missed) to bring back soon") }
+        let skipped = page.results.filter { $0.status == .skipped }.count
+        if skipped > 0 { parts.append("\(skipped) skipped") }
         return parts.joined(separator: " · ")
     }
 
@@ -175,7 +177,7 @@ struct GradeStamp: View {
     let page: BookPage
 
     static func grade(for page: BookPage) -> Int {
-        let graded = page.results.filter { $0.status != .done }
+        let graded = page.results.filter { $0.status != .done && $0.status != .skipped }
         guard !graded.isEmpty else { return 5 }
         let missed = graded.filter { $0.status == .missed }.count
         return missed == 0 ? 5 : missed <= 2 ? 4 : 3
@@ -216,7 +218,7 @@ struct HowThisBookWorks: View {
     private func row(_ icon: String, _ text: String) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: 12) {
             Image(systemName: icon).foregroundStyle(Theme.accent).frame(width: 22)
-            Text(text).font(.system(size: 16)).foregroundStyle(Theme.text)
+            Text(text).scaledFont(16).foregroundStyle(Theme.text)
                 .fixedSize(horizontal: false, vertical: true)
         }
     }

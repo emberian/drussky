@@ -73,15 +73,18 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         try? session.setActive(true)
     }
 
-    func hasRecording(_ text: String) -> Bool { index[RussianText.key(text)] != nil || privateIndex[RussianText.key(text)] != nil }
-    func speakerCount(_ text: String) -> Int { index[RussianText.key(text)] == nil ? 0 : 1 + (variants[RussianText.key(text)]?.count ?? 0) }
+    // Recordings are found by `RussianText.audioKey`, which keeps a rising question apart from
+    // its statement. With no recording of the right intonation, the system voice reads the text
+    // with its punctuation rather than a clip with the wrong contour.
+    func hasRecording(_ text: String) -> Bool { index[RussianText.audioKey(text)] != nil || privateIndex[RussianText.audioKey(text)] != nil }
+    func speakerCount(_ text: String) -> Int { index[RussianText.audioKey(text)] == nil ? 0 : 1 + (variants[RussianText.audioKey(text)]?.count ?? 0) }
 
     func recordingURL(for text: String) -> URL? {
-        index[RussianText.key(text)].flatMap { audioDir?.appendingPathComponent($0) }
+        index[RussianText.audioKey(text)].flatMap { audioDir?.appendingPathComponent($0) }
     }
 
     func play(_ text: String) {
-        let key = RussianText.key(text)
+        let key = RussianText.audioKey(text)
         stop()
         speakingKey = key
         if let primary = index[key] {
@@ -103,10 +106,27 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         synth.speak(utterance)
     }
 
-    func playFile(_ url: URL, key: String) {
+    /// Starts `url` and returns the token of the sequence it begins (see `continueSequence`).
+    @discardableResult
+    func playFile(_ url: URL, key: String) -> Int {
         stop()
         speakingKey = key
         start(url)
+        return sequence
+    }
+
+    /// Bumped by every new playback and by `stop()`. A multi-clip sequence (hear one word, then
+    /// its pair) holds the token it began with and plays its next clip only while that is still
+    /// current: anything played or stopped in between (the next trial, a page turn) ends it.
+    private(set) var sequence = 0
+
+    /// Plays the next clip of the sequence begun as `token`; false (and silent) if it has ended.
+    @discardableResult
+    func continueSequence(_ url: URL, key: String, token: Int) -> Bool {
+        guard token == sequence else { return false }
+        speakingKey = key
+        start(url)
+        return true
     }
 
     private func start(_ url: URL) {
@@ -124,6 +144,7 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
     }
 
     func stop() {
+        sequence += 1
         let deck = self.deck
         audioQueue.async {
             deck.player?.stop()

@@ -57,21 +57,35 @@ struct IntonationRow: View {
         line(mine, color: Theme.ink, width: 2)
     }
 
+    /// What the plot shows, in measurements only. The pitch tracker finds the biggest climb but
+    /// not which syllable carries it or what kind of question it is, so it doesn't say whether
+    /// either voice "is a question" or tell the learner what to change. Listening decides.
     private func hint(_ mine: Contour) -> String? {
         guard let model else { return nil }
-        let asks = model.rise >= Self.questionRise, youAsk = mine.rise >= Self.questionRise
-        switch (asks, youAsk) {
-        case (true, false): return "The model's voice jumps up on the stressed syllable — that makes it a question. Lift yours there."
-        case (false, true): return "Yours jumps up like a question; the model stays level and falls."
-        case (true, true): return "Both jump up on the stressed syllable: a question."
-        case (false, false): return mine.finalMovement > 2 ? "Let the end fall, as the model does." : nil
-        }
+        return "Biggest climb: model \(Self.describe(model)); yours \(Self.describe(mine)). Play both and compare by ear."
     }
 
-    static let questionRise: Float = 4.5
+    static func describe(_ c: Contour) -> String {
+        let r = c.rise
+        guard r >= 1.5 else { return "about level" }
+        return "about \(Int(r.rounded())) semitones, peaking \(c.risePeakPlace)"
+    }
 
     private func accessibility(_ mine: Contour) -> String {
-        func shape(_ c: Contour) -> String { c.rise >= Self.questionRise ? "jumps up, like a question" : "stays level and falls" }
-        return (model.map { "Model pitch \(shape($0)). " } ?? "") + "Your pitch \(shape(mine))."
+        (model.map { "Model pitch: biggest climb \(Self.describe($0)). " } ?? "") + "Your pitch: biggest climb \(Self.describe(mine))."
+    }
+}
+
+extension Contour {
+    /// Where the top of the biggest climb falls in the utterance: "early", "in the middle", "near the end".
+    var risePeakPlace: String {
+        var low = Float.infinity, best: Float = 0, peak = 0
+        for (i, v) in semitones.enumerated() {
+            guard let v else { continue }
+            low = min(low, v)
+            if v - low > best { best = v - low; peak = i }
+        }
+        let f = Float(peak) / Float(max(1, semitones.count - 1))
+        return f < 0.34 ? "early" : f < 0.67 ? "in the middle" : "near the end"
     }
 }

@@ -329,13 +329,16 @@ struct RussianDomain: KnowledgeDomain {
     ///   right with no failed check and one attempt      good ("right first time")
     ///   right after a failed check or extra attempt     hard
     ///   finished by the learner's own judgement         hard (not verified)
+    ///   skipped                                         nil
     ///   copying and tracing done                        good (in the copy modality only)
     static func grade(_ ex: Exercise, _ r: ExerciseResult) -> Grade? {
+        if r.status == .skipped { return nil }
         if r.revealed || r.status == .missed { return .again }
         switch r.status {
-        case .open, .missed: return r.status == .missed ? .again : nil
+        case .open, .missed, .skipped: return r.status == .missed ? .again : nil
         case .correct:
             if r.assisted == true { return nil }
+            if r.selfAssessed == true { return .hard }
             return r.isRightFirstTime ? .good : .hard
         case .done:
             switch ex.kind {
@@ -370,7 +373,7 @@ struct RussianDomain: KnowledgeDomain {
             guard let target = ex.text else { return [] }
             return wordSubstitutions(target, response, channel: .speech)
         case .dictation, .translate, .fill, .copy, .trace:
-            guard let target = ex.target, !RussianText.answerMatches(response, target) else { return [] }
+            guard let target = ex.target, !RussianText.answerMatches(response, target, subjectDrop: ex.kind == .translate) else { return [] }
             let words = wordSubstitutions(target, response, channel: .writing)
             return words.isEmpty ? letterSubstitutions(target, response) : words
         default:
@@ -440,7 +443,7 @@ struct RussianDomain: KnowledgeDomain {
         // A response carries confusions only the first time it is logged: on the call that made it.
         // A right answer (including "I wrote it right" over a misreading) and finished practice say nothing about confusion.
         let fresh = tried || a.backfill
-        let wrongish = a.after.status != .correct && (a.after.status != .done || ex.kind == .readAloud)
+        let wrongish = a.after.status != .correct && a.after.status != .skipped && (a.after.status != .done || ex.kind == .readAloud)
         let confusions = fresh && wrongish ? response.map { confusions(ex, response: $0) } ?? [] : []
         let item = "\(a.page.id)#\(a.index)"
         // Outcomes have one id per round, so a reconstructed one and a live one can't both count.

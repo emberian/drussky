@@ -22,7 +22,7 @@ enum InkReader {
     /// Recognizers differ between devices and OS versions, so several presentations are tried
     /// in turn and the first that reads as the answer wins; if none does, the most common
     /// reading is reported.
-    static func read(_ drawing: PKDrawing, target: String) async -> Reading? {
+    static func read(_ drawing: PKDrawing, target: String, subjectDrop: Bool = false) async -> Reading? {
         guard !drawing.strokes.isEmpty else { return nil }
         let single = RussianText.comparable(target).count == 1
         let passes: [Pass] = single
@@ -39,7 +39,7 @@ enum InkReader {
             let candidates = await recognize(cg, hint: hint, accurate: pass.accurate, correction: pass.correction)
             all += candidates.filter { !all.contains($0) }
             if let hit = candidates.first(where: { single ? (pass.tiles > 1 ? majority($0, of: target) : RussianText.matches($0, target))
-                                                          : RussianText.answerMatches($0, target) }) {
+                                                          : RussianText.answerMatches($0, target, subjectDrop: subjectDrop) }) {
                 return Reading(best: single ? String(hit.prefix(1)) : hit, candidates: all, matches: true)
             }
         }

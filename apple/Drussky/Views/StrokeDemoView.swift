@@ -165,14 +165,15 @@ struct FormationHintLine: View {
     }
 }
 
-/// "Watch it written": plays (or replays) the stroke demo on the letter's line.
+/// "Watch it printed": plays (or replays) the stroke demo on the letter's line. The stroke
+/// models are hand-printed letters, so the button says so; there are no cursive models yet.
 struct WatchStrokesButton: View {
     let demo: StrokeDemo
 
     var body: some View {
         let playing = demo.startedAt != nil
         Button { demo.play() } label: {
-            Label(playing ? "Again" : "Watch it written", systemImage: playing ? "arrow.counterclockwise" : "pencil.and.scribble")
+            Label(playing ? "Again" : "Watch it printed", systemImage: playing ? "arrow.counterclockwise" : "pencil.and.scribble")
                 .font(Theme.label(14))
                 .padding(.horizontal, 12).padding(.vertical, 8)
                 .foregroundStyle(Theme.redPen)
@@ -181,5 +182,6 @@ struct WatchStrokesButton: View {
         .buttonStyle(.plain)
         .fixedSize()
         .accessibilityIdentifier("watch-strokes")
+        .accessibilityHint("Shows how the printed letter is formed, stroke by stroke")
     }
 }

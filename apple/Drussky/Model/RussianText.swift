@@ -90,27 +90,71 @@ enum RussianText {
         })
     }
 
-    /// True when handwriting practice reads as the target written one or more times
-    /// (for example "Аа Аа" for А): every letter read belongs to the target.
+    /// True when handwriting practice reads as the target written whole, in order, one or more
+    /// times ("Аа Аа" for А, "мамамама" for мама). A part ("ам"), a rearrangement ("ток" for
+    /// кот) or extra letters don't count.
     static func isRepetition(_ heard: String, of target: String) -> Bool {
-        let wanted = Set(comparable(target).filter { !$0.isWhitespace })
-        let got = comparable(heard).filter { !$0.isWhitespace }
-        return !got.isEmpty && !wanted.isEmpty && got.allSatisfy { wanted.contains($0) } && wanted.isSubset(of: Set(got))
+        let unit = Array(comparable(target).filter { !$0.isWhitespace })
+        let got = Array(comparable(heard).filter { !$0.isWhitespace })
+        guard !unit.isEmpty, !got.isEmpty, got.count % unit.count == 0 else { return false }
+        return stride(from: 0, to: got.count, by: unit.count).allSatisfy { Array(got[$0..<($0 + unit.count)]) == unit }
     }
 
     static let pronouns: Set<String> = ["я", "ты", "он", "она", "оно", "мы", "вы", "они"]
 
-    /// Written answers: exact match, or the same with/without a leading subject pronoun
-    /// (Russian drops it freely: "читаю" and "я читаю" are both "I am reading").
-    static func answerMatches(_ heard: String, _ target: String) -> Bool {
+    /// Verb endings each subject pronoun agrees with (present/future and past).
+    private static let agreement: [String: [String]] = [
+        "я": ["ю", "у", "л", "ла"], "ты": ["ешь", "ёшь", "ишь", "л", "ла"],
+        "он": ["ет", "ёт", "ит", "л"], "она": ["ет", "ёт", "ит", "ла"], "оно": ["ет", "ёт", "ит", "ло"],
+        "мы": ["ем", "ём", "им", "ли"], "вы": ["ете", "ёте", "ите", "ли"], "они": ["ют", "ут", "ят", "ат", "ли"],
+    ]
+
+    /// "я читаю" → "читаю": a subject pronoun before a verb that agrees with it, which Russian
+    /// may drop. nil for anything else ("ты кот" is not "кот"; "ты читаю" agrees with nothing).
+    static func droppingSubjectPronoun(_ s: String) -> String? {
+        let words = comparable(s).split(separator: " ").map(String.init)
+        guard words.count == 2 || words.count == 3, let pronoun = words.first, let endings = agreement[pronoun] else { return nil }
+        let verbIndex = words[1] == "не" && words.count == 3 ? 2 : 1
+        let verb = words[verbIndex].replacingOccurrences(of: "ё", with: "е")
+        guard verb.count > 2, endings.contains(where: { verb.hasSuffix($0.replacingOccurrences(of: "ё", with: "е")) }) else { return nil }
+        return words.dropFirst().joined(separator: " ")
+    }
+
+    /// Written answers: the answer itself. With `subjectDrop` (translating from English, where
+    /// "I am reading" may be "читаю" or "я читаю"), also with or without an agreeing subject
+    /// pronoun. Never for dictation, where the utterance itself is the answer.
+    static func answerMatches(_ heard: String, _ target: String, subjectDrop: Bool = false) -> Bool {
         if matches(heard, target) || matches(heard.lowercased(), target) { return true }
-        func dropPronoun(_ s: String) -> String? {
-            let words = comparable(s).split(separator: " ")
-            guard words.count > 1, pronouns.contains(String(words[0])) else { return nil }
-            return words.dropFirst().joined(separator: " ")
-        }
-        if let t = dropPronoun(target), matches(heard, t) { return true }
-        if let h = dropPronoun(heard), matches(h, target) { return true }
+        guard subjectDrop else { return false }
+        if let t = droppingSubjectPronoun(target), matches(heard, t) { return true }
+        if let h = droppingSubjectPronoun(heard), matches(h, target) { return true }
         return false
     }
+
+    // MARK: Audio identity
+
+    /// Question words (and forms) that, opening a question, give it a falling contour (IK-2).
+    static let questionWords: Set<String> = Set(("кто кого кому кем ком что чего чему чем чём где куда откуда когда почему зачем "
+        + "отчего как какой какая какое какие какого каком какую каким каких какому чей чья чьё чьи сколько который "
+        + "которая которое которые").split(separator: " ").map(String.init))
+    private static let leadWords: Set<String> = Set("а и но ну так о об обо с со в во на к ко у от до из за по для про"
+        .split(separator: " ").map(String.init))
+
+    /// A question said with a rise (yes/no, "А ты?"): it ends in "?" and no question word opens
+    /// it. Its recording differs from the statement with the same words; a question-word
+    /// question falls like a statement. (Mirrors scripts/validate_course.py rising_question.)
+    static func isRisingQuestion(_ s: String) -> Bool {
+        let trimmed = unstressed(s).replacingOccurrences(of: "+", with: "")
+            .trimmingCharacters(in: CharacterSet(charactersIn: "»\"”) \n"))
+        guard trimmed.hasSuffix("?") else { return false }
+        let body = String(trimmed.dropLast())
+        let last = body.components(separatedBy: CharacterSet(charactersIn: ".!?…")).last ?? body
+        var words = key(last).split(separator: " ").map(String.init)
+        while let w = words.first, leadWords.contains(w) { words.removeFirst() }
+        return !(words.first.map(questionWords.contains) ?? false)
+    }
+
+    /// The identity of a recording: `key` plus "?" for a rising question, so "Э́то чай?" and
+    /// "Э́то чай." are different clips. (Mirrors validate_course.py audio_key.)
+    static func audioKey(_ s: String) -> String { key(s) + (isRisingQuestion(s) ? "?" : "") }
 }

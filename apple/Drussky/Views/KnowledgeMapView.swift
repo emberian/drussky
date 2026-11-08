@@ -184,8 +184,16 @@ struct KnowledgeMap: View {
         .onTapGesture(coordinateSpace: .local) { p in
             if let id = layout.node(at: p) { selected = id }
         }
-        .accessibilityElement(children: .ignore)
+        // The canvas has no elements of its own: VoiceOver gets the same nodes as a list of
+        // buttons, each with its recall, opening the same history.
+        .accessibilityElement(children: .contain)
         .accessibilityLabel("Knowledge map: \(layout.nodes.filter { ($0.strength ?? 0) >= 0.5 }.count) things you can recall now")
+        .accessibilityChildren {
+            ForEach(layout.nodes, id: \.id) { node in
+                Button(node.label) { selected = node.id }
+                    .accessibilityValue(node.strength.map { "recall \(Int(($0 * 100).rounded())) percent" } ?? "not practised")
+            }
+        }
     }
 
     private func draw(layout: MapLayout, edges: [LearningCore.Edge], in ctx: inout GraphicsContext) {

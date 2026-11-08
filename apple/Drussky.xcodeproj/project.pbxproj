@@ -38,6 +38,7 @@
 		690AD36C797DD631CEBEB327 /* IntonationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D2B1276836F39A113FCB1E /* IntonationView.swift */; };
 		69BCF5C4C118382F269649E1 /* SoundPairView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2FBD2C1A4D69EEC95A4BF1 /* SoundPairView.swift */; };
 		6A542EBFCECD40693C6EE613 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B358D7400C07670977C09B /* Graph.swift */; };
+		6CEAD89FBC51628442C83C12 /* CheckingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F1EC16BC584C5EB910470F /* CheckingTests.swift */; };
 		7A9309980F32D1410CC4B436 /* Book+Attempts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84A8DF3FC11034F6E5A0FB /* Book+Attempts.swift */; };
 		7B7B3708DF0CE9C452DE40F7 /* PageWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EF908D6FA69AE1C9862EBA /* PageWriter.swift */; };
 		807FC977AACFA132255E77C8 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD9033F35F4F9C1AE5974BD /* AppState.swift */; };
@@ -57,6 +58,7 @@
 		B642A68EF4FACF87C704635A /* LaunchProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FF00557E4301350608DB9 /* LaunchProbe.swift */; };
 		B857765E8476BD471932FB86 /* LearningCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 144663A43664AFA42BFFB0E4 /* LearningCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC4BD4EC630AE39955A764B6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8667B929B9319AC53CBBAA /* PageView.swift */; };
+		BC686E884A403F49A536CC1C /* ScaledFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B377DF5FEFE4EE9A12E4DB /* ScaledFont.swift */; };
 		BF985A5B60A524FAB486B2BA /* LearningCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 144663A43664AFA42BFFB0E4 /* LearningCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C3DFCFFDA2985CE3CFF4FB1B /* InkWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC15B124F9AE9C9FE24C1A /* InkWriter.swift */; };
 		C7500491DCE324EF0FE52467 /* strokes.json in Resources */ = {isa = PBXBuildFile; fileRef = B9BFAF35608759712621C94D /* strokes.json */; };
@@ -199,6 +201,8 @@
 		DC2183BBBE99C1790444D983 /* QA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QA.swift; sourceTree = "<group>"; };
 		DE2FBD2C1A4D69EEC95A4BF1 /* SoundPairView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPairView.swift; sourceTree = "<group>"; };
 		E54B2965E0DECBAB5F248B24 /* Scheduling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduling.swift; sourceTree = "<group>"; };
+		E5F1EC16BC584C5EB910470F /* CheckingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckingTests.swift; sourceTree = "<group>"; };
+		E7B377DF5FEFE4EE9A12E4DB /* ScaledFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledFont.swift; sourceTree = "<group>"; };
 		E9B8787FE5BD39DD4C776BD8 /* InkReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkReader.swift; sourceTree = "<group>"; };
 		E9CAF74155006B1914D2F22E /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		EC2D2061E2C5FDFFA51D36EF /* OFL-MarckScript.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "OFL-MarckScript.txt"; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 		06305DCDBD604A16CF5D89E8 /* DrusskyTests */ = {
 			isa = PBXGroup;
 			children = (
+				E5F1EC16BC584C5EB910470F /* CheckingTests.swift */,
 				EFB7D30DEF9D3822201CE244 /* DrusskyTests.swift */,
 				88A41A0388A9800487C69809 /* FormationCoachTests.swift */,
 				3AA5D8D879AB04BFB06ECB4E /* hershey-ink.json */,
@@ -295,6 +300,7 @@
 				4B8667B929B9319AC53CBBAA /* PageView.swift */,
 				2AD7AA6ADA8848A5C762E9FC /* RecoveryView.swift */,
 				97D974078BE264B301B0782B /* RhythmView.swift */,
+				E7B377DF5FEFE4EE9A12E4DB /* ScaledFont.swift */,
 				DE2FBD2C1A4D69EEC95A4BF1 /* SoundPairView.swift */,
 				37192A6446B8BCE506389373 /* StrokeDemoView.swift */,
 				D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */,
@@ -652,6 +658,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CEAD89FBC51628442C83C12 /* CheckingTests.swift in Sources */,
 				F73DDD756EE8C9DD99177420 /* DrusskyTests.swift in Sources */,
 				916843E48C3BC25493F884D5 /* FormationCoachTests.swift in Sources */,
 				138DD78B9EA241EB4D4DDDA4 /* KnowledgeTests.swift in Sources */,
@@ -695,6 +702,7 @@
 				88A1445927806777FE3EB2A2 /* RhythmView.swift in Sources */,
 				FB356AD0BFE81A45548E6B00 /* RussianDomain.swift in Sources */,
 				5FB598889AC9BDE297B90C65 /* RussianText.swift in Sources */,
+				BC686E884A403F49A536CC1C /* ScaledFont.swift in Sources */,
 				69BCF5C4C118382F269649E1 /* SoundPairView.swift in Sources */,
 				F5372D0ACA158ED77B8F7480 /* SoundPairs.swift in Sources */,
 				D3A0E99EAF001AFDB22943D0 /* SpeechCheck.swift in Sources */,

@@ -43,7 +43,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "a-my-chto-39f7a2.m4a": {
-  "key": "а мы что",
+  "key": "а мы что?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -62,7 +62,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "a-my-kak-zhe-edda80.m4a": {
-  "key": "а мы как же",
+  "key": "а мы как же?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -92,7 +92,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "a-ty-gde-seychas-fc61ee.m4a": {
-  "key": "а ты где сейчас",
+  "key": "а ты где сейчас?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -111,7 +111,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "a-u-tebya-ea1ea8.m4a": {
-  "key": "а у тебя",
+  "key": "а у тебя?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "А у теб+я?",
@@ -1721,7 +1721,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "dobroe-utro-kofe-734dd3.m4a": {
-  "key": "доброе утро кофе",
+  "key": "доброе утро кофе?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Д+оброе +утро! К+офе?",
@@ -2313,7 +2313,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eshchyo-raz-kto-tvoy-otets-647396.m4a": {
-  "key": "ещё раз кто твой отец",
+  "key": "ещё раз кто твой отец?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -2424,7 +2424,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "est-chto-nibud-chto-ty-khochesh-kupit-55da9f.m4a": {
-  "key": "есть что нибудь что ты хочешь купить",
+  "key": "есть что нибудь что ты хочешь купить?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -2443,7 +2443,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "est-kto-v-komnate-8fcf17.m4a": {
-  "key": "есть кто в комнате",
+  "key": "есть кто в комнате?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -2462,7 +2462,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "est-mesto-kuda-by-ty-khotel-poyti-4f5ed4.m4a": {
-  "key": "есть место куда бы ты хотел пойти",
+  "key": "есть место куда бы ты хотел пойти?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -2613,8 +2613,19 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "eto-chay-ec0117.m4a": {
+  "key": "это чай?",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это ч+ай?",
+  "orig": ".local/drussky-audio/wav/eto-chay-ec0117-505109.wav",
+  "orig_sha1": "1018c9f3be8b72b9c7d3d8c81979f347109e2707",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "eto-chto-to-novoe-dbdcf1.m4a": {
-  "key": "это что то новое",
+  "key": "это что то новое?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -2633,7 +2644,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eto-deystvitelno-stoit-togo-43c6c7.m4a": {
-  "key": "это действительно стоит того",
+  "key": "это действительно стоит того?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -2652,7 +2663,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eto-dlya-menya-c369e9.m4a": {
-  "key": "это для меня",
+  "key": "это для меня?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -2698,7 +2709,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eto-iz-frantsii-400fe5.m4a": {
-  "key": "это из франции",
+  "key": "это из франции?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -3037,7 +3048,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eto-novoe-okno-a2c744.m4a": {
-  "key": "это новое окно",
+  "key": "это новое окно?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "+Это н+овое окн+о?",
@@ -3078,7 +3089,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eto-po-frantsuzski-42f78b.m4a": {
-  "key": "это по французски",
+  "key": "это по французски?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -3094,6 +3105,17 @@
   "orig": ".local/drussky-library/tatoeba/public/raw/479793.mp3",
   "orig_sha1": "27bfba92af91b01150046a2f19848fe31899717d",
   "orig_url": "https://tatoeba.org/en/audio/download/479793",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "eto-pravda-26c6de.m4a": {
+  "key": "это правда?",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Это пр+авда?",
+  "orig": ".local/drussky-audio/wav/eto-pravda-26c6de-d868fe.wav",
+  "orig_sha1": "c250b62dd69bbce6bb5bdc43b525bbc514e6aac9",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eto-pravda-83e31e.m4a": {
@@ -3226,7 +3248,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eto-tvoya-lozhka-e8a4de.m4a": {
-  "key": "это твоя ложка",
+  "key": "это твоя ложка?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "+Это тво+я л+ожка?",
@@ -3237,7 +3259,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eto-tvoyo-okno-2f9363.m4a": {
-  "key": "это твоё окно",
+  "key": "это твоё окно?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "+Это тво+ё окн+о?",
@@ -3248,7 +3270,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "eto-zhe-tak-rabotaet-da-a1583b.m4a": {
-  "key": "это же так работает да",
+  "key": "это же так работает да?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -3985,7 +4007,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "idyot-li-dozhd-6e6be5.m4a": {
-  "key": "идёт ли дождь",
+  "key": "идёт ли дождь?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -4099,7 +4121,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "kak-dela-khorosho-spasibo-a-u-tebya-698da6.m4a": {
-  "key": "как дела хорошо спасибо а у тебя",
+  "key": "как дела хорошо спасибо а у тебя?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "К+ак дел+а? Хорош+о, спас+ибо. А у теб+я?",
@@ -4357,7 +4379,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "khochesh-chay-bc52f5.m4a": {
-  "key": "хочешь чай",
+  "key": "хочешь чай?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Х+очешь ч+ай?",
@@ -4368,7 +4390,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "khochesh-chtoby-ya-kupil-eto-tebe-3ef3b0.m4a": {
-  "key": "хочешь чтобы я купил это тебе",
+  "key": "хочешь чтобы я купил это тебе?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -4387,7 +4409,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "khochesh-kofe-a29b49.m4a": {
-  "key": "хочешь кофе",
+  "key": "хочешь кофе?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Х+очешь к+офе?",
@@ -4545,7 +4567,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "khotite-chtoby-ya-kupil-eto-dlya-vas-b83392.m4a": {
-  "key": "хотите чтобы я купил это для вас",
+  "key": "хотите чтобы я купил это для вас?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -4708,6 +4730,17 @@
   "input": "к+офе с молок+ом.",
   "orig": ".local/drussky-audio/wav/kofe-s-molokom-34cf55-15b7e9.wav",
   "orig_sha1": "313a1ff3ccd164936eb6b0091e692abfef29435f",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "kofe-s-molokom-73f144.m4a": {
+  "key": "кофе с молоком?",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "К+офе с молок+ом?",
+  "orig": ".local/drussky-audio/wav/kofe-s-molokom-73f144-e00150.wav",
+  "orig_sha1": "8d218f7cb3aee4800757d821ffb1065cea07efb7",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -5887,7 +5920,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "mne-kofe-a-tebe-chay-d314c0.m4a": {
-  "key": "мне кофе а тебе чай",
+  "key": "мне кофе а тебе чай?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Мн+е к+офе, а теб+е ч+ай?",
@@ -5998,7 +6031,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "mogu-vam-pomoch-6a0894.m4a": {
-  "key": "могу вам помочь",
+  "key": "могу вам помочь?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -6273,7 +6306,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "mozhno-eshchyo-b3a7e4.m4a": {
-  "key": "можно ещё",
+  "key": "можно ещё?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "М+ожно ещ+ё?",
@@ -6284,7 +6317,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "mozhno-li-vam-pomoch-6bb2db.m4a": {
-  "key": "можно ли вам помочь",
+  "key": "можно ли вам помочь?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -6512,7 +6545,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "my-mozhem-pogovorit-ob-etom-na-ulitse-0344e1.m4a": {
-  "key": "мы можем поговорить об этом на улице",
+  "key": "мы можем поговорить об этом на улице?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -7009,7 +7042,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ne-khochesh-poyti-vmeste-5dc605.m4a": {
-  "key": "не хочешь пойти вместе",
+  "key": "не хочешь пойти вместе?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -7279,7 +7312,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ni-u-kogo-net-voprosov-5b69d6.m4a": {
-  "key": "ни у кого нет вопросов",
+  "key": "ни у кого нет вопросов?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -8047,7 +8080,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "on-govorit-po-frantsuzski-aa7936.m4a": {
-  "key": "он говорит по французски",
+  "key": "он говорит по французски?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -9025,7 +9058,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "pomoch-tebe-s-etim-2c50d8.m4a": {
-  "key": "помочь тебе с этим",
+  "key": "помочь тебе с этим?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11194,7 +11227,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tak-ty-deystvitelno-etogo-khochesh-381f08.m4a": {
-  "key": "так ты действительно этого хочешь",
+  "key": "так ты действительно этого хочешь?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11213,7 +11246,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tak-ty-ikh-znal-7ddfac.m4a": {
-  "key": "так ты их знал",
+  "key": "так ты их знал?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11232,7 +11265,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tak-ty-uchitel-898864.m4a": {
-  "key": "так ты учитель",
+  "key": "так ты учитель?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11251,7 +11284,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tak-ty-za-etim-syuda-prishyol-763708.m4a": {
-  "key": "так ты за этим сюда пришёл",
+  "key": "так ты за этим сюда пришёл?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11270,7 +11303,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tak-ty-znaesh-gde-ego-nayti-a9b543.m4a": {
-  "key": "так ты знаешь где его найти",
+  "key": "так ты знаешь где его найти?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11289,7 +11322,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tak-ty-znaesh-pochemu-eto-proizoshlo-68e76f.m4a": {
-  "key": "так ты знаешь почему это произошло",
+  "key": "так ты знаешь почему это произошло?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11308,7 +11341,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tak-vy-deystvitelno-etogo-khotite-d36fe3.m4a": {
-  "key": "так вы действительно этого хотите",
+  "key": "так вы действительно этого хотите?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11327,7 +11360,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tak-vy-poetomu-syuda-prishli-7e9279.m4a": {
-  "key": "так вы поэтому сюда пришли",
+  "key": "так вы поэтому сюда пришли?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11437,7 +11470,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tebe-eto-o-chyom-to-govorit-519a30.m4a": {
-  "key": "тебе это о чём то говорит",
+  "key": "тебе это о чём то говорит?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11494,7 +11527,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tebe-nravitsya-eto-delat-fc029f.m4a": {
-  "key": "тебе нравится это делать",
+  "key": "тебе нравится это делать?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11513,7 +11546,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tebe-nravitsya-frantsuzskiy-ce31c6.m4a": {
-  "key": "тебе нравится французский",
+  "key": "тебе нравится французский?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11532,7 +11565,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tebe-ona-eshchyo-nuzhna-431766.m4a": {
-  "key": "тебе она ещё нужна",
+  "key": "тебе она ещё нужна?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11551,7 +11584,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tebe-ono-eshchyo-nuzhno-c2f0e2.m4a": {
-  "key": "тебе оно ещё нужно",
+  "key": "тебе оно ещё нужно?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -11570,7 +11603,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "tebe-vsyo-eto-nuzhno-9225d2.m4a": {
-  "key": "тебе всё это нужно",
+  "key": "тебе всё это нужно?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12116,7 +12149,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-byla-vchera-doma-ab4aaf.m4a": {
-  "key": "ты была вчера дома",
+  "key": "ты была вчера дома?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12162,7 +12195,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-dumaesh-chto-eto-fakt-a4acf6.m4a": {
-  "key": "ты думаешь что это факт",
+  "key": "ты думаешь что это факт?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Т+ы д+умаешь, чт+о +это ф+акт?",
@@ -12173,7 +12206,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-dumaesh-chto-eto-pravda-e0c8ca.m4a": {
-  "key": "ты думаешь что это правда",
+  "key": "ты думаешь что это правда?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Т+ы д+умаешь, чт+о +это пр+авда?",
@@ -12195,7 +12228,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-edesh-domoy-541d57.m4a": {
-  "key": "ты едешь домой",
+  "key": "ты едешь домой?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Т+ы +едешь дом+ой?",
@@ -12206,7 +12239,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-ego-zdes-kupil-396e19.m4a": {
-  "key": "ты его здесь купил",
+  "key": "ты его здесь купил?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12225,7 +12258,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-etogo-ne-znal-ee4cb9.m4a": {
-  "key": "ты этого не знал",
+  "key": "ты этого не знал?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12288,7 +12321,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-khochesh-sup-80b76a.m4a": {
-  "key": "ты хочешь суп",
+  "key": "ты хочешь суп?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Т+ы х+очешь с+уп?",
@@ -12299,7 +12332,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-mozhesh-chitat-po-frantsuzski-50db0d.m4a": {
-  "key": "ты можешь читать по французски",
+  "key": "ты можешь читать по французски?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12318,7 +12351,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-mozhesh-im-doveryat-818f90.m4a": {
-  "key": "ты можешь им доверять",
+  "key": "ты можешь им доверять?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12337,7 +12370,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-mozhesh-nam-pomoch-ili-net-4c5117.m4a": {
-  "key": "ты можешь нам помочь или нет",
+  "key": "ты можешь нам помочь или нет?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12389,7 +12422,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-ne-khochesh-spat-56b1a5.m4a": {
-  "key": "ты не хочешь спать",
+  "key": "ты не хочешь спать?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12408,7 +12441,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-ne-mozhesh-poyti-149e95.m4a": {
-  "key": "ты не можешь пойти",
+  "key": "ты не можешь пойти?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12446,7 +12479,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-nichego-ne-zabyl-df3757.m4a": {
-  "key": "ты ничего не забыл",
+  "key": "ты ничего не забыл?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12465,7 +12498,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-po-frantsuzski-to-govorish-a51222.m4a": {
-  "key": "ты по французски то говоришь",
+  "key": "ты по французски то говоришь?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12483,6 +12516,17 @@
   "orig_url": "https://tatoeba.org/en/audio/download/1278726",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "ty-ponimaesh-03d9e1.m4a": {
+  "key": "ты понимаешь?",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Т+ы поним+аешь?",
+  "orig": ".local/drussky-audio/wav/ty-ponimaesh-03d9e1-a0833b.wav",
+  "orig_sha1": "db7303f380fc78cde1921da1258dc03c2d53a453",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "ty-ponimaesh-996f26.m4a": {
   "key": "ты понимаешь",
   "kind": "ai_generated_speech",
@@ -12495,7 +12539,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-ponimaesh-po-russki-60d9c8.m4a": {
-  "key": "ты понимаешь по русски",
+  "key": "ты понимаешь по русски?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Т+ы поним+аешь пор+усски?",
@@ -12506,7 +12550,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-s-nami-7ff94a.m4a": {
-  "key": "ты с нами",
+  "key": "ты с нами?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12544,7 +12588,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-so-mnoy-8e9605.m4a": {
-  "key": "ты со мной",
+  "key": "ты со мной?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12590,7 +12634,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-videl-eto-37a522.m4a": {
-  "key": "ты видел это",
+  "key": "ты видел это?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12620,7 +12664,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-vidish-raketu-085bbe.m4a": {
-  "key": "ты видишь ракету",
+  "key": "ты видишь ракету?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Т+ы в+идишь рак+ету?",
@@ -12631,7 +12675,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-zhe-ponimaesh-chto-ya-govoryu-aae005.m4a": {
-  "key": "ты же понимаешь что я говорю",
+  "key": "ты же понимаешь что я говорю?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12649,6 +12693,17 @@
   "orig_url": "https://tatoeba.org/en/audio/download/1091549",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "ty-znaesh-d1edb5.m4a": {
+  "key": "ты знаешь?",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "т+ы зн+аешь?",
+  "orig": ".local/drussky-audio/wav/ty-znaesh-d1edb5-ed02db.wav",
+  "orig_sha1": "94cabc769faf3c5c209c25c05170438f8b1deb4f",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "ty-znaesh-f95e91.m4a": {
   "key": "ты знаешь",
   "kind": "ai_generated_speech",
@@ -12661,7 +12716,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-znaesh-frantsuzskiy-5d22c1.m4a": {
-  "key": "ты знаешь французский",
+  "key": "ты знаешь французский?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12680,7 +12735,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-znaesh-gde-sol-f0cc32.m4a": {
-  "key": "ты знаешь где соль",
+  "key": "ты знаешь где соль?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "Т+ы зн+аешь, гд+е с+оль?",
@@ -12691,7 +12746,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ty-znaesh-kto-ona-takaya-dab71b.m4a": {
-  "key": "ты знаешь кто она такая",
+  "key": "ты знаешь кто она такая?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -12950,7 +13005,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "u-tebya-est-chay-a637b4.m4a": {
-  "key": "у тебя есть чай",
+  "key": "у тебя есть чай?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "У теб+я +есть ч+ай?",
@@ -12980,7 +13035,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "u-tebya-est-khleb-f00b7c.m4a": {
-  "key": "у тебя есть хлеб",
+  "key": "у тебя есть хлеб?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "У теб+я +есть хл+еб?",
@@ -12991,7 +13046,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "u-tebya-est-kofe-93ec54.m4a": {
-  "key": "у тебя есть кофе",
+  "key": "у тебя есть кофе?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "У теб+я +есть к+офе?",
@@ -13043,7 +13098,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "u-tebya-net-chaya-df17b2.m4a": {
-  "key": "у тебя нет чая",
+  "key": "у тебя нет чая?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "У теб+я н+ет ч+ая?",
@@ -13054,7 +13109,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "u-tebya-net-khleba-10793c.m4a": {
-  "key": "у тебя нет хлеба",
+  "key": "у тебя нет хлеба?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "У теб+я н+ет хл+еба?",
@@ -13065,7 +13120,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "u-tebya-net-soli-5b1e4b.m4a": {
-  "key": "у тебя нет соли",
+  "key": "у тебя нет соли?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "У теб+я н+ет с+оли?",
@@ -13076,7 +13131,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "u-tebya-seychas-est-vremya-f46ee4.m4a": {
-  "key": "у тебя сейчас есть время",
+  "key": "у тебя сейчас есть время?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -13095,7 +13150,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "u-vas-seychas-dozhd-41e572.m4a": {
-  "key": "у вас сейчас дождь",
+  "key": "у вас сейчас дождь?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -13114,7 +13169,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "u-vas-vsyo-est-4916c7.m4a": {
-  "key": "у вас всё есть",
+  "key": "у вас всё есть?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -14040,7 +14095,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "vsyo-na-meste-95a2c8.m4a": {
-  "key": "всё на месте",
+  "key": "всё на месте?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -14059,7 +14114,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "vy-byli-vchera-doma-9a849c.m4a": {
-  "key": "вы были вчера дома",
+  "key": "вы были вчера дома?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -14098,6 +14153,17 @@
   "orig_sha1": "e306249a53a2a6eb3ed45cfa64ab62bf49b6a420",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "vy-chitaete-6e0e6e.m4a": {
+  "key": "вы читаете?",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "В+ы чит+аете?",
+  "orig": ".local/drussky-audio/wav/vy-chitaete-6e0e6e-fde5c1.wav",
+  "orig_sha1": "69350dcb0083d32960e224ef87e8144d70fbeaae",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "vy-dumaete-d11ed3.m4a": {
   "key": "вы думаете",
   "from": "crates/rufren-app/assets/foundations/foundation-a20-you-pl-think.wav",
@@ -14129,7 +14195,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "vy-ne-khotite-zdes-rabotat-863da5.m4a": {
-  "key": "вы не хотите здесь работать",
+  "key": "вы не хотите здесь работать?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -14148,7 +14214,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "vy-ne-znaete-ikh-ne-tak-li-636727.m4a": {
-  "key": "вы не знаете их не так ли",
+  "key": "вы не знаете их не так ли?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -14167,7 +14233,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "vy-ponimaete-chto-ya-khochu-skazat-2be0e5.m4a": {
-  "key": "вы понимаете что я хочу сказать",
+  "key": "вы понимаете что я хочу сказать?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -14200,6 +14266,17 @@
   "input": "в+ы зн+аете.",
   "orig": ".local/drussky-audio/wav/vy-znaete-4857d7-b01389.wav",
   "orig_sha1": "cc4f4a9191e5724cc9148d637d42a545bb2b4085",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "vy-znaete-9eacf2.m4a": {
+  "key": "вы знаете?",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "В+ы зн+аете?",
+  "orig": ".local/drussky-audio/wav/vy-znaete-9eacf2-30d7c0.wav",
+  "orig_sha1": "00ffd752e8e7d3827665e4d6da51d2a1b75b2d90",
   "voice": "xenia",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
@@ -14671,7 +14748,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ya-ego-znayu-2cba6d.m4a": {
-  "key": "я его знаю",
+  "key": "я его знаю?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -15094,7 +15171,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ya-mogu-ostavit-soobshchenie-f971f3.m4a": {
-  "key": "я могу оставить сообщение",
+  "key": "я могу оставить сообщение?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -15263,7 +15340,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ya-ne-znayu-a-ty-znaesh-2e0058.m4a": {
-  "key": "я не знаю а ты знаешь",
+  "key": "я не знаю а ты знаешь?",
   "kind": "ai_generated_speech",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
   "input": "+Я не зн+аю. А т+ы зн+аешь?",
@@ -15704,7 +15781,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "ya-tut-odin-f0f89d.m4a": {
-  "key": "я тут один",
+  "key": "я тут один?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",
@@ -16374,7 +16451,7 @@
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "znaete-skolko-vremya-b65826.m4a": {
-  "key": "знаете сколько время",
+  "key": "знаете сколько время?",
   "kind": "human_recording",
   "set": "library-sentences",
   "provider": "Tatoeba",

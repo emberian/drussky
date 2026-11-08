@@ -20,7 +20,7 @@ from pathlib import Path
 APPLE = Path(__file__).resolve().parents[1]
 REPO = APPLE.parent
 sys.path.insert(0, str(APPLE / "scripts"))
-from validate_course import key, spoken_strings  # noqa: E402
+from validate_course import audio_key, key, spoken_strings  # noqa: E402
 from audio_store import MACOS_SETTINGS, Silero, commons_url, encode, restore_fields, silero_fields  # noqa: E402
 
 COURSE = APPLE / "Drussky/Resources/course.json"
@@ -94,7 +94,7 @@ def plan():
     course = json.loads(COURSE.read_text())
     wanted = {}
     for s in spoken_strings(course):
-        wanted.setdefault(key(s), s)
+        wanted.setdefault(audio_key(s), s)
     foundation = {}
     manifest = json.loads((FOUNDATION / "manifest.json").read_text())
     kinds = {a["id"]: a.get("provenance", a.get("source_response", {}).get("provenance", {})).get("kind") for a in manifest["assets"]}

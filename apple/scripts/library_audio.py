@@ -20,6 +20,7 @@ APPLE = Path(__file__).resolve().parents[1]
 SET = "library-sentences"
 sys.path.insert(0, str(APPLE / "scripts"))
 from audio_store import restore_fields  # noqa: E402
+from validate_course import audio_key  # noqa: E402
 
 
 def encode(wav, m4a):
@@ -42,6 +43,7 @@ def main():
             raise SystemExit(f"{f} already belongs to another clip")
         if not (audio / f).exists():
             encode(t["wav"], audio / f)
+        t["key"] = audio_key(t["ru"])  # a rising question is not its statement's clip
         if t["key"] not in index:
             index[t["key"]] = f
             added += 1
