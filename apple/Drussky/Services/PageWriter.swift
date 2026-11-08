@@ -174,6 +174,7 @@ enum PageWriter {
         func readable(_ s: String?) -> Bool { readingAnyLetters || lettersOK(s) }
         func nonEmpty(_ s: String?) -> Bool { !(s ?? "").trimmingCharacters(in: .whitespaces).isEmpty }
         switch ex.kind {
+        case .constructionChoice: return nil  // prepared locally, never supplied by the tutor
         case .meet: return nil  // letters are introduced only by the course
         case .explain:
             guard nonEmpty(ex.text), readable(ex.text) else { return nil }

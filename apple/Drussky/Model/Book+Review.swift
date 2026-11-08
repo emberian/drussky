@@ -32,6 +32,8 @@ extension Book {
             page.exercises.indices.compactMap { i in page.results[i].status.isComplete ? nil : page.exercises[i].reviewKey }
         })
         let due = knowledge.model.dueReviews(reviewCandidates(), at: now(), policy: reviewPolicy)
+            // Construction choices come due only while an unseen sentence is left to decide.
+            .filter { $0.id != ConstructionChoice.key || freshConstructionChoices.contains { !ConstructionChoice.reservedForProbe($0) } }
         // Words never yet read in another hand, after everything due (Cursive/CursiveReviews.swift).
         return (due + cursiveSeeds(excluding: Set(due.map(\.id)))).filter { !waiting.contains($0.id) }
     }
@@ -69,6 +71,7 @@ extension Book {
 
     /// The modalities a target's review exercises can actually test.
     func reviewModalities(for key: String) -> Set<Modality> {
+        if key == ConstructionChoice.key { return [.constructionChoice] }
         let (kind, value) = split(key)
         if kind == "letter" {
             guard let letter = course.letter(value) else { return [] }
@@ -84,7 +87,23 @@ extension Book {
     }
 
     /// A review exercise for a target in a modality (nil: a first recall, varied by `variant`).
-    func reviewExercise(for key: String, modality: Modality?, variant: Int) -> Exercise {
+    func reviewExercise(for key: String, modality: Modality?, variant: Int, forProbe: Bool = false) -> Exercise {
+        if key == ConstructionChoice.key {
+            let fresh = freshConstructionChoices.filter { forProbe || !ConstructionChoice.reservedForProbe($0) }
+            guard !fresh.isEmpty else {
+                var note = Exercise(kind: .explain)
+                note.text = "These sentence choices are all in your notebook. Return to their examples."
+                return note
+            }
+            var choice = fresh[abs(variant % fresh.count)]
+            // Rotate the answers too: their position cannot identify the case.
+            let options = choice.options ?? []
+            let offset = abs(variant % max(1, options.count))
+            choice.options = Array(options.dropFirst(offset) + options.prefix(offset))
+            choice.answerIndex = ((choice.answerIndex ?? 0) - offset + options.count) % options.count
+            choice.reviewKey = key
+            return choice
+        }
         let (kind, value) = split(key)
         var ex: Exercise
         if kind == "letter", let letter = course.letter(value) {

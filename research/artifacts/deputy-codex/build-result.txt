@@ -1,0 +1,12 @@
+Final simulator build-for-testing: PASS (arm64 and x86_64).
+App and all test targets compile under Swift 6.
+
+Command, from apple/:
+xcodegen generate
+xcodebuild -project Drussky.xcodeproj -scheme Drussky -sdk iphonesimulator -destination generic/platform=iOS\ Simulator -derivedDataPath .build/deputy CODE_SIGNING_ALLOWED=NO 'OTHER_SWIFT_FLAGS=$(inherited) -disable-sandbox' build-for-testing
+
+Full output: /tmp/drussky-deputy-final-verified-build.log
+
+Simulator execution: BLOCKED before tests ran (CoreSimulator unavailable; destination not found).
+Failure log: /tmp/drussky-deputy-simulator-tests.log
+Screenshots: none.

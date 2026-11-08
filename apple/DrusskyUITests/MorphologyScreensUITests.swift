@@ -22,7 +22,7 @@ final class MorphologyScreensUITests: XCTestCase {
 
     func testWordFamiliesOnTheInsideCover() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-qa-reset", "-qa-complete", "70", "-qa-contents"]
+        app.launchArguments = ["-qa-reset", "-qa-complete", "70", "-qa-contents", "-qa-evidence"]
         app.launch()
         let title = app.staticTexts["Word families"].firstMatch
         XCTAssertTrue(title.waitForExistence(timeout: 20))
@@ -32,7 +32,7 @@ final class MorphologyScreensUITests: XCTestCase {
         attach(app, "families-map")
         app.terminate()
 
-        app.launchArguments = ["-qa-reset", "-qa-complete", "70", "-qa-contents", "-qa-family", "чит"]
+        app.launchArguments = ["-qa-reset", "-qa-complete", "70", "-qa-contents", "-qa-evidence", "-qa-family", "чит"]
         app.launch()
         XCTAssertTrue(app.navigationBars.firstMatch.waitForExistence(timeout: 20))
         sleep(3)

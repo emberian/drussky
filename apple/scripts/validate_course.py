@@ -289,6 +289,34 @@ def check_meaning_before_recall(course, lex_keys):
                         err(f"{p['id']}#{n} {k}", f"recalls {gap} before its meaning was shown (in {r!r})")
 
 
+def check_page_purpose(where, page, body=None):
+    """Composition follows the learning purpose; diary lines remain outside the count.
+    A writing page (the default) is mostly Pencil work (`is_writing`: a tiled paradigm is not)
+    and mixes in hearing and speaking; a reading page is mostly reading tasks; an oral page is
+    mostly listening and speaking with at least one spoken response."""
+    if body is None:
+        body = [e for e in page["exercises"] if e.get("kind") != "diary"]
+    kinds = [e.get("kind") for e in body]
+    purpose = page.get("purpose", "writing")
+    if purpose not in {"writing", "reading", "oral"}:
+        err(where, f"unknown page purpose {purpose!r}")
+        return
+    if purpose == "writing":
+        writing = sum(is_writing(e) for e in body)
+        if writing * 2 <= len(body):
+            err(where, f"writing is {writing}/{len(body)}, not a majority")
+        if not {"listen_pick", "dictation"} & set(kinds):
+            err(where, "no hearing exercise")
+        if "read_aloud" not in kinds:
+            err(where, "no speaking exercise")
+    elif purpose == "reading":
+        if sum(k in {"passage", "read_meaning", "family_guess"} for k in kinds) * 2 <= len(body):
+            err(where, "a reading page needs a majority of reading tasks")
+    elif purpose == "oral":
+        if sum(k in {"read_aloud", "listen_pick"} for k in kinds) * 2 <= len(body) or "read_aloud" not in kinds:
+            err(where, "an oral page needs mostly listening/speaking and at least one spoken response")
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     path = Path(args[0]) if args else DEFAULT
@@ -351,7 +379,7 @@ def main():
         check_stress(u["id"] + ".title/subtitle", u["title"] + " " + (u.get("subtitle") or ""))
         for p in u["pages"]:
             pw = p.get("id")
-            if set(p) - {"id", "title", "intro", "exercises"} or not {"id", "title", "exercises"} <= set(p):
+            if set(p) - {"id", "title", "intro", "exercises", "purpose"} or not {"id", "title", "exercises"} <= set(p):
                 err(pw, f"page keys {sorted(p)}")
             if pw in ids:
                 err(pw, "duplicate id")
@@ -376,14 +404,7 @@ def main():
             body = [e for e in exs if e.get("kind") != "diary"]
             if not 6 <= len(body) <= 10:
                 err(pw, f"{len(body)} exercises (need 6-10)")
-            kinds = [e.get("kind") for e in body]
-            writing = sum(is_writing(e) for e in body)
-            if writing * 2 <= len(body):
-                err(pw, f"writing is {writing}/{len(body)}, not a majority")
-            if not {"listen_pick", "dictation"} & set(kinds):
-                err(pw, "no hearing exercise")
-            if "read_aloud" not in kinds:
-                err(pw, "no speaking exercise")
+            check_page_purpose(pw, p, body)
             for n, e in enumerate(exs, 1):
                 w = f"{pw}#{n} {e.get('kind')}"
                 k = e.get("kind")
@@ -596,13 +617,13 @@ def main():
                     if missing:
                         err(w, f"words not in lexicon: {missing}")
     check_meaning_before_recall(course, lex_keys)
-    # every lexicon entry is produced somewhere (written, said, or picked by ear), and glosses are distinct
+    # Every lexicon entry is used in a task (receptive vocabulary need not be produced). Glosses are distinct.
     produced = []
     for u in course["units"]:
         for p in u["pages"]:
             for e in p["exercises"]:
                 k = e.get("kind")
-                if k in ("trace", "copy", "dictation", "read_aloud"):
+                if k in ("trace", "copy", "dictation", "read_aloud", "read_meaning", "passage"):
                     produced.append(key(e["text"]))
                 elif k in ("translate", "fill"):
                     produced.append(key(e["answer"]))
@@ -621,7 +642,7 @@ def main():
     for wd in lexicon:
         k = key(wd["ru"])
         if not any(f" {k} " in t for t in padded):
-            err(f"lexicon {wd['ru']}", "never produced (no trace/copy/dictation/read_aloud/translate/fill/listen_pick target)")
+            err(f"lexicon {wd['ru']}", "never used in a reading, writing, speaking or listening task")
     glosses = {}
     for wd in lexicon:
         if wd["en"] in glosses:

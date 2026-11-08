@@ -198,3 +198,10 @@ response latency of that answer in milliseconds, when the activity has such a mo
 `calibration` is present once any retention probe has been answered (Probes.swift).
 
 Tests in `LearningCoreTests/` use a toy domain and need no course.
+
+Drussky's reading policy now uses the closure overload of `distance(to:ladder:knows:)`. The core's
+original best-modality API remains available, but is not the Russian reading-readiness policy.
+Drussky filters to direct production of each written form, excluding inferred lemma credit.
+`Probe` also has optional `lastExposure`, `firstAttempt`, `assistance` and `context` provenance.
+These preserve old notebook decoding and distinguish a scheduled delay from time since the last
+logged practice; they do not imply that every real-world exposure was observed.

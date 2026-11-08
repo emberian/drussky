@@ -71,6 +71,7 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     /// checking a built word: shown to tap; saying: cue to voice onset). Becomes the event's
     /// `latencyMs`; reset when the exercise is reopened.
     var responseMs: Int? = nil
+    var baseline: BaselineResponse? = nil
 
     var roundNumber: Int { round ?? 0 }
 
@@ -443,6 +444,7 @@ final class Book {
     }
 
     func reopen(_ ref: ExerciseRef, keptInk: Bool = false) {
+        guard page(id: ref.pageID)?.exercises[safe: ref.index]?.baseline == nil else { return }
         record(ref) { r in
             if r.revealed || r.status == .missed { r.assisted = true }
             if keptInk { r.inkAttempts = (r.inkAttempts ?? 0) + 1 }
@@ -463,6 +465,7 @@ final class Book {
     func memoryKey(for exercise: Exercise) -> String? {
         if let key = exercise.reviewKey { return key }
         switch exercise.kind {
+        case .constructionChoice: return ConstructionChoice.key
         case .meet: return exercise.letter.map { "letter:\($0)" }
         // Only what the learner produced becomes something to recall later.
         case .explain, .readMeaning, .passage, .soundPair: return nil
@@ -568,6 +571,7 @@ final class Book {
         case .readAloud: lines.append("Reading aloud: «\(ex.text ?? "")».")
         case .translate: lines.append("Writing the Russian for “\(ex.en ?? "")” (answer «\(ex.answerText ?? "")»).")
         case .fill: lines.append("Filling the gap: \(ex.before ?? "")___\(ex.after ?? "") — “\(ex.hint ?? "")” (answer «\(ex.answerText ?? "")»).")
+        case .constructionChoice: lines.append("Choosing a noun ending in «\(ex.text ?? "")».")
         case .readMeaning: lines.append("Reading «\(ex.text ?? "")» and choosing its meaning from: \((ex.options ?? []).joined(separator: " / ")).")
         case .passage: lines.append("Reading a passage: «\(ex.text ?? "")» (translation: \(ex.en ?? "none")).")
         case .soundPair: lines.append(ex.say.map { "Hearing «\($0)» and telling it from its minimal pair: \((ex.options ?? []).joined(separator: " / "))." }

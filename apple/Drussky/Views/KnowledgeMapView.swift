@@ -10,7 +10,7 @@ struct KnowledgeSection: View {
     var body: some View {
         let k = book.knowledge
         VStack(alignment: .leading, spacing: 14) {
-            Text("What you know").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
+            Text("Practice traces").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
             Text("Letters, words and patterns glow by how surely you'd recall them today. Red threads join things you've mixed up. Tap any for its history.")
                 .font(.system(size: 15)).foregroundStyle(Theme.muted)
             KnowledgeMap(tracker: k, selected: $selected)
@@ -273,7 +273,7 @@ struct ReadabilityBadge: View {
         VStack(alignment: .trailing, spacing: 0) {
             Text("\(Int((fraction * 100).rounded()))%").font(.system(size: 17, weight: .semibold, design: .rounded))
                 .monospacedDigit().foregroundStyle(Theme.text)
-            Text("you know").font(.system(size: 11)).foregroundStyle(Theme.muted)
+            Text(ReadingEvidence.label(for: fraction)).font(.system(size: 11)).foregroundStyle(Theme.muted)
         }
         .accessibilityElement(children: .combine)
     }

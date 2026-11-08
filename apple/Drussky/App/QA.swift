@@ -80,6 +80,10 @@ enum QA {
            let text = Shelves.library.texts(onShelf: shelf.id).first(where: { $0.rung == n }) {
             book.open(Shelves.item(text, on: shelf))
         }
+        // -qa-baseline: the weekly sample page (Baseline/); -qa-construction: "Which ending fits?"
+        // (Constructions/), whatever the notebook has met so far.
+        if has("-qa-baseline") { _ = book.openBaseline() }
+        if has("-qa-construction") { _ = book.openConstructionPractice(force: true) }
         book.saveNow()
     }
 
@@ -112,7 +116,7 @@ enum QA {
                 r.attempts += 1
                 switch ex.kind {
                 case .listenPick: r.chosen = ex.options?.firstIndex(of: ex.say ?? ""); r.status = .correct
-                case .readMeaning, .familyGuess: r.chosen = ex.answerIndex; r.status = .correct
+                case .readMeaning, .familyGuess, .constructionChoice: r.chosen = ex.answerIndex; r.status = .correct
                 case .readHandwriting:
                     r.chosen = ex.options?.firstIndex { RussianText.key($0) == RussianText.key(ex.text ?? "") }
                     r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct

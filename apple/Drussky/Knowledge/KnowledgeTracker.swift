@@ -175,8 +175,10 @@ final class KnowledgeTracker {
 
     func strength(_ id: ComponentID) -> Double? { model.strength(id, at: now()) }
 
-    /// Running-word coverage of a text by words currently retrievable (R ≥ 0.5 in some modality).
-    func readability(of text: String) -> Double { model.coverage(domain.tokens(in: text), at: now()) }
+    /// Running words backed by recent successful production of the form as written.
+    func readability(of text: String) -> Double {
+        ReadingEvidence.coverage(text, domain: domain, model: model, at: now())
+    }
 
     /// Words (lexemes and phrases) with any evidence.
     var practisedWords: [ComponentID] {

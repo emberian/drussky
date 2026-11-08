@@ -6,19 +6,36 @@ struct ContentsView: View {
     @Environment(Book.self) private var book
     @Environment(Voice.self) private var voice
     @Environment(\.dismiss) private var dismiss
+    @State private var baselineExhausted = false
+    @State private var showEvidence = false
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
                     stats
-                    DeskNotes()
+                    VStack(alignment: .leading, spacing: 8) {
+                        Button("What I could do this week") {
+                            if book.openBaseline() { dismiss() } else { baselineExhausted = true }
+                        }.font(.system(size: 22, weight: .bold, design: .serif))
+                            .accessibilityIdentifier("open-baseline")
+                        Text(baselineExhausted
+                             ? "Both new reading samples are already in your notebook. Return to their examples; another unseen sample needs new material."
+                             : "Keep a new reading, five messages, your own voice and an uncorrected paragraph.")
+                            .font(.system(size: 15)).foregroundStyle(Theme.muted)
+                    }
+                    if book.canOpenConstructionPractice {
+                        Button("Which ending fits?") {
+                            if book.openConstructionPractice() { dismiss() }
+                        }.foregroundStyle(Theme.accent)
+                    }
                     GoalSection()
                     ShelvesSection()  // «Ста́нция», «Матема́тика» (Views/ShelfViews.swift)
-                    KnowledgeSection()
                     MyRussianSection()
                     alphabet
                     if !book.customWords.isEmpty { keptWords }
+                    Button("Practice evidence and estimates") { showEvidence = true }
+                        .foregroundStyle(Theme.muted).accessibilityIdentifier("practice-evidence")
                     pages
                 }
                 .padding(24)
@@ -27,6 +44,15 @@ struct ContentsView: View {
             }
             .background(GridPaper(marginX: nil))
             .navigationTitle("Алфави́т")
+            .navigationDestination(isPresented: $showEvidence) {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 24) {
+                        DeskNotes()
+                        KnowledgeSection()
+                    }.padding(24)
+                }.navigationTitle("Practice evidence")
+            }
+            .onAppear { if QA.has("-qa-evidence") { showEvidence = true } }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
             }
@@ -39,7 +65,7 @@ struct ContentsView: View {
     private var stats: some View {
         HStack(spacing: 28) {
             stat("\(lettersMet)", "of 33 letters")
-            stat("\(wordsMet)", "words")
+            stat("\(wordsMet)", "words met")
             stat("\(book.pages.filter(\.isFinished).count)", "pages done")
             stat("\(book.dueCount)", "ready to review")
         }
@@ -101,7 +127,9 @@ struct ContentsView: View {
                             Text(page.unitTitle).font(.system(size: 13)).foregroundStyle(Theme.muted)
                         }
                         Spacer()
-                        if page.isFinished {
+                        if page.isFinished && page.isBaseline {
+                            Text("Sample kept").font(Theme.label(12)).foregroundStyle(Theme.muted)
+                        } else if page.isFinished {
                             Text(GradeStamp.mark(for: page)).font(Theme.cursive(30)).foregroundStyle(Theme.redPen)
                         } else {
                             Text("\(page.completedCount)/\(page.exercises.count)")

@@ -273,15 +273,24 @@ enum SpokenText {
     static let close = Color(Theme.dynamic(0xB26A00, 0xF2B45A))
 
     /// The target with the stressed vowel in blue (as everywhere) and each sound's verdict on
-    /// its letters: came out as another or not at all in red, close in amber, right in green.
-    /// A word-level report only marks the letters the recognizer heard as others, in amber with a
-    /// dotted line (a hypothesis, not a verdict): it cannot vouch for the rest either.
+    /// its letters: came out as another or not at all in red, close in amber, right in green —
+    /// only where the verdict clears the confidence floor; an uncertain sound leaves its letters
+    /// unmarked. A word-level report only marks the letters the recognizer heard as others, in
+    /// amber with a dotted line (a hypothesis, not a verdict): it cannot vouch for the rest either.
     static func marked(_ text: String, report: PronunciationReport?, showStress: Bool) -> AttributedString {
         var verdicts: [Int: PhoneJudgement.Verdict] = [:]
         if let report {
             let rank: [PhoneJudgement.Verdict: Int] = [.good: 0, .close: 1, .extra: 1, .substituted: 2, .missing: 2]
             for s in report.sounds {
                 guard let r = s.letterRange else { continue }
+                if report.isWordLevel {
+                    // The recognizer's spelling: a hypothesis about these letters, amber and dotted below.
+                    guard s.verdict == .substituted || s.verdict == .missing else { continue }
+                } else if s.verdict == .substituted || s.verdict == .missing || s.verdict == .extra {
+                    guard s.supportsCorrection else { continue }
+                } else {
+                    guard SpeakingFeedback.permits(s.expected?.confidence) else { continue }
+                }
                 for i in r {
                     if let current = verdicts[i], rank[current, default: 0] > rank[s.verdict, default: 0] { continue }
                     verdicts[i] = s.verdict

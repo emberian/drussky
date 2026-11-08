@@ -113,7 +113,11 @@ rules), so authoring it is only needed where the tagger would be wrong.
    most; exercise kinds already say what to do. No hedging, no disclaimers, no "optional",
    no talk about recordings, models, accuracy or the app itself. No mention of friends or coaches.
 5. **Size.** A page is 6–10 exercises, ~8–12 minutes. Writing (trace/copy/dictation/translate/fill)
-   should be the majority of exercises; every page mixes in hearing and speaking.
+   is the majority on a `purpose: "writing"` page (the default for old pages), which also
+   mixes in hearing and speaking. A `purpose: "reading"` page has a majority of
+   passage/read_meaning/family_guess tasks and need not demand production. A `purpose: "oral"`
+   page has mostly read_aloud/listen_pick tasks with at least one spoken response.
+   Diary lines remain last, outside these counts. Lexicon entries may be receptive vocabulary.
 
 # Library — `Drussky/Resources/library.json` (and `PrivatePack/library.json`)
 
@@ -331,3 +335,17 @@ unstressed) to `[lemma, construction…]`, so `"книгу": ["книга", "acc
 the grammar patterns (`{id, name, note, requires?}`). `requires` gives the prerequisite edges, and
 from those the map's "ready next". Add a form here when the course or library introduces one;
 words absent from the map are their own lemma.
+
+# Local sample and construction pages
+
+These are prepared in code, outside generated `course.json`. `construction_choice` has `text`
+(a sentence with a gap), `options` (plausible Russian forms), integer `answer`, `hint` (feedback
+shown afterward), and `word` (the complete sentence identity). It finishes on the first choice,
+uses the separate `construction-choice` modality, and credits only its construction decision.
+It deliberately has no spoken string.
+
+A local `explain` exercise may have an optional `baseline` task; the view routes this to weekly
+sample capture instead of an explanation. `ExerciseResult.baseline` is optional too. The original
+response, help/familiarity flags and timestamps are kept alongside the normal ink/voice files.
+A sealed response cannot be reopened; reflection is a separate field. These are ungraded samples,
+not evidence of lexical recall. Old pages and results decode without either field.

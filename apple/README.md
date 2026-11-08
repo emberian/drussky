@@ -109,8 +109,8 @@ urgent first), then the next course page. After a week or more away, the first p
 sample of what you knew rather than everything. When several things the next page leans on have
 gone weak, a short *Getting ready* page brings them back first; when much is due but the next
 page's material is ready, the course goes on with reviews woven in. Now and then a few things the
-book believes you know are slipped onto pages one, seven and thirty days later; inside the cover,
-*How well the book knows you* sets its predictions against what you actually recalled, and the
+book expects you to recall are slipped onto pages one, seven and thirty days later. The back page,
+*Practice evidence and estimates*, compares review predictions with observed answers, and the
 memory model's intervals move a little, slowly, towards the evidence. When answers slow and misses
 pile up late in a long page, the page shortens (two remaining reviews become listening or reading
 choices, the rest wait) and says so in one line. Settings: retention aim (80–95%), reviews per day,
@@ -211,21 +211,21 @@ QA: `-qa-series N` / `-qa-math N` open episode N / rung N as a page.
 The inside cover asks for one text you want to read for real — from the Library, pasted or
 scanned, or a ru.wikisource link (fetched through the MediaWiki parse API and cleaned to its
 paragraphs). It becomes *your book*, kept in the notebook (several allowed; one current), and
-the cover shows **Distance to your book**: the share of its words you know, how many new words
-stand between you and its first page, how many of its sentences you could read now, a ladder
+the cover shows **Distance to your book**: production-backed coverage of its actual forms, words
+still to practice on its first page, sentences at 95%+ coverage, a ladder
 of the next twenty words worth knowing (occurrences in the text, weighted toward the first
 page) and the grammar patterns it leans on. The text's words are lemmatized by the course's
 tables, then by the tutor (`claude-sonnet-5-5`, 300 forms per call, cached in the goal with a
 short gloss), with a rule-based stemmer standing in until that arrives.
 
 **Toward my book** (＋, or the panel) has the tutor write a page from the goal's own sentences:
-a passage of 2–4 consecutive sentences that are now ≥80% known (glossed), then exercises on the
+a passage of 2–4 consecutive sentences that are at ≥95% production-backed form coverage (glossed), then exercises on the
 most valuable unknown words taken from the text. Every Russian string on the page must be a
 contiguous stretch of the text; anything invented is dropped. Without a key, an offline page
 teaches the words through their own sentences. The book also writes one by itself when a
 brand-new course page would teach nothing toward the goal while a readable stretch waits (at
-most one in three pages). When the first five sentences are each ≥90% known, the book opens
-them as a page of their own — *You can read the first page of your book* — with tap-to-gloss
+most one in three pages). When the first five sentences are each at ≥98% form coverage, the book opens
+them as a page of their own — *Try the first page of your book* — with tap-to-gloss
 and a red «Пе́рвая страни́ца» stamp. Policies and thresholds: `Drussky/Goal/Goal.swift`;
 the distance arithmetic is LearningCore's `Target`.
 
@@ -361,3 +361,32 @@ string the app can speak, including generated reviews, has a recording — a uni
 enforces it. `scripts/make_audio.py` (local Silero) generates missing ones.
 
 Learner data lives in Application Support/Drussky (`book.json`, `ink/`, `voice/`).
+
+## Weekly samples and reading evidence
+
+The inside cover's **What I could do this week** opens a dated sample page: one new beginner
+scene with gist/detail/inference questions, five existing human recordings from five speakers,
+an unscripted spoken task, and an uncorrected paragraph. Responses can be written or typed;
+the spoken task keeps its first recording. Saving locks the first response and reveals comparison
+notes, with a separate reflection field. Help, previous familiarity, replay starts and rough weekly
+exposure remain with the sample. These tasks do not grade vocabulary or change recall traces.
+`-qa-baseline` opens the flow in the QA notebook; `-qa-contents -qa-evidence` opens the estimates back page. There are currently two parallel reading sets;
+after those, the app asks for new material rather than presenting a repeat as unseen. Listening
+material is absent from the authored course, but may have been heard in the library; familiarity
+is self-reported, not inferred.
+
+Goal and library vocabulary coverage require successful production of the **actual written form**
+in hear→write, English→write or see→say, with current predicted recall at least 0.85. Copying,
+recognition, inferred lemma credit and root credit do not count. Supported-passage selection uses
+95% coverage and the first-page invitation uses 98%. Neither estimates comprehension; text remains
+available to study below those thresholds. Percentages count running forms; the first-page bonus
+only affects the vocabulary teaching ladder.
+
+After the accusative and genitive have been encountered, **Which ending fits?** offers a short
+concentrated introduction followed by decisions in new sentences. `construction-choice` has its
+own scheduling trace and no production credit. The finite bank never recycles a sentence as new;
+two kinds of context are reserved from ordinary review for checks scheduled at 7 and 30 days.
+Probe records retain the first-attempt flag, help/disputes, context and last logged exposure, so the
+scheduled delay is distinguishable from elapsed time without logged practice. Weekly pages show
+these later examples in prose. The knowledge map, root estimates, hourly observations and
+calibration chart are under **Practice evidence and estimates**, at the back of the inside cover.

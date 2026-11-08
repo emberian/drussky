@@ -14748,7 +14748,7 @@
     {
      "id": "u28-p2",
      "title": "Verbs dressed as adjectives",
-     "intro": "Participles and gerunds: recognize them, and written Russian opens up. You never need to produce one.",
+     "intro": "Participles and gerunds: read who did what, and when. Leave production for later.",
      "exercises": [
       {
        "kind": "explain",
@@ -14789,6 +14789,36 @@
        ]
       },
       {
+       "kind": "read_meaning",
+       "text": "Э́то письмо́, напи́санное бра́том.",
+       "options": [
+        "This is a letter written by my brother.",
+        "This is a letter my brother is writing.",
+        "This is a letter to my brother."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "read_meaning",
+       "text": "чита́ющий челове́к",
+       "options": [
+        "a person who is reading",
+        "a person who has finished reading",
+        "a person who will read"
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "read_meaning",
+       "text": "прочита́вший кни́гу",
+       "options": [
+        "someone who is still reading the book",
+        "someone who has not read the book",
+        "someone who has finished the book"
+       ],
+       "answer": 2
+      },
+      {
        "kind": "listen_pick",
        "say": "чита́я",
        "options": [
@@ -14796,6 +14826,26 @@
         "чита́ющий",
         "прочита́в"
        ]
+      },
+      {
+       "kind": "read_meaning",
+       "text": "напи́санное письмо́, откры́тое окно́",
+       "options": [
+        "a letter that writes and a window that opens something",
+        "a letter to write and a window to close",
+        "a written letter and an open window"
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Окно́ откры́то.",
+       "options": [
+        "Someone will open the window.",
+        "The window is open.",
+        "The window is opening something."
+       ],
+       "answer": 1
       },
       {
        "kind": "read_meaning",
@@ -14808,42 +14858,25 @@
        "answer": 1
       },
       {
-       "kind": "fill",
-       "before": "Окно́ ",
-       "after": ".",
-       "hint": "The window is open.",
-       "answer": "откры́то"
-      },
-      {
-       "kind": "fill",
-       "before": "Э́то письмо́, напи́санное ",
-       "after": ".",
-       "hint": "This is a letter written by my brother.",
-       "answer": "бра́том"
-      },
-      {
-       "kind": "dictation",
-       "text": "Э́то письмо́ написа́л брат."
+       "kind": "read_meaning",
+       "text": "Прочита́в кни́гу, я поду́мала.",
+       "options": [
+        "Before reading the book, I thought.",
+        "Having finished the book, I thought.",
+        "While still reading the book, I thought."
+       ],
+       "answer": 1
       },
       {
        "kind": "read_aloud",
        "text": "Чита́ющий, прочита́вший, живу́щий. Напи́санный, откры́тый. Чита́я, она́ молча́ла. Прочита́в, она́ поду́мала."
       },
       {
-       "kind": "copy",
-       "text": "напи́санное письмо́, откры́тое окно́",
-       "times": 1
-      },
-      {
-       "kind": "copy",
-       "text": "чита́ющий, прочита́вший, чита́я, прочита́в",
-       "times": 1
-      },
-      {
        "kind": "diary",
-       "prompt": "Describe something you see using one participle you recognize (a written letter, an open window)."
+       "prompt": "What did you read today? Write a few words of your own; simple sentences are enough."
       }
-     ]
+     ],
+     "purpose": "reading"
     },
     {
      "id": "u28-p3",
