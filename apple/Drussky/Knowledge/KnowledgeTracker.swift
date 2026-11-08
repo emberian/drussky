@@ -127,7 +127,7 @@ final class KnowledgeTracker {
         }
         guard !events.isEmpty else { return 0 }
         append(events)
-        model = KnowledgeModel(events: model.events + events)
+        model = KnowledgeModel(events: model.events + events, fsrs: model.fsrs)
         return events.count
     }
 
@@ -177,8 +177,12 @@ final class KnowledgeTracker {
         return "Knowledge model (FSRS recall per skill and modality):\n" + lines.joined(separator: "\n")
     }
 
-    func exportGraph() -> URL? {
-        let doc = GraphExport(domain: domain.name, modalities: domain.modalities, graph: graph, model: model, at: now())
+    /// Refolds the log with other FSRS parameters (learned from retention probes, Book+Day).
+    func rebuild(fsrs: FSRS) { model = KnowledgeModel(events: model.events, fsrs: fsrs) }
+
+    func exportGraph(calibration: Calibration? = nil) -> URL? {
+        var doc = GraphExport(domain: domain.name, modalities: domain.modalities, graph: graph, model: model, at: now())
+        doc.calibration = calibration
         let url = FileManager.default.temporaryDirectory.appendingPathComponent("Drussky knowledge graph.json")
         do { try doc.json().write(to: url, options: .atomic); return url } catch { return nil }
     }

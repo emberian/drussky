@@ -10,6 +10,7 @@ import UIKit
 ///   -qa-history D      spread the completed pages over the last D days (knowledge-map history)
 ///   -qa-misses         choice exercises are missed twice (the correction under the choices)
 ///   -qa-corrupt        an undecodable book.json in the QA folder (the recovery screen)
+///   -qa-day N / -qa-away D / -qa-probes / -qa-tired   the day's shape (QA+Day.swift)
 @MainActor
 enum QA {
     static func value(_ flag: String) -> Int? {
@@ -39,7 +40,7 @@ enum QA {
         let pages = value("-qa-complete") ?? 0
         let history = value("-qa-history").map { Double($0) * 86_400 }
         // -qa-age D: the pages were done D days ago, so their reviews are due now.
-        if let days = value("-qa-age") { book.now = { Date().addingTimeInterval(-Double(days) * 86_400) } }
+        if let days = value("-qa-age") ?? dayShift { book.now = { Date().addingTimeInterval(-Double(days) * 86_400) } }
         for n in 0..<pages {
             if let history {
                 var tick = 0.0
@@ -59,6 +60,7 @@ enum QA {
             }
         }
         book.now = Date.init
+        openDay(book)
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
         book.saveNow()
     }

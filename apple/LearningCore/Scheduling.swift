@@ -47,6 +47,13 @@ public struct DueReview: Sendable, Hashable {
     /// Higher first: relearning, then lowest recall, then confusion pressure.
     public var priority: Double
     public var relearning: Bool
+
+    public init(id: String, modality: Modality?, priority: Double, relearning: Bool) {
+        self.id = id
+        self.modality = modality
+        self.priority = priority
+        self.relearning = relearning
+    }
 }
 
 extension MemoryTrace {

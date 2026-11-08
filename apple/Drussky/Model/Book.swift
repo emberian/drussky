@@ -85,6 +85,11 @@ struct Settings: Codable, Sendable, Equatable {
     var fingerDrawing: Bool = false
     var cursiveModels: Bool = false
     var showStress: Bool = true
+    /// The day's shape (Book+Day; optional: older notebooks lack them). FSRS retention target
+    /// (0.8–0.95), reviews placed per day, retention probes on.
+    var desiredRetention: Double? = nil
+    var dailyReviewCap: Int? = nil
+    var probes: Bool? = nil
 }
 
 @MainActor
@@ -99,9 +104,11 @@ final class Book {
     private var legacyMemories: [Memory] = []
     @ObservationIgnored var candidateCache: [ReviewCandidate]?
     /// Index into course.pageSequence of the next authored page to instantiate.
-    private(set) var courseCursor: Int = 0
+    var courseCursor: Int = 0
     var currentPage: Int = 0 { didSet { scheduleSave() } }
     var settings = Settings() { didSet { scheduleSave() } }
+    /// The day's shape, probes and what the desk noticed (Day/Book+Day.swift).
+    var day = DayState() { didSet { scheduleSave() } }
     /// Bumped when the learner explicitly finishes something (Done, Check, a choice), so the
     /// page moves on. Recognition ticking an exercise by itself never moves the page.
     private(set) var customWords: [Course.Word] = []
@@ -153,6 +160,7 @@ final class Book {
             settings = saved.settings
             customWords = saved.customWords ?? []
             soundStats = saved.soundStats ?? [:]
+            day = saved.day ?? DayState()
         }
         reindexPages()
         knowledge.now = { [unowned self] in self.now() }
@@ -162,6 +170,7 @@ final class Book {
         let ink = store.ink
         Task { await ink.setFailureHandler(writerErrors) }
         guard problem == nil else { return }
+        applyLearnedParameters()
         knowledge.backfill(pages: pages)
         if pages.isEmpty { _ = appendNextPage() }
     }
@@ -177,7 +186,7 @@ final class Book {
     /// The next authored page the learner hasn't had, in course order. Tracking pages by id
     /// (not by position) means a course revision that inserts or reorders pages never makes
     /// the learner skip or repeat one.
-    private var nextCoursePage: (unit: Course.Unit, page: Course.Page)? {
+    var nextCoursePage: (unit: Course.Unit, page: Course.Page)? {
         let had = Set(pages.compactMap(\.sourceID))
         return course.pageSequence.first { !had.contains($0.page.id) }
     }
@@ -202,9 +211,10 @@ final class Book {
     /// Appends either a review page (when much is due) or the next course page with a few
     /// due reviews woven in. Returns false at the end of the course with nothing due.
     private func appendNextPage() -> Bool {
-        let due = dueReviews()
+        if appendComposedPage() { return true }  // Book+Day: morning, welcome-back and remediation pages
+        let due = Array(dueReviews().prefix(reviewAllowance()))  // the day's cap; the rest wait, most urgent first
         let lastWasReview = pages.last?.isReview ?? true
-        if (due.count >= 10 && !lastWasReview) || (courseFinished && !due.isEmpty) {
+        if (due.count >= 10 && !lastWasReview && !frontierPrefersCourse()) || (courseFinished && !due.isEmpty) {
             let items = Array(due.prefix(8))
             let exercises = items.enumerated().map { reviewExercise(for: $1.id, modality: $1.modality, variant: $0) }
             appendPage(sourceID: nil, unitTitle: "Повторение · Review", title: "Bring it back",
@@ -225,6 +235,7 @@ final class Book {
             exercises.insert(reviewExercise(for: item.id, modality: item.modality, variant: pages.count + i),
                              at: min(slots[i], exercises.count))
         }
+        exercises += extraNewItem(excluding: taughtHere)  // one more new word while the learner is sharp
         appendPage(sourceID: source.id, unitTitle: unit.title, title: source.title, intro: source.intro,
                    isReview: false, exercises: exercises)
         return true
@@ -261,11 +272,12 @@ final class Book {
         return out
     }
 
-    private func appendPage(sourceID: String?, unitTitle: String, title: String, intro: String?,
-                            isReview: Bool, exercises: [Exercise]) {
+    func appendPage(sourceID: String?, unitTitle: String, title: String, intro: String?,
+                    isReview: Bool, exercises: [Exercise]) {
         let number = pages.count + 1
         // A random suffix keeps ink/voice file names unique even if the notebook is ever restarted.
         let id = String(format: "p%04d-", number) + UUID().uuidString.prefix(6).lowercased()
+        let exercises = exercises + probeExercises(pageID: id, among: exercises)  // retention probes due now
         pages.append(BookPage(id: id, number: number, sourceID: sourceID,
                               unitTitle: unitTitle, title: title, intro: intro, isReview: isReview,
                               exercises: exercises, results: exercises.map { _ in ExerciseResult() },
@@ -326,6 +338,14 @@ final class Book {
         pages[p] = page
         if finishing { saveNow() } else { scheduleSave() }
         knowledge.observe(page: page, index: ref.index, before: before, after: after)
+        deskObserved(ref, exercise: page.exercises[ref.index], result: after)  // probes, fatigue (Book+Day)
+    }
+
+    /// Replaces a page as a whole (the desk shortening one, Book+Day); its id never changes.
+    func replace(page: BookPage, at index: Int) {
+        guard pages.indices.contains(index), pages[index].id == page.id else { return }
+        pages[index] = page
+        scheduleSave()
     }
 
     func result(_ ref: ExerciseRef) -> ExerciseResult? {
@@ -548,7 +568,7 @@ final class Book {
             try store.saveState(.init(pages: pages, memories: legacyMemories, courseCursor: courseCursor,
                                       currentPage: currentPage, settings: settings, customWords: customWords,
                                       soundStats: soundStats.isEmpty ? nil : soundStats,
-                                      targets: targets.values.sorted { $0.key < $1.key }))
+                                      targets: targets.values.sorted { $0.key < $1.key }, day: day))
             if persistenceError?.hasPrefix("notebook") == true { persistenceError = nil }
         } catch {
             persistenceError = "notebook: \((error as NSError).localizedDescription)"
@@ -580,6 +600,8 @@ struct BookState: Codable {
     var soundStats: [String: ContrastStat]? = nil
     /// What to recall and since when (format 2; migrated from `memories`).
     var targets: [ReviewTarget]? = nil
+    /// Day shape, probes, learned parameters (optional: older notebooks lack it).
+    var day: DayState? = nil
 }
 
 /// Something the learner should be able to recall, and when they met it.
