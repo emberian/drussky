@@ -290,7 +290,7 @@ for w, pos, en in [
     ("нет", "part", "no; there is not"), ("ни", "part", "not any"), ("ли", "part", "whether"), ("же", "part", "the very (emphasis)"),
     ("бы", "part", "would"), ("ну", "part", "well"), ("уж", "part", "really (emphasis)"), ("ведь", "part", "after all"),
     ("бу'дто", "conj", "as if"), ("хотя'", "conj", "although"), ("е'сли", "conj", "if"), ("что'бы", "conj", "so that"),
-    ("чтоб", "conj", "so that"), ("или", "conj", "or"), ("лишь", "part", "only"), ("столь", "adv", "so (much)"),
+    ("чтоб", "conj", "so that"), ("и'ли", "conj", "or"), ("лишь", "part", "only"), ("столь", "adv", "so (much)"),
     ("в", "prep", "in, into"), ("на", "prep", "on, onto"), ("с", "prep", "with; off"), ("у", "prep", "at, by"),
     ("к", "prep", "towards"), ("о", "prep", "about"), ("об", "prep", "about"), ("по", "prep", "along, by"),
     ("до", "prep", "up to"), ("для", "prep", "for"), ("из", "prep", "out of"), ("от", "prep", "from"),
@@ -550,7 +550,7 @@ M("[тёпл]|ый", "adj", "warm", family="тепл"); M("[тепл]|е'е", "a
 M("[ночь]", "noun", "night"); M("[день]", "noun", "day")
 M("[у'тр]|о", "noun", "morning"); M("за'|[втр]|а", "adv", "tomorrow", base="утро"); M("за'|[втр]|ак", "noun", "breakfast", base="завтра")
 M("[ве'чер]", "noun", "evening"); M("[вчер]|а'", "adv", "yesterday", base="вечер")
-M("[вре'м]|я", "noun", "time"); M("[год]", "noun", "year"); M("[лет]|о", "noun", "summer; (plural) years", family="лето")
+M("[вре'м]|я", "noun", "time"); M("[год]", "noun", "year"); M("[ле'т]|о", "noun", "summer; (plural) years", family="лето")
 M("[час]", "noun", "hour"); M("сей|[ча'с]", "adv", "now, right away", base="час", example=("Сейча'с я чита'ю.", "Right now I am reading."))
 M("[доро'г]|а", "noun", "road")
 M("[го'род]", "noun", "city"); M("[дом]", "noun", "house, home"); M("[дом]|о'й", "adv", "homewards", base="дом")

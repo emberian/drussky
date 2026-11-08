@@ -395,7 +395,7 @@ struct WritingExercise: View {
         .onAppear { pad.onChange = { _ in scheduleIdleCheck() } }
         .onChange(of: book.advanceSignal) { _, _ in
             guard isActive, slot.isAdvanceTarget, ex.kind == .dictation else { return }
-            if ex.narration != nil { NarrationPlayer.shared.play(exercise: ex, owner: "\(slot.page.id)-\(slot.index)") }
+            if ex.narration != nil { voice.stop(); NarrationPlayer.shared.play(exercise: ex, owner: "\(slot.page.id)-\(slot.index)") }
             else if let s = ex.spoken { voice.play(s) }
         }
     }

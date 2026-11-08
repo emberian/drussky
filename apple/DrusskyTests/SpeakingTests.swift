@@ -266,7 +266,11 @@ final class SpeakingTests: XCTestCase {
         XCTAssertEqual(sub.heard?.ipa, "i")
         let tip = try XCTUnwrap(r.tips.first)
         XCTAssertEqual(tip.contrast, "y-i")
-        XCTAssertTrue(tip.message.hasPrefix("«ы» came out as «и»."), tip.message)
+        // The recognizer compared spellings, not sounds: the tip says what it heard, as a hypothesis.
+        XCTAssertTrue(tip.message.hasPrefix("The recognizer heard «и» where «ы» should be"), tip.message)
+        XCTAssertTrue(tip.message.contains("may have misheard"), tip.message)
+        XCTAssertEqual(r.provenance, .words)
+        XCTAssertTrue(r.isWordLevel)
         XCTAssertEqual(r.accuracy, 2.0 / 3.0, accuracy: 1e-9)
     }
 
@@ -301,6 +305,8 @@ final class SpeakingTests: XCTestCase {
 
     // MARK: Evidence
 
+    /// Only a phone-level report (the sounds themselves judged) leaves sound evidence. A word-level
+    /// report's «бил» for «был» is the recognizer's spelling, not a measurement of the ы: no event.
     func testASubstitutionIsSpeechEvidenceOnItsContrast() throws {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "course", withExtension: "json"))
         let course = try JSONDecoder().decode(Course.self, from: Data(contentsOf: url))
@@ -309,7 +315,14 @@ final class SpeakingTests: XCTestCase {
         ex.text = "был"
         book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [ex], newWords: [])
         let page = try XCTUnwrap(book.page)
-        let report = WordLevelAnalyzer.report(target: "был", transcript: "бил", comparison: nil)
+        let words = WordLevelAnalyzer.report(target: "был", transcript: "бил", comparison: nil)
+        XCTAssertTrue(words.isWordLevel)
+        book.knowledge.heard(page: page, index: 0, take: "take-0.m4a", report: words, attempt: 1)
+        XCTAssertFalse(book.knowledge.model.events.contains { $0.id == "speech:take-0.m4a" }, "a hypothesis about spelling is not sound evidence")
+        let sub = PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "i"), verdict: .substituted, letterRange: 1..<2)
+        let report = PronunciationReport(target: "был", transcript: "бил", expected: [], heard: [Phone(ipa: "b"), Phone(ipa: "i"), Phone(ipa: "l")],
+                                         sounds: [sub], syllables: [], stressedSyllable: nil, accuracy: 0.6, tips: [], provenance: .phones)
+        XCTAssertFalse(report.isWordLevel)
         book.knowledge.heard(page: page, index: 0, take: "take-1.m4a", report: report, attempt: 1)
         book.knowledge.heard(page: page, index: 0, take: "take-1.m4a", report: report, attempt: 1)
         let events = book.knowledge.model.events.filter { $0.id == "speech:take-1.m4a" }
@@ -320,9 +333,16 @@ final class SpeakingTests: XCTestCase {
         XCTAssertTrue(e.components.contains(ComponentID(.sound, "y-i")))
         XCTAssertEqual(e.confusions, [Confusion(target: ComponentID(.letter, "Ы"), produced: ComponentID(.letter, "И"), channel: .speech)])
         // A clean take adds nothing beyond the exercise's own outcome.
-        let clean = WordLevelAnalyzer.report(target: "был", transcript: "был", comparison: nil)
+        var clean = report
+        clean.sounds = [PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "ɨ"), verdict: .good, letterRange: 1..<2)]
         book.knowledge.heard(page: page, index: 0, take: "take-2.m4a", report: clean, attempt: 2)
         XCTAssertFalse(book.knowledge.model.events.contains { $0.id == "speech:take-2.m4a" })
+        // A report saved before provenance existed: phones heard means phone-level.
+        var old = report
+        old.provenance = nil
+        XCTAssertFalse(old.isWordLevel)
+        old.heard = []
+        XCTAssertTrue(old.isWordLevel)
     }
 
     // MARK: Finishing the exercise

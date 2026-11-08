@@ -11,6 +11,10 @@ extension RussianDomain {
     func speechEvidence(page: BookPage, index: Int, take: String, report: PronunciationReport,
                         attempt: Int, at t: Date, source: String = "live") -> LearningEvent? {
         guard page.exercises.indices.contains(index) else { return nil }
+        // A word-level report compared the recognizer's spelling with the target's: that «бил» was
+        // written for «был» is a hypothesis about what was heard, not a measurement of the ы. Only
+        // phone-level analysis asserts sound defects, so only it leaves sound evidence.
+        guard !report.isWordLevel else { return nil }
         let ex = page.exercises[index]
         let target = report.target
         var contrasts: [String] = []

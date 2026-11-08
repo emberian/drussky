@@ -139,6 +139,73 @@ final class DiaryTests: XCTestCase {
         XCTAssertFalse(EventLog(url: again.knowledge.logURL).load().contains { $0.item == "\(clean.pageID)#1" })
     }
 
+    /// A reply whose corrected text differs from the line but whose edits are missing, or do not
+    /// apply to what was written, is shown but grades nothing: no word of the tutor's replacement
+    /// text is credited as produced, nothing joins the learner's words, and the page mark says so.
+    func testAnInconsistentCorrectionGradesNothing() throws {
+        let book = Book(course: try course(), store: tempStore())
+        var ex = Exercise(kind: .diary); ex.prompt = "Who is at home?"
+        book.insertWrittenPage(title: "Дневник", intro: nil, unitTitle: "My Russian", exercises: [ex, ex, ex], newWords: [])
+        let pageID = book.pages[book.currentPage].id
+        // Changed text, no edits.
+        let a = ExerciseRef(pageID: pageID, index: 0)
+        book.submitDiary(a, entry: DiaryEntry(prompt: ex.prompt!, text: "Мама дом.", submitted: book.now()))
+        book.finishDiary(a, correction: DiaryCorrection(corrected: "Ма́ма до́ма.", edits: [], praise: "", teach: [], at: book.now()))
+        XCTAssertEqual(book.result(a)?.status, .done, "not 'right'")
+        XCTAssertEqual(book.result(a)?.diary?.correction?.verified, false)
+        let doma = book.knowledge.domain.productionComponents("дома").first!
+        XCTAssertNil(book.knowledge.model.trace(doma, .produce), "«дома» was never written")
+        XCTAssertNil(book.knowledge.model.trace(ComponentID(.lexeme, "мама"), .produce)?.reviews.last?.grade, "nothing graded")
+        XCTAssertNil(book.targets["word:дома"])
+        let main = book.knowledge.model.events.filter { $0.item == a.item && $0.type == .outcome }
+        XCTAssertEqual(main.count, 1)
+        XCTAssertNil(main.first?.grade)
+        XCTAssertEqual(main.first?.help, ["unverified-correction"])
+        // Edits that name words the learner never wrote.
+        let b = ExerciseRef(pageID: pageID, index: 1)
+        book.submitDiary(b, entry: DiaryEntry(prompt: ex.prompt!, text: "Папа тут.", submitted: book.now()))
+        book.finishDiary(b, correction: DiaryCorrection(corrected: "Па́па до́ма.",
+                                                         edits: [DiaryEdit(span: "здесь", replacement: "до́ма", category: .wordChoice, why: "", en: "at home")],
+                                                         praise: "", teach: [], at: book.now()))
+        XCTAssertEqual(book.result(b)?.diary?.correction?.verified, false)
+        XCTAssertFalse(book.knowledge.model.events.contains { $0.item == b.item && $0.grade != nil })
+        // A consistent correction, stress and punctuation aside, is verified and graded as before.
+        let c = ExerciseRef(pageID: pageID, index: 2)
+        book.submitDiary(c, entry: DiaryEntry(prompt: ex.prompt!, text: "мама дом", submitted: book.now()))
+        book.finishDiary(c, correction: DiaryCorrection(corrected: "Ма́ма до́ма.",
+                                                         edits: [DiaryEdit(span: "дом", replacement: "до́ма", category: .ending, why: "", en: "at home")],
+                                                         praise: "", teach: [], at: book.now()))
+        XCTAssertEqual(book.result(c)?.diary?.correction?.verified, true)
+        XCTAssertEqual(book.result(c)?.status, .done)
+        XCTAssertEqual(book.knowledge.model.trace(doma, .produce)?.reviews.map(\.grade), [.again])
+        XCTAssertNotNil(book.targets["word:дома"])
+        // The page: one line verified with one slip, two unverified → assessed by the one, no miss.
+        let page = book.pages[book.currentPage]
+        XCTAssertTrue(page.isFinished)
+        XCTAssertEqual(GradeStamp.grade(for: page), 5)
+        var fourSlips = page
+        var corr = fourSlips.results[2].diary!.correction!
+        corr.edits = Array(repeating: corr.edits[0], count: 4)
+        fourSlips.results[2].diary!.correction = corr
+        XCTAssertEqual(GradeStamp.grade(for: fourSlips), 4, "many corrections on the only assessed line: a miss")
+        var nothingAssessed = page
+        nothingAssessed.results[2].diary!.correction!.verified = false
+        XCTAssertNil(GradeStamp.grade(for: nothingAssessed))
+        XCTAssertEqual(GradeStamp.mark(for: nothingAssessed), "✓")
+        XCTAssertEqual(GradeStamp.praise(for: nothingAssessed), "Готово!")
+        // A page finished by the learner's own judgement alone is complete, not graded.
+        var said = Exercise(kind: .readAloud); said.text = "кот"
+        book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [said], newWords: [])
+        book.record(ExerciseRef(pageID: book.page!.id, index: 0)) { $0.status = .done; $0.selfAssessed = true }
+        XCTAssertNil(GradeStamp.grade(for: book.page!))
+        // A correction from before the check existed reads as consistent.
+        let data = try JSONEncoder().encode(DiaryCorrection(corrected: "x", edits: [], praise: "", teach: [], at: book.now()))
+        var object = try XCTUnwrap(try JSONSerialization.jsonObject(with: data) as? [String: Any])
+        object.removeValue(forKey: "verified")
+        let decoded = try JSONDecoder().decode(DiaryCorrection.self, from: JSONSerialization.data(withJSONObject: object))
+        XCTAssertNil(decoded.verified)
+    }
+
     /// A diary line's evidence is several lines of the log (one per edit, then the main outcome).
     /// A write that stopped after the first edit is completed edit by edit on the next opening:
     /// the lines already there are not written again, the missing ones are, and only once.

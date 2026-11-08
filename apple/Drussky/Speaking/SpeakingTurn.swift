@@ -174,18 +174,20 @@ final class SpeakingTurn {
         guard mic else { end(r.key, .micDenied); return }
         if speech { SpeechCheck.warmUp(with: r.model) }
 
-        // Listen first.
+        // Listen first: the model the take will be compared with (the reader's own sentence when
+        // shadowing a narration), the text's clip or voice when there is none.
         for k in stride(from: 1, through: r.repeats, by: 1) {
             guard session == mine, !skipModel else { break }
             phase = .model(k, of: r.repeats)
             let watchdog = Task { try? await Task.sleep(for: .seconds(20)); if !Task.isCancelled { voice.stop() } }
-            await voice.playToEnd(r.target)
+            if let model = r.model { await voice.playFileToEnd(model, key: RussianText.audioKey(r.target)) } else { await voice.playToEnd(r.target) }
             watchdog.cancel()
             if k < r.repeats && !skipModel { try? await Task.sleep(for: .milliseconds(350)) }
         }
         guard session == mine else { return }
 
-        // Your turn.
+        // Your turn. Nothing else may be sounding into the microphone (a narration still reading).
+        voice.stop()
         Voice.configureSession()
         let cap = TakeCapture(config: Self.config(target: r.target, model: r.model))
         let stream: AsyncStream<CaptureEvent>

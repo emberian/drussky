@@ -273,6 +273,27 @@ final class DayTests: XCTestCase {
         XCTAssertTrue(Fatigue.sessionEvents(yesterday, now: day(1)).isEmpty, "the last event is long past: no session")
     }
 
+    /// Component-level annotations are not more answers or more tries: six corrections on one line
+    /// of free writing are one completion, and a take logged twice (the attempt and its
+    /// pronunciation annotation) is one try.
+    func testAnnotationsDoNotInflateFatigue() {
+        let start = t0
+        var events = session(start: start, latencies: Array(repeating: 6, count: 6))
+        let t = start.addingTimeInterval(7 * 60)
+        for i in 0..<6 { events.append(LearningEvent(id: "edit\(i)", t: t, type: .outcome, item: "p#d", modality: write, components: [a], grade: .again)) }
+        events.append(outcome([a], write, .good, at: t, item: "p#d", latency: 6))
+        let u = start.addingTimeInterval(8 * 60)
+        events.append(LearningEvent(t: u, type: .attempt, item: "p#s", modality: write, components: [a], correct: false, attempt: 1))
+        events.append(LearningEvent(t: u, type: .attempt, item: "p#s", modality: write, components: [a], correct: false, attempt: 1))
+        events.append(outcome([a], write, .good, at: u.addingTimeInterval(5), item: "p#s", latency: 6))
+        let e = Fatigue.estimate(events: events, now: u.addingTimeInterval(10), pageStarted: start)
+        XCTAssertEqual(e.signals.items, 8, "\(e)")
+        XCTAssertEqual(e.signals.missRate ?? 1, 0)
+        XCTAssertEqual(e.signals.triesPerItem ?? 0, 9.0 / 8, accuracy: 1e-9)
+        XCTAssertNotEqual(e.level, .tired)
+        XCTAssertEqual(Fatigue.completions(in: Fatigue.sessionEvents(events, now: u.addingTimeInterval(10))).map(\.item).filter { $0 == "p#d" }.count, 1)
+    }
+
     func testHourlyPreference() {
         let cal = utc
         let morning = cal.date(bySettingHour: 8, minute: 0, second: 0, of: t0)!
