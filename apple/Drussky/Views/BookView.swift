@@ -9,6 +9,7 @@ struct BookView: View {
     @State private var showSettings = false
     @State private var writeMode: WritePageSheet.Mode?
     @State private var showLibrary = false
+    @State private var showTyping = false
     @Environment(\.horizontalSizeClass) private var sizeClass
 
     var body: some View {
@@ -24,6 +25,7 @@ struct BookView: View {
             Button("OK") { notice = nil }
         } message: { Text(notice ?? "") }
         .sheet(isPresented: $showLibrary) { LibrarySheet().presentationSizing(.page) }
+        .sheet(isPresented: $showTyping) { TypingDrillView().presentationSizing(.page) }  // Devices/Typing
         .sheet(isPresented: Binding(get: { writeMode != nil }, set: { if !$0 { writeMode = nil } })) {
             if let writeMode { WritePageSheet(mode: writeMode) }
         }
@@ -49,6 +51,8 @@ struct BookView: View {
             if QA.has("-qa-diary") { QA.diaryPages(book) }
             if QA.has("-qa-families") { show("Word families", MorphologyPages.addFamilies(book)) }
             if QA.has("-qa-cognates") { show("Cognates", MorphologyPages.addCognates(book)) }
+            if QA.has("-qa-pocket") { show("Pocket", PocketPage.insert(book: book, voice: voice)) }  // Devices
+            showTyping = QA.has("-qa-typing")
         }
         .onChange(of: book.currentPage) { _, _ in
             // The goal (Goal/): its first page opens when readable; a brand-new course page that
@@ -90,7 +94,7 @@ struct BookView: View {
     }
 
     private var topBar: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: sizeClass == .compact ? 0 : 6) {  // six 44-pt buttons and the page number must fit a 390-pt phone
             Button { showContents = true } label: {
                 Label("Alphabet & pages", systemImage: "character.book.closed")
                     .labelStyle(.iconOnly)
@@ -135,6 +139,8 @@ struct BookView: View {
                 Button { book.insertDiaryPage() } label: { Label("Write in my diary", systemImage: "pencil.line") }
                 Button { show("Word families", MorphologyPages.addFamilies(book)) } label: { Label("Word families", systemImage: "tree") }
                 Button { show("Cognates", MorphologyPages.addCognates(book)) } label: { Label("Cognates", systemImage: "character.book.closed") }
+                if sizeClass == .compact { Button { show("Pocket", PocketPage.insert(book: book, voice: voice)) } label: { Label("Pocket: listen and speak", systemImage: "iphone.radiowaves.left.and.right") } }  // Devices/Pocket
+                if KeyboardPresence.shared.present { Button { showTyping = true } label: { Label("Typing drill", systemImage: "keyboard") } }  // Devices/Typing
             } label: {
                 Image(systemName: "plus.square.on.square").font(.system(size: 18, weight: .medium)).frame(width: 44, height: 44)
             }
@@ -145,7 +151,7 @@ struct BookView: View {
             .accessibilityLabel("Settings")
         }
         .tint(Theme.accent)
-        .padding(.horizontal, 12)
+        .padding(.horizontal, sizeClass == .compact ? 4 : 12)
         .background(.ultraThinMaterial, in: Capsule())
         .padding(.horizontal, 16)
         .padding(.top, 6)

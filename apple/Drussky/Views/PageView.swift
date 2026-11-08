@@ -150,6 +150,7 @@ struct PageView: View {
                     .foregroundStyle(Theme.muted)
             }
             .buttonStyle(.plain)
+            PagePrintButton(pageIndex: pageIndex)  // Devices/PDF
         }
         .padding(.top, 30)
         .animation(.spring(response: 0.5, dampingFraction: 0.7), value: page.isFinished)

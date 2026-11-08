@@ -109,11 +109,13 @@ final class NarrationPlayer: NSObject, AVAudioPlayerDelegate {
     }
 
     nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        // Only the identity and duration cross to the main actor (the Mac Catalyst SDK's AVAudioPlayer isn't Sendable).
+        let finished = ObjectIdentifier(player), duration = player.duration
         Task { @MainActor in
-            guard self.player === player else { return }
+            guard let current = self.player, ObjectIdentifier(current) == finished else { return }
             self.isPlaying = false
             self.ticker?.cancel()
-            self.time = player.duration
+            self.time = duration
         }
     }
 }

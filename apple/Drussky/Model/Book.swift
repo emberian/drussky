@@ -55,6 +55,8 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var selfAssessed: Bool? = nil
     /// Diary: what the learner wrote and the tutor's red-pen correction (Diary/DiaryEntry.swift).
     var diary: DiaryEntry? = nil
+    /// Answered on a keyboard rather than with the Pencil (Devices/Typing); evidence goes under `type`.
+    var typed: Bool? = nil
 
     var roundNumber: Int { round ?? 0 }
 

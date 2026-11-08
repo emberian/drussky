@@ -38,6 +38,7 @@ extension Modality {
         case .hearPick: "hear → pick"
         case .readPick: "read → pick"
         case .build: "English → build"
+        case .type: "typed"
         default: rawValue
         }
     }
@@ -91,7 +92,7 @@ struct RussianAttempt {
 /// Russian, as Drussky teaches it, in LearningCore's terms.
 struct RussianDomain: KnowledgeDomain {
     let name = "drussky-ru"
-    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build]
+    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .type]
     let graph: KnowledgeGraph
     let lemmas: Lemmas
     /// Roots, affixes and segmentations (Morphology/).
@@ -454,7 +455,7 @@ struct RussianDomain: KnowledgeDomain {
     func evidence(for a: RussianAttempt) -> LearningEvent? {
         guard a.page.exercises.indices.contains(a.index) else { return nil }
         let ex = a.page.exercises[a.index]
-        guard let modality = Self.modality(for: ex.kind), !(ex.kind == .soundPair && ex.say == nil) else { return nil }
+        guard let modality = a.after.typed == true ? Modality.type : Self.modality(for: ex.kind), !(ex.kind == .soundPair && ex.say == nil) else { return nil }
         let finished = !a.before.status.isComplete && a.after.status.isComplete
         let tried = a.after.attempts > a.before.attempts
         guard finished || tried else { return nil }
