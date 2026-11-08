@@ -68,6 +68,7 @@
 		D3A0E99EAF001AFDB22943D0 /* SpeechCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */; };
 		DB3D064DB50315B07FD9D64C /* QA.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2183BBBE99C1790444D983 /* QA.swift */; };
 		DFCD27C5F6B84C0A1923E490 /* NotebookSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C7FD22C881185CDEE1092E /* NotebookSafetyTests.swift */; };
+		E0C219A5D00BA3734A2A3621 /* PronunciationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5EB61E8246F9DC324AC04D /* PronunciationTypes.swift */; };
 		E57A52723D5F7D80807A53B1 /* TutorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74264D1BFDC2677C7515FBED /* TutorView.swift */; };
 		E690EE7AE2CCA3D9C9372D1C /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5206CA36CCD17DFB27C030F /* Tutor.swift */; };
 		EC5DEA629DDF914B9CA6C598 /* NotebookLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1095511DFC346F6F4748A8 /* NotebookLoading.swift */; };
@@ -183,6 +184,7 @@
 		85D2852B93CF4306C44308E3 /* Evidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evidence.swift; sourceTree = "<group>"; };
 		88A41A0388A9800487C69809 /* FormationCoachTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationCoachTests.swift; sourceTree = "<group>"; };
 		8C0F6D077D932F35314C315B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		8C5EB61E8246F9DC324AC04D /* PronunciationTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationTypes.swift; sourceTree = "<group>"; };
 		8CF686BE6829DB81620A8095 /* GrowthChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthChart.swift; sourceTree = "<group>"; };
 		966160D52E50F1ED0AD393D5 /* Drussky.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Drussky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		966FF00557E4301350608DB9 /* LaunchProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchProbe.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				585F3D85E04CF81E23B463FE /* App */,
 				EAE7E43FD27A1C87EF14F290 /* Knowledge */,
 				821816A06DA5B4F87E72816A /* Model */,
+				3AEBC014E006318F4AAF22CE /* Pronunciation */,
 				7788604B501CF50BEF8AE6CA /* Resources */,
 				9983B7D7DF1F94E1B107DEDB /* Services */,
 				3F7BC8E80380301E80C4E108 /* Views */,
@@ -284,6 +287,14 @@
 				E54B2965E0DECBAB5F248B24 /* Scheduling.swift */,
 			);
 			path = LearningCore;
+			sourceTree = "<group>";
+		};
+		3AEBC014E006318F4AAF22CE /* Pronunciation */ = {
+			isa = PBXGroup;
+			children = (
+				8C5EB61E8246F9DC324AC04D /* PronunciationTypes.swift */,
+			);
+			path = Pronunciation;
 			sourceTree = "<group>";
 		};
 		3F7BC8E80380301E80C4E108 /* Views */ = {
@@ -696,6 +707,7 @@
 				BC4BD4EC630AE39955A764B6 /* PageView.swift in Sources */,
 				7B7B3708DF0CE9C452DE40F7 /* PageWriter.swift in Sources */,
 				44C1FFB01EA503282E7E8A8D /* Pitch.swift in Sources */,
+				E0C219A5D00BA3734A2A3621 /* PronunciationTypes.swift in Sources */,
 				09FD56B0A4364BF3B758EFC4 /* QA+Intonation.swift in Sources */,
 				DB3D064DB50315B07FD9D64C /* QA.swift in Sources */,
 				F4AFFA97BA152A966576EC5C /* RecoveryView.swift in Sources */,
