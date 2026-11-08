@@ -1,0 +1,3011 @@
+{
+  "version": 1,
+  "collection": {
+    "id": "mathematics",
+    "title": "Матема́тика",
+    "title_en": "Mathematics",
+    "description_en": "Original guided readings. after_page is a support recommendation, not an access gate. Levels describe the supported mathematical register, not general proficiency."
+  },
+  "texts": [
+    {
+      "id": "math-01-sets",
+      "title": "Мно́жество",
+      "title_en": "A set",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A1",
+      "topic": "math",
+      "text": "Что тако́е мно́жество? Вот мно́жество A. В нём есть элеме́нты: 1, 2 и 3. Э́то чи́сла. В мно́жестве B есть то́лько 1 и 2. Э́то то́же мно́жество чи́сел. В A три элеме́нта, а в B два элеме́нта. В мно́жестве нет поря́дка: 1, 2, 3 и 3, 2, 1 — здесь одно́ и то же мно́жество. В нём нет «пе́рвого» элеме́нта. В матема́тике ва́жно, что есть в мно́жестве, а не где э́то на страни́це. Мно́жество без элеме́нтов — пусто́е мно́жество. Его́ знак — ∅.",
+      "summary_en": "A set. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u7-p4",
+      "rung": 1,
+      "en": "What is a set? Here is set A. It has elements: 1, 2 and 3. These are numbers. Set B has only 1 and 2. This is also a set of numbers. A has three elements, and B has two elements. A set has no order: 1, 2, 3 and 3, 2, 1 are the same set here. It has no ‘first’ element. In mathematics, what matters is what is in the set, not where it is on the page. A set without elements is the empty set. Its symbol is ∅.",
+      "how_read": [
+        {
+          "ru": "в мно́жестве",
+          "en": "in a set",
+          "note": "в + Prepositional: location, not motion."
+        },
+        {
+          "ru": "мно́жество чи́сел",
+          "en": "a set of numbers",
+          "note": "Genitive plural names the contents."
+        },
+        {
+          "ru": "без элеме́нтов",
+          "en": "without elements",
+          "note": "без + Genitive; the plural ending is -ov."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "∅",
+          "ru": "пусто́е мно́жество",
+          "en": "the empty set"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What does this text distinguish?",
+          "options": [
+            "A function and its inverse",
+            "A set and the order of its written elements",
+            "A number and its square"
+          ],
+          "answer": 1,
+          "explanation": "The same set can be written in different orders."
+        },
+        {
+          "kind": "detail",
+          "prompt": "How many elements does B have?",
+          "options": [
+            "Three",
+            "None",
+            "Two"
+          ],
+          "answer": 2,
+          "explanation": "B has only 1 and 2."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What does «в нём нет пе́рвого элеме́нта» deny?",
+          "options": [
+            "A distinguished first element, not the existence of elements",
+            "That A has any elements",
+            "That 1 is a number"
+          ],
+          "answer": 0,
+          "explanation": "The genitive after нет belongs to ‘first element’; A still has three elements."
+        }
+      ],
+      "glosses": {
+        "без": "without (+ genitive)",
+        "в": "in (+ prepositional for location)",
+        "важно": "what matters is; it is important",
+        "два": "two (masculine or neuter)",
+        "его": "its; of it",
+        "есть": "there is/are; is (existence or identity)",
+        "же": "same; emphasizes identity in ‘the same’",
+        "знак": "symbol; sign",
+        "математике": "in mathematics (prepositional)",
+        "множестве": "in/on a set (prepositional singular)",
+        "множество": "set (neuter nominative/accusative)",
+        "на": "on (+ prepositional for location)",
+        "нём": "it (prepositional after in)",
+        "одно": "one; the same (neuter)",
+        "первого": "first (genitive masculine)",
+        "порядка": "of order (genitive)",
+        "пустое": "empty (neuter nominative)",
+        "странице": "on the page (prepositional)",
+        "такое": "such; what something is (neuter nominative)",
+        "то": "then (after if); the same (within the fixed expression for identity)",
+        "только": "only",
+        "три": "three",
+        "чисел": "of numbers (genitive plural)",
+        "числа": "numbers (nominative plural, чи́сла)",
+        "элемента": "of an element; elements after two/three (genitive singular)",
+        "элементов": "of elements (genitive plural)",
+        "элементы": "elements (plural)"
+      }
+    },
+    {
+      "id": "math-02-elements",
+      "title": "Элеме́нт и мно́жество",
+      "title_en": "An element and a set",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A1",
+      "topic": "math",
+      "text": "Элеме́нт мно́жества — э́то объе́кт в э́том мно́жестве. Здесь A — мно́жество чи́сел 2, 4 и 6. Число́ 2 — элеме́нт A. За́пись 2 ∈ A — э́то кра́ткая фо́рма той же мы́сли. Число́ 3 — не элеме́нт A: в A нет числа́ 3. Здесь ва́жен не разме́р числа́, а соста́в мно́жества. Число́ 2 и мно́жество из одного́ элеме́нта 2 — не одно́ и то же. В пе́рвом слу́чае э́то число́, во второ́м — мно́жество. У мно́жества есть элеме́нт, а у числа́ в э́том описа́нии нет элеме́нтов.",
+      "summary_en": "An element and a set. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u8-p3",
+      "rung": 2,
+      "en": "An element of a set is an object in that set. Here A is the set of the numbers 2, 4 and 6. The number 2 is an element of A. The notation 2 ∈ A is a short form of the same thought. The number 3 is not an element of A: A has no number 3. What matters here is not the size of the number but the membership of the set. The number 2 and the set consisting of the single element 2 are not the same thing. In the first case it is a number, in the second a set. The set has an element, whereas the number has no elements in this description.",
+      "how_read": [
+        {
+          "ru": "элеме́нт мно́жества",
+          "en": "an element of a set",
+          "note": "Genitive singular: -а."
+        },
+        {
+          "ru": "нет числа́",
+          "en": "there is no number",
+          "note": "число́ → числа́ in the genitive singular; compare plural чи́сла."
+        },
+        {
+          "ru": "в пе́рвом слу́чае",
+          "en": "in the first case",
+          "note": "Prepositional adjective and noun agree."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "∈",
+          "ru": "принадлежи́т",
+          "en": "belongs to; its set takes the dative, introduced in rung 7"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is the main distinction?",
+          "options": [
+            "Small versus large numbers",
+            "Odd versus even functions",
+            "An element versus a set containing it"
+          ],
+          "answer": 2,
+          "explanation": "A singleton and its element play different roles."
+        },
+        {
+          "kind": "detail",
+          "prompt": "Is 3 in A?",
+          "options": [
+            "No",
+            "Yes",
+            "Only when written first"
+          ],
+          "answer": 0,
+          "explanation": "A contains 2, 4 and 6."
+        },
+        {
+          "kind": "inference",
+          "prompt": "In «нет числа́ 3», why is «числа́» not plural ‘numbers’?",
+          "options": [
+            "It agrees with the numeral three as a count",
+            "нет governs genitive singular, and the phrase singles out 3",
+            "It names every number in A"
+          ],
+          "answer": 1,
+          "explanation": "The written numeral identifies one number; the stress and construction distinguish числа́ from чи́сла."
+        }
+      ],
+      "glosses": {
+        "в": "in (+ prepositional for location)",
+        "важен": "matters; is important (masculine short form)",
+        "во": "in; variant of the preposition used before certain consonant clusters",
+        "втором": "second (prepositional singular)",
+        "есть": "there is/are; is (existence or identity)",
+        "же": "same; emphasizes identity in ‘the same’",
+        "запись": "notation; a written expression",
+        "из": "of; from; out of (+ genitive)",
+        "краткая": "short; concise (feminine nominative)",
+        "множества": "of a set (genitive singular)",
+        "множестве": "in/on a set (prepositional singular)",
+        "множество": "set (neuter nominative/accusative)",
+        "мысли": "of the thought; of the idea (genitive)",
+        "одно": "one; the same (neuter)",
+        "одного": "one (genitive masculine/neuter)",
+        "описании": "in the description (prepositional)",
+        "первом": "first (prepositional masculine)",
+        "принадлежит": "belongs to (+ dative)",
+        "размер": "size",
+        "случае": "in the case (prepositional)",
+        "состав": "membership; composition (what is in the set)",
+        "то": "then (after if); the same (within the fixed expression for identity)",
+        "той": "that; the same (feminine genitive or prepositional)",
+        "у": "at; of; at … there is = … has (+ genitive)",
+        "форма": "form (of a thought or expression)",
+        "чисел": "of numbers (genitive plural)",
+        "числа": "of the number (genitive singular, числа́)",
+        "число": "number (neuter singular)",
+        "элемент": "element (nominative)",
+        "элемента": "of an element; elements after two/three (genitive singular)",
+        "элементов": "of elements (genitive plural)",
+        "этом": "this (prepositional singular)"
+      }
+    },
+    {
+      "id": "math-03-subsets",
+      "title": "Подмно́жество",
+      "title_en": "A subset",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A1",
+      "topic": "math",
+      "text": "A — подмно́жество B, е́сли ка́ждый элеме́нт A — э́то и элеме́нт B. Здесь A — мно́жество чи́сел 1 и 2, а B — мно́жество чи́сел 1, 2 и 3. Поэ́тому A — подмно́жество B. Но B — не подмно́жество A: в B есть 3, а в A нет числа́ 3. Для пусто́го мно́жества нет тако́го приме́ра: в нём вообще́ нет элеме́нтов. Поэ́тому пусто́е мно́жество — подмно́жество ка́ждого мно́жества. Здесь A ⊂ B — стро́гое включе́ние: A — подмно́жество B, но A ≠ B. Для нестро́гого включе́ния есть знак ⊆. Само́ мно́жество то́же есть среди́ его́ подмно́жеств. Здесь нет стро́гого включе́ния.",
+      "summary_en": "A subset. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u10-p4",
+      "rung": 3,
+      "en": "A is a subset of B if every element of A is also an element of B. Here A is the set of the numbers 1 and 2, and B is the set of the numbers 1, 2 and 3. Therefore A is a subset of B. But B is not a subset of A: B has 3, and A has no number 3. There is no such example for the empty set: it has no elements at all. Therefore the empty set is a subset of every set. Here A ⊂ B is strict inclusion: A is a subset of B, but A ≠ B. For non-strict inclusion there is the symbol ⊆. The set itself is also among its subsets. There is no strict inclusion here.",
+      "how_read": [
+        {
+          "ru": "ка́ждый элеме́нт",
+          "en": "every element",
+          "note": "Universal claim; one missing element defeats it."
+        },
+        {
+          "ru": "для ка́ждого мно́жества",
+          "en": "for every set",
+          "note": "для + Genitive."
+        },
+        {
+          "ru": "е́сли …",
+          "en": "if …",
+          "note": "A condition; the definition states what subset means."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "A ⊂ B",
+          "ru": "A — стро́гое подмно́жество B",
+          "en": "A is a proper subset of B; ⊂ is strict throughout this shelf"
+        },
+        {
+          "symbol": "A ⊆ B",
+          "ru": "A — подмно́жество B",
+          "en": "A is a subset of B, possibly equal"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What does subsethood compare?",
+          "options": [
+            "Elements of two sets",
+            "The order of numerals",
+            "Only the sizes of numerals"
+          ],
+          "answer": 0,
+          "explanation": "Every element of the first set must occur in the second."
+        },
+        {
+          "kind": "detail",
+          "prompt": "Which element prevents B from being a subset of A?",
+          "options": [
+            "2",
+            "3",
+            "1"
+          ],
+          "answer": 1,
+          "explanation": "3 is in B but not in A."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What work does «тако́го» do in the empty-set argument?",
+          "options": [
+            "It refers to a first element in an ordered list",
+            "It says the empty set contains 3",
+            "It refers to an element present in the first set but absent from the second"
+          ],
+          "answer": 2,
+          "explanation": "The previous sentence supplies the counterexample pattern. No element can instantiate it for the empty set."
+        }
+      ],
+      "glosses": {
+        "в": "in (+ prepositional for location)",
+        "включение": "inclusion (nominative singular)",
+        "включения": "of inclusion (genitive singular)",
+        "вообще": "at all",
+        "для": "for (+ genitive)",
+        "его": "its; of it",
+        "если": "if",
+        "знак": "symbol; sign",
+        "каждого": "each; every (genitive masculine/neuter)",
+        "каждый": "each; every (masculine nominative/accusative)",
+        "множества": "of a set (genitive singular)",
+        "множество": "set (neuter nominative/accusative)",
+        "нестрогого": "non-strict (genitive singular)",
+        "но": "but",
+        "нём": "it (prepositional after in)",
+        "подмножеств": "subsets (genitive plural)",
+        "подмножество": "subset",
+        "поэтому": "therefore; for this reason",
+        "примера": "of an example (genitive)",
+        "пустого": "empty (genitive singular)",
+        "пустое": "empty (neuter nominative)",
+        "само": "itself (neuter nominative)",
+        "среди": "among (+ genitive)",
+        "строгого": "strict (genitive singular)",
+        "строгое": "strict; proper (neuter nominative)",
+        "такого": "such (genitive singular)",
+        "чисел": "of numbers (genitive plural)",
+        "числа": "of the number (genitive singular, числа́)",
+        "элемент": "element (nominative)",
+        "элементов": "of elements (genitive plural)"
+      }
+    },
+    {
+      "id": "math-04-functions",
+      "title": "Фу́нкция",
+      "title_en": "A function",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A1",
+      "topic": "math",
+      "text": "Фу́нкция f : A → B — э́то пра́вило: для ка́ждого элеме́нта x из A есть ро́вно одно́ значе́ние f(x) в B. Здесь A — о́бласть определе́ния, а B — мно́жество возмо́жных значе́ний. Все ли элеме́нты B есть среди́ значе́ний f? Не обяза́тельно. Наприме́р, A — мно́жество чи́сел 1 и 2, B — мно́жество чи́сел 1, 2 и 3. Е́сли f(1) = 2 и f(2) = 2, э́то фу́нкция. Для ка́ждого аргуме́нта есть одно́ значе́ние. Два ра́зных аргуме́нта и одно́ о́бщее значе́ние — здесь нет пробле́мы. Но два значе́ния для одного́ аргуме́нта — э́то уже́ не фу́нкция.",
+      "summary_en": "A function. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u18-p2",
+      "rung": 4,
+      "en": "A function f : A → B is a rule: for every element x of A there is exactly one value f(x) in B. Here A is the domain, and B is the set of possible values. Do all the elements of B occur among the values of f? Not necessarily. For example, A is the set of the numbers 1 and 2, and B is the set of the numbers 1, 2 and 3. If f(1) = 2 and f(2) = 2, this is a function. Each argument has one value. Two different arguments and one shared value present no problem here. But two values for one argument no longer make a function.",
+      "how_read": [
+        {
+          "ru": "для ка́ждого элеме́нта",
+          "en": "for every element",
+          "note": "Genitive under для; the quantifier comes before uniqueness."
+        },
+        {
+          "ru": "ро́вно одно́ значе́ние",
+          "en": "exactly one value",
+          "note": "Existence and uniqueness together."
+        },
+        {
+          "ru": "о́бласть определе́ния",
+          "en": "domain of definition",
+          "note": "A genitive noun complements о́бласть; no preposition."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "f : A → B",
+          "ru": "f отобража́ет A в B",
+          "en": "f maps A to B; letters remain symbolic placeholders"
+        },
+        {
+          "symbol": "f(x)",
+          "ru": "f от x",
+          "en": "f of x"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is required of a function?",
+          "options": [
+            "Different arguments must have different values",
+            "Exactly one value for each argument in A",
+            "Every element of B must be attained"
+          ],
+          "answer": 1,
+          "explanation": "Existence and uniqueness are per argument."
+        },
+        {
+          "kind": "detail",
+          "prompt": "What is f(2) in the example?",
+          "options": [
+            "1",
+            "3",
+            "2"
+          ],
+          "answer": 2,
+          "explanation": "Both displayed values are 2."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What does «для одного́ аргуме́нта» restrict in the last sentence?",
+          "options": [
+            "Both forbidden values belong to the same argument",
+            "Each value belongs to a different argument",
+            "The domain may contain only one argument"
+          ],
+          "answer": 0,
+          "explanation": "Sharing a value is allowed; assigning two values to one argument violates the definition."
+        }
+      ],
+      "glosses": {
+        "аргумента": "of an argument (genitive singular)",
+        "возможных": "possible (genitive plural)",
+        "все": "all (nominative plural)",
+        "для": "for (+ genitive)",
+        "если": "if",
+        "значение": "value (neuter singular)",
+        "значений": "of values (genitive plural)",
+        "значения": "values (genitive singular form used after two)",
+        "из": "of; from; out of (+ genitive)",
+        "каждого": "each; every (genitive masculine/neuter)",
+        "ли": "whether; marks a yes/no question",
+        "множество": "set (neuter nominative/accusative)",
+        "например": "for example",
+        "но": "but",
+        "область": "domain; region",
+        "общее": "total; common (neuter nominative)",
+        "обязательно": "necessarily",
+        "одно": "one; the same (neuter)",
+        "одного": "one (genitive masculine/neuter)",
+        "определения": "of definition (genitive)",
+        "от": "from; of (+ genitive)",
+        "отображает": "maps (a domain into a codomain)",
+        "правило": "rule",
+        "проблемы": "problem (genitive singular after there is no)",
+        "разных": "different; distinct (genitive/prepositional plural)",
+        "ровно": "exactly",
+        "среди": "among (+ genitive)",
+        "уже": "already; no longer (with negation)",
+        "функция": "function",
+        "чисел": "of numbers (genitive plural)",
+        "элемента": "of an element; elements after two/three (genitive singular)",
+        "элементы": "elements (nominative plural)"
+      }
+    },
+    {
+      "id": "math-05-injections",
+      "title": "Инъе́кция",
+      "title_en": "An injection",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A2",
+      "topic": "math",
+      "text": "Инъе́кция — э́то фу́нкция без совпаде́ний значе́ний у ра́зных аргуме́нтов. Ина́че: е́сли f(x) = f(y), то x = y. Здесь ва́жен поря́док усло́вия и вы́вода. Для любо́й фу́нкции из x = y сле́дует f(x) = f(y). Для инъе́кции есть и обра́тное утвержде́ние. Наприме́р, у фу́нкции f(x) = x + 1 на мно́жестве натура́льных чи́сел нет одина́ковых значе́ний для ра́зных аргуме́нтов. Э́то инъе́кция. А у постоя́нной фу́нкции g(x) = 1 есть одно́ и то же значе́ние для 1 и 2. Э́то не инъе́кция. В определе́нии инъе́кции нет тре́бования о нали́чии всех элеме́нтов B среди́ значе́ний фу́нкции.",
+      "summary_en": "An injection. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u18-p2",
+      "rung": 5,
+      "en": "An injection is a function with no coinciding values at different arguments. In other words: if f(x) = f(y), then x = y. The order of hypothesis and conclusion matters here. For any function, x = y implies f(x) = f(y). For an injection the converse statement holds as well. For example, the function f(x) = x + 1 on the set of natural numbers has no equal values at different arguments. It is an injection. But the constant function g(x) = 1 has the same value at 1 and 2. It is not an injection. The definition of injection does not require every element of B to occur among the function's values.",
+      "how_read": [
+        {
+          "ru": "е́сли … то …",
+          "en": "if … then …",
+          "note": "Reversing the clauses changes the claim."
+        },
+        {
+          "ru": "из … сле́дует …",
+          "en": "… follows from …",
+          "note": "из + Genitive for a verbal noun; formulas keep their notation."
+        },
+        {
+          "ru": "у ра́зных аргуме́нтов",
+          "en": "at different arguments",
+          "note": "у + Genitive plural."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "x = y",
+          "ru": "x ра́вен y",
+          "en": "x equals y; spoken Russian complements of ра́вен take dative"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What does an injection rule out?",
+          "options": [
+            "A nonempty domain",
+            "An unused element of B",
+            "Equal values at distinct arguments"
+          ],
+          "answer": 2,
+          "explanation": "The extra requirement concerns distinct arguments, not coverage of B."
+        },
+        {
+          "kind": "detail",
+          "prompt": "Which example is not injective?",
+          "options": [
+            "g(x) = 1 on the natural numbers",
+            "f(x) = x + 1 on the natural numbers",
+            "Both examples are injective"
+          ],
+          "answer": 0,
+          "explanation": "1 and 2 have the same g-value."
+        },
+        {
+          "kind": "inference",
+          "prompt": "Which direction after «е́сли» characterizes injectivity?",
+          "options": [
+            "Every output has an input",
+            "Equal outputs imply equal inputs",
+            "Equal inputs imply equal outputs"
+          ],
+          "answer": 1,
+          "explanation": "The second direction holds for every function; the first is the extra requirement."
+        }
+      ],
+      "glosses": {
+        "аргументов": "of arguments (genitive plural)",
+        "без": "without (+ genitive)",
+        "важен": "matters; is important (masculine short form)",
+        "всех": "all (genitive plural)",
+        "вывода": "of the conclusion (genitive)",
+        "для": "for (+ genitive)",
+        "если": "if",
+        "же": "same; emphasizes identity in ‘the same’",
+        "значение": "value (neuter singular)",
+        "значений": "of values (genitive plural)",
+        "из": "of; from; out of (+ genitive)",
+        "иначе": "otherwise; in other words",
+        "инъекции": "of/for an injection (genitive)",
+        "инъекция": "injection; an injective function",
+        "любой": "any; every (feminine genitive with ‘function’)",
+        "множестве": "in/on a set (prepositional singular)",
+        "наличии": "presence; occurrence (prepositional after about)",
+        "например": "for example",
+        "натуральных": "positive integer (genitive plural; zero excluded here)",
+        "о": "about; concerning (+ prepositional)",
+        "обратное": "converse (neuter nominative)",
+        "одинаковых": "equal; the same (genitive plural)",
+        "одно": "one; the same (neuter)",
+        "определении": "in the definition (prepositional)",
+        "порядок": "order (nominative)",
+        "постоянной": "constant (feminine genitive, of a function)",
+        "равен": "equals (masculine short adjective; + dative)",
+        "разных": "different; distinct (genitive/prepositional plural)",
+        "следует": "follows (from + genitive gives the premise)",
+        "совпадений": "coincidences; collisions (genitive plural)",
+        "среди": "among (+ genitive)",
+        "то": "then (after if); the same (within the fixed expression for identity)",
+        "требования": "requirement (genitive singular after there is no)",
+        "условия": "of a condition (genitive singular); conditions (plural)",
+        "утверждение": "proposition; statement; assertion",
+        "функции": "of a function (genitive singular)",
+        "функция": "function",
+        "чисел": "of numbers (genitive plural)",
+        "элементов": "of elements (genitive plural)"
+      }
+    },
+    {
+      "id": "math-06-equivalence",
+      "title": "Отноше́ние эквивале́нтности",
+      "title_en": "An equivalence relation",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A2",
+      "topic": "math",
+      "text": "Отноше́ние R на мно́жестве A — э́то пра́вило для пар элеме́нтов. Для ка́ждой па́ры есть отве́т: да и́ли нет. За́пись x R y — э́то «да» для па́ры x, y. Отноше́ние эквивале́нтности — рефлекси́вное, симметри́чное и транзити́вное отноше́ние. Рефлекси́вность: для ка́ждого x есть x R x. Симметри́чность: е́сли x R y, то y R x. Транзити́вность: е́сли x R y и y R z, то x R z. Приме́р на мно́жестве це́лых чи́сел: x R y тогда́ и то́лько тогда́, когда́ у x и y одина́ковая чётность. Здесь два кла́сса: чётные чи́сла и нечётные чи́сла. В ка́ждом кла́ссе все чи́сла эквивале́нтны.",
+      "summary_en": "An equivalence relation. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u22-p2",
+      "rung": 6,
+      "en": "A relation R on a set A is a rule for pairs of elements. For each pair there is an answer: yes or no. The notation x R y means ‘yes’ for the pair x, y. An equivalence relation is a reflexive, symmetric and transitive relation. Reflexivity: for every x, x R x holds. Symmetry: if x R y, then y R x. Transitivity: if x R y and y R z, then x R z. An example on the integers: x R y if and only if x and y have the same parity. There are two classes here: the even numbers and the odd numbers. All the numbers in each class are equivalent.",
+      "how_read": [
+        {
+          "ru": "для ка́ждой па́ры",
+          "en": "for every pair",
+          "note": "Feminine genitive singular in both words."
+        },
+        {
+          "ru": "тогда́ и то́лько тогда́, когда́",
+          "en": "if and only if",
+          "note": "Two directions of implication; not chronological time here."
+        },
+        {
+          "ru": "в ка́ждом кла́ссе",
+          "en": "in each class",
+          "note": "Prepositional singular."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "x R y",
+          "ru": "x и y эквивале́нтны",
+          "en": "x and y are equivalent, for the equivalence relation R used here"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is defined?",
+          "options": [
+            "A relation with three properties",
+            "A function with three values",
+            "An ordering of all integers"
+          ],
+          "answer": 0,
+          "explanation": "Reflexivity, symmetry and transitivity are the three properties."
+        },
+        {
+          "kind": "detail",
+          "prompt": "How many parity classes are there?",
+          "options": [
+            "Infinitely many",
+            "Two",
+            "One"
+          ],
+          "answer": 1,
+          "explanation": "Even integers form one class, odd integers the other."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What does «тогда́ и то́лько тогда́» join here?",
+          "options": [
+            "Symmetry and transitivity alone",
+            "x being even and y being odd",
+            "x R y and x,y having the same parity"
+          ],
+          "answer": 2,
+          "explanation": "The parity statement is both necessary and sufficient for x R y."
+        }
+      ],
+      "glosses": {
+        "все": "all (nominative or accusative plural)",
+        "для": "for (+ genitive)",
+        "если": "if",
+        "запись": "notation; a written expression",
+        "или": "or",
+        "каждого": "each; every (genitive masculine/neuter)",
+        "каждой": "each; every (feminine genitive or prepositional)",
+        "каждом": "each; every (masculine/neuter prepositional)",
+        "класса": "classes (counted form after two)",
+        "классе": "in a class (prepositional)",
+        "множестве": "in/on a set (prepositional singular)",
+        "нечётные": "odd (plural adjective)",
+        "одинаковая": "the same (feminine nominative)",
+        "ответ": "answer",
+        "отношение": "relation",
+        "пар": "of pairs (genitive plural)",
+        "пары": "pair (genitive singular)",
+        "правило": "rule",
+        "пример": "example",
+        "рефлексивное": "reflexive (neuter adjective)",
+        "рефлексивность": "reflexivity",
+        "симметричное": "symmetric (neuter adjective)",
+        "симметричность": "symmetry",
+        "то": "then (after if); the same (within the fixed expression for identity)",
+        "тогда": "then (logical consequence, not necessarily time)",
+        "только": "only",
+        "транзитивное": "transitive (neuter adjective)",
+        "транзитивность": "transitivity",
+        "целых": "integer (genitive plural adjective)",
+        "чисел": "of numbers (genitive plural)",
+        "числа": "numbers (nominative plural, чи́сла)",
+        "чётность": "parity (evenness or oddness)",
+        "чётные": "even (plural adjective)",
+        "эквивалентности": "of equivalence (genitive)",
+        "эквивалентны": "are equivalent (plural short adjective)",
+        "элементов": "of elements (genitive plural)"
+      }
+    },
+    {
+      "id": "math-07-identity",
+      "title": "Тожде́ственная фу́нкция",
+      "title_en": "The identity function",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A2",
+      "topic": "math",
+      "text": "Пусть A — мно́жество. Для ка́ждого x ∈ A поло́жим f(x) = x. Э́то пра́вило явля́ется фу́нкцией из A в A: ка́ждому элеме́нту A соотве́тствует ро́вно одно́ значе́ние, и оно́ принадлежи́т мно́жеству A. Така́я фу́нкция называ́ется тожде́ственной. Утвержде́ние: она́ явля́ется инъе́кцией.\nДоказа́тельство. Пусть f(x) = f(y). По определе́нию f име́ем f(x) = x и f(y) = y. Сле́довательно, x = y. Э́то и есть усло́вие инъекти́вности. Здесь мы не счита́ем элеме́нты A. Мно́жество мо́жет быть коне́чным, бесконе́чным и да́же пусты́м: во всех слу́чаях одно́ и то же рассужде́ние остаётся ве́рным.",
+      "summary_en": "The identity function. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u24-p3",
+      "rung": 7,
+      "en": "Let A be a set. For each x ∈ A, put f(x) = x. This rule is a function from A to A: each element of A has exactly one corresponding value, and it belongs to A. Such a function is called the identity function. Proposition: it is an injection.\nProof. Let f(x) = f(y). By the definition of f, we have f(x) = x and f(y) = y. Consequently x = y. This is precisely the injectivity condition. We do not count the elements of A here. The set may be finite, infinite or even empty: the same reasoning remains valid in all cases.",
+      "how_read": [
+        {
+          "ru": "принадлежи́т мно́жеству",
+          "en": "belongs to a set",
+          "note": "принадлежа́ть + Dative: the member is nominative."
+        },
+        {
+          "ru": "явля́ется фу́нкцией",
+          "en": "is a function",
+          "note": "явля́ться + Instrumental; compare the earlier zero copula."
+        },
+        {
+          "ru": "пусть … поло́жим …",
+          "en": "let … let us put …",
+          "note": "пусть introduces an arbitrary object; perfective поло́жим makes a definition."
+        },
+        {
+          "ru": "по определе́нию",
+          "en": "by definition",
+          "note": "по + Dative in this fixed proof frame."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "x ∈ A",
+          "ru": "x принадлежи́т мно́жеству A",
+          "en": "x belongs to set A"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is proved?",
+          "options": [
+            "Every set is finite",
+            "The identity is injective on every set",
+            "Every function is the identity"
+          ],
+          "answer": 1,
+          "explanation": "The proof uses only f(x) = x."
+        },
+        {
+          "kind": "detail",
+          "prompt": "What is assumed at the start of the proof?",
+          "options": [
+            "x ≠ y",
+            "A has exactly two elements",
+            "f(x) = f(y)"
+          ],
+          "answer": 2,
+          "explanation": "Equality of outputs is the hypothesis for testing injectivity."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What does «оно́» refer to in the first paragraph?",
+          "options": [
+            "The unique value, not the rule",
+            "The function, not its value",
+            "A count of the elements"
+          ],
+          "answer": 0,
+          "explanation": "значе́ние is neuter; this is the value whose membership in A must be checked."
+        }
+      ],
+      "glosses": {
+        "бесконечным": "infinite (instrumental singular)",
+        "верным": "valid (instrumental after ‘remains’)",
+        "во": "in; variant of the preposition used before certain consonant clusters",
+        "всех": "all (genitive plural)",
+        "даже": "even",
+        "же": "same; emphasizes identity in ‘the same’",
+        "значение": "value (neuter singular)",
+        "имеем": "we have (in a calculation)",
+        "инъективности": "of injectivity (genitive singular)",
+        "инъекцией": "an injection (instrumental after ‘is’)",
+        "каждого": "each; every (genitive masculine/neuter)",
+        "каждому": "to each (dative)",
+        "конечным": "finite (instrumental singular)",
+        "множество": "set (neuter nominative/accusative)",
+        "множеству": "to a set (dative singular)",
+        "может": "may; can (singular)",
+        "называется": "is called (singular)",
+        "определению": "by definition (dative after by)",
+        "остаётся": "remains (present)",
+        "по": "by; according to; over (dative in the proof and summation frames here)",
+        "положим": "put; let us set (perfective future used to define)",
+        "правило": "rule",
+        "принадлежать": "to belong to (+ dative)",
+        "принадлежит": "belongs to (+ dative)",
+        "пустым": "empty (instrumental singular)",
+        "пусть": "let; suppose (introduces an object or hypothesis)",
+        "рассуждение": "reasoning; argument",
+        "ровно": "exactly",
+        "случаях": "in cases (prepositional plural)",
+        "соответствует": "corresponds to (+ dative)",
+        "считаем": "we count",
+        "такая": "such (feminine nominative)",
+        "тождественная": "identity (feminine adjective, of a function)",
+        "тождественной": "identity (feminine instrumental, after ‘is called’)",
+        "условие": "condition",
+        "утверждение": "proposition; statement; assertion",
+        "функцией": "a function (instrumental after is)",
+        "элементу": "to an element (dative)",
+        "элементы": "elements (plural)",
+        "является": "is; constitutes (+ instrumental)",
+        "являться": "to be; to constitute (+ instrumental)"
+      }
+    },
+    {
+      "id": "math-08-even-sum",
+      "title": "Су́мма чётных чи́сел",
+      "title_en": "A sum of even integers",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A2",
+      "topic": "math",
+      "text": "Утвержде́ние. Су́мма двух чётных це́лых чи́сел явля́ется чётным число́м. Число́ называ́ется чётным, е́сли оно́ равно́ удво́енному це́лому числу́. Здесь ва́жно сло́во «це́лому»: полови́на любо́го веще́ственного числа́ существу́ет, но не всегда́ явля́ется це́лым число́м.\nДоказа́тельство. Пусть a и b — чётные це́лые чи́сла. Тогда́ существу́ют це́лые чи́сла k и m, для кото́рых a = 2k и b = 2m. Мы записа́ли a + b = 2(k + m). Су́мма k + m то́же явля́ется це́лым число́м. Поэ́тому a + b — чётное число́. Мы доказа́ли утвержде́ние для любы́х двух чётных це́лых чи́сел, а не то́лько для одного́ приме́ра.",
+      "summary_en": "A sum of even integers. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u25-p2",
+      "rung": 8,
+      "en": "Proposition. The sum of two even integers is an even number. A number is called even if it equals twice an integer. The word ‘integer’ matters here: half of any real number exists, but it is not always an integer.\nProof. Let a and b be even integers. Then there exist integers k and m for which a = 2k and b = 2m. We have written a + b = 2(k + m). The sum k + m is also an integer. Therefore a + b is even. We have proved the proposition for any two even integers, not just for one example.",
+      "how_read": [
+        {
+          "ru": "равно́ це́лому числу́",
+          "en": "equals an integer",
+          "note": "равно́ + Dative; neuter subject число́."
+        },
+        {
+          "ru": "для кото́рых",
+          "en": "for which",
+          "note": "Genitive plural refers back to the integers k and m."
+        },
+        {
+          "ru": "мы записа́ли … мы доказа́ли …",
+          "en": "we have written … we have proved …",
+          "note": "Perfective past presents completed steps."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "a + b",
+          "ru": "a плюс b",
+          "en": "a plus b"
+        },
+        {
+          "symbol": "2k",
+          "ru": "два k",
+          "en": "two k; multiplication by juxtaposition"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is the claim?",
+          "options": [
+            "Every real number is even",
+            "The sum of two even integers is odd",
+            "The sum of two even integers is even"
+          ],
+          "answer": 2,
+          "explanation": "Both hypotheses include integrality and evenness."
+        },
+        {
+          "kind": "detail",
+          "prompt": "Why is k + m an integer?",
+          "options": [
+            "Both k and m are integers",
+            "All halves are integers",
+            "a and b are equal"
+          ],
+          "answer": 0,
+          "explanation": "Integers are closed under addition."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What fails if «це́лые» is removed from the statement about k and m?",
+          "options": [
+            "The sum must become negative",
+            "Writing a number as twice a real number no longer proves it even",
+            "The displayed algebra becomes false"
+          ],
+          "answer": 1,
+          "explanation": "The algebra still works; the definition of evenness needs an integer witness."
+        }
+      ],
+      "glosses": {
+        "важно": "what matters is; it is important",
+        "вещественного": "of a real (number; genitive singular)",
+        "всегда": "always",
+        "доказали": "we have proved (perfective past plural)",
+        "записали": "we have written (perfective past plural)",
+        "которых": "which; whose (genitive plural)",
+        "любых": "any (genitive plural)",
+        "называется": "is called (singular)",
+        "одного": "one (genitive masculine/neuter)",
+        "половина": "half",
+        "поэтому": "therefore; for this reason",
+        "примера": "of an example (genitive)",
+        "пусть": "let; suppose (introduces an object or hypothesis)",
+        "равно": "equals (neuter short adjective; + dative)",
+        "существуют": "exist; there exist (plural)",
+        "удвоенному": "twice; doubled (dative singular)",
+        "утверждение": "proposition; statement; assertion",
+        "целому": "integer (dative adjective modifying number)",
+        "целые": "integer (plural adjective)",
+        "целым": "integer (instrumental adjective modifying number)",
+        "целых": "integer (genitive plural adjective)",
+        "числом": "a number (instrumental)",
+        "числу": "a number (dative)",
+        "чётные": "even (plural adjective)",
+        "чётным": "even (instrumental singular adjective)",
+        "является": "is; constitutes (+ instrumental)"
+      }
+    },
+    {
+      "id": "math-09-pigeonhole",
+      "title": "При́нцип Дирихле́",
+      "title_en": "The pigeonhole principle",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A2",
+      "topic": "math",
+      "text": "Утвержде́ние. Е́сли n + 1 предме́тов размести́ть в n я́щиках, где n — натура́льное число́, то хотя́ бы в одно́м я́щике бу́дет не ме́нее двух предме́тов. Не тре́буется, что́бы ка́ждый я́щик был непусты́м. Предме́ты мо́гут лежа́ть как уго́дно.\nДоказа́тельство. Предполо́жим проти́вное: в ка́ждом я́щике не бо́лее одного́ предме́та. Тогда́ во всех n я́щиках вме́сте не бо́лее n предме́тов. Но мы размести́ли n + 1 предме́тов. Получи́ли противоре́чие. Зна́чит, предположе́ние неве́рно. Хотя́ бы оди́н я́щик соде́ржит два предме́та и́ли бо́льше. Здесь «хотя́ бы оди́н» не означа́ет «ро́вно оди́н»: таки́х я́щиков мо́жет быть не́сколько.",
+      "summary_en": "The pigeonhole principle. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u25-p4",
+      "rung": 9,
+      "en": "Proposition. If n + 1 objects are placed in n boxes, where n is a positive integer, then at least one box will contain at least two objects. Not every box is required to be nonempty. The objects may be arranged in any way.\nProof. Suppose the contrary: each box contains at most one object. Then all n boxes together contain at most n objects. But we placed n + 1 objects. We have obtained a contradiction. Hence the supposition is false. At least one box contains two objects or more. Here ‘at least one’ does not mean ‘exactly one’: there may be several such boxes.",
+      "how_read": [
+        {
+          "ru": "хотя́ бы оди́н",
+          "en": "at least one",
+          "note": "Existence without uniqueness."
+        },
+        {
+          "ru": "не ме́нее двух",
+          "en": "not fewer than two",
+          "note": "Genitive after ме́нее; lower bound."
+        },
+        {
+          "ru": "предполо́жим проти́вное",
+          "en": "suppose the contrary",
+          "note": "Perfective first-person plural sets up contradiction."
+        },
+        {
+          "ru": "получи́ли противоре́чие",
+          "en": "we obtained a contradiction",
+          "note": "Perfective past: the conflicting result has been reached."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "n + 1",
+          "ru": "n плюс оди́н",
+          "en": "n plus one"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What does the principle guarantee?",
+          "options": [
+            "Some box has at least two objects",
+            "Every box has two objects",
+            "Exactly one box is nonempty"
+          ],
+          "answer": 0,
+          "explanation": "It is an existence claim."
+        },
+        {
+          "kind": "detail",
+          "prompt": "What upper bound follows under the contrary assumption?",
+          "options": [
+            "Exactly two in total",
+            "At most n objects in total",
+            "At most n + 1 in each box"
+          ],
+          "answer": 1,
+          "explanation": "At most one per box times n boxes."
+        },
+        {
+          "kind": "inference",
+          "prompt": "Which situation is still allowed by «хотя́ бы в одно́м»?",
+          "options": [
+            "Every box contains at most one object",
+            "There are no objects",
+            "Two boxes each contain two objects"
+          ],
+          "answer": 2,
+          "explanation": "‘At least’ leaves open more than one crowded box; for example five objects in four boxes can be distributed 2,2,1,0."
+        }
+      ],
+      "glosses": {
+        "более": "more; ‘at most’ after not",
+        "больше": "more; greater than",
+        "бы": "would; marks a hypothetical consequence",
+        "вместе": "together; in total",
+        "во": "in; variant of the preposition used before certain consonant clusters",
+        "всех": "all (genitive plural)",
+        "дирихле": "Dirichlet (surname, indeclinable)",
+        "или": "or",
+        "каждом": "each; every (masculine/neuter prepositional)",
+        "лежать": "to lie; be placed (imperfective infinitive)",
+        "менее": "less; fewer (negated here: at least)",
+        "могут": "may; can (they)",
+        "может": "may; can (singular)",
+        "натуральное": "positive integer (adjective modifying ‘number’; zero excluded here)",
+        "неверно": "false; incorrect (neuter short form)",
+        "непустым": "nonempty (instrumental after was)",
+        "несколько": "several",
+        "одного": "one (genitive masculine/neuter)",
+        "одном": "one; the same (masculine/neuter prepositional)",
+        "означает": "means (singular)",
+        "получили": "we obtained (perfective past)",
+        "предмета": "objects (genitive singular in the count expressions one or two objects)",
+        "предметов": "objects (genitive plural after a quantity)",
+        "предметы": "objects (nominative plural)",
+        "предположение": "supposition; assumption",
+        "предположим": "suppose; let us suppose (perfective future)",
+        "принцип": "principle",
+        "противное": "the contrary; the negation of the proposed claim",
+        "противоречие": "contradiction (accusative singular)",
+        "разместили": "we placed (perfective past)",
+        "разместить": "to place; distribute (perfective infinitive)",
+        "ровно": "exactly",
+        "содержит": "contains",
+        "таких": "such (genitive plural)",
+        "требуется": "is required",
+        "угодно": "as one wishes; the whole frame means ‘in any way’",
+        "утверждение": "proposition; statement; assertion",
+        "хотя": "although; although would = at least",
+        "ящик": "box (nominative)",
+        "ящиках": "in boxes (prepositional plural)",
+        "ящике": "in a box (prepositional)",
+        "ящиков": "of boxes (genitive plural)"
+      }
+    },
+    {
+      "id": "math-10-primes",
+      "title": "Просты́х чи́сел бесконе́чно мно́го",
+      "title_en": "Infinitely many primes",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A2",
+      "topic": "math",
+      "text": "Просто́е число́ — натура́льное число́, бо́льшее едини́цы, у кото́рого то́лько два натура́льных дели́теля: едини́ца и само́ число́. Утвержде́ние: просты́х чи́сел бесконе́чно мно́го.\nДоказа́тельство. Предполо́жим, что просты́х чи́сел коне́чно мно́го. Пусть p₁, …, pₙ — все просты́е чи́сла. Возьмём N = p₁⋯pₙ + 1. Число́ N бо́льше едини́цы, поэ́тому у него́ есть просто́й дели́тель q. Но ни одно́ число́ из спи́ска не де́лит N: оста́ток от деле́ния N на ка́ждое из них ра́вен едини́це. Сле́довательно, q нет в спи́ске. Получи́ли противоре́чие. Зна́чит, просты́х чи́сел бесконе́чно мно́го. Мы не утвержда́ем, что само́ N обяза́тельно просто́е: ну́жен то́лько его́ просто́й дели́тель.",
+      "summary_en": "Infinitely many primes. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u25-p4",
+      "rung": 10,
+      "en": "A prime is a positive integer greater than one with only two positive divisors: one and the number itself. Proposition: there are infinitely many primes.\nProof. Suppose there are finitely many primes. Let p₁, …, pₙ be all the primes. Take N = p₁⋯pₙ + 1. N is greater than one, so it has a prime divisor q. But no number in the list divides N: the remainder on dividing N by each of them is one. Consequently q is not in the list. We have obtained a contradiction. Hence there are infinitely many primes. We do not claim that N itself is necessarily prime: only its prime divisor is needed.",
+      "how_read": [
+        {
+          "ru": "у кото́рого",
+          "en": "which has",
+          "note": "у + Genitive; кото́рый refers to число́, neuter singular."
+        },
+        {
+          "ru": "ра́вен едини́це",
+          "en": "equals one",
+          "note": "ра́вен + Dative; masculine оста́ток controls ра́вен."
+        },
+        {
+          "ru": "ни одно́ … не …",
+          "en": "not a single …",
+          "note": "ни strengthens the negation; it is not a second logical negation."
+        },
+        {
+          "ru": "возьмём …",
+          "en": "take / let us take …",
+          "note": "Perfective future used to perform a proof step."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "p₁⋯pₙ",
+          "ru": "произведе́ние всех чи́сел из спи́ска",
+          "en": "the product of all the numbers in the list"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What does the proof establish?",
+          "options": [
+            "Every integer is prime",
+            "No finite list contains every prime",
+            "Every product plus one is prime"
+          ],
+          "answer": 1,
+          "explanation": "The contradiction supplies a prime divisor absent from the alleged complete list."
+        },
+        {
+          "kind": "detail",
+          "prompt": "Which number must be prime?",
+          "options": [
+            "N",
+            "p₁⋯pₙ",
+            "q"
+          ],
+          "answer": 2,
+          "explanation": "q is chosen as a prime divisor; N need not be prime."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What changes if «все» is removed from «все просты́е чи́сла»?",
+          "options": [
+            "A new prime need not contradict an incomplete list",
+            "N can then equal one",
+            "The remainder is no longer one"
+          ],
+          "answer": 0,
+          "explanation": "Completeness of the list is exactly what the new divisor contradicts."
+        }
+      ],
+      "glosses": {
+        "бесконечно": "infinitely; without a finite bound",
+        "больше": "more; greater than",
+        "возьмём": "take; let us take (perfective future, we)",
+        "все": "all (nominative or accusative plural)",
+        "всех": "all (genitive plural)",
+        "деления": "of division (genitive)",
+        "делит": "divides (without remainder)",
+        "делитель": "divisor (nominative)",
+        "делителя": "divisor (genitive singular; also the counted form after two)",
+        "его": "its; of it",
+        "единица": "one; the number one (nominative)",
+        "единице": "one (dative after ‘equals’)",
+        "единицы": "one (genitive after a comparison or up to)",
+        "каждое": "each; every (neuter nominative/accusative)",
+        "конечно": "finitely (in ‘finitely many’)",
+        "которого": "which (genitive masculine/neuter)",
+        "который": "which (masculine nominative)",
+        "натуральное": "positive integer (adjective modifying ‘number’; zero excluded here)",
+        "натуральных": "positive integer (genitive plural; zero excluded here)",
+        "него": "it (genitive after a preposition)",
+        "ни": "not even; strengthens a following negation",
+        "них": "them (genitive after a preposition)",
+        "нужен": "is needed (masculine short form)",
+        "обязательно": "necessarily",
+        "остаток": "remainder (of division)",
+        "от": "from; of (+ genitive)",
+        "получили": "we obtained (perfective past)",
+        "поэтому": "therefore; for this reason",
+        "предположим": "suppose; let us suppose (perfective future)",
+        "произведение": "product (of numbers)",
+        "простой": "prime (masculine adjective)",
+        "простых": "prime (genitive plural adjective)",
+        "противоречие": "contradiction (accusative singular)",
+        "пусть": "let; suppose (introduces an object or hypothesis)",
+        "равен": "equals (masculine short adjective; + dative)",
+        "само": "itself (neuter nominative)",
+        "списка": "of/from the list (genitive)",
+        "списке": "in the list (prepositional)",
+        "утверждаем": "we claim; we assert",
+        "утверждение": "proposition; statement; assertion"
+      }
+    },
+    {
+      "id": "math-11-sqrt-two",
+      "title": "Ко́рень из двух",
+      "title_en": "The square root of two",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "A2",
+      "topic": "math",
+      "text": "Утвержде́ние. Число́ √2 иррациона́льно: оно́ не явля́ется отноше́нием двух це́лых чи́сел.\nДоказа́тельство. Предполо́жим, что √2 = a/b, где a и b — положи́тельные це́лые чи́сла без о́бщего дели́теля, бо́льшего едини́цы. Тогда́ a² = 2b², поэ́тому a² чётно. Квадра́т нечётного числа́ нечётен, зна́чит, a чётно. Запи́шем a = 2k. Полу́чим 4k² = 2b² и b² = 2k². Сле́довательно, b то́же чётно. Но тогда́ у a и b есть о́бщий дели́тель 2. Э́то противоре́чит вы́бору дро́би. Ита́к, √2 иррациона́льно. Усло́вие об отсу́тствии о́бщего дели́теля необходи́мо для противоре́чия, а не для преобразова́ния ра́венств.",
+      "summary_en": "The square root of two. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u25-p4",
+      "rung": 11,
+      "en": "Proposition. The number √2 is irrational: it is not a ratio of two integers.\nProof. Suppose √2 = a/b, where a and b are positive integers with no common divisor greater than one. Then a² = 2b², so a² is even. The square of an odd number is odd, so a is even. Write a = 2k. We obtain 4k² = 2b² and b² = 2k². Consequently b is even too. But then a and b have a common divisor, 2. This contradicts the choice of fraction. Thus √2 is irrational. The condition about the absence of a common divisor is necessary for the contradiction, not for transforming the equalities.",
+      "how_read": [
+        {
+          "ru": "противоре́чит вы́бору",
+          "en": "contradicts the choice",
+          "note": "противоре́чить + Dative."
+        },
+        {
+          "ru": "без о́бщего дели́теля",
+          "en": "without a common divisor",
+          "note": "Genitive under без; the following qualifier excludes only divisors greater than one."
+        },
+        {
+          "ru": "запи́шем … полу́чим …",
+          "en": "write … obtain …",
+          "note": "Perfective futures advance the argument."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "√2",
+          "ru": "квадра́тный ко́рень из двух",
+          "en": "the square root of two"
+        },
+        {
+          "symbol": "a²",
+          "ru": "a в квадра́те",
+          "en": "a squared"
+        },
+        {
+          "symbol": "a/b",
+          "ru": "a, делённое на b",
+          "en": "a divided by b"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is ruled out?",
+          "options": [
+            "Positive square roots",
+            "Even denominators in general",
+            "A rational representation of √2"
+          ],
+          "answer": 2,
+          "explanation": "The contradiction rules out every reduced rational representation."
+        },
+        {
+          "kind": "detail",
+          "prompt": "Why must b be even?",
+          "options": [
+            "b² is even, and the square of an odd integer is odd",
+            "Every denominator is even",
+            "b equals a"
+          ],
+          "answer": 0,
+          "explanation": "The same parity reasoning is used twice."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What does «бо́льшего едини́цы» modify in the initial assumption?",
+          "options": [
+            "The square root, requiring it to exceed two",
+            "The common divisor, excluding only divisors greater than one",
+            "The fraction, requiring it to exceed one"
+          ],
+          "answer": 1,
+          "explanation": "The genitive masculine singular agrees with дели́теля; divisor 1 is allowed."
+        }
+      ],
+      "glosses": {
+        "без": "without (+ genitive)",
+        "большего": "greater (genitive masculine singular)",
+        "выбору": "the choice (dative, after ‘contradicts’)",
+        "делитель": "divisor (nominative)",
+        "делителя": "divisor (genitive singular; also the counted form after two)",
+        "делённое": "divided (neuter passive participle, of a number)",
+        "дроби": "of the fraction (genitive)",
+        "единицы": "one (genitive after a comparison or up to)",
+        "запишем": "write; let us write (perfective future)",
+        "иррационально": "is irrational (neuter short adjective)",
+        "итак": "thus; so",
+        "квадрат": "square (of a number)",
+        "квадрате": "squared; ‘in the square’ (prepositional)",
+        "квадратный": "square (adjective modifying ‘root’)",
+        "корень": "root (square root here)",
+        "необходимо": "necessary (neuter short form)",
+        "нечётен": "odd (masculine short adjective)",
+        "нечётного": "odd (genitive neuter, modifying ‘number’)",
+        "об": "about; concerning (+ prepositional, variant of about)",
+        "общего": "common; shared (genitive singular)",
+        "общий": "common; shared (masculine nominative)",
+        "отношением": "a ratio (instrumental after is)",
+        "отсутствии": "absence (prepositional after about)",
+        "положительные": "positive (plural nominative/accusative)",
+        "получим": "we obtain; we shall obtain (perfective future)",
+        "поэтому": "therefore; for this reason",
+        "предположим": "suppose; let us suppose (perfective future)",
+        "преобразования": "for transformation (genitive after for)",
+        "противоречит": "contradicts (+ dative)",
+        "противоречить": "to contradict (+ dative)",
+        "противоречия": "for the contradiction (genitive after for)",
+        "равенств": "of equalities (genitive plural)",
+        "условие": "condition",
+        "утверждение": "proposition; statement; assertion",
+        "целые": "integer (plural adjective)",
+        "целых": "integer (genitive plural adjective)",
+        "чётно": "is even (neuter short adjective)",
+        "является": "is; constitutes (+ instrumental)"
+      }
+    },
+    {
+      "id": "math-12-degrees",
+      "title": "Сте́пени верши́н",
+      "title_en": "Degrees of vertices",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B1",
+      "topic": "math",
+      "text": "Рассмо́трим коне́чный неориенти́рованный граф без пе́тель и кра́тных рёбер. Сте́пень верши́ны — число́ рёбер, кото́рые выхо́дят из неё. Утвержде́ние: су́мма степене́й всех верши́н равна́ удво́енному числу́ рёбер.\nДоказа́тельство. Посчита́ем концы́ рёбер двумя́ спо́собами. В ка́ждой верши́не число́ концо́в равно́ её сте́пени. Поэ́тому о́бщее число́ концо́в равно́ су́мме степене́й. С друго́й стороны́, у ка́ждого ребра́ есть два конца́. Зна́чит, о́бщее число́ концо́в равно́ удво́енному числу́ рёбер. О́ба выраже́ния счита́ют одно́ и то же, поэ́тому они́ равны́. Сле́дствие: число́ верши́н нечётной сте́пени чётно. Ина́че су́мма всех степене́й была́ бы нечётной, хотя́ она́ равна́ удво́енному це́лому числу́.",
+      "summary_en": "Degrees of vertices. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u27-p5",
+      "rung": 12,
+      "en": "Consider a finite undirected graph without loops or multiple edges. The degree of a vertex is the number of edges incident to it. Proposition: the sum of all vertex degrees is twice the number of edges.\nProof. Count edge ends in two ways. At each vertex the number of ends is its degree. Therefore the total number of ends is the sum of the degrees. On the other hand, each edge has two ends. Hence the total number of ends is twice the number of edges. Both expressions count the same thing, so they are equal. Corollary: the number of vertices of odd degree is even. Otherwise the sum of all degrees would be odd, although it equals twice an integer.",
+      "how_read": [
+        {
+          "ru": "рёбра, кото́рые …",
+          "en": "edges which …",
+          "note": "кото́рые is plural to match рёбра; the relative clause identifies incidence."
+        },
+        {
+          "ru": "су́мма равна́",
+          "en": "the sum equals",
+          "note": "Feminine равна́ agrees with су́мма; compare neuter равно́ and plural равны́."
+        },
+        {
+          "ru": "двумя́ спо́собами",
+          "en": "in two ways",
+          "note": "Instrumental expresses the method."
+        },
+        {
+          "ru": "с друго́й стороны́",
+          "en": "on the other hand",
+          "note": "A proof connective introducing another count."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "∑ deg(v) = 2m",
+          "ru": "су́мма степене́й верши́н равна́ удво́енному числу́ рёбер",
+          "en": "the sum of vertex degrees equals twice the number of edges"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is the proof's method?",
+          "options": [
+            "Counting the same ends twice in different ways",
+            "Ordering the vertices",
+            "Assuming all degrees are odd"
+          ],
+          "answer": 0,
+          "explanation": "One count groups ends by vertex, the other by edge."
+        },
+        {
+          "kind": "detail",
+          "prompt": "How many ends does each edge contribute?",
+          "options": [
+            "Its degree",
+            "Two",
+            "One"
+          ],
+          "answer": 1,
+          "explanation": "The edges have two distinct endpoints because loops are excluded."
+        },
+        {
+          "kind": "inference",
+          "prompt": "In «число́ верши́н нечётной сте́пени чётно», what is even?",
+          "options": [
+            "Each of those vertices’ degrees",
+            "Every number of edges",
+            "The number of odd-degree vertices"
+          ],
+          "answer": 2,
+          "explanation": "чётно agrees with число́; нечётной сте́пени restricts which vertices are counted."
+        }
+      ],
+      "glosses": {
+        "без": "without (+ genitive)",
+        "бы": "would; marks a hypothetical consequence",
+        "вершин": "of vertices (genitive plural)",
+        "вершине": "at a vertex (prepositional singular)",
+        "вершины": "of a vertex (genitive singular), or vertices (plural in the opening sentence)",
+        "всех": "all (genitive plural)",
+        "выражения": "expressions (nominative plural)",
+        "выходят": "go out from; are incident to (edges at a vertex)",
+        "граф": "graph (nominative)",
+        "двумя": "two (instrumental)",
+        "другой": "the other (genitive feminine, in ‘on the other hand’)",
+        "её": "its; of it (feminine antecedent)",
+        "же": "same; emphasizes identity in ‘the same’",
+        "иначе": "otherwise; in other words",
+        "каждого": "each; every (genitive masculine/neuter)",
+        "каждой": "each; every (feminine genitive or prepositional)",
+        "конечный": "finite (masculine accusative)",
+        "конца": "ends (counted form after two)",
+        "концов": "of ends (genitive plural)",
+        "концы": "ends (accusative plural)",
+        "кратных": "multiple; parallel (genitive plural, of graph edges)",
+        "неориентированный": "undirected (masculine accusative)",
+        "нечётной": "odd (feminine genitive/instrumental)",
+        "неё": "it (feminine genitive, referring to the vertex)",
+        "оба": "both (masculine/neuter)",
+        "общее": "total; common (neuter nominative)",
+        "петель": "of loops (genitive plural)",
+        "посчитаем": "count; let us count (perfective future)",
+        "поэтому": "therefore; for this reason",
+        "равна": "equals (feminine short adjective; + dative)",
+        "равно": "equals (neuter short adjective; + dative)",
+        "равны": "are equal (plural short adjective)",
+        "рассмотрим": "consider; let us consider (perfective future)",
+        "ребра": "of an edge (genitive singular)",
+        "рёбер": "of edges (genitive plural)",
+        "рёбра": "edges (nominative plural)",
+        "следствие": "corollary; consequence",
+        "способами": "ways; methods (instrumental plural)",
+        "степеней": "of degrees (genitive plural, of graph vertices)",
+        "степени": "degree (genitive singular after ‘of’; dative singular after equals)",
+        "степень": "degree (of a graph vertex)",
+        "стороны": "side (genitive singular in with other side, ‘on the other hand’)",
+        "сумме": "the sum (dative after equals)",
+        "считают": "count (they)",
+        "удвоенному": "twice; doubled (dative singular)",
+        "утверждение": "proposition; statement; assertion",
+        "хотя": "although; although would = at least",
+        "целому": "integer (dative adjective modifying number)",
+        "числу": "a number (dative)",
+        "чётно": "is even (neuter short adjective)"
+      }
+    },
+    {
+      "id": "math-13-paths",
+      "title": "Кратча́йший путь",
+      "title_en": "A shortest path",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B1",
+      "topic": "math",
+      "text": "Пусть две ра́зные верши́ны коне́чного неориенти́рованного гра́фа соедине́ны маршру́том. Здесь маршру́т — после́довательность сме́жных верши́н; повторе́ния разреше́ны. Путь — маршру́т без повторе́ний верши́н. Утвержде́ние: ме́жду да́нными верши́нами существу́ет путь.\nДоказа́тельство. Вы́берем маршру́т наиме́ньшей длины́. Е́сли в нём два́жды встреча́ется одна́ верши́на, уда́лим часть маршру́та ме́жду э́тими двумя́ появле́ниями. Оста́нется маршру́т с те́ми же нача́лом и концо́м, кото́рый коро́че исхо́дного. Э́то противоре́чит вы́бору. Поэ́тому повторе́ний нет: вы́бранный маршру́т явля́ется путём. Мы доказа́ли существова́ние пути́, но не его́ еди́нственность. В гра́фе мо́гут быть два ра́зных пути́, кото́рые име́ют одина́ковую наиме́ньшую длину́.",
+      "summary_en": "A shortest path. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u27-p5",
+      "rung": 13,
+      "en": "Let two distinct vertices of a finite undirected graph be connected by a walk. Here a walk is a sequence of adjacent vertices; repetitions are allowed. A path is a walk without repeated vertices. Proposition: a path exists between the given vertices.\nProof. Choose a walk of minimum length. If a vertex occurs twice in it, remove the part of the walk between those two occurrences. A walk remains with the same beginning and end, shorter than the original. This contradicts the choice. Therefore there are no repetitions: the chosen walk is a path. We have proved existence of a path, but not uniqueness. There may be two different paths in the graph having the same minimum length.",
+      "how_read": [
+        {
+          "ru": "ме́жду верши́нами",
+          "en": "between vertices",
+          "note": "ме́жду + Instrumental."
+        },
+        {
+          "ru": "кото́рый коро́че исхо́дного",
+          "en": "which is shorter than the original",
+          "note": "кото́рый refers to маршру́т, not часть; comparison uses genitive."
+        },
+        {
+          "ru": "вы́берем … уда́лим …",
+          "en": "choose … remove …",
+          "note": "Perfective steps construct the contradiction."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "∃",
+          "ru": "существу́ет",
+          "en": "there exists; existence alone says nothing about uniqueness"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is proved?",
+          "options": [
+            "Every shortest path is unique",
+            "A connecting walk implies a connecting path",
+            "Every pair of vertices is adjacent"
+          ],
+          "answer": 1,
+          "explanation": "Cycles in a walk can be removed."
+        },
+        {
+          "kind": "detail",
+          "prompt": "What is removed from a walk with a repeated vertex?",
+          "options": [
+            "Both endpoint vertices",
+            "Every edge in the graph",
+            "The segment between two occurrences of the same vertex"
+          ],
+          "answer": 2,
+          "explanation": "The repeated vertex lets the remaining pieces join."
+        },
+        {
+          "kind": "inference",
+          "prompt": "Why is «кото́рый» masculine in the shorter-walk sentence?",
+          "options": [
+            "Its head is маршру́т, the surviving walk",
+            "Its head is часть, the removed part",
+            "Its head is длина́, the length"
+          ],
+          "answer": 0,
+          "explanation": "The proof needs a shorter connecting walk; masculine agreement points to exactly that object."
+        }
+      ],
+      "glosses": {
+        "без": "without (+ genitive)",
+        "вершин": "of vertices (genitive plural)",
+        "вершина": "vertex (nominative singular)",
+        "вершинами": "vertices (instrumental plural, after ‘between’)",
+        "вершины": "vertices (nominative plural in the opening assumption)",
+        "встречается": "occurs; is encountered",
+        "выберем": "choose; let us choose (perfective future)",
+        "выбору": "the choice (dative, after ‘contradicts’)",
+        "выбранный": "chosen (masculine nominative passive participle)",
+        "графа": "of a graph (genitive)",
+        "графе": "in a graph (prepositional)",
+        "данными": "given (instrumental plural, modifying vertices)",
+        "дважды": "twice",
+        "двумя": "two (instrumental)",
+        "длина": "length (nominative singular)",
+        "длину": "length (accusative)",
+        "длины": "of length (genitive singular)",
+        "доказали": "we have proved (perfective past plural)",
+        "его": "its; of it",
+        "единственность": "uniqueness (accusative)",
+        "же": "same; emphasizes identity in ‘the same’",
+        "имеют": "have (they)",
+        "исходного": "the original (genitive masculine after a comparative)",
+        "конечного": "of a finite (genitive singular)",
+        "концом": "end (instrumental)",
+        "короче": "shorter",
+        "кратчайший": "shortest (masculine nominative)",
+        "маршрут": "walk (a sequence allowing repeated vertices)",
+        "маршрута": "of the walk (genitive)",
+        "маршрутом": "by a walk (instrumental)",
+        "между": "between (+ instrumental)",
+        "могут": "may; can (they)",
+        "наименьшей": "least; minimum (feminine genitive)",
+        "наименьшую": "least; minimum (feminine accusative)",
+        "началом": "beginning (instrumental)",
+        "неориентированного": "undirected (genitive masculine)",
+        "нём": "it (prepositional after in)",
+        "одинаковую": "the same (feminine accusative)",
+        "останется": "will remain (perfective future)",
+        "повторений": "of repetitions (genitive plural)",
+        "повторения": "repetitions (nominative plural)",
+        "последовательность": "sequence",
+        "поэтому": "therefore; for this reason",
+        "появлениями": "occurrences (instrumental plural after between)",
+        "противоречит": "contradicts (+ dative)",
+        "пусть": "let; suppose (introduces an object or hypothesis)",
+        "пути": "of a path; paths (genitive singular or counted form)",
+        "путь": "path (no repeated vertices in this text)",
+        "путём": "a path (instrumental after is)",
+        "разные": "different; distinct (plural)",
+        "разных": "different; distinct (genitive/prepositional plural)",
+        "разрешены": "are allowed (plural short passive participle)",
+        "смежных": "adjacent (genitive plural)",
+        "соединены": "are connected (plural short passive participle)",
+        "существование": "existence (accusative)",
+        "теми": "those; the same (instrumental plural)",
+        "удалим": "remove; let us remove (perfective future)",
+        "утверждение": "proposition; statement; assertion",
+        "часть": "part; segment",
+        "этими": "these (instrumental plural)",
+        "является": "is; constitutes (+ instrumental)"
+      }
+    },
+    {
+      "id": "math-14-inverse",
+      "title": "Обра́тная фу́нкция",
+      "title_en": "An inverse function",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B1",
+      "topic": "math",
+      "text": "Фу́нкция f : A → B называ́ется бие́кцией, е́сли для ка́ждого y ∈ B существу́ет еди́нственный x ∈ A, для кото́рого f(x) = y. Утвержде́ние: у бие́кции существу́ет обра́тная фу́нкция g : B → A.\nДоказа́тельство. Для ка́ждого y возьмём э́тот еди́нственный x и поло́жим g(y) = x. Значе́ние существу́ет и определено́ однозна́чно, поэ́тому g явля́ется фу́нкцией. По построе́нию f(g(y)) = y. Кро́ме того́, g(f(x)) = x, так как x — еди́нственный аргуме́нт со значе́нием f(x). Ита́к, g — обра́тная фу́нкция. Без существова́ния проо́браза значе́ние g иногда́ отсу́тствует; без еди́нственности появля́ется вы́бор. О́ба усло́вия ну́жны для э́того определе́ния.",
+      "summary_en": "An inverse function. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u27-p5",
+      "rung": 14,
+      "en": "A function f : A → B is called a bijection if for every y ∈ B there exists a unique x ∈ A for which f(x) = y. Proposition: a bijection has an inverse function g : B → A.\nProof. For each y take this unique x and put g(y) = x. The value exists and is uniquely determined, so g is a function. By construction f(g(y)) = y. Moreover g(f(x)) = x, since x is the unique argument with value f(x). Thus g is the inverse function. Without existence of a preimage the value of g is sometimes missing; without uniqueness a choice arises. Both conditions are needed for this definition.",
+      "how_read": [
+        {
+          "ru": "существу́ет еди́нственный",
+          "en": "there exists a unique",
+          "note": "Existence plus uniqueness, inside the scope of ‘for every y’."
+        },
+        {
+          "ru": "для кото́рого",
+          "en": "for which",
+          "note": "Genitive singular refers to x, not y."
+        },
+        {
+          "ru": "по построе́нию",
+          "en": "by construction",
+          "note": "по + Dative; refers back to how g was defined."
+        },
+        {
+          "ru": "определено́ однозна́чно",
+          "en": "is uniquely determined",
+          "note": "Short passive participle agrees with neuter значе́ние."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "∀ y ∈ B ∃! x ∈ A",
+          "ru": "для любо́го y из B существу́ет еди́нственный x из A",
+          "en": "for every y in B there is a unique x in A"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is being constructed?",
+          "options": [
+            "An ordering of B",
+            "A constant function",
+            "An inverse to a bijection"
+          ],
+          "answer": 2,
+          "explanation": "g takes each y back to its unique preimage."
+        },
+        {
+          "kind": "detail",
+          "prompt": "What is g's domain?",
+          "options": [
+            "B",
+            "A only",
+            "The integers regardless of A and B"
+          ],
+          "answer": 0,
+          "explanation": "The direction of the arrow is reversed."
+        },
+        {
+          "kind": "inference",
+          "prompt": "Does «для ка́ждого y … еди́нственный x» require the same x for all y?",
+          "options": [
+            "Only when B has two elements",
+            "No: x is chosen separately for each y",
+            "Yes: there must be one fixed x"
+          ],
+          "answer": 1,
+          "explanation": "The existence-and-uniqueness clause is inside the scope of the universal quantifier."
+        }
+      ],
+      "glosses": {
+        "без": "without (+ genitive)",
+        "биекцией": "a bijection (instrumental after ‘is called’)",
+        "биекции": "of a bijection (genitive singular)",
+        "возьмём": "take; let us take (perfective future, we)",
+        "выбор": "a choice (nominative)",
+        "единственности": "of uniqueness (genitive)",
+        "единственный": "unique; the only one (masculine)",
+        "значение": "value (neuter singular)",
+        "значением": "value (instrumental after with)",
+        "иногда": "sometimes",
+        "итак": "thus; so",
+        "каждого": "each; every (genitive masculine/neuter)",
+        "которого": "which (genitive masculine/neuter)",
+        "кроме": "besides (in the frame meaning moreover)",
+        "называется": "is called (singular)",
+        "нужны": "are needed (plural short form)",
+        "оба": "both (masculine/neuter)",
+        "обратная": "inverse (feminine nominative)",
+        "однозначно": "uniquely; unambiguously",
+        "определения": "of definition (genitive)",
+        "определено": "is determined (neuter short passive participle)",
+        "отсутствует": "is absent; is missing",
+        "по": "by; according to; over (dative in the proof and summation frames here)",
+        "положим": "put; let us set (perfective future used to define)",
+        "построению": "by construction (dative after by)",
+        "поэтому": "therefore; for this reason",
+        "появляется": "arises; appears",
+        "прообраза": "of a preimage (genitive singular)",
+        "существования": "of existence (genitive)",
+        "того": "that (genitive, in the frame meaning moreover)",
+        "условия": "of a condition (genitive singular); conditions (plural)",
+        "утверждение": "proposition; statement; assertion",
+        "функцией": "a function (instrumental after is)",
+        "этого": "this (genitive singular)",
+        "является": "is; constitutes (+ instrumental)"
+      }
+    },
+    {
+      "id": "math-15-open-sets",
+      "title": "Откры́тые мно́жества",
+      "title_en": "Topology: an open set",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B1",
+      "topic": "math",
+      "text": "Рассма́триваем веще́ственную пряму́ю. Окре́стность то́чки x — интерва́л (x − ε, x + ε), где ε > 0. Мно́жество U называ́ется откры́тым, е́сли для ка́ждой то́чки x из U существу́ет окре́стность, цели́ком содержа́щаяся в U. Сло́во «содержа́щаяся» отно́сится к окре́стности: все её то́чки должны́ принадлежа́ть U.\nНаприме́р, интерва́л (0, 1) откры́т. Для то́чки внутри́ него́ мо́жно вы́брать доста́точно ма́лую окре́стность. Мно́жество всех то́чек, не принадлежа́щих отре́зку [0, 1], то́же откры́то: э́то объедине́ние интерва́лов (−∞, 0) и (1, +∞). Здесь «не принадлежа́щих» характеризу́ет то́чки, а не мно́жество. Само́ мно́жество [0, 1] за́мкнуто: его́ дополне́ние откры́то.",
+      "summary_en": "Topology: an open set. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u28-p2",
+      "rung": 15,
+      "en": "We consider the real line. A neighborhood of a point x is an interval (x − ε, x + ε), where ε > 0. A set U is called open if each point x in U has a neighborhood wholly contained in U. The word ‘contained’ refers to the neighborhood: all its points must belong to U.\nFor example, the interval (0, 1) is open. For a point inside it one can choose a sufficiently small neighborhood. The set of all points not belonging to the closed interval [0, 1] is open too: it is the union of the intervals (−∞, 0) and (1, +∞). Here ‘not belonging’ characterizes the points, not the set. The set [0, 1] itself is closed: its complement is open.",
+      "how_read": [
+        {
+          "ru": "окре́стность, содержа́щаяся в U",
+          "en": "a neighborhood contained in U",
+          "note": "Present reflexive participle, feminine nominative singular."
+        },
+        {
+          "ru": "всех то́чек, не принадлежа́щих отре́зку",
+          "en": "all points not belonging to the interval",
+          "note": "Genitive plural agreement with то́чек; принадлежа́ть still governs dative отре́зку."
+        },
+        {
+          "ru": "его́ дополне́ние откры́то",
+          "en": "its complement is open",
+          "note": "Short neuter predicate adjective; a property, not an act of opening."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "(0, 1)",
+          "ru": "интерва́л от нуля́ до едини́цы",
+          "en": "the open interval from zero to one"
+        },
+        {
+          "symbol": "[0, 1]",
+          "ru": "отре́зок от нуля́ до едини́цы",
+          "en": "the closed interval from zero to one"
+        },
+        {
+          "symbol": "ε > 0",
+          "ru": "э́псилон бо́льше нуля́",
+          "en": "epsilon is greater than zero"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What makes a subset of the real line open?",
+          "options": [
+            "Each of its points has a neighborhood contained in it",
+            "It contains both endpoints of every interval",
+            "Its complement has one point"
+          ],
+          "answer": 0,
+          "explanation": "The neighborhood may depend on the point."
+        },
+        {
+          "kind": "detail",
+          "prompt": "Is 0 in the complement of [0, 1]?",
+          "options": [
+            "Only if epsilon is small",
+            "No",
+            "Yes"
+          ],
+          "answer": 1,
+          "explanation": "The closed interval includes both endpoints."
+        },
+        {
+          "kind": "inference",
+          "prompt": "Which noun governs the agreement in «не принадлежа́щих»?",
+          "options": [
+            "мно́жество",
+            "отре́зку",
+            "то́чек"
+          ],
+          "answer": 2,
+          "explanation": "The genitive plural participle modifies the genitive plural points; its own dative complement is отре́зку."
+        }
+      ],
+      "glosses": {
+        "вещественную": "the real (line; accusative singular)",
+        "внутри": "inside (+ genitive)",
+        "все": "all (nominative or accusative plural)",
+        "всех": "all (genitive plural)",
+        "выбрать": "to choose (perfective infinitive)",
+        "должны": "must; are required to (plural short form)",
+        "дополнение": "complement (of a set)",
+        "достаточно": "sufficiently; it suffices",
+        "его": "its; of it",
+        "единицы": "one (genitive after a comparison or up to)",
+        "её": "its; of it (feminine antecedent)",
+        "замкнуто": "is closed (neuter short predicate adjective)",
+        "интервал": "open interval",
+        "интервалов": "of open intervals (genitive plural)",
+        "к": "to (+ dative)",
+        "каждой": "each; every (feminine genitive or prepositional)",
+        "малую": "small (feminine accusative)",
+        "множества": "sets (nominative plural in the title or opening); of a set in genitive contexts",
+        "множество": "set (neuter nominative/accusative)",
+        "например": "for example",
+        "него": "it (genitive after a preposition)",
+        "нуля": "zero (genitive after from or a comparison)",
+        "объединение": "union (of sets)",
+        "окрестности": "of/to the neighborhood (genitive or dative singular)",
+        "окрестность": "neighborhood (feminine nominative/accusative)",
+        "от": "from; of (+ genitive)",
+        "открыт": "is open (masculine short adjective)",
+        "открытые": "open (plural adjective)",
+        "открытым": "open (instrumental after ‘is called’)",
+        "относится": "refers to; modifies (+ to and dative)",
+        "отрезку": "to the closed interval (dative)",
+        "отрезок": "closed interval; segment",
+        "принадлежать": "to belong to (+ dative)",
+        "принадлежащих": "belonging to (genitive plural active participle here)",
+        "прямую": "the line (feminine accusative)",
+        "рассматриваем": "we consider (imperfective present)",
+        "само": "itself (neuter nominative)",
+        "содержащаяся": "contained (feminine nominative reflexive participle)",
+        "точек": "of points (genitive plural)",
+        "точки": "of a point (genitive singular); points (nominative plural)",
+        "характеризует": "characterizes; describes",
+        "целиком": "wholly; entirely",
+        "эпсилон": "epsilon, the name of ε"
+      }
+    },
+    {
+      "id": "math-16-union-theorem",
+      "title": "Объедине́ние: теоре́ма",
+      "title_en": "Topology: the union theorem",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B1",
+      "topic": "math",
+      "text": "Теоре́ма. Объедине́ние любо́го семе́йства откры́тых мно́жеств веще́ственной прямо́й откры́то. Речь идёт о мно́жествах, откры́тых на одно́й и той же прямо́й. Семе́йство мо́жет быть коне́чным и́ли бесконе́чным.\nОбозна́чим э́ти мно́жества Uᵢ, где i ∈ I. Их объедине́ние U состои́т из то́чек, принадлежа́щих хотя́ бы одному́ Uᵢ. Не тре́буется, что́бы то́чка принадлежа́ла всем мно́жествам семе́йства. При пусто́м I объедине́ние пусто́. Пусто́е мно́жество откры́то: в нём нет то́чки, для кото́рой усло́вие откры́тости наруша́ется. В сле́дующем доказа́тельстве для непусто́го объедине́ния мы вы́берем то́чку, зате́м одно́ мно́жество семе́йства, содержа́щее э́ту то́чку.",
+      "summary_en": "Topology: the union theorem. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u28-p2",
+      "rung": 16,
+      "en": "Theorem. The union of any family of open subsets of the real line is open. We mean sets open in one and the same real line. The family may be finite or infinite.\nDenote these sets by Uᵢ, where i ∈ I. Their union U consists of the points belonging to at least one Uᵢ. A point need not belong to every set in the family. When I is empty, the union is empty. The empty set is open: it has no point at which the openness condition fails. In the following proof for a nonempty union we shall choose a point, then one set in the family containing that point.",
+      "how_read": [
+        {
+          "ru": "объедине́ние семе́йства мно́жеств",
+          "en": "the union of a family of sets",
+          "note": "Two nested genitives: family of sets, union of that family."
+        },
+        {
+          "ru": "то́чек, принадлежа́щих хотя́ бы одному́",
+          "en": "points belonging to at least one",
+          "note": "Agreement is genitive plural; the governed object is dative singular."
+        },
+        {
+          "ru": "мно́жество, содержа́щее э́ту то́чку",
+          "en": "a set containing this point",
+          "note": "Active participle: the set contains the point; contrast содержа́щееся."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "U = ⋃ᵢ Uᵢ",
+          "ru": "U — объедине́ние всех U с и́ндексом i",
+          "en": "U is the union of all U sub i, with i ranging over I"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What does the theorem permit?",
+          "options": [
+            "Only disjoint open intervals",
+            "An arbitrary family, including an infinite one",
+            "Only two open sets"
+          ],
+          "answer": 1,
+          "explanation": "There is no finiteness or disjointness hypothesis."
+        },
+        {
+          "kind": "detail",
+          "prompt": "How many member sets must contain a point of U?",
+          "options": [
+            "Every member",
+            "Exactly two",
+            "At least one"
+          ],
+          "answer": 2,
+          "explanation": "This is the membership condition for a union."
+        },
+        {
+          "kind": "inference",
+          "prompt": "Why does the empty family not give a counterexample?",
+          "options": [
+            "Its union is empty, so no point violates the openness condition",
+            "Its union is the whole line by definition",
+            "The theorem excludes it"
+          ],
+          "answer": 0,
+          "explanation": "Openness quantifies over points of U; for empty U there is no failing point."
+        }
+      ],
+      "glosses": {
+        "бесконечным": "infinite (instrumental singular)",
+        "бы": "would; marks a hypothetical consequence",
+        "вещественной": "of the real (line; genitive singular)",
+        "всем": "all (dative plural)",
+        "всех": "all (genitive plural)",
+        "выберем": "choose; let us choose (perfective future)",
+        "доказательстве": "in the proof (prepositional)",
+        "же": "same; emphasizes identity in ‘the same’",
+        "затем": "then; next",
+        "индексом": "index; subscript (instrumental after with)",
+        "конечным": "finite (instrumental singular)",
+        "множеств": "of sets (genitive plural)",
+        "множества": "sets (nominative plural in the title or opening); of a set in genitive contexts",
+        "множествам": "to sets (dative plural)",
+        "множествах": "about/in sets (prepositional plural)",
+        "множество": "set (neuter nominative/accusative)",
+        "может": "may; can (singular)",
+        "нарушается": "is violated; fails to hold",
+        "непустого": "nonempty (neuter genitive)",
+        "нём": "it (prepositional after in)",
+        "обозначим": "denote; let us denote (perfective future)",
+        "объединение": "union (of sets)",
+        "объединения": "of the union (genitive)",
+        "одной": "one; the same (feminine prepositional)",
+        "одному": "one (dative masculine/neuter)",
+        "открытости": "of openness (genitive)",
+        "открытых": "open (genitive plural)",
+        "при": "when; under the condition; given (+ prepositional)",
+        "принадлежала": "belonged; would belong (past feminine, after so that)",
+        "принадлежащих": "belonging to (genitive plural active participle here)",
+        "прямой": "of/on the line (feminine genitive/prepositional)",
+        "пусто": "is empty (neuter short adjective)",
+        "пустое": "empty (neuter nominative)",
+        "пустом": "empty (prepositional singular)",
+        "речь": "speech; the whole frame means ‘we are talking about’",
+        "семейства": "of a family (genitive singular)",
+        "семейство": "family (of sets)",
+        "следующем": "following; next (prepositional masculine)",
+        "содержащее": "containing (neuter active participle)",
+        "содержащееся": "contained (neuter reflexive participle)",
+        "состоит": "consists (from + genitive)",
+        "той": "that; the same (feminine genitive or prepositional)",
+        "точек": "of points (genitive plural)",
+        "точка": "point (nominative)",
+        "точки": "of a point (genitive singular); points (nominative plural)",
+        "точку": "a point (accusative)",
+        "требуется": "is required",
+        "условие": "condition",
+        "хотя": "although; although would = at least",
+        "эту": "this (feminine accusative)"
+      }
+    },
+    {
+      "id": "math-17-union-proof",
+      "title": "Объедине́ние: доказа́тельство",
+      "title_en": "Topology: proof of the union theorem",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B1",
+      "topic": "math",
+      "text": "Доказа́тельство. Пусть U — объедине́ние откры́тых мно́жеств Uᵢ. Слу́чай пусто́го U уже́ рассмо́трен. Вы́брав произво́льную то́чку x из U, найдём мно́жество Uᵢ, содержа́щее x. По определе́нию объедине́ния тако́е мно́жество существу́ет. Так как Uᵢ откры́то, существу́ет окре́стность V то́чки x, содержа́щаяся в Uᵢ. Но Uᵢ ⊆ U. Сле́довательно, V цели́ком соде́ржится и в U. Мы нашли́ тре́буемую окре́стность для произво́льной то́чки U. Зна́чит, U откры́то.\nВыбира́я Uᵢ, мы мо́жем учиты́вать x. Одно́ и то же Uᵢ не обяза́но подходи́ть для всех то́чек U. Доказа́тельство испо́льзует лока́льное усло́вие: у ка́ждой то́чки есть своя́ окре́стность.",
+      "summary_en": "Topology: proof of the union theorem. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u28-p4",
+      "rung": 17,
+      "en": "Proof. Let U be the union of open sets Uᵢ. The case of empty U has already been dealt with. Having chosen an arbitrary point x in U, we find a set Uᵢ containing x. Such a set exists by the definition of union. Since Uᵢ is open, there is a neighborhood V of x contained in Uᵢ. But Uᵢ ⊆ U. Consequently V is wholly contained in U as well. We have found the required neighborhood for an arbitrary point of U. Hence U is open.\nWhen choosing Uᵢ, we may take x into account. The same Uᵢ need not work for every point of U. The proof uses a local condition: each point has its own neighborhood.",
+      "how_read": [
+        {
+          "ru": "вы́брав то́чку, найдём …",
+          "en": "having chosen a point, we find …",
+          "note": "Perfective adverbial participle: the implicit we performs both actions."
+        },
+        {
+          "ru": "выбира́я …, мы …",
+          "en": "when choosing …, we …",
+          "note": "Imperfective adverbial participle presents the ongoing choice."
+        },
+        {
+          "ru": "окре́стность, содержа́щаяся …",
+          "en": "a neighborhood contained …",
+          "note": "Feminine agreement, with -sya reversing the containment role."
+        },
+        {
+          "ru": "слу́чай рассмо́трен",
+          "en": "the case has been dealt with",
+          "note": "Short passive participle, masculine singular."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "Uᵢ ⊆ U",
+          "ru": "U с и́ндексом i явля́ется подмно́жеством U",
+          "en": "U sub i is a subset of U"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "How does openness pass to the union?",
+          "options": [
+            "All member sets have the same neighborhood",
+            "The union has finitely many points",
+            "A neighborhood in one member set is also in the union"
+          ],
+          "answer": 2,
+          "explanation": "Containment supplies the last step."
+        },
+        {
+          "kind": "detail",
+          "prompt": "What may depend on x?",
+          "options": [
+            "The selected member set Uᵢ",
+            "Whether x belongs to U after it was chosen",
+            "The definition of union"
+          ],
+          "answer": 0,
+          "explanation": "The member set is selected after the point."
+        },
+        {
+          "kind": "inference",
+          "prompt": "Who chooses in «вы́брав … найдём»?",
+          "options": [
+            "The neighborhood V",
+            "The same implicit we who will find the member set",
+            "The point x"
+          ],
+          "answer": 1,
+          "explanation": "The adverbial participle shares its agent with the main verb, not the nearest noun."
+        }
+      ],
+      "glosses": {
+        "всех": "all (genitive plural)",
+        "выбирая": "choosing; while choosing (imperfective adverbial participle)",
+        "выбрав": "having chosen (perfective adverbial participle)",
+        "индексом": "index; subscript (instrumental after with)",
+        "использует": "uses",
+        "каждой": "each; every (feminine genitive or prepositional)",
+        "локальное": "local (neuter accusative)",
+        "множеств": "of sets (genitive plural)",
+        "множество": "set (neuter nominative/accusative)",
+        "можем": "we may; we can",
+        "найдём": "we find; let us find (perfective future)",
+        "нашли": "we have found (perfective past)",
+        "объединение": "union (of sets)",
+        "объединения": "of the union (genitive)",
+        "обязано": "is required to; must (neuter short form)",
+        "окрестность": "neighborhood (feminine nominative/accusative)",
+        "определению": "by definition (dative after by)",
+        "открытых": "open (genitive plural)",
+        "по": "by; according to; over (dative in the proof and summation frames here)",
+        "подмножеством": "a subset (instrumental after is)",
+        "подходить": "to work; to be suitable (for + genitive)",
+        "произвольной": "arbitrary (feminine genitive)",
+        "произвольную": "arbitrary (feminine accusative)",
+        "пустого": "empty (genitive singular)",
+        "пусть": "let; suppose (introduces an object or hypothesis)",
+        "рассмотрен": "has been considered (masculine short passive participle)",
+        "своя": "its own (feminine nominative)",
+        "случай": "case (nominative)",
+        "содержащаяся": "contained (feminine nominative reflexive participle)",
+        "содержащее": "containing (neuter active participle)",
+        "содержится": "is contained",
+        "точек": "of points (genitive plural)",
+        "точки": "of a point (genitive singular); points (nominative plural)",
+        "точку": "a point (accusative)",
+        "требуемую": "required (feminine accusative passive participle)",
+        "уже": "already; no longer (with negation)",
+        "условие": "condition",
+        "учитывать": "to take into account (imperfective infinitive)",
+        "целиком": "wholly; entirely",
+        "является": "is; constitutes (+ instrumental)"
+      }
+    },
+    {
+      "id": "math-18-continuity",
+      "title": "Непреры́вность в то́чке",
+      "title_en": "Analysis: continuity at a point",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B1",
+      "topic": "math",
+      "text": "Пусть f — веще́ственная фу́нкция, определённая на отре́зке [a, b], где a < b. То́чка x₀ принадлежи́т э́тому отре́зку. Фу́нкция f непреры́вна в то́чке x₀, е́сли для любо́го ε > 0 существу́ет δ > 0 тако́е, что для всех x из [a, b] при |x − x₀| < δ выполня́ется |f(x) − f(x₀)| < ε.\nЗдесь δ мо́жет зави́сеть от ε и от то́чки x₀, но не от проверя́емого x. Фу́нкция определена́ на всём отре́зке; непреры́вность пока́ тре́буется лишь в одно́й то́чке. На конце́ отре́зка мы по-пре́жнему проверя́ем то́лько те x, кото́рые принадлежа́т о́бласти определе́ния. То́чки вне отре́зка в э́том определе́нии не уча́ствуют.",
+      "summary_en": "Analysis: continuity at a point. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u29-p1",
+      "rung": 18,
+      "en": "Let f be a real-valued function defined on the closed interval [a, b], where a < b. The point x₀ belongs to this interval. The function f is continuous at x₀ if for every ε > 0 there exists δ > 0 such that for all x in [a, b], whenever |x − x₀| < δ, we have |f(x) − f(x₀)| < ε.\nHere δ may depend on ε and on x₀, but not on the x being tested. The function is defined on the whole interval; continuity is so far required only at one point. At an endpoint of the interval we still test only those x belonging to the domain. Points outside the interval do not participate in this definition.",
+      "how_read": [
+        {
+          "ru": "фу́нкция, определённая на отре́зке",
+          "en": "a function defined on a closed interval",
+          "note": "Full passive participle agrees with фу́нкция, feminine nominative."
+        },
+        {
+          "ru": "фу́нкция определена́",
+          "en": "the function is defined",
+          "note": "Short passive participle; final stress, unlike определённая."
+        },
+        {
+          "ru": "зави́сеть от то́чки",
+          "en": "to depend on a point",
+          "note": "зави́сеть от + Genitive."
+        },
+        {
+          "ru": "проверя́емого x",
+          "en": "the x being tested",
+          "note": "Present passive participle; not the fixed point x₀."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "|x − x₀| < δ",
+          "ru": "мо́дуль ра́зности x и x нулево́го ме́ньше числа́ де́льта",
+          "en": "the absolute difference between x and x nought is less than delta"
+        },
+        {
+          "symbol": "∀ ε > 0 ∃ δ > 0",
+          "ru": "для любо́го положи́тельного числа́ э́псилон существу́ет положи́тельное число́ де́льта",
+          "en": "for every positive epsilon there exists a positive delta"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is being defined?",
+          "options": [
+            "Continuity at one point relative to the domain",
+            "Differentiability on the whole line",
+            "Constancy of f"
+          ],
+          "answer": 0,
+          "explanation": "The test restricts x to the domain and centers it at x₀."
+        },
+        {
+          "kind": "detail",
+          "prompt": "May delta depend on epsilon?",
+          "options": [
+            "Only if f is constant",
+            "Yes",
+            "No"
+          ],
+          "answer": 1,
+          "explanation": "Delta is selected after epsilon."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What is the head of «определённая» and what does that clause assert?",
+          "options": [
+            "то́чка; it must be an interior point",
+            "непреры́вность; it holds at every point",
+            "фу́нкция; its domain is [a, b]"
+          ],
+          "answer": 2,
+          "explanation": "The participle specifies where the function is defined; it does not itself assert continuity."
+        }
+      ],
+      "glosses": {
+        "вещественная": "real-valued (feminine nominative)",
+        "вне": "outside (+ genitive)",
+        "всех": "all (genitive plural)",
+        "всём": "the whole (prepositional singular)",
+        "выполняется": "holds; is satisfied",
+        "дельта": "delta, the name of δ",
+        "зависеть": "to depend (from + genitive)",
+        "конце": "at an endpoint (prepositional)",
+        "лишь": "only",
+        "модуль": "absolute value",
+        "может": "may; can (singular)",
+        "непрерывна": "continuous (feminine short adjective)",
+        "непрерывность": "continuity (feminine nominative/accusative)",
+        "нулевого": "nought; zero subscript (genitive in the spoken formula)",
+        "области": "domain (genitive or dative, according to its governor)",
+        "одной": "one; the same (feminine prepositional)",
+        "определена": "is defined (feminine short passive participle)",
+        "определении": "in the definition (prepositional)",
+        "определения": "of definition (genitive)",
+        "определённая": "defined (feminine full passive participle)",
+        "от": "from; of (+ genitive)",
+        "отрезка": "of the closed interval (genitive)",
+        "отрезке": "on the closed interval (prepositional)",
+        "отрезку": "to the closed interval (dative)",
+        "по-прежнему": "still; as before (fixed adverb)",
+        "положительного": "positive (genitive masculine/neuter)",
+        "положительное": "positive (neuter nominative)",
+        "при": "when; under the condition; given (+ prepositional)",
+        "принадлежат": "belong to (+ dative)",
+        "проверяем": "we test; we check",
+        "проверяемого": "being tested (genitive masculine passive participle)",
+        "пусть": "let; suppose (introduces an object or hypothesis)",
+        "разности": "of the difference (genitive)",
+        "точка": "point (nominative)",
+        "точке": "at a point (prepositional)",
+        "точки": "of a point (genitive singular); points (nominative plural)",
+        "требуется": "is required",
+        "участвуют": "participate; enter into the definition",
+        "эпсилон": "epsilon, the name of ε",
+        "этом": "this (prepositional singular)",
+        "этому": "this (dative singular)"
+      }
+    },
+    {
+      "id": "math-19-sum-theorem",
+      "title": "Су́мма: теоре́ма о непреры́вности",
+      "title_en": "Analysis: continuity of a sum",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B1",
+      "topic": "math",
+      "text": "Теоре́ма. Пусть фу́нкции f и g, определённые на одно́м отре́зке [a, b], непреры́вны в то́чке x₀ э́того отре́зка. Тогда́ фу́нкция h, определённая ра́венством h(x) = f(x) + g(x), то́же непреры́вна в x₀.\nСло́во «то́же» перено́сит сво́йство непреры́вности на су́мму. Оно́ не утвержда́ет, что f, g и h равны́ друг дру́гу. То́чка x₀ одна́ и та же для обе́их исхо́дных фу́нкций. Их непреры́вность в ра́зных то́чках была́ бы други́м усло́вием. Для доказа́тельства доста́точно ограни́чить ка́ждое из двух измене́ний величино́й ε/2. Скла́дывая оце́нки, мы полу́чим ну́жную оце́нку для h. Соотве́тствующие ра́диусы окре́стностей мо́гут различа́ться.",
+      "summary_en": "Analysis: continuity of a sum. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u29-p2",
+      "rung": 19,
+      "en": "Theorem. Let functions f and g, defined on the same closed interval [a, b], be continuous at a point x₀ of this interval. Then the function h, defined by h(x) = f(x) + g(x), is also continuous at x₀.\nThe word ‘also’ transfers the property of continuity to the sum. It does not assert that f, g and h equal one another. The point x₀ is the same for both original functions. Continuity at different points would be a different hypothesis. To prove the theorem it suffices to bound each of the two changes by ε/2. Adding the bounds, we shall obtain the needed bound for h. The corresponding neighborhood radii may differ.",
+      "how_read": [
+        {
+          "ru": "фу́нкции, определённые …",
+          "en": "functions defined …",
+          "note": "Plural participle modifies f and g together."
+        },
+        {
+          "ru": "определённая ра́венством",
+          "en": "defined by the equality",
+          "note": "Feminine participle modifies h; instrumental expresses the defining means."
+        },
+        {
+          "ru": "скла́дывая оце́нки, мы полу́чим …",
+          "en": "adding the bounds, we shall obtain …",
+          "note": "The same we adds and obtains; imperfective adverbial participle."
+        },
+        {
+          "ru": "для обе́их фу́нкций",
+          "en": "for both functions",
+          "note": "Genitive feminine обе́их, referring to f and g."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "h(x) = f(x) + g(x)",
+          "ru": "h от x равно́ f от x плюс g от x",
+          "en": "h of x equals f of x plus g of x"
+        },
+        {
+          "symbol": "ε/2",
+          "ru": "э́псилон попола́м",
+          "en": "epsilon divided by two"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What does the theorem preserve under addition?",
+          "options": [
+            "Equality of the two functions",
+            "Continuity at the same point",
+            "The values of each function separately"
+          ],
+          "answer": 1,
+          "explanation": "The hypothesis and conclusion concern continuity at x₀."
+        },
+        {
+          "kind": "detail",
+          "prompt": "Must the two neighborhood radii be equal?",
+          "options": [
+            "Yes",
+            "Only at an endpoint",
+            "No"
+          ],
+          "answer": 2,
+          "explanation": "The final sentence explicitly allows them to differ."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What changes from «определённые» to «определённая»?",
+          "options": [
+            "The head changes from two functions f,g to the single function h",
+            "The domain changes from closed to open",
+            "The definition changes from past to future"
+          ],
+          "answer": 0,
+          "explanation": "Number agreement distinguishes the source functions from their sum."
+        }
+      ],
+      "glosses": {
+        "величиной": "by a quantity; by the amount (instrumental)",
+        "доказательства": "for a proof; of a proof (genitive)",
+        "достаточно": "sufficiently; it suffices",
+        "друг": "one another (first part of the reciprocal expression)",
+        "другим": "a different (instrumental singular)",
+        "другу": "one another (dative part of the reciprocal expression)",
+        "изменений": "changes (genitive plural)",
+        "исходных": "original; initial (genitive plural)",
+        "каждое": "each; every (neuter nominative/accusative)",
+        "могут": "may; can (they)",
+        "непрерывна": "continuous (feminine short adjective)",
+        "непрерывности": "of continuity (genitive)",
+        "непрерывность": "continuity (feminine nominative/accusative)",
+        "непрерывны": "continuous (plural short adjective)",
+        "нужную": "the required (feminine accusative)",
+        "обеих": "both (genitive feminine)",
+        "ограничить": "to bound (perfective infinitive)",
+        "одном": "one; the same (masculine/neuter prepositional)",
+        "окрестностей": "of neighborhoods (genitive plural)",
+        "определённая": "defined (feminine full passive participle)",
+        "определённые": "defined (plural full passive participle)",
+        "от": "from; of (+ genitive)",
+        "отрезка": "of the closed interval (genitive)",
+        "отрезке": "on the closed interval (prepositional)",
+        "оценки": "bounds; estimates (plural)",
+        "оценку": "bound; estimate (accusative)",
+        "переносит": "transfers; carries over",
+        "получим": "we obtain; we shall obtain (perfective future)",
+        "пополам": "in half; divided by two",
+        "равенством": "by the equality (instrumental)",
+        "равно": "equals (neuter short adjective; + dative)",
+        "равны": "are equal (plural short adjective)",
+        "радиусы": "radii (nominative plural)",
+        "различаться": "to differ (imperfective infinitive)",
+        "разных": "different; distinct (genitive/prepositional plural)",
+        "свойство": "property (neuter nominative/accusative)",
+        "складывая": "adding (imperfective adverbial participle)",
+        "соответствующие": "corresponding (plural active participle)",
+        "сумму": "the sum (accusative)",
+        "точка": "point (nominative)",
+        "точках": "at points (prepositional plural)",
+        "точке": "at a point (prepositional)",
+        "условием": "a condition (instrumental)",
+        "утверждает": "asserts; states",
+        "функции": "functions f and g (nominative plural)",
+        "функций": "of functions (genitive plural)",
+        "эпсилон": "epsilon, the name of ε",
+        "этого": "this (genitive singular)"
+      }
+    },
+    {
+      "id": "math-20-sum-proof",
+      "title": "Су́мма: доказа́тельство",
+      "title_en": "Analysis: proof for the sum",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B2",
+      "topic": "math",
+      "text": "Доказа́тельство. Зафикси́руем ε > 0. Из непреры́вности f и g в x₀ полу́чим положи́тельные чи́сла δ₁ и δ₂. При |x − x₀| < δ₁ измене́ние f по мо́дулю ме́ньше ε/2; при |x − x₀| < δ₂ то же ве́рно для g. Поло́жим δ = min(δ₁, δ₂). Вы́брав x из отре́зка так, что |x − x₀| < δ, полу́чим сра́зу о́бе оце́нки. Применя́я нера́венство треуго́льника, нахо́дим: |h(x) − h(x₀)| ≤ |f(x) − f(x₀)| + |g(x) − g(x₀)| < ε. Сле́довательно, h непреры́вна в x₀.\nВы́бранное δ не зави́сит от x. Ми́нимум ну́жен, что́бы о́бе оце́нки выполня́лись одновре́менно. Вы́брав ма́ксимум вме́сто ми́нимума, мы не смогли́ бы обоснова́ть э́тот шаг. Э́то ва́жно для поря́дка вы́бора пара́метров.",
+      "summary_en": "Analysis: proof for the sum. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u29-p2",
+      "rung": 20,
+      "en": "Proof. Fix ε > 0. From continuity of f and g at x₀ we obtain positive numbers δ₁ and δ₂. When |x − x₀| < δ₁ the absolute change in f is less than ε/2; when |x − x₀| < δ₂ the same holds for g. Put δ = min(δ₁, δ₂). Choosing x in the interval so that |x − x₀| < δ, we obtain both bounds at once. Applying the triangle inequality, we find: |h(x) − h(x₀)| ≤ |f(x) − f(x₀)| + |g(x) − g(x₀)| < ε. Consequently h is continuous at x₀.\nThe chosen δ does not depend on x. The minimum is needed for both bounds to hold simultaneously. Had we chosen the maximum instead of the minimum, we could not have justified this step. This matters for the order in which the parameters are chosen.",
+      "how_read": [
+        {
+          "ru": "зафикси́руем …",
+          "en": "fix …",
+          "note": "Perfective future sets a parameter before choosing witnesses."
+        },
+        {
+          "ru": "применя́я нера́венство, нахо́дим …",
+          "en": "applying the inequality, we find …",
+          "note": "The adverbial participle gives the method; the agent stays the same."
+        },
+        {
+          "ru": "вы́бранное δ",
+          "en": "the chosen delta",
+          "note": "Passive participle: δ is the result of our choice, not the chooser."
+        },
+        {
+          "ru": "не зави́сит от x",
+          "en": "does not depend on x",
+          "note": "The dependency constraint in the definition is preserved."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "δ = min(δ₁, δ₂)",
+          "ru": "число́ де́льта равно́ ми́нимуму из чи́сел де́льта оди́н и де́льта два",
+          "en": "delta is the minimum of delta one and delta two"
+        },
+        {
+          "symbol": "≤",
+          "ru": "ме́ньше и́ли равно́",
+          "en": "less than or equal to"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What completes the continuity argument?",
+          "options": [
+            "A different radius is chosen after each x",
+            "The two functions are shown equal",
+            "One radius enforces both bounds for every allowed x"
+          ],
+          "answer": 2,
+          "explanation": "The chosen minimum works simultaneously for both functions."
+        },
+        {
+          "kind": "detail",
+          "prompt": "How is epsilon divided between the two changes?",
+          "options": [
+            "Each is bounded by epsilon over two",
+            "Each is bounded by twice epsilon",
+            "Only one change is bounded"
+          ],
+          "answer": 0,
+          "explanation": "The triangle inequality then gives a strict bound by epsilon."
+        },
+        {
+          "kind": "inference",
+          "prompt": "Why is the maximum not justified by this proof?",
+          "options": [
+            "The triangle inequality requires equal functions",
+            "One of the hypotheses for a bound may fail within the larger radius",
+            "A maximum of two positive numbers is negative"
+          ],
+          "answer": 1,
+          "explanation": "The Russian ‘о́бе … одновре́менно’ requires satisfying both distance restrictions, hence the smaller radius."
+        }
+      ],
+      "glosses": {
+        "верно": "true; valid (neuter short form)",
+        "вместо": "instead of (+ genitive)",
+        "выбора": "of choosing; of the choice (genitive)",
+        "выбрав": "having chosen (perfective adverbial participle)",
+        "выбранное": "chosen (neuter nominative passive participle)",
+        "выполнялись": "would hold; would be satisfied (past plural, with would)",
+        "дельта": "delta, the name of δ",
+        "зависит": "depends (from + genitive)",
+        "зафиксируем": "fix; let us fix (perfective future)",
+        "изменение": "change; variation (nominative singular)",
+        "максимум": "maximum; the larger of the two",
+        "минимум": "minimum; the smaller of the two",
+        "минимума": "the minimum (genitive after instead of)",
+        "минимуму": "the minimum (dative after equals)",
+        "модулю": "absolute value (dative in the frame meaning in absolute value)",
+        "находим": "we find (imperfective present)",
+        "непрерывна": "continuous (feminine short adjective)",
+        "непрерывности": "of continuity (genitive)",
+        "неравенство": "inequality (accusative)",
+        "обе": "both (feminine)",
+        "обосновать": "to justify (perfective infinitive)",
+        "одновременно": "simultaneously",
+        "от": "from; of (+ genitive)",
+        "отрезка": "of the closed interval (genitive)",
+        "оценки": "bounds; estimates (plural)",
+        "параметров": "of parameters (genitive plural)",
+        "по": "by; according to; over (dative in the proof and summation frames here)",
+        "положим": "put; let us set (perfective future used to define)",
+        "положительные": "positive (plural nominative/accusative)",
+        "получим": "we obtain; we shall obtain (perfective future)",
+        "порядка": "of order (genitive)",
+        "при": "when; under the condition; given (+ prepositional)",
+        "применяя": "applying (imperfective adverbial participle)",
+        "равно": "equals (neuter short adjective; + dative)",
+        "смогли": "would have been able (perfective past plural with would)",
+        "сразу": "at once",
+        "треугольника": "of a triangle (genitive; the triangle inequality)",
+        "шаг": "step (of the proof)"
+      }
+    },
+    {
+      "id": "math-21-probability",
+      "title": "Коне́чная вероя́тность",
+      "title_en": "Finite probability",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B2",
+      "topic": "math",
+      "text": "Пусть Ω — непусто́е коне́чное мно́жество исхо́дов. Ка́ждому исхо́ду ω сопоста́влено число́ p(ω) ≥ 0, причём су́мма всех э́тих чи́сел равна́ едини́це. Собы́тие — подмно́жество Ω. Вероя́тность собы́тия A определена́ как су́мма p(ω) по всем исхо́дам, принадлежа́щим A.\nУтвержде́ние. Е́сли собы́тия A и B не пересека́ются, то P(A ∪ B) = P(A) + P(B). Доказа́тельство. Скла́дывая вероя́тности исхо́дов из A и из B, мы учиты́ваем ка́ждый исхо́д объедине́ния ро́вно оди́н раз. Поэ́тому су́ммы равны́. Без усло́вия о непересече́нии о́бщие исхо́ды учиты́вались бы два́жды. Собы́тие, име́ющее нулеву́ю вероя́тность, здесь не обяза́тельно пусто́: в нём мо́гут быть исхо́ды, вероя́тности кото́рых равны́ нулю́.",
+      "summary_en": "Finite probability. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u29-p3",
+      "rung": 21,
+      "en": "Let Ω be a nonempty finite set of outcomes. To each outcome ω a number p(ω) ≥ 0 is assigned, and the sum of all these numbers is one. An event is a subset of Ω. The probability of an event A is defined as the sum of p(ω) over all outcomes belonging to A.\nProposition. If events A and B are disjoint, then P(A ∪ B) = P(A) + P(B). Proof. Adding the probabilities of the outcomes in A and B, we count every outcome of the union exactly once. Therefore the sums are equal. Without the disjointness condition, common outcomes would be counted twice. An event having probability zero need not be empty here: it may contain outcomes whose probabilities equal zero.",
+      "how_read": [
+        {
+          "ru": "ка́ждому исхо́ду сопоста́влено число́",
+          "en": "a number is assigned to each outcome",
+          "note": "Dative recipient; число́ is the neuter subject of the short passive participle."
+        },
+        {
+          "ru": "по исхо́дам, принадлежа́щим A",
+          "en": "over outcomes belonging to A",
+          "note": "Dative plural participle agrees with исхо́дам."
+        },
+        {
+          "ru": "собы́тие, име́ющее нулеву́ю вероя́тность",
+          "en": "an event having zero probability",
+          "note": "Active participle, neuter singular; probability is its accusative object."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "P(A ∪ B)",
+          "ru": "вероя́тность объедине́ния A и B",
+          "en": "probability of the union of A and B"
+        },
+        {
+          "symbol": "p(ω) ≥ 0",
+          "ru": "p от оме́га бо́льше и́ли равно́ нулю́",
+          "en": "p of omega is greater than or equal to zero"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is proved?",
+          "options": [
+            "Additivity for disjoint events",
+            "All outcomes have equal probability",
+            "Every zero-probability event is empty"
+          ],
+          "answer": 0,
+          "explanation": "Disjointness ensures no outcome is counted twice."
+        },
+        {
+          "kind": "detail",
+          "prompt": "Can an individual outcome have probability zero?",
+          "options": [
+            "Only if Ω is empty",
+            "Yes",
+            "No"
+          ],
+          "answer": 1,
+          "explanation": "The assigned numbers are nonnegative, not strictly positive."
+        },
+        {
+          "kind": "inference",
+          "prompt": "Which word is the subject in «ка́ждому исхо́ду … сопоста́влено число́»?",
+          "options": [
+            "исхо́ду, because it comes first",
+            "ка́ждому, acting as a plural subject",
+            "число́, despite coming last"
+          ],
+          "answer": 2,
+          "explanation": "The outcome is dative; the neuter participle agrees with the number that is assigned."
+        }
+      ],
+      "glosses": {
+        "без": "without (+ genitive)",
+        "вероятности": "probabilities (plural when adding outcomes); probability (genitive after ‘zero’ or ‘of the event’)",
+        "вероятность": "probability (feminine singular)",
+        "всем": "all (dative plural)",
+        "дважды": "twice",
+        "единице": "one (dative after ‘equals’)",
+        "имеющее": "having (neuter active participle)",
+        "исход": "outcome (nominative or accusative)",
+        "исходам": "outcomes (dative plural, for summation over them)",
+        "исходов": "of outcomes (genitive plural)",
+        "исходу": "to an outcome (dative)",
+        "исходы": "outcomes (nominative plural)",
+        "каждому": "to each (dative)",
+        "конечная": "finite (feminine nominative)",
+        "конечное": "finite (neuter nominative)",
+        "которых": "which; whose (genitive plural)",
+        "могут": "may; can (they)",
+        "непересечении": "disjointness; nonintersection (prepositional)",
+        "непустое": "nonempty (neuter nominative)",
+        "нулевую": "zero (feminine accusative, of probability)",
+        "нулю": "zero (dative after equals)",
+        "нём": "it (prepositional after in)",
+        "общие": "common; shared (plural nominative)",
+        "объединения": "of the union (genitive)",
+        "обязательно": "necessarily",
+        "омега": "omega, the name of ω",
+        "определена": "is defined (feminine short passive participle)",
+        "от": "from; of (+ genitive)",
+        "пересекаются": "intersect (plural reflexive verb)",
+        "по": "by; according to; over (dative in the proof and summation frames here)",
+        "подмножество": "subset",
+        "поэтому": "therefore; for this reason",
+        "принадлежащим": "belonging to (dative plural active participle here)",
+        "причём": "and moreover; with the additional condition that",
+        "пусто": "is empty (neuter short adjective)",
+        "равна": "equals (feminine short adjective; + dative)",
+        "равны": "are equal (plural short adjective)",
+        "ровно": "exactly",
+        "складывая": "adding (imperfective adverbial participle)",
+        "событие": "event (neuter nominative)",
+        "события": "of an event (genitive in its probability), or events A and B (plural in the proposition)",
+        "сопоставлено": "has been assigned (neuter short passive participle)",
+        "суммы": "sums (nominative plural)",
+        "условия": "of a condition (genitive singular); conditions (plural)",
+        "утверждение": "proposition; statement; assertion",
+        "учитываем": "we count; take into account",
+        "учитывались": "would be counted (past plural with would)",
+        "этих": "these (genitive plural)"
+      }
+    },
+    {
+      "id": "math-22-independence",
+      "title": "Незави́симость собы́тий",
+      "title_en": "Independence and conditioning",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B2",
+      "topic": "math",
+      "text": "Собы́тия A и B называ́ются незави́симыми, е́сли P(A ∩ B) = P(A)P(B). При P(B) > 0 усло́вная вероя́тность P(A | B) определена́ ра́венством P(A | B) = P(A ∩ B)/P(B). Э́то вероя́тность A при усло́вии, что B произошло́.\nУтвержде́ние. При P(B) > 0 незави́симость равноси́льна ра́венству P(A | B) = P(A). Доказа́тельство. Раздели́в ра́венство из определе́ния незави́симости на P(B), полу́чим тре́буемое ра́венство. Обра́тно, умно́жив после́днее ра́венство на P(B), восстано́вим определе́ние незави́симости. О́ба ша́га допусти́мы, поско́льку знамена́тель положи́телен. При P(B) = 0 незави́симость по-пре́жнему определена́, а приведённая фо́рмула усло́вной вероя́тности не определя́ет число́. Непересека́ющиеся собы́тия положи́тельной вероя́тности зави́симы.",
+      "summary_en": "Independence and conditioning. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u29-p3",
+      "rung": 22,
+      "en": "Events A and B are called independent if P(A ∩ B) = P(A)P(B). When P(B) > 0, the conditional probability P(A | B) is defined by P(A | B) = P(A ∩ B)/P(B). This is the probability of A given that B occurred.\nProposition. When P(B) > 0, independence is equivalent to P(A | B) = P(A). Proof. Dividing the equality from the definition of independence by P(B), we obtain the required equality. Conversely, multiplying the latter equality by P(B), we recover the definition of independence. Both steps are valid because the denominator is positive. When P(B) = 0, independence is still defined, but the displayed conditional-probability formula does not define a number. Disjoint events of positive probability are dependent.",
+      "how_read": [
+        {
+          "ru": "раздели́в … полу́чим …",
+          "en": "having divided … we obtain …",
+          "note": "Perfective adverbial participle marks a completed operation."
+        },
+        {
+          "ru": "умно́жив … восстано́вим …",
+          "en": "having multiplied … we recover …",
+          "note": "The reverse operation proves the other implication."
+        },
+        {
+          "ru": "равноси́льна ра́венству",
+          "en": "is equivalent to the equality",
+          "note": "равноси́льна + Dative; feminine agrees with незави́симость."
+        },
+        {
+          "ru": "приведённая фо́рмула",
+          "en": "the displayed formula",
+          "note": "Past passive participle: a formula given above, not an event that occurred."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "P(A | B)",
+          "ru": "вероя́тность A при усло́вии B",
+          "en": "probability of A given B"
+        },
+        {
+          "symbol": "A ∩ B",
+          "ru": "пересече́ние A и B",
+          "en": "intersection of A and B"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is related to independence?",
+          "options": [
+            "All conditional probabilities are one",
+            "Conditioning on a positive-probability event leaves the probability unchanged",
+            "Disjointness always implies independence"
+          ],
+          "answer": 1,
+          "explanation": "The equivalence needs P(B) > 0."
+        },
+        {
+          "kind": "detail",
+          "prompt": "Which equality is multiplied by P(B) in the reverse direction?",
+          "options": [
+            "P(B) = 0",
+            "P(A) = 1",
+            "P(A | B) = P(A)"
+          ],
+          "answer": 2,
+          "explanation": "‘The latter equality’ refers to the theorem's conditional-probability equality."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What does «при P(B) > 0» limit?",
+          "options": [
+            "The equivalence using the displayed conditional probability",
+            "The definition of independence itself in every case",
+            "The existence of events A and B"
+          ],
+          "answer": 0,
+          "explanation": "Independence still has its product definition when P(B) = 0; the quotient formula does not."
+        }
+      ],
+      "glosses": {
+        "вероятности": "of probability (genitive singular)",
+        "вероятность": "probability (feminine singular)",
+        "восстановим": "we recover; reconstruct (perfective future)",
+        "допустимы": "valid; permitted (plural short form)",
+        "зависимы": "dependent (plural short adjective)",
+        "знаменатель": "denominator",
+        "называются": "are called (plural)",
+        "независимости": "of independence (genitive)",
+        "независимость": "independence (feminine nominative)",
+        "независимыми": "independent (instrumental plural after ‘are called’)",
+        "непересекающиеся": "disjoint; nonintersecting (plural participle)",
+        "оба": "both (masculine/neuter)",
+        "обратно": "conversely; in the reverse direction",
+        "определена": "is defined (feminine short passive participle)",
+        "определения": "of definition (genitive)",
+        "определяет": "defines (singular)",
+        "пересечение": "intersection (of sets)",
+        "по-прежнему": "still; as before (fixed adverb)",
+        "положителен": "is positive (masculine short adjective)",
+        "положительной": "positive (feminine genitive)",
+        "получим": "we obtain; we shall obtain (perfective future)",
+        "поскольку": "since; because",
+        "последнее": "the latter; last-mentioned (neuter accusative)",
+        "при": "when; under the condition; given (+ prepositional)",
+        "приведённая": "given above; displayed (feminine passive participle)",
+        "произошло": "occurred (neuter perfective past)",
+        "равенство": "equality (nominative/accusative)",
+        "равенством": "by the equality (instrumental)",
+        "равенству": "to the equality (dative)",
+        "равносильна": "is equivalent to (feminine; + dative)",
+        "разделив": "having divided (perfective adverbial participle)",
+        "событий": "of events (genitive plural)",
+        "события": "events (nominative plural)",
+        "требуемое": "required (neuter passive participle)",
+        "умножив": "having multiplied (perfective adverbial participle)",
+        "условии": "condition (prepositional, in the frame meaning given/on condition that)",
+        "условная": "conditional (feminine adjective, of probability)",
+        "условной": "conditional (feminine genitive, of probability)",
+        "утверждение": "proposition; statement; assertion",
+        "формула": "formula",
+        "шага": "steps (counted form after both)"
+      }
+    },
+    {
+      "id": "math-23-quantifiers",
+      "title": "Отрица́ние и ква́нторы",
+      "title_en": "Negation and quantifiers",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B2",
+      "topic": "math",
+      "text": "Рабо́таем в класси́ческой ло́гике. Пусть P(x) — сво́йство элеме́нтов мно́жества A. Утвержде́ние «не все элеме́нты A облада́ют сво́йством P» равноси́льно утвержде́нию «существу́ет элеме́нт A, не облада́ющий сво́йством P». Символи́чески: ¬∀x ∈ A P(x) ⇔ ∃x ∈ A ¬P(x).\nДоказа́тельство. Е́сли на́йден элеме́нт, не облада́ющий сво́йством, то всео́бщее утвержде́ние ло́жно. Обра́тно, е́сли тако́го элеме́нта нет, то ка́ждый элеме́нт облада́ет сво́йством, и отрица́ние всео́бщего утвержде́ния ло́жно. В класси́ческой ло́гике э́того доста́точно для эквивале́нтности.\nСло́ва «не все» не означа́ют «все не». В мно́жестве чи́сел 1 и 2 не все чи́сла чётные, но и не все нечётные. При пусто́м A о́бе сто́роны запи́санной эквивале́нтности ло́жны.",
+      "summary_en": "Negation and quantifiers. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u29-p4",
+      "rung": 23,
+      "en": "We work in classical logic. Let P(x) be a property of elements of a set A. The statement ‘not all elements of A have property P’ is equivalent to ‘there exists an element of A not having property P’. In symbols: ¬∀x ∈ A P(x) ⇔ ∃x ∈ A ¬P(x).\nProof. If an element not having the property has been found, the universal statement is false. Conversely, if there is no such element, every element has the property, and the negation of the universal statement is false. In classical logic this suffices for equivalence.\nThe words ‘not all’ do not mean ‘all not’. In the set of the numbers 1 and 2, not all numbers are even, but neither are all odd. When A is empty, both sides of the written equivalence are false.",
+      "how_read": [
+        {
+          "ru": "элеме́нт, не облада́ющий сво́йством",
+          "en": "an element not having the property",
+          "note": "Active participle agrees with элеме́нт; облада́ть + Instrumental."
+        },
+        {
+          "ru": "е́сли на́йден элеме́нт",
+          "en": "if an element has been found",
+          "note": "Short passive participle; the element is the subject, not the finder."
+        },
+        {
+          "ru": "отрица́ние всео́бщего утвержде́ния",
+          "en": "negation of the universal statement",
+          "note": "Genitive marks the scope of the negation."
+        },
+        {
+          "ru": "не все … / все не …",
+          "en": "not all … / all not …",
+          "note": "Different scope; test with one even and one odd integer."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "∀",
+          "ru": "для любо́го",
+          "en": "for every"
+        },
+        {
+          "symbol": "∃",
+          "ru": "существу́ет",
+          "en": "there exists"
+        },
+        {
+          "symbol": "⇔",
+          "ru": "тогда́ и то́лько тогда́",
+          "en": "if and only if"
+        },
+        {
+          "symbol": "¬",
+          "ru": "не",
+          "en": "not"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What is the central distinction?",
+          "options": [
+            "An integer versus a real number",
+            "A relation versus its inverse",
+            "Negating a universal versus universally negating"
+          ],
+          "answer": 2,
+          "explanation": "Moving the negation changes its scope."
+        },
+        {
+          "kind": "detail",
+          "prompt": "What happens for empty A?",
+          "options": [
+            "Both sides of the displayed equivalence are false",
+            "Both are true",
+            "Only the left is true"
+          ],
+          "answer": 0,
+          "explanation": "Every element of the empty set satisfies P vacuously, so ‘not all’ is false; there is no counterexample."
+        },
+        {
+          "kind": "inference",
+          "prompt": "In the set containing 1 and 2, which reading matches «не все … чётные»?",
+          "options": [
+            "There is no even member",
+            "There is an odd member, without claiming every member is odd",
+            "Every member is odd"
+          ],
+          "answer": 1,
+          "explanation": "The negation takes scope over ‘all’; it does not attach separately to each member's property."
+        }
+      ],
+      "glosses": {
+        "все": "all (nominative or accusative plural)",
+        "всеобщего": "of the universal (statement; genitive singular)",
+        "всеобщее": "universal (statement; neuter nominative)",
+        "достаточно": "sufficiently; it suffices",
+        "записанной": "written; displayed (feminine genitive passive participle)",
+        "кванторы": "quantifiers",
+        "классической": "classical (feminine prepositional, of logic)",
+        "логике": "in logic (prepositional)",
+        "ложно": "is false (neuter short form)",
+        "ложны": "are false (plural short form)",
+        "множества": "of a set (genitive singular)",
+        "множестве": "in/on a set (prepositional singular)",
+        "найден": "has been found (masculine short passive participle)",
+        "нечётные": "odd (plural adjective)",
+        "обе": "both (feminine)",
+        "обладает": "has; possesses (a property; + instrumental)",
+        "обладать": "to have; possess (+ instrumental)",
+        "обладают": "have; possess (plural; + instrumental)",
+        "обладающий": "having; possessing (masculine active participle)",
+        "обратно": "conversely; in the reverse direction",
+        "означают": "mean (plural)",
+        "отрицание": "negation",
+        "при": "when; under the condition; given (+ prepositional)",
+        "пустом": "empty (prepositional singular)",
+        "работаем": "we work",
+        "равносильно": "is equivalent to (neuter; + dative)",
+        "свойство": "property (neuter nominative/accusative)",
+        "свойством": "a property (instrumental after possess)",
+        "символически": "in symbols",
+        "слова": "words (nominative plural)",
+        "стороны": "sides of the equivalence (nominative plural)",
+        "такого": "such (genitive singular)",
+        "утверждение": "proposition; statement; assertion",
+        "утверждению": "to the statement (dative)",
+        "утверждения": "of the statement (genitive)",
+        "чётные": "even (plural adjective)",
+        "эквивалентности": "of equivalence (genitive)",
+        "элемента": "of an element; elements after two/three (genitive singular)",
+        "элементов": "of elements (genitive plural)",
+        "элементы": "elements (plural)",
+        "этого": "this (genitive singular)"
+      }
+    },
+    {
+      "id": "math-24-information",
+      "title": "Три подхо́да к информа́ции",
+      "title_en": "Three approaches to information",
+      "author": "Drussky · Codex",
+      "year": 2026,
+      "level": "B2",
+      "topic": "math",
+      "text": "Коли́чество информа́ции мо́жно определя́ть по-ра́зному. В комбинато́рном подхо́де мы счита́ем допусти́мые вариа́нты. Для вы́бора одного́ из N вариа́нтов есте́ственна ме́ра log₂ N. Вероя́тностный подхо́д учиты́вает распределе́ние вероя́тностей: при p > 0 ре́дкое собы́тие несёт бо́льше информа́ции, измеря́емой величино́й −log₂ p. Усредня́я э́ту величину́, получа́ем энтропи́ю.\nАлгоритми́ческий подхо́д свя́зывает сло́жность конкре́тной стро́ки с длино́й кратча́йшей програ́ммы, печа́тающей э́ту стро́ку и заверша́ющей рабо́ту. Оптима́льный универса́льный язы́к описа́ния зафикси́рован зара́нее. При сме́не тако́го языка́ сло́жность меня́ется не бо́лее чем на конста́нту, зави́сящую от двух языко́в, но не от стро́ки. Э́та сло́жность в о́бщем слу́чае невычисли́ма. На́ше кра́ткое сопоставле́ние развива́ет разли́чие трёх подхо́дов Колмого́рова. Оно́ не отождествля́ет сло́жность едини́чной стро́ки с энтропи́ей распределе́ния и не измеря́ет смы́словую це́нность сообще́ния.",
+      "summary_en": "Three approaches to information. An original graded mathematical reading.",
+      "license": "CC0 1.0",
+      "source": "https://github.com/emberian/drussky",
+      "after_page": "u29-p4",
+      "rung": 24,
+      "en": "The quantity of information can be defined in different ways. In the combinatorial approach we count admissible alternatives. For choosing one of N alternatives, log₂ N is a natural measure. The probabilistic approach takes a probability distribution into account: for p > 0 a rare event carries more information, measured by −log₂ p. Averaging this quantity gives entropy.\nThe algorithmic approach relates the complexity of a particular string to the length of a shortest program that prints the string and halts. An optimal universal description language is fixed in advance. When one changes such a language, complexity changes by at most a constant depending on the two languages but not on the string. This complexity is in general uncomputable. Our brief comparison develops Kolmogorov's distinction between three approaches. It does not identify the complexity of an individual string with the entropy of a distribution or measure the semantic value of a message.",
+      "how_read": [
+        {
+          "ru": "информа́ции, измеря́емой величино́й",
+          "en": "information measured by the quantity",
+          "note": "Passive participle, feminine genitive; instrumental names the measure."
+        },
+        {
+          "ru": "програ́ммы, печа́тающей … и заверша́ющей …",
+          "en": "a program printing … and terminating …",
+          "note": "Both active participles modify програ́ммы, feminine genitive singular."
+        },
+        {
+          "ru": "конста́нту, зави́сящую от …",
+          "en": "a constant depending on …",
+          "note": "Accusative feminine agreement; зави́сеть от still governs genitive."
+        },
+        {
+          "ru": "усредня́я …, получа́ем …",
+          "en": "averaging … we obtain …",
+          "note": "The same implicit we carries out both operations."
+        }
+      ],
+      "notation": [
+        {
+          "symbol": "log₂ N",
+          "ru": "логари́фм N по основа́нию два",
+          "en": "logarithm of N to base two"
+        },
+        {
+          "symbol": "−log₂ p",
+          "ru": "ми́нус логари́фм p по основа́нию два",
+          "en": "minus the logarithm of p to base two"
+        }
+      ],
+      "questions": [
+        {
+          "kind": "gist",
+          "prompt": "What does the text compare?",
+          "options": [
+            "Counting alternatives, probability, and shortest descriptions",
+            "Three sorting algorithms",
+            "Three measures of semantic beauty"
+          ],
+          "answer": 0,
+          "explanation": "The approaches quantify different aspects of information."
+        },
+        {
+          "kind": "detail",
+          "prompt": "What must the program do after printing the string?",
+          "options": [
+            "Choose the description language",
+            "Halt",
+            "Print every other string"
+          ],
+          "answer": 1,
+          "explanation": "The second coordinated participle requires termination."
+        },
+        {
+          "kind": "inference",
+          "prompt": "What depends on the two languages but not the string?",
+          "options": [
+            "The shortest program for every string",
+            "The probability of every event",
+            "The additive bound on the change in complexity"
+          ],
+          "answer": 2,
+          "explanation": "зави́сящую agrees with конста́нту; the claim is about the bound, not string-independent complexity."
+        }
+      ],
+      "references": [
+        {
+          "url": "https://www.mathnet.ru/eng/ppi68",
+          "note": "Kolmogorov, 1965: the three approaches. Original exposition here, not a translation or excerpt."
+        },
+        {
+          "url": "https://www.karlin.mff.cuni.cz/~krajicek/kolmogorov65.pdf",
+          "note": "English translation of the primary paper; consulted for the distinction and invariance statement."
+        },
+        {
+          "url": "https://arxiv.org/abs/0809.2754",
+          "note": "Vereshchagin, 2008: algorithmic information, optimal descriptions and invariance. Supports the modern summary; no wording reproduced."
+        }
+      ],
+      "glosses": {
+        "алгоритмический": "algorithmic (masculine nominative)",
+        "более": "more; ‘at most’ after not",
+        "вариантов": "alternatives (genitive plural after a quantity)",
+        "варианты": "alternatives (accusative plural)",
+        "величиной": "by a quantity; by the amount (instrumental)",
+        "величину": "quantity (accusative singular)",
+        "вероятностей": "of probabilities (genitive plural, in a distribution)",
+        "вероятностный": "probabilistic (masculine nominative)",
+        "выбора": "of choosing; of the choice (genitive)",
+        "длиной": "length (instrumental after with)",
+        "допустимые": "admissible; allowed (accusative plural)",
+        "единичной": "individual; single (genitive feminine)",
+        "естественна": "is natural (feminine short form)",
+        "завершающей": "terminating; completing (feminine genitive active participle)",
+        "зависеть": "to depend (from + genitive)",
+        "зависящую": "depending (feminine accusative active participle)",
+        "заранее": "in advance",
+        "зафиксирован": "has been fixed (masculine short passive participle)",
+        "измеряемой": "measured (feminine genitive passive participle)",
+        "измеряет": "measures",
+        "информации": "of information (genitive singular)",
+        "к": "to (+ dative)",
+        "количество": "quantity; amount",
+        "колмогорова": "of Kolmogorov (genitive of the surname)",
+        "комбинаторном": "combinatorial (prepositional singular)",
+        "конкретной": "particular; specific (feminine genitive)",
+        "константу": "a constant (accusative feminine)",
+        "краткое": "brief (neuter nominative)",
+        "кратчайшей": "shortest (feminine genitive)",
+        "логарифм": "logarithm",
+        "меняется": "changes; varies",
+        "мера": "measure (nominative)",
+        "невычислима": "uncomputable (feminine short form)",
+        "несёт": "carries; conveys",
+        "общем": "general (prepositional; ‘in general’)",
+        "одного": "one (genitive masculine/neuter)",
+        "описания": "of description (genitive)",
+        "определять": "to define (imperfective infinitive)",
+        "оптимальный": "optimal (a universal description language with constant compiler overhead)",
+        "основанию": "base (dative after by, in a logarithm)",
+        "от": "from; of (+ genitive)",
+        "отождествляет": "identifies; treats as the same (with + instrumental)",
+        "печатающей": "printing (feminine genitive active participle)",
+        "по": "by; according to; over (dative in the proof and summation frames here)",
+        "по-разному": "in different ways (fixed adverb)",
+        "подход": "approach",
+        "подхода": "approach (genitive singular, counted form after three)",
+        "подходе": "in the approach (prepositional)",
+        "подходов": "of approaches (genitive plural)",
+        "при": "when; under the condition; given (+ prepositional)",
+        "программы": "of a program (genitive singular)",
+        "развивает": "develops; elaborates",
+        "различие": "distinction",
+        "распределение": "distribution (accusative)",
+        "распределения": "of a distribution (genitive)",
+        "редкое": "rare (neuter nominative)",
+        "связывает": "relates; links (with + instrumental)",
+        "сложность": "complexity",
+        "случае": "in the case (prepositional)",
+        "смене": "a change (prepositional after given)",
+        "смысловую": "semantic; relating to meaning (feminine accusative)",
+        "событие": "event (neuter nominative)",
+        "сообщения": "of a message (genitive)",
+        "сопоставление": "comparison",
+        "строки": "of a string (genitive)",
+        "строку": "a string (accusative)",
+        "считаем": "we count",
+        "такого": "such (genitive singular)",
+        "универсальный": "universal (description language)",
+        "усредняя": "averaging (imperfective adverbial participle)",
+        "учитывает": "takes into account",
+        "ценность": "value; worth (semantic, not a function value)",
+        "энтропией": "entropy (instrumental after with)",
+        "энтропию": "entropy (accusative)",
+        "эту": "this (feminine accusative)",
+        "язык": "language (here a description language)",
+        "языка": "of a language (genitive singular)",
+        "языков": "of languages (genitive plural)"
+      }
+    }
+  ],
+  "sentences": []
+}
