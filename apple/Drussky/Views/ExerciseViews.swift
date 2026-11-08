@@ -1047,10 +1047,10 @@ struct PassageExercise: View {
         return nil
     }
 
-    /// The token without the punctuation around it or its stress marks: «Что», э́то?», „так“, ’вот’
-    /// and (A) all read clean, as the gloss, ink and audio keys want them.
+    /// The token without the punctuation around it: «Что», э́то?», „так“, ’вот’ and (A) all read clean.
+    /// Stress marks stay (the gloss, ink and audio keys strip them themselves).
     static func bare(_ token: String) -> String {
-        RussianText.unstressed(token.trimmingCharacters(in: .punctuationCharacters))
+        token.trimmingCharacters(in: .punctuationCharacters)
     }
 }
 

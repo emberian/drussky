@@ -79,7 +79,7 @@ final class StressTests: XCTestCase {
         book.settings.showStress = true
         let shown = book.displayText(text.text)
         XCTAssertNotEqual(shown, text.text, "the fable has stored marks")
-        XCTAssertTrue(shown.contains("\u{0301}"))
+        XCTAssertTrue(shown.unicodeScalars.contains("\u{0301}"))
         XCTAssertEqual(RussianText.unstressed(shown), text.text, "nothing but marks was added")
         XCTAssertEqual(shown, text.stressedText)
         // Line and token counts match the bare text's, so structure tokens and narration timings still line up.
@@ -119,11 +119,16 @@ final class StressTests: XCTestCase {
         XCTAssertEqual(RussianText.audioKey(marked), RussianText.audioKey(bare))
         XCTAssertEqual(RussianText.audioKey("Э́то чай?"), RussianText.audioKey("Это чай?"))
         XCTAssertEqual(RussianText.comparable(marked), RussianText.comparable(bare))
-        XCTAssertEqual(PassageExercise.bare("пробежа́ла."), "пробежала", "the tapped word is bare for gloss, ink and voice")
+        // The tapped token keeps its mark for display; every key made from it strips it.
+        let tapped = PassageExercise.bare("пробежа́ла.")
+        XCTAssertEqual(tapped, "пробежа́ла")
+        XCTAssertEqual(RussianText.key(tapped), "пробежала")
+        XCTAssertEqual(RussianText.audioKey(tapped), RussianText.audioKey("пробежала"))
         XCTAssertEqual(Narration.bare(Substring("«те́лу».")), "телу")
         // A gloss keyed by the bare word is found from the marked token.
         let glosses = ["пробежала": "ran across"]
         XCTAssertEqual(glosses.first { RussianText.key($0.key) == RussianText.key(PassageExercise.bare("пробежа́ла,")) }?.value, "ran across")
+        XCTAssertEqual(RussianText.unstressed(PassageExercise.bare("«те́лу».")), "телу", "the read-along accessibility label is bare")
         // A word label: the library's spelling for a word the course lacks, the course's for one it has.
         let book = freshBook()
         XCTAssertEqual(String(book.stressedLabel("пробежала").characters), "пробежала")
