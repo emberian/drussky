@@ -98,6 +98,7 @@ struct ExerciseRow: View {
         case .buildWord: BuildWordExercise(slot: slot, isActive: isActive)
         case .familyGuess: FamilyGuessExercise(slot: slot, isActive: isActive)
         case .talk: TalkExercise(slot: slot, isActive: isActive)
+        case .structure: StructureExercise(slot: slot, isActive: isActive)
         }
     }
 }
@@ -832,8 +833,12 @@ struct PassageExercise: View {
     @State private var selected: String?
     @State private var showTranslation = false
     @State private var pass = ReadingPass()  // Fluency/: a finger-follow reading pass, words a minute
+    /// The «Структу́ра» layer (Structure/): the text's sentences found in library-structure.json, and what is open.
+    @State private var passage: PassageStructure?
+    @State private var layer = StructureLayer()
 
     private var text: String { slot.exercise.text ?? "" }
+    private var structureOn: Bool { passage != nil && book.settings.showStructure == true }
 
     /// Lines (dialogue turns, verse) of words, punctuation kept attached for display.
     private var lines: [[String]] {
@@ -845,26 +850,38 @@ struct PassageExercise: View {
         VStack(alignment: .leading, spacing: 14) {
             if slot.exercise.narration != nil, slot.exercise.words != nil {
                 // A human reading: the words light up as they are said (Narration/ReadAlongView.swift).
-                ReadAlongView(exercise: slot.exercise, owner: "\(slot.page.id)-\(slot.index)", selected: $selected)
+                ReadAlongView(exercise: slot.exercise, owner: "\(slot.page.id)-\(slot.index)", selected: $selected,
+                              structure: passage, layer: layer)
             } else {
             HStack(spacing: 14) {
                 Instruction(text: "Read it. Tap any word you want to check.")
                 HearButton(text: text, size: 40, label: "Whole text")
+                Spacer(minLength: 0)
+                if passage != nil { StructureToggle() }
             }
             VStack(alignment: .leading, spacing: 6) {
-              ForEach(Array(lines.enumerated()), id: \.offset) { _, tokens in
+              ForEach(Array(lines.enumerated()), id: \.offset) { li, tokens in
               FlowRow(spacing: 8) {
-                ForEach(Array(tokens.enumerated()), id: \.offset) { _, token in
+                ForEach(Array(tokens.enumerated()), id: \.offset) { ti, token in
                     let word = Self.bare(token)
-                    Button { select(word) } label: {
+                    let tok = passage?.token(line: li, index: ti)
+                    let mark = structureOn && passage != nil
+                        ? layer.mark(for: tok, previous: passage?.token(line: li, index: ti - 1), next: passage?.token(line: li, index: ti + 1),
+                                     in: passage!, roles: Structure.shared.roles) : .none
+                    Button { select(word, token: tok) } label: {
                         Text(Theme.stressed(token, show: book.settings.showStress))
                             .russianFont(28)
                             .foregroundStyle(Theme.text)
                             .padding(.vertical, 2).padding(.horizontal, 3)
                             .background(RoundedRectangle(cornerRadius: 6)
                                 .fill(selected == word ? Theme.accent.opacity(0.15) : .clear))
+                            .structureMarks(mark, on: structureOn)
                     }
                     .buttonStyle(.plain)
+                    .simultaneousGesture(LongPressGesture(minimumDuration: 0.45).onEnded { _ in
+                        guard structureOn, let tok, let si = tok.sentence, let s = passage?.sentence(si) else { return }
+                        layer.longPressed(s, at: si, words: tok.words)
+                    })
                 }
               }
               }
@@ -873,6 +890,9 @@ struct PassageExercise: View {
             .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
             .overlay { ReadingPassOverlay(pass: pass, text: text) }
             ReadingPassBar(pass: pass, text: text)
+            }
+            if structureOn, let passage, layer.panel != nil {
+                StructurePanel(layer: layer, passage: passage)
             }
             if let selected {
                 HStack(spacing: 12) {
@@ -901,11 +921,16 @@ struct PassageExercise: View {
             }
         }
         .animation(.easeOut(duration: 0.2), value: selected)
+        .animation(.easeOut(duration: 0.2), value: layer.panel)
+        .onAppear { if passage == nil { passage = PassageStructure(text: text) } }
+        .onChange(of: book.settings.showStructure) { _, on in if on != true { layer.reset() } }
     }
 
-    private func select(_ word: String) {
+    private func select(_ word: String, token: PassageStructure.Token? = nil) {
+        if structureOn, layer.consumeSuppressedTap() { return }  // the tap that ends a long press
         selected = word
         voice.play(word)
+        if structureOn, let token, let si = token.sentence, let s = passage?.sentence(si) { layer.tapped(s, at: si, words: token.words) }
     }
 
     private func gloss(for word: String) -> String? {

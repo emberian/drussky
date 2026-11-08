@@ -76,8 +76,9 @@ DESUGAR_KINDS = ["participle", "gerund", "other"]
 CASES = ["nom", "gen", "dat", "acc", "ins", "loc"]
 
 # A word for span purposes: letters (Cyrillic or Latin), digits and stress marks, hyphenated compounds
-# as one word. Punctuation, dashes between words and spaces are never inside a word.
-WORD = re.compile(r"[^\W_]+(?:-[^\W_]+)*", re.U)
+# as one word. Punctuation, dashes between words and spaces are never inside a word. The app's
+# StructureText.words applies the same rule (Structure.swift).
+WORD = re.compile(r"(?:[^\W_]|́)+(?:-(?:[^\W_]|́)+)*", re.U)
 
 SYSTEM = f"""You annotate Russian sentences for an adult English-speaking learner in the first weeks of Russian who \
 wants to read real texts (fiction, mathematics, philosophy) by seeing their skeleton long before knowing the words. \
@@ -122,7 +123,8 @@ stress is worse than nothing. Write nothing but the JSON."""
 
 
 def strip_stress(s):
-    return "".join(c for c in unicodedata.normalize("NFD", s) if c != ACUTE)
+    """Without U+0301, recomposed (й and ё stay single characters)."""
+    return unicodedata.normalize("NFC", "".join(c for c in unicodedata.normalize("NFD", s) if c != ACUTE))
 
 
 def key(s):
@@ -321,7 +323,8 @@ def ask(client, model, prompt, effort):
             if msg.stop_reason == "max_tokens":
                 raise RuntimeError("reply cut off at max_tokens")
             text = next(b.text for b in msg.content if b.type == "text")
-            return json.loads(text), msg.usage
+            # NFC keeps й and ё single characters; Cyrillic vowels have no precomposed acute forms, so stress marks stay.
+            return json.loads(unicodedata.normalize("NFC", text)), msg.usage
         except (anthropic.RateLimitError, anthropic.APIConnectionError, anthropic.InternalServerError) as e:
             wait = min(120, 10 * 2 ** attempt)
             print(f"  {type(e).__name__}; waiting {wait}s", file=sys.stderr)

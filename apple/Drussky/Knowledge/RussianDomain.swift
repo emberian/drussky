@@ -271,6 +271,7 @@ struct RussianDomain: KnowledgeDomain {
         case .readMeaning: ex.text
         case .soundPair: ex.say
         case .familyGuess: ex.word  // the new family member, not the sentence it sits in
+        case .structure: ex.word  // the pronoun or participle asked about, not the sentence
         default: ex.target
         }
         guard let target else { return out }
@@ -335,6 +336,7 @@ struct RussianDomain: KnowledgeDomain {
         case .readAloud: .say
         case .listenPick, .soundPair: .hearPick
         case .readMeaning, .familyGuess: .readPick
+        case .structure: .readPick  // reading a sentence's structure: who is meant
         case .buildWord: .build
         case .explain, .passage: nil
         case .diary: nil  // its evidence is built from the correction (DiaryKnowledge.swift)
@@ -364,7 +366,7 @@ struct RussianDomain: KnowledgeDomain {
         case .done:
             switch ex.kind {
             case .meet, .trace, .copy: return .good
-            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord: return r.assisted == true ? nil : .again
+            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord, .structure: return r.assisted == true ? nil : .again
             case .explain, .passage: return nil
             default: return r.assisted == true ? nil : .hard  // finished, but not verified right first time
             }
@@ -479,7 +481,8 @@ struct RussianDomain: KnowledgeDomain {
             source: a.backfill ? "backfill" : "live", item: item, activity: ex.kind.rawValue, modality: modality,
             components: touched, grade: grade,
             correct: finished ? nil : false, attempt: a.after.attempts, expected: [.readMeaning, .familyGuess].contains(ex.kind)
-                ? ex.answerIndex.flatMap { ex.options?[safe: $0] } : (ex.kind == .soundPair ? ex.say : ex.target),
+                ? ex.answerIndex.flatMap { ex.options?[safe: $0] } : ex.kind == .structure ? Structure.probe(of: ex)?.head
+                : (ex.kind == .soundPair ? ex.say : ex.target),
             response: response, latency: a.latency,
             help: a.after.revealed ? ["revealed"] : (a.after.assisted == true ? ["assisted"] : nil),
             confusions: confusions.isEmpty ? nil : confusions, review: ex.reviewKey != nil ? true : nil,

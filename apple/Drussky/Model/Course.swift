@@ -76,6 +76,9 @@ enum ExerciseKind: String, Codable, Sendable {
     case familyGuess = "family_guess"
     /// A spoken conversation with the tutor (Talk/).
     case talk
+    /// Referent resolution on a library sentence: tap the head a pronoun or participle belongs to
+    /// (Structure/); generated locally from library-structure.json, never authored.
+    case structure
 
     /// Exercises answered with the pencil on ruled paper.
     var isWriting: Bool {
@@ -125,11 +128,14 @@ struct Exercise: Codable, Sendable, Hashable {
     /// family_guess: the new family member inside `text`, and the root it shares with known words.
     var word: String? = nil
     var root: String? = nil
+    /// structure: the word asked about (index into `Structure.words(in: text)`); `answer` is its head's index
+    /// and `word` the probe as written.
+    var probe: Int? = nil
 
     enum CodingKeys: String, CodingKey {
         case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills, prompt
         case narration, words, span
-        case parts, alternatives, word, root
+        case parts, alternatives, word, root, probe
     }
 
     init(kind: ExerciseKind) { self.kind = kind }
@@ -158,6 +164,7 @@ struct Exercise: Codable, Sendable, Hashable {
         alternatives = try c.decodeIfPresent([String].self, forKey: .alternatives)
         word = try c.decodeIfPresent(String.self, forKey: .word)
         root = try c.decodeIfPresent(String.self, forKey: .root)
+        probe = try c.decodeIfPresent(Int.self, forKey: .probe)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -189,6 +196,7 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(alternatives, forKey: .alternatives)
         try c.encodeIfPresent(word, forKey: .word)
         try c.encodeIfPresent(root, forKey: .root)
+        try c.encodeIfPresent(probe, forKey: .probe)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }
@@ -209,7 +217,7 @@ struct Exercise: Codable, Sendable, Hashable {
         switch kind {
         case .listenPick: say
         case .dictation: say ?? text
-        case .readAloud, .trace, .copy, .readMeaning, .passage, .familyGuess: text
+        case .readAloud, .trace, .copy, .readMeaning, .passage, .familyGuess, .structure: text
         case .fill: [before, answerText, after].compactMap { $0 }.joined()
         case .translate, .buildWord: answerText
         default: nil
