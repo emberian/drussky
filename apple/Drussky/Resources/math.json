@@ -15,13 +15,13 @@
       "year": 2026,
       "level": "A1",
       "topic": "math",
-      "text": "Что тако́е мно́жество? Вот мно́жество A. В нём есть элеме́нты: 1, 2 и 3. Э́то чи́сла. В мно́жестве B есть то́лько 1 и 2. Э́то то́же мно́жество чи́сел. В A три элеме́нта, а в B два элеме́нта. В мно́жестве нет поря́дка: 1, 2, 3 и 3, 2, 1 — здесь одно́ и то же мно́жество. В нём нет «пе́рвого» элеме́нта. В матема́тике ва́жно, что есть в мно́жестве, а не где э́то на страни́це. Мно́жество без элеме́нтов — пусто́е мно́жество. Его́ знак — ∅.",
+      "text": "Что тако́е мно́жество? Вот мно́жество A. В нём есть элеме́нты: 1, 2 и 3. Э́то чи́сла. В мно́жестве B есть то́лько 1 и 2. Э́то то́же мно́жество чи́сел. В A три элеме́нта, а в B два элеме́нта. В мно́жестве нет поря́дка: здесь 1, 2, 3 и 3, 2, 1 — одно́ и то же мно́жество. В нём нет «пе́рвого» элеме́нта. В матема́тике ва́жно, что есть в мно́жестве, а не где элеме́нты на страни́це. Мно́жество без элеме́нтов — пусто́е мно́жество. Его́ знак — ∅.",
       "summary_en": "A set. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
       "after_page": "u7-p4",
       "rung": 1,
-      "en": "What is a set? Here is set A. It has elements: 1, 2 and 3. These are numbers. Set B has only 1 and 2. This is also a set of numbers. A has three elements, and B has two elements. A set has no order: 1, 2, 3 and 3, 2, 1 are the same set here. It has no ‘first’ element. In mathematics, what matters is what is in the set, not where it is on the page. A set without elements is the empty set. Its symbol is ∅.",
+      "en": "What is a set? Here is set A. It has elements: 1, 2 and 3. These are numbers. Set B has only 1 and 2. This is also a set of numbers. A has three elements, and B has two elements. A set has no order: here 1, 2, 3 and 3, 2, 1 are the same set. It has no ‘first’ element. In mathematics, what matters is what is in the set, not where the elements are on the page. A set without elements is the empty set. Its symbol is ∅.",
       "how_read": [
         {
           "ru": "в мно́жестве",
@@ -119,13 +119,13 @@
       "year": 2026,
       "level": "A1",
       "topic": "math",
-      "text": "Элеме́нт мно́жества — э́то объе́кт в э́том мно́жестве. Здесь A — мно́жество чи́сел 2, 4 и 6. Число́ 2 — элеме́нт A. За́пись 2 ∈ A — э́то кра́ткая фо́рма той же мы́сли. Число́ 3 — не элеме́нт A: в A нет числа́ 3. Здесь ва́жен не разме́р числа́, а соста́в мно́жества. Число́ 2 и мно́жество из одного́ элеме́нта 2 — не одно́ и то же. В пе́рвом слу́чае э́то число́, во второ́м — мно́жество. У мно́жества есть элеме́нт, а у числа́ в э́том описа́нии нет элеме́нтов.",
+      "text": "Элеме́нт мно́жества — э́то объе́кт в э́том мно́жестве. Здесь A — мно́жество чи́сел 2, 4 и 6. Число́ 2 — элеме́нт A. За́пись 2 ∈ A — э́то кра́ткая фо́рма той же мы́сли. Число́ 3 — не элеме́нт A: в A нет числа́ 3. Здесь важна́ не величина́ числа́, а соста́в мно́жества. Число́ 2 и мно́жество из одного́ элеме́нта 2 — не одно́ и то же. В пе́рвом слу́чае э́то число́, во второ́м — мно́жество. У мно́жества есть элеме́нт, а у числа́ в э́том описа́нии нет элеме́нтов.",
       "summary_en": "An element and a set. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
       "after_page": "u8-p3",
       "rung": 2,
-      "en": "An element of a set is an object in that set. Here A is the set of the numbers 2, 4 and 6. The number 2 is an element of A. The notation 2 ∈ A is a short form of the same thought. The number 3 is not an element of A: A has no number 3. What matters here is not the size of the number but the membership of the set. The number 2 and the set consisting of the single element 2 are not the same thing. In the first case it is a number, in the second a set. The set has an element, whereas the number has no elements in this description.",
+      "en": "An element of a set is an object in that set. Here A is the set of the numbers 2, 4 and 6. The number 2 is an element of A. The notation 2 ∈ A is a short form of the same thought. The number 3 is not an element of A: A has no number 3. What matters here is not the magnitude of the number but the membership of the set. The number 2 and the set consisting of the single element 2 are not the same thing. In the first case it is a number, in the second a set. The set has an element, whereas the number has no elements in this description.",
       "how_read": [
         {
           "ru": "элеме́нт мно́жества",
@@ -148,6 +148,11 @@
           "symbol": "∈",
           "ru": "принадлежи́т",
           "en": "belongs to; its set takes the dative, introduced in rung 7"
+        },
+        {
+          "symbol": "2 ∈ A",
+          "ru": "два принадлежи́т A",
+          "en": "two belongs to A; symbolic set names stay undeclined in print"
         }
       ],
       "questions": [
@@ -187,9 +192,11 @@
       ],
       "glosses": {
         "в": "in (+ prepositional for location)",
-        "важен": "matters; is important (masculine short form)",
+        "важна": "matters; is important (feminine short form)",
+        "величина": "magnitude; size (of a number or quantity)",
         "во": "in; variant of the preposition used before certain consonant clusters",
         "втором": "second (prepositional singular)",
+        "два": "two (masculine or neuter)",
         "есть": "there is/are; is (existence or identity)",
         "же": "same; emphasizes identity in ‘the same’",
         "запись": "notation; a written expression",
@@ -204,7 +211,6 @@
         "описании": "in the description (prepositional)",
         "первом": "first (prepositional masculine)",
         "принадлежит": "belongs to (+ dative)",
-        "размер": "size",
         "случае": "in the case (prepositional)",
         "состав": "membership; composition (what is in the set)",
         "то": "then (after if); the same (within the fixed expression for identity)",
@@ -228,13 +234,13 @@
       "year": 2026,
       "level": "A1",
       "topic": "math",
-      "text": "A — подмно́жество B, е́сли ка́ждый элеме́нт A — э́то и элеме́нт B. Здесь A — мно́жество чи́сел 1 и 2, а B — мно́жество чи́сел 1, 2 и 3. Поэ́тому A — подмно́жество B. Но B — не подмно́жество A: в B есть 3, а в A нет числа́ 3. Для пусто́го мно́жества нет тако́го приме́ра: в нём вообще́ нет элеме́нтов. Поэ́тому пусто́е мно́жество — подмно́жество ка́ждого мно́жества. Здесь A ⊂ B — стро́гое включе́ние: A — подмно́жество B, но A ≠ B. Для нестро́гого включе́ния есть знак ⊆. Само́ мно́жество то́же есть среди́ его́ подмно́жеств. Здесь нет стро́гого включе́ния.",
+      "text": "A — подмно́жество B, е́сли ка́ждый элеме́нт A — э́то и элеме́нт B. Здесь A — мно́жество чи́сел 1 и 2, а B — мно́жество чи́сел 1, 2 и 3. Поэ́тому A — подмно́жество B. Но B — не подмно́жество A: в B есть 3, а в A нет числа́ 3. Для пусто́го мно́жества нет тако́го приме́ра: в нём вообще́ нет элеме́нтов. Поэ́тому пусто́е мно́жество — подмно́жество ка́ждого мно́жества. Здесь A ⊂ B — стро́гое включе́ние: A — подмно́жество B, но A ≠ B. Для нестро́гого включе́ния есть знак ⊆. Само́ мно́жество то́же есть среди́ свои́х подмно́жеств. Здесь нет стро́гого включе́ния.",
       "summary_en": "A subset. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
       "after_page": "u10-p4",
       "rung": 3,
-      "en": "A is a subset of B if every element of A is also an element of B. Here A is the set of the numbers 1 and 2, and B is the set of the numbers 1, 2 and 3. Therefore A is a subset of B. But B is not a subset of A: B has 3, and A has no number 3. There is no such example for the empty set: it has no elements at all. Therefore the empty set is a subset of every set. Here A ⊂ B is strict inclusion: A is a subset of B, but A ≠ B. For non-strict inclusion there is the symbol ⊆. The set itself is also among its subsets. There is no strict inclusion here.",
+      "en": "A is a subset of B if every element of A is also an element of B. Here A is the set of the numbers 1 and 2, and B is the set of the numbers 1, 2 and 3. Therefore A is a subset of B. But B is not a subset of A: B has 3, and A has no number 3. There is no such example for the empty set: it has no elements at all. Therefore the empty set is a subset of every set. Here A ⊂ B is strict inclusion: A is a subset of B, but A ≠ B. For non-strict inclusion there is the symbol ⊆. The set itself is also among its own subsets. There is no strict inclusion here.",
       "how_read": [
         {
           "ru": "ка́ждый элеме́нт",
@@ -262,6 +268,11 @@
           "symbol": "A ⊆ B",
           "ru": "A — подмно́жество B",
           "en": "A is a subset of B, possibly equal"
+        },
+        {
+          "symbol": "A ≠ B",
+          "ru": "A не равно́ B",
+          "en": "A is not equal to B"
         }
       ],
       "questions": [
@@ -305,7 +316,6 @@
         "включения": "of inclusion (genitive singular)",
         "вообще": "at all",
         "для": "for (+ genitive)",
-        "его": "its; of it",
         "если": "if",
         "знак": "symbol; sign",
         "каждого": "each; every (genitive masculine/neuter)",
@@ -321,7 +331,9 @@
         "примера": "of an example (genitive)",
         "пустого": "empty (genitive singular)",
         "пустое": "empty (neuter nominative)",
+        "равно": "equals; is equal to (neuter short adjective)",
         "само": "itself (neuter nominative)",
+        "своих": "its own (genitive plural, referring back to the subject)",
         "среди": "among (+ genitive)",
         "строгого": "strict (genitive singular)",
         "строгое": "strict; proper (neuter nominative)",
@@ -340,13 +352,13 @@
       "year": 2026,
       "level": "A1",
       "topic": "math",
-      "text": "Фу́нкция f : A → B — э́то пра́вило: для ка́ждого элеме́нта x из A есть ро́вно одно́ значе́ние f(x) в B. Здесь A — о́бласть определе́ния, а B — мно́жество возмо́жных значе́ний. Все ли элеме́нты B есть среди́ значе́ний f? Не обяза́тельно. Наприме́р, A — мно́жество чи́сел 1 и 2, B — мно́жество чи́сел 1, 2 и 3. Е́сли f(1) = 2 и f(2) = 2, э́то фу́нкция. Для ка́ждого аргуме́нта есть одно́ значе́ние. Два ра́зных аргуме́нта и одно́ о́бщее значе́ние — здесь нет пробле́мы. Но два значе́ния для одного́ аргуме́нта — э́то уже́ не фу́нкция.",
+      "text": "Фу́нкция f : A → B — э́то пра́вило: для ка́ждого элеме́нта x из A есть ро́вно одно́ значе́ние f(x) в B. Здесь A — о́бласть определе́ния, а B — мно́жество возмо́жных значе́ний. Все ли элеме́нты B есть среди́ значе́ний f? Не обяза́тельно. Наприме́р, A — мно́жество чи́сел 1 и 2, B — мно́жество чи́сел 1, 2 и 3. Е́сли f(1) = 2 и f(2) = 2, э́то фу́нкция. Для ка́ждого аргуме́нта есть одно́ значе́ние. Два ра́зных аргуме́нта и одно́ о́бщее значе́ние — здесь нет наруше́ния пра́вила. Но два значе́ния для одного́ аргуме́нта — э́то уже́ не фу́нкция.",
       "summary_en": "A function. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
       "after_page": "u18-p2",
       "rung": 4,
-      "en": "A function f : A → B is a rule: for every element x of A there is exactly one value f(x) in B. Here A is the domain, and B is the set of possible values. Do all the elements of B occur among the values of f? Not necessarily. For example, A is the set of the numbers 1 and 2, and B is the set of the numbers 1, 2 and 3. If f(1) = 2 and f(2) = 2, this is a function. Each argument has one value. Two different arguments and one shared value present no problem here. But two values for one argument no longer make a function.",
+      "en": "A function f : A → B is a rule: for every element x of A there is exactly one value f(x) in B. Here A is the domain, and B is the set of possible values. Do all the elements of B occur among the values of f? Not necessarily. For example, A is the set of the numbers 1 and 2, and B is the set of the numbers 1, 2 and 3. If f(1) = 2 and f(2) = 2, this is a function. Each argument has one value. Two different arguments and one shared value do not violate the rule here. But two values for one argument no longer make a function.",
       "how_read": [
         {
           "ru": "для ка́ждого элеме́нта",
@@ -425,6 +437,7 @@
         "ли": "whether; marks a yes/no question",
         "множество": "set (neuter nominative/accusative)",
         "например": "for example",
+        "нарушения": "of a violation (genitive singular after there is no)",
         "но": "but",
         "область": "domain; region",
         "общее": "total; common (neuter nominative)",
@@ -434,8 +447,8 @@
         "определения": "of definition (genitive)",
         "от": "from; of (+ genitive)",
         "отображает": "maps (a domain into a codomain)",
+        "правила": "of the rule (genitive singular)",
         "правило": "rule",
-        "проблемы": "problem (genitive singular after there is no)",
         "разных": "different; distinct (genitive/prepositional plural)",
         "ровно": "exactly",
         "среди": "among (+ genitive)",
@@ -454,13 +467,13 @@
       "year": 2026,
       "level": "A2",
       "topic": "math",
-      "text": "Инъе́кция — э́то фу́нкция без совпаде́ний значе́ний у ра́зных аргуме́нтов. Ина́че: е́сли f(x) = f(y), то x = y. Здесь ва́жен поря́док усло́вия и вы́вода. Для любо́й фу́нкции из x = y сле́дует f(x) = f(y). Для инъе́кции есть и обра́тное утвержде́ние. Наприме́р, у фу́нкции f(x) = x + 1 на мно́жестве натура́льных чи́сел нет одина́ковых значе́ний для ра́зных аргуме́нтов. Э́то инъе́кция. А у постоя́нной фу́нкции g(x) = 1 есть одно́ и то же значе́ние для 1 и 2. Э́то не инъе́кция. В определе́нии инъе́кции нет тре́бования о нали́чии всех элеме́нтов B среди́ значе́ний фу́нкции.",
+      "text": "Инъе́кция — э́то фу́нкция без совпаде́ния значе́ний у ра́зных аргуме́нтов. Ина́че: е́сли f(x) = f(y), то x = y. Здесь ва́жен поря́док усло́вия и вы́вода. Для любо́й фу́нкции из x = y сле́дует f(x) = f(y). Для инъе́кции ве́рно и обра́тное утвержде́ние. Наприме́р, у фу́нкции f(x) = x + 1 на мно́жестве натура́льных чи́сел нет одина́ковых значе́ний для ра́зных аргуме́нтов. Э́то инъе́кция. А у постоя́нной фу́нкции g(x) = 1 есть одно́ и то же значе́ние для 1 и 2. Э́то не инъе́кция. В определе́нии инъе́кции нет тре́бования о нали́чии всех элеме́нтов B среди́ значе́ний фу́нкции.",
       "summary_en": "An injection. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
       "after_page": "u18-p2",
       "rung": 5,
-      "en": "An injection is a function with no coinciding values at different arguments. In other words: if f(x) = f(y), then x = y. The order of hypothesis and conclusion matters here. For any function, x = y implies f(x) = f(y). For an injection the converse statement holds as well. For example, the function f(x) = x + 1 on the set of natural numbers has no equal values at different arguments. It is an injection. But the constant function g(x) = 1 has the same value at 1 and 2. It is not an injection. The definition of injection does not require every element of B to occur among the function's values.",
+      "en": "An injection is a function with no coincidence of values at different arguments. In other words: if f(x) = f(y), then x = y. The order of hypothesis and conclusion matters here. For any function, x = y implies f(x) = f(y). For an injection the converse statement holds as well. For example, the function f(x) = x + 1 on the set of natural numbers has no equal values at different arguments. It is an injection. But the constant function g(x) = 1 has the same value at 1 and 2. It is not an injection. The definition of injection does not require every element of B to occur among the function's values.",
       "how_read": [
         {
           "ru": "е́сли … то …",
@@ -510,20 +523,21 @@
         },
         {
           "kind": "inference",
-          "prompt": "Which direction after «е́сли» characterizes injectivity?",
+          "prompt": "In «из x = y сле́дует f(x) = f(y)», how does Russian mark which equation is the premise?",
           "options": [
-            "Every output has an input",
-            "Equal outputs imply equal inputs",
-            "Equal inputs imply equal outputs"
+            "The verb «сле́дует» always precedes the premise",
+            "The preposition «из» marks the premise from which the subject «f(x) = f(y)» follows",
+            "The second equation is always the premise in Russian"
           ],
           "answer": 1,
-          "explanation": "The second direction holds for every function; the first is the extra requirement."
+          "explanation": "«из» (‘from’) introduces the hypothesis x = y, while the conclusion f(x) = f(y) is the grammatical subject of «сле́дует»."
         }
       ],
       "glosses": {
         "аргументов": "of arguments (genitive plural)",
         "без": "without (+ genitive)",
         "важен": "matters; is important (masculine short form)",
+        "верно": "holds; is true (neuter short adjective)",
         "всех": "all (genitive plural)",
         "вывода": "of the conclusion (genitive)",
         "для": "for (+ genitive)",
@@ -550,7 +564,7 @@
         "равен": "equals (masculine short adjective; + dative)",
         "разных": "different; distinct (genitive/prepositional plural)",
         "следует": "follows (from + genitive gives the premise)",
-        "совпадений": "coincidences; collisions (genitive plural)",
+        "совпадения": "of coincidence; of collision (genitive singular)",
         "среди": "among (+ genitive)",
         "то": "then (after if); the same (within the fixed expression for identity)",
         "требования": "requirement (genitive singular after there is no)",
@@ -570,7 +584,7 @@
       "year": 2026,
       "level": "A2",
       "topic": "math",
-      "text": "Отноше́ние R на мно́жестве A — э́то пра́вило для пар элеме́нтов. Для ка́ждой па́ры есть отве́т: да и́ли нет. За́пись x R y — э́то «да» для па́ры x, y. Отноше́ние эквивале́нтности — рефлекси́вное, симметри́чное и транзити́вное отноше́ние. Рефлекси́вность: для ка́ждого x есть x R x. Симметри́чность: е́сли x R y, то y R x. Транзити́вность: е́сли x R y и y R z, то x R z. Приме́р на мно́жестве це́лых чи́сел: x R y тогда́ и то́лько тогда́, когда́ у x и y одина́ковая чётность. Здесь два кла́сса: чётные чи́сла и нечётные чи́сла. В ка́ждом кла́ссе все чи́сла эквивале́нтны.",
+      "text": "Отноше́ние R на мно́жестве A — э́то пра́вило для пар элеме́нтов. Для ка́ждой па́ры есть отве́т: да и́ли нет. За́пись x R y — э́то «да» для па́ры x, y. Отноше́ние эквивале́нтности — рефлекси́вное, симметри́чное и транзити́вное отноше́ние. Рефлекси́вность: для ка́ждого x ве́рно x R x. Симметри́чность: е́сли x R y, то y R x. Транзити́вность: е́сли x R y и y R z, то x R z. Приме́р на мно́жестве це́лых чи́сел: x R y тогда́ и то́лько тогда́, когда́ у x и y одина́ковая чётность. Здесь два кла́сса: чётные чи́сла и нечётные чи́сла. В ка́ждом кла́ссе все чи́сла эквивале́нтны.",
       "summary_en": "An equivalence relation. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
@@ -637,6 +651,7 @@
         }
       ],
       "glosses": {
+        "верно": "holds; is true (neuter short adjective)",
         "все": "all (nominative or accusative plural)",
         "для": "for (+ genitive)",
         "если": "if",
@@ -806,13 +821,13 @@
       "year": 2026,
       "level": "A2",
       "topic": "math",
-      "text": "Утвержде́ние. Су́мма двух чётных це́лых чи́сел явля́ется чётным число́м. Число́ называ́ется чётным, е́сли оно́ равно́ удво́енному це́лому числу́. Здесь ва́жно сло́во «це́лому»: полови́на любо́го веще́ственного числа́ существу́ет, но не всегда́ явля́ется це́лым число́м.\nДоказа́тельство. Пусть a и b — чётные це́лые чи́сла. Тогда́ существу́ют це́лые чи́сла k и m, для кото́рых a = 2k и b = 2m. Мы записа́ли a + b = 2(k + m). Су́мма k + m то́же явля́ется це́лым число́м. Поэ́тому a + b — чётное число́. Мы доказа́ли утвержде́ние для любы́х двух чётных це́лых чи́сел, а не то́лько для одного́ приме́ра.",
+      "text": "Утвержде́ние. Су́мма двух чётных це́лых чи́сел явля́ется чётным число́м. Число́ называ́ется чётным, е́сли оно́ равно́ удво́енному це́лому числу́. Здесь ва́жно сло́во «це́лому»: полови́на любо́го веще́ственного числа́ существу́ет, но не всегда́ явля́ется це́лым число́м.\nДоказа́тельство. Пусть a и b — чётные це́лые чи́сла. Тогда́ существу́ют це́лые чи́сла k и m, для кото́рых a = 2k и b = 2m. Запи́шем a + b = 2(k + m). Су́мма k + m то́же явля́ется це́лым число́м. Поэ́тому a + b — чётное число́. Мы доказа́ли утвержде́ние для любы́х двух чётных це́лых чи́сел, а не то́лько для одного́ приме́ра.",
       "summary_en": "A sum of even integers. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
       "after_page": "u25-p2",
       "rung": 8,
-      "en": "Proposition. The sum of two even integers is an even number. A number is called even if it equals twice an integer. The word ‘integer’ matters here: half of any real number exists, but it is not always an integer.\nProof. Let a and b be even integers. Then there exist integers k and m for which a = 2k and b = 2m. We have written a + b = 2(k + m). The sum k + m is also an integer. Therefore a + b is even. We have proved the proposition for any two even integers, not just for one example.",
+      "en": "Proposition. The sum of two even integers is an even number. A number is called even if it equals twice an integer. The word ‘integer’ matters here: half of any real number exists, but it is not always an integer.\nProof. Let a and b be even integers. Then there exist integers k and m for which a = 2k and b = 2m. Write a + b = 2(k + m). The sum k + m is also an integer. Therefore a + b is even. We have proved the proposition for any two even integers, not just for one example.",
       "how_read": [
         {
           "ru": "равно́ це́лому числу́",
@@ -825,9 +840,9 @@
           "note": "Genitive plural refers back to the integers k and m."
         },
         {
-          "ru": "мы записа́ли … мы доказа́ли …",
-          "en": "we have written … we have proved …",
-          "note": "Perfective past presents completed steps."
+          "ru": "запи́шем … мы доказа́ли …",
+          "en": "let us write … we have proved …",
+          "note": "Perfective future makes the next proof step; perfective past sums up the completed proof."
         }
       ],
       "notation": [
@@ -867,14 +882,14 @@
         },
         {
           "kind": "inference",
-          "prompt": "What fails if «це́лые» is removed from the statement about k and m?",
+          "prompt": "In «оно́ равно́ удво́енному це́лому числу́», why is «равно́» nominative neuter while «це́лому числу́» is dative?",
           "options": [
-            "The sum must become negative",
-            "Writing a number as twice a real number no longer proves it even",
-            "The displayed algebra becomes false"
+            "«равно́» agrees with the subject «оно́» and governs the dative on what it equals",
+            "«равно́» is an invariable adverb that takes any case after it",
+            "«це́лому числу́» is the subject and «оно́» is the direct object"
           ],
-          "answer": 1,
-          "explanation": "The algebra still works; the definition of evenness needs an integer witness."
+          "answer": 0,
+          "explanation": "The short adjective равно́ agrees in gender and number with оно́ (число́), while governing the dative case on удво́енному це́лому числу́."
         }
       ],
       "glosses": {
@@ -882,7 +897,7 @@
         "вещественного": "of a real (number; genitive singular)",
         "всегда": "always",
         "доказали": "we have proved (perfective past plural)",
-        "записали": "we have written (perfective past plural)",
+        "запишем": "write; let us write (perfective future)",
         "которых": "which; whose (genitive plural)",
         "любых": "any (genitive plural)",
         "называется": "is called (singular)",
@@ -914,7 +929,7 @@
       "year": 2026,
       "level": "A2",
       "topic": "math",
-      "text": "Утвержде́ние. Е́сли n + 1 предме́тов размести́ть в n я́щиках, где n — натура́льное число́, то хотя́ бы в одно́м я́щике бу́дет не ме́нее двух предме́тов. Не тре́буется, что́бы ка́ждый я́щик был непусты́м. Предме́ты мо́гут лежа́ть как уго́дно.\nДоказа́тельство. Предполо́жим проти́вное: в ка́ждом я́щике не бо́лее одного́ предме́та. Тогда́ во всех n я́щиках вме́сте не бо́лее n предме́тов. Но мы размести́ли n + 1 предме́тов. Получи́ли противоре́чие. Зна́чит, предположе́ние неве́рно. Хотя́ бы оди́н я́щик соде́ржит два предме́та и́ли бо́льше. Здесь «хотя́ бы оди́н» не означа́ет «ро́вно оди́н»: таки́х я́щиков мо́жет быть не́сколько.",
+      "text": "Утвержде́ние. Е́сли n + 1 предме́т размести́ть в n я́щиках, где n — натура́льное число́, то хотя́ бы в одно́м я́щике бу́дет не ме́нее двух предме́тов. Не тре́буется, что́бы ка́ждый я́щик был непусты́м. Предме́ты мо́гут лежа́ть как уго́дно.\nДоказа́тельство. Предполо́жим проти́вное: в ка́ждом я́щике не бо́лее одного́ предме́та. Тогда́ во всех n я́щиках вме́сте не бо́лее n предме́тов. Но мы размести́ли n + 1 предме́т. Получи́ли противоре́чие. Зна́чит, предположе́ние неве́рно. Хотя́ бы оди́н я́щик соде́ржит два предме́та и́ли бо́льше. Здесь «хотя́ бы оди́н» не означа́ет «ро́вно оди́н»: таки́х я́щиков мо́жет быть не́сколько.",
       "summary_en": "The pigeonhole principle. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
@@ -1007,6 +1022,7 @@
         "одном": "one; the same (masculine/neuter prepositional)",
         "означает": "means (singular)",
         "получили": "we obtained (perfective past)",
+        "предмет": "object; item (singular after a compound numeral ending in one, such as n + 1)",
         "предмета": "objects (genitive singular in the count expressions one or two objects)",
         "предметов": "objects (genitive plural after a quantity)",
         "предметы": "objects (nominative plural)",
@@ -1038,13 +1054,13 @@
       "year": 2026,
       "level": "A2",
       "topic": "math",
-      "text": "Просто́е число́ — натура́льное число́, бо́льшее едини́цы, у кото́рого то́лько два натура́льных дели́теля: едини́ца и само́ число́. Утвержде́ние: просты́х чи́сел бесконе́чно мно́го.\nДоказа́тельство. Предполо́жим, что просты́х чи́сел коне́чно мно́го. Пусть p₁, …, pₙ — все просты́е чи́сла. Возьмём N = p₁⋯pₙ + 1. Число́ N бо́льше едини́цы, поэ́тому у него́ есть просто́й дели́тель q. Но ни одно́ число́ из спи́ска не де́лит N: оста́ток от деле́ния N на ка́ждое из них ра́вен едини́це. Сле́довательно, q нет в спи́ске. Получи́ли противоре́чие. Зна́чит, просты́х чи́сел бесконе́чно мно́го. Мы не утвержда́ем, что само́ N обяза́тельно просто́е: ну́жен то́лько его́ просто́й дели́тель.",
+      "text": "Просто́е число́ — натура́льное число́, бо́льшее едини́цы, у кото́рого то́лько два натура́льных дели́теля: едини́ца и само́ число́. Утвержде́ние: просты́х чи́сел бесконе́чно мно́го.\nДоказа́тельство. Предполо́жим, что просты́х чи́сел коне́чное число́. Пусть p₁, …, pₙ — все просты́е чи́сла. Возьмём N = p₁⋯pₙ + 1. Число́ N бо́льше едини́цы, поэ́тому у него́ есть просто́й дели́тель q. Но ни одно́ число́ из спи́ска не де́лит N: оста́ток от деле́ния N на ка́ждое из них ра́вен едини́це. Сле́довательно, числа́ q нет в спи́ске. Получи́ли противоре́чие. Зна́чит, просты́х чи́сел бесконе́чно мно́го. Мы не утвержда́ем, что само́ N обяза́тельно просто́е: ну́жен то́лько его́ просто́й дели́тель.",
       "summary_en": "Infinitely many primes. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
       "after_page": "u25-p4",
       "rung": 10,
-      "en": "A prime is a positive integer greater than one with only two positive divisors: one and the number itself. Proposition: there are infinitely many primes.\nProof. Suppose there are finitely many primes. Let p₁, …, pₙ be all the primes. Take N = p₁⋯pₙ + 1. N is greater than one, so it has a prime divisor q. But no number in the list divides N: the remainder on dividing N by each of them is one. Consequently q is not in the list. We have obtained a contradiction. Hence there are infinitely many primes. We do not claim that N itself is necessarily prime: only its prime divisor is needed.",
+      "en": "A prime is a positive integer greater than one with only two positive divisors: one and the number itself. Proposition: there are infinitely many primes.\nProof. Suppose there is a finite number of primes. Let p₁, …, pₙ be all the primes. Take N = p₁⋯pₙ + 1. N is greater than one, so it has a prime divisor q. But no number in the list divides N: the remainder on dividing N by each of them is one. Consequently the number q is not in the list. We have obtained a contradiction. Hence there are infinitely many primes. We do not claim that N itself is necessarily prime: only its prime divisor is needed.",
       "how_read": [
         {
           "ru": "у кото́рого",
@@ -1070,8 +1086,8 @@
       "notation": [
         {
           "symbol": "p₁⋯pₙ",
-          "ru": "произведе́ние всех чи́сел из спи́ска",
-          "en": "the product of all the numbers in the list"
+          "ru": "произведе́ние всех чи́сел от p пе́рвого до p э́нного",
+          "en": "the product of all the numbers from p sub one to p sub n"
         }
       ],
       "questions": [
@@ -1099,14 +1115,14 @@
         },
         {
           "kind": "inference",
-          "prompt": "What changes if «все» is removed from «все просты́е чи́сла»?",
+          "prompt": "Why does «у кото́рого» have masculine/neuter genitive agreement in «натура́льное число́, бо́льшее едини́цы, у кото́рого …»?",
           "options": [
-            "A new prime need not contradict an incomplete list",
-            "N can then equal one",
-            "The remainder is no longer one"
+            "Its antecedent is neuter число́, not the immediately preceding feminine noun едини́цы",
+            "Its antecedent is feminine едини́ца",
+            "Genitive relative pronouns do not distinguish gender in the singular"
           ],
           "answer": 0,
-          "explanation": "Completeness of the list is exactly what the new divisor contradicts."
+          "explanation": "Neuter genitive кото́рого agrees with число́ across the intervening comparative phrase бо́льшее едини́цы."
         }
       ],
       "glosses": {
@@ -1119,12 +1135,13 @@
         "делит": "divides (without remainder)",
         "делитель": "divisor (nominative)",
         "делителя": "divisor (genitive singular; also the counted form after two)",
+        "до": "to; up to (+ genitive)",
         "его": "its; of it",
         "единица": "one; the number one (nominative)",
         "единице": "one (dative after ‘equals’)",
         "единицы": "one (genitive after a comparison or up to)",
         "каждое": "each; every (neuter nominative/accusative)",
-        "конечно": "finitely (in ‘finitely many’)",
+        "конечное": "finite (neuter nominative/accusative; ‘a finite number of’ = finitely many)",
         "которого": "which (genitive masculine/neuter)",
         "который": "which (masculine nominative)",
         "натуральное": "positive integer (adjective modifying ‘number’; zero excluded here)",
@@ -1136,6 +1153,7 @@
         "обязательно": "necessarily",
         "остаток": "remainder (of division)",
         "от": "from; of (+ genitive)",
+        "первого": "first; sub one (genitive masculine/neuter)",
         "получили": "we obtained (perfective past)",
         "поэтому": "therefore; for this reason",
         "предположим": "suppose; let us suppose (perfective future)",
@@ -1149,7 +1167,9 @@
         "списка": "of/from the list (genitive)",
         "списке": "in the list (prepositional)",
         "утверждаем": "we claim; we assert",
-        "утверждение": "proposition; statement; assertion"
+        "утверждение": "proposition; statement; assertion",
+        "числа": "numbers (nominative plural, чи́сла); of the number (genitive singular, числа́)",
+        "энного": "n-th; sub n (genitive masculine/neuter)"
       }
     },
     {
@@ -1285,13 +1305,13 @@
       "year": 2026,
       "level": "B1",
       "topic": "math",
-      "text": "Рассмо́трим коне́чный неориенти́рованный граф без пе́тель и кра́тных рёбер. Сте́пень верши́ны — число́ рёбер, кото́рые выхо́дят из неё. Утвержде́ние: су́мма степене́й всех верши́н равна́ удво́енному числу́ рёбер.\nДоказа́тельство. Посчита́ем концы́ рёбер двумя́ спо́собами. В ка́ждой верши́не число́ концо́в равно́ её сте́пени. Поэ́тому о́бщее число́ концо́в равно́ су́мме степене́й. С друго́й стороны́, у ка́ждого ребра́ есть два конца́. Зна́чит, о́бщее число́ концо́в равно́ удво́енному числу́ рёбер. О́ба выраже́ния счита́ют одно́ и то же, поэ́тому они́ равны́. Сле́дствие: число́ верши́н нечётной сте́пени чётно. Ина́че су́мма всех степене́й была́ бы нечётной, хотя́ она́ равна́ удво́енному це́лому числу́.",
+      "text": "Рассмо́трим коне́чный неориенти́рованный граф без пе́тель и кра́тных рёбер. Сте́пень верши́ны — число́ рёбер, кото́рые выхо́дят из неё. Утвержде́ние: су́мма степене́й всех верши́н равна́ удво́енному числу́ рёбер.\nДоказа́тельство. Посчита́ем концы́ рёбер двумя́ спо́собами. В ка́ждой верши́не число́ концо́в равно́ её сте́пени. Поэ́тому о́бщее число́ концо́в равно́ су́мме степене́й. С друго́й стороны́, у ка́ждого ребра́ есть два конца́. Зна́чит, о́бщее число́ концо́в равно́ удво́енному числу́ рёбер. О́ба выраже́ния даю́т одно́ и то же число́, поэ́тому они́ равны́. Сле́дствие: число́ верши́н нечётной сте́пени чётно. Ина́че су́мма всех степене́й была́ бы нечётной, хотя́ она́ равна́ удво́енному це́лому числу́.",
       "summary_en": "Degrees of vertices. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
       "after_page": "u27-p5",
       "rung": 12,
-      "en": "Consider a finite undirected graph without loops or multiple edges. The degree of a vertex is the number of edges incident to it. Proposition: the sum of all vertex degrees is twice the number of edges.\nProof. Count edge ends in two ways. At each vertex the number of ends is its degree. Therefore the total number of ends is the sum of the degrees. On the other hand, each edge has two ends. Hence the total number of ends is twice the number of edges. Both expressions count the same thing, so they are equal. Corollary: the number of vertices of odd degree is even. Otherwise the sum of all degrees would be odd, although it equals twice an integer.",
+      "en": "Consider a finite undirected graph without loops or multiple edges. The degree of a vertex is the number of edges incident to it. Proposition: the sum of all vertex degrees is twice the number of edges.\nProof. Count edge ends in two ways. At each vertex the number of ends is its degree. Therefore the total number of ends is the sum of the degrees. On the other hand, each edge has two ends. Hence the total number of ends is twice the number of edges. Both expressions give the same number, so they are equal. Corollary: the number of vertices of odd degree is even. Otherwise the sum of all degrees would be odd, although it equals twice an integer.",
       "how_read": [
         {
           "ru": "рёбра, кото́рые …",
@@ -1366,6 +1386,7 @@
         "выражения": "expressions (nominative plural)",
         "выходят": "go out from; are incident to (edges at a vertex)",
         "граф": "graph (nominative)",
+        "дают": "give; yield (they)",
         "двумя": "two (instrumental)",
         "другой": "the other (genitive feminine, in ‘on the other hand’)",
         "её": "its; of it (feminine antecedent)",
@@ -1400,7 +1421,6 @@
         "степень": "degree (of a graph vertex)",
         "стороны": "side (genitive singular in with other side, ‘on the other hand’)",
         "сумме": "the sum (dative after equals)",
-        "считают": "count (they)",
         "удвоенному": "twice; doubled (dative singular)",
         "утверждение": "proposition; statement; assertion",
         "хотя": "although; although would = at least",
@@ -1417,13 +1437,13 @@
       "year": 2026,
       "level": "B1",
       "topic": "math",
-      "text": "Пусть две ра́зные верши́ны коне́чного неориенти́рованного гра́фа соедине́ны маршру́том. Здесь маршру́т — после́довательность сме́жных верши́н; повторе́ния разреше́ны. Путь — маршру́т без повторе́ний верши́н. Утвержде́ние: ме́жду да́нными верши́нами существу́ет путь.\nДоказа́тельство. Вы́берем маршру́т наиме́ньшей длины́. Е́сли в нём два́жды встреча́ется одна́ верши́на, уда́лим часть маршру́та ме́жду э́тими двумя́ появле́ниями. Оста́нется маршру́т с те́ми же нача́лом и концо́м, кото́рый коро́че исхо́дного. Э́то противоре́чит вы́бору. Поэ́тому повторе́ний нет: вы́бранный маршру́т явля́ется путём. Мы доказа́ли существова́ние пути́, но не его́ еди́нственность. В гра́фе мо́гут быть два ра́зных пути́, кото́рые име́ют одина́ковую наиме́ньшую длину́.",
+      "text": "Пусть две ра́зные верши́ны коне́чного неориенти́рованного гра́фа соединены́ маршру́том. Здесь маршру́т — после́довательность сме́жных верши́н; повторе́ния разрешены́. Путь — маршру́т без повторе́ний верши́н. Утвержде́ние: ме́жду да́нными верши́нами существу́ет путь.\nДоказа́тельство. Вы́берем маршру́т наиме́ньшей длины́. Е́сли в нём два́жды встреча́ется одна́ и та же верши́на, уда́лим часть маршру́та ме́жду э́тими двумя́ появле́ниями. Оста́нется маршру́т с те́ми же нача́лом и концо́м, кото́рый коро́че исхо́дного. Э́то противоре́чит вы́бору маршру́та. Поэ́тому повторе́ний нет: вы́бранный маршру́т явля́ется путём. Мы доказа́ли существова́ние пути́, но не его́ еди́нственность. В гра́фе мо́гут быть два ра́зных пути́, кото́рые име́ют одина́ковую наиме́ньшую длину́.",
       "summary_en": "A shortest path. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
       "after_page": "u27-p5",
       "rung": 13,
-      "en": "Let two distinct vertices of a finite undirected graph be connected by a walk. Here a walk is a sequence of adjacent vertices; repetitions are allowed. A path is a walk without repeated vertices. Proposition: a path exists between the given vertices.\nProof. Choose a walk of minimum length. If a vertex occurs twice in it, remove the part of the walk between those two occurrences. A walk remains with the same beginning and end, shorter than the original. This contradicts the choice. Therefore there are no repetitions: the chosen walk is a path. We have proved existence of a path, but not uniqueness. There may be two different paths in the graph having the same minimum length.",
+      "en": "Let two distinct vertices of a finite undirected graph be connected by a walk. Here a walk is a sequence of adjacent vertices; repetitions are allowed. A path is a walk without repeated vertices. Proposition: a path exists between the given vertices.\nProof. Choose a walk of minimum length. If one and the same vertex occurs twice in it, remove the part of the walk between those two occurrences. A walk remains with the same beginning and end, shorter than the original. This contradicts the choice of the walk. Therefore there are no repetitions: the chosen walk is a path. We have proved existence of a path, but not uniqueness. There may be two different paths in the graph having the same minimum length.",
       "how_read": [
         {
           "ru": "ме́жду верши́нами",
@@ -1539,6 +1559,7 @@
         "смежных": "adjacent (genitive plural)",
         "соединены": "are connected (plural short passive participle)",
         "существование": "existence (accusative)",
+        "та": "that; the same (feminine nominative, in ‘one and the same’)",
         "теми": "those; the same (instrumental plural)",
         "удалим": "remove; let us remove (perfective future)",
         "утверждение": "proposition; statement; assertion",
@@ -1555,7 +1576,7 @@
       "year": 2026,
       "level": "B1",
       "topic": "math",
-      "text": "Фу́нкция f : A → B называ́ется бие́кцией, е́сли для ка́ждого y ∈ B существу́ет еди́нственный x ∈ A, для кото́рого f(x) = y. Утвержде́ние: у бие́кции существу́ет обра́тная фу́нкция g : B → A.\nДоказа́тельство. Для ка́ждого y возьмём э́тот еди́нственный x и поло́жим g(y) = x. Значе́ние существу́ет и определено́ однозна́чно, поэ́тому g явля́ется фу́нкцией. По построе́нию f(g(y)) = y. Кро́ме того́, g(f(x)) = x, так как x — еди́нственный аргуме́нт со значе́нием f(x). Ита́к, g — обра́тная фу́нкция. Без существова́ния проо́браза значе́ние g иногда́ отсу́тствует; без еди́нственности появля́ется вы́бор. О́ба усло́вия ну́жны для э́того определе́ния.",
+      "text": "Фу́нкция f : A → B называ́ется бие́кцией, е́сли для ка́ждого y ∈ B существу́ет еди́нственный x ∈ A, для кото́рого f(x) = y. Утвержде́ние: у бие́кции существу́ет обра́тная фу́нкция g : B → A.\nДоказа́тельство. Для ка́ждого y возьмём э́тот еди́нственный x и поло́жим g(y) = x. Значе́ние существу́ет и определено́ однозна́чно, поэ́тому g явля́ется фу́нкцией. По построе́нию f(g(y)) = y. Кро́ме того́, g(f(x)) = x, так как x — еди́нственный аргуме́нт со значе́нием f(x). Ита́к, g — обра́тная фу́нкция. Без существова́ния проо́браза значе́ние g иногда́ отсу́тствует; без еди́нственности появля́ется вы́бор. О́ба усло́вия нужны́ для э́того определе́ния.",
       "summary_en": "An inverse function. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
@@ -1802,7 +1823,7 @@
       "year": 2026,
       "level": "B1",
       "topic": "math",
-      "text": "Теоре́ма. Объедине́ние любо́го семе́йства откры́тых мно́жеств веще́ственной прямо́й откры́то. Речь идёт о мно́жествах, откры́тых на одно́й и той же прямо́й. Семе́йство мо́жет быть коне́чным и́ли бесконе́чным.\nОбозна́чим э́ти мно́жества Uᵢ, где i ∈ I. Их объедине́ние U состои́т из то́чек, принадлежа́щих хотя́ бы одному́ Uᵢ. Не тре́буется, что́бы то́чка принадлежа́ла всем мно́жествам семе́йства. При пусто́м I объедине́ние пусто́. Пусто́е мно́жество откры́то: в нём нет то́чки, для кото́рой усло́вие откры́тости наруша́ется. В сле́дующем доказа́тельстве для непусто́го объедине́ния мы вы́берем то́чку, зате́м одно́ мно́жество семе́йства, содержа́щее э́ту то́чку.",
+      "text": "Теоре́ма. Объедине́ние любо́го семе́йства откры́тых мно́жеств веще́ственной прямо́й откры́то. Речь идёт о мно́жествах, откры́тых на одно́й и той же прямо́й. Семе́йство мо́жет быть коне́чным и́ли бесконе́чным.\nОбозна́чим э́ти мно́жества Uᵢ, где i ∈ I. Их объедине́ние U состои́т из то́чек, принадлежа́щих хотя́ бы одному́ Uᵢ. Не тре́буется, что́бы то́чка принадлежа́ла всем мно́жествам семе́йства. При пусто́м I объедине́ние пу́сто. Пусто́е мно́жество откры́то: в нём нет то́чки, для кото́рой усло́вие откры́тости наруша́ется. В сле́дующем доказа́тельстве для непусто́го объедине́ния мы вы́берем то́чку, зате́м одно́ мно́жество семе́йства, содержа́щее э́ту то́чку.",
       "summary_en": "Topology: the union theorem. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
@@ -1858,14 +1879,14 @@
         },
         {
           "kind": "inference",
-          "prompt": "Why does the empty family not give a counterexample?",
+          "prompt": "In «одно́ мно́жество семе́йства, содержа́щее э́ту то́чку», which noun does «содержа́щее» modify and why?",
           "options": [
-            "Its union is empty, so no point violates the openness condition",
-            "Its union is the whole line by definition",
-            "The theorem excludes it"
+            "мно́жество, because содержа́щее is neuter accusative/nominative singular while семе́йства is genitive singular",
+            "семе́йства, because it immediately precedes the participle",
+            "то́чку, because the point is inside the union"
           ],
           "answer": 0,
-          "explanation": "Openness quantifies over points of U; for empty U there is no failing point."
+          "explanation": "Neuter singular содержа́щее agrees with мно́жество across the genitive modifier семе́йства; э́ту то́чку is the accusative object of the participle."
         }
       ],
       "glosses": {
@@ -1929,7 +1950,7 @@
       "year": 2026,
       "level": "B1",
       "topic": "math",
-      "text": "Доказа́тельство. Пусть U — объедине́ние откры́тых мно́жеств Uᵢ. Слу́чай пусто́го U уже́ рассмо́трен. Вы́брав произво́льную то́чку x из U, найдём мно́жество Uᵢ, содержа́щее x. По определе́нию объедине́ния тако́е мно́жество существу́ет. Так как Uᵢ откры́то, существу́ет окре́стность V то́чки x, содержа́щаяся в Uᵢ. Но Uᵢ ⊆ U. Сле́довательно, V цели́ком соде́ржится и в U. Мы нашли́ тре́буемую окре́стность для произво́льной то́чки U. Зна́чит, U откры́то.\nВыбира́я Uᵢ, мы мо́жем учиты́вать x. Одно́ и то же Uᵢ не обяза́но подходи́ть для всех то́чек U. Доказа́тельство испо́льзует лока́льное усло́вие: у ка́ждой то́чки есть своя́ окре́стность.",
+      "text": "Доказа́тельство. Пусть U — объедине́ние откры́тых мно́жеств Uᵢ. Слу́чай пусто́го U уже́ рассмо́трен. Вы́брав произво́льную то́чку x из U, найдём мно́жество Uᵢ, содержа́щее x. По определе́нию объедине́ния тако́е мно́жество существу́ет. Так как Uᵢ откры́то, существу́ет окре́стность V то́чки x, содержа́щаяся в Uᵢ. Но Uᵢ ⊆ U. Сле́довательно, V цели́ком соде́ржится и в U. Мы нашли́ тре́буемую окре́стность для произво́льной то́чки U. Зна́чит, U откры́то.\nВыбира́я Uᵢ, мы мо́жем учи́тывать x. Одно́ и то же Uᵢ не обяза́но подходи́ть для всех то́чек U. Доказа́тельство испо́льзует лока́льное усло́вие: у ка́ждой то́чки есть своя́ окре́стность.",
       "summary_en": "Topology: proof of the union theorem. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
@@ -2083,13 +2104,13 @@
       "notation": [
         {
           "symbol": "|x − x₀| < δ",
-          "ru": "мо́дуль ра́зности x и x нулево́го ме́ньше числа́ де́льта",
+          "ru": "мо́дуль ра́зности x и x нулево́го ме́ньше де́льта",
           "en": "the absolute difference between x and x nought is less than delta"
         },
         {
           "symbol": "∀ ε > 0 ∃ δ > 0",
-          "ru": "для любо́го положи́тельного числа́ э́псилон существу́ет положи́тельное число́ де́льта",
-          "en": "for every positive epsilon there exists a positive delta"
+          "ru": "для любо́го э́псилон бо́льше нуля́ существу́ет де́льта бо́льше нуля́",
+          "en": "for every epsilon greater than zero there exists a delta greater than zero"
         }
       ],
       "questions": [
@@ -2128,6 +2149,7 @@
         }
       ],
       "glosses": {
+        "больше": "more; greater than",
         "вещественная": "real-valued (feminine nominative)",
         "вне": "outside (+ genitive)",
         "всех": "all (genitive plural)",
@@ -2142,6 +2164,7 @@
         "непрерывна": "continuous (feminine short adjective)",
         "непрерывность": "continuity (feminine nominative/accusative)",
         "нулевого": "nought; zero subscript (genitive in the spoken formula)",
+        "нуля": "zero (genitive after a comparison)",
         "области": "domain (genitive or dative, according to its governor)",
         "одной": "one; the same (feminine prepositional)",
         "определена": "is defined (feminine short passive participle)",
@@ -2153,8 +2176,6 @@
         "отрезке": "on the closed interval (prepositional)",
         "отрезку": "to the closed interval (dative)",
         "по-прежнему": "still; as before (fixed adverb)",
-        "положительного": "positive (genitive masculine/neuter)",
-        "положительное": "positive (neuter nominative)",
         "при": "when; under the condition; given (+ prepositional)",
         "принадлежат": "belong to (+ dative)",
         "проверяем": "we test; we check",
@@ -2346,7 +2367,7 @@
       "notation": [
         {
           "symbol": "δ = min(δ₁, δ₂)",
-          "ru": "число́ де́льта равно́ ми́нимуму из чи́сел де́льта оди́н и де́льта два",
+          "ru": "де́льта равно́ ми́нимуму из де́льта оди́н и де́льта два",
           "en": "delta is the minimum of delta one and delta two"
         },
         {
@@ -2380,14 +2401,14 @@
         },
         {
           "kind": "inference",
-          "prompt": "Why is the maximum not justified by this proof?",
+          "prompt": "How does «Вы́брав ма́ксимум вме́сто ми́нимума, мы не смогли́ бы обоснова́ть э́тот шаг» express a counterfactual condition?",
           "options": [
-            "The triangle inequality requires equal functions",
-            "One of the hypotheses for a bound may fail within the larger radius",
-            "A maximum of two positive numbers is negative"
+            "It states that we actually chose the maximum in the proof",
+            "The perfective adverbial participle «Вы́брав» supplies the hypothetical condition (‘had we chosen’) for the subjunctive «не смогли́ бы»",
+            "It predicts that the maximum will be chosen in a later theorem"
           ],
           "answer": 1,
-          "explanation": "The Russian ‘о́бе … одновре́менно’ requires satisfying both distance restrictions, hence the smaller radius."
+          "explanation": "In Russian mathematical prose, an adverbial participle («Вы́брав …») combined with a past-tense verb and «бы» («не смогли́ бы») concisely expresses a counterfactual ‘if we had chosen …, we could not have …’ without a separate «е́сли бы» clause."
         }
       ],
       "glosses": {
@@ -2439,7 +2460,7 @@
       "year": 2026,
       "level": "B2",
       "topic": "math",
-      "text": "Пусть Ω — непусто́е коне́чное мно́жество исхо́дов. Ка́ждому исхо́ду ω сопоста́влено число́ p(ω) ≥ 0, причём су́мма всех э́тих чи́сел равна́ едини́це. Собы́тие — подмно́жество Ω. Вероя́тность собы́тия A определена́ как су́мма p(ω) по всем исхо́дам, принадлежа́щим A.\nУтвержде́ние. Е́сли собы́тия A и B не пересека́ются, то P(A ∪ B) = P(A) + P(B). Доказа́тельство. Скла́дывая вероя́тности исхо́дов из A и из B, мы учиты́ваем ка́ждый исхо́д объедине́ния ро́вно оди́н раз. Поэ́тому су́ммы равны́. Без усло́вия о непересече́нии о́бщие исхо́ды учиты́вались бы два́жды. Собы́тие, име́ющее нулеву́ю вероя́тность, здесь не обяза́тельно пусто́: в нём мо́гут быть исхо́ды, вероя́тности кото́рых равны́ нулю́.",
+      "text": "Пусть Ω — непусто́е коне́чное мно́жество исхо́дов. Ка́ждому исхо́ду ω сопоста́влено число́ p(ω) ≥ 0, причём су́мма всех э́тих чи́сел равна́ едини́це. Собы́тие — подмно́жество Ω. Вероя́тность собы́тия A определена́ как су́мма p(ω) по всем исхо́дам, принадлежа́щим A.\nУтвержде́ние. Е́сли собы́тия A и B не пересека́ются, то P(A ∪ B) = P(A) + P(B). Доказа́тельство. Скла́дывая вероя́тности исхо́дов из A и из B, мы учи́тываем ка́ждый исхо́д объедине́ния ро́вно оди́н раз. Поэ́тому су́ммы равны́. Без усло́вия непересече́ния о́бщие исхо́ды учи́тывались бы два́жды. Собы́тие, име́ющее нулеву́ю вероя́тность, здесь не обяза́тельно пу́сто: в нём мо́гут быть исхо́ды, вероя́тности кото́рых равны́ нулю́.",
       "summary_en": "Finite probability. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
@@ -2528,7 +2549,7 @@
         "конечное": "finite (neuter nominative)",
         "которых": "which; whose (genitive plural)",
         "могут": "may; can (they)",
-        "непересечении": "disjointness; nonintersection (prepositional)",
+        "непересечения": "of disjointness; of nonintersection (genitive)",
         "непустое": "nonempty (neuter nominative)",
         "нулевую": "zero (feminine accusative, of probability)",
         "нулю": "zero (dative after equals)",
@@ -2635,14 +2656,14 @@
         },
         {
           "kind": "inference",
-          "prompt": "What does «при P(B) > 0» limit?",
+          "prompt": "In «При P(B) = 0 незави́симость по-пре́жнему определена́, а приведённая фо́рмула … не определя́ет число́», what is the grammatical difference between «определена́» and «не определя́ет число́»?",
           "options": [
-            "The equivalence using the displayed conditional probability",
-            "The definition of independence itself in every case",
-            "The existence of events A and B"
+            "«определена́» is a feminine short passive participle (‘is defined’) with subject незави́симость, while «не определя́ет» is an active verb (‘does not define’) with subject фо́рмула and object число́",
+            "Both are active verbs taking число́ as their direct object",
+            "«определена́» modifies фо́рмула and «определя́ет» modifies незави́симость"
           ],
           "answer": 0,
-          "explanation": "Independence still has its product definition when P(B) = 0; the quotient formula does not."
+          "explanation": "Russian contrasts the passive state «незави́симость определена́» (independence is defined) with the active transitive clause «фо́рмула не определя́ет число́» (the formula does not define a number)."
         }
       ],
       "glosses": {
@@ -2697,7 +2718,7 @@
       "year": 2026,
       "level": "B2",
       "topic": "math",
-      "text": "Рабо́таем в класси́ческой ло́гике. Пусть P(x) — сво́йство элеме́нтов мно́жества A. Утвержде́ние «не все элеме́нты A облада́ют сво́йством P» равноси́льно утвержде́нию «существу́ет элеме́нт A, не облада́ющий сво́йством P». Символи́чески: ¬∀x ∈ A P(x) ⇔ ∃x ∈ A ¬P(x).\nДоказа́тельство. Е́сли на́йден элеме́нт, не облада́ющий сво́йством, то всео́бщее утвержде́ние ло́жно. Обра́тно, е́сли тако́го элеме́нта нет, то ка́ждый элеме́нт облада́ет сво́йством, и отрица́ние всео́бщего утвержде́ния ло́жно. В класси́ческой ло́гике э́того доста́точно для эквивале́нтности.\nСло́ва «не все» не означа́ют «все не». В мно́жестве чи́сел 1 и 2 не все чи́сла чётные, но и не все нечётные. При пусто́м A о́бе сто́роны запи́санной эквивале́нтности ло́жны.",
+      "text": "Рабо́таем в класси́ческой ло́гике. Пусть P(x) — сво́йство элеме́нтов мно́жества A. Утвержде́ние «не все элеме́нты A облада́ют сво́йством P» равноси́льно утвержде́нию «существу́ет элеме́нт A, не облада́ющий сво́йством P». Символи́чески: ¬∀x ∈ A P(x) ⇔ ∃x ∈ A ¬P(x).\nДоказа́тельство. Е́сли на́йден элеме́нт, не облада́ющий сво́йством, то всео́бщее утвержде́ние ло́жно. Обра́тно, е́сли тако́го элеме́нта нет, то ка́ждый элеме́нт облада́ет сво́йством, и отрица́ние всео́бщего утвержде́ния ло́жно. В класси́ческой ло́гике э́того доста́точно для эквивале́нтности.\nСлова́ «не все» не означа́ют «все не». В мно́жестве чи́сел 1 и 2 не все чи́сла чётные, но и не все нечётные. При пусто́м A о́бе стороны́ запи́санной эквивале́нтности ло́жны.",
       "summary_en": "Negation and quantifiers. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
@@ -2814,7 +2835,7 @@
         "свойством": "a property (instrumental after possess)",
         "символически": "in symbols",
         "слова": "words (nominative plural)",
-        "стороны": "sides of the equivalence (nominative plural)",
+        "стороны": "sides of the equivalence (genitive singular after both)",
         "такого": "such (genitive singular)",
         "утверждение": "proposition; statement; assertion",
         "утверждению": "to the statement (dative)",
@@ -2835,13 +2856,13 @@
       "year": 2026,
       "level": "B2",
       "topic": "math",
-      "text": "Коли́чество информа́ции мо́жно определя́ть по-ра́зному. В комбинато́рном подхо́де мы счита́ем допусти́мые вариа́нты. Для вы́бора одного́ из N вариа́нтов есте́ственна ме́ра log₂ N. Вероя́тностный подхо́д учиты́вает распределе́ние вероя́тностей: при p > 0 ре́дкое собы́тие несёт бо́льше информа́ции, измеря́емой величино́й −log₂ p. Усредня́я э́ту величину́, получа́ем энтропи́ю.\nАлгоритми́ческий подхо́д свя́зывает сло́жность конкре́тной стро́ки с длино́й кратча́йшей програ́ммы, печа́тающей э́ту стро́ку и заверша́ющей рабо́ту. Оптима́льный универса́льный язы́к описа́ния зафикси́рован зара́нее. При сме́не тако́го языка́ сло́жность меня́ется не бо́лее чем на конста́нту, зави́сящую от двух языко́в, но не от стро́ки. Э́та сло́жность в о́бщем слу́чае невычисли́ма. На́ше кра́ткое сопоставле́ние развива́ет разли́чие трёх подхо́дов Колмого́рова. Оно́ не отождествля́ет сло́жность едини́чной стро́ки с энтропи́ей распределе́ния и не измеря́ет смы́словую це́нность сообще́ния.",
+      "text": "Коли́чество информа́ции мо́жно определя́ть по-ра́зному. В комбинато́рном подхо́де мы счита́ем допусти́мые вариа́нты. Для вы́бора одного́ из N вариа́нтов есте́ственна ме́ра log₂ N. Вероя́тностный подхо́д учи́тывает распределе́ние вероя́тностей: при p > 0 ре́дкое собы́тие несёт бо́льше информа́ции, измеря́емой величино́й −log₂ p. Усредня́я э́ту величину́, получа́ем энтропи́ю.\nАлгоритми́ческий подхо́д свя́зывает сло́жность конкре́тной строки́ с длино́й кратча́йшей програ́ммы, печа́тающей э́ту строку́ и заверша́ющей рабо́ту. Оптима́льный универса́льный язы́к описа́ния зафикси́рован зара́нее. При сме́не тако́го языка́ сло́жность меня́ется не бо́лее чем на конста́нту, зави́сящую от двух языко́в, но не от строки́. Э́та сло́жность в о́бщем слу́чае невычисли́ма. На́ше кра́ткое сопоставле́ние раскрыва́ет разли́чие трёх подхо́дов Колмого́рова. Оно́ не отождествля́ет сло́жность едини́чной строки́ с энтропи́ей распределе́ния и не измеря́ет смы́словую це́нность сообще́ния.",
       "summary_en": "Three approaches to information. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
       "after_page": "u29-p4",
       "rung": 24,
-      "en": "The quantity of information can be defined in different ways. In the combinatorial approach we count admissible alternatives. For choosing one of N alternatives, log₂ N is a natural measure. The probabilistic approach takes a probability distribution into account: for p > 0 a rare event carries more information, measured by −log₂ p. Averaging this quantity gives entropy.\nThe algorithmic approach relates the complexity of a particular string to the length of a shortest program that prints the string and halts. An optimal universal description language is fixed in advance. When one changes such a language, complexity changes by at most a constant depending on the two languages but not on the string. This complexity is in general uncomputable. Our brief comparison develops Kolmogorov's distinction between three approaches. It does not identify the complexity of an individual string with the entropy of a distribution or measure the semantic value of a message.",
+      "en": "The quantity of information can be defined in different ways. In the combinatorial approach we count admissible alternatives. For choosing one of N alternatives, log₂ N is a natural measure. The probabilistic approach takes a probability distribution into account: for p > 0 a rare event carries more information, measured by −log₂ p. Averaging this quantity gives entropy.\nThe algorithmic approach relates the complexity of a particular string to the length of a shortest program that prints the string and halts. An optimal universal description language is fixed in advance. When one changes such a language, complexity changes by at most a constant depending on the two languages but not on the string. This complexity is in general uncomputable. Our brief comparison brings out Kolmogorov's distinction between three approaches. It does not identify the complexity of an individual string with the entropy of a distribution or measure the semantic value of a message.",
       "how_read": [
         {
           "ru": "информа́ции, измеря́емой величино́й",
@@ -2901,7 +2922,7 @@
         },
         {
           "kind": "inference",
-          "prompt": "What depends on the two languages but not the string?",
+          "prompt": "In «сло́жность меня́ется не бо́лее чем на конста́нту, зави́сящую от двух языко́в, но не от строки́», which noun does «зави́сящую» modify and what does that say about what depends on the two languages?",
           "options": [
             "The shortest program for every string",
             "The probability of every event",
@@ -2977,8 +2998,8 @@
         "подходов": "of approaches (genitive plural)",
         "при": "when; under the condition; given (+ prepositional)",
         "программы": "of a program (genitive singular)",
-        "развивает": "develops; elaborates",
         "различие": "distinction",
+        "раскрывает": "brings out; reveals",
         "распределение": "distribution (accusative)",
         "распределения": "of a distribution (genitive)",
         "редкое": "rare (neuter nominative)",
