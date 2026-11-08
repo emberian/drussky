@@ -37,6 +37,8 @@ struct Course: Codable, Sendable {
         var title: String
         var intro: String?
         var exercises: [Exercise]
+        /// Absent in older courses: traditional writing practice.
+        var purpose: String? = nil
     }
 
     struct Example: Codable, Sendable, Hashable {
@@ -66,6 +68,7 @@ enum ExerciseKind: String, Codable, Sendable {
     case readAloud = "read_aloud"
     case translate, fill
     case readMeaning = "read_meaning"
+    case constructionChoice = "construction_choice"
     case passage
     /// Generated minimal-pair listening (SoundPairs.swift); never authored in course.json.
     case soundPair = "sound_pair"
@@ -74,16 +77,24 @@ enum ExerciseKind: String, Codable, Sendable {
     /// Word building from morpheme tiles and guessing a new family member (Morphology/).
     case buildWord = "build_word"
     case familyGuess = "family_guess"
+    /// Reading a word or line in someone's handwriting, then printing it or picking it among
+    /// look-alikes (Cursive/).
+    case readHandwriting = "read_handwriting"
     /// A spoken conversation with the tutor (Talk/).
     case talk
     /// Referent resolution on a library sentence: tap the head a pronoun or participle belongs to
     /// (Structure/); generated locally from library-structure.json, never authored.
     case structure
+    /// Grammar as a system (Grammar/): a table with cells to fill, one form from a cue, phrases
+    /// sorted by the case or pattern they show.
+    case paradigmFill = "paradigm_fill"
+    case transform
+    case cueSort = "cue_sort"
 
     /// Exercises answered with the pencil on ruled paper.
     var isWriting: Bool {
         switch self {
-        case .meet, .trace, .copy, .dictation, .translate, .fill: true
+        case .meet, .trace, .copy, .dictation, .translate, .fill, .transform: true
         default: false
         }
     }
@@ -131,11 +142,40 @@ struct Exercise: Codable, Sendable, Hashable {
     /// structure: the word asked about (index into `Structure.words(in: text)`); `answer` is its head's index
     /// and `word` the probe as written.
     var probe: Int? = nil
+    /// Passage: how its phrases and notation are read, listed quietly under the text (a shelf
+    /// reading's `how_read` and `notation`, Model/Shelves.swift).
+    var frames: [Frame]? = nil
+    /// Passage: things to hear in it (a dialogue's `notice`), shown once it has been read.
+    var notice: [String]? = nil
+
+    struct Frame: Codable, Sendable, Hashable {
+        var ru: String
+        var en: String
+        var note: String? = nil
+        /// The notation this reads out (∅, ⊂), when it is one.
+        var symbol: String? = nil
+    }
+    /// paradigm_fill / transform: the paradigms.json table, the cell asked (`cue`), the cells to
+    /// write (`cells`), and every cell shown with its form (`forms`; `options` present = tap tiles
+    /// instead of writing). cue_sort: `items` sorted into `options`.
+    var paradigm: String? = nil
+    var cue: String? = nil
+    var cells: [String]? = nil
+    var forms: [String: String]? = nil
+    var items: [SortItem]? = nil
+    /// trace/copy/meet: drawn with the cursive models whatever the setting (the cursive unit).
+    var cursive: Bool? = nil
+    /// read_handwriting: fixes how the sample is rendered (hand, slant, paper); absent, one is derived.
+    var seed: Int? = nil
+    /// A first-attempt weekly sample, kept without an automated grade.
+    var baseline: BaselineTask? = nil
 
     enum CodingKeys: String, CodingKey {
         case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills, prompt
         case narration, words, span
-        case parts, alternatives, word, root, probe
+        case parts, alternatives, word, root, probe, frames, notice, baseline
+        case paradigm, cue, cells, forms, items
+        case cursive, seed
     }
 
     init(kind: ExerciseKind) { self.kind = kind }
@@ -165,6 +205,16 @@ struct Exercise: Codable, Sendable, Hashable {
         word = try c.decodeIfPresent(String.self, forKey: .word)
         root = try c.decodeIfPresent(String.self, forKey: .root)
         probe = try c.decodeIfPresent(Int.self, forKey: .probe)
+        frames = try c.decodeIfPresent([Frame].self, forKey: .frames)
+        notice = try c.decodeIfPresent([String].self, forKey: .notice)
+        paradigm = try c.decodeIfPresent(String.self, forKey: .paradigm)
+        cue = try c.decodeIfPresent(String.self, forKey: .cue)
+        cells = try c.decodeIfPresent([String].self, forKey: .cells)
+        forms = try c.decodeIfPresent([String: String].self, forKey: .forms)
+        items = try c.decodeIfPresent([SortItem].self, forKey: .items)
+        cursive = try c.decodeIfPresent(Bool.self, forKey: .cursive)
+        seed = try c.decodeIfPresent(Int.self, forKey: .seed)
+        baseline = try c.decodeIfPresent(BaselineTask.self, forKey: .baseline)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -197,6 +247,16 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(word, forKey: .word)
         try c.encodeIfPresent(root, forKey: .root)
         try c.encodeIfPresent(probe, forKey: .probe)
+        try c.encodeIfPresent(frames, forKey: .frames)
+        try c.encodeIfPresent(notice, forKey: .notice)
+        try c.encodeIfPresent(paradigm, forKey: .paradigm)
+        try c.encodeIfPresent(cue, forKey: .cue)
+        try c.encodeIfPresent(cells, forKey: .cells)
+        try c.encodeIfPresent(forms, forKey: .forms)
+        try c.encodeIfPresent(items, forKey: .items)
+        try c.encodeIfPresent(cursive, forKey: .cursive)
+        try c.encodeIfPresent(seed, forKey: .seed)
+        try c.encodeIfPresent(baseline, forKey: .baseline)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }
@@ -205,8 +265,8 @@ struct Exercise: Codable, Sendable, Hashable {
     var target: String? {
         switch kind {
         case .meet: letter
-        case .trace, .copy, .dictation, .readAloud: text
-        case .translate, .fill, .buildWord: answerText
+        case .trace, .copy, .dictation, .readAloud, .readHandwriting: text
+        case .translate, .fill, .buildWord, .transform: answerText
         case .listenPick: say
         default: nil
         }
@@ -217,9 +277,9 @@ struct Exercise: Codable, Sendable, Hashable {
         switch kind {
         case .listenPick: say
         case .dictation: say ?? text
-        case .readAloud, .trace, .copy, .readMeaning, .passage, .familyGuess, .structure: text
+        case .readAloud, .trace, .copy, .readMeaning, .passage, .familyGuess, .readHandwriting, .structure: text
         case .fill: [before, answerText, after].compactMap { $0 }.joined()
-        case .translate, .buildWord: answerText
+        case .translate, .buildWord, .transform: answerText
         default: nil
         }
     }

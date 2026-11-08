@@ -41,6 +41,11 @@ public struct Probe: Codable, Sendable, Hashable, Identifiable {
     /// Whether recall succeeded (a grade above `again`). nil while unanswered or if it went ungraded.
     public var observed: Bool?
     public var answered: Date?
+    /// Assessment provenance. Optional so earlier notebooks continue to decode.
+    public var lastExposure: Date? = nil
+    public var firstAttempt: Bool? = nil
+    public var assistance: [String]? = nil
+    public var context: String? = nil
 
     public init(id: String = UUID().uuidString, candidate: String, modality: Modality, drawn: Date, due: Date) {
         self.id = id
@@ -139,11 +144,17 @@ public struct ProbeLedger: Codable, Sendable, Equatable {
     /// Records what happened on `item`, if a probe was placed there. `observed` nil: the item went
     /// ungraded (skipped); the probe is kept but counts for nothing.
     @discardableResult
-    public mutating func observe(item: String, predicted: Double?, observed: Bool?, at date: Date) -> Probe? {
+    public mutating func observe(item: String, predicted: Double?, observed: Bool?, at date: Date,
+                                 lastExposure: Date? = nil, firstAttempt: Bool? = nil,
+                                 assistance: [String]? = nil, context: String? = nil) -> Probe? {
         guard let i = probes.firstIndex(where: { $0.item == item && $0.answered == nil }) else { return nil }
         probes[i].predicted = predicted
         probes[i].observed = observed
         probes[i].answered = date
+        probes[i].lastExposure = lastExposure
+        probes[i].firstAttempt = firstAttempt
+        probes[i].assistance = assistance
+        probes[i].context = context
         return probes[i]
     }
 

@@ -32,13 +32,13 @@ struct SpeakingReportView: View {
                     }
                 }
             }
-            if !report.tips.isEmpty {
+            if !report.actionableTips.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
-                    ForEach(Array(report.tips.prefix(2).enumerated()), id: \.offset) { _, tip in tipRow(tip) }
+                    ForEach(Array(report.actionableTips.prefix(2).enumerated()), id: \.offset) { _, tip in tipRow(tip) }
                 }
-            } else if comparison?.model != nil, comparison?.stressMisses.isEmpty == true {
-                Label("Stress and rhythm follow the model.", systemImage: "checkmark")
-                    .scaledFont(14, weight: .medium).foregroundStyle(Theme.good)
+            } else {
+                Text("Listen back: does your message come through? Compare one part with the model if it helps.")
+                    .scaledFont(14).foregroundStyle(Theme.muted)
             }
         }
         .padding(12)
@@ -89,7 +89,7 @@ struct SpeakingReportView: View {
 
 /// Syllables in columns: the text, the model's syllable, the learner's. Width is length,
 /// colour depth is prominence, the line inside is pitch. The written stress is in blue; a
-/// learner's syllable carrying the stress that belongs elsewhere is ringed in red.
+/// learner can compare the recordings without an automatic stress-error diagnosis.
 struct SyllableGrid: View {
     @Environment(Voice.self) private var voice
     let comparison: ProsodyComparison
@@ -101,7 +101,6 @@ struct SyllableGrid: View {
     private func width(_ s: SpokenSyllable?) -> CGFloat { max(30, min(150, CGFloat((s?.end ?? 0) - (s?.start ?? 0)) * Self.perSecond)) }
 
     var body: some View {
-        let misplaced = Set(comparison.stressMisses.map(\.heard))
         HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(" ").russianFont(19).hidden()
@@ -121,10 +120,10 @@ struct SyllableGrid: View {
                                 .russianFont(19).foregroundStyle(Theme.text).lineLimit(1).fixedSize()
                             if let model = comparison.model, let modelURL {
                                 box(model[i], url: modelURL, key: "syl-m-\(takeURL.lastPathComponent)-\(i)", color: Theme.accent,
-                                    stressed: syl.isStressed, misplaced: false)
+                                    stressed: syl.isStressed)
                             }
                             box(comparison.take[i], url: takeURL, key: "syl-y-\(takeURL.lastPathComponent)-\(i)", color: Theme.ink,
-                                stressed: syl.isStressed, misplaced: misplaced.contains(i))
+                                stressed: syl.isStressed)
                         }
                         .frame(width: w, alignment: .leading)
                         .padding(.leading, gap ? 10 : 0)
@@ -135,7 +134,7 @@ struct SyllableGrid: View {
         .accessibilityElement(children: .contain)
     }
 
-    private func box(_ s: SpokenSyllable, url: URL, key: String, color: Color, stressed: Bool, misplaced: Bool) -> some View {
+    private func box(_ s: SpokenSyllable, url: URL, key: String, color: Color, stressed: Bool) -> some View {
         let playing = voice.speakingKey == key
         return Button {
             voice.playSegment(url, key: key, from: max(0, s.start - 0.03), to: s.end + 0.04)
@@ -155,7 +154,7 @@ struct SyllableGrid: View {
             .frame(width: width(s), height: 34)
             .background(RoundedRectangle(cornerRadius: 7).fill(color.opacity(0.08 + 0.42 * s.prominence)))
             .overlay(RoundedRectangle(cornerRadius: 7)
-                .stroke(misplaced ? Theme.redPen : (playing ? Theme.accent : .clear), lineWidth: misplaced || playing ? 2 : 0))
+                .stroke(playing ? Theme.accent : .clear, lineWidth: playing ? 2 : 0))
         }
         .buttonStyle(.plain)
         .accessibilityLabel(stressed ? "stressed syllable" : "syllable")

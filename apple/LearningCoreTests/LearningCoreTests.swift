@@ -235,3 +235,15 @@ final class LearningCoreTests: XCTestCase {
         XCTAssertTrue(empty.ladder.isEmpty)
     }
 }
+
+extension LearningCoreTests {
+    func testTargetAcceptsDomainKnowledgePolicy() {
+        let target = Target(units: [Target.Unit(key: a), Target.Unit(key: b), Target.Unit(key: a)], segments: [0..<2, 2..<3])
+        let m = KnowledgeModel(events: [outcome([a, b], say, .good, at: t0)])
+        let d = m.distance(to: target) { $0.key == b }
+        XCTAssertEqual(d.coverage, 1.0 / 3.0, accuracy: 1e-9)
+        XCTAssertEqual(d.segmentCoverage, [0.5, 0])
+        XCTAssertEqual(d.knownKeys, 1)
+        XCTAssertEqual(d.ladder.map(\.key), [a])
+    }
+}

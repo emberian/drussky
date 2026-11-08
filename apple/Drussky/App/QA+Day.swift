@@ -13,7 +13,7 @@ extension QA {
         if dayShift != nil { book.turnForward() }
         if has("-qa-probes") { syntheticProbes(book) }
         if has("-qa-tired"), let page = book.page {
-            book.day.shortened = [page.id: "Shorter page today — you've been at it a while. (Answers take twice as long as when you started.)"]
+            book.day.shortened = [page.id: "2 reviews now use choices. 3 reviews wait for later."]
             book.day.lastShortened = book.now()
         }
     }

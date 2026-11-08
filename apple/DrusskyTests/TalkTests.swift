@@ -19,6 +19,51 @@ final class TalkTests: XCTestCase {
 
     // MARK: The dialogue
 
+    func testResumingLearnerTurnWaitsForMicrophoneTap() async throws {
+        // Resuming checks for the tutor first (no key: the page says so instead); the turn itself
+        // never reaches the network, so any key will do for this test. The learner's own is restored.
+        let keyBefore = Keychain.apiKey
+        Keychain.apiKey = keyBefore ?? "qa-placeholder-key"
+        defer { Keychain.apiKey = keyBefore }
+        let book = Book(course: try course(), store: tempStore())
+        book.insertTalkPage()
+        let ref = ExerciseRef(pageID: try XCTUnwrap(book.page).id, index: 0)
+        var saved = TalkConversation(turns: 6)
+        saved.scene = TalkScene(title: "A cat", ru: "Кот")
+        let line = TalkLine(role: .tutor, ru: "Где кот?", at: book.now())
+        saved.lines = [line]
+        book.saveTalk(ref, saved)
+        let session = TalkSession(ref: ref, book: book, pageVoice: Voice(), voice: SilentTutorVoice())
+        defer { session.cancel() }
+
+        session.appear(autoStart: false)
+        XCTAssertEqual(session.status, .paused)
+        session.resume()
+        await Task.yield()
+        XCTAssertEqual(session.status, .yourTurn)
+        XCTAssertEqual(session.mic.phase, .idle, "Reading the reply must not start capture or request microphone permission")
+
+        session.mic.pose(.hearing, key: session.key)
+        session.replay(line)
+        XCTAssertEqual(session.mic.phase, .idle, "Replaying the tutor must not record the tutor as the learner")
+        XCTAssertEqual(session.status, .yourTurn)
+    }
+
+    /// Without a key nothing starts: the page says so, and "Try again" asks the same question
+    /// again instead of launching a request that would fail.
+    func testTryAgainWithoutKeyStaysUnavailable() async throws {
+        try XCTSkipUnless((Keychain.apiKey ?? "").isEmpty, "requires a simulator with no tutor key")
+        let book = Book(course: try course(), store: tempStore())
+        book.insertTalkPage()
+        let ref = ExerciseRef(pageID: try XCTUnwrap(book.page).id, index: 0)
+        let session = TalkSession(ref: ref, book: book, pageVoice: Voice(), voice: SilentTutorVoice())
+        defer { session.cancel() }
+        session.propose()
+        guard case .unavailable = session.status else { return XCTFail("A missing key is an unavailable note, not a request: \(session.status)") }
+        session.resume()
+        guard case .unavailable = session.status else { return XCTFail("Try again with the key still missing stays unavailable: \(session.status)") }
+    }
+
     func testDialogueTurnOrderAndEnd() {
         var d = TalkDialogue(totalTurns: 6)
         XCTAssertEqual(d.phase, .choosingScene)
@@ -136,6 +181,63 @@ final class TalkTests: XCTestCase {
         XCTAssertTrue(TalkTutor.turns(for: c, dialogue: e).last!.text.contains("LAST turn"), "ending early tells the tutor to say goodbye")
     }
 
+    func testScenesCarryTheInformationGap() {
+        let reply = """
+        {"scenes":[{"title":"At breakfast","ru":"За за́втраком","goal":"Find out what there is to drink and order one thing",
+                    "frames":[{"ru":"Что есть …?","en":"what is there …?"},{"ru":"Я хочу́ …","en":"I want …"},{"ru":"А … есть?","en":"and is there …?"},{"ru":"too many","en":""}],
+                    "secret":"There is tea and juice but no coffee"},
+                   {"title":"In a shop","ru":"В магази́не","goal":"Ask the price of bread","frames":["Ско́лько сто́ит …? = how much is …?"],"facts":"Bread is 40 roubles"},
+                   {"title":"At breakfast","ru":"dup"}, {"title":"Fourth","ru":"Четвёртая"}]}
+        """
+        let scenes = TalkTutor.parseScenes(reply)
+        XCTAssertEqual(scenes.map(\.title), ["At breakfast", "In a shop", "Fourth"], "duplicates dropped, three at most")
+        XCTAssertEqual(scenes[0].goal, "Find out what there is to drink and order one thing")
+        XCTAssertEqual(scenes[0].frames?.count, 3, "at most three frames")
+        XCTAssertEqual(scenes[0].frames?.first, TalkFrame(ru: "Что есть …?", en: "what is there …?"))
+        XCTAssertEqual(scenes[0].secret, "There is tea and juice but no coffee")
+        XCTAssertEqual(scenes[1].frames, [TalkFrame(ru: "Ско́лько сто́ит …?", en: "how much is …?")], "a frame as one string still reads")
+        XCTAssertEqual(scenes[1].secret, "Bread is 40 roubles", "`facts` is read as the secret")
+        XCTAssertNil(scenes[2].goal)
+        // The scene's private facts reach the partner's prompt, not the marker's.
+        let turnPrompt = TalkTutor.turnSystem(scene: scenes[0], state: "")
+        XCTAssertTrue(turnPrompt.contains("no coffee") && turnPrompt.contains("order one thing"))
+        XCTAssertTrue(turnPrompt.contains("not obliged to agree"))
+        XCTAssertFalse(TalkTutor.markSystem.contains("private facts"), "the marker judges from the learner's words")
+    }
+
+    func testEndpointingProfileAndTurnRequest() {
+        let c = TalkSession.endpointing
+        XCTAssertEqual(c.trailingSilence, 1.5, "a hesitant beginner may pause mid-thought")
+        XCTAssertEqual(c.maxSpeech, 12)
+        XCTAssertEqual(c.waitLimit, 10)
+        XCTAssertGreaterThan(c.trailingSilence, VoiceActivity.Config().trailingSilence)
+        let plain = SpeakingTurn.Request(key: "k", target: "Да.", takeURL: URL(fileURLWithPath: "/tmp/x.m4a"), model: nil, repeats: 0)
+        XCTAssertNil(plain.config, "read-aloud keeps the target's own endpointing")
+        XCTAssertEqual(SpeakingTurn.config(target: "Да.", model: nil).maxSpeech, 6)
+    }
+
+    func testTalkIsUnavailableWithoutAKeyAndLeavable() throws {
+        let previous = Keychain.apiKey
+        Keychain.apiKey = nil
+        defer { Keychain.apiKey = previous }
+        let book = Book(course: try course(), store: tempStore())
+        QA.complete(book, page: 0, upTo: .max); book.turnForward()
+        book.insertTalkPage()
+        let page = try XCTUnwrap(book.page)
+        let ref = ExerciseRef(pageID: page.id, index: 0)
+        let session = TalkSession(ref: ref, book: book, pageVoice: Voice(), voice: SilentTutorVoice())
+        session.appear(autoStart: true)
+        guard case .unavailable(let why) = session.status else { return XCTFail("expected unavailable, got \(session.status)") }
+        XCTAssertTrue(why.contains("key"), why)
+        XCTAssertNil(book.result(ref)?.talk, "nothing was started")
+        session.propose()
+        guard case .unavailable = session.status else { return XCTFail("propose must not reach the network without a key") }
+        session.skip()
+        XCTAssertEqual(book.result(ref)?.status, .skipped, "Not today leaves the page")
+        XCTAssertEqual(session.status, .done)
+        XCTAssertTrue(book.pages[book.currentPage].isFinished)
+    }
+
     // MARK: The marking
 
     func testMarkingMapsOntoTheTranscript() throws {
@@ -154,10 +256,14 @@ final class TalkTests: XCTestCase {
              {"span": "молоко", "replacement": "молоко́м", "category": "case ending", "why": "с takes the instrumental", "en": "with milk", "pattern": "gram:instr"},
              {"span": "сахар", "replacement": "с са́харом", "category": "ending", "why": "the same", "en": "with sugar"}],
            "praise": ""}],
+         "goal": {"reached": true, "conveyed": "They ordered coffee and bread and asked for milk and sugar.", "clarified": ""},
          "praise": "A whole conversation!",
          "teach": [{"title": "With: с + instrumental", "note": "After с the noun changes: [[с молоко́м|with milk]].", "pattern": "instr"}]}
         """
         let m = try XCTUnwrap(TalkTutor.parseMarking(reply, conversation: c, at: Date()))
+        XCTAssertEqual(m.outcome?.reached, true)
+        XCTAssertEqual(m.outcome?.conveyed, "They ordered coffee and bread and asked for milk and sugar.")
+        XCTAssertNil(m.outcome?.clarified, "an empty clarification is none")
         XCTAssertEqual(m.lines.count, 2)
         XCTAssertEqual(m.lines[1]?.edits.count, 0)
         XCTAssertEqual(m.lines[1]?.praise, "Just right.")
@@ -181,11 +287,8 @@ final class TalkTests: XCTestCase {
         XCTAssertEqual(RussianVoicePick.best(voices + [C(language: "ru-RU", quality: 3, name: "Katya")])?.name, "Katya", "Premium beats Enhanced")
         XCTAssertEqual(RussianVoicePick.best([C(language: "ru-UA", quality: 2, name: "A"), C(language: "ru-RU", quality: 2, name: "B")])?.name, "B", "ru-RU first at equal quality")
         XCTAssertNil(RussianVoicePick.best([C(language: "en-GB", quality: 3, name: "Daniel")]), "never a non-Russian voice")
-        if let v = Voice.bestRussianVoice {
-            XCTAssertTrue(v.language.hasPrefix("ru"))
-            let all = AVSpeechSynthesisVoice.speechVoices().filter { $0.language.hasPrefix("ru") }
-            XCTAssertEqual(v.quality.rawValue, all.map(\.quality.rawValue).max(), "the app's voice is the best installed")
-        }
+        // The live voice list is not consulted here: AVSpeechSynthesisVoice.speechVoices() blocks on the
+        // simulator's speech daemon and hung this test for eight minutes with several simulators up.
         XCTAssertEqual(TalkSession.kindTip(from: PronunciationReport(target: "да", transcript: "да", expected: [], heard: [], sounds: [],
                                                                      syllables: [], stressedSyllable: nil, accuracy: 1, tips: [])), nil)
     }
@@ -282,6 +385,9 @@ final class TalkTests: XCTestCase {
         let scenes = try XCTUnwrap(session.conversation.proposed)
         print("TALK scenes (\(Int(Date().timeIntervalSince(t0) * 1000)) ms):", scenes.map { "\($0.title) / \($0.ru)" })
         XCTAssertEqual(scenes.count, 3)
+        print("TALK gap:", scenes.map { "\($0.goal ?? "-") | frames \(($0.frames ?? []).map(\.ru)) | secret \($0.secret ?? "-")" })
+        XCTAssertTrue(scenes.allSatisfy { $0.goal != nil && !($0.frames ?? []).isEmpty }, "every scene has a goal and frames")
+        XCTAssertTrue(scenes.contains { $0.secret != nil }, "the partner has private facts")
         session.choose(scenes[0])
         try await wait(for: .yourTurn)
         let opener = try XCTUnwrap(session.conversation.tutorLines.last)
@@ -310,6 +416,8 @@ final class TalkTests: XCTestCase {
         session.endNow()
         try await wait(for: .done, seconds: 150)
         let c = session.conversation
+        print("TALK outcome:", c.outcome.map { "reached=\(String(describing: $0.reached)) conveyed=\($0.conveyed) clarified=\($0.clarified ?? "-")" } ?? "none")
+        XCTAssertNotNil(c.outcome, "the marking says first whether the goal was reached")
         print("TALK goodbye:", c.tutorLines.last?.ru ?? "", "| marks:", c.learnerLines.map { "\($0.ru) → \($0.corrected) [\($0.correction?.edits.count ?? -1)]" }, "| praise:", c.praise ?? "", "| teach:", c.teach?.map(\.title) ?? [])
         XCTAssertTrue(c.isEnded && c.isMarked)
         XCTAssertEqual(c.learnerLines.count, 2)

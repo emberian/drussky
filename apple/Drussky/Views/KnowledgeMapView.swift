@@ -10,12 +10,13 @@ struct KnowledgeSection: View {
     var body: some View {
         let k = book.knowledge
         VStack(alignment: .leading, spacing: 14) {
-            Text("What you know").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
+            Text("Practice traces").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
             Text("Letters, words and patterns glow by how surely you'd recall them today. Red threads join things you've mixed up. Tap any for its history.")
                 .font(.system(size: 15)).foregroundStyle(Theme.muted)
             KnowledgeMap(tracker: k, selected: $selected)
             nextUp(k)
             WordFamiliesSection()
+            GrammarSection()
             GrowthChart(tracker: k)
         }
         .onAppear {
@@ -42,7 +43,7 @@ struct KnowledgeSection: View {
                         FlowRow(spacing: 8) {
                             ForEach(next, id: \.self) { id in
                                 Button { selected = id } label: {
-                                    Text(k.label(id)).font(Theme.russian(16)).foregroundStyle(Theme.text)
+                                    Text(book.stressedLabel(k.label(id))).font(Theme.russian(16)).foregroundStyle(Theme.text)
                                         .padding(.horizontal, 10).padding(.vertical, 4)
                                         .overlay(Capsule().strokeBorder(Theme.accent.opacity(0.5), style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
                                 }
@@ -58,9 +59,9 @@ struct KnowledgeSection: View {
                         ForEach(Array(pairs.enumerated()), id: \.offset) { _, p in
                             Button { selected = p.0 } label: {
                                 HStack(spacing: 6) {
-                                    Text(k.label(p.0)).font(Theme.russian(17))
+                                    Text(book.stressedLabel(k.label(p.0))).font(Theme.russian(17))
                                     Text("↔").foregroundStyle(Theme.redPen)
-                                    Text(k.label(p.1)).font(Theme.russian(17))
+                                    Text(book.stressedLabel(k.label(p.1))).font(Theme.russian(17))
                                     Text("×\(Int(p.2.rounded(.up)))").font(Theme.label(12)).foregroundStyle(Theme.muted)
                                 }
                                 .foregroundStyle(Theme.text)
@@ -84,6 +85,8 @@ struct MapLayout {
         var rect: CGRect
         var strength: Double?
         var round: Bool
+        /// Right and quick in some modality (`CompilationPolicy`): comes without thinking.
+        var compiled = false
     }
     struct Band { var title: String; var y: CGFloat }
 
@@ -102,7 +105,7 @@ struct MapLayout {
         func band(_ title: String) { bands.append(Band(title: title, y: y)); y += 22 }
         func add(_ id: ComponentID, _ label: String, _ rect: CGRect, round: Bool) {
             index[id] = nodes.count
-            nodes.append(Node(id: id, label: label, rect: rect, strength: model.strength(id, at: t), round: round))
+            nodes.append(Node(id: id, label: label, rect: rect, strength: model.strength(id, at: t), round: round, compiled: k.isCompiled(id)))
         }
 
         band("Letters")
@@ -131,7 +134,7 @@ struct MapLayout {
         y += 14
 
         band("Patterns & sounds")
-        let patterns = graph.components(of: .construction) + graph.components(of: .sound)
+        let patterns = graph.components(of: .construction).filter { $0.unit != "Grammar" } + graph.components(of: .sound)  // table cells are drawn by GrammarSection
         flow(patterns.map { ($0.id, $0.label) }, font: Self.patternFont, height: 26, width: width, y: &y, add: add)
         height = y + 4
     }
@@ -167,6 +170,7 @@ extension UIFont {
 }
 
 struct KnowledgeMap: View {
+    @Environment(Book.self) private var book
     let tracker: KnowledgeTracker
     @Binding var selected: ComponentID?
     @State private var width: CGFloat = 800
@@ -192,7 +196,7 @@ struct KnowledgeMap: View {
         .accessibilityChildren {
             ForEach(layout.nodes, id: \.id) { node in
                 Button(node.label) { selected = node.id }
-                    .accessibilityValue(node.strength.map { "recall \(Int(($0 * 100).rounded())) percent" } ?? "not practised")
+                    .accessibilityValue(node.strength.map { "recall \(Int(($0 * 100).rounded())) percent" + (node.compiled ? ", comes without thinking" : "") } ?? "not practised")
             }
         }
     }
@@ -242,6 +246,10 @@ struct KnowledgeMap: View {
                 ctx.fill(path, with: .color(Theme.card))
                 ctx.fill(path, with: .color(Theme.accent.opacity(0.08 + 0.42 * s)))
                 ctx.stroke(path, with: .color(Theme.accent.opacity(0.25 + 0.5 * s)), lineWidth: n.id == selected ? 2 : 1)
+                // Compiled: a second, inner line — the teacher's double underline, nothing louder.
+                if n.compiled {
+                    ctx.stroke(shape(n).path(in: n.rect.insetBy(dx: 2.5, dy: 2.5)), with: .color(Theme.accent.opacity(0.55)), lineWidth: 0.8)
+                }
             } else {
                 ctx.stroke(path, with: .color(Theme.muted.opacity(0.28)), lineWidth: 1)
             }
@@ -251,7 +259,12 @@ struct KnowledgeMap: View {
             case .construction, .sound: .system(size: 13, weight: .medium)
             default: Theme.russian(16)
             }
-            ctx.draw(Text(n.label).font(font).foregroundStyle(color), at: CGPoint(x: n.rect.midX, y: n.rect.midY))
+            // Words carry their stress like everywhere else on the page (the coloured vowel).
+            let label: Text = switch n.id.kind {
+            case .lexeme, .phrase, .form: Text(book.stressedLabel(n.label))
+            default: Text(n.label)
+            }
+            ctx.draw(label.font(font).foregroundStyle(color), at: CGPoint(x: n.rect.midX, y: n.rect.midY))
         }
     }
 
@@ -266,7 +279,7 @@ struct ReadabilityBadge: View {
         VStack(alignment: .trailing, spacing: 0) {
             Text("\(Int((fraction * 100).rounded()))%").font(.system(size: 17, weight: .semibold, design: .rounded))
                 .monospacedDigit().foregroundStyle(Theme.text)
-            Text("you know").font(.system(size: 11)).foregroundStyle(Theme.muted)
+            Text(ReadingEvidence.label(for: fraction)).font(.system(size: 11)).foregroundStyle(Theme.muted)
         }
         .accessibilityElement(children: .combine)
     }

@@ -14,6 +14,7 @@ final class KnowledgeTracker {
     private let lemmas: Lemmas
     private let pairs: SoundPairs
     private let morphology: Morphology
+    private let paradigms: Paradigms
     private var lastActivity: [String: Date] = [:]
     private var keptCount: Int
     /// Events the log could not take yet (disk full, file busy); retried before the next append.
@@ -25,7 +26,7 @@ final class KnowledgeTracker {
     /// The memory groups drawn as growth series.
     static let growthGroups: [(title: String, modalities: Set<Modality>)] = [
         ("hear → write", [.hearWrite]), ("English → write", [.meaningWrite]), ("see → say", [.say]),
-        ("recognize", [.hearPick, .readPick]),
+        ("recognize", [.hearPick, .readPick, .readCursive]),
     ]
 
     init(course: Course, root: URL, customWords: [Course.Word], now: @escaping () -> Date) {
@@ -33,9 +34,10 @@ final class KnowledgeTracker {
         self.lemmas = Lemmas.load()
         self.pairs = SoundPairs.load()
         self.morphology = Morphology.load()
+        self.paradigms = Paradigms.load()
         self.now = now
         keptCount = customWords.count
-        domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords, morphology: morphology)
+        domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords, morphology: morphology, paradigms: paradigms)
         log = EventLog(url: root.appendingPathComponent("events.jsonl"))
         model = KnowledgeModel(events: log.load())
     }
@@ -47,7 +49,7 @@ final class KnowledgeTracker {
     func refresh(customWords: [Course.Word]) {
         guard customWords.count != keptCount else { return }
         keptCount = customWords.count
-        domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords, morphology: morphology)
+        domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords, morphology: morphology, paradigms: paradigms)
     }
 
     // MARK: Evidence
@@ -173,8 +175,10 @@ final class KnowledgeTracker {
 
     func strength(_ id: ComponentID) -> Double? { model.strength(id, at: now()) }
 
-    /// Running-word coverage of a text by words currently retrievable (R ≥ 0.5 in some modality).
-    func readability(of text: String) -> Double { model.coverage(domain.tokens(in: text), at: now()) }
+    /// Running words backed by recent successful production of the form as written.
+    func readability(of text: String) -> Double {
+        ReadingEvidence.coverage(text, domain: domain, model: model, at: now())
+    }
 
     /// Words (lexemes and phrases) with any evidence.
     var practisedWords: [ComponentID] {

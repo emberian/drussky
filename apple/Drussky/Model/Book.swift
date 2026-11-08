@@ -18,6 +18,9 @@ struct BookPage: Codable, Identifiable, Sendable {
     var created: Date
     var finished: Date?
     var notes: [PageNote]? = nil
+    /// Shelf items (Model/Shelves.swift source ids) this page's footer offers: what the course had
+    /// reached when the page was composed. Written once, here; the learner opens them or not.
+    var offers: [String]? = nil
 
     var isFinished: Bool { finished != nil }
     var firstOpenIndex: Int? { results.firstIndex { !$0.status.isComplete } }
@@ -61,6 +64,14 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var diary: DiaryEntry? = nil
     /// Talk: the spoken conversation with the tutor (Talk/TalkTypes.swift).
     var talk: TalkConversation? = nil
+    /// Answered on a keyboard rather than with the Pencil (Devices/Typing); evidence goes under `type`.
+    var typed: Bool? = nil
+    /// How long the latest response took, in milliseconds, as the exercise measures it (writing:
+    /// first stroke to last before Check; choosing by ear: clip's end to tap; choosing a meaning or
+    /// checking a built word: shown to tap; saying: cue to voice onset). Becomes the event's
+    /// `latencyMs`; reset when the exercise is reopened.
+    var responseMs: Int? = nil
+    var baseline: BaselineResponse? = nil
 
     var roundNumber: Int { round ?? 0 }
 
@@ -133,6 +144,8 @@ final class Book {
     /// The pre-format-2 memories, written back unchanged (never used for scheduling).
     private var legacyMemories: [Memory] = []
     @ObservationIgnored var candidateCache: [ReviewCandidate]?
+    /// Words taught only inside multi-word lexicon entries → gloss (`phraseGloss`), built on first use.
+    @ObservationIgnored private var phraseIndex: [String: String]?
     /// Index into course.pageSequence of the next authored page to instantiate.
     var courseCursor: Int = 0
     var currentPage: Int = 0 { didSet { scheduleSave() } }
@@ -153,6 +166,7 @@ final class Book {
     var hooks = HookShelf() { didSet { scheduleSave() } }
     /// Fluency measurements: reading, writing and listening over weeks (Fluency/, metrics.jsonl).
     let fluency: FluencyTracker
+    /// Explicit navigation only. Completion and asynchronous feedback leave the paper in place.
     private(set) var advanceSignal = 0
     private(set) var advancePageID: String?
     func requestAdvance(page id: String) { advancePageID = id; advanceSignal += 1 }
@@ -340,10 +354,11 @@ final class Book {
         // A random suffix keeps ink/voice file names unique even if the notebook is ever restarted.
         let id = String(format: "p%04d-", number) + UUID().uuidString.prefix(6).lowercased()
         let exercises = exercises + probeExercises(pageID: id, among: exercises)  // retention probes due now
+        let offers = shelfOffers()  // an episode or reading the course has reached (Model/Shelves.swift)
         pages.append(BookPage(id: id, number: number, sourceID: sourceID,
                               unitTitle: unitTitle, title: title, intro: intro, isReview: isReview,
                               exercises: exercises, results: exercises.map { _ in ExerciseResult() },
-                              created: now(), finished: nil))
+                              created: now(), finished: nil, offers: offers.isEmpty ? nil : offers))
         reindexPages()
         scheduleSave()
     }
@@ -433,6 +448,7 @@ final class Book {
     }
 
     func reopen(_ ref: ExerciseRef, keptInk: Bool = false) {
+        guard page(id: ref.pageID)?.exercises[safe: ref.index]?.baseline == nil else { return }
         record(ref) { r in
             if r.revealed || r.status == .missed { r.assisted = true }
             if keptInk { r.inkAttempts = (r.inkAttempts ?? 0) + 1 }
@@ -443,6 +459,7 @@ final class Book {
             r.revealed = false
             r.selfAssessed = nil
             r.judged = nil
+            r.responseMs = nil
             r.readerAgreed = nil
         }
     }
@@ -452,6 +469,7 @@ final class Book {
     func memoryKey(for exercise: Exercise) -> String? {
         if let key = exercise.reviewKey { return key }
         switch exercise.kind {
+        case .constructionChoice: return ConstructionChoice.key
         case .meet: return exercise.letter.map { "letter:\($0)" }
         // Only what the learner produced becomes something to recall later.
         case .explain, .readMeaning, .passage, .soundPair, .structure: return nil
@@ -473,6 +491,34 @@ final class Book {
         if let w = course.word(ru) { return w }
         let key = RussianText.key(ru)
         return customWords.first { RussianText.key($0.ru) == key }
+    }
+
+    /// A word that is only taught inside a multi-word lexicon entry («ко́смосе» in «в ко́смосе»,
+    /// «ду́маю» in «я ду́маю»): the entry's meaning, with the entry named. Tap-to-gloss falls back
+    /// to this when the word is no entry of its own; one-letter words are not looked up this way.
+    func phraseGloss(for ru: String) -> String? {
+        let key = RussianText.key(ru)
+        guard key.count > 1 else { return nil }
+        if phraseIndex == nil {
+            var index: [String: String] = [:]
+            for w in course.lexicon {
+                let parts = RussianText.key(w.ru).split(separator: " ").map(String.init)
+                guard parts.count > 1 else { continue }
+                for part in parts where part.count > 1 && course.word(part) == nil && index[part] == nil {
+                    index[part] = "\(w.en) (in «\(w.ru)»)"
+                }
+            }
+            phraseIndex = index
+        }
+        return phraseIndex?[key]
+    }
+
+    /// A word as a label elsewhere (a map chip, a goal rung): the course's stressed form when the
+    /// word is one of ours, shown the way the page shows stress; a text's own word otherwise.
+    func stressedLabel(_ text: String) -> AttributedString {
+        let ru = word(text)?.ru
+        let form = ru.map { RussianText.unstressed($0) == RussianText.unstressed(text) ? $0 : text } ?? text
+        return Theme.stressed(form, show: settings.showStress)
     }
 
     func isKept(_ ru: String) -> Bool { word(ru) != nil && targets["word:\(RussianText.key(ru))"] != nil }
@@ -537,6 +583,7 @@ final class Book {
         case .readAloud: lines.append("Reading aloud: «\(ex.text ?? "")».")
         case .translate: lines.append("Writing the Russian for “\(ex.en ?? "")” (answer «\(ex.answerText ?? "")»).")
         case .fill: lines.append("Filling the gap: \(ex.before ?? "")___\(ex.after ?? "") — “\(ex.hint ?? "")” (answer «\(ex.answerText ?? "")»).")
+        case .constructionChoice: lines.append("Choosing a noun ending in «\(ex.text ?? "")».")
         case .readMeaning: lines.append("Reading «\(ex.text ?? "")» and choosing its meaning from: \((ex.options ?? []).joined(separator: " / ")).")
         case .passage: lines.append("Reading a passage: «\(ex.text ?? "")» (translation: \(ex.en ?? "none")).")
         case .soundPair: lines.append(ex.say.map { "Hearing «\($0)» and telling it from its minimal pair: \((ex.options ?? []).joined(separator: " / "))." }
@@ -548,6 +595,10 @@ final class Book {
         case .structure:
             let p = Structure.probe(of: ex)
             lines.append("Reading «\(ex.text ?? "")» and tapping the word that «\(p?.probe ?? ex.word ?? "")» refers to or agrees with (answer «\(p?.head ?? "")»).")
+        case .paradigmFill: lines.append("Filling the \(ex.paradigm ?? "") table of «\(ex.word ?? "")»: cells \((ex.cells ?? []).joined(separator: ", ")) (answers \((ex.cells ?? []).compactMap { ex.forms?[$0] }.joined(separator: ", "))).")
+        case .transform: lines.append("Writing «\(ex.word ?? "")» in the \(ex.cue ?? "") cell (answer «\(ex.answerText ?? "")»)" + (ex.before != nil ? " in \(ex.before ?? "")___\(ex.after ?? "")." : "."))
+        case .cueSort: lines.append("Sorting \((ex.items ?? []).map { "«\($0.text)»" }.joined(separator: ", ")) into: \((ex.options ?? []).joined(separator: " / ")).")
+        case .readHandwriting: lines.append("Reading «\(ex.text ?? "")» in someone's handwriting" + (ex.options.map { " and choosing among: \($0.joined(separator: " / "))." } ?? " and printing it."))
         }
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")

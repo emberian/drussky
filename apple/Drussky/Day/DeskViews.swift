@@ -9,7 +9,7 @@ struct DeskLine: View {
 
     var body: some View {
         if let line = book.deskLine(for: pageIndex) {
-            Label(line, systemImage: "moon.zzz")
+            Text(line)
                 .scaledFont(15)
                 .foregroundStyle(Theme.muted)
                 .fixedSize(horizontal: false, vertical: true)
@@ -69,7 +69,7 @@ struct RetentionChart: View {
                                predicted: $0.predicted, observed: $0.observed, count: $0.count) }
         }
         VStack(alignment: .leading, spacing: 8) {
-            Text("How well the book knows you").font(Theme.label(13)).foregroundStyle(Theme.muted)
+            Text("Review predictions and observed answers").font(Theme.label(13)).foregroundStyle(Theme.muted)
             if let all = calibration.overall, all.count >= 4 {
                 Text(summary(all)).scaledFont(15).foregroundStyle(Theme.text)
                     .fixedSize(horizontal: false, vertical: true)
@@ -178,7 +178,7 @@ struct DaySettingsSection: View {
         } header: {
             Text("Your day")
         } footer: {
-            Text("A review comes due when the book expects your recall to have fallen to the aim; 80% means fewer, later reviews, 95% many more. The first page of a day opens with a warm-up and the day's reviews up to the cap; what is left waits, most urgent first. Probes slip a few items you know onto pages at 1, 7 and 30 days to check the book's predictions — see the cover.")
+            Text("A review comes due when the book expects your recall to have fallen to the aim; 80% means fewer, later reviews, 95% many more. The first page of a day opens with a warm-up and the day's reviews up to the cap; what is left waits, most urgent first. Probes slip a few items you know onto pages at 1, 7 and 30 days to check review predictions — see Practice evidence.")
         }
     }
 }

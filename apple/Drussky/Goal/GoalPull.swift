@@ -64,7 +64,9 @@ enum GoalPull {
             return (e.options?.count ?? 0) >= 2 ? e : nil
         case .diary:
             return ex  // an English prompt to write about the text; no Russian to verify
-        case .meet, .soundPair, .buildWord, .familyGuess, .talk, .structure:
+        case .readHandwriting:
+            return inText(ex.text, text) ? ex : nil
+        case .meet, .soundPair, .buildWord, .familyGuess, .talk, .paradigmFill, .transform, .cueSort, .constructionChoice, .structure:
             return nil  // generated locally, never from a goal text
         }
     }

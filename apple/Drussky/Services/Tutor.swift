@@ -60,10 +60,12 @@ enum Tutor {
         quick, curious, a beginner in Russian, interested in linguistics, science fiction, mathematics \
         and philosophy. Working memory is sometimes stretched, so keep answers short and concrete: \
         2–6 sentences, or a tiny table/list when it really helps. Answer in English. Write every Russian \
-        word in Cyrillic with a stress mark (´) on words of two or more syllables, and give a rough \
-        pronunciation only when asked or when it is the point. Prefer one vivid example over a rule list. \
-        If the learner's answer was wrong, say exactly what differs. Don't use letters they haven't met \
-        unless needed; if you do, say so briefly. No preamble, no sign-off. \
+        word in Cyrillic with a stress mark (U+0301) on words of two or more syllables (never on ё or \
+        one-syllable words), and give a rough pronunciation only when asked or when it is the point. \
+        Prefer one vivid, idiomatic example over a rule list (never calque English word order). When \
+        addressing the learner in Russian as their tutor, use вы consistently; explain ты forms for \
+        home and kitchen Russian. If the learner's answer was wrong, say exactly what differs. Don't \
+        use letters they haven't met unless needed; if you do, say so briefly. No preamble, no sign-off. \
         Mark every Russian word or phrase in your answer as [[ру́сский|english]], with stress marks: \
         the learner taps it to hear it and can keep it in their workbook. Use **bold** and short lists freely.
 
@@ -142,6 +144,10 @@ enum Keychain {
 
     static var apiKey: String? {
         get {
+            #if DEBUG
+            // Exercise no-key UI without deleting or replacing a simulator's saved credential.
+            if ProcessInfo.processInfo.arguments.contains("-qa-nokey") { return nil }
+            #endif
             let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service,
                                         kSecAttrAccount as String: account, kSecReturnData as String: true]
             var out: AnyObject?

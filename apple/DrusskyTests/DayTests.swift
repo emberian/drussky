@@ -275,8 +275,8 @@ final class DayTests: XCTestCase {
         XCTAssertEqual(estimate.level, .tired, "\(estimate)")
         let page = book.pages[p]
         let line = try XCTUnwrap(book.deskLine(for: p))
-        XCTAssertTrue(line.hasPrefix("Shorter page today"), line)
-        XCTAssertEqual(book.coverLine, "Shorter page today — you've been at it a while.")
+        XCTAssertEqual(line, "2 reviews now use choices. 3 reviews wait for later.")
+        XCTAssertEqual(book.coverLine, "Some reviews were left for a later page.")
         // Two of the remaining reviews became recognition; the rest were left for later, never graded.
         let remaining = Array(9..<14)
         XCTAssertEqual(remaining.filter { page.exercises[$0].kind == .listenPick || page.exercises[$0].kind == .readMeaning }, [9, 10])
@@ -294,6 +294,25 @@ final class DayTests: XCTestCase {
         clock = clock.addingTimeInterval(300)
         book.record(page: p, exercise: 9) { $0.attempts = 1; $0.chosen = 0; $0.status = .done }
         XCTAssertEqual(book.pages[p].results[10].status, .open)
+    }
+
+    func testNoShorteningNoticeWhenNoReviewsCanChange() throws {
+        let book = Book(course: course, store: tempStore())
+        var ex = Exercise(kind: .dictation); ex.text = "кот"
+        book.insertWrittenPage(title: "New work", intro: nil, unitTitle: "QA",
+                               exercises: Array(repeating: ex, count: 10), newWords: [])
+        let p = book.currentPage
+        var clock = book.now()
+        book.now = { clock }
+        for i in 0..<8 {
+            clock = clock.addingTimeInterval(300)
+            book.record(page: p, exercise: i) { $0.attempts = 1; $0.failedChecks = 1; $0.recognized = "кит" }
+            book.record(page: p, exercise: i) { $0.attempts = 2; $0.revealed = true; $0.status = .missed }
+        }
+        XCTAssertEqual(book.day.fatigue?.level, .tired)
+        XCTAssertNil(book.deskLine(for: p), "A page with no reviews was not shortened")
+        XCTAssertNil(book.day.lastShortened)
+        XCTAssertEqual(book.pages[p].results.filter { $0.status == .open }.count, 2)
     }
 
     /// Shortening never takes an exercise the learner has begun: ink on its strip (the writing may be
@@ -386,6 +405,52 @@ final class DayTests: XCTestCase {
         XCTAssertEqual(book.reviewAllowance(), 0)
         book.turnForward()
         XCTAssertEqual(reviewCount(book.pages.last!, book), 0, "the allowance is spent for the day")
+    }
+
+    /// The next course page leans on letters the learner knows but still writes slowly (right,
+    /// timed, over the floor): on a heavy day they come back first, within the allowance, and
+    /// never two such pages in a row. Untimed knowledge is never called slow.
+    func testAHeavyDaySettlesSlowPrerequisitesBeforeTheNextPage() throws {
+        let book = studied(6)
+        book.advanceClock(byDays: 2)
+        let next = try XCTUnwrap(book.nextCoursePage).page
+        let letters = Set(book.pageComponents(of: next).flatMap { book.knowledge.graph.prerequisites(of: $0) })
+            .filter { $0.kind == .letter && book.letterKnown($0.key) }.sorted()
+        XCTAssertFalse(letters.isEmpty, "the page's words lean on letters")
+        XCTAssertTrue(book.appendConsolidationIfNeeded() == false, "nothing timed yet: nothing to settle")
+        // Three right answers on each, every one slow for the pen (nine seconds first stroke to last).
+        let exercises = letters.map { book.reviewExercise(for: "letter:\($0.key)", modality: .hearWrite, variant: 0) }
+        book.insertWrittenPage(title: "letters", intro: nil, unitTitle: "t", exercises: exercises, newWords: [])
+        let p = book.currentPage
+        for round in 0..<3 {
+            for i in exercises.indices {
+                if round > 0 { book.reopen(page: p, exercise: i) }
+                book.record(page: p, exercise: i) { $0.attempts = 1; $0.recognized = exercises[i].text; $0.status = .correct; $0.responseMs = 9000 }
+            }
+        }
+        let first = letters[0]
+        XCTAssertEqual(book.knowledge.model.trace(first, .hearWrite)?.latencySamples, 3)
+        XCTAssertTrue(book.knowledge.model.isKnownButUncompiled(first, at: book.now(), ready: 0.8, policy: book.knowledge.compilation))
+        XCTAssertFalse(book.knowledge.isCompiled(first))
+        XCTAssertTrue(book.dayIsHeavy, "\(book.dueReviews().count) due")
+        XCTAssertTrue(book.appendConsolidationIfNeeded())
+        let page = try XCTUnwrap(book.pages.last)
+        XCTAssertEqual(page.unitTitle, Book.consolidationUnit)
+        XCTAssertTrue(page.isReview)
+        let settled = page.exercises.indices.filter { !book.isProbe(page: page, index: $0) }  // probes ride along on any new page
+        XCTAssertFalse(settled.isEmpty)
+        XCTAssertLessThanOrEqual(settled.count, 6)
+        for i in settled { XCTAssertTrue(page.exercises[i].reviewKey?.hasPrefix("letter:") ?? false, "\(page.exercises[i])") }
+        XCTAssertFalse(book.appendConsolidationIfNeeded(), "not twice in a row")
+        // Quick answers compile the letter; it is no longer named.
+        let quick = book.currentPage
+        for round in 0..<3 {
+            if round > 0 { book.reopen(page: quick, exercise: 0) }
+            book.record(page: quick, exercise: 0) { $0.attempts = 1; $0.recognized = exercises[0].text; $0.status = .correct; $0.responseMs = 1500 }
+        }
+        XCTAssertTrue(book.knowledge.isCompiled(first), "\(book.knowledge.model.trace(first, .hearWrite)?.latencyEMA ?? -1)")
+        XCTAssertFalse(book.knowledge.model.uncompiledPrerequisites(of: book.pageComponents(of: next), in: book.knowledge.graph,
+                                                                    at: book.now(), policy: book.knowledge.compilation).contains(first))
     }
 
     /// A format-2 notebook written before the day's shape existed: no `day`, old settings.

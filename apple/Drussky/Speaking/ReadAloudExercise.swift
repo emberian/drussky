@@ -41,8 +41,8 @@ struct ReadAloudExercise: View {
                 } else {
                     HearButton(text: target, size: 40)
                 }
-                MeaningTag(text: target)
             }
+            MeaningTag(text: target)
             HStack(alignment: .center, spacing: 16) {
                 TurnButton(phase: mine ? turn.phase : .idle, level: mine ? turn.level : 0) { tap() }
                 TurnStatus(phase: mine ? turn.phase : .idle, problem: turn.problem(for: key), hasTake: recordingExists,
@@ -98,7 +98,7 @@ struct ReadAloudExercise: View {
                      : "I heard «\(heard)».")
                     .scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
                 if !slot.result.status.isComplete {
-                    HStack(spacing: 10) {
+                    FlowRow(spacing: 10) {
                         PillButton(title: "Sounded right to me", systemImage: "hand.thumbsup") {
                             slot.finish { $0.status = .done; $0.selfAssessed = true }
                         }
@@ -125,7 +125,7 @@ struct ReadAloudExercise: View {
         turn.begin(request, voice: voice) { take in
             // Resolved by id and round: the page may have turned or the exercise been reopened.
             book.commitTake(ref, round: round, file: take.file.lastPathComponent, heard: take.heard, target: target,
-                            recognitionAllowed: take.recognitionAllowed, timedOut: take.timedOut)
+                            recognitionAllowed: take.recognitionAllowed, timedOut: take.timedOut, onsetMs: take.onsetMs)
             if let r = take.report, let page = book.page(id: ref.pageID) {
                 book.knowledge.heard(page: page, index: ref.index, take: take.file.lastPathComponent, report: r,
                                      attempt: book.result(ref)?.attempts ?? 0)
@@ -148,8 +148,9 @@ struct ReadAloudExercise: View {
 
 // MARK: - The one button
 
-/// Microphone when idle; while the model plays, a speaker; on "your turn" a ring goes out once;
-/// while listening, a ring that breathes with the voice. Tap: start, skip the model, or stop.
+/// Microphone when idle; while the model plays, a speaker; once it has played, a red microphone
+/// waiting for the tap; on "your turn" a ring goes out once; while listening, a ring that
+/// breathes with the voice. Tap: start, skip the model, say it, or stop.
 struct TurnButton: View {
     let phase: SpeakingTurn.Phase
     let level: Float
@@ -188,7 +189,7 @@ struct TurnButton: View {
 
     private var fill: Color {
         switch phase {
-        case .cue, .waiting, .hearing: Theme.redPen
+        case .cue, .waiting, .hearing, .ready: Theme.redPen
         case .model: Theme.accent.opacity(0.75)
         default: Theme.accent
         }
@@ -203,7 +204,7 @@ struct TurnButton: View {
             Image(systemName: "stop.fill").foregroundStyle(.white).font(.system(size: 20))
         case .analysing, .preparing:
             ProgressView().tint(.white)
-        case .idle:
+        case .idle, .ready:
             Image(systemName: "mic.fill").foregroundStyle(.white).font(.system(size: 24))
         }
     }
@@ -211,6 +212,7 @@ struct TurnButton: View {
     private var label: String {
         switch phase {
         case .model: "Skip the model"
+        case .ready: "Your turn: tap to say it"
         case .cue, .waiting, .hearing: "Stop"
         case .analysing, .preparing: "Checking"
         case .idle: "Listen, then say it"
@@ -232,6 +234,9 @@ struct TurnStatus: View {
             case .model(let k, let n):
                 Text(n > 1 ? "Listen (\(k) of \(n))" : "Listen").scaledFont(17, weight: .semibold).foregroundStyle(Theme.accent)
                 Button("Skip to my turn", action: skip).font(Theme.label(13)).foregroundStyle(Theme.muted)
+            case .ready:
+                Text("Your turn").scaledFont(17, weight: .semibold).foregroundStyle(Theme.redPen)
+                Text("Tap to say it.").scaledFont(13).foregroundStyle(Theme.muted)
             case .cue, .waiting:
                 Text("Your turn").scaledFont(17, weight: .semibold).foregroundStyle(Theme.redPen)
                 Text("Say it — I'll stop when you do.").scaledFont(13).foregroundStyle(Theme.muted)
@@ -273,15 +278,24 @@ enum SpokenText {
     static let close = Color(Theme.dynamic(0xB26A00, 0xF2B45A))
 
     /// The target with the stressed vowel in blue (as everywhere) and each sound's verdict on
-    /// its letters: came out as another or not at all in red, close in amber, right in green.
-    /// A word-level report only marks the letters the recognizer heard as others, in amber with a
-    /// dotted line (a hypothesis, not a verdict): it cannot vouch for the rest either.
+    /// its letters: came out as another or not at all in red, close in amber, right in green —
+    /// only where the verdict clears the confidence floor; an uncertain sound leaves its letters
+    /// unmarked. A word-level report only marks the letters the recognizer heard as others, in
+    /// amber with a dotted line (a hypothesis, not a verdict): it cannot vouch for the rest either.
     static func marked(_ text: String, report: PronunciationReport?, showStress: Bool) -> AttributedString {
         var verdicts: [Int: PhoneJudgement.Verdict] = [:]
         if let report {
             let rank: [PhoneJudgement.Verdict: Int] = [.good: 0, .close: 1, .extra: 1, .substituted: 2, .missing: 2]
             for s in report.sounds {
                 guard let r = s.letterRange else { continue }
+                if report.isWordLevel {
+                    // The recognizer's spelling: a hypothesis about these letters, amber and dotted below.
+                    guard s.verdict == .substituted || s.verdict == .missing else { continue }
+                } else if s.verdict == .substituted || s.verdict == .missing || s.verdict == .extra {
+                    guard s.supportsCorrection else { continue }
+                } else {
+                    guard SpeakingFeedback.permits(s.expected?.confidence) else { continue }
+                }
                 for i in r {
                     if let current = verdicts[i], rank[current, default: 0] > rank[s.verdict, default: 0] { continue }
                     verdicts[i] = s.verdict

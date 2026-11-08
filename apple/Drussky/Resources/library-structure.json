@@ -5997,6 +5997,5848 @@
        47
       ]
      ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        2,
+        22
+       ],
+       "words": [
+        0,
+        3
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        23,
+        26
+       ],
+       "words": [
+        4,
+        4
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "dat",
+       "dependents": [
+        3
+       ],
+       "frame": "по + Dat",
+       "head": 0
+      }
+     ],
+     "index": 26,
+     "referents": [
+      {
+       "head": 3,
+       "headSentence": 26,
+       "kind": "adjective",
+       "word": 1
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "obtain; happen",
+       "inflection": "ю",
+       "prefix": "с",
+       "relatives": [
+        "слу́чай",
+        "получа́ть",
+        "получи́ть"
+       ],
+       "root": "луч",
+       "rootID": "луч",
+       "source": "morphology",
+       "suffix": "а",
+       "word": 3
+      }
+     ],
+     "text": "— По какому это случаю тут?",
+     "words": [
+      [
+       2,
+       4
+      ],
+      [
+       5,
+       11
+      ],
+      [
+       12,
+       15
+      ],
+      [
+       16,
+       22
+      ],
+      [
+       23,
+       26
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "predicate",
+       "span": [
+        2,
+        12
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        13,
+        21
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "gerund_clause",
+       "span": [
+        23,
+        41
+       ],
+       "words": [
+        2,
+        4
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        23,
+        33
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        34,
+        41
+       ],
+       "words": [
+        3,
+        4
+       ]
+      }
+     ],
+     "desugar": [
+      {
+       "en": "Ochumelov pushes into the crowd and asks.",
+       "kind": "gerund",
+       "ru": "Очуме́лов вре́зывается в толпу́ и спра́шивает.",
+       "span": [
+        23,
+        41
+       ],
+       "words": [
+        2,
+        4
+       ]
+      }
+     ],
+     "governance": [
+      {
+       "case": "acc",
+       "dependents": [
+        4
+       ],
+       "frame": "вре́зываться в + Acc",
+       "head": 2
+      },
+      {
+       "case": "acc",
+       "dependents": [
+        4
+       ],
+       "frame": "в + Acc",
+       "head": 3
+      }
+     ],
+     "index": 27,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "ask",
+       "inflection": "ет",
+       "prefix": "с",
+       "relatives": [
+        "вопро́с",
+        "спроси́ть"
+       ],
+       "root": "праш",
+       "rootID": "прос",
+       "source": "morphology",
+       "suffix": "ива",
+       "word": 0
+      },
+      {
+       "gloss": "cut",
+       "inflection": "сь",
+       "prefix": "в",
+       "relatives": [],
+       "root": "рез",
+       "source": "model",
+       "suffix": "ывая",
+       "word": 2
+      },
+      {
+       "gloss": "crowd",
+       "inflection": "у",
+       "prefix": "",
+       "relatives": [],
+       "root": "толп",
+       "source": "model",
+       "suffix": "",
+       "word": 4
+      }
+     ],
+     "text": "— спрашивает Очумелов, врезываясь в толпу.",
+     "words": [
+      [
+       2,
+       12
+      ],
+      [
+       13,
+       21
+      ],
+      [
+       23,
+       33
+      ],
+      [
+       34,
+       35
+      ],
+      [
+       36,
+       41
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "adverbial",
+       "span": [
+        2,
+        8
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        9,
+        12
+       ],
+       "words": [
+        1,
+        1
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 28,
+     "referents": [],
+     "roots": [],
+     "text": "— Почему тут?",
+     "words": [
+      [
+       2,
+       8
+      ],
+      [
+       9,
+       12
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "particle",
+       "span": [
+        0,
+        3
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        4,
+        6
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        7,
+        12
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        13,
+        18
+       ],
+       "words": [
+        3,
+        3
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 29,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "finger",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "пал",
+       "source": "model",
+       "suffix": "ец",
+       "word": 3
+      }
+     ],
+     "text": "Это ты зачем палец?..",
+     "words": [
+      [
+       0,
+       3
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       7,
+       12
+      ],
+      [
+       13,
+       18
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        3
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        4,
+        10
+       ],
+       "words": [
+        1,
+        1
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 30,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "shout",
+       "inflection": "л",
+       "prefix": "",
+       "relatives": [],
+       "root": "крич",
+       "source": "model",
+       "suffix": "а",
+       "word": 1
+      }
+     ],
+     "text": "Кто кричал?",
+     "words": [
+      [
+       0,
+       3
+      ],
+      [
+       4,
+       10
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "predicate",
+       "span": [
+        2,
+        5
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        6,
+        7
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "address",
+       "span": [
+        9,
+        24
+       ],
+       "words": [
+        2,
+        3
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        26,
+        32
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        33,
+        42
+       ],
+       "words": [
+        5,
+        6
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 31,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "go (on foot)",
+       "inflection": "у",
+       "prefix": "",
+       "relatives": [
+        "ход",
+        "вход",
+        "вы́ход"
+       ],
+       "root": "ид",
+       "rootID": "ход",
+       "source": "morphology",
+       "suffix": "",
+       "word": 0
+      },
+      {
+       "gloss": "good",
+       "inflection": "е",
+       "prefix": "",
+       "relatives": [],
+       "root": "благ",
+       "source": "model",
+       "suffix": "ороди",
+       "word": 3
+      },
+      {
+       "gloss": "touch",
+       "inflection": "ю",
+       "prefix": "",
+       "relatives": [],
+       "root": "трог",
+       "source": "model",
+       "suffix": "а",
+       "word": 6
+      }
+     ],
+     "text": "— Иду я, ваше благородие, никого не трогаю…",
+     "words": [
+      [
+       2,
+       5
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       9,
+       13
+      ],
+      [
+       14,
+       24
+      ],
+      [
+       26,
+       32
+      ],
+      [
+       33,
+       35
+      ],
+      [
+       36,
+       42
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "predicate",
+       "span": [
+        2,
+        10
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        11,
+        17
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "gerund_clause",
+       "span": [
+        19,
+        33
+       ],
+       "words": [
+        2,
+        4
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        19,
+        25
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        26,
+        33
+       ],
+       "words": [
+        3,
+        4
+       ]
+      }
+     ],
+     "desugar": [
+      {
+       "en": "Khryukin begins and coughs into his fist.",
+       "kind": "gerund",
+       "ru": "Хрю́кин начина́ет и ка́шляет в кула́к.",
+       "span": [
+        19,
+        33
+       ],
+       "words": [
+        2,
+        4
+       ]
+      }
+     ],
+     "governance": [
+      {
+       "case": "acc",
+       "dependents": [
+        4
+       ],
+       "frame": "в + Acc (into)",
+       "head": 3
+      }
+     ],
+     "index": 32,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "begin",
+       "inflection": "ет",
+       "prefix": "на",
+       "relatives": [
+        "нача́ло",
+        "нача́ть",
+        "начина́ться"
+       ],
+       "root": "чин",
+       "rootID": "ча",
+       "source": "morphology",
+       "suffix": "а",
+       "word": 0
+      },
+      {
+       "gloss": "cough",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "кашл",
+       "source": "model",
+       "suffix": "яя",
+       "word": 2
+      },
+      {
+       "gloss": "fist",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "кулак",
+       "source": "model",
+       "suffix": "",
+       "word": 4
+      }
+     ],
+     "text": "— начинает Хрюкин, кашляя в кулак.",
+     "words": [
+      [
+       2,
+       10
+      ],
+      [
+       11,
+       17
+      ],
+      [
+       19,
+       25
+      ],
+      [
+       26,
+       27
+      ],
+      [
+       28,
+       33
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        2,
+        13
+       ],
+       "words": [
+        0,
+        1
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        14,
+        31
+       ],
+       "words": [
+        2,
+        4
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        35,
+        36
+       ],
+       "words": [
+        5,
+        5
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        37,
+        42
+       ],
+       "words": [
+        6,
+        6
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        43,
+        53
+       ],
+       "words": [
+        7,
+        8
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        54,
+        74
+       ],
+       "words": [
+        9,
+        14
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        75,
+        83
+       ],
+       "words": [
+        15,
+        16
+       ]
+      }
+     ],
+     "desugar": [
+      {
+       "en": "And suddenly this vile dog, for no reason, bit me by the finger.",
+       "kind": "other",
+       "ru": "И вдруг э́та по́длая соба́ка без причи́ны укуси́ла меня́ за па́лец.",
+       "span": [
+        35,
+        83
+       ],
+       "words": [
+        5,
+        16
+       ]
+      }
+     ],
+     "governance": [
+      {
+       "case": "gen",
+       "dependents": [
+        1
+       ],
+       "frame": "насчёт + Gen",
+       "head": 0
+      },
+      {
+       "case": "ins",
+       "dependents": [
+        3,
+        4
+       ],
+       "frame": "с + Ins (with)",
+       "head": 2
+      },
+      {
+       "case": "acc",
+       "dependents": [
+        16
+       ],
+       "frame": "за + Acc (grab by)",
+       "head": 15
+      }
+     ],
+     "index": 33,
+     "referents": [
+      {
+       "head": 8,
+       "headSentence": 33,
+       "kind": "adjective",
+       "word": 7
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "firewood",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "дров",
+       "source": "model",
+       "suffix": "",
+       "word": 1
+      },
+      {
+       "gloss": "suddenly",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "вдруг",
+       "source": "model",
+       "suffix": "",
+       "word": 6
+      },
+      {
+       "gloss": "vile",
+       "inflection": "ая",
+       "prefix": "",
+       "relatives": [],
+       "root": "подл",
+       "source": "model",
+       "suffix": "",
+       "word": 8
+      },
+      {
+       "gloss": "finger",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "пал",
+       "source": "model",
+       "suffix": "ец",
+       "word": 16
+      }
+     ],
+     "text": "— Насчёт дров с Митрий Митричем, — и вдруг эта подлая ни с того, ни с сего за палец…",
+     "words": [
+      [
+       2,
+       8
+      ],
+      [
+       9,
+       13
+      ],
+      [
+       14,
+       15
+      ],
+      [
+       16,
+       22
+      ],
+      [
+       23,
+       31
+      ],
+      [
+       35,
+       36
+      ],
+      [
+       37,
+       42
+      ],
+      [
+       43,
+       46
+      ],
+      [
+       47,
+       53
+      ],
+      [
+       54,
+       56
+      ],
+      [
+       57,
+       58
+      ],
+      [
+       59,
+       63
+      ],
+      [
+       65,
+       67
+      ],
+      [
+       68,
+       69
+      ],
+      [
+       70,
+       74
+      ],
+      [
+       75,
+       77
+      ],
+      [
+       78,
+       83
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        2
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        3,
+        7
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        8,
+        16
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        18,
+        19
+       ],
+       "words": [
+        3,
+        3
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        20,
+        27
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "relative_clause",
+       "span": [
+        29,
+        47
+       ],
+       "words": [
+        5,
+        6
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        29,
+        36
+       ],
+       "words": [
+        5,
+        5
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        37,
+        47
+       ],
+       "words": [
+        6,
+        6
+       ]
+      }
+     ],
+     "desugar": [
+      {
+       "en": "I am a man who works.",
+       "kind": "participle",
+       "ru": "Я челове́к, кото́рый рабо́тает.",
+       "span": [
+        29,
+        47
+       ],
+       "words": [
+        5,
+        6
+       ]
+      }
+     ],
+     "governance": [],
+     "index": 34,
+     "referents": [
+      {
+       "head": 4,
+       "headSentence": 34,
+       "kind": "relative",
+       "word": 5
+      },
+      {
+       "head": 4,
+       "headSentence": 34,
+       "kind": "participle",
+       "word": 6
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "guilt; cause",
+       "inflection": "те",
+       "prefix": "из",
+       "relatives": [
+        "вини́тельный"
+       ],
+       "root": "вин",
+       "rootID": "вин",
+       "source": "morphology",
+       "suffix": "и",
+       "word": 2
+      },
+      {
+       "gloss": "human being",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "челов",
+       "rootID": "челов",
+       "source": "morphology",
+       "suffix": "ек",
+       "word": 4
+      },
+      {
+       "gloss": "work, slave",
+       "inflection": "ий",
+       "prefix": "",
+       "relatives": [
+        "ро́бот",
+        "рабо́та",
+        "рабо́тать"
+       ],
+       "root": "раб",
+       "rootID": "раб",
+       "source": "morphology",
+       "suffix": "отающ",
+       "word": 6
+      }
+     ],
+     "text": "Вы меня извините, я человек, который работающий…",
+     "words": [
+      [
+       0,
+       2
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       8,
+       16
+      ],
+      [
+       18,
+       19
+      ],
+      [
+       20,
+       27
+      ],
+      [
+       29,
+       36
+      ],
+      [
+       37,
+       47
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        6
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        7,
+        13
+       ],
+       "words": [
+        1,
+        2
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        14,
+        20
+       ],
+       "words": [
+        3,
+        3
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "gen",
+       "dependents": [
+        2
+       ],
+       "frame": "у + Gen",
+       "head": 1
+      }
+     ],
+     "index": 35,
+     "referents": [
+      {
+       "head": 0,
+       "headSentence": 35,
+       "kind": "adjective",
+       "word": 3
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "work, slave",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [
+        "ро́бот",
+        "рабо́тать",
+        "рабо́тник"
+       ],
+       "root": "раб",
+       "rootID": "раб",
+       "source": "morphology",
+       "suffix": "от",
+       "word": 0
+      },
+      {
+       "gloss": "small, shallow",
+       "inflection": "ая",
+       "prefix": "",
+       "relatives": [],
+       "root": "мел",
+       "source": "model",
+       "suffix": "к",
+       "word": 3
+      }
+     ],
+     "text": "Работа у меня мелкая.",
+     "words": [
+      [
+       0,
+       6
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       9,
+       13
+      ],
+      [
+       14,
+       20
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "particle",
+       "span": [
+        0,
+        5
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        6,
+        9
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        10,
+        18
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "subordinate_clause",
+       "span": [
+        20,
+        72
+       ],
+       "words": [
+        3,
+        10
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        20,
+        26
+       ],
+       "words": [
+        3,
+        3
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        29,
+        30
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        31,
+        43
+       ],
+       "words": [
+        5,
+        6
+       ]
+      },
+      {
+       "role": "introductory",
+       "span": [
+        45,
+        50
+       ],
+       "words": [
+        7,
+        7
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        52,
+        58
+       ],
+       "words": [
+        8,
+        8
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        59,
+        72
+       ],
+       "words": [
+        9,
+        10
+       ]
+      }
+     ],
+     "desugar": [
+      {
+       "en": "Let them pay me, because maybe I won't move this finger for a week.",
+       "kind": "other",
+       "ru": "Пусть мне запла́тят, потому́ что я, мо́жет быть, неде́лю не пошевельну́ э́тим па́льцем.",
+       "span": [
+        0,
+        72
+       ],
+       "words": [
+        0,
+        10
+       ]
+      }
+     ],
+     "governance": [
+      {
+       "case": "dat",
+       "dependents": [
+        1
+       ],
+       "frame": "плати́ть + Dat",
+       "head": 2
+      },
+      {
+       "case": "ins",
+       "dependents": [
+        6
+       ],
+       "frame": "пошевельну́ть + Ins",
+       "head": 10
+      }
+     ],
+     "index": 36,
+     "referents": [
+      {
+       "head": 6,
+       "headSentence": 36,
+       "kind": "adjective",
+       "word": 5
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "pay",
+       "inflection": "ят",
+       "prefix": "за",
+       "relatives": [],
+       "root": "плат",
+       "source": "model",
+       "suffix": "",
+       "word": 2
+      },
+      {
+       "gloss": "finger",
+       "inflection": "ем",
+       "prefix": "",
+       "relatives": [],
+       "root": "пал",
+       "source": "model",
+       "suffix": "ьц",
+       "word": 6
+      },
+      {
+       "gloss": "be able",
+       "inflection": "ет",
+       "prefix": "",
+       "relatives": [
+        "мочь",
+        "мо́жно",
+        "помо́чь"
+       ],
+       "root": "мож",
+       "rootID": "мог",
+       "source": "morphology",
+       "suffix": "",
+       "word": 7
+      },
+      {
+       "gloss": "do, deed",
+       "inflection": "ю",
+       "prefix": "не",
+       "relatives": [
+        "де́ло",
+        "де́лать",
+        "сде́лать"
+       ],
+       "root": "дел",
+       "rootID": "дел",
+       "source": "morphology",
+       "suffix": "",
+       "word": 8
+      },
+      {
+       "gloss": "stir, move",
+       "inflection": "у",
+       "prefix": "по",
+       "relatives": [],
+       "root": "шевел",
+       "source": "model",
+       "suffix": "ьн",
+       "word": 10
+      }
+     ],
+     "text": "Пущай мне заплатят, потому — я этим пальцем, может, неделю не пошевельну…",
+     "words": [
+      [
+       0,
+       5
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       10,
+       18
+      ],
+      [
+       20,
+       26
+      ],
+      [
+       29,
+       30
+      ],
+      [
+       31,
+       35
+      ],
+      [
+       36,
+       43
+      ],
+      [
+       45,
+       50
+      ],
+      [
+       52,
+       58
+      ],
+      [
+       59,
+       61
+      ],
+      [
+       62,
+       72
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        5
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "address",
+       "span": [
+        7,
+        22
+       ],
+       "words": [
+        1,
+        2
+       ]
+      },
+      {
+       "role": "particle",
+       "span": [
+        24,
+        25
+       ],
+       "words": [
+        3,
+        3
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        26,
+        34
+       ],
+       "words": [
+        4,
+        5
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        35,
+        38
+       ],
+       "words": [
+        6,
+        6
+       ]
+      },
+      {
+       "role": "subordinate_clause",
+       "span": [
+        40,
+        61
+       ],
+       "words": [
+        7,
+        10
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        40,
+        44
+       ],
+       "words": [
+        7,
+        7
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        45,
+        53
+       ],
+       "words": [
+        8,
+        9
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        54,
+        61
+       ],
+       "words": [
+        10,
+        10
+       ]
+      }
+     ],
+     "desugar": [
+      {
+       "en": "There is no rule in the law that a man should put up with a beast.",
+       "kind": "other",
+       "ru": "В зако́не нет пра́вила, что́бы челове́к терпе́л от тва́ри.",
+       "span": [
+        0,
+        61
+       ],
+       "words": [
+        0,
+        10
+       ]
+      }
+     ],
+     "governance": [
+      {
+       "case": "loc",
+       "dependents": [
+        5
+       ],
+       "frame": "в + Loc",
+       "head": 4
+      },
+      {
+       "case": "gen",
+       "dependents": [
+        0
+       ],
+       "frame": "нет + Gen",
+       "head": 6
+      },
+      {
+       "case": "gen",
+       "dependents": [
+        9
+       ],
+       "frame": "от + Gen",
+       "head": 8
+      }
+     ],
+     "index": 37,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "good",
+       "inflection": "е",
+       "prefix": "",
+       "relatives": [],
+       "root": "благ",
+       "source": "model",
+       "suffix": "ороди",
+       "word": 2
+      },
+      {
+       "gloss": "end",
+       "inflection": "е",
+       "prefix": "за",
+       "relatives": [
+        "зако́н",
+        "коне́ц",
+        "наконе́ц"
+       ],
+       "root": "кон",
+       "rootID": "кон",
+       "source": "morphology",
+       "suffix": "",
+       "word": 5
+      },
+      {
+       "gloss": "create",
+       "inflection": "и",
+       "prefix": "",
+       "relatives": [],
+       "root": "твар",
+       "source": "model",
+       "suffix": "",
+       "word": 9
+      },
+      {
+       "gloss": "endure",
+       "inflection": "ть",
+       "prefix": "",
+       "relatives": [],
+       "root": "терп",
+       "source": "model",
+       "suffix": "е",
+       "word": 10
+      }
+     ],
+     "text": "Этого, ваше благородие, и в законе нет, чтоб от твари терпеть…",
+     "words": [
+      [
+       0,
+       5
+      ],
+      [
+       7,
+       11
+      ],
+      [
+       12,
+       22
+      ],
+      [
+       24,
+       25
+      ],
+      [
+       26,
+       27
+      ],
+      [
+       28,
+       34
+      ],
+      [
+       35,
+       38
+      ],
+      [
+       40,
+       44
+      ],
+      [
+       45,
+       47
+      ],
+      [
+       48,
+       53
+      ],
+      [
+       54,
+       61
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subordinate_clause",
+       "span": [
+        0,
+        27
+       ],
+       "words": [
+        0,
+        3
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        0,
+        5
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        6,
+        12
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        13,
+        27
+       ],
+       "words": [
+        2,
+        3
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        29,
+        31
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        32,
+        37
+       ],
+       "words": [
+        5,
+        5
+       ]
+      },
+      {
+       "role": "particle",
+       "span": [
+        38,
+        39
+       ],
+       "words": [
+        6,
+        6
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        40,
+        47
+       ],
+       "words": [
+        7,
+        8
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        48,
+        56
+       ],
+       "words": [
+        9,
+        10
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "loc",
+       "dependents": [
+        10
+       ],
+       "frame": "на + Loc",
+       "head": 9
+      }
+     ],
+     "index": 38,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "be",
+       "inflection": "ет",
+       "prefix": "",
+       "relatives": [
+        "бытие́",
+        "быва́ть"
+       ],
+       "root": "буд",
+       "rootID": "бы",
+       "source": "morphology",
+       "suffix": "",
+       "word": 2
+      },
+      {
+       "gloss": "taste; bite",
+       "inflection": "ться",
+       "prefix": "",
+       "relatives": [
+        "вкус",
+        "вку́сно"
+       ],
+       "root": "кус",
+       "rootID": "вкус",
+       "source": "morphology",
+       "suffix": "а",
+       "word": 3
+      },
+      {
+       "gloss": "live",
+       "inflection": "ть",
+       "prefix": "",
+       "relatives": [
+        "живо́й",
+        "жизнь"
+       ],
+       "root": "жи",
+       "rootID": "жи",
+       "source": "morphology",
+       "suffix": "",
+       "word": 8
+      },
+      {
+       "gloss": "light; world",
+       "inflection": "е",
+       "prefix": "",
+       "relatives": [
+        "свет"
+       ],
+       "root": "свет",
+       "rootID": "свет",
+       "source": "morphology",
+       "suffix": "",
+       "word": 10
+      }
+     ],
+     "text": "Ежели каждый будет кусаться, то лучше и не жить на свете…",
+     "words": [
+      [
+       0,
+       5
+      ],
+      [
+       6,
+       12
+      ],
+      [
+       13,
+       18
+      ],
+      [
+       19,
+       27
+      ],
+      [
+       29,
+       31
+      ],
+      [
+       32,
+       37
+      ],
+      [
+       38,
+       39
+      ],
+      [
+       40,
+       42
+      ],
+      [
+       43,
+       47
+      ],
+      [
+       48,
+       50
+      ],
+      [
+       51,
+       56
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "interjection",
+       "span": [
+        2,
+        4
+       ],
+       "words": [
+        0,
+        0
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 39,
+     "referents": [],
+     "roots": [],
+     "text": "— Гм!..",
+     "words": [
+      [
+       2,
+       4
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "predicate",
+       "span": [
+        0,
+        6
+       ],
+       "words": [
+        0,
+        0
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 40,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "good",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [
+        "хоро́ший"
+       ],
+       "root": "хорош",
+       "rootID": "хорош",
+       "source": "morphology",
+       "suffix": "о",
+       "word": 0
+      }
+     ],
+     "text": "Хорошо…",
+     "words": [
+      [
+       0,
+       6
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "predicate",
+       "span": [
+        2,
+        9
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        10,
+        18
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        19,
+        25
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "gerund_clause",
+       "span": [
+        27,
+        50
+       ],
+       "words": [
+        3,
+        6
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        27,
+        33
+       ],
+       "words": [
+        3,
+        3
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        34,
+        35
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        36,
+        42
+       ],
+       "words": [
+        5,
+        5
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        43,
+        50
+       ],
+       "words": [
+        6,
+        6
+       ]
+      }
+     ],
+     "desugar": [
+      {
+       "en": "He coughs and moves his eyebrows (while speaking).",
+       "kind": "gerund",
+       "ru": "Он ка́шляет и шевели́т бровя́ми.",
+       "span": [
+        27,
+        50
+       ],
+       "words": [
+        3,
+        6
+       ]
+      }
+     ],
+     "governance": [
+      {
+       "case": "ins",
+       "dependents": [
+        6
+       ],
+       "frame": "шевели́ть + Ins",
+       "head": 5
+      }
+     ],
+     "index": 41,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "speak",
+       "inflection": "т",
+       "prefix": "",
+       "relatives": [],
+       "root": "говор",
+       "rootID": "говор",
+       "source": "morphology",
+       "suffix": "и",
+       "word": 0
+      },
+      {
+       "gloss": "strict",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "строг",
+       "source": "model",
+       "suffix": "о",
+       "word": 2
+      },
+      {
+       "gloss": "cough",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "кашл",
+       "source": "model",
+       "suffix": "яя",
+       "word": 3
+      },
+      {
+       "gloss": "stir, move",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "шевел",
+       "source": "model",
+       "suffix": "я",
+       "word": 5
+      },
+      {
+       "gloss": "brow",
+       "inflection": "ями",
+       "prefix": "",
+       "relatives": [],
+       "root": "бров",
+       "source": "model",
+       "suffix": "",
+       "word": 6
+      }
+     ],
+     "text": "— говорит Очумелов строго, кашляя и шевеля бровями.",
+     "words": [
+      [
+       2,
+       9
+      ],
+      [
+       10,
+       18
+      ],
+      [
+       19,
+       25
+      ],
+      [
+       27,
+       33
+      ],
+      [
+       34,
+       35
+      ],
+      [
+       36,
+       42
+      ],
+      [
+       43,
+       50
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "predicate",
+       "span": [
+        2,
+        8
+       ],
+       "words": [
+        0,
+        0
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 42,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "good",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [
+        "хоро́ший"
+       ],
+       "root": "хорош",
+       "rootID": "хорош",
+       "source": "morphology",
+       "suffix": "о",
+       "word": 0
+      }
+     ],
+     "text": "— Хорошо…",
+     "words": [
+      [
+       2,
+       8
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "predicate",
+       "span": [
+        0,
+        3
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        4,
+        10
+       ],
+       "words": [
+        1,
+        1
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 43,
+     "referents": [
+      {
+       "head": 1,
+       "headSentence": 43,
+       "kind": "possessive",
+       "word": 0
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "dog",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [
+        "соба́чка"
+       ],
+       "root": "собак",
+       "rootID": "собак",
+       "source": "morphology",
+       "suffix": "",
+       "word": 1
+      }
+     ],
+     "text": "Чья собака?",
+     "words": [
+      [
+       0,
+       3
+      ],
+      [
+       4,
+       10
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        1
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        2,
+        7
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        8,
+        11
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        12,
+        22
+       ],
+       "words": [
+        3,
+        4
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "gen",
+       "dependents": [
+        1
+       ],
+       "frame": "не оста́вить + Gen (genitive of negation)",
+       "head": 4
+      }
+     ],
+     "index": 44,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "stand, become",
+       "inflection": "ю",
+       "prefix": "о",
+       "relatives": [
+        "стать",
+        "сто́ить",
+        "стоя́ть"
+       ],
+       "root": "став",
+       "rootID": "ста",
+       "source": "morphology",
+       "suffix": "л",
+       "word": 4
+      }
+     ],
+     "text": "Я этого так не оставлю.",
+     "words": [
+      [
+       0,
+       1
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       8,
+       11
+      ],
+      [
+       12,
+       14
+      ],
+      [
+       15,
+       22
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        1
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        2,
+        8
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        9,
+        12
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "subordinate_clause",
+       "span": [
+        14,
+        34
+       ],
+       "words": [
+        3,
+        5
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        14,
+        17
+       ],
+       "words": [
+        3,
+        3
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        18,
+        23
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        24,
+        34
+       ],
+       "words": [
+        5,
+        5
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "dat",
+       "dependents": [
+        2
+       ],
+       "frame": "показа́ть + Dat (кому́)",
+       "head": 1
+      }
+     ],
+     "index": 45,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "show; say",
+       "inflection": "у",
+       "prefix": "по",
+       "relatives": [
+        "расска́з",
+        "сказа́ть",
+        "доказа́ть"
+       ],
+       "root": "каж",
+       "rootID": "каз",
+       "source": "morphology",
+       "suffix": "",
+       "word": 1
+      },
+      {
+       "gloss": "dog",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [
+        "соба́чка"
+       ],
+       "root": "собак",
+       "rootID": "собак",
+       "source": "morphology",
+       "suffix": "",
+       "word": 4
+      },
+      {
+       "gloss": "let go",
+       "inflection": "ть",
+       "prefix": "рас",
+       "relatives": [],
+       "root": "пуск",
+       "source": "model",
+       "suffix": "а",
+       "word": 5
+      }
+     ],
+     "text": "Я покажу вам, как собак распускать!",
+     "words": [
+      [
+       0,
+       1
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       9,
+       12
+      ],
+      [
+       14,
+       17
+      ],
+      [
+       18,
+       23
+      ],
+      [
+       24,
+       34
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "predicate",
+       "span": [
+        0,
+        13
+       ],
+       "words": [
+        0,
+        1
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        14,
+        22
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        23,
+        81
+       ],
+       "words": [
+        3,
+        9
+       ]
+      },
+      {
+       "role": "participial_clause",
+       "span": [
+        43,
+        81
+       ],
+       "words": [
+        6,
+        9
+       ]
+      }
+     ],
+     "desugar": [
+      {
+       "en": "at such gentlemen, who do not wish to obey the regulations",
+       "kind": "participle",
+       "ru": "на подо́бных госпо́д, кото́рые не жела́ют подчиня́ться постановле́ниям",
+       "span": [
+        23,
+        81
+       ],
+       "words": [
+        3,
+        9
+       ]
+      }
+     ],
+     "governance": [
+      {
+       "case": "acc",
+       "dependents": [
+        5
+       ],
+       "frame": "обрати́ть внима́ние на + Acc",
+       "head": 3
+      },
+      {
+       "case": "dat",
+       "dependents": [
+        9
+       ],
+       "frame": "подчиня́ться + Dat",
+       "head": 8
+      }
+     ],
+     "index": 46,
+     "referents": [
+      {
+       "head": 5,
+       "headSentence": 46,
+       "kind": "adjective",
+       "word": 4
+      },
+      {
+       "head": 5,
+       "headSentence": 46,
+       "kind": "participle",
+       "word": 7
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "time",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [],
+       "root": "пор",
+       "source": "model",
+       "suffix": "",
+       "word": 0
+      },
+      {
+       "gloss": "turn",
+       "inflection": "ть",
+       "prefix": "",
+       "relatives": [],
+       "root": "обрат",
+       "source": "model",
+       "suffix": "и",
+       "word": 1
+      },
+      {
+       "gloss": "attention",
+       "inflection": "е",
+       "prefix": "",
+       "relatives": [],
+       "root": "вним",
+       "source": "model",
+       "suffix": "ани",
+       "word": 2
+      },
+      {
+       "gloss": "fitting, like",
+       "inflection": "ых",
+       "prefix": "по",
+       "relatives": [],
+       "root": "доб",
+       "source": "model",
+       "suffix": "н",
+       "word": 4
+      },
+      {
+       "gloss": "lord, master",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "господ",
+       "source": "model",
+       "suffix": "",
+       "word": 5
+      },
+      {
+       "gloss": "wish",
+       "inflection": "их",
+       "prefix": "",
+       "relatives": [],
+       "root": "жел",
+       "source": "model",
+       "suffix": "ающ",
+       "word": 7
+      },
+      {
+       "gloss": "begin",
+       "inflection": "ться",
+       "prefix": "под",
+       "relatives": [
+        "нача́ло",
+        "нача́ть",
+        "начина́ться"
+       ],
+       "root": "чин",
+       "rootID": "ча",
+       "source": "morphology",
+       "suffix": "я",
+       "word": 8
+      },
+      {
+       "gloss": "stand, become",
+       "inflection": "ям",
+       "prefix": "по",
+       "relatives": [
+        "стать",
+        "сто́ить",
+        "стоя́ть"
+       ],
+       "root": "стан",
+       "rootID": "ста",
+       "source": "morphology",
+       "suffix": "овлени",
+       "word": 9
+      }
+     ],
+     "text": "Пора обратить внимание на подобных господ, не желающих подчиняться постановлениям!",
+     "words": [
+      [
+       0,
+       4
+      ],
+      [
+       5,
+       13
+      ],
+      [
+       14,
+       22
+      ],
+      [
+       23,
+       25
+      ],
+      [
+       26,
+       34
+      ],
+      [
+       35,
+       41
+      ],
+      [
+       43,
+       45
+      ],
+      [
+       46,
+       54
+      ],
+      [
+       55,
+       66
+      ],
+      [
+       67,
+       81
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subordinate_clause",
+       "span": [
+        0,
+        27
+       ],
+       "words": [
+        0,
+        3
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        0,
+        3
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        4,
+        13
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        14,
+        17
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "apposition",
+       "span": [
+        19,
+        27
+       ],
+       "words": [
+        3,
+        3
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        29,
+        32
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        33,
+        35
+       ],
+       "words": [
+        5,
+        5
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        36,
+        42
+       ],
+       "words": [
+        6,
+        6
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        43,
+        49
+       ],
+       "words": [
+        7,
+        8
+       ]
+      },
+      {
+       "role": "subordinate_clause",
+       "span": [
+        51,
+        91
+       ],
+       "words": [
+        9,
+        15
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        51,
+        54
+       ],
+       "words": [
+        9,
+        9
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        55,
+        61
+       ],
+       "words": [
+        10,
+        10
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        62,
+        68
+       ],
+       "words": [
+        11,
+        11
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        69,
+        70
+       ],
+       "words": [
+        12,
+        12
+       ]
+      },
+      {
+       "role": "attribute",
+       "span": [
+        71,
+        77
+       ],
+       "words": [
+        13,
+        13
+       ]
+      },
+      {
+       "role": "attribute",
+       "span": [
+        78,
+        86
+       ],
+       "words": [
+        14,
+        14
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        87,
+        91
+       ],
+       "words": [
+        15,
+        15
+       ]
+      }
+     ],
+     "desugar": [
+      {
+       "en": "When they fine him, he will learn.",
+       "kind": "other",
+       "ru": "Когда́ его́ оштрафу́ют, он узна́ет.",
+       "span": [
+        0,
+        42
+       ],
+       "words": [
+        0,
+        6
+       ]
+      }
+     ],
+     "governance": [
+      {
+       "case": "gen",
+       "dependents": [
+        8
+       ],
+       "frame": "у + Gen",
+       "head": 7
+      }
+     ],
+     "index": 47,
+     "referents": [
+      {
+       "head": 3,
+       "headSentence": 47,
+       "kind": "pronoun",
+       "word": 2
+      },
+      {
+       "head": 3,
+       "headSentence": 47,
+       "kind": "pronoun",
+       "word": 5
+      },
+      {
+       "head": 15,
+       "headSentence": 47,
+       "kind": "adjective",
+       "word": 13
+      },
+      {
+       "head": 15,
+       "headSentence": 47,
+       "kind": "adjective",
+       "word": 14
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "fine, penalty",
+       "inflection": "ют",
+       "prefix": "о",
+       "relatives": [],
+       "root": "штраф",
+       "source": "model",
+       "suffix": "у",
+       "word": 1
+      },
+      {
+       "gloss": "vile",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [],
+       "root": "мерз",
+       "source": "model",
+       "suffix": "авц",
+       "word": 3
+      },
+      {
+       "gloss": "know",
+       "inflection": "ет",
+       "prefix": "у",
+       "relatives": [
+        "знак",
+        "знать",
+        "зна́ние"
+       ],
+       "root": "зна",
+       "rootID": "зна",
+       "source": "morphology",
+       "suffix": "",
+       "word": 6
+      },
+      {
+       "gloss": "know",
+       "inflection": "ит",
+       "prefix": "",
+       "relatives": [
+        "знак",
+        "знать",
+        "зна́ние"
+       ],
+       "root": "знач",
+       "rootID": "зна",
+       "source": "morphology",
+       "suffix": "",
+       "word": 10
+      },
+      {
+       "gloss": "dog",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [
+        "соба́чка"
+       ],
+       "root": "собак",
+       "rootID": "собак",
+       "source": "morphology",
+       "suffix": "",
+       "word": 11
+      },
+      {
+       "gloss": "other",
+       "inflection": "ий",
+       "prefix": "",
+       "relatives": [],
+       "root": "проч",
+       "source": "model",
+       "suffix": "",
+       "word": 13
+      },
+      {
+       "gloss": "wander",
+       "inflection": "ий",
+       "prefix": "",
+       "relatives": [],
+       "root": "брод",
+       "source": "model",
+       "suffix": "яч",
+       "word": 14
+      },
+      {
+       "gloss": "cattle",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "скот",
+       "source": "model",
+       "suffix": "",
+       "word": 15
+      }
+     ],
+     "text": "Как оштрафуют его, мерзавца, так он узнает у меня, что значит собака и прочий бродячий скот!",
+     "words": [
+      [
+       0,
+       3
+      ],
+      [
+       4,
+       13
+      ],
+      [
+       14,
+       17
+      ],
+      [
+       19,
+       27
+      ],
+      [
+       29,
+       32
+      ],
+      [
+       33,
+       35
+      ],
+      [
+       36,
+       42
+      ],
+      [
+       43,
+       44
+      ],
+      [
+       45,
+       49
+      ],
+      [
+       51,
+       54
+      ],
+      [
+       55,
+       61
+      ],
+      [
+       62,
+       68
+      ],
+      [
+       69,
+       70
+      ],
+      [
+       71,
+       77
+      ],
+      [
+       78,
+       86
+      ],
+      [
+       87,
+       91
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        1
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        2,
+        5
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        6,
+        12
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        13,
+        26
+       ],
+       "words": [
+        3,
+        4
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "dat",
+       "dependents": [
+        1
+       ],
+       "frame": "показа́ть + Dat (кому́)",
+       "head": 2
+      }
+     ],
+     "index": 48,
+     "referents": [
+      {
+       "head": 3,
+       "headSentence": 47,
+       "kind": "pronoun",
+       "word": 1
+      },
+      {
+       "head": 4,
+       "headSentence": 48,
+       "kind": "possessive",
+       "word": 3
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "show; say",
+       "inflection": "у",
+       "prefix": "по",
+       "relatives": [
+        "расска́з",
+        "сказа́ть",
+        "доказа́ть"
+       ],
+       "root": "каж",
+       "rootID": "каз",
+       "source": "morphology",
+       "suffix": "",
+       "word": 2
+      },
+      {
+       "gloss": "mother",
+       "inflection": "ь",
+       "prefix": "",
+       "relatives": [],
+       "root": "мат",
+       "rootID": "мат",
+       "source": "morphology",
+       "suffix": "",
+       "word": 4
+      }
+     ],
+     "text": "Я ему покажу Кузькину мать!..",
+     "words": [
+      [
+       0,
+       1
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       6,
+       12
+      ],
+      [
+       13,
+       21
+      ],
+      [
+       22,
+       26
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "address",
+       "span": [
+        0,
+        7
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "direct_speech",
+       "span": [
+        0,
+        7
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        11,
+        21
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        22,
+        33
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        34,
+        46
+       ],
+       "words": [
+        3,
+        4
+       ]
+      },
+      {
+       "role": "direct_speech",
+       "span": [
+        50,
+        93
+       ],
+       "words": [
+        5,
+        11
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        50,
+        55
+       ],
+       "words": [
+        5,
+        5
+       ]
+      },
+      {
+       "role": "subordinate_clause",
+       "span": [
+        57,
+        71
+       ],
+       "words": [
+        6,
+        8
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        57,
+        60
+       ],
+       "words": [
+        6,
+        6
+       ]
+      },
+      {
+       "role": "particle",
+       "span": [
+        61,
+        64
+       ],
+       "words": [
+        7,
+        7
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        65,
+        71
+       ],
+       "words": [
+        8,
+        8
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        73,
+        74
+       ],
+       "words": [
+        9,
+        9
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        75,
+        84
+       ],
+       "words": [
+        10,
+        10
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        85,
+        93
+       ],
+       "words": [
+        11,
+        11
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "dat",
+       "dependents": [
+        4
+       ],
+       "frame": "обраща́ться к + Dat",
+       "head": 1
+      },
+      {
+       "case": "dat",
+       "dependents": [
+        4
+       ],
+       "frame": "к + Dat",
+       "head": 3
+      }
+     ],
+     "index": 49,
+     "referents": [
+      {
+       "head": 8,
+       "headSentence": 49,
+       "kind": "pronoun",
+       "word": 6
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "turn",
+       "inflection": "ется",
+       "prefix": "об",
+       "relatives": [],
+       "root": "ращ",
+       "source": "model",
+       "suffix": "а",
+       "word": 1
+      },
+      {
+       "gloss": "look, watch",
+       "inflection": "ь",
+       "prefix": "над",
+       "relatives": [],
+       "root": "зир",
+       "source": "model",
+       "suffix": "ател",
+       "word": 2
+      },
+      {
+       "gloss": "city",
+       "inflection": "ому",
+       "prefix": "",
+       "relatives": [
+        "го́род"
+       ],
+       "root": "город",
+       "rootID": "город",
+       "source": "morphology",
+       "suffix": "ов",
+       "word": 4
+      },
+      {
+       "gloss": "know",
+       "inflection": "й",
+       "prefix": "у",
+       "relatives": [
+        "знак",
+        "знать",
+        "зна́ние"
+       ],
+       "root": "зна",
+       "rootID": "зна",
+       "source": "morphology",
+       "suffix": "",
+       "word": 5
+      },
+      {
+       "gloss": "dog",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [
+        "соба́чка"
+       ],
+       "root": "собак",
+       "rootID": "собак",
+       "source": "morphology",
+       "suffix": "",
+       "word": 8
+      },
+      {
+       "gloss": "stand, become",
+       "inflection": "й",
+       "prefix": "со",
+       "relatives": [
+        "стать",
+        "сто́ить",
+        "стоя́ть"
+       ],
+       "root": "став",
+       "rootID": "ста",
+       "source": "morphology",
+       "suffix": "ля",
+       "word": 10
+      },
+      {
+       "gloss": "official record",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "протокол",
+       "source": "model",
+       "suffix": "",
+       "word": 11
+      }
+     ],
+     "text": "Елдырин, — обращается надзиратель к городовому, — узнай, чья это собака, и составляй протокол!",
+     "words": [
+      [
+       0,
+       7
+      ],
+      [
+       11,
+       21
+      ],
+      [
+       22,
+       33
+      ],
+      [
+       34,
+       35
+      ],
+      [
+       36,
+       46
+      ],
+      [
+       50,
+       55
+      ],
+      [
+       57,
+       60
+      ],
+      [
+       61,
+       64
+      ],
+      [
+       65,
+       71
+      ],
+      [
+       73,
+       74
+      ],
+      [
+       75,
+       84
+      ],
+      [
+       85,
+       93
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "conjunction",
+       "span": [
+        0,
+        1
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        2,
+        8
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        9,
+        23
+       ],
+       "words": [
+        2,
+        3
+       ]
+      }
+     ],
+     "desugar": [
+      {
+       "en": "We must destroy the dog.",
+       "kind": "other",
+       "ru": "Мы должны́ истреби́ть соба́ку.",
+       "span": [
+        2,
+        23
+       ],
+       "words": [
+        1,
+        3
+       ]
+      }
+     ],
+     "governance": [],
+     "index": 50,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "dog",
+       "inflection": "у",
+       "prefix": "",
+       "relatives": [
+        "соба́ка",
+        "соба́чка"
+       ],
+       "root": "собак",
+       "rootID": "собак",
+       "source": "morphology",
+       "suffix": "",
+       "word": 1
+      },
+      {
+       "gloss": "require",
+       "inflection": "ть",
+       "prefix": "ис",
+       "relatives": [
+        "тре́боваться"
+       ],
+       "root": "треб",
+       "rootID": "треб",
+       "source": "morphology",
+       "suffix": "и",
+       "word": 2
+      },
+      {
+       "gloss": "need",
+       "inflection": "о",
+       "prefix": "",
+       "relatives": [],
+       "root": "над",
+       "source": "model",
+       "suffix": "",
+       "word": 3
+      }
+     ],
+     "text": "А собаку истребить надо.",
+     "words": [
+      [
+       0,
+       1
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       9,
+       18
+      ],
+      [
+       19,
+       23
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "adverbial",
+       "span": [
+        0,
+        7
+       ],
+       "words": [
+        0,
+        0
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 51,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "slow",
+       "inflection": "я",
+       "prefix": "не",
+       "relatives": [
+        "ме́дленно",
+        "поме́дленнее"
+       ],
+       "root": "медл",
+       "rootID": "медл",
+       "source": "morphology",
+       "suffix": "",
+       "word": 0
+      }
+     ],
+     "text": "Немедля!",
+     "words": [
+      [
+       0,
+       7
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        3
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "introductory",
+       "span": [
+        4,
+        12
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        13,
+        20
+       ],
+       "words": [
+        2,
+        2
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 52,
+     "referents": [
+      {
+       "head": 1,
+       "headSentence": 50,
+       "kind": "pronoun",
+       "word": 0
+      },
+      {
+       "head": 1,
+       "headSentence": 50,
+       "kind": "adjective",
+       "word": 2
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "believe, trust",
+       "inflection": "ое",
+       "prefix": "на",
+       "relatives": [
+        "ве́рить",
+        "ве́рный"
+       ],
+       "root": "вер",
+       "rootID": "вер",
+       "source": "morphology",
+       "suffix": "н",
+       "word": 1
+      },
+      {
+       "gloss": "rage, fury",
+       "inflection": "ая",
+       "prefix": "",
+       "relatives": [],
+       "root": "беш",
+       "source": "model",
+       "suffix": "ен",
+       "word": 2
+      }
+     ],
+     "text": "Она наверное бешеная…",
+     "words": [
+      [
+       0,
+       3
+      ],
+      [
+       4,
+       12
+      ],
+      [
+       13,
+       20
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "direct_speech",
+       "span": [
+        0,
+        14
+       ],
+       "words": [
+        0,
+        2
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        0,
+        3
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "particle",
+       "span": [
+        4,
+        7
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        8,
+        14
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        16,
+        25
+       ],
+       "words": [
+        3,
+        3
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 53,
+     "referents": [
+      {
+       "head": 2,
+       "headSentence": 53,
+       "kind": "pronoun",
+       "word": 0
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "dog",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [
+        "соба́чка"
+       ],
+       "root": "собак",
+       "rootID": "собак",
+       "source": "morphology",
+       "suffix": "",
+       "word": 2
+      },
+      {
+       "gloss": "ask",
+       "inflection": "ю",
+       "prefix": "с",
+       "relatives": [
+        "вопро́с",
+        "спроси́ть",
+        "спра́шивать"
+       ],
+       "root": "праш",
+       "rootID": "прос",
+       "source": "morphology",
+       "suffix": "ива",
+       "word": 3
+      }
+     ],
+     "text": "Чья это собака, спрашиваю?",
+     "words": [
+      [
+       0,
+       3
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       8,
+       14
+      ],
+      [
+       16,
+       25
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        2,
+        5
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "introductory",
+       "span": [
+        7,
+        13
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        15,
+        32
+       ],
+       "words": [
+        2,
+        3
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 54,
+     "referents": [
+      {
+       "head": 2,
+       "headSentence": 53,
+       "kind": "pronoun",
+       "word": 0
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "show; say",
+       "inflection": "сь",
+       "prefix": "",
+       "relatives": [
+        "расска́з",
+        "сказа́ть",
+        "доказа́ть"
+       ],
+       "root": "каж",
+       "rootID": "каз",
+       "source": "morphology",
+       "suffix": "и",
+       "word": 1
+      },
+      {
+       "gloss": "general",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [],
+       "root": "генерал",
+       "source": "model",
+       "suffix": "",
+       "word": 2
+      }
+     ],
+     "text": "— Это, кажись, генерала Жигалова!",
+     "words": [
+      [
+       2,
+       5
+      ],
+      [
+       7,
+       13
+      ],
+      [
+       15,
+       23
+      ],
+      [
+       24,
+       32
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "predicate",
+       "span": [
+        2,
+        8
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        9,
+        15
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        16,
+        24
+       ],
+       "words": [
+        2,
+        3
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "gen",
+       "dependents": [
+        3
+       ],
+       "frame": "из + Gen",
+       "head": 2
+      }
+     ],
+     "index": 55,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "shout",
+       "inflection": "т",
+       "prefix": "",
+       "relatives": [],
+       "root": "крич",
+       "source": "model",
+       "suffix": "и",
+       "word": 0
+      },
+      {
+       "gloss": "crowd",
+       "inflection": "ы",
+       "prefix": "",
+       "relatives": [],
+       "root": "толп",
+       "source": "model",
+       "suffix": "",
+       "word": 3
+      }
+     ],
+     "text": "— кричит кто-то из толпы.",
+     "words": [
+      [
+       2,
+       8
+      ],
+      [
+       9,
+       15
+      ],
+      [
+       16,
+       18
+      ],
+      [
+       19,
+       24
+      ]
+     ]
+    }
+   ]
+  },
+  "chekhov-smert-chinovnika": {
+   "sentences": [
+    {
+     "chunks": [
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        0,
+        23
+       ],
+       "words": [
+        0,
+        3
+       ]
+      },
+      {
+       "role": "attribute",
+       "span": [
+        24,
+        43
+       ],
+       "words": [
+        4,
+        6
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        44,
+        53
+       ],
+       "words": [
+        7,
+        7
+       ]
+      },
+      {
+       "role": "apposition",
+       "span": [
+        55,
+        76
+       ],
+       "words": [
+        8,
+        10
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        78,
+        83
+       ],
+       "words": [
+        11,
+        11
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        84,
+        105
+       ],
+       "words": [
+        12,
+        15
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        106,
+        107
+       ],
+       "words": [
+        16,
+        16
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        108,
+        114
+       ],
+       "words": [
+        17,
+        17
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        115,
+        124
+       ],
+       "words": [
+        18,
+        19
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        125,
+        151
+       ],
+       "words": [
+        20,
+        22
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "acc",
+       "dependents": [
+        3
+       ],
+       "frame": "в + Acc (when)",
+       "head": 0
+      },
+      {
+       "case": "loc",
+       "dependents": [
+        14
+       ],
+       "frame": "в (во) + Loc (where)",
+       "head": 12
+      },
+      {
+       "case": "gen",
+       "dependents": [
+        15
+       ],
+       "frame": "ряд + Gen",
+       "head": 14
+      },
+      {
+       "case": "acc",
+       "dependents": [
+        19
+       ],
+       "frame": "в + Acc (into, through)",
+       "head": 18
+      },
+      {
+       "case": "acc",
+       "dependents": [
+        22
+       ],
+       "frame": "гляде́ть на + Acc",
+       "head": 20
+      }
+     ],
+     "index": 0,
+     "referents": [
+      {
+       "head": 3,
+       "headSentence": 0,
+       "kind": "numeral",
+       "word": 1
+      },
+      {
+       "head": 3,
+       "headSentence": 0,
+       "kind": "adjective",
+       "word": 2
+      },
+      {
+       "head": 7,
+       "headSentence": 0,
+       "kind": "adjective",
+       "word": 6
+      },
+      {
+       "head": 14,
+       "headSentence": 0,
+       "kind": "adjective",
+       "word": 13
+      },
+      {
+       "head": 22,
+       "headSentence": 0,
+       "kind": "adjective",
+       "word": 21
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "one",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [
+        "еди́ный",
+        "едини́ца",
+        "оди́ннадцать"
+       ],
+       "root": "один",
+       "rootID": "один",
+       "source": "morphology",
+       "suffix": "",
+       "word": 1
+      },
+      {
+       "gloss": "beautiful; red",
+       "inflection": "ый",
+       "prefix": "пре",
+       "relatives": [
+        "кра́сный",
+        "красота́",
+        "краси́вый"
+       ],
+       "root": "крас",
+       "rootID": "крас",
+       "source": "morphology",
+       "suffix": "н",
+       "word": 2
+      },
+      {
+       "gloss": "evening",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [
+        "вчера́"
+       ],
+       "root": "вечер",
+       "rootID": "вечер",
+       "source": "morphology",
+       "suffix": "",
+       "word": 3
+      },
+      {
+       "gloss": "less",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [
+        "ме́ньше"
+       ],
+       "root": "мен",
+       "source": "model",
+       "suffix": "ее",
+       "word": 5
+      },
+      {
+       "gloss": "beautiful; red",
+       "inflection": "ый",
+       "prefix": "пре",
+       "relatives": [
+        "кра́сный",
+        "красота́",
+        "краси́вый"
+       ],
+       "root": "крас",
+       "rootID": "крас",
+       "source": "morphology",
+       "suffix": "н",
+       "word": 6
+      },
+      {
+       "gloss": "execute (clerk)",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "экзекут",
+       "source": "model",
+       "suffix": "ор",
+       "word": 7
+      },
+      {
+       "gloss": "worm",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "черв",
+       "rootID": "черв",
+       "source": "morphology",
+       "suffix": "яков",
+       "word": 10
+      },
+      {
+       "gloss": "sit",
+       "inflection": "л",
+       "prefix": "",
+       "relatives": [],
+       "root": "сид",
+       "source": "model",
+       "suffix": "е",
+       "word": 11
+      },
+      {
+       "gloss": "row, order",
+       "inflection": "у",
+       "prefix": "",
+       "relatives": [
+        "ряд",
+        "поря́док"
+       ],
+       "root": "ряд",
+       "rootID": "ряд",
+       "source": "morphology",
+       "suffix": "",
+       "word": 14
+      },
+      {
+       "gloss": "armchair",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "кресел",
+       "source": "model",
+       "suffix": "",
+       "word": 15
+      },
+      {
+       "gloss": "look",
+       "inflection": "л",
+       "prefix": "",
+       "relatives": [],
+       "root": "гляд",
+       "source": "model",
+       "suffix": "е",
+       "word": 17
+      },
+      {
+       "gloss": "binoculars",
+       "inflection": "ь",
+       "prefix": "",
+       "relatives": [],
+       "root": "бинокл",
+       "source": "model",
+       "suffix": "",
+       "word": 19
+      },
+      {
+       "gloss": "bell",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [],
+       "root": "колокол",
+       "source": "model",
+       "suffix": "",
+       "word": 22
+      }
+     ],
+     "text": "В один прекрасный вечер не менее прекрасный экзекутор, Иван Дмитрич Червяков, сидел во втором ряду кресел и глядел в бинокль на «Корневильские колокола».",
+     "words": [
+      [
+       0,
+       1
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       7,
+       17
+      ],
+      [
+       18,
+       23
+      ],
+      [
+       24,
+       26
+      ],
+      [
+       27,
+       32
+      ],
+      [
+       33,
+       43
+      ],
+      [
+       44,
+       53
+      ],
+      [
+       55,
+       59
+      ],
+      [
+       60,
+       67
+      ],
+      [
+       68,
+       76
+      ],
+      [
+       78,
+       83
+      ],
+      [
+       84,
+       86
+      ],
+      [
+       87,
+       93
+      ],
+      [
+       94,
+       98
+      ],
+      [
+       99,
+       105
+      ],
+      [
+       106,
+       107
+      ],
+      [
+       108,
+       114
+      ],
+      [
+       115,
+       116
+      ],
+      [
+       117,
+       124
+      ],
+      [
+       125,
+       127
+      ],
+      [
+       129,
+       142
+      ],
+      [
+       143,
+       151
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        2
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        3,
+        9
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        10,
+        11
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        12,
+        22
+       ],
+       "words": [
+        3,
+        3
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        23,
+        27
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        28,
+        47
+       ],
+       "words": [
+        5,
+        7
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "loc",
+       "dependents": [
+        6
+       ],
+       "frame": "на + Loc",
+       "head": 5
+      },
+      {
+       "case": "gen",
+       "dependents": [
+        7
+       ],
+       "frame": "верх + Gen",
+       "head": 6
+      }
+     ],
+     "index": 1,
+     "referents": [
+      {
+       "head": 7,
+       "headSentence": 0,
+       "kind": "pronoun",
+       "word": 0
+      },
+      {
+       "head": 7,
+       "headSentence": 0,
+       "kind": "pronoun",
+       "word": 4
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "look",
+       "inflection": "л",
+       "prefix": "",
+       "relatives": [],
+       "root": "гляд",
+       "source": "model",
+       "suffix": "е",
+       "word": 1
+      },
+      {
+       "gloss": "feel",
+       "inflection": "л",
+       "prefix": "",
+       "relatives": [],
+       "root": "чувств",
+       "source": "model",
+       "suffix": "ова",
+       "word": 3
+      },
+      {
+       "gloss": "top",
+       "inflection": "у",
+       "prefix": "",
+       "relatives": [
+        "верх",
+        "верши́на"
+       ],
+       "root": "верх",
+       "rootID": "верх",
+       "source": "morphology",
+       "suffix": "",
+       "word": 6
+      },
+      {
+       "gloss": "bliss",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [],
+       "root": "блаж",
+       "source": "model",
+       "suffix": "енств",
+       "word": 7
+      }
+     ],
+     "text": "Он глядел и чувствовал себя на верху блаженства.",
+     "words": [
+      [
+       0,
+       2
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       10,
+       11
+      ],
+      [
+       12,
+       22
+      ],
+      [
+       23,
+       27
+      ],
+      [
+       28,
+       30
+      ],
+      [
+       31,
+       36
+      ],
+      [
+       37,
+       47
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "conjunction",
+       "span": [
+        0,
+        2
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        3,
+        8
+       ],
+       "words": [
+        1,
+        1
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 2,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "suddenly",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "вдруг",
+       "source": "model",
+       "suffix": "",
+       "word": 1
+      }
+     ],
+     "text": "Но вдруг…",
+     "words": [
+      [
+       0,
+       2
+      ],
+      [
+       3,
+       8
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        0,
+        11
+       ],
+       "words": [
+        0,
+        1
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        12,
+        17
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        18,
+        29
+       ],
+       "words": [
+        3,
+        3
+       ]
+      },
+      {
+       "role": "attribute",
+       "span": [
+        30,
+        33
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        35,
+        43
+       ],
+       "words": [
+        5,
+        6
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "loc",
+       "dependents": [
+        1
+       ],
+       "frame": "в + Loc (where)",
+       "head": 0
+      },
+      {
+       "case": "nom",
+       "dependents": [
+        5
+       ],
+       "frame": "встреча́ться (reflexive: occur)",
+       "head": 3
+      }
+     ],
+     "index": 3,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "tell",
+       "inflection": "ах",
+       "prefix": "рас",
+       "relatives": [
+        "сказа́ть"
+       ],
+       "root": "сказ",
+       "source": "model",
+       "suffix": "",
+       "word": 1
+      },
+      {
+       "gloss": "part",
+       "inflection": "о",
+       "prefix": "",
+       "relatives": [
+        "часть",
+        "сча́стье",
+        "части́ца"
+       ],
+       "root": "част",
+       "rootID": "част",
+       "source": "morphology",
+       "suffix": "",
+       "word": 2
+      },
+      {
+       "gloss": "meet",
+       "inflection": "ется",
+       "prefix": "",
+       "relatives": [],
+       "root": "встреч",
+       "source": "model",
+       "suffix": "а",
+       "word": 3
+      },
+      {
+       "gloss": "suddenly",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "вдруг",
+       "source": "model",
+       "suffix": "",
+       "word": 6
+      }
+     ],
+     "text": "В рассказах часто встречается это «но вдруг».",
+     "words": [
+      [
+       0,
+       1
+      ],
+      [
+       2,
+       11
+      ],
+      [
+       12,
+       17
+      ],
+      [
+       18,
+       29
+      ],
+      [
+       30,
+       33
+      ],
+      [
+       35,
+       37
+      ],
+      [
+       38,
+       43
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        6
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        7,
+        12
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "coordinate_clause",
+       "span": [
+        14,
+        42
+       ],
+       "words": [
+        2,
+        5
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        14,
+        19
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        20,
+        23
+       ],
+       "words": [
+        3,
+        3
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        24,
+        29
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        30,
+        42
+       ],
+       "words": [
+        5,
+        5
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "gen",
+       "dependents": [
+        5
+       ],
+       "frame": "по́лный + Gen",
+       "head": 4
+      }
+     ],
+     "index": 4,
+     "referents": [
+      {
+       "head": 0,
+       "headSentence": 4,
+       "kind": "adjective",
+       "word": 1
+      },
+      {
+       "head": 2,
+       "headSentence": 4,
+       "kind": "adjective",
+       "word": 4
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "author",
+       "inflection": "ы",
+       "prefix": "",
+       "relatives": [],
+       "root": "автор",
+       "source": "model",
+       "suffix": "",
+       "word": 0
+      },
+      {
+       "gloss": "right, true, straight",
+       "inflection": "ы",
+       "prefix": "",
+       "relatives": [
+        "прав",
+        "пра́во",
+        "пра́вда"
+       ],
+       "root": "прав",
+       "rootID": "прав",
+       "source": "morphology",
+       "suffix": "",
+       "word": 1
+      },
+      {
+       "gloss": "live",
+       "inflection": "ь",
+       "prefix": "",
+       "relatives": [
+        "жить",
+        "живо́й"
+       ],
+       "root": "жи",
+       "rootID": "жи",
+       "source": "morphology",
+       "suffix": "зн",
+       "word": 2
+      },
+      {
+       "gloss": "full",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [],
+       "root": "пол",
+       "source": "model",
+       "suffix": "н",
+       "word": 4
+      },
+      {
+       "gloss": "sudden",
+       "inflection": "ей",
+       "prefix": "",
+       "relatives": [],
+       "root": "внезап",
+       "source": "model",
+       "suffix": "ност",
+       "word": 5
+      }
+     ],
+     "text": "Авторы правы: жизнь так полна внезапностей!",
+     "words": [
+      [
+       0,
+       6
+      ],
+      [
+       7,
+       12
+      ],
+      [
+       14,
+       19
+      ],
+      [
+       20,
+       23
+      ],
+      [
+       24,
+       29
+      ],
+      [
+       30,
+       42
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "conjunction",
+       "span": [
+        0,
+        2
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "adverbial",
+       "span": [
+        3,
+        8
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        9,
+        13
+       ],
+       "words": [
+        2,
+        2
+       ]
+      },
+      {
+       "role": "attribute",
+       "span": [
+        14,
+        17
+       ],
+       "words": [
+        3,
+        3
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        18,
+        29
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "coordinate_clause",
+       "span": [
+        31,
+        48
+       ],
+       "words": [
+        5,
+        6
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        31,
+        36
+       ],
+       "words": [
+        5,
+        5
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        37,
+        48
+       ],
+       "words": [
+        6,
+        6
+       ]
+      },
+      {
+       "role": "coordinate_clause",
+       "span": [
+        50,
+        70
+       ],
+       "words": [
+        7,
+        8
+       ]
+      },
+      {
+       "role": "subject",
+       "span": [
+        50,
+        57
+       ],
+       "words": [
+        7,
+        7
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        58,
+        70
+       ],
+       "words": [
+        8,
+        8
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "nom",
+       "dependents": [
+        2
+       ],
+       "frame": "помо́рщиться (reflexive)",
+       "head": 4
+      },
+      {
+       "case": "nom",
+       "dependents": [
+        5
+       ],
+       "frame": "подкати́ться (reflexive)",
+       "head": 6
+      },
+      {
+       "case": "nom",
+       "dependents": [
+        7
+       ],
+       "frame": "останови́ться (reflexive)",
+       "head": 8
+      }
+     ],
+     "index": 5,
+     "referents": [
+      {
+       "head": 7,
+       "headSentence": 0,
+       "kind": "possessive",
+       "word": 3
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "suddenly",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "вдруг",
+       "source": "model",
+       "suffix": "",
+       "word": 1
+      },
+      {
+       "gloss": "face; person",
+       "inflection": "о",
+       "prefix": "",
+       "relatives": [
+        "ли́чный"
+       ],
+       "root": "лиц",
+       "rootID": "лиц",
+       "source": "morphology",
+       "suffix": "",
+       "word": 2
+      },
+      {
+       "gloss": "wrinkle",
+       "inflection": "лось",
+       "prefix": "по",
+       "relatives": [],
+       "root": "морщ",
+       "source": "model",
+       "suffix": "и",
+       "word": 4
+      },
+      {
+       "gloss": "eye",
+       "inflection": "а",
+       "prefix": "",
+       "relatives": [],
+       "root": "глаз",
+       "rootID": "глаз",
+       "source": "morphology",
+       "suffix": "",
+       "word": 5
+      },
+      {
+       "gloss": "roll",
+       "inflection": "лись",
+       "prefix": "под",
+       "relatives": [],
+       "root": "кат",
+       "source": "model",
+       "suffix": "и",
+       "word": 6
+      },
+      {
+       "gloss": "breathe",
+       "inflection": "е",
+       "prefix": "",
+       "relatives": [],
+       "root": "дых",
+       "source": "model",
+       "suffix": "ани",
+       "word": 7
+      },
+      {
+       "gloss": "stand, become",
+       "inflection": "лось",
+       "prefix": "о",
+       "relatives": [
+        "стать",
+        "сто́ить",
+        "стоя́ть"
+       ],
+       "root": "стан",
+       "rootID": "ста",
+       "source": "morphology",
+       "suffix": "ови",
+       "word": 8
+      }
+     ],
+     "text": "Но вдруг лицо его поморщилось, глаза подкатились, дыхание остановилось…",
+     "words": [
+      [
+       0,
+       2
+      ],
+      [
+       3,
+       8
+      ],
+      [
+       9,
+       13
+      ],
+      [
+       14,
+       17
+      ],
+      [
+       18,
+       29
+      ],
+      [
+       31,
+       36
+      ],
+      [
+       37,
+       48
+      ],
+      [
+       50,
+       57
+      ],
+      [
+       58,
+       70
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "subject",
+       "span": [
+        0,
+        2
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        3,
+        8
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "prepositional_phrase",
+       "span": [
+        9,
+        16
+       ],
+       "words": [
+        2,
+        3
+       ]
+      },
+      {
+       "role": "object",
+       "span": [
+        17,
+        24
+       ],
+       "words": [
+        4,
+        4
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        26,
+        34
+       ],
+       "words": [
+        5,
+        5
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        35,
+        36
+       ],
+       "words": [
+        6,
+        6
+       ]
+      },
+      {
+       "role": "interjection",
+       "span": [
+        39,
+        44
+       ],
+       "words": [
+        7,
+        7
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [
+      {
+       "case": "gen",
+       "dependents": [
+        3
+       ],
+       "frame": "от + Gen",
+       "head": 2
+      },
+      {
+       "case": "nom",
+       "dependents": [
+        0
+       ],
+       "frame": "нагну́ться (reflexive)",
+       "head": 5
+      }
+     ],
+     "index": 6,
+     "referents": [
+      {
+       "head": 7,
+       "headSentence": 0,
+       "kind": "pronoun",
+       "word": 0
+      }
+     ],
+     "roots": [
+      {
+       "gloss": "lead",
+       "inflection": "л",
+       "prefix": "от",
+       "relatives": [
+        "води́ть"
+       ],
+       "root": "ве",
+       "source": "model",
+       "suffix": "",
+       "word": 1
+      },
+      {
+       "gloss": "eye",
+       "inflection": "",
+       "prefix": "",
+       "relatives": [],
+       "root": "глаз",
+       "rootID": "глаз",
+       "source": "morphology",
+       "suffix": "",
+       "word": 3
+      },
+      {
+       "gloss": "binoculars",
+       "inflection": "ь",
+       "prefix": "",
+       "relatives": [],
+       "root": "бинокл",
+       "source": "model",
+       "suffix": "",
+       "word": 4
+      },
+      {
+       "gloss": "bend",
+       "inflection": "лся",
+       "prefix": "на",
+       "relatives": [],
+       "root": "гн",
+       "source": "model",
+       "suffix": "у",
+       "word": 5
+      }
+     ],
+     "text": "он отвел от глаз бинокль, нагнулся и…. апчхи!!!",
+     "words": [
+      [
+       0,
+       2
+      ],
+      [
+       3,
+       8
+      ],
+      [
+       9,
+       11
+      ],
+      [
+       12,
+       16
+      ],
+      [
+       17,
+       24
+      ],
+      [
+       26,
+       34
+      ],
+      [
+       35,
+       36
+      ],
+      [
+       39,
+       44
+      ]
+     ]
+    },
+    {
+     "chunks": [
+      {
+       "role": "predicate",
+       "span": [
+        0,
+        6
+       ],
+       "words": [
+        0,
+        0
+       ]
+      },
+      {
+       "role": "parenthetical",
+       "span": [
+        8,
+        18
+       ],
+       "words": [
+        1,
+        2
+       ]
+      },
+      {
+       "role": "conjunction",
+       "span": [
+        8,
+        11
+       ],
+       "words": [
+        1,
+        1
+       ]
+      },
+      {
+       "role": "predicate",
+       "span": [
+        12,
+        18
+       ],
+       "words": [
+        2,
+        2
+       ]
+      }
+     ],
+     "desugar": [],
+     "governance": [],
+     "index": 7,
+     "referents": [],
+     "roots": [
+      {
+       "gloss": "sneeze",
+       "inflection": "л",
+       "prefix": "",
+       "relatives": [],
+       "root": "чих",
+       "source": "model",
+       "suffix": "ну",
+       "word": 0
+      },
+      {
+       "gloss": "see",
+       "inflection": "ите",
+       "prefix": "",
+       "relatives": [
+        "вид",
+        "ви́деть",
+        "уви́деть"
+       ],
+       "root": "вид",
+       "rootID": "вид",
+       "source": "morphology",
+       "suffix": "",
+       "word": 2
+      }
+     ],
+     "text": "Чихнул, как видите.",
+     "words": [
+      [
+       0,
+       6
+      ],
+      [
+       8,
+       11
+      ],
+      [
+       12,
+       18
+      ]
+     ]
     }
    ]
   },
@@ -23574,16 +29416,6 @@
      ]
     },
     {
-     "chunks": [],
-     "desugar": [],
-     "governance": [],
-     "index": 19,
-     "referents": [],
-     "roots": [],
-     "text": "—",
-     "words": []
-    },
-    {
      "chunks": [
       {
        "role": "address",
@@ -23829,16 +29661,6 @@
        24
       ]
      ]
-    },
-    {
-     "chunks": [],
-     "desugar": [],
-     "governance": [],
-     "index": 22,
-     "referents": [],
-     "roots": [],
-     "text": "—",
-     "words": []
     },
     {
      "chunks": [
@@ -24345,16 +30167,6 @@
      ]
     },
     {
-     "chunks": [],
-     "desugar": [],
-     "governance": [],
-     "index": 28,
-     "referents": [],
-     "roots": [],
-     "text": "—",
-     "words": []
-    },
-    {
      "chunks": [
       {
        "role": "interjection",
@@ -24595,16 +30407,6 @@
        19
       ]
      ]
-    },
-    {
-     "chunks": [],
-     "desugar": [],
-     "governance": [],
-     "index": 32,
-     "referents": [],
-     "roots": [],
-     "text": "—",
-     "words": []
     },
     {
      "chunks": [

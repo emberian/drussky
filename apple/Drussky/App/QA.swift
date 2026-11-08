@@ -10,6 +10,7 @@ import UIKit
 ///   -qa-history D      spread the completed pages over the last D days (knowledge-map history)
 ///   -qa-misses         choice exercises are missed twice (the correction under the choices)
 ///   -qa-corrupt        an undecodable book.json in the QA folder (the recovery screen)
+///   -qa-nokey         hide the tutor key for this Debug launch without changing Keychain
 ///   -qa-day N / -qa-away D / -qa-probes / -qa-tired   the day's shape (QA+Day.swift)
 @MainActor
 enum QA {
@@ -25,7 +26,7 @@ enum QA {
 
     static func prepare(store: BookStore) {
         #if DEBUG
-        if let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"], !key.isEmpty { Keychain.apiKey = key }
+        if !has("-qa-nokey"), let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"], !key.isEmpty { Keychain.apiKey = key }
         // -qa-corrupt: a notebook that exists but can't be decoded (the recovery screen).
         if has("-qa-corrupt") { try? Data("{ \"version\": 1, \"pages\": [".utf8).write(to: store.stateURL) }
         #endif
@@ -36,6 +37,7 @@ enum QA {
 
     static func apply(to book: Book) {
         if has("-qa-finger") { book.settings.fingerDrawing = true }  // XCUITest can only touch, not Pencil
+        if has("-qa-cursive") { book.settings.cursiveModels = true }  // cursive ghosts, demo and hints (Cursive/)
         guard has("-qa-reset") else { return }
         let pages = value("-qa-complete") ?? 0
         let history = value("-qa-history").map { Double($0) * 86_400 }
@@ -61,6 +63,18 @@ enum QA {
         }
         book.now = Date.init
         openDay(book)
+        // -qa-series N / -qa-kitchen N / -qa-math N: episode N of «Ста́нция» / dialogue N of «Ку́хня» / rung N of
+        // the mathematics shelf, as a page (Model/Shelves.swift); -qa-partial then applies to it.
+        for (flag, serialID) in [("-qa-series", "stantsiya"), ("-qa-kitchen", "kukhnya")] {
+            if let n = value(flag), let serial = Shelves.serials.first(where: { $0.id == serialID }),
+               let ep = serial.episodes.first(where: { $0.number == n }) {
+                book.open(Shelves.item(ep, in: serial))
+            }
+        }
+        if let n = value("-qa-math"), let shelf = Shelves.library.shelves?.first,
+           let text = Shelves.library.texts(onShelf: shelf.id).first(where: { $0.rung == n }) {
+            book.open(Shelves.item(text, on: shelf))
+        }
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
         applyGoal(to: book)
         applyInstruments(to: book)  // -qa-judge, -qa-hooks, -qa-fluency (Fluency/QA+Instruments.swift)
@@ -72,6 +86,10 @@ enum QA {
             book.insertWrittenPage(title: page.title, intro: page.intro, unitTitle: "Library · \(text.level) · read aloud",
                                    exercises: page.exercises, newWords: [])
         }
+        // -qa-baseline: the weekly sample page (Baseline/); -qa-construction: "Which ending fits?"
+        // (Constructions/), whatever the notebook has met so far.
+        if has("-qa-baseline") { _ = book.openBaseline() }
+        if has("-qa-construction") { _ = book.openConstructionPractice(force: true) }
         book.saveNow()
     }
 
@@ -84,7 +102,7 @@ enum QA {
     static func complete(_ book: Book, page pageIndex: Int, upTo limit: Int) {
         let page = book.pages[pageIndex]
         for (i, ex) in page.exercises.enumerated() where i < limit {
-            if ex.kind.isWriting, let target = ex.kind == .meet ? ex.letter.map({ l in
+            if ex.kind.isWriting || (ex.kind == .readHandwriting && ex.options == nil), let target = ex.kind == .meet ? ex.letter.map({ l in
                 book.course.letter(l).map { "\($0.upper) \($0.lower)" } ?? l }) : ex.target {
                 let drawing = SyntheticInk.drawing(for: RussianText.unstressed(target), height: 132, wobble: Double(i))
                 try? drawing.dataRepresentation().write(to: book.inkURL(page: page, exercise: i))
@@ -104,10 +122,15 @@ enum QA {
                 r.attempts += 1
                 switch ex.kind {
                 case .listenPick: r.chosen = ex.options?.firstIndex(of: ex.say ?? ""); r.status = .correct
-                case .readMeaning, .familyGuess, .structure: r.chosen = ex.answerIndex; r.status = .correct
+                case .readMeaning, .familyGuess, .constructionChoice, .structure: r.chosen = ex.answerIndex; r.status = .correct
+                case .readHandwriting:
+                    r.chosen = ex.options?.firstIndex { RussianText.key($0) == RussianText.key(ex.text ?? "") }
+                    r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
                 case .buildWord: r.recognized = BuildWordCheck.assemble(ex.parts ?? []); r.status = .correct
+                case .paradigmFill: r.recognized = (ex.cells ?? []).map { "\($0)=✓\(ex.forms?[$0] ?? "")" }.joined(separator: ";"); r.status = .correct
+                case .cueSort: r.recognized = (ex.items ?? []).indices.map { "\($0):\(ex.items![$0].answer)" }.joined(separator: ","); r.status = .correct
                 case .readAloud: r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
-                case .dictation, .translate, .fill: r.status = i % 5 == 3 ? .missed : .correct
+                case .dictation, .translate, .fill, .transform: r.status = i % 5 == 3 ? .missed : .correct
                     if r.status == .missed { r.revealed = true; r.recognized = misreading(ex.target ?? "") }
                 default: r.status = .done
                 }
@@ -128,9 +151,10 @@ extension QA {
 
 /// Handwriting-like ink generated from font outlines: each glyph contour becomes a stroke.
 enum SyntheticInk {
-    static func drawing(for text: String, height: CGFloat, wobble: Double = 0, cursive: Bool = false) -> PKDrawing {
+    static func drawing(for text: String, height: CGFloat, wobble: Double = 0, cursive: Bool = false, font named: String? = nil) -> PKDrawing {
         let metrics = StripMetrics(height: height)
-        let font = metrics.font(cursive: cursive) as CTFont
+        // A named hand (one of the bundled handwriting fonts) at the cursive model's size, else the model font.
+        let font = named.flatMap { UIFont(name: $0, size: metrics.font(cursive: true).pointSize) as CTFont? } ?? (metrics.font(cursive: cursive) as CTFont)
         let attr = NSAttributedString(string: text, attributes: [.font: font])
         let line = CTLineCreateWithAttributedString(attr)
         var strokes: [PKStroke] = []

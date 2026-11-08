@@ -20,6 +20,37 @@ final class NotebookSafetyTests: XCTestCase {
 
     // MARK: Opening
 
+    func testFinishedWorkStaysInPlaceUntilExplicitNavigation() throws {
+        let book = Book(course: course, store: BookStore(root: tempRoot()))
+        var copy = Exercise(kind: .copy); copy.text = "кот"
+        var spoken = Exercise(kind: .readAloud); spoken.text = "кот"
+        let diary = Exercise(kind: .diary), talk = Exercise(kind: .talk)
+        book.insertWrittenPage(title: "Stay here", intro: nil, unitTitle: "QA",
+                               exercises: [copy, spoken, diary, diary, talk, talk, talk], newWords: [])
+        let pageID = try XCTUnwrap(book.page).id
+        let pageIndex = book.currentPage
+        func ref(_ i: Int) -> ExerciseRef { ExerciseRef(pageID: pageID, index: i) }
+        ExerciseSlot(book: book, ref: ref(0)).finish { $0.status = .done }
+        XCTAssertEqual(book.commitTake(ref(1), round: 0, file: "qa.m4a", heard: "кот", target: "кот",
+                                       recognitionAllowed: true, timedOut: false), .finished)
+        let entry = DiaryEntry(prompt: "", text: "Кот.", submitted: book.now())
+        book.submitDiary(ref(2), entry: entry)
+        book.keepDiaryUncorrected(ref(2))
+        book.submitDiary(ref(3), entry: entry)
+        book.finishDiary(ref(3), correction: DiaryCorrection(corrected: "Кот.", edits: [], praise: "", teach: [], at: book.now()))
+        book.skipTalk(ref(4))
+        let conversation = TalkConversation(turns: 6)
+        book.saveTalk(ref(5), conversation)
+        book.keepTalkUnmarked(ref(5))
+        book.finishTalk(ref(6), conversation)
+
+        XCTAssertTrue(try XCTUnwrap(book.page).isFinished)
+        XCTAssertEqual(book.currentPage, pageIndex)
+        XCTAssertEqual(book.advanceSignal, 0, "Neither answers nor arriving feedback may request scrolling or start the next exercise's sound")
+        book.requestAdvance(page: pageID)
+        XCTAssertEqual(book.advanceSignal, 1, "An explicit Next remains available")
+    }
+
     func testUndecodableNotebookIsNeverReplacedAndGetsAVerifiedCopy() throws {
         let store = BookStore(root: tempRoot())
         let original = Data("{ not a notebook".utf8)

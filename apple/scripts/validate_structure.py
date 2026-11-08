@@ -19,7 +19,7 @@ from pathlib import Path
 
 APPLE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(APPLE / "scripts"))
-from library_structure import ROLES, REFERENT_KINDS, DESUGAR_KINDS, CASES, check_stress, sentences_of, words_of  # noqa: E402
+from library_structure import ROLES, REFERENT_KINDS, DESUGAR_KINDS, CASES, check_stress, sentences_of, words_of, wordless  # noqa: E402
 
 RES = APPLE / "Drussky/Resources"
 
@@ -57,6 +57,11 @@ def main():
         for i, (_, src) in enumerate(sentences):
             s = have.get(i)
             where = f"{tid} S{i}"
+            if wordless(src):
+                if s:
+                    err(f"{where}: a sentence with no words (a lone dash) must not carry structure")
+                counts["sentences"] -= 1
+                continue
             if not s:
                 (warn if args.allow_missing else err)(f"{where}: no structure")
                 continue

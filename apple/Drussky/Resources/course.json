@@ -1171,7 +1171,7 @@
    "emoji": "🌌"
   },
   {
-   "ru": "пла́нета",
+   "ru": "плане́та",
    "en": "planet",
    "emoji": "🪐"
   },
@@ -1409,7 +1409,7 @@
    "en": "in space"
   },
   {
-   "ru": "на пла́нете",
+   "ru": "на плане́те",
    "en": "on the planet"
   },
   {
@@ -1790,7 +1790,7 @@
    "en": "proof"
   },
   {
-   "ru": "тео́рема",
+   "ru": "теоре́ма",
    "en": "theorem"
   },
   {
@@ -3019,7 +3019,7 @@
    "en": "five (genitive)"
   },
   {
-   "ru": "зна́чение",
+   "ru": "значе́ние",
    "en": "value; meaning"
   },
   {
@@ -3027,7 +3027,7 @@
    "en": "of the function"
   },
   {
-   "ru": "зна́чение фу́нкции",
+   "ru": "значе́ние фу́нкции",
    "en": "the value of the function"
   },
   {
@@ -3079,7 +3079,7 @@
    "en": "essence"
   },
   {
-   "ru": "де́йствительность",
+   "ru": "действи́тельность",
    "en": "reality, actuality"
   },
   {
@@ -3163,7 +3163,7 @@
    "en": "nevertheless"
   },
   {
-   "ru": "де́йствительно",
+   "ru": "действи́тельно",
    "en": "indeed, really"
   },
   {
@@ -3193,6 +3193,14 @@
   {
    "ru": "красота́",
    "en": "beauty"
+  },
+  {
+   "ru": "быть",
+   "en": "to be"
+  },
+  {
+   "ru": "рабо́та",
+   "en": "work (the noun)"
   }
  ],
  "units": [
@@ -3624,7 +3632,7 @@
     {
      "id": "u3-p1",
      "title": "Э and Е",
-     "intro": "Э says e as in bet and starts the most useful word in Russian, э́то. Е says ye and gives you no.",
+     "intro": "Э says e as in bet and starts the most useful word in Russian, э́то. Е says ye at the start of a word, and softens the consonant before it in не and нет.",
      "exercises": [
       {
        "kind": "meet",
@@ -3754,7 +3762,7 @@
       },
       {
        "kind": "diary",
-       "prompt": "Name three things in the room with э́то."
+       "prompt": "Name a cat, a cake and a rocket using this page's pattern. They can be imagined."
       }
      ]
     },
@@ -3936,6 +3944,10 @@
          "en": "The cat is at home."
         },
         {
+         "ru": "кни́га",
+         "en": "book"
+        },
+        {
          "ru": "го́род",
          "en": "city, town"
         }
@@ -3950,7 +3962,7 @@
        "say": "кни́га",
        "options": [
         "кни́га",
-        "нога́",
+        "вода́",
         "го́род"
        ]
       },
@@ -3985,7 +3997,7 @@
        "options": [
         "Where is the book?",
         "The book is there.",
-        "The leg is there."
+        "The water is there."
        ],
        "answer": 1
       },
@@ -4220,7 +4232,7 @@
       },
       {
        "kind": "explain",
-       "text": "My follows the thing it owns: мой for a consonant ending, моя́ for -а, моё for -о.",
+       "text": "Мой, моя́, моё agree with the noun they describe: мой for a consonant ending (and male people like па́па), моя́ for -а, моё for -о.",
        "examples": [
         {
          "ru": "мой дом",
@@ -4308,6 +4320,10 @@
         {
          "ru": "люблю́",
          "en": "I love"
+        },
+        {
+         "ru": "лю́ди",
+         "en": "people"
         }
        ]
       },
@@ -4472,7 +4488,7 @@
       },
       {
        "kind": "explain",
-       "text": "То́же means too or also, and наш means our.",
+       "text": "То́же means too or also (doing the same thing as someone else), and наш means our.",
        "examples": [
         {
          "ru": "Я то́же.",
@@ -5714,6 +5730,118 @@
        "prompt": "What did you eat today?"
       }
      ]
+    },
+    {
+     "id": "g4",
+     "title": "хоте́ть, есть, дать — and с + чем?",
+     "intro": "Four verbs keep their own tables, and the word for «with» asks for the instrumental.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "хоте́ть runs on conjugation I in the singular and II in the plural: хочу́, хо́чешь, хо́чет, хоти́м, хоти́те, хотя́т. есть (to eat) and дать (to give) are older still: ем, ешь, ест; дам, дашь, даст. Переда́й is the imperative of переда́ть.",
+       "examples": [
+        {
+         "ru": "хоте́ть",
+         "en": "to want"
+        },
+        {
+         "ru": "дать",
+         "en": "to give"
+        },
+        {
+         "ru": "переда́й",
+         "en": "pass"
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "хоте́ть",
+       "paradigm": "irregular",
+       "forms": {
+        "1sg": "хочу́",
+        "2sg": "хо́чешь",
+        "3sg": "хо́чет",
+        "1pl": "хоти́м",
+        "2pl": "хоти́те",
+        "3pl": "хотя́т"
+       },
+       "cells": [
+        "3sg",
+        "1pl",
+        "3pl"
+       ],
+       "options": [
+        "хоти́м",
+        "хоти́т",
+        "хо́чет",
+        "хо́чем",
+        "хотя́т"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "хоте́ть",
+       "cue": "2sg",
+       "answer": "хо́чешь",
+       "before": "Ты ",
+       "after": " чай?",
+       "hint": "Do you want tea?"
+      },
+      {
+       "kind": "explain",
+       "text": "With: с + instrumental. Masculine and neuter nouns take -ом: с молоко́м, с са́харом; feminine -ой: с ма́мой.",
+       "examples": [
+        {
+         "ru": "с молоко́м",
+         "en": "with milk"
+        },
+        {
+         "ru": "с са́харом",
+         "en": "with sugar"
+        }
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "молоко́",
+       "cue": "instr-sg",
+       "answer": "молоко́м",
+       "before": "Чай с ",
+       "after": ".",
+       "hint": "Tea with milk."
+      },
+      {
+       "kind": "transform",
+       "word": "са́хар",
+       "cue": "instr-sg",
+       "answer": "са́харом",
+       "before": "Ко́фе с ",
+       "after": ".",
+       "hint": "Coffee with sugar."
+      },
+      {
+       "kind": "transform",
+       "word": "ма́ма",
+       "cue": "instr-sg",
+       "answer": "ма́мой",
+       "before": "Я иду́ с ",
+       "after": ".",
+       "hint": "I am walking with mom."
+      },
+      {
+       "kind": "dictation",
+       "text": "Я хочу́ чай с молоко́м."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Переда́й мне са́хар, пожа́луйста. Я хочу́ ко́фе с са́харом."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
+      }
+     ]
     }
    ]
   },
@@ -6138,6 +6266,129 @@
       {
        "kind": "diary",
        "prompt": "Describe three things as new or old."
+      }
+     ]
+    },
+    {
+     "id": "g1",
+     "title": "Three declensions",
+     "intro": "Every noun belongs to one of three tables. The ending of the dictionary form tells you which.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Nouns I end in -а or -я (кни́га, ку́хня), nouns II in a consonant, -й, -ь or in -о, -е (стол, окно́), nouns III in -ь and are feminine (ночь, соль). The table decides every other ending the word will ever take.",
+       "examples": [
+        {
+         "ru": "кни́га",
+         "en": "book"
+        },
+        {
+         "ru": "стол",
+         "en": "table"
+        },
+        {
+         "ru": "окно́",
+         "en": "window"
+        },
+        {
+         "ru": "ночь",
+         "en": "night"
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "кни́га",
+       "paradigm": "decl1",
+       "forms": {
+        "nom-sg": "кни́га",
+        "nom-pl": "кни́ги"
+       },
+       "cells": [
+        "nom-pl"
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "стол",
+       "paradigm": "decl2",
+       "forms": {
+        "nom-sg": "стол",
+        "nom-pl": "столы́"
+       },
+       "cells": [
+        "nom-pl"
+       ],
+       "options": [
+        "сто́ла",
+        "столы́",
+        "столо́в"
+       ]
+      },
+      {
+       "kind": "cue_sort",
+       "paradigm": "tables",
+       "options": [
+        "Nouns I · -а / -я",
+        "Nouns II · consonant, -ь, -й / -о, -е",
+        "Nouns III · -ь"
+       ],
+       "items": [
+        {
+         "text": "стол",
+         "answer": 1
+        },
+        {
+         "text": "ма́ма",
+         "answer": 0
+        },
+        {
+         "text": "дом",
+         "answer": 1
+        },
+        {
+         "text": "окно́",
+         "answer": 1
+        },
+        {
+         "text": "кни́га",
+         "answer": 0
+        },
+        {
+         "text": "ночь",
+         "answer": 2
+        }
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "окно́",
+       "cue": "nom-pl",
+       "answer": "о́кна"
+      },
+      {
+       "kind": "transform",
+       "word": "кот",
+       "cue": "nom-pl",
+       "answer": "коты́"
+      },
+      {
+       "kind": "transform",
+       "word": "ма́ма",
+       "cue": "nom-pl",
+       "answer": "ма́мы"
+      },
+      {
+       "kind": "dictation",
+       "text": "Э́то столы́ и о́кна."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Стол, столы́. Окно́, о́кна. Кни́га, кни́ги."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
       }
      ]
     }
@@ -7123,6 +7374,667 @@
        "prompt": "What is there none of today? Use у меня́ нет."
       }
      ]
+    },
+    {
+     "id": "g2",
+     "title": "у меня́ есть: the pronouns change",
+     "intro": "Having is said as «at me there is». The person stands in the genitive; here is the whole table for я and ты.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Each pronoun has six forms, learned as words. After у (at) and нет (there is no) comes the genitive: меня́, тебя́. The accusative, the object, looks the same: Он зна́ет меня́.",
+       "examples": [
+        {
+         "ru": "у меня́ есть",
+         "en": "I have"
+        },
+        {
+         "ru": "у тебя́ есть",
+         "en": "you have"
+        },
+        {
+         "ru": "меня́",
+         "en": "me"
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "я",
+       "paradigm": "pron",
+       "forms": {
+        "nom": "я",
+        "gen": "меня́",
+        "acc": "меня́"
+       },
+       "cells": [
+        "gen"
+       ],
+       "options": [
+        "мне",
+        "тебя́",
+        "меня́"
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "ты",
+       "paradigm": "pron",
+       "forms": {
+        "nom": "ты",
+        "gen": "тебя́",
+        "acc": "тебя́"
+       },
+       "cells": [
+        "gen",
+        "acc"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "я",
+       "cue": "gen",
+       "answer": "меня́",
+       "before": "У ",
+       "after": " есть кот.",
+       "hint": "I have a cat."
+      },
+      {
+       "kind": "transform",
+       "word": "ты",
+       "cue": "gen",
+       "answer": "тебя́",
+       "before": "У ",
+       "after": " есть кни́га?",
+       "hint": "Do you have a book?"
+      },
+      {
+       "kind": "transform",
+       "word": "я",
+       "cue": "acc",
+       "answer": "меня́",
+       "before": "Он зна́ет ",
+       "after": ".",
+       "hint": "He knows me."
+      },
+      {
+       "kind": "dictation",
+       "text": "У тебя́ есть сестра́?"
+      },
+      {
+       "kind": "read_aloud",
+       "text": "У меня́ есть брат. А у тебя́?"
+      },
+      {
+       "kind": "cue_sort",
+       "paradigm": "uses",
+       "options": [
+        "у меня́ есть",
+        "нет + чего́?"
+       ],
+       "items": [
+        {
+         "text": "У меня́ нет хле́ба.",
+         "answer": 1
+        },
+        {
+         "text": "У тебя́ есть кот?",
+         "answer": 0
+        },
+        {
+         "text": "У меня́ есть кни́га.",
+         "answer": 0
+        },
+        {
+         "text": "Нет со́ли.",
+         "answer": 1
+        }
+       ]
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u31",
+   "title": "Cursive",
+   "subtitle": "про́писи · how Russians write by hand",
+   "pages": [
+    {
+     "id": "u31-p1",
+     "title": "Joined up: о а с е",
+     "intro": "Russians write by hand in a joined, slanted cursive that looks nothing like print. Start with the round letters: each begins at the top, and the red joins between letters are part of the word.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Cursive о is one oval, round anticlockwise from the top. а is the same oval with a stem down its right side; с and е leave at the bottom right, ready for the next letter.",
+       "examples": [
+        {
+         "ru": "окно́",
+         "en": "window"
+        },
+        {
+         "ru": "сок",
+         "en": "juice"
+        },
+        {
+         "ru": "сестра́",
+         "en": "sister"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "сок",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "окно́",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "сестра́",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "сок",
+       "seed": 111051343,
+       "options": [
+        "сак",
+        "сок",
+        "сов"
+       ]
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "окно́",
+       "seed": 168228551
+      },
+      {
+       "kind": "dictation",
+       "text": "окно́"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "сок",
+       "options": [
+        "сок",
+        "кот",
+        "сыр"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "сестра́"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three round words, written in cursive if you can."
+      }
+     ]
+    },
+    {
+     "id": "u31-p2",
+     "title": "The zigzag letters: и ш л м",
+     "intro": "In a quick hand и, ш, л and м all turn into one zigzag. The school hand keeps them apart: и and ш start at the top with cups, л and м start with a hook on the line.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "и: down, cup, up, down, cup; ш is the same with three cups. л and м begin with a little hook on the baseline and climb, and that hook is what tells лиши́шься apart.",
+       "examples": [
+        {
+         "ru": "мир",
+         "en": "world, peace"
+        },
+        {
+         "ru": "ма́ма",
+         "en": "mom"
+        },
+        {
+         "ru": "мы",
+         "en": "we"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "ма́ма",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "мы",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "мир",
+       "times": 2,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "ма́ма",
+       "seed": 17487040,
+       "options": [
+        "ма́ма",
+        "ла́ма",
+        "ма́ша"
+       ]
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "мир",
+       "seed": 143584604
+      },
+      {
+       "kind": "dictation",
+       "text": "мне"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "мир",
+       "options": [
+        "мир",
+        "мы",
+        "мне"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "ма́ма"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Write ма́ма and мир in your own hand; add one more word with л or м."
+      }
+     ]
+    },
+    {
+     "id": "u31-p3",
+     "title": "Humps and tails: т п н ц щ",
+     "intro": "т in cursive is three humps, like a Latin m, while ш is three cups. п has one hump, н a tiny loop in the middle; ц and щ end with a tail below the line.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Humps are rounded at the top, cups at the bottom: that is the whole difference between т and ш. н goes down, back up to the middle, a tiny loop, then across. ц and щ finish with a small tail under the line.",
+       "examples": [
+        {
+         "ru": "тут",
+         "en": "here"
+        },
+        {
+         "ru": "стол",
+         "en": "table"
+        },
+        {
+         "ru": "цирк",
+         "en": "circus"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "тут",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "нос",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "стол",
+       "times": 2,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "тут",
+       "seed": 152510669,
+       "options": [
+        "тут",
+        "шут",
+        "пут"
+       ]
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "цирк",
+       "seed": 79497847
+      },
+      {
+       "kind": "dictation",
+       "text": "там"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "стол",
+       "options": [
+        "стол",
+        "стул",
+        "столы́"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "торт"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Where is the table, and what is on it? Two sentences, joined up."
+      }
+     ]
+    },
+    {
+     "id": "u31-p4",
+     "title": "Loops below the line: д у з р ф",
+     "intro": "Several letters drop below the line in cursive. д is an oval with a loop under it, like a g; у and з loop under too; р and ф send a long stem down.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Cursive д has no feet: it is an oval whose stem drops below the line and loops back. у does the same after its cup, з curls into a loop, and р and ф put a long stem under the line.",
+       "examples": [
+        {
+         "ru": "дом",
+         "en": "house"
+        },
+        {
+         "ru": "вода́",
+         "en": "water"
+        },
+        {
+         "ru": "у́тро",
+         "en": "morning"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "дом",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "у́тро",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "вода́",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "вода́",
+       "seed": 31700161,
+       "options": [
+        "бода́",
+        "вода́",
+        "вола́"
+       ]
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "раке́та",
+       "seed": 165099795
+      },
+      {
+       "kind": "dictation",
+       "text": "да"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "дом",
+       "options": [
+        "дом",
+        "до́ма",
+        "да"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "ко́фе"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Your morning in two short sentences, in cursive."
+      }
+     ]
+    },
+    {
+     "id": "u31-p5",
+     "title": "Above the line: б в к",
+     "intro": "б climbs above the small letters and flags to the right; в loops above the line and closes its bowl at the top. к stays small, with an arm and a leg.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "б: an oval, then its stem rises and flags right. в starts at the middle, loops above the line, comes down and closes its bowl at the top of the small letters. к: down, back up to the middle, a short arm, then the leg.",
+       "examples": [
+        {
+         "ru": "брат",
+         "en": "brother"
+        },
+        {
+         "ru": "вот",
+         "en": "here is"
+        },
+        {
+         "ru": "кни́га",
+         "en": "book"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "брат",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "мать",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "кни́га",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "люблю́",
+       "seed": 225138200,
+       "options": [
+        "моблю́",
+        "люблю́",
+        "лювлю́"
+       ]
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "сыр",
+       "seed": 70724738
+      },
+      {
+       "kind": "dictation",
+       "text": "вот"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "мать",
+       "options": [
+        "мать",
+        "ма́ма",
+        "мы"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "объе́кт"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Who is your brother or sister, and what do they love?"
+      }
+     ]
+    },
+    {
+     "id": "u31-p6",
+     "title": "Capitals and names",
+     "intro": "Capital letters in cursive are the big school shapes: an А with a hook, a Т with a wavy roof, a Д that loops at its foot. Sentences start with them.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "А starts with a hook on the line like л, climbs, comes down, and gets its bar last. Т takes its roof first, then the stem. Э, З, С and О are the rounds you know, taller.",
+       "examples": [
+        {
+         "ru": "Э́то кот.",
+         "en": "This is a cat."
+        },
+        {
+         "ru": "Приве́т!",
+         "en": "Hi!"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "Э́то кот.",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "Приве́т!",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "Вот она́.",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "Э́то кот.",
+       "seed": 228248168
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "Вот она́.",
+       "seed": 180022583,
+       "options": [
+        "Вот оно́.",
+        "Вот они́.",
+        "Вот она́."
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "мы там"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "спаси́бо",
+       "options": [
+        "спаси́бо",
+        "пожа́луйста",
+        "приве́т"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Приве́т!"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences that start with a capital letter: Э́то… Вот…"
+      }
+     ]
+    },
+    {
+     "id": "u31-p7",
+     "title": "A note on the table",
+     "intro": "A note someone left: short, joined, slanted. Read it, copy it in cursive, and write one back.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Notes are written fast: letters lean, joins stretch, the pen barely lifts. Look for the hooks of л and м, the humps of т, the loops under д and у.",
+       "examples": [
+        {
+         "ru": "Ма́ма до́ма.",
+         "en": "Mum is at home."
+        },
+        {
+         "ru": "Кот до́ма.",
+         "en": "The cat is at home."
+        }
+       ]
+      },
+      {
+       "kind": "copy",
+       "text": "Ма́ма до́ма.",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "Кот до́ма.",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "Кот до́ма.",
+       "seed": 185353957
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "Мы там.",
+       "seed": 239714158
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "Где кот?",
+       "seed": 252246227,
+       "options": [
+        "Где ко́фе?",
+        "Где кот?",
+        "Где чай?"
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "Ма́ма до́ма."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Кот до́ма.",
+       "options": [
+        "Кот до́ма.",
+        "Ма́ма до́ма.",
+        "Кот там."
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Где кот?"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Leave a note on the table for someone at home."
+      }
+     ]
     }
    ]
   },
@@ -7138,7 +8050,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Drop -ть from чита́ть and add the ending for who is doing it: я -ю, ты -ешь, он and она́ -ет.",
+       "text": "Drop -ть from чита́ть and add the ending for who is doing it: я -ю, ты -ешь, он and она́ -ет. Notice that кни́га becomes кни́гу when it is the thing being read.",
        "examples": [
         {
          "ru": "чита́ть",
@@ -7594,11 +8506,11 @@
     {
      "id": "u18-p2",
      "title": "In the city, in space",
-     "intro": "Feminine and masculine alike take -е: в го́роде, на пла́нете, в ко́смосе.",
+     "intro": "Feminine and masculine alike take -е: в го́роде, на плане́те, в ко́смосе.",
      "exercises": [
       {
        "kind": "explain",
-       "text": "Nearly every noun takes -е after в or на for where: в го́роде, в ко́смосе, на пла́нете, в кни́ге. Nouns like ста́нция swap the final я for и: на ста́нции.",
+       "text": "Nearly every noun takes -е after в or на for where: в го́роде, в ко́смосе, на плане́те, в кни́ге. Nouns like ста́нция swap the final я for и: на ста́нции.",
        "examples": [
         {
          "ru": "в го́роде",
@@ -7609,7 +8521,7 @@
          "en": "in space"
         },
         {
-         "ru": "на пла́нете",
+         "ru": "на плане́те",
          "en": "on the planet"
         },
         {
@@ -7653,7 +8565,7 @@
        "before": "Ро́бот на ",
        "after": ".",
        "hint": "The robot is on the planet.",
-       "answer": "пла́нете"
+       "answer": "плане́те"
       },
       {
        "kind": "dictation",
@@ -7691,7 +8603,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "For the object, -а becomes -у and -я becomes -ю; masculine and neuter things stay as they are: я ви́жу стол, я ви́жу окно́, я ви́жу кни́гу. People and animals change too: я ви́жу бра́та.",
+       "text": "For the object, -а becomes -у and -я becomes -ю; inanimate masculine and neuter nouns stay as they are: я ви́жу стол, я ви́жу окно́, я ви́жу кни́гу. Living masculine nouns take -а instead: брат, я ви́жу бра́та.",
        "examples": [
         {
          "ru": "Я ви́жу звезду́.",
@@ -7752,7 +8664,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Я ви́жу звезду́ и пла́нету."
+       "text": "Я ви́жу звезду́ и плане́ту."
       },
       {
        "kind": "translate",
@@ -7781,6 +8693,20 @@
      "intro": "A short reading: a robot, a station, the Earth in the window.",
      "exercises": [
       {
+       "kind": "explain",
+       "text": "As the object, Земля́ becomes Зе́млю (note the stress shift) and Луна́ becomes Луну́.",
+       "examples": [
+        {
+         "ru": "Земля́",
+         "en": "the Earth"
+        },
+        {
+         "ru": "Луна́",
+         "en": "the Moon"
+        }
+       ]
+      },
+      {
        "kind": "passage",
        "text": "Ста́нция в ко́смосе. На ста́нции живёт ро́бот. Он ви́дит Зе́млю в окне́. Ещё он ви́дит звёзды и Луну́. Ро́бот лю́бит Зе́млю.",
        "en": "A station in space. A robot lives on the station. It sees the Earth in the window. It also sees the stars and the Moon. The robot loves the Earth.",
@@ -7803,20 +8729,6 @@
         "The station is inside a robot."
        ],
        "answer": 0
-      },
-      {
-       "kind": "explain",
-       "text": "As the object, Земля́ becomes Зе́млю and Луна́ becomes Луну́.",
-       "examples": [
-        {
-         "ru": "Земля́",
-         "en": "the Earth"
-        },
-        {
-         "ru": "Луна́",
-         "en": "the Moon"
-        }
-       ]
       },
       {
        "kind": "translate",
@@ -7856,6 +8768,132 @@
       {
        "kind": "diary",
        "prompt": "A robot looks out of a window. What does it see?"
+      }
+     ]
+    },
+    {
+     "id": "g6",
+     "title": "Where: the prepositional",
+     "intro": "Being somewhere takes в or на and the -е ending. The accusative marks what a verb acts on. Two cells of the noun tables, side by side.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Где? — в до́ме, на столе́, в кни́ге: the prepositional ends in -е for all three tables (-и after -ия, -ие and for nouns in -ь: на ста́нции). The object of a verb is the accusative: for nouns I, -а → -у: Я чита́ю кни́гу.",
+       "examples": [
+        {
+         "ru": "на столе́",
+         "en": "on the table"
+        },
+        {
+         "ru": "в кни́ге",
+         "en": "in the book"
+        },
+        {
+         "ru": "кни́гу",
+         "en": "book (as the object)"
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "кни́га",
+       "paradigm": "decl1",
+       "forms": {
+        "nom-sg": "кни́га",
+        "acc-sg": "кни́гу",
+        "prep-sg": "кни́ге",
+        "nom-pl": "кни́ги"
+       },
+       "cells": [
+        "acc-sg",
+        "prep-sg"
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "стол",
+       "paradigm": "decl2",
+       "forms": {
+        "nom-sg": "стол",
+        "acc-sg": "стол",
+        "prep-sg": "столе́",
+        "nom-pl": "столы́"
+       },
+       "cells": [
+        "acc-sg",
+        "prep-sg"
+       ],
+       "options": [
+        "столы́",
+        "стола́",
+        "столе́",
+        "стол"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "стол",
+       "cue": "prep-sg",
+       "answer": "столе́",
+       "before": "Кни́га на ",
+       "after": ".",
+       "hint": "The book is on the table."
+      },
+      {
+       "kind": "transform",
+       "word": "звезда́",
+       "cue": "acc-sg",
+       "answer": "звезду́",
+       "before": "Я ви́жу ",
+       "after": ".",
+       "hint": "I see a star."
+      },
+      {
+       "kind": "transform",
+       "word": "ку́хня",
+       "cue": "prep-sg",
+       "answer": "ку́хне",
+       "before": "Мы на ",
+       "after": ".",
+       "hint": "We are in the kitchen."
+      },
+      {
+       "kind": "cue_sort",
+       "paradigm": "uses",
+       "options": [
+        "the object: чита́ю кни́гу",
+        "в / на + where"
+       ],
+       "items": [
+        {
+         "text": "Я чита́ю кни́гу.",
+         "answer": 0
+        },
+        {
+         "text": "Кни́га на столе́.",
+         "answer": 1
+        },
+        {
+         "text": "Я ви́жу звезду́.",
+         "answer": 0
+        },
+        {
+         "text": "Кот в до́ме.",
+         "answer": 1
+        }
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "Кни́га на столе́ в до́ме."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Где кни́га? На столе́. Что я чита́ю? Кни́гу."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
       }
      ]
     }
@@ -7963,7 +9001,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Понима́ть, to understand, goes like чита́ть: я понима́ю, ты понима́ешь. По-ру́сски and по-англи́йски name the language.",
+       "text": "You already know я не понима́ю; the full verb понима́ть (to understand) goes like чита́ть: я понима́ю, ты понима́ешь. По-ру́сски and по-англи́йски name the language.",
        "examples": [
         {
          "ru": "Я говорю́ по-ру́сски.",
@@ -8128,6 +9166,118 @@
       {
        "kind": "diary",
        "prompt": "Three things that are not so: не and нет."
+      }
+     ]
+    },
+    {
+     "id": "g3",
+     "title": "Two conjugations",
+     "intro": "Every present-tense verb runs on one of two sets of endings: -ешь or -ишь. Here are both tables, side by side.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Conjugation I has е in its endings: чита́ю, чита́ешь, чита́ет, чита́ем, чита́ете, чита́ют. Conjugation II has и: говорю́, говори́шь, говори́т, говори́м, говори́те, говоря́т. The я form and the они́ form give the rest away.",
+       "examples": [
+        {
+         "ru": "чита́ть",
+         "en": "to read"
+        },
+        {
+         "ru": "говори́ть",
+         "en": "to speak"
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "чита́ть",
+       "paradigm": "conj1",
+       "forms": {
+        "1sg": "чита́ю",
+        "2sg": "чита́ешь",
+        "3sg": "чита́ет",
+        "1pl": "чита́ем",
+        "2pl": "чита́ете",
+        "3pl": "чита́ют"
+       },
+       "cells": [
+        "2sg",
+        "1pl",
+        "3pl"
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "говори́ть",
+       "paradigm": "conj2",
+       "forms": {
+        "1sg": "говорю́",
+        "2sg": "говори́шь",
+        "3sg": "говори́т",
+        "1pl": "говори́м",
+        "2pl": "говори́те",
+        "3pl": "говоря́т"
+       },
+       "cells": [
+        "2sg",
+        "3sg",
+        "2pl"
+       ],
+       "options": [
+        "говори́т",
+        "говоря́т",
+        "говори́те",
+        "чита́ете",
+        "говори́шь"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "знать",
+       "cue": "2pl",
+       "answer": "зна́ете",
+       "before": "Вы ",
+       "after": ", где кот?",
+       "hint": "Do you know where the cat is?"
+      },
+      {
+       "kind": "transform",
+       "word": "ду́мать",
+       "cue": "3pl",
+       "answer": "ду́мают",
+       "before": "Они́ ",
+       "after": ", что э́то пра́вда.",
+       "hint": "They think that it's true."
+      },
+      {
+       "kind": "transform",
+       "word": "говори́ть",
+       "cue": "1pl",
+       "answer": "говори́м",
+       "before": "Мы ",
+       "after": " по-ру́сски.",
+       "hint": "We speak Russian."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "говори́т",
+       "options": [
+        "говори́т",
+        "говори́м",
+        "говоря́т"
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "Они́ чита́ют и ду́мают."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Я чита́ю, ты чита́ешь. Я говорю́, ты говори́шь."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
       }
      ]
     },
@@ -8312,7 +9462,7 @@
          "en": "space"
         },
         {
-         "ru": "пла́нета",
+         "ru": "плане́та",
          "en": "planet"
         },
         {
@@ -8346,9 +9496,9 @@
       },
       {
        "kind": "listen_pick",
-       "say": "пла́нета",
+       "say": "плане́та",
        "options": [
-        "пла́нета",
+        "плане́та",
         "раке́та",
         "звезда́"
        ]
@@ -8363,7 +9513,7 @@
       {
        "kind": "translate",
        "en": "planet",
-       "answer": "пла́нета"
+       "answer": "плане́та"
       },
       {
        "kind": "copy",
@@ -9274,6 +10424,120 @@
        "prompt": "What will you do tomorrow, and what will you get done?"
       }
      ]
+    },
+    {
+     "id": "g5",
+     "title": "The past-tense table",
+     "intro": "One form per gender and one plural, whoever is speaking. Here is the table, and the verbs that move their stress.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Drop -ть, add -л, -ла, -ло, -ли: чита́л, чита́ла, чита́ло, чита́ли. The form agrees with the subject's gender or number, not its person: я чита́л, я чита́ла, мы чита́ли. быть moves its stress: был, была́, бы́ло, бы́ли.",
+       "examples": [
+        {
+         "ru": "чита́л",
+         "en": "read (he)"
+        },
+        {
+         "ru": "чита́ла",
+         "en": "read (she)"
+        },
+        {
+         "ru": "быть",
+         "en": "to be"
+        },
+        {
+         "ru": "бы́ли",
+         "en": "were"
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "чита́ть",
+       "paradigm": "past",
+       "forms": {
+        "past-m": "чита́л",
+        "past-f": "чита́ла",
+        "past-n": "чита́ло",
+        "past-pl": "чита́ли"
+       },
+       "cells": [
+        "past-f",
+        "past-n",
+        "past-pl"
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "быть",
+       "paradigm": "past",
+       "forms": {
+        "past-m": "был",
+        "past-f": "была́",
+        "past-n": "бы́ло",
+        "past-pl": "бы́ли"
+       },
+       "cells": [
+        "past-f",
+        "past-pl"
+       ],
+       "options": [
+        "была́",
+        "бы́ли",
+        "бу́дет",
+        "бы́ла"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "быть",
+       "cue": "past-f",
+       "answer": "была́",
+       "before": "Она́ ",
+       "after": " до́ма.",
+       "hint": "She was at home."
+      },
+      {
+       "kind": "transform",
+       "word": "рабо́тать",
+       "cue": "past-m",
+       "answer": "рабо́тал",
+       "before": "Он ",
+       "after": " вчера́.",
+       "hint": "He worked yesterday."
+      },
+      {
+       "kind": "transform",
+       "word": "ду́мать",
+       "cue": "past-pl",
+       "answer": "ду́мали",
+       "before": "Они́ ",
+       "after": " до́лго.",
+       "hint": "They thought for a long time."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "была́",
+       "options": [
+        "была́",
+        "был",
+        "бы́ли"
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "Она́ чита́ла, а он ду́мал."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Был, была́, бы́ло, бы́ли. Чита́л, чита́ла, чита́ло, чита́ли."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
+      }
+     ]
     }
    ]
   },
@@ -9553,6 +10817,141 @@
       {
        "kind": "diary",
        "prompt": "Where did you go today, and how?"
+      }
+     ]
+    },
+    {
+     "id": "g7",
+     "title": "Where to: the accusative of direction",
+     "intro": "Куда́? takes the same в and на — with the accusative. The table of идти́ and е́хать goes with it.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Where something is: в го́роде (prepositional). Where it is going: в го́род (accusative). Nouns II that are things keep their dictionary form as the accusative, so the preposition does all the work: в парк, but в па́рке.",
+       "examples": [
+        {
+         "ru": "идти́",
+         "en": "to go (on foot)"
+        },
+        {
+         "ru": "рабо́та",
+         "en": "work"
+        },
+        {
+         "ru": "в го́род",
+         "en": "to the city"
+        },
+        {
+         "ru": "в го́роде",
+         "en": "in the city"
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "идти́",
+       "paradigm": "irregular",
+       "forms": {
+        "1sg": "иду́",
+        "2sg": "идёшь",
+        "3sg": "идёт",
+        "1pl": "идём",
+        "2pl": "идёте",
+        "3pl": "иду́т"
+       },
+       "cells": [
+        "2sg",
+        "3sg",
+        "1pl",
+        "3pl"
+       ],
+       "options": [
+        "иду́м",
+        "иду́т",
+        "е́дут",
+        "идёт",
+        "идём",
+        "идёшь"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "рабо́та",
+       "cue": "acc-sg",
+       "answer": "рабо́ту",
+       "before": "Я е́ду на ",
+       "after": ".",
+       "hint": "I am going to work."
+      },
+      {
+       "kind": "transform",
+       "word": "го́род",
+       "cue": "acc-sg",
+       "answer": "го́род",
+       "before": "Мы идём в ",
+       "after": ".",
+       "hint": "We are going to the city."
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "рабо́та",
+       "paradigm": "decl1",
+       "forms": {
+        "nom-sg": "рабо́та",
+        "acc-sg": "рабо́ту",
+        "prep-sg": "рабо́те"
+       },
+       "cells": [
+        "acc-sg",
+        "prep-sg"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "парк",
+       "cue": "acc-sg",
+       "answer": "парк",
+       "before": "Мы идём в ",
+       "after": ".",
+       "hint": "We are going to the park."
+      },
+      {
+       "kind": "cue_sort",
+       "paradigm": "uses",
+       "options": [
+        "в / на + where to",
+        "в / на + where"
+       ],
+       "items": [
+        {
+         "text": "Кни́га на столе́.",
+         "answer": 1
+        },
+        {
+         "text": "Я живу́ в го́роде.",
+         "answer": 1
+        },
+        {
+         "text": "Я е́ду на рабо́ту.",
+         "answer": 0
+        },
+        {
+         "text": "Я иду́ в го́род.",
+         "answer": 0
+        }
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "Я иду́ в парк, а ты идёшь домо́й."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Куда́ ты идёшь? В го́род. Где ты живёшь? В го́роде."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
       }
      ]
     }
@@ -10237,7 +11636,7 @@
      "exercises": [
       {
        "kind": "passage",
-       "text": "Тео́рема: су́мма двух чётных чи́сел — чётное число́. Доказа́тельство. Чётное число́ — э́то число́, кото́рое де́лится на два. Возьмём два чётных числа́. Ка́ждое из них — два, умно́женное на це́лое число́. Их су́мма — два, умно́женное на су́мму э́тих це́лых чи́сел. Зна́чит, су́мма то́же де́лится на два, то есть она́ чётная. Что и тре́бовалось доказа́ть.",
+       "text": "Теоре́ма: су́мма двух чётных чи́сел — чётное число́. Доказа́тельство. Чётное число́ — э́то число́, кото́рое де́лится на два. Возьмём два чётных числа́. Ка́ждое из них — два, умно́женное на це́лое число́. Их су́мма — два, умно́женное на су́мму э́тих це́лых чи́сел. Зна́чит, су́мма то́же де́лится на два, то есть она́ чётная. Что и тре́бовалось доказа́ть.",
        "en": "Theorem: the sum of two even numbers is an even number. Proof. An even number is a number that is divisible by two. Take two even numbers. Each of them is two multiplied by a whole number. Their sum is two multiplied by the sum of those whole numbers. So the sum is also divisible by two, that is, it is even. Which was to be proved.",
        "glosses": {
         "двух": "two (of two)",
@@ -10289,7 +11688,7 @@
       {
        "kind": "translate",
        "en": "theorem",
-       "answer": "тео́рема"
+       "answer": "теоре́ма"
       },
       {
        "kind": "fill",
@@ -10320,6 +11719,137 @@
        "prompt": "Your own two-line proof of something simple."
       }
      ]
+    },
+    {
+     "id": "g8",
+     "title": "The genitive: нет, of, and after numbers",
+     "intro": "One case, three jobs: what is missing, what something is of, and what comes after a number.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Nouns II take -а (-я) in the genitive singular: нет хле́ба, для любо́го числа́. Nouns I take -ы (-и): нет кни́ги. In the plural, nouns I and neuter nouns II lose their ending — книг, чи́сел — and masculine nouns take -ов: пять столо́в.",
+       "examples": [
+        {
+         "ru": "хле́ба",
+         "en": "bread (after нет)"
+        },
+        {
+         "ru": "для любо́го числа́",
+         "en": "for any number"
+        },
+        {
+         "ru": "двух чётных чи́сел",
+         "en": "of two even numbers"
+        }
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "число́",
+       "paradigm": "decl2",
+       "forms": {
+        "nom-sg": "число́",
+        "gen-sg": "числа́",
+        "nom-pl": "чи́сла",
+        "gen-pl": "чи́сел"
+       },
+       "cells": [
+        "gen-sg",
+        "gen-pl"
+       ]
+      },
+      {
+       "kind": "paradigm_fill",
+       "word": "кни́га",
+       "paradigm": "decl1",
+       "forms": {
+        "nom-sg": "кни́га",
+        "gen-sg": "кни́ги",
+        "nom-pl": "кни́ги",
+        "gen-pl": "книг"
+       },
+       "cells": [
+        "gen-sg",
+        "gen-pl"
+       ],
+       "options": [
+        "книг",
+        "кни́ге",
+        "кни́гу",
+        "кни́ги"
+       ]
+      },
+      {
+       "kind": "transform",
+       "word": "хлеб",
+       "cue": "gen-sg",
+       "answer": "хле́ба",
+       "before": "У меня́ нет ",
+       "after": ".",
+       "hint": "I have no bread."
+      },
+      {
+       "kind": "transform",
+       "word": "число́",
+       "cue": "gen-pl",
+       "answer": "чи́сел",
+       "before": "су́мма двух ",
+       "after": "",
+       "hint": "the sum of two numbers"
+      },
+      {
+       "kind": "transform",
+       "word": "стол",
+       "cue": "gen-pl",
+       "answer": "столо́в",
+       "before": "пять ",
+       "after": "",
+       "hint": "five tables"
+      },
+      {
+       "kind": "cue_sort",
+       "paradigm": "uses",
+       "options": [
+        "нет + чего́?",
+        "of: су́мма чи́сел",
+        "у меня́ есть"
+       ],
+       "items": [
+        {
+         "text": "Нет молока́.",
+         "answer": 0
+        },
+        {
+         "text": "У меня́ нет хле́ба.",
+         "answer": 0
+        },
+        {
+         "text": "су́мма двух чи́сел",
+         "answer": 1
+        },
+        {
+         "text": "для любо́го числа́",
+         "answer": 1
+        },
+        {
+         "text": "У меня́ есть кни́га.",
+         "answer": 2
+        }
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "Су́мма двух чётных чи́сел — чётное число́."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Оди́н стол, два стола́, пять столо́в."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences of your own, with words from this page."
+      }
+     ]
     }
    ]
   },
@@ -10335,7 +11865,7 @@
      "exercises": [
       {
        "kind": "passage",
-       "text": "— Что тако́е справедли́вость? — спра́шивает Сокра́т.\n— Э́то когда́ ка́ждый получа́ет то, чего́ заслу́живает, — отвеча́ет учени́к.\n— А кто зна́ет, чего́ заслу́живает ка́ждый?\n— Наве́рное, му́дрый челове́к.\n— Зна́чит, что́бы быть справедли́вым, ну́жно быть му́дрым?\n— Да, ка́жется, так.\n— Тогда́ сна́чала ну́жно узна́ть, что тако́е му́дрость.",
+       "text": "— Что тако́е справедли́вость? — спра́шивает Сокра́т.\n— Э́то когда́ ка́ждый получа́ет то, чего́ заслу́живает, — отвеча́ет учени́к.\n— А кто зна́ет, чего́ заслу́живает ка́ждый?\n— Наве́рное, му́дрый челове́к.\n— Зна́чит, что́бы быть справедли́вым, ну́жно быть му́дрым?\n— Да, ка́жется, так.\n— Тогда́ снача́ла ну́жно узна́ть, что тако́е му́дрость.",
        "en": "“What is justice?” asks Socrates. “It's when everyone gets what they deserve,” answers the student. “And who knows what everyone deserves?” “A wise person, probably.” “So to be just, one has to be wise?” “Yes, it seems so.” “Then first we need to find out what wisdom is.”",
        "glosses": {
         "спрашивает": "asks",
@@ -11542,7 +13072,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "The six cases have names: имени́тельный (кто? что?), роди́тельный (кого́? чего́?), да́тельный (кому́?), вини́тельный (кого́? что?, the object), твори́тельный (кем? чем?), предло́жный (о ком? о чём?, где?). A grammar table lists them in this order.",
+       "text": "The six cases have names: имени́тельный (кто? что?), роди́тельный (кого́? чего́?), да́тельный (кому́?), вини́тельный (кого́? что?, the object — like роди́тельный for living masculine nouns), твори́тельный (кем? чем?), предло́жный (о ком? о чём?, где?). A grammar table lists them in this order.",
        "examples": [
         {
          "ru": "паде́ж",
@@ -13218,7 +14748,7 @@
     {
      "id": "u28-p2",
      "title": "Verbs dressed as adjectives",
-     "intro": "Participles and gerunds: recognize them, and written Russian opens up. You never need to produce one.",
+     "intro": "Participles and gerunds: read who did what, and when. Leave production for later.",
      "exercises": [
       {
        "kind": "explain",
@@ -13259,6 +14789,36 @@
        ]
       },
       {
+       "kind": "read_meaning",
+       "text": "Э́то письмо́, напи́санное бра́том.",
+       "options": [
+        "This is a letter written by my brother.",
+        "This is a letter my brother is writing.",
+        "This is a letter to my brother."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "read_meaning",
+       "text": "чита́ющий челове́к",
+       "options": [
+        "a person who is reading",
+        "a person who has finished reading",
+        "a person who will read"
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "read_meaning",
+       "text": "прочита́вший кни́гу",
+       "options": [
+        "someone who is still reading the book",
+        "someone who has not read the book",
+        "someone who has finished the book"
+       ],
+       "answer": 2
+      },
+      {
        "kind": "listen_pick",
        "say": "чита́я",
        "options": [
@@ -13266,6 +14826,26 @@
         "чита́ющий",
         "прочита́в"
        ]
+      },
+      {
+       "kind": "read_meaning",
+       "text": "напи́санное письмо́, откры́тое окно́",
+       "options": [
+        "a letter that writes and a window that opens something",
+        "a letter to write and a window to close",
+        "a written letter and an open window"
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Окно́ откры́то.",
+       "options": [
+        "Someone will open the window.",
+        "The window is open.",
+        "The window is opening something."
+       ],
+       "answer": 1
       },
       {
        "kind": "read_meaning",
@@ -13278,42 +14858,25 @@
        "answer": 1
       },
       {
-       "kind": "fill",
-       "before": "Окно́ ",
-       "after": ".",
-       "hint": "The window is open.",
-       "answer": "откры́то"
-      },
-      {
-       "kind": "fill",
-       "before": "Э́то письмо́, напи́санное ",
-       "after": ".",
-       "hint": "This is a letter written by my brother.",
-       "answer": "бра́том"
-      },
-      {
-       "kind": "dictation",
-       "text": "Э́то письмо́ написа́л брат."
+       "kind": "read_meaning",
+       "text": "Прочита́в кни́гу, я поду́мала.",
+       "options": [
+        "Before reading the book, I thought.",
+        "Having finished the book, I thought.",
+        "While still reading the book, I thought."
+       ],
+       "answer": 1
       },
       {
        "kind": "read_aloud",
        "text": "Чита́ющий, прочита́вший, живу́щий. Напи́санный, откры́тый. Чита́я, она́ молча́ла. Прочита́в, она́ поду́мала."
       },
       {
-       "kind": "copy",
-       "text": "напи́санное письмо́, откры́тое окно́",
-       "times": 1
-      },
-      {
-       "kind": "copy",
-       "text": "чита́ющий, прочита́вший, чита́я, прочита́в",
-       "times": 1
-      },
-      {
        "kind": "diary",
-       "prompt": "Describe something you see using one participle you recognize (a written letter, an open window)."
+       "prompt": "What did you read today? Write a few words of your own; simple sentences are enough."
       }
-     ]
+     ],
+     "purpose": "reading"
     },
     {
      "id": "u28-p3",
@@ -13843,7 +15406,7 @@
       },
       {
        "kind": "copy",
-       "text": "тео́рема, ле́мма, сле́дствие, доказа́тельство",
+       "text": "теоре́ма, ле́мма, сле́дствие, доказа́тельство",
        "times": 1
       },
       {
@@ -13859,7 +15422,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Для всех and для любо́го say for all; существу́ет says there exists; еди́нственный is unique. Равно́ is equals, бо́льше and ме́ньше are greater than and less than (with the genitive), and зна́чение фу́нкции в то́чке is the value of the function at a point.",
+       "text": "Для всех and для любо́го say for all; существу́ет says there exists; еди́нственный is unique. Равно́ is equals, бо́льше and ме́ньше are greater than and less than (with the genitive), and значе́ние фу́нкции в то́чке is the value of the function at a point.",
        "examples": [
         {
          "ru": "для всех",
@@ -13898,7 +15461,7 @@
          "en": "Three is less than five."
         },
         {
-         "ru": "зна́чение фу́нкции в то́чке два",
+         "ru": "значе́ние фу́нкции в то́чке два",
          "en": "the value of the function at the point two"
         },
         {
@@ -13950,22 +15513,22 @@
       },
       {
        "kind": "read_meaning",
-       "text": "Зна́чение фу́нкции в то́чке два равно́ четырём.",
+       "text": "Значе́ние фу́нкции в то́чке два равно́ четырём.",
        "options": [
         "The function has two values: two and four.",
-        "The value of the function at the point two equals four.",
-        "The function is greater than four at two."
+        "The function is greater than four at two.",
+        "The value of the function at the point two equals four."
        ],
-       "answer": 1
+       "answer": 2
       },
       {
        "kind": "copy",
-       "text": "зна́чение фу́нкции в то́чке",
+       "text": "значе́ние фу́нкции в то́чке",
        "times": 1
       },
       {
        "kind": "diary",
-       "prompt": "Three true statements with бо́льше, ме́ньше and ра́вно."
+       "prompt": "Three true statements with бо́льше, ме́ньше and равно́."
       }
      ]
     },
@@ -13976,7 +15539,7 @@
      "exercises": [
       {
        "kind": "passage",
-       "text": "Тео́рема: просты́х чи́сел бесконе́чно мно́го.\nДоказа́тельство: предполо́жим, что их коне́чное число́. Рассмо́трим число́: произведе́ние всех просты́х чи́сел плюс оди́н. Тогда́ оно́ не де́лится ни на одно́ из них. Зна́чит, оно́ само́ просто́е и́ли де́лится на просто́е число́, кото́рого нет среди́ них. Получа́ем противоре́чие. Что и тре́бовалось доказа́ть.",
+       "text": "Теоре́ма: просты́х чи́сел бесконе́чно мно́го.\nДоказа́тельство: предполо́жим, что их коне́чное число́. Рассмо́трим число́: произведе́ние всех просты́х чи́сел плюс оди́н. Тогда́ оно́ не де́лится ни на одно́ из них. Зна́чит, оно́ само́ просто́е и́ли де́лится на просто́е число́, кото́рого нет среди́ них. Получа́ем противоре́чие. Что и тре́бовалось доказа́ть.",
        "en": "Theorem: there are infinitely many primes.\nProof: suppose there are finitely many of them. Consider the number: the product of all the primes plus one. Then it is not divisible by any one of them. So it is itself prime, or divisible by a prime that is not among them. We obtain a contradiction. Which was to be proved.",
        "glosses": {
         "простых": "prime (простых чисел: of prime numbers)",
@@ -14056,7 +15619,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Philosophy's nouns are built with three suffixes: -ость turns an adjective into a quality (де́йствительный, де́йствительность), -ние and -ие turn a verb into an act or a state (мы́слить, мышле́ние; знать, зна́ние; быть, бытие́). И́стина is truth as a philosopher means it; пра́вда is truth as a person tells it.",
+       "text": "Philosophy's nouns are built with three suffixes: -ость turns an adjective into a quality (действи́тельный, действи́тельность), -ние and -ие turn a verb into an act or a state (мы́слить, мышле́ние; знать, зна́ние; быть, бытие́). И́стина is truth as a philosopher means it; пра́вда is truth as a person tells it.",
        "examples": [
         {
          "ru": "и́стина",
@@ -14083,7 +15646,7 @@
          "en": "essence"
         },
         {
-         "ru": "де́йствительность",
+         "ru": "действи́тельность",
          "en": "reality, actuality"
         },
         {
@@ -14147,17 +15710,17 @@
       },
       {
        "kind": "read_aloud",
-       "text": "И́стина, свобо́да, созна́ние, бытие́, мышле́ние, су́щность, де́йствительность, возмо́жность, необходи́мость, ра́зум."
+       "text": "И́стина, свобо́да, созна́ние, бытие́, мышле́ние, су́щность, действи́тельность, возмо́жность, необходи́мость, ра́зум."
       },
       {
        "kind": "read_meaning",
-       "text": "Возмо́жность — ещё не де́йствительность.",
+       "text": "Возмо́жность — ещё не действи́тельность.",
        "options": [
         "Reality is only a possibility.",
-        "A possibility is not yet a reality.",
-        "Possibility and reality are the same."
+        "Possibility and reality are the same.",
+        "A possibility is not yet a reality."
        ],
-       "answer": 1
+       "answer": 2
       },
       {
        "kind": "copy",
@@ -14286,7 +15849,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "An argument is held together by connectives: во-пе́рвых, во-вторы́х (first, second); одна́ко (however); поэ́тому (therefore, so); с одно́й стороны́… с друго́й стороны́ (on the one hand… on the other); наприме́р (for example); ита́к (thus); тем не ме́нее (nevertheless); де́йствительно (indeed).",
+       "text": "An argument is held together by connectives: во-пе́рвых, во-вторы́х (first, second); одна́ко (however); поэ́тому (therefore, so); с одно́й стороны́… с друго́й стороны́ (on the one hand… on the other); наприме́р (for example); ита́к (thus); тем не ме́нее (nevertheless); действи́тельно (indeed).",
        "examples": [
         {
          "ru": "Во-пе́рвых, э́то пра́вда. Во-вторы́х, э́то ва́жно.",
@@ -14321,7 +15884,7 @@
          "en": "otherwise, differently"
         },
         {
-         "ru": "Де́йствительно, э́то так.",
+         "ru": "Действи́тельно, э́то так.",
          "en": "Indeed, that is so."
         }
        ]
@@ -14361,7 +15924,7 @@
       },
       {
        "kind": "dictation",
-       "text": "Де́йствительно, э́то так. Одна́ко э́то тру́дно."
+       "text": "Действи́тельно, э́то так. Одна́ко э́то тру́дно."
       },
       {
        "kind": "read_aloud",

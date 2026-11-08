@@ -56,6 +56,17 @@ final class TalkSession {
     private var run = 0
 
     var key: String { "\(ref.pageID)-\(ref.index)-talk" }
+
+    /// Endpointing for a hesitant beginner in conversation: a thought may pause for a second
+    /// and a half before it goes on, an answer may run to twelve seconds, and the "your turn"
+    /// may wait ten seconds for a first word. A tap still ends the turn at once.
+    static let endpointing: VoiceActivity.Config = {
+        var c = VoiceActivity.Config()
+        c.trailingSilence = 1.5
+        c.maxSpeech = 12
+        c.waitLimit = 10
+        return c
+    }()
     var isLive: Bool { [.proposing, .thinking, .speaking, .yourTurn, .marking].contains(status) }
 
     init(ref: ExerciseRef, book: Book, pageVoice: Voice, voice: (any TutorVoice)? = nil, analyzer: (any PronunciationAnalyzer)? = nil) {
@@ -90,12 +101,13 @@ final class TalkSession {
     }
 
     var unavailableReason: String? {
-        if !Reachability.shared.isOnline { return TalkTutor.Failure.offline.localizedDescription }
+        if !Reachability.shared.isOnline || QA.has("-qa-offline") { return TalkTutor.Failure.offline.localizedDescription }
         if (Keychain.apiKey ?? "").isEmpty { return "Talk needs your tutor: add your Anthropic API key in Settings." }
         return nil
     }
 
     func propose() {
+        if let why = unavailableReason { status = .unavailable(why); return }
         begin(.proposing) { [self] mine in
             do {
                 let scenes = try await TalkTutor.proposeScenes(book: book)
@@ -116,9 +128,14 @@ final class TalkSession {
         tutorTurn()
     }
 
-    /// Picks up a conversation left in the middle.
+    /// Picks up a conversation left in the middle, or tries again after a failure or an
+    /// unavailable note (the reason is checked afresh: still no key means still unavailable).
     func resume() {
-        guard status == .paused else { return }
+        switch status {
+        case .paused, .failed, .unavailable: break
+        default: return
+        }
+        if let why = unavailableReason { status = .unavailable(why); return }
         switch dialogue.phase {
         case .tutorTurn: tutorTurn()
         case .learnerTurn: yourTurn()
@@ -187,24 +204,40 @@ final class TalkSession {
         }
     }
 
-    /// Says a tutor line again (tap the speaker on it).
+    /// Says a tutor line again (tap the speaker on it). While it is the learner's turn the
+    /// microphone closes first and stays closed: nothing is captured while the tutor speaks,
+    /// and the next take starts only with the learner's own tap.
     func replay(_ line: TalkLine) {
         guard !isLive || status == .yourTurn else { return }
+        mic.cancel()
+        speaker?.cancel()
         voice.stop()
-        Task { await voice.speak(line.ru) }
+        let voice = self.voice
+        speaker = Task { @MainActor in
+            guard !Task.isCancelled else { return }
+            await voice.speak(line.ru)
+        }
     }
 
     // MARK: The learner's turn
 
-    /// Hands over the microphone: a cue, then listening until the voice stops. The last tutor
-    /// line is the recognizer's hint (the reply usually reuses its words).
+    /// Leave time to read, replay or compose a reply. Only a microphone tap starts capture.
     func yourTurn() {
         guard !dialogue.isOver else { return }
         task = nil
+        mic.cancel()
         status = .yourTurn
+    }
+
+    /// The last tutor line is the recognizer's hint (the reply usually reuses its words).
+    private func startCapture() {
+        guard status == .yourTurn else { return }
+        speaker?.cancel()
+        voice.stop()
         let mine = run
         let hint = conversation.tutorLines.last?.ru ?? "Да."
-        let request = SpeakingTurn.Request(key: key, target: hint, takeURL: book.newTakeURL(ref), model: nil, repeats: 0)
+        let request = SpeakingTurn.Request(key: key, target: hint, takeURL: book.newTakeURL(ref), model: nil, repeats: 0,
+                                           config: Self.endpointing)
         mic.begin(request, voice: pageVoice) { [self] take in
             guard run == mine else { return }
             let heard = (take.heard ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
@@ -221,14 +254,18 @@ final class TalkSession {
     /// A take that held no recognisable Russian, kept if the learner then types what they said.
     private var pendingTake: String?
 
-    /// The microphone's one button while it is the learner's turn: ends the take early.
-    func tap() { _ = mic.tap(key) }
+    /// Start when ready, or stop a take early. An interrupted/failed take can be retried.
+    func tap() {
+        guard status == .yourTurn else { return }
+        if !mic.tap(key) { startCapture() }
+    }
 
     /// Nothing came through: try the turn again.
     func again() {
         guard status == .notHeard || status == .paused else { return }
         pendingTake = nil
         yourTurn()
+        startCapture()
     }
 
     /// The learner types the line instead (the recognizer gave up, or there is no microphone).
@@ -273,6 +310,7 @@ final class TalkSession {
 
     /// The red pen over the transcript, then one pronunciation tip per take at most.
     func mark() {
+        if let why = unavailableReason { status = .failed(why); return }
         begin(.marking) { [self] mine in
             do {
                 let m = try await TalkTutor.mark(conversation, book: book)
@@ -282,6 +320,7 @@ final class TalkSession {
                     k += 1
                     if let c = m.lines[k] { conversation.lines[i].correction = c }
                 }
+                conversation.outcome = m.outcome
                 conversation.praise = m.praise.isEmpty ? nil : m.praise
                 conversation.teach = m.teach.isEmpty ? nil : m.teach
                 conversation.model = TalkTutor.markModel

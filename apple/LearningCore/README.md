@@ -120,6 +120,27 @@ Tracing and copying stay ticked by the reader: there is nothing to recall. The l
 the chair back to the reader in Settings ("Judge my writing"); the domain's `grade` reads either
 kind of result (`Drussky/Judgement/`).
 
+## Compiled, not just known
+
+Correctness alone cannot tell two states of knowledge apart: a form produced after six seconds
+of working it out and one produced in 600 ms earn the same grade. FSRS schedules the first as
+well as the second, and new material is then stacked on ground that still costs working memory
+to stand on. So an outcome may carry `latencyMs`, the response latency as the domain measures it
+for the activity (Drussky: from the first stroke to the last before Check for writing, from the
+clip's end to the tap for choosing by ear, from the exercise being shown to the tap for choosing a
+meaning or checking a built word, from the cue to the voice's onset for saying). Each memory trace
+keeps an exponential moving average of the latency of its *right* answers beside the FSRS state.
+
+A memory is **compiled** (`CompilationPolicy`, every threshold in `Compilation.swift`) when enough
+right answers were timed (3), their average is under the modality's floor (the domain sets the
+floors: choosing by ear is quicker than writing a word), and the recent reviews were right first
+time (all of the last 5). A component never timed is not called uncompiled: no measurement, no
+claim. The model uses this in two places only. The day's composition does not open a course page
+whose prerequisites are known but uncompiled while the day is already heavy — it brings them back
+first, within the day's allowance (`KnowledgeModel.uncompiledPrerequisites`). And where the app
+shows what is known, it says, as a teacher would in a margin, when something now comes without
+thinking.
+
 ## Metrics
 
 `Metrics.swift` is a time series per (component, metric name): `MetricStore` appends samples,
@@ -151,7 +172,9 @@ Only `v`, `id`, `t`, `type`, `source`, `item` and `components` are always presen
 carry `grade` when the domain judges them evidence of recall; an outcome without `grade` records
 that the item was finished (e.g. rewritten after the answer was shown) and moves no memory.
 Attempts carry `correct: false`. `latency` is the number of seconds since
-the previous recorded activity in the same context (a page), when known.
+the previous recorded activity in the same context (a page), when known. `latencyMs` is the
+response latency of that answer in milliseconds, when the activity has such a moment (see
+"Compiled, not just known"); it is optional and absent on older lines.
 
 ## Contract: graph export
 
@@ -175,3 +198,10 @@ the previous recorded activity in the same context (a page), when known.
 `calibration` is present once any retention probe has been answered (Probes.swift).
 
 Tests in `LearningCoreTests/` use a toy domain and need no course.
+
+Drussky's reading policy now uses the closure overload of `distance(to:ladder:knows:)`. The core's
+original best-modality API remains available, but is not the Russian reading-readiness policy.
+Drussky filters to direct production of each written form, excluding inferred lemma credit.
+`Probe` also has optional `lastExposure`, `firstAttempt`, `assistance` and `context` provenance.
+These preserve old notebook decoding and distinguish a scheduled delay from time since the last
+logged practice; they do not imply that every real-world exposure was observed.

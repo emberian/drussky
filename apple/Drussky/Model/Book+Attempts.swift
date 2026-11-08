@@ -18,7 +18,7 @@ extension Book {
     /// a recognizer that heard nothing says nothing about the pronunciation.
     @discardableResult
     func commitTake(_ ref: ExerciseRef, round: Int, file: String, heard: String?, target: String,
-                    recognitionAllowed: Bool, timedOut: Bool) -> TakeOutcome {
+                    recognitionAllowed: Bool, timedOut: Bool, onsetMs: Int? = nil) -> TakeOutcome {
         guard !isClosed else { return .closed }
         guard let current = result(ref) else { return .keptOnly }
         guard current.roundNumber == round else {
@@ -33,6 +33,7 @@ extension Book {
             if let old = r.recording { r.takes = (r.takes ?? []) + [old] }
             r.recording = file
             r.recognized = heard
+            r.responseMs = onsetMs  // from the cue to the voice: how long the words took to come
             guard !r.status.isComplete else { return }
             if ok { r.status = r.attempts == 1 && (r.failedChecks ?? 0) == 0 ? .correct : .done }
             else if heardWords && recognitionAllowed && !timedOut { r.failedChecks = (r.failedChecks ?? 0) + 1 }
@@ -41,7 +42,6 @@ extension Book {
         // debounce, so the next opening finds it (and can reconstruct its evidence from the report).
         saveNow()
         if !wasComplete, result(ref)?.status.isComplete == true {
-            requestAdvance(page: ref.pageID)
             return .finished
         }
         return .recorded

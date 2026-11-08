@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The inside cover's "Distance to your book": one calm panel, or an invitation to choose one.
+/// The learner's book and the next words to practise, or an invitation to choose one.
 struct GoalSection: View {
     @Environment(Book.self) private var book
     @State private var picking = false
@@ -22,7 +22,7 @@ struct GoalSection: View {
     private var invitation: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Your book").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
-            Text("Choose a text you want to read for real — a chapter of Zamyatin, a page of analysis, anything pasted or linked. The course then pulls toward it, and this cover shows how far you are.")
+            Text("Choose a text you want to read — from the Library, pasted, or linked. Keep it here and practise its words in context.")
                 .font(.system(size: 15)).foregroundStyle(Theme.muted).fixedSize(horizontal: false, vertical: true)
             Button { picking = true } label: {
                 Label("Choose your book", systemImage: "book")
@@ -45,7 +45,7 @@ struct GoalSection: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Distance to your book").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
+                    Text("Your book").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
                     Text(goal.byline).font(Theme.russian(16)).foregroundStyle(Theme.muted)
                 }
                 Spacer()
@@ -62,11 +62,6 @@ struct GoalSection: View {
                 }
                 .accessibilityLabel("Book options")
             }
-            HStack(alignment: .top, spacing: 28) {
-                stat("\(Int((d.coverage * 100).rounded()))%", "of its words you know")
-                stat("\(d.firstPageUnknown)", d.firstPageUnknown == 1 ? "new word before the first page" : "new words before the first page")
-                stat("\(d.readableSentences) of \(a.sentences.count)", "sentences you could read now")
-            }
             firstPage(goal, d)
             if !d.ladder.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
@@ -74,7 +69,7 @@ struct GoalSection: View {
                     FlowRow(spacing: 8) {
                         ForEach(d.ladder) { rung in
                             HStack(spacing: 6) {
-                                Text(rung.example.lowercased()).font(Theme.russian(17, weight: .medium)).foregroundStyle(Theme.text)
+                                Text(book.stressedLabel(rung.example.lowercased())).font(Theme.russian(17, weight: .medium)).foregroundStyle(Theme.text)
                                 if let g = rung.gloss { Text(g).font(.system(size: 13)).foregroundStyle(Theme.muted).lineLimit(1) }
                                 if rung.count > 1 { Text("×\(rung.count)").font(Theme.label(11)).foregroundStyle(Theme.accent) }
                             }
@@ -115,8 +110,8 @@ struct GoalSection: View {
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("toward-my-book")
                 Text(d.passageWindow(avoiding: Set(goal.usedSentences ?? [])) == nil
-                     ? "No stretch reads easily yet; a page teaches its words in their own sentences."
-                     : "A page from its own sentences: a readable passage, then its new words.")
+                     ? "Start with its words in short supported sentences."
+                     : "A supported passage from the book, then practice with its new words.")
                     .font(.system(size: 13)).foregroundStyle(Theme.muted).fixedSize(horizontal: false, vertical: true)
             }
         }
@@ -138,29 +133,19 @@ struct GoalSection: View {
         if let opened = goal.firstPageOpened {
             HStack(spacing: 10) {
                 Image(systemName: "seal.fill").foregroundStyle(Theme.redPen)
-                Text("You read its first page on \(PageView.russianDate(opened)).").font(.system(size: 15)).foregroundStyle(Theme.text)
+                Text("You opened its first page on \(PageView.russianDate(opened)).").font(.system(size: 15)).foregroundStyle(Theme.text)
             }
         } else if d.firstPageReady {
             Button { book.openFirstPageIfReady() } label: {
-                Label("The first page is readable — open it", systemImage: "book.pages")
+                Label("Try the first page", systemImage: "book.pages")
                     .font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.redPen)
             }
             .buttonStyle(.plain)
         } else {
-            ProgressView(value: min(1, d.firstPageCoverage / Goal.firstPageThreshold)) {
-                Text("First page: \(Int((d.firstPageCoverage * 100).rounded()))% of its hardest sentence known (opens at \(Int(Goal.firstPageThreshold * 100))%)")
-                    .font(.system(size: 13)).foregroundStyle(Theme.muted)
-            }
-            .tint(Theme.redPen)
+            // No bar: one honest word about the first page's forms (ReadingEvidence), nothing to fill.
+            Text("First page: \(ReadingEvidence.label(for: d.firstPageCoverage)).")
+                .font(.system(size: 13)).foregroundStyle(Theme.muted)
         }
-    }
-
-    private func stat(_ value: String, _ label: String) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(value).font(.system(size: 30, weight: .bold, design: .serif)).foregroundStyle(Theme.text).monospacedDigit()
-            Text(label).font(Theme.label(12)).foregroundStyle(Theme.muted).fixedSize(horizontal: false, vertical: true)
-        }
-        .frame(maxWidth: 220, alignment: .leading)
     }
 }
 
@@ -241,7 +226,7 @@ struct GoalPicker: View {
                     .padding(10).frame(minHeight: 260)
                     .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
                     .overlay(alignment: .topLeading) {
-                        if text.isEmpty { Text("Вставьте текст…").font(Theme.russian(19)).foregroundStyle(Theme.muted).padding(18).allowsHitTesting(false) }
+                        if text.isEmpty { Text("Вста́вьте текст…").font(Theme.russian(19)).foregroundStyle(Theme.muted).padding(18).allowsHitTesting(false) }
                     }
                 makeButton(enabled: RussianText.letters(in: text).count >= 5) {
                     Goal(title: title.isEmpty ? String(text.prefix(40)).trimmingCharacters(in: .whitespacesAndNewlines) : title,
@@ -333,17 +318,15 @@ struct GoalPullHeader: View {
         VStack(alignment: .leading, spacing: 10) {
             Text(goal.title).font(Theme.russian(28, weight: .semibold)).foregroundStyle(Theme.text)
             if let author = goal.author { Text(author).font(.system(size: 15)).foregroundStyle(Theme.muted) }
-            Text("\(Int((d.coverage * 100).rounded()))% of its words known · \(d.readableSentences) of \(d.analysis.sentences.count) sentences readable")
-                .font(.system(size: 15)).foregroundStyle(Theme.muted)
             if let window {
                 Text(d.analysis.sentenceText(window))
                     .font(Theme.russian(19)).foregroundStyle(Theme.text.opacity(0.85))
                     .padding(14).frame(maxWidth: .infinity, alignment: .leading)
                     .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
-                Text("This stretch reads at ≥80% now: it opens the page. Then its new words, in their own sentences.")
+                Text("This stretch has at least 95% form coverage. Try it with support, then practice its new words.")
                     .font(.system(size: 15)).foregroundStyle(Theme.text)
             } else {
-                Text("No stretch of the text reads easily yet. The page teaches its most valuable words through the sentences they come from — nothing on it is invented.")
+                Text("The page introduces words from the text, using the sentences they come from.")
                     .font(.system(size: 15)).foregroundStyle(Theme.text)
             }
             let words = d.wordsToTeach(in: window, limit: 6)

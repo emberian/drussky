@@ -503,7 +503,7 @@ def repair(data, texts):
         sentences = sentences_of(t["text"])
         kept = []
         for s in entry["sentences"]:
-            if s["index"] >= len(sentences) or sentences[s["index"]][1] != s["text"]:
+            if s["index"] >= len(sentences) or sentences[s["index"]][1] != s["text"] or wordless(s["text"]):
                 continue
             for x in s["roots"]:
                 x["relatives"] = [headword(r) for r in x["relatives"]]
@@ -511,10 +511,15 @@ def repair(data, texts):
         entry["sentences"] = kept
 
 
+def wordless(sentence):
+    """A "sentence" the splitter yields with no word in it (a lone dash line of dialogue): nothing to annotate."""
+    return not words_of(sentence)
+
+
 def done_indices(entry, sentences):
-    """Sentence indices already annotated against the current text."""
+    """Sentence indices already annotated against the current text (a wordless one needs nothing)."""
     have = {s["index"]: s for s in entry.get("sentences", [])}
-    return {i for i, (_, s) in enumerate(sentences) if i in have and have[i]["text"] == s}
+    return {i for i, (_, s) in enumerate(sentences) if wordless(s) or (i in have and have[i]["text"] == s)}
 
 
 def main():

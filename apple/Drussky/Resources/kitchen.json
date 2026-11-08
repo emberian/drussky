@@ -1,0 +1,2288 @@
+{
+  "version": 1,
+  "series": [
+    {
+      "id": "kukhnya",
+      "title": "Ку́хня",
+      "title_en": "The Kitchen",
+      "summary_en": "In a small apartment kitchen, Katya (who actually knows how to cook soup and borscht), Max (a computer scientist who makes the morning coffee, forgets the milk, and reads mathematics at midnight), and their ginger cat Tima live out thirty overheard domestic moments — from morning coffee and lost keys to late-night tea, neighbours at the door, and kitchen proofs.",
+      "episode_word": "диало́г",
+      "episodes": [
+        {
+          "id": "kukhnya-01",
+          "number": 1,
+          "title": "Сыр и Ти́ма",
+          "title_en": "Cheese and Tima",
+          "after_page": "u4-p2",
+          "text": "— Макс, смотри́! Вот окно́, а на окне́ — сок, сыр и торт.\n— О, сыр! А где ми́ска, Ка́тя?\n— Ми́ска там. Но кто э́то там на окне́?\n— Так э́то Ти́ма! Кот сно́ва там, где сыр и мя́со!\n— Ти́ма, нет! Э́то не твоя́ ми́ска, э́то торт и сыр!",
+          "en": "— Max, look! Here is the window, and on the windowsill are juice, cheese, and cake.\n— Oh, cheese! And where is the bowl, Katya?\n— The bowl is there. But who is that there on the windowsill?\n— Why, that is Tima! The cat is once again right where the cheese and meat are!\n— Tima, no! That is not your bowl, that is cake and cheese!",
+          "glosses": {
+            "макс": "Max (Katya's partner)",
+            "смотри": "look! (informal imperative)",
+            "а": "and, whereas; what about",
+            "на": "on",
+            "окне": "window, windowsill (prepositional after 'na')",
+            "о": "oh!",
+            "где": "where",
+            "миска": "bowl (especially a cat's bowl)",
+            "катя": "Katya",
+            "но": "but",
+            "так": "why, well, so (conversational particle)",
+            "тима": "Tima (their ginger cat)",
+            "снова": "again, once again",
+            "мясо": "meat",
+            "твоя": "your (feminine, informal)"
+          },
+          "notice": [
+            "«Смотри́!» (Look!) — bare imperative to someone you call «ты», the fastest way to get attention at home.",
+            "«А где ми́ска?» — starting a question with «а» pivots the topic ('And what about the bowl?').",
+            "«Так э́то Ти́ма!» — unstressed «так» at the start of a reply means 'Why, that's…!' when pointing out the obvious."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Макс, смотри́! Вот окно́, а на окне́ — сок, сыр и торт.",
+              "options": [
+                "Katya calls Max to look at the juice, cheese, and cake on the windowsill.",
+                "Max tells Katya that there is no cheese or juice at home.",
+                "Katya asks who ate the cake and drank the juice."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ти́ма, нет! Э́то не твоя́ ми́ска, э́то торт и сыр!",
+              "options": [
+                "Tima is sleeping by the window away from the food.",
+                "Katya stops the cat because he is going after their cake and cheese instead of his bowl.",
+                "Max gives Tima a bowl of milk and meat."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Так э́то Ти́ма! Кот сно́ва там, где сыр и мя́со!",
+              "options": [
+                "It asks a polite question to a stranger.",
+                "It expresses realization ('Why, that's Tima!') as Max spots the cat by the food.",
+                "It negates the sentence so it means Tima is not there."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "What is on your table or window right now, and where is the cat? Write what you would say back using «вот», «там», or «смотри́»."
+        },
+        {
+          "id": "kukhnya-02",
+          "number": 2,
+          "title": "Где молоко́?",
+          "title_en": "Where Is the Milk?",
+          "after_page": "u4-p4",
+          "text": "— Ка́тя, у́тро! Где молоко́? Тут на столе́ вода́ и сок.\n— Ну как где? Молоко́ там, у окна́, и ма́сло там.\n— А где стака́н, ви́лка и таре́лка?\n— На столе́, Макс! Иди́ туда́, к окну́: там стака́н, ма́сло и молоко́.\n— О, да, молоко́ тут! Ла́дно, гото́во.",
+          "en": "— Katya, morning! Where is the milk? Here on the table there is water and juice.\n— Well what do you mean, where? The milk is over there by the window, and the butter is there.\n— And where are the glass, the fork, and the plate?\n— On the table, Max! Go over there to the window: the glass, butter, and milk are there.\n— Oh, yes, the milk is here! Alright, it's ready.",
+          "glosses": {
+            "катя": "Katya",
+            "утро": "morning",
+            "на": "on",
+            "столе": "table (prepositional: on the table)",
+            "ну": "well, come on (conversational particle)",
+            "у": "by, near, at",
+            "окна": "the window (genitive: by the window)",
+            "масло": "butter",
+            "а": "and, what about",
+            "стакан": "glass, tumbler",
+            "вилка": "fork",
+            "тарелка": "plate",
+            "макс": "Max",
+            "иди": "go, come! (informal imperative)",
+            "туда": "there, over that way",
+            "к": "to, toward",
+            "окну": "the window (dative: toward the window)",
+            "о": "oh!",
+            "ладно": "okay, alright, fine",
+            "готово": "ready, done (neuter)"
+          },
+          "notice": [
+            "«Ну как где?» (Well what do you mean, where?) — repeating a question word after «ну как» gently teases someone for missing what is right in front of them.",
+            "«Иди́ туда́!» (Go over there!) — «там» is static location (where?), while «туда́» is direction of motion (where to?).",
+            "«Ла́дно, гото́во» (Alright, it's ready) — the two everyday words that close almost any kitchen task."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Где молоко́? Тут на столе́ вода́ и сок.",
+              "options": [
+                "Max is looking for the milk because he only sees water and juice on the table.",
+                "Max is asking Katya to buy water and juice in the city.",
+                "Katya is drinking milk at the window."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Молоко́ там, у окна́, и ма́сло там.",
+              "options": [
+                "There is no milk or butter at home today.",
+                "Both the milk and the butter are over by the window.",
+                "The cat drank the milk under the table."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ну как где? Молоко́ там, у окна́, и ма́сло там.",
+              "options": [
+                "Katya does not know where the milk is either.",
+                "The particle phrase 'Nu kak gde?' implies the answer should be obvious because the milk is right in its usual spot.",
+                "Katya is addressing a neighbour politely."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Someone at home asks «Где молоко́?». Write what you would answer using «на столе́», «у окна́», or «ла́дно»."
+        },
+        {
+          "id": "kukhnya-03",
+          "number": 3,
+          "title": "Бу́дем суп?",
+          "title_en": "Shall We Have Soup?",
+          "after_page": "u5-p3",
+          "text": "— Макс, иди́ сюда́! Обе́д на плите́. Бу́дем суп и сала́т?\n— Да, спаси́бо, Ка́тя! Я так люблю́ твой суп.\n— Ну дава́й, бери́ таре́лку и попро́буй. Он на плите́.\n— Ой, суп вку́сный! А где рис и сыр? Они́ на столе́?\n— Нет, там ма́сло и я́блоко. Дай таре́лку, вот твой суп!",
+          "en": "— Max, come here! Lunch is on the stove. Shall we have soup and salad?\n— Yes, thank you, Katya! I love your soup so much.\n— Well go ahead, take a plate and taste it. It is on the stove.\n— Oh, the soup is tasty! And where are the rice and cheese? Are they on the table?\n— No, there is butter and an apple there. Hand me your plate, here is your soup!",
+          "glosses": {
+            "макс": "Max",
+            "иди": "come, go! (imperative)",
+            "сюда": "here, over here",
+            "обед": "lunch",
+            "на": "on",
+            "плите": "stove (prepositional: on the stove)",
+            "будем": "shall we have? (idiomatic offer of food or drink: 'will we [have]…?')",
+            "салат": "salad",
+            "катя": "Katya",
+            "так": "so, so much",
+            "твой": "your (masculine, informal)",
+            "ну": "well, go on",
+            "давай": "come on, go ahead; let's",
+            "бери": "take! (imperfective imperative: go ahead and take)",
+            "тарелку": "plate (accusative object)",
+            "попробуй": "try it, taste it! (perfective imperative)",
+            "ой": "oh, ooh!",
+            "вкусный": "tasty, delicious (masculine)",
+            "а": "and, what about",
+            "рис": "rice",
+            "столе": "table (prepositional: on the table)",
+            "масло": "butter",
+            "яблоко": "apple",
+            "дай": "give, hand me! (perfective imperative)"
+          },
+          "notice": [
+            "«Бу́дем суп?» (Literally 'Will we soup?') — in Russian kitchen talk, forms of «быть» + a food noun ('Will you / shall we have soup?') replace the verb 'to eat/drink'.",
+            "«Ну дава́й, бери́ таре́лку» — imperfective imperative «бери́» invites someone to go ahead and start an action immediately.",
+            "«Попро́буй!» (Taste it! / Try it!) and «Дай таре́лку!» (Hand me the plate!) — perfective imperatives asking for a single completed action."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Макс, иди́ сюда́! Обе́д на плите́. Бу́дем суп и сала́т?",
+              "options": [
+                "Katya calls Max into the kitchen for lunch and asks if they shall have soup and salad.",
+                "Max asks Katya when she will cook soup for dinner.",
+                "Katya says there is no soup left on the stove."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ну дава́й, бери́ таре́лку и попро́буй.",
+              "options": [
+                "Wash the plate and put it in the cupboard.",
+                "Go ahead, grab a plate and taste the soup.",
+                "Wait until the soup cools down on the window."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Бу́дем суп и сала́т? — Да, спаси́бо, Ка́тя!",
+              "options": [
+                "It asks whether Max cooked the soup yesterday.",
+                "Russian uses future forms of 'byt'' ('Budem…?') plus a food noun as the everyday domestic offer instead of 'Do we want to eat soup?'",
+                "It is a formal restaurant question addressed to strangers."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Offer someone at home soup, salad, or milk using «Бу́дем…?» and write what you would answer."
+        },
+        {
+          "id": "kukhnya-04",
+          "number": 4,
+          "title": "Ча́йник и ча́шка",
+          "title_en": "The Kettle and the Cup",
+          "after_page": "u6-p3",
+          "text": "— Ка́тя, а где моя́ ча́шка? Я хочу́ наш чай.\n— Макс, она́ же тут, на столе́! И ло́жка тут.\n— А ча́йник уже́ горя́чий?\n— Подожди́, ча́йник ещё на плите́. Сейча́с кипи́т!\n— Хорошо́. А мо́жно ещё хлеб, сыр и са́хар?\n— Коне́чно! Положи́ хлеб и сыр на стол, а я сде́лаю чай.",
+          "en": "— Katya, where is my cup? I want our tea.\n— Max, it's right here on the table! And the spoon is here.\n— And is the kettle hot already?\n— Wait, the kettle is still on the stove. It is boiling right now!\n— Good. And may I have more bread, cheese, and sugar?\n— Of course! Put the bread and cheese on the table, and I'll make the tea.",
+          "glosses": {
+            "катя": "Katya",
+            "а": "and, what about",
+            "чашка": "cup",
+            "хочу": "I want",
+            "макс": "Max",
+            "же": "right there, obviously! (emphatic particle)",
+            "на": "on",
+            "столе": "table (prepositional: on the table)",
+            "ложка": "spoon",
+            "чайник": "kettle, teapot",
+            "уже": "already",
+            "горячий": "hot (masculine)",
+            "подожди": "wait! (perfective imperative)",
+            "плите": "stove (prepositional: on the stove)",
+            "сейчас": "right now, in a moment",
+            "кипит": "is boiling",
+            "можно": "may I have, is it possible",
+            "сахар": "sugar",
+            "конечно": "of course (pronounced 'konechno' or 'koneshno')",
+            "положи": "put, lay down! (perfective imperative)",
+            "сделаю": "I will make (perfective future)"
+          },
+          "notice": [
+            "«Она́ же тут, на столе́!» — the particle «же» after the stressed word means 'after all / obviously / right in front of you!'.",
+            "«Подожди́!» (Wait!) and «Положи́!» (Put it down!) — two essential perfective kitchen imperatives.",
+            "«А я сде́лаю чай» — perfective future «сде́лаю» ('I'll make it') promises a completed result."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— А ча́йник уже́ горя́чий? — Подожди́, ча́йник ещё на плите́. Сейча́с кипи́т!",
+              "options": [
+                "The kettle is still on the stove and is boiling right now.",
+                "The tea is already cold and needs to be poured out.",
+                "Max already poured the tea into the cups."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Положи́ хлеб и сыр на стол, а я сде́лаю чай.",
+              "options": [
+                "Max will make the tea while Katya reads a book.",
+                "Katya asks Max to put the bread and cheese on the table while she makes the tea.",
+                "They have no bread or sugar left for tea."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Макс, она́ же тут, на столе́!",
+              "options": [
+                "It turns the statement into a polite question about whose cup it is.",
+                "The particle 'zhe' adds mild exasperation ('It's right here, as you can see!'), pointing to something already visible.",
+                "It means the cup was on the table yesterday but is gone now."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Write a two-line exchange at the tea table using «где моя́ ча́шка», «она́ же тут», or «мо́жно ещё»."
+        },
+        {
+          "id": "kukhnya-05",
+          "number": 5,
+          "title": "Соль и́ли са́хар?",
+          "title_en": "Salt or Sugar?",
+          "after_page": "u7-p5",
+          "text": "— Приве́т! Ты уже́ не спишь? Сде́лай мне ко́фе, пожа́луйста.\n— Сейча́с сде́лаю! Вода́ уже́ горя́чая. Где са́хар?\n— Посмотри́ в шкафу́. Ой, Макс, подожди́! Что ты берёшь? Э́то ведь соль!\n— Как соль?! Вот э́та ба́нка — соль?\n— Да, э́то соль! Поста́вь соль на ме́сто, а са́хар возьми́ на по́лке.",
+          "en": "— Hi! Are you awake already? Make me some coffee, please.\n— I'll make it right now! The water is already hot. Where is the sugar?\n— Look in the cupboard. Oh, Max, wait! What are you taking? That's salt, you know!\n— What do you mean, salt?! This jar right here is salt?\n— Yes, that's salt! Put the salt back in its place, and take the sugar on the shelf.",
+          "glosses": {
+            "уже": "already",
+            "спишь": "you are sleeping (with 'ne': you're awake)",
+            "сделай": "make, do! (perfective imperative)",
+            "мне": "for me, to me",
+            "пожалуйста": "please",
+            "сейчас": "right now, right away",
+            "сделаю": "I will make (perfective future)",
+            "горячая": "hot (feminine)",
+            "сахар": "sugar",
+            "посмотри": "take a look! (perfective imperative)",
+            "в": "in",
+            "шкафу": "cupboard, cabinet (locative after 'v': in the cupboard)",
+            "ой": "oh, watch out!",
+            "макс": "Max",
+            "подожди": "wait! (perfective imperative)",
+            "берёшь": "you are taking, reaching for",
+            "ведь": "after all, you know! (particle appealing to shared facts)",
+            "эта": "this (feminine)",
+            "банка": "jar",
+            "поставь": "put, stand (upright)! (perfective imperative)",
+            "на": "on, into",
+            "место": "place ('na mesto': back in its place)",
+            "а": "and, whereas",
+            "возьми": "take! (perfective imperative)",
+            "полке": "shelf (prepositional: on the shelf)"
+          },
+          "notice": [
+            "«Сде́лай мне ко́фе — Сейча́с сде́лаю!» — perfective request («сде́лай») answered immediately by «сейча́с» + perfective future («сде́лаю», 'I'm on it!').",
+            "«Э́то ведь соль!» — «ведь» reminds the listener of a fact they ought to know ('That's salt, you know!').",
+            "«Поста́вь на ме́сто» (Put it back in its place — for upright containers like a jar or bottle) vs. «Возьми́» (Take it)."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Ой, Макс, подожди́! Что ты берёшь? Э́то ведь соль!",
+              "options": [
+                "Katya stops Max just as he reaches for the salt jar instead of the sugar.",
+                "Max puts salt into the soup because it is not salty enough.",
+                "Katya asks Max to pass the salt for her coffee."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Поста́вь соль на ме́сто, а са́хар возьми́ на по́лке.",
+              "options": [
+                "Put the sugar in the cupboard and leave the salt on the table.",
+                "Put the salt jar back in its place and take the sugar from the shelf.",
+                "Buy salt and sugar on the street."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Сде́лай мне ко́фе, пожа́луйста. — Сейча́с сде́лаю!",
+              "options": [
+                "Max says he is currently making coffee every morning as a habit.",
+                "The perfective future 'Seichas sdelayu!' promises a single completed result right away ('I'll make it right now!').",
+                "Max refuses politely because there is no coffee left."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Write what you would say if someone handed you the wrong jar in the kitchen, using «подожди́», «э́то ведь…», and «возьми́»."
+        },
+        {
+          "id": "kukhnya-06",
+          "number": 6,
+          "title": "Переда́й ма́сло",
+          "title_en": "Pass the Butter",
+          "after_page": "u13-p3",
+          "text": "— До́брое у́тро, Макс! Сади́сь за стол, ко́фе и ка́ша уже́ тут.\n— До́брое у́тро! О, о́чень вку́сно па́хнет! Прия́тного аппети́та!\n— Спаси́бо, и тебе́! Переда́й, пожа́луйста, ма́сло и нож.\n— На, держи́. А тебе́ наре́зать хлеб и сыр?\n— Да, наре́жь, пожа́луйста. И мо́жно ещё немно́го ко́фе?\n— Коне́чно, дава́й ча́шку, сейча́с налью́!",
+          "en": "— Good morning, Max! Sit down at the table, the coffee and porridge are already here.\n— Good morning! Oh, it smells delicious! Enjoy your meal!\n— Thanks, you too! Pass the butter and the knife, please.\n— Here, take them. Shall I slice some bread and cheese for you?\n— Yes, slice some, please. And may I have a little more coffee?\n— Of course, give me your cup, I'll pour it right now!",
+          "glosses": {
+            "доброе": "good (neuter: in 'good morning')",
+            "макс": "Max",
+            "садись": "sit down! (informal imperative)",
+            "за": "at ('sadis' za stol': sit down at the table)",
+            "уже": "already",
+            "о": "oh!",
+            "пахнет": "it smells",
+            "приятного": "pleasant (genitive: in 'enjoy your meal')",
+            "аппетита": "appetite (genitive: in 'enjoy your meal')",
+            "спасибо": "thank you",
+            "масло": "butter",
+            "нож": "knife",
+            "на": "here, take it! (colloquial particle when handing something over)",
+            "держи": "hold this, here you go! (imperative used when passing an item)",
+            "а": "and",
+            "нарезать": "to slice, to cut up (infinitive question: 'shall I slice?')",
+            "нарежь": "slice! (perfective imperative)",
+            "немного": "a little, some",
+            "конечно": "of course",
+            "давай": "hand over, give me; let's",
+            "чашку": "cup (accusative object)",
+            "сейчас": "right now",
+            "налью": "I will pour (perfective future)"
+          },
+          "notice": [
+            "«На, держи́!» (Here, take it!) — when handing something across the table, Russians say «на!» (here!) or «держи́!» (hold/take it!).",
+            "«А тебе́ наре́зать хлеб?» (Shall I slice some bread for you?) — dative («тебе́») + perfective infinitive asks 'Should I do X for you?'.",
+            "«Дава́й ча́шку!» — before a noun in the accusative, «дава́й» means 'hand me / pass me your cup'."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— До́брое у́тро, Макс! Сади́сь за стол, ко́фе и ка́ша уже́ тут.",
+              "options": [
+                "Katya invites Max to sit down at the table because coffee and porridge are ready.",
+                "Max tells Katya that he already ate breakfast in the city.",
+                "Katya asks Max to cook porridge for dinner."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— На, держи́. А тебе́ наре́зать хлеб и сыр?",
+              "options": [
+                "Max asks where the knife and butter are kept.",
+                "Max hands Katya the butter and knife and offers to slice bread and cheese for her.",
+                "Max says there is no bread or cheese left at home."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Переда́й, пожа́луйста, ма́сло и нож. — На, держи́.",
+              "options": [
+                "'Na' is the preposition 'on' and means the butter is on the table.",
+                "Spoken standalone when handing an object to someone you call 'ty', 'Na, derzhi!' means 'Here you go, take it!'",
+                "It is a refusal meaning 'No, hold on a minute.'"
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "At breakfast tonight or tomorrow, how would you ask someone to pass the butter or salt, and offer to pour more coffee? Write two lines."
+        },
+        {
+          "id": "kukhnya-07",
+          "number": 7,
+          "title": "Как э́то по-ру́сски?",
+          "title_en": "How Do You Say This in Russian?",
+          "after_page": "c1-p1",
+          "text": "— Макс, дай мне, пожа́луйста, дуршла́г и кры́шку вон там у ра́ковины.\n— Ой, подожди́! Я не понима́ю. Скажи́ ещё раз, поме́дленнее, пожа́луйста!\n— Кры́шку. И дуршла́г — вот он, у ра́ковины.\n— Что зна́чит «кры́шка»? А, э́то вот э́то? А как по-ру́сски вот э́то?\n— Э́то сковорода́, а э́то кастрю́ля. Возьми́ кры́шку от кастрю́ли!",
+          "en": "— Max, hand me the colander and the lid right over there by the sink, please.\n— Oh, wait! I don't understand. Say it once more, slower, please!\n— The lid. And the colander — there it is, by the sink.\n— What does 'kryshka' mean? Ah, is it this thing right here? And how do you say this in Russian?\n— That is a frying pan, and that is a saucepan. Take the lid for the saucepan!",
+          "glosses": {
+            "макс": "Max",
+            "дай": "give, hand! (imperative)",
+            "мне": "to me",
+            "дуршлаг": "colander, strainer",
+            "крышку": "lid (accusative object)",
+            "вон": "over there, right there (pointing particle: 'von tam')",
+            "у": "by, near",
+            "раковины": "sink (genitive: by the sink)",
+            "ой": "oh!",
+            "подожди": "wait! (imperative)",
+            "понимаю": "I understand",
+            "скажи": "say, tell! (perfective imperative)",
+            "раз": "time ('yeshchyo raz': once more)",
+            "помедленнее": "slower, a bit more slowly",
+            "а": "ah!; and",
+            "крышка": "lid",
+            "сковорода": "frying pan, skillet",
+            "кастрюля": "saucepan, pot",
+            "возьми": "take! (perfective imperative)",
+            "от": "from, for ('kryshka ot kastryuli': the lid for the pot)",
+            "кастрюли": "of the pan (genitive after от: the pan's lid)"
+          },
+          "notice": [
+            "«Подожди́, скажи́ поме́дленнее!» — the real survival sentence when a native speaker rattles off three kitchen nouns at full speed.",
+            "«Э́то вот э́то?» (Is it this thing right here?) — pointing with «вот э́то» lets you confirm any object before you know its gender or case.",
+            "«Кры́шка от кастрю́ли» — Russian says 'the lid from the pot' («от + genitive») for a lid, key, or cap that belongs to something."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Ой, подожди́! Я не понима́ю. Скажи́ ещё раз, поме́дленнее, пожа́луйста!",
+              "options": [
+                "Max stops Katya and asks her to repeat the request more slowly because he didn't catch the kitchen words.",
+                "Max tells Katya that he already washed the saucepan and the frying pan.",
+                "Max says he speaks Russian fast and understands everything."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Э́то сковорода́, а э́то кастрю́ля. Возьми́ кры́шку от кастрю́ли!",
+              "options": [
+                "Katya tells Max to put the frying pan in the cupboard.",
+                "Katya names the frying pan and the saucepan, and tells Max to take the saucepan lid.",
+                "Katya asks Max to wash the sink and the window."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Что зна́чит «кры́шка»? А, э́то вот э́то?",
+              "options": [
+                "Max is asking who broke the lid yesterday.",
+                "Combining 'Chto znachit…?' with pointing ('eto vot eto?') lets a beginner map an unfamiliar spoken word directly to a physical object in the kitchen.",
+                "Max is addressing Katya with formal plural 'vy'."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Point at two things in your kitchen tonight and write what you would ask a Russian speaker using «Как по-ру́сски вот э́то?» and «Что зна́чит…?»."
+        },
+        {
+          "id": "kukhnya-08",
+          "number": 8,
+          "title": "Дава́й поу́жинаем",
+          "title_en": "Let's Have Dinner",
+          "after_page": "u14-p5",
+          "text": "— Ка́тя, я так хочу́ есть! Что у нас на у́жин?\n— Я то́же голо́дная. Дава́й сде́лаем макаро́ны с сы́ром и сала́т!\n— Дава́й! А чай бу́дешь с молоко́м и́ли с лимо́ном?\n— Мне чай без са́хара, но с лимо́ном, пожа́луйста.\n— Ла́дно! Вода́ в кастрю́ле уже́ кипи́т. Че́рез де́сять мину́т у́жин гото́в!",
+          "en": "— Katya, I'm so hungry! What do we have for dinner?\n— I'm hungry too. Let's make pasta with cheese and a salad!\n— Let's do it! And will you have your tea with milk or with lemon?\n— Tea without sugar, but with lemon for me, please.\n— Alright! The water in the pot is already boiling. In ten minutes dinner is ready!",
+          "glosses": {
+            "катя": "Katya",
+            "так": "so, so much",
+            "хочу": "I want ('ya khochu yest'': I'm hungry, literally 'I want to eat')",
+            "у": "by, with ('u nas': we have)",
+            "нас": "us ('u nas': we have)",
+            "голодная": "hungry (feminine)",
+            "давай": "let's! / deal! (with 1st person plural future: let's make)",
+            "сделаем": "we will make ('davai sdelayem': let's make)",
+            "макароны": "pasta, macaroni",
+            "сыром": "cheese (instrumental after 's': with cheese)",
+            "салат": "salad",
+            "а": "and",
+            "будешь": "will you have?",
+            "молоком": "milk (instrumental after 's': with milk)",
+            "или": "or",
+            "лимоном": "lemon (instrumental after 's': with lemon)",
+            "без": "without (+ genitive)",
+            "сахара": "sugar (genitive after 'bez': without sugar)",
+            "но": "but",
+            "ладно": "alright, okay",
+            "в": "in",
+            "кастрюле": "saucepan, pot (prepositional: in the pot)",
+            "уже": "already",
+            "кипит": "is boiling",
+            "через": "in, after (a period of time)",
+            "десять": "ten",
+            "минут": "minutes (genitive plural)"
+          },
+          "notice": [
+            "«Я так хочу́ есть!» (I want to eat so badly!) and «Я голо́дный / голо́дная» — the two natural ways to say 'I'm hungry'.",
+            "«Дава́й сде́лаем… — Дава́й!» — «дава́й» + perfective 'we' future («сде́лаем», «поу́жинаем») means 'Let's…!', and «Дава́й!» alone answers 'Let's do it! / Deal!'.",
+            "«С лимо́ном, но без са́хара» — «с» (with) takes the instrumental (-ом), while «без» (without) takes the genitive (-а)."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Я то́же голо́дная. Дава́й сде́лаем макаро́ны с сы́ром и сала́т!",
+              "options": [
+                "Katya is hungry too and suggests they make pasta with cheese and a salad together.",
+                "Katya says she already had dinner at work and is not hungry.",
+                "Katya wants Max to buy soup and bread."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Мне чай без са́хара, но с лимо́ном, пожа́луйста.",
+              "options": [
+                "Katya wants coffee with milk and sugar.",
+                "Katya wants tea with lemon and without sugar.",
+                "Max wants tea with milk and sugar."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Дава́й сде́лаем макаро́ны с сы́ром и сала́т! — Дава́й!",
+              "options": [
+                "It orders the other person to cook alone while the speaker rests.",
+                "'Davai' + 1st-person plural perfective ('sdelayem') proposes a joint action ('Let's make…'), and 'Davai!' alone agrees ('Let's!').",
+                "It asks a question about what they ate yesterday."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "What would you propose making for dinner tonight? Write a suggestion with «Дава́й сде́лаем…» and say how you want your tea or coffee."
+        },
+        {
+          "id": "kukhnya-09",
+          "number": 9,
+          "title": "Чья э́то кру́жка?",
+          "title_en": "Whose Mug Is This?",
+          "after_page": "u8-p5",
+          "text": "— Макс, посмотри́ на ра́ковину: тут гря́зные таре́лки, ло́жки и три ча́шки!\n— Ой, э́то мы всё оста́вили по́сле за́втрака и обе́да?\n— Да! А вон там у окна́ ещё ста́рая си́няя кру́жка. Чья она́?\n— Э́то моя́ кру́жка. Ла́дно, дава́й я сейча́с помо́ю посу́ду!\n— Спаси́бо! А я пока́ вы́тру стол и уберу́ хлеб.",
+          "en": "— Max, look at the sink: there are dirty plates, spoons, and three cups here!\n— Oops, did we leave all that after breakfast and lunch?\n— Yes! And over there by the window is that old blue mug too. Whose is it?\n— That's my mug. Alright, let me wash the dishes right now!\n— Thanks! And meanwhile I'll wipe the table and put the bread away.",
+          "glosses": {
+            "макс": "Max",
+            "посмотри": "look! (perfective imperative)",
+            "раковину": "sink (accusative after 'na': at the sink)",
+            "грязные": "dirty (plural)",
+            "три": "three",
+            "ой": "oops, oh!",
+            "оставили": "left (past plural: we left)",
+            "после": "after (+ genitive)",
+            "завтрака": "breakfast (genitive: after breakfast)",
+            "обеда": "lunch (genitive: after lunch)",
+            "вон": "over there ('von tam': right over there)",
+            "у": "by, near",
+            "окна": "window (genitive: by the window)",
+            "старая": "old (feminine)",
+            "синяя": "dark blue (feminine)",
+            "кружка": "mug",
+            "чья": "whose (feminine, agreeing with 'kruzhka')",
+            "ладно": "alright, okay",
+            "давай": "let ('davai ya pomoyu': let me wash / I'll wash)",
+            "сейчас": "right now",
+            "помою": "I will wash (perfective future)",
+            "посуду": "the dishes (accusative collective noun)",
+            "пока": "meanwhile, for now (also 'bye' at the end of a conversation)",
+            "вытру": "I will wipe (perfective future)",
+            "уберу": "I will put away, clear away (perfective future)"
+          },
+          "notice": [
+            "«Чья э́то кру́жка?» (Whose mug is this?) — «чей / чья / чьё / чьи» agrees in gender with the thing owned, just like «мой / моя́ / моё».",
+            "«Дава́й я помо́ю посу́ду!» (Let me wash the dishes! / I'll wash the dishes!) — «дава́й я + perfective future» is how you volunteer to do a chore at home.",
+            "«А я пока́ вы́тру стол» — inside a sentence, «пока́» means 'meanwhile / in the meantime' (not 'bye'!)."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Макс, посмотри́ на ра́ковину: тут гря́зные таре́лки, ло́жки и три ча́шки!",
+              "options": [
+                "Katya points out the pile of dirty plates, spoons, and cups in the sink.",
+                "Katya just bought new plates and spoons for the kitchen.",
+                "Max already washed all the cups and plates."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ла́дно, дава́й я сейча́с помо́ю посу́ду! — Спаси́бо! А я пока́ вы́тру стол и уберу́ хлеб.",
+              "options": [
+                "Katya washes the dishes while Max reads by the window.",
+                "Max volunteers to wash the dishes right away, and Katya offers to wipe the table and put the bread away in the meantime.",
+                "They decide to leave the dishes until tomorrow morning."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— А я пока́ вы́тру стол и уберу́ хлеб.",
+              "options": [
+                "Katya is saying goodbye and leaving the house.",
+                "Used mid-sentence as an adverb, 'poka' means 'meanwhile / while you do that', coordinating two people sharing kitchen chores.",
+                "It means 'never' in negative sentences."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "How would you divide up cleaning the kitchen tonight? Write one sentence with «Дава́й я помо́ю…» and one with «А ты пока́…»."
+        },
+        {
+          "id": "kukhnya-10",
+          "number": 10,
+          "title": "Купи́ яйцо́ и смета́ну",
+          "title_en": "Buy Eggs and Sour Cream",
+          "after_page": "u15-p4",
+          "text": "— Ка́тя, я иду́ в магази́н. Что купи́ть?\n— Посмотри́ в холоди́льнике: ско́лько там яи́ц?\n— Раз, два, три… То́лько три яйца́ и ста́рый лук. А молока́ и смета́ны вообще́ нет!\n— Тогда́ купи́ де́сять яи́ц, две па́чки молока́, смета́ну и ма́сло.\n— Хорошо́, сейча́с запишу́ спи́сок, а то опя́ть забу́ду молоко́!",
+          "en": "— Katya, I'm going to the shop. What should I buy?\n— Look in the fridge: how many eggs are in there?\n— One, two, three… Only three eggs and an old onion. And there is no milk or sour cream at all!\n— Then buy ten eggs, two cartons of milk, sour cream, and butter.\n— Good, I'll write down the list right now, or else I'll forget the milk again!",
+          "glosses": {
+            "катя": "Katya",
+            "иду": "I am going (on foot)",
+            "в": "to, in",
+            "магазин": "shop, grocery store",
+            "купить": "to buy (infinitive question: 'what should I buy?')",
+            "посмотри": "look! (perfective imperative)",
+            "холодильнике": "fridge, refrigerator (prepositional: in the fridge)",
+            "сколько": "how many, how much",
+            "яиц": "eggs (genitive plural)",
+            "раз": "one (when counting aloud: 'raz, dva, tri…')",
+            "только": "only",
+            "яйца": "eggs (genitive singular after two, three, four)",
+            "молока": "milk (genitive after 'net': no milk)",
+            "сметаны": "sour cream (genitive after 'net': no sour cream)",
+            "вообще": "at all, whatsoever (with 'net': none at all)",
+            "тогда": "then, in that case",
+            "купи": "buy! (perfective imperative)",
+            "две": "two (feminine)",
+            "пачки": "packs, cartons (after 'dve')",
+            "сметану": "sour cream (accusative object)",
+            "масло": "butter",
+            "сейчас": "right now",
+            "запишу": "I will write down (perfective future)",
+            "список": "list",
+            "то": "otherwise ('a to': or else, otherwise)",
+            "опять": "again",
+            "забуду": "I will forget (perfective future)"
+          },
+          "notice": [
+            "«Раз, два, три…» — when counting things aloud in the kitchen, Russians almost always start with «раз» instead of «оди́н».",
+            "«Молока́ вообще́ нет!» — «вообще́ нет» means 'none at all / completely out of'.",
+            "«…а то опя́ть забу́ду молоко́!» — «а то» between clauses is the everyday spoken way to say 'or else / otherwise'."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Раз, два, три… То́лько три яйца́ и ста́рый лук. А молока́ и смета́ны вообще́ нет!",
+              "options": [
+                "Max checks the fridge and finds only three eggs, an old onion, and no milk or sour cream at all.",
+                "The fridge is full of milk, sour cream, and ten eggs.",
+                "Max already bought eggs and sour cream this morning."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Хорошо́, сейча́с запишу́ спи́сок, а то опя́ть забу́ду молоко́!",
+              "options": [
+                "Max never forgets anything when he goes to the store.",
+                "Max writes down a shopping list right away so he doesn't forget the milk again.",
+                "Katya writes a list of ten books to read."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ка́тя, я иду́ в магази́н. Что купи́ть?",
+              "options": [
+                "It means 'What did you buy?' in the past tense.",
+                "A bare perfective infinitive in a question ('Chto kupit'?') asks 'What should I buy?' without needing a modal verb like 'must' or 'should'.",
+                "It is a command telling Katya to go to the store."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Look in your fridge tonight and write a three-line exchange starting with «Что купи́ть?» and counting two or three things."
+        },
+        {
+          "id": "kukhnya-11",
+          "number": 11,
+          "title": "Когда́ бу́дет гото́во?",
+          "title_en": "When Will It Be Ready?",
+          "after_page": "u9-p4",
+          "text": "— Ка́тя, когда́ бу́дет гото́в наш у́жин?\n— Ско́ро! Я варю́ пельме́ни и карто́шку. Посмотри́ в кастрю́лю: вода́ кипи́т?\n— Да, уже́ си́льно кипи́т! Ско́лько мину́т ещё вари́ть?\n— Ещё пять мину́т. Помеша́й ло́жкой, посоли́ чуть-чу́ть и пото́м вы́ключи плиту́.\n— Ла́дно! А смета́на и ма́сло уже́ на столе́.",
+          "en": "— Katya, when will our dinner be ready?\n— Soon! I'm boiling dumplings and potatoes. Look into the pot: is the water boiling?\n— Yes, it's already boiling hard! How many more minutes should they boil?\n— Five more minutes. Stir with a spoon, salt them a tiny bit, and then turn off the stove.\n— Alright! And the sour cream and butter are already on the table.",
+          "glosses": {
+            "катя": "Katya",
+            "скоро": "soon",
+            "варю": "I am boiling, cooking",
+            "пельмени": "pelmeni, Russian dumplings",
+            "картошку": "potatoes (accusative object)",
+            "посмотри": "look! (perfective imperative)",
+            "в": "in, into",
+            "кастрюлю": "saucepan, pot (accusative: into the pot)",
+            "кипит": "is boiling",
+            "уже": "already",
+            "сильно": "strongly, hard, vigorously",
+            "минут": "minutes (genitive plural)",
+            "варить": "to boil, to cook (infinitive question: 'should we boil?')",
+            "помешай": "stir! (perfective imperative)",
+            "ложкой": "with a spoon (instrumental)",
+            "посоли": "add salt, salt it! (perfective imperative)",
+            "чуть-чуть": "a tiny bit, just a little",
+            "потом": "then, afterwards",
+            "выключи": "turn off, switch off! (perfective imperative)",
+            "плиту": "stove (accusative object)",
+            "ладно": "alright, okay",
+            "сметана": "sour cream",
+            "масло": "butter",
+            "столе": "table (prepositional: on the table)"
+          },
+          "notice": [
+            "«Помеша́й, посоли́ и вы́ключи плиту́» — a sequence of completed kitchen steps uses chained perfective imperatives.",
+            "«Ско́лько мину́т ещё вари́ть?» — imperfective infinitive «вари́ть» focuses on the ongoing duration of the cooking process.",
+            "«Чуть-чу́ть» (a tiny bit) — indispensable kitchen adverb when seasoning or pouring."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Ещё пять мину́т. Помеша́й ло́жкой, посоли́ чуть-чу́ть и пото́м вы́ключи плиту́.",
+              "options": [
+                "Katya tells Max to boil the dumplings for five more minutes, stir with a spoon, add a bit of salt, and then turn off the stove.",
+                "Katya tells Max to turn on the stove and put the dumplings into cold water.",
+                "Max tells Katya that dinner is already cold."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ла́дно! А смета́на и ма́сло уже́ на столе́.",
+              "options": [
+                "They forgot to buy sour cream and butter.",
+                "Max has already put the sour cream and butter out on the table.",
+                "The sour cream and butter are still in the shop."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Помеша́й ло́жкой, посоли́ чуть-чу́ть и пото́м вы́ключи плиту́.",
+              "options": [
+                "They describe habits that happen every week.",
+                "Russian chains perfective imperatives ('pomeshai', 'posoli', 'vyklyuchi') to give a step-by-step sequence of single completed actions.",
+                "They are polite plural forms addressed to strangers."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Give someone at home two short cooking instructions using «посмотри́», «помеша́й», or «вы́ключи плиту́»."
+        },
+        {
+          "id": "kukhnya-12",
+          "number": 12,
+          "title": "Опя́ть молока́ нет!",
+          "title_en": "There's No Milk Again!",
+          "after_page": "u10-p4",
+          "text": "— Макс, я откры́ла холоди́льник, а у нас опя́ть нет молока́!\n— Как нет молока́?! Я же ходи́л в магази́н!\n— Да, у нас есть смета́на, кефи́р, сыр и ма́сло. А молока́ нет: оно́ ко́нчилось ещё у́тром!\n— Ой… Прости́! Я купи́л кефи́р и совсе́м забы́л про молоко́.\n— Ну ла́дно, бу́дем пить ко́фе без молока́, а Ти́ме дади́м смета́ны!",
+          "en": "— Max, I opened the fridge, and we have no milk again!\n— What do you mean, no milk?! I went to the store, after all!\n— Yes, we have sour cream, kefir, cheese, and butter. But there is no milk: it ran out this morning!\n— Oh… Sorry! I bought kefir and completely forgot about the milk.\n— Well alright, we'll drink coffee without milk, and we'll give Tima some sour cream!",
+          "glosses": {
+            "макс": "Max",
+            "открыла": "opened (past feminine: I opened)",
+            "холодильник": "fridge, refrigerator",
+            "нас": "us ('u nas': we have)",
+            "опять": "again",
+            "же": "after all, indeed! (emphatic particle)",
+            "ходил": "went and came back (past masculine)",
+            "в": "to",
+            "магазин": "shop, grocery store",
+            "сметана": "sour cream",
+            "кефир": "kefir",
+            "масло": "butter",
+            "кончилось": "ran out, is all gone (neuter past)",
+            "утром": "in the morning, this morning",
+            "ой": "oh, oops!",
+            "прости": "sorry, forgive me! (informal imperative)",
+            "купил": "bought (past masculine)",
+            "совсем": "completely, totally",
+            "забыл": "forgot (past masculine)",
+            "про": "about (+ accusative: 'zabyt' pro moloko' — to forget about the milk)",
+            "ну": "well",
+            "ладно": "alright, okay",
+            "будем": "we will",
+            "пить": "to drink",
+            "без": "without (+ genitive)",
+            "тиме": "to Tima (dative)",
+            "дадим": "we will give (perfective future)",
+            "сметаны": "some sour cream (partitive genitive)"
+          },
+          "notice": [
+            "«Оно́ ко́нчилось!» (It ran out! / It's all gone!) — «ко́нчился / ко́нчилась / ко́нчилось» is how Russian says you're out of coffee, bread, or milk.",
+            "«Прости́! Я совсе́м забы́л про молоко́» — in everyday speech, «забы́ть про + accusative» is much more common than «забы́ть о».",
+            "«Дади́м смета́ны» — genitive («смета́ны») instead of accusative («смета́ну») means 'some sour cream'."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Да, у нас есть смета́на, кефи́р, сыр и ма́сло. А молока́ нет: оно́ ко́нчилось ещё у́тром!",
+              "options": [
+                "They have sour cream, kefir, cheese, and butter in the fridge, but the milk ran out in the morning.",
+                "The fridge is completely empty and there is nothing to eat.",
+                "They have plenty of milk, but no cheese or butter."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Прости́! Я купи́л кефи́р и совсе́м забы́л про молоко́.",
+              "options": [
+                "Max apologizes because he bought milk instead of kefir.",
+                "Max apologizes because he bought kefir and completely forgot about the milk.",
+                "Max says the store had no milk today."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— А Ти́ме дади́м смета́ны!",
+              "options": [
+                "It is a negative construction meaning Tima gets no sour cream.",
+                "Using the genitive ('smetany') for the object of 'give' expresses a partitive quantity ('some sour cream') rather than the whole container.",
+                "It means the sour cream belongs to Tima."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "What has run out in your kitchen today? Write two sentences using «У нас есть…», «А … нет», or «ко́нчилось»."
+        },
+        {
+          "id": "kukhnya-13",
+          "number": 13,
+          "title": "Запи́ска на холоди́льнике",
+          "title_en": "A Note on the Fridge",
+          "after_page": "u31-p7",
+          "text": "— Алло́, Ка́тя! Я на ку́хне, чита́ю твою́ запи́ску на холоди́льнике.\n— Ну что, понима́ешь мой по́черк?\n— Почти́ всё! «Суп в кастрю́ле, разогре́й сам. Хлеб в хле́бнице».\n— Пра́вильно! А да́льше что там напи́сано?\n— А да́льше одно́ сло́во непоня́тно… «Покорми́ Ти́му, он голо́дный»! Он уже́ сиди́т у ми́ски!",
+          "en": "— Hello, Katya! I'm in the kitchen, reading your note on the fridge.\n— Well, do you understand my handwriting?\n— Almost everything! 'The soup is in the pot, heat it up yourself. The bread is in the breadbox.'\n— Right! And what is written after that?\n— After that one word is hard to make out… 'Feed Tima, he is hungry'! He's already sitting by his bowl!",
+          "glosses": {
+            "алло": "hello! (on the telephone)",
+            "катя": "Katya",
+            "кухне": "kitchen (prepositional: in the kitchen)",
+            "читаю": "I am reading",
+            "твою": "your (feminine accusative)",
+            "записку": "short written note (accusative object)",
+            "холодильнике": "fridge (prepositional: on the fridge)",
+            "ну": "well ('nu chto': well then, so)",
+            "понимаешь": "you understand",
+            "почерк": "handwriting",
+            "почти": "almost",
+            "в": "in",
+            "кастрюле": "pot, saucepan (prepositional: in the pot)",
+            "разогрей": "heat up, warm up! (perfective imperative)",
+            "сам": "yourself, by yourself (masculine)",
+            "хлебнице": "breadbox (prepositional: in the breadbox)",
+            "правильно": "right, correct, correctly",
+            "дальше": "further, after that, next",
+            "написано": "is written (neuter short participle)",
+            "одно": "one (neuter, agreeing with 'slovo')",
+            "непонятно": "unclear, hard to make out",
+            "покорми": "feed! (perfective imperative)",
+            "тиму": "Tima (accusative object)",
+            "голодный": "hungry (masculine)",
+            "уже": "already",
+            "сидит": "is sitting",
+            "миски": "bowl (genitive after 'u': by the bowl)"
+          },
+          "notice": [
+            "«Алло́!» — the universal word for answering or starting a phone call in Russian.",
+            "«Разогре́й сам» (Heat it up yourself) and «Покорми́ Ти́му» (Feed Tima) — the two classic imperatives on any Russian kitchen note.",
+            "«Что там напи́сано?» (What does it say there? literally 'What is written there?') — how Russian asks what a sign, note, or label says."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— «Суп в кастрю́ле, разогре́й сам. Хлеб в хле́бнице».",
+              "options": [
+                "Katya's note tells Max where the soup and bread are and instructs him to heat up the soup himself.",
+                "Katya's note asks Max to cook fresh soup and bake bread.",
+                "Max left a note telling Katya that there is no soup left."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— «Покорми́ Ти́му, он голо́дный»! Он уже́ сиди́т у ми́ски!",
+              "options": [
+                "Tima is sleeping in the bedroom and does not want food.",
+                "Max deciphers the last line telling him to feed Tima, who is already waiting by his bowl.",
+                "Katya already fed Tima before leaving."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Пра́вильно! А да́льше что там напи́сано?",
+              "options": [
+                "It asks who wrote the note yesterday.",
+                "Instead of saying 'What does the note say?', Russian uses the neuter impersonal 'Chto tam napisano?' ('What is written there?').",
+                "It means 'Why did you write that?'"
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Write a two-line note to leave on the fridge at home using «разогре́й», «покорми́», or «на столе́»."
+        },
+        {
+          "id": "kukhnya-14",
+          "number": 14,
+          "title": "Вы́ключи свет!",
+          "title_en": "Turn Off the Light!",
+          "after_page": "u11-p4",
+          "text": "— Макс, ты ещё не спишь? Уже́ по́здно, пора́ спать!\n— Я чита́ю но́вую кни́гу и пью тёплый чай. Ты иди́, я сейча́с приду́.\n— Хорошо́. То́лько когда́ допьёшь чай, помо́й ча́шку и закро́й окно́: на ку́хне хо́лодно.\n— Ла́дно, закро́ю окно́ и вы́ключу свет.\n— Споко́йной но́чи!\n— Споко́йной но́чи, Ка́тя!",
+          "en": "— Max, are you still awake? It's late already, time to sleep!\n— I'm reading a new book and drinking warm tea. You go ahead, I'll come right now.\n— Okay. Just when you finish drinking your tea, wash your cup and close the window: it's cold in the kitchen.\n— Alright, I'll close the window and turn off the light.\n— Good night!\n— Good night, Katya!",
+          "glosses": {
+            "макс": "Max",
+            "спишь": "you are sleeping ('ty yeshchyo ne spish'': are you still awake?)",
+            "уже": "already",
+            "поздно": "late (it is late)",
+            "пора": "it's time ('pora spat'': time to go to bed)",
+            "спать": "to sleep",
+            "читаю": "I am reading",
+            "новую": "new (feminine accusative)",
+            "пью": "I am drinking",
+            "тёплый": "warm (masculine)",
+            "иди": "go ahead! (imperfective imperative)",
+            "сейчас": "soon, right away",
+            "приду": "I will come (perfective future)",
+            "только": "just, only",
+            "допьёшь": "you finish drinking (perfective future with prefix 'do-')",
+            "помой": "wash! (perfective imperative)",
+            "чашку": "cup (accusative object)",
+            "закрой": "close, shut! (perfective imperative)",
+            "кухне": "kitchen (prepositional: in the kitchen)",
+            "холодно": "it is cold",
+            "ладно": "alright, okay",
+            "закрою": "I will close (perfective future)",
+            "выключу": "I will turn off (perfective future)",
+            "свет": "the light",
+            "спокойной": "peaceful, quiet (genitive: in 'good night')",
+            "ночи": "night (genitive: in 'good night')",
+            "катя": "Katya"
+          },
+          "notice": [
+            "«Уже́ по́здно, пора́ спать!» (It's late already, time to sleep!) — «пора́ + infinitive» means 'it's time to…'.",
+            "«Когда́ допьёшь чай…» — prefix «до-» on a verb («допи́ть», «дое́сть», «дочита́ть») means to finish the remainder of something.",
+            "«Закро́й окно́ и вы́ключи свет» (Close the window and turn off the light) — the universal bedtime kitchen line."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Макс, ты ещё не спишь? Уже́ по́здно, пора́ спать!",
+              "options": [
+                "Katya comes into the kitchen late at night and tells Max it is time to go to sleep.",
+                "Katya wakes Max up early in the morning for breakfast.",
+                "Max asks Katya why she is reading a book."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— То́лько когда́ допьёшь чай, помо́й ча́шку и закро́й окно́: на ку́хне хо́лодно.",
+              "options": [
+                "Open the window because the kitchen is too hot.",
+                "When you finish your tea, wash your cup and close the window because it's cold in the kitchen.",
+                "Leave the cup on the table and keep the light on."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ты иди́, я сейча́с приду́.",
+              "options": [
+                "It orders Katya not to go into the bedroom.",
+                "The imperfective imperative 'Ty idi' warmly grants permission ('You go on ahead'), paired with the perfective future 'ya seichas pridu' ('I'll be right there').",
+                "It asks where Katya went yesterday."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "What do you say at home before going to bed? Write two lines using «пора́ спать», «закро́й окно́», or «вы́ключи свет»."
+        },
+        {
+          "id": "kukhnya-15",
+          "number": 15,
+          "title": "Где ключи́ и телефо́н?",
+          "title_en": "Where Are the Keys and the Phone?",
+          "after_page": "u18-p4",
+          "text": "— Ка́тя, ты не ви́дела мои́ ключи́ и телефо́н? Я нигде́ их не ви́жу!\n— Посмотри́ на ку́хне на столе́. Они́ не там?\n— На столе́ то́лько моя́ кни́га, очки́ и пуста́я ча́шка.\n— А под кни́гой? И посмотри́ на сту́ле, где спит Ти́ма!\n— То́чно! Ключи́ под кни́гой, а телефо́н пря́мо под кото́м! Ну, Ти́ма!",
+          "en": "— Katya, have you seen my keys and phone? I don't see them anywhere!\n— Look in the kitchen on the table. Aren't they there?\n— On the table there is only my book, my glasses, and an empty cup.\n— What about under the book? And look on the chair where Tima is sleeping!\n— Spot on! The keys are under the book, and the phone is right under the cat! Oh, Tima!",
+          "glosses": {
+            "катя": "Katya",
+            "видела": "saw (past feminine: 'ty ne videla' — have you seen?)",
+            "мои": "my (plural)",
+            "ключи": "keys",
+            "телефон": "phone, telephone",
+            "нигде": "nowhere (with 'ne': not anywhere)",
+            "их": "them",
+            "вижу": "I see",
+            "посмотри": "look! (perfective imperative)",
+            "кухне": "kitchen (prepositional: in the kitchen)",
+            "столе": "table (prepositional: on the table)",
+            "только": "only",
+            "очки": "glasses, spectacles (always plural)",
+            "пустая": "empty (feminine)",
+            "под": "under (+ instrumental)",
+            "книгой": "book (instrumental after 'pod': under the book)",
+            "стуле": "chair (prepositional: on the chair)",
+            "спит": "is sleeping",
+            "тима": "Tima",
+            "точно": "exact, spot on, that's right!",
+            "прямо": "right, directly",
+            "котом": "cat (instrumental after 'pod': under the cat)",
+            "ну": "oh, well really! (exclamatory particle)"
+          },
+          "notice": [
+            "«Ты не ви́дела мои́ ключи́?» (Literally 'Didn't you see my keys?') — Russian asks 'Have you seen…?' in the negative past.",
+            "«Я нигде́ их не ви́жу» — Russian requires double negation: «нигде́» (nowhere) + «не ви́жу» (I don't see).",
+            "«То́чно!» (Spot on! / Exactly!) — the single word you hear constantly when someone finds or remembers something."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Ка́тя, ты не ви́дела мои́ ключи́ и телефо́н? Я нигде́ их не ви́жу!",
+              "options": [
+                "Max asks Katya if she has seen his keys and phone because he cannot find them anywhere.",
+                "Max found Katya's keys and phone in the street.",
+                "Katya lost her glasses and her book."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— То́чно! Ключи́ под кни́гой, а телефо́н пря́мо под кото́м!",
+              "options": [
+                "The keys and the phone are in the fridge.",
+                "Max finds his keys under the book and his phone right underneath Tima the cat.",
+                "Tima knocked the keys onto the floor."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ка́тя, ты не ви́дела мои́ ключи́ и телефо́н?",
+              "options": [
+                "Max is accusing Katya of hiding his keys.",
+                "Russian uses a negative past-tense question ('Ty ne videla…?' / 'Ty ne znayesh'…?') as the polite, idiomatic way to ask 'Have you seen…?' or 'Do you happen to know…?'",
+                "The verb form 'videla' shows that Max is addressing a man."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Write what you would ask tonight when looking for your phone, glasses, or keys using «Ты не ви́дел / не ви́дела…?»."
+        },
+        {
+          "id": "kukhnya-16",
+          "number": 16,
+          "title": "Сосе́дка у две́ри",
+          "title_en": "The Neighbour at the Door",
+          "after_page": "u22-p2",
+          "text": "— Макс, кто́-то стучи́т в дверь! Подержи́ Ти́му, потому́ что он сейча́с вы́бежит!\n— Держу́! Кто там? А, до́брый ве́чер, Ве́ра Па́вловна!\n— До́брый ве́чер, Макс! Извини́те, пожа́луйста, у вас есть немно́го со́ли и́ли са́хара? Магази́н уже́ закры́т.\n— Коне́чно, Ве́ра Па́вловна, проходи́те на ку́хню! Ка́тя, дай, пожа́луйста, но́вую па́чку со́ли.\n— Вот, возьми́те, пожа́луйста! Как вы живёте?",
+          "en": "— Max, someone is knocking at the door! Hold Tima, because he'll run out right now!\n— Got him! Who's there? Ah, good evening, Vera Pavlovna!\n— Good evening, Max! Excuse me, please, do you have a little salt or sugar? The shop is already closed.\n— Of course, Vera Pavlovna, come on in to the kitchen! Katya, hand me the new pack of salt, please.\n— Here, please take it! How are you doing?",
+          "glosses": {
+            "макс": "Max",
+            "кто-то": "someone",
+            "стучит": "is knocking",
+            "дверь": "door (accusative: at the door)",
+            "подержи": "hold (for a moment)! (perfective imperative)",
+            "потому": "because ('potomu chto')",
+            "сейчас": "right now",
+            "выбежит": "will run out (perfective future)",
+            "держу": "I'm holding (him), got him!",
+            "добрый": "good (masculine: in 'good evening')",
+            "вечер": "evening",
+            "вера": "Vera (first name of their neighbour)",
+            "павловна": "Pavlovna (patronymic: daughter of Pavel, used with first name for polite respect)",
+            "извините": "excuse me, forgive me (polite/plural imperative)",
+            "вас": "you (plural or polite genitive after 'u': do you have)",
+            "или": "or",
+            "сахара": "some sugar (partitive genitive)",
+            "магазин": "shop, store",
+            "уже": "already",
+            "закрыт": "is closed (masculine short participle)",
+            "конечно": "of course",
+            "проходите": "come in, walk on through! (polite imperative)",
+            "кухню": "kitchen (accusative of direction: into the kitchen)",
+            "катя": "Katya",
+            "дай": "hand me, give! (informal imperative to Katya)",
+            "новую": "new (feminine accusative)",
+            "пачку": "pack, box (accusative object)",
+            "возьмите": "take! (polite/plural imperative to Vera Pavlovna)",
+            "живёте": "you live, you are doing (polite plural)",
+            "тиму": "Tima (the cat, as the object)"
+          },
+          "notice": [
+            "«Подержи́ Ти́му!» / «Дай па́чку» (to Max/Katya, «ты») vs. «Извини́те» / «Проходи́те» / «Возьми́те» (to the neighbour Vera Pavlovna, «вы» + name and patronymic).",
+            "«Подержи́ Ти́му — Держу́!» — repeating the partner's imperative verb in the 1st-person present («Держу́!», «Иду́!», «Смотрю́!») means 'I'm doing it right now!'.",
+            "«Магази́н уже́ закры́т» — short predicate «закры́т / закры́та / закры́то» (closed) vs. «откры́т / откры́та / откры́то» (open)."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Извини́те, пожа́луйста, у вас есть немно́го со́ли и́ли са́хара? Магази́н уже́ закры́т.",
+              "options": [
+                "Their neighbour Vera Pavlovna politely asks if they have a little salt or sugar because the shop is already closed.",
+                "Vera Pavlovna brings them a cake and a pack of salt from the shop.",
+                "Max asks the neighbour where the nearest grocery store is."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Подержи́ Ти́му, потому́ что он сейча́с вы́бежит! — Держу́!",
+              "options": [
+                "Katya tells Max to let the cat outside for a walk.",
+                "Katya asks Max to hold Tima so the cat doesn't bolt out the door, and Max confirms he's holding him.",
+                "Tima is asleep under the bed."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ка́тя, дай, пожа́луйста, но́вую па́чку со́ли. — Вот, возьми́те, пожа́луйста!",
+              "options": [
+                "Both imperatives are addressed to the same person.",
+                "Max uses informal 'dai' ('ty') with his partner Katya, while Katya switches to polite 'voz'mite' ('vy') when handing the salt to their older neighbour.",
+                "Both verbs are past tense forms."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "A neighbour knocks at your door. Write one polite sentence to them using «вы» («Проходи́те», «Возьми́те», «У вас есть…») and one sentence to your housemate using «ты»."
+        },
+        {
+          "id": "kukhnya-17",
+          "number": 17,
+          "title": "Ночь, чай и звёзды",
+          "title_en": "Night, Tea, and Stars",
+          "after_page": "u16-p4",
+          "text": "— Ночь, ти́хо, а мы не спим. Смотри́ в окно́: каки́е больши́е звёзды!\n— Да, мир о́чень большо́й, а на́ша ку́хня ма́ленькая и тёплая. Нали́ть тебе́ ещё ча́ю с мя́той?\n— Нале́й! Я ду́маю о ко́смосе и о Дека́рте: я пью чай, сле́довательно, я существу́ю!\n— Ха-ха́! Э́то краси́вая мысль, Макс. Но посу́ду за́втра всё равно́ мыть тебе́!\n— Э́то не филосо́фия, Ка́тя, э́то суро́вый факт!",
+          "en": "— It's night, it's quiet, and we aren't sleeping. Look out the window: what big stars!\n— Yes, the world is very big, while our kitchen is small and warm. Shall I pour you more mint tea?\n— Pour some! I'm thinking about space and about Descartes: I drink tea, therefore I exist!\n— Ha-ha! That's a beautiful thought, Max. But tomorrow you still have to wash the dishes anyway!\n— That's not philosophy, Katya, that's a harsh fact!",
+          "glosses": {
+            "спим": "we are sleeping ('my ne spim': we're awake)",
+            "смотри": "look! (imperative)",
+            "какие": "what, how! (exclamatory plural: 'what big stars!')",
+            "большие": "big (plural)",
+            "маленькая": "small, little (feminine)",
+            "тёплая": "warm (feminine)",
+            "налить": "to pour (infinitive offer: 'shall I pour?')",
+            "мятой": "mint (instrumental after 's': with mint)",
+            "налей": "pour! (perfective imperative)",
+            "думаю": "I am thinking",
+            "о": "about (+ prepositional)",
+            "космосе": "space (prepositional: about space)",
+            "декарте": "Descartes (prepositional: about Descartes)",
+            "пью": "I drink, I am drinking",
+            "ха-ха": "ha-ha!",
+            "красивая": "beautiful, nice (feminine)",
+            "макс": "Max",
+            "но": "but",
+            "посуду": "the dishes (accusative object)",
+            "завтра": "tomorrow",
+            "равно": "all the same ('vsyo ravno': anyway, regardless, all the same)",
+            "мыть": "to wash ('myt' tebe': it's on you to wash)",
+            "философия": "philosophy",
+            "катя": "Katya",
+            "суровый": "harsh, stern (masculine)",
+            "чаю": "some tea (partitive genitive after нали́ть)"
+          },
+          "notice": [
+            "«Нали́ть тебе́ ещё ча́ю?» — dative + infinitive («нали́ть тебе́…?») is the warmest way to ask 'Shall I pour you…?', and «Нале́й!» answers 'Yes, pour some!'.",
+            "«Всё равно́» (anyway / all the same / regardless) — one of the ten most common idioms in spoken Russian.",
+            "«Посу́ду за́втра мыть тебе́!» — infinitive + dative («мыть тебе́») means 'it's your turn / your job to wash', with «тебе́» placed last for emphasis."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Я пью чай, сле́довательно, я существу́ю! — Ха-ха́! Э́то краси́вая мысль, Макс. Но посу́ду за́втра всё равно́ мыть тебе́!",
+              "options": [
+                "Max parodies Descartes over midnight tea, and Katya jokes that he still has to wash the dishes tomorrow anyway.",
+                "Max and Katya argue about mathematics and decide not to drink tea.",
+                "Katya promises to wash all the dishes tomorrow morning."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Мир о́чень большо́й, а на́ша ку́хня ма́ленькая и тёплая. Нали́ть тебе́ ещё ча́ю с мя́той?",
+              "options": [
+                "The kitchen is cold and dark, and there is no tea left.",
+                "Max contrasts the vast world with their small, warm kitchen and offers Katya more mint tea.",
+                "Katya asks Max to make coffee with milk."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Но посу́ду за́втра всё равно́ мыть тебе́!",
+              "options": [
+                "It means 'You washed the dishes yesterday.'",
+                "Putting the object ('posudu') first and the dative pronoun ('tebe') at the very end emphasizes whose turn it is ('washing the dishes tomorrow is still on YOU!').",
+                "It is a question asking who owns the dishes."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Write your own kitchen version of Descartes («Я …, сле́довательно, я существу́ю!») and what your housemate would reply."
+        },
+        {
+          "id": "kukhnya-18",
+          "number": 18,
+          "title": "Ты покорми́л кота́?",
+          "title_en": "Did You Feed the Cat?",
+          "after_page": "u17-p5",
+          "text": "— Макс, почему́ Ти́ма так гро́мко мяу́кает у ми́ски? Ты корми́л его́ сего́дня у́тром?\n— Коне́чно, покорми́л! Я дал ему́ ры́бу в во́семь часо́в, и он всё съел за мину́ту!\n— Пра́вда? А он смо́трит на меня́ так, бу́дто не ел три дня!\n— Он про́сто хи́трый кот: он ду́мал, что ты спала́ и не зна́ла!\n— Ну, Ти́ма, арти́ст! Вчера́ он де́лал то́чно так же!",
+          "en": "— Max, why is Tima meowing so loudly by his bowl? Did you feed him this morning?\n— Of course I fed him! I gave him fish at eight o'clock, and he ate it all up in a minute!\n— Really? Yet he's looking at me as if he hasn't eaten in three days!\n— He's just a sly cat: he thought that you were asleep and didn't know!\n— Oh, Tima, what an actor! Yesterday he did the exact same thing!",
+          "glosses": {
+            "макс": "Max",
+            "тима": "Tima",
+            "громко": "loudly",
+            "мяукает": "is meowing",
+            "миски": "bowl (genitive after 'u': by the bowl)",
+            "кормил": "fed, did feed (imperfective past: asking if the event took place at all)",
+            "его": "him (accusative, pronounced 'yevo')",
+            "конечно": "of course",
+            "покормил": "fed (perfective past: confirming the completed result)",
+            "дал": "gave (past masculine of 'dat'')",
+            "ему": "to him (dative)",
+            "рыбу": "fish (accusative object)",
+            "часов": "o'clock (genitive plural after eight)",
+            "съел": "ate up, finished eating (perfective past)",
+            "за": "in, within (+ accusative of time: 'za minutu' — in a minute)",
+            "минуту": "minute (accusative)",
+            "смотрит": "is looking",
+            "будто": "as if, as though",
+            "ел": "ate, has eaten (past masculine)",
+            "дня": "days (genitive singular after three)",
+            "просто": "simply, just",
+            "хитрый": "sly, cunning (masculine)",
+            "спала": "were sleeping, slept (past feminine, stress on final '-a')",
+            "знала": "knew (past feminine)",
+            "ну": "oh, well!",
+            "артист": "actor, performer!",
+            "точно": "exactly ('tochno tak zhe': the exact same way)",
+            "же": "same ('tak zhe': the same way)"
+          },
+          "notice": [
+            "«Ты корми́л его́? — Коне́чно, покорми́л!» — Russian asks general 'Did you ever do X?' in the imperfective («корми́л?»), and confirms the completed result in the perfective («покорми́л!», «съел!»).",
+            "«Ты спала́» — in the past of «спать» and «быть», only the feminine shifts stress to the ending: «спал, спа́ло, спа́ли» vs. «спала́».",
+            "«Он про́сто хи́трый кот» — «про́сто» ('just / simply') is used in almost every spoken explanation."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Коне́чно, покорми́л! Я дал ему́ ры́бу в во́семь часо́в, и он всё съел за мину́ту!",
+              "options": [
+                "Max confirms he already fed Tima fish at eight o'clock and the cat ate it all in one minute.",
+                "Max forgot to feed Tima this morning because he was sleeping.",
+                "Tima refused to eat the fish."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Он про́сто хи́трый кот: он ду́мал, что ты спала́ и не зна́ла!",
+              "options": [
+                "Tima was sleeping all morning and didn't see Max.",
+                "Tima is pretending to be starving because he thought Katya was asleep when Max fed him.",
+                "Katya fed the cat twice this morning."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ты корми́л его́ сего́дня у́тром? — Коне́чно, покорми́л!",
+              "options": [
+                "Both verbs are imperfective present tense.",
+                "Katya uses the imperfective past ('kormil') to ask whether the action happened at all today, while Max answers with the perfective past ('pokormil') to emphasize the completed result.",
+                "Max is saying he will feed the cat tomorrow."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Ask someone at home what they did this morning and answer using a pair like «де́лал / сде́лал», «ел / съел», or «корми́л / покорми́л»."
+        },
+        {
+          "id": "kukhnya-19",
+          "number": 19,
+          "title": "Я схожу́ за хле́бом",
+          "title_en": "I'll Run Out for Bread",
+          "after_page": "u19-p4",
+          "text": "— Ка́тя, я сейча́с иду́ гуля́ть, а по доро́ге зайду́ в пека́рню. Тебе́ что-нибу́дь купи́ть?\n— О, сходи́, пожа́луйста, за све́жим хле́бом! И возьми́ что-нибу́дь вку́сное к ча́ю.\n— Бу́лочки с кори́цей подойду́т?\n— О́чень! То́лько не ходи́ в тот ста́рый магази́н у па́рка, там хлеб невку́сный.\n— Хорошо́, я бы́стро схожу́ туда́ и обра́тно. Ско́ро бу́ду до́ма!",
+          "en": "— Katya, I'm going out for a walk right now, and on the way I'll drop by the bakery. Should I buy you anything?\n— Oh, please run out for some fresh bread! And get something tasty to go with tea.\n— Will cinnamon buns work?\n— Very much so! Just don't go to that old shop by the park, the bread there isn't good.\n— Okay, I'll quickly make the round trip there and back. I'll be home soon!",
+          "glosses": {
+            "катя": "Katya",
+            "сейчас": "right now",
+            "иду": "I am going (on foot)",
+            "по": "along, on ('po doroge': on the way)",
+            "дороге": "road, way ('po doroge': on the way)",
+            "зайду": "I will drop in, stop by (perfective future)",
+            "пекарню": "bakery (accusative of direction)",
+            "что-нибудь": "anything, something (open choice)",
+            "купить": "to buy",
+            "о": "oh!",
+            "сходи": "go (there and back)! (perfective imperative)",
+            "за": "for, to fetch (+ instrumental: 'skhodit' za khlebom' — to go get bread)",
+            "свежим": "fresh (instrumental masculine)",
+            "хлебом": "bread (instrumental after 'za': for bread)",
+            "возьми": "get, take! (perfective imperative)",
+            "вкусное": "tasty (neuter, agreeing with 'chto-nibud'')",
+            "к": "for, to accompany ('k chayu': to have with tea)",
+            "чаю": "tea (dative after 'k': with tea)",
+            "булочки": "buns, rolls",
+            "корицей": "cinnamon (instrumental after 's': with cinnamon)",
+            "подойдут": "will suit, will do, will work (perfective future)",
+            "только": "just, only",
+            "ходи": "go ('ne khodi': don't go)",
+            "тот": "that (masculine)",
+            "магазин": "shop, store",
+            "парка": "park (genitive after 'u': by the park)",
+            "невкусный": "not tasty, bad-tasting",
+            "быстро": "quickly",
+            "схожу": "I will go and come back (perfective future)",
+            "туда": "there ('tuda i obratno': there and back)",
+            "обратно": "back",
+            "скоро": "soon"
+          },
+          "notice": [
+            "«Сходи́ть за хле́бом» (to run out for bread, one round trip there and back) and «зайти́ в пека́рню» (to drop by the bakery on the way) — how motion prefixes work in real life.",
+            "«Что-нибу́дь вку́сное к ча́ю» (something tasty to go with tea) — Russian culturally groups pastries, sweets, and jam under the phrase «к ча́ю».",
+            "«Ско́ро бу́ду!» (I'll be back soon!) — the standard phrase as you step out the door."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— О, сходи́, пожа́луйста, за све́жим хле́бом! И возьми́ что-нибу́дь вку́сное к ча́ю.",
+              "options": [
+                "Katya asks Max to go get fresh bread and pick up something tasty to have with tea.",
+                "Katya tells Max that they already have plenty of fresh bread and buns at home.",
+                "Max asks Katya to bake cinnamon buns at home."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— То́лько не ходи́ в тот ста́рый магази́н у па́рка, там хлеб невку́сный.",
+              "options": [
+                "The old shop by the park has the best bread in the city.",
+                "Katya warns Max not to go to the old shop by the park because the bread there is not good.",
+                "The bakery is closed today."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Я бы́стро схожу́ туда́ и обра́тно.",
+              "options": [
+                "Max is moving to another city permanently.",
+                "Adding the prefix 's-' to 'khodit'' creates a perfective verb ('skhodit' / skhozhu') meaning a single round trip ('go there and come right back').",
+                "Max is going by train."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "You are heading out the door. Write what you would ask your housemate using «Я зайду́ в…», «Тебе́ что-нибу́дь купи́ть?», or «к ча́ю»."
+        },
+        {
+          "id": "kukhnya-20",
+          "number": 20,
+          "title": "Курье́р звони́т",
+          "title_en": "The Courier Is Calling",
+          "after_page": "u20-p4",
+          "text": "— Макс, у тебя́ звони́т телефо́н! Возьми́ тру́бку, у меня́ ру́ки в муке́ и воде́.\n— Алло́, здра́вствуйте! Да, я вас слу́шаю.\n— Здра́вствуйте! Э́то курье́р. Я привёз ва́шу посы́лку и проду́кты, но домофо́н внизу́ не рабо́тает. Откро́йте, пожа́луйста!\n— Да, коне́чно, сейча́с откро́ю! Поднима́йтесь на тре́тий эта́ж.\n— Ка́тя, курье́р уже́ идёт сюда́! Встреть его́ у две́ри, а я пока́ вы́мою ру́ки.",
+          "en": "— Max, your phone is ringing! Pick up the phone, my hands are covered in flour and water.\n— Hello! Yes, I'm listening.\n— Hello! This is the delivery courier. I've brought your parcel and groceries, but the intercom downstairs isn't working. Please buzz me in!\n— Yes, of course, I'll open it right now! Come up to the third floor.\n— Katya, the courier is already coming up here! Meet him at the door, and meanwhile I'll wash my hands.",
+          "glosses": {
+            "макс": "Max",
+            "звонит": "is ringing, is calling",
+            "телефон": "phone",
+            "возьми": "take, pick up! (perfective imperative)",
+            "трубку": "receiver, phone ('vzyat' trubku': to answer the phone)",
+            "руки": "hands",
+            "муке": "flour (prepositional: 'ruki v muke' — hands covered in flour)",
+            "воде": "water (prepositional: in water)",
+            "алло": "hello! (on the phone)",
+            "здравствуйте": "hello! (formal/polite greeting to 'vy')",
+            "вас": "you (polite accusative object)",
+            "слушаю": "I am listening ('ya vas slushayu': speaking / how can I help you?)",
+            "курьер": "delivery courier",
+            "привёз": "brought (by vehicle, past masculine)",
+            "вашу": "your (polite/plural feminine accusative)",
+            "посылку": "parcel, package (accusative)",
+            "продукты": "groceries, food items",
+            "домофон": "intercom, entry buzzer",
+            "внизу": "downstairs, below",
+            "откройте": "open! (polite imperative to 'vy')",
+            "конечно": "of course",
+            "сейчас": "right now",
+            "открою": "I will open (perfective future)",
+            "поднимайтесь": "come up, go up! (polite imperative)",
+            "третий": "third (masculine accusative)",
+            "этаж": "floor, storey",
+            "катя": "Katya",
+            "уже": "already",
+            "идёт": "is coming, walking",
+            "сюда": "here, up here",
+            "встреть": "meet! (informal perfective imperative to Katya)",
+            "его": "him (accusative)",
+            "двери": "door (genitive after 'u': at the door)",
+            "пока": "meanwhile",
+            "вымою": "I will wash (perfective future)"
+          },
+          "notice": [
+            "«Возьми́ тру́бку, у меня́ ру́ки в муке́!» — «ру́ки в + prepositional» means 'my hands are covered in (flour / water / soap)'.",
+            "«Здра́вствуйте! Откро́йте… Поднима́йтесь!» (formal «вы» with the courier on the phone) vs. «Возьми́ тру́бку! Встреть его́!» (informal «ты» between Katya and Max).",
+            "«У тебя́ звони́т телефо́н» — Russian says 'At you the phone is ringing' rather than 'Your phone is ringing'."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Макс, у тебя́ звони́т телефо́н! Возьми́ тру́бку, у меня́ ру́ки в муке́ и воде́.",
+              "options": [
+                "Katya asks Max to answer his ringing phone because her hands are covered in flour and water.",
+                "Katya calls the courier on the phone to order flour and water.",
+                "Max is making dough in the kitchen."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Э́то курье́р. Я привёз ва́шу посы́лку и проду́кты, но домофо́н внизу́ не рабо́тает. Откро́йте, пожа́луйста!",
+              "options": [
+                "The courier says he will deliver the parcel next week.",
+                "The courier has brought their parcel and groceries, and asks them to buzz him in because the downstairs intercom isn't working.",
+                "The courier is already on the fifth floor."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Поднима́йтесь на тре́тий эта́ж. … — Ка́тя, курье́р уже́ идёт сюда́! Встреть его́ у две́ри!",
+              "options": [
+                "Max uses polite plural 'vy' with both the courier and Katya.",
+                "Max uses the polite '-tes'' imperative ('Podnimaites'') with the courier on the phone, then immediately switches to the bare 'ty' imperative ('Vstret'') when speaking to Katya at home.",
+                "Both imperatives are imperfective."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "A courier calls on the phone with a delivery. Write what you say to the courier using «вы» («Здра́вствуйте», «Откро́ю», «Поднима́йтесь») and what you call out to your partner using «ты»."
+        },
+        {
+          "id": "kukhnya-21",
+          "number": 21,
+          "title": "Полови́на и реце́пт",
+          "title_en": "Half a Recipe",
+          "after_page": "u21-p4",
+          "text": "— Ка́тя, дава́й испечём я́блочный пиро́г! Что говори́т реце́пт?\n— Тут напи́сано на шесть челове́к: четы́реста гра́ммов муки́, сто гра́ммов ма́сла и два стака́на молока́.\n— Нас то́лько дво́е! Е́сли число́ чётное, то оно́ де́лится на два: возьмём две́сти гра́ммов муки́ и оди́н стака́н молока́.\n— Отли́чно, матема́тик! А что ты сде́лаешь с яйцо́м? В реце́пте три яйца́, а три на два не де́лится!\n— Зна́чит, возьмём два больши́х яйца́, а тре́тье отдади́м Ти́ме. Что и тре́бовалось доказа́ть!",
+          "en": "— Katya, let's bake an apple pie! What does the recipe say?\n— Here it says for six people: four hundred grams of flour, one hundred grams of butter, and two glasses of milk.\n— There are only two of us! If a number is even, then it is divisible by two: let's take two hundred grams of flour and one glass of milk.\n— Excellent, mathematician! And what will you do with the eggs? The recipe has three eggs, and three is not divisible by two!\n— So we'll take two big eggs, and give the third one to Tima. Quod erat demonstrandum!",
+          "glosses": {
+            "катя": "Katya",
+            "давай": "let's!",
+            "испечём": "we will bake ('davai ispechyom': let's bake)",
+            "яблочный": "apple (adjective, masculine)",
+            "пирог": "pie, cake",
+            "рецепт": "recipe",
+            "написано": "is written, it says",
+            "человек": "people (genitive plural after six)",
+            "четыреста": "four hundred",
+            "граммов": "grams (genitive plural)",
+            "муки": "flour (genitive)",
+            "масла": "butter (genitive)",
+            "стакана": "glasses, cups (genitive singular after two)",
+            "нас": "of us ('nas tol'ko dvoye': there are only two of us)",
+            "двое": "two (collective numeral: two people)",
+            "возьмём": "let's take, we will take (perfective future)",
+            "двести": "two hundred",
+            "стакан": "glass, cup",
+            "отлично": "excellent, great!",
+            "математик": "mathematician",
+            "сделаешь": "you will do (perfective future)",
+            "яйцом": "egg (instrumental after 's': with the egg)",
+            "рецепте": "recipe (prepositional: in the recipe)",
+            "яйца": "eggs (genitive singular after two, three)",
+            "больших": "big, large (genitive plural)",
+            "третье": "the third one (neuter, agreeing with 'yaitso')",
+            "отдадим": "we will give away (perfective future)",
+            "тиме": "to Tima (dative)",
+            "требовалось": "was required",
+            "доказать": "to prove",
+            "только": "only"
+          },
+          "notice": [
+            "«Нас то́лько дво́е» (There are only two of us) — collective numerals («дво́е», «тро́е») with genitive pronouns («нас», «вас») count how many people are in a group.",
+            "«Возьмём две́сти гра́ммов» — 1st-person plural perfective («возьмём», «испечём») works both with «дава́й» and on its own to mean 'let's take / let's bake'.",
+            "«Четы́реста гра́ммов муки́, два стака́на молока́» — container and weight words take the genitive of the ingredient."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Е́сли число́ чётное, то оно́ де́лится на два: возьмём две́сти гра́ммов муки́ и оди́н стака́н молока́.",
+              "options": [
+                "Max halves the even quantities in the recipe because there are only two of them instead of six.",
+                "Max doubles the recipe to bake two pies for twelve people.",
+                "They decide not to bake the pie because they have no flour."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— В реце́пте три яйца́, а три на два не де́лится! — Зна́чит, возьмём два больши́х яйца́, а тре́тье отдади́м Ти́ме.",
+              "options": [
+                "They put all three eggs into the pie.",
+                "Since three isn't divisible by two, Max decides to use two large eggs for the pie and give the third to Tima.",
+                "They have no eggs in the fridge."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Нас то́лько дво́е!",
+              "options": [
+                "It means 'We have two pies.'",
+                "Russian expresses 'There are only two of us' with the genitive pronoun 'nas' plus the collective numeral 'dvoye'.",
+                "It is a past-tense sentence."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Scale a simple kitchen recipe in Russian using «возьмём», «де́лится на два», and «стака́н молока́»."
+        },
+        {
+          "id": "kukhnya-22",
+          "number": 22,
+          "title": "Заче́м и почему́",
+          "title_en": "What For and Why",
+          "after_page": "u22-p4",
+          "text": "— Ка́тя, почему́ ты вы́ключила ча́йник, но ещё не налила́ чай?\n— Потому́ что я снача́ла хочу́ согре́ть зава́рочный ча́йник. Что́бы чай был вку́сным, ну́жно подожда́ть пять мину́т!\n— А заче́м ты доста́ла мёд и имби́рь?\n— Зате́м, что на у́лице сего́дня ве́тер и дождь! Нам ну́жно пить горя́чий чай с мёдом, что́бы не заболе́ть.\n— Ка́жется, му́дрость начина́ется на ку́хне!",
+          "en": "— Katya, why did you turn off the kettle, yet haven't poured the tea?\n— Because first I want to warm the teapot. For the tea to be tasty, we need to wait five minutes!\n— And what did you take out the honey and ginger for?\n— Because outside today there is wind and rain! We need to drink hot tea with honey in order not to get sick.\n— It seems wisdom begins in the kitchen!",
+          "glosses": {
+            "катя": "Katya",
+            "выключила": "turned off (past feminine)",
+            "чайник": "kettle, teapot",
+            "налила": "poured (past feminine)",
+            "потому": "because ('potomu chto')",
+            "сначала": "first, at first",
+            "хочу": "I want",
+            "согреть": "to warm up (perfective infinitive)",
+            "заварочный": "brewing ('zavarochnyi chainik': teapot for steeping tea leaves)",
+            "был": "was, would be ('chtoby chai byl': so that the tea is)",
+            "вкусным": "tasty (instrumental after 'byl')",
+            "подождать": "to wait (perfective infinitive)",
+            "минут": "minutes (genitive plural)",
+            "зачем": "what for, for what purpose",
+            "достала": "took out, got out (past feminine)",
+            "мёд": "honey",
+            "имбирь": "ginger",
+            "затем": "for that purpose ('zatem, chto': because / so that)",
+            "улице": "outside, street ('na ulitse': outside)",
+            "ветер": "wind",
+            "дождь": "rain",
+            "нам": "for us, we ('nam nuzhno': we need)",
+            "пить": "to drink",
+            "горячий": "hot (masculine)",
+            "мёдом": "honey (instrumental after 's': with honey)",
+            "заболеть": "to fall ill, to get sick (perfective infinitive)",
+            "начинается": "begins",
+            "кухне": "kitchen (prepositional: in the kitchen)"
+          },
+          "notice": [
+            "«Почему́?» (Why — asking the cause) vs. «Заче́м?» (What for — asking the purpose/goal).",
+            "«Что́бы не заболе́ть» (in order not to get sick, same subject → infinitive) vs. «Что́бы чай был вку́сным» (so that the tea is tasty, different subject → past-tense form «был»!).",
+            "«Ча́йник» (the kettle that boils water) vs. «зава́рочный ча́йник» (the small teapot for steeping loose tea)."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Потому́ что я снача́ла хочу́ согре́ть зава́рочный ча́йник. Что́бы чай был вку́сным, ну́жно подожда́ть пять мину́т!",
+              "options": [
+                "Katya warms the teapot first and explains that waiting five minutes makes the tea tasty.",
+                "Katya forgot to turn on the kettle, so the water is still cold.",
+                "Max prefers cold tea without honey."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Нам ну́жно пить горя́чий чай с мёдом, что́бы не заболе́ть.",
+              "options": [
+                "They are drinking cold juice because it is hot outside.",
+                "Because it is windy and rainy outside, they need to drink hot tea with honey so they don't get sick.",
+                "They have no honey or ginger at home."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Что́бы чай был вку́сным, ну́жно подожда́ть пять мину́т!",
+              "options": [
+                "The verb 'byl' means the tea was tasty yesterday.",
+                "After 'chtoby' ('in order that'), when the clause has its own subject ('chai'), Russian uses the '-l' form ('byl') as a subjunctive ('so that the tea would be tasty') rather than past tense.",
+                "It is an imperative command."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Write one sentence with «что́бы + infinitive» and one with «почему́ / потому́ что» about something you do in the kitchen."
+        },
+        {
+          "id": "kukhnya-23",
+          "number": 23,
+          "title": "Оди́н ко́рень на ку́хне",
+          "title_en": "One Root in the Kitchen",
+          "after_page": "u23-p6",
+          "text": "— Ка́тя, я учу́ ру́сские приста́вки, но на ку́хне всё звучи́т одина́ково: вари́ть, свари́ть, завари́ть, перевари́ть…\n— Смотри́, э́то же чи́стая ло́гика и систе́ма! Ко́рень «вар-»: я свари́ла ка́шу, ты завари́л све́жий чай, а макаро́ны нельзя́ перевари́ть!\n— А сло́во «варе́нье» — то́же э́тот ко́рень?\n— Коне́чно! Я́годы до́лго вари́ли с са́харом — вот тебе́ и варе́нье!\n— Зна́чит, приста́вка — э́то фу́нкция, а ко́рень — её аргуме́нт! Дава́й пить чай с варе́ньем!",
+          "en": "— Katya, I'm learning Russian prefixes, but in the kitchen everything sounds identical: 'varit'', 'svarit'', 'zavarit'', 'perevarit''…\n— Look, it's pure logic and a system! The root is 'var-' (boil/cook): I cooked the porridge, you brewed fresh tea, and pasta must not be overcooked!\n— And does the word 'varen'ye' (jam) have this root too?\n— Of course! Berries were boiled for a long time with sugar — and there you have jam!\n— That means the prefix is a function, and the root is its argument! Let's drink tea with jam!",
+          "glosses": {
+            "катя": "Katya",
+            "учу": "I am learning, studying",
+            "русские": "Russian (plural)",
+            "приставки": "prefixes",
+            "кухне": "kitchen (prepositional: in the kitchen)",
+            "звучит": "sounds (it)",
+            "одинаково": "the same, identically",
+            "варить": "to boil, to cook (imperfective)",
+            "сварить": "to cook, boil to completion (prefix 's-')",
+            "заварить": "to brew, steep (tea or coffee, prefix 'za-')",
+            "переварить": "to overcook, boil too long (prefix 'pere-')",
+            "смотри": "look! (imperative)",
+            "же": "after all, really! (emphatic particle)",
+            "чистая": "pure (feminine)",
+            "корень": "root (of a word)",
+            "вар": "var- (the root meaning 'boil/cook')",
+            "сварила": "cooked, boiled (perfective past feminine)",
+            "кашу": "porridge (accusative object)",
+            "заварил": "brewed, steeped (perfective past masculine)",
+            "свежий": "fresh (masculine)",
+            "макароны": "pasta",
+            "нельзя": "one must not, it is forbidden/impossible",
+            "варенье": "jam, fruit preserves",
+            "этот": "this (masculine)",
+            "конечно": "of course",
+            "ягоды": "berries",
+            "варили": "boiled (they boiled / were boiled)",
+            "сахаром": "sugar (instrumental after 's': with sugar)",
+            "приставка": "prefix",
+            "её": "its, her",
+            "давай": "let's!",
+            "пить": "to drink",
+            "вареньем": "jam (instrumental after 's': with jam)"
+          },
+          "notice": [
+            "One kitchen root «вар-» (boil): «вари́ть» (boil), «свари́ть суп» (cook soup), «завари́ть чай» (steep tea), «перевари́ть макаро́ны» (overcook pasta), «варе́нье» (jam).",
+            "«Вот тебе́ и варе́нье!» (And there you have jam!) — idiomatic ethical dative «вот тебе́ и X» meaning 'and voilà, you get X!'.",
+            "«Нельзя́ перевари́ть» — «нельзя́ + perfective infinitive» means 'you mustn't / shouldn't'."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Ко́рень «вар-»: я свари́ла ка́шу, ты завари́л све́жий чай, а макаро́ны нельзя́ перевари́ть!",
+              "options": [
+                "Katya shows how different prefixes on the root 'var-' distinguish cooking porridge, steeping tea, and overcooking pasta.",
+                "Katya says all four verbs mean the exact same thing.",
+                "Max overcooked the porridge and spilled the tea."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— А сло́во «варе́нье» — то́же э́тот ко́рень? — Коне́чно! Я́годы до́лго вари́ли с са́харом — вот тебе́ и варе́нье!",
+              "options": [
+                "Jam is bought raw and never boiled.",
+                "The word for jam ('varen'ye') comes from the same root because berries are boiled with sugar.",
+                "They have no jam or sugar at home."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Я́годы до́лго вари́ли с са́харом — вот тебе́ и варе́нье!",
+              "options": [
+                "A specific group of friends boiled berries yesterday.",
+                "A 3rd-person plural verb ('varili') with no pronoun subject is Russian's natural spoken passive ('berries were boiled / people boiled berries').",
+                "It is a command to boil berries right now."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Pick a kitchen root («вар-» or «рез-») and write two sentences contrasting two prefixes (like «свари́ть» vs. «завари́ть»)."
+        },
+        {
+          "id": "kukhnya-24",
+          "number": 24,
+          "title": "К нам иду́т го́сти",
+          "title_en": "Guests Are Coming Over",
+          "after_page": "u24-p5",
+          "text": "— Макс, у нас оста́лось ма́ло вре́мени: к нам че́рез час иду́т го́сти!\n— Я уже́ накрыва́ю на стол! Скажи́, ско́лько таре́лок ста́вить?\n— Поста́вь четы́ре больши́е таре́лки для госте́й и для нас, а ря́дом с таре́лками положи́ ви́лки, ножи́ и салфе́тки.\n— Гото́во! А чем па́хнет из духо́вки? Пирого́м с гриба́ми?\n— Да! И не забу́дь доста́ть из холоди́льника сок и ми́ску с сала́том.",
+          "en": "— Max, we have little time left: guests are coming to our place in an hour!\n— I'm already setting the table! Tell me, how many plates should I put out?\n— Put out four big plates for the guests and for us, and next to the plates lay the forks, knives, and napkins.\n— Done! And what smells so good from the oven? Mushroom pie?\n— Yes! And don't forget to take the juice and the salad bowl out of the fridge.",
+          "glosses": {
+            "макс": "Max",
+            "нас": "us ('u nas': we have; 'dlya nas': for us)",
+            "осталось": "is left, remains (neuter past)",
+            "времени": "time (genitive after 'malo')",
+            "к": "to ('k nam': to our place, over to see us)",
+            "через": "in (after a time span)",
+            "час": "an hour",
+            "идут": "are coming (on foot)",
+            "гости": "guests",
+            "уже": "already",
+            "накрываю": "I am setting ('nakryvat' na stol': to set the table)",
+            "скажи": "tell me! (imperative)",
+            "тарелок": "plates (genitive plural after 'skol'ko')",
+            "ставить": "to put, set out (infinitive question: 'should I put out?')",
+            "поставь": "put, set out! (perfective imperative)",
+            "большие": "big (plural)",
+            "для": "for (+ genitive)",
+            "гостей": "guests (genitive plural after 'dlya')",
+            "рядом": "next to ('ryadom s' + instrumental)",
+            "тарелками": "plates (instrumental plural: next to the plates)",
+            "положи": "lay, put down! (perfective imperative)",
+            "вилки": "forks",
+            "ножи": "knives",
+            "салфетки": "napkins",
+            "готово": "done, ready!",
+            "чем": "with what, of what (instrumental: 'chem pakhnet' — what does it smell like?)",
+            "пахнет": "smells (impersonal)",
+            "духовки": "oven (genitive after 'iz': from the oven)",
+            "пирогом": "pie (instrumental: smells of pie)",
+            "грибами": "mushrooms (instrumental plural after 's': with mushrooms)",
+            "забудь": "forget ('ne zabud'': don't forget!)",
+            "достать": "to take out, get out",
+            "холодильника": "fridge (genitive after 'iz': out of the fridge)",
+            "миску": "bowl (accusative)",
+            "салатом": "salad (instrumental after 's': with salad)"
+          },
+          "notice": [
+            "«Накрыва́ть на стол» (to set the table) and «убира́ть со стола́» (to clear the table) — core table-setting verbs.",
+            "«Поста́вь таре́лки, а ря́дом с таре́лками положи́ ви́лки и ножи́» — Russian puts plates/cups with «поста́вить», but lays flat cutlery/napkins with «положи́ть».",
+            "«Чем па́хнет? — Пирого́м с гриба́ми!» — «па́хнуть» (to smell of) takes the instrumental case!"
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Поста́вь четы́ре больши́е таре́лки для госте́й и для нас, а ря́дом с таре́лками положи́ ви́лки, ножи́ и салфе́тки.",
+              "options": [
+                "Katya tells Max how to set the table for four with plates, forks, knives, and napkins.",
+                "Katya asks Max to wash the dishes after the guests leave.",
+                "Only two people are having dinner tonight."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— А чем па́хнет из духо́вки? Пирого́м с гриба́ми? — Да! И не забу́дь доста́ть из холоди́льника сок и ми́ску с сала́том.",
+              "options": [
+                "The mushroom pie is in the fridge and the salad is in the oven.",
+                "A mushroom pie is baking in the oven, and Katya reminds Max to get the juice and salad out of the fridge.",
+                "They forgot to buy mushrooms and juice."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— А чем па́хнет из духо́вки? Пирого́м с гриба́ми?",
+              "options": [
+                "The pie is cutting the mushrooms with a knife.",
+                "The verb 'pakhnut'' ('to smell of') governs the instrumental case, so both the question word ('chem') and the answer ('pirogom') stand in the instrumental.",
+                "It is a dative construction."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Describe setting the table at home using «для», «ря́дом с», and «с» (all three cases!)."
+        },
+        {
+          "id": "kukhnya-25",
+          "number": 25,
+          "title": "Не тро́гай, горя́чо!",
+          "title_en": "Don't Touch, It's Hot!",
+          "after_page": "u25-p4",
+          "text": "— Ой, Макс, осторо́жно! Не тро́гай про́тивень рука́ми, он о́чень горя́чий!\n— Сейча́с возьму́ прихва́тку и доста́ну пиро́г из духо́вки. Куда́ его́ поста́вить?\n— Поста́вь сюда́ на до́ску и пока́ не режь: пусть он немно́го осты́нет.\n— А го́сти уже́ здесь! Проходи́те, пожа́луйста, сади́тесь за стол и бери́те сала́т!\n— Спаси́бо! Како́й краси́вый пиро́г — сейча́с попро́буем!",
+          "en": "— Oh, Max, careful! Don't touch the baking tray with your bare hands, it's very hot!\n— I'll grab an oven mitt right now and take the pie out of the oven. Where should I put it?\n— Put it here on the board and don't cut it yet: let it cool down a little.\n— And the guests are already here! Come on in, please, sit down at the table and help yourselves to the salad!\n— Thank you! What a beautiful pie — we'll try it right now!",
+          "glosses": {
+            "ой": "oh, watch out!",
+            "макс": "Max",
+            "осторожно": "careful, watch out!",
+            "трогай": "touch ('ne trogai': don't touch! imperfective prohibition)",
+            "противень": "baking sheet, oven tray",
+            "руками": "with (bare) hands (instrumental plural)",
+            "горячий": "hot (masculine)",
+            "сейчас": "right now",
+            "возьму": "I will take (perfective future)",
+            "прихватку": "oven mitt, potholder (accusative)",
+            "достану": "I will take out (perfective future)",
+            "пирог": "pie",
+            "духовки": "oven (genitive: out of the oven)",
+            "его": "it (accusative)",
+            "поставить": "to put, set down",
+            "поставь": "put, set! (perfective imperative)",
+            "сюда": "here",
+            "доску": "cutting board (accusative object)",
+            "режь": "cut ('poka ne rezh'': don't cut it yet! imperfective prohibition)",
+            "пусть": "let ('pust' ostynet': let it cool down)",
+            "остынет": "will cool down (perfective future)",
+            "гости": "guests",
+            "уже": "already",
+            "проходите": "come on in! (imperfective polite imperative: invitation)",
+            "садитесь": "sit down, take a seat! (imperfective polite imperative: invitation)",
+            "за": "at ('sadites' za stol': sit down at the table)",
+            "берите": "take, help yourselves! (imperfective polite imperative: invitation)",
+            "салат": "salad",
+            "какой": "what a! (masculine exclamatory)",
+            "красивый": "beautiful, lovely (masculine)",
+            "попробуем": "we will try, taste (perfective future)"
+          },
+          "notice": [
+            "Aspect in kitchen imperatives: 1) Single action → PERFECTIVE («Поста́вь на до́ску!»), 2) Prohibition → IMPERFECTIVE («Не тро́гай! Пока́ не режь!»), 3) Hospitable invitation to guests → IMPERFECTIVE («Проходи́те, сади́тесь, бери́те!»).",
+            "«Осторо́жно!» (Careful! / Watch out!) — the first word to know near a hot stove.",
+            "«Пусть он немно́го осты́нет» (Let it cool down a bit) — «пусть» isn't only for math proofs; in the kitchen it means 'let it (sit / cool / boil)'."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Ой, Макс, осторо́жно! Не тро́гай про́тивень рука́ми, он о́чень горя́чий!",
+              "options": [
+                "Katya warns Max not to touch the hot baking tray with his bare hands.",
+                "Katya asks Max to wash the cold baking tray in the sink.",
+                "Max drops the pie on the floor."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Поста́вь сюда́ на до́ску и пока́ не режь: пусть он немно́го осты́нет.",
+              "options": [
+                "Cut the pie immediately while it is boiling hot.",
+                "Set the pie on the board and don't slice it yet so it can cool down a little.",
+                "Put the hot pie straight into the fridge."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Проходи́те, пожа́луйста, сади́тесь за стол и бери́те сала́т!",
+              "options": [
+                "Max is prohibiting the guests from sitting down.",
+                "When welcoming guests to the table, Russian uses imperfective imperatives ('Prokhodite, sadites', berite!') because perfective imperatives sound like abrupt commands rather than warm invitations.",
+                "Max is speaking to one child using 'ty'."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Write three kitchen imperatives: one single request (perfective), one 'don't!' (imperfective with «не»), and one warm invitation to a guest."
+        },
+        {
+          "id": "kukhnya-26",
+          "number": 26,
+          "title": "Полчаса́ до у́жина",
+          "title_en": "Half an Hour Until Dinner",
+          "after_page": "u26-p5",
+          "text": "— Макс, кото́рый сейча́с час? Я не ви́жу часы́.\n— Сейча́с без двадцати́ семь. До у́жина ещё полчаса́.\n— Отли́чно! Я то́лько что пришла́ с ры́нка: купи́ла два килогра́мма я́блок, па́чку ма́сла и буты́лку молока́.\n— Ско́лько сто́ят я́блоки на ры́нке?\n— Сто пятьдеся́т рубле́й за килогра́мм — совсе́м дёшево и о́чень вку́сно! Помоги́ мне разобра́ть су́мку.",
+          "en": "— Max, what time is it right now? I can't see the clock.\n— Right now it's twenty to seven. There's still half an hour until dinner.\n— Great! I just got back from the market: I bought two kilograms of apples, a pack of butter, and a bottle of milk.\n— How much do apples cost at the market?\n— One hundred and fifty roubles a kilogram — really cheap and very tasty! Help me unpack the bag.",
+          "glosses": {
+            "макс": "Max",
+            "который": "which ('kotoryi chas': what time is it?)",
+            "вижу": "I see",
+            "часы": "clock, watch (always plural)",
+            "без": "without, to (in telling time: 'bez dvadtsati sem'' — twenty to seven)",
+            "двадцати": "twenty (genitive after 'bez')",
+            "до": "until (+ genitive)",
+            "ужина": "dinner (genitive: until dinner)",
+            "отлично": "great, excellent!",
+            "пришла": "came, arrived on foot (past feminine)",
+            "рынка": "market (genitive after 's': from the market)",
+            "купила": "bought (past feminine)",
+            "килограмма": "kilograms (genitive singular after two)",
+            "яблок": "apples (genitive plural)",
+            "пачку": "pack (accusative)",
+            "масла": "butter (genitive)",
+            "бутылку": "bottle (accusative)",
+            "яблоки": "apples (nominative plural)",
+            "рынке": "market (prepositional: at the market)",
+            "за": "per, for (+ accusative: 'za kilogramm' — per kilogram)",
+            "килограмм": "kilogram",
+            "совсем": "quite, really, totally",
+            "помоги": "help! (perfective imperative)",
+            "разобрать": "to unpack, sort out (perfective infinitive)",
+            "сумку": "bag (accusative object)"
+          },
+          "notice": [
+            "«Без двадцати́ семь» (Literally 'seven without twenty' = 6:40) — how spoken Russian tells time in the second half of the hour.",
+            "«Я то́лько что пришла́» (I just arrived) — «то́лько что» + past tense means 'just now / a moment ago'.",
+            "«Помоги́ мне разобра́ть су́мку» (Help me unpack the bag) — «разобра́ть су́мку / паке́ты» is what you do when you come home with groceries."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Я то́лько что пришла́ с ры́нка: купи́ла два килогра́мма я́блок, па́чку ма́сла и буты́лку молока́.",
+              "options": [
+                "Katya just returned from the market with two kilos of apples, a pack of butter, and a bottle of milk.",
+                "Katya is about to go to the market in half an hour.",
+                "Max bought apples and milk yesterday."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Сто пятьдеся́т рубле́й за килогра́мм — совсе́м дёшево и о́чень вку́сно! Помоги́ мне разобра́ть су́мку.",
+              "options": [
+                "The apples were very expensive and sour.",
+                "The apples cost 150 roubles per kilo, which is cheap and tasty, and Katya asks Max to help unpack her bag.",
+                "Katya left her bag at the market."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Сейча́с без двадцати́ семь. До у́жина ещё полчаса́.",
+              "options": [
+                "It is 7:20 in the evening.",
+                "Russian says 'bez dvadtsati sem'' ('seven minus twenty minutes', i.e. 6:40), so dinner is at 7:10.",
+                "It is twenty minutes past midnight."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Say what time it is right now and list three things you bought at the shop or market with their quantities."
+        },
+        {
+          "id": "kukhnya-27",
+          "number": 27,
+          "title": "Како́й ко́фе лу́чше?",
+          "title_en": "Which Coffee Is Better?",
+          "after_page": "u27-p5",
+          "text": "— Ка́тя, како́й ко́фе ты сего́дня хо́чешь: тот, кото́рый в ту́рке, и́ли из кофемаши́ны?\n— Свари́, пожа́луйста, в ту́рке! Он намно́го вкусне́е и кре́пче, чем из маши́ны.\n— Ты права́, я то́же согла́сен. Но для э́того мне нужна́ ма́ленькая ло́жка и холо́дная вода́.\n— Возьми́ ту ло́жку, кото́рая лежи́т у ча́йника. А мне сего́дня ну́жен са́мый кре́пкий ко́фе: впереди́ тру́дный день!\n— Сейча́с бу́дет гото́во, сади́сь!",
+          "en": "— Katya, which coffee do you want today: the one in the cezve, or from the coffee machine?\n— Brew it in the cezve, please! It is much tastier and stronger than from the machine.\n— You're right, I agree too. But for that I need a small spoon and cold water.\n— Take that spoon that's lying by the kettle. Today I need the strongest coffee: there's a hard day ahead!\n— It'll be ready right now, sit down!",
+          "glosses": {
+            "катя": "Katya",
+            "какой": "which, what kind of (masculine)",
+            "хочешь": "you want",
+            "турке": "cezve, Turkish coffee pot (prepositional: in the cezve)",
+            "кофемашины": "coffee machine (genitive after 'iz': from the coffee machine)",
+            "свари": "brew, cook! (perfective imperative)",
+            "намного": "much, by far (with a comparative: 'namnogo vkusneye' — much tastier)",
+            "вкуснее": "tastier, more delicious",
+            "крепче": "stronger (comparative)",
+            "машины": "machine (genitive: from the machine)",
+            "этого": "this, that (genitive after 'dlya': for that)",
+            "маленькая": "small (feminine)",
+            "холодная": "cold (feminine)",
+            "возьми": "take! (perfective imperative)",
+            "ту": "that (feminine accusative)",
+            "ложку": "spoon (accusative)",
+            "лежит": "is lying",
+            "чайника": "kettle (genitive after 'u': by the kettle)",
+            "крепкий": "strong (of coffee or tea)",
+            "впереди": "ahead",
+            "готово": "ready (сейчас будет готово: it'll be ready in a moment)",
+            "садись": "sit down! (imperative)",
+            "для": "for (+ genitive)",
+            "согласен": "agreed, I agree (short adjective, said by a man)"
+          },
+          "notice": [
+            "«Свари́ть ко́фе в ту́рке» — in Russian, you don't just 'make' coffee; you 'boil/brew' it («вари́ть / свари́ть ко́фе»), often in a «ту́рка» (cezve).",
+            "«Он намно́го вкусне́е и кре́пче, чем…» — «намно́го» + comparative means 'much (tastier / stronger)'.",
+            "«Мне нужна́ ло́жка» (feminine) vs. «Мне ну́жен ко́фе» (masculine!) — «ну́жен / нужна́ / ну́жно» agrees with the thing needed, and «ко́фе» takes masculine agreement."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Свари́, пожа́луйста, в ту́рке! Он намно́го вкусне́е и кре́пче, чем из маши́ны.",
+              "options": [
+                "Katya asks Max to brew the coffee in the cezve because it is much tastier and stronger than from the machine.",
+                "Katya prefers weak coffee from the coffee machine.",
+                "They decide to drink tea instead of coffee today."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Возьми́ ту ло́жку, кото́рая лежи́т у ча́йника. А мне сего́дня ну́жен са́мый кре́пкий ко́фе: впереди́ тру́дный день!",
+              "options": [
+                "There are no clean spoons in the kitchen.",
+                "Katya points Max to the spoon lying by the kettle and says she needs the strongest coffee for a tough day ahead.",
+                "Katya is going back to sleep because today is Sunday."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Но для э́того мне нужна́ ма́ленькая ло́жка… — А мне сего́дня ну́жен са́мый кре́пкий ко́фе!",
+              "options": [
+                "'Nuzhna' is used by women and 'nuzhen' is used by men.",
+                "In 'mne nuzhen/nuzhna X', the grammatical subject is the thing needed, so 'lozhka' (feminine) requires 'nuzhna' while 'kofe' (masculine) requires 'nuzhen', regardless of the speaker's gender.",
+                "Both sentences are in the past tense."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Compare two drinks or foods in your kitchen using «лу́чше, чем» or «вкусне́е, чем», and say what you need using «мне ну́жен / нужна́ / ну́жно»."
+        },
+        {
+          "id": "kukhnya-28",
+          "number": 28,
+          "title": "Молоко́ убежа́ло!",
+          "title_en": "The Milk Boiled Over!",
+          "after_page": "u28-p5",
+          "text": "— Ка́тя, чем э́то так стра́нно па́хнет на ку́хне?\n— Ой, молоко́ убежа́ло! Я же поста́вила кастрю́лю на плиту́ и отверну́лась на одну́ секу́нду!\n— Де́ло в том, что молоко́ всегда́ ждёт тот моме́нт, когда́ ты отвора́чиваешься!\n— Ты ведь да́же не смеёшься, ты говори́шь серьёзно!\n— Коне́чно: э́то зако́н приро́ды! Ла́дно, не расстра́ивайся, дава́й тря́пку — плиту́ вы́тру я.",
+          "en": "— Katya, what is that strange smell in the kitchen?\n— Oh no, the milk boiled over! I put the saucepan on the stove and turned away for one second!\n— The thing is, milk always waits for the exact moment when you turn away!\n— You aren't even laughing, after all — you're saying that seriously!\n— Of course: it's a law of nature! Alright, don't be upset, hand me the cloth — I'll wipe the stove.",
+          "glosses": {
+            "катя": "Katya",
+            "чем": "of what ('chem pakhnet': what is that smell?)",
+            "пахнет": "it smells",
+            "кухне": "kitchen (prepositional: in the kitchen)",
+            "ой": "oh no!",
+            "убежало": "boiled over (literally 'ran away', neuter past)",
+            "поставила": "put, set (past feminine)",
+            "кастрюлю": "saucepan (accusative)",
+            "плиту": "stove (accusative: onto the stove; direct object: wipe the stove)",
+            "отвернулась": "turned away (reflexive past feminine)",
+            "одну": "one (feminine accusative)",
+            "секунду": "second (accusative)",
+            "дело": "the thing, the matter ('delo v tom, chto': the thing is that)",
+            "том": "that ('delo v tom, chto': the thing is that)",
+            "всегда": "always",
+            "момент": "moment",
+            "отворачиваешься": "you turn away (imperfective reflexive present)",
+            "смеёшься": "you are laughing",
+            "серьёзно": "seriously",
+            "конечно": "of course",
+            "закон": "law",
+            "природы": "of nature (genitive)",
+            "ладно": "alright",
+            "расстраивайся": "get upset ('ne rasstraivaisya': don't be upset!)",
+            "давай": "hand me, give me",
+            "тряпку": "cloth, rag (accusative object)",
+            "вытру": "I will wipe (perfective future)",
+            "говоришь": "you say, you are saying (ты)"
+          },
+          "notice": [
+            "«Молоко́ убежа́ло!» (Literally 'The milk ran away!') — the universal Russian idiom for milk or coffee boiling over on the stove.",
+            "«Не расстра́ивайся!» (Don't be upset / don't worry about it!) — essential comforting reflexive imperative when someone spills or breaks something.",
+            "«Плиту́ вы́тру я!» — putting the subject «я» at the very end puts full contrastive stress on it ('*I'll* be the one to wipe the stove')."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Ой, молоко́ убежа́ло! Я же поста́вила кастрю́лю на плиту́ и отверну́лась на одну́ секу́нду!",
+              "options": [
+                "The milk boiled over on the stove the moment Katya turned her back for one second.",
+                "Tima the cat drank all the milk from the saucepan.",
+                "Katya forgot to take the milk out of the fridge."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Ла́дно, не расстра́ивайся, дава́й тря́пку — плиту́ вы́тру я.",
+              "options": [
+                "Max tells Katya to clean the stove herself while he reads.",
+                "Max tells Katya not to be upset, asks for the cloth, and insists on wiping the stove himself.",
+                "They decide to buy a new stove."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Дава́й тря́пку — плиту́ вы́тру я.",
+              "options": [
+                "It is a question asking who wiped the stove.",
+                "In Russian word order (theme → rheme), moving the known object ('plitu') to the front and placing 'ya' at the very end puts the spotlight on who will do it: 'I am the one who will wipe the stove.'",
+                "It means the stove is already clean."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Something spilled or boiled over in the kitchen. Write a reassuring reply using «не расстра́ивайся», «де́ло в том, что», and emphatic word order («… сде́лаю я»)."
+        },
+        {
+          "id": "kukhnya-29",
+          "number": 29,
+          "title": "Теоре́ма о чи́стой ра́ковине",
+          "title_en": "The Theorem of the Clean Sink",
+          "after_page": "u29-p4",
+          "text": "— Макс, в ра́ковине опя́ть лежи́т гря́зная ча́шка и́з-под ко́фе! Ты говори́шь, что не пил ко́фе днём?\n— Предполо́жим, что я его́ не пил. Пусть мно́жество люде́й в на́шей кварти́ре состои́т из двух элеме́нтов: ты и я.\n— Допу́стим. Но я пила́ то́лько зелёный чай, а кот Ти́ма ко́фе не пьёт!\n— Тогда́ ча́шка не принадлежи́т ни тебе́, ни коту́, отку́да сле́дует, что ко́фе пил я. Получа́ем противоре́чие с мое́й па́мятью!\n— Сле́довательно, посу́ду мо́ет а́втор теоре́мы. Что и тре́бовалось доказа́ть!",
+          "en": "— Max, there's a dirty coffee cup lying in the sink again! Do you say you didn't drink coffee this afternoon?\n— Suppose that I didn't drink it. Let the set of people in our apartment consist of two elements: you and me.\n— Granted. But I only drank green tea, and Tima the cat doesn't drink coffee!\n— Then the cup belongs neither to you nor to the cat, from which it follows that I drank the coffee. We obtain a contradiction with my memory!\n— Therefore, the author of the theorem washes the dishes. Quod erat demonstrandum!",
+          "glosses": {
+            "макс": "Max",
+            "раковине": "sink (prepositional: in the sink)",
+            "лежит": "is lying",
+            "грязная": "dirty (feminine)",
+            "из-под": "from, used for ('chashka iz-pod kofe': a cup that had coffee in it)",
+            "говоришь": "you say",
+            "пил": "drank (past masculine)",
+            "его": "it (accusative)",
+            "людей": "of people (genitive plural)",
+            "нашей": "our (prepositional feminine)",
+            "квартире": "apartment, flat (prepositional: in our apartment)",
+            "состоит": "consists ('sostoyat' iz': to consist of)",
+            "двух": "two (genitive)",
+            "элементов": "elements (genitive plural)",
+            "допустим": "granted, let us assume",
+            "пила": "drank (past feminine)",
+            "зелёный": "green (masculine)",
+            "тима": "Tima",
+            "пьёт": "drinks",
+            "ни": "neither … nor ('ni tebe, ni kotu')",
+            "коту": "to the cat (dative)",
+            "моей": "my (instrumental feminine)",
+            "памятью": "memory (instrumental after 's': with my memory)",
+            "посуду": "the dishes (accusative)",
+            "моет": "washes",
+            "автор": "author",
+            "теоремы": "of the theorem (genitive)",
+            "требовалось": "was required",
+            "доказать": "to prove",
+            "откуда": "from where; here: from which (отку́да сле́дует — from which it follows)"
+          },
+          "notice": [
+            "«Ча́шка и́з-под ко́фе» / «ба́нка и́з-под варе́нья» — the compound preposition «и́з-под + genitive» names a container by what used to be inside it ('a dirty coffee cup', 'an empty jam jar').",
+            "«Допу́стим» (Granted / Suppose so) — used both in formal mathematics and in everyday skeptical conversation.",
+            "«Посу́ду мо́ет а́втор теоре́мы» — object first, subject last, delivering the punchline on who washes the dishes."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Тогда́ ча́шка не принадлежи́т ни тебе́, ни коту́, отку́да сле́дует, что ко́фе пил я. Получа́ем противоре́чие с мое́й па́мятью!",
+              "options": [
+                "By elimination, since neither Katya nor the cat drank coffee, Max proves that he must have drunk it himself despite forgetting.",
+                "Max proves that Tima the cat drank the coffee.",
+                "Katya admits that she drank the coffee at lunch."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Сле́довательно, посу́ду мо́ет а́втор теоре́мы. Что и тре́бовалось доказа́ть!",
+              "options": [
+                "Katya washes the cup because she likes theorems.",
+                "Katya concludes the proof by declaring that the author of the theorem (Max) washes the dishes.",
+                "They leave the cup in the sink until tomorrow."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— В ра́ковине опя́ть лежи́т гря́зная ча́шка и́з-под ко́фе!",
+              "options": [
+                "The cup is hidden underneath the coffee machine.",
+                "The compound preposition 'iz-pod + genitive' ('chashka iz-pod kofe') specifically means an empty or dirty container that recently held coffee.",
+                "The cup is still full of hot coffee."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "Write a playful two-line kitchen proof using «пусть», «отку́да сле́дует», or «что и тре́бовалось доказа́ть»."
+        },
+        {
+          "id": "kukhnya-30",
+          "number": 30,
+          "title": "Бытие́ и у́тренний ко́фе",
+          "title_en": "Being and Morning Coffee",
+          "after_page": "u30-p4",
+          "text": "— До́брое у́тро, Ка́тя! Воскресе́нье, со́лнце в окне́, и я уже́ свари́л нам све́жий ко́фе. И да́же купи́л молоко́!\n— Не мо́жет быть! Зна́чит, в на́шем до́ме наконе́ц наступи́ла гармо́ния?\n— Во-пе́рвых, сего́дня выходно́й. Во-вторы́х, как говоря́т фило́софы, бытие́ определя́ет созна́ние — а хоро́шее бытие́ начина́ется с за́втрака!\n— Я с тобо́й по́лностью согла́сна. Одна́ко у кота́ Ти́мы своя́ филосо́фия: для него́ су́щность жи́зни — э́то смета́на.\n— Поэ́тому дава́й за́втракать! Мир спасёт красота́, а на́ше у́тро — горя́чий ко́фе и сы́рники!",
+          "en": "— Good morning, Katya! It's Sunday, the sun is in the window, and I've already brewed fresh coffee for us. And I even bought milk!\n— It can't be! Does that mean harmony has finally arrived in our home?\n— First, today is a day off. Second, as philosophers say, being determines consciousness — and good being starts with breakfast!\n— I completely agree with you. However, Tima the cat has his own philosophy: for him, the essence of life is sour cream.\n— Therefore, let's have breakfast! Beauty will save the world, and hot coffee and cheese pancakes will save our morning!",
+          "glosses": {
+            "доброе": "good (neuter: in 'good morning')",
+            "катя": "Katya",
+            "солнце": "sun",
+            "окне": "window (prepositional: in the window)",
+            "сварил": "brewed, cooked (perfective past masculine)",
+            "свежий": "fresh (masculine)",
+            "купил": "bought (past masculine)",
+            "может": "can ('ne mozhet byt'': it can't be! / no way!)",
+            "нашем": "our (prepositional masculine)",
+            "доме": "house, home (prepositional: in our home)",
+            "наступила": "has arrived, set in (past feminine)",
+            "гармония": "harmony",
+            "выходной": "day off, weekend day",
+            "говорят": "say (they say)",
+            "философы": "philosophers",
+            "хорошее": "good (neuter)",
+            "завтрака": "breakfast (genitive after 's': starts with breakfast)",
+            "тобой": "you ('s toboi': with you)",
+            "полностью": "completely, fully",
+            "согласна": "agree (feminine short predicate)",
+            "кота": "cat (genitive after 'u': the cat has)",
+            "тимы": "Tima (genitive)",
+            "своя": "his own (feminine)",
+            "него": "him ('dlya nego': for him)",
+            "жизни": "of life (genitive)",
+            "сметана": "sour cream",
+            "давай": "let's!",
+            "завтракать": "to have breakfast ('davai zavtrakat'': let's have breakfast)",
+            "горячий": "hot (masculine)",
+            "сырники": "syrniki, Russian cottage-cheese pancakes",
+            "для": "for (+ genitive)"
+          },
+          "notice": [
+            "«Не мо́жет быть!» (It can't be! / No way!) — the classic exclamation of delighted disbelief.",
+            "«Дава́й за́втракать!» — with an imperfective infinitive («за́втракать», «пить чай»), «дава́й» invites someone to sit down and enjoy an activity right now.",
+            "«Сы́рники» (from «сыр», originally cottage cheese / quark) — pan-fried quark pancakes served with sour cream or jam, the quintessential Russian Sunday breakfast."
+          ],
+          "questions": [
+            {
+              "kind": "read_meaning",
+              "text": "— Воскресе́нье, со́лнце в окне́, и я уже́ свари́л нам све́жий ко́фе. И да́же купи́л молоко́!",
+              "options": [
+                "On Sunday morning Max has already brewed fresh coffee for both of them and even remembered to buy milk.",
+                "Max forgot to buy milk again on Sunday morning.",
+                "Katya woke up early to make coffee while Max slept."
+              ],
+              "answer": 0
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Одна́ко у кота́ Ти́мы своя́ филосо́фия: для него́ су́щность жи́зни — э́то смета́на.",
+              "options": [
+                "Tima prefers coffee with sugar in the morning.",
+                "Katya jokes that Tima has his own philosophy in which the essence of life is sour cream.",
+                "Tima is outside in the street."
+              ],
+              "answer": 1
+            },
+            {
+              "kind": "read_meaning",
+              "text": "— Мир спасёт красота́, а на́ше у́тро — горя́чий ко́фе и сы́рники!",
+              "options": [
+                "The dash means the sentence is unfinished.",
+                "In the second clause, Russian drops the repeated verb ('spasut', 'will save') and marks the ellipsis with an em-dash, while keeping 'nashe utro' as the accusative object before the dash and the new subjects ('kofe i syrniki') after it.",
+                "'Nashe utro' is the subject of the second clause."
+              ],
+              "answer": 1
+            }
+          ],
+          "prompt": "It is Sunday morning in your kitchen. Write three or four lines of your own domestic dialogue using words from across the course (imperatives, particles like «же» or «ведь», and a philosophical or mathematical joke)."
+        }
+      ]
+    }
+  ]
+}

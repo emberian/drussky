@@ -5,8 +5,11 @@ import Foundation
 /// transcript afterwards.
 @MainActor
 enum TalkTutor {
-    /// Turns are short and must start speaking fast; the marking is homework and may take its time.
-    static let turnModel = Tutor.model
+    /// Turns are short and must start speaking fast: Sonnet 5.5, measured as good as Opus on ten sample
+    /// turns and a second sooner to the first word (README, "Talk"); the scenes call likewise. The
+    /// marking is homework and may take its time: Opus.
+    static let turnModel = PageWriter.rescaleModel
+    static let scenesModel = PageWriter.rescaleModel
     static let markModel = Tutor.model
 
     enum Failure: LocalizedError {
@@ -38,20 +41,31 @@ enum TalkTutor {
 
     // MARK: Scenes
 
+    /// Every scene is an information gap: the tutor holds facts the learner lacks, the learner
+    /// has something to find out or get done, so there is a reason to listen and to answer.
     static let scenesSystem = """
     You are the tutor inside Drussky, a Russian exercise book used by one adult English speaker, Ember: quick, \
     curious, a beginner in Russian who wants to actually speak it. You are about to have a short spoken \
     conversation with them in Russian. Propose THREE small everyday scenes they could hold a 6–10 turn \
-    conversation in using ONLY the words they know (plus a word or two you would teach). Reply with ONE JSON \
-    object and nothing else: {"scenes":[{"title":"At breakfast","ru":"За за́втраком"}, ...]}. Titles in plain \
-    English, 2–5 words; `ru` the same in Russian with stress marks (U+0301) on words of 2+ syllables, never on ё. \
-    Vary them: a place, a situation, a topic (e.g. "about a book you read"). No preamble.
+    conversation in using ONLY the words they know (plus a word or two you would teach). Each scene is an \
+    information gap: YOU (the partner) know something they don't (where the keys are, your schedule, which film \
+    you prefer, what the shop has), and THEY have a communicative goal that needs your information or agreement. \
+    Reply with ONE JSON object and nothing else:
+    {"scenes":[{"title":"At breakfast","ru":"За за́втраком",
+                "goal":"Find out what there is to drink and order one thing",
+                "frames":[{"ru":"Что есть …?","en":"what is there …?"},{"ru":"Я хочу́ …","en":"I want …"}],
+                "secret":"There is tea and juice but no coffee; the milk is finished"}, ...]}
+    Titles in plain English, 2–5 words; `ru` the same in Russian with stress marks (U+0301) on words of 2+ \
+    syllables, never on ё or one-syllable words. `goal` is one sentence in English the learner can act on. `frames` are 2–3 phrase \
+    frames they may need, in Russian with a gap (…) and stress marks, built from THEIR words first, each with its \
+    English. `secret` is what you know and they don't, in English, 1–2 sentences, concrete, answerable with their \
+    words. Vary the three: a place, a situation, a topic (e.g. "about a book you read"). No preamble.
     """
 
     static func proposeScenes(book: Book) async throws -> [TalkScene] {
         var raw = ""
-        for try await chunk in Tutor.stream([.init(role: "user", text: state(book) + "\nPropose the three scenes.")],
-                                            system: scenesSystem, maxTokens: 2000, effort: "low", model: turnModel) {
+        for try await chunk in Tutor.stream([.init(role: "user", text: scenesState(book) + "\nPropose the three scenes.")],
+                                            system: scenesSystem, maxTokens: 2000, effort: "low", model: scenesModel) {
             raw += chunk
         }
         let scenes = parseScenes(raw)
@@ -59,15 +73,37 @@ enum TalkTutor {
         return scenes
     }
 
+    /// Scenes need only the words (not the constructions or the knowledge summary): a smaller
+    /// prompt, measurably faster to first token (README, "Talk").
+    static func scenesState(_ book: Book) -> String {
+        let known = book.targets.keys.sorted().filter { $0.hasPrefix("word:") }.compactMap { book.word(String($0.dropFirst(5))) }
+            .prefix(200).map { "\($0.ru) = \($0.en)" }.joined(separator: "; ")
+        return "Words they know: \(known.isEmpty ? "none yet" : known)."
+    }
+
     static func parseScenes(_ reply: String) -> [TalkScene] {
         guard let json = PageWriter.extractJSON(reply), let data = json.data(using: .utf8),
               let any = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return [] }
+        func str(_ v: Any?) -> String? {
+            guard let s = (v as? String)?.trimmingCharacters(in: .whitespacesAndNewlines), !s.isEmpty else { return nil }
+            return s
+        }
         var out: [TalkScene] = []
         for item in (any["scenes"] as? [Any]) ?? [] {
-            guard let s = item as? [String: Any], let title = (s["title"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines),
-                  !title.isEmpty else { continue }
-            let ru = ((s["ru"] as? String) ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-            if !out.contains(where: { $0.title == title }) { out.append(TalkScene(title: title, ru: ru)) }
+            guard let s = item as? [String: Any], let title = str(s["title"]) else { continue }
+            var scene = TalkScene(title: title, ru: str(s["ru"]) ?? "")
+            scene.goal = str(s["goal"])
+            scene.secret = str(s["secret"] ?? s["facts"])
+            let frames = ((s["frames"] as? [Any]) ?? []).compactMap { f -> TalkFrame? in
+                if let d = f as? [String: Any], let ru = str(d["ru"]) { return TalkFrame(ru: ru, en: str(d["en"]) ?? "") }
+                if let line = f as? String, !RussianText.letters(in: line).isEmpty {
+                    let bits = line.split(separator: "=", maxSplits: 1).map { $0.trimmingCharacters(in: .whitespaces) }
+                    return TalkFrame(ru: bits[0], en: bits.count > 1 ? bits[1] : "")
+                }
+                return nil
+            }
+            scene.frames = frames.isEmpty ? nil : Array(frames.prefix(3))
+            if !out.contains(where: { $0.title == title }) { out.append(scene) }
         }
         return Array(out.prefix(3))
     }
@@ -84,11 +120,19 @@ enum TalkTutor {
         recognition, so what you receive of their reply is what the recognizer heard, and may be garbled.
 
         Scene: \(scene.title) (\(scene.ru)).
+        What you know and they don't (your private facts; never read them out unasked, answer from them when \
+        asked, and stay consistent with them): \(scene.secret ?? "decide small concrete facts yourself and keep to them").
+        Their goal (they were told it in English; you were not told to help them reach it): \(scene.goal ?? "to hold the conversation").
+        You are a partner, not an oracle: respond to the meaning they actually expressed, with your facts. If a \
+        reply is unclear or doesn't answer, ask them to clarify («Прости́те, что?», «Чай и́ли ко́фе?») rather than \
+        guessing kindly. If they ask for something your facts rule out, say so and offer what there is. You are \
+        not obliged to agree. Let them reach the goal only through what they manage to say.
 
         Rules for every turn:
         - RU: what you say — Russian only, 1–2 short natural sentences, at most 12 words in all, built from the words \
         they know plus AT MOST TWO new words (list those in NEW). Usually end with a question they can answer with \
-        words they have. Stress marks (U+0301) on every word of 2+ syllables, never on ё. Use вы.
+        words they have. Stress marks (U+0301) on every word of 2+ syllables, never on ё or one-syllable words. \
+        Address the learner consistently as вы (as their Russian tutor; never mix ты and вы).
         - If their reply is close to a sensible answer, respond to its meaning. If a word is wrong or unclear, \
         repair gently inside RU with «Вы хоте́ли сказа́ть …?» and the right form, then carry on. Never explain in \
         English inside RU. If nothing was heard, ask again more simply.
@@ -320,9 +364,15 @@ enum TalkTutor {
     the transcript: your lines, and their lines as SPEECH RECOGNITION heard them. Now mark their lines the way a \
     kind, exact teacher marks homework in red pen, keeping in mind that it was spoken: be lenient about anything \
     the recognizer could have misheard (a homophone, an unstressed vowel, a dropped soft sign); mark what they \
-    clearly said wrong (a wrong ending, agreement, word choice, word order), and praise what was right.
+    clearly said wrong (a wrong ending, agreement, word choice, word order), accept natural spoken Russian word \
+    order and omitted subject pronouns, and praise what was right.
+    First, before any grammar: did they do what they set out to do? You are told their goal; judge it ONLY from \
+    what they said and how the partner answered in the transcript, never from anything you imagine the partner \
+    knew. Say what they managed to convey, and what the partner had to ask them to clarify, if anything.
     Reply with ONE JSON object and nothing else:
-    {"lines": [{"n": 1, "corrected": "their line, corrected, with stress marks (U+0301) on words of 2+ syllables, never on ё",
+    {"goal": {"reached": true, "conveyed": "1–2 sentences in English: what they got across and whether the goal was met",
+              "clarified": "what the partner had to ask them to repeat or clarify, or ''"},
+     "lines": [{"n": 1, "corrected": "their line, corrected, with stress marks (U+0301) on words of 2+ syllables, never on ё or one-syllable words",
                 "edits": [{"span": "their words exactly as heard", "replacement": "the right form, stress-marked ('' to delete)",
                            "category": "spelling|ending|agreement|word-choice|word-order|stress|punctuation|other",
                            "why": "one line in English saying what differs and why", "en": "English meaning of the replacement",
@@ -356,6 +406,7 @@ enum TalkTutor {
         var lines: [Int: DiaryCorrection]
         var praise: String
         var teach: [DiaryTeach]
+        var outcome: TalkOutcome?
     }
 
     static func mark(_ c: TalkConversation, book: Book) async throws -> Marking {
@@ -363,6 +414,7 @@ enum TalkTutor {
         \(state(book))
 
         Scene: \(c.scene?.title ?? "").
+        Their goal: \(c.scene?.goal ?? "to hold the conversation").
         Transcript:
         ---
         \(transcript(c))
@@ -400,6 +452,16 @@ enum TalkTutor {
             let pattern = (t["pattern"] as? String).flatMap { $0.isEmpty ? nil : $0.replacingOccurrences(of: "gram:", with: "") }
             teach.append(DiaryTeach(title: title, note: (t["note"] as? String) ?? "", pattern: pattern))
         }
-        return Marking(lines: lines, praise: praise, teach: Array(teach.prefix(2)))
+        var outcome: TalkOutcome?
+        if let g = any["goal"] as? [String: Any] {
+            let conveyed = ((g["conveyed"] as? String) ?? (g["summary"] as? String) ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+            let clarified = ((g["clarified"] as? String) ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+            let reached: Bool? = (g["reached"] as? Bool) ?? (g["reached"] as? NSNumber)?.boolValue
+                ?? (g["reached"] as? String).map { ["true", "yes"].contains($0.lowercased()) }
+            if !conveyed.isEmpty || reached != nil {
+                outcome = TalkOutcome(reached: reached, conveyed: conveyed, clarified: clarified.isEmpty ? nil : clarified)
+            }
+        }
+        return Marking(lines: lines, praise: praise, teach: Array(teach.prefix(2)), outcome: outcome)
     }
 }

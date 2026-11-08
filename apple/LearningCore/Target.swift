@@ -63,13 +63,18 @@ extension KnowledgeModel {
     /// The distance to a target now. A key counts as known when every unit of it is known;
     /// the ladder ranks unknown keys by the weight they would unlock (then by first appearance).
     public func distance(to target: Target, at date: Date, threshold: Double = 0.5, ladder limit: Int = 20) -> Distance {
+        distance(to: target, ladder: limit) { knows($0, at: date, threshold: threshold) }
+    }
+
+    /// Domains decide what counts as demonstrated knowledge; aggregation stays the same.
+    public func distance(to target: Target, ladder limit: Int = 20, knows: (Target.Unit) -> Bool) -> Distance {
         var total = 0.0, known = 0.0
         var keyWeight: [ComponentID: Double] = [:], keyCount: [ComponentID: Int] = [:], keyKnown: [ComponentID: Bool] = [:]
         var firstSeen: [ComponentID: Int] = [:]
         var unitKnown: [Bool] = []
         unitKnown.reserveCapacity(target.units.count)
         for (i, u) in target.units.enumerated() {
-            let k = knows(u, at: date, threshold: threshold)
+            let k = knows(u)
             unitKnown.append(k)
             total += u.weight
             if k { known += u.weight }

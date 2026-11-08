@@ -43,7 +43,7 @@ struct GlossLine: View {
     private var meaning: String {
         if let known { return known }
         if let fetched { return fetched.en }
-        return failed ? "—" : "…"
+        return failed ? "Meaning unavailable. Try again when your tutor is available." : "Looking up the meaning…"
     }
 }
 

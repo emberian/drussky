@@ -2,6 +2,7 @@
 """Check Drussky/Resources/library.json (and PrivatePack/library.json when present).
 
   python3 apple/scripts/validate_library.py
+  python3 apple/scripts/validate_library.py apple/Drussky/Resources/math.json
 
 Schema and lengths for texts and sentences; every sentence clip exists and has provenance in its
 audio directory's sources.json; and nothing in the bundled (redistributed) library carries a
@@ -21,6 +22,9 @@ MAX_TEXT = 3000
 MAX_WORDS = 10
 TEXT_FIELDS = {"id": str, "title": str, "author": str, "level": str, "topic": str, "text": str, "license": str, "source": str}
 OPTIONAL_TEXT = {"title_en": str, "year": int, "summary_en": str, "narration": str, "words": str, "reader": str}
+# Optional authored-reading support, checked in detail by validate_math.py.
+OPTIONAL_TEXT.update({"rung": int, "after_page": str, "en": str, "glosses": dict,
+                      "questions": list, "how_read": list, "notation": list, "references": list})
 SENTENCE_FIELDS = {"ru": str, "en": str}
 OPTIONAL_SENTENCE = {"audio": str, "speaker": str, "license": str, "source": str}
 # A license string is redistributable when it names one of these and none of the restrictions.
@@ -69,9 +73,12 @@ def check_narration(root, t, tag, public, err):
         err(f"{tag}: {p}")
 
 
-def check(root, public, errors, notes):
-    path = root / "library.json"
-    where = str(path.relative_to(APPLE))
+def check(root, public, errors, notes, filename="library.json"):
+    path = root / filename
+    try:
+        where = str(path.relative_to(APPLE))
+    except ValueError:
+        where = str(path)
     if not path.exists():
         if public:
             errors.append(f"{where}: missing")
@@ -113,7 +120,9 @@ def check(root, public, errors, notes):
             err(f"{tag}: text is {len(t['text'])} chars (max {MAX_TEXT})")
         if len(CYRILLIC.findall(t["text"])) < 0.5 * len(re.findall(r"\w", t["text"])):
             err(f"{tag}: text is not mostly Cyrillic")
-        if re.search(r"[<>{}|]|\[\d+\]|\[\[|&[a-z]+;|''", t["text"]):
+        # Inequalities and absolute-value/conditional bars are mathematical notation.
+        markup = r"[{}]|\[\d+\]|\[\[|&[a-z]+;|''" if t["topic"] == "math" else r"[<>{}|]|\[\d+\]|\[\[|&[a-z]+;|''"
+        if re.search(markup, t["text"]) or re.search(r"</?[A-Za-z][^>]*>", t["text"]):
             err(f"{tag}: text has leftover markup")
         if "\n\n" in t["text"] or t["text"] != t["text"].strip():
             err(f"{tag}: paragraphs are separated by a single \\n, no surrounding whitespace")
@@ -177,8 +186,12 @@ def check(root, public, errors, notes):
 
 def main():
     errors, notes = [], []
-    check(PUBLIC, True, errors, notes)
-    check(PRIVATE, False, errors, notes)
+    if len(sys.argv) > 1:
+        path = Path(sys.argv[1]).resolve()
+        check(path.parent, True, errors, notes, filename=path.name)
+    else:
+        check(PUBLIC, True, errors, notes)
+        check(PRIVATE, False, errors, notes)
     for n in notes:
         print(n)
     for e in errors:
