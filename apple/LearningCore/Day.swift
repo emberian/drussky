@@ -84,14 +84,16 @@ public struct DayComposition: Sendable, Equatable {
     }
 
     /// After a long absence: a stratified sample across the urgency range (every k-th item of
-    /// the ordered due list), so the page measures where memory stands instead of re-testing all of it.
-    public static func welcomeBack(due: [DueReview], policy: DayPolicy = DayPolicy()) -> DayComposition {
+    /// the ordered due list), so the page measures where memory stands instead of re-testing all of
+    /// it. The sample never exceeds `allowance` (what is left of the day's cap): a return is a day
+    /// like any other for the learner's own limit.
+    public static func welcomeBack(due: [DueReview], allowance: Int, policy: DayPolicy = DayPolicy()) -> DayComposition {
         let ordered = overflowOrder(due)
-        guard ordered.count > policy.welcomeBackSample else {
+        let n = max(0, min(allowance, policy.welcomeBackSample))
+        guard ordered.count > n else {
             return DayComposition(warmUp: [], reviews: ordered, deferred: [])
         }
         var sample: [DueReview] = []
-        let n = policy.welcomeBackSample
         for i in 0..<n {
             // Spread the picks over the list, the first pick being the most urgent.
             let index = i * (ordered.count - 1) / max(1, n - 1)

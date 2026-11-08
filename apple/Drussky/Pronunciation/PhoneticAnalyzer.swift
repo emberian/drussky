@@ -81,7 +81,7 @@ final class PhoneticAnalyzer: PronunciationAnalyzer, Sendable {
             heard: heard.map { timeFix($0.phone) },
             sounds: sounds, syllables: prosody.syllables, stressedSyllable: prosody.stressedSyllable,
             accuracy: Double(goodCount) / Double(expectedCount), tips: tips,
-            speechStart: Double(speech.start) / 16_000, speechEnd: Double(speech.end) / 16_000)
+            speechStart: Double(speech.start) / 16_000, speechEnd: Double(speech.end) / 16_000, provenance: .phones)
     }
 }
 

@@ -39,6 +39,7 @@ extension Modality {
         case .readPick: "read → pick"
         case .build: "English → build"
         case .readCursive: "read handwriting"
+        case .type: "typed"
         default: rawValue
         }
     }
@@ -92,7 +93,7 @@ struct RussianAttempt {
 /// Russian, as Drussky teaches it, in LearningCore's terms.
 struct RussianDomain: KnowledgeDomain {
     let name = "drussky-ru"
-    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .readCursive]
+    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .speak, .type, .readCursive]
     let graph: KnowledgeGraph
     let lemmas: Lemmas
     /// Roots, affixes and segmentations (Morphology/).
@@ -340,6 +341,7 @@ struct RussianDomain: KnowledgeDomain {
         case .readHandwriting: .readCursive
         case .explain, .passage: nil
         case .diary: nil  // its evidence is built from the correction (DiaryKnowledge.swift)
+        case .talk: nil  // its evidence is built per turn and from the marking (Talk/TalkKnowledge.swift)
         }
     }
 
@@ -359,6 +361,7 @@ struct RussianDomain: KnowledgeDomain {
         case .open, .missed, .skipped: return r.status == .missed ? .again : nil
         case .correct:
             if r.assisted == true { return nil }
+            if let a = SelfJudgement.assessment(r) { return a.grade }  // the learner judged; the reader modulates
             if r.selfAssessed == true { return .hard }
             return r.isRightFirstTime ? .good : .hard
         case .done:
@@ -458,7 +461,7 @@ struct RussianDomain: KnowledgeDomain {
     func evidence(for a: RussianAttempt) -> LearningEvent? {
         guard a.page.exercises.indices.contains(a.index) else { return nil }
         let ex = a.page.exercises[a.index]
-        guard let modality = Self.modality(for: ex.kind), !(ex.kind == .soundPair && ex.say == nil) else { return nil }
+        guard let modality = a.after.typed == true ? Modality.type : Self.modality(for: ex.kind), !(ex.kind == .soundPair && ex.say == nil) else { return nil }
         let finished = !a.before.status.isComplete && a.after.status.isComplete
         let tried = a.after.attempts > a.before.attempts
         guard finished || tried else { return nil }
@@ -484,7 +487,9 @@ struct RussianDomain: KnowledgeDomain {
                 ? ex.answerIndex.flatMap { ex.options?[safe: $0] } : (ex.kind == .soundPair ? ex.say : ex.target),
             response: response, latency: a.latency,
             help: a.after.revealed ? ["revealed"] : (a.after.assisted == true ? ["assisted"] : nil),
-            confusions: confusions.isEmpty ? nil : confusions, review: ex.reviewKey != nil ? true : nil)
+            confusions: confusions.isEmpty ? nil : confusions, review: ex.reviewKey != nil ? true : nil,
+            judge: finished && ex.kind.isWriting && ![.meet, .trace, .copy].contains(ex.kind) ? SelfJudgement.judge(a.after) : nil,
+            confidence: finished ? SelfJudgement.confidence(a.after) : nil)
     }
 
     func normalize(_ answer: String) -> String { RussianText.comparable(answer) }

@@ -26,6 +26,13 @@ extension KnowledgeTracker {
             return [LearningEvent(id: mainID, t: at, type: .outcome, source: source, item: item, activity: "diary",
                                   modality: .produce, components: domain.productionComponents(entry.text), response: entry.text)]
         }
+        guard correction.verified != false else {
+            // The marks don't account for the corrected line: what was written is on record, but
+            // nothing is graded and no replacement is credited as produced.
+            return [LearningEvent(id: mainID, t: at, type: .outcome, source: source, item: item, activity: "diary",
+                                  modality: .produce, components: domain.productionComponents(entry.text),
+                                  expected: correction.corrected, response: entry.text, help: ["unverified-correction"])]
+        }
         var events: [LearningEvent] = []
         // A taught pattern no edit names itself rides on the first edit (the biggest slip).
         let unclaimed = correction.teach.compactMap(\.pattern).filter { p in !p.isEmpty && !correction.edits.contains { $0.pattern == p } }

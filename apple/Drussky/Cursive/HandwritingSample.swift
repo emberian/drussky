@@ -46,7 +46,7 @@ struct HandwritingSample: Equatable, Sendable {
         return HandwritingSample(
             text: RussianText.unstressed(text), style: style,
             slant: -0.08 + unit() * 0.4, size: 0.82 + unit() * 0.33,
-            wobble: Double(unit()) * 6.28, jitter: 0.4 + unit() * 1.4,
+            wobble: Double(unit()) * 6.28, jitter: 0.3 + unit() * 0.9,
             ink: Ink(rawValue: Int(rng.next() % 3))!, paper: Paper(rawValue: Int(rng.next() % 3))!,
             tilt: -2 + unit() * 4)
     }
@@ -124,8 +124,9 @@ struct HandwritingSampleView: View {
         for stroke in CursiveLayout.strokes(sample.text, in: m) where stroke.count > 1 {
             let pts = stroke.map { p -> CGPoint in
                 n += 1
-                let dx = CGFloat(sin(Double(n) * 0.9 + sample.wobble)) * sample.jitter
-                let dy = CGFloat(cos(Double(n) * 0.7 + sample.wobble * 1.3)) * sample.jitter
+                // Slow drift along the stroke (a hand's sway), not per-point noise.
+                let dx = CGFloat(sin(Double(n) * 0.16 + sample.wobble)) * sample.jitter
+                let dy = CGFloat(cos(Double(n) * 0.11 + sample.wobble * 1.3)) * sample.jitter
                 let x = p.x + dx + (m.lines.baseline - p.y) * sample.slant
                 return CGPoint(x: 18 + x * k, y: yShift + (p.y + dy) * k)
             }

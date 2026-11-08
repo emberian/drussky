@@ -3,7 +3,10 @@
 A Russian exercise book you write in. Open it and you are on today's page: numbered
 exercises down a squared тетрадь page, answered in place — with the Pencil on ruled lines,
 by ear, or aloud. Finished exercises get a red tick; a finished page gets a red mark
-(5 — Отлично!). Turn the page with the arrow; turning back shows exactly what you wrote.
+(5 — Отлично!), or a red tick (Готово!) when nothing on it was graded — practice, skips, speaking
+you judged yourself, a diary line nobody corrected. A diary line the tutor marked counts, and three
+or more corrections on it count as a miss. Turn the page with the arrow; turning back shows exactly
+what you wrote.
 
 ## What a page asks of you
 
@@ -21,6 +24,7 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | read along | a library text read by a human (LibriVox volunteers, Commons readers): the word being said lights up, tap a word to hear from there, ¾ speed, or listen first with the text appearing as it is read; then write one of its sentences from the reader's voice and say one after the reader |
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние) |
 | build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
+| talk (Разгово́р) | a spoken conversation with the tutor: pick one of three scenes made from your words, then 6–10 turns — the tutor speaks (short Russian, stress-marked, at most two new words a turn, a gentle «Вы хоте́ли сказа́ть…?» when you slip), you answer out loud hands-free, an eye icon whispers the English; afterwards every line of yours gets the red pen and at most one pronunciation tip. ＋ → *Talk* |
 | guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
 | read handwriting | a word or line in somebody's hand (one of four bundled OFL handwriting fonts, or the school cursive models written through with a different slant, size and ink each time): print it on the line, or pick it among look-alikes (ма́ма / ла́ма / ма́ша). ＋ → *Read handwriting* makes a page of them from words you know |
 
@@ -33,10 +37,29 @@ baseline", "т is three humps in one stroke"). The cursive unit sits after unit 
 by shape, then words, then a note to copy. Reading handwriting is its own memory modality
 (*read-cursive*); a word taken for a look-alike is logged as a shape confusion.
 
-Writing is read on-device by Apple's handwriting recognizer. It confirms a right answer by
-itself after a short pause; **Check** asks it explicitly. When it misreads you, *I wrote it
-right* overrides it — the recognizer is a helper, not the judge. *Show me* writes the
-answer in red above your line and brings the item back soon.
+Writing is read on-device by Apple's handwriting recognizer. For tracing and copying it ticks
+the line by itself after a short pause. For recall (dictation, translate, fill) **you are the
+judge** by default (Settings → *Judge my writing*): **Check** writes the model answer beside
+your line and you say *Right* or *Not quite*; the recognizer reads silently, pre-selects the
+likely verdict with one small hint ("The reader saw «кат». You decide."), and its reading goes
+into the answer log beside your verdict — a right you gave over a reading it disputed is marked
+*worth another look* on the word's history, never overruled. With *The reader* as judge it
+confirms a right answer itself, *I wrote it right* overrides it, and *Show me* writes the answer
+in red above your line and brings the item back soon. (`LearningCore/README.md`, "Judging one's
+own writing".)
+
+**Hooks** (`Hooks/`): on a word's history card, *Give me a hook* asks the tutor for a one-line
+keyword mnemonic (мы́ло → "MEAL-o — wash your hands before the meal" 🧼); keep it, reword it or
+write your own. It is shown faintly above the line before the next few recalls of that word, fainter
+each time, then not at all. Once a day, with a key on the device, the tutor writes hooks for the
+~60 words you miss most in one call; *Export hooks* gives them as Markdown.
+
+**Fluency** (`Fluency/`, `metrics.jsonl`): a passage has *Read it with a finger* — follow the lines
+as you read, lift at the end; nothing ticks while you read, and afterwards one line gives words a
+minute against last time. Every word written from memory records strokes a second and how legibly
+the recognizer read it; a sentence said aloud records words a minute from its syllable onsets; a
+sentence written from the reader's voice records whether you caught it at 1× or ¾×. Small sparklines
+on the word's history and one line inside the cover ("You read about 20% faster than last week").
 
 Saying something aloud is hands-free (`Speaking/`): the model plays (Settings: 0–3 times,
 tap to skip), a soft tone says it's your turn, and the microphone (AVAudioEngine) measures the
@@ -54,8 +77,11 @@ your take through a time warp (DTW on cepstra) so rhythm, loudness and melody co
 syllable. Stress is judged against the model, so a voice's own habits cancel. Tap any syllable to
 hear just that part of the model or of you. Letters a word-level report couldn't hear aren't
 marked right. If recognition can't confirm a take you can mark it *Sounded right to me* (counted,
-as unverified) or skip it (not counted). Letters heard as others are logged as speech confusions
-on their sound contrast.
+as unverified) or skip it (not counted). A word-level report's letter differences are the
+recognizer's spelling, not a measurement of a sound: they are shown in amber as what it heard, with
+the contrast's advice as something to try, and leave no evidence. Only the phone-level analyzer
+(`PhoneticAnalyzer`, when its model is bundled) asserts sound verdicts and logs speech confusions
+on their contrast; each report carries its `provenance`.
 
 ## Remembering
 
@@ -107,6 +133,49 @@ checked before it goes in. The tutor's answers mark Russian as tappable phrases 
 double-tap the Pencil to erase). Speakers with a small number cycle through several human
 voices.
 
+## Talk
+
+＋ → *Talk* (`Drussky/Talk/`) is a spoken conversation with the tutor on the page, and every
+conversation has something to accomplish. The tutor proposes three scenes built from the words
+you know; each is an information gap: the partner holds facts you don't (where the keys are, what
+the shop has, which film they prefer) and you have a goal, told to you in English on the scene
+card with two or three phrase frames you may need (from your own words first). The partner
+answers the meaning you actually express from its facts, asks you to clarify when a line is
+unclear, says no when its facts say no, and is not obliged to agree. It speaks one or two short
+stress-marked sentences within your vocabulary plus at most two new words; the soft tone says it
+is your turn and the same hands-free microphone as *read aloud* takes your answer with a
+conversation profile (`TalkSession.endpointing`: a pause of 1.5 s ends the turn rather than 0.7 s,
+up to 12 s of speech, 10 s to start; "Still listening… a pause is fine; tap when you've finished";
+nothing is captured while the tutor speaks, and replaying a line closes the microphone first).
+Speech recognition transcribes it, the eye beside each line whispers the English and the new
+words (each keepable); typing a line is always there. After 6–10 turns the tutor says goodbye and
+the transcript is marked: first whether you reached your goal and what came across, judged from
+your words alone (the marker is told the goal, never the partner's facts, which are then shown to
+you), then your lines as heard with the red pen over them (`DiaryTutor`'s JSON contract per line,
+lenient about what the recognizer could have misheard), one word of praise, the pattern behind
+the biggest slip, and, where the phone-level analyzer is bundled, one pronunciation tip per take.
+Every turn the tutor understood is `good` on the words you said (modality `own-speech`); each
+edit is `again` with a speech confusion; new words and corrected forms join your words.
+Conversations are saved inside the exercise's result and listed under *My Russian*.
+
+The tutor's reply is a line-based format (`RU:` / `EN:` / `NEW:` / `END`) rather than JSON so the
+voice can start on the first sentence while the rest is still arriving (`TalkLatency` is kept on
+each tutor line). Models, measured 2026-11-08 from this machine with the app's own prompts: the
+scenes call is `claude-sonnet-5-5` (first token 0.63–0.81 s against 8.7–12.7 s for Opus 5.5, with
+the full state prompt or the words-only one — the prompt's size made no difference, so it sends
+only the words); turns are Sonnet too: on ten sample turns (an opener, a clean order, a garbled
+«С молоко и сахар», noise words, silence, an English line, a last turn) both models were 0/10
+flagged on format, length (≤ 12 words), Latin letters and `END`; Sonnet missed one stress mark
+in 30 multi-syllable words, Opus none; mean first token Sonnet 1.9 s, Opus 2.9 s (in-app Opus
+turns ranged 1.9–9.4 s). The marking stays on Opus 5.5. The system prompt carries a prompt-cache
+breakpoint. The lines are spoken by `TutorVoice`: the system voice is the first implementation
+(`SystemTutorVoice`, the best installed Russian voice — Premium over Enhanced over default;
+Settings → Talk says which one and how to download a better one in iOS Settings → Accessibility →
+Spoken Content); a narrator engine slots in behind the same three calls. Offline, or without a
+key, the page says so in one line and can be left (*Not today*, or turn the page); nothing is
+started. A page turn cancels whatever is live; the lines said so far are already saved and the
+page offers to continue.
+
 ## Your book
 
 The inside cover asks for one text you want to read for real — from the Library, pasted or
@@ -136,7 +205,37 @@ The book icon (top left) opens your alphabet — each letter in **your own handw
 you've met it — and every page so far with its mark. **My Russian** collects every diary line
 you have ever written, newest first, with its red pen, and what the pen keeps finding this
 week; it exports as Markdown. Settings: finger drawing, cursive
-models, stress marks, notebook export (pages, ink, recordings as a zip), credits.
+models, stress marks, notebook export (pages, ink, recordings as a zip), the notebook as a PDF, credits.
+
+## On paper, in a pocket, at a keyboard (`Drussky/Devices/`)
+
+**Print your тетрадь.** Settings → *Export notebook as PDF* (A4 or Letter; the local one is
+picked) lays every page out as it is in the book — squared paper, red margin, dated header,
+numbered exercises with your ink on their ruled lines, red ticks and corrections, the diary's red
+pen, the tutor's questions, the mark — and hands it to the share sheet. *Print this page* at the
+foot of any page does one page. Ink is zoomed from its strip so nothing written is cut off, and a
+page is laid out as blocks that are never split across sheets (`NotebookPDF.paginate`).
+
+**Pocket (iPhone).** On a phone, ＋ → *Pocket: listen and speak* writes a page with nothing to
+write: due items as *listen and pick* or *say it* (a dictation or translation that is due is said
+instead), real-voice sentences of known words to pick or repeat, sound pairs on the weakest
+contrasts, and one passage already read, to hear again — sized for five to ten minutes
+(`PocketPage`). The full page is still there behind it.
+
+**Typing Russian.** With a hardware keyboard (always on the Mac; an iPad with a keyboard), every
+writing exercise offers *Type it instead*: a field that is checked exactly like handwriting, with a
+small ЙЦУКЕН map under it lighting the next key you need (a wrong key lights *delete*). Type on the
+system Russian layout, or switch on the **phonetic** scheme and type Latin
+(`Transliteration`): `a b v g d e zh z i j k l m n o p r s t u f h c ch sh sch y`, `yo yu ya ' ''`
+for `ё ю я ь ъ`, `eh` for э, `x` for х — `ya chitayu` → я читаю, `novyj` → новый, `zhizn'` → жизнь.
+A typed answer is recorded under its own `type` modality: knowing how to type a word is not
+knowing how to write it. ＋ → *Typing drill* (keyboard devices) runs home row → all letters → your
+own words, one line at a time, with words per minute shown after each line and the median speed
+of each day as a thin line (kept in `typing.json` in the notebook folder). The Pencil stays
+first on the iPad: the strip is always there and typing is a button under it.
+
+QA: `-qa-pocket` inserts a pocket page, `-qa-typing` opens the drill, `-qa-keyboard` pretends a
+keyboard is attached (simulator).
 
 ## Audio
 
@@ -186,7 +285,10 @@ string the app or its reviews can speak), handwriting recognition on synthetic p
 ink and on 156 single-line pen-stroke samples with hand-like slant and wobble (on the iPad
 Pro M4: pen 155/156, cursive 12/12, print 12/13), scheduling and persistence, notebook-recovery and redo
 regressions, speech recognition on recorded Russian (runs once speech recognition is
-allowed), and one live tutor answer (runs when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
+allowed), self-judgement evidence (verdict × reader → grade and confidence), hooks (parsing,
+storage, fading) and fluency (words a minute from onsets, strokes a second from ink, the metric
+log, the cover line), and live tutor calls — one answer, one diary correction, one hook and a
+small hook batch (run when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
 `DrusskyUITests` writes on the paper with real touch strokes, completes the exercise, and
 checks it survives a relaunch.
 
@@ -194,11 +296,16 @@ QA launch arguments (simulator): `-qa-reset`, `-qa-complete N` (work through N p
 synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-contents`,
 `-qa-settings`, `-qa-diary` (three diary pages with canned red-pen corrections, no key
 needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian);
+`-qa-talk fresh|scene|mid|marked` (a Talk page: untouched, the scene choice, the middle of a dialogue, the
+marked transcript; `-qa-nokey` / `-qa-offline` pose the unavailable note);
 `-qa-settings`; `-qa-day N` / `-qa-away D` (the pages were done N or D days ago, then the page is
 turned: a morning or welcome-back page), `-qa-probes` (a synthetic answered probe set for the cover
 chart), `-qa-tired` (the current page marked shortened);
 `-qa-settings`, `-qa-goal <library id>` (make that text the learner's book), `-qa-goal-pull` (an
-offline page toward it), `-qa-goal-first` (open its first page now).
+offline page toward it), `-qa-goal-first` (open its first page now); `-qa-judge` (ink on the first
+open recall exercise with Check tapped: the self-judgement panel), `-qa-hooks` (canned hooks on a few
+words; `-qa-contents -qa-node lex:кот` opens one), `-qa-fluency` (three weeks of synthetic fluency
+samples for the cover line and sparklines).
 
 ## Content
 

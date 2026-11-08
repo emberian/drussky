@@ -29,6 +29,7 @@ struct DeskNotes: View {
                 Text(line).scaledFont(16).foregroundStyle(Theme.text)
                     .fixedSize(horizontal: false, vertical: true)
             }
+            FluencyNotes()  // Fluency/
             RetentionChart(book: book)
         }
     }

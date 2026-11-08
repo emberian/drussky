@@ -67,6 +67,7 @@ final class AppState {
                 }
                 SpeechCheck.warmUp(with: voice.recordingURL(for: "спаси́бо"))
                 phase = .ready(book, voice, speech)
+                HookBatch.runIfDue(book)  // Hooks/: mnemonics for the most-lapsed words, once a day
             }
         } catch {
             phase = .failed("\(error)")
@@ -87,8 +88,10 @@ final class AppState {
         let scratch = FileManager.default.temporaryDirectory.appendingPathComponent("restore-\(UUID().uuidString)")
         defer { try? FileManager.default.removeItem(at: scratch) }
         let candidate = try NotebookArchive.candidate(from: archive, scratch: scratch)
+        // A take being analysed must neither land on the closing book nor write into the folder
+        // once it is the restored notebook's: invalidated and drained before anything moves.
+        if let speech { await speech.invalidate() }
         if let book { await book.close() }
-        speech?.cancel()
         do {
             let kept = try NotebookArchive.install(candidate, at: root)
             load()

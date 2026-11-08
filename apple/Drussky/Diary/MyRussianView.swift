@@ -72,6 +72,7 @@ struct MyRussianView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 22) {
                 summary(entries)
+                TalkEntriesView()
                 ForEach(entries) { d in
                     VStack(alignment: .leading, spacing: 10) {
                         HStack(alignment: .firstTextBaseline) {

@@ -20,12 +20,10 @@ REPO = APPLE.parent
 sys.path.insert(0, str(APPLE / "scripts"))
 from audio_store import Silero, encode, restore_fields, silero_fields  # noqa: E402
 from make_audio import AUDIO, SYNTH_FINAL, SYNTH_OVERRIDES, silero_text, slug  # noqa: E402
-from validate_course import key  # noqa: E402
+from validate_course import audio_key  # noqa: E402
 
 SCRATCH = REPO / ".local/drussky-audio/morphology"
 PROVIDER = "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)"
-# Strings the source list leaves unstressed; the stress Silero should use.
-UNSTRESSED = {"или": "и́ли", "лето": "ле́то"}
 
 
 def main():
@@ -33,20 +31,20 @@ def main():
     lines = [l.strip() for l in Path(args[0]).read_text().splitlines() if l.strip() and not l.startswith("#")]
     wanted = {}
     for s in lines:
-        wanted.setdefault(key(s), s)
+        wanted.setdefault(audio_key(s), s)  # a rising question is its own clip ("…?")
     index = json.loads((AUDIO / "index.json").read_text())
     todo = {k: s for k, s in wanted.items() if k not in index or not (AUDIO / index[k]).is_file()}
     print(f"{len(wanted)} keys, {len(wanted) - len(todo)} already have a clip, {len(todo)} to generate", flush=True)
     if "--plan" in sys.argv:
         for k, s in todo.items():
-            print("  gen", repr(s), "->", SYNTH_FINAL.get(k) or silero_text(SYNTH_OVERRIDES.get(k, UNSTRESSED.get(k, s))))
+            print("  gen", repr(s), "->", SYNTH_FINAL.get(k) or silero_text(SYNTH_OVERRIDES.get(k, s)))
         return
     (SCRATCH / "wav").mkdir(parents=True, exist_ok=True)
     silero = Silero(threads=4)
     new_index, new_sources = {}, {}
     for n, (k, text) in enumerate(todo.items(), 1):
         name = "morph-" + slug(k)
-        synth = SYNTH_FINAL.get(k) or silero_text(SYNTH_OVERRIDES.get(k, UNSTRESSED.get(k, text)))
+        synth = SYNTH_FINAL.get(k) or silero_text(SYNTH_OVERRIDES.get(k, text))
         wav = SCRATCH / "wav" / f"{name}-{hashlib.sha1(synth.encode()).hexdigest()[:6]}.wav"
         if not wav.exists():
             data, frames = silero.wav(synth, "xenia")

@@ -56,7 +56,7 @@ final class CursiveTests: XCTestCase {
 
     func testJoinsCoverEveryPairInTheCursiveUnit() throws {
         let course = try course()
-        let unit = try XCTUnwrap(course.units.first { $0.id == "u24" })
+        let unit = try XCTUnwrap(course.units.first { $0.id == "u31" })
         XCTAssertTrue((6...8).contains(unit.pages.count), "\(unit.pages.count) pages")
         var texts: [String] = []
         for p in unit.pages {

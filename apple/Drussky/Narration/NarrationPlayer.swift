@@ -109,11 +109,14 @@ final class NarrationPlayer: NSObject, AVAudioPlayerDelegate {
     }
 
     nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        // Only Sendable values cross to the main actor: the player's identity and its duration.
+        let finished = ObjectIdentifier(player)
+        let duration = player.duration
         Task { @MainActor in
-            guard self.player === player else { return }
+            guard let current = self.player, ObjectIdentifier(current) == finished else { return }
             self.isPlaying = false
             self.ticker?.cancel()
-            self.time = player.duration
+            self.time = duration
         }
     }
 }

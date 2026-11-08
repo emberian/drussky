@@ -30,14 +30,21 @@ extension Book {
 
     /// The correction lands: the entry finishes (right when nothing needed changing), and every
     /// corrected form joins the learner's words so reviews bring it back (hear→write, en→write).
+    /// A correction whose marks don't account for its corrected line (`isConsistent`) is kept to
+    /// read but finishes the line ungraded: it adds no words and awards nothing.
     func finishDiary(_ ref: ExerciseRef, correction: DiaryCorrection) {
-        guard let current = result(ref), current.diary != nil else { return }
-        for e in correction.edits where !RussianText.key(e.replacement).isEmpty && !RussianText.letters(in: e.replacement).isEmpty {
-            keep(e.replacement, en: e.en ?? "")
+        guard let current = result(ref), let entry = current.diary else { return }
+        var correction = correction
+        let verified = correction.isConsistent(with: entry.text)
+        correction.verified = verified
+        if verified {
+            for e in correction.edits where !RussianText.key(e.replacement).isEmpty && !RussianText.letters(in: e.replacement).isEmpty {
+                keep(e.replacement, en: e.en ?? "")
+            }
         }
         record(ref) { r in
             r.diary?.correction = correction
-            r.status = correction.edits.isEmpty ? .correct : .done
+            r.status = verified && correction.edits.isEmpty ? .correct : .done
         }
         requestAdvance(page: ref.pageID)
     }

@@ -42,7 +42,7 @@ final class CursiveScreensUITests: XCTestCase {
 
     func testCursiveUnitPage() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["-qa-reset", "-qa-until", "u24-p2", "-qa-top"]
+        app.launchArguments = ["-qa-reset", "-qa-until", "u31-p2", "-qa-top"]
         app.launch()
         XCTAssertTrue(app.staticTexts["The zigzag letters: и ш л м"].firstMatch.waitForExistence(timeout: 30))
         sleep(2)

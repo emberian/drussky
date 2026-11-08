@@ -39,6 +39,8 @@ enum Tutor {
     struct Turn: Codable, Sendable, Hashable {
         var role: String   // "user" | "assistant"
         var text: String
+        /// Who answered (OnDevice/TutorBackend.swift); nil on questions and on notes from before it was recorded.
+        var provenance: TutorProvenance? = nil
     }
 
     enum Failure: LocalizedError {
@@ -93,7 +95,7 @@ enum Tutor {
                         "stream": true,
                         "fallbacks": "default",
                         "output_config": ["effort": effort],
-                        "system": systemPrompt,
+                        "system": [["type": "text", "text": systemPrompt, "cache_control": ["type": "ephemeral"]]],  // the stable prefix of every call is cached
                         "messages": turns.map { ["role": $0.role, "content": $0.text] },
                     ]
                     request.httpBody = try JSONSerialization.data(withJSONObject: body)

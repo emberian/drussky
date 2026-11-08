@@ -150,6 +150,7 @@ struct PageView: View {
                     .foregroundStyle(Theme.muted)
             }
             .buttonStyle(.plain)
+            PagePrintButton(pageIndex: pageIndex)  // Devices/PDF
         }
         .padding(.top, 30)
         .animation(.spring(response: 0.5, dampingFraction: 0.7), value: page.isFinished)
@@ -174,32 +175,52 @@ struct PageView: View {
     }
 }
 
-/// A Russian teacher's mark: a red 5 (отлично) or 4 in the corner of a finished page.
+/// A Russian teacher's mark: a red 5 (отлично) or 4 in the corner of a finished page — or a tick
+/// when the page was completed but nothing on it was assessed.
 struct GradeStamp: View {
     let page: BookPage
 
-    static func grade(for page: BookPage) -> Int {
-        let graded = page.results.filter { $0.status != .done && $0.status != .skipped }
-        guard !graded.isEmpty else { return 5 }
-        let missed = graded.filter { $0.status == .missed }.count
+    /// The mark, or nil when nothing on the page was assessed: practice, skips, speaking the
+    /// learner judged themselves, diary lines nobody corrected or whose correction didn't hold up.
+    /// A diary line the tutor marked counts: right as written, or with a few slips, is fine;
+    /// three or more corrections is a miss.
+    static func grade(for page: BookPage) -> Int? {
+        var graded = 0, missed = 0
+        for (ex, r) in zip(page.exercises, page.results) {
+            switch r.status {
+            case .correct: graded += 1
+            case .missed: graded += 1; missed += 1
+            case .done:
+                if ex.kind == .diary, let c = r.diary?.correction, c.verified != false {
+                    graded += 1
+                    if c.edits.count >= 3 { missed += 1 }
+                }
+            case .open, .skipped: break
+            }
+        }
+        guard graded > 0 else { return nil }
         return missed == 0 ? 5 : missed <= 2 ? 4 : 3
     }
 
+    /// What goes in the corner: the mark, or a tick.
+    static func mark(for page: BookPage) -> String { grade(for: page).map(String.init) ?? "✓" }
+
     static func praise(for page: BookPage) -> String {
         switch grade(for: page) {
-        case 5: "Отлично!"
-        case 4: "Хорошо!"
-        default: "Молодец — дальше!"
+        case 5?: "Отлично!"
+        case 4?: "Хорошо!"
+        case .some: "Молодец — дальше!"
+        case nil: "Готово!"
         }
     }
 
     var body: some View {
-        Text("\(Self.grade(for: page))")
+        Text(Self.mark(for: page))
             .font(Theme.cursive(84))
             .foregroundStyle(Theme.redPen)
             .rotationEffect(.degrees(-10))
             .frame(width: 84, height: 84)
-            .accessibilityLabel("Mark: \(Self.grade(for: page)) out of 5")
+            .accessibilityLabel(Self.grade(for: page).map { "Mark: \($0) out of 5" } ?? "Done, not graded")
     }
 }
 

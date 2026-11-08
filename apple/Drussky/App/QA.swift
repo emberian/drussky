@@ -64,6 +64,7 @@ enum QA {
         openDay(book)
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
         applyGoal(to: book)
+        applyInstruments(to: book)  // -qa-judge, -qa-hooks, -qa-fluency (Fluency/QA+Instruments.swift)
         // -qa-narration ID: the read-along page of that library text, right after the current page
         // (-qa-narration-at MS shows it paused at that moment of the reading).
         if let id = string("-qa-narration"), let text = Library.load().texts.first(where: { $0.id == id }) {

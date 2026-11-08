@@ -62,7 +62,7 @@ struct TutorSheet: View {
                 noteID = existing.id
                 turns = existing.turns
             }
-            if Keychain.apiKey == nil { error = Tutor.Failure.noKey.errorDescription }
+            if case .unavailable(let why) = TutorRouter.route(.quickAnswer, .live) { error = why }
         }
     }
 
@@ -113,6 +113,14 @@ struct TutorSheet: View {
                         ForEach(phrases, id: \.self) { PhraseChip(phrase: $0) }
                     }
                 }
+                if turn.provenance == .onDevice, let i = turns.firstIndex(of: turn), i > 0 {
+                    HStack(spacing: 10) {
+                        ProvenanceTag(.onDevice)
+                        Button("Ask Claude for more") { send(turns[i - 1].text, via: .claude) }
+                            .font(Theme.label(12)).foregroundStyle(Theme.accent).buttonStyle(.plain)
+                            .disabled(streaming)
+                    }
+                }
             }
             .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -141,9 +149,12 @@ struct TutorSheet: View {
         .background(.bar)
     }
 
-    private func send(_ text: String) {
+    /// `via` forces a tutor ("Ask Claude for more"); by default the router picks one.
+    private func send(_ text: String, via forced: TutorRoute? = nil) {
         let q = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !q.isEmpty, !streaming else { return }
+        let route = forced ?? TutorRouter.route(.quickAnswer, .live)
+        if case .unavailable(let why) = route { error = why; return }
         draft = ""
         error = nil
         turns.append(.init(role: "user", text: q))
@@ -154,8 +165,14 @@ struct TutorSheet: View {
         Task {
             var failed = false
             do {
-                for try await chunk in Tutor.stream(history, context: context) {
-                    turns[turns.count - 1].text += chunk
+                if route == .onDevice {
+                    let answer = try await OnDeviceBackend().quickAnswer(question: q, context: context)
+                    turns[turns.count - 1] = .init(role: "assistant", text: answer, provenance: .onDevice)
+                } else {
+                    for try await chunk in Tutor.stream(history, context: context) {
+                        turns[turns.count - 1].text += chunk
+                    }
+                    turns[turns.count - 1].provenance = .claude
                 }
             } catch {
                 // A partial or refused answer is not an answer: drop it and give the question back.

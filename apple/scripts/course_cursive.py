@@ -1,4 +1,4 @@
-"""Unit 24: cursive (пропись) — how Russians write by hand, placed after unit 10 so every word in
+"""Unit 31: cursive (пропись) — how Russians write by hand, placed after unit 10 so every word in
 it is one the learner has already written in print.
 
 Same conventions as build_course.py: an apostrophe after a Cyrillic vowel marks stress. Two
@@ -32,7 +32,7 @@ def units(h):
     def ccp(text, times=1):
         return {**cp(text, times), "cursive": True}
 
-    return [("u24", "Cursive", "про'писи · how Russians write by hand", [
+    return [("u31", "Cursive", "про'писи · how Russians write by hand", [
         ("Joined up: о а с е", "Russians write by hand in a joined, slanted cursive that looks nothing like print. Start with the round letters: each begins at the top, and the red joins between letters are part of the word.", [
             ex("Cursive о is one oval, round anticlockwise from the top. а is the same oval with a stem down its right side; с and е leave at the bottom right, ready for the next letter.",
                [("окно'", "window"), ("сок", "juice"), ("сестра'", "sister")]),
@@ -108,11 +108,11 @@ def units(h):
 
 
 DIARY_PROMPTS = {
-    "u24-p1": "Three round words, written in cursive if you can.",
-    "u24-p2": "Write ма'ма and мир in your own hand; add one more word with л or м.",
-    "u24-p3": "Where is the table, and what is on it? Two sentences, joined up.",
-    "u24-p4": "Your morning in two short sentences, in cursive.",
-    "u24-p5": "Who is your brother or sister, and what do they love?",
-    "u24-p6": "Two sentences that start with a capital letter: Э'то… Вот…",
-    "u24-p7": "Leave a note on the table for someone at home.",
+    "u31-p1": "Three round words, written in cursive if you can.",
+    "u31-p2": "Write ма'ма and мир in your own hand; add one more word with л or м.",
+    "u31-p3": "Where is the table, and what is on it? Two sentences, joined up.",
+    "u31-p4": "Your morning in two short sentences, in cursive.",
+    "u31-p5": "Who is your brother or sister, and what do they love?",
+    "u31-p6": "Two sentences that start with a capital letter: Э'то… Вот…",
+    "u31-p7": "Leave a note on the table for someone at home.",
 }

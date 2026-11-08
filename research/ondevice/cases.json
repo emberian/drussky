@@ -1,0 +1,903 @@
+{
+ "glosses": [
+  {
+   "id": "gloss-1",
+   "word": "доброе",
+   "context": "— До́брое у́тро!",
+   "reference": "good (доброе утро: good morning)",
+   "page": "u14-p3"
+  },
+  {
+   "id": "gloss-2",
+   "word": "станции",
+   "context": "На ста́нции живёт ро́бот.",
+   "reference": "station (after на: on the station)",
+   "page": "u18-p4"
+  },
+  {
+   "id": "gloss-3",
+   "word": "живёт",
+   "context": "На ста́нции живёт ро́бот.",
+   "reference": "lives (he, she, it)",
+   "page": "u18-p4"
+  },
+  {
+   "id": "gloss-4",
+   "word": "окне",
+   "context": "Он ви́дит Зе́млю в окне́.",
+   "reference": "window (after в: in the window)",
+   "page": "u18-p4"
+  },
+  {
+   "id": "gloss-5",
+   "word": "ещё",
+   "context": "Ещё он ви́дит звёзды и Луну́.",
+   "reference": "also, as well",
+   "page": "u18-p4"
+  },
+  {
+   "id": "gloss-6",
+   "word": "космосе",
+   "context": "Ста́нция в ко́смосе.",
+   "reference": "space (after в: in space)",
+   "page": "u18-p4"
+  },
+  {
+   "id": "gloss-7",
+   "word": "вечером",
+   "context": "Вчера́ ве́чером я был до́ма.",
+   "reference": "in the evening",
+   "page": "u17-p3"
+  },
+  {
+   "id": "gloss-8",
+   "word": "был",
+   "context": "Вчера́ ве́чером я был до́ма.",
+   "reference": "was (he, or a man saying I)",
+   "page": "u17-p3"
+  },
+  {
+   "id": "gloss-9",
+   "word": "читала",
+   "context": "Ма́ма чита́ла кни́гу, а па́па ду́мал.",
+   "reference": "was reading (she)",
+   "page": "u17-p3"
+  },
+  {
+   "id": "gloss-10",
+   "word": "думал",
+   "context": "Ма́ма чита́ла кни́гу, а па́па ду́мал.",
+   "reference": "was thinking (he)",
+   "page": "u17-p3"
+  },
+  {
+   "id": "gloss-11",
+   "word": "спал",
+   "context": "Кот спал на столе́.",
+   "reference": "was sleeping (he, it)",
+   "page": "u17-p3"
+  },
+  {
+   "id": "gloss-12",
+   "word": "ходила",
+   "context": "Вчера́ у́тром я ходи́ла в парк.",
+   "reference": "went and came back (she, or a woman saying I)",
+   "page": "u19-p4"
+  },
+  {
+   "id": "gloss-13",
+   "word": "было",
+   "context": "Там бы́ло ти́хо.",
+   "reference": "it was",
+   "page": "u19-p4"
+  },
+  {
+   "id": "gloss-14",
+   "word": "были",
+   "context": "Ве́чером мы бы́ли до́ма и чита́ли.",
+   "reference": "were (they, we)",
+   "page": "u19-p4"
+  },
+  {
+   "id": "gloss-15",
+   "word": "читали",
+   "context": "Ве́чером мы бы́ли до́ма и чита́ли.",
+   "reference": "read, were reading (they, we)",
+   "page": "u19-p4"
+  },
+  {
+   "id": "gloss-16",
+   "word": "иду",
+   "context": "За́втра я опя́ть иду́ в парк.",
+   "reference": "I am going (on foot)",
+   "page": "u19-p4"
+  },
+  {
+   "id": "gloss-17",
+   "word": "летит",
+   "context": "Ста́нция «Звезда́» лети́т вокру́г Земли́.",
+   "reference": "flies (it)",
+   "page": "u20-p1"
+  },
+  {
+   "id": "gloss-18",
+   "word": "вокруг",
+   "context": "Ста́нция «Звезда́» лети́т вокру́г Земли́.",
+   "reference": "around",
+   "page": "u20-p1"
+  },
+  {
+   "id": "gloss-19",
+   "word": "земли",
+   "context": "Ста́нция «Звезда́» лети́т вокру́г Земли́.",
+   "reference": "the Earth (after вокруг)",
+   "page": "u20-p1"
+  },
+  {
+   "id": "gloss-20",
+   "word": "станции",
+   "context": "На ста́нции рабо́тает Ми́ра.",
+   "reference": "station (after на: on the station)",
+   "page": "u20-p1"
+  },
+  {
+   "id": "gloss-21",
+   "word": "каждое",
+   "context": "Ка́ждое у́тро она́ смо́трит на звёзды.",
+   "reference": "every (with a neuter noun)",
+   "page": "u20-p1"
+  },
+  {
+   "id": "gloss-22",
+   "word": "сигнале",
+   "context": "Э́то не шум: в сигна́ле есть чи́сла.",
+   "reference": "signal (after в: in the signal)",
+   "page": "u20-p2"
+  },
+  {
+   "id": "gloss-23",
+   "word": "есть",
+   "context": "Э́то не шум: в сигна́ле есть чи́сла.",
+   "reference": "there is, there are",
+   "page": "u20-p2"
+  },
+  {
+   "id": "gloss-24",
+   "word": "простые",
+   "context": "Ми́ра ду́мает: «Э́то просты́е чи́сла.",
+   "reference": "prime (of numbers); simple",
+   "page": "u20-p2"
+  },
+  {
+   "id": "gloss-25",
+   "word": "кто-то",
+   "context": "Зна́чит, там кто́-то есть».",
+   "reference": "someone",
+   "page": "u20-p2"
+  },
+  {
+   "id": "gloss-26",
+   "word": "там",
+   "context": "Зна́чит, там кто́-то есть».",
+   "reference": "there; here: out there",
+   "page": "u20-p2"
+  },
+  {
+   "id": "gloss-27",
+   "word": "посылает",
+   "context": "Она́ посыла́ет его́ к звёздам.",
+   "reference": "sends (he, she)",
+   "page": "u20-p3"
+  },
+  {
+   "id": "gloss-28",
+   "word": "его",
+   "context": "Она́ посыла́ет его́ к звёздам.",
+   "reference": "it (the answer); said yevo",
+   "page": "u20-p3"
+  },
+  {
+   "id": "gloss-29",
+   "word": "к",
+   "context": "Она́ посыла́ет его́ к звёздам.",
+   "reference": "to, towards",
+   "page": "u20-p3"
+  },
+  {
+   "id": "gloss-30",
+   "word": "звёздам",
+   "context": "Она́ посыла́ет его́ к звёздам.",
+   "reference": "stars (after к: to the stars)",
+   "page": "u20-p3"
+  },
+  {
+   "id": "gloss-31",
+   "word": "дня",
+   "context": "Оди́н день, два дня, неде́лю.",
+   "reference": "days (after два)",
+   "page": "u20-p3"
+  },
+  {
+   "id": "gloss-32",
+   "word": "через",
+   "context": "Че́рез ме́сяц прихо́дит но́вый сигна́л.",
+   "reference": "after, in (через месяц: a month later)",
+   "page": "u20-p4"
+  },
+  {
+   "id": "gloss-33",
+   "word": "месяц",
+   "context": "Че́рез ме́сяц прихо́дит но́вый сигна́л.",
+   "reference": "month",
+   "page": "u20-p4"
+  },
+  {
+   "id": "gloss-34",
+   "word": "приходит",
+   "context": "Че́рез ме́сяц прихо́дит но́вый сигна́л.",
+   "reference": "comes, arrives",
+   "page": "u20-p4"
+  },
+  {
+   "id": "gloss-35",
+   "word": "нём",
+   "context": "В нём одно́ сло́во: «Приве́т».",
+   "reference": "it (after в: in it)",
+   "page": "u20-p4"
+  },
+  {
+   "id": "gloss-36",
+   "word": "одно",
+   "context": "В нём одно́ сло́во: «Приве́т».",
+   "reference": "one (with a neuter noun)",
+   "page": "u20-p4"
+  },
+  {
+   "id": "gloss-37",
+   "word": "двух",
+   "context": "Тео́рема: су́мма двух чётных чи́сел — чётное число́.",
+   "reference": "two (of two)",
+   "page": "u21-p4"
+  },
+  {
+   "id": "gloss-38",
+   "word": "чётных",
+   "context": "Тео́рема: су́мма двух чётных чи́сел — чётное число́.",
+   "reference": "even (of even ...)",
+   "page": "u21-p4"
+  },
+  {
+   "id": "gloss-39",
+   "word": "чисел",
+   "context": "Тео́рема: су́мма двух чётных чи́сел — чётное число́.",
+   "reference": "numbers (of numbers)",
+   "page": "u21-p4"
+  },
+  {
+   "id": "gloss-40",
+   "word": "которое",
+   "context": "Чётное число́ — э́то число́, кото́рое де́лится на два.",
+   "reference": "which, that",
+   "page": "u21-p4"
+  },
+  {
+   "id": "gloss-41",
+   "word": "возьмём",
+   "context": "Возьмём два чётных числа́.",
+   "reference": "let's take",
+   "page": "u21-p4"
+  },
+  {
+   "id": "gloss-42",
+   "word": "спрашивает",
+   "context": "— спра́шивает Сокра́т.",
+   "reference": "asks",
+   "page": "u22-p3"
+  },
+  {
+   "id": "gloss-43",
+   "word": "сократ",
+   "context": "— спра́шивает Сокра́т.",
+   "reference": "Socrates",
+   "page": "u22-p3"
+  },
+  {
+   "id": "gloss-44",
+   "word": "когда",
+   "context": "— Э́то когда́ ка́ждый получа́ет то, чего́ заслу́живает, — отвеча́ет учени́к.",
+   "reference": "when",
+   "page": "u22-p3"
+  },
+  {
+   "id": "gloss-45",
+   "word": "каждый",
+   "context": "— Э́то когда́ ка́ждый получа́ет то, чего́ заслу́живает, — отвеча́ет учени́к.",
+   "reference": "everyone, each",
+   "page": "u22-p3"
+  },
+  {
+   "id": "gloss-46",
+   "word": "получает",
+   "context": "— Э́то когда́ ка́ждый получа́ет то, чего́ заслу́живает, — отвеча́ет учени́к.",
+   "reference": "gets, receives",
+   "page": "u22-p3"
+  },
+  {
+   "id": "gloss-47",
+   "word": "стихи",
+   "context": "Э́то стихи́ Фёдора Тю́тчева.",
+   "reference": "poems, verses",
+   "page": "u22-p4"
+  },
+  {
+   "id": "gloss-48",
+   "word": "фёдора",
+   "context": "Э́то стихи́ Фёдора Тю́тчева.",
+   "reference": "Fyodor (by Fyodor)",
+   "page": "u22-p4"
+  },
+  {
+   "id": "gloss-49",
+   "word": "тютчева",
+   "context": "Э́то стихи́ Фёдора Тю́тчева.",
+   "reference": "Tyutchev (by Tyutchev)",
+   "page": "u22-p4"
+  },
+  {
+   "id": "gloss-50",
+   "word": "аршином",
+   "context": "Арши́ном о́бщим не изме́рить:",
+   "reference": "with an arshin (an old Russian measuring rod)",
+   "page": "u22-p4"
+  }
+ ],
+ "endings": [
+  {
+   "id": "ending-1",
+   "sentence": "Я живу́ в Москве́.",
+   "word": "Москве́",
+   "key": "Prepositional case after в for a location (where). Москва is feminine, -а becomes -е."
+  },
+  {
+   "id": "ending-2",
+   "sentence": "Я чита́ю кни́гу.",
+   "word": "кни́гу",
+   "key": "Accusative case, the direct object of читать. Feminine -а becomes -у."
+  },
+  {
+   "id": "ending-3",
+   "sentence": "У меня́ нет вре́мени.",
+   "word": "вре́мени",
+   "key": "Genitive case after нет (absence). Время is a neuter -мя noun; its genitive is времени."
+  },
+  {
+   "id": "ending-4",
+   "sentence": "Он даёт кни́гу бра́ту.",
+   "word": "бра́ту",
+   "key": "Dative case: the recipient of giving. Masculine nouns take -у."
+  },
+  {
+   "id": "ending-5",
+   "sentence": "Мы идём в шко́лу.",
+   "word": "шко́лу",
+   "key": "Accusative case after в with a verb of motion (destination, where to). Feminine -а becomes -у."
+  },
+  {
+   "id": "ending-6",
+   "sentence": "Она́ пи́шет ру́чкой.",
+   "word": "ру́чкой",
+   "key": "Instrumental case: the tool or means of doing it. Feminine -а becomes -ой."
+  },
+  {
+   "id": "ending-7",
+   "sentence": "Я ви́жу ма́му.",
+   "word": "ма́му",
+   "key": "Accusative direct object. Feminine -а becomes -у."
+  },
+  {
+   "id": "ending-8",
+   "sentence": "Я ви́жу бра́та.",
+   "word": "бра́та",
+   "key": "Accusative direct object; for animate masculine nouns the accusative looks like the genitive, so брат takes -а."
+  },
+  {
+   "id": "ending-9",
+   "sentence": "Я ви́жу стол.",
+   "word": "стол",
+   "key": "Accusative direct object; for inanimate masculine nouns the accusative equals the nominative, so no ending changes."
+  },
+  {
+   "id": "ending-10",
+   "sentence": "Э́то кни́га ма́мы.",
+   "word": "ма́мы",
+   "key": "Genitive case for possession (whose book). Feminine -а becomes -ы."
+  },
+  {
+   "id": "ending-11",
+   "sentence": "Он говори́т о Росси́и.",
+   "word": "Росси́и",
+   "key": "Prepositional case after о (about). Nouns ending in -ия take -ии, not -ие."
+  },
+  {
+   "id": "ending-12",
+   "sentence": "У меня́ пять книг.",
+   "word": "книг",
+   "key": "Genitive plural after the numbers five and up. Feminine -а nouns drop the ending (zero ending)."
+  },
+  {
+   "id": "ending-13",
+   "sentence": "На столе́ два стола́.",
+   "word": "стола́",
+   "key": "Genitive singular after the numbers два/две, три, четыре. Masculine nouns take -а."
+  },
+  {
+   "id": "ending-14",
+   "sentence": "Я рабо́таю.",
+   "word": "рабо́таю",
+   "key": "First person singular present of работать (an -ать verb, first conjugation): stem работа- plus -ю."
+  },
+  {
+   "id": "ending-15",
+   "sentence": "Ты рабо́таешь.",
+   "word": "рабо́таешь",
+   "key": "Second person singular present, first conjugation ending -ешь."
+  },
+  {
+   "id": "ending-16",
+   "sentence": "Они́ говоря́т.",
+   "word": "говоря́т",
+   "key": "Third person plural present of говорить, a second conjugation (-ить) verb, so -ят (not -ют)."
+  },
+  {
+   "id": "ending-17",
+   "sentence": "Она́ чита́ла.",
+   "word": "чита́ла",
+   "key": "Past tense: -л plus -а because the subject (она) is feminine; the past tense agrees in gender, not person."
+  },
+  {
+   "id": "ending-18",
+   "sentence": "Э́то но́вая кни́га.",
+   "word": "но́вая",
+   "key": "Adjective agreeing with the feminine singular nominative noun книга: feminine ending -ая."
+  },
+  {
+   "id": "ending-19",
+   "sentence": "Мне хо́лодно.",
+   "word": "Мне",
+   "key": "Dative case: the experiencer in an impersonal construction (it is cold to me). Dative of я is мне."
+  },
+  {
+   "id": "ending-20",
+   "sentence": "Я был в Петербу́рге.",
+   "word": "Петербу́рге",
+   "key": "Prepositional case after в for a location. Masculine nouns add -е."
+  }
+ ],
+ "diaries": [
+  {
+   "id": "diary-1",
+   "prompt": "What do you like to do?",
+   "text": "Я люблю читать книга.",
+   "gold": "Я люблю́ чита́ть кни́ги.",
+   "planted": [
+    {
+     "span": "книга",
+     "replacement": [
+      "книги",
+      "книгу"
+     ],
+     "category": "ending"
+    }
+   ]
+  },
+  {
+   "id": "diary-2",
+   "prompt": "Tell me about your family.",
+   "text": "Моя папа работает дома.",
+   "gold": "Мой па́па рабо́тает до́ма.",
+   "planted": [
+    {
+     "span": "Моя",
+     "replacement": [
+      "мой"
+     ],
+     "category": "agreement"
+    }
+   ]
+  },
+  {
+   "id": "diary-3",
+   "prompt": "What did you do yesterday?",
+   "text": "Вчера я ходил в школа.",
+   "gold": "Вчера́ я ходи́л в шко́лу.",
+   "planted": [
+    {
+     "span": "школа",
+     "replacement": [
+      "школу"
+     ],
+     "category": "ending"
+    }
+   ]
+  },
+  {
+   "id": "diary-4",
+   "prompt": "Where do you live?",
+   "text": "Я живу в Москва.",
+   "gold": "Я живу́ в Москве́.",
+   "planted": [
+    {
+     "span": "Москва",
+     "replacement": [
+      "москве"
+     ],
+     "category": "ending"
+    }
+   ]
+  },
+  {
+   "id": "diary-5",
+   "prompt": "What is your friend doing?",
+   "text": "Она читает книга и пьёт чай.",
+   "gold": "Она́ чита́ет кни́гу и пьёт чай.",
+   "planted": [
+    {
+     "span": "книга",
+     "replacement": [
+      "книгу"
+     ],
+     "category": "ending"
+    }
+   ]
+  },
+  {
+   "id": "diary-6",
+   "prompt": "Tell me about your brother.",
+   "text": "У меня есть брат. Он студент. Он учится в университет.",
+   "gold": "У меня́ есть брат. Он студе́нт. Он у́чится в университе́те.",
+   "planted": [
+    {
+     "span": "университет",
+     "replacement": [
+      "университете"
+     ],
+     "category": "ending"
+    }
+   ]
+  },
+  {
+   "id": "diary-7",
+   "prompt": "What is happening at home?",
+   "text": "Мама и папа дома. Они смотрит телевизор.",
+   "gold": "Ма́ма и па́па до́ма. Они́ смо́трят телеви́зор.",
+   "planted": [
+    {
+     "span": "смотрит",
+     "replacement": [
+      "смотрят"
+     ],
+     "category": "agreement"
+    }
+   ]
+  },
+  {
+   "id": "diary-8",
+   "prompt": "What is hard today?",
+   "text": "Я не понимаю этот слово.",
+   "gold": "Я не понима́ю э́то сло́во.",
+   "planted": [
+    {
+     "span": "этот",
+     "replacement": [
+      "это"
+     ],
+     "category": "agreement"
+    }
+   ]
+  },
+  {
+   "id": "diary-9",
+   "prompt": "What are your plans?",
+   "text": "Сегодня хорошая погода. Я иду в парк с друг.",
+   "gold": "Сего́дня хоро́шая пого́да. Я иду́ в парк с дру́гом.",
+   "planted": [
+    {
+     "span": "друг",
+     "replacement": [
+      "другом"
+     ],
+     "category": "ending"
+    }
+   ]
+  },
+  {
+   "id": "diary-10",
+   "prompt": "Introduce yourself.",
+   "text": "Меня зовут Эмбер. Я люблю математику и кофе.",
+   "gold": "Меня́ зову́т Э́мбер. Я люблю́ матема́тику и ко́фе.",
+   "planted": []
+  }
+ ],
+ "lemmas": [
+  {
+   "id": "lemma-1",
+   "form": "лев",
+   "gold": [
+    "лев"
+   ]
+  },
+  {
+   "id": "lemma-4",
+   "form": "пробежала",
+   "gold": [
+    "пробежать"
+   ]
+  },
+  {
+   "id": "lemma-7",
+   "form": "телу",
+   "gold": [
+    "тело"
+   ]
+  },
+  {
+   "id": "lemma-10",
+   "form": "и",
+   "gold": [
+    "и"
+   ]
+  },
+  {
+   "id": "lemma-13",
+   "form": "стала",
+   "gold": [
+    "стать"
+   ]
+  },
+  {
+   "id": "lemma-16",
+   "form": "пустил",
+   "gold": [
+    "пустить"
+   ]
+  },
+  {
+   "id": "lemma-19",
+   "form": "если",
+   "gold": [
+    "если"
+   ]
+  },
+  {
+   "id": "lemma-22",
+   "form": "пустишь",
+   "gold": [
+    "пустить"
+   ]
+  },
+  {
+   "id": "lemma-25",
+   "form": "добро",
+   "gold": [
+    "добро"
+   ]
+  },
+  {
+   "id": "lemma-28",
+   "form": "что",
+   "gold": [
+    "что"
+   ]
+  },
+  {
+   "id": "lemma-31",
+   "form": "потом",
+   "gold": [
+    "потом"
+   ]
+  },
+  {
+   "id": "lemma-34",
+   "form": "льва",
+   "gold": [
+    "лев"
+   ]
+  },
+  {
+   "id": "lemma-37",
+   "form": "к",
+   "gold": [
+    "к"
+   ]
+  },
+  {
+   "id": "lemma-40",
+   "form": "львиный",
+   "gold": [
+    "львиный"
+   ]
+  },
+  {
+   "id": "lemma-43",
+   "form": "перегрызла",
+   "gold": [
+    "перегрызть"
+   ]
+  },
+  {
+   "id": "lemma-46",
+   "form": "смеялся",
+   "gold": [
+    "смеяться"
+   ]
+  },
+  {
+   "id": "lemma-49",
+   "form": "могла",
+   "gold": [
+    "мочь"
+   ]
+  },
+  {
+   "id": "lemma-52",
+   "form": "видишь",
+   "gold": [
+    "видеть"
+   ]
+  },
+  {
+   "id": "lemma-55",
+   "form": "мыши",
+   "gold": [
+    "мышь"
+   ]
+  },
+  {
+   "id": "lemma-58",
+   "form": "слив",
+   "gold": [
+    "слива"
+   ]
+  },
+  {
+   "id": "lemma-61",
+   "form": "дать",
+   "gold": [
+    "дать"
+   ]
+  },
+  {
+   "id": "lemma-64",
+   "form": "обеда",
+   "gold": [
+    "обед"
+   ]
+  },
+  {
+   "id": "lemma-67",
+   "form": "на",
+   "gold": [
+    "на"
+   ]
+  },
+  {
+   "id": "lemma-70",
+   "form": "никогда",
+   "gold": [
+    "никогда"
+   ]
+  },
+  {
+   "id": "lemma-73",
+   "form": "нюхал",
+   "gold": [
+    "нюхать"
+   ]
+  },
+  {
+   "id": "lemma-76",
+   "form": "хотелось",
+   "gold": [
+    "хотеться"
+   ]
+  },
+  {
+   "id": "lemma-79",
+   "form": "мимо",
+   "gold": [
+    "мимо"
+   ]
+  },
+  {
+   "id": "lemma-82",
+   "form": "было",
+   "gold": [
+    "быть"
+   ]
+  },
+  {
+   "id": "lemma-85",
+   "form": "удержался",
+   "gold": [
+    "удержаться"
+   ]
+  },
+  {
+   "id": "lemma-88",
+   "form": "сливу",
+   "gold": [
+    "слива"
+   ]
+  },
+  {
+   "id": "lemma-91",
+   "form": "обедом",
+   "gold": [
+    "обед"
+   ]
+  },
+  {
+   "id": "lemma-94",
+   "form": "видит",
+   "gold": [
+    "видеть"
+   ]
+  },
+  {
+   "id": "lemma-97",
+   "form": "отцу",
+   "gold": [
+    "отец"
+   ]
+  },
+  {
+   "id": "lemma-100",
+   "form": "слово",
+   "gold": [
+    "слово"
+   ]
+  },
+  {
+   "id": "lemma-103",
+   "form": "напечатано",
+   "gold": [
+    "напечатать"
+   ]
+  },
+  {
+   "id": "lemma-106",
+   "form": "через",
+   "gold": [
+    "через"
+   ]
+  },
+  {
+   "id": "lemma-109",
+   "form": "постройка",
+   "gold": [
+    "постройка"
+   ]
+  },
+  {
+   "id": "lemma-112",
+   "form": "великий",
+   "gold": [
+    "великий"
+   ]
+  },
+  {
+   "id": "lemma-115",
+   "form": "первый",
+   "gold": [
+    "первый"
+   ]
+  },
+  {
+   "id": "lemma-118",
+   "form": "мировое",
+   "gold": [
+    "мировой"
+   ]
+  }
+ ]
+}

@@ -77,6 +77,8 @@ enum ExerciseKind: String, Codable, Sendable {
     /// Reading a word or line in someone's handwriting, then printing it or picking it among
     /// look-alikes (Cursive/).
     case readHandwriting = "read_handwriting"
+    /// A spoken conversation with the tutor (Talk/).
+    case talk
 
     /// Exercises answered with the pencil on ruled paper.
     var isWriting: Bool {

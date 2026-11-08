@@ -1989,6 +1989,1210 @@
   {
    "ru": "элеме́нт",
    "en": "element"
+  },
+  {
+   "ru": "вре́мя",
+   "en": "time"
+  },
+  {
+   "ru": "нет вре́мени",
+   "en": "there is no time"
+  },
+  {
+   "ru": "у бра́та",
+   "en": "at my brother's; my brother has"
+  },
+  {
+   "ru": "у сестры́",
+   "en": "at my sister's; my sister has"
+  },
+  {
+   "ru": "из",
+   "en": "from, out of"
+  },
+  {
+   "ru": "из го́рода",
+   "en": "from the city"
+  },
+  {
+   "ru": "по́сле",
+   "en": "after"
+  },
+  {
+   "ru": "по́сле обе́да",
+   "en": "after lunch"
+  },
+  {
+   "ru": "мно́го",
+   "en": "many, much, a lot"
+  },
+  {
+   "ru": "мно́го книг",
+   "en": "many books"
+  },
+  {
+   "ru": "мно́го рабо́ты",
+   "en": "a lot of work"
+  },
+  {
+   "ru": "ма́ло",
+   "en": "few, little"
+  },
+  {
+   "ru": "ма́ло вре́мени",
+   "en": "little time"
+  },
+  {
+   "ru": "ему́",
+   "en": "to him"
+  },
+  {
+   "ru": "ей",
+   "en": "to her"
+  },
+  {
+   "ru": "нам",
+   "en": "to us"
+  },
+  {
+   "ru": "вам",
+   "en": "to you (plural or polite; dative)"
+  },
+  {
+   "ru": "им",
+   "en": "to them"
+  },
+  {
+   "ru": "бра́ту",
+   "en": "to the brother"
+  },
+  {
+   "ru": "сестре́",
+   "en": "to the sister"
+  },
+  {
+   "ru": "я пишу́",
+   "en": "I write, I am writing"
+  },
+  {
+   "ru": "лет",
+   "en": "years (after пять and up; also in ages)"
+  },
+  {
+   "ru": "Ско́лько тебе́ лет?",
+   "en": "How old are you?"
+  },
+  {
+   "ru": "мне нра́вится",
+   "en": "I like (it pleases me)"
+  },
+  {
+   "ru": "нра́вится",
+   "en": "pleases, is liked (he, she, it)"
+  },
+  {
+   "ru": "с бра́том",
+   "en": "with my brother"
+  },
+  {
+   "ru": "с сестро́й",
+   "en": "with my sister"
+  },
+  {
+   "ru": "со мной",
+   "en": "with me"
+  },
+  {
+   "ru": "с тобо́й",
+   "en": "with you (one person)"
+  },
+  {
+   "ru": "ру́чка",
+   "en": "pen"
+  },
+  {
+   "ru": "ру́чкой",
+   "en": "with a pen (instrumental)"
+  },
+  {
+   "ru": "стать",
+   "en": "to become"
+  },
+  {
+   "ru": "ста́ла",
+   "en": "became (she)"
+  },
+  {
+   "ru": "учи́телем",
+   "en": "a teacher (after быть or стать)"
+  },
+  {
+   "ru": "писа́телем",
+   "en": "a writer (after быть or стать)"
+  },
+  {
+   "ru": "идёт",
+   "en": "goes, is going (he, she, it; on foot)"
+  },
+  {
+   "ru": "на стол",
+   "en": "onto the table"
+  },
+  {
+   "ru": "на рабо́те",
+   "en": "at work"
+  },
+  {
+   "ru": "о",
+   "en": "about (with the prepositional)"
+  },
+  {
+   "ru": "о кни́ге",
+   "en": "about the book"
+  },
+  {
+   "ru": "о тебе́",
+   "en": "about you"
+  },
+  {
+   "ru": "о бра́те",
+   "en": "about my brother"
+  },
+  {
+   "ru": "паде́ж",
+   "en": "case (grammatical)"
+  },
+  {
+   "ru": "роди́тельный паде́ж",
+   "en": "genitive case"
+  },
+  {
+   "ru": "да́тельный паде́ж",
+   "en": "dative case"
+  },
+  {
+   "ru": "вини́тельный паде́ж",
+   "en": "accusative case"
+  },
+  {
+   "ru": "твори́тельный паде́ж",
+   "en": "instrumental case"
+  },
+  {
+   "ru": "предло́жный паде́ж",
+   "en": "prepositional case"
+  },
+  {
+   "ru": "написа́ла",
+   "en": "wrote and finished (she)"
+  },
+  {
+   "ru": "поду́мать",
+   "en": "to think for a moment, think it over"
+  },
+  {
+   "ru": "сказа́ть",
+   "en": "to say (once, perfective)"
+  },
+  {
+   "ru": "узна́ть",
+   "en": "to find out"
+  },
+  {
+   "ru": "ви́деть",
+   "en": "to see"
+  },
+  {
+   "ru": "уви́деть",
+   "en": "to catch sight of, to see (once)"
+  },
+  {
+   "ru": "ждать",
+   "en": "to wait"
+  },
+  {
+   "ru": "подожда́ть",
+   "en": "to wait a bit"
+  },
+  {
+   "ru": "хо́чет",
+   "en": "wants (he, she)"
+  },
+  {
+   "ru": "писа́л",
+   "en": "was writing (he)"
+  },
+  {
+   "ru": "написа́л",
+   "en": "wrote and finished (he)"
+  },
+  {
+   "ru": "наконе́ц",
+   "en": "finally, at last"
+  },
+  {
+   "ru": "сказа́ла",
+   "en": "said (she)"
+  },
+  {
+   "ru": "жда́ли",
+   "en": "waited (plural)"
+  },
+  {
+   "ru": "уви́дели",
+   "en": "caught sight of, saw (plural)"
+  },
+  {
+   "ru": "час",
+   "en": "hour; one o'clock"
+  },
+  {
+   "ru": "поду́мал",
+   "en": "thought a moment (he)"
+  },
+  {
+   "ru": "по́нял",
+   "en": "understood, grasped (he)"
+  },
+  {
+   "ru": "напишу́",
+   "en": "I will write (and finish)"
+  },
+  {
+   "ru": "я скажу́",
+   "en": "I will say"
+  },
+  {
+   "ru": "поймёшь",
+   "en": "you (one person) will understand"
+  },
+  {
+   "ru": "Мы узна́ем.",
+   "en": "We will find out."
+  },
+  {
+   "ru": "уви́дите",
+   "en": "you (plural) will see"
+  },
+  {
+   "ru": "сде́лает",
+   "en": "will get it done (he, she)"
+  },
+  {
+   "ru": "поду́маю",
+   "en": "I will think it over"
+  },
+  {
+   "ru": "скажи́",
+   "en": "say, tell (to one person)"
+  },
+  {
+   "ru": "напиши́",
+   "en": "write (to one person)"
+  },
+  {
+   "ru": "подожди́",
+   "en": "wait (to one person)"
+  },
+  {
+   "ru": "слу́шай",
+   "en": "listen (to one person)"
+  },
+  {
+   "ru": "смотри́",
+   "en": "look (to one person)"
+  },
+  {
+   "ru": "скажи́те",
+   "en": "say, tell (polite or plural)"
+  },
+  {
+   "ru": "не говори́",
+   "en": "don't say, don't talk"
+  },
+  {
+   "ru": "чита́й",
+   "en": "read (to one person)"
+  },
+  {
+   "ru": "бы́стро",
+   "en": "quickly, fast"
+  },
+  {
+   "ru": "одна́",
+   "en": "one (feminine)"
+  },
+  {
+   "ru": "одно́",
+   "en": "one (neuter)"
+  },
+  {
+   "ru": "две",
+   "en": "two (feminine)"
+  },
+  {
+   "ru": "год",
+   "en": "year"
+  },
+  {
+   "ru": "два стола́",
+   "en": "two tables"
+  },
+  {
+   "ru": "пять столо́в",
+   "en": "five tables"
+  },
+  {
+   "ru": "две кни́ги",
+   "en": "two books"
+  },
+  {
+   "ru": "пять книг",
+   "en": "five books"
+  },
+  {
+   "ru": "два окна́",
+   "en": "two windows"
+  },
+  {
+   "ru": "пять о́кон",
+   "en": "five windows"
+  },
+  {
+   "ru": "два го́да",
+   "en": "two years"
+  },
+  {
+   "ru": "пять лет",
+   "en": "five years"
+  },
+  {
+   "ru": "Кото́рый час?",
+   "en": "What time is it?"
+  },
+  {
+   "ru": "сейча́с",
+   "en": "now, at this moment"
+  },
+  {
+   "ru": "три часа́",
+   "en": "three o'clock; three hours"
+  },
+  {
+   "ru": "семь часо́в",
+   "en": "seven o'clock; seven hours"
+  },
+  {
+   "ru": "утра́",
+   "en": "in the morning (after a clock time)"
+  },
+  {
+   "ru": "ве́чера",
+   "en": "in the evening (after a clock time)"
+  },
+  {
+   "ru": "мину́та",
+   "en": "minute"
+  },
+  {
+   "ru": "де́сять мину́т",
+   "en": "ten minutes"
+  },
+  {
+   "ru": "полчаса́",
+   "en": "half an hour"
+  },
+  {
+   "ru": "день",
+   "en": "day"
+  },
+  {
+   "ru": "понеде́льник",
+   "en": "Monday"
+  },
+  {
+   "ru": "вто́рник",
+   "en": "Tuesday"
+  },
+  {
+   "ru": "среда́",
+   "en": "Wednesday"
+  },
+  {
+   "ru": "четве́рг",
+   "en": "Thursday"
+  },
+  {
+   "ru": "пя́тница",
+   "en": "Friday"
+  },
+  {
+   "ru": "суббо́та",
+   "en": "Saturday"
+  },
+  {
+   "ru": "воскресе́нье",
+   "en": "Sunday"
+  },
+  {
+   "ru": "в пя́тницу",
+   "en": "on Friday"
+  },
+  {
+   "ru": "в суббо́ту",
+   "en": "on Saturday"
+  },
+  {
+   "ru": "Како́й сего́дня день?",
+   "en": "What day is it today?"
+  },
+  {
+   "ru": "Како́е сего́дня число́?",
+   "en": "What is the date today?"
+  },
+  {
+   "ru": "пе́рвое ма́я",
+   "en": "the first of May"
+  },
+  {
+   "ru": "янва́рь",
+   "en": "January"
+  },
+  {
+   "ru": "февра́ль",
+   "en": "February"
+  },
+  {
+   "ru": "март",
+   "en": "March"
+  },
+  {
+   "ru": "апре́ль",
+   "en": "April"
+  },
+  {
+   "ru": "май",
+   "en": "May"
+  },
+  {
+   "ru": "ию́нь",
+   "en": "June"
+  },
+  {
+   "ru": "ию́ль",
+   "en": "July"
+  },
+  {
+   "ru": "а́вгуст",
+   "en": "August"
+  },
+  {
+   "ru": "сентя́брь",
+   "en": "September"
+  },
+  {
+   "ru": "октя́брь",
+   "en": "October"
+  },
+  {
+   "ru": "ноя́брь",
+   "en": "November"
+  },
+  {
+   "ru": "дека́брь",
+   "en": "December"
+  },
+  {
+   "ru": "второ́е",
+   "en": "the second (date)"
+  },
+  {
+   "ru": "тре́тье",
+   "en": "the third (date)"
+  },
+  {
+   "ru": "Ско́лько э́то сто́ит?",
+   "en": "How much does this cost?"
+  },
+  {
+   "ru": "сто́ит",
+   "en": "costs (one thing)"
+  },
+  {
+   "ru": "сто́ят",
+   "en": "cost (several things)"
+  },
+  {
+   "ru": "рубль",
+   "en": "rouble"
+  },
+  {
+   "ru": "два рубля́",
+   "en": "two roubles"
+  },
+  {
+   "ru": "рубле́й",
+   "en": "roubles (after пять and up)"
+  },
+  {
+   "ru": "до́рого",
+   "en": "expensive; dearly"
+  },
+  {
+   "ru": "дёшево",
+   "en": "cheap, cheaply"
+  },
+  {
+   "ru": "буты́лка молока́",
+   "en": "a bottle of milk"
+  },
+  {
+   "ru": "килогра́мм сы́ра",
+   "en": "a kilogram of cheese"
+  },
+  {
+   "ru": "литр воды́",
+   "en": "a litre of water"
+  },
+  {
+   "ru": "и́ли",
+   "en": "or"
+  },
+  {
+   "ru": "меню́",
+   "en": "menu"
+  },
+  {
+   "ru": "вари́те",
+   "en": "cook, boil (polite imperative)"
+  },
+  {
+   "ru": "две́сти",
+   "en": "two hundred"
+  },
+  {
+   "ru": "три́ста",
+   "en": "three hundred"
+  },
+  {
+   "ru": "интере́сный",
+   "en": "interesting"
+  },
+  {
+   "ru": "интере́снее",
+   "en": "more interesting"
+  },
+  {
+   "ru": "чем",
+   "en": "than"
+  },
+  {
+   "ru": "фильм",
+   "en": "film"
+  },
+  {
+   "ru": "э́та",
+   "en": "this (feminine)"
+  },
+  {
+   "ru": "бо́льше",
+   "en": "more, bigger"
+  },
+  {
+   "ru": "ме́ньше",
+   "en": "less, smaller"
+  },
+  {
+   "ru": "лу́чше",
+   "en": "better"
+  },
+  {
+   "ru": "ху́же",
+   "en": "worse"
+  },
+  {
+   "ru": "ста́рше",
+   "en": "older"
+  },
+  {
+   "ru": "моло́же",
+   "en": "younger"
+  },
+  {
+   "ru": "са́мый",
+   "en": "the most (superlative)"
+  },
+  {
+   "ru": "са́мая интере́сная кни́га",
+   "en": "the most interesting book"
+  },
+  {
+   "ru": "ва́жный",
+   "en": "important"
+  },
+  {
+   "ru": "тру́дный",
+   "en": "difficult"
+  },
+  {
+   "ru": "лёгкий",
+   "en": "easy; light"
+  },
+  {
+   "ru": "прав",
+   "en": "right, correct (a man is)"
+  },
+  {
+   "ru": "права́",
+   "en": "right, correct (a woman is)"
+  },
+  {
+   "ru": "я согла́сен",
+   "en": "I agree (a man speaking)"
+  },
+  {
+   "ru": "я согла́сна",
+   "en": "I agree (a woman speaking)"
+  },
+  {
+   "ru": "ну́жен",
+   "en": "needed (masculine)"
+  },
+  {
+   "ru": "нужна́",
+   "en": "needed (feminine)"
+  },
+  {
+   "ru": "ну́жно",
+   "en": "one needs to; it is necessary"
+  },
+  {
+   "ru": "до́лжен",
+   "en": "must (a man)"
+  },
+  {
+   "ru": "должна́",
+   "en": "must (a woman)"
+  },
+  {
+   "ru": "идти́",
+   "en": "to go (on foot, one way)"
+  },
+  {
+   "ru": "тру́дно",
+   "en": "hard, difficult (it is)"
+  },
+  {
+   "ru": "легко́",
+   "en": "easy; easily"
+  },
+  {
+   "ru": "ва́жно",
+   "en": "important (it is important)"
+  },
+  {
+   "ru": "интере́сно",
+   "en": "interesting (it is)"
+  },
+  {
+   "ru": "э́тот",
+   "en": "this (masculine)"
+  },
+  {
+   "ru": "э́ти",
+   "en": "these"
+  },
+  {
+   "ru": "тот",
+   "en": "that (masculine)"
+  },
+  {
+   "ru": "та",
+   "en": "that (feminine)"
+  },
+  {
+   "ru": "те",
+   "en": "those"
+  },
+  {
+   "ru": "кото́рый",
+   "en": "which, who (masculine)"
+  },
+  {
+   "ru": "кото́рая",
+   "en": "which, who (feminine)"
+  },
+  {
+   "ru": "кото́рую",
+   "en": "which, whom (feminine object)"
+  },
+  {
+   "ru": "кото́рые",
+   "en": "which, who (plural)"
+  },
+  {
+   "ru": "в кото́ром",
+   "en": "in which (masculine or neuter)"
+  },
+  {
+   "ru": "в кото́рой",
+   "en": "in which (feminine)"
+  },
+  {
+   "ru": "челове́ка",
+   "en": "person (as the object)"
+  },
+  {
+   "ru": "трудне́е",
+   "en": "harder, more difficult"
+  },
+  {
+   "ru": "зада́чи",
+   "en": "problems, tasks"
+  },
+  {
+   "ru": "нра́вятся",
+   "en": "please, are liked (they)"
+  },
+  {
+   "ru": "учи́ться",
+   "en": "to study, to learn (for oneself)"
+  },
+  {
+   "ru": "учу́сь",
+   "en": "I study, I am learning"
+  },
+  {
+   "ru": "Как э́то называ́ется?",
+   "en": "What is this called?"
+  },
+  {
+   "ru": "называ́ется",
+   "en": "is called"
+  },
+  {
+   "ru": "нахо́дится",
+   "en": "is located"
+  },
+  {
+   "ru": "уро́к",
+   "en": "lesson"
+  },
+  {
+   "ru": "начина́ется",
+   "en": "begins (it)"
+  },
+  {
+   "ru": "конча́ется",
+   "en": "ends (it)"
+  },
+  {
+   "ru": "мне ка́жется",
+   "en": "it seems to me"
+  },
+  {
+   "ru": "чита́ющий",
+   "en": "reading, the one who is reading (participle)"
+  },
+  {
+   "ru": "живу́щий",
+   "en": "living (participle)"
+  },
+  {
+   "ru": "прочита́вший",
+   "en": "having read (participle)"
+  },
+  {
+   "ru": "напи́санное",
+   "en": "written (neuter participle)"
+  },
+  {
+   "ru": "откры́тое",
+   "en": "open, opened (neuter participle)"
+  },
+  {
+   "ru": "откры́то",
+   "en": "open (it is open)"
+  },
+  {
+   "ru": "чита́я",
+   "en": "while reading"
+  },
+  {
+   "ru": "прочита́в",
+   "en": "having read (to the end)"
+  },
+  {
+   "ru": "молча́ла",
+   "en": "was silent (she)"
+  },
+  {
+   "ru": "поду́мала",
+   "en": "thought a moment (she)"
+  },
+  {
+   "ru": "же",
+   "en": "precisely, indeed (emphasis)"
+  },
+  {
+   "ru": "ведь",
+   "en": "after all, you know"
+  },
+  {
+   "ru": "да́же",
+   "en": "even"
+  },
+  {
+   "ru": "нача́ло",
+   "en": "beginning"
+  },
+  {
+   "ru": "сказа́л",
+   "en": "said (he)"
+  },
+  {
+   "ru": "понима́ет",
+   "en": "understands (he, she)"
+  },
+  {
+   "ru": "что́бы",
+   "en": "in order to; so that"
+  },
+  {
+   "ru": "то, что",
+   "en": "the thing that; what"
+  },
+  {
+   "ru": "тот, кто",
+   "en": "the one who"
+  },
+  {
+   "ru": "де́ло в том, что",
+   "en": "the thing is that"
+  },
+  {
+   "ru": "уви́дит",
+   "en": "will see (he, she)"
+  },
+  {
+   "ru": "знал",
+   "en": "knew (he)"
+  },
+  {
+   "ru": "бы",
+   "en": "would (the particle of the hypothetical)"
+  },
+  {
+   "ru": "стекла́",
+   "en": "glass (из стекла: made of glass)"
+  },
+  {
+   "ru": "смотре́л",
+   "en": "was looking (he)"
+  },
+  {
+   "ru": "стра́нно",
+   "en": "strange (it is strange)"
+  },
+  {
+   "ru": "уже́",
+   "en": "already"
+  },
+  {
+   "ru": "войны́",
+   "en": "war (of war)"
+  },
+  {
+   "ru": "инжене́р",
+   "en": "engineer"
+  },
+  {
+   "ru": "вас",
+   "en": "you (plural, as the object or after than)"
+  },
+  {
+   "ru": "определе́ние",
+   "en": "definition"
+  },
+  {
+   "ru": "мно́жество",
+   "en": "set (in mathematics)"
+  },
+  {
+   "ru": "принадлежи́т",
+   "en": "belongs to"
+  },
+  {
+   "ru": "мно́жеству",
+   "en": "to the set (after принадлежит)"
+  },
+  {
+   "ru": "пусто́е мно́жество",
+   "en": "the empty set"
+  },
+  {
+   "ru": "чётным",
+   "en": "even (after называется)"
+  },
+  {
+   "ru": "едини́ца",
+   "en": "one (the number); a unit"
+  },
+  {
+   "ru": "тогда́ и то́лько тогда́, когда́",
+   "en": "if and only if"
+  },
+  {
+   "ru": "тогда́",
+   "en": "then, in that case"
+  },
+  {
+   "ru": "пусть",
+   "en": "let (in a proof)"
+  },
+  {
+   "ru": "предполо́жим",
+   "en": "suppose, let us assume"
+  },
+  {
+   "ru": "чётная",
+   "en": "even (feminine)"
+  },
+  {
+   "ru": "отку́да сле́дует",
+   "en": "from which it follows"
+  },
+  {
+   "ru": "сле́дует",
+   "en": "follows (it)"
+  },
+  {
+   "ru": "получа́ем",
+   "en": "we obtain, we get"
+  },
+  {
+   "ru": "противоре́чие",
+   "en": "contradiction"
+  },
+  {
+   "ru": "ле́мма",
+   "en": "lemma"
+  },
+  {
+   "ru": "сле́дствие",
+   "en": "corollary, consequence"
+  },
+  {
+   "ru": "для всех",
+   "en": "for all"
+  },
+  {
+   "ru": "всех",
+   "en": "all (genitive: of all)"
+  },
+  {
+   "ru": "еди́нственное",
+   "en": "unique, the only (neuter)"
+  },
+  {
+   "ru": "равно́",
+   "en": "equals (the number after it goes into the dative)"
+  },
+  {
+   "ru": "четырём",
+   "en": "four (dative, after равно)"
+  },
+  {
+   "ru": "семи́",
+   "en": "seven (dative, after равно)"
+  },
+  {
+   "ru": "ми́нус",
+   "en": "minus"
+  },
+  {
+   "ru": "трёх",
+   "en": "three (genitive)"
+  },
+  {
+   "ru": "пяти́",
+   "en": "five (genitive)"
+  },
+  {
+   "ru": "зна́чение",
+   "en": "value; meaning"
+  },
+  {
+   "ru": "фу́нкции",
+   "en": "of the function"
+  },
+  {
+   "ru": "зна́чение фу́нкции",
+   "en": "the value of the function"
+  },
+  {
+   "ru": "в то́чке",
+   "en": "at the point"
+  },
+  {
+   "ru": "просты́х чи́сел",
+   "en": "of prime numbers"
+  },
+  {
+   "ru": "бесконе́чно",
+   "en": "infinitely"
+  },
+  {
+   "ru": "их",
+   "en": "of them; their"
+  },
+  {
+   "ru": "коне́чное",
+   "en": "finite (neuter)"
+  },
+  {
+   "ru": "произведе́ние",
+   "en": "product (of multiplication)"
+  },
+  {
+   "ru": "и́стина",
+   "en": "truth (philosophical)"
+  },
+  {
+   "ru": "свобо́да",
+   "en": "freedom"
+  },
+  {
+   "ru": "созна́ние",
+   "en": "consciousness"
+  },
+  {
+   "ru": "бытие́",
+   "en": "being, existence"
+  },
+  {
+   "ru": "мышле́ние",
+   "en": "thinking (as a faculty)"
+  },
+  {
+   "ru": "су́щность",
+   "en": "essence"
+  },
+  {
+   "ru": "де́йствительность",
+   "en": "reality, actuality"
+  },
+  {
+   "ru": "возмо́жность",
+   "en": "possibility"
+  },
+  {
+   "ru": "необходи́мость",
+   "en": "necessity"
+  },
+  {
+   "ru": "ра́зум",
+   "en": "reason (the faculty)"
+  },
+  {
+   "ru": "определя́ет",
+   "en": "determines, defines (it)"
+  },
+  {
+   "ru": "существова́ть",
+   "en": "to exist"
+  },
+  {
+   "ru": "незави́симо от",
+   "en": "independently of"
+  },
+  {
+   "ru": "нас",
+   "en": "us (after от, у, для…)"
+  },
+  {
+   "ru": "явля́ется",
+   "en": "is (formal: appears as, with the instrumental)"
+  },
+  {
+   "ru": "существо́",
+   "en": "creature, being"
+  },
+  {
+   "ru": "мы́слящим существо́м",
+   "en": "a thinking creature (instrumental)"
+  },
+  {
+   "ru": "быть свобо́дным",
+   "en": "to be free"
+  },
+  {
+   "ru": "во-пе́рвых",
+   "en": "first, firstly"
+  },
+  {
+   "ru": "во-вторы́х",
+   "en": "second, secondly"
+  },
+  {
+   "ru": "одна́ко",
+   "en": "however"
+  },
+  {
+   "ru": "поэ́тому",
+   "en": "therefore, so"
+  },
+  {
+   "ru": "с одно́й стороны́",
+   "en": "on the one hand"
+  },
+  {
+   "ru": "с друго́й стороны́",
+   "en": "on the other hand"
+  },
+  {
+   "ru": "наприме́р",
+   "en": "for example"
+  },
+  {
+   "ru": "ита́к",
+   "en": "thus, so then"
+  },
+  {
+   "ru": "тем не ме́нее",
+   "en": "nevertheless"
+  },
+  {
+   "ru": "де́йствительно",
+   "en": "indeed, really"
+  },
+  {
+   "ru": "ина́че",
+   "en": "otherwise, differently"
+  },
+  {
+   "ru": "хоте́ть",
+   "en": "to want"
+  },
+  {
+   "ru": "того́",
+   "en": "that (genitive: of that; того, что: what)"
+  },
+  {
+   "ru": "реша́ет",
+   "en": "decides (he, she)"
+  },
+  {
+   "ru": "смысл",
+   "en": "meaning, sense"
+  },
+  {
+   "ru": "спасёт",
+   "en": "will save"
+  },
+  {
+   "ru": "красота́",
+   "en": "beauty"
   }
  ],
  "units": [
@@ -5923,12 +7127,12 @@
    ]
   },
   {
-   "id": "u24",
+   "id": "u31",
    "title": "Cursive",
    "subtitle": "про́писи · how Russians write by hand",
    "pages": [
     {
-     "id": "u24-p1",
+     "id": "u31-p1",
      "title": "Joined up: о а с е",
      "intro": "Russians write by hand in a joined, slanted cursive that looks nothing like print. Start with the round letters: each begins at the top, and the red joins between letters are part of the word.",
      "exercises": [
@@ -6005,7 +7209,7 @@
      ]
     },
     {
-     "id": "u24-p2",
+     "id": "u31-p2",
      "title": "The zigzag letters: и ш л м",
      "intro": "In a quick hand и, ш, л and м all turn into one zigzag. The school hand keeps them apart: и and ш start at the top with cups, л and м start with a hook on the line.",
      "exercises": [
@@ -6082,7 +7286,7 @@
      ]
     },
     {
-     "id": "u24-p3",
+     "id": "u31-p3",
      "title": "Humps and tails: т п н ц щ",
      "intro": "т in cursive is three humps, like a Latin m, while ш is three cups. п has one hump, н a tiny loop in the middle; ц and щ end with a tail below the line.",
      "exercises": [
@@ -6159,7 +7363,7 @@
      ]
     },
     {
-     "id": "u24-p4",
+     "id": "u31-p4",
      "title": "Loops below the line: д у з р ф",
      "intro": "Several letters drop below the line in cursive. д is an oval with a loop under it, like a g; у and з loop under too; р and ф send a long stem down.",
      "exercises": [
@@ -6236,7 +7440,7 @@
      ]
     },
     {
-     "id": "u24-p5",
+     "id": "u31-p5",
      "title": "Above the line: б в к",
      "intro": "б climbs above the small letters and flags to the right; в loops above the line and closes its bowl at the top. к stays small, with an arm and a leg.",
      "exercises": [
@@ -6313,7 +7517,7 @@
      ]
     },
     {
-     "id": "u24-p6",
+     "id": "u31-p6",
      "title": "Capitals and names",
      "intro": "Capital letters in cursive are the big school shapes: an А with a hook, a Т with a wavy roof, a Д that loops at its foot. Sentences start with them.",
      "exercises": [
@@ -6386,7 +7590,7 @@
      ]
     },
     {
-     "id": "u24-p7",
+     "id": "u31-p7",
      "title": "A note on the table",
      "intro": "A note someone left: short, joined, slanted. Read it, copy it in cursive, and write one back.",
      "exercises": [
@@ -10426,6 +11630,3408 @@
       {
        "kind": "diary",
        "prompt": "Two sentences of your own, with words from this page."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u24",
+   "title": "Cases as a system",
+   "subtitle": "паде́ж: роди́тельный, да́тельный, твори́тельный, предло́жный",
+   "pages": [
+    {
+     "id": "u24-p1",
+     "title": "Genitive: чего́ нет",
+     "intro": "You know нет хле́ба. The same ending serves у, из, по́сле, мно́го and ма́ло: one case, five uses.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The genitive answers чего́? and кого́?. Нет, у, из and по́сле take it, and so do мно́го and ма́ло: a masculine noun adds -а, a feminine -а becomes -ы or -и, and a plural often loses its ending altogether. Вре́мя, time, is irregular: learn нет вре́мени as one piece.",
+       "examples": [
+        {
+         "ru": "у бра́та",
+         "en": "at my brother's; my brother has"
+        },
+        {
+         "ru": "у сестры́",
+         "en": "at my sister's; my sister has"
+        },
+        {
+         "ru": "из го́рода",
+         "en": "from the city"
+        },
+        {
+         "ru": "по́сле обе́да",
+         "en": "after lunch"
+        },
+        {
+         "ru": "мно́го книг",
+         "en": "many books"
+        },
+        {
+         "ru": "мно́го рабо́ты",
+         "en": "a lot of work"
+        },
+        {
+         "ru": "вре́мя",
+         "en": "time"
+        },
+        {
+         "ru": "нет вре́мени",
+         "en": "there is no time"
+        },
+        {
+         "ru": "ма́ло вре́мени",
+         "en": "little time"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "из го́рода",
+       "options": [
+        "из го́рода",
+        "в го́роде",
+        "в го́род"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "after lunch",
+       "answer": "по́сле обе́да"
+      },
+      {
+       "kind": "translate",
+       "en": "many books",
+       "answer": "мно́го книг"
+      },
+      {
+       "kind": "fill",
+       "before": "У меня́ ",
+       "after": " вре́мени.",
+       "hint": "I have little time.",
+       "answer": "ма́ло"
+      },
+      {
+       "kind": "fill",
+       "before": "Я ",
+       "after": ".",
+       "hint": "I am from the city.",
+       "answer": "из го́рода"
+      },
+      {
+       "kind": "dictation",
+       "text": "У бра́та нет вре́мени."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "По́сле обе́да у меня́ есть вре́мя, а у бра́та вре́мени нет. У сестры́ мно́го рабо́ты."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "У сестры́ мно́го книг, а у бра́та ма́ло.",
+       "options": [
+        "My sister has many books, and my brother few.",
+        "My sister has few books, and my brother many.",
+        "My sister and brother have no books."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "What do you have little of, and a lot of? Where are you from? Three sentences in the genitive."
+      }
+     ]
+    },
+    {
+     "id": "u24-p2",
+     "title": "Dative: кому́?",
+     "intro": "The person something goes to, and two idioms that live in this case: age and liking.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The dative answers кому́?: the person something goes to. Мне, тебе́, ему́, ей, нам, вам, им are its pronouns; a masculine noun adds -у (бра́ту), a feminine one swaps -а for -е (сестре́).",
+       "examples": [
+        {
+         "ru": "ему́",
+         "en": "to him"
+        },
+        {
+         "ru": "ей",
+         "en": "to her"
+        },
+        {
+         "ru": "нам",
+         "en": "to us"
+        },
+        {
+         "ru": "вам",
+         "en": "to you (plural or polite; dative)"
+        },
+        {
+         "ru": "им",
+         "en": "to them"
+        },
+        {
+         "ru": "бра́ту",
+         "en": "to the brother"
+        },
+        {
+         "ru": "сестре́",
+         "en": "to the sister"
+        },
+        {
+         "ru": "Я пишу́ письмо́ сестре́.",
+         "en": "I am writing a letter to my sister."
+        }
+       ]
+      },
+      {
+       "kind": "explain",
+       "text": "Age and liking are dative too: Мне три́дцать лет, I am thirty; мне нра́вится, I like it, literally it pleases me.",
+       "examples": [
+        {
+         "ru": "Ско́лько тебе́ лет?",
+         "en": "How old are you?"
+        },
+        {
+         "ru": "Мне три́дцать лет.",
+         "en": "I am thirty."
+        },
+        {
+         "ru": "Мне нра́вится матема́тика.",
+         "en": "I like mathematics."
+        },
+        {
+         "ru": "Нам нра́вится ко́смос.",
+         "en": "We like space."
+        }
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "Им нра́вится матема́тика."
+      },
+      {
+       "kind": "translate",
+       "en": "I like (it pleases me)",
+       "answer": "мне нра́вится"
+      },
+      {
+       "kind": "translate",
+       "en": "How old are you?",
+       "answer": "Ско́лько тебе́ лет?"
+      },
+      {
+       "kind": "fill",
+       "before": "Мне три́дцать ",
+       "after": ".",
+       "hint": "I am thirty.",
+       "answer": "лет"
+      },
+      {
+       "kind": "fill",
+       "before": "Я пишу́ письмо́ ",
+       "after": ".",
+       "hint": "I am writing a letter to my brother.",
+       "answer": "бра́ту"
+      },
+      {
+       "kind": "dictation",
+       "text": "Ей два́дцать лет."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Ско́лько тебе́ лет? Мне со́рок лет. Вам нра́вится матема́тика? Да, нам нра́вится. А ему́ нет."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Нам нра́вится ко́смос.",
+       "options": [
+        "We live in space.",
+        "They like space.",
+        "We like space."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "diary",
+       "prompt": "Who do you write to, and what do you like? Say your age."
+      }
+     ]
+    },
+    {
+     "id": "u24-p3",
+     "title": "Instrumental: с кем? чем?",
+     "intro": "Who with, by what means, and what someone is or becomes.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The instrumental answers с кем? and чем?: who with, and by what means. A masculine noun adds -ом (с бра́том), a feminine one -ой (с сестро́й); the pronouns are со мной, с тобо́й, с ним, с ней, с на́ми, с ва́ми, с ни́ми.",
+       "examples": [
+        {
+         "ru": "с бра́том",
+         "en": "with my brother"
+        },
+        {
+         "ru": "с сестро́й",
+         "en": "with my sister"
+        },
+        {
+         "ru": "со мной",
+         "en": "with me"
+        },
+        {
+         "ru": "с тобо́й",
+         "en": "with you"
+        },
+        {
+         "ru": "ру́чка",
+         "en": "pen"
+        },
+        {
+         "ru": "Я пишу́ ру́чкой.",
+         "en": "I write with a pen."
+        }
+       ]
+      },
+      {
+       "kind": "explain",
+       "text": "Быть and стать, to become, take it too: он был учи́телем, она́ ста́ла писа́телем.",
+       "examples": [
+        {
+         "ru": "стать",
+         "en": "to become"
+        },
+        {
+         "ru": "Он был учи́телем.",
+         "en": "He was a teacher."
+        },
+        {
+         "ru": "Она́ ста́ла писа́телем.",
+         "en": "She became a writer."
+        }
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "Я пишу́ ру́чкой."
+      },
+      {
+       "kind": "translate",
+       "en": "with me",
+       "answer": "со мной"
+      },
+      {
+       "kind": "translate",
+       "en": "to become",
+       "answer": "стать"
+      },
+      {
+       "kind": "fill",
+       "before": "Я иду́ в парк ",
+       "after": ".",
+       "hint": "I'm going to the park with my brother.",
+       "answer": "с бра́том"
+      },
+      {
+       "kind": "fill",
+       "before": "Он был ",
+       "after": ".",
+       "hint": "He was a teacher.",
+       "answer": "учи́телем"
+      },
+      {
+       "kind": "dictation",
+       "text": "Она́ ста́ла писа́телем."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Э́то моя́ ру́чка. Я пишу́ письмо́ ру́чкой. Со мной брат, с тобо́й сестра́."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Я хочу́ стать учи́телем.",
+       "options": [
+        "I want to become a teacher.",
+        "I want to be with a teacher.",
+        "I was a teacher."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "diary",
+       "prompt": "Who did you spend today with, and what do you want to become?"
+      }
+     ]
+    },
+    {
+     "id": "u24-p4",
+     "title": "Where, or where to: в and на",
+     "intro": "The same two prepositions, two cases: where something is, and where it is going. And о, about.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "В and на take two cases: где? takes the prepositional (-е), куда́? the accusative: plain for masculine and neuter things, -у for feminine ones (в го́род, на рабо́ту). О, about, also takes the prepositional: о кни́ге, о тебе́.",
+       "examples": [
+        {
+         "ru": "Я на рабо́те. Я иду́ на рабо́ту.",
+         "en": "I am at work. I am going to work."
+        },
+        {
+         "ru": "на рабо́те",
+         "en": "at work"
+        },
+        {
+         "ru": "Кот на столе́. Кот идёт на стол.",
+         "en": "The cat is on the table. The cat is getting onto the table."
+        },
+        {
+         "ru": "идёт",
+         "en": "goes, is going (he, she, it; on foot)"
+        },
+        {
+         "ru": "Я в го́роде. Я е́ду в го́род.",
+         "en": "I'm in the city. I'm going to the city."
+        },
+        {
+         "ru": "о",
+         "en": "about (with the prepositional)"
+        },
+        {
+         "ru": "о кни́ге",
+         "en": "about the book"
+        },
+        {
+         "ru": "о тебе́",
+         "en": "about you"
+        },
+        {
+         "ru": "о бра́те",
+         "en": "about my brother"
+        },
+        {
+         "ru": "Я ду́маю о ко́смосе.",
+         "en": "I think about space."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "на рабо́ту",
+       "options": [
+        "на рабо́ту",
+        "на рабо́те",
+        "рабо́та"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "about the book",
+       "answer": "о кни́ге"
+      },
+      {
+       "kind": "translate",
+       "en": "about you",
+       "answer": "о тебе́"
+      },
+      {
+       "kind": "fill",
+       "before": "Кни́га ",
+       "after": ".",
+       "hint": "The book is on the table.",
+       "answer": "на столе́"
+      },
+      {
+       "kind": "fill",
+       "before": "Я ду́маю ",
+       "after": " тебе́.",
+       "hint": "I am thinking about you.",
+       "answer": "о"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я ду́маю о ко́смосе."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Где ты? На рабо́те. Куда́ ты идёшь? На рабо́ту. Кот идёт на стол. Я ду́маю о бра́те."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Она́ ду́мает о бра́те.",
+       "options": [
+        "She is going to her brother.",
+        "She is thinking about her brother.",
+        "She is with her brother."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Where is each thing in your room, and where is it going? Then: what are you thinking about?"
+      }
+     ]
+    },
+    {
+     "id": "u24-p5",
+     "title": "Six cases, one story",
+     "intro": "The table has names now. Read a day that uses every row of it.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The six cases have names: имени́тельный (кто? что?), роди́тельный (кого́? чего́?), да́тельный (кому́?), вини́тельный (кого́? что?, the object), твори́тельный (кем? чем?), предло́жный (о ком? о чём?, где?). A grammar table lists them in this order.",
+       "examples": [
+        {
+         "ru": "паде́ж",
+         "en": "case (grammatical)"
+        },
+        {
+         "ru": "роди́тельный паде́ж",
+         "en": "genitive case"
+        },
+        {
+         "ru": "да́тельный паде́ж",
+         "en": "dative case"
+        },
+        {
+         "ru": "вини́тельный паде́ж",
+         "en": "accusative case"
+        },
+        {
+         "ru": "твори́тельный паде́ж",
+         "en": "instrumental case"
+        },
+        {
+         "ru": "предло́жный паде́ж",
+         "en": "prepositional case"
+        }
+       ]
+      },
+      {
+       "kind": "passage",
+       "text": "Вчера́ по́сле рабо́ты я ходи́ла в го́род с сестро́й. У сестры́ мно́го книг, а у меня́ ма́ло вре́мени. В го́роде мы бы́ли до́лго. Пото́м я написа́ла письмо́ бра́ту о го́роде и о сестре́. Брат отве́тил: «Мне нра́вится э́то письмо́».",
+       "en": "Yesterday after work I went to the city with my sister. My sister has many books, and I have little time. We were in the city a long time. Then I wrote a letter to my brother about the city and about my sister. My brother answered: “I like this letter.”",
+       "glosses": {
+        "работы": "work (после работы: after work)",
+        "ходила": "went and came back (a woman saying I)",
+        "сестрой": "sister (с сестрой: with my sister)",
+        "сестры": "sister (у сестры: my sister has)",
+        "книг": "books (много книг: many books)",
+        "времени": "time (мало времени: little time)",
+        "городе": "city (в городе: in the city; о городе: about the city)",
+        "написала": "wrote and finished (she)",
+        "брату": "to my brother",
+        "сестре": "sister (о сестре: about my sister)",
+        "ответил": "answered (he)",
+        "нравится": "pleases (мне нравится: I like)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Я написа́ла письмо́ бра́ту о го́роде.",
+       "options": [
+        "I wrote a letter to my sister about my brother.",
+        "I wrote a letter to my brother about the city.",
+        "My brother wrote me a letter about the city."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "fill",
+       "before": "У сестры́ ",
+       "after": " книг.",
+       "hint": "My sister has many books.",
+       "answer": "мно́го"
+      },
+      {
+       "kind": "fill",
+       "before": "Я ходи́ла в го́род ",
+       "after": ".",
+       "hint": "I went to the city with my sister.",
+       "answer": "с сестро́й"
+      },
+      {
+       "kind": "translate",
+       "en": "case (grammatical)",
+       "answer": "паде́ж"
+      },
+      {
+       "kind": "translate",
+       "en": "genitive case",
+       "answer": "роди́тельный паде́ж"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я написа́ла письмо́ бра́ту о го́роде."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Роди́тельный паде́ж, да́тельный паде́ж, вини́тельный паде́ж, твори́тельный паде́ж, предло́жный паде́ж."
+      },
+      {
+       "kind": "diary",
+       "prompt": "A day of yours that uses every case: with whom, to whom, about what."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u25",
+   "title": "Aspect",
+   "subtitle": "вид: чита́ть — прочита́ть · бу́ду чита́ть — прочита́ю · скажи́!",
+   "pages": [
+    {
+     "id": "u25-p1",
+     "title": "Two verbs for one",
+     "intro": "Nearly every verb comes as a pair. Here are the pairs for the verbs you already have.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The imperfective names the activity or a repeated act; the perfective names one completed result. You know чита́ть / прочита́ть and де́лать / сде́лать; here are the rest of your verbs.",
+       "examples": [
+        {
+         "ru": "писа́ть — написа́ть",
+         "en": "to write — to write and finish"
+        },
+        {
+         "ru": "ду́мать — поду́мать",
+         "en": "to think — to think for a moment, think it over"
+        },
+        {
+         "ru": "говори́ть — сказа́ть",
+         "en": "to speak — to say (once)"
+        },
+        {
+         "ru": "понима́ть — поня́ть",
+         "en": "to understand — to grasp"
+        },
+        {
+         "ru": "знать — узна́ть",
+         "en": "to know — to find out"
+        },
+        {
+         "ru": "ви́деть — уви́деть",
+         "en": "to see — to catch sight of"
+        },
+        {
+         "ru": "ждать — подожда́ть",
+         "en": "to wait — to wait a bit"
+        },
+        {
+         "ru": "Он хо́чет поня́ть.",
+         "en": "He wants to understand."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "сказа́ть",
+       "options": [
+        "сказа́ть",
+        "говори́ть",
+        "узна́ть"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "to say (once, perfective)",
+       "answer": "сказа́ть"
+      },
+      {
+       "kind": "translate",
+       "en": "to find out",
+       "answer": "узна́ть"
+      },
+      {
+       "kind": "fill",
+       "before": "Я хочу́ ",
+       "after": ", кто э́то.",
+       "hint": "I want to find out who this is.",
+       "answer": "узна́ть"
+      },
+      {
+       "kind": "fill",
+       "before": "Я понима́ю, что ты хо́чешь ",
+       "after": ".",
+       "hint": "I understand what you want to say.",
+       "answer": "сказа́ть"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я хочу́ поду́мать."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Чита́ть — прочита́ть, писа́ть — написа́ть, говори́ть — сказа́ть, ждать — подожда́ть, ви́деть — уви́деть. Он хо́чет поня́ть."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Она́ хо́чет поня́ть, а не то́лько знать.",
+       "options": [
+        "She wants to know, not just to understand.",
+        "She doesn't want to know.",
+        "She wants to understand, not just to know."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "copy",
+       "text": "ду́мать — поду́мать, знать — узна́ть",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three things you want to find out, say or understand this week."
+      }
+     ]
+    },
+    {
+     "id": "u25-p2",
+     "title": "Process or result: the past",
+     "intro": "Я писа́л письмо́ is the evening; я написа́л письмо́ is the letter in the envelope.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "In the past, the imperfective says what was going on, the perfective what got done. Both are needed in one story: the long evening, then the result.",
+       "examples": [
+        {
+         "ru": "Я до́лго писа́л письмо́ и наконе́ц написа́л.",
+         "en": "I wrote the letter for a long time and finally finished it."
+        },
+        {
+         "ru": "наконе́ц",
+         "en": "finally, at last"
+        },
+        {
+         "ru": "Она́ говори́ла до́лго, а пото́м сказа́ла: «Да».",
+         "en": "She talked for a long time, and then said: “Yes.”"
+        },
+        {
+         "ru": "Мы жда́ли час и наконе́ц уви́дели раке́ту.",
+         "en": "We waited an hour and finally saw the rocket."
+        },
+        {
+         "ru": "час",
+         "en": "hour; one o'clock"
+        },
+        {
+         "ru": "Я поду́мал и по́нял.",
+         "en": "I thought a moment and understood."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "написа́л",
+       "options": [
+        "писа́л",
+        "написа́л"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "finally, at last",
+       "answer": "наконе́ц"
+      },
+      {
+       "kind": "translate",
+       "en": "wrote and finished (he)",
+       "answer": "написа́л"
+      },
+      {
+       "kind": "fill",
+       "before": "Он до́лго ду́мал и наконе́ц ",
+       "after": ".",
+       "hint": "He thought for a long time and finally understood.",
+       "answer": "по́нял"
+      },
+      {
+       "kind": "fill",
+       "before": "Вчера́ я ",
+       "after": " письмо́, но не написа́л.",
+       "hint": "Yesterday I was writing a letter, but didn't finish it.",
+       "answer": "писа́л"
+      },
+      {
+       "kind": "dictation",
+       "text": "Мы жда́ли и наконе́ц уви́дели звезду́."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Я поду́мал и по́нял. Она́ до́лго говори́ла и наконе́ц сказа́ла: «Да»."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Она́ чита́ла кни́гу, но не прочита́ла.",
+       "options": [
+        "She finished the book.",
+        "She didn't read the book.",
+        "She was reading the book but didn't finish it."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "copy",
+       "text": "писа́л — написа́л, ду́мал — поду́мал",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Yesterday: one thing you did for a long time, one you finished."
+      }
+     ]
+    },
+    {
+     "id": "u25-p3",
+     "title": "Two futures",
+     "intro": "Бу́ду + infinitive for an activity; the perfective with present endings for a result.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The imperfective future is бу́ду + infinitive: an activity. The perfective future is just the perfective verb with present endings: a result you expect.",
+       "examples": [
+        {
+         "ru": "Я бу́ду писа́ть.",
+         "en": "I will be writing."
+        },
+        {
+         "ru": "Я напишу́ письмо́.",
+         "en": "I will write the letter (and finish)."
+        },
+        {
+         "ru": "Я скажу́.",
+         "en": "I will say."
+        },
+        {
+         "ru": "Ты поймёшь.",
+         "en": "You will understand."
+        },
+        {
+         "ru": "Мы узна́ем.",
+         "en": "We will find out."
+        },
+        {
+         "ru": "Вы уви́дите.",
+         "en": "You will see."
+        },
+        {
+         "ru": "Он сде́лает.",
+         "en": "He will get it done."
+        },
+        {
+         "ru": "Я поду́маю.",
+         "en": "I'll think about it."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "напишу́",
+       "options": [
+        "напишу́",
+        "пишу́",
+        "написа́л"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "I will say",
+       "answer": "я скажу́"
+      },
+      {
+       "kind": "translate",
+       "en": "We will find out.",
+       "answer": "Мы узна́ем."
+      },
+      {
+       "kind": "fill",
+       "before": "За́втра я ",
+       "after": " письмо́ сестре́.",
+       "hint": "Tomorrow I will write (and finish) a letter to my sister.",
+       "answer": "напишу́"
+      },
+      {
+       "kind": "fill",
+       "before": "Ты ",
+       "after": " за́втра.",
+       "hint": "You will understand tomorrow.",
+       "answer": "поймёшь"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я скажу́, а ты поймёшь."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Я бу́ду чита́ть, и я прочита́ю. Вы уви́дите: он сде́лает, а я поду́маю."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Вы уви́дите: он сде́лает э́то.",
+       "options": [
+        "You saw: he did it.",
+        "You will see: he will get it done.",
+        "You will see him doing it."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "copy",
+       "text": "бу́ду писа́ть — напишу́",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Tomorrow: what you will be doing, and what you will get done."
+      }
+     ]
+    },
+    {
+     "id": "u25-p4",
+     "title": "Tell me: imperatives",
+     "intro": "Asking, telling, warning. The imperative comes straight from the ты-form.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The imperative comes from the ты-form: чита́й, скажи́, напиши́, подожди́, слу́шай, смотри́. Add -те for вы or for politeness: скажи́те, пожа́луйста. A perfective asks for one act; a negative request is usually imperfective: не говори́.",
+       "examples": [
+        {
+         "ru": "Скажи́ мне.",
+         "en": "Tell me."
+        },
+        {
+         "ru": "Напиши́ мне.",
+         "en": "Write to me."
+        },
+        {
+         "ru": "Подожди́!",
+         "en": "Wait!"
+        },
+        {
+         "ru": "Слу́шай.",
+         "en": "Listen."
+        },
+        {
+         "ru": "Смотри́!",
+         "en": "Look!"
+        },
+        {
+         "ru": "Скажи́те, пожа́луйста.",
+         "en": "Tell me, please (polite)."
+        },
+        {
+         "ru": "Не говори́ так бы́стро.",
+         "en": "Don't talk so fast."
+        },
+        {
+         "ru": "бы́стро",
+         "en": "quickly, fast"
+        },
+        {
+         "ru": "Чита́й ме́дленно.",
+         "en": "Read slowly."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Подожди́!",
+       "options": [
+        "Подожди́!",
+        "Скажи́!",
+        "Смотри́!"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "Wait! (to one person, informal)",
+       "answer": "подожди́"
+      },
+      {
+       "kind": "translate",
+       "en": "Look! (to one person, informal)",
+       "answer": "смотри́"
+      },
+      {
+       "kind": "fill",
+       "before": "",
+       "after": ", пожа́луйста, где вы́ход?",
+       "hint": "Tell me, please, where is the exit?",
+       "answer": "Скажи́те"
+      },
+      {
+       "kind": "fill",
+       "before": "",
+       "after": " мне за́втра.",
+       "hint": "Write to me tomorrow.",
+       "answer": "Напиши́"
+      },
+      {
+       "kind": "dictation",
+       "text": "Слу́шай и не говори́."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Скажи́ мне. Подожди́. Смотри́, э́то раке́та! Чита́й ме́дленно, не говори́ бы́стро."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Чита́й ме́дленно и не говори́ бы́стро.",
+       "options": [
+        "Read fast and don't talk slowly.",
+        "Read slowly and don't talk fast.",
+        "Don't read and don't talk."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "copy",
+       "text": "скажи́ — скажи́те, подожди́ — подожди́те",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three requests to someone at home: one polite, one urgent, one a warning."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u26",
+   "title": "Numbers and things",
+   "subtitle": "два стола́, пять столо́в · кото́рый час? · ско́лько сто́ит?",
+   "pages": [
+    {
+     "id": "u26-p1",
+     "title": "One, two, five: the noun changes",
+     "intro": "After оди́н, after два, after пять: three shapes of the same noun.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "After оди́н the noun is plain (оди́н стол); after два, три, четы́ре it takes the genitive singular (два стола́, две кни́ги); after пять and up, the genitive plural (пять столо́в, пять книг). Два becomes две with a feminine noun.",
+       "examples": [
+        {
+         "ru": "оди́н стол, два стола́, пять столо́в",
+         "en": "one table, two tables, five tables"
+        },
+        {
+         "ru": "одна́ кни́га, две кни́ги, пять книг",
+         "en": "one book, two books, five books"
+        },
+        {
+         "ru": "одно́ окно́, два окна́, пять о́кон",
+         "en": "one window, two windows, five windows"
+        },
+        {
+         "ru": "оди́н год, два го́да, пять лет",
+         "en": "one year, two years, five years"
+        },
+        {
+         "ru": "год",
+         "en": "year"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "две кни́ги",
+       "options": [
+        "две кни́ги",
+        "два стола́",
+        "пять книг"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "two years",
+       "answer": "два го́да"
+      },
+      {
+       "kind": "translate",
+       "en": "five tables",
+       "answer": "пять столо́в"
+      },
+      {
+       "kind": "fill",
+       "before": "У меня́ ",
+       "after": ".",
+       "hint": "I have two books.",
+       "answer": "две кни́ги"
+      },
+      {
+       "kind": "fill",
+       "before": "В до́ме ",
+       "after": ".",
+       "hint": "There are five windows in the house.",
+       "answer": "пять о́кон"
+      },
+      {
+       "kind": "dictation",
+       "text": "Три стола́ и четы́ре ча́шки."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Оди́н стол, два стола́, пять столо́в. Одна́ кни́га, две кни́ги, пять книг. Одно́ окно́, два окна́, пять о́кон. Оди́н год, два го́да, пять лет."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Мне два́дцать два го́да.",
+       "options": [
+        "I am twenty-five.",
+        "I have two years.",
+        "I am twenty-two."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "copy",
+       "text": "год, го́да, лет",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Count what is in your kitchen: one, two, five of something."
+      }
+     ]
+    },
+    {
+     "id": "u26-p2",
+     "title": "What time is it?",
+     "intro": "Hours count like tables: час, два часа́, пять часо́в.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Кото́рый час? or Ско́лько вре́мени? asks the time. Час is an hour and one o'clock: два часа́, пять часо́в; в три часа́ is at three. Утра́ and ве́чера tell morning from evening: в семь часо́в утра́.",
+       "examples": [
+        {
+         "ru": "Кото́рый час?",
+         "en": "What time is it?"
+        },
+        {
+         "ru": "сейча́с",
+         "en": "now, at this moment"
+        },
+        {
+         "ru": "Сейча́с три часа́.",
+         "en": "It's three o'clock now."
+        },
+        {
+         "ru": "в семь часо́в утра́",
+         "en": "at seven in the morning"
+        },
+        {
+         "ru": "в де́вять часо́в ве́чера",
+         "en": "at nine in the evening"
+        },
+        {
+         "ru": "мину́та",
+         "en": "minute"
+        },
+        {
+         "ru": "де́сять мину́т",
+         "en": "ten minutes"
+        },
+        {
+         "ru": "полчаса́",
+         "en": "half an hour"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Кото́рый час?",
+       "options": [
+        "Кото́рый час?",
+        "Ско́лько вре́мени?",
+        "Ско́лько тебе́ лет?"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "What time is it?",
+       "answer": "Кото́рый час?"
+      },
+      {
+       "kind": "translate",
+       "en": "half an hour",
+       "answer": "полчаса́"
+      },
+      {
+       "kind": "fill",
+       "before": "Сейча́с ",
+       "after": ".",
+       "hint": "It's three o'clock now.",
+       "answer": "три часа́"
+      },
+      {
+       "kind": "fill",
+       "before": "Обе́д в ",
+       "after": ".",
+       "hint": "Lunch is at one o'clock.",
+       "answer": "час"
+      },
+      {
+       "kind": "dictation",
+       "text": "У́жин в семь часо́в ве́чера."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Кото́рый час? Сейча́с два часа́. За́втрак в во́семь часо́в утра́, у́жин в семь часо́в ве́чера."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "За́втрак в во́семь часо́в утра́.",
+       "options": [
+        "Breakfast is at eight in the morning.",
+        "Breakfast is at eight in the evening.",
+        "Breakfast is in eight minutes."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "copy",
+       "text": "мину́та, де́сять мину́т, полчаса́",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Your day in hours: when you get up, eat, work, sleep."
+      }
+     ]
+    },
+    {
+     "id": "u26-p3",
+     "title": "Days and dates",
+     "intro": "The week, and the date as a neuter ordinal.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The week: понеде́льник, вто́рник, среда́, четве́рг, пя́тница, суббо́та, воскресе́нье. On a day is в + accusative: в понеде́льник, в сре́ду, в пя́тницу. Dates use the neuter ordinal: пе́рвое ма́я, the first of May.",
+       "examples": [
+        {
+         "ru": "день",
+         "en": "day"
+        },
+        {
+         "ru": "понеде́льник, вто́рник, среда́",
+         "en": "Monday, Tuesday, Wednesday"
+        },
+        {
+         "ru": "четве́рг, пя́тница",
+         "en": "Thursday, Friday"
+        },
+        {
+         "ru": "суббо́та, воскресе́нье",
+         "en": "Saturday, Sunday"
+        },
+        {
+         "ru": "Како́й сего́дня день?",
+         "en": "What day is it today?"
+        },
+        {
+         "ru": "Сего́дня понеде́льник.",
+         "en": "Today is Monday."
+        },
+        {
+         "ru": "в пя́тницу",
+         "en": "on Friday"
+        },
+        {
+         "ru": "в суббо́ту",
+         "en": "on Saturday"
+        },
+        {
+         "ru": "Како́е сего́дня число́?",
+         "en": "What is the date today?"
+        },
+        {
+         "ru": "пе́рвое ма́я",
+         "en": "the first of May"
+        },
+        {
+         "ru": "второ́е",
+         "en": "the second (date)"
+        },
+        {
+         "ru": "тре́тье",
+         "en": "the third (date)"
+        },
+        {
+         "ru": "янва́рь, февра́ль, март, апре́ль, май, ию́нь",
+         "en": "January, February, March, April, May, June"
+        },
+        {
+         "ru": "ию́ль, а́вгуст, сентя́брь, октя́брь, ноя́брь, дека́брь",
+         "en": "July, August, September, October, November, December"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "четве́рг",
+       "options": [
+        "четве́рг",
+        "вто́рник",
+        "воскресе́нье"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "Friday",
+       "answer": "пя́тница"
+      },
+      {
+       "kind": "translate",
+       "en": "May",
+       "answer": "май"
+      },
+      {
+       "kind": "fill",
+       "before": "Сего́дня ",
+       "after": ", за́втра четве́рг.",
+       "hint": "Today is Wednesday, tomorrow Thursday.",
+       "answer": "среда́"
+      },
+      {
+       "kind": "fill",
+       "before": "Мы е́дем в го́род ",
+       "after": ".",
+       "hint": "We're going to the city on Saturday.",
+       "answer": "в суббо́ту"
+      },
+      {
+       "kind": "dictation",
+       "text": "В пя́тницу я рабо́таю, в суббо́ту — нет."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Како́й сего́дня день? Понеде́льник. Понеде́льник, вто́рник, среда́, четве́рг, пя́тница, суббо́та, воскресе́нье. Янва́рь, февра́ль, март, апре́ль, май, ию́нь, ию́ль, а́вгуст, сентя́брь, октя́брь, ноя́брь, дека́брь. Како́е сего́дня число́? Пе́рвое ма́я, второ́е, тре́тье."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Како́е сего́дня число́? Тре́тье ма́я.",
+       "options": [
+        "What day is today? Thursday.",
+        "What's the date today? The third of May.",
+        "What time is it? Three o'clock."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "copy",
+       "text": "ма́я, ию́ня, сентября́",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "What day and date is it, and what do you do on which days?"
+      }
+     ]
+    },
+    {
+     "id": "u26-p4",
+     "title": "Prices and quantities",
+     "intro": "How much is it, and how much of it: сто́ит, рубли́, and the genitive again.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Ско́лько сто́ит? asks a price: сто́ит for one thing, сто́ят for several. Money counts like everything else: оди́н рубль, два рубля́, пять рубле́й. Quantities take the genitive: буты́лка молока́, килогра́мм сы́ра, литр воды́.",
+       "examples": [
+        {
+         "ru": "Ско́лько э́то сто́ит?",
+         "en": "How much does this cost?"
+        },
+        {
+         "ru": "Хлеб сто́ит со́рок рубле́й.",
+         "en": "The bread costs forty roubles."
+        },
+        {
+         "ru": "рубль",
+         "en": "rouble"
+        },
+        {
+         "ru": "два рубля́",
+         "en": "two roubles"
+        },
+        {
+         "ru": "Кни́ги сто́ят до́рого.",
+         "en": "The books are expensive."
+        },
+        {
+         "ru": "дёшево",
+         "en": "cheap, cheaply"
+        },
+        {
+         "ru": "буты́лка молока́",
+         "en": "a bottle of milk"
+        },
+        {
+         "ru": "килогра́мм сы́ра",
+         "en": "a kilogram of cheese"
+        },
+        {
+         "ru": "литр воды́",
+         "en": "a litre of water"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "два рубля́",
+       "options": [
+        "два рубля́",
+        "пять рубле́й",
+        "оди́н рубль"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "How much does this cost?",
+       "answer": "Ско́лько э́то сто́ит?"
+      },
+      {
+       "kind": "translate",
+       "en": "a bottle of milk",
+       "answer": "буты́лка молока́"
+      },
+      {
+       "kind": "fill",
+       "before": "Суп ",
+       "after": " сто рубле́й.",
+       "hint": "The soup costs a hundred roubles.",
+       "answer": "сто́ит"
+      },
+      {
+       "kind": "fill",
+       "before": "Килогра́мм сы́ра сто́ит ",
+       "after": ".",
+       "hint": "A kilogram of cheese is expensive.",
+       "answer": "до́рого"
+      },
+      {
+       "kind": "dictation",
+       "text": "Хлеб сто́ит со́рок рубле́й."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Ско́лько сто́ит литр воды́? Два́дцать рубле́й. Э́то дёшево. А кни́ги сто́ят до́рого."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Кни́ги сто́ят до́рого, а хлеб — дёшево.",
+       "options": [
+        "Books are expensive, but bread is cheap.",
+        "Books are cheap, but bread is expensive.",
+        "Books and bread cost the same."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "copy",
+       "text": "рубль, два рубля́, пять рубле́й",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three things you bought, with their prices."
+      }
+     ]
+    },
+    {
+     "id": "u26-p5",
+     "title": "A menu and a recipe",
+     "intro": "Two texts you will meet in any kitchen: prices, and instructions in the polite imperative.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Меню́. За́втрак: ка́ша с молоко́м — сто два́дцать рубле́й, чай и́ли ко́фе — шестьдеся́т рубле́й. Обе́д: суп — две́сти рубле́й, хлеб — три́дцать. У́жин: щи, сыр и чай — три́ста рубле́й.",
+       "en": "Menu. Breakfast: porridge with milk, 120 roubles; tea or coffee, 60 roubles. Lunch: soup, 200 roubles; bread, 30. Dinner: cabbage soup, cheese and tea, 300 roubles.",
+       "glosses": {
+        "меню": "menu",
+        "молоком": "milk (с молоком: with milk)",
+        "рублей": "roubles (after 5 and up)",
+        "или": "or",
+        "двести": "two hundred",
+        "триста": "three hundred"
+       }
+      },
+      {
+       "kind": "passage",
+       "text": "Ка́ша. Возьми́те рис, молоко́ и соль. Нале́йте молоко́ в кастрю́лю. Вари́те де́сять мину́т. Пото́м доба́вьте са́хар. Прия́тного аппети́та!",
+       "en": "Porridge. Take rice, milk and salt. Pour the milk into a saucepan. Cook for ten minutes. Then add sugar. Enjoy your meal!",
+       "glosses": {
+        "возьмите": "take (polite imperative)",
+        "рис": "rice",
+        "налейте": "pour (polite imperative)",
+        "кастрюлю": "saucepan (into the saucepan)",
+        "варите": "cook, boil (polite imperative)",
+        "минут": "minutes (after 5 and up)",
+        "добавьте": "add (polite imperative)",
+        "приятного": "enjoyable (приятного аппетита: enjoy your meal)",
+        "аппетита": "appetite (of)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Чай и́ли ко́фе — шестьдеся́т рубле́й.",
+       "options": [
+        "Tea and coffee: sixteen roubles.",
+        "Tea or coffee: sixty roubles.",
+        "Tea with coffee: sixty roubles."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "fill",
+       "before": "Вари́те ",
+       "after": ".",
+       "hint": "Cook for ten minutes.",
+       "answer": "де́сять мину́т"
+      },
+      {
+       "kind": "translate",
+       "en": "or",
+       "answer": "и́ли"
+      },
+      {
+       "kind": "translate",
+       "en": "menu",
+       "answer": "меню́"
+      },
+      {
+       "kind": "dictation",
+       "text": "Суп сто́ит две́сти рубле́й."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Чай и́ли ко́фе? Ко́фе с молоко́м, пожа́луйста. Вари́те де́сять мину́т."
+      },
+      {
+       "kind": "copy",
+       "text": "меню́, две́сти, три́ста",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "A recipe for something you make, in the polite imperative."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u27",
+   "title": "Describing and comparing",
+   "subtitle": "лу́чше, ху́же · прав, ну́жен · э́тот, тот · кото́рый",
+   "pages": [
+    {
+     "id": "u27-p1",
+     "title": "More and less",
+     "intro": "Comparing two things, and naming the most.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Compare with -ее and чем: интере́снее, чем, more interesting than. A few comparatives are irregular and very common: бо́льше more, ме́ньше less, лу́чше better, ху́же worse, ста́рше older, моло́же younger. Са́мый makes the superlative: са́мая интере́сная кни́га.",
+       "examples": [
+        {
+         "ru": "интере́сный",
+         "en": "interesting"
+        },
+        {
+         "ru": "фильм",
+         "en": "film"
+        },
+        {
+         "ru": "Э́та кни́га интере́снее, чем фильм.",
+         "en": "This book is more interesting than the film."
+        },
+        {
+         "ru": "э́та",
+         "en": "this (feminine)"
+        },
+        {
+         "ru": "бо́льше — ме́ньше",
+         "en": "more — less"
+        },
+        {
+         "ru": "лу́чше — ху́же",
+         "en": "better — worse"
+        },
+        {
+         "ru": "Брат ста́рше, сестра́ моло́же.",
+         "en": "My brother is older, my sister younger."
+        },
+        {
+         "ru": "са́мая интере́сная кни́га",
+         "en": "the most interesting book"
+        },
+        {
+         "ru": "ва́жный",
+         "en": "important"
+        },
+        {
+         "ru": "тру́дный",
+         "en": "difficult"
+        },
+        {
+         "ru": "лёгкий",
+         "en": "easy; light"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "лу́чше",
+       "options": [
+        "лу́чше",
+        "ху́же",
+        "бо́льше"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "better",
+       "answer": "лу́чше"
+      },
+      {
+       "kind": "translate",
+       "en": "important",
+       "answer": "ва́жный"
+      },
+      {
+       "kind": "fill",
+       "before": "Матема́тика ",
+       "after": ", чем фильм.",
+       "hint": "Mathematics is more interesting than a film.",
+       "answer": "интере́снее"
+      },
+      {
+       "kind": "fill",
+       "before": "Брат ",
+       "after": " меня́.",
+       "hint": "My brother is older than me.",
+       "answer": "ста́рше"
+      },
+      {
+       "kind": "dictation",
+       "text": "Э́та кни́га лу́чше, чем фильм."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Бо́льше, ме́ньше, лу́чше, ху́же, ста́рше, моло́же. Ва́жный, тру́дный, лёгкий."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Э́то са́мая интере́сная кни́га.",
+       "options": [
+        "This is a more interesting book.",
+        "This is an interesting film.",
+        "This is the most interesting book."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "copy",
+       "text": "интере́сный — интере́снее — са́мый интере́сный",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Compare two books, two cities or two foods."
+      }
+     ]
+    },
+    {
+     "id": "u27-p2",
+     "title": "Short forms: прав, ну́жен, до́лжен",
+     "intro": "Adjectives have a short form used only as a predicate; here are the ones you will hear most. Adverbs end in -о.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Some adjectives have a short form used only as a predicate: ты прав / ты права́, you are right; я согла́сен / согла́сна, I agree; мне ну́жен / нужна́ / ну́жно, I need; я до́лжен / должна́, I must. Adverbs end in -о and double as it is…: тру́дно, легко́, ва́жно, интере́сно.",
+       "examples": [
+        {
+         "ru": "Ты прав.",
+         "en": "You are right (to a man)."
+        },
+        {
+         "ru": "Ты права́.",
+         "en": "You are right (to a woman)."
+        },
+        {
+         "ru": "Я согла́сен.",
+         "en": "I agree (a man speaking)."
+        },
+        {
+         "ru": "Я согла́сна.",
+         "en": "I agree (a woman speaking)."
+        },
+        {
+         "ru": "Мне ну́жен стол.",
+         "en": "I need a table."
+        },
+        {
+         "ru": "Мне нужна́ кни́га.",
+         "en": "I need a book."
+        },
+        {
+         "ru": "Мне ну́жно поду́мать.",
+         "en": "I need to think."
+        },
+        {
+         "ru": "Я до́лжен идти́.",
+         "en": "I must go (a man)."
+        },
+        {
+         "ru": "идти́",
+         "en": "to go (on foot, one way)"
+        },
+        {
+         "ru": "Она́ должна́ рабо́тать.",
+         "en": "She must work."
+        },
+        {
+         "ru": "Э́то тру́дно, но интере́сно.",
+         "en": "It's hard, but interesting."
+        },
+        {
+         "ru": "легко́",
+         "en": "easy; easily"
+        },
+        {
+         "ru": "ва́жно",
+         "en": "important (it is important)"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "права́",
+       "options": [
+        "прав",
+        "права́"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "I agree (a man speaking)",
+       "answer": "я согла́сен"
+      },
+      {
+       "kind": "translate",
+       "en": "to go (on foot, one way)",
+       "answer": "идти́"
+      },
+      {
+       "kind": "fill",
+       "before": "Ты ",
+       "after": ", э́то ва́жно.",
+       "hint": "You're right (to a man), this is important.",
+       "answer": "прав"
+      },
+      {
+       "kind": "fill",
+       "before": "Мне ",
+       "after": " соль.",
+       "hint": "I need salt.",
+       "answer": "нужна́"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я согла́сна. Я должна́ идти́."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Э́то тру́дно, но интере́сно. А э́то легко́ и ва́жно. Я согла́сен, и я до́лжен идти́."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Ему́ ну́жно бо́льше вре́мени.",
+       "options": [
+        "He has a lot of time.",
+        "He needs less time.",
+        "He needs more time."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "copy",
+       "text": "ну́жен, нужна́, ну́жно",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "What do you need, and what must you do today?"
+      }
+     ]
+    },
+    {
+     "id": "u27-p3",
+     "title": "This and that: э́тот, тот",
+     "intro": "Э́то alone points; before a noun it agrees. Тот is the one further away.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Э́то alone points: э́то кни́га, this is a book. Before a noun it agrees: э́тот стол, э́та кни́га, э́то окно́, э́ти кни́ги. Тот, та, то, те is that one, further away.",
+       "examples": [
+        {
+         "ru": "э́тот стол",
+         "en": "this table"
+        },
+        {
+         "ru": "э́та кни́га",
+         "en": "this book"
+        },
+        {
+         "ru": "э́то окно́",
+         "en": "this window"
+        },
+        {
+         "ru": "э́ти кни́ги",
+         "en": "these books"
+        },
+        {
+         "ru": "тот дом",
+         "en": "that house"
+        },
+        {
+         "ru": "та у́лица",
+         "en": "that street"
+        },
+        {
+         "ru": "те лю́ди",
+         "en": "those people"
+        },
+        {
+         "ru": "Э́тот чай лу́чше, чем тот.",
+         "en": "This tea is better than that one."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "э́ти",
+       "options": [
+        "э́ти",
+        "э́та",
+        "э́то"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "this (masculine)",
+       "answer": "э́тот"
+      },
+      {
+       "kind": "translate",
+       "en": "these",
+       "answer": "э́ти"
+      },
+      {
+       "kind": "fill",
+       "before": "",
+       "after": " кни́га моя́, а та — твоя́.",
+       "hint": "This book is mine, and that one is yours.",
+       "answer": "Э́та"
+      },
+      {
+       "kind": "fill",
+       "before": "Кто ",
+       "after": " лю́ди?",
+       "hint": "Who are those people?",
+       "answer": "те"
+      },
+      {
+       "kind": "dictation",
+       "text": "Э́тот стол но́вый, а тот ста́рый."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Э́тот, э́та, э́то, э́ти. Тот, та, то, те."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Э́ти кни́ги интере́снее, чем те.",
+       "options": [
+        "Those books are more interesting than these.",
+        "These books are the most interesting.",
+        "These books are more interesting than those."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "copy",
+       "text": "э́тот — тот, э́та — та, э́ти — те",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "This thing and that thing: compare what is near you with what is across the room."
+      }
+     ]
+    },
+    {
+     "id": "u27-p4",
+     "title": "Which: кото́рый",
+     "intro": "The word that joins a clause to a noun: the gateway to real sentences.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Кото́рый joins a clause to a noun, like which or who. It agrees with the noun in gender and number, and takes the case its own clause needs: челове́к, кото́рый чита́ет; кни́га, кото́рую я чита́ю; го́род, в кото́ром я живу́.",
+       "examples": [
+        {
+         "ru": "челове́к, кото́рый чита́ет",
+         "en": "the person who is reading"
+        },
+        {
+         "ru": "кни́га, кото́рую я чита́ю",
+         "en": "the book that I am reading"
+        },
+        {
+         "ru": "го́род, в кото́ром я живу́",
+         "en": "the city I live in"
+        },
+        {
+         "ru": "лю́ди, кото́рые зна́ют",
+         "en": "people who know"
+        },
+        {
+         "ru": "кото́рая",
+         "en": "which, who (feminine)"
+        },
+        {
+         "ru": "Я ви́жу челове́ка, кото́рый ждёт.",
+         "en": "I see a person who is waiting."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "кото́рую",
+       "options": [
+        "кото́рую",
+        "кото́рая",
+        "кото́рые"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "which, who (masculine)",
+       "answer": "кото́рый"
+      },
+      {
+       "kind": "translate",
+       "en": "which, who (plural)",
+       "answer": "кото́рые"
+      },
+      {
+       "kind": "fill",
+       "before": "Э́то кни́га, ",
+       "after": " я люблю́.",
+       "hint": "This is the book that I love.",
+       "answer": "кото́рую"
+      },
+      {
+       "kind": "fill",
+       "before": "Э́то го́род, ",
+       "after": " живёт мой брат.",
+       "hint": "This is the city where my brother lives.",
+       "answer": "в кото́ром"
+      },
+      {
+       "kind": "dictation",
+       "text": "Челове́к, кото́рый ду́мает."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Кни́га, кото́рую я чита́ю, о ко́смосе."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Я зна́ю челове́ка, кото́рый живёт на ста́нции.",
+       "options": [
+        "I know a station where a person lives.",
+        "A person knows that I live on the station.",
+        "I know a person who lives on the station."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "copy",
+       "text": "кото́рый, кото́рая, кото́рое, кото́рые",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three sentences with кото́рый about people and things you know."
+      }
+     ]
+    },
+    {
+     "id": "u27-p5",
+     "title": "Reading with кото́рый",
+     "intro": "Mira again, in sentences with clauses inside them.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Ми́ра — ро́бот, кото́рый живёт на ста́нции. Ста́нция, на кото́рой она́ рабо́тает, лети́т вокру́г Земли́. Ка́ждое у́тро Ми́ра чита́ет кни́ги, кото́рые ей нра́вятся. Са́мая интере́сная кни́га — та, в кото́рой есть зада́чи. Э́ти зада́чи трудне́е, чем те, кото́рые она́ реша́ла вчера́.",
+       "en": "Mira is a robot who lives on the station. The station she works on flies around the Earth. Every morning Mira reads books that she likes. The most interesting book is the one with problems in it. These problems are harder than the ones she solved yesterday.",
+       "glosses": {
+        "которой": "which (на которой: on which; в которой: in which)",
+        "вокруг": "around",
+        "земли": "the Earth (after вокруг)",
+        "каждое": "every (with a neuter noun)",
+        "нравятся": "please (they); which she likes",
+        "станции": "station (на станции: on the station)",
+        "самая": "the most (feminine)",
+        "интересная": "interesting (feminine)",
+        "задачи": "problems, tasks",
+        "труднее": "harder, more difficult",
+        "решала": "was solving, solved (she)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Э́ти зада́чи трудне́е, чем те.",
+       "options": [
+        "Those problems are harder than these.",
+        "These problems are harder than those.",
+        "These problems are the hardest."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "fill",
+       "before": "Ми́ра — ро́бот, ",
+       "after": " живёт на ста́нции.",
+       "hint": "Mira is a robot who lives on the station.",
+       "answer": "кото́рый"
+      },
+      {
+       "kind": "fill",
+       "before": "Са́мая интере́сная кни́га — ",
+       "after": ", в кото́рой есть зада́чи.",
+       "hint": "The most interesting book is the one with problems in it.",
+       "answer": "та"
+      },
+      {
+       "kind": "translate",
+       "en": "harder, more difficult",
+       "answer": "трудне́е"
+      },
+      {
+       "kind": "translate",
+       "en": "problems, tasks",
+       "answer": "зада́чи"
+      },
+      {
+       "kind": "dictation",
+       "text": "Кни́ги, кото́рые ей нра́вятся."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Ста́нция, на кото́рой она́ рабо́тает, лети́т вокру́г Земли́."
+      },
+      {
+       "kind": "diary",
+       "prompt": "Describe someone you know in sentences with clauses inside them."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u28",
+   "title": "The machinery of written Russian",
+   "subtitle": "-ся · чита́ющий, прочита́в · же, ведь · что́бы",
+   "pages": [
+    {
+     "id": "u28-p1",
+     "title": "Verbs with -ся",
+     "intro": "A tail that turns the verb back on its subject, or just marks a verb with no object.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "-ся on the end of a verb turns it back on its subject, or marks a verb that takes no object: учи́ться to study, называ́ться to be called, находи́ться to be located, начина́ться to begin, конча́ться to end. After a vowel it is -сь: учу́сь.",
+       "examples": [
+        {
+         "ru": "учи́ться",
+         "en": "to study, to learn (for oneself)"
+        },
+        {
+         "ru": "Я учу́сь чита́ть по-ру́сски.",
+         "en": "I am learning to read Russian."
+        },
+        {
+         "ru": "Как э́то называ́ется?",
+         "en": "What is this called?"
+        },
+        {
+         "ru": "Где нахо́дится ста́нция?",
+         "en": "Where is the station located?"
+        },
+        {
+         "ru": "уро́к",
+         "en": "lesson"
+        },
+        {
+         "ru": "Уро́к начина́ется в де́вять.",
+         "en": "The lesson begins at nine."
+        },
+        {
+         "ru": "Фильм конча́ется.",
+         "en": "The film is ending."
+        },
+        {
+         "ru": "мне ка́жется",
+         "en": "it seems to me"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "начина́ется",
+       "options": [
+        "начина́ется",
+        "конча́ется",
+        "называ́ется"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "to study, to learn (for oneself)",
+       "answer": "учи́ться"
+      },
+      {
+       "kind": "translate",
+       "en": "What is this called?",
+       "answer": "Как э́то называ́ется?"
+      },
+      {
+       "kind": "fill",
+       "before": "Где ",
+       "after": " вы́ход?",
+       "hint": "Where is the exit located?",
+       "answer": "нахо́дится"
+      },
+      {
+       "kind": "fill",
+       "before": "Уро́к ",
+       "after": " в во́семь часо́в.",
+       "hint": "The lesson begins at eight o'clock.",
+       "answer": "начина́ется"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я учу́сь говори́ть по-ру́сски."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Как э́то называ́ется? Где э́то нахо́дится? Когда́ э́то начина́ется и конча́ется? Мне ка́жется, в де́вять."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Мне ка́жется, уро́к конча́ется.",
+       "options": [
+        "It seems to me the lesson is beginning.",
+        "It seems to me the lesson is ending.",
+        "I know the lesson is over."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "copy",
+       "text": "учи́ться — учу́сь, начина́ться — начина́ется",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "What are you learning, when does your day begin and end, and what is this thing called?"
+      }
+     ]
+    },
+    {
+     "id": "u28-p2",
+     "title": "Verbs dressed as adjectives",
+     "intro": "Participles and gerunds: recognize them, and written Russian opens up. You never need to produce one.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "A participle is a verb wearing an adjective ending. -ущий/-ющий/-ащий/-ящий is doing: чита́ющий, the one who is reading; -вший did: прочита́вший; -нный and -тый was done: напи́санный, written, откры́тый, open. A gerund is a verb used as an adverb: чита́я, while reading; прочита́в, having read.",
+       "examples": [
+        {
+         "ru": "чита́ющий челове́к",
+         "en": "a person who is reading"
+        },
+        {
+         "ru": "живу́щий на ста́нции ро́бот",
+         "en": "a robot living on the station"
+        },
+        {
+         "ru": "прочита́вший кни́гу",
+         "en": "the one having read the book"
+        },
+        {
+         "ru": "напи́санное письмо́",
+         "en": "a written letter"
+        },
+        {
+         "ru": "откры́тое окно́",
+         "en": "an open window"
+        },
+        {
+         "ru": "Окно́ откры́то.",
+         "en": "The window is open."
+        },
+        {
+         "ru": "Чита́я письмо́, она́ молча́ла.",
+         "en": "While reading the letter, she was silent."
+        },
+        {
+         "ru": "Прочита́в, она́ поду́мала.",
+         "en": "Having read it, she thought."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "чита́я",
+       "options": [
+        "чита́я",
+        "чита́ющий",
+        "прочита́в"
+       ]
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Чита́я письмо́, она́ молча́ла.",
+       "options": [
+        "Having read the letter, she spoke.",
+        "While reading the letter, she was silent.",
+        "She was reading a letter about silence."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "fill",
+       "before": "Окно́ ",
+       "after": ".",
+       "hint": "The window is open.",
+       "answer": "откры́то"
+      },
+      {
+       "kind": "fill",
+       "before": "Э́то письмо́, напи́санное ",
+       "after": ".",
+       "hint": "This is a letter written by my brother.",
+       "answer": "бра́том"
+      },
+      {
+       "kind": "dictation",
+       "text": "Э́то письмо́ написа́л брат."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Чита́ющий, прочита́вший, живу́щий. Напи́санный, откры́тый. Чита́я, она́ молча́ла. Прочита́в, она́ поду́мала."
+      },
+      {
+       "kind": "copy",
+       "text": "напи́санное письмо́, откры́тое окно́",
+       "times": 1
+      },
+      {
+       "kind": "copy",
+       "text": "чита́ющий, прочита́вший, чита́я, прочита́в",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Describe something you see using one participle you recognize (a written letter, an open window)."
+      }
+     ]
+    },
+    {
+     "id": "u28-p3",
+     "title": "Word order and emphasis",
+     "intro": "The cases carry the roles, so the order carries the emphasis: the important word goes last.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Russian word order is free because the cases carry the roles; the new or important word goes last. Ма́ма чита́ет кни́гу answers what is mom doing, Кни́гу чита́ет ма́ма answers who is reading the book. Little words add emphasis: же (precisely), ведь (after all), да́же (even), то́лько (only).",
+       "examples": [
+        {
+         "ru": "Кни́гу чита́ет ма́ма.",
+         "en": "It's mom who is reading the book."
+        },
+        {
+         "ru": "Ма́ма чита́ет кни́гу.",
+         "en": "Mom is reading a book."
+        },
+        {
+         "ru": "Я же сказа́л!",
+         "en": "I did say so!"
+        },
+        {
+         "ru": "сказа́л",
+         "en": "said (he)"
+        },
+        {
+         "ru": "Ты ведь зна́ешь.",
+         "en": "You know, after all."
+        },
+        {
+         "ru": "Да́же ро́бот понима́ет.",
+         "en": "Even a robot understands."
+        },
+        {
+         "ru": "понима́ет",
+         "en": "understands (he, she)"
+        },
+        {
+         "ru": "Э́то то́лько нача́ло.",
+         "en": "This is only the beginning."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Кни́гу чита́ет ма́ма.",
+       "options": [
+        "Кни́гу чита́ет ма́ма.",
+        "Ма́ма чита́ет кни́гу.",
+        "Ма́ма чита́ет."
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "even",
+       "answer": "да́же"
+      },
+      {
+       "kind": "translate",
+       "en": "beginning",
+       "answer": "нача́ло"
+      },
+      {
+       "kind": "fill",
+       "before": "Ты ",
+       "after": " зна́ешь, где соль.",
+       "hint": "You know where the salt is, after all.",
+       "answer": "ведь"
+      },
+      {
+       "kind": "fill",
+       "before": "Я же ",
+       "after": ": э́то факт!",
+       "hint": "I did say so: it's a fact!",
+       "answer": "сказа́л"
+      },
+      {
+       "kind": "dictation",
+       "text": "Да́же ро́бот э́то понима́ет."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Кни́гу чита́ет ма́ма. Ма́ма чита́ет кни́гу. Ма́ма кни́гу чита́ет."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Письмо́ написа́л брат, а не сестра́.",
+       "options": [
+        "My brother wrote a letter to my sister.",
+        "It was my brother who wrote the letter, not my sister.",
+        "My sister wrote the letter, not my brother."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "copy",
+       "text": "же, ведь, да́же, то́лько",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Say who did what, three ways, moving the emphasis each time."
+      }
+     ]
+    },
+    {
+     "id": "u28-p4",
+     "title": "That, which, what: clause words",
+     "intro": "Что for a fact, что́бы for a purpose or a wish, то, что for the thing that.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Что joins a fact: я зна́ю, что. Что́бы joins a purpose or a wish: я чита́ю, что́бы знать; я хочу́, что́бы ты знал. То, что is the thing that, тот, кто the one who, and де́ло в том, что means the point is that.",
+       "examples": [
+        {
+         "ru": "Я зна́ю то, что ты зна́ешь.",
+         "en": "I know what you know."
+        },
+        {
+         "ru": "Тот, кто ждёт, уви́дит.",
+         "en": "The one who waits will see."
+        },
+        {
+         "ru": "Я чита́ю, что́бы знать.",
+         "en": "I read in order to know."
+        },
+        {
+         "ru": "Я хочу́, что́бы ты по́нял.",
+         "en": "I want you to understand."
+        },
+        {
+         "ru": "Де́ло в том, что у меня́ нет вре́мени.",
+         "en": "The thing is, I have no time."
+        },
+        {
+         "ru": "Е́сли бы я знал!",
+         "en": "If only I knew!"
+        },
+        {
+         "ru": "бы",
+         "en": "would (the particle of the hypothetical)"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "что́бы",
+       "options": [
+        "что́бы",
+        "что",
+        "что тако́е"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "in order to; so that",
+       "answer": "что́бы"
+      },
+      {
+       "kind": "translate",
+       "en": "the thing is that",
+       "answer": "де́ло в том, что"
+      },
+      {
+       "kind": "fill",
+       "before": "Я учу́сь, ",
+       "after": " чита́ть по-ру́сски.",
+       "hint": "I study in order to read Russian.",
+       "answer": "что́бы"
+      },
+      {
+       "kind": "fill",
+       "before": "",
+       "after": " ждёт, уви́дит.",
+       "hint": "The one who waits will see (two words: that one, who).",
+       "answer": "Тот, кто"
+      },
+      {
+       "kind": "dictation",
+       "text": "Де́ло в том, что я не зна́ю."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Я хочу́, что́бы ты по́нял то, что я зна́ю. Е́сли бы я знал!"
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Е́сли бы у меня́ бы́ло вре́мя!",
+       "options": [
+        "If only I had time!",
+        "I have time.",
+        "When I have time."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "copy",
+       "text": "что — что́бы — то, что — тот, кто",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Why do you read? Two sentences with что́бы, and one with де́ло в том, что."
+      }
+     ]
+    },
+    {
+     "id": "u28-p5",
+     "title": "Science fiction: two scenes",
+     "intro": "Two short originals in the manner of the Russian classics of the genre: a city of glass, and a station on Mars.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Я живу́ в го́роде из стекла́. Ка́ждое у́тро в семь часо́в мы все встаём, и ка́ждый ве́чер в де́сять мы все спим. Стена́, отделя́ющая нас от ле́са, то́же из стекла́. Сего́дня я уви́дел за стено́й челове́ка, кото́рый не спал. Он смотре́л на звёзды. Э́то бы́ло стра́нно.",
+       "en": "I live in a city of glass. Every morning at seven we all get up, and every evening at ten we all sleep. The wall separating us from the forest is also glass. Today I saw, beyond the wall, a person who was not asleep. He was looking at the stars. It was strange.",
+       "glosses": {
+        "городе": "city (в городе: in the city)",
+        "живу": "I live",
+        "стекла": "glass (из стекла: made of glass)",
+        "каждое": "every (with a neuter noun)",
+        "часов": "o'clock (в семь часов: at seven)",
+        "все": "all, everyone",
+        "встаём": "we get up",
+        "каждый": "every (with a masculine noun)",
+        "вечер": "evening",
+        "спим": "we sleep",
+        "стена": "wall",
+        "отделяющая": "separating (feminine participle)",
+        "нас": "us",
+        "от": "from",
+        "леса": "forest (от леса: from the forest)",
+        "увидел": "caught sight of, saw (he)",
+        "за": "beyond, behind",
+        "стеной": "wall (за стеной: beyond the wall)",
+        "человека": "person (as the object)",
+        "смотрел": "was looking (he)",
+        "странно": "strange (it was strange)"
+       }
+      },
+      {
+       "kind": "passage",
+       "text": "Ста́нция на Ма́рсе рабо́тает уже́ сто лет. Лю́ди, живу́щие здесь, не зна́ют войны́. Ка́ждый рабо́тает сто́лько, ско́лько хо́чет, потому́ что маши́ны де́лают остально́е. Инжене́р говори́т мне: «Мы не лу́чше вас, мы то́лько ста́рше».",
+       "en": "The station on Mars has been working for a hundred years already. The people living here do not know war. Everyone works as much as they want, because the machines do the rest. The engineer tells me: “We are not better than you, only older.”",
+       "glosses": {
+        "знают": "know (they)",
+        "потому": "because (потому что)",
+        "марсе": "Mars (на Марсе: on Mars)",
+        "уже": "already",
+        "живущие": "living (plural participle)",
+        "войны": "war (не знают войны: do not know war)",
+        "каждый": "everyone, each",
+        "столько": "as much (столько, сколько: as much as)",
+        "хочет": "wants (he, she)",
+        "машины": "machines",
+        "делают": "do (they)",
+        "остальное": "the rest",
+        "инженер": "engineer",
+        "вас": "you (plural; than you)"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Он смотре́л на звёзды.",
+       "options": [
+        "He was looking at the stars.",
+        "He was sleeping under the stars.",
+        "He saw the Earth."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "fill",
+       "before": "Я живу́ в го́роде из ",
+       "after": ".",
+       "hint": "I live in a city of glass.",
+       "answer": "стекла́"
+      },
+      {
+       "kind": "fill",
+       "before": "Мы не лу́чше ",
+       "after": ", мы то́лько ста́рше.",
+       "hint": "We are not better than you, only older.",
+       "answer": "вас"
+      },
+      {
+       "kind": "translate",
+       "en": "engineer",
+       "answer": "инжене́р"
+      },
+      {
+       "kind": "translate",
+       "en": "already",
+       "answer": "уже́"
+      },
+      {
+       "kind": "dictation",
+       "text": "Лю́ди здесь не зна́ют войны́."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Э́то бы́ло стра́нно: он смотре́л на звёзды. Мы не лу́чше вас, мы то́лько ста́рше."
+      },
+      {
+       "kind": "copy",
+       "text": "стекло́, стена́, война́",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Your own science-fiction scene in four sentences."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u29",
+   "title": "The language of mathematics",
+   "subtitle": "определе́ние · пусть, тогда́ · для всех, существу́ет · доказа́тельство",
+   "pages": [
+    {
+     "id": "u29-p1",
+     "title": "Definitions",
+     "intro": "Every definition has the same shape: X называ́ется Y, е́сли…",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "A definition has one shape: X называ́ется Y, е́сли… . Мно́жество is a set, элеме́нт an element, принадлежи́т is belongs to; пусто́е мно́жество is the empty set. If and only if is тогда́ и то́лько тогда́, когда́ (the calque е́сли и то́лько е́сли is also heard).",
+       "examples": [
+        {
+         "ru": "определе́ние",
+         "en": "definition"
+        },
+        {
+         "ru": "мно́жество",
+         "en": "set (in mathematics)"
+        },
+        {
+         "ru": "Число́ принадлежи́т мно́жеству.",
+         "en": "The number belongs to the set."
+        },
+        {
+         "ru": "пусто́е мно́жество",
+         "en": "the empty set"
+        },
+        {
+         "ru": "Число́ называ́ется чётным, е́сли оно́ де́лится на два.",
+         "en": "A number is called even if it is divisible by two."
+        },
+        {
+         "ru": "едини́ца",
+         "en": "one (the number); a unit"
+        },
+        {
+         "ru": "Число́ называ́ется просты́м, е́сли оно́ де́лится то́лько на едини́цу и на само́ себя́.",
+         "en": "A number is called prime if it is divisible only by one and by itself."
+        },
+        {
+         "ru": "тогда́ и то́лько тогда́, когда́",
+         "en": "if and only if"
+        },
+        {
+         "ru": "тогда́",
+         "en": "then, in that case"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "мно́жество",
+       "options": [
+        "мно́жество",
+        "число́",
+        "мно́го"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "set (in mathematics)",
+       "answer": "мно́жество"
+      },
+      {
+       "kind": "translate",
+       "en": "definition",
+       "answer": "определе́ние"
+      },
+      {
+       "kind": "fill",
+       "before": "Число́ ",
+       "after": " мно́жеству.",
+       "hint": "The number belongs to the set.",
+       "answer": "принадлежи́т"
+      },
+      {
+       "kind": "fill",
+       "before": "Число́ называ́ется чётным, ",
+       "after": " оно́ де́лится на два.",
+       "hint": "A number is called even if it is divisible by two.",
+       "answer": "е́сли"
+      },
+      {
+       "kind": "dictation",
+       "text": "Э́то пусто́е мно́жество."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Определе́ние. Число́ называ́ется просты́м, е́сли оно́ де́лится то́лько на едини́цу и на само́ себя́."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Два принадлежи́т мно́жеству чётных чи́сел.",
+       "options": [
+        "Two belongs to the set of even numbers.",
+        "Two is the set of even numbers.",
+        "Two does not belong to the set of even numbers."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "copy",
+       "text": "определе́ние, едини́ца, тогда́ и то́лько тогда́, когда́",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Define something simple in Russian: X называ́ется Y, е́сли…"
+      }
+     ]
+    },
+    {
+     "id": "u29-p2",
+     "title": "Theorem and proof: пусть, тогда́",
+     "intro": "A proof walks on a few words. Learn them and every proof opens.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "A proof walks on a few words: пусть (let), предполо́жим (suppose), тогда́ (then), сле́довательно (therefore), отку́да сле́дует (from which it follows), противоре́чие (contradiction). A ле́мма is a small theorem on the way, a сле́дствие a corollary.",
+       "examples": [
+        {
+         "ru": "пусть",
+         "en": "let (in a proof)"
+        },
+        {
+         "ru": "Пусть число́ чётное.",
+         "en": "Let the number be even."
+        },
+        {
+         "ru": "предполо́жим",
+         "en": "suppose, let us assume"
+        },
+        {
+         "ru": "Предполо́жим, что э́то непра́вда.",
+         "en": "Suppose this is not true."
+        },
+        {
+         "ru": "Тогда́ су́мма то́же чётная.",
+         "en": "Then the sum is also even."
+        },
+        {
+         "ru": "чётная",
+         "en": "even (feminine)"
+        },
+        {
+         "ru": "отку́да сле́дует",
+         "en": "from which it follows"
+        },
+        {
+         "ru": "Получа́ем противоре́чие.",
+         "en": "We obtain a contradiction."
+        },
+        {
+         "ru": "ле́мма",
+         "en": "lemma"
+        },
+        {
+         "ru": "сле́дствие",
+         "en": "corollary, consequence"
+        }
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "let (in a proof)",
+       "answer": "пусть"
+      },
+      {
+       "kind": "translate",
+       "en": "contradiction",
+       "answer": "противоре́чие"
+      },
+      {
+       "kind": "fill",
+       "before": "",
+       "after": " число́ чётное.",
+       "hint": "Let the number be even.",
+       "answer": "Пусть"
+      },
+      {
+       "kind": "fill",
+       "before": "",
+       "after": ", что э́то непра́вда.",
+       "hint": "Suppose this is not true.",
+       "answer": "Предполо́жим"
+      },
+      {
+       "kind": "dictation",
+       "text": "Тогда́ су́мма то́же чётная."
+      },
+      {
+       "kind": "dictation",
+       "text": "Получа́ем противоре́чие."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Пусть… Предполо́жим… Тогда́… Отку́да сле́дует… Сле́довательно… Что и тре́бовалось доказа́ть."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Отку́да сле́дует, что число́ чётное.",
+       "options": [
+        "From which it follows that the number is odd.",
+        "Suppose that the number is even.",
+        "From which it follows that the number is even."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "copy",
+       "text": "тео́рема, ле́мма, сле́дствие, доказа́тельство",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "A two-line proof with пусть and тогда́."
+      }
+     ]
+    },
+    {
+     "id": "u29-p3",
+     "title": "For all, there exists, equals",
+     "intro": "Quantifiers, comparison and functions: the symbols, said aloud.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Для всех and для любо́го say for all; существу́ет says there exists; еди́нственный is unique. Равно́ is equals, бо́льше and ме́ньше are greater than and less than (with the genitive), and зна́чение фу́нкции в то́чке is the value of the function at a point.",
+       "examples": [
+        {
+         "ru": "для всех",
+         "en": "for all"
+        },
+        {
+         "ru": "Существу́ет еди́нственное просто́е чётное число́.",
+         "en": "There exists a unique even prime number."
+        },
+        {
+         "ru": "равно́",
+         "en": "equals (the number after it goes into the dative)"
+        },
+        {
+         "ru": "Два плюс два равно́ четырём.",
+         "en": "Two plus two equals four."
+        },
+        {
+         "ru": "четырём",
+         "en": "four (dative, after равно)"
+        },
+        {
+         "ru": "семи́",
+         "en": "seven (dative, after равно)"
+        },
+        {
+         "ru": "ми́нус",
+         "en": "minus"
+        },
+        {
+         "ru": "Пять бо́льше трёх.",
+         "en": "Five is greater than three."
+        },
+        {
+         "ru": "Три ме́ньше пяти́.",
+         "en": "Three is less than five."
+        },
+        {
+         "ru": "зна́чение фу́нкции в то́чке два",
+         "en": "the value of the function at the point two"
+        },
+        {
+         "ru": "мно́жество всех чётных чи́сел",
+         "en": "the set of all even numbers"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "бо́льше",
+       "options": [
+        "бо́льше",
+        "ме́ньше",
+        "равно́"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "equals",
+       "answer": "равно́"
+      },
+      {
+       "kind": "translate",
+       "en": "for all",
+       "answer": "для всех"
+      },
+      {
+       "kind": "fill",
+       "before": "Пять ",
+       "after": " трёх.",
+       "hint": "Five is greater than three.",
+       "answer": "бо́льше"
+      },
+      {
+       "kind": "fill",
+       "before": "Де́сять ми́нус три ",
+       "after": " семи́.",
+       "hint": "Ten minus three equals seven (equals, not will be).",
+       "answer": "равно́"
+      },
+      {
+       "kind": "dictation",
+       "text": "Три ме́ньше пяти́. Два плюс два равно́ четырём."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Существу́ет еди́нственное просто́е чётное число́: два."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Зна́чение фу́нкции в то́чке два равно́ четырём.",
+       "options": [
+        "The function has two values: two and four.",
+        "The value of the function at the point two equals four.",
+        "The function is greater than four at two."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "copy",
+       "text": "зна́чение фу́нкции в то́чке",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three true statements with бо́льше, ме́ньше and ра́вно."
+      }
+     ]
+    },
+    {
+     "id": "u29-p4",
+     "title": "A real proof: Euclid",
+     "intro": "The oldest proof in the book, in the Russian a textbook would use.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "Тео́рема: просты́х чи́сел бесконе́чно мно́го.\nДоказа́тельство: предполо́жим, что их коне́чное число́. Рассмо́трим число́: произведе́ние всех просты́х чи́сел плюс оди́н. Тогда́ оно́ не де́лится ни на одно́ из них. Зна́чит, оно́ само́ просто́е и́ли де́лится на просто́е число́, кото́рого нет среди́ них. Получа́ем противоре́чие. Что и тре́бовалось доказа́ть.",
+       "en": "Theorem: there are infinitely many primes.\nProof: suppose there are finitely many of them. Consider the number: the product of all the primes plus one. Then it is not divisible by any one of them. So it is itself prime, or divisible by a prime that is not among them. We obtain a contradiction. Which was to be proved.",
+       "glosses": {
+        "простых": "prime (простых чисел: of prime numbers)",
+        "чисел": "numbers (of numbers)",
+        "бесконечно": "infinitely",
+        "их": "of them",
+        "конечное": "finite (neuter)",
+        "рассмотрим": "let us consider",
+        "произведение": "product (of multiplication)",
+        "ни": "not (ни на одно: not by any one)",
+        "них": "them (из них: of them)",
+        "само": "itself",
+        "простое": "prime (simple)",
+        "которого": "which (которого нет: which is not)",
+        "среди": "among",
+        "требовалось": "was required",
+        "доказать": "to prove"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Просты́х чи́сел бесконе́чно мно́го.",
+       "options": [
+        "There are finitely many primes.",
+        "Prime numbers are very big.",
+        "There are infinitely many primes."
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "fill",
+       "before": "Предполо́жим, что их ",
+       "after": " число́.",
+       "hint": "Suppose there are finitely many of them.",
+       "answer": "коне́чное"
+      },
+      {
+       "kind": "translate",
+       "en": "infinitely",
+       "answer": "бесконе́чно"
+      },
+      {
+       "kind": "translate",
+       "en": "product (of multiplication)",
+       "answer": "произведе́ние"
+      },
+      {
+       "kind": "dictation",
+       "text": "Получа́ем противоре́чие. Что и тре́бовалось доказа́ть."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Рассмо́трим число́: произведе́ние всех просты́х чи́сел плюс оди́н."
+      },
+      {
+       "kind": "copy",
+       "text": "бесконе́чно мно́го, коне́чное число́",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Retell Euclid's proof in your own three sentences."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u30",
+   "title": "The language of philosophy",
+   "subtitle": "и́стина, бытие́, созна́ние · есть, явля́ется · одна́ко, поэ́тому",
+   "pages": [
+    {
+     "id": "u30-p1",
+     "title": "Abstract nouns",
+     "intro": "Philosophy lives on nouns in -ость and -ние, built from adjectives and verbs you know.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Philosophy's nouns are built with three suffixes: -ость turns an adjective into a quality (де́йствительный, де́йствительность), -ние and -ие turn a verb into an act or a state (мы́слить, мышле́ние; знать, зна́ние; быть, бытие́). И́стина is truth as a philosopher means it; пра́вда is truth as a person tells it.",
+       "examples": [
+        {
+         "ru": "и́стина",
+         "en": "truth (philosophical)"
+        },
+        {
+         "ru": "свобо́да",
+         "en": "freedom"
+        },
+        {
+         "ru": "созна́ние",
+         "en": "consciousness"
+        },
+        {
+         "ru": "бытие́",
+         "en": "being, existence"
+        },
+        {
+         "ru": "мышле́ние",
+         "en": "thinking (as a faculty)"
+        },
+        {
+         "ru": "су́щность",
+         "en": "essence"
+        },
+        {
+         "ru": "де́йствительность",
+         "en": "reality, actuality"
+        },
+        {
+         "ru": "возмо́жность",
+         "en": "possibility"
+        },
+        {
+         "ru": "необходи́мость",
+         "en": "necessity"
+        },
+        {
+         "ru": "ра́зум",
+         "en": "reason (the faculty)"
+        },
+        {
+         "ru": "Бытие́ определя́ет созна́ние.",
+         "en": "Being determines consciousness (a maxim after Marx)."
+        },
+        {
+         "ru": "определя́ет",
+         "en": "determines, defines (it)"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "созна́ние",
+       "options": [
+        "созна́ние",
+        "зна́ние",
+        "мышле́ние"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "truth (philosophical)",
+       "answer": "и́стина"
+      },
+      {
+       "kind": "translate",
+       "en": "freedom",
+       "answer": "свобо́да"
+      },
+      {
+       "kind": "fill",
+       "before": "Бытие́ определя́ет ",
+       "after": ".",
+       "hint": "Being determines consciousness.",
+       "answer": "созна́ние"
+      },
+      {
+       "kind": "fill",
+       "before": "Мышле́ние — ",
+       "after": " челове́ка.",
+       "hint": "Thinking is the essence of a human being.",
+       "answer": "су́щность"
+      },
+      {
+       "kind": "dictation",
+       "text": "И́стина и пра́вда — не одно́ и то же."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "И́стина, свобо́да, созна́ние, бытие́, мышле́ние, су́щность, де́йствительность, возмо́жность, необходи́мость, ра́зум."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Возмо́жность — ещё не де́йствительность.",
+       "options": [
+        "Reality is only a possibility.",
+        "A possibility is not yet a reality.",
+        "Possibility and reality are the same."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "copy",
+       "text": "-ость: су́щность, возмо́жность; -ние: созна́ние, мышле́ние",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Pick two abstract nouns from this page and say what they mean to you."
+      }
+     ]
+    },
+    {
+     "id": "u30-p2",
+     "title": "To be: есть, явля́ется, существу́ет",
+     "intro": "Everyday Russian drops is. Philosophy puts it back, in three shapes.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Everyday Russian drops is, but philosophy puts it back: Что есть и́стина? Явля́ться with the instrumental is the formal to be; существова́ть is to exist. Быть with the instrumental names a role or a state: быть свобо́дным, быть челове́ком.",
+       "examples": [
+        {
+         "ru": "Что есть и́стина?",
+         "en": "What is truth?"
+        },
+        {
+         "ru": "существова́ть",
+         "en": "to exist"
+        },
+        {
+         "ru": "Мир существу́ет незави́симо от нас.",
+         "en": "The world exists independently of us."
+        },
+        {
+         "ru": "незави́симо от",
+         "en": "independently of"
+        },
+        {
+         "ru": "нас",
+         "en": "us (after от, у, для…)"
+        },
+        {
+         "ru": "явля́ется",
+         "en": "is (formal: appears as, with the instrumental)"
+        },
+        {
+         "ru": "существо́",
+         "en": "creature, being"
+        },
+        {
+         "ru": "Челове́к явля́ется мы́слящим существо́м.",
+         "en": "A human being is a thinking creature."
+        },
+        {
+         "ru": "быть свобо́дным",
+         "en": "to be free"
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "явля́ется",
+       "options": [
+        "явля́ется",
+        "называ́ется",
+        "существу́ет"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "to exist",
+       "answer": "существова́ть"
+      },
+      {
+       "kind": "translate",
+       "en": "is (formal: appears as, with the instrumental)",
+       "answer": "явля́ется"
+      },
+      {
+       "kind": "fill",
+       "before": "Что ",
+       "after": " и́стина?",
+       "hint": "What is truth? (with the philosopher's is)",
+       "answer": "есть"
+      },
+      {
+       "kind": "fill",
+       "before": "Мир существу́ет ",
+       "after": " нас.",
+       "hint": "The world exists independently of us.",
+       "answer": "незави́симо от"
+      },
+      {
+       "kind": "dictation",
+       "text": "Челове́к явля́ется мы́слящим существо́м."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Что есть и́стина? Мир существу́ет незави́симо от нас. Челове́к — существо́, кото́рое хо́чет быть свобо́дным."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Что́бы быть свобо́дным, ну́жно ду́мать.",
+       "options": [
+        "To think, one must be free.",
+        "To be free, one must think.",
+        "A free person doesn't think."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "copy",
+       "text": "быть, есть, явля́ется, существова́ть",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "What exists, what is, what seems? Three sentences."
+      }
+     ]
+    },
+    {
+     "id": "u30-p3",
+     "title": "Connecting an argument",
+     "intro": "The words that hold a page of reasoning together.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "An argument is held together by connectives: во-пе́рвых, во-вторы́х (first, second); одна́ко (however); поэ́тому (therefore, so); с одно́й стороны́… с друго́й стороны́ (on the one hand… on the other); наприме́р (for example); ита́к (thus); тем не ме́нее (nevertheless); де́йствительно (indeed).",
+       "examples": [
+        {
+         "ru": "Во-пе́рвых, э́то пра́вда. Во-вторы́х, э́то ва́жно.",
+         "en": "First, it is true. Second, it is important."
+        },
+        {
+         "ru": "Одна́ко э́то тру́дно.",
+         "en": "However, it is difficult."
+        },
+        {
+         "ru": "Поэ́тому я согла́сен.",
+         "en": "Therefore I agree."
+        },
+        {
+         "ru": "С одно́й стороны́… с друго́й стороны́…",
+         "en": "On the one hand… on the other hand…"
+        },
+        {
+         "ru": "наприме́р",
+         "en": "for example"
+        },
+        {
+         "ru": "Ита́к, мы зна́ем.",
+         "en": "Thus, we know."
+        },
+        {
+         "ru": "Тем не ме́нее я ду́маю ина́че.",
+         "en": "Nevertheless I think otherwise."
+        },
+        {
+         "ru": "ина́че",
+         "en": "otherwise, differently"
+        },
+        {
+         "ru": "Де́йствительно, э́то так.",
+         "en": "Indeed, that is so."
+        }
+       ]
+      },
+      {
+       "kind": "listen_pick",
+       "say": "одна́ко",
+       "options": [
+        "одна́ко",
+        "поэ́тому",
+        "ита́к"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "however",
+       "answer": "одна́ко"
+      },
+      {
+       "kind": "translate",
+       "en": "for example",
+       "answer": "наприме́р"
+      },
+      {
+       "kind": "fill",
+       "before": "",
+       "after": " я согла́сен.",
+       "hint": "Therefore, so, I agree.",
+       "answer": "Поэ́тому"
+      },
+      {
+       "kind": "fill",
+       "before": "Во-пе́рвых, э́то пра́вда; ",
+       "after": ", э́то ва́жно.",
+       "hint": "First, it is true; second, it is important.",
+       "answer": "во-вторы́х"
+      },
+      {
+       "kind": "dictation",
+       "text": "Де́йствительно, э́то так. Одна́ко э́то тру́дно."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "С одно́й стороны́, э́то тру́дно. С друго́й стороны́, э́то интере́сно. Ита́к, я согла́сен."
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Тем не ме́нее я ду́маю ина́че.",
+       "options": [
+        "Therefore I think the same.",
+        "Nevertheless I think otherwise.",
+        "For example, I think so."
+       ],
+       "answer": 1
+      },
+      {
+       "kind": "copy",
+       "text": "одна́ко, поэ́тому, тем не ме́нее, ина́че",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Argue for something small, with во-пе́рвых, во-вторы́х and одна́ко."
+      }
+     ]
+    },
+    {
+     "id": "u30-p4",
+     "title": "Socrates again, then Tolstoy",
+     "intro": "A dialogue in the old manner, and two sentences from the real books: Tolstoy's question, Dostoevsky's answer.",
+     "exercises": [
+      {
+       "kind": "passage",
+       "text": "— Что тако́е свобо́да? — спра́шивает Сокра́т.\n— Э́то когда́ я де́лаю то, что хочу́, — отвеча́ет учени́к.\n— А е́сли ты хо́чешь того́, что тебе́ вреди́т?\n— Тогда́ я не свобо́ден, а раб свои́х жела́ний.\n— Зна́чит, свобо́да — э́то не де́лать, что хо́чешь, а хоте́ть того́, что ну́жно?\n— Ка́жется, так. Одна́ко кто реша́ет, что ну́жно?",
+       "en": "“What is freedom?” asks Socrates. “It's when I do what I want,” answers the student. “And if you want what harms you?” “Then I am not free, but a slave of my desires.” “So freedom is not doing what you want, but wanting what is needed?” “It seems so. However, who decides what is needed?”",
+       "glosses": {
+        "такое": "such (что такое: what is)",
+        "спрашивает": "asks",
+        "сократ": "Socrates",
+        "делаю": "I do",
+        "хочу": "I want",
+        "отвечает": "answers",
+        "хочешь": "you want",
+        "того": "that (genitive: того, что: what)",
+        "вредит": "harms (тебе вредит: harms you)",
+        "свободен": "free (masculine short form)",
+        "раб": "slave",
+        "своих": "of one's own",
+        "желаний": "desires (of desires)",
+        "хотеть": "to want",
+        "решает": "decides (he, she)"
+       }
+      },
+      {
+       "kind": "passage",
+       "text": "Лев Толсто́й в «И́споведи» спра́шивает: «Есть ли в мое́й жи́зни тако́й смысл, кото́рый не уничтожа́лся бы неизбе́жно предстоя́щей мне сме́ртью?» Достое́вский в «Идио́те», слова́ми кня́зя Мы́шкина, отвеча́ет: «Мир спасёт красота́».",
+       "en": "Leo Tolstoy asks in A Confession: “Is there any meaning in my life that would not be destroyed by the death that inevitably awaits me?” Dostoevsky answers in The Idiot, in words attributed to Prince Myshkin: “Beauty will save the world.”",
+       "glosses": {
+        "лев": "Leo (Lev)",
+        "толстой": "Tolstoy",
+        "исповеди": "A Confession (in A Confession)",
+        "спрашивает": "asks",
+        "ли": "whether (есть ли: is there)",
+        "моей": "my (in my)",
+        "жизни": "life (in life)",
+        "такой": "such, any such",
+        "смысл": "meaning, sense",
+        "уничтожался": "would be destroyed (не уничтожался бы)",
+        "неизбежно": "inevitably",
+        "предстоящей": "awaiting, lying ahead (participle)",
+        "смертью": "death (by death)",
+        "достоевский": "Dostoevsky",
+        "идиоте": "The Idiot (in The Idiot)",
+        "словами": "in the words (of)",
+        "князя": "prince (of Prince)",
+        "мышкина": "Myshkin (of Myshkin)",
+        "отвечает": "answers",
+        "спасёт": "will save",
+        "красота": "beauty"
+       }
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Свобо́да — э́то хоте́ть того́, что ну́жно.",
+       "options": [
+        "Freedom is wanting what is needed.",
+        "Freedom is doing what you want.",
+        "Freedom is not needing anything."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "fill",
+       "before": "Одна́ко кто ",
+       "after": ", что ну́жно?",
+       "hint": "However, who decides what is needed?",
+       "answer": "реша́ет"
+      },
+      {
+       "kind": "fill",
+       "before": "Мир спасёт ",
+       "after": ".",
+       "hint": "Beauty will save the world.",
+       "answer": "красота́"
+      },
+      {
+       "kind": "translate",
+       "en": "beauty",
+       "answer": "красота́"
+      },
+      {
+       "kind": "translate",
+       "en": "meaning, sense",
+       "answer": "смысл"
+      },
+      {
+       "kind": "dictation",
+       "text": "Мир спасёт красота́."
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Есть ли в мое́й жи́зни тако́й смысл? Свобо́да — э́то хоте́ть того́, что ну́жно."
+      },
+      {
+       "kind": "copy",
+       "text": "свобо́да, смысл, красота́",
+       "times": 1
+      },
+      {
+       "kind": "diary",
+       "prompt": "Your answer to Tolstoy's question, as far as your Russian reaches."
       }
      ]
     }

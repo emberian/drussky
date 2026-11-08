@@ -59,7 +59,7 @@ public enum Fatigue {
     public static func estimate(events: [LearningEvent], now: Date, pageStarted: Date? = nil,
                                 policy: FatiguePolicy = FatiguePolicy()) -> FatigueEstimate {
         let session = sessionEvents(events, now: now, policy: policy)
-        let outcomes = session.filter { $0.type == .outcome && $0.grade != nil }
+        let outcomes = completions(in: session)
         let start = pageStarted ?? session.first?.t ?? now
         let minutes = max(0, now.timeIntervalSince(start) / 60)
         var signals = FatigueEstimate.Signals(latencyRatio: nil, missRate: nil, triesPerItem: nil, minutes: minutes, items: outcomes.count)
@@ -79,7 +79,7 @@ public enum Fatigue {
             if misses >= 2 && missing > 0 { reasons.append("\(misses) of the last \(recent.count) missed") }
 
             let recentItems = Set(recent.map(\.item))
-            let tries = session.filter { recentItems.contains($0.item) && ($0.type == .attempt || $0.type == .outcome) }.count
+            let tries = tries(in: session, on: recentItems, completions: outcomes)
             let perItem = Double(tries) / Double(recentItems.count)
             signals.triesPerItem = perItem
             let retrying = unit((perItem - 1.2) / 1.3)
@@ -112,13 +112,37 @@ public enum Fatigue {
     }
 
     /// The events of the session that ends at the last event before `now` (if that was less than
-    /// a session gap ago), in time order.
+    /// a session gap ago), in time order; events at the same instant keep their logged order.
     public static func sessionEvents(_ events: [LearningEvent], now: Date, policy: FatiguePolicy = FatiguePolicy()) -> [LearningEvent] {
-        let past = events.filter { $0.t <= now }.sorted { $0.t < $1.t }
+        let past = events.enumerated().filter { $0.element.t <= now }
+            .sorted { ($0.element.t, $0.offset) < ($1.element.t, $1.offset) }.map(\.element)
         guard let last = past.last, now.timeIntervalSince(last.t) < policy.sessionGap else { return [] }
         var start = past.count - 1
         while start > 0, past[start].t.timeIntervalSince(past[start - 1].t) < policy.sessionGap { start -= 1 }
         return Array(past[start...])
+    }
+
+    /// The learner's answers: one per completion. A domain may log several outcomes for one answer
+    /// at one instant (a corrected line of free writing yields one per correction and then its
+    /// own); those describe one answer, and the last logged carries its grade. Ungraded
+    /// completions are not answers.
+    public static func completions(in session: [LearningEvent]) -> [LearningEvent] {
+        var out: [LearningEvent] = []
+        for e in session where e.type == .outcome {
+            if let last = out.last, last.item == e.item, last.t == e.t { out[out.count - 1] = e } else { out.append(e) }
+        }
+        return out.filter { $0.grade != nil }
+    }
+
+    /// Tries on `items`: their attempts, one per attempt number when numbered (a domain may log
+    /// the same try twice, as the exercise's attempt and as an annotation of it), plus their completions.
+    static func tries(in session: [LearningEvent], on items: Set<String>, completions: [LearningEvent]) -> Int {
+        var numbered = Set<String>()
+        var count = completions.filter { items.contains($0.item) }.count
+        for e in session where e.type == .attempt && items.contains(e.item) {
+            if let n = e.attempt { if numbered.insert("\(e.item)#\(n)").inserted { count += 1 } } else { count += 1 }
+        }
+        return count
     }
 
     static func median(_ xs: [Double]) -> Double {

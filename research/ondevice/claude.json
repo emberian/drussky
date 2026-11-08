@@ -1,0 +1,750 @@
+{
+ "glosses": [
+  {
+   "id": "gloss-1",
+   "seconds": 1.250284194946289,
+   "answer": "good",
+   "lemma": "добрый"
+  },
+  {
+   "id": "gloss-2",
+   "seconds": 0.9249048233032227,
+   "answer": "station",
+   "lemma": "станция"
+  },
+  {
+   "id": "gloss-3",
+   "seconds": 1.0164899826049805,
+   "answer": "lives",
+   "lemma": "жить"
+  },
+  {
+   "id": "gloss-4",
+   "seconds": 0.9561049938201904,
+   "answer": "window",
+   "lemma": "окно"
+  },
+  {
+   "id": "gloss-5",
+   "seconds": 1.2770099639892578,
+   "answer": "also, in addition",
+   "lemma": "ещё"
+  },
+  {
+   "id": "gloss-6",
+   "seconds": 1.046586036682129,
+   "answer": "space (outer space)",
+   "lemma": "космос"
+  },
+  {
+   "id": "gloss-7",
+   "seconds": 0.9520819187164307,
+   "answer": "in the evening",
+   "lemma": "вечером"
+  },
+  {
+   "id": "gloss-8",
+   "seconds": 4.923627853393555,
+   "answer": "was",
+   "lemma": "быть"
+  },
+  {
+   "id": "gloss-9",
+   "seconds": 0.9417059421539307,
+   "answer": "was reading",
+   "lemma": "читать"
+  },
+  {
+   "id": "gloss-10",
+   "seconds": 8.407322883605957,
+   "answer": "was thinking",
+   "lemma": "думать"
+  },
+  {
+   "id": "gloss-11",
+   "seconds": 1.6053950786590576,
+   "answer": "was sleeping",
+   "lemma": "спать"
+  },
+  {
+   "id": "gloss-12",
+   "seconds": 8.408870935440063,
+   "answer": "went (on foot)",
+   "lemma": "ходить"
+  },
+  {
+   "id": "gloss-13",
+   "seconds": 1.0103230476379395,
+   "answer": "was",
+   "lemma": "быть"
+  },
+  {
+   "id": "gloss-14",
+   "seconds": 1.228085994720459,
+   "answer": "were",
+   "lemma": "быть"
+  },
+  {
+   "id": "gloss-15",
+   "seconds": 0.9300339221954346,
+   "answer": "were reading",
+   "lemma": "читать"
+  },
+  {
+   "id": "gloss-16",
+   "seconds": 0.9546990394592285,
+   "answer": "am going",
+   "lemma": "идти"
+  },
+  {
+   "id": "gloss-17",
+   "seconds": 4.845767021179199,
+   "answer": "flies, orbits",
+   "lemma": "лете́ть"
+  },
+  {
+   "id": "gloss-18",
+   "seconds": 0.9587619304656982,
+   "answer": "around",
+   "lemma": "вокруг"
+  },
+  {
+   "id": "gloss-19",
+   "seconds": 1.0085272789001465,
+   "answer": "Earth",
+   "lemma": "земля"
+  },
+  {
+   "id": "gloss-20",
+   "seconds": 1.6452021598815918,
+   "answer": "station",
+   "lemma": "станция"
+  },
+  {
+   "id": "gloss-21",
+   "seconds": 0.9760661125183105,
+   "answer": "every",
+   "lemma": "каждый"
+  },
+  {
+   "id": "gloss-22",
+   "seconds": 8.388861894607544,
+   "answer": "signal",
+   "lemma": "сигнал"
+  },
+  {
+   "id": "gloss-23",
+   "seconds": 1.7585361003875732,
+   "answer": "there are",
+   "lemma": "быть"
+  },
+  {
+   "id": "gloss-24",
+   "seconds": 2.160335063934326,
+   "answer": "prime",
+   "lemma": "простой"
+  },
+  {
+   "id": "gloss-25",
+   "seconds": 0.9782369136810303,
+   "answer": "someone",
+   "lemma": "кто-то"
+  },
+  {
+   "id": "gloss-26",
+   "seconds": 0.937614917755127,
+   "answer": "there",
+   "lemma": "там"
+  },
+  {
+   "id": "gloss-27",
+   "seconds": 1.50620698928833,
+   "answer": "sends",
+   "lemma": "посылать"
+  },
+  {
+   "id": "gloss-28",
+   "seconds": 1.1999738216400146,
+   "answer": "him",
+   "lemma": "он"
+  },
+  {
+   "id": "gloss-29",
+   "seconds": 1.0860607624053955,
+   "answer": "to, toward",
+   "lemma": "к"
+  },
+  {
+   "id": "gloss-30",
+   "seconds": 1.0150511264801025,
+   "answer": "to the stars",
+   "lemma": "звезда"
+  },
+  {
+   "id": "gloss-31",
+   "seconds": 0.9302008152008057,
+   "answer": "days",
+   "lemma": "день"
+  },
+  {
+   "id": "gloss-32",
+   "seconds": 1.0112121105194092,
+   "answer": "in, after (time)",
+   "lemma": "через"
+  },
+  {
+   "id": "gloss-33",
+   "seconds": 1.047691822052002,
+   "answer": "month",
+   "lemma": "месяц"
+  },
+  {
+   "id": "gloss-34",
+   "seconds": 0.9534549713134766,
+   "answer": "arrives, comes",
+   "lemma": "приходить"
+  },
+  {
+   "id": "gloss-35",
+   "seconds": 1.6692461967468262,
+   "answer": "it",
+   "lemma": "он"
+  },
+  {
+   "id": "gloss-36",
+   "seconds": 1.0475876331329346,
+   "answer": "one",
+   "lemma": "один"
+  },
+  {
+   "id": "gloss-37",
+   "seconds": 3.5201499462127686,
+   "answer": "two",
+   "lemma": "два"
+  },
+  {
+   "id": "gloss-38",
+   "seconds": 0.9261257648468018,
+   "answer": "even",
+   "lemma": "чётный"
+  },
+  {
+   "id": "gloss-39",
+   "seconds": 2.9510416984558105,
+   "answer": "numbers",
+   "lemma": "число"
+  },
+  {
+   "id": "gloss-40",
+   "seconds": 1.005523920059204,
+   "answer": "which, that",
+   "lemma": "который"
+  },
+  {
+   "id": "gloss-41",
+   "seconds": 1.0336990356445312,
+   "answer": "let's take",
+   "lemma": "взять"
+  },
+  {
+   "id": "gloss-42",
+   "seconds": 0.9319281578063965,
+   "answer": "asks",
+   "lemma": "спрашивать"
+  },
+  {
+   "id": "gloss-43",
+   "seconds": 1.5067031383514404,
+   "answer": "Socrates",
+   "lemma": "Сократ"
+  },
+  {
+   "id": "gloss-44",
+   "seconds": 0.9045708179473877,
+   "answer": "when",
+   "lemma": "когда"
+  },
+  {
+   "id": "gloss-45",
+   "seconds": 1.532832145690918,
+   "answer": "everyone",
+   "lemma": "каждый"
+  },
+  {
+   "id": "gloss-46",
+   "seconds": 0.9375388622283936,
+   "answer": "receives, gets",
+   "lemma": "получать"
+  },
+  {
+   "id": "gloss-47",
+   "seconds": 1.0056722164154053,
+   "answer": "poems, verses",
+   "lemma": "стих"
+  },
+  {
+   "id": "gloss-48",
+   "seconds": 1.1516499519348145,
+   "answer": "Fyodor (name)",
+   "lemma": "Фёдор"
+  },
+  {
+   "id": "gloss-49",
+   "seconds": 0.9800987243652344,
+   "answer": "Tyutchev (poet)",
+   "lemma": "Тютчев"
+  },
+  {
+   "id": "gloss-50",
+   "seconds": 2.059192180633545,
+   "answer": "yardstick (arshin)",
+   "lemma": "аршин"
+  }
+ ],
+ "endings": [
+  {
+   "id": "ending-1",
+   "seconds": 2.703319787979126,
+   "answer": "Because of [[в|in]]: when it means **location (\"in\")**, Russian puts the noun in the **prepositional case**, and for most nouns ending in **-а** that ending becomes **-е**.\n\n- [[Москва́|Moscow]] → [[в Москве́|in Moscow]]\n- [[шко́ла|school]] → [[в шко́ле|at school]]\n\nSo the sentence [[Я живу́ в Москве́.|I live in Moscow.]] literally marks Moscow as \"the place where.\" Notice the stress stays on the end: [[Москве́|Moscow (location)]]."
+  },
+  {
+   "id": "ending-2",
+   "seconds": 4.011243104934692,
+   "answer": "Because **кни́гу** is the **direct object**: it's the thing being read. Russian marks that with the **accusative case**.\n\nFor feminine nouns ending in **-а**, the accusative swaps **-а → -у**:\n\n| Role | Form |\n|---|---|\n| Subject / dictionary form | [[кни́га|book]] |\n| Direct object (accusative) | [[кни́гу|book (object)]] |\n\nCompare:\n- [[Кни́га интере́сная.|The book is interesting.]] (the book is the subject)\n- [[Я чита́ю кни́гу.|I'm reading a book.]] (the book is the object)\n\nBecause the ending marks the role, Russian word order can shift: [[Кни́гу чита́ю я.|It's me reading the book.]] still means *I* read the *book*."
+  },
+  {
+   "id": "ending-3",
+   "seconds": 3.908311128616333,
+   "answer": "Two things combine here:\n\n1. **[[нет|there is no]] takes the genitive case.** When you say something is *absent*, the missing thing goes into genitive: [[У меня́ нет вре́мени.|I have no time.]] Compare the positive: [[У меня́ есть вре́мя.|I have time.]], where it stays in the basic form.\n\n2. **[[вре́мя|time]] is an irregular noun.** It's one of about ten neuter nouns ending in **-мя** that grow a hidden **-ен-** in every other form. So instead of a \"normal\" ending, you get [[вре́мя|time]] → [[вре́мени|of time]].\n\nIts sibling [[и́мя|name]] behaves the same: [[У меня́ нет и́мени.|I have no name.]], a nicely sci-fi sentence."
+  },
+  {
+   "id": "ending-4",
+   "seconds": 3.156435966491699,
+   "answer": "Because **[[бра́ту|to (my) brother]]** is the **recipient**: the person something is given *to*. Russian marks the recipient with the **dative case**, and for masculine nouns like **[[брат|brother]]** the dative ending is **-у**.\n\nSo no word for \"to\" is needed; the ending does that job:\n- **[[Он даёт кни́гу бра́ту.|He gives the book to his brother.]]**\n\nCompare with **[[кни́гу|book]]**: that's the *thing* given (accusative, **[[кни́га|book]]** → **-у**). Two different cases happen to share the same ending here, which is a nice coincidence to notice."
+  },
+  {
+   "id": "ending-5",
+   "seconds": 4.599048852920532,
+   "answer": "Because **в** + motion *into* a place takes the **accusative** case, and for words like [[шко́ла|school]] that ending is **‑у**:\n\n- [[шко́ла|school]] → [[в шко́лу|to/into school]]: you're heading there.\n\nCompare the **location** version, where **в** takes a different case (prepositional) and the ending becomes **‑е**:\n\n- [[Мы идём в шко́лу.|We're going to school.]]: movement → **‑у**\n- [[Мы в шко́ле.|We're at school.]]: being there → **‑е**\n\nSo the ending tells you whether the school is a **destination** or a **location**."
+  },
+  {
+   "id": "ending-6",
+   "seconds": 3.20170521736145,
+   "answer": "It's the **instrumental case**: Russian has no separate word for \"with\" when you mean the *tool* you use. The ending itself carries that meaning.\n\n- [[ру́чка|pen]]: dictionary form\n- [[ру́чкой|with a pen]]: ‑а becomes ‑ой\n\nSo [[Она́ пи́шет ру́чкой.|She writes with a pen.]] literally reads \"She writes pen‑with.\" Same pattern: [[Она́ пи́шет кара́ндашом.|She writes with a pencil.]] Here a masculine noun takes ‑ом instead."
+  },
+  {
+   "id": "ending-7",
+   "seconds": 3.5841710567474365,
+   "answer": "Because **ма́ма** is the *object* here: the thing being seen. In Russian, the object of a verb like [[ви́жу|I see]] takes the **accusative case**, and for feminine nouns ending in **-а**, that ending changes to **-у**.\n\n- [[Ма́ма ви́дит.|Mom sees.]] → mom is the subject, so the ending stays **-а**\n- [[Я ви́жу ма́му.|I see mom.]] → mom is the object, so it becomes **-у**\n\nIt's a bit like English *she → her* (\"she sees\" vs. \"I see her\"), except Russian marks it on nouns too, not just pronouns. That's also why word order is flexible: [[Ма́му ви́жу я.|It's me who sees mom.]] still means *I* see *mom*, because the **-у** tells you who's being seen."
+  },
+  {
+   "id": "ending-8",
+   "seconds": 3.5433809757232666,
+   "answer": "Because **бра́т** is the *object* of [[ви́жу|I see]], it goes into the **accusative case**. For masculine nouns naming **living beings** (people, animals), the accusative takes the ending **-а**:\n\n- [[Э́то бра́т.|This is a brother.]] (subject, no ending)\n- [[Я ви́жу бра́та.|I see a brother.]] (object, **-а**)\n\nFor a **non-living** masculine noun, the accusative looks just like the dictionary form: [[Я ви́жу до́м.|I see a house.]] (no change). So Russian grammatically marks whether the thing you see is alive, a nice example of **animacy** built into the grammar."
+  },
+  {
+   "id": "ending-9",
+   "seconds": 5.411705255508423,
+   "answer": "Trick question, in a way: **[[стол|table]] has no new ending here**. It's the object of [[ви́жу|I see]], so it's in the **accusative** case. But for masculine nouns naming *things* (inanimate), the accusative looks exactly like the dictionary form.\n\nCompare a feminine noun, which *does* change:\n- [[ла́мпа|lamp]] → [[Я ви́жу ла́мпу.|I see the lamp.]] (**-а → -у**)\n- [[стол|table]] → [[Я ви́жу стол.|I see the table.]] (no change)\n\nFun twist: masculine *living* things do change, as in [[кот|cat]] → [[Я ви́жу кота́.|I see the cat.]] Russian grammar literally cares whether the object is alive."
+  },
+  {
+   "id": "ending-10",
+   "seconds": 2.5800352096557617,
+   "answer": "It's the **genitive case**, Russian's \"of\" form. [[кни́га ма́мы|mom's book]] is literally \"the book **of mom**\": the owner goes *after* the thing and takes the genitive ending.\n\nFor words ending in **-а** like [[ма́ма|mom]], the -а becomes **-ы**:\n\n- [[ма́ма|mom]] → [[ма́мы|of mom]]\n- [[па́па|dad]] → [[па́пы|of dad]]\n\nSo [[Э́то кни́га па́пы.|This is dad's book.]] works the same way."
+  },
+  {
+   "id": "ending-11",
+   "seconds": 3.668283224105835,
+   "answer": "Because [[о|about]] always takes the **prepositional case**, the \"about/in what\" case.\n\nMost feminine nouns in **-а/-я** switch to **-е** here: [[Москва́|Moscow]] → [[о Москве́|about Moscow]]. But nouns ending in **-ия** take **-ии** instead, so it's never \"-ие\":\n\n- [[Росси́я|Russia]] → [[о Росси́и|about Russia]]\n- [[исто́рия|history]] → [[об исто́рии|about history]]\n- [[филосо́фия|philosophy]] → [[о филосо́фии|about philosophy]]\n\nSo [[Он говори́т о Росси́и.|He talks about Russia.]] is simply **о + prepositional**, with the special **-ия → -ии** pattern."
+  },
+  {
+   "id": "ending-12",
+   "seconds": 4.0136260986328125,
+   "answer": "After **5 and up**, Russian puts the noun in the **genitive plural**, literally \"five *of books*.\" For [[кни́га|book]], the genitive plural simply drops the final **-а**, leaving the bare stem [[книг|of books]].\n\nCompare how the noun changes with the number:\n\n| | |\n|---|---|\n| [[одна́ кни́га|one book]] | nominative singular |\n| [[две кни́ги|two books]] | genitive **singular** (after 2, 3, 4) |\n| [[пять книг|five books]] | genitive **plural** (after 5+) |\n\nSo [[У меня́ пять книг.|I have five books.]] uses the \"zero ending,\" which is common for feminine nouns in **-а**."
+  },
+  {
+   "id": "ending-13",
+   "seconds": 3.641244888305664,
+   "answer": "Because it comes right after [[два|two]]. In Russian, the numbers **2, 3, 4** make the next noun take the **genitive singular** (\"of-form\"), so [[стол|table]] becomes [[стола́|table (gen. sg.)]].\n\n- [[оди́н стол|one table]]: plain form\n- [[два стола́|two tables]]: genitive singular\n- [[пять столо́в|five tables]]: genitive **plural**\n\nLiterally, [[два стола́|two tables]] is something like \"a pair of table.\" Compare the start of the sentence: [[на столе́|on the table]] uses a different ending, **-е**, because [[на|on]] (meaning location) takes the prepositional case."
+  },
+  {
+   "id": "ending-14",
+   "seconds": 3.585645914077759,
+   "answer": "Because the subject is [[я|I]]. Russian verbs change their ending to match **who** is doing the action, and **-ю** is the ending for \"I\".\n\nThe dictionary form is [[рабо́тать|to work]]. Drop **-ть**, add the personal ending:\n\n| who | verb |\n|---|---|\n| [[я|I]] | [[рабо́таю|work]] |\n| [[ты|you]] | [[рабо́таешь|work]] |\n| [[он|he]] | [[рабо́тает|works]] |\n\nIt's like English *I work / he work**s***, but Russian marks every person, not just \"he\". That's why Russians can often drop the pronoun: [[рабо́таю|(I) work]] already tells you it's \"I\"."
+  },
+  {
+   "id": "ending-15",
+   "seconds": 4.737828016281128,
+   "answer": "Because the subject is [[ты|you (informal, one person)]], and Russian verbs change their ending to match **who** is doing the action. For [[ты|you]], the present-tense ending is **‑ешь**: the stem [[рабо́та-|work-]] + **‑ешь** → [[рабо́таешь|you work]].\n\n| who | verb |\n|---|---|\n| [[я|I]] | [[рабо́таю|I work]] |\n| [[ты|you]] | [[рабо́таешь|you work]] |\n| [[он|he]] | [[рабо́тает|he works]] |\n\nThe ending alone often tells you the person, so [[Рабо́таешь?|Are you working?]] works even without [[ты|you]]. The final **ь** (soft sign) has no sound of its own here. It's a spelling habit that this ending always carries."
+  },
+  {
+   "id": "ending-16",
+   "seconds": 3.6805341243743896,
+   "answer": "Because the subject is [[они́|they]], and [[говори́ть|to speak]] is a **second-conjugation** verb (an «и-verb»), whose \"they\" ending is **-ят**.\n\n| | ending | form |\n|---|---|---|\n| [[я|I]] | -ю | [[говорю́|I speak]] |\n| [[ты|you]] | -ишь | [[говори́шь|you speak]] |\n| [[они́|they]] | **-ят** | [[говоря́т|they speak]] |\n\nCompare a first-conjugation verb like [[чита́ть|to read]]: [[они́ чита́ют|they read]] uses **-ют** instead. So the vowel in the \"they\" ending tells you which family the verb belongs to: **-ят** for the и-family, **-ют** for the е-family."
+  },
+  {
+   "id": "ending-17",
+   "seconds": 3.6050009727478027,
+   "answer": "Because Russian past tense agrees with the subject's **gender and number**, not with person. The past is built from the stem [[чита́-|read-]] + **-л**, then a gender ending. [[Она́|she]] is feminine, so it takes **-а**:\n\n| subject | verb |\n|---|---|\n| [[он|he]] | [[чита́л|read]] (no ending) |\n| [[она́|she]] | [[чита́ла|read]] |\n| [[оно́|it]] | [[чита́ло|read]] |\n| [[они́|they]] | [[чита́ли|read]] |\n\nSo the ending tells you who did it. A woman says [[я чита́ла|I read]], a man says [[я чита́л|I read]]."
+  },
+  {
+   "id": "ending-18",
+   "seconds": 2.622791051864624,
+   "answer": "Because **[[кни́га|book]]** is feminine (it ends in **-а**), and an adjective must match its noun's gender. So **[[но́вый|new]]** takes the feminine ending **-ая**.\n\n| Gender | Example |\n|---|---|\n| masculine | [[но́вый дом|new house]] |\n| feminine | [[но́вая кни́га|new book]] |\n| neuter | [[но́вое окно́|new window]] |\n\nThe adjective's ending echoes the noun: feminine **-а** pairs with **-ая**."
+  },
+  {
+   "id": "ending-19",
+   "seconds": 5.466799259185791,
+   "answer": "**[[мне|to me]]** is the dative form of **[[я|I]]**, so the sentence literally says \"**To me** (it is) cold.\"\n\nRussian often describes feelings and sensations this way: the person who *experiences* the state goes in the dative, and the state itself is an adverb ending in **-о**, with no \"is\" needed in the present tense. There's no grammatical subject at all, a bit like English \"it's cold,\" but with \"to me\" attached.\n\nThe same pattern works for other states:\n- **[[Мне ску́чно.|I'm bored.]]** (lit. \"to me boring\")\n- **[[Мне хорошо́.|I feel good.]]**\n\nIf you said **[[Я холо́дный.|I'm cold.]]**, it would sound like you yourself are a cold *object* or a cold *personality*, not that you're feeling chilly."
+  },
+  {
+   "id": "ending-20",
+   "seconds": 3.246696949005127,
+   "answer": "Because of [[в|in]]: when it means **\"in / at\" (a location)**, the noun after it takes the **prepositional case**, and for most masculine nouns that just means adding **-е**.\n\n- [[Петербу́рг|Petersburg]] → [[в Петербу́рге|in Petersburg]]\n- [[Москва́|Moscow]] → [[в Москве́|in Moscow]] (here **-а** is swapped for **-е**)\n\nSo [[Я был в Петербу́рге.|I was in Petersburg.]] answers \"where?\". Think of **-е** as a little \"location tag\" the noun wears after [[в|in]]."
+  }
+ ],
+ "diaries": [
+  {
+   "id": "diary-1",
+   "seconds": 6.177548885345459,
+   "json": "{\"corrected\": \"Я люблю́ чита́ть кни́ги.\", \"edits\": [{\"span\": \"книга\", \"replacement\": \"кни́ги\", \"category\": \"ending\", \"why\": \"The thing you read is the object of чита́ть, so it can't stay in the dictionary form кни́га; for 'books' in general, use the plural object form кни́ги.\", \"en\": \"books\"}], \"praise\": \"Я люблю́ чита́ть is exactly right: люблю́ plus an infinitive is the natural way to say what you like to do.\", \"teach\": [{\"title\": \"The object changes its ending\", \"note\": \"When a noun is the thing being acted on, it takes the accusative form: a feminine noun ending in -а switches to -у, so one book is кни́гу and books in general are кни́ги. For example, [[Я чита́ю кни́гу.|I'm reading a book.]]\", \"pattern\": \"accusative-object\"}]}",
+   "error": null
+  },
+  {
+   "id": "diary-2",
+   "seconds": 4.310740947723389,
+   "json": "{\"corrected\": \"Мой па́па рабо́тает до́ма.\", \"edits\": [{\"span\": \"Моя\", \"replacement\": \"Мой\", \"category\": \"agreement\", \"why\": \"папа ends in -а but means a man, so it is masculine and takes мой, not моя.\", \"en\": \"my (masculine)\"}], \"praise\": \"You conjugated рабо́тает perfectly and used до́ма for \\\"at home\\\" exactly the way Russians do.\", \"teach\": [{\"title\": \"Male words ending in -а\", \"note\": \"A few words ending in -а name men, like папа, дедушка and дядя, so they take masculine words such as мой. Compare [[мой па́па|my dad]] with моя мама.\", \"pattern\": \"masculine-a-nouns\"}]}",
+   "error": null
+  },
+  {
+   "id": "diary-3",
+   "seconds": 5.76530909538269,
+   "json": "{\"corrected\": \"Вчера́ я ходи́л в шко́лу.\", \"edits\": [{\"span\": \"в школа\", \"replacement\": \"в шко́лу\", \"category\": \"ending\", \"why\": \"After в meaning 'to/into' (going somewhere), the noun takes the accusative case, so шко́ла becomes шко́лу.\", \"en\": \"to school\"}], \"praise\": \"You built the past tense perfectly: ходи́л has the right -л ending for a male speaker, and starting with Вчера́ is exactly how a Russian would answer this prompt.\", \"teach\": [{\"title\": \"Going somewhere: в + accusative\", \"note\": \"When в means motion 'to/into' a place, the noun changes to the accusative, and feminine -а becomes -у. So шко́ла turns into [[Я иду́ в шко́лу.|I'm going to school.]]\", \"pattern\": \"v-accusative-motion\"}]}",
+   "error": null
+  },
+  {
+   "id": "diary-4",
+   "seconds": 5.130674362182617,
+   "json": "{\"corrected\": \"Я живу́ в Москве́.\", \"edits\": [{\"span\": \"Москва\", \"replacement\": \"Москве́\", \"category\": \"ending\", \"why\": \"After в meaning 'in' (location), the noun takes the prepositional case, so -а becomes -е.\", \"en\": \"in Moscow\"}], \"praise\": \"You conjugated живу́ perfectly and chose exactly the right preposition в for 'in'. That is the whole sentence frame done right!\", \"teach\": [{\"title\": \"Location: в + prepositional case\", \"note\": \"When в means 'in' (where something is), the noun usually swaps its ending to -е: Москва́ → в Москве́, парк → [[в па́рке|in the park]]. Think 'where?' (где?) and reach for that -е.\", \"pattern\": \"v-prepositional-location\"}]}",
+   "error": null
+  },
+  {
+   "id": "diary-5",
+   "seconds": 4.841042995452881,
+   "json": "{\"corrected\": \"Она́ чита́ет кни́гу и пьёт чай.\", \"edits\": [{\"span\": \"книга\", \"replacement\": \"кни́гу\", \"category\": \"ending\", \"why\": \"The book is the thing being read (the direct object), so its -а ending changes to -у.\", \"en\": \"book (as the object being read)\"}], \"praise\": \"Lovely work: you conjugated both verbs correctly, including the tricky пьёт from пить, and joined the two actions with и naturally.\", \"teach\": [{\"title\": \"Object nouns: -а becomes -у\", \"note\": \"When a feminine noun ending in -а is the direct object of a verb like читать, its ending switches to -у (the accusative case). [[Я чита́ю кни́гу.|I am reading a book.]]\", \"pattern\": \"accusative-a-to-u\"}]}",
+   "error": null
+  },
+  {
+   "id": "diary-6",
+   "seconds": 6.15496301651001,
+   "json": "{\"corrected\": \"У меня́ есть брат. Он студе́нт. Он у́чится в университе́те.\", \"edits\": [{\"span\": \"университет\", \"replacement\": \"университе́те\", \"category\": \"ending\", \"why\": \"After в meaning 'in/at' a place, the noun takes the prepositional case, so a consonant-final noun like университет adds -е.\", \"en\": \"(at) university\"}], \"praise\": \"У меня́ есть брат is exactly right, and choosing у́чится for 'studies at' rather than a plain 'learns' verb is a lovely, natural touch.\", \"teach\": [{\"title\": \"Location after в: prepositional\", \"note\": \"When в means 'in' or 'at' a place, the noun goes into the prepositional case, which usually means adding -е (or swapping -а for -е). For example, школа becomes [[в шко́ле|at school]].\", \"pattern\": \"prepositional-location\"}]}",
+   "error": null
+  },
+  {
+   "id": "diary-7",
+   "seconds": 6.00045108795166,
+   "json": "{\"corrected\": \"Ма́ма и па́па до́ма. Они́ смо́трят телеви́зор.\", \"edits\": [{\"span\": \"смотрит\", \"replacement\": \"смо́трят\", \"category\": \"agreement\", \"why\": \"The subject is они (they), so the verb needs the plural ending -ят, not the singular -ит for он/она.\", \"en\": \"(they) watch\"}], \"praise\": \"You used до́ма for \\\"at home\\\" exactly right, and телеви́зор is spelled perfectly.\", \"teach\": [{\"title\": \"Verb endings follow the subject\", \"note\": \"A Russian verb changes its ending to match who is doing it: он/она смо́трит, but они смо́трят. The same goes for verbs you know: он чита́ет, but [[они́ чита́ют|they read]].\", \"pattern\": \"verb-plural-ending\"}]}",
+   "error": null
+  },
+  {
+   "id": "diary-8",
+   "seconds": 6.234049081802368,
+   "json": "{\"corrected\": \"Я не понима́ю э́то сло́во.\", \"edits\": [{\"span\": \"этот\", \"replacement\": \"э́то\", \"category\": \"agreement\", \"why\": \"Сло́во ends in -о, so it is neuter, and 'this' must be neuter too: э́то, not masculine э́тот.\", \"en\": \"this\"}], \"praise\": \"You built a perfect negative sentence: не goes right before the verb, and понима́ю has exactly the right ending for я.\", \"teach\": [{\"title\": \"'This' matches the noun's gender\", \"note\": \"Э́тот goes with masculine nouns like дом, but nouns ending in -о are neuter and take э́то. For example: [[э́то сло́во|this word]].\", \"pattern\": \"demonstrative-gender\"}]}",
+   "error": null
+  },
+  {
+   "id": "diary-9",
+   "seconds": 5.7180259227752686,
+   "json": "{\"corrected\": \"Сего́дня хоро́шая пого́да. Я иду́ в парк с дру́гом.\", \"edits\": [{\"span\": \"с друг\", \"replacement\": \"с дру́гом\", \"category\": \"ending\", \"why\": \"After с meaning 'with', the noun takes the instrumental case, so друг becomes дру́гом.\", \"en\": \"with a friend\"}], \"praise\": \"Хоро́шая пого́да is spot on: you made the adjective feminine to match пого́да, and в парк is exactly right for going somewhere.\", \"teach\": [{\"title\": \"С + instrumental means 'with'\", \"note\": \"When с means 'with', the noun after it changes into the instrumental case: masculine nouns usually add -ом, and feminine nouns ending in -а change it to -ой. For example: [[Я пью чай с ма́мой.|I'm drinking tea with mum.]]\", \"pattern\": \"s-instrumental\"}]}",
+   "error": null
+  },
+  {
+   "id": "diary-10",
+   "seconds": 6.621507883071899,
+   "json": "{\"corrected\": \"Меня́ зову́т Э́мбер. Я люблю́ матема́тику и ко́фе.\", \"edits\": [], \"praise\": \"Perfect: you correctly changed математика to математику after люблю and left кофе unchanged, exactly as Russian requires.\", \"teach\": []}",
+   "error": null
+  }
+ ],
+ "lemmas": [
+  {
+   "id": "lemma-1",
+   "seconds": 0.18827502131462098,
+   "lemma": "лев",
+   "answer": "lion",
+   "error": null
+  },
+  {
+   "id": "lemma-4",
+   "seconds": 0.18827502131462098,
+   "lemma": "пробежать",
+   "answer": "run across",
+   "error": null
+  },
+  {
+   "id": "lemma-7",
+   "seconds": 0.18827502131462098,
+   "lemma": "тело",
+   "answer": "body",
+   "error": null
+  },
+  {
+   "id": "lemma-10",
+   "seconds": 0.18827502131462098,
+   "lemma": "и",
+   "answer": "and",
+   "error": null
+  },
+  {
+   "id": "lemma-13",
+   "seconds": 0.18827502131462098,
+   "lemma": "стать",
+   "answer": "become; begin",
+   "error": null
+  },
+  {
+   "id": "lemma-16",
+   "seconds": 0.18827502131462098,
+   "lemma": "пустить",
+   "answer": "let go",
+   "error": null
+  },
+  {
+   "id": "lemma-19",
+   "seconds": 0.18827502131462098,
+   "lemma": "если",
+   "answer": "if",
+   "error": null
+  },
+  {
+   "id": "lemma-22",
+   "seconds": 0.18827502131462098,
+   "lemma": "пустить",
+   "answer": "let go",
+   "error": null
+  },
+  {
+   "id": "lemma-25",
+   "seconds": 0.18827502131462098,
+   "lemma": "добро",
+   "answer": "good; goodness",
+   "error": null
+  },
+  {
+   "id": "lemma-28",
+   "seconds": 0.18827502131462098,
+   "lemma": "что",
+   "answer": "what; that",
+   "error": null
+  },
+  {
+   "id": "lemma-31",
+   "seconds": 0.18827502131462098,
+   "lemma": "потом",
+   "answer": "then; later",
+   "error": null
+  },
+  {
+   "id": "lemma-34",
+   "seconds": 0.18827502131462098,
+   "lemma": "лев",
+   "answer": "lion",
+   "error": null
+  },
+  {
+   "id": "lemma-37",
+   "seconds": 0.18827502131462098,
+   "lemma": "к",
+   "answer": "to; towards",
+   "error": null
+  },
+  {
+   "id": "lemma-40",
+   "seconds": 0.18827502131462098,
+   "lemma": "львиный",
+   "answer": "lion's",
+   "error": null
+  },
+  {
+   "id": "lemma-43",
+   "seconds": 0.18827502131462098,
+   "lemma": "перегрызть",
+   "answer": "gnaw through",
+   "error": null
+  },
+  {
+   "id": "lemma-46",
+   "seconds": 0.18827502131462098,
+   "lemma": "смеяться",
+   "answer": "laugh",
+   "error": null
+  },
+  {
+   "id": "lemma-49",
+   "seconds": 0.18827502131462098,
+   "lemma": "мочь",
+   "answer": "can; be able",
+   "error": null
+  },
+  {
+   "id": "lemma-52",
+   "seconds": 0.18827502131462098,
+   "lemma": "видеть",
+   "answer": "see",
+   "error": null
+  },
+  {
+   "id": "lemma-55",
+   "seconds": 0.18827502131462098,
+   "lemma": "мышь",
+   "answer": "mouse",
+   "error": null
+  },
+  {
+   "id": "lemma-58",
+   "seconds": 0.18827502131462098,
+   "lemma": "слива",
+   "answer": "plum",
+   "error": null
+  },
+  {
+   "id": "lemma-61",
+   "seconds": 0.18827502131462098,
+   "lemma": "дать",
+   "answer": "give",
+   "error": null
+  },
+  {
+   "id": "lemma-64",
+   "seconds": 0.18827502131462098,
+   "lemma": "обед",
+   "answer": "lunch; dinner",
+   "error": null
+  },
+  {
+   "id": "lemma-67",
+   "seconds": 0.18827502131462098,
+   "lemma": "на",
+   "answer": "on; onto",
+   "error": null
+  },
+  {
+   "id": "lemma-70",
+   "seconds": 0.18827502131462098,
+   "lemma": "никогда",
+   "answer": "never",
+   "error": null
+  },
+  {
+   "id": "lemma-73",
+   "seconds": 0.18827502131462098,
+   "lemma": "нюхать",
+   "answer": "sniff; smell",
+   "error": null
+  },
+  {
+   "id": "lemma-76",
+   "seconds": 0.18827502131462098,
+   "lemma": "хотеться",
+   "answer": "want; feel like",
+   "error": null
+  },
+  {
+   "id": "lemma-79",
+   "seconds": 0.18827502131462098,
+   "lemma": "мимо",
+   "answer": "past; by",
+   "error": null
+  },
+  {
+   "id": "lemma-82",
+   "seconds": 0.18827502131462098,
+   "lemma": "быть",
+   "answer": "be",
+   "error": null
+  },
+  {
+   "id": "lemma-85",
+   "seconds": 0.18827502131462098,
+   "lemma": "удержаться",
+   "answer": "restrain oneself",
+   "error": null
+  },
+  {
+   "id": "lemma-88",
+   "seconds": 0.18827502131462098,
+   "lemma": "слива",
+   "answer": "plum",
+   "error": null
+  },
+  {
+   "id": "lemma-91",
+   "seconds": 0.18827502131462098,
+   "lemma": "обед",
+   "answer": "lunch; dinner",
+   "error": null
+  },
+  {
+   "id": "lemma-94",
+   "seconds": 0.18827502131462098,
+   "lemma": "видеть",
+   "answer": "see",
+   "error": null
+  },
+  {
+   "id": "lemma-97",
+   "seconds": 0.18827502131462098,
+   "lemma": "отец",
+   "answer": "father",
+   "error": null
+  },
+  {
+   "id": "lemma-100",
+   "seconds": 0.18827502131462098,
+   "lemma": "слово",
+   "answer": "word",
+   "error": null
+  },
+  {
+   "id": "lemma-103",
+   "seconds": 0.18827502131462098,
+   "lemma": "напечатать",
+   "answer": "print",
+   "error": null
+  },
+  {
+   "id": "lemma-106",
+   "seconds": 0.18827502131462098,
+   "lemma": "через",
+   "answer": "through; across",
+   "error": null
+  },
+  {
+   "id": "lemma-109",
+   "seconds": 0.18827502131462098,
+   "lemma": "постройка",
+   "answer": "building; construction",
+   "error": null
+  },
+  {
+   "id": "lemma-112",
+   "seconds": 0.18827502131462098,
+   "lemma": "великий",
+   "answer": "great",
+   "error": null
+  },
+  {
+   "id": "lemma-115",
+   "seconds": 0.18827502131462098,
+   "lemma": "первый",
+   "answer": "first",
+   "error": null
+  },
+  {
+   "id": "lemma-118",
+   "seconds": 0.18827502131462098,
+   "lemma": "мировой",
+   "answer": "world; global",
+   "error": null
+  }
+ ]
+}
