@@ -54,6 +54,9 @@ struct BookView: View {
             if QA.has("-qa-cognates") { show("Cognates", MorphologyPages.addCognates(book)) }
             if QA.has("-qa-pocket") { show("Pocket", PocketPage.insert(book: book, voice: voice)) }  // Devices
             showTyping = QA.has("-qa-typing")
+            if QA.has("-qa-landscape"), let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {  // screenshots
+                scene.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeLeft))
+            }
         }
         .onChange(of: book.currentPage) { _, _ in
             // The goal (Goal/): its first page opens when readable; a brand-new course page that
@@ -135,6 +138,13 @@ struct BookView: View {
                 Button { writeMode = .goal } label: { Label("Toward my book", systemImage: "arrow.right.to.line") }
                     .disabled(book.currentGoal == nil)
                 Button { showLibrary = true } label: { Label("Library", systemImage: "books.vertical") }
+                ForEach(Shelves.serials) { serial in  // the next episode of the serial (Model/Shelves.swift)
+                    if let ep = book.nextEpisode(of: serial) {
+                        Button { book.open(Shelves.item(ep, in: serial)) } label: {
+                            Label(RussianText.unstressed("\(serial.title) · эпизо́д \(ep.number)"), systemImage: "sparkles")
+                        }
+                    }
+                }
                 Button { makeEarTraining() } label: { Label("Ear training", systemImage: "ear") }
                 Button { makeSoundPairs() } label: { Label("Sound pairs", systemImage: "ear.badge.waveform") }
                 Button { book.insertDiaryPage() } label: { Label("Write in my diary", systemImage: "pencil.line") }

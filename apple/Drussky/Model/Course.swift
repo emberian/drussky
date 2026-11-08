@@ -125,11 +125,22 @@ struct Exercise: Codable, Sendable, Hashable {
     /// family_guess: the new family member inside `text`, and the root it shares with known words.
     var word: String? = nil
     var root: String? = nil
+    /// Passage: how its phrases and notation are read, listed quietly under the text (a shelf
+    /// reading's `how_read` and `notation`, Model/Shelves.swift).
+    var frames: [Frame]? = nil
+
+    struct Frame: Codable, Sendable, Hashable {
+        var ru: String
+        var en: String
+        var note: String? = nil
+        /// The notation this reads out (∅, ⊂), when it is one.
+        var symbol: String? = nil
+    }
 
     enum CodingKeys: String, CodingKey {
         case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills, prompt
         case narration, words, span
-        case parts, alternatives, word, root
+        case parts, alternatives, word, root, frames
     }
 
     init(kind: ExerciseKind) { self.kind = kind }
@@ -158,6 +169,7 @@ struct Exercise: Codable, Sendable, Hashable {
         alternatives = try c.decodeIfPresent([String].self, forKey: .alternatives)
         word = try c.decodeIfPresent(String.self, forKey: .word)
         root = try c.decodeIfPresent(String.self, forKey: .root)
+        frames = try c.decodeIfPresent([Frame].self, forKey: .frames)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -189,6 +201,7 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(alternatives, forKey: .alternatives)
         try c.encodeIfPresent(word, forKey: .word)
         try c.encodeIfPresent(root, forKey: .root)
+        try c.encodeIfPresent(frames, forKey: .frames)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }

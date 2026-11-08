@@ -186,14 +186,36 @@ python3 apple/scripts/validate_library.py apple/Drussky/Resources/math.json
 python3 -m unittest discover -s apple/scripts -p 'test_validate_math.py'
 ```
 
-**Current reader integration:** `Model/Library.swift` uses synthesized `Codable` and
-successfully decodes the collection while ignoring the extra keys (verified with
-the actual model and `JSONDecoder`). However, `Library.load()` only discovers
-`library.json` and `PrivatePack/library.json`. Merely bundling `math.json` does not add
-a shelf, and ignored fields do not become visible teaching support. The integration
-owner must merge/discover the collection, add Optional decoding fields, and map the
-authored translation/glosses/questions/frames into the reading UI. Until then this is
-a compatible authored collection, not a claim that the shipped UI displays it.
+**In the app:** `Library.load()` merges the files named in `Library.shelfFiles` (`math`)
+behind `library.json`; each text remembers its `shelf` (the collection id) and
+`Library.Text` decodes the fields above as Optionals (`rung`, `after_page`, `en`, `glosses`,
+`questions`, `how_read`, `notation`). `Shelves.page(for:on:)` (Model/Shelves.swift) turns
+a reading into a page: a `passage` carrying `text`, `en`, `glosses` and `frames` (the
+`how_read` frames then the `notation` readings, each `{ru, en, note?, symbol?}` — an
+Optional field of `Exercise`, shown under the text as *How it is read*), then the three
+questions as `read_meaning` exercises whose `text` is the English prompt and `hint` the
+explanation. The page's `sourceID` is `reading:<id>`.
+
+# The serial — `Drussky/Resources/series.json`
+
+```json
+{ "version": 1, "series": [{ "id": "stantsiya", "title": "Ста́нция", "title_en": "The Station", "summary_en": "…",
+    "episodes": [{ "id": "stantsiya-01", "number": 1, "title": "Се́ктор Три", "title_en": "Sector Three",
+                   "after_page": "u3-p3", "text": "…", "en": "…", "glosses": { "сектор": "sector" },
+                   "questions": [{ "kind": "read_meaning", "text": "…", "options": ["…", "…", "…"], "answer": 0 }],
+                   "prompt": "What happens next …" }] }] }
+```
+
+Episodes are numbered from 1 and their `after_page`s are non-decreasing in course order.
+`text` and the question texts carry stress on every polysyllable without ё; episodes before
+the alphabet is complete use only letters met by `after_page`; every word of `text` not in the
+course lexicon by `after_page` is in `glosses` (lowercase, unstressed keys); `en`, options and
+glosses are English (Russian only inside a gloss's parenthesis). `questions` are three
+`read_meaning` exercises in the course's own format. `scripts/validate_series.py` checks all
+of this and prints per-episode coverage. In the app (`Serial.load()`, `Shelves.page(for:in:)`)
+an episode is a page — `passage` (text, en, glosses), the three questions, a `diary` with the
+prompt — with `sourceID` `episode:<id>`; a page's Optional `offers` lists the shelf items its
+footer offered when it was composed.
 
 # Sound pairs — `Drussky/Resources/pairs.json`
 

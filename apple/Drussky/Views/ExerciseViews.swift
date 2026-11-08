@@ -703,9 +703,17 @@ struct ReadMeaningExercise: View {
 
     var body: some View {
         let ex = slot.exercise
+        // A Russian line asks for its meaning; an English question (a shelf reading's) asks about the text just read.
+        let question = RussianText.letters(in: ex.text ?? "").isEmpty
         VStack(alignment: .leading, spacing: 12) {
-            Instruction(text: "What does it mean?")
-            RussianLine(text: ex.text ?? "", size: 34)
+            if question {
+                Instruction(text: "From the text")
+                Text(Theme.stressed(ex.text ?? "", show: slot.book.settings.showStress)).scaledFont(20, weight: .medium).foregroundStyle(Theme.text)
+                    .fixedSize(horizontal: false, vertical: true).frame(maxWidth: 640, alignment: .leading)
+            } else {
+                Instruction(text: "What does it mean?")
+                RussianLine(text: ex.text ?? "", size: 34)
+            }
             ChoiceGrid(options: ex.options ?? [], chosen: slot.result.chosen, correct: ex.answerIndex,
                        russian: false, showStress: true, locked: slot.result.status.isComplete) { i in
                 let right = i == ex.answerIndex
@@ -717,9 +725,15 @@ struct ReadMeaningExercise: View {
             }
             if slot.result.status == .missed, let answer = ex.answerIndex.flatMap({ ex.options?[safe: $0] }) {
                 ChoiceCorrection(slot: slot) {
-                    HStack(spacing: 8) {
-                        Text("It means").scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
-                        Text(answer).scaledFont(17, weight: .semibold).foregroundStyle(Theme.good)
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack(spacing: 8) {
+                            Text(question ? "The text says" : "It means").scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
+                            Text(answer).scaledFont(17, weight: .semibold).foregroundStyle(Theme.good)
+                        }
+                        if question, let why = ex.hint {
+                            Text(Theme.stressed(why, show: slot.book.settings.showStress)).scaledFont(14).italic().foregroundStyle(Theme.muted)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
                 }
             }
@@ -858,15 +872,19 @@ struct PassageExercise: View {
               FlowRow(spacing: 8) {
                 ForEach(Array(tokens.enumerated()), id: \.offset) { _, token in
                     let word = Self.bare(token)
-                    Button { select(word) } label: {
-                        Text(Theme.stressed(token, show: book.settings.showStress))
-                            .russianFont(28)
-                            .foregroundStyle(Theme.text)
-                            .padding(.vertical, 2).padding(.horizontal, 3)
-                            .background(RoundedRectangle(cornerRadius: 6)
+                    let shown = Text(Theme.stressed(token, show: book.settings.showStress))
+                        .russianFont(28)
+                        .foregroundStyle(Theme.text)
+                        .padding(.vertical, 2).padding(.horizontal, 3)
+                    if word.isEmpty {
+                        shown  // a dash or a lone quotation mark: nothing to look up
+                    } else {
+                        Button { select(word) } label: {
+                            shown.background(RoundedRectangle(cornerRadius: 6)
                                 .fill(selected == word ? Theme.accent.opacity(0.15) : .clear))
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
               }
               }
@@ -875,6 +893,7 @@ struct PassageExercise: View {
             .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
             .overlay { ReadingPassOverlay(pass: pass, text: text) }
             ReadingPassBar(pass: pass, text: text)
+            if let frames = slot.exercise.frames, !frames.isEmpty { PassageFrames(frames: frames) }
             }
             if let selected {
                 HStack(spacing: 12) {
@@ -910,14 +929,49 @@ struct PassageExercise: View {
         voice.play(word)
     }
 
+    /// The page's own gloss first, then the lexicon, then a phrase of the lexicon the word is taught
+    /// in, then (for notation) how the page says it is read.
     private func gloss(for word: String) -> String? {
         let key = RussianText.key(word)
         if let g = slot.exercise.glosses?.first(where: { RussianText.key($0.key) == key })?.value { return g }
-        return book.word(word)?.en
+        if let w = book.word(word)?.en { return w }
+        if let p = book.phraseGloss(for: word) { return p }
+        if let f = slot.exercise.frames?.first(where: { $0.symbol == word }) { return "\(f.ru) — \(f.en)" }
+        return nil
     }
 
+    /// The token without the punctuation around it: «Что», э́то?», „так“, ’вот’ and (A) all read clean.
     static func bare(_ token: String) -> String {
-        let punct = Set(".,?!—–:;…«»\"()")
-        return String(token.drop(while: { punct.contains($0) }).reversed().drop(while: { punct.contains($0) }).reversed())
+        token.trimmingCharacters(in: .punctuationCharacters)
+    }
+}
+
+/// How a passage's phrases and notation are read: a quiet list under the text, each line
+/// hearable (the synthetic voice until a clip is recorded), with the grammar behind it.
+struct PassageFrames: View {
+    @Environment(Book.self) private var book
+    let frames: [Exercise.Frame]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("HOW IT IS READ").font(Theme.label(11)).tracking(1.4).foregroundStyle(Theme.muted)
+            ForEach(Array(frames.enumerated()), id: \.offset) { _, f in
+                HStack(alignment: .firstTextBaseline, spacing: 10) {
+                    if let s = f.symbol {
+                        Text(s).font(.system(size: 20, design: .serif)).foregroundStyle(Theme.text).frame(minWidth: 26, alignment: .leading)
+                    }
+                    VStack(alignment: .leading, spacing: 2) {
+                        HStack(spacing: 8) {
+                            Text(Theme.stressed(f.ru, show: book.settings.showStress)).russianFont(21).foregroundStyle(Theme.text)
+                            HearButton(text: f.ru, size: 26)
+                        }
+                        Text(f.en).scaledFont(14).foregroundStyle(Theme.muted)
+                        if let n = f.note { Text(n).scaledFont(13).italic().foregroundStyle(Theme.muted).fixedSize(horizontal: false, vertical: true) }
+                    }
+                }
+            }
+        }
+        .padding(.leading, 6)
+        .frame(maxWidth: 640, alignment: .leading)
     }
 }

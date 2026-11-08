@@ -14,6 +14,7 @@ struct ContentsView: View {
                     stats
                     DeskNotes()
                     GoalSection()
+                    ShelvesSection()  // «Ста́нция», «Матема́тика» (Views/ShelfViews.swift)
                     KnowledgeSection()
                     MyRussianSection()
                     alphabet

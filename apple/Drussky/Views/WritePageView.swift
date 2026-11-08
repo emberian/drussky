@@ -191,18 +191,35 @@ struct LibrarySheet: View {
     @State private var library = Library.load()
     @State private var topic = "all"
 
-    private var topics: [String] { ["all"] + Array(Set(library.texts.map(\.topic))).sorted() }
+    private var topics: [String] { ["all"] + Array(Set(library.loose.map(\.topic))).sorted() }
 
     var body: some View {
         NavigationStack {
             List {
+                // The shelves (Model/Shelves.swift): one entry each, their items inside.
+                Section {
+                    ForEach(Shelves.serials) { serial in
+                        NavigationLink {
+                            SerialView(serial: serial, onDone: { dismiss() })
+                        } label: {
+                            shelfRow(serial.title, serial.title_en, "\(serial.episodes.count) episodes · a serial, one episode per course page")
+                        }
+                    }
+                    ForEach(library.shelves ?? []) { shelf in
+                        NavigationLink {
+                            ShelfView(shelf: shelf, onDone: { dismiss() })
+                        } label: {
+                            shelfRow(shelf.title, shelf.title_en, "\(library.texts(onShelf: shelf.id).count) readings in rungs")
+                        }
+                    }
+                }
                 Picker("Topic", selection: $topic) {
                     ForEach(topics, id: \.self) { Text($0 == "all" ? "Everything" : $0.capitalized).tag($0) }
                 }
                 .pickerStyle(.segmented)
                 .listRowBackground(Color.clear)
                 ForEach(Library.levels, id: \.self) { level in
-                    let texts = library.texts.filter { $0.level == level && (topic == "all" || $0.topic == topic) }
+                    let texts = library.loose.filter { $0.level == level && (topic == "all" || $0.topic == topic) }
                     if !texts.isEmpty {
                         Section(level) {
                             ForEach(texts) { t in
@@ -234,6 +251,16 @@ struct LibrarySheet: View {
             }
             .navigationTitle("Library")
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
+        }
+    }
+
+    private func shelfRow(_ title: String, _ titleEn: String?, _ line: String) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            HStack(spacing: 8) {
+                Text(Theme.stressed(title, show: book.settings.showStress)).font(Theme.russian(20, weight: .medium))
+                if let titleEn { Text(titleEn).font(.system(size: 14)).foregroundStyle(.secondary) }
+            }
+            Text(line).font(.system(size: 14)).foregroundStyle(.secondary)
         }
     }
 }

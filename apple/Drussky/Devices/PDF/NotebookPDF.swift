@@ -244,7 +244,7 @@ enum NotebookPDF {
             let a = text("\(page.completedCount) of \(page.exercises.count) done", font: rounded(9), color: .muted)
             return Block(kind: .footer, height: 16, ink: nil) { rect in a.draw(at: CGPoint(x: x, y: rect.minY)) }
         }
-        let grade = text("\(GradeStamp.grade(for: page))", font: cursive(54), color: .redPen)
+        let grade = text(GradeStamp.mark(for: page), font: cursive(54), color: .redPen)
         let praise = text(GradeStamp.praise(for: page), font: cursive(22), color: .redPen)
         var parts = ["\(page.exercises.count) exercises"]
         let firstTry = page.results.filter(\.isRightFirstTime).count

@@ -18,6 +18,9 @@ struct BookPage: Codable, Identifiable, Sendable {
     var created: Date
     var finished: Date?
     var notes: [PageNote]? = nil
+    /// Shelf items (Model/Shelves.swift source ids) this page's footer offers: what the course had
+    /// reached when the page was composed. Written once, here; the learner opens them or not.
+    var offers: [String]? = nil
 
     var isFinished: Bool { finished != nil }
     var firstOpenIndex: Int? { results.firstIndex { !$0.status.isComplete } }
@@ -132,6 +135,8 @@ final class Book {
     /// The pre-format-2 memories, written back unchanged (never used for scheduling).
     private var legacyMemories: [Memory] = []
     @ObservationIgnored var candidateCache: [ReviewCandidate]?
+    /// Words taught only inside multi-word lexicon entries → gloss (`phraseGloss`), built on first use.
+    @ObservationIgnored private var phraseIndex: [String: String]?
     /// Index into course.pageSequence of the next authored page to instantiate.
     var courseCursor: Int = 0
     var currentPage: Int = 0 { didSet { scheduleSave() } }
@@ -339,10 +344,11 @@ final class Book {
         // A random suffix keeps ink/voice file names unique even if the notebook is ever restarted.
         let id = String(format: "p%04d-", number) + UUID().uuidString.prefix(6).lowercased()
         let exercises = exercises + probeExercises(pageID: id, among: exercises)  // retention probes due now
+        let offers = shelfOffers()  // an episode or reading the course has reached (Model/Shelves.swift)
         pages.append(BookPage(id: id, number: number, sourceID: sourceID,
                               unitTitle: unitTitle, title: title, intro: intro, isReview: isReview,
                               exercises: exercises, results: exercises.map { _ in ExerciseResult() },
-                              created: now(), finished: nil))
+                              created: now(), finished: nil, offers: offers.isEmpty ? nil : offers))
         reindexPages()
         scheduleSave()
     }
@@ -472,6 +478,26 @@ final class Book {
         if let w = course.word(ru) { return w }
         let key = RussianText.key(ru)
         return customWords.first { RussianText.key($0.ru) == key }
+    }
+
+    /// A word that is only taught inside a multi-word lexicon entry («ко́смосе» in «в ко́смосе»,
+    /// «ду́маю» in «я ду́маю»): the entry's meaning, with the entry named. Tap-to-gloss falls back
+    /// to this when the word is no entry of its own; one-letter words are not looked up this way.
+    func phraseGloss(for ru: String) -> String? {
+        let key = RussianText.key(ru)
+        guard key.count > 1 else { return nil }
+        if phraseIndex == nil {
+            var index: [String: String] = [:]
+            for w in course.lexicon {
+                let parts = RussianText.key(w.ru).split(separator: " ").map(String.init)
+                guard parts.count > 1 else { continue }
+                for part in parts where part.count > 1 && course.word(part) == nil && index[part] == nil {
+                    index[part] = "\(w.en) (in «\(w.ru)»)"
+                }
+            }
+            phraseIndex = index
+        }
+        return phraseIndex?[key]
     }
 
     func isKept(_ ru: String) -> Bool { word(ru) != nil && targets["word:\(RussianText.key(ru))"] != nil }

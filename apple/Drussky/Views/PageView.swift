@@ -130,6 +130,7 @@ struct PageView: View {
                 }
                 .transition(.scale(scale: 0.8).combined(with: .opacity))
             }
+            ShelfOfferCard(pageIndex: pageIndex)  // an episode or reading the course has reached (Views/ShelfViews.swift)
             Button {
                 withAnimation { _ = book.turnForward() }
             } label: {

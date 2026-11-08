@@ -71,6 +71,14 @@ enum QA {
             book.insertWrittenPage(title: page.title, intro: page.intro, unitTitle: "Library · \(text.level) · read aloud",
                                    exercises: page.exercises, newWords: [])
         }
+        // -qa-series N / -qa-math N: episode N of the serial / rung N of the mathematics shelf, as a page (Model/Shelves.swift).
+        if let n = value("-qa-series"), let serial = Shelves.serials.first, let ep = serial.episodes.first(where: { $0.number == n }) {
+            book.open(Shelves.item(ep, in: serial))
+        }
+        if let n = value("-qa-math"), let shelf = Shelves.library.shelves?.first,
+           let text = Shelves.library.texts(onShelf: shelf.id).first(where: { $0.rung == n }) {
+            book.open(Shelves.item(text, on: shelf))
+        }
         book.saveNow()
     }
 
