@@ -1,6 +1,7 @@
 import XCTest
 
 /// Margin notes and a reading page made from the learner's own text, through the real UI.
+@MainActor
 final class NewPagesUITests: XCTestCase {
     func testMarginNotesAndOwnTextPage() throws {
         let app = XCUIApplication()

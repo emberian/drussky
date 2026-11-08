@@ -410,8 +410,10 @@ struct RussianDomain: KnowledgeDomain {
         let wrongish = a.after.status != .correct && (a.after.status != .done || ex.kind == .readAloud)
         let confusions = fresh && wrongish ? response.map { confusions(ex, response: $0) } ?? [] : []
         let item = "\(a.page.id)#\(a.index)"
+        // Outcomes have one id per round, so a reconstructed one and a live one can't both count.
+        let id = finished ? KnowledgeTracker.outcomeID(item: item, round: a.after.roundNumber) : UUID().uuidString
         return LearningEvent(
-            id: a.backfill ? "bf:\(item)" : UUID().uuidString, t: a.at, type: finished ? .outcome : .attempt,
+            id: id, t: a.at, type: finished ? .outcome : .attempt,
             source: a.backfill ? "backfill" : "live", item: item, activity: ex.kind.rawValue, modality: modality,
             components: components(for: ex), grade: finished ? Self.grade(ex, a.after) : nil,
             correct: finished ? nil : false, attempt: a.after.attempts, expected: ex.kind == .readMeaning

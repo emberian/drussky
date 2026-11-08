@@ -1,6 +1,7 @@
 import XCTest
 
 /// Screens a person sees but the unit tests can't: landscape, the tutor sheet with a live answer.
+@MainActor
 final class ScreensUITests: XCTestCase {
     func testLandscapeAndTutor() throws {
         let app = XCUIApplication()

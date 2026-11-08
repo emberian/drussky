@@ -42,7 +42,7 @@ struct PageView: View {
                                 .id("end")
                         }
                         .frame(width: contentWidth)
-                        .overlay { MarginLayer(page: page, enabled: book.marginMode, fingerDrawing: book.settings.fingerDrawing) }
+                        .overlay { MarginLayer(book: book, page: page, enabled: book.marginMode, fingerDrawing: book.settings.fingerDrawing) }
                         .padding(.top, topInset)
                         .padding(.bottom, 120)
                         .frame(maxWidth: .infinity)
@@ -57,7 +57,7 @@ struct PageView: View {
                         }
                     }
                     .onChange(of: book.advanceSignal) { _, _ in
-                        guard book.advancePage == pageIndex else { return }
+                        guard book.advancePageID == book.pages[pageIndex].id else { return }
                         let new = book.pages[pageIndex].firstOpenIndex
                         Task {
                             try? await Task.sleep(for: .milliseconds(450))
@@ -230,11 +230,11 @@ struct MarginLayer: View {
     let fingerDrawing: Bool
     @StateObject private var controller: PadController
 
-    init(page: BookPage, enabled: Bool, fingerDrawing: Bool) {
+    init(book: Book, page: BookPage, enabled: Bool, fingerDrawing: Bool) {
         self.page = page
         self.enabled = enabled
         self.fingerDrawing = fingerDrawing
-        _controller = StateObject(wrappedValue: PadController(fileURL: BookStore.standard().root.appendingPathComponent("ink/\(page.id)-margin.drawing")))
+        _controller = StateObject(wrappedValue: PadController(fileURL: book.marginURL(page: page), writer: book.store.ink))
     }
 
     var body: some View {

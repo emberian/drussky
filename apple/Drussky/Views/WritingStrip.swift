@@ -35,17 +35,42 @@ struct StripMetrics {
 }
 
 /// Owns a strip's PencilKit canvas so SwiftUI controls (Undo, Clear, Check) can reach it.
+/// Every change gets a new revision and goes to the notebook's one `InkWriter`, which writes
+/// in order and never lets an older drawing replace a newer one.
 @MainActor
 final class PadController: ObservableObject {
     @Published private(set) var isEmpty = true
     @Published private(set) var strokeCount = 0
+    /// The revision of the ink now on the strip; a check compares it before trusting a reading.
+    private(set) var revision = 0
     fileprivate weak var canvas: PKCanvasView?
     let fileURL: URL
+    let writer: InkWriter
     var onChange: ((PKDrawing) -> Void)?
-    private var saveTask: Task<Void, Never>?
 
-    init(fileURL: URL) {
+    init(fileURL: URL, writer: InkWriter) {
         self.fileURL = fileURL
+        self.writer = writer
+        Self.live.append(Weak(pad: self))
+    }
+
+    private struct Weak { weak var pad: PadController? }
+    private static var live: [Weak] = []
+
+    /// Hands every open strip's current ink to its writer and waits until each has it, so a
+    /// following `flush()` writes everything (background, export, restore).
+    static func submitAll() async {
+        live.removeAll { $0.pad == nil }
+        for pad in live.compactMap(\.pad) where pad.revision > 0 { await pad.submitCurrent(fresh: false) }
+    }
+
+    /// Submits what is on the canvas, and waits for the writer to take it. Under its own
+    /// revision (it is the ink of that change) unless `fresh`, an explicit new version.
+    func submitCurrent(fresh: Bool) async {
+        guard let canvas else { return }
+        if fresh || revision == 0 { revision = InkRevision.next() }
+        let d = canvas.drawing
+        await writer.submit(fileURL, revision: revision, data: d.strokes.isEmpty ? nil : d.dataRepresentation())
     }
 
     var drawing: PKDrawing { canvas?.drawing ?? storedDrawing() }
@@ -55,33 +80,51 @@ final class PadController: ObservableObject {
         return d
     }
 
+    /// Empties the strip. Undo brings the ink back.
     func clear() {
-        canvas?.drawing = PKDrawing()
-        canvas?.undoManager?.removeAllActions()
-        changed(PKDrawing())
+        guard let canvas, !canvas.drawing.strokes.isEmpty else { return }
+        replace(with: PKDrawing(), undoable: true)
     }
 
     func undo() { canvas?.undoManager?.undo() }
 
     /// Replaces the ink (used by QA to inject synthetic writing).
     func setDrawing(_ drawing: PKDrawing) {
-        canvas?.drawing = drawing
+        replace(with: drawing, undoable: false)
+    }
+
+    private func replace(with drawing: PKDrawing, undoable: Bool) {
+        guard let canvas else { changed(drawing); return }
+        let old = canvas.drawing
+        if undoable, let undo = canvas.undoManager {
+            undo.registerUndo(withTarget: self) { pad in
+                MainActor.assumeIsolated { pad.replace(with: old, undoable: true) }
+            }
+        }
+        canvas.drawing = drawing
         changed(drawing)
+    }
+
+    /// Keeps the current ink as an earlier attempt at `destination` and starts a clean strip.
+    func archive(to destination: URL) async throws {
+        await submitCurrent(fresh: true)
+        try await writer.archive(fileURL, to: destination)
+        canvas?.drawing = PKDrawing()
+        canvas?.undoManager?.removeAllActions()
+        revision = InkRevision.next()
+        isEmpty = true
+        strokeCount = 0
+        await writer.submit(fileURL, revision: revision, data: nil)
     }
 
     fileprivate func changed(_ drawing: PKDrawing) {
         isEmpty = drawing.strokes.isEmpty
         strokeCount = drawing.strokes.count
+        revision = InkRevision.next()
         onChange?(drawing)
-        saveTask?.cancel()
-        let url = fileURL
-        let data = drawing.dataRepresentation()
-        let empty = drawing.strokes.isEmpty
-        saveTask = Task.detached(priority: .utility) {
-            try? await Task.sleep(for: .milliseconds(250))
-            guard !Task.isCancelled else { return }
-            if empty { try? FileManager.default.removeItem(at: url) } else { try? data.write(to: url, options: .atomic) }
-        }
+        let url = fileURL, writer = self.writer, revision = self.revision
+        let data = drawing.strokes.isEmpty ? nil : drawing.dataRepresentation()
+        Task { await writer.submit(url, revision: revision, data: data) }
     }
 
     fileprivate func attach(_ canvas: PKCanvasView) {

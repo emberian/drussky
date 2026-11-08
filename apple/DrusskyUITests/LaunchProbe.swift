@@ -1,6 +1,7 @@
 import XCTest
 
 /// Real touch input on the PencilKit paper: strokes → ink → exercise state → persistence.
+@MainActor
 final class WritingUITests: XCTestCase {
     func testTouchWritingCompletesAndPersists() throws {
         let app = XCUIApplication()

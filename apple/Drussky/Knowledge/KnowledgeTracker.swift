@@ -15,6 +15,10 @@ final class KnowledgeTracker {
     private let pairs: SoundPairs
     private var lastActivity: [String: Date] = [:]
     private var keptCount: Int
+    /// Events the log could not take yet (disk full, file busy); retried before the next append.
+    private var unwritten: [LearningEvent] = []
+    /// Set while some evidence is only in memory; cleared once it reaches events.jsonl.
+    private(set) var logProblem: String?
     var now: () -> Date
 
     /// The memory groups drawn as growth series.
@@ -64,20 +68,46 @@ final class KnowledgeTracker {
     }
 
     private func record(_ events: [LearningEvent]) {
-        log.append(events)
+        append(events)
         for e in events { model.apply(e) }
     }
 
-    /// Reconstructs evidence for every finished result that has none yet (notebooks from before
-    /// the log existed, or results written while the log could not be). Idempotent: an item that
-    /// has any event already is skipped, and backfilled ids are deterministic.
+    private func append(_ events: [LearningEvent]) {
+        let batch = unwritten + events
+        if log.append(batch) {
+            unwritten = []
+            logProblem = nil
+        } else {
+            unwritten = batch
+            logProblem = "\(batch.count) answer(s) not yet written to events.jsonl"
+        }
+    }
+
+    /// Tries again to write evidence the log refused earlier.
+    func retryPendingEvents() {
+        guard !unwritten.isEmpty else { return }
+        append([])
+    }
+
+    /// The id of the outcome a completed result's round yields, live or reconstructed.
+    nonisolated static func outcomeID(item: String, round: Int) -> String { "out:\(item)#\(round)" }
+
+    /// Reconstructs the outcome of every finished result whose round has none in the log:
+    /// notebooks from before the log existed, a completion whose append failed after earlier
+    /// attempts were logged, or a crash between saving the result and logging it. Attempts never
+    /// stand in for an outcome. Idempotent: reconstructed ids are the live ones.
     @discardableResult
     func backfill(pages: [BookPage]) -> Int {
         let logged = model.items
         let ids = Set(model.events.map(\.id))
+        var outcomes: [String: Int] = [:]
+        for e in model.events where e.type == .outcome { outcomes[e.item, default: 0] += 1 }
         var events: [LearningEvent] = []
         for page in pages {
-            for (i, r) in page.results.enumerated() where r.status.isComplete && !logged.contains("\(page.id)#\(i)") {
+            for (i, r) in page.results.enumerated() where r.status.isComplete {
+                let item = "\(page.id)#\(i)"
+                // Older logs used random ids: count their outcomes instead (one per finished round).
+                if ids.contains(Self.outcomeID(item: item, round: r.roundNumber)) || outcomes[item, default: 0] > r.roundNumber { continue }
                 let at = r.updated ?? page.finished ?? page.created
                 var before = ExerciseResult()
                 before.attempts = 0
@@ -96,7 +126,7 @@ final class KnowledgeTracker {
             }
         }
         guard !events.isEmpty else { return 0 }
-        log.append(events)
+        append(events)
         model = KnowledgeModel(events: model.events + events)
         return events.count
     }

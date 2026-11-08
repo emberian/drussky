@@ -37,6 +37,26 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var updated: Date? = nil
     /// Set once the result has fed the memory model, so re-doing an exercise can't count twice.
     var learned: Bool? = nil
+    /// How many times the exercise has been reopened ("Write it again"); each round is its own attempt.
+    var round: Int? = nil
+    /// The answer was shown at some point, in this round or an earlier one. Survives reopening.
+    var assisted: Bool? = nil
+    /// Checks the recognizer could not confirm, however they were triggered.
+    var failedChecks: Int? = nil
+    /// Earlier recordings (file names in voice/), oldest first; `recording` is the latest.
+    var takes: [String]? = nil
+    /// Earlier writings kept when the exercise was reopened (ink/<page>-<i>~<n>.drawing, n = 1…).
+    var inkAttempts: Int? = nil
+
+    var roundNumber: Int { round ?? 0 }
+}
+
+/// A stable address for one exercise: page ids never change, and a page's exercises are frozen,
+/// so this survives pages being inserted while async work (recognition, a check) is pending.
+struct ExerciseRef: Hashable, Sendable {
+    var pageID: String
+    var index: Int
+    var item: String { "\(pageID)#\(index)" }
 }
 
 /// Spaced-retrieval memory for one item ("letter:Ж", "word:кот").
@@ -73,30 +93,57 @@ final class Book {
     /// While on, the Pencil writes anywhere on the page (margin notes) instead of in exercises.
     var marginMode = false
     private(set) var advanceSignal = 0
-    private(set) var advancePage = 0
-    func requestAdvance(page: Int) { advancePage = page; advanceSignal += 1 }
+    private(set) var advancePageID: String?
+    func requestAdvance(page id: String) { advancePageID = id; advanceSignal += 1 }
 
-    private let store: BookStore
+    let store: BookStore
     private var saveTask: Task<Void, Never>?
     var now: () -> Date = Date.init
     /// Knowledge components, evidence log (events.jsonl) and per-modality memory (Knowledge/).
     let knowledge: KnowledgeTracker
+    /// Set when book.json exists but couldn't be opened: this Book then never writes it.
+    let problem: NotebookProblem?
+    /// What loading had to repair (the original was copied aside first).
+    let repairs: [String]
+    /// The last failure writing the notebook or its ink; shown until a later write succeeds.
+    private(set) var persistenceError: String?
+    private var closed = false
+    private var pageIndexByID: [String: Int] = [:]
+
+    /// Opens the notebook in `store`, or reports why it can't be opened without touching it.
+    static func open(course: Course, store: BookStore) -> Result<Book, NotebookProblem> {
+        let book = Book(course: course, store: store)
+        if let problem = book.problem { return .failure(problem) }
+        return .success(book)
+    }
 
     init(course: Course, store: BookStore) {
         self.course = course
         self.store = store
-        let saved = store.loadState()
+        var saved: BookState?
+        switch store.load() {
+        case .missing: problem = nil; repairs = []
+        case .loaded(let state, let fixed): saved = state; problem = nil; repairs = fixed
+        case .unavailable(let p): problem = p; repairs = []
+        }
         knowledge = KnowledgeTracker(course: course, root: store.root, customWords: saved?.customWords ?? [], now: Date.init)
         if let saved {
             pages = saved.pages
-            memories = Dictionary(uniqueKeysWithValues: saved.memories.map { ($0.key, $0) })
+            memories = Dictionary(saved.memories.map { ($0.key, $0) }, uniquingKeysWith: { a, _ in a })
             courseCursor = saved.courseCursor
             currentPage = min(saved.currentPage, max(0, saved.pages.count - 1))
             settings = saved.settings
             customWords = saved.customWords ?? []
             soundStats = saved.soundStats ?? [:]
         }
+        reindexPages()
         knowledge.now = { [unowned self] in self.now() }
+        let writerErrors: @Sendable (String) -> Void = { [weak self] message in
+            Task { @MainActor in self?.persistenceError = message }
+        }
+        let ink = store.ink
+        Task { await ink.setFailureHandler(writerErrors) }
+        guard problem == nil else { return }
         knowledge.backfill(pages: pages)
         if pages.isEmpty { _ = appendNextPage() }
     }
@@ -104,6 +151,11 @@ final class Book {
     // MARK: Pages
 
     var page: BookPage? { pages.indices.contains(currentPage) ? pages[currentPage] : nil }
+    func index(ofPage id: String) -> Int? { pageIndexByID[id] }
+    func page(id: String) -> BookPage? { pageIndexByID[id].map { pages[$0] } }
+    private func reindexPages() {
+        pageIndexByID = Dictionary(pages.enumerated().map { ($1.id, $0) }, uniquingKeysWith: { a, _ in a })
+    }
     /// The next authored page the learner hasn't had, in course order. Tracking pages by id
     /// (not by position) means a course revision that inserts or reorders pages never makes
     /// the learner skip or repeat one.
@@ -210,6 +262,7 @@ final class Book {
                               unitTitle: unitTitle, title: title, intro: intro, isReview: isReview,
                               exercises: exercises, results: exercises.map { _ in ExerciseResult() },
                               created: now(), finished: nil))
+        reindexPages()
         scheduleSave()
     }
 
@@ -225,6 +278,7 @@ final class Book {
                               isReview: false, exercises: exercises, results: exercises.map { _ in ExerciseResult() },
                               created: now(), finished: nil), at: at)
         for i in pages.indices { pages[i].number = i + 1 }
+        reindexPages()
         currentPage = at
         knowledge.refresh(customWords: customWords)
         scheduleSave()
@@ -233,27 +287,53 @@ final class Book {
     // MARK: Results
 
     func record(page pageIndex: Int, exercise index: Int, _ update: (inout ExerciseResult) -> Void) {
-        guard pages.indices.contains(pageIndex), pages[pageIndex].results.indices.contains(index) else { return }
-        let before = pages[pageIndex].results[index]
-        update(&pages[pageIndex].results[index])
-        pages[pageIndex].results[index].updated = now()
-        let after = pages[pageIndex].results[index]
-        knowledge.observe(page: pages[pageIndex], index: index, before: before, after: after)
-        if !before.status.isComplete && after.status.isComplete && after.learned != true {
-            learn(from: pages[pageIndex].exercises[index], result: after.status)
-            noteSoundPair(pages[pageIndex].exercises[index], status: after.status)
-            pages[pageIndex].results[index].learned = true
-        }
-        if !after.status.isComplete { pages[pageIndex].finished = nil }
-        if pages[pageIndex].finished == nil && pages[pageIndex].results.allSatisfy({ $0.status.isComplete }) {
-            pages[pageIndex].finished = now()
-        }
-        scheduleSave()
+        guard pages.indices.contains(pageIndex) else { return }
+        record(ExerciseRef(pageID: pages[pageIndex].id, index: index), update)
     }
 
-    /// Re-opens a finished exercise so it can be attempted again (ink is kept by the view).
+    /// The one way a result changes. The closure edits a copy, never storage inside `pages`, so
+    /// it may read anything on the book (an inout borrow of `pages` here was an exclusivity trap).
+    /// A result that finishes is saved before its outcome is logged: if the app dies in between,
+    /// the next launch finds the saved result and logs the missing outcome (never the reverse).
+    func record(_ ref: ExerciseRef, _ update: (inout ExerciseResult) -> Void) {
+        guard let p = pageIndexByID[ref.pageID], pages[p].results.indices.contains(ref.index) else { return }
+        let before = pages[p].results[ref.index]
+        var after = before
+        update(&after)
+        after.updated = now()
+        let finishing = !before.status.isComplete && after.status.isComplete
+        if finishing && after.learned != true {
+            let exercise = pages[p].exercises[ref.index]
+            learn(from: exercise, result: after.status)
+            noteSoundPair(exercise, status: after.status)
+            after.learned = true
+        }
+        var page = pages[p]
+        page.results[ref.index] = after
+        if !after.status.isComplete { page.finished = nil }
+        if page.finished == nil && page.results.allSatisfy({ $0.status.isComplete }) { page.finished = now() }
+        pages[p] = page
+        if finishing { saveNow() } else { scheduleSave() }
+        knowledge.observe(page: page, index: ref.index, before: before, after: after)
+    }
+
+    func result(_ ref: ExerciseRef) -> ExerciseResult? {
+        guard let p = pageIndexByID[ref.pageID] else { return nil }
+        return pages[p].results[safe: ref.index]
+    }
+
+    /// Re-opens a finished exercise as a new round. Its ink so far is kept as an earlier attempt
+    /// (the view archives it), and having been shown the answer stays on record.
     func reopen(page pageIndex: Int, exercise index: Int) {
-        record(page: pageIndex, exercise: index) { r in
+        guard pages.indices.contains(pageIndex) else { return }
+        reopen(ExerciseRef(pageID: pages[pageIndex].id, index: index))
+    }
+
+    func reopen(_ ref: ExerciseRef, keptInk: Bool = false) {
+        record(ref) { r in
+            if r.revealed || r.status == .missed { r.assisted = true }
+            if keptInk { r.inkAttempts = (r.inkAttempts ?? 0) + 1 }
+            r.round = r.roundNumber + 1
             r.status = .open
             r.recognized = nil
             r.chosen = nil
@@ -321,7 +401,8 @@ final class Book {
     func reviewExercise(for memory: Memory, variant: Int) -> Exercise {
         let parts = memory.key.split(separator: ":", maxSplits: 1).map(String.init)
         var ex: Exercise
-        if parts.first == "letter", let letter = course.letter(parts[1]) {
+        let value = parts.count > 1 ? parts[1] : ""
+        if parts.first == "letter", let letter = course.letter(value) {
             // Dictate the letter only when its spoken form begins with it (а, ра); signs and
             // letters voiced inside a word (ы in "ты") are recalled by choosing what was heard.
             let sayable = RussianText.key(letter.say).hasPrefix(letter.lower)
@@ -449,7 +530,20 @@ final class Book {
     // MARK: Ink & recordings
 
     func inkURL(page: BookPage, exercise index: Int) -> URL { store.inkURL(pageID: page.id, index: index) }
-    func recordingURL(page: BookPage, exercise index: Int) -> URL { store.recordingURL(pageID: page.id, index: index) }
+    /// An earlier writing kept when the exercise was reopened (n = 1 is the first).
+    func inkAttemptURL(_ ref: ExerciseRef, attempt n: Int) -> URL {
+        store.root.appendingPathComponent("ink/\(ref.pageID)-\(ref.index)~\(n).drawing")
+    }
+    /// The latest recording: the file the result names (older notebooks used one fixed name).
+    func recordingURL(page: BookPage, exercise index: Int) -> URL {
+        if let file = page.results[safe: index]?.recording { return voiceURL(file: file) }
+        return store.recordingURL(pageID: page.id, index: index)
+    }
+    /// A fresh file for a new take; nothing is committed to the result until it succeeds.
+    func newTakeURL(_ ref: ExerciseRef) -> URL {
+        voiceURL(file: "\(ref.pageID)-\(ref.index)-\(UUID().uuidString.prefix(8).lowercased()).m4a")
+    }
+    func voiceURL(file: String) -> URL { store.root.appendingPathComponent("voice/\(file)") }
     func marginURL(page: BookPage) -> URL { store.root.appendingPathComponent("ink/\(page.id)-margin.drawing") }
 
     /// The learner's own handwriting of a letter: the ink from its `meet` exercise.
@@ -465,16 +559,29 @@ final class Book {
 
     // MARK: Persistence
 
-    /// Zips the notebook folder (state, ink, recordings) for sharing.
-    func exportArchive() -> URL? {
-        var output: URL?
-        var error: NSError?
-        NSFileCoordinator().coordinate(readingItemAt: store.root, options: .forUploading, error: &error) { zipped in
-            let dest = FileManager.default.temporaryDirectory.appendingPathComponent("Drussky notebook.zip")
-            try? FileManager.default.removeItem(at: dest)
-            if (try? FileManager.default.copyItem(at: zipped, to: dest)) != nil { output = dest }
-        }
-        return output
+    func report(_ message: String) { persistenceError = message }
+
+    /// Writes everything still pending: the notebook, ink, and any events the log couldn't take.
+    func flush() async {
+        saveNow()
+        await PadController.submitAll()
+        let failures = await store.ink.flush()
+        if let f = failures.first { persistenceError = f }
+        knowledge.retryPendingEvents()
+    }
+
+    /// Zips the notebook folder (state, ink, recordings, events) for sharing, after flushing.
+    func exportArchive() async -> URL? {
+        await flush()
+        return NotebookArchive.export(root: store.root)
+    }
+
+    /// Stops all writing (before the folder is replaced by a restore).
+    func close() async {
+        await flush()
+        await store.ink.close()
+        saveTask?.cancel()
+        closed = true
     }
 
     private func scheduleSave() {
@@ -487,9 +594,17 @@ final class Book {
     }
 
     func saveNow() {
-        store.saveState(.init(pages: pages, memories: Array(memories.values), courseCursor: courseCursor,
-                              currentPage: currentPage, settings: settings, customWords: customWords,
-                              soundStats: soundStats.isEmpty ? nil : soundStats))
+        // A notebook that exists but couldn't be opened is never written over.
+        guard problem == nil, !closed else { return }
+        saveTask?.cancel()
+        do {
+            try store.saveState(.init(pages: pages, memories: Array(memories.values), courseCursor: courseCursor,
+                                      currentPage: currentPage, settings: settings, customWords: customWords,
+                                      soundStats: soundStats.isEmpty ? nil : soundStats))
+            if persistenceError?.hasPrefix("notebook") == true { persistenceError = nil }
+        } catch {
+            persistenceError = "notebook: \((error as NSError).localizedDescription)"
+        }
     }
 
     #if DEBUG
@@ -501,7 +616,8 @@ final class Book {
 }
 
 struct BookState: Codable {
-    var version = 1
+    static let currentVersion = 1
+    var version = BookState.currentVersion
     var pages: [BookPage]
     var memories: [Memory]
     var courseCursor: Int
@@ -513,18 +629,24 @@ struct BookState: Codable {
     var soundStats: [String: ContrastStat]? = nil
 }
 
-/// Files under Application Support/Drussky: book.json, ink/, voice/.
+/// Files under Application Support/Drussky: book.json, ink/, voice/, events.jsonl.
 struct BookStore: Sendable {
     let root: URL
+    /// The single serialized writer for this notebook's ink.
+    let ink: InkWriter
 
     @MainActor
-    static func standard() -> BookStore {
+    static func standard() -> BookStore { BookStore(root: standardRoot) }
+
+    @MainActor
+    static var standardRoot: URL {
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-        return BookStore(root: base.appendingPathComponent(QA.active ? "Drussky-QA" : "Drussky", isDirectory: true))
+        return base.appendingPathComponent(QA.active ? "Drussky-QA" : "Drussky", isDirectory: true)
     }
 
-    init(root: URL) {
+    init(root: URL, ink: InkWriter = InkWriter()) {
         self.root = root
+        self.ink = ink
         for dir in ["ink", "voice"] {
             try? FileManager.default.createDirectory(at: root.appendingPathComponent(dir), withIntermediateDirectories: true)
         }
@@ -533,29 +655,4 @@ struct BookStore: Sendable {
     var stateURL: URL { root.appendingPathComponent("book.json") }
     func inkURL(pageID: String, index: Int) -> URL { root.appendingPathComponent("ink/\(pageID)-\(index).drawing") }
     func recordingURL(pageID: String, index: Int) -> URL { root.appendingPathComponent("voice/\(pageID)-\(index).m4a") }
-
-    /// nil means "no notebook yet". A notebook that exists but can't be decoded is moved aside
-    /// (never overwritten) so an update can never silently erase it.
-    func loadState() -> BookState? {
-        guard let data = try? Data(contentsOf: stateURL) else { return nil }
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        do {
-            return try decoder.decode(BookState.self, from: data)
-        } catch {
-            let stamp = ISO8601DateFormatter().string(from: Date()).replacingOccurrences(of: ":", with: "-")
-            let aside = root.appendingPathComponent("book-unreadable-\(stamp).json")
-            try? FileManager.default.moveItem(at: stateURL, to: aside)
-            try? "\(error)".write(to: aside.appendingPathExtension("error.txt"), atomically: true, encoding: .utf8)
-            return nil
-        }
-    }
-
-    func saveState(_ state: BookState) {
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
-        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        guard let data = try? encoder.encode(state) else { return }
-        try? data.write(to: stateURL, options: .atomic)
-    }
 }

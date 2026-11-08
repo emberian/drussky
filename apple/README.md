@@ -85,10 +85,11 @@ xcodegen generate
 # simulator
 xcodebuild -project Drussky.xcodeproj -scheme Drussky \
   -destination 'platform=iOS Simulator,name=Drussky iPad 13' -derivedDataPath .build/dd test
-# iPad (team 992772WV7K, automatic signing)
-xcodebuild -project Drussky.xcodeproj -scheme Drussky -configuration Release \
+# ember's iPad (team 992772WV7K, automatic signing). `Personal` is Release plus PrivatePack
+# (personal-study audio); plain Release and archives never contain PrivatePack.
+xcodebuild -project Drussky.xcodeproj -scheme Drussky -configuration Personal \
   -destination 'id=<device udid>' -derivedDataPath .build/device -allowProvisioningUpdates build
-xcrun devicectl device install app --device <device udid> .build/device/Build/Products/Release-iphoneos/Drussky.app
+xcrun devicectl device install app --device <device udid> .build/device/Build/Products/Personal-iphoneos/Drussky.app
 # Mac (native Mac Catalyst app, sandboxed with microphone + network)
 xcodebuild -project Drussky.xcodeproj -scheme Drussky -configuration Release \
   -destination 'platform=macOS,variant=Mac Catalyst' -derivedDataPath .build/mac -allowProvisioningUpdates build

@@ -90,7 +90,7 @@ struct SoundPairExercise: View {
             }
         }
         .onChange(of: book.advanceSignal) { _, _ in
-            if isActive, book.advancePage == slot.pageIndex, !done { play(ex.say ?? "", exactStress: exact, voice: ex.times) }
+            if isActive, slot.isAdvanceTarget, !done { play(ex.say ?? "", exactStress: exact, voice: ex.times) }
         }
     }
 

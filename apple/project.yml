@@ -4,6 +4,12 @@ options:
   deploymentTarget:
     iOS: "18.0"
   createIntermediateGroups: true
+configs:
+  Debug: debug
+  Release: release
+  # The learner's own device build: Release, plus PrivatePack (personal-study audio that must
+  # never ship in a distributed archive). Deploy with -configuration Personal.
+  Personal: release
 settings:
   base:
     DEVELOPMENT_TEAM: 992772WV7K
@@ -50,10 +56,6 @@ targets:
       - path: Drussky/Resources/Audio
         type: folder
         buildPhase: resources
-      - path: PrivatePack
-        type: folder
-        buildPhase: resources
-        optional: true
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: software.ember.drussky
@@ -73,6 +75,18 @@ targets:
         INFOPLIST_KEY_NSMicrophoneUsageDescription: "Drussky listens when you say Russian aloud, and keeps your recording on the page."
         INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "Drussky checks the Russian you say aloud."
         GENERATE_INFOPLIST_FILE: YES
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+    postBuildScripts:
+      - name: PrivatePack (Debug and Personal only)
+        basedOnDependencyAnalysis: false
+        script: |
+          dest="$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/PrivatePack"
+          rm -rf "$dest"
+          case "$CONFIGURATION" in
+            Debug|Personal)
+              if [ -d "$SRCROOT/PrivatePack" ]; then cp -R "$SRCROOT/PrivatePack" "$dest"; fi ;;
+            *) ;;
+          esac
   DrusskyTests:
     type: bundle.unit-test
     platform: iOS

@@ -158,6 +158,7 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var exportURL: URL?
     @State private var graphURL: URL?
+    @State private var restoreError: String?
     @State private var apiKey = Keychain.apiKey ?? ""
 
     var body: some View {
@@ -190,8 +191,10 @@ struct SettingsView: View {
                     } else {
                         Label("Preparing export…", systemImage: "hourglass").foregroundStyle(.secondary)
                     }
+                    RestoreButton(error: $restoreError)
+                    if let restoreError { Text(restoreError).font(.footnote).foregroundStyle(Theme.redPen) }
                 } footer: {
-                    Text("Your pages, handwriting and recordings, as one folder.")
+                    Text("Your pages, handwriting, recordings and answer log, as one zip. Restoring checks an export first and keeps the current notebook beside it.")
                 }
                 Section {
                     if let graphURL {
@@ -205,7 +208,7 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
-            .task { book.saveNow(); exportURL = book.exportArchive(); graphURL = book.knowledge.exportGraph() }
+            .task { exportURL = await book.exportArchive(); graphURL = book.knowledge.exportGraph() }
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         }
     }

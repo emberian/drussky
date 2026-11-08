@@ -23,6 +23,8 @@ enum QA {
     static func prepare(store: BookStore) {
         #if DEBUG
         if let key = ProcessInfo.processInfo.environment["DRUSSKY_TUTOR_KEY"], !key.isEmpty { Keychain.apiKey = key }
+        // -qa-corrupt: a notebook that exists but can't be decoded (the recovery screen).
+        if has("-qa-corrupt") { try? Data("{ \"version\": 1, \"pages\": [".utf8).write(to: store.stateURL) }
         #endif
         guard has("-qa-reset") else { return }
         try? FileManager.default.removeItem(at: store.root)

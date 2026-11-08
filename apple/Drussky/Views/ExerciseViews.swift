@@ -1,24 +1,39 @@
 import PencilKit
 import SwiftUI
 
-/// Everything an exercise view needs to read and record its own state.
+/// Everything an exercise view needs to read and record its own state. It holds the exercise's
+/// stable id, not a position, so work that finishes after an await (recognition, a check) lands
+/// on the exercise it began on even if pages were inserted meanwhile.
 @MainActor
 struct ExerciseSlot {
     let book: Book
-    let pageIndex: Int
-    let index: Int
+    let ref: ExerciseRef
 
-    var page: BookPage { book.pages[pageIndex] }
+    init(book: Book, pageIndex: Int, index: Int) {
+        self.book = book
+        ref = ExerciseRef(pageID: book.pages[pageIndex].id, index: index)
+    }
+
+    init(book: Book, ref: ExerciseRef) {
+        self.book = book
+        self.ref = ref
+    }
+
+    var index: Int { ref.index }
+    var pageIndex: Int { book.index(ofPage: ref.pageID) ?? 0 }
+    var page: BookPage { book.page(id: ref.pageID) ?? book.pages[pageIndex] }
     var exercise: Exercise { page.exercises[index] }
     var result: ExerciseResult { page.results[index] }
 
-    func record(_ update: (inout ExerciseResult) -> Void) { book.record(page: pageIndex, exercise: index, update) }
+    func record(_ update: (inout ExerciseResult) -> Void) { book.record(ref, update) }
     /// Records, then moves the page on if this finished the exercise (an explicit action).
     func finish(_ update: (inout ExerciseResult) -> Void) {
-        let was = result.status.isComplete
+        let was = book.result(ref)?.status.isComplete ?? true
         record(update)
-        if !was && result.status.isComplete { book.requestAdvance(page: pageIndex) }
+        if !was && book.result(ref)?.status.isComplete == true { book.requestAdvance(page: ref.pageID) }
     }
+    /// Whether an advance signal is for this exercise's page.
+    var isAdvanceTarget: Bool { book.advancePageID == ref.pageID }
     var inkURL: URL { book.inkURL(page: page, exercise: index) }
     var recordingURL: URL { book.recordingURL(page: page, exercise: index) }
 }
@@ -204,7 +219,7 @@ struct MeetExercise: View {
                                 coach: LetterCoach(letter: letter, demo: demo))
             }
             .onChange(of: book.advanceSignal) { _, _ in
-                if isActive && book.advancePage == slot.pageIndex { voice.play(letter.say) }
+                if isActive && slot.isAdvanceTarget { voice.play(letter.say) }
             }
         }
     }
@@ -262,6 +277,8 @@ struct WritingExercise: View {
 
     @StateObject private var pad: PadController
     @State private var checking = false
+    /// A check asked for while one was running (true if any of those asks was manual).
+    @State private var pendingCheck: Bool?
     @State private var lastReading: String?
     @State private var idleTask: Task<Void, Never>?
     @State private var width: CGFloat = 640
@@ -272,7 +289,7 @@ struct WritingExercise: View {
         self.isActive = isActive
         self.ghostOverride = ghostOverride
         self.instructionOverride = instructionOverride
-        _pad = StateObject(wrappedValue: PadController(fileURL: slot.inkURL))
+        _pad = StateObject(wrappedValue: PadController(fileURL: slot.inkURL, writer: slot.book.store.ink))
     }
 
     private var ex: Exercise { slot.exercise }
@@ -320,13 +337,17 @@ struct WritingExercise: View {
             }
             .overlay(alignment: .bottomTrailing) {
                 if result.status.isComplete {
-                    Button { pad.clear(); lastReading = nil; slot.book.reopen(page: slot.pageIndex, exercise: slot.index) } label: {
+                    Button { Task { await writeAgain() } } label: {
                         Label("Write it again", systemImage: "arrow.counterclockwise")
                             .font(Theme.label(12)).foregroundStyle(Theme.muted.opacity(0.8))
                     }
                     .buttonStyle(.plain)
                     .padding(.bottom, 2)
                 }
+            }
+            if (result.inkAttempts ?? 0) > 0 {
+                EarlierAttempts(urls: (1...(result.inkAttempts ?? 0)).map { slot.book.inkAttemptURL(slot.ref, attempt: $0) },
+                                height: stripHeight * 0.4)
             }
             if let coach {  // tucked into the strip's empty bottom margin, clear of "Write it again"
                 FormationHintLine(pad: pad, letter: coach.letter, lift: stripHeight * 0.08,
@@ -336,7 +357,7 @@ struct WritingExercise: View {
         }
         .onAppear { pad.onChange = { _ in scheduleIdleCheck() } }
         .onChange(of: book.advanceSignal) { _, _ in
-            if isActive, book.advancePage == slot.pageIndex, ex.kind == .dictation, let s = ex.spoken { voice.play(s) }
+            if isActive, slot.isAdvanceTarget, ex.kind == .dictation, let s = ex.spoken { voice.play(s) }
         }
     }
 
@@ -444,17 +465,28 @@ struct WritingExercise: View {
     }
 
     /// Reads the ink. Silent checks only ever confirm success; a manual check also reports misses.
+    /// A reading only counts for the ink it was made from: if the strip changed while Vision was
+    /// reading (more writing, Clear, Undo), the reading is dropped and the latest ink is read.
     private func check(manual: Bool) {
-        guard !checking, !result.status.isComplete else { return }
+        guard !result.status.isComplete, !pad.isEmpty else { return }
+        if checking { pendingCheck = (pendingCheck ?? false) || manual; return }
         checking = true
-        let drawing = pad.drawing
+        let drawing = pad.drawing, revision = pad.revision
         let target = self.target
         let practice = !isRecall
+        let ref = slot.ref, book = slot.book, round = result.roundNumber
         Task {
             let reading = await InkReader.read(drawing, target: target)
             checking = false
-            guard !result.status.isComplete else { return }
+            let again = pendingCheck
+            pendingCheck = nil
+            guard let current = book.result(ref), !current.status.isComplete, current.roundNumber == round else { return }
+            guard pad.revision == revision else {
+                check(manual: manual || again == true)
+                return
+            }
             let ok = reading.map { practice ? ($0.matches || RussianText.isRepetition($0.best, of: target)) : $0.matches } ?? false
+            let slot = ExerciseSlot(book: book, ref: ref)
             if ok {
                 let apply: ((inout ExerciseResult) -> Void) -> Void = manual ? slot.finish : slot.record
                 apply { r in
@@ -464,10 +496,33 @@ struct WritingExercise: View {
                 }
                 lastReading = nil
             } else if manual {
-                slot.record { $0.attempts += 1; $0.recognized = reading?.best }
+                slot.record { r in
+                    r.attempts += 1
+                    r.failedChecks = (r.failedChecks ?? 0) + 1
+                    r.recognized = reading?.best
+                }
                 lastReading = reading?.best ?? ""
+            } else if again == true {
+                check(manual: true)
             }
         }
+    }
+
+    /// Starts another round on a fresh strip. The ink so far is kept as an earlier attempt;
+    /// if it can't be kept, nothing is cleared.
+    private func writeAgain() async {
+        idleTask?.cancel()
+        let book = slot.book, ref = slot.ref
+        let n = (result.inkAttempts ?? 0) + 1
+        let dest = book.inkAttemptURL(ref, attempt: n)
+        do {
+            try await pad.archive(to: dest)
+        } catch {
+            book.report("ink: couldn't keep the earlier writing (\((error as NSError).localizedDescription)), so it was left in place")
+            return
+        }
+        lastReading = nil
+        book.reopen(ref, keptInk: FileManager.default.fileExists(atPath: dest.path))
     }
 
     private func finishPractice() {
@@ -510,7 +565,7 @@ struct ListenPickExercise: View {
             }
         }
         .onChange(of: book.advanceSignal) { _, _ in
-            if isActive, book.advancePage == slot.pageIndex, let s = ex.say { voice.play(s) }
+            if isActive, slot.isAdvanceTarget, let s = ex.say { voice.play(s) }
         }
     }
 
@@ -621,7 +676,7 @@ struct ReadAloudExercise: View {
                     .frame(width: 80, height: 80)
                 }
                 .buttonStyle(.plain)
-                .disabled(speech.phase == .listening)
+                .disabled(speech.isBusy)
                 .accessibilityLabel(mine && speech.isRecording ? "Stop recording" : "Record")
                 if recordingExists {
                     Button { voice.playFile(slot.recordingURL, key: "mine-\(key)") } label: {
@@ -670,23 +725,17 @@ struct ReadAloudExercise: View {
 
     private func toggle() async {
         if speech.activeKey == key && speech.isRecording {
-            let heard = await speech.finish(target: target)
-            let ok = heard.map { RussianText.matches($0, target) } ?? false
-            // Read everything from the book before mutating it: touching `slot` (which reads
-            // book.pages) inside the mutation is an exclusivity violation and aborts.
-            let file = slot.recordingURL.lastPathComponent
-            slot.finish { r in
-                r.attempts += 1
-                r.recording = file
-                r.recognized = heard
-                if ok && !r.status.isComplete { r.status = r.attempts == 1 ? .correct : .done }
-            }
+            // Capture the exercise's id and round now; resolve them again after listening.
+            let ref = slot.ref, book = slot.book, round = slot.result.roundNumber, target = self.target
+            guard let take = await speech.finish(target: target) else { return }
+            book.commitTake(ref, round: round, file: take.file.lastPathComponent, heard: take.heard, target: target,
+                            recognitionAllowed: take.recognitionAllowed, timedOut: take.timedOut)
         } else {
             voice.stop()
-            if speech.isRecording { speech.cancel() }
-            denied = !(await speech.start(to: slot.recordingURL, key: key))
+            let started = await speech.start(to: slot.book.newTakeURL(slot.ref), key: key)
+            denied = started == .micDenied
             // Permission was just granted (or already was): load the recognizer while they speak.
-            SpeechCheck.warmUp(with: voice.recordingURL(for: target))
+            if started == .recording { SpeechCheck.warmUp(with: voice.recordingURL(for: target)) }
         }
     }
 }

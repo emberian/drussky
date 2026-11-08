@@ -4,6 +4,7 @@ import UIKit
 /// The whole app: one book, open at the current page. Pages turn with a page curl.
 struct BookView: View {
     @Environment(Book.self) private var book
+    @Environment(AppState.self) private var app
     @State private var showContents = false
     @State private var showSettings = false
     @State private var writeMode: WritePageSheet.Mode?
@@ -26,6 +27,19 @@ struct BookView: View {
         .sheet(isPresented: Binding(get: { writeMode != nil }, set: { if !$0 { writeMode = nil } })) {
             if let writeMode { WritePageSheet(mode: writeMode) }
         }
+        .overlay(alignment: .bottom) {
+            if let problem = book.persistenceError ?? book.knowledge.logProblem {
+                Label("Not saved yet: \(problem)", systemImage: "exclamationmark.triangle.fill")
+                    .font(.footnote.weight(.medium)).foregroundStyle(.white)
+                    .padding(.horizontal, 14).padding(.vertical, 8)
+                    .background(Capsule().fill(Theme.redPen))
+                    .padding(.bottom, 12)
+                    .accessibilityAddTraits(.isStaticText)
+            }
+        }
+        .alert("Notebook", isPresented: Binding(get: { app.notice != nil }, set: { if !$0 { app.notice = nil } })) {
+            Button("OK") { app.notice = nil }
+        } message: { Text(app.notice ?? "") }
         .onAppear {
             showContents = QA.has("-qa-contents")
             showSettings = QA.has("-qa-settings")
@@ -144,7 +158,9 @@ struct PageCurl: UIViewControllerRepresentable {
         let direction: UIPageViewController.NavigationDirection = target > context.coordinator.shown ? .forward : .reverse
         context.coordinator.shown = target
         voice.stop()
-        if speech.isRecording { speech.cancel() }
+        // A take being recorded (or waiting on permission) stops; one already being listened to
+        // finishes and lands on its own exercise, which it addresses by id.
+        if speech.isRecording || speech.phase == .requesting { speech.cancel() }
         let animated = UIView.areAnimationsEnabled && !UIAccessibility.isReduceMotionEnabled
         pvc.setViewControllers([host(target)], direction: direction, animated: animated)
     }

@@ -11,7 +11,6 @@
 		0619713939B412884AEF4DFF /* course.json in Resources */ = {isa = PBXBuildFile; fileRef = 386E28FC654C1880C29D1332 /* course.json */; };
 		09FD56B0A4364BF3B758EFC4 /* QA+Intonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9959937A9DC8B4AB3A21D8A /* QA+Intonation.swift */; };
 		0B2FCFBABE5C8D2D2CDB150B /* KnowledgeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A83A72A8552601FEA690DD5 /* KnowledgeTracker.swift */; };
-		0F5E7EA89A56898D930132AF /* PrivatePack in Resources */ = {isa = PBXBuildFile; fileRef = 64789480E8340077727A5CFE /* PrivatePack */; };
 		138DD78B9EA241EB4D4DDDA4 /* KnowledgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7684E2C4AF652E484A533A0 /* KnowledgeTests.swift */; };
 		21BFB9DFE5268BEBEE704E49 /* DrusskyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF549E6E6DDAEC172CF7EC /* DrusskyApp.swift */; };
 		227543D9796B41F6F686DD77 /* StrokeDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37192A6446B8BCE506389373 /* StrokeDemoView.swift */; };
@@ -37,7 +36,9 @@
 		690AD36C797DD631CEBEB327 /* IntonationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D2B1276836F39A113FCB1E /* IntonationView.swift */; };
 		69BCF5C4C118382F269649E1 /* SoundPairView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2FBD2C1A4D69EEC95A4BF1 /* SoundPairView.swift */; };
 		6A542EBFCECD40693C6EE613 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B358D7400C07670977C09B /* Graph.swift */; };
+		7A9309980F32D1410CC4B436 /* Book+Attempts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84A8DF3FC11034F6E5A0FB /* Book+Attempts.swift */; };
 		7B7B3708DF0CE9C452DE40F7 /* PageWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EF908D6FA69AE1C9862EBA /* PageWriter.swift */; };
+		807FC977AACFA132255E77C8 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD9033F35F4F9C1AE5974BD /* AppState.swift */; };
 		8372C0305DCC4A84F0E0B0DA /* StrokeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6951261E1F68BB26721097CB /* StrokeModels.swift */; };
 		8391837C952CE70C5C196344 /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CAF74155006B1914D2F22E /* Voice.swift */; };
 		88A1445927806777FE3EB2A2 /* RhythmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D974078BE264B301B0782B /* RhythmView.swift */; };
@@ -54,18 +55,24 @@
 		B857765E8476BD471932FB86 /* LearningCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 144663A43664AFA42BFFB0E4 /* LearningCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC4BD4EC630AE39955A764B6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8667B929B9319AC53CBBAA /* PageView.swift */; };
 		BF985A5B60A524FAB486B2BA /* LearningCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 144663A43664AFA42BFFB0E4 /* LearningCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C3DFCFFDA2985CE3CFF4FB1B /* InkWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC15B124F9AE9C9FE24C1A /* InkWriter.swift */; };
 		C7500491DCE324EF0FE52467 /* strokes.json in Resources */ = {isa = PBXBuildFile; fileRef = B9BFAF35608759712621C94D /* strokes.json */; };
 		C7A50DB49B573DC7BE60B579 /* KnowledgeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498F96495BEEB942967BA522 /* KnowledgeMapView.swift */; };
 		C9C00EFC1AA03C2C85489463 /* LearningCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A3C4AAD0A283ABF063186 /* LearningCoreTests.swift */; };
 		D1AA7E1AB37F8557A6B66B01 /* library.json in Resources */ = {isa = PBXBuildFile; fileRef = F66C50789A2CD8461AE31E6F /* library.json */; };
 		D3A0E99EAF001AFDB22943D0 /* SpeechCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */; };
 		DB3D064DB50315B07FD9D64C /* QA.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2183BBBE99C1790444D983 /* QA.swift */; };
+		DFCD27C5F6B84C0A1923E490 /* NotebookSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C7FD22C881185CDEE1092E /* NotebookSafetyTests.swift */; };
 		E57A52723D5F7D80807A53B1 /* TutorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74264D1BFDC2677C7515FBED /* TutorView.swift */; };
 		E690EE7AE2CCA3D9C9372D1C /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5206CA36CCD17DFB27C030F /* Tutor.swift */; };
+		EC5DEA629DDF914B9CA6C598 /* NotebookLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1095511DFC346F6F4748A8 /* NotebookLoading.swift */; };
+		EE2BF2C19B635513A48C4ACE /* EarlierAttempts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40296369FBA50E77B28E46CA /* EarlierAttempts.swift */; };
 		EF8F11688BA47BDDA76D86E3 /* WritingStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B7B2BCE090C576089B5D2 /* WritingStrip.swift */; };
 		F082298B2B042C1136782201 /* pairs.json in Resources */ = {isa = PBXBuildFile; fileRef = 48B9C2E0AE3895D9F96B94A8 /* pairs.json */; };
+		F4AFFA97BA152A966576EC5C /* RecoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD7AA6ADA8848A5C762E9FC /* RecoveryView.swift */; };
 		F5372D0ACA158ED77B8F7480 /* SoundPairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595B06C5D704446F3E517821 /* SoundPairs.swift */; };
 		F73DDD756EE8C9DD99177420 /* DrusskyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB7D30DEF9D3822201CE244 /* DrusskyTests.swift */; };
+		F999F596AFD1FE53882E5C0E /* NotebookArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD210A3FE35B1CC0C06DAAA0 /* NotebookArchive.swift */; };
 		FB356AD0BFE81A45548E6B00 /* RussianDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1430660BCDA21C7FB31B2F /* RussianDomain.swift */; };
 		FB7F6E27A5068503D04C4C7A /* hershey-ink.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AA5D8D879AB04BFB06ECB4E /* hershey-ink.json */; };
 /* End PBXBuildFile section */
@@ -133,6 +140,7 @@
 		1B90003DA1A2BC105BEF7BDF /* DrusskyUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DrusskyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B45D46005FA317A82BAB4B /* MarckScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MarckScript-Regular.ttf"; sourceTree = "<group>"; };
 		27AE7A8C01467109460EB5B7 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		2AD7AA6ADA8848A5C762E9FC /* RecoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryView.swift; sourceTree = "<group>"; };
 		2B0C8928C4C7D7EB62548D5F /* FSRS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSRS.swift; sourceTree = "<group>"; };
 		2CABEA1EF7D21362DB90DEB5 /* NewPagesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPagesUITests.swift; sourceTree = "<group>"; };
 		3337A7628485FC5AE5B0DC88 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -141,6 +149,9 @@
 		386E28FC654C1880C29D1332 /* course.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = course.json; sourceTree = "<group>"; };
 		3A768443796062643225D742 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
 		3AA5D8D879AB04BFB06ECB4E /* hershey-ink.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "hershey-ink.json"; sourceTree = "<group>"; };
+		3DD9033F35F4F9C1AE5974BD /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		40296369FBA50E77B28E46CA /* EarlierAttempts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarlierAttempts.swift; sourceTree = "<group>"; };
+		43DC15B124F9AE9C9FE24C1A /* InkWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkWriter.swift; sourceTree = "<group>"; };
 		4703C3E6E6CDD85F62432B43 /* Domain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
 		48B9C2E0AE3895D9F96B94A8 /* pairs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pairs.json; sourceTree = "<group>"; };
 		48C1AAC72C73F9142E86649A /* SoundPairsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPairsTests.swift; sourceTree = "<group>"; };
@@ -153,12 +164,14 @@
 		595B06C5D704446F3E517821 /* SoundPairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPairs.swift; sourceTree = "<group>"; };
 		5E3A3C4AAD0A283ABF063186 /* LearningCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCoreTests.swift; sourceTree = "<group>"; };
 		5E5A0EF4CCE1C2A07B42CEB2 /* RussianText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianText.swift; sourceTree = "<group>"; };
-		64789480E8340077727A5CFE /* PrivatePack */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PrivatePack; sourceTree = SOURCE_ROOT; };
 		688983BD7403A34D60ED8EBE /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		6951261E1F68BB26721097CB /* StrokeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeModels.swift; sourceTree = "<group>"; };
 		6A83A72A8552601FEA690DD5 /* KnowledgeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeTracker.swift; sourceTree = "<group>"; };
+		6E84A8DF3FC11034F6E5A0FB /* Book+Attempts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+Attempts.swift"; sourceTree = "<group>"; };
+		72C7FD22C881185CDEE1092E /* NotebookSafetyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookSafetyTests.swift; sourceTree = "<group>"; };
 		74264D1BFDC2677C7515FBED /* TutorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorView.swift; sourceTree = "<group>"; };
 		76FA98F7CF39CE01A5ADCC7A /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Audio; path = Drussky/Resources/Audio; sourceTree = SOURCE_ROOT; };
+		7C1095511DFC346F6F4748A8 /* NotebookLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookLoading.swift; sourceTree = "<group>"; };
 		84A5F088589077DA6E84C059 /* FormationCoach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationCoach.swift; sourceTree = "<group>"; };
 		85D2852B93CF4306C44308E3 /* Evidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evidence.swift; sourceTree = "<group>"; };
 		88A41A0388A9800487C69809 /* FormationCoachTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationCoachTests.swift; sourceTree = "<group>"; };
@@ -174,6 +187,7 @@
 		BB1430660BCDA21C7FB31B2F /* RussianDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianDomain.swift; sourceTree = "<group>"; };
 		C7684E2C4AF652E484A533A0 /* KnowledgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeTests.swift; sourceTree = "<group>"; };
 		C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViews.swift; sourceTree = "<group>"; };
+		CD210A3FE35B1CC0C06DAAA0 /* NotebookArchive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookArchive.swift; sourceTree = "<group>"; };
 		D33FB32EAC9E5C0C6CCB6FA3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		D3DC1A7F49DBFFE259DDFBCC /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		D5BF549E6E6DDAEC172CF7EC /* DrusskyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrusskyApp.swift; sourceTree = "<group>"; };
@@ -228,6 +242,7 @@
 				88A41A0388A9800487C69809 /* FormationCoachTests.swift */,
 				3AA5D8D879AB04BFB06ECB4E /* hershey-ink.json */,
 				C7684E2C4AF652E484A533A0 /* KnowledgeTests.swift */,
+				72C7FD22C881185CDEE1092E /* NotebookSafetyTests.swift */,
 				48C1AAC72C73F9142E86649A /* SoundPairsTests.swift */,
 			);
 			path = DrusskyTests;
@@ -264,11 +279,13 @@
 				688983BD7403A34D60ED8EBE /* BookView.swift */,
 				AE8A4317E191F83606CECA00 /* ComponentHistoryView.swift */,
 				3A768443796062643225D742 /* ContentsView.swift */,
+				40296369FBA50E77B28E46CA /* EarlierAttempts.swift */,
 				C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */,
 				8CF686BE6829DB81620A8095 /* GrowthChart.swift */,
 				09D2B1276836F39A113FCB1E /* IntonationView.swift */,
 				498F96495BEEB942967BA522 /* KnowledgeMapView.swift */,
 				4B8667B929B9319AC53CBBAA /* PageView.swift */,
+				2AD7AA6ADA8848A5C762E9FC /* RecoveryView.swift */,
 				97D974078BE264B301B0782B /* RhythmView.swift */,
 				DE2FBD2C1A4D69EEC95A4BF1 /* SoundPairView.swift */,
 				37192A6446B8BCE506389373 /* StrokeDemoView.swift */,
@@ -283,6 +300,7 @@
 		585F3D85E04CF81E23B463FE /* App */ = {
 			isa = PBXGroup;
 			children = (
+				3DD9033F35F4F9C1AE5974BD /* AppState.swift */,
 				D5BF549E6E6DDAEC172CF7EC /* DrusskyApp.swift */,
 				DC2183BBBE99C1790444D983 /* QA.swift */,
 				B9959937A9DC8B4AB3A21D8A /* QA+Intonation.swift */,
@@ -309,8 +327,12 @@
 			isa = PBXGroup;
 			children = (
 				3337A7628485FC5AE5B0DC88 /* Book.swift */,
+				6E84A8DF3FC11034F6E5A0FB /* Book+Attempts.swift */,
 				27AE7A8C01467109460EB5B7 /* Course.swift */,
+				43DC15B124F9AE9C9FE24C1A /* InkWriter.swift */,
 				D3DC1A7F49DBFFE259DDFBCC /* Library.swift */,
+				CD210A3FE35B1CC0C06DAAA0 /* NotebookArchive.swift */,
+				7C1095511DFC346F6F4748A8 /* NotebookLoading.swift */,
 				5E5A0EF4CCE1C2A07B42CEB2 /* RussianText.swift */,
 				595B06C5D704446F3E517821 /* SoundPairs.swift */,
 				6951261E1F68BB26721097CB /* StrokeModels.swift */,
@@ -361,7 +383,6 @@
 		EB7E55D010BAEF213914079E = {
 			isa = PBXGroup;
 			children = (
-				64789480E8340077727A5CFE /* PrivatePack */,
 				1F5F4280DFDE09F9376E8534 /* Drussky */,
 				06305DCDBD604A16CF5D89E8 /* DrusskyTests */,
 				041A425F9E0F853F7382281E /* DrusskyUITests */,
@@ -468,6 +489,7 @@
 				57FA2E9CFBDA4DB3083391B3 /* Resources */,
 				7FF070F741DCE4EC1A05CB7D /* Frameworks */,
 				1DD6396F62AAB8423426FF3B /* Embed Frameworks */,
+				64363A05E3307D9C38C0633D /* PrivatePack (Debug and Personal only) */,
 			);
 			buildRules = (
 			);
@@ -553,7 +575,6 @@
 				AD8A2190D80258D2E1F620D1 /* Audio in Resources */,
 				9AEF27A7EFA1034C131805E5 /* MarckScript-Regular.ttf in Resources */,
 				5D6D5A01E7727D984F154F82 /* OFL-MarckScript.txt in Resources */,
-				0F5E7EA89A56898D930132AF /* PrivatePack in Resources */,
 				0619713939B412884AEF4DFF /* course.json in Resources */,
 				38A0E413208B3DC981A69072 /* lemmas.json in Resources */,
 				D1AA7E1AB37F8557A6B66B01 /* library.json in Resources */,
@@ -563,6 +584,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		64363A05E3307D9C38C0633D /* PrivatePack (Debug and Personal only) */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "PrivatePack (Debug and Personal only)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "dest=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/PrivatePack\"\nrm -rf \"$dest\"\ncase \"$CONFIGURATION\" in\n  Debug|Personal)\n    if [ -d \"$SRCROOT/PrivatePack\" ]; then cp -R \"$SRCROOT/PrivatePack\" \"$dest\"; fi ;;\n  *) ;;\nesac\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		41F71F5A4A41A18988BB3D67 /* Sources */ = {
@@ -602,6 +645,7 @@
 				F73DDD756EE8C9DD99177420 /* DrusskyTests.swift in Sources */,
 				916843E48C3BC25493F884D5 /* FormationCoachTests.swift in Sources */,
 				138DD78B9EA241EB4D4DDDA4 /* KnowledgeTests.swift in Sources */,
+				DFCD27C5F6B84C0A1923E490 /* NotebookSafetyTests.swift in Sources */,
 				61671DC2B12966C775E190F3 /* SoundPairsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,25 +654,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				807FC977AACFA132255E77C8 /* AppState.swift in Sources */,
+				7A9309980F32D1410CC4B436 /* Book+Attempts.swift in Sources */,
 				3297D52B73F2DBF6F5C384C5 /* Book.swift in Sources */,
 				4E705686838A634286DB9ACE /* BookView.swift in Sources */,
 				ACADF8B6D32A191CE4BF1A9B /* ComponentHistoryView.swift in Sources */,
 				5D05D4B8151EC7292B609E8E /* ContentsView.swift in Sources */,
 				4AD1FD7CAF518B5E5BDE9FB6 /* Course.swift in Sources */,
 				21BFB9DFE5268BEBEE704E49 /* DrusskyApp.swift in Sources */,
+				EE2BF2C19B635513A48C4ACE /* EarlierAttempts.swift in Sources */,
 				244E83B48DE97484C52D0B55 /* ExerciseViews.swift in Sources */,
 				5EEF45B0FEBBD89FF6A763C9 /* FormationCoach.swift in Sources */,
 				A3121AE2FE1F79A0AAA9553D /* GrowthChart.swift in Sources */,
 				A009ECABCA825B294FD93098 /* InkReader.swift in Sources */,
+				C3DFCFFDA2985CE3CFF4FB1B /* InkWriter.swift in Sources */,
 				690AD36C797DD631CEBEB327 /* IntonationView.swift in Sources */,
 				C7A50DB49B573DC7BE60B579 /* KnowledgeMapView.swift in Sources */,
 				0B2FCFBABE5C8D2D2CDB150B /* KnowledgeTracker.swift in Sources */,
 				AE9EAB7575098C5390D9E329 /* Library.swift in Sources */,
+				F999F596AFD1FE53882E5C0E /* NotebookArchive.swift in Sources */,
+				EC5DEA629DDF914B9CA6C598 /* NotebookLoading.swift in Sources */,
 				BC4BD4EC630AE39955A764B6 /* PageView.swift in Sources */,
 				7B7B3708DF0CE9C452DE40F7 /* PageWriter.swift in Sources */,
 				44C1FFB01EA503282E7E8A8D /* Pitch.swift in Sources */,
 				09FD56B0A4364BF3B758EFC4 /* QA+Intonation.swift in Sources */,
 				DB3D064DB50315B07FD9D64C /* QA.swift in Sources */,
+				F4AFFA97BA152A966576EC5C /* RecoveryView.swift in Sources */,
 				88A1445927806777FE3EB2A2 /* RhythmView.swift in Sources */,
 				FB356AD0BFE81A45548E6B00 /* RussianDomain.swift in Sources */,
 				5FB598889AC9BDE297B90C65 /* RussianText.swift in Sources */,
@@ -672,6 +723,36 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		02476013931AFBA9B7F849A5 /* Personal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Drussky/Drussky-mac.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Drussky;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Drussky listens when you say Russian aloud, and keeps your recording on the page.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Drussky checks the Russian you say aloud.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.drussky;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Personal;
+		};
 		050668EEA452A759F6C658E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -801,6 +882,24 @@
 			};
 			name = Debug;
 		};
+		32DBCECAF953BDF374FC4951 /* Personal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.drussky.uitests;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Drussky;
+			};
+			name = Personal;
+		};
 		39DB112D172A62D5BE7E9918 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -824,6 +923,7 @@
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Drussky/Drussky-mac.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Drussky;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -869,6 +969,7 @@
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Drussky/Drussky-mac.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Drussky;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -968,6 +1069,31 @@
 			};
 			name = Release;
 		};
+		8C1ED5FF0A954EB97B3B0B94 /* Personal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.learningcore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Personal;
+		};
 		C2C98A74B76DF469200E57F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -993,6 +1119,23 @@
 			};
 			name = Release;
 		};
+		C41AE6F02A2361F986A7085E /* Personal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.drussky.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Drussky.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Drussky";
+			};
+			name = Personal;
+		};
 		CFFD70AA28491554A3B0E2BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1011,6 +1154,83 @@
 			};
 			name = Debug;
 		};
+		DD30BC0CF92BEE5C21FC8DE9 /* Personal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = software.ember.learningcore.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Personal;
+		};
+		F72CB9CFBD0270E5069B9691 /* Personal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 992772WV7K;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 2.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Personal;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1018,6 +1238,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				69E96EAA2A4F265B3A774102 /* Debug */,
+				8C1ED5FF0A954EB97B3B0B94 /* Personal */,
 				C2C98A74B76DF469200E57F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1027,6 +1248,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4DB74A8A70FC4F692D7574C3 /* Debug */,
+				02476013931AFBA9B7F849A5 /* Personal */,
 				3E19F22DDCE73C156B3C0102 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1036,6 +1258,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CFFD70AA28491554A3B0E2BE /* Debug */,
+				32DBCECAF953BDF374FC4951 /* Personal */,
 				51CBE8F73F89A9048C600DA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1045,6 +1268,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				091DF8E819928D033C4BF10C /* Debug */,
+				F72CB9CFBD0270E5069B9691 /* Personal */,
 				050668EEA452A759F6C658E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1054,6 +1278,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5D444824610C5F3D668C9112 /* Debug */,
+				C41AE6F02A2361F986A7085E /* Personal */,
 				8431748AF19EBABA256CC0F9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1063,6 +1288,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				39DB112D172A62D5BE7E9918 /* Debug */,
+				DD30BC0CF92BEE5C21FC8DE9 /* Personal */,
 				4D985A4D065CB0A7BC646918 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
