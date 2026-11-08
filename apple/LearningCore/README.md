@@ -44,6 +44,52 @@ Knowing a word by ear is not knowing how to write it, so each modality has its o
   giving the expected number recallable.
 - **Coverage**: the share of a text's tokens with some candidate component at R ≥ 0.5.
 
+## Time and the learner
+
+Three more files, still knowing nothing about any subject; the domain names its candidates and
+components, the core shapes the day.
+
+- **A day has a shape** (`Day.swift`). `DayShape.shape` reads the last activity against the clock:
+  the first page on a new calendar day is a *morning* page; after an absence of
+  `DayPolicy.welcomeBackAfter` (7 days) it is a *welcome-back* page. `DayComposition.morning`
+  takes the easiest due items (highest recall, no lapse) as a warm-up of `warmUp` (3), then the most
+  urgent up to what is left of the day's `reviewCap` (25, settable) and the page's own
+  `morningReviews` (12); everything else is **deferred, most urgent first** (`overflowOrder`:
+  `DueReview.priority` = relearning + (1 − R) + confusion pressure, so the most overdue and most
+  confused come back first on the next page or day). `welcomeBack` re-tests a stratified sample
+  (`welcomeBackSample` = 8, spread evenly over the urgency range from the most urgent to the
+  easiest) rather than everything. `weave` places up to 3 on an ordinary page, within the cap. The
+  desired retention (`ReviewPolicy.retention`, 0.8–0.95) is the one knob on when anything comes due.
+- **Frontier pulls** (`Day.swift`, `KnowledgeModel.frontierDecision`). The course stays the spine.
+  Given the components the next course page introduces: if at least `FrontierPolicy.minWeak` (3)
+  of their prerequisites outside the page have been met and are weak (strength < 0.6 or relearning),
+  the decision is `.remediate(weakest first, at most 6)`: the domain builds a short page from those
+  items before the course goes on. Otherwise, when enough is due for a review page
+  (`reviewPageThreshold`, 10) but every not-yet-learned component on the page has all its
+  prerequisites at R ≥ 0.8, the decision is `.preferCourse`: the course page, with reviews woven in,
+  rather than a page of review. Prerequisites never met are not weak — the course will teach them.
+- **Measured retention** (`Probes.swift`). Every `ProbePolicy.every` (7 days) `drawProbes` samples
+  `sampleSize` (6) practised candidates stratified by present recall into thirds, each in one of its
+  practised modalities, and schedules one probe per delay (1, 7, 30 days) — deterministically from a
+  seed. A `Probe` is placed on a page as an ordinary exercise; only the `ProbeLedger` knows. When it
+  is answered, the trace's `recallBefore` (R just before that review) is recorded against success.
+  `Calibration` bins predictions (5 bands) per modality and overall: observed rate vs mean prediction,
+  Brier score, expected calibration error, and `overconfidence` = predicted − observed.
+  `ParameterNudge` turns that into one bounded step: outside a ±0.05 deadband and with at least
+  `minObservations` (12), the FSRS stability scale moves 2% towards the evidence, within 0.7–1.3;
+  `FSRS.scalingStability(by:)` scales the four initial stabilities and the growth factor (e^w8),
+  leaving difficulty alone. The graph export carries `calibration`.
+- **The desk notices you** (`Fatigue.swift`). `Fatigue.estimate` reads the current session (events
+  with no gap over 45 minutes) for four signals, each explained in words: answers slowing (median
+  latency of the last third over the first third), misses in the last 8 outcomes, tries per finished
+  item, and minutes on the page. Score = 0.3·slower + 0.3·missing + 0.2·retrying + 0.2·long;
+  ≥ 0.55 is *tired*, ≤ 0.15 with no misses and no slowing is *sharp*; fewer than 6 outcomes and
+  only time counts. `HourlyPreference` is first-try success per modality by hour band (night,
+  morning, afternoon, evening): `order` sorts modalities best-first for the hour (8 trials needed),
+  `standout` names one when it clearly leads. What a domain does with these is its own: Drussky
+  orders the morning page's reviews by the hour's preference, shortens a page when tired (two
+  remaining reviews become recognition, the rest wait, ungraded), and allows one frontier word when sharp.
+
 ## Contract: `events.jsonl`
 
 One JSON object per line, UTF-8, ISO-8601 dates. Fields are only ever added, never renamed
@@ -78,7 +124,12 @@ the previous recorded activity in the same context (a page), when known.
           {"from":"lex:она","to":"lex:оно","kind":"confused-with","weight":1.9,"note":"writing"}],
  "transfer":[{"from":"hear-write","to":"meaning-write","primedSuccess":9,"primedTrials":11,
               "coldSuccess":3,"coldTrials":8}],
- "frontier":["gram:past","phrase:у меня есть"]}
+ "frontier":["gram:past","phrase:у меня есть"],
+ "calibration":{"binCount":5,"overall":{"count":24,"predicted":0.81,"observed":0.75,"brier":0.17,"error":0.08,
+                "bins":[{"lower":0.6,"upper":0.8,"predicted":0.72,"observed":0.6,"count":10},…]},
+                "series":[{"modality":"hear-write",…}]}}
 ```
+
+`calibration` is present once any retention probe has been answered (Probes.swift).
 
 Tests in `LearningCoreTests/` use a toy domain and need no course.

@@ -56,6 +56,8 @@ public struct GraphExport: Codable, Sendable {
     public var edges: [Edge]
     public var transfer: [TransferStat]
     public var frontier: [ComponentID]
+    /// Measured retention from probes (Probes.swift), when any have been answered.
+    public var calibration: Calibration? = nil
 
     public init(domain: String, modalities: [Modality], graph: KnowledgeGraph, model: KnowledgeModel, at date: Date) {
         self.domain = domain

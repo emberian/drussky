@@ -58,6 +58,19 @@ isn't graded. New pages weave up to three due items in; when ten or more are due
 is a review page (Повторение). Scaffolds fade (trace → copy → write from hearing) while recall
 of a word is strong now, and come back if it decays.
 
+The book also knows what day it is. The first page of a new day opens with a short warm-up (the
+easiest due items), the day's reviews up to a cap (25 a day by default; the overflow waits, most
+urgent first), then the next course page. After a week or more away, the first page re-tests a
+sample of what you knew rather than everything. When several things the next page leans on have
+gone weak, a short *Getting ready* page brings them back first; when much is due but the next
+page's material is ready, the course goes on with reviews woven in. Now and then a few things the
+book believes you know are slipped onto pages one, seven and thirty days later; inside the cover,
+*How well the book knows you* sets its predictions against what you actually recalled, and the
+memory model's intervals move a little, slowly, towards the evidence. When answers slow and misses
+pile up late in a long page, the page shortens (two remaining reviews become listening or reading
+choices, the rest wait) and says so in one line. Settings: retention aim (80–95%), reviews per day,
+probes on or off. (`LearningCore/README.md`, "Time and the learner".)
+
 ## The tutor
 
 The **?** beside each exercise (and *Ask about this page* at the bottom) asks Claude
@@ -133,7 +146,10 @@ checks it survives a relaunch.
 QA launch arguments (simulator): `-qa-reset`, `-qa-complete N` (work through N pages with
 synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-contents`,
 `-qa-settings`, `-qa-diary` (three diary pages with canned red-pen corrections, no key
-needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian).
+needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian);
+`-qa-settings`; `-qa-day N` / `-qa-away D` (the pages were done N or D days ago, then the page is
+turned: a morning or welcome-back page), `-qa-probes` (a synthetic answered probe set for the cover
+chart), `-qa-tired` (the current page marked shortened).
 
 ## Content
 

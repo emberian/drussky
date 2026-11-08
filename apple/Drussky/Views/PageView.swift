@@ -114,6 +114,7 @@ struct PageView: View {
 
     @ViewBuilder private func footer(_ page: BookPage) -> some View {
         VStack(alignment: .leading, spacing: 18) {
+            DeskLine(pageIndex: pageIndex)
             if page.isFinished {
                 HStack(alignment: .center, spacing: 18) {
                     GradeStamp(page: page)

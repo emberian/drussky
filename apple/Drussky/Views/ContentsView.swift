@@ -12,6 +12,7 @@ struct ContentsView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
                     stats
+                    DeskNotes()
                     KnowledgeSection()
                     MyRussianSection()
                     alphabet
@@ -170,6 +171,7 @@ struct SettingsView: View {
                     Toggle("Draw with a finger too", isOn: $book.settings.fingerDrawing)
                     Toggle("Handwritten (cursive) models", isOn: $book.settings.cursiveModels)
                 }
+                DaySettingsSection()
                 Section {
                     Toggle("Show stress", isOn: $book.settings.showStress)
                 } footer: {
@@ -218,7 +220,7 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
-            .task { exportURL = await book.exportArchive(); graphURL = book.knowledge.exportGraph() }
+            .task { exportURL = await book.exportArchive(); graphURL = book.exportGraph() }
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         }
     }

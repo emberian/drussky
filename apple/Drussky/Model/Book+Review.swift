@@ -4,7 +4,8 @@ import LearningCore
 /// Review and fading, read from LearningCore's FSRS traces (per component × modality). Book
 /// only says what there is to recall (`targets`) and turns a due item into an exercise.
 extension Book {
-    static let reviewPolicy = ReviewPolicy()
+    /// Retention target from Settings (Day): the one knob on when reviews come due.
+    var reviewPolicy: ReviewPolicy { ReviewPolicy(retention: settings.desiredRetention ?? 0.9) }
     /// Modalities in which recall (not copying) is practised; fading looks at these.
     static let recallModalities: Set<Modality> = [.hearWrite, .meaningWrite]
 
@@ -30,7 +31,7 @@ extension Book {
         let waiting = Set(pages.suffix(2).flatMap { page in
             page.exercises.indices.compactMap { i in page.results[i].status.isComplete ? nil : page.exercises[i].reviewKey }
         })
-        return knowledge.model.dueReviews(reviewCandidates(), at: now(), policy: Self.reviewPolicy)
+        return knowledge.model.dueReviews(reviewCandidates(), at: now(), policy: reviewPolicy)
             .filter { !waiting.contains($0.id) }
     }
 
