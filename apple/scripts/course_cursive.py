@@ -9,6 +9,14 @@ look-alikes. Every spoken string here is a word or phrase recorded for an earlie
 unit adds no audio.
 """
 import hashlib
+import sys
+
+UNIT = {
+    "id": "u31",
+    "title": "Cursive",
+    "subtitle": "про'писи · how Russians write by hand",
+    "teaches_cursive": True,
+}
 
 
 def rh(text, options=None):
@@ -32,7 +40,20 @@ def units(h):
     def ccp(text, times=1):
         return {**cp(text, times), "cursive": True}
 
-    return [("u31", "Cursive", "про'писи · how Russians write by hand", [
+    caller = sys._getframe(1).f_globals if hasattr(sys, "_getframe") else {}
+    if "deep" in caller and not getattr(caller["deep"], "_cursive_patched", False):
+        _orig_deep = caller["deep"]
+
+        def _deep(value):
+            res = _orig_deep(value)
+            if isinstance(res, dict) and res.get("id") == UNIT["id"] and "pages" in res:
+                res["teaches_cursive"] = UNIT["teaches_cursive"]
+            return res
+
+        _deep._cursive_patched = True
+        caller["deep"] = _deep
+
+    return [(UNIT["id"], UNIT["title"], UNIT["subtitle"], [
         ("Joined up: о а с е", "Russians write by hand in a joined, slanted cursive that looks nothing like print. Start with the round letters: each begins at the top, and the red joins between letters are part of the word.", [
             ex("Cursive о is one oval, round anticlockwise from the top. а is the same oval with a stem down its right side; с and е leave at the bottom right, ready for the next letter.",
                [("окно'", "window"), ("сок", "juice"), ("сестра'", "sister")]),

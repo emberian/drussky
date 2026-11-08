@@ -9,7 +9,8 @@ import LearningCore
 extension Book {
     /// The cursive unit's first page is finished.
     var cursiveUnlocked: Bool {
-        pages.contains { $0.sourceID == "\(Self.cursiveUnitID)-p1" && $0.isFinished }
+        let firstPages = Set(course.cursiveUnitIDs.map { "\($0)-p1" })
+        return pages.contains { ($0.sourceID.map(firstPages.contains) ?? false) && $0.isFinished }
     }
 
     static let cursiveUnitID = "u31"

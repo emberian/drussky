@@ -173,4 +173,26 @@ final class StressTests: XCTestCase {
         XCTAssertFalse(FileManager.default.fileExists(atPath: url.path))
         XCTAssertNil(again.goalStressTable(goal.id))
     }
+
+    func testProminentAndPassageStressStylesStripAcuteAndUnderlineStressedVowels() {
+        let text = "Кла́ссная рабо́та · Ста́нция"
+        let bare = "Классная работа · Станция"
+        for style in [Theme.StressStyle.prominent, Theme.StressStyle.passage] {
+            let rendered = Theme.stressed(text, style: style, show: true)
+            let chars = String(rendered.characters)
+            XCTAssertFalse(chars.unicodeScalars.contains("\u{0301}"), "\(style) strips raw U+0301")
+            XCTAssertEqual(chars, bare)
+            let underlined = rendered.runs
+                .filter { $0.swiftUI.underlineStyle != nil }
+                .map { String(rendered[$0.range].characters) }
+            XCTAssertEqual(underlined, ["а", "о", "а"], "\(style) underlines only the stressed vowels")
+        }
+        let prominent = Theme.stressed(text, style: .prominent, show: true)
+        XCTAssertTrue(prominent.runs.contains { $0.swiftUI.underlineStyle == .single })
+        let passage = Theme.stressed(text, style: .passage, show: true)
+        XCTAssertTrue(passage.runs.contains { $0.swiftUI.underlineStyle != nil })
+        let off = Theme.stressed(text, style: .passage, show: false)
+        XCTAssertFalse(String(off.characters).unicodeScalars.contains("\u{0301}"))
+        XCTAssertFalse(off.runs.contains { $0.swiftUI.underlineStyle != nil })
+    }
 }

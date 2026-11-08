@@ -21,6 +21,7 @@
 		0958A440B412FD013E39854C /* math.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F8BE754BB0B17978686CA11 /* math.json */; };
 		09FD56B0A4364BF3B758EFC4 /* QA+Intonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9959937A9DC8B4AB3A21D8A /* QA+Intonation.swift */; };
 		0B2FCFBABE5C8D2D2CDB150B /* KnowledgeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A83A72A8552601FEA690DD5 /* KnowledgeTracker.swift */; };
+		0BB1F3970F172CB5FC84F25A /* constructions.json in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E36B8C0CA328E17E5575 /* constructions.json */; };
 		0CB0451AAA82012CC656D059 /* SpeechEvidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A72E1E3C021AC9FA6611221 /* SpeechEvidence.swift */; };
 		0D818DAABBF4847C75917221 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9BF5E30AD119A5B00E3E7708 /* README.md */; };
 		0E7BEE8ADDF4E807F7B86A7D /* OFL-Caveat.txt in Resources */ = {isa = PBXBuildFile; fileRef = FA857E0CA67E0AE0F5AC4F1A /* OFL-Caveat.txt */; };
@@ -169,6 +170,7 @@
 		9F8ABCE4A35E127232F73FAE /* JudgementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B8C1B71CE1D536549B072 /* JudgementTests.swift */; };
 		A009ECABCA825B294FD93098 /* InkReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B8787FE5BD39DD4C776BD8 /* InkReader.swift */; };
 		A1347A310E32E152967B8479 /* CursiveTraps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3879BF21E9BAEAAC2F8420 /* CursiveTraps.swift */; };
+		A154193CF48CA7BA15415CE5 /* talk-scenes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5326D6809C5D85A330D59BB5 /* talk-scenes.json */; };
 		A1978D47249F6C2F633D9EB6 /* ComforterBrush-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1177C02FBECDDA15632B105 /* ComforterBrush-Regular.ttf */; };
 		A3121AE2FE1F79A0AAA9553D /* GrowthChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF686BE6829DB81620A8095 /* GrowthChart.swift */; };
 		A38FB79C508B503FDA8F3391 /* Models in Resources */ = {isa = PBXBuildFile; fileRef = 9D96FA709CFA23129F0B83F4 /* Models */; };
@@ -256,6 +258,7 @@
 		F5EB36CD9AB39A530D3FCAB5 /* StructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91531E98221ADBC31CE65D4E /* StructureTests.swift */; };
 		F6611EF040A5007FBF7E46FE /* OFL-BadScript.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6583D008E1939C53360E2EB2 /* OFL-BadScript.txt */; };
 		F73DDD756EE8C9DD99177420 /* DrusskyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB7D30DEF9D3822201CE244 /* DrusskyTests.swift */; };
+		F7DCAD651310274AF8E28749 /* diary-prompts.json in Resources */ = {isa = PBXBuildFile; fileRef = C6C4393A06D8598CF68D7B86 /* diary-prompts.json */; };
 		F999F596AFD1FE53882E5C0E /* NotebookArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD210A3FE35B1CC0C06DAAA0 /* NotebookArchive.swift */; };
 		FAB197FE45A38AC8CD1D5FD6 /* GrammarPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE096B60160FC540683A8502 /* GrammarPages.swift */; };
 		FAF2EEA71694EA3B3DF2B5EF /* PhoneLayoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C0D4D988AD6A66017C6D34 /* PhoneLayoutUITests.swift */; };
@@ -404,6 +407,7 @@
 		5018AED36BDE90A7727DEAE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50738AFA47D87DDF551CCCAA /* ScreensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensUITests.swift; sourceTree = "<group>"; };
 		519B44D98A8ECC269EECDF7C /* Listening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listening.swift; sourceTree = "<group>"; };
+		5326D6809C5D85A330D59BB5 /* talk-scenes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "talk-scenes.json"; sourceTree = "<group>"; };
 		53BA4246F9025E0C5685DD5E /* Prosody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prosody.swift; sourceTree = "<group>"; };
 		553B86E3F2A1B128F013A8EE /* StressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressTests.swift; sourceTree = "<group>"; };
 		55AF3AF1845DC2F87D142527 /* MetricsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsTests.swift; sourceTree = "<group>"; };
@@ -488,6 +492,7 @@
 		A47DF5E6BCCCD8FF0E3EC2F5 /* ListeningScreensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningScreensUITests.swift; sourceTree = "<group>"; };
 		A50BD5856D7D8DB38FD1B02A /* LibraryStress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStress.swift; sourceTree = "<group>"; };
 		A67AD69B1E4D8FCF2FDB1EEF /* FluencyTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluencyTracker.swift; sourceTree = "<group>"; };
+		A6A0E36B8C0CA328E17E5575 /* constructions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = constructions.json; sourceTree = "<group>"; };
 		A6CECCD90793D5D5B6FF0E7A /* RussianG2P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianG2P.swift; sourceTree = "<group>"; };
 		A75343E5B3FE7857ACB306C0 /* GoalViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViews.swift; sourceTree = "<group>"; };
 		A7BEBEB884A944E203465D8F /* OnDeviceSchemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDeviceSchemas.swift; sourceTree = "<group>"; };
@@ -522,6 +527,7 @@
 		C2CE9364D9AFB775507EFC3B /* SpeakingReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingReportView.swift; sourceTree = "<group>"; };
 		C4C0343BB6363018301B82B7 /* MyRussianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRussianView.swift; sourceTree = "<group>"; };
 		C5151CB084A64E0F88F10700 /* Neucha-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Neucha-Regular.ttf"; sourceTree = "<group>"; };
+		C6C4393A06D8598CF68D7B86 /* diary-prompts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "diary-prompts.json"; sourceTree = "<group>"; };
 		C6F950A502BFE191B1045B79 /* VoiceActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceActivity.swift; sourceTree = "<group>"; };
 		C7684E2C4AF652E484A533A0 /* KnowledgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeTests.swift; sourceTree = "<group>"; };
 		C7A28A511D6BC397366E2EBF /* ExerciseViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViews.swift; sourceTree = "<group>"; };
@@ -890,8 +896,10 @@
 			children = (
 				5018AED36BDE90A7727DEAE7 /* Assets.xcassets */,
 				76FA98F7CF39CE01A5ADCC7A /* Audio */,
+				A6A0E36B8C0CA328E17E5575 /* constructions.json */,
 				386E28FC654C1880C29D1332 /* course.json */,
 				F709F645B7B3B5B509D0BB1D /* credits.json */,
+				C6C4393A06D8598CF68D7B86 /* diary-prompts.json */,
 				FABC0197D8F2F405AD92AC6C /* kitchen.json */,
 				4DB996D908029A1780AC509E /* lemmas.json */,
 				E138E0ADCF12A9C2535E9F0E /* library-stress.json */,
@@ -906,6 +914,7 @@
 				F1D6976FA2C7D19294D15554 /* series.json */,
 				777B18E01A53D8D1009B7234 /* strokes-cursive.json */,
 				B9BFAF35608759712621C94D /* strokes.json */,
+				5326D6809C5D85A330D59BB5 /* talk-scenes.json */,
 				BD11DB255B4E8119378B74FD /* Fonts */,
 			);
 			path = Resources;
@@ -1371,8 +1380,10 @@
 				5D6D5A01E7727D984F154F82 /* OFL-MarckScript.txt in Resources */,
 				83989418C0F3C4520914B7A5 /* OFL-Neucha.txt in Resources */,
 				0D818DAABBF4847C75917221 /* README.md in Resources */,
+				0BB1F3970F172CB5FC84F25A /* constructions.json in Resources */,
 				0619713939B412884AEF4DFF /* course.json in Resources */,
 				94FC2915DD7121C310A786FF /* credits.json in Resources */,
+				F7DCAD651310274AF8E28749 /* diary-prompts.json in Resources */,
 				4D468A5B7C18CABC13221573 /* fonts.json in Resources */,
 				65EF615D615EDE92F62C20A6 /* kitchen.json in Resources */,
 				38A0E413208B3DC981A69072 /* lemmas.json in Resources */,
@@ -1387,6 +1398,7 @@
 				0819D6811E35DA87A5F3260A /* series.json in Resources */,
 				F197F995F977DAD386CAA8E6 /* strokes-cursive.json in Resources */,
 				C7500491DCE324EF0FE52467 /* strokes.json in Resources */,
+				A154193CF48CA7BA15415CE5 /* talk-scenes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

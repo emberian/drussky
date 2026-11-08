@@ -57,7 +57,7 @@ struct ListeningExercise: View {
                 VStack(alignment: .leading, spacing: 2) { kindLine(item) }
             }
             if item.kind != .message, let q = item.question {
-                Text(q).scaledFont(18, weight: .medium).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
+                Text(Theme.passageStressed(q, show: book.settings.showStress)).scaledFont(18, weight: .medium).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
             } else if item.kind == .message {
                 Text("A voice message. Listen, then answer the questions below.").scaledFont(18, weight: .medium).foregroundStyle(Theme.text)
                     .fixedSize(horizontal: false, vertical: true)
@@ -209,7 +209,7 @@ struct ListeningExercise: View {
                 if item.kind == .message, let q = item.questions?[safe: i] {
                     HStack(alignment: .firstTextBaseline, spacing: 8) {
                         Text("\(i + 1).").font(Theme.label(14)).foregroundStyle(Theme.muted)
-                        Text(q.prompt).scaledFont(17, weight: .medium).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
+                        Text(Theme.passageStressed(q.prompt, show: book.settings.showStress)).scaledFont(17, weight: .medium).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 ChoiceGrid(options: item.options(i), chosen: done ? picks[safe: i] ?? nil : pending[i], correct: done ? item.answer(i) : nil,
@@ -292,7 +292,7 @@ struct ListeningExercise: View {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     if !missed.isEmpty { Image(systemName: "pencil.tip").font(.system(size: 13, weight: .bold)).foregroundStyle(Theme.redPen) }
                     (Text(Theme.stressed(r.span, show: book.settings.showStress)).font(Theme.russian(17, weight: .semibold))
-                     + Text(" — ").font(.system(size: 15)) + Text(Theme.stressed(r.why, show: book.settings.showStress)).font(.system(size: 15)))
+                     + Text(" — ").font(.system(size: 15)) + Text(Theme.passageStressed(r.why, show: book.settings.showStress)).font(.system(size: 15)))
                         .foregroundStyle(missed.isEmpty ? Theme.muted : Theme.text)
                         .fixedSize(horizontal: false, vertical: true)
                     if !missed.isEmpty, item.kind != .questionOrStatement {
@@ -326,7 +326,7 @@ struct ListeningExercise: View {
             if !item.glosses.isEmpty {
                 FlowRow(spacing: 12) {
                     ForEach(item.glosses.sorted { $0.key < $1.key }, id: \.key) { k, v in
-                        (Text(k).font(Theme.russian(15, weight: .medium)) + Text(" \(v)").font(.system(size: 13)))
+                        (Text(Theme.passageStressed(k, show: book.settings.showStress)).font(Theme.russian(15, weight: .medium)) + Text(" \(v)").font(.system(size: 13)))
                             .foregroundStyle(Theme.muted).fixedSize(horizontal: false, vertical: true)
                     }
                 }

@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "intro": "First follow one noun through three roles. Then choose an ending in new sentences: who or what, the direct object, or what is absent.",
+  "examples": "Кни́га здесь.\nThe book is here.\n\nЯ чита́ю кни́гу.\nI am reading the book.\n\nЗдесь нет кни́ги.\nThere is no book here.",
+  "diary_prompt": "Something you have, something you need, and something you cannot find. Use your own words.",
+  "items": [
+    {
+      "text": "Э́та ___ моя́.",
+      "options": ["кни́га", "кни́гу", "кни́ги"],
+      "answer": 0,
+      "why": "The noun is the subject: use the naming form, -а.",
+      "word": "Э́та кни́га моя́.",
+      "reserve": false
+    },
+    {
+      "text": "Где твоя́ ___?",
+      "options": ["кни́га", "кни́гу", "кни́ги"],
+      "answer": 0,
+      "why": "The noun is the subject: use the naming form, -а.",
+      "word": "Где твоя́ кни́га?",
+      "reserve": true
+    },
+    {
+      "text": "Я ищу́ ___.",
+      "options": ["кни́га", "кни́гу", "кни́ги"],
+      "answer": 1,
+      "en": "I am looking for the book (one).",
+      "why": "The thing being sought is the direct object: -а becomes -у.",
+      "word": "Я ищу́ кни́гу.",
+      "reserve": false
+    },
+    {
+      "text": "Он ви́дит ___.",
+      "options": ["кни́га", "кни́гу", "кни́ги"],
+      "answer": 1,
+      "en": "He sees the book (one).",
+      "why": "The thing being seen is the direct object: -а becomes -у.",
+      "word": "Он ви́дит кни́гу.",
+      "reserve": true
+    },
+    {
+      "text": "У меня́ нет ___.",
+      "options": ["кни́га", "кни́гу", "кни́ги"],
+      "answer": 2,
+      "why": "After нет, use the genitive: -и after г, otherwise -ы here.",
+      "word": "У меня́ нет кни́ги.",
+      "reserve": false
+    },
+    {
+      "text": "Здесь нет ___.",
+      "options": ["кни́га", "кни́гу", "кни́ги"],
+      "answer": 2,
+      "why": "After нет, use the genitive: -и after г, otherwise -ы here.",
+      "word": "Здесь нет кни́ги.",
+      "reserve": false
+    },
+    {
+      "text": "Э́та ___ моя́.",
+      "options": ["газе́та", "газе́ту", "газе́ты"],
+      "answer": 0,
+      "why": "The noun is the subject: use the naming form, -а.",
+      "word": "Э́та газе́та моя́.",
+      "reserve": false
+    },
+    {
+      "text": "Где твоя́ ___?",
+      "options": ["газе́та", "газе́ту", "газе́ты"],
+      "answer": 0,
+      "why": "The noun is the subject: use the naming form, -а.",
+      "word": "Где твоя́ газе́та?",
+      "reserve": true
+    },
+    {
+      "text": "Я ищу́ ___.",
+      "options": ["газе́та", "газе́ту", "газе́ты"],
+      "answer": 1,
+      "en": "I am looking for the newspaper (one).",
+      "why": "The thing being sought is the direct object: -а becomes -у.",
+      "word": "Я ищу́ газе́ту.",
+      "reserve": false
+    },
+    {
+      "text": "Он ви́дит ___.",
+      "options": ["газе́та", "газе́ту", "газе́ты"],
+      "answer": 1,
+      "en": "He sees the newspaper (one).",
+      "why": "The thing being seen is the direct object: -а becomes -у.",
+      "word": "Он ви́дит газе́ту.",
+      "reserve": true
+    },
+    {
+      "text": "У меня́ нет ___.",
+      "options": ["газе́та", "газе́ту", "газе́ты"],
+      "answer": 2,
+      "why": "After нет, use the genitive: -и after г, otherwise -ы here.",
+      "word": "У меня́ нет газе́ты.",
+      "reserve": false
+    },
+    {
+      "text": "Здесь нет ___.",
+      "options": ["газе́та", "газе́ту", "газе́ты"],
+      "answer": 2,
+      "why": "After нет, use the genitive: -и after г, otherwise -ы here.",
+      "word": "Здесь нет газе́ты.",
+      "reserve": false
+    },
+    {
+      "text": "Э́та ___ моя́.",
+      "options": ["ко́мната", "ко́мнату", "ко́мнаты"],
+      "answer": 0,
+      "why": "The noun is the subject: use the naming form, -а.",
+      "word": "Э́та ко́мната моя́.",
+      "reserve": false
+    },
+    {
+      "text": "Где твоя́ ___?",
+      "options": ["ко́мната", "ко́мнату", "ко́мнаты"],
+      "answer": 0,
+      "why": "The noun is the subject: use the naming form, -а.",
+      "word": "Где твоя́ ко́мната?",
+      "reserve": true
+    },
+    {
+      "text": "Я ищу́ ___.",
+      "options": ["ко́мната", "ко́мнату", "ко́мнаты"],
+      "answer": 1,
+      "en": "I am looking for the room (one).",
+      "why": "The thing being sought is the direct object: -а becomes -у.",
+      "word": "Я ищу́ ко́мнату.",
+      "reserve": false
+    },
+    {
+      "text": "Он ви́дит ___.",
+      "options": ["ко́мната", "ко́мнату", "ко́мнаты"],
+      "answer": 1,
+      "en": "He sees the room (one).",
+      "why": "The thing being seen is the direct object: -а becomes -у.",
+      "word": "Он ви́дит ко́мнату.",
+      "reserve": true
+    },
+    {
+      "text": "У меня́ нет ___.",
+      "options": ["ко́мната", "ко́мнату", "ко́мнаты"],
+      "answer": 2,
+      "why": "After нет, use the genitive: -и after г, otherwise -ы here.",
+      "word": "У меня́ нет ко́мнаты.",
+      "reserve": false
+    },
+    {
+      "text": "Здесь нет ___.",
+      "options": ["ко́мната", "ко́мнату", "ко́мнаты"],
+      "answer": 2,
+      "why": "After нет, use the genitive: -и after г, otherwise -ы here.",
+      "word": "Здесь нет ко́мнаты.",
+      "reserve": false
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "scenes": [
+    {
+      "title": "Here and there",
+      "ru": "Тут и там",
+      "goal": "Find out what is here and what is over there",
+      "frames": [
+        { "ru": "Что э́то?", "en": "what is this?" },
+        { "ru": "Где …?", "en": "where is …?" }
+      ],
+      "secret": "The cat is here; the house is over there"
+    },
+    {
+      "title": "At the table",
+      "ru": "За столо́м",
+      "goal": "Ask what is on the table and ask for water or bread",
+      "frames": [
+        { "ru": "Что на столе́?", "en": "what is on the table?" },
+        { "ru": "Да́йте, пожа́луйста, …", "en": "please give me …" }
+      ],
+      "secret": "There is bread, soup, and water on the table"
+    },
+    {
+      "title": "At breakfast",
+      "ru": "За за́втраком",
+      "goal": "Find out what there is to drink and order one thing",
+      "frames": [
+        { "ru": "Что есть …?", "en": "what is there …?" },
+        { "ru": "Я хочу́ …", "en": "I want …" }
+      ],
+      "secret": "There is tea and milk, but no coffee"
+    },
+    {
+      "title": "Whose is it?",
+      "ru": "Чьё э́то?",
+      "goal": "Find out where the book and the letter are",
+      "frames": [
+        { "ru": "Где он / она́ / оно́?", "en": "where is it?" }
+      ],
+      "secret": "The book is on the table and the letter is in the bag"
+    },
+    {
+      "title": "Speaking Russian",
+      "ru": "По-ру́сски",
+      "goal": "Find out which languages your partner speaks",
+      "frames": [
+        { "ru": "Вы говори́те по-…?", "en": "do you speak …?" }
+      ],
+      "secret": "Speaks Russian and a little English"
+    },
+    {
+      "title": "In a shop",
+      "ru": "В магази́не",
+      "goal": "Find out whether they have bread, and how much it costs",
+      "frames": [
+        { "ru": "У вас есть …?", "en": "do you have …?" },
+        { "ru": "Ско́лько сто́ит …?", "en": "how much is …?" }
+      ],
+      "secret": "The shop has bread (40 roubles) and milk, but no cheese today."
+    },
+    {
+      "title": "About a book you read",
+      "ru": "О кни́ге, кото́рую вы чита́ли",
+      "goal": "Tell them what you are reading and find out what they read",
+      "frames": [
+        { "ru": "Я чита́ю …", "en": "I am reading …" },
+        { "ru": "А что вы чита́ете?", "en": "and what do you read?" }
+      ],
+      "secret": "You read a book about space; you don't like poetry."
+    },
+    {
+      "title": "Who is at home?",
+      "ru": "Кто до́ма?",
+      "goal": "Find out who is at home right now and where the cat is",
+      "frames": [
+        { "ru": "Кто до́ма?", "en": "who is at home?" },
+        { "ru": "Где кот?", "en": "where is the cat?" }
+      ],
+      "secret": "Mom and dad are at home; the cat is in the kitchen."
+    },
+    {
+      "title": "My family",
+      "ru": "Моя́ семья́",
+      "goal": "Ask about your partner's brother or sister and what they love",
+      "frames": [
+        { "ru": "У вас есть …?", "en": "do you have …?" },
+        { "ru": "Что он / она́ лю́бит?", "en": "what does he / she love?" }
+      ],
+      "secret": "Has one sister who loves music and tea."
+    },
+    {
+      "title": "In the kitchen",
+      "ru": "На ку́хне",
+      "goal": "Find out what you have in the kitchen and what is missing",
+      "frames": [
+        { "ru": "У нас есть …?", "en": "do we have …?" },
+        { "ru": "У нас нет …", "en": "we don't have …" }
+      ],
+      "secret": "There is bread and cheese, but no salt and no milk."
+    },
+    {
+      "title": "How many?",
+      "ru": "Ско́лько?",
+      "goal": "Find out how many cups and chairs are in the room",
+      "frames": [
+        { "ru": "Ско́лько здесь …?", "en": "how many … are here?" },
+        { "ru": "Здесь …", "en": "there are … here" }
+      ],
+      "secret": "There are four chairs and three cups on the table."
+    },
+    {
+      "title": "In the city",
+      "ru": "В го́роде",
+      "goal": "Find out where your partner is right now and what they see",
+      "frames": [
+        { "ru": "Где вы сейча́с?", "en": "where are you now?" },
+        { "ru": "Что вы ви́дите?", "en": "what do you see?" }
+      ],
+      "secret": "Sitting by a window in the city; sees a street and an old house."
+    },
+    {
+      "title": "Yesterday evening",
+      "ru": "Вчера́ ве́чером",
+      "goal": "Find out where your partner was yesterday evening and what they did",
+      "frames": [
+        { "ru": "Где вы бы́ли вчера́?", "en": "where were you yesterday?" },
+        { "ru": "Что вы де́лали?", "en": "what were you doing?" }
+      ],
+      "secret": "Was at home yesterday evening, reading a book and having dinner."
+    },
+    {
+      "title": "Tomorrow's plan",
+      "ru": "Пла́ны на за́втра",
+      "goal": "Find out when your partner is free tomorrow and agree on a time",
+      "frames": [
+        { "ru": "Что вы бу́дете де́лать за́втра?", "en": "what will you do tomorrow?" },
+        { "ru": "Когда́ …?", "en": "when …?" }
+      ],
+      "secret": "Busy in the morning, free after lunch."
+    },
+    {
+      "title": "Going to the city",
+      "ru": "Пое́здка в го́род",
+      "goal": "Find out where your partner is going today and how they are getting there",
+      "frames": [
+        { "ru": "Куда́ вы идёте?", "en": "where are you going?" },
+        { "ru": "На чём вы е́дете?", "en": "how are you travelling?" }
+      ],
+      "secret": "Going to work in the city by metro."
+    },
+    {
+      "title": "A message from space",
+      "ru": "Сигна́л из ко́смоса",
+      "goal": "Find out what the station heard and which planet it came from",
+      "frames": [
+        { "ru": "Что вы слы́шали?", "en": "what did you hear?" },
+        { "ru": "Отку́да э́то?", "en": "where is it from?" }
+      ],
+      "secret": "Heard three numbers from a distant planet at night."
+    },
+    {
+      "title": "A number problem",
+      "ru": "Зада́ча о чи́слах",
+      "goal": "Find out which number your partner is thinking of",
+      "frames": [
+        { "ru": "Э́то число́ бо́льше …?", "en": "is this number greater than …?" },
+        { "ru": "Э́то чётное число́?", "en": "is it an even number?" }
+      ],
+      "secret": "The number is twelve: even, greater than ten, less than fifteen."
+    },
+    {
+      "title": "Why Russian?",
+      "ru": "Почему́ ру́сский?",
+      "goal": "Find out why your partner is reading this book and tell them your reason",
+      "frames": [
+        { "ru": "Почему́ вы чита́ете …?", "en": "why are you reading …?" },
+        { "ru": "Потому́ что …", "en": "because …" }
+      ],
+      "secret": "Reading Tolstoy in the original because translations miss the voice."
+    }
+  ]
+}

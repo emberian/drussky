@@ -58,6 +58,7 @@ struct Course: Codable, Sendable {
         var title: String
         var subtitle: String?
         var pages: [Page]
+        var teaches_cursive: Bool? = nil
     }
 
     struct Page: Codable, Sendable, Identifiable {
@@ -83,6 +84,12 @@ struct Course: Codable, Sendable {
     /// Flattened, ordered list of authored pages with their unit.
     var pageSequence: [(unit: Unit, page: Page)] {
         units.flatMap { unit in unit.pages.map { (unit, $0) } }
+    }
+
+    /// Unit IDs marked `teaches_cursive: true` in `course.json` (falling back to `["u31"]`).
+    var cursiveUnitIDs: Set<String> {
+        let ids = Set(units.filter { $0.teaches_cursive == true }.map(\.id))
+        return ids.isEmpty ? ["u31"] : ids
     }
 }
 

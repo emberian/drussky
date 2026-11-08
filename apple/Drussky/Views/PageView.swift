@@ -83,30 +83,31 @@ struct PageView: View {
     private func header(_ page: BookPage) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(alignment: .firstTextBaseline) {
-                Text(Self.russianDate(page.created))
+                Text(Theme.passageStressed(Self.russianDate(page.created), show: book.settings.showStress))
                     .font(Theme.cursive(compact ? 26 : 32))
                     .foregroundStyle(Theme.ink)
                 Spacer()
-                Text(page.isReview ? "Повторе́ние" : "Кла́ссная рабо́та")
+                Text(Theme.passageStressed(page.isReview ? "Повторе́ние" : "Кла́ссная рабо́та", show: book.settings.showStress))
                     .font(Theme.cursive(compact ? 22 : 28))
                     .foregroundStyle(Theme.ink)
             }
             .padding(.trailing, 12)
-            Text(page.unitTitle.uppercased())
+            Text(Theme.passageStressed(page.unitTitle.uppercased(), show: book.settings.showStress))
                 .font(Theme.label(12))
                 .tracking(1.6)
                 .foregroundStyle(Theme.accent)
                 .padding(.top, 4)
-            Text(page.title)
+            Text(Theme.passageStressed(page.title, show: book.settings.showStress))
                 .font(.system(size: compact ? 28 : 34, weight: .bold, design: .serif))
                 .foregroundStyle(Theme.text)
+                .accessibilityLabel(page.title)
             if page.isGoalFirstPage { FirstPageStamp() }
             if page.number == 1 {
                 HowThisBookWorks()
                     .padding(.vertical, 6)
             }
             if let intro = page.intro {
-                Text(Theme.stressed(intro, show: book.settings.showStress))
+                Text(Theme.passageStressed(intro, show: book.settings.showStress))
                     .scaledFont(18)
                     .lineSpacing(3)
                     .foregroundStyle(Theme.text.opacity(0.82))
@@ -127,7 +128,7 @@ struct PageView: View {
                 HStack(alignment: .center, spacing: 18) {
                     GradeStamp(page: page)
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(GradeStamp.praise(for: page))
+                        Text(Theme.passageStressed(GradeStamp.praise(for: page), show: book.settings.showStress))
                             .font(Theme.cursive(34))
                             .foregroundStyle(Theme.redPen)
                         Text(summary(page))

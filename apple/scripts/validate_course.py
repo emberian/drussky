@@ -442,8 +442,10 @@ def main():
     known, met, ids = set(), [], set()
     letter_rows = {l["upper"]: l for l in letters}
     for u in course["units"]:
-        if set(u) - {"id", "title", "subtitle", "pages"} or not {"id", "title", "pages"} <= set(u):
+        if set(u) - {"id", "title", "subtitle", "pages", "teaches_cursive"} or not {"id", "title", "pages"} <= set(u):
             err(u.get("id"), f"unit keys {sorted(u)}")
+        if "teaches_cursive" in u and not isinstance(u["teaches_cursive"], bool):
+            err(u.get("id"), "teaches_cursive must be a boolean")
         if u["id"] in ids:
             err(u["id"], "duplicate id")
         ids.add(u["id"])

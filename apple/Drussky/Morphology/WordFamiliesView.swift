@@ -66,24 +66,25 @@ struct WordFamiliesSection: View {
 
 /// One root with its family around it.
 struct FamilyHub: View {
+    @Environment(Book.self) private var book
     let hub: WordFamiliesSection.Hub
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(hub.root.label).font(Theme.russian(20, weight: .semibold)).foregroundStyle(Theme.text)
+                Text(Theme.passageStressed(hub.root.label, show: book.settings.showStress)).font(Theme.russian(20, weight: .semibold)).foregroundStyle(Theme.text)
                 Text(hub.root.gloss).font(.system(size: 14)).foregroundStyle(Theme.muted).lineLimit(1)
                 Spacer(minLength: 0)
                 Text("\(hub.known.count)/\(hub.known.count + hub.unknown.count)").font(Theme.label(12)).foregroundStyle(Theme.muted).monospacedDigit()
             }
             FlowRow(spacing: 6) {
                 ForEach(hub.known, id: \.0) { word, s in
-                    Text(word).font(Theme.russian(15)).foregroundStyle(Theme.text)
+                    Text(Theme.passageStressed(word, show: book.settings.showStress)).font(Theme.russian(15)).foregroundStyle(Theme.text)
                         .padding(.horizontal, 8).padding(.vertical, 3)
                         .background(Capsule().fill(Theme.accent.opacity(0.1 + 0.4 * s)))
                 }
                 ForEach(hub.unknown.prefix(6), id: \.self) { word in
-                    Text(word).font(Theme.russian(15)).foregroundStyle(Theme.muted.opacity(0.7))
+                    Text(Theme.passageStressed(word, show: book.settings.showStress)).font(Theme.russian(15)).foregroundStyle(Theme.muted.opacity(0.7))
                         .padding(.horizontal, 8).padding(.vertical, 3)
                         .overlay(Capsule().strokeBorder(Theme.muted.opacity(0.3), lineWidth: 1))
                 }
@@ -115,11 +116,11 @@ struct FamilyView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack(alignment: .firstTextBaseline, spacing: 14) {
-                            Text(root.label).font(Theme.russian(40, weight: .semibold)).foregroundStyle(Theme.text)
+                            Text(Theme.passageStressed(root.label, show: book.settings.showStress)).font(Theme.russian(40, weight: .semibold)).foregroundStyle(Theme.text)
                             Text(root.gloss).font(.system(size: 20)).foregroundStyle(Theme.text)
                         }
                         if let note = root.note {
-                            Text(Theme.stressed(note, show: book.settings.showStress)).font(.system(size: 15)).foregroundStyle(Theme.muted)
+                            Text(Theme.passageStressed(note, show: book.settings.showStress)).font(.system(size: 15)).foregroundStyle(Theme.muted)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                         if let s = k.model.strength(ComponentID(.root, rootID), at: t) {
@@ -142,7 +143,7 @@ struct FamilyView: View {
             }
         }
         .background(GridPaper(marginX: nil))
-        .navigationTitle(m.root(rootID)?.label ?? rootID)
+        .navigationTitle(RussianText.unstressed(m.root(rootID)?.label ?? rootID))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         .sheet(item: $history) { id in
@@ -158,7 +159,7 @@ struct FamilyView: View {
             HearButton(text: e.ru, size: 30)
             VStack(alignment: .leading, spacing: 3) {
                 HStack(alignment: .firstTextBaseline, spacing: 10) {
-                    Text(Theme.stressed(e.ru, show: book.settings.showStress)).font(Theme.russian(22, weight: .medium))
+                    Text(Theme.passageStressed(e.ru, show: book.settings.showStress)).font(Theme.russian(22, weight: .medium))
                         .foregroundStyle(known ? Theme.text : Theme.muted)
                     Text(e.en).font(.system(size: 15)).foregroundStyle(known ? Theme.text : Theme.muted)
                     if let s = strength {
@@ -168,11 +169,11 @@ struct FamilyView: View {
                     }
                 }
                 HStack(spacing: 6) {
-                    Text(e.morphemes.map { RussianText.unstressed($0) }.joined(separator: " · ")).font(Theme.russian(14)).foregroundStyle(Theme.muted)
-                    if let base = e.base, base != e.key { Text("← \(base)").font(.system(size: 13)).foregroundStyle(Theme.muted) }
+                    Text(Theme.passageStressed(e.morphemes.joined(separator: " · "), show: book.settings.showStress)).font(Theme.russian(14)).foregroundStyle(Theme.muted)
+                    if let base = e.base, base != e.key { Text(Theme.passageStressed("← \(base)", show: book.settings.showStress)).font(.system(size: 13)).foregroundStyle(Theme.muted) }
                 }
                 if let note = e.note ?? e.loan {
-                    Text(Theme.stressed(note, show: book.settings.showStress)).font(.system(size: 13)).foregroundStyle(Theme.muted)
+                    Text(Theme.passageStressed(note, show: book.settings.showStress)).font(.system(size: 13)).foregroundStyle(Theme.muted)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }

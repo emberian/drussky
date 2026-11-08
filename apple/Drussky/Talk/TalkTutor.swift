@@ -48,6 +48,21 @@ enum TalkTutor {
 
     // MARK: Scenes
 
+    private struct ScenesFile: Codable {
+        var version: Int
+        var scenes: [TalkScene]
+    }
+
+    /// Bundled fallback/starter conversation scenes decoded from `talk-scenes.json`.
+    nonisolated static let scenes: [TalkScene] = {
+        guard let url = Bundle.main.url(forResource: "talk-scenes", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let file = try? JSONDecoder().decode(ScenesFile.self, from: data) else {
+            return []
+        }
+        return file.scenes
+    }()
+
     /// Every scene is an information gap: the tutor holds facts the learner lacks, the learner
     /// has something to find out or get done, so there is a reason to listen and to answer.
     static let scenesSystem = """

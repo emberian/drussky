@@ -111,34 +111,26 @@ extension RussianText {
 /// Prompts for the ＋ menu's diary page, unlocked by the units the learner has reached.
 /// Each uses only topics whose words the course has taught by then.
 enum DiaryPrompts {
-    static let bank: [(unit: String, prompt: String)] = [
-        ("u3", "What is this? Point at three things around you: Э́то…"),
-        ("u3", "Who is at home right now?"),
-        ("u4", "Where is everything? Say where three things are."),
-        ("u4", "Describe your room: what is here, what is there."),
-        ("u5", "What do you love? Two or three things."),
-        ("u5", "Who is in your family? Name them with мой, моя́."),
-        ("u6", "What are you reading or thinking about today?"),
-        ("u6", "What is on the table? Use то́же."),
-        ("u7", "Say hello to someone and ask how they are."),
-        ("u13", "Write what you say at breakfast, from good morning to thank you."),
-        ("u14", "What did you eat today? What do you want tomorrow?"),
-        ("u14", "Order coffee or tea the way you like it."),
-        ("u8", "Describe three things with но́вый, но́вая, но́вое or ста́рый."),
-        ("u15", "Count what is in your room: how many of what?"),
-        ("u9", "Ask three questions you would like answered."),
-        ("u10", "What do you have, and what don't you have?"),
-        ("u11", "What are you reading? What do you know? Three sentences."),
-        ("u18", "Where are you now, and what do you see?"),
-        ("u12", "Which languages do you speak and understand, and how well?"),
-        ("u16", "A thought you had today, in one sentence."),
-        ("u17", "What did you do yesterday? Three sentences in the past."),
-        ("u17", "What will you do tomorrow?"),
-        ("u19", "Where did you go today, and how?"),
-        ("u20", "Write a message to a robot on a space station."),
-        ("u21", "State a small mathematical fact in Russian."),
-        ("u22", "Something you know, and something you don't."),
-    ]
+    struct Entry: Codable, Sendable, Hashable {
+        var unit: String
+        var prompt: String
+    }
+
+    private struct File: Codable {
+        var version: Int
+        var prompts: [Entry]
+    }
+
+    static let entries: [Entry] = {
+        guard let url = Bundle.main.url(forResource: "diary-prompts", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let file = try? JSONDecoder().decode(File.self, from: data) else {
+            return []
+        }
+        return file.prompts
+    }()
+
+    static let bank: [(unit: String, prompt: String)] = entries.map { ($0.unit, $0.prompt) }
 
     /// A prompt for a unit the learner has reached, least recently used first.
     @MainActor

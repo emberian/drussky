@@ -7,43 +7,62 @@ extension Modality { static let constructionChoice: Modality = "construction-cho
 enum ConstructionChoice {
     static let key = "construction:noun-a-case"
     static let component = ComponentID(.construction, "noun-a-case")
-    static func reservedForProbe(_ ex: Exercise) -> Bool {
-        ex.text == "Где твоя́ ___?" || ex.text == "Он ви́дит ___."
+
+    struct Item: Codable, Sendable, Hashable {
+        var text: String
+        var options: [String]
+        var answer: Int
+        var en: String? = nil
+        var why: String
+        var word: String
+        var reserve: Bool = false
+
+        var exercise: Exercise {
+            var ex = Exercise(kind: .constructionChoice)
+            ex.text = text
+            ex.options = options
+            ex.answerIndex = answer
+            ex.en = en
+            ex.hint = why
+            ex.skills = [ConstructionChoice.component.key]
+            ex.word = word
+            return ex
+        }
     }
 
-    /// The decision, not sentence copying, is the target. Each sentence is offered at most once.
-    static let bank: [Exercise] = {
-        var out: [Exercise] = []
-        let nouns = [("book", ["кни́га", "кни́гу", "кни́ги"]),
-                     ("newspaper", ["газе́та", "газе́ту", "газе́ты"]),
-                     ("room", ["ко́мната", "ко́мнату", "ко́мнаты"])]
-        for (noun, forms) in nouns {
-            let frames: [(String, Int, String)] = [
-                ("Э́та ___ моя́.", 0, "The noun is the subject: use the naming form, -а."),
-                ("Где твоя́ ___?", 0, "The noun is the subject: use the naming form, -а."),
-                ("Я ищу́ ___.", 1, "The thing being sought is the direct object: -а becomes -у."),
-                ("Он ви́дит ___.", 1, "The thing being seen is the direct object: -а becomes -у."),
-                ("У меня́ нет ___.", 2, "After нет, use the genitive: -и after г, otherwise -ы here."),
-                ("Здесь нет ___.", 2, "After нет, use the genitive: -и after г, otherwise -ы here.")
-            ]
-            for (frame, answer, reason) in frames {
-                var ex = Exercise(kind: .constructionChoice)
-                ex.text = frame
-                ex.options = forms
-                ex.answerIndex = answer
-                // The plural accusative looks like the singular genitive. State the intended
-                // singular meaning so both книгу and книги cannot answer the same prompt.
-                if frame == "Я ищу́ ___." { ex.en = "I am looking for the \(noun) (one)." }
-                if frame == "Он ви́дит ___." { ex.en = "He sees the \(noun) (one)." }
-                ex.hint = reason
-                ex.skills = [component.key]
-                // A stable identity for the sentence, independent of the options' display order.
-                ex.word = frame.replacingOccurrences(of: "___", with: forms[answer])
-                out.append(ex)
-            }
+    private struct File: Codable {
+        var version: Int
+        var intro: String
+        var examples: String? = nil
+        var diary_prompt: String? = nil
+        var items: [Item]
+    }
+
+    private static let loaded: File = {
+        guard let url = Bundle.main.url(forResource: "constructions", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let file = try? JSONDecoder().decode(File.self, from: data) else {
+            return File(version: 1, intro: "", items: [])
         }
-        return out
+        return file
     }()
+
+    static let intro: String = loaded.intro
+    static let examples: String = loaded.examples ?? ""
+    static let diaryPrompt: String = loaded.diary_prompt ?? ""
+    static let items: [Item] = loaded.items
+
+    /// The decision, not sentence copying, is the target. Each sentence is offered at most once.
+    static let bank: [Exercise] = loaded.items.map(\.exercise)
+
+    private static let reservedWords: Set<String> = Set(loaded.items.filter(\.reserve).map(\.word))
+    private static let reservedTexts: Set<String> = Set(loaded.items.filter(\.reserve).map(\.text))
+
+    static func reservedForProbe(_ ex: Exercise) -> Bool {
+        if let word = ex.word, reservedWords.contains(word) { return true }
+        if let text = ex.text, reservedTexts.contains(text) { return true }
+        return false
+    }
 }
 
 @MainActor
@@ -67,15 +86,15 @@ extension Book {
     func openConstructionPractice(force: Bool = false) -> Bool {
         guard force || (canOpenConstructionPractice && freshConstructionChoices.count >= 3) else { return false }
         var intro = Exercise(kind: .explain)
-        intro.text = "First follow one noun through three roles. Then choose an ending in new sentences: who or what, the direct object, or what is absent."
+        intro.text = ConstructionChoice.intro
         // These explanations are text-only (no new spoken strings are requested), so the three
         // sentences are lines of one note: each Russian line with its English under it, never mixed.
         var examples = Exercise(kind: .explain)
-        examples.text = "Кни́га здесь.\nThe book is here.\n\nЯ чита́ю кни́гу.\nI am reading the book.\n\nЗдесь нет кни́ги.\nThere is no book here."
+        examples.text = ConstructionChoice.examples
         let pool = force && freshConstructionChoices.count < 3 ? ConstructionChoice.bank : freshConstructionChoices
         let choices = Array(pool.filter { !ConstructionChoice.reservedForProbe($0) }.prefix(3))
         var diary = Exercise(kind: .diary)
-        diary.prompt = "Something you have, something you need, and something you cannot find. Use your own words."
+        diary.prompt = ConstructionChoice.diaryPrompt
         insertWrittenPage(title: "Which ending fits?", intro: "Follow the noun’s job in the sentence.", unitTitle: "Construction practice",
                           exercises: [intro, examples] + choices + [diary], newWords: [], sourceID: ConstructionChoice.key)
         return true

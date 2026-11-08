@@ -67,8 +67,9 @@ enum CursivePages {
     static func addHandwriting(_ book: Book) -> String? {
         let exercises = book.readHandwritingExercises()
         guard exercises.count >= 4 else { return "A few more words first: this page is made from words you have already written." }
+        let unitTitle = book.course.units.first { book.course.cursiveUnitIDs.contains($0.id) }?.title ?? "Cursive"
         book.insertWrittenPage(title: "Read handwriting", intro: "Words you know, in other people's hands. Read them the way you would a note on the table.",
-                               unitTitle: "Cursive", exercises: exercises, newWords: [])
+                               unitTitle: unitTitle, exercises: exercises, newWords: [])
         return nil
     }
 }

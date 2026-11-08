@@ -26,7 +26,7 @@ final class DiaryTests: XCTestCase {
         let c = try course()
         let firstDiaryUnit = try XCTUnwrap(c.units.firstIndex { $0.pages.contains { $0.exercises.contains { $0.kind == .diary } } })
         XCTAssertGreaterThanOrEqual(firstDiaryUnit, 1, "initial alphabet units have no diary prompt")
-        for (unitIndex, unit) in c.units.enumerated() where !unit.id.hasPrefix("g") && unit.id != Book.cursiveUnitID {
+        for (unitIndex, unit) in c.units.enumerated() where !unit.id.hasPrefix("g") && unit.id != Book.cursiveUnitID && unit.teaches_cursive != true {
             for page in unit.pages {
                 let diaries = page.exercises.filter { $0.kind == .diary }
                 if unitIndex < firstDiaryUnit {

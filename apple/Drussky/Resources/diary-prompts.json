@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "prompts": [
+    { "unit": "u3", "prompt": "What is this? Point at three things around you: Э́то…" },
+    { "unit": "u3", "prompt": "Who is at home right now?" },
+    { "unit": "u4", "prompt": "Where is everything? Say where three things are." },
+    { "unit": "u4", "prompt": "Describe your room: what is here, what is there." },
+    { "unit": "u5", "prompt": "What do you love? Two or three things." },
+    { "unit": "u5", "prompt": "Who is in your family? Name them with мой, моя́." },
+    { "unit": "u6", "prompt": "What are you reading or thinking about today?" },
+    { "unit": "u6", "prompt": "What is on the table? Use то́же." },
+    { "unit": "u7", "prompt": "Say hello to someone and ask how they are." },
+    { "unit": "u13", "prompt": "Write what you say at breakfast, from good morning to thank you." },
+    { "unit": "u14", "prompt": "What did you eat today? What do you want tomorrow?" },
+    { "unit": "u14", "prompt": "Order coffee or tea the way you like it." },
+    { "unit": "u8", "prompt": "Describe three things with но́вый, но́вая, но́вое or ста́рый." },
+    { "unit": "u15", "prompt": "Count what is in your room: how many of what?" },
+    { "unit": "u9", "prompt": "Ask three questions you would like answered." },
+    { "unit": "u10", "prompt": "What do you have, and what don't you have?" },
+    { "unit": "u11", "prompt": "What are you reading? What do you know? Three sentences." },
+    { "unit": "u18", "prompt": "Where are you now, and what do you see?" },
+    { "unit": "u12", "prompt": "Which languages do you speak and understand, and how well?" },
+    { "unit": "u16", "prompt": "A thought you had today, in one sentence." },
+    { "unit": "u17", "prompt": "What did you do yesterday? Three sentences in the past." },
+    { "unit": "u17", "prompt": "What will you do tomorrow?" },
+    { "unit": "u19", "prompt": "Where did you go today, and how?" },
+    { "unit": "u20", "prompt": "Write a message to a robot on a space station." },
+    { "unit": "u21", "prompt": "State a small mathematical fact in Russian." },
+    { "unit": "u22", "prompt": "Something you know, and something you don't." }
+  ]
+}

@@ -16,9 +16,9 @@ struct ShelfOfferCard: View {
                 ForEach(items) { item in
                     HStack(alignment: .firstTextBaseline, spacing: 14) {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(Theme.stressed(item.place, show: book.settings.showStress)).font(Theme.label(12)).tracking(1.2).foregroundStyle(Theme.accent)
+                            Text(Theme.passageStressed(item.place, show: book.settings.showStress)).font(Theme.label(12)).tracking(1.2).foregroundStyle(Theme.accent)
                             HStack(spacing: 8) {
-                                Text(Theme.stressed("«\(item.title)»", show: book.settings.showStress)).russianFont(22, weight: .medium).foregroundStyle(Theme.text)
+                                Text(Theme.passageStressed("«\(item.title)»", show: book.settings.showStress)).russianFont(22, weight: .medium).foregroundStyle(Theme.text)
                                 if let en = item.titleEn { Text(en).scaledFont(14).foregroundStyle(Theme.muted) }
                             }
                             Text(item.kind == .listening ? "You can listen to this now." : "You can read this now.")
@@ -116,12 +116,12 @@ struct ShelfItemRow: View {
                     .foregroundStyle(Theme.muted).frame(width: 28, alignment: .trailing)
                 VStack(alignment: .leading, spacing: 3) {
                     HStack(spacing: 8) {
-                        Text(Theme.stressed(item.title, show: book.settings.showStress)).font(Theme.russian(20, weight: .medium))
+                        Text(Theme.passageStressed(item.title, show: book.settings.showStress)).font(Theme.russian(20, weight: .medium))
                             .foregroundStyle(ready || opened ? Theme.text : Theme.text.opacity(0.6))
                         if let en = item.titleEn { Text(en).font(.system(size: 14)).foregroundStyle(.secondary) }
                     }
                     if let summary { Text(summary).font(.system(size: 13)).foregroundStyle(.secondary).lineLimit(2) }
-                    Text(status(opened: opened, ready: ready)).font(.system(size: 13)).foregroundStyle(.secondary)
+                    Text(Theme.passageStressed(status(opened: opened, ready: ready), show: book.settings.showStress)).font(.system(size: 13)).foregroundStyle(.secondary)
                 }
                 Spacer()
                 if let level { Text(level).font(Theme.label(12)).foregroundStyle(Theme.muted) }
@@ -226,10 +226,10 @@ struct ShelvesSection: View {
         return HStack(spacing: 14) {
             VStack(alignment: .leading, spacing: 3) {
                 HStack(spacing: 8) {
-                    Text(Theme.stressed(title, show: book.settings.showStress)).font(Theme.russian(20, weight: .medium)).foregroundStyle(Theme.text)
+                    Text(Theme.passageStressed(title, show: book.settings.showStress)).font(Theme.russian(20, weight: .medium)).foregroundStyle(Theme.text)
                     if let titleEn { Text(titleEn).font(.system(size: 14)).foregroundStyle(Theme.muted) }
                 }
-                Text(line(opened: opened, total: items.count, next: next, unit: unit)).font(.system(size: 13)).foregroundStyle(Theme.muted)
+                Text(Theme.passageStressed(line(opened: opened, total: items.count, next: next, unit: unit), show: book.settings.showStress)).font(.system(size: 13)).foregroundStyle(Theme.muted)
             }
             Spacer()
             Image(systemName: "chevron.right").font(.system(size: 13, weight: .semibold)).foregroundStyle(Theme.muted)

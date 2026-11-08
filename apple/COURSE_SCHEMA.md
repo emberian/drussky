@@ -38,8 +38,10 @@ memorable line in the tutor's voice.
 ### Unit
 ```json
 { "id": "u3", "title": "Pronouns", "subtitle": "я ты он она оно мы вы они",
+  "teaches_cursive": true,
   "pages": [Page, …] }
 ```
+`subtitle` and `teaches_cursive` (boolean, `true` on the cursive unit) are optional.
 
 ### Page
 ```json

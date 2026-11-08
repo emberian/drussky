@@ -41,7 +41,7 @@ struct GrammarSection: View {
                     ForEach(summaries, id: \.0.id) { table, s in
                         Button { openTable = TableKey(id: table.id) } label: {
                             HStack(spacing: 6) {
-                                Text(Theme.stressed(table.title, show: true)).font(.system(size: 14, weight: .medium)).foregroundStyle(s.filled == 0 ? Theme.muted : Theme.text).lineLimit(1)
+                                Text(Theme.passageStressed(table.title, show: book.settings.showStress)).font(.system(size: 14, weight: .medium)).foregroundStyle(s.filled == 0 ? Theme.muted : Theme.text).lineLimit(1)
                                 Text("\(s.filled)/\(s.total)").font(Theme.label(11)).foregroundStyle(Theme.muted).monospacedDigit()
                             }
                             .padding(.horizontal, 10).padding(.vertical, 6)
@@ -131,27 +131,27 @@ struct ParadigmTableCard: View {
         VStack(alignment: .leading, spacing: 8) {
             Button(action: onTitle) {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text(table.title).font(.system(size: compact ? 16 : 22, weight: .semibold, design: .serif)).foregroundStyle(Theme.text)
-                    if !compact { Text(table.subtitle).font(.system(size: 14)).foregroundStyle(Theme.muted) }
+                    Text(Theme.passageStressed(table.title, show: book.settings.showStress)).font(.system(size: compact ? 16 : 22, weight: .semibold, design: .serif)).foregroundStyle(Theme.text)
+                    if !compact { Text(Theme.passageStressed(table.subtitle, show: book.settings.showStress)).font(.system(size: 14)).foregroundStyle(Theme.muted) }
                     Spacer(minLength: 0)
                     Text("\(summary.filled)/\(summary.total)").font(Theme.label(12)).foregroundStyle(Theme.muted).monospacedDigit()
                 }
             }
             .buttonStyle(.plain)
             .accessibilityLabel("\(table.title): \(summary.filled) of \(summary.total) cells met")
-            if compact { Text(table.subtitle).font(.system(size: 12)).foregroundStyle(Theme.muted).lineLimit(1) }
+            if compact { Text(Theme.passageStressed(table.subtitle, show: book.settings.showStress)).font(.system(size: 12)).foregroundStyle(Theme.muted).lineLimit(1) }
             Grid(alignment: .leading, horizontalSpacing: 4, verticalSpacing: 4) {
                 if table.cols.count > 1 {
                     GridRow {
                         Color.clear.frame(width: 1, height: 1)
                         ForEach(table.cols) { col in
-                            Text(Theme.stressed(col.label, show: true)).font(Theme.label(compact ? 10 : 12)).foregroundStyle(Theme.muted).lineLimit(1)
+                            Text(Theme.passageStressed(col.label, show: book.settings.showStress)).font(Theme.label(compact ? 10 : 12)).foregroundStyle(Theme.muted).lineLimit(1)
                         }
                     }
                 }
                 ForEach(table.rows) { row in
                     GridRow {
-                        Text(Theme.stressed(row.label, show: true)).font(Theme.label(compact ? 10 : 12)).foregroundStyle(Theme.muted).lineLimit(1)
+                        Text(Theme.passageStressed(row.label, show: book.settings.showStress)).font(Theme.label(compact ? 10 : 12)).foregroundStyle(Theme.muted).lineLimit(1)
                             .frame(minWidth: compact ? 36 : 60, alignment: .leading)
                         ForEach(table.cols) { col in
                             if let cell = table.cell(row: row.id, col: col.id) {
@@ -226,7 +226,7 @@ struct TableSheet: View {
         ScrollView {
             if let table = p.table(tableID) {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text(Theme.stressed(table.note, show: book.settings.showStress)).font(.system(size: 16)).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
+                    Text(Theme.passageStressed(table.note, show: book.settings.showStress)).font(.system(size: 16)).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
                     ParadigmTableCard(table: table, compact: false, onCell: { openCell = $0 })
                     if !table.words.isEmpty {
                         Text("Words in this table").font(Theme.label(13)).foregroundStyle(Theme.muted)
@@ -234,7 +234,7 @@ struct TableSheet: View {
                             ForEach(table.words, id: \.self) { key in
                                 if let w = p.words[key] {
                                     let known = book.knowledge.model.hasEvidence(ComponentID(.lexeme, w.key))
-                                    Text(Theme.stressed(w.ru, show: book.settings.showStress)).font(Theme.russian(16)).foregroundStyle(known ? Theme.text : Theme.muted.opacity(0.7))
+                                    Text(Theme.passageStressed(w.ru, show: book.settings.showStress)).font(Theme.russian(16)).foregroundStyle(known ? Theme.text : Theme.muted.opacity(0.7))
                                         .padding(.horizontal, 8).padding(.vertical, 3)
                                         .background(Capsule().fill(known ? Theme.accent.opacity(0.1) : .clear))
                                         .overlay(Capsule().strokeBorder(Theme.muted.opacity(known ? 0 : 0.3), lineWidth: 1))
@@ -249,7 +249,7 @@ struct TableSheet: View {
             }
         }
         .background(GridPaper(marginX: nil))
-        .navigationTitle(p.table(tableID)?.title ?? tableID)
+        .navigationTitle(RussianText.unstressed(p.table(tableID)?.title ?? tableID))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         .sheet(item: $openCell) { cell in
@@ -284,26 +284,26 @@ struct CellSheet: View {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack(alignment: .firstTextBaseline, spacing: 12) {
                             Text(Theme.stressed(cell.ending, show: true)).font(Theme.russian(40, weight: .semibold)).foregroundStyle(Theme.text)
-                            Text(p.cueLabel(table: table, cell: cell.id)).font(.system(size: 18)).foregroundStyle(Theme.text)
+                            Text(Theme.passageStressed(p.cueLabel(table: table, cell: cell.id), show: book.settings.showStress)).font(.system(size: 18)).foregroundStyle(Theme.text)
                         }
-                        Text(table.title).font(Theme.label(13)).foregroundStyle(Theme.muted)
+                        Text(Theme.passageStressed(table.title, show: book.settings.showStress)).font(Theme.label(13)).foregroundStyle(Theme.muted)
                         if let s = strength.strength {
                             Text("Recall of the pattern today: \(Int((s * 100).rounded()))%" + (strength.produced ? " · you have produced it" : " · met, not yet produced")).font(Theme.label(13)).foregroundStyle(Theme.muted)
                         } else {
                             Text("Not met yet.").font(Theme.label(13)).foregroundStyle(Theme.muted)
                         }
                         if let gloss = table.rows.first(where: { $0.id == cell.row })?.gloss {
-                            Text(Theme.stressed(gloss, show: true)).font(.system(size: 15)).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
+                            Text(Theme.passageStressed(gloss, show: book.settings.showStress)).font(.system(size: 15)).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
                         }
                     }
                     if let use {
-                        Text(Theme.stressed(use.rule, show: book.settings.showStress)).font(.system(size: 16)).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
+                        Text(Theme.passageStressed(use.rule, show: book.settings.showStress)).font(.system(size: 16)).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
                         VStack(alignment: .leading, spacing: 10) {
                             ForEach(use.examples, id: \.ru) { e in
                                 HStack(spacing: 12) {
                                     HearButton(text: e.ru, size: 30)
                                     VStack(alignment: .leading, spacing: 2) {
-                                        Text(Theme.stressed(e.ru, show: book.settings.showStress)).font(Theme.russian(20, weight: .medium)).foregroundStyle(Theme.text)
+                                        Text(Theme.passageStressed(e.ru, show: book.settings.showStress)).font(Theme.russian(20, weight: .medium)).foregroundStyle(Theme.text)
                                         Text(e.en).font(.system(size: 14)).foregroundStyle(Theme.muted)
                                     }
                                 }
@@ -317,7 +317,7 @@ struct CellSheet: View {
                                     let known = k.model.hasEvidence(ComponentID(.lexeme, w.key))
                                     HStack(spacing: 12) {
                                         HearButton(text: form.split(separator: "/").first.map { String($0).trimmingCharacters(in: .whitespaces) } ?? form, size: 30)
-                                        Text(Theme.stressed(form, show: book.settings.showStress)).font(Theme.russian(22, weight: .medium)).foregroundStyle(known ? Theme.text : Theme.muted)
+                                        Text(Theme.passageStressed(form, show: book.settings.showStress)).font(Theme.russian(22, weight: .medium)).foregroundStyle(known ? Theme.text : Theme.muted)
                                         Text("← \(RussianText.unstressed(w.ru)) · \(w.en)").font(.system(size: 14)).foregroundStyle(Theme.muted).lineLimit(1)
                                         Spacer(minLength: 0)
                                         if !known { Text("not yet").font(Theme.label(11)).foregroundStyle(Theme.muted.opacity(0.7)) }
@@ -342,7 +342,7 @@ struct CellSheet: View {
             }
         }
         .background(GridPaper(marginX: nil))
-        .navigationTitle(p.table(tableID).map { p.cueLabel(table: $0, cell: cellID) } ?? cellID)
+        .navigationTitle(RussianText.unstressed(p.table(tableID).map { p.cueLabel(table: $0, cell: cellID) } ?? cellID))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         .sheet(item: $history) { id in
