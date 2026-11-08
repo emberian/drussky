@@ -46,6 +46,12 @@ enum Shelves {
 
     // MARK: Pages
 
+    /// The English title as the first words of an intro: "A set. " / "The Milk Boiled Over! " / "".
+    static func lead(_ titleEn: String?) -> String {
+        guard let t = titleEn, !t.isEmpty else { return "" }
+        return t.last.map { ".!?…".contains($0) } == true ? "\(t) " : "\(t). "
+    }
+
     struct Page {
         var title: String
         var intro: String
@@ -63,7 +69,7 @@ enum Shelves {
         passage.notice = (ep.notice?.isEmpty ?? true) ? nil : ep.notice
         var diary = Exercise(kind: .diary)
         diary.prompt = ep.prompt
-        let about = ep.title_en.map { "\($0). " } ?? ""
+        let about = lead(ep.title_en)
         let hear = passage.notice == nil ? "" : " Once you have read it, what to hear in it is listed under the text."
         return Page(title: ep.title,
                     intro: "\(about)Read it; tap any word you want to check.\(hear) Then three questions about what it said, and a line of your own about what comes next.",
@@ -89,7 +95,7 @@ enum Shelves {
             e.hint = q.explanation
             return e
         }
-        let about = text.title_en.map { "\($0). " } ?? ""
+        let about = lead(text.title_en)
         let frameNote = frames.isEmpty ? "" : " How its phrases are read is listed under the text."
         return Page(title: text.title,
                     intro: "\(about)Read it; tap any word you want to check.\(frameNote) Then three questions about what it says.",

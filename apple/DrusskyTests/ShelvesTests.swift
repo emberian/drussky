@@ -63,6 +63,9 @@ final class ShelvesTests: XCTestCase {
         XCTAssertEqual(page.unitTitle, "Ку́хня · диало́г 1")
         XCTAssertEqual(page.exercises.map(\.kind), [.passage, .readMeaning, .readMeaning, .readMeaning, .diary])
         XCTAssertEqual(page.exercises[0].notice, ep.notice)
+        XCTAssertTrue(page.intro.hasPrefix("Cheese and Tima. Read it"), page.intro)
+        XCTAssertEqual(Shelves.lead("The Milk Boiled Over!"), "The Milk Boiled Over! ")
+        XCTAssertEqual(Shelves.lead(nil), "")
         let data = try JSONEncoder().encode(page.exercises[0])
         XCTAssertEqual(try JSONDecoder().decode(Exercise.self, from: data).notice, ep.notice)
         // Both serials are on the shelves, in order, with the kitchen's items named as dialogues.
