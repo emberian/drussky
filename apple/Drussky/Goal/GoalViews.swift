@@ -69,7 +69,7 @@ struct GoalSection: View {
                     FlowRow(spacing: 8) {
                         ForEach(d.ladder) { rung in
                             HStack(spacing: 6) {
-                                Text(rung.example.lowercased()).font(Theme.russian(17, weight: .medium)).foregroundStyle(Theme.text)
+                                Text(book.stressedLabel(rung.example.lowercased())).font(Theme.russian(17, weight: .medium)).foregroundStyle(Theme.text)
                                 if let g = rung.gloss { Text(g).font(.system(size: 13)).foregroundStyle(Theme.muted).lineLimit(1) }
                                 if rung.count > 1 { Text("×\(rung.count)").font(Theme.label(11)).foregroundStyle(Theme.accent) }
                             }

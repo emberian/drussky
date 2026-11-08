@@ -124,7 +124,7 @@ struct DiaryExercise: View {
                 }
                 if isActive || hasInk { skipButton }
             }
-            .frame(minHeight: 34)
+            .frame(minHeight: 44)
         }
     }
 

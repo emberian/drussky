@@ -481,6 +481,14 @@ final class Book {
         return customWords.first { RussianText.key($0.ru) == key }
     }
 
+    /// A word as a label elsewhere (a map chip, a goal rung): the course's stressed form when the
+    /// word is one of ours, shown the way the page shows stress; a text's own word otherwise.
+    func stressedLabel(_ text: String) -> AttributedString {
+        let ru = word(text)?.ru
+        let form = ru.map { RussianText.unstressed($0) == RussianText.unstressed(text) ? $0 : text } ?? text
+        return Theme.stressed(form, show: settings.showStress)
+    }
+
     func isKept(_ ru: String) -> Bool { word(ru) != nil && targets["word:\(RussianText.key(ru))"] != nil }
 
     /// Keeps a word or phrase from a tutor answer: it joins the learner's words and is

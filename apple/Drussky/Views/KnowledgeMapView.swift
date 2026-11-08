@@ -43,7 +43,7 @@ struct KnowledgeSection: View {
                         FlowRow(spacing: 8) {
                             ForEach(next, id: \.self) { id in
                                 Button { selected = id } label: {
-                                    Text(k.label(id)).font(Theme.russian(16)).foregroundStyle(Theme.text)
+                                    Text(book.stressedLabel(k.label(id))).font(Theme.russian(16)).foregroundStyle(Theme.text)
                                         .padding(.horizontal, 10).padding(.vertical, 4)
                                         .overlay(Capsule().strokeBorder(Theme.accent.opacity(0.5), style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
                                 }
@@ -59,9 +59,9 @@ struct KnowledgeSection: View {
                         ForEach(Array(pairs.enumerated()), id: \.offset) { _, p in
                             Button { selected = p.0 } label: {
                                 HStack(spacing: 6) {
-                                    Text(k.label(p.0)).font(Theme.russian(17))
+                                    Text(book.stressedLabel(k.label(p.0))).font(Theme.russian(17))
                                     Text("↔").foregroundStyle(Theme.redPen)
-                                    Text(k.label(p.1)).font(Theme.russian(17))
+                                    Text(book.stressedLabel(k.label(p.1))).font(Theme.russian(17))
                                     Text("×\(Int(p.2.rounded(.up)))").font(Theme.label(12)).foregroundStyle(Theme.muted)
                                 }
                                 .foregroundStyle(Theme.text)
@@ -170,6 +170,7 @@ extension UIFont {
 }
 
 struct KnowledgeMap: View {
+    @Environment(Book.self) private var book
     let tracker: KnowledgeTracker
     @Binding var selected: ComponentID?
     @State private var width: CGFloat = 800
@@ -258,7 +259,12 @@ struct KnowledgeMap: View {
             case .construction, .sound: .system(size: 13, weight: .medium)
             default: Theme.russian(16)
             }
-            ctx.draw(Text(n.label).font(font).foregroundStyle(color), at: CGPoint(x: n.rect.midX, y: n.rect.midY))
+            // Words carry their stress like everywhere else on the page (the coloured vowel).
+            let label: Text = switch n.id.kind {
+            case .lexeme, .phrase, .form: Text(book.stressedLabel(n.label))
+            default: Text(n.label)
+            }
+            ctx.draw(label.font(font).foregroundStyle(color), at: CGPoint(x: n.rect.midX, y: n.rect.midY))
         }
     }
 
