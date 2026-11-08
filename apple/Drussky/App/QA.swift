@@ -60,7 +60,20 @@ enum QA {
         }
         book.now = Date.init
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
+        // -qa-narration ID: the read-along page of that library text, right after the current page
+        // (-qa-narration-at MS shows it paused at that moment of the reading).
+        if let id = string("-qa-narration"), let text = Library.load().texts.first(where: { $0.id == id }) {
+            let page = Narration.page(for: text)
+            book.insertWrittenPage(title: page.title, intro: page.intro, unitTitle: "Library · \(text.level) · read aloud",
+                                   exercises: page.exercises, newWords: [])
+        }
         book.saveNow()
+    }
+
+    static func string(_ flag: String) -> String? {
+        let args = ProcessInfo.processInfo.arguments
+        guard let i = args.firstIndex(of: flag), i + 1 < args.count else { return nil }
+        return args[i + 1]
     }
 
     static func complete(_ book: Book, page pageIndex: Int, upTo limit: Int) {

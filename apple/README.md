@@ -18,6 +18,7 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | read aloud | say it; every take is kept, played back, and its rhythm and pitch drawn against the model's; *Skip for now* (ungraded) is always there |
 | what does it mean | read Russian, choose its meaning |
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound |
+| read along | a library text read by a human (LibriVox volunteers, Commons readers): the word being said lights up, tap a word to hear from there, ¾ speed, or listen first with the text appearing as it is read; then write one of its sentences from the reader's voice and say one after the reader |
 
 Writing is read on-device by Apple's handwriting recognizer. It confirms a right answer by
 itself after a short pause; **Check** asks it explicitly. When it misreads you, *I wrote it
@@ -86,6 +87,14 @@ Tatoeba), else by re-synthesizing the recorded Silero input; then trims, levels 
 the generators did. Plain `python3` works when nothing needs synthesis. `audio.py status --plan`
 shows what is missing and how it would come back; `audio.py verify` checks that every clip exists,
 decodes and has provenance.
+
+Narrated library texts (`Audio/narr-*.m4a`, registered in `index-narration.json` /
+`sources-narration.json` with their `*.words.json` word timings) are excerpts cut out of whole
+public-domain chapters at offsets recorded in the manifest, so `restore` rebuilds them from the
+download alone. Timing a new text needs the aligner venv once:
+`cd .local/drussky-librivox && uv venv venv --python 3.12 && uv pip install --python venv/bin/python ctc-forced-aligner unidecode`,
+then `.local/drussky-librivox/venv/bin/python apple/scripts/narration.py align <id>` and
+`python3 apple/scripts/narration.py build <id>` (see `research/NARRATION_ALIGNMENT.md`).
 
 ## Building
 

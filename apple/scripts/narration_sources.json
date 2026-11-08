@@ -1,0 +1,77 @@
+{
+ "_about": "Human narration of library texts (scripts/narration.py). One entry per library text id: where the recording of the whole chapter/piece lives, who read it, under what terms. The excerpt is located inside it by forced alignment.",
+ "pushkin-vystrel": {
+  "url": "https://archive.org/download/belkintales_1406_librivox/belkintales_01_pushkin_64kb.mp3",
+  "orig": ".local/drussky-librivox/orig/belkintales_01_pushkin_64kb.mp3",
+  "provider": "LibriVox",
+  "reader": "Xenium5",
+  "title": "Повести покойного Ивана Петровича Белкина, 01 — Выстрел",
+  "source_page": "https://librivox.org/belkin-tales-by-alexander-pushkin/",
+  "archive_page": "https://archive.org/details/belkintales_1406_librivox",
+  "license": "Public domain",
+  "statement": "LibriVox recordings are in the public domain; read in Russian by Xenium5 (LibriVox volunteer)."
+ },
+ "pushkin-stantsionnyi-smotritel": {
+  "url": "https://archive.org/download/belkintales_1406_librivox/belkintales_04_pushkin_64kb.mp3",
+  "orig": ".local/drussky-librivox/orig/belkintales_04_pushkin_64kb.mp3",
+  "provider": "LibriVox",
+  "reader": "Xenium5",
+  "title": "Повести покойного Ивана Петровича Белкина, 04 — Станционный смотритель",
+  "source_page": "https://librivox.org/belkin-tales-by-alexander-pushkin/",
+  "archive_page": "https://archive.org/details/belkintales_1406_librivox",
+  "license": "Public domain",
+  "statement": "LibriVox recordings are in the public domain; read in Russian by Xenium5 (LibriVox volunteer)."
+ },
+ "dostoevsky-zapiski-iz-podpolya-2x2": {
+  "url": "https://archive.org/download/notes_underground_russian/06-dostoevsky-zapiski-iz-podpolya-I-09-10_64kb.mp3",
+  "orig": ".local/drussky-librivox/orig/06-dostoevsky-zapiski-iz-podpolya-I-09-10_64kb.mp3",
+  "provider": "LibriVox",
+  "reader": "Yakovlev Valery",
+  "title": "Записки из подполья, часть 1, главы 9–10",
+  "source_page": "https://librivox.org/zapiski-iz-podpolya-by-fyodor-dostoevsky/",
+  "archive_page": "https://archive.org/details/notes_underground_russian",
+  "license": "Public domain",
+  "statement": "LibriVox recordings are in the public domain; read in Russian by Yakovlev Valery (LibriVox volunteer)."
+ },
+ "tolstoy-muravei-i-golubka": {
+  "url": "https://archive.org/download/multilingual_short_works_collection_012_1403_librivox/msw012_11_muraveyigolubka_tolstoy_klm_64kb.mp3",
+  "orig": ".local/drussky-librivox/orig/msw012_11_muraveyigolubka_tolstoy_klm_64kb.mp3",
+  "provider": "LibriVox",
+  "reader": "Luiza Karimova",
+  "title": "Multilingual Short Works Collection 012, 11 — Муравей и голубка",
+  "source_page": "https://librivox.org/multilingual-short-works-collection-012-by-various/",
+  "archive_page": "https://archive.org/details/multilingual_short_works_collection_012_1403_librivox",
+  "license": "Public domain",
+  "statement": "LibriVox recordings are in the public domain; read in Russian by Luiza Karimova (LibriVox volunteer)."
+ },
+ "chekhov-tolstyi-i-tonkii": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Ru-%D0%A7%D0%B5%D1%85%D0%BE%D0%B2-%D0%A2%D0%BE%D0%BB%D1%81%D1%82%D1%8B%D0%B9_%D0%B8_%D1%82%D0%BE%D0%BD%D0%BA%D0%B8%D0%B9.ogg",
+  "orig": ".local/drussky-librivox/orig/Ru-Чехов-Толстый_и_тонкий.ogg",
+  "provider": "Wikimedia Commons",
+  "reader": "Pogrebnoj-Alexandroff",
+  "title": "Ru-Чехов-Толстый и тонкий.ogg",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%A7%D0%B5%D1%85%D0%BE%D0%B2-%D0%A2%D0%BE%D0%BB%D1%81%D1%82%D1%8B%D0%B9_%D0%B8_%D1%82%D0%BE%D0%BD%D0%BA%D0%B8%D0%B9.ogg",
+  "license": "CC BY 3.0",
+  "statement": "Recording by Pogrebnoj-Alexandroff on Wikimedia Commons, CC BY 3.0."
+ },
+ "pushkin-zimnee-utro": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Ru-%D0%97%D0%B8%D0%BC%D0%BD%D0%B5%D0%B5_%D1%83%D1%82%D1%80%D0%BE.ogg",
+  "orig": ".local/drussky-librivox/orig/Ru-Зимнее_утро.ogg",
+  "provider": "Wikimedia Commons",
+  "reader": "Шантопик",
+  "title": "Ru-Зимнее утро.ogg (spoken Wikisource)",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%97%D0%B8%D0%BC%D0%BD%D0%B5%D0%B5_%D1%83%D1%82%D1%80%D0%BE.ogg",
+  "license": "CC BY-SA 4.0",
+  "statement": "Recording by Шантопик on Wikimedia Commons, CC BY-SA 4.0."
+ },
+ "turgenev-russkii-yazyk": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/%D0%98._%D0%90._%D0%A2%D1%83%D1%80%D0%B3%D0%B5%D0%BD%D0%B5%D0%B2._%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B7%D1%8B%D0%BA_%28%D1%87%D0%B8%D1%82._%D0%90._%D0%9F._%D0%9B%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%29.ogg",
+  "orig": ".local/drussky-librivox/orig/И._А._Тургенев._Русский_язык_(чит._А._П._Ленский).ogg",
+  "provider": "Wikimedia Commons",
+  "reader": "А. П. Ленский (1894)",
+  "title": "И. С. Тургенев, «Русский язык», читает А. П. Ленский, 1894",
+  "source_page": "https://commons.wikimedia.org/wiki/File:%D0%98._%D0%90._%D0%A2%D1%83%D1%80%D0%B3%D0%B5%D0%BD%D0%B5%D0%B2._%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B7%D1%8B%D0%BA_(%D1%87%D0%B8%D1%82._%D0%90._%D0%9F._%D0%9B%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9).ogg",
+  "license": "Public domain",
+  "statement": "1894 phonograph recording of the actor A. P. Lensky; public domain (performer died 1908)."
+ }
+}

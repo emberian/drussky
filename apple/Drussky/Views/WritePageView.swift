@@ -75,7 +75,8 @@ struct WritePageContent: View {
         case .ownText:
             bigButton("Make it a page", enabled: !writing && RussianText.letters(in: text).count >= 3) { .text(text) }
         case .library(let t):
-            bigButton("Rescale to my level", enabled: !writing) { .rescale(t.text, title: "\(t.author), «\(t.title)»") }
+            if t.isNarrated { ReadAlongButton(text: t, onDone: onDone).disabled(writing) }
+            bigButton("Rescale to my level", enabled: !writing, prominent: !t.isNarrated) { .rescale(t.text, title: "\(t.author), «\(t.title)»") }
             bigButton("Read it as written", enabled: !writing, prominent: false) { .text(t.text) }
         }
     }
@@ -128,7 +129,8 @@ struct LibraryTextHeader: View {
                 .padding(14)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
-            Text("Original level \(text.level) · \(text.license)\(text.isPrivate == true ? " · personal study" : "")")
+            Text("Original level \(text.level) · \(text.license)\(text.isPrivate == true ? " · personal study" : "")"
+                 + (text.reader.map { " · read aloud by \($0)" } ?? ""))
                 .font(Theme.label(12)).foregroundStyle(Theme.muted)
         }
     }
@@ -167,6 +169,10 @@ struct LibrarySheet: View {
                                                 .font(.system(size: 14)).foregroundStyle(.secondary)
                                         }
                                         Spacer()
+                                        if t.isNarrated {
+                                            Image(systemName: "headphones").foregroundStyle(Theme.accent)
+                                                .accessibilityLabel("Read aloud by \(t.reader ?? "a human reader")")
+                                        }
                                         ReadabilityBadge(fraction: book.knowledge.readability(of: t.text))
                                     }
                                 }

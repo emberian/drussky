@@ -64,6 +64,19 @@ memorable line in the tutor's voice.
 | `read_meaning` | `text`, `options:[en…]`, `answer` (index) | Reads Russian, picks its meaning. |
 | `passage` | `text`, `en`, optional `glosses:{word: meaning}` | Reads a short text (2–8 sentences); taps any word to see its meaning and hear it; can play the whole text and reveal `en`. Words missing from `glosses` fall back to the lexicon. Gloss keys are the word as written, lowercase, without stress. |
 
+A `passage` may carry a human reading: `narration` (an `Audio/` clip) and `words` (its word-timing
+file, `Audio/narr-<id>.words.json`); the app then plays the reader with the word being said lit up,
+replays from a tapped word, slows to ¾ speed, and can hide the text until it is read. A `dictation`
+or `read_aloud` built from one sentence of that reading carries the same two fields plus
+`span: [first, last]` — the sentence's word indices in the timings — so the clip plays just that
+stretch (chunk dictation, shadowing). These exercises are made locally from a narrated library text
+(*Listen and read along*), never authored in course.json. The timing file is
+`{"version": 1, "text": "<library id>", "file": "<clip>", "duration": s, "reader": "…",
+"words": [["слово", start, end], …]}`, where `words` are, in order, every whitespace token of the
+text whose bare form (outer punctuation and stress marks off) contains a letter; digits, `***` and
+dashes have no entry. `scripts/narration.py` writes and checks it; `Narration.swift` applies the
+same rule.
+
 Any exercise may also carry an optional `skills: ["past", "negation"]`: the grammar patterns
 it practises, by construction id from `Resources/lemmas.json` (`gram:` prefix optional). When it is
 absent, the knowledge model tags the exercise from its words (lemma map plus a few word-order
@@ -112,6 +125,14 @@ rescaled by the tutor to the learner's current vocabulary.
 
 Levels follow CEFR (A1 A2 B1 B2 C1). `PrivatePack/` (git-ignored, never in a release build)
 has the same layout for material that is fine for personal study but not redistributable.
+
+A text read by a human (LibriVox, Wikimedia Commons) also has `narration` (its clip in `Audio/`,
+registered in `Audio/index-narration.json` under the key `narration:<id>` with provenance in
+`Audio/sources-narration.json`), `words` (the word-timing file) and `reader`. The library shows a
+headphone icon for it and offers *Listen and read along*, which builds the read-along page above
+without the tutor. Texts without the three fields are read by the synthetic voice. `scripts/narration.py`
+(`align`, `build`, `check`) produces all of it from `scripts/narration_sources.json`;
+`validate_library.py` checks that the three fields, the manifests and the timings agree.
 
 # Sound pairs — `Drussky/Resources/pairs.json`
 

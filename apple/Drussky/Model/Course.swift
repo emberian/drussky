@@ -101,9 +101,16 @@ struct Exercise: Codable, Sendable, Hashable {
     /// Grammar patterns the exercise practises (lemmas.json construction ids); when absent the
     /// knowledge model tags it from its words.
     var skills: [String]? = nil
+    /// A human reading of the text (an Audio/ clip) with its word timings file (Audio/*.words.json);
+    /// `span` = [first, last] timing index when the exercise is one stretch of it (chunk dictation,
+    /// shadowing). See Narration.swift.
+    var narration: String? = nil
+    var words: String? = nil
+    var span: [Int]? = nil
 
     enum CodingKeys: String, CodingKey {
         case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills
+        case narration, words, span
     }
 
     init(kind: ExerciseKind) { self.kind = kind }
@@ -124,6 +131,9 @@ struct Exercise: Codable, Sendable, Hashable {
         reviewKey = try c.decodeIfPresent(String.self, forKey: .reviewKey)
         glosses = try c.decodeIfPresent([String: String].self, forKey: .glosses)
         skills = try c.decodeIfPresent([String].self, forKey: .skills)
+        narration = try c.decodeIfPresent(String.self, forKey: .narration)
+        words = try c.decodeIfPresent(String.self, forKey: .words)
+        span = try c.decodeIfPresent([Int].self, forKey: .span)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -147,6 +157,9 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(reviewKey, forKey: .reviewKey)
         try c.encodeIfPresent(glosses, forKey: .glosses)
         try c.encodeIfPresent(skills, forKey: .skills)
+        try c.encodeIfPresent(narration, forKey: .narration)
+        try c.encodeIfPresent(words, forKey: .words)
+        try c.encodeIfPresent(span, forKey: .span)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }

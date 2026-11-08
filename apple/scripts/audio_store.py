@@ -73,14 +73,24 @@ def silero_fields(text, voice):
 
 
 def encode(src, m4a, level_dir):
-    """Trim silence, level to the common loudness, encode AAC (the one processing step for every clip)."""
-    pcm, _ = level(decode(src))
+    """Trim silence, level to the common loudness, encode AAC (the one processing step for every clip).
+    Returns audio_level's info (where the trim started, the gain applied)."""
+    pcm, info = level(decode(src))
     leveled = Path(level_dir) / (Path(m4a).stem + ".wav")
     leveled.parent.mkdir(parents=True, exist_ok=True)
     leveled.write_bytes(to_wav(pcm))
     tmp = Path(m4a).with_suffix(".tmp.m4a")
     subprocess.run(["afconvert", "-f", "m4af", "-d", "aac", "-b", "64000", str(leveled), str(tmp)], check=True)
     tmp.replace(m4a)
+    return info
+
+
+def cut(src, start, end, wav):
+    """The stretch [start, end] seconds of a recording as 24 kHz mono WAV (a narration excerpt out of its chapter).
+    Sample-exact for the recorded offsets, so restore reproduces the clip and its word times."""
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{start:.3f}", "-to", f"{end:.3f}", "-i", str(src),
+                    "-ac", "1", "-ar", "24000", "-c:a", "pcm_s16le", str(wav)], check=True)
+    return Path(wav)
 
 
 def fetch(url, dest, want_sha1=None):
