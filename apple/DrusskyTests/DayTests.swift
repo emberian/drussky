@@ -3,7 +3,7 @@ import XCTest
 @testable import Drussky
 
 /// The shape of a day in the notebook: morning and welcome-back pages, the daily cap, probes,
-/// the desk shortening a page, and notebooks from before any of this existed.
+/// the desk offering to lighten a page, and notebooks from before any of this existed.
 @MainActor
 final class DayTests: XCTestCase {
     var course: Course {
@@ -283,33 +283,93 @@ final class DayTests: XCTestCase {
         XCTAssertEqual(again.knowledge.model.fsrs.w[0], 0.9 * FSRS.defaultWeights[0], accuracy: 1e-9)
     }
 
-    func testATiredLearnerGetsAShorterPage() throws {
-        let book = Book(course: course, store: tempStore())
-        let words = ["кот", "мама", "окно", "она", "книга", "дом", "сок", "нос", "рот", "стол", "ты", "мы", "он", "это"]
+    let longPageWords = ["кот", "мама", "окно", "она", "книга", "дом", "сок", "нос", "рот", "стол", "ты", "мы", "он", "это"]
+
+    /// A long page of review dictations, answered until the desk reads the session as tired: six
+    /// quick right answers (`sharp` runs then), then slow, failing ones half an hour in. `prepared`
+    /// runs on the fresh page. The clock ends at the last answer. Returns the page's index.
+    func tireOut(_ book: Book, clock: inout Date, prepared: (Book, Int) throws -> Void = { _, _ in },
+                 sharp: (Book, Int) -> Void = { _, _ in }) rethrows -> Int {
+        let words = longPageWords
         let exercises: [Exercise] = words.map { w in
             var d = Exercise(kind: .dictation); d.text = w; d.reviewKey = "word:\(w)"; return d
         }
         book.insertWrittenPage(title: "long", intro: nil, unitTitle: "t", exercises: exercises, newWords: [])
         let p = book.currentPage
-        let start = book.now()
-        var clock = start
-        book.now = { clock }
-        // Six quick right answers…
+        try prepared(book, p)
+        var now = clock
+        book.now = { [now] in now }
         for i in 0..<6 {
-            clock = clock.addingTimeInterval(6)
+            now = now.addingTimeInterval(6)
+            book.now = { [now] in now }
             book.record(page: p, exercise: i) { $0.attempts = 1; $0.recognized = words[i]; $0.status = .correct }
         }
-        XCTAssertEqual(book.day.fatigue?.level, .sharp, "\(String(describing: book.day.fatigue))")
-        XCTAssertNil(book.deskLine(for: p))
-        // …then slow, failing ones, half an hour in.
+        sharp(book, p)
         for i in 6..<9 {
-            clock = clock.addingTimeInterval(300)
+            now = now.addingTimeInterval(300)
+            book.now = { [now] in now }
             book.record(page: p, exercise: i) { $0.attempts += 1; $0.failedChecks = 1; $0.recognized = QA.misreading(words[i]) }
-            clock = clock.addingTimeInterval(280)
+            now = now.addingTimeInterval(280)
+            book.now = { [now] in now }
             book.record(page: p, exercise: i) { $0.attempts += 1; $0.revealed = true; $0.status = .missed }
         }
+        clock = now
+        return p
+    }
+
+    /// Tired, the page offers to make the rest lighter and changes nothing by itself; taking the
+    /// offer makes two remaining reviews recognition and leaves the rest for later.
+    func testATiredLearnerIsOfferedALighterPage() throws {
+        let book = Book(course: course, store: tempStore())
+        let words = longPageWords
+        var clock = book.now()
+        let p = try tireOut(book, clock: &clock, sharp: { book, p in
+            // After six quick right answers: sharp, and nothing offered.
+            XCTAssertEqual(book.day.fatigue?.level, .sharp, "\(String(describing: book.day.fatigue))")
+            XCTAssertFalse(book.lighterOffer(for: p))
+            XCTAssertNil(book.deskLine(for: p))
+        })
         let estimate = try XCTUnwrap(book.day.fatigue)
         XCTAssertEqual(estimate.level, .tired, "\(estimate)")
+        // The offer stands; the page is exactly as it was.
+        XCTAssertTrue(book.lighterOffer(for: p))
+        XCTAssertNil(book.deskLine(for: p), "nothing is said until the offer is taken")
+        XCTAssertNil(book.coverLine)
+        XCTAssertNil(book.pages[p].lightened)
+        XCTAssertTrue((9..<14).allSatisfy { book.pages[p].exercises[$0].kind == .dictation && book.pages[p].results[$0].status == .open })
+        XCTAssertNil(book.day.lastShortened)
+        // Answering on with the offer standing changes nothing either.
+        clock = clock.addingTimeInterval(200)
+        book.now = { [clock] in clock }
+        book.record(page: p, exercise: 9) { $0.attempts = 1; $0.recognized = words[9]; $0.status = .correct }
+        XCTAssertTrue(book.lighterOffer(for: p))
+        XCTAssertTrue((10..<14).allSatisfy { book.pages[p].exercises[$0].kind == .dictation && book.pages[p].results[$0].status == .open })
+        // Taken: exactly the change that used to be automatic.
+        book.lighten(page: p)
+        let page = book.pages[p]
+        XCTAssertEqual(page.lightened, true)
+        XCTAssertFalse(book.lighterOffer(for: p))
+        let line = try XCTUnwrap(book.deskLine(for: p))
+        XCTAssertEqual(line, "2 reviews now use choices. 2 reviews wait for later.")
+        XCTAssertEqual(book.coverLine, "Some reviews were left for a later page.")
+        XCTAssertEqual(page.results[9].status, .correct, "the one answered meanwhile is untouched")
+        XCTAssertEqual((10..<14).filter { page.exercises[$0].kind == .listenPick || page.exercises[$0].kind == .readMeaning }, [10, 11])
+        XCTAssertEqual((10..<14).filter { page.results[$0].status == .skipped }, [12, 13])
+        XCTAssertEqual(page.exercises[10].reviewKey, "word:\(words[10])", "the same item, asked by recognition")
+        // The notebook keeps the choice; one from before the offer existed still opens.
+        book.saveNow()
+        let again = Book(course: course, store: book.store)
+        XCTAssertEqual(again.pages[p].lightened, true)
+        XCTAssertNil(try JSONDecoder().decode(BookPage.self, from: JSONEncoder().encode(book.pages[0])).lightened)
+    }
+
+    func testTheOfferedChangeIsTheOldShortening() throws {
+        let book = Book(course: course, store: tempStore())
+        let words = longPageWords
+        var clock = book.now()
+        let p = try tireOut(book, clock: &clock)
+        XCTAssertTrue(book.lighterOffer(for: p))
+        book.lighten(page: p)
         let page = book.pages[p]
         let line = try XCTUnwrap(book.deskLine(for: p))
         XCTAssertEqual(line, "2 reviews now use choices. 3 reviews wait for later.")
@@ -327,13 +387,38 @@ final class DayTests: XCTestCase {
         XCTAssertEqual(page.results[6].status, .missed)
         // Memory for the skipped items didn't move.
         XCTAssertNil(book.knowledge.model.trace(ComponentID(.lexeme, words[12]), .hearWrite))
-        // The desk shortens a page once: answering on goes on as usual.
+        // A page is offered once: answering on goes on as usual, with no second offer.
         clock = clock.addingTimeInterval(300)
+        book.now = { [clock] in clock }
         book.record(page: p, exercise: 9) { $0.attempts = 1; $0.chosen = 0; $0.status = .done }
         XCTAssertEqual(book.pages[p].results[10].status, .open)
+        XCTAssertFalse(book.lighterOffer(for: p))
     }
 
-    func testNoShorteningNoticeWhenNoReviewsCanChange() throws {
+    /// Turning the page with the offer standing declines it: the page stays as it was, the choice
+    /// is kept, and coming back does not ask again.
+    func testTurningThePageDeclinesTheOffer() throws {
+        let book = Book(course: course, store: tempStore())
+        var clock = book.now()
+        let p = try tireOut(book, clock: &clock)
+        XCTAssertTrue(book.lighterOffer(for: p))
+        let before = book.pages[p]
+        XCTAssertTrue(book.turnForward())
+        XCTAssertFalse(book.lighterOffer(for: p))
+        XCTAssertEqual(book.pages[p].lightened, false)
+        XCTAssertEqual(book.pages[p].exercises, before.exercises)
+        XCTAssertEqual(book.pages[p].results, before.results)
+        XCTAssertNil(book.deskLine(for: p)); XCTAssertNil(book.day.lastShortened)
+        book.goTo(p)
+        clock = clock.addingTimeInterval(300)
+        book.now = { [clock] in clock }
+        book.record(page: p, exercise: 9) { $0.attempts += 1; $0.revealed = true; $0.status = .missed }
+        XCTAssertEqual(book.day.fatigue?.level, .tired)
+        XCTAssertFalse(book.lighterOffer(for: p), "declined once, not asked again")
+        XCTAssertTrue((10..<14).allSatisfy { book.pages[p].exercises[$0].kind == .dictation && book.pages[p].results[$0].status == .open })
+    }
+
+    func testNoOfferWhenNoReviewsCanChange() throws {
         let book = Book(course: course, store: tempStore())
         var ex = Exercise(kind: .dictation); ex.text = "кот"
         book.insertWrittenPage(title: "New work", intro: nil, unitTitle: "QA",
@@ -347,39 +432,28 @@ final class DayTests: XCTestCase {
             book.record(page: p, exercise: i) { $0.attempts = 2; $0.revealed = true; $0.status = .missed }
         }
         XCTAssertEqual(book.day.fatigue?.level, .tired)
-        XCTAssertNil(book.deskLine(for: p), "A page with no reviews was not shortened")
+        XCTAssertFalse(book.lighterOffer(for: p), "a page with no reviews has nothing to lighten: no offer")
+        XCTAssertNil(book.deskLine(for: p))
         XCTAssertNil(book.day.lastShortened)
         XCTAssertEqual(book.pages[p].results.filter { $0.status == .open }.count, 2)
     }
 
-    /// Shortening never takes an exercise the learner has begun: ink on its strip (the writing may be
+    /// Lightening never takes an exercise the learner has begun: ink on its strip (the writing may be
     /// under the recognizer), a take recorded. A replaced one starts a new round, so a check that
     /// began on the old exercise lands nowhere instead of ticking the new one.
-    func testShorteningSparesWorkUnderway() throws {
+    func testLighteningSparesWorkUnderway() throws {
         let book = Book(course: course, store: tempStore())
-        let words = ["кот", "мама", "окно", "она", "книга", "дом", "сок", "нос", "рот", "стол", "ты", "мы", "он", "это"]
-        let exercises: [Exercise] = words.map { w in
-            var d = Exercise(kind: .dictation); d.text = w; d.reviewKey = "word:\(w)"; return d
-        }
-        book.insertWrittenPage(title: "long", intro: nil, unitTitle: "t", exercises: exercises, newWords: [])
-        let p = book.currentPage
-        let page0 = book.pages[p]
+        let words = longPageWords
         var clock = book.now()
-        book.now = { clock }
-        // Writing is under way on 9 (ink on disk, Vision pending); a take was recorded on 10.
-        try Data("ink".utf8).write(to: book.inkURL(page: page0, exercise: 9))
-        book.record(page: p, exercise: 10) { $0.recording = "t.m4a" }
-        let pendingRound = book.pages[p].results[11].roundNumber
-        for i in 0..<6 {
-            clock = clock.addingTimeInterval(6)
-            book.record(page: p, exercise: i) { $0.attempts = 1; $0.recognized = words[i]; $0.status = .correct }
-        }
-        for i in 6..<9 {
-            clock = clock.addingTimeInterval(300)
-            book.record(page: p, exercise: i) { $0.attempts += 1; $0.failedChecks = 1; $0.recognized = QA.misreading(words[i]) }
-            clock = clock.addingTimeInterval(280)
-            book.record(page: p, exercise: i) { $0.attempts += 1; $0.revealed = true; $0.status = .missed }
-        }
+        var pendingRound = 0
+        let p = try tireOut(book, clock: &clock, prepared: { book, p in
+            // Writing is under way on 9 (ink on disk, Vision pending); a take was recorded on 10.
+            try Data("ink".utf8).write(to: book.inkURL(page: book.pages[p], exercise: 9))
+            book.record(page: p, exercise: 10) { $0.recording = "t.m4a" }
+            pendingRound = book.pages[p].results[11].roundNumber
+        })
+        XCTAssertTrue(book.lighterOffer(for: p))
+        book.lighten(page: p)
         XCTAssertNotNil(book.deskLine(for: p))
         let page = book.pages[p]
         XCTAssertEqual(page.exercises[9].kind, .dictation, "ink under way: left alone")
@@ -533,5 +607,23 @@ final class DayTests: XCTestCase {
         let again = Book(course: course, store: store)
         XCTAssertEqual(again.settings.dailyReviewCap, 30)
         XCTAssertEqual(again.day.lastOpeningKind, "welcome-back")
+    }
+
+    /// The sharp hour's "one more new word" is a word, never a bare preposition or particle
+    /// («с»), however early the frontier offers one.
+    func testTheSharpHourWordIsNeverAFunctionWord() throws {
+        var offered = 0
+        for n in [1, 2, 3, 5, 8, 12] {
+            let book = studied(n)
+            book.day.sharpAt = book.now()
+            let frontier = book.knowledge.model.frontier(book.knowledge.graph, at: book.now(), kinds: [.lexeme], limit: 12)
+            if frontier.contains(where: { book.targets["word:\($0.key)"] == nil && RussianText.isFunctionWord($0.key) }) { offered += 1 }
+            for ex in book.extraNewItem(excluding: []) {
+                let text = try XCTUnwrap(ex.text)
+                XCTAssertEqual(ex.kind, .copy)
+                XCTAssertFalse(RussianText.isFunctionWord(text), "after \(n) pages the sharp hour offered «\(text)»")
+            }
+        }
+        XCTAssertGreaterThan(offered, 0, "the frontier never offered a function word, so nothing was refused")
     }
 }

@@ -221,9 +221,14 @@ struct SettingsView: View {
         @Bindable var book = book
         NavigationStack {
             Form {
-                Section("Writing") {
+                Section {
                     Toggle("Draw with a finger too", isOn: $book.settings.fingerDrawing)
                     Toggle("Handwritten (cursive) models", isOn: $book.settings.cursiveModels)
+                    Toggle("I write with my left hand", isOn: Binding(get: { book.settings.leftHanded ?? false }, set: { book.settings.leftHanded = $0 }))
+                } header: {
+                    Text("Writing")
+                } footer: {
+                    Text("With the left hand, stroke direction is not judged: о may go round either way and a bar may run right to left. Shape, start and size still count.")
                 }
                 JudgeSettingsSection()
                 DaySettingsSection()

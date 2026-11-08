@@ -117,15 +117,52 @@ final class ListeningTests: XCTestCase {
         for s in strings where !voice.hasRecording(s) { missing.append(s) }
         XCTAssertTrue(missing.isEmpty, "no clip: \(missing)")
         // Each heard line has a clip in the voice assigned to it, so A and B stay two people and a
-        // replay keeps its speaker; a course clip stands in only where the course voice was asked for.
+        // replay keeps its speaker.
         var wrongVoice: [String] = []
         for it in (Listening.shared.sets + Listening.shared.weekly_samples).flatMap(\.items) {
             for (i, text) in it.heard.enumerated() {
                 let name = it.voice(forLine: i)
-                if voice.recordingURL(for: text, voice: name) == nil && name != "xenia" { wrongVoice.append("\(it.id): \(text) (\(name))") }
+                if voice.recordingURL(for: text, voice: name) == nil { wrongVoice.append("\(it.id): \(text) (\(name))") }
             }
         }
         XCTAssertTrue(wrongVoice.isEmpty, "no clip in the assigned voice: \(wrongVoice)")
+    }
+
+    /// Where the author did not ask for variety (`any`), everything an item plays — its turn, both
+    /// intonation forms, the span and the choices revealed after the answer — is the course voice
+    /// xenia, and the course clip stands in only when it is hers (sources.json records the voice):
+    /// a human recording of «сыр» among xenia's turns would be a third voice on the page. So the
+    /// single-voice `any` items of a set's page share one voice. `unfamiliar` items are unchanged:
+    /// their turn is aidar's (checked above); what is revealed after the answer stays the course voice.
+    func testASingleVoicePageIsOneVoice() throws {
+        let voice = Voice()
+        let audio = try XCTUnwrap(Bundle.main.url(forResource: "Audio", withExtension: nil))
+        let sources = try XCTUnwrap(JSONSerialization.jsonObject(with: Data(contentsOf: audio.appendingPathComponent("sources.json"))) as? [String: [String: Any]])
+        /// The voice of the clip `text` is played in for speaker `name`, by its provenance.
+        func clipVoice(_ text: String, _ name: String) -> String {
+            guard let url = voice.recordingURL(for: text, voice: name) else { return "none" }
+            let entry = sources[url.lastPathComponent]
+            return entry?["voice"] as? String ?? (entry?["kind"] as? String ?? "unknown")
+        }
+        var offVoice: [String] = []
+        for set in Listening.shared.sets {
+            var pageVoices = Set<String>()
+            for it in set.items where !it.kind.isExchange && it.voice_hint == "any" {
+                let name = it.voice()
+                var plays = it.heard + (it.forms ?? []).map(\.ru) + [it.crucial_span] + (it.questions ?? []).map(\.crucial_span)
+                if it.kind == .pickObject { plays += it.options ?? [] }
+                let voices = Set(plays.map { clipVoice($0, name) })
+                if voices != [name] { offVoice.append("\(it.id) (\(name)): \(plays.map { "\($0) → \(clipVoice($0, name))" })") }
+                pageVoices.formUnion(voices)
+            }
+            XCTAssertEqual(pageVoices, ["xenia"], "\(set.id): its `any` items are one voice")
+            // Scene labels are the course voice too.
+            for it in set.items { for e in it.scene ?? [] where clipVoice(e.ru, "xenia") != "xenia" { offVoice.append("\(it.id) scene \(e.ru)") } }
+        }
+        XCTAssertTrue(offVoice.isEmpty, "played in another voice than the item's: \(offVoice)")
+        // Exchanges are unchanged: A and B keep their two voices.
+        let exchange = try item(.whoNeeds)
+        XCTAssertEqual(Set((exchange.lines ?? []).indices.map { exchange.voice(forLine: $0) }).count, 2)
     }
 
     func testASetBecomesAPageOfCardsOfferedOnce() throws {
@@ -163,6 +200,20 @@ final class ListeningTests: XCTestCase {
         book.saveNow()
         let again = Book(course: book.course, store: BookStore(root: book.store.root))
         XCTAssertEqual(again.page(id: book.page!.id)?.exercises.first?.listening?.kind, .questionOrStatement)
+    }
+
+    /// "Play it first; then choose." is said once on a page of cards: under the first, and not
+    /// at all once a card is answered (Views/ListeningView.swift).
+    func testThePlayFirstHintIsSaidOncePerPage() throws {
+        let book = try freshBook()
+        let set = try XCTUnwrap(Listening.shared.sets.first)
+        book.open(Shelves.item(set, number: 1))
+        var page = try XCTUnwrap(book.page)
+        XCTAssertEqual(page.exercises.count, 6)
+        XCTAssertEqual(page.exercises.indices.filter { ListeningExercise.carriesPlayFirstHint(page, index: $0) }, [0])
+        book.record(page: book.currentPage, exercise: 0) { $0.chosen = 0; $0.attempts = 1; $0.status = .missed }
+        page = try XCTUnwrap(book.page)
+        XCTAssertTrue(page.exercises.indices.allSatisfy { !ListeningExercise.carriesPlayFirstHint(page, index: $0) }, "answered once: the page needs no hint")
     }
 
     func testARightAnswerIsHearPickEvidenceOnTheHeardWords() throws {

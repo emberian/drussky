@@ -131,6 +131,20 @@ enum RussianText {
         return false
     }
 
+    // MARK: Function words
+
+    /// Prepositions, conjunctions and particles the course meets. да and нет are words.
+    private static let functionWords: Set<String> = Set(("о об обо с со в во на к ко у из от до за по для про без под над при через "
+        + "и а но или не ни же ж ли бы б ну вот ведь уж").split(separator: " ").map(String.init))
+
+    /// A word learned inside phrases («в ко́смосе», «о рабо́те»), never recalled on its own: one
+    /// of the function words above, or any single Cyrillic letter. Multi-word entries are not.
+    static func isFunctionWord(_ s: String) -> Bool {
+        let k = key(s)
+        guard !k.isEmpty, !k.contains(" ") else { return false }
+        return functionWords.contains(k) || (k.count == 1 && !letters(in: k).isEmpty)
+    }
+
     // MARK: Audio identity
 
     /// Question words (and forms) that, opening a question, give it a falling contour (IK-2).

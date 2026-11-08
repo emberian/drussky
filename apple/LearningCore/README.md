@@ -91,8 +91,9 @@ components, the core shapes the day.
   only time counts. `HourlyPreference` is first-try success per modality by hour band (night,
   morning, afternoon, evening): `order` sorts modalities best-first for the hour (8 trials needed),
   `standout` names one when it clearly leads. What a domain does with these is its own: Drussky
-  orders the morning page's reviews by the hour's preference, shortens a page when tired (two
-  remaining reviews become recognition, the rest wait, ungraded), and allows one frontier word when sharp.
+  orders the morning page's reviews by the hour's preference, offers (never applies) a lighter rest of
+  the page when tired (taken: two remaining reviews become recognition, the rest wait, ungraded), and
+  allows one frontier word when sharp.
 
 ## Judging one's own writing
 

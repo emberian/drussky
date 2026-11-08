@@ -218,9 +218,20 @@ struct ListeningExercise: View {
                 }
             }
         }
-        if !done && plays == 0 {
+        if showsPlayFirstHint {
             Text("Play it first; then choose.").font(Theme.label(13)).foregroundStyle(Theme.muted)
         }
+    }
+
+    /// The hint is said once on a page: under its first card, until that card has been played or
+    /// something on the page answered. Every card after that already shows how it goes.
+    private var showsPlayFirstHint: Bool { !done && plays == 0 && Self.carriesPlayFirstHint(slot.page, index: slot.index) }
+
+    /// Whether the card at `index` is the one that carries the page's hint: the first listening
+    /// card, while no card on the page is answered.
+    static func carriesPlayFirstHint(_ page: BookPage, index: Int) -> Bool {
+        let cards = page.exercises.indices.filter { page.exercises[$0].kind == .listening }
+        return cards.first == index && !cards.contains { page.results[$0].status.isComplete }
     }
 
     private func choose(_ c: Int, decision i: Int, item: ListeningItem) {

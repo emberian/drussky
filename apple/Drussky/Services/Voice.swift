@@ -85,12 +85,16 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
 
     /// A particular synthetic speaker's clip of `text` — the listening strand keeps A and B apart
     /// and a voice stable across replays. Listening clips are filed as `listening-<voice>-…` in
-    /// index.json or variants-listening.json (scripts/make_listening_audio.py); nil when that
-    /// speaker never recorded the text, and the caller falls back to `play(_:)`.
+    /// index.json or variants-listening.json (scripts/make_listening_audio.py). Xenia is the course
+    /// voice: a text with no listening clip of hers is served by the course's own clip, which the
+    /// script vouches for (a human recording or another voice's course clip gets a
+    /// `listening-xenia-` variant instead). Nil when another speaker never recorded the text, and
+    /// the caller falls back to `play(_:)`.
     func recordingURL(for text: String, voice name: String) -> URL? {
         let key = RussianText.audioKey(text)
         let files = (index[key].map { [$0] } ?? []) + (variants[key] ?? [])
-        return files.first { $0.hasPrefix("listening-\(name)-") }.flatMap { audioDir?.appendingPathComponent($0) }
+        let file = files.first { $0.hasPrefix("listening-\(name)-") } ?? (name == "xenia" ? index[key] : nil)
+        return file.flatMap { audioDir?.appendingPathComponent($0) }
     }
 
     func play(_ text: String) {

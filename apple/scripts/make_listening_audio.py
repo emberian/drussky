@@ -11,12 +11,16 @@ Crucial spans, scene labels and object choices (played only after the answer) ar
 
 A text whose key has no clip yet gets one in its assigned voice as the primary entry of
 Audio/index.json (file `listening-<voice>-<slug>.m4a`, sources "set": "listening"). A text that
-already has a primary clip (a course word, a human recording) and is assigned xenia keeps it. One
-assigned another voice gets that voice's clip as a variant in Audio/variants-listening.json — the
-same mechanism variants.json uses for other speakers of one word — and the app picks the speaker's
-clip by the `listening-<voice>-` file prefix (`Voice.recordingURL(for:voice:)`). Everything goes
-through make_morphology_audio.generate (the shared Silero + encode pipeline); index/sources/variants
-files are re-read right before writing and no existing entry is changed.
+already has a primary clip keeps it only when that clip is in the assigned voice: for xenia, a
+course clip Silero made with xenia (sources.json "voice": "xenia") serves; a human recording, a
+pre-Silero clip or another voice's clip does not, so a page of xenia items never borrows a third
+voice for its spans and choices. Anything else gets the assigned voice's clip as a variant in
+Audio/variants-listening.json — the same mechanism variants.json uses for other speakers of one
+word — and the app picks the speaker's clip by the `listening-<voice>-` file prefix
+(`Voice.recordingURL(for:voice:)`, which for xenia falls back to the primary this script has
+vouched for). Everything goes through make_morphology_audio.generate (the shared Silero + encode
+pipeline); index/sources/variants files are re-read right before writing and no existing entry is
+changed.
 """
 import json
 import sys
@@ -72,10 +76,21 @@ def assignments(data):
     return out
 
 
+def served(key, v, index, variants, sources):
+    """Whether `key` already has a clip in voice `v`: a listening clip of that voice, or (xenia,
+    the course voice) a course clip Silero made with xenia. Mirrored by the xenia fallback in
+    `Voice.recordingURL(for:voice:)`, which this guarantee makes safe."""
+    files = [index[key]] + variants.get(key, [])
+    if any(f.startswith(f"listening-{v}-") for f in files):
+        return True
+    return v == "xenia" and sources.get(index[key], {}).get("voice") == "xenia"
+
+
 def main():
     plan = "--plan" in sys.argv
     data = json.loads(LISTENING.read_text())
     index = json.loads((AUDIO / "index.json").read_text())
+    sources = json.loads(SOURCES.read_text())
     variants = json.loads(VARIANTS.read_text()) if VARIANTS.exists() else {}
     primary, variant = {}, {}  # voice -> [text]
     kept = 0
@@ -83,12 +98,10 @@ def main():
         k = audio_key(text)
         if k not in index:
             primary.setdefault(v, []).append(text)
-        elif v == "xenia":
-            kept += 1  # the course clip serves
-        elif not any(f.startswith(f"listening-{v}-") for f in [index[k]] + variants.get(k, [])):
-            variant.setdefault(v, []).append(text)
-        else:
+        elif served(k, v, index, variants, sources):
             kept += 1
+        else:
+            variant.setdefault(v, []).append(text)
     print(f"{kept} already served; primaries to make: " + ", ".join(f"{v} {len(t)}" for v, t in sorted(primary.items()))
           + "; variants to make: " + (", ".join(f"{v} {len(t)}" for v, t in sorted(variant.items())) or "none"), flush=True)
     for v, texts in sorted(primary.items()):

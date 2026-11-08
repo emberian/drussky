@@ -138,6 +138,7 @@ struct StrokeDemoOverlay: View {
 
 /// The one formation hint, under the writing line. Recomputed a moment after the pen stops.
 struct FormationHintLine: View {
+    @Environment(Book.self) private var book
     @ObservedObject var pad: PadController
     let letter: Course.Letter
     /// Compare with the cursive models, in cursive's words (Cursive/CursiveCoach.swift).
@@ -167,9 +168,9 @@ struct FormationHintLine: View {
             guard !Task.isCancelled else { return }
             let ink = FormationCoach.polylines(pad.drawing)
             if cursive, let models = CursiveModels.shared {
-                hint = CursiveCoach.hint(for: ink, upper: letter.upper, lower: letter.lower, models: models)
+                hint = CursiveCoach.hint(for: ink, upper: letter.upper, lower: letter.lower, models: models, directionMatters: !(book.settings.leftHanded ?? false))
             } else if let models = StrokeModels.shared {
-                hint = FormationCoach.hint(for: ink, upper: letter.upper, lower: letter.lower, models: models)
+                hint = FormationCoach.hint(for: ink, upper: letter.upper, lower: letter.lower, models: models, directionMatters: !(book.settings.leftHanded ?? false))
             }
         }
     }

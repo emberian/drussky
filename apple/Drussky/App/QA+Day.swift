@@ -5,17 +5,31 @@ import LearningCore
 ///   -qa-day N     the pages were done N days ago; the page is turned: the morning page
 ///   -qa-away D    the same, D days (7 or more: the welcome-back page)
 ///   -qa-probes    a synthetic set of answered probes, so the cover chart has something to show
-///   -qa-tired     the current page is marked shortened (the desk line)
+///   -qa-tired     the offer to make the rest of the page lighter stands on the current page
 extension QA {
     static var dayShift: Int? { value("-qa-day") ?? value("-qa-away") }
 
     static func openDay(_ book: Book) {
         if dayShift != nil { book.turnForward() }
         if has("-qa-probes") { syntheticProbes(book) }
-        if has("-qa-tired"), let page = book.page {
-            book.day.shortened = [page.id: "2 reviews now use choices. 3 reviews wait for later."]
-            book.day.lastShortened = book.now()
+        if has("-qa-tired") { poseLighterOffer(book) }
+    }
+
+    /// The offer needs untouched reviews to change: when the current page has none, a written page
+    /// of review dictations stands in (the same shape DayTests use), with its first two answered.
+    private static func poseLighterOffer(_ book: Book) {
+        if let page = book.page, book.lightening(of: page).isEmpty || page.isFinished {
+            let words = ["кот", "мама", "окно", "она", "книга", "дом", "сок", "нос", "рот", "стол"].filter { book.word($0) != nil }
+            let exercises: [Exercise] = words.map { w in
+                var d = Exercise(kind: .dictation); d.text = w; d.reviewKey = "word:\(w)"; return d
+            }
+            book.insertWrittenPage(title: "A long page", intro: nil, unitTitle: "Повторение · Review", exercises: exercises, newWords: [])
+            for i in 0..<2 where i < words.count {
+                book.record(page: book.currentPage, exercise: i) { $0.attempts = 1; $0.recognized = words[i]; $0.status = .correct }
+            }
         }
+        guard let page = book.page else { return }
+        book.day.lighterOffer = page.id
     }
 
     /// Thirty answered probes with a plausible spread: slightly overconfident predictions.

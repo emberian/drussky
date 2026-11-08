@@ -6,7 +6,7 @@ import Foundation
 enum CursiveCoach {
     /// One hint for the letter written most recently in `ink`, or nil when there is nothing
     /// confident to say. `upper` is the capital; both cases are candidates.
-    static func hint(for ink: [[CGPoint]], upper: String, lower: String, models: CursiveModels) -> String? {
+    static func hint(for ink: [[CGPoint]], upper: String, lower: String, models: CursiveModels, directionMatters: Bool = true) -> String? {
         let candidates = [upper, lower].compactMap { models.letter($0) }
         guard !candidates.isEmpty, !ink.isEmpty else { return nil }
         let shapes = candidates.map(\.model)
@@ -15,7 +15,7 @@ enum CursiveCoach {
         let groups = FormationCoach.segment(ink, joinGap: joinGap, maxWidth: maxWidth)
         guard let latest = groups.max(by: { $0.max()! < $1.max()! }) else { return nil }
         let strokes = latest.map { ink[$0] }
-        if let a = FormationCoach.assess(strokes, candidates: shapes, lines: models.lines), let letter = models.letter(a.glyph) {
+        if let a = FormationCoach.assess(strokes, candidates: shapes, lines: models.lines, directionMatters: directionMatters), let letter = models.letter(a.glyph) {
             if let issue = a.issues.first { return phrase(issue, letter: letter) }
             if startsWithoutHook(strokes, letter: letter) { return letter.hint }
             return a.wellMatched ? "That \(a.glyph) is written like the model." : nil
@@ -30,13 +30,13 @@ enum CursiveCoach {
             m.strokes[0].points = Array(m.strokes[0].points.drop { $0.y > waist })
             return m
         }
-        if !hookless.isEmpty, let a = FormationCoach.assess(strokes, candidates: hookless, lines: models.lines),
+        if !hookless.isEmpty, let a = FormationCoach.assess(strokes, candidates: hookless, lines: models.lines, directionMatters: directionMatters),
            let letter = models.letter(a.glyph), startsWithoutHook(strokes, letter: letter) {
             return letter.hint
         }
         if strokes.count > 1 {
             let joined = [strokes.flatMap { $0 }]
-            if let a = FormationCoach.assess(joined, candidates: shapes, lines: models.lines), let letter = models.letter(a.glyph),
+            if let a = FormationCoach.assess(joined, candidates: shapes, lines: models.lines, directionMatters: directionMatters), let letter = models.letter(a.glyph),
                strokes.count > letter.model.strokes.count {
                 return phrase(.extraStrokes, letter: letter)
             }

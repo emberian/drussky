@@ -78,6 +78,9 @@ extension Book {
             return sayable(letter) ? [.hearWrite, .hearPick] : [.hearPick]
         }
         guard kind == "word", !value.isEmpty else { return [] }
+        // A function word (Model/RussianText.swift) is met inside phrases; alone it is only
+        // recognised by its meaning, never written, said or picked out by ear.
+        if RussianText.isFunctionWord(value) { return word(value)?.en.isEmpty == false ? [.readPick] : [] }
         guard let word = word(value) else { return [.hearWrite] }
         var m: Set<Modality> = [.hearWrite, .say, .hearPick]
         if askable(word) { m.insert(.meaningWrite) }
@@ -123,7 +126,8 @@ extension Book {
             }
         } else if let word = word(value) {
             let rotation: [Modality] = askable(word) ? [.meaningWrite, .hearWrite, .say] : [.hearWrite, .hearWrite, .say]
-            switch modality ?? rotation[variant % 3] {
+            let first: Modality = RussianText.isFunctionWord(value) ? .readPick : rotation[variant % 3]
+            switch modality ?? first {
             case .meaningWrite where askable(word):
                 ex = Exercise(kind: .translate); ex.en = word.en; ex.answerText = word.ru
             case .say:
