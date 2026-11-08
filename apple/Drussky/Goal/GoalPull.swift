@@ -62,6 +62,8 @@ enum GoalPull {
             var e = ex
             e.options = ex.options?.filter { $0 == ex.say || !RussianText.key($0).contains(" ") || inText($0, text) }
             return (e.options?.count ?? 0) >= 2 ? e : nil
+        case .diary:
+            return ex  // an English prompt to write about the text; no Russian to verify
         case .meet, .soundPair:
             return nil
         }
