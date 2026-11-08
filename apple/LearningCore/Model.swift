@@ -18,11 +18,21 @@ public struct Review: Sendable, Hashable {
     public var state: FSRS.State
     /// Retrievability just before it (nil for the first review).
     public var recallBefore: Double?
+    /// How long the answer took (`LearningEvent.latencyMs`), when measured.
+    public var latencyMs: Int?
 }
 
-/// The review history of one (component, modality), and what FSRS makes of it.
+/// The review history of one (component, modality), and what FSRS makes of it — plus how fast
+/// the right answers come (`latencyEMA`), which FSRS does not see: a form produced after six
+/// seconds of working it out and one produced in 600 ms are the same grade and a different
+/// state of knowledge (`CompilationPolicy`).
 public struct MemoryTrace: Sendable, Hashable {
     public private(set) var reviews: [Review] = []
+    /// Exponential moving average of the latency of right answers, in milliseconds; nil until one
+    /// was measured.
+    public private(set) var latencyEMA: Double?
+    /// Right answers whose latency was measured.
+    public private(set) var latencySamples = 0
 
     public var state: FSRS.State? { reviews.last?.state }
     public var last: Date? { reviews.last?.t }
@@ -48,12 +58,25 @@ public struct MemoryTrace: Sendable, Hashable {
         return FSRS.retrievability(elapsedDays: date.timeIntervalSince(r.t) / 86_400, stability: r.state.stability)
     }
 
-    mutating func add(_ grade: Grade, at t: Date, fsrs: FSRS) {
+    mutating func add(_ grade: Grade, at t: Date, fsrs: FSRS, latencyMs: Int? = nil, alpha: Double = CompilationPolicy.defaultAlpha) {
         let prev = reviews.last
         let elapsed = prev.map { t.timeIntervalSince($0.t) / 86_400 } ?? 0
         let before = prev.map { FSRS.retrievability(elapsedDays: elapsed, stability: $0.state.stability) }
         reviews.append(Review(t: t, grade: grade, state: fsrs.next(prev?.state, elapsedDays: elapsed, grade: grade),
-                              recallBefore: before))
+                              recallBefore: before, latencyMs: latencyMs))
+        // Only a right answer says how fast the knowledge comes; a wrong one measures something else.
+        if let latencyMs, latencyMs >= 0, grade >= .good {
+            let x = Double(latencyMs)
+            latencyEMA = latencyEMA.map { $0 + alpha * (x - $0) } ?? x
+            latencySamples += 1
+        }
+    }
+
+    /// Share of the last `window` reviews answered right first time (good or easy).
+    public func recentAccuracy(window: Int) -> Double? {
+        let recent = reviews.suffix(max(1, window))
+        guard !recent.isEmpty else { return nil }
+        return Double(recent.filter { $0.grade >= .good }.count) / Double(recent.count)
     }
 }
 
@@ -140,7 +163,7 @@ public struct KnowledgeModel: Sendable {
                 let key = MemoryKey(c, m)
                 if traces[key] == nil { noteFirstTry(c, in: m, success: grade >= .good, at: e.t) }
                 var trace = traces[key] ?? MemoryTrace()
-                trace.add(grade, at: e.t, fsrs: fsrs)
+                trace.add(grade, at: e.t, fsrs: fsrs, latencyMs: e.latencyMs)
                 traces[key] = trace
                 modalitiesOf[c, default: []].insert(m)
             }

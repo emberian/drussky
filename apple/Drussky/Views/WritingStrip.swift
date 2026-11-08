@@ -43,6 +43,15 @@ final class PadController: ObservableObject {
     @Published private(set) var strokeCount = 0
     /// The revision of the ink now on the strip; a check compares it before trusting a reading.
     private(set) var revision = 0
+    /// When the first stroke of the ink now on the strip landed, and when the last one did
+    /// (reset when the strip is cleared or archived). Their difference is the response latency a
+    /// writing exercise records: how long the word took to write, hesitations included.
+    private(set) var firstStrokeAt: Date?
+    private(set) var lastStrokeAt: Date?
+    var inkDurationMs: Int? {
+        guard let first = firstStrokeAt, let last = lastStrokeAt else { return nil }
+        return Int(last.timeIntervalSince(first) * 1000)
+    }
     fileprivate weak var canvas: PKCanvasView?
     let fileURL: URL
     let writer: InkWriter
@@ -114,6 +123,8 @@ final class PadController: ObservableObject {
         revision = InkRevision.next()
         isEmpty = true
         strokeCount = 0
+        firstStrokeAt = nil
+        lastStrokeAt = nil
         await writer.submit(fileURL, revision: revision, data: nil)
     }
 
@@ -121,6 +132,14 @@ final class PadController: ObservableObject {
         isEmpty = drawing.strokes.isEmpty
         strokeCount = drawing.strokes.count
         revision = InkRevision.next()
+        if drawing.strokes.isEmpty {
+            firstStrokeAt = nil
+            lastStrokeAt = nil
+        } else {
+            let now = Date()
+            firstStrokeAt = firstStrokeAt ?? now
+            lastStrokeAt = now
+        }
         onChange?(drawing)
         let url = fileURL, writer = self.writer, revision = self.revision
         let data = drawing.strokes.isEmpty ? nil : drawing.dataRepresentation()

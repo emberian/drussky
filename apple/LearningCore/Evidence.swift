@@ -62,6 +62,12 @@ public struct LearningEvent: Codable, Sendable, Hashable, Identifiable {
     public var response: String?
     /// Seconds since the previous recorded activity in the same session context, when known.
     public var latency: Double?
+    /// Response latency in milliseconds: from the prompt (the exercise shown, the clip's end, the
+    /// cue to speak) to the response (the stroke, the tap, the voice's onset), as the domain
+    /// measures it for the activity. Absent when the activity has no such moment (free writing,
+    /// a conversation) or the record predates the field. Right and fast is "compiled"
+    /// (`CompilationPolicy`), distinct from right.
+    public var latencyMs: Int?
     /// Help used: "revealed", "tutor", …
     public var help: [String]?
     public var confusions: [Confusion]?
@@ -78,9 +84,10 @@ public struct LearningEvent: Codable, Sendable, Hashable, Identifiable {
                 activity: String? = nil, modality: Modality? = nil, components: [ComponentID], grade: Grade? = nil,
                 correct: Bool? = nil, attempt: Int? = nil, expected: String? = nil, response: String? = nil,
                 latency: Double? = nil, help: [String]? = nil, confusions: [Confusion]? = nil, review: Bool? = nil,
-                judge: String? = nil, confidence: Double? = nil) {
+                judge: String? = nil, confidence: Double? = nil, latencyMs: Int? = nil) {
         self.judge = judge
         self.confidence = confidence
+        self.latencyMs = latencyMs
         self.id = id
         self.t = t
         self.type = type

@@ -125,7 +125,7 @@ struct ReadAloudExercise: View {
         turn.begin(request, voice: voice) { take in
             // Resolved by id and round: the page may have turned or the exercise been reopened.
             book.commitTake(ref, round: round, file: take.file.lastPathComponent, heard: take.heard, target: target,
-                            recognitionAllowed: take.recognitionAllowed, timedOut: take.timedOut)
+                            recognitionAllowed: take.recognitionAllowed, timedOut: take.timedOut, onsetMs: take.onsetMs)
             if let r = take.report, let page = book.page(id: ref.pageID) {
                 book.knowledge.heard(page: page, index: ref.index, take: take.file.lastPathComponent, report: r,
                                      attempt: book.result(ref)?.attempts ?? 0)

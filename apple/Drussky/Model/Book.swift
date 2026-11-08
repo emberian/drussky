@@ -63,6 +63,11 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var talk: TalkConversation? = nil
     /// Answered on a keyboard rather than with the Pencil (Devices/Typing); evidence goes under `type`.
     var typed: Bool? = nil
+    /// How long the latest response took, in milliseconds, as the exercise measures it (writing:
+    /// first stroke to last before Check; choosing by ear: clip's end to tap; choosing a meaning or
+    /// checking a built word: shown to tap; saying: cue to voice onset). Becomes the event's
+    /// `latencyMs`; reset when the exercise is reopened.
+    var responseMs: Int? = nil
 
     var roundNumber: Int { round ?? 0 }
 
@@ -442,6 +447,7 @@ final class Book {
             r.revealed = false
             r.selfAssessed = nil
             r.judged = nil
+            r.responseMs = nil
             r.readerAgreed = nil
         }
     }
