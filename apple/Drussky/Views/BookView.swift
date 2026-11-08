@@ -47,6 +47,8 @@ struct BookView: View {
             if QA.has("-qa-intonation") { QA.intonationPage(book) }
             if let state = QA.string("-qa-speak") { QA.speakingPage(book, turn: speech, voice: voice, state: state) }
             if QA.has("-qa-diary") { QA.diaryPages(book) }
+            if QA.has("-qa-families") { show("Word families", MorphologyPages.addFamilies(book)) }
+            if QA.has("-qa-cognates") { show("Cognates", MorphologyPages.addCognates(book)) }
         }
         .onChange(of: book.currentPage) { _, _ in
             // The goal (Goal/): its first page opens when readable; a brand-new course page that
@@ -60,6 +62,13 @@ struct BookView: View {
     @Environment(SpeakingTurn.self) private var speech
     @State private var notice: String?
     @State private var noticeTitle = "Ear training"
+
+    /// Shows a page maker's notice when it couldn't make a page.
+    private func show(_ title: String, _ problem: String?) {
+        guard let problem else { return }
+        noticeTitle = title
+        notice = problem
+    }
 
     private func makeSoundPairs() {
         guard book.insertSoundPairsPage(voices: { voice.pairVoices($0, exactStress: $1).count }) else {
@@ -124,6 +133,8 @@ struct BookView: View {
                 Button { makeEarTraining() } label: { Label("Ear training", systemImage: "ear") }
                 Button { makeSoundPairs() } label: { Label("Sound pairs", systemImage: "ear.badge.waveform") }
                 Button { book.insertDiaryPage() } label: { Label("Write in my diary", systemImage: "pencil.line") }
+                Button { show("Word families", MorphologyPages.addFamilies(book)) } label: { Label("Word families", systemImage: "tree") }
+                Button { show("Cognates", MorphologyPages.addCognates(book)) } label: { Label("Cognates", systemImage: "character.book.closed") }
             } label: {
                 Image(systemName: "plus.square.on.square").font(.system(size: 18, weight: .medium)).frame(width: 44, height: 44)
             }

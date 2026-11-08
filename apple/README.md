@@ -17,9 +17,11 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | fill | write the missing word in a sentence |
 | read aloud | one tap: hear the model, a soft cue, then just say it (it stops when you do); every take is kept, compared with the model syllable by syllable, with a tip or two; *Skip for now* (ungraded) is always there |
 | what does it mean | read Russian, choose its meaning |
-| passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound |
 | diary (Дневник) | write a few words of *your own* Russian about a prompt, on ruled lines (or type); confirm or fix the recognizer's transcript, then the tutor marks it like homework — wrong spans underlined, the right form in red above, the corrected line, a word of praise, the pattern behind the biggest slip. Your ink stays. Every edit becomes evidence (own-writing modality, a confusion edge, the pattern), and corrected forms join your words for review. From unit 3 every page ends with one; ＋ → *Write in my diary* adds one now; *Not today* skips it |
 | read along | a library text read by a human (LibriVox volunteers, Commons readers): the word being said lights up, tap a word to hear from there, ¾ speed, or listen first with the text appearing as it is read; then write one of its sentences from the reader's voice and say one after the reader |
+| passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние) |
+| build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
+| guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
 
 Writing is read on-device by Apple's handwriting recognizer. It confirms a right answer by
 itself after a short pause; **Check** asks it explicitly. When it misreads you, *I wrote it
@@ -84,7 +86,10 @@ and the next launch imports it and deletes the file.
 ## Pages that write themselves
 
 The **＋** in the top bar asks the tutor for a new page, placed right after the current one:
-*A page from my mistakes* (built from what you've missed and find hardest) or *Read my own
+*Word families* (roots you already have two words of, with their other members to guess and
+build; `Resources/morphology.json`, see COURSE_SCHEMA.md) and *Cognates* (the Greek and Latin of
+mathematics and philosophy, read as Russian) are built on the device without the tutor. The tutor
+writes *A page from my mistakes* (built from what you've missed and find hardest) or *Read my own
 text…* (paste or Scan Text any Russian; it becomes a glossed passage with questions, and its
 new words join your reviews). Pages arrive in the course's own format and every exercise is
 checked before it goes in. The tutor's answers mark Russian as tappable phrases you can

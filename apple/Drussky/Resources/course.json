@@ -1880,6 +1880,115 @@
   {
    "ru": "Ру́кописи не горя́т.",
    "en": "Manuscripts don't burn (Bulgakov)"
+  },
+  {
+   "ru": "писа́ть",
+   "en": "to write"
+  },
+  {
+   "ru": "письмо́",
+   "en": "a letter (mail)",
+   "emoji": "✉️"
+  },
+  {
+   "ru": "писа́тель",
+   "en": "a writer"
+  },
+  {
+   "ru": "написа́ть",
+   "en": "to write (and finish)"
+  },
+  {
+   "ru": "чита́тель",
+   "en": "a reader"
+  },
+  {
+   "ru": "чте́ние",
+   "en": "reading"
+  },
+  {
+   "ru": "счита́ть",
+   "en": "to count; to consider"
+  },
+  {
+   "ru": "вход",
+   "en": "entrance"
+  },
+  {
+   "ru": "вы́ход",
+   "en": "exit"
+  },
+  {
+   "ru": "перехо́д",
+   "en": "crossing, transition"
+  },
+  {
+   "ru": "учи́ть",
+   "en": "to teach; to learn"
+  },
+  {
+   "ru": "учи́тель",
+   "en": "teacher"
+  },
+  {
+   "ru": "учени́к",
+   "en": "pupil"
+  },
+  {
+   "ru": "рабо́тник",
+   "en": "worker"
+  },
+  {
+   "ru": "зна́ние",
+   "en": "knowledge"
+  },
+  {
+   "ru": "тео́рия",
+   "en": "theory"
+  },
+  {
+   "ru": "филосо́фия",
+   "en": "philosophy"
+  },
+  {
+   "ru": "ло́гика",
+   "en": "logic"
+  },
+  {
+   "ru": "систе́ма",
+   "en": "system"
+  },
+  {
+   "ru": "матема́тика",
+   "en": "mathematics"
+  },
+  {
+   "ru": "геоме́трия",
+   "en": "geometry"
+  },
+  {
+   "ru": "фу́нкция",
+   "en": "function"
+  },
+  {
+   "ru": "структу́ра",
+   "en": "structure"
+  },
+  {
+   "ru": "аргуме́нт",
+   "en": "argument"
+  },
+  {
+   "ru": "абстра́кция",
+   "en": "abstraction"
+  },
+  {
+   "ru": "информа́ция",
+   "en": "information"
+  },
+  {
+   "ru": "элеме́нт",
+   "en": "element"
   }
  ],
  "units": [
@@ -9187,6 +9296,573 @@
       {
        "kind": "diary",
        "prompt": "Something you know, and something you don't, in your own words."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "u23",
+   "title": "Word families",
+   "subtitle": "ко́рни · приста́вки · су́ффиксы · Greek and Latin",
+   "pages": [
+    {
+     "id": "u23-p1",
+     "title": "One root, many words: пис-",
+     "intro": "Russian builds its words from a few hundred roots. Learn the root and its prefixes and suffixes, and whole families come at once.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "The root пис- (пиш- before some endings) means write: писа́ть to write, письмо́ a letter, писа́тель a writer, написа́ть to write and finish. Prefixes and suffixes do the rest.",
+       "examples": [
+        {
+         "ru": "писа́ть",
+         "en": "to write"
+        },
+        {
+         "ru": "письмо́",
+         "en": "a letter (mail)"
+        },
+        {
+         "ru": "писа́тель",
+         "en": "a writer"
+        },
+        {
+         "ru": "написа́ть",
+         "en": "to write (and finish)"
+        },
+        {
+         "ru": "пи́шет",
+         "en": "writes"
+        }
+       ]
+      },
+      {
+       "kind": "build_word",
+       "en": "a writer",
+       "answer": "писа́тель",
+       "parts": [
+        "пис",
+        "-а́-",
+        "-тель"
+       ],
+       "options": [
+        "-тель",
+        "-ник",
+        "пис",
+        "-а́-",
+        "пере-"
+       ]
+      },
+      {
+       "kind": "family_guess",
+       "text": "Я хочу́ написа́ть письмо́.",
+       "word": "написа́ть",
+       "root": "пис",
+       "options": [
+        "to write (and finish)",
+        "to read (to the end)",
+        "to sell"
+       ],
+       "answer": 0,
+       "en": "I want to write a letter."
+      },
+      {
+       "kind": "translate",
+       "en": "to write",
+       "answer": "писа́ть"
+      },
+      {
+       "kind": "translate",
+       "en": "a letter (mail)",
+       "answer": "письмо́"
+      },
+      {
+       "kind": "fill",
+       "before": "Мой брат — ",
+       "after": ".",
+       "hint": "My brother is a writer.",
+       "answer": "писа́тель"
+      },
+      {
+       "kind": "dictation",
+       "text": "Писа́тель пи́шет кни́гу."
+      },
+      {
+       "kind": "copy",
+       "text": "писа́ть, написа́ть, письмо́",
+       "times": 1
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Писа́тель пи́шет письмо́."
+      }
+     ]
+    },
+    {
+     "id": "u23-p2",
+     "title": "Reading and counting: чит-",
+     "intro": "One root for reading and counting, and число́ grows from it too.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Чита́ть and счита́ть, to count, share one root: чит-, чт-, чёт-. So do число́, a number, and чётное, even. A reader is чита́тель; reading is чте́ние.",
+       "examples": [
+        {
+         "ru": "чита́тель",
+         "en": "a reader"
+        },
+        {
+         "ru": "чте́ние",
+         "en": "reading"
+        },
+        {
+         "ru": "счита́ть",
+         "en": "to count; to consider"
+        },
+        {
+         "ru": "число́",
+         "en": "number"
+        },
+        {
+         "ru": "чётное",
+         "en": "even (of a number)"
+        }
+       ]
+      },
+      {
+       "kind": "build_word",
+       "en": "a reader",
+       "answer": "чита́тель",
+       "parts": [
+        "чит",
+        "-а́-",
+        "-тель"
+       ],
+       "options": [
+        "-а́-",
+        "чит",
+        "-тель",
+        "-ник",
+        "про-"
+       ]
+      },
+      {
+       "kind": "family_guess",
+       "text": "Ро́бот лю́бит счита́ть звёзды.",
+       "word": "счита́ть",
+       "root": "чит",
+       "options": [
+        "to read to the end",
+        "to count",
+        "to rewrite"
+       ],
+       "answer": 1,
+       "en": "The robot loves counting stars."
+      },
+      {
+       "kind": "translate",
+       "en": "a reader",
+       "answer": "чита́тель"
+      },
+      {
+       "kind": "translate",
+       "en": "reading",
+       "answer": "чте́ние"
+      },
+      {
+       "kind": "fill",
+       "before": "Чита́тель чита́ет, а писа́тель ",
+       "after": ".",
+       "hint": "The reader reads, and the writer writes.",
+       "answer": "пи́шет"
+      },
+      {
+       "kind": "dictation",
+       "text": "Я люблю́ чте́ние."
+      },
+      {
+       "kind": "copy",
+       "text": "чита́ть, счита́ть, число́",
+       "times": 1
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Счита́ть — э́то чита́ть чи́сла."
+      }
+     ]
+    },
+    {
+     "id": "u23-p3",
+     "title": "In, out, across: prefixes on ход-",
+     "intro": "Ходи́ть and идти́ share the root ход-. A prefix gives the direction, and a noun falls out.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "В- is in, вы- is out, пере- is across. On the root ход-, go: вход the way in, вы́ход the way out, перехо́д a crossing.",
+       "examples": [
+        {
+         "ru": "вход",
+         "en": "entrance"
+        },
+        {
+         "ru": "вы́ход",
+         "en": "exit"
+        },
+        {
+         "ru": "перехо́д",
+         "en": "crossing, transition"
+        },
+        {
+         "ru": "ходи́ть",
+         "en": "to go (regularly, on foot)"
+        }
+       ]
+      },
+      {
+       "kind": "build_word",
+       "en": "crossing, transition",
+       "answer": "перехо́д",
+       "parts": [
+        "пере-",
+        "хо́д"
+       ],
+       "options": [
+        "пере-",
+        "вы-",
+        "-ник",
+        "хо́д"
+       ]
+      },
+      {
+       "kind": "family_guess",
+       "text": "Где вход в парк?",
+       "word": "вход",
+       "root": "ход",
+       "options": [
+        "exit",
+        "entrance",
+        "crossing"
+       ],
+       "answer": 1,
+       "en": "Where is the entrance to the park?"
+      },
+      {
+       "kind": "translate",
+       "en": "exit",
+       "answer": "вы́ход"
+      },
+      {
+       "kind": "translate",
+       "en": "entrance",
+       "answer": "вход"
+      },
+      {
+       "kind": "fill",
+       "before": "Где ",
+       "after": "?",
+       "hint": "Where is the exit?",
+       "answer": "вы́ход"
+      },
+      {
+       "kind": "dictation",
+       "text": "Вход там, а вы́ход тут."
+      },
+      {
+       "kind": "copy",
+       "text": "вход, вы́ход, перехо́д",
+       "times": 1
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Вход, вы́ход, перехо́д."
+      }
+     ]
+    },
+    {
+     "id": "u23-p4",
+     "title": "Suffixes: -тель, -ник, -ость, -ние",
+     "intro": "A suffix says what kind of word you have: a person, a quality, an activity.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "-тель and -ник make a person: учи́тель teacher, учени́к pupil, рабо́тник worker. -ость makes a quality: му́дрость wisdom. -ние makes an activity: зна́ние knowledge.",
+       "examples": [
+        {
+         "ru": "учи́ть",
+         "en": "to teach; to learn"
+        },
+        {
+         "ru": "учи́тель",
+         "en": "teacher"
+        },
+        {
+         "ru": "учени́к",
+         "en": "pupil"
+        },
+        {
+         "ru": "рабо́тник",
+         "en": "worker"
+        },
+        {
+         "ru": "зна́ние",
+         "en": "knowledge"
+        }
+       ]
+      },
+      {
+       "kind": "build_word",
+       "en": "teacher",
+       "answer": "учи́тель",
+       "parts": [
+        "уч",
+        "-и́-",
+        "-тель"
+       ],
+       "options": [
+        "-тель",
+        "-ник",
+        "-и́-",
+        "уч",
+        "на-"
+       ]
+      },
+      {
+       "kind": "family_guess",
+       "text": "Рабо́тник рабо́тает ка́ждый день.",
+       "word": "рабо́тник",
+       "root": "раб",
+       "options": [
+        "teacher",
+        "pupil",
+        "worker"
+       ],
+       "answer": 2,
+       "en": "The worker works every day."
+      },
+      {
+       "kind": "translate",
+       "en": "teacher",
+       "answer": "учи́тель"
+      },
+      {
+       "kind": "translate",
+       "en": "pupil",
+       "answer": "учени́к"
+      },
+      {
+       "kind": "fill",
+       "before": "Му́дрый челове́к зна́ет, что тако́е ",
+       "after": ".",
+       "hint": "A wise person knows what wisdom is.",
+       "answer": "му́дрость"
+      },
+      {
+       "kind": "dictation",
+       "text": "Учи́тель и учени́к."
+      },
+      {
+       "kind": "copy",
+       "text": "учи́ть, учи́тель, учени́к",
+       "times": 1
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Учи́тель, учени́к, рабо́тник, зна́ние."
+      }
+     ]
+    },
+    {
+     "id": "u23-p5",
+     "title": "Greek you already know",
+     "intro": "Greek came into Russian sound by sound. Read these as Greek and they are yours.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Th is т (тео́рия), ph is ф (филосо́фия), -y is -ия, and -ics is -ика (ло́гика, матема́тика). The pieces are Greek too: фило- love, -со́фия wisdom, гео- earth, -ме́трия measuring.",
+       "examples": [
+        {
+         "ru": "тео́рия",
+         "en": "theory"
+        },
+        {
+         "ru": "филосо́фия",
+         "en": "philosophy"
+        },
+        {
+         "ru": "ло́гика",
+         "en": "logic"
+        },
+        {
+         "ru": "систе́ма",
+         "en": "system"
+        },
+        {
+         "ru": "матема́тика",
+         "en": "mathematics"
+        },
+        {
+         "ru": "геоме́трия",
+         "en": "geometry"
+        }
+       ]
+      },
+      {
+       "kind": "build_word",
+       "en": "philosophy",
+       "answer": "филосо́фия",
+       "parts": [
+        "фило-",
+        "-со́фия"
+       ],
+       "options": [
+        "-со́фия",
+        "фило-",
+        "гео-",
+        "-ло́гия"
+       ]
+      },
+      {
+       "kind": "build_word",
+       "en": "geometry",
+       "answer": "геоме́трия",
+       "parts": [
+        "гео-",
+        "-ме́трия"
+       ],
+       "options": [
+        "гео-",
+        "фило-",
+        "-ме́трия",
+        "-со́фия"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "theory",
+       "answer": "тео́рия"
+      },
+      {
+       "kind": "translate",
+       "en": "logic",
+       "answer": "ло́гика"
+      },
+      {
+       "kind": "fill",
+       "before": "Э́то не тео́рия, э́то ",
+       "after": ".",
+       "hint": "This is not a theory, it is a fact.",
+       "answer": "факт"
+      },
+      {
+       "kind": "dictation",
+       "text": "Э́то моя́ тео́рия."
+      },
+      {
+       "kind": "copy",
+       "text": "филосо́фия, геоме́трия",
+       "times": 1
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Тео́рия, филосо́фия, ло́гика, систе́ма, матема́тика."
+      }
+     ]
+    },
+    {
+     "id": "u23-p6",
+     "title": "Latin you already know",
+     "intro": "Latin came the same way, with its own endings.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "-tion is -ция (фу́нкция), -ure is -ура (структу́ра), -ment is -мент (аргуме́нт, элеме́нт). Abstractio is абстра́кция; informatio, информа́ция.",
+       "examples": [
+        {
+         "ru": "фу́нкция",
+         "en": "function"
+        },
+        {
+         "ru": "структу́ра",
+         "en": "structure"
+        },
+        {
+         "ru": "аргуме́нт",
+         "en": "argument"
+        },
+        {
+         "ru": "абстра́кция",
+         "en": "abstraction"
+        },
+        {
+         "ru": "информа́ция",
+         "en": "information"
+        },
+        {
+         "ru": "элеме́нт",
+         "en": "element"
+        }
+       ]
+      },
+      {
+       "kind": "build_word",
+       "en": "function",
+       "answer": "фу́нкция",
+       "parts": [
+        "фу́нк-",
+        "-ция"
+       ],
+       "options": [
+        "-у́ра",
+        "-ция",
+        "структ-",
+        "фу́нк-"
+       ]
+      },
+      {
+       "kind": "build_word",
+       "en": "structure",
+       "answer": "структу́ра",
+       "parts": [
+        "структ-",
+        "-у́ра"
+       ],
+       "options": [
+        "-ция",
+        "структ-",
+        "-у́ра",
+        "-ме́нт"
+       ]
+      },
+      {
+       "kind": "translate",
+       "en": "argument",
+       "answer": "аргуме́нт"
+      },
+      {
+       "kind": "translate",
+       "en": "information",
+       "answer": "информа́ция"
+      },
+      {
+       "kind": "fill",
+       "before": "Два — э́то ",
+       "after": ", а не систе́ма.",
+       "hint": "Two is an element, not a system.",
+       "answer": "элеме́нт"
+      },
+      {
+       "kind": "dictation",
+       "text": "Э́то абстра́кция."
+      },
+      {
+       "kind": "copy",
+       "text": "фу́нкция, структу́ра",
+       "times": 1
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Фу́нкция, структу́ра, аргуме́нт, абстра́кция."
       }
      ]
     }

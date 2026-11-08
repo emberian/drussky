@@ -13,6 +13,7 @@ final class KnowledgeTracker {
     private let course: Course
     private let lemmas: Lemmas
     private let pairs: SoundPairs
+    private let morphology: Morphology
     private var lastActivity: [String: Date] = [:]
     private var keptCount: Int
     /// Events the log could not take yet (disk full, file busy); retried before the next append.
@@ -31,9 +32,10 @@ final class KnowledgeTracker {
         self.course = course
         self.lemmas = Lemmas.load()
         self.pairs = SoundPairs.load()
+        self.morphology = Morphology.load()
         self.now = now
         keptCount = customWords.count
-        domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords)
+        domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords, morphology: morphology)
         log = EventLog(url: root.appendingPathComponent("events.jsonl"))
         model = KnowledgeModel(events: log.load())
     }
@@ -45,7 +47,7 @@ final class KnowledgeTracker {
     func refresh(customWords: [Course.Word]) {
         guard customWords.count != keptCount else { return }
         keptCount = customWords.count
-        domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords)
+        domain = RussianDomain(course: course, lemmas: lemmas, pairs: pairs, customWords: customWords, morphology: morphology)
     }
 
     // MARK: Evidence

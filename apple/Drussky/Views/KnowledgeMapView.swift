@@ -15,6 +15,7 @@ struct KnowledgeSection: View {
                 .font(.system(size: 15)).foregroundStyle(Theme.muted)
             KnowledgeMap(tracker: k, selected: $selected)
             nextUp(k)
+            WordFamiliesSection()
             GrowthChart(tracker: k)
         }
         .onAppear {

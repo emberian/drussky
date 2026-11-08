@@ -95,6 +95,8 @@ struct ExerciseRow: View {
         case .passage: PassageExercise(slot: slot)
         case .soundPair: SoundPairExercise(slot: slot, isActive: isActive)
         case .diary: DiaryExercise(slot: slot, isActive: isActive)
+        case .buildWord: BuildWordExercise(slot: slot, isActive: isActive)
+        case .familyGuess: FamilyGuessExercise(slot: slot, isActive: isActive)
         }
     }
 }
@@ -821,7 +823,9 @@ struct PassageExercise: View {
             if let selected {
                 HStack(spacing: 12) {
                     Text(selected).russianFont(24, weight: .medium).foregroundStyle(Theme.text)
-                    Text(gloss(for: selected) ?? "—").scaledFont(17).foregroundStyle(Theme.muted)
+                    // A word still unknown, on a root already known, is shown taken apart first.
+                    Text([book.knowledge.rootHint(for: selected), gloss(for: selected) ?? "—"].compactMap { $0 }.joined(separator: " → "))
+                        .scaledFont(17).foregroundStyle(Theme.muted)
                     HearButton(text: selected, size: 34)
                 }
                 .transition(.opacity)
