@@ -46,6 +46,12 @@ struct BookView: View {
             if QA.has("-qa-pairs") { makeSoundPairs() }
             if QA.has("-qa-intonation") { QA.intonationPage(book) }
         }
+        .onChange(of: book.currentPage) { _, _ in
+            // The goal (Goal/): its first page opens when readable; a brand-new course page that
+            // adds nothing toward it gives way to a page written from the goal's own sentences.
+            if book.openFirstPageIfReady() { return }
+            if let page = book.page, writeMode == nil, book.goalPullDue(reaching: page) { writeMode = .goalAuto }
+        }
     }
 
     @Environment(Voice.self) private var voice
@@ -114,6 +120,8 @@ struct BookView: View {
             Menu {
                 Button { writeMode = .practice } label: { Label("A page from my mistakes", systemImage: "wand.and.stars") }
                 Button { writeMode = .text } label: { Label("Read my own text…", systemImage: "doc.text") }
+                Button { writeMode = .goal } label: { Label("Toward my book", systemImage: "arrow.right.to.line") }
+                    .disabled(book.currentGoal == nil)
                 Button { showLibrary = true } label: { Label("Library", systemImage: "books.vertical") }
                 Button { makeEarTraining() } label: { Label("Ear training", systemImage: "ear") }
                 Button { makeSoundPairs() } label: { Label("Sound pairs", systemImage: "ear.badge.waveform") }

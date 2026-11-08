@@ -97,6 +97,7 @@ struct PageView: View {
             Text(page.title)
                 .font(.system(size: compact ? 28 : 34, weight: .bold, design: .serif))
                 .foregroundStyle(Theme.text)
+            if page.isGoalFirstPage { FirstPageStamp() }
             if page.number == 1 {
                 HowThisBookWorks()
                     .padding(.vertical, 6)

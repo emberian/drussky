@@ -65,6 +65,29 @@ checked before it goes in. The tutor's answers mark Russian as tappable phrases 
 double-tap the Pencil to erase). Speakers with a small number cycle through several human
 voices.
 
+## Your book
+
+The inside cover asks for one text you want to read for real — from the Library, pasted or
+scanned, or a ru.wikisource link (fetched through the MediaWiki parse API and cleaned to its
+paragraphs). It becomes *your book*, kept in the notebook (several allowed; one current), and
+the cover shows **Distance to your book**: the share of its words you know, how many new words
+stand between you and its first page, how many of its sentences you could read now, a ladder
+of the next twenty words worth knowing (occurrences in the text, weighted toward the first
+page) and the grammar patterns it leans on. The text's words are lemmatized by the course's
+tables, then by the tutor (`claude-sonnet-5-5`, 300 forms per call, cached in the goal with a
+short gloss), with a rule-based stemmer standing in until that arrives.
+
+**Toward my book** (＋, or the panel) has the tutor write a page from the goal's own sentences:
+a passage of 2–4 consecutive sentences that are now ≥80% known (glossed), then exercises on the
+most valuable unknown words taken from the text. Every Russian string on the page must be a
+contiguous stretch of the text; anything invented is dropped. Without a key, an offline page
+teaches the words through their own sentences. The book also writes one by itself when a
+brand-new course page would teach nothing toward the goal while a readable stretch waits (at
+most one in three pages). When the first five sentences are each ≥90% known, the book opens
+them as a page of their own — *You can read the first page of your book* — with tap-to-gloss
+and a red «Пе́рвая страни́ца» stamp. Policies and thresholds: `Drussky/Goal/Goal.swift`;
+the distance arithmetic is LearningCore's `Target`.
+
 ## Inside the cover
 
 The book icon (top left) opens your alphabet — each letter in **your own handwriting** once
@@ -117,7 +140,8 @@ checks it survives a relaunch.
 
 QA launch arguments (simulator): `-qa-reset`, `-qa-complete N` (work through N pages with
 synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-contents`,
-`-qa-settings`.
+`-qa-settings`, `-qa-goal <library id>` (make that text the learner's book), `-qa-goal-pull` (an
+offline page toward it), `-qa-goal-first` (open its first page now).
 
 ## Content
 

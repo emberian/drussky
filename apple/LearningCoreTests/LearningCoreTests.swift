@@ -201,4 +201,37 @@ final class LearningCoreTests: XCTestCase {
         let lapsed = KnowledgeModel(events: m.events + [outcome([a], write, .again, at: day(9))])
         XCTAssertFalse(lapsed.isSecure([a], in: [write], at: day(9.1)))
     }
+
+    // MARK: Targets
+
+    /// A target of weighted units: coverage by weight, distinct keys, per-segment shares and a
+    /// ladder of unknown keys by the weight they unlock.
+    func testDistanceToTarget() {
+        let c = ComponentID("sym", "c"), abForm = ComponentID("form", "ab'")
+        // "ab ab' a | c b" — two segments; ab' is a form whose lexeme is ab.
+        let units = [Target.Unit(key: ab, weight: 2), Target.Unit(key: ab, candidates: [abForm, ab], weight: 2),
+                     Target.Unit(key: a, weight: 2), Target.Unit(key: c, weight: 1), Target.Unit(key: b, weight: 1)]
+        let target = Target(units: units, segments: [0..<3, 3..<5])
+        let nothing = KnowledgeModel().distance(to: target, at: t0)
+        XCTAssertEqual(nothing.coverage, 0)
+        XCTAssertEqual(nothing.keys, 4)
+        XCTAssertEqual(nothing.knownKeys, 0)
+        XCTAssertEqual(nothing.ladder.map(\.key), [ab, a, c, b], "by unlocked weight, then first appearance")
+        XCTAssertEqual(nothing.ladder.first?.value, 4)
+        XCTAssertEqual(nothing.ladder.first?.count, 2)
+
+        let m = KnowledgeModel(events: [outcome([ab], write, .good, at: t0), outcome([a], write, .good, at: t0)])
+        let d = m.distance(to: target, at: day(0.5))
+        XCTAssertEqual(d.coverage, 6.0 / 8.0, accuracy: 1e-9, "ab (both units, the form through its lexeme) and a are known")
+        XCTAssertEqual(d.knownKeys, 2)
+        XCTAssertEqual(d.segmentCoverage, [1, 0])
+        XCTAssertEqual(d.segmentsReadable(at: 0.8), 1)
+        XCTAssertEqual(d.ladder.map(\.key), [c, b])
+        // Memory fades: far later nothing reaches the threshold.
+        XCTAssertEqual(m.distance(to: target, at: day(400)).coverage, 0)
+        // An empty target is at distance 0 with nothing to climb.
+        let empty = m.distance(to: Target(units: []), at: t0)
+        XCTAssertEqual(empty.coverage, 0)
+        XCTAssertTrue(empty.ladder.isEmpty)
+    }
 }

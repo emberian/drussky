@@ -12,6 +12,7 @@ struct ContentsView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
                     stats
+                    GoalSection()
                     KnowledgeSection()
                     alphabet
                     if !book.customWords.isEmpty { keptWords }

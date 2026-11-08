@@ -60,6 +60,7 @@ enum QA {
         }
         book.now = Date.init
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
+        applyGoal(to: book)
         book.saveNow()
     }
 

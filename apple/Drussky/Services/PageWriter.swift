@@ -10,6 +10,8 @@ enum PageWriter {
         case text(String)
         /// Rewrite a text down (or up) to the learner's level, keeping its content.
         case rescale(String, title: String)
+        /// A step toward the learner's goal text, built only from its own sentences (Goal/GoalPull.swift).
+        case goal(GoalPull.Brief)
     }
 
     /// Rescaling is a rewriting job; Sonnet 5.5 does it quickly and well.
@@ -45,7 +47,11 @@ enum PageWriter {
         guard let json = extractJSON(raw), let data = json.data(using: .utf8),
               let written = try? JSONDecoder().decode(Written.self, from: data) else { throw Failure.unreadable }
         let allowPassageLetters: Bool = { if case .practice = request { return false } else { return true } }()
-        let usable = written.exercises.compactMap { sanitize($0, book: book, passageAnyLetters: allowPassageLetters) }
+        let isGoal: Bool = { if case .goal = request { return true } else { return false } }()
+        var usable = written.exercises.compactMap {
+            sanitize($0, book: book, passageAnyLetters: allowPassageLetters, readingAnyLetters: isGoal)
+        }
+        if case .goal(let brief) = request { usable = usable.compactMap { GoalPull.verify($0, in: brief) } }
         guard usable.count >= 4 else { throw Failure.tooFew }
         return (written, usable)
     }
@@ -136,6 +142,8 @@ enum PageWriter {
             on what happens, and translate/fill/dictation for the new words (list them in new_words). \
             In the passage's English translation, end with a line: "Rescaled from: <author/title>".
             """
+        case .goal(let brief):
+            return GoalPull.prompt(brief, state: state)
         }
     }
 
@@ -156,11 +164,13 @@ enum PageWriter {
         return nil
     }
 
-    /// Drops exercises that are malformed or use letters the learner hasn't met.
-    static func sanitize(_ ex: Exercise, book: Book, passageAnyLetters: Bool) -> Exercise? {
+    /// Drops exercises that are malformed or use letters the learner hasn't met (reading
+    /// exercises may use any letters when `readingAnyLetters`: a real text has them all).
+    static func sanitize(_ ex: Exercise, book: Book, passageAnyLetters: Bool, readingAnyLetters: Bool = false) -> Exercise? {
         let met = Set(book.course.letters.filter { book.letterKnown($0.upper) }.map(\.upper))
         let allMet = met.count >= book.course.letters.count
         func lettersOK(_ s: String?) -> Bool { allMet || s.map { RussianText.letters(in: $0).isSubset(of: met) } ?? true }
+        func readable(_ s: String?) -> Bool { readingAnyLetters || lettersOK(s) }
         func nonEmpty(_ s: String?) -> Bool { !(s ?? "").trimmingCharacters(in: .whitespaces).isEmpty }
         switch ex.kind {
         case .meet: return nil  // letters are introduced only by the course
@@ -169,11 +179,13 @@ enum PageWriter {
             var e = ex
             e.examples = ex.examples?.filter { lettersOK($0.ru) }
             return e
-        case .trace, .copy, .dictation, .readAloud:
+        case .trace, .copy, .dictation:
             return nonEmpty(ex.text) && lettersOK(ex.text) ? ex : nil
+        case .readAloud:
+            return nonEmpty(ex.text) && readable(ex.text) ? ex : nil
         case .listenPick:
             guard let say = ex.say, let options = ex.options, options.contains(say), options.count >= 2,
-                  options.allSatisfy(lettersOK) else { return nil }
+                  options.allSatisfy(readable) else { return nil }
             return ex
         case .translate:
             return nonEmpty(ex.en) && nonEmpty(ex.answerText) && lettersOK(ex.answerText) ? ex : nil
@@ -181,7 +193,7 @@ enum PageWriter {
             guard nonEmpty(ex.answerText), nonEmpty(ex.hint), lettersOK(ex.answerText), lettersOK(ex.before), lettersOK(ex.after) else { return nil }
             return ex
         case .readMeaning:
-            guard nonEmpty(ex.text), lettersOK(ex.text), let options = ex.options, let i = ex.answerIndex,
+            guard nonEmpty(ex.text), readable(ex.text), let options = ex.options, let i = ex.answerIndex,
                   options.indices.contains(i), options.count >= 2 else { return nil }
             return ex
         case .soundPair: return nil  // generated locally from pairs.json only

@@ -3,22 +3,35 @@ import SwiftUI
 /// Asks the tutor for a new page: practice from what you keep missing, a reading page from a
 /// Russian text you bring, or a library text — as written or rescaled to your level.
 struct WritePageSheet: View {
-    enum Mode: Hashable { case practice, text }
+    /// `.goalAuto`: opened by the book itself (policy in Goal/Goal.swift); writing starts at once.
+    enum Mode: Hashable { case practice, text, goal, goalAuto }
     @Environment(\.dismiss) private var dismiss
+    @Environment(Book.self) private var book
     let mode: Mode
+
+    private var source: WritePageContent.Source? {
+        switch mode {
+        case .practice: .practice
+        case .text: .ownText
+        case .goal: book.currentGoal.map { .goal($0, auto: false) }
+        case .goalAuto: book.currentGoal.map { .goal($0, auto: true) }
+        }
+    }
 
     var body: some View {
         NavigationStack {
-            WritePageContent(source: mode == .practice ? .practice : .ownText, onDone: { dismiss() })
-                .navigationTitle(mode == .practice ? "A page from your mistakes" : "Read your own text")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
+            if let source {
+                WritePageContent(source: source, onDone: { dismiss() })
+                    .navigationTitle(mode == .practice ? "A page from your mistakes" : mode == .text ? "Read your own text" : "Toward your book")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
+            }
         }
     }
 }
 
 struct WritePageContent: View {
-    enum Source: Hashable { case practice, ownText, library(Library.Text) }
+    enum Source: Hashable { case practice, ownText, library(Library.Text), goal(Goal, auto: Bool) }
     @Environment(Book.self) private var book
     let source: Source
     var onDone: () -> Void
@@ -51,6 +64,8 @@ struct WritePageContent: View {
                         }
                 case .library(let t):
                     LibraryTextHeader(text: t)
+                case .goal(let g, _):
+                    GoalPullHeader(goal: g)
                 }
                 if writing {
                     HStack(spacing: 12) {
@@ -66,6 +81,9 @@ struct WritePageContent: View {
         }
         .background(Theme.paper.ignoresSafeArea())
         .interactiveDismissDisabled(writing)
+        .task {
+            if case .goal(let g, auto: true) = source, !writing { await write(.goal(brief(g))) }
+        }
     }
 
     @ViewBuilder private var buttons: some View {
@@ -77,7 +95,30 @@ struct WritePageContent: View {
         case .library(let t):
             bigButton("Rescale to my level", enabled: !writing) { .rescale(t.text, title: "\(t.author), «\(t.title)»") }
             bigButton("Read it as written", enabled: !writing, prominent: false) { .text(t.text) }
+        case .goal(let g, _):
+            bigButton("Write a page toward my book", enabled: !writing && Keychain.apiKey?.isEmpty == false) { .goal(brief(g)) }
+            Button { makeLocalGoalPage(g) } label: {
+                Text("Without the tutor: its words in their own sentences")
+                    .font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.accent)
+            }
+            .buttonStyle(.plain).disabled(writing)
         }
+    }
+
+    private func brief(_ g: Goal) -> GoalPull.Brief {
+        let d = book.distance(for: g)
+        return GoalPull.Brief(goal: g, distance: d,
+                              patterns: d.patterns(domain: book.knowledge.domain, model: book.knowledge.model, at: book.now()))
+    }
+
+    private func makeLocalGoalPage(_ g: Goal) {
+        let b = brief(g)
+        let met = Set(book.course.letters.filter { book.letterKnown($0.upper) }.map(\.upper))
+        let page = GoalPull.localPage(b, met: met, allMet: met.count >= book.course.letters.count)
+        guard page.exercises.count >= 2 else { error = "Not enough of the text is within reach yet — a few more pages and try again."; return }
+        book.insertGoalPage(PageWriter.Written(title: page.title, intro: page.intro, exercises: page.exercises, new_words: nil),
+                            exercises: page.exercises, goal: g, sentences: b.sentences)
+        onDone()
     }
 
     private func bigButton(_ title: String, enabled: Bool, prominent: Bool = true, request: @escaping () -> PageWriter.Request) -> some View {
@@ -99,11 +140,17 @@ struct WritePageContent: View {
         defer { writing = false }
         do {
             let (page, exercises) = try await PageWriter.write(request, book: book) { n in progress = n }
+            if case .goal(let brief) = request {
+                book.insertGoalPage(page, exercises: exercises, goal: brief.goal, sentences: brief.sentences)
+                onDone()
+                return
+            }
             let unit: String = {
                 switch source {
                 case .practice: "Written for you"
                 case .ownText: "Your text"
                 case .library(let t): "Library · \(t.level)"
+                case .goal: "Toward your book"
                 }
             }()
             book.insertWrittenPage(title: page.title, intro: page.intro, unitTitle: unit,
