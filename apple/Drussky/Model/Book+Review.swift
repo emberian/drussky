@@ -31,8 +31,9 @@ extension Book {
         let waiting = Set(pages.suffix(2).flatMap { page in
             page.exercises.indices.compactMap { i in page.results[i].status.isComplete ? nil : page.exercises[i].reviewKey }
         })
-        return knowledge.model.dueReviews(reviewCandidates(), at: now(), policy: reviewPolicy)
-            .filter { !waiting.contains($0.id) }
+        let due = knowledge.model.dueReviews(reviewCandidates(), at: now(), policy: reviewPolicy)
+        // Words never yet read in another hand, after everything due (Cursive/CursiveReviews.swift).
+        return (due + cursiveSeeds(excluding: Set(due.map(\.id)))).filter { !waiting.contains($0.id) }
     }
 
     var dueCount: Int { dueReviews().count }
@@ -77,6 +78,7 @@ extension Book {
         var m: Set<Modality> = [.hearWrite, .say, .hearPick]
         if askable(word) { m.insert(.meaningWrite) }
         if !word.en.isEmpty { m.insert(.readPick) }
+        if cursiveUnlocked, !value.contains(" ") { m.insert(.readCursive) }  // Cursive/CursiveReviews.swift
         return m
     }
 
@@ -109,6 +111,8 @@ extension Book {
             case .hearPick:
                 ex = Exercise(kind: .listenPick); ex.say = word.ru
                 ex.options = ([word.ru] + distractors(for: word, count: 2)).shuffled()
+            case .readCursive:
+                ex = cursiveReviewExercise(for: key, word: word.ru, variant: variant)
             case .readPick where !word.en.isEmpty:
                 let others = distractors(for: word, count: 2).compactMap { self.word($0)?.en }
                     .filter { $0.lowercased() != word.en.lowercased() }

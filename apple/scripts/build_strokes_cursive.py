@@ -228,11 +228,23 @@ letter("з", 34, [s("top bump, waist, long loop", join(cubic((1, X + 7), (3, X -
                                                      cubic((6, XMID), (17, XMID + 1), (19, BASE - 2), (16, DESC - 6), n=8),
                                                      tail_loop(16, DESC - 6)))],
        (1, X + 7), (25, BASE - 11), "з: a small bump at the top, in to the waist, then a bigger curve that loops below the line.")
-letter("ж", 56, [s("left half, up, stem, up, right half", join(arc(9, XMID, 8, H / 2 - 1, -75, -285),
-                                                              line((9 + 8 * math.cos(math.radians(75)), XMID + (H / 2 - 1) * math.sin(math.radians(75))), (22, X)),
-                                                              line((22, X), (22, BASE)), line((22, BASE), (34, X)),
-                                                              arc(34, XMID, 8, H / 2 - 1, -90, 90), hook_from(34, BASE - 1)))],
-       (9 + 8 * math.cos(math.radians(-75)), XMID + (H / 2 - 1) * math.sin(math.radians(-75))), (40, BASE - 13), "ж: the left half-oval like с, up to the stem, down it, up again and the right half-oval the other way.")
+def half_pair(cl, cr, stem, rx, ry, cy, top):
+    """ж's three parts in one stroke: a left half-oval open to the right (-60° to -300°), a rise
+    from its lower end to the stem's top, the stem, a rise to the right half-oval, which goes
+    round clockwise (-120° to 120°) and leaves in a hook."""
+    a0, a1 = math.radians(-60), math.radians(60)
+    left_end = (cl + rx * math.cos(a1), cy + ry * math.sin(a1))
+    right_start = (cr + rx * math.cos(math.radians(-120)), cy + ry * math.sin(math.radians(-120)))
+    right_end = (cr + rx * math.cos(math.radians(120)), cy + ry * math.sin(math.radians(120)))
+    pts = join(arc(cl, cy, rx, ry, -60, -300), line(left_end, (stem, top)), line((stem, top), (stem, BASE)),
+               line((stem, BASE), right_start), arc(cr, cy, rx, ry, -120, 120), hook_from(right_end[0], right_end[1]))
+    entry = (cl + rx * math.cos(a0), cy + ry * math.sin(a0))
+    return pts, entry, (right_end[0] + 6, right_end[1] - 12)
+
+
+_zh, _zh_in, _zh_out = half_pair(9, 39, 24, 9, H / 2 - 1, XMID, X)
+letter("ж", 60, [s("left half, up, stem, up, right half", _zh)], _zh_in, _zh_out,
+       "ж: the left half-oval like с, up to the stem, down it, up again and the right half-oval the other way.")
 letter("х", 34, [s("left curve", arc(0, XMID, 10, H / 2, -90, 90)), s("right curve", join(arc(20, XMID, 10, H / 2, -90, -270), hook_from(20, BASE)))],
        (0, X), (26, BASE - 12), "х is two curves back to back, touching in the middle: the left one first (bulging right), then the right one.")
 letter("ф", 40, [s("left oval", oval(7, XMID, 7, H / 2, -90)), s("stem", line((14, X), (14, DESC))), s("right oval", arc(21, XMID, 7, H / 2, -90, 360))],
@@ -280,11 +292,9 @@ letter("Д", 54, [s("down, loop, base, round", join(line((30, CAP + 6), (10, BAS
 letter("Е", 44, [s("two rounds", join(arc(22, (CAP + MID) / 2, 18, (MID - CAP) / 2, -30, -270), arc(22, (MID + BASE) / 2, 20, (BASE - MID) / 2, -90, -330)))],
        (22 + 18 * math.cos(math.radians(-30)), (CAP + MID) / 2 + (MID - CAP) / 2 * math.sin(math.radians(-30))), None, "Е is two rounds open to the right, the top one first, both anticlockwise.")
 letter("Ё", 44, L["Е"][1] + [s("dots", dot(14, 10)), s("second dot", dot(30, 10))], L["Е"][2], None, "Ё is Е with two dots above.")
-letter("Ж", 84, [s("left half, up, stem, up, right half", join(arc(15, MID, 14, (BASE - CAP) / 2 - 1, -75, -285),
-                                                              line((15 + 14 * math.cos(math.radians(75)), MID + ((BASE - CAP) / 2 - 1) * math.sin(math.radians(75))), (36, CAP)),
-                                                              line((36, CAP), (36, BASE)), line((36, BASE), (56, CAP)),
-                                                              arc(56, MID, 14, (BASE - CAP) / 2 - 1, -90, 90), hook_from(56, BASE - 1)))],
-       (15 + 14 * math.cos(math.radians(-75)), MID + ((BASE - CAP) / 2 - 1) * math.sin(math.radians(-75))), (62, BASE - 13), "Ж: the left half-oval like С, up to the stem, down it, up again and the right half-oval the other way.")
+_ZH, _ZH_in, _ZH_out = half_pair(15, 65, 40, 15, (BASE - CAP) / 2 - 1, MID, CAP)
+letter("Ж", 90, [s("left half, up, stem, up, right half", _ZH)], _ZH_in, _ZH_out,
+       "Ж: the left half-oval like С, up to the stem, down it, up again and the right half-oval the other way.")
 letter("З", 44, [s("two rounds", join(arc(20, (CAP + MID) / 2, 16, (MID - CAP) / 2, -150, 90), arc(20, (MID + BASE) / 2, 20, (BASE - MID) / 2, -90, 150)))],
        (20 + 16 * math.cos(math.radians(-150)), (CAP + MID) / 2 + (MID - CAP) / 2 * math.sin(math.radians(-150))), None, "З is two rounds to the right, clockwise, the lower one a little bigger.")
 letter("И", CU + 24, [s("down, cup, up, down, cup", join(cubic((0, CAP + 10), (0, CAP + 4), (3, TOPC), (6, TOPC), n=4), cap_cup_rise(6, 6 + CU), cap_cup_hook(6 + CU)))],

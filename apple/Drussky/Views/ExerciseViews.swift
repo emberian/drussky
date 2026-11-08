@@ -292,6 +292,7 @@ struct ExplainExercise: View {
                     ForEach(examples, id: \.self) { ex in
                         HStack(spacing: 8) {
                             RussianLine(text: ex.ru, size: 24)
+                                .fixedSize()  // a word, never "м…": the flow row gives each example its own width
                             Text(ex.en).scaledFont(15).foregroundStyle(Theme.muted)
                         }
                     }
