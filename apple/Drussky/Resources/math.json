@@ -471,7 +471,7 @@
       "summary_en": "An injection. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
-      "after_page": "u18-p2",
+      "after_page": "u18-p4",
       "rung": 5,
       "en": "An injection is a function with no coincidence of values at different arguments. In other words: if f(x) = f(y), then x = y. The order of hypothesis and conclusion matters here. For any function, x = y implies f(x) = f(y). For an injection the converse statement holds as well. For example, the function f(x) = x + 1 on the set of natural numbers has no equal values at different arguments. It is an injection. But the constant function g(x) = 1 has the same value at 1 and 2. It is not an injection. The definition of injection does not require every element of B to occur among the function's values.",
       "how_read": [
@@ -1058,7 +1058,7 @@
       "summary_en": "Infinitely many primes. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
-      "after_page": "u25-p4",
+      "after_page": "u26-p2",
       "rung": 10,
       "en": "A prime is a positive integer greater than one with only two positive divisors: one and the number itself. Proposition: there are infinitely many primes.\nProof. Suppose there is a finite number of primes. Let p₁, …, pₙ be all the primes. Take N = p₁⋯pₙ + 1. N is greater than one, so it has a prime divisor q. But no number in the list divides N: the remainder on dividing N by each of them is one. Consequently the number q is not in the list. We have obtained a contradiction. Hence there are infinitely many primes. We do not claim that N itself is necessarily prime: only its prime divisor is needed.",
       "how_read": [
@@ -1184,7 +1184,7 @@
       "summary_en": "The square root of two. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
-      "after_page": "u25-p4",
+      "after_page": "u26-p4",
       "rung": 11,
       "en": "Proposition. The number √2 is irrational: it is not a ratio of two integers.\nProof. Suppose √2 = a/b, where a and b are positive integers with no common divisor greater than one. Then a² = 2b², so a² is even. The square of an odd number is odd, so a is even. Write a = 2k. We obtain 4k² = 2b² and b² = 2k². Consequently b is even too. But then a and b have a common divisor, 2. This contradicts the choice of fraction. Thus √2 is irrational. The condition about the absence of a common divisor is necessary for the contradiction, not for transforming the equalities.",
       "how_read": [
@@ -1309,7 +1309,7 @@
       "summary_en": "Degrees of vertices. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
-      "after_page": "u27-p5",
+      "after_page": "u27-p3",
       "rung": 12,
       "en": "Consider a finite undirected graph without loops or multiple edges. The degree of a vertex is the number of edges incident to it. Proposition: the sum of all vertex degrees is twice the number of edges.\nProof. Count edge ends in two ways. At each vertex the number of ends is its degree. Therefore the total number of ends is the sum of the degrees. On the other hand, each edge has two ends. Hence the total number of ends is twice the number of edges. Both expressions give the same number, so they are equal. Corollary: the number of vertices of odd degree is even. Otherwise the sum of all degrees would be odd, although it equals twice an integer.",
       "how_read": [
@@ -1426,7 +1426,8 @@
         "хотя": "although; although would = at least",
         "целому": "integer (dative adjective modifying number)",
         "числу": "a number (dative)",
-        "чётно": "is even (neuter short adjective)"
+        "чётно": "is even (neuter short adjective)",
+        "которые": "which, that (plural, pointing back to the nouns just named)"
       }
     },
     {
@@ -1580,7 +1581,7 @@
       "summary_en": "An inverse function. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
-      "after_page": "u27-p5",
+      "after_page": "u28-p1",
       "rung": 14,
       "en": "A function f : A → B is called a bijection if for every y ∈ B there exists a unique x ∈ A for which f(x) = y. Proposition: a bijection has an inverse function g : B → A.\nProof. For each y take this unique x and put g(y) = x. The value exists and is uniquely determined, so g is a function. By construction f(g(y)) = y. Moreover g(f(x)) = x, since x is the unique argument with value f(x). Thus g is the inverse function. Without existence of a preimage the value of g is sometimes missing; without uniqueness a choice arises. Both conditions are needed for this definition.",
       "how_read": [
@@ -1827,7 +1828,7 @@
       "summary_en": "Topology: the union theorem. An original graded mathematical reading.",
       "license": "CC0 1.0",
       "source": "https://github.com/emberian/drussky",
-      "after_page": "u28-p2",
+      "after_page": "u28-p3",
       "rung": 16,
       "en": "Theorem. The union of any family of open subsets of the real line is open. We mean sets open in one and the same real line. The family may be finite or infinite.\nDenote these sets by Uᵢ, where i ∈ I. Their union U consists of the points belonging to at least one Uᵢ. A point need not belong to every set in the family. When I is empty, the union is empty. The empty set is open: it has no point at which the openness condition fails. In the following proof for a nonempty union we shall choose a point, then one set in the family containing that point.",
       "how_read": [
