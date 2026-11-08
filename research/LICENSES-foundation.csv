@@ -1,0 +1,113 @@
+asset,kind,recorded_license,normalized_license,missing_license_field,model_license,attribution_required,share_alike,credit,source_page,used_by_app
+crates/rufren-app/assets/foundations/foundation-a.wav,human_recording,CC BY 2.0 FR,CC-BY-2.0-FR,False,,True,False,The Shtooka Project (individual speaker not identified on source page),https://commons.wikimedia.org/wiki/File:Ru-а.ogg,
+crates/rufren-app/assets/foundations/foundation-a10-juice.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a10-l-model.wav,human_recording,CC BY-SA 3.0,CC-BY-SA-3.0,False,,True,True,Aleksey Pogrebnoj-Alexandroff,https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D0%B0.ogg,
+crates/rufren-app/assets/foundations/foundation-a10-s-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a10-table.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a10-this-table.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a11-hand.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a11-here.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a11-i-here.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a11-r-model.wav,human_recording,CC BY-SA 3.0,CC-BY-SA-3.0,False,,True,True,Pogrebnoj-Alexandroff,https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%B0.ogg,
+crates/rufren-app/assets/foundations/foundation-a11-u-model.wav,human_recording,CC BY-SA 3.0,CC-BY-SA-3.0,False,,True,True,Cherus,https://commons.wikimedia.org/wiki/File:Ru-21-%D0%B1%D1%83%D0%BA%D0%B2%D0%B0-%D0%A3.ogg,
+crates/rufren-app/assets/foundations/foundation-a11-you-here.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a12-compose-they-here.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a12-v-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a12-water.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a12-we.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a12-we-here.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a12-you.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a12-you-there.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,vy-tam-140e35.m4a
+crates/rufren-app/assets/foundations/foundation-a13-b-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a13-dad.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a13-p-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a13-robot.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a13-robot-he.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a13-this-robot.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a14-book.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a14-book-she.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a14-g-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a14-sound.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a14-this-book.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a14-z-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a15-ball.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a15-beetle.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a15-choir.wav,human_recording,CC BY-SA 3.0,CC-BY-SA-3.0,False,,True,True,Aleksey Pogrebnoj-Alexandroff,https://commons.wikimedia.org/wiki/File:Ru-%D1%85%D0%BE%D1%80.ogg,
+crates/rufren-app/assets/foundations/foundation-a15-h-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a15-noise.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a15-sh-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a15-zh-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a16-hatch.wav,human_recording,CC BY-SA 4.0,CC-BY-SA-4.0,False,,True,True,1640max,https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%8E%D0%BA.ogg,lyuk-b34bf0.m4a
+crates/rufren-app/assets/foundations/foundation-a16-honey.wav,human_recording,CC BY 2.0 fr,CC-BY-2.0-FR,False,,True,False,The Shtooka Project; individual speaker unreported (page wikitext),https://commons.wikimedia.org/wiki/File:Ru-%D0%BC%D1%91%D0%B4.ogg,
+crates/rufren-app/assets/foundations/foundation-a16-onion.wav,human_recording,CC BY 2.0 fr,CC-BY-2.0-FR,False,,True,False,Audio sample provided by The Shtooka Project.,https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%83%D0%BA.ogg,
+crates/rufren-app/assets/foundations/foundation-a16-yo-model.wav,human_recording,CC BY-SA 3.0,CC-BY-SA-3.0,False,,True,True,Pogrebnoj-Alexandroff,https://commons.wikimedia.org/wiki/File:Ru-%D1%91_(j%C9%B5).ogg,yo-6baaab.m4a
+crates/rufren-app/assets/foundations/foundation-a16-yu-model.wav,human_recording,CC BY-SA 3.0,CC-BY-SA-3.0,False,,True,True,Cherus,https://commons.wikimedia.org/wiki/File:Ru-32-%D0%B1%D1%83%D0%BA%D0%B2%D0%B0-%D0%AE.ogg,yu-baa96c.m4a
+crates/rufren-app/assets/foundations/foundation-a17-compose-my-robot.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a17-j-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a17-my-book.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,moya-kniga-bc556f.m4a
+crates/rufren-app/assets/foundations/foundation-a17-my-cat.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a17-my-f.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,moya-d8cf06.m4a
+crates/rufren-app/assets/foundations/foundation-a17-my-m.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a17-my-n.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a17-my-window.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,moyo-okno-653a53.m4a
+crates/rufren-app/assets/foundations/foundation-a17-salt.wav,human_recording,CC BY 2.0 fr,CC-BY-2.0-FR,False,,True,False,Audio sample provided by The Shtooka Project.,https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BE%D0%BB%D1%8C.ogg,
+crates/rufren-app/assets/foundations/foundation-a18-ch-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a18-circus.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a18-shch-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a18-soup.wav,human_recording,CC BY 2.0 fr,CC-BY-2.0-FR,False,,True,False,The Shtooka Project; individual speaker unreported (page wikitext),https://commons.wikimedia.org/wiki/File:Ru-%D1%89%D0%B8.ogg,shchi-c6bf76.m4a
+crates/rufren-app/assets/foundations/foundation-a18-tea.wav,human_recording,CC BY 2.0 fr,CC-BY-2.0-FR,False,,True,False,Audio sample provided by The Shtooka Project.,https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D0%B0%D0%B9.ogg,
+crates/rufren-app/assets/foundations/foundation-a18-ts-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a19-f-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,fa-c0d26e.m4a
+crates/rufren-app/assets/foundations/foundation-a19-fact.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a19-object.wav,human_recording,CC BY-SA 4.0,CC-BY-SA-4.0,False,,True,True,1640max,https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82.ogg,
+crates/rufren-app/assets/foundations/foundation-a19-this-object.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,eto-obekt-1b7300.m4a
+crates/rufren-app/assets/foundations/foundation-a19-what.wav,human_recording,CC BY 2.0 fr,CC-BY-2.0-FR,False,,True,False,Audio sample provided by The Shtooka Project.,https://commons.wikimedia.org/wiki/File:Ru-%D1%87%D1%82%D0%BE.ogg,
+crates/rufren-app/assets/foundations/foundation-a19-what-this.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a20-compose-she-reads.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,ona-chitaet-ed4c19.m4a
+crates/rufren-app/assets/foundations/foundation-a20-compose-she-thinks.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,ona-dumaet-daae93.m4a
+crates/rufren-app/assets/foundations/foundation-a20-he-reads.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,on-chitaet-bd60a6.m4a
+crates/rufren-app/assets/foundations/foundation-a20-he-thinks.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a20-i-read.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,ya-chitayu-17f6c2.m4a
+crates/rufren-app/assets/foundations/foundation-a20-i-think.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,ya-dumayu-b6c6a1.m4a
+crates/rufren-app/assets/foundations/foundation-a20-they-read.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,oni-chitayut-d60f7b.m4a
+crates/rufren-app/assets/foundations/foundation-a20-they-think.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,oni-dumayut-150d13.m4a
+crates/rufren-app/assets/foundations/foundation-a20-we-read.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,my-chitaem-42f4aa.m4a
+crates/rufren-app/assets/foundations/foundation-a20-we-think.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,my-dumaem-8a0788.m4a
+crates/rufren-app/assets/foundations/foundation-a20-you-pl-read.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,vy-chitaete-1eca04.m4a
+crates/rufren-app/assets/foundations/foundation-a20-you-pl-think.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,vy-dumaete-d11ed3.m4a
+crates/rufren-app/assets/foundations/foundation-a20-you-read.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,ty-chitaesh-be0629.m4a
+crates/rufren-app/assets/foundations/foundation-a20-you-think.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,ty-dumaesh-49f0e1.m4a
+crates/rufren-app/assets/foundations/foundation-a21-compose-sphere.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a21-fact-question.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,eto-fakt-a43bb7.m4a
+crates/rufren-app/assets/foundations/foundation-a21-fiction-scene.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a21-maybe.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a21-number.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a21-one.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a21-one-number.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a21-robot-scene.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a8-i-there.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,ya-tam-9b6559.m4a
+crates/rufren-app/assets/foundations/foundation-a8-you-there.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,ty-tam-c3bbd6.m4a
+crates/rufren-app/assets/foundations/foundation-a9-e-model.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a9-eh-model.wav,human_recording,CC BY-SA 2.5,CC-BY-SA-2.5,False,,True,True,Pogrebnoj-Alexandroff,https://commons.wikimedia.org/wiki/File:Ru-%D1%8D.ogg,
+crates/rufren-app/assets/foundations/foundation-a9-this.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-a9-this-cat.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,eto-kot-4ef65f.m4a
+crates/rufren-app/assets/foundations/foundation-a9-this-window.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,eto-okno-caffb1.m4a
+crates/rufren-app/assets/foundations/foundation-am.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,am-3d2299.m4a
+crates/rufren-app/assets/foundations/foundation-da.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-i.wav,human_recording,CC BY 2.0 fr,CC-BY-2.0-FR,False,,True,False,The Shtooka Project; individual speaker not identified on source page,https://commons.wikimedia.org/wiki/File:Ru-и.ogg,
+crates/rufren-app/assets/foundations/foundation-ka.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-kot.wav,human_recording,CC BY 2.0 FR,CC-BY-2.0-FR,False,,True,False,The Shtooka Project (individual speaker not identified on source page),https://commons.wikimedia.org/wiki/File:Ru-кот.ogg,
+crates/rufren-app/assets/foundations/foundation-ma.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-na.wav,human_recording,CC BY 3.0 us,CC-BY-3.0-US,False,,True,False,"Сергей Сахно, Vion Nicolas / The Shtooka Project",https://commons.wikimedia.org/wiki/File:Ru-на.ogg,na-2d38cb.m4a
+crates/rufren-app/assets/foundations/foundation-net.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-o.wav,human_recording,CC BY 3.0 US,CC-BY-3.0-US,False,,True,False,"Сергей Сахно, Vion Nicolas; The Shtooka Project",https://commons.wikimedia.org/wiki/File:Ru-о.ogg,
+crates/rufren-app/assets/foundations/foundation-okno.wav,human_recording,CC BY 2.0 fr,CC-BY-2.0-FR,False,,True,False,The Shtooka Project; individual speaker not identified on source page,https://commons.wikimedia.org/wiki/File:Ru-окно.ogg,
+crates/rufren-app/assets/foundations/foundation-on.wav,human_recording,CC BY 2.0 fr,CC-BY-2.0-FR,False,,True,False,The Shtooka Project; individual speaker not identified on source page,https://commons.wikimedia.org/wiki/File:Ru-он.ogg,
+crates/rufren-app/assets/foundations/foundation-ona.wav,human_recording,CC BY 3.0 us,CC-BY-3.0-US,False,,True,False,"Сергей Сахно, Vion Nicolas / The Shtooka Project",https://commons.wikimedia.org/wiki/File:Ru-она.ogg,
+crates/rufren-app/assets/foundations/foundation-oni.wav,human_recording,CC BY 3.0 us,CC-BY-3.0-US,False,,True,False,"Сергей Сахно, Vion Nicolas / The Shtooka Project",https://commons.wikimedia.org/wiki/File:Ru-они.ogg,
+crates/rufren-app/assets/foundations/foundation-ono.wav,human_recording,CC BY-SA 4.0,CC-BY-SA-4.0,False,,True,True,1640max / Forvo,https://commons.wikimedia.org/wiki/File:Ru-оно.ogg,
+crates/rufren-app/assets/foundations/foundation-ta.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-tam.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-tam-kot.wav,ai_generated_speech,,unknown,True,CC-BY-NC-SA-4.0,False,False,,,
+crates/rufren-app/assets/foundations/foundation-ty.wav,human_recording,CC BY 3.0 us,CC-BY-3.0-US,False,,True,False,"Сергей Сахно, Vion Nicolas / The Shtooka Project",https://commons.wikimedia.org/wiki/File:Ru-ты.ogg,
+crates/rufren-app/assets/foundations/foundation-ya.wav,human_recording,CC BY 3.0 us,CC-BY-3.0-US,False,,True,False,"Сергей Сахно, Vion Nicolas / The Shtooka Project",https://commons.wikimedia.org/wiki/File:Ru-я.ogg,

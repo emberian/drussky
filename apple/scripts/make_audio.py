@@ -21,14 +21,17 @@ APPLE = Path(__file__).resolve().parents[1]
 REPO = APPLE.parent
 sys.path.insert(0, str(APPLE / "scripts"))
 from validate_course import audio_key, key, spoken_strings  # noqa: E402
-from audio_store import MACOS_SETTINGS, Silero, commons_url, encode, restore_fields, silero_fields  # noqa: E402
+from audio_store import Silero, commons_url, encode, restore_fields, silero_fields  # noqa: E402
 
 COURSE = APPLE / "Drussky/Resources/course.json"
 AUDIO = APPLE / "Drussky/Resources/Audio"
 SCRATCH = REPO / ".local/drussky-audio"
 FOUNDATION = REPO / "crates/rufren-app/assets/foundations"
-# Chosen human (or macOS) takes: key -> {orig, kind, title, source_page, license, author, provider}
+# Chosen human takes: key -> {orig, kind, title, author, credit, license, source_page}. (macOS system
+# voices are not an option: Apple's licence does not allow sharing their output.)
 HUMAN = APPLE / "scripts/human_audio.json"
+# What every human recording must carry so that credits.json can credit it (build_credits.py).
+PROVENANCE = ("author", "license", "source_page")
 FOUNDATION_TEXT = REPO / "crates/rufren-content/content/foundations-v1.json"
 # research/ALPHABET_AUDIO_SOURCE_REVIEW.md: these two have review problems.
 DO_NOT_REUSE = {"foundation-a11-u-model", "foundation-a17-my-n"}
@@ -84,11 +87,17 @@ def silero_text(text):
     return s if s.rstrip("»\"”)")[-1:] in set(".?!…") else s + "."
 
 
-def human_restore(k, h):
-    """restore_fields arguments for a chosen human_audio.json take: a Commons URL, or the macOS input."""
-    if h["kind"] == "macos_tts":
-        return {"synth": {"input": k, "voice": "Milena", "synth": MACOS_SETTINGS}}
-    return {"url": commons_url(h["title"])}
+def human_provenance(k, source):
+    """Who made a human recording and on what terms, from a human_audio.json take or a foundation
+    provenance record. A recording nobody can be credited for cannot be built."""
+    fields = {f: source.get(f) for f in ("title", "author", "credit", "license", "source_page", "author_evidence") if source.get(f)}
+    # Older foundation records name the speaker only in `credit`.
+    if not fields.get("author") and fields.get("credit"):
+        fields["author"] = fields["credit"]
+    missing = [f for f in PROVENANCE if not fields.get(f)]
+    if missing:
+        sys.exit(f"{k}: human recording lacks {', '.join(missing)}; record them (scripts/fetch_provenance.py) before building")
+    return fields
 
 
 def plan():
@@ -126,7 +135,7 @@ def main():
         human = {k: v for k, v in human.items() if k not in have}
         reuse = {k: v for k, v in reuse.items() if k not in have}
         generate = {k: v for k, v in generate.items() if k not in have}
-    print(f"{len(wanted)} keys: chosen human/macOS {len(human)}, reuse {len(reuse)} ({sum(kinds.get(v) == 'human_recording' for v in reuse.values())} human), generate {len(generate)}")
+    print(f"{len(wanted)} keys: chosen human {len(human)}, reuse {len(reuse)} ({sum(kinds.get(v) == 'human_recording' for v in reuse.values())} human), generate {len(generate)}")
     if "--plan" in sys.argv:
         for k, s in generate.items():
             print("  gen", repr(s), "->", SYNTH_FINAL.get(k) or silero_text(SYNTH_OVERRIDES.get(k, s)))
@@ -140,16 +149,15 @@ def main():
         name = slug(k) + ".m4a"
         to_m4a(REPO / h["orig"], AUDIO / name)
         index[k] = name
-        sources[name] = {"key": k, **{f: h[f] for f in ("kind", "title", "author", "credit", "license", "source_page", "provider") if h.get(f)},
-                         **restore_fields(REPO / h["orig"], **human_restore(k, h))}
+        sources[name] = {"key": k, "kind": h["kind"], **human_provenance(k, h),
+                         **restore_fields(REPO / h["orig"], url=commons_url(h["title"]))}
 
     for k, fid in reuse.items():
         name = slug(k) + ".m4a"
         to_m4a(FOUNDATION / f"{fid}.wav", AUDIO / name)
         index[k] = name
-        p = credits.get(fid, {})
         sources[name] = {"key": k, "from": f"crates/rufren-app/assets/foundations/{fid}.wav", "kind": kinds.get(fid),
-                         **({"credit": p.get("credit"), "license": p.get("license"), "source_page": p.get("source_page")} if kinds.get(fid) == "human_recording" else {}),
+                         **(human_provenance(k, credits.get(fid, {})) if kinds.get(fid) == "human_recording" else {}),
                          **restore_fields(FOUNDATION / f"{fid}.wav")}
 
     silero = Silero(threads=4)

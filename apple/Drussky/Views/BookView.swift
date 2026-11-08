@@ -44,7 +44,7 @@ struct BookView: View {
         } message: { Text(app.notice ?? "") }
         .onAppear {
             showContents = QA.has("-qa-contents")
-            showSettings = QA.has("-qa-settings")
+            showSettings = QA.has("-qa-settings") || QA.has("-qa-sources")
             if QA.has("-qa-pairs") { makeSoundPairs() }
             if QA.has("-qa-intonation") { QA.intonationPage(book) }
             if let state = QA.string("-qa-speak") { QA.speakingPage(book, turn: speech, voice: voice, state: state) }

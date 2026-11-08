@@ -2569,13 +2569,15 @@
   "key": "десять",
   "kind": "human_recording",
   "title": "Ru-десять.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B5%D1%81%D1%8F%D1%82%D1%8C.ogg",
   "orig": ".local/drussky-audio/human/orig/36d33f8b6764.ogg",
   "orig_sha1": "fb62f9fe9e1658f66437ee1ce1e27d4957e4c78c",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Ru-%D0%B4%D0%B5%D1%81%D1%8F%D1%82%D1%8C.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "desyat-minus-tri-ravno-sem-429541.m4a": {
   "key": "десять минус три равно семь",
@@ -2647,13 +2649,15 @@
   "key": "девяносто",
   "kind": "human_recording",
   "title": "Ru-девяносто.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B5%D0%B2%D1%8F%D0%BD%D0%BE%D1%81%D1%82%D0%BE.ogg",
   "orig": ".local/drussky-audio/human/orig/1551c9453c16.ogg",
   "orig_sha1": "392f60a3049bca1faf42900f5887bc41883a22e4",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Ru-%D0%B4%D0%B5%D0%B2%D1%8F%D0%BD%D0%BE%D1%81%D1%82%D0%BE.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "devyanosto-plyus-desyat-sto-169874.m4a": {
   "key": "девяносто плюс десять сто",
@@ -2747,13 +2751,15 @@
   "key": "девятнадцать",
   "kind": "human_recording",
   "title": "Ru-девятнадцать.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
   "orig": ".local/drussky-audio/curriculum-human/orig/4902105b8769.ogg",
   "orig_sha1": "b73d1fefa84df1ad73f8bbaf27993bd8c6125e77",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Ru-%D0%B4%D0%B5%D0%B2%D1%8F%D1%82%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "deystvitelno-d2cbc7.m4a": {
   "key": "действительно",
@@ -3480,13 +3486,15 @@
   "key": "двадцать",
   "kind": "human_recording",
   "title": "Ru-двадцать.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B2%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
   "orig": ".local/drussky-audio/human/orig/22e7df8e59ec.ogg",
   "orig_sha1": "31c7cbc0a5cd3dd797a7d9c2057574e93d2d67bb",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Ru-%D0%B4%D0%B2%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "dvadtsat-tridtsat-sorok-pyatdesyat-shest-0c7e7a.m4a": {
   "key": "двадцать тридцать сорок пятьдесят шестьдесят семьдесят восемьдесят девяносто сто",
@@ -3539,13 +3547,15 @@
   "key": "двенадцать",
   "kind": "human_recording",
   "title": "Ru-двенадцать.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B4%D0%B2%D0%B5%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
   "orig": ".local/drussky-audio/curriculum-human/orig/fbf5987ddfc6.ogg",
   "orig_sha1": "5e9cd6104beeb6c1347e027463f054edac2c7664",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/6/61/Ru-%D0%B4%D0%B2%D0%B5%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "dver-c1029c.m4a": {
   "key": "дверь",
@@ -3606,14 +3616,13 @@
  },
  "e-bea15c.m4a": {
   "key": "е",
-  "kind": "macos_tts",
-  "title": "say -v Milena",
-  "provider": "macOS Milena (ru_RU), Apple system voice",
-  "orig": ".local/drussky-audio/macos/m-е.wav",
-  "orig_sha1": "a0dd3af619cc72b7cbb05f67fb8e12477877d0e8",
-  "input": "е",
-  "voice": "Milena",
-  "synth": "macOS `say -v Milena -o <aiff> <input>`",
+  "kind": "ai_generated_speech",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+е.",
+  "orig": ".local/drussky-audio/wav/e-bea15c-ae9163.wav",
+  "orig_sha1": "e2e8f5f3c94d4837ab33cb94a1a2bd44019c8001",
+  "voice": "xenia",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
  "edem-ba3134.m4a": {
@@ -12099,13 +12108,15 @@
   "key": "ложка",
   "kind": "human_recording",
   "title": "Ru-ложка.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0.ogg",
   "orig": ".local/drussky-audio/human/orig/2a8d643540d1.ogg",
   "orig_sha1": "00f7f355e8c94643a89768fcc8832e904ebe79b1",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Ru-%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "lozhka-aleksey-pogrebnoj-al-da64d0.m4a": {
   "key": "ложка",
@@ -12359,7 +12370,9 @@
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BB%D1%8E%D0%BA.ogg",
   "orig": "crates/rufren-app/assets/foundations/foundation-a16-hatch.wav",
   "orig_sha1": "538d64ddd9ec4e31471f3f3aaccfed3a62bbbad4",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "author": "1640max",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "ma-b176b6.m4a": {
   "key": "ма",
@@ -22493,12 +22506,14 @@
   "key": "на",
   "from": "crates/rufren-app/assets/foundations/foundation-na.wav",
   "kind": "human_recording",
-  "credit": "Сергей Сахно, Vion Nicolas / The Shtooka Project",
+  "credit": "Audio sample provided by The Shtooka Project.",
   "license": "CC BY 3.0 us",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-на.ogg",
   "orig": "crates/rufren-app/assets/foundations/foundation-na.wav",
   "orig_sha1": "c0eabf444a5db7892c077b7b8d655b01e6f56fda",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "author": "The Shtooka Project (speaker not identified)",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "na-aleksey-pogrebnoj-al-a6f6c1.m4a": {
   "key": "на",
@@ -23189,13 +23204,15 @@
   "key": "неделя",
   "kind": "human_recording",
   "title": "Ru-неделя.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F.ogg",
   "orig": ".local/drussky-audio/human/orig/e977daa97193.ogg",
   "orig_sha1": "a56ab3a7ba9c2a8ca147c8ae29b5c9ea60ec3743",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Ru-%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "nedelya-doctorandusmanhattan-7a775e.m4a": {
   "key": "неделя",
@@ -24185,13 +24202,15 @@
   "key": "один",
   "kind": "human_recording",
   "title": "Ru-один.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B4%D0%B8%D0%BD.ogg",
   "orig": ".local/drussky-audio/human/orig/89aec4cbb061.ogg",
   "orig_sha1": "77b5462276389aa41ba5c760993708a0af49b477",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Ru-%D0%BE%D0%B4%D0%B8%D0%BD.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "odin-god-dva-goda-pyat-let-b10c93.m4a": {
   "key": "один год два года пять лет",
@@ -24269,13 +24288,15 @@
   "key": "одиннадцать",
   "kind": "human_recording",
   "title": "Ru-одиннадцать.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%B4%D0%B8%D0%BD%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
   "orig": ".local/drussky-audio/human/orig/f6f57bd419d4.ogg",
   "orig_sha1": "de0b9e564d382b4be9810aa67045911ea3eadbcf",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Ru-%D0%BE%D0%B4%D0%B8%D0%BD%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "odinnadtsat-dvenadtsat-trinadtsat-chetyr-38c570.m4a": {
   "key": "одиннадцать двенадцать тринадцать четырнадцать пятнадцать шестнадцать семнадцать восемнадцать девятнадцать двадцать",
@@ -24404,13 +24425,15 @@
   "key": "окно",
   "kind": "human_recording",
   "title": "Ru-окно.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D0%BA%D0%BD%D0%BE.ogg",
   "orig": ".local/drussky-audio/human/orig/cb1e0a97be6d.ogg",
   "orig_sha1": "a582a394f1550984616f28363c25a9332e8eac8b",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Ru-%D0%BE%D0%BA%D0%BD%D0%BE.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "okno-ono-f4509c.m4a": {
   "key": "окно оно",
@@ -25476,13 +25499,15 @@
   "key": "отец",
   "kind": "human_recording",
   "title": "Ru-отец.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BE%D1%82%D0%B5%D1%86.ogg",
   "orig": ".local/drussky-audio/human/orig/0908950a3240.ogg",
   "orig_sha1": "ef6efe22decffdf6f0cdc25f124e5e80d6505535",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Ru-%D0%BE%D1%82%D0%B5%D1%86.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "otets-tatiana-kerbush-4b52d8.m4a": {
   "key": "отец",
@@ -26880,13 +26905,15 @@
   "key": "правда",
   "kind": "human_recording",
   "title": "Ru-правда.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%80%D0%B0%D0%B2%D0%B4%D0%B0.ogg",
   "orig": ".local/drussky-audio/human/orig/9a897dc6f5fc.ogg",
   "orig_sha1": "ab7cafc26a4d67c2a71ee9a559c1b2d0405c5dec",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Ru-%D0%BF%D1%80%D0%B0%D0%B2%D0%B4%D0%B0.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "pravda-lvova-ee9703.m4a": {
   "key": "правда",
@@ -26975,13 +27002,15 @@
   "key": "привет",
   "kind": "human_recording",
   "title": "Ru-привет.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82.ogg",
   "orig": ".local/drussky-audio/human/orig/bdec9212a05f.ogg",
   "orig_sha1": "5e5cdd234339d456d7cf86d7f6b7c27f4b1479f4",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Ru-%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "privet-kak-dela-9c9075.m4a": {
   "key": "привет как дела",
@@ -27497,13 +27526,15 @@
   "key": "пятьдесят",
   "kind": "human_recording",
   "title": "Ru-пятьдесят.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%BF%D1%8F%D1%82%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.ogg",
   "orig": ".local/drussky-audio/human/orig/eba38129aa5c.ogg",
   "orig_sha1": "3e58e124a7a1da8179ccbcec05963b4604754971",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Ru-%D0%BF%D1%8F%D1%82%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "pyati-e2313b.m4a": {
   "key": "пяти",
@@ -27657,13 +27688,15 @@
   "key": "ракета",
   "kind": "human_recording",
   "title": "Ru-ракета.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.ogg",
   "orig": ".local/drussky-audio/human/orig/af9c94e7f871.ogg",
   "orig_sha1": "9a43d1858272e92134df368c7b9c0b8eafb05aa7",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Ru-%D1%80%D0%B0%D0%BA%D0%B5%D1%82%D0%B0.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "raketa-letit-9695db.m4a": {
   "key": "ракета летит",
@@ -27915,13 +27948,15 @@
   "key": "рот",
   "kind": "human_recording",
   "title": "Ru-рот.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%80%D0%BE%D1%82.ogg",
   "orig": ".local/drussky-audio/human/orig/7e069071c36f.ogg",
   "orig_sha1": "f8a9141deab99afb6a87d97270382346bf629164",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Ru-%D1%80%D0%BE%D1%82.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "rot-aleksey-pogrebnoj-al-17cd63.m4a": {
   "key": "рот",
@@ -28229,13 +28264,15 @@
   "key": "сахар",
   "kind": "human_recording",
   "title": "Ru-сахар.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B0%D1%85%D0%B0%D1%80.ogg",
   "orig": ".local/drussky-audio/curriculum-human/orig/5521ad2326d4.ogg",
   "orig_sha1": "535c2a19485bccb26053afc7ae40ce2aadb8957c",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Ru-%D1%81%D0%B0%D1%85%D0%B0%D1%80.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "sakharom-7876a8.m4a": {
   "key": "сахаром",
@@ -28318,13 +28355,15 @@
   "key": "сделать",
   "kind": "human_recording",
   "title": "Ru-сделать.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C.ogg",
   "orig": ".local/drussky-audio/curriculum-human/orig/17d57f27432a.ogg",
   "orig_sha1": "d009a0fed2e611ff478971b3da750d384905d7dd",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Ru-%D1%81%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "segodnya-42f85c.m4a": {
   "key": "сегодня",
@@ -28483,13 +28522,15 @@
   "key": "семьдесят",
   "kind": "human_recording",
   "title": "Ru-семьдесят.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B5%D0%BC%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.ogg",
   "orig": ".local/drussky-audio/human/orig/1a05a00d39fb.ogg",
   "orig_sha1": "115812f8d0e30cb2a7b4862c50fd903289578bb1",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Ru-%D1%81%D0%B5%D0%BC%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "semi-9e2ab1.m4a": {
   "key": "семи",
@@ -28506,13 +28547,15 @@
   "key": "семнадцать",
   "kind": "human_recording",
   "title": "Ru-семнадцать.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B5%D0%BC%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
   "orig": ".local/drussky-audio/curriculum-human/orig/a71a7688cb94.ogg",
   "orig_sha1": "713dd1cc2880f13fb28a1411bd5ee1540c402810",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Ru-%D1%81%D0%B5%D0%BC%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "sentyabr-d756a7.m4a": {
   "key": "сентябрь",
@@ -28529,13 +28572,15 @@
   "key": "сестра",
   "kind": "human_recording",
   "title": "Ru-сестра.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%B5%D1%81%D1%82%D1%80%D0%B0.ogg",
   "orig": ".local/drussky-audio/human/orig/43a0f4d5788f.ogg",
   "orig_sha1": "36269d07e34f03039586f0f84fe0ca2156185da5",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Ru-%D1%81%D0%B5%D1%81%D1%82%D1%80%D0%B0.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "sestre-ce3be8.m4a": {
   "key": "сестре",
@@ -28608,12 +28653,14 @@
   "key": "щи",
   "from": "crates/rufren-app/assets/foundations/foundation-a18-soup.wav",
   "kind": "human_recording",
-  "credit": "The Shtooka Project; individual speaker unreported (page wikitext)",
+  "credit": "Audio sample provided by The Shtooka Project.",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%89%D0%B8.ogg",
   "orig": "crates/rufren-app/assets/foundations/foundation-a18-soup.wav",
   "orig_sha1": "b52192782b38eea6e4bfef406f5945dfedab00bc",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "author": "The Shtooka Project (speaker not identified)",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "shelves-a-chaynik-uzhe-goryachiy-315b56.m4a": {
   "key": "а чайник уже горячий?",
@@ -35366,13 +35413,15 @@
   "key": "шум",
   "kind": "human_recording",
   "title": "Ru-шум.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%88%D1%83%D0%BC.ogg",
   "orig": ".local/drussky-audio/human/orig/fe8c59649f53.ogg",
   "orig_sha1": "37e933d190c5377350b5a1e4795dd27fa2f36b6c",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Ru-%D1%88%D1%83%D0%BC.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "signal-f09d94.m4a": {
   "key": "сигнал",
@@ -35586,13 +35635,15 @@
   "key": "сколько",
   "kind": "human_recording",
   "title": "Ru-сколько.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE.ogg",
   "orig": ".local/drussky-audio/curriculum-human/orig/aad728cc8e77.ogg",
   "orig_sha1": "f576910d16beea522cdf214669ba0788f3df657f",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Ru-%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "skolko-let-nazad-eto-sluchilos-4b1c60.m4a": {
   "key": "сколько лет назад это случилось",
@@ -35710,13 +35761,15 @@
   "key": "следовательно",
   "kind": "human_recording",
   "title": "Ru-следовательно.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE.ogg",
   "orig": ".local/drussky-audio/human/orig/5f1257212bf5.ogg",
   "orig_sha1": "00edaab51834e3728c54df5b16603e648842f241",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Ru-%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "sledovatelno-tatiana-kerbush-fe278d.m4a": {
   "key": "следовательно",
@@ -36341,13 +36394,15 @@
   "key": "сто",
   "kind": "human_recording",
   "title": "Ru-сто.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%82%D0%BE.ogg",
   "orig": ".local/drussky-audio/human/orig/f56c0cde166a.ogg",
   "orig_sha1": "62532931b081e33e3cac282b4d1f2bce6501df95",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Ru-%D1%81%D1%82%D0%BE.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "sto-doctorandusmanhattan-4f82ae.m4a": {
   "key": "сто",
@@ -36544,13 +36599,15 @@
   "key": "стул",
   "kind": "human_recording",
   "title": "Ru-стул.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%82%D1%83%D0%BB.ogg",
   "orig": ".local/drussky-audio/human/orig/2106b6b8f8ac.ogg",
   "orig_sha1": "dccf7e319f5bd53c87d58929beda292bbdcc3d4d",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Ru-%D1%81%D1%82%D1%83%D0%BB.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "subbota-8e1ecf.m4a": {
   "key": "суббота",
@@ -36794,13 +36851,15 @@
   "key": "сыр",
   "kind": "human_recording",
   "title": "Ru-сыр.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%81%D1%8B%D1%80.ogg",
   "orig": ".local/drussky-audio/human/orig/ac2669a7a149.ogg",
   "orig_sha1": "6e7ccd48e244d923d171f4e8bd9aebf129cd8ecf",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Ru-%D1%81%D1%8B%D1%80.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "syr-tatiana-kerbush-7d8560.m4a": {
   "key": "сыр",
@@ -37816,13 +37875,15 @@
   "key": "тринадцать",
   "kind": "human_recording",
   "title": "Ru-тринадцать.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%82%D1%80%D0%B8%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
   "orig": ".local/drussky-audio/human/orig/226a39c95e61.ogg",
   "orig_sha1": "4dd2ed2167f16fc262c9aeccccea9fbac434ce27",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Ru-%D1%82%D1%80%D0%B8%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "trista-4198e1.m4a": {
   "key": "триста",
@@ -37918,13 +37979,15 @@
   "key": "цирк",
   "kind": "human_recording",
   "title": "Ru-цирк.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%86%D0%B8%D1%80%D0%BA.ogg",
   "orig": ".local/drussky-audio/human/orig/6bdc563b4317.ogg",
   "orig_sha1": "759770949b34e2ea27264c4faff5b09860a66e01",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Ru-%D1%86%D0%B8%D1%80%D0%BA.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "tuda-ne-stoit-idti-4e9295.m4a": {
   "key": "туда не стоит идти",
@@ -40817,13 +40880,15 @@
   "key": "восемь",
   "kind": "human_recording",
   "title": "Ru-восемь.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C.ogg",
   "orig": ".local/drussky-audio/human/orig/bf759037cd57.ogg",
   "orig_sha1": "45b01a0befc49b1b789a72165585da7221122899",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/3/34/Ru-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "vosem-delitsya-na-dva-d1f2c8.m4a": {
   "key": "восемь делится на два",
@@ -40879,13 +40944,15 @@
   "key": "восемьдесят",
   "kind": "human_recording",
   "title": "Ru-восемьдесят.ogg",
-  "author": "not stated; see source page",
+  "author": "The Shtooka Project (speaker not identified)",
   "license": "CC BY 2.0 fr",
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.ogg",
   "orig": ".local/drussky-audio/human/orig/1871f4bb603d.ogg",
   "orig_sha1": "d122d2899a6c59a788c27b0e787db66966f364de",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Ru-%D0%B2%D0%BE%D1%81%D0%B5%D0%BC%D1%8C%D0%B4%D0%B5%D1%81%D1%8F%D1%82.ogg",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "credit": "Audio sample provided by The Shtooka Project.",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "vosemdesyat-xana000-eb57ac.m4a": {
   "key": "восемьдесят",
@@ -44051,7 +44118,9 @@
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-%D1%91_(j%C9%B5).ogg",
   "orig": "crates/rufren-app/assets/foundations/foundation-a16-yo-model.wav",
   "orig_sha1": "25d8263816af682fb135ec6e1cbb4cd5190ff40f",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "author": "Pogrebnoj-Alexandroff",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "yu-baa96c.m4a": {
   "key": "ю",
@@ -44062,7 +44131,9 @@
   "source_page": "https://commons.wikimedia.org/wiki/File:Ru-32-%D0%B1%D1%83%D0%BA%D0%B2%D0%B0-%D0%AE.ogg",
   "orig": "crates/rufren-app/assets/foundations/foundation-a16-yu-model.wav",
   "orig_sha1": "6fcc783afc94d72827b2e43033378aae43285f88",
-  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "author": "Cherus",
+  "author_evidence": "Commons file page text, fetched by scripts/fetch_provenance.py"
  },
  "za-a98e59.m4a": {
   "key": "за",

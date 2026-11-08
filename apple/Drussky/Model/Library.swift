@@ -56,6 +56,13 @@ struct Library: Codable, Sendable {
         var speaker: String?
         var license: String?
         var source: String?
+        /// Tatoeba's record of who wrote each half and its licence (scripts/fetch_provenance.py);
+        /// the speaker above is not the author. Shown on «Исто́чники · Sources».
+        var ru_author: String?
+        var en_author: String?
+        var ru_license: String?
+        var en_license: String?
+        var en_source: String?
     }
 
     struct Collection: Codable, Sendable, Hashable, Identifiable {

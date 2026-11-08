@@ -12,6 +12,7 @@ import UIKit
 ///   -qa-corrupt        an undecodable book.json in the QA folder (the recovery screen)
 ///   -qa-nokey         hide the tutor key for this Debug launch without changing Keychain
 ///   -qa-day N / -qa-away D / -qa-probes / -qa-tired   the day's shape (QA+Day.swift)
+///   -qa-sources        open Settings on «Исто́чники · Sources» (Views/CreditsView.swift)
 @MainActor
 enum QA {
     static func value(_ flag: String) -> Int? {
