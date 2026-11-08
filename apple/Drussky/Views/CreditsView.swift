@@ -111,7 +111,8 @@ private struct ClipRow: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text(entry.title).font(Theme.russian(17)).foregroundStyle(Theme.text)
+            Text(entry.spoken ?? entry.title).font(Theme.russian(17)).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
+            if entry.spoken != nil { Text(entry.title).font(.system(size: 12)).foregroundStyle(Theme.muted) }
             HStack(spacing: 6) {
                 LicenceLabel(entry: entry)
                 if let n = entry.assets?.count, n > 1 { Text("· \(n) clips").font(.system(size: 13)).foregroundStyle(Theme.muted) }
@@ -131,7 +132,7 @@ private struct NarrationsSection: View {
         Section {
             ForEach(entries) { e in
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(e.title).font(Theme.russian(17)).foregroundStyle(Theme.text)
+                    Text(e.title).font(Theme.russian(17)).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)
                     Text("Read by \(e.author ?? "a reader not yet recorded")").font(.system(size: 14)).foregroundStyle(Theme.text)
                     LicenceLabel(entry: e)
                     if let url = e.source_url { SourceLink(url) }

@@ -146,7 +146,7 @@ def build():
         key = (group, page, author, raw_license, title, credit, change, note)
         if key not in source_groups:
             entry = {"id": "recording-" + digest(json.dumps(key, ensure_ascii=False))[:16],
-                     "title": title, "author": author, "recorded_author": raw_author,
+                     "title": title, "spoken": source.get("key"), "author": author, "recorded_author": raw_author,
                      "source_url": page, "license": ident, "recorded_license": raw_license,
                      "license_url": url, "attribution_required": required,
                      "share_alike": "-SA-" in ident, "attribution": attribution,

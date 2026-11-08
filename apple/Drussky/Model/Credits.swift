@@ -36,6 +36,8 @@ struct Credits: Decodable, Sendable {
     struct Entry: Decodable, Sendable, Identifiable {
         var id: String
         var title: String
+        /// What a recording says (its index key); the title is the source file's name.
+        var spoken: String?
         var author: String?
         var source_url: String?
         var source_urls: [String]?
