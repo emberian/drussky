@@ -5,7 +5,14 @@ import Foundation
 enum DiaryTutor {
     enum Failure: LocalizedError {
         case unreadable
-        var errorDescription: String? { "The tutor's correction didn't come back in a form I could use. Try again." }
+        /// No tutor can correct right now (offline, no key); the text says why.
+        case unavailable(String)
+        var errorDescription: String? {
+            switch self {
+            case .unreadable: "The tutor's correction didn't come back in a form I could use. Try again."
+            case .unavailable(let why): why
+            }
+        }
     }
 
     /// The correction's JSON contract. The reply is parsed tolerantly (`parse`): missing fields
@@ -55,6 +62,8 @@ enum DiaryTutor {
 
     /// Asks for the correction and parses it. `progress` gets the streamed character count.
     static func correct(text: String, prompt: String, book: Book, progress: @escaping (Int) -> Void = { _ in }) async throws -> DiaryCorrection {
+        // Corrections are Claude's alone (OnDevice/TutorBackend.swift says why); offline they wait.
+        if case .unavailable(let why) = TutorRouter.route(.diaryCorrection, .live) { throw Failure.unavailable(why) }
         var raw = ""
         for try await chunk in Tutor.stream([.init(role: "user", text: Self.prompt(entry: text, prompt: prompt, book: book))],
                                             system: system, maxTokens: 4000, effort: "medium") {
