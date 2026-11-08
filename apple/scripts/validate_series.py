@@ -260,8 +260,9 @@ def validate() -> int:
                     errs.append(f"{loc}: gloss key {gk!r} must be lowercase, unstressed, and unpunctuated")
                 if not isinstance(gv, str) or not gv.strip():
                     errs.append(f"{loc}: empty gloss for {gk!r}")
-                elif set(gv) & CYRILLIC:
-                    errs.append(f"{loc}: gloss value for {gk!r} contains Cyrillic: {gv!r}")
+                elif set(re.sub(r"\([^)]*\)", "", gv)) & CYRILLIC:
+                    # A gloss is English; Russian belongs only in a parenthesis ("screen (after на: on the screen)").
+                    errs.append(f"{loc}: gloss value for {gk!r} contains Cyrillic outside parentheses: {gv!r}")
                 if gk not in ep_unique_keys:
                     errs.append(f"{loc}: gloss key {gk!r} does not appear in episode text")
 
