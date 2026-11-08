@@ -18,8 +18,15 @@ struct Library: Codable, Sendable {
         var summary_en: String?
         var license: String
         var source: String
+        /// A human reading of the text: an Audio/ clip, its word timings file, and who read it
+        /// (scripts/narration.py; Narration.swift). Absent when only the synthetic voice can read it.
+        var narration: String? = nil
+        var words: String? = nil
+        var reader: String? = nil
         /// Set when loaded from the private pack (personal study only).
         var isPrivate: Bool? = nil
+
+        var isNarrated: Bool { narration != nil && words != nil }
     }
 
     struct Sentence: Codable, Sendable, Hashable {

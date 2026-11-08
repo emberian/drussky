@@ -148,6 +148,8 @@ def cmd_restore(args):
                         src_path = p
                 else:
                     src_path = p
+                if "cut" in entry:  # a narration excerpt: the recorded stretch of the chapter, not the whole file
+                    src_path = store.cut(src_path, entry["cut"]["start"], entry["cut"]["end"], Path(level_dir) / (Path(f).stem + "-cut.wav"))
                 store.encode(src_path, audio / f, level_dir)
             except Exception as e:  # noqa: BLE001 -- report every clip, keep going
                 done[how] -= 1

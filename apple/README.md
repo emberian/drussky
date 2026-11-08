@@ -19,6 +19,7 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | what does it mean | read Russian, choose its meaning |
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound |
 | diary (Дневник) | write a few words of *your own* Russian about a prompt, on ruled lines (or type); confirm or fix the recognizer's transcript, then the tutor marks it like homework — wrong spans underlined, the right form in red above, the corrected line, a word of praise, the pattern behind the biggest slip. Your ink stays. Every edit becomes evidence (own-writing modality, a confusion edge, the pattern), and corrected forms join your words for review. From unit 3 every page ends with one; ＋ → *Write in my diary* adds one now; *Not today* skips it |
+| read along | a library text read by a human (LibriVox volunteers, Commons readers): the word being said lights up, tap a word to hear from there, ¾ speed, or listen first with the text appearing as it is read; then write one of its sentences from the reader's voice and say one after the reader |
 
 Writing is read on-device by Apple's handwriting recognizer. It confirms a right answer by
 itself after a short pause; **Check** asks it explicitly. When it misreads you, *I wrote it
@@ -137,6 +138,14 @@ Tatoeba), else by re-synthesizing the recorded Silero input; then trims, levels 
 the generators did. Plain `python3` works when nothing needs synthesis. `audio.py status --plan`
 shows what is missing and how it would come back; `audio.py verify` checks that every clip exists,
 decodes and has provenance.
+
+Narrated library texts (`Audio/narr-*.m4a`, registered in `index-narration.json` /
+`sources-narration.json` with their `*.words.json` word timings) are excerpts cut out of whole
+public-domain chapters at offsets recorded in the manifest, so `restore` rebuilds them from the
+download alone. Timing a new text needs the aligner venv once:
+`cd .local/drussky-librivox && uv venv venv --python 3.12 && uv pip install --python venv/bin/python ctc-forced-aligner unidecode`,
+then `.local/drussky-librivox/venv/bin/python apple/scripts/narration.py align <id>` and
+`python3 apple/scripts/narration.py build <id>` (see `research/NARRATION_ALIGNMENT.md`).
 
 ## Building
 

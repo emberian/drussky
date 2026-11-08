@@ -52,6 +52,7 @@ def level(pcm):
         f = min(1.0, i / fade, (len(clip) - 1 - i) / fade)
         out[i] = max(-32767, min(32767, round(v * g * f)))
     info = {"trimmed_seconds": round(len(clip) / RATE, 3), "speech_seconds": round((last - first + 1) / 100, 2),
+            "start_seconds": round(start / RATE, 3),
             "gain_db": round(gain_db, 1), "noise_floor_db": round(db(sorted(energies)[len(energies) // 10]), 1),
             "peak_db_before": round(db(peak), 1)}
     return out, info

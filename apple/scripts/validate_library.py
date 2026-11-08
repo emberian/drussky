@@ -20,7 +20,7 @@ TOPICS = {"classic", "scifi", "math", "science", "philosophy", "everyday"}
 MAX_TEXT = 3000
 MAX_WORDS = 10
 TEXT_FIELDS = {"id": str, "title": str, "author": str, "level": str, "topic": str, "text": str, "license": str, "source": str}
-OPTIONAL_TEXT = {"title_en": str, "year": int, "summary_en": str}
+OPTIONAL_TEXT = {"title_en": str, "year": int, "summary_en": str, "narration": str, "words": str, "reader": str}
 SENTENCE_FIELDS = {"ru": str, "en": str}
 OPTIONAL_SENTENCE = {"audio": str, "speaker": str, "license": str, "source": str}
 # A license string is redistributable when it names one of these and none of the restrictions.
@@ -36,6 +36,37 @@ def redistributable(lic):
 
 def words(s):
     return re.findall(r"[Ѐ-ӿ́-]+", s)
+
+
+def check_narration(root, t, tag, public, err):
+    """A narrated text: clip registered in index-narration.json with provenance, word timings that match the text."""
+    from narration import check_words
+    audio = root / "Audio"
+    if not (t.get("narration") and t.get("words") and t.get("reader")):
+        err(f"{tag}: narration needs 'narration', 'words' and 'reader' together")
+        return
+    index = json.loads((audio / "index-narration.json").read_text()) if (audio / "index-narration.json").exists() else {}
+    sources = json.loads((audio / "sources-narration.json").read_text()) if (audio / "sources-narration.json").exists() else {}
+    if index.get(f"narration:{t['id']}") != t["narration"]:
+        err(f"{tag}: {t['narration']} is not index-narration.json's clip for narration:{t['id']}")
+    src = sources.get(t["narration"])
+    if not src:
+        err(f"{tag}: {t['narration']} has no sources-narration.json entry")
+    else:
+        for f in ("license", "source_page", "reader", "cut", "orig_url"):
+            if not src.get(f):
+                err(f"{tag}: sources-narration.json entry lacks '{f}'")
+        if public and not redistributable(src.get("license", "")):
+            err(f"{tag}: narration license {src.get('license')!r} is not redistributable")
+    wp = audio / t["words"]
+    if not wp.is_file():
+        err(f"{tag}: word timings {t['words']} missing")
+        return
+    timing = json.loads(wp.read_text())
+    if timing.get("file") != t["narration"]:
+        err(f"{tag}: {t['words']} is for {timing.get('file')}, not {t['narration']}")
+    for p in check_words(t["text"], timing):
+        err(f"{tag}: {p}")
 
 
 def check(root, public, errors, notes):
@@ -92,6 +123,8 @@ def check(root, public, errors, notes):
             err(f"{tag}: implausible year {t['year']}")
         if public and not redistributable(t["license"]):
             err(f"{tag}: license {t['license']!r} is not redistributable; it belongs in PrivatePack")
+        if "narration" in t or "words" in t:
+            check_narration(root, t, tag, public, err)
     sentences = lib.get("sentences", [])
     if not isinstance(sentences, list):
         err("sentences must be a list")
@@ -137,7 +170,8 @@ def check(root, public, errors, notes):
     by_level = {}
     for t in lib["texts"]:
         by_level[t.get("level")] = by_level.get(t.get("level"), 0) + 1
-    notes.append(f"{where}: {len(lib['texts'])} texts {dict(sorted(by_level.items()))}, "
+    narrated = [t for t in lib["texts"] if "narration" in t]
+    notes.append(f"{where}: {len(lib['texts'])} texts {dict(sorted(by_level.items()))}, {len(narrated)} narrated, "
                  f"{len(sentences)} sentences, {len([s for s in sentences if 'audio' in s])} with audio, {len(speakers)} speakers")
 
 

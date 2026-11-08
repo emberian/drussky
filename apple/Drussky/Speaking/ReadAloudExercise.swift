@@ -14,6 +14,9 @@ struct ReadAloudExercise: View {
     let isActive: Bool
     @State private var report: PronunciationReport?
     @State private var noPairs = false
+    /// Shadowing: the human reader's sentence cut from the narration, used as the model.
+    @State private var narrationChunk: URL?
+    private var modelURL: URL? { narrationChunk ?? voice.recordingURL(for: target) }
 
     private var key: String { "\(slot.page.id)-\(slot.index)" }
     private var target: String { slot.exercise.text ?? "" }
@@ -24,12 +27,19 @@ struct ReadAloudExercise: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Instruction(text: slot.result.status.isComplete ? "Say it again whenever you like." : "Listen, then say it.")
+                .task(id: slot.exercise.narration) {
+                    if slot.exercise.narration != nil { narrationChunk = await Narration.chunkURL(for: slot.exercise) }
+                }
             HStack(alignment: .firstTextBaseline, spacing: 14) {
                 Text(SpokenText.marked(target, report: recordingExists ? report : nil, showStress: book.settings.showStress))
                     .russianFont(40, weight: .medium)
                     .foregroundStyle(Theme.text)
                     .accessibilityLabel(target)
-                HearButton(text: target, size: 40)
+                if slot.exercise.narration != nil {
+                    NarrationClipButton(exercise: slot.exercise, owner: key, size: 40, label: "Reader")
+                } else {
+                    HearButton(text: target, size: 40)
+                }
                 MeaningTag(text: target)
             }
             HStack(alignment: .center, spacing: 16) {
@@ -48,7 +58,7 @@ struct ReadAloudExercise: View {
                 }
             }
             if recordingExists, let report {
-                SpeakingReportView(report: report, target: target, modelURL: voice.recordingURL(for: target),
+                SpeakingReportView(report: report, target: target, modelURL: modelURL,
                                    takeURL: slot.recordingURL, version: slot.result.attempts,
                                    practise: practise)
                 if noPairs {
@@ -102,7 +112,7 @@ struct ReadAloudExercise: View {
         if turn.tap(key) { return }
         let ref = slot.ref, book = slot.book, round = slot.result.roundNumber, target = self.target
         let request = SpeakingTurn.Request(key: key, target: target, takeURL: book.newTakeURL(ref),
-                                           model: voice.recordingURL(for: target), repeats: book.settings.modelRepeats)
+                                           model: modelURL, repeats: book.settings.modelRepeats)
         turn.begin(request, voice: voice) { take in
             // Resolved by id and round: the page may have turned or the exercise been reopened.
             book.commitTake(ref, round: round, file: take.file.lastPathComponent, heard: take.heard, target: target,
@@ -117,7 +127,7 @@ struct ReadAloudExercise: View {
     private func loadReport() async {
         guard recordingExists else { report = nil; return }
         let url = slot.recordingURL
-        report = await turn.analyseEarlier(url, target: target, model: voice.recordingURL(for: target), heard: slot.result.recognized)
+        report = await turn.analyseEarlier(url, target: target, model: modelURL, heard: slot.result.recognized)
     }
 
     private func practise(_ contrast: String) {

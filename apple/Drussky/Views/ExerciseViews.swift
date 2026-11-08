@@ -392,7 +392,9 @@ struct WritingExercise: View {
         }
         .onAppear { pad.onChange = { _ in scheduleIdleCheck() } }
         .onChange(of: book.advanceSignal) { _, _ in
-            if isActive, slot.isAdvanceTarget, ex.kind == .dictation, let s = ex.spoken { voice.play(s) }
+            guard isActive, slot.isAdvanceTarget, ex.kind == .dictation else { return }
+            if ex.narration != nil { NarrationPlayer.shared.play(exercise: ex, owner: "\(slot.page.id)-\(slot.index)") }
+            else if let s = ex.spoken { voice.play(s) }
         }
     }
 
@@ -414,8 +416,12 @@ struct WritingExercise: View {
             }
         case .dictation:
             HStack(spacing: 14) {
-                HearButton(text: ex.spoken ?? target, size: 52)
-                Instruction(text: "Write what you hear.")
+                if ex.narration != nil {  // a sentence of a narrated text, at the reader's pace
+                    NarrationClipButton(exercise: ex, owner: "\(slot.page.id)-\(slot.index)", size: 52)
+                } else {
+                    HearButton(text: ex.spoken ?? target, size: 52)
+                }
+                Instruction(text: ex.narration != nil ? "Write what the reader says." : "Write what you hear.")
             }
         case .translate:
             VStack(alignment: .leading, spacing: 4) {
@@ -783,6 +789,10 @@ struct PassageExercise: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
+            if slot.exercise.narration != nil, slot.exercise.words != nil {
+                // A human reading: the words light up as they are said (Narration/ReadAlongView.swift).
+                ReadAlongView(exercise: slot.exercise, owner: "\(slot.page.id)-\(slot.index)", selected: $selected)
+            } else {
             HStack(spacing: 14) {
                 Instruction(text: "Read it. Tap any word you want to check.")
                 HearButton(text: text, size: 40, label: "Whole text")
@@ -807,6 +817,7 @@ struct PassageExercise: View {
             }
             .padding(18)
             .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
+            }
             if let selected {
                 HStack(spacing: 12) {
                     Text(selected).russianFont(24, weight: .medium).foregroundStyle(Theme.text)
