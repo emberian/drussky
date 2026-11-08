@@ -165,9 +165,11 @@ final class Book {
         return .success(book)
     }
 
-    init(course: Course, store: BookStore) {
+    /// `now` is the book's clock (tests run it ahead); opening reads it for the day's shape.
+    init(course: Course, store: BookStore, now: @escaping () -> Date = Date.init) {
         self.course = course
         self.store = store
+        self.now = now
         var saved: BookState?
         switch store.load() {
         case .missing: problem = nil; repairs = []
@@ -199,6 +201,7 @@ final class Book {
         applyLearnedParameters()
         knowledge.backfill(pages: pages, takeReport: { [store] file in Book.savedReport(of: file, in: store) })
         reconcileProbes()
+        noteSessionStart()
         if pages.isEmpty { _ = appendNextPage() }
     }
 
@@ -327,13 +330,17 @@ final class Book {
     }
 
     /// Puts a tutor-written page right after the current one and opens it. Its new words join
-    /// the learner's words so the page's exercises feed their reviews.
+    /// the learner's words so the page's exercises feed their reviews. With
+    /// `beforeCurrentIfUntouched`, a page the book inserts by itself on reaching a page nobody
+    /// has started goes in front of that page instead, so the learner turns forward onto it
+    /// afterwards rather than leaving it behind.
     func insertWrittenPage(title: String, intro: String?, unitTitle: String, exercises: [Exercise], newWords: [Course.Word],
-                           sourceID: String? = nil) {
+                           sourceID: String? = nil, beforeCurrentIfUntouched: Bool = false) {
         for w in newWords where word(w.ru) == nil && !w.en.isEmpty {
             customWords.append(Course.Word(ru: w.ru, en: w.en, emoji: w.emoji, note: w.note ?? "from a written page"))
         }
-        let at = min(currentPage + 1, pages.count)
+        let untouched = page?.results.allSatisfy { $0.status == .open && $0.attempts == 0 && $0.recognized == nil } ?? false
+        let at = beforeCurrentIfUntouched && untouched ? currentPage : min(currentPage + 1, pages.count)
         let id = "w" + UUID().uuidString.prefix(8).lowercased()
         pages.insert(BookPage(id: id, number: 0, sourceID: sourceID, unitTitle: unitTitle, title: title, intro: intro,
                               isReview: false, exercises: exercises, results: exercises.map { _ in ExerciseResult() },

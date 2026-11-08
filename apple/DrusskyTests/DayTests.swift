@@ -296,6 +296,98 @@ final class DayTests: XCTestCase {
         XCTAssertEqual(book.pages[p].results[10].status, .open)
     }
 
+    /// Shortening never takes an exercise the learner has begun: ink on its strip (the writing may be
+    /// under the recognizer), a take recorded. A replaced one starts a new round, so a check that
+    /// began on the old exercise lands nowhere instead of ticking the new one.
+    func testShorteningSparesWorkUnderway() throws {
+        let book = Book(course: course, store: tempStore())
+        let words = ["кот", "мама", "окно", "она", "книга", "дом", "сок", "нос", "рот", "стол", "ты", "мы", "он", "это"]
+        let exercises: [Exercise] = words.map { w in
+            var d = Exercise(kind: .dictation); d.text = w; d.reviewKey = "word:\(w)"; return d
+        }
+        book.insertWrittenPage(title: "long", intro: nil, unitTitle: "t", exercises: exercises, newWords: [])
+        let p = book.currentPage
+        let page0 = book.pages[p]
+        var clock = book.now()
+        book.now = { clock }
+        // Writing is under way on 9 (ink on disk, Vision pending); a take was recorded on 10.
+        try Data("ink".utf8).write(to: book.inkURL(page: page0, exercise: 9))
+        book.record(page: p, exercise: 10) { $0.recording = "t.m4a" }
+        let pendingRound = book.pages[p].results[11].roundNumber
+        for i in 0..<6 {
+            clock = clock.addingTimeInterval(6)
+            book.record(page: p, exercise: i) { $0.attempts = 1; $0.recognized = words[i]; $0.status = .correct }
+        }
+        for i in 6..<9 {
+            clock = clock.addingTimeInterval(300)
+            book.record(page: p, exercise: i) { $0.attempts += 1; $0.failedChecks = 1; $0.recognized = QA.misreading(words[i]) }
+            clock = clock.addingTimeInterval(280)
+            book.record(page: p, exercise: i) { $0.attempts += 1; $0.revealed = true; $0.status = .missed }
+        }
+        XCTAssertNotNil(book.deskLine(for: p))
+        let page = book.pages[p]
+        XCTAssertEqual(page.exercises[9].kind, .dictation, "ink under way: left alone")
+        XCTAssertEqual(page.results[9].status, .open)
+        XCTAssertEqual(page.exercises[10].kind, .dictation, "a take recorded: left alone")
+        XCTAssertEqual(page.results[10].status, .open)
+        XCTAssertTrue([.listenPick, .readMeaning].contains(page.exercises[11].kind))
+        XCTAssertTrue([.listenPick, .readMeaning].contains(page.exercises[12].kind))
+        XCTAssertEqual(page.results[13].status, .skipped)
+        XCTAssertEqual(page.results[11].roundNumber, pendingRound + 1, "a replaced exercise is a new round")
+        // The handwriting check that began on the old exercise 11 compares rounds and drops out.
+        let ref = ExerciseRef(pageID: page.id, index: 11)
+        XCTAssertNotEqual(book.result(ref)?.roundNumber, pendingRound)
+        XCTAssertEqual(book.commitTake(ref, round: pendingRound, file: "late.m4a", heard: words[11], target: words[11],
+                                       recognitionAllowed: true, timedOut: false), .keptOnly)
+        XCTAssertEqual(book.result(ref)?.status, .open)
+    }
+
+    /// Back after twelve days, the learner answers one thing on the page left open before turning
+    /// it: the absence still opens with a welcome-back page. The same for an ordinary morning.
+    func testAnAnswerBeforeTheFirstTurnDoesNotHideTheAbsence() throws {
+        let store = tempStore()
+        let book = studied(3, store: store)
+        let open = book.currentPage
+        book.advanceClock(byDays: 12)
+        book.noteSessionStart()  // the launch (Book.init does this too, with the clock of the device)
+        XCTAssertEqual(book.day.pendingOpening, "welcome-back")
+        XCTAssertEqual(book.day.pendingOpeningDays, 12)
+        QA.complete(book, page: open, upTo: 1)
+        XCTAssertTrue(Calendar.current.isDate(try XCTUnwrap(book.lastActivity), inSameDayAs: book.now()), "the answer is today's")
+        book.turnForward()
+        XCTAssertEqual(book.pages.last?.unitTitle, Book.welcomeBackUnit)
+        XCTAssertNil(book.day.pendingOpening, "consumed")
+        XCTAssertEqual(book.day.lastOpeningKind, "welcome-back")
+        // The next page is ordinary; the decision survives a relaunch until it is used.
+        book.turnForward()
+        XCTAssertNotEqual(book.pages.last?.unitTitle, Book.welcomeBackUnit)
+        book.advanceClock(byDays: 1)
+        book.noteSessionStart()
+        XCTAssertEqual(book.day.pendingOpening, "morning")
+        book.saveNow()
+        let again = Book(course: course, store: store, now: book.now)
+        XCTAssertEqual(again.day.pendingOpening, "morning", "persisted")
+        QA.complete(again, page: again.currentPage, upTo: 2)
+        again.turnForward()
+        XCTAssertEqual(again.day.lastOpeningKind, "morning")
+        XCTAssertTrue(again.pages.last?.intro?.hasPrefix("A new day.") ?? false, again.pages.last?.intro ?? "")
+    }
+
+    /// The daily cap holds on a return too: five allowed, eight due, five placed.
+    func testWelcomeBackKeepsToTheDailyCap() throws {
+        let book = studied(4)
+        book.settings.dailyReviewCap = 5
+        book.advanceClock(byDays: 9)
+        XCTAssertGreaterThan(book.dueReviews().count, 5)
+        book.turnForward()
+        let page = try XCTUnwrap(book.pages.last)
+        XCTAssertEqual(page.unitTitle, Book.welcomeBackUnit)
+        XCTAssertEqual(reviewCount(page, book), 5)
+        XCTAssertEqual(book.reviewAllowance(), 0)
+        book.turnForward()
+        XCTAssertEqual(reviewCount(book.pages.last!, book), 0, "the allowance is spent for the day")
+    }
+
     /// A format-2 notebook written before the day's shape existed: no `day`, old settings.
     static let formatTwoNotebook = """
     {"version":2,"courseCursor":1,"currentPage":0,"memories":[],
@@ -314,7 +406,13 @@ final class DayTests: XCTestCase {
         XCTAssertNil(book.problem)
         XCTAssertTrue(book.repairs.isEmpty)
         XCTAssertEqual(book.pages.count, 1)
-        XCTAssertEqual(book.day, DayState())
+        // Opening a notebook last written weeks ago decides the day's opening at once; nothing else.
+        XCTAssertEqual(book.day.pendingOpening, "welcome-back")
+        var expected = DayState()
+        expected.pendingOpening = book.day.pendingOpening
+        expected.pendingOpeningDays = book.day.pendingOpeningDays
+        expected.pendingOpeningSince = book.day.pendingOpeningSince
+        XCTAssertEqual(book.day, expected)
         XCTAssertTrue(book.settings.cursiveModels)
         XCTAssertNil(book.settings.desiredRetention)
         XCTAssertEqual(book.reviewPolicy.retention, 0.9)

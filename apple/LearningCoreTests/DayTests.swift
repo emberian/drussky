@@ -69,14 +69,21 @@ final class DayTests: XCTestCase {
 
     func testWelcomeBackSamplesAcrossUrgency() {
         let items = (0..<40).map { due("i\($0)", r: Double($0) / 40) }
-        let w = DayComposition.welcomeBack(due: items, policy: DayPolicy(welcomeBackSample: 8))
+        let w = DayComposition.welcomeBack(due: items, allowance: 25, policy: DayPolicy(welcomeBackSample: 8))
         XCTAssertEqual(w.reviews.count, 8)
         XCTAssertEqual(w.reviews.first?.id, "i0", "the most urgent is always in the sample")
         XCTAssertEqual(w.reviews.last?.id, "i39", "and so is the easiest: the page measures the whole range")
         XCTAssertEqual(w.deferred.count, 32)
         XCTAssertEqual(Set(w.reviews.map(\.id)).intersection(w.deferred.map(\.id)).count, 0)
-        let small = DayComposition.welcomeBack(due: Array(items.prefix(5)))
+        let small = DayComposition.welcomeBack(due: Array(items.prefix(5)), allowance: 25)
         XCTAssertEqual(small.reviews.count, 5, "fewer due than the sample: all of them")
+        // The day's cap holds on a return too: a smaller sample, still spanning the range.
+        let capped = DayComposition.welcomeBack(due: items, allowance: 5, policy: DayPolicy(welcomeBackSample: 8))
+        XCTAssertEqual(capped.reviews.count, 5)
+        XCTAssertEqual(capped.reviews.first?.id, "i0")
+        XCTAssertEqual(capped.reviews.last?.id, "i39")
+        XCTAssertEqual(capped.deferred.count, 35)
+        XCTAssertTrue(DayComposition.welcomeBack(due: items, allowance: 0).reviews.isEmpty, "nothing left today: nothing placed")
     }
 
     // MARK: Frontier

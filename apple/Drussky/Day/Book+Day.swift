@@ -16,6 +16,11 @@ struct DayState: Codable, Sendable, Equatable {
     /// Pages the desk shortened (page id → the line shown on the page), and when it last did.
     var shortened: [String: String]? = nil
     var lastShortened: Date? = nil
+    /// The opening the next new page owes this day ("morning" / "welcome-back", with the days
+    /// away), decided when the session began and consumed when the page is composed.
+    var pendingOpening: String? = nil
+    var pendingOpeningDays: Int? = nil
+    var pendingOpeningSince: Date? = nil
 
     /// In-session only.
     var fatigue: FatigueEstimate? = nil
@@ -23,6 +28,7 @@ struct DayState: Codable, Sendable, Equatable {
 
     enum CodingKeys: String, CodingKey {
         case probes, stabilityScale, lastNudge, lastOpening, lastOpeningKind, deferredAtOpening, shortened, lastShortened
+        case pendingOpening, pendingOpeningDays, pendingOpeningSince
     }
 
     init() {}
@@ -58,11 +64,43 @@ extension Book {
     /// next course page needs. False: nothing special, the ordinary flow decides.
     func appendComposedPage() -> Bool {
         guard !pages.isEmpty else { return false }
-        switch DayShape.shape(lastActivity: lastActivity, now: now(), policy: dayPolicy) {
+        switch pendingShape() ?? DayShape.shape(lastActivity: lastActivity, now: now(), policy: dayPolicy) {
         case .welcomeBack(let days): return appendWelcomeBack(days: days)
         case .morning: return appendMorningPage()
         case .ordinary: return appendRemediationIfNeeded()
         }
+    }
+
+    /// At the start of a session (launch, back to the foreground): what the next new page owes
+    /// the day is decided now, from the last thing done before this session, and kept until that
+    /// page is composed. The first answer of the day may well land on the page left open; that
+    /// answer must not turn a twelve-day absence into an ordinary afternoon.
+    func noteSessionStart() {
+        if let since = day.pendingOpeningSince, !isToday(since) { clearPendingOpening() }  // a decision from another day
+        guard !isToday(day.lastOpening) else { return }  // today's opening page already exists
+        switch DayShape.shape(lastActivity: lastActivity, now: now(), policy: dayPolicy) {
+        case .ordinary: break  // activity already today: keep whatever was decided earlier today
+        case .morning: setPendingOpening("morning", days: nil)
+        case .welcomeBack(let days): setPendingOpening("welcome-back", days: days)
+        }
+    }
+
+    /// The opening decided at session start, if it is today's and still owed.
+    private func pendingShape() -> DayShape? {
+        guard let kind = day.pendingOpening, isToday(day.pendingOpeningSince), !isToday(day.lastOpening) else { return nil }
+        return kind == "welcome-back" ? .welcomeBack(days: day.pendingOpeningDays ?? 0) : .morning
+    }
+
+    private func setPendingOpening(_ kind: String, days: Int?) {
+        day.pendingOpening = kind
+        day.pendingOpeningDays = days
+        day.pendingOpeningSince = startOfToday
+    }
+
+    private func clearPendingOpening() {
+        day.pendingOpening = nil
+        day.pendingOpeningDays = nil
+        day.pendingOpeningSince = nil
     }
 
     /// Reviews still allowed today: the daily cap less the reviews already placed on today's
@@ -112,11 +150,12 @@ extension Book {
     }
 
     /// After a long absence: a stratified sample of what is due, to see where memory stands,
-    /// rather than everything at once.
+    /// rather than everything at once — and never more than the day's allowance.
     private func appendWelcomeBack(days: Int) -> Bool {
         let due = dueReviews()
         guard !due.isEmpty else { return appendMorningPage() }
-        let comp = DayComposition.welcomeBack(due: due, policy: dayPolicy)
+        let comp = DayComposition.welcomeBack(due: due, allowance: reviewAllowance(), policy: dayPolicy)
+        guard !comp.reviews.isEmpty else { return appendMorningPage() }  // nothing allowed today: the course goes on
         let exercises = comp.reviews.enumerated().map { reviewExercise(for: $1.id, modality: $1.modality, variant: pages.count + $0) }
         let waiting = comp.deferred.count
         let intro = "\(days) days away. A few of the things you knew, to see where they stand"
@@ -129,11 +168,12 @@ extension Book {
     }
 
     /// Several things the next course page leans on are weak: a short page bringing them back
-    /// (built locally from the review exercises) before the course goes on.
+    /// (built locally from the review exercises) before the course goes on. These are reviews
+    /// too: the page takes only what is left of the day's allowance.
     private func appendRemediationIfNeeded() -> Bool {
         guard let (_, source) = nextCoursePage, pages.last?.unitTitle != Self.remediationUnit else { return false }
         guard case .remediate(let weak) = frontierDecision(for: source) else { return false }
-        let keys = weak.compactMap(targetKey)
+        let keys = Array(weak.compactMap(targetKey).prefix(reviewAllowance()))
         guard keys.count >= FrontierPolicy().minWeak else { return false }
         let exercises = keys.enumerated().map { reviewExercise(for: $1, modality: nil, variant: pages.count + $0) }
         appendPage(sourceID: nil, unitTitle: Self.remediationUnit, title: "Before the next page",
@@ -176,6 +216,7 @@ extension Book {
         day.lastOpening = startOfToday
         day.lastOpeningKind = kind
         day.deferredAtOpening = deferred
+        clearPendingOpening()
     }
 
     /// While the learner is sharp (Fatigue, within the last 20 minutes): one word from the
@@ -315,13 +356,17 @@ extension Book {
 
     /// The page shortens: of the reviews not yet begun, two stay as recognition (hear or read and
     /// pick) instead of recall, the rest are left for a fresher hour (skipped, never graded).
+    /// Begun means any mark at all: an attempt or check, a take, or ink on the strip (the writing
+    /// may still be under the recognizer). A replaced exercise starts a new round, so a check or
+    /// take that began on the old one lands nowhere (`record` and `commitTake` compare rounds).
     private func shorten(page p: Int, _ estimate: FatigueEstimate) {
         var page = pages[p]
         let probeItems = Set(day.probes.probes.compactMap(\.item))
         let untouched = page.exercises.indices.filter { i in
             let r = page.results[i]
             return !r.status.isComplete && page.exercises[i].reviewKey != nil && r.attempts == 0 && (r.failedChecks ?? 0) == 0
-                && r.recognized == nil && !probeItems.contains("\(page.id)#\(i)")
+                && r.recognized == nil && r.recording == nil && !probeItems.contains("\(page.id)#\(i)")
+                && !FileManager.default.fileExists(atPath: store.inkURL(pageID: page.id, index: i).path)
         }
         for i in untouched.prefix(2) {
             let ex = page.exercises[i]
@@ -329,6 +374,7 @@ extension Book {
             let can = reviewModalities(for: key)
             guard let m = [Modality.hearPick, .readPick].first(where: { can.contains($0) }) else { continue }
             page.exercises[i] = reviewExercise(for: key, modality: m, variant: i)
+            page.results[i].round = page.results[i].roundNumber + 1
         }
         for i in untouched.dropFirst(2) {
             page.results[i].status = .skipped
