@@ -109,6 +109,7 @@ struct ExerciseRow: View {
         case .transform: WritingExercise(slot: slot, isActive: isActive)  // Grammar/: a form from a cue, on the strip
         case .paradigmFill: ParadigmFillExercise(slot: slot, isActive: isActive)
         case .cueSort: CueSortExercise(slot: slot, isActive: isActive)
+        case .listening: ListeningExercise(slot: slot, isActive: isActive)  // Views/ListeningView.swift
         }
         }
     }
@@ -810,20 +811,24 @@ struct ChoiceGrid: View {
     let russian: Bool
     let showStress: Bool
     var locked = false
+    /// A pick not judged yet (a message's answers are judged together at the end): the chosen one
+    /// is shown as chosen, with no mark and no colour of right or wrong.
+    var neutral = false
     let onChoose: (Int) -> Void
 
     var body: some View {
         let finished = locked || (chosen != nil && chosen == correct)
+        let judged = finished || !neutral
         FlowRow(spacing: 12) {
             ForEach(Array(options.enumerated()), id: \.offset) { i, option in
                 let isChosen = chosen == i
                 let isRight = correct == i
                 let revealed = finished && isRight && !isChosen
                 let shown = russian ? Theme.stressed(option, show: showStress) : AttributedString(option)
-                let color: Color = isChosen ? (isRight ? Theme.good : Theme.redPen) : (revealed ? Theme.good : Theme.text)
+                let color: Color = isChosen ? (judged ? (isRight ? Theme.good : Theme.redPen) : Theme.accent) : (revealed ? Theme.good : Theme.text)
                 Button { onChoose(i) } label: {
                     HStack(spacing: 8) {
-                        if isChosen || revealed {
+                        if (isChosen && judged) || revealed {
                             Image(systemName: isRight ? "checkmark" : "xmark").font(.system(size: 15, weight: .bold))
                         }
                         Group {
@@ -840,8 +845,8 @@ struct ChoiceGrid: View {
                 }
                 .buttonStyle(.plain)
                 .allowsHitTesting(!finished)  // not .disabled: the marked answers stay full strength
-                .sensoryFeedback(isRight ? .success : .error, trigger: isChosen)
-                .accessibilityValue(isChosen ? (isRight ? "your choice, right" : "your choice, wrong") : revealed ? "the right answer" : "")
+                .sensoryFeedback(judged ? (isRight ? .success : .error) : .selection, trigger: isChosen)
+                .accessibilityValue(isChosen ? (judged ? (isRight ? "your choice, right" : "your choice, wrong") : "your choice") : revealed ? "the right answer" : "")
             }
         }
     }

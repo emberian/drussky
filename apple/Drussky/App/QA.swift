@@ -75,6 +75,10 @@ enum QA {
            let text = Shelves.library.texts(onShelf: shelf.id).first(where: { $0.rung == n }) {
             book.open(Shelves.item(text, on: shelf))
         }
+        // -qa-listening N: set N of the listening strand as a page (Model/Listening.swift); -qa-partial
+        // then applies to it. -qa-listening-week N: the weekly sample page with reserved set N's messages.
+        if let n = value("-qa-listening"), let set = Listening.shared.set(number: n) { book.open(Shelves.item(set, number: n)) }
+        if let n = value("-qa-listening-week"), let set = Listening.shared.weeklySet(number: n) { _ = book.openBaseline(listening: set) }
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
         applyGoal(to: book)
         applyInstruments(to: book)  // -qa-judge, -qa-hooks, -qa-fluency (Fluency/QA+Instruments.swift)
@@ -129,6 +133,12 @@ enum QA {
                 case .paradigmFill: r.recognized = (ex.cells ?? []).map { "\($0)=✓\(ex.forms?[$0] ?? "")" }.joined(separator: ";"); r.status = .correct
                 case .cueSort: r.recognized = (ex.items ?? []).indices.map { "\($0):\(ex.items![$0].answer)" }.joined(separator: ","); r.status = .correct
                 case .readAloud: r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
+                case .listening:  // every decision right, as the card records them (Model/Listening.swift)
+                    if let item = ex.listening {
+                        if item.kind == .message { r.recognized = (0..<item.decisionCount).map { String(item.answer($0) ?? 0) }.joined(separator: ",") }
+                        else { r.chosen = item.answer }
+                    }
+                    r.status = .correct
                 case .dictation, .translate, .fill, .transform: r.status = i % 5 == 3 ? .missed : .correct
                     if r.status == .missed { r.revealed = true; r.recognized = misreading(ex.target ?? "") }
                 default: r.status = .done

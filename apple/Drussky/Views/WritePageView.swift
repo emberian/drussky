@@ -212,6 +212,13 @@ struct LibrarySheet: View {
                             shelfRow(shelf.title, shelf.title_en, "\(library.texts(onShelf: shelf.id).count) readings in rungs")
                         }
                     }
+                    if !Shelves.listeningItems.isEmpty {
+                        NavigationLink {
+                            ListeningShelfView(onDone: { dismiss() })
+                        } label: {
+                            shelfRow("На слух", "Listening", "\(Shelves.listeningItems.count) sets of things said once · answer what they meant")
+                        }
+                    }
                 }
                 Picker("Topic", selection: $topic) {
                     ForEach(topics, id: \.self) { Text($0 == "all" ? "Everything" : $0.capitalized).tag($0) }

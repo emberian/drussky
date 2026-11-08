@@ -26,7 +26,7 @@ final class KnowledgeTests: XCTestCase {
         XCTAssertTrue(g.edges(to: phrase, .partOf).map(\.from).contains(ComponentID(.form, "меня")))
         XCTAssertTrue(g.edges(from: phrase, .exemplifies).map(\.to).contains(ComponentID(.construction, "have")))
         XCTAssertEqual(g.prerequisites(of: ComponentID(.construction, "pres-2sg")), [ComponentID(.construction, "pres-1sg")])
-        XCTAssertEqual(g.components(of: .sound).count, SoundPairs.load().contrasts.count)
+        XCTAssertEqual(g.components(of: .sound).count, SoundPairs.load().contrasts.count + 1, "the pair contrasts and asking-or-telling (RussianDomain+Listening)")
         // Every lexicon entry is a component.
         for w in course.lexicon {
             XCTAssertNotNil(d.utteranceID(w.ru).flatMap { g[$0] }, w.ru)

@@ -215,6 +215,54 @@ domestic dialogues of 25–80 words, one per course page, each with one to three
 QA: `-qa-series N` / `-qa-kitchen N` / `-qa-math N` open episode N / dialogue N / rung N as a
 page (`-qa-partial 1` then marks its passage read).
 
+## Listening: «На слух»
+
+A third shelf (`Resources/listening.json`, `Model/Listening.swift`, `Views/ListeningView.swift`):
+twelve sets of six to eight short situations said once, each set ready after one course page.
+Seven kinds, one calm card each — the English task, **Play** (nothing plays until you tap),
+**Replay**, **Slower** (¾ speed, same voice), the choices, and only after the answer the words:
+
+| kind | you hear | you answer |
+|---|---|---|
+| which thing (`pick_object`) | a request («Дай сыр.») | the noun asked for, among taught nouns (Russian, stressed) |
+| who needs what (`who_needs`) | two people, A then B, two voices; badges light as each speaks | A, B or both |
+| follow (`follow`) | an instruction over a small scene — things on a tray, places to put them, as word chips | which result follows (one object's new place, or unchanged) |
+| asking or telling (`question_or_statement`) | one of two identical sentences, as a statement (IK-1) or a yes/no question (IK-3) | Statement / Question; afterwards both forms, same voice, side by side |
+| voice message (`message`) | two to four sentences | two or three English questions (gist and detail), judged together once all are answered |
+| a correction (`correction`) | a sentence with a self-repair («Я хочу́ чай. Нет, ко́фе.») | the final meaning |
+| who wants what (`disagreement`) | two people who do not agree | what each wants or what was actually agreed |
+
+After the answer the stressed transcript appears in place with the deciding span underlined in
+red and one line of *why* under it (for a message, the missed question's span, not the item's);
+the right choice is marked, the translation and the item's glosses follow. Nothing scrolls or
+moves. A miss offers *Try it again* (ungraded). Every answer is `hear-pick` evidence on the words
+and constructions of the heard turn (a heard word is not evidence of its letters); a miss is
+`again` on the words of the crucial span only; *asking or telling* is one skill of its own,
+`sound:intonation`, whatever the words. A card is never a thing to recall later, and the tutor
+never writes one.
+
+A set is offered once at the foot of the next page after its course page is finished (the same
+calm card as an episode: *You can listen to this now · Listen*), is listed in ＋ → *Library*
+and on the cover's Shelves row («На слух · 12 sets · what is ready next»), and ＋ → *На слух · N*
+opens the next one. Six reserved sets of five unheard messages (`weekly_samples`) never appear
+there: once the course has finished a reserved set's page, **What I could do this week** takes
+its five messages as the sample's listening part — played by text in a voice the course never
+uses (aidar), answered in English on the ruled lines, the Russian and the model meanings shown
+only after the first response is sealed, never graded — and falls back to the bank of human
+recordings until then. Each set is used once.
+
+Voices: `voice_hint: any` keeps the course voice (xenia); `unfamiliar` moves to aidar; an
+exchange is always two voices (xenia/aidar, or aidar/baya when unfamiliar), and a replay keeps
+the speaker. `scripts/make_listening_audio.py` makes the clips with the same rule
+(`ListeningItem.voice(forLine:)`): 288 Silero clips for the 338 strings (the other 50 already had
+course clips), filed as `listening-<voice>-…` in `Audio/index.json` or, where the text already
+has a course clip in another voice, in `Audio/variants-listening.json` — the mechanism
+`variants.json` uses for other speakers of one word; `Voice.recordingURL(for:voice:)` picks the
+speaker by that prefix. `make_morphology_audio.py --voice=xenia|aidar|baya` is the shared
+generator. `scripts/validate_listening.py` is the content gate (in `check_content.py`) and
+writes the spoken inventory `research/artifacts/listening-spoken.txt`. QA: `-qa-listening N`
+opens set N; `-qa-listening-week N` opens the weekly sample with reserved set N's messages.
+
 ## Your book
 
 The inside cover asks for one text you want to read for real — from the Library, pasted or
@@ -359,7 +407,8 @@ cell, or every table of the Grammar section).
 `scripts/validate_course.py` (schema in `COURSE_SCHEMA.md`: letters before use, stress
 marks, page sizes, answer integrity). `scripts/check_content.py` runs every content validator
 at once: the course, the library (`validate_library.py`), the mathematics shelf
-(`validate_math.py` and its unit tests), the serial (`validate_series.py`) and morphology. Hand-printed stroke models for all 66 letter forms
+(`validate_math.py` and its unit tests), the serials (`validate_series.py`), morphology and
+listening (`validate_listening.py`). Hand-printed stroke models for all 66 letter forms
 (`Drussky/Resources/strokes.json`) are built by `scripts/build_strokes.py`. Audio lives in `Drussky/Resources/Audio/` with
 `index.json` (audio key → file) and `sources.json` (provenance and licences). The audio key is
 the normalized text plus `?` for a rising (yes/no) question, so «Э́то чай?» and «Э́то чай.» are
@@ -379,9 +428,10 @@ the spoken task keeps its first recording. Saving locks the first response and r
 notes, with a separate reflection field. Help, previous familiarity, replay starts and rough weekly
 exposure remain with the sample. These tasks do not grade vocabulary or change recall traces.
 `-qa-baseline` opens the flow in the QA notebook; `-qa-contents -qa-evidence` opens the estimates back page. There are currently two parallel reading sets;
-after those, the app asks for new material rather than presenting a repeat as unseen. Listening
-material is absent from the authored course, but may have been heard in the library; familiarity
-is self-reported, not inferred.
+after those, the app asks for new material rather than presenting a repeat as unseen. The five
+messages come from the listening strand's reserved sets once the course has reached one
+(«На слух», above), else from the bank of human recordings; familiarity is self-reported, not
+inferred.
 
 Goal and library vocabulary coverage require successful production of the **actual written form**
 in hear→write, English→write or see→say, with current predicted recall at least 0.85. Copying,

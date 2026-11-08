@@ -21,11 +21,11 @@ struct ShelfOfferCard: View {
                                 Text(Theme.stressed("«\(item.title)»", show: book.settings.showStress)).russianFont(22, weight: .medium).foregroundStyle(Theme.text)
                                 if let en = item.titleEn { Text(en).scaledFont(14).foregroundStyle(Theme.muted) }
                             }
-                            Text("You can read this now.")
+                            Text(item.kind == .listening ? "You can listen to this now." : "You can read this now.")
                                 .scaledFont(14).foregroundStyle(Theme.muted)
                         }
                         Spacer(minLength: 8)
-                        PillButton(title: "Read it", systemImage: "book") { book.open(item) }
+                        PillButton(title: item.kind == .listening ? "Listen" : "Read it", systemImage: item.kind == .listening ? "ear" : "book") { book.open(item) }
                     }
                 }
             }
@@ -139,9 +139,46 @@ struct ShelfItemRow: View {
 
     private func status(opened: Bool, ready: Bool) -> String {
         if opened { return "In your notebook" }
-        if ready { return "Ready to read" }
-        if let name = book.pageName(item.afterPage) { return "After \(name) — or read ahead" }
-        return "Read ahead"
+        if ready { return item.kind == .listening ? "Ready to hear" : "Ready to read" }
+        let ahead = item.kind == .listening ? "listen ahead" : "read ahead"
+        if let name = book.pageName(item.afterPage) { return "After \(name) — or \(ahead)" }
+        return ahead.prefix(1).uppercased() + ahead.dropFirst()
+    }
+}
+
+/// «На слух»: the listening sets in order, each ready after its course page, every one openable now.
+struct ListeningShelfView: View {
+    @Environment(Book.self) private var book
+    var onDone: () -> Void
+
+    var body: some View {
+        List {
+            Section {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Russian by ear").font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.text)
+                    Text("Short things said once — a request, two people at the table, a voice message, someone correcting themselves. You answer what it meant; the words appear only afterwards. Each set is ready after one page of the course and is offered at the foot of a page when you get there.")
+                        .font(.system(size: 13)).foregroundStyle(Theme.muted)
+                }
+                .listRowBackground(Color.clear)
+            }
+            Section {
+                ForEach(Array(Shelves.listeningItems.enumerated()), id: \.element.id) { i, item in
+                    ShelfItemRow(item: item, number: i + 1, summary: Shelves.listening.sets[safe: i].map(Self.summary), onDone: onDone)
+                }
+            }
+        }
+        .navigationTitle("На слух")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    /// "8 cards · which thing, who needs what, follow an instruction"
+    static func summary(_ set: ListeningSet) -> String {
+        let names: [ListeningItem.Kind: String] = [.pickObject: "which thing", .whoNeeds: "who needs what", .follow: "follow an instruction",
+                                                   .questionOrStatement: "asking or telling", .message: "voice messages", .correction: "self-corrections",
+                                                   .disagreement: "who wants what"]
+        var seen = Set<ListeningItem.Kind>()
+        let kinds = set.items.map(\.kind).filter { seen.insert($0).inserted }.compactMap { names[$0] }
+        return "\(set.items.count) cards · \(kinds.joined(separator: ", "))"
     }
 }
 
@@ -170,6 +207,15 @@ struct ShelvesSection: View {
                     row(title: shelf.title, titleEn: shelf.title_en, items: items, unit: "reading")
                 }
                 .buttonStyle(.plain)
+            }
+            if !Shelves.listeningItems.isEmpty {
+                NavigationLink {
+                    ListeningShelfView(onDone: { dismiss() })
+                } label: {
+                    row(title: "На слух", titleEn: "Listening", items: Shelves.listeningItems, unit: "set")
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("shelf-listening")
             }
         }
     }

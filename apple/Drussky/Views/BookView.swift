@@ -150,6 +150,9 @@ struct BookView: View {
                         }
                     }
                 }
+                if let next = book.nextListeningSet() {  // the next listening set (Model/Listening.swift)
+                    Button { book.open(next) } label: { Label(RussianText.unstressed(next.place), systemImage: "ear") }
+                }
                 Button { makeEarTraining() } label: { Label("Ear training", systemImage: "ear") }
                 Button { makeSoundPairs() } label: { Label("Sound pairs", systemImage: "ear.badge.waveform") }
                 Button { book.insertDiaryPage() } label: { Label("Write in my diary", systemImage: "pencil.line") }

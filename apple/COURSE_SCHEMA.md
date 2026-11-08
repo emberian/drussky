@@ -239,6 +239,51 @@ an episode is a page — `passage` (text, en, glosses), the three questions, a `
 prompt — with `sourceID` `episode:<id>`; a page's Optional `offers` lists the shelf items its
 footer offered when it was composed.
 
+# Listening — `Drussky/Resources/listening.json`
+
+```json
+{ "version": 1,
+  "sets": [{ "id": "listen-02", "title": "Дай, пожа́луйста", "title_en": "Pass me the right thing", "after_page": "u4-p4",
+             "items": [{ "id": "listen-02-01", "kind": "pick_object", "en": "Give me the cheese.", "after_page": "u4-p4",
+                         "voice_hint": "any", "glosses": { "дай": "give (informal singular request)" },
+                         "ru": "Дай сыр.", "question": "Which thing is wanted?", "options": ["сок", "сыр", "торт"], "answer": 1,
+                         "crucial_span": "сыр", "why": "сыр names the cheese." }] }],
+  "weekly_samples": [{ "id": "listen-week-01", "title": "Пе́рвые сообще́ния", "title_en": "Unheard messages 1", "after_page": "u14-p5",
+                       "items": [ /* five `message` items whose questions have response_mode, answer_en, accept_en */ ] }] }
+```
+
+Authored content (editable like `math.json`), the exact contract in
+`research/deputies/deputy-codex-listening.md`. Every item has `id`, `kind`, `en` (the translation
+of what is played; A/B-labelled lines for an exchange), `after_page`, `voice_hint` (`any` |
+`unfamiliar`), `glosses` (lowercase unstressed surface form → meaning; may be `{}`),
+`crucial_span` (an exact stressed substring of a heard turn) and `why`. The rest depends on
+`kind`, and a field a kind does not use is **absent**, never an empty placeholder; indices are
+zero-based:
+
+| kind | fields |
+|---|---|
+| `pick_object` | `ru`, `question`, `options` (3–4 taught nouns, stressed), `answer` |
+| `who_needs`, `disagreement` | `lines: [{speaker: "A"\|"B", ru, en}]` (2–4, both speakers), `question`, `options` (English), `answer` |
+| `follow` | `ru`, `question`, `scene: [{id, ru, en, role: "object"\|"place"}]`, `options` (English results), `outcomes: [{object, place\|null}]` parallel to `options`, `answer` |
+| `question_or_statement` | `forms: [{ru, en}]` (exactly two: the statement ending `.`, the question ending `?`), `played` (0\|1), `question`, `options: ["Statement", "Question"]`, `answer` = `played` |
+| `message` | `ru` (2–4 sentences), `questions: [{kind: gist\|detail, prompt, options, answer, crucial_span, why}]` (2–3); the item-level span/why are a fallback |
+| `correction` | `ru` (a statement and its self-repair in one clip), `question`, `options` (English), `answer` |
+
+Weekly messages replace a question's `options`/`answer` with `response_mode: "english_text"`,
+`answer_en` and `accept_en` (examples, not a whitelist). `scripts/validate_listening.py` checks
+the schema, stress, exact surface-form coverage by `after_page`, course order, answers, spans,
+scene references, intonation pairs (distinct audio keys) and the isolation of the reserved
+messages from everything else, and `--write-inventory` writes the 338 playback strings to
+`research/artifacts/listening-spoken.txt`.
+
+In the app (`Listening.load()`, `ListeningItem` with Optional kind-specific fields) a set is a
+page of `listening` exercises — each carries its item in the Optional `listening` field, in a
+fixed order that is not the authored one — with `sourceID` `listening:<set-id>`, offered once like
+an episode. A result keeps one choice in `chosen`, or a message's choices in `recognized`
+("1,2") committed together. Reserved sets are never pages; `openBaseline()` takes a reached set's
+five messages as `BaselineTask`s (kind `listening`, the new Optional `text` played by text in the
+voice `speaker` names).
+
 # Sound pairs — `Drussky/Resources/pairs.json`
 
 Minimal pairs for listening (＋ → Sound pairs). `contrasts: [{id, name, note}]`,

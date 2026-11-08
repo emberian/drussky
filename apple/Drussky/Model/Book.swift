@@ -469,7 +469,7 @@ final class Book {
         case .constructionChoice: return ConstructionChoice.key
         case .meet: return exercise.letter.map { "letter:\($0)" }
         // Only what the learner produced becomes something to recall later.
-        case .explain, .readMeaning, .passage, .soundPair: return nil
+        case .explain, .readMeaning, .passage, .soundPair, .listening: return nil
         default:
             guard let target = exercise.target ?? exercise.text else { return nil }
             guard let word = word(target) else {
@@ -593,6 +593,7 @@ final class Book {
         case .transform: lines.append("Writing «\(ex.word ?? "")» in the \(ex.cue ?? "") cell (answer «\(ex.answerText ?? "")»)" + (ex.before != nil ? " in \(ex.before ?? "")___\(ex.after ?? "")." : "."))
         case .cueSort: lines.append("Sorting \((ex.items ?? []).map { "«\($0.text)»" }.joined(separator: ", ")) into: \((ex.options ?? []).joined(separator: " / ")).")
         case .readHandwriting: lines.append("Reading «\(ex.text ?? "")» in someone's handwriting" + (ex.options.map { " and choosing among: \($0.joined(separator: " / "))." } ?? " and printing it."))
+        case .listening: lines.append(ListeningItem.describe(ex, r))
         }
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")

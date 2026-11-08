@@ -87,6 +87,9 @@ enum ExerciseKind: String, Codable, Sendable {
     case paradigmFill = "paradigm_fill"
     case transform
     case cueSort = "cue_sort"
+    /// A heard situation from the listening strand (Model/Listening.swift): the exercise carries
+    /// its `listening` item; nothing plays until the learner taps.
+    case listening
 
     /// Exercises answered with the pencil on ruled paper.
     var isWriting: Bool {
@@ -163,11 +166,13 @@ struct Exercise: Codable, Sendable, Hashable {
     var seed: Int? = nil
     /// A first-attempt weekly sample, kept without an automated grade.
     var baseline: BaselineTask? = nil
+    /// listening: the heard item, as listening.json wrote it (the page keeps its own copy).
+    var listening: ListeningItem? = nil
 
     enum CodingKeys: String, CodingKey {
         case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills, prompt
         case narration, words, span
-        case parts, alternatives, word, root, frames, notice, baseline
+        case parts, alternatives, word, root, frames, notice, baseline, listening
         case paradigm, cue, cells, forms, items
         case cursive, seed
     }
@@ -208,6 +213,7 @@ struct Exercise: Codable, Sendable, Hashable {
         cursive = try c.decodeIfPresent(Bool.self, forKey: .cursive)
         seed = try c.decodeIfPresent(Int.self, forKey: .seed)
         baseline = try c.decodeIfPresent(BaselineTask.self, forKey: .baseline)
+        listening = try c.decodeIfPresent(ListeningItem.self, forKey: .listening)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -249,6 +255,7 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(cursive, forKey: .cursive)
         try c.encodeIfPresent(seed, forKey: .seed)
         try c.encodeIfPresent(baseline, forKey: .baseline)
+        try c.encodeIfPresent(listening, forKey: .listening)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }
