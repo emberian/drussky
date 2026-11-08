@@ -94,7 +94,10 @@ final class CheckingTests: XCTestCase {
         XCTAssertEqual(book.knowledge.model.trace(ComponentID(.lexeme, "кот"), .say)?.reviews.last?.grade, .hard,
                        "judged right by the learner: counted, but not as verified")
         XCTAssertFalse(book.pages[p].results[1].isRightFirstTime)
-        XCTAssertEqual(GradeStamp.grade(for: book.pages[p]), 5)
+        // Skipped and self-assessed: the page is complete, and nothing on it was assessed.
+        XCTAssertTrue(book.pages[p].isFinished)
+        XCTAssertNil(GradeStamp.grade(for: book.pages[p]))
+        XCTAssertEqual(GradeStamp.mark(for: book.pages[p]), "✓")
     }
 
     func testTryingAMissedChoiceAgainIsPractice() throws {

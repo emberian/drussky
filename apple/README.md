@@ -3,7 +3,10 @@
 A Russian exercise book you write in. Open it and you are on today's page: numbered
 exercises down a squared тетрадь page, answered in place — with the Pencil on ruled lines,
 by ear, or aloud. Finished exercises get a red tick; a finished page gets a red mark
-(5 — Отлично!). Turn the page with the arrow; turning back shows exactly what you wrote.
+(5 — Отлично!), or a red tick (Готово!) when nothing on it was graded — practice, skips, speaking
+you judged yourself, a diary line nobody corrected. A diary line the tutor marked counts, and three
+or more corrections on it count as a miss. Turn the page with the arrow; turning back shows exactly
+what you wrote.
 
 ## What a page asks of you
 
@@ -63,8 +66,11 @@ your take through a time warp (DTW on cepstra) so rhythm, loudness and melody co
 syllable. Stress is judged against the model, so a voice's own habits cancel. Tap any syllable to
 hear just that part of the model or of you. Letters a word-level report couldn't hear aren't
 marked right. If recognition can't confirm a take you can mark it *Sounded right to me* (counted,
-as unverified) or skip it (not counted). Letters heard as others are logged as speech confusions
-on their sound contrast.
+as unverified) or skip it (not counted). A word-level report's letter differences are the
+recognizer's spelling, not a measurement of a sound: they are shown in amber as what it heard, with
+the contrast's advice as something to try, and leave no evidence. Only the phone-level analyzer
+(`PhoneticAnalyzer`, when its model is bundled) asserts sound verdicts and logs speech confusions
+on their contrast; each report carries its `provenance`.
 
 ## Remembering
 

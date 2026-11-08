@@ -192,6 +192,9 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         }
     }
 
+    /// Silence: the clip or voice playing, and the narration reader too. Voice is the app's one
+    /// audio owner — a page turn, a new clip or a microphone about to open all come through here,
+    /// so a narration can never read on into the next page or into a take.
     func stop() {
         sequence += 1
         let deck = self.deck
@@ -201,6 +204,7 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         }
         if synth.isSpeaking { synth.stopSpeaking(at: .immediate) }
         speakingKey = nil
+        NarrationPlayer.shared.pause()
     }
 
     static let bestRussianVoice: AVSpeechSynthesisVoice? = {

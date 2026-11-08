@@ -142,7 +142,8 @@ struct WritePageContent: View {
         do {
             let (page, exercises) = try await PageWriter.write(request, book: book) { n in progress = n }
             if case .goal(let brief) = request {
-                book.insertGoalPage(page, exercises: exercises, goal: brief.goal, sentences: brief.sentences)
+                let auto = if case .goal(_, let auto) = source { auto } else { false }
+                book.insertGoalPage(page, exercises: exercises, goal: brief.goal, sentences: brief.sentences, auto: auto)
                 onDone()
                 return
             }

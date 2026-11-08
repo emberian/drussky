@@ -39,7 +39,7 @@ enum WordFallback {
             sounds: sounds,
             syllables: expected.syllables.map { SyllableJudgement(text: $0.text, isStressed: $0.stressed, start: nil, end: nil, prominence: nil) },
             stressedSyllable: nil, accuracy: Double(good) / Double(expectedCount), tips: tips,
-            speechStart: Double(speech.start) / 16_000, speechEnd: Double(speech.end) / 16_000)
+            speechStart: Double(speech.start) / 16_000, speechEnd: Double(speech.end) / 16_000, provenance: .words)
     }
 
     /// The recogniser writes no stress marks: give each heard word the target word's stress

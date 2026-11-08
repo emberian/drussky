@@ -56,6 +56,9 @@ final class SpeakingTurn {
     var analyzer: (any PronunciationAnalyzer)?
 
     private var session = 0
+    /// Bumped only by `invalidate()`: a turn begun in an earlier epoch may finish its analysis,
+    /// but writes no take or report and calls nothing back. Page turns bump `session` alone.
+    private var epoch = 0
     private var task: Task<Void, Never>?
     private var capture: TakeCapture?
     private weak var voice: Voice?
@@ -91,14 +94,14 @@ final class SpeakingTurn {
     func begin(_ request: Request, voice: Voice, onTake: @escaping @MainActor (Take) -> Void) {
         cancel()
         session += 1
-        let mine = session
+        let mine = session, era = epoch
         self.voice = voice
         activeKey = request.key
         problem = nil
         skipModel = false
         tapped = false
         phase = .preparing
-        task = Task { await run(request, voice: voice, mine: mine, onTake: onTake) }
+        task = Task { await run(request, voice: voice, mine: mine, era: era, onTake: onTake) }
     }
 
     /// The one button: skips the model while it plays, ends the take while listening.
@@ -138,6 +141,17 @@ final class SpeakingTurn {
         activeKey = nil
     }
 
+    /// Hard cancellation, for when the notebook itself is going away (a restore): nothing begun
+    /// before this writes a take or a report into the folder, logs evidence or lands on an
+    /// exercise, and the call returns only once the turn in progress has wound down, so no file
+    /// is being written while the folder is swapped. A page turn is `cancel`, never this.
+    func invalidate() async {
+        epoch += 1
+        let pending = task
+        cancel()
+        await pending?.value
+    }
+
     private func interrupt() {
         guard let key = activeKey, phase != .analysing, phase != .idle, phase != .preparing, phase != .cue else { return }
         cancel()
@@ -153,25 +167,27 @@ final class SpeakingTurn {
         if let p { problem = (key, p) }
     }
 
-    private func run(_ r: Request, voice: Voice, mine: Int, onTake: @escaping @MainActor (Take) -> Void) async {
+    private func run(_ r: Request, voice: Voice, mine: Int, era: Int, onTake: @escaping @MainActor (Take) -> Void) async {
         let (mic, speech) = await SpeechCheck.permissions()
         guard session == mine else { return }
         recognitionDenied = !speech
         guard mic else { end(r.key, .micDenied); return }
         if speech { SpeechCheck.warmUp(with: r.model) }
 
-        // Listen first.
+        // Listen first: the model the take will be compared with (the reader's own sentence when
+        // shadowing a narration), the text's clip or voice when there is none.
         for k in stride(from: 1, through: r.repeats, by: 1) {
             guard session == mine, !skipModel else { break }
             phase = .model(k, of: r.repeats)
             let watchdog = Task { try? await Task.sleep(for: .seconds(20)); if !Task.isCancelled { voice.stop() } }
-            await voice.playToEnd(r.target)
+            if let model = r.model { await voice.playFileToEnd(model, key: RussianText.audioKey(r.target)) } else { await voice.playToEnd(r.target) }
             watchdog.cancel()
             if k < r.repeats && !skipModel { try? await Task.sleep(for: .milliseconds(350)) }
         }
         guard session == mine else { return }
 
-        // Your turn.
+        // Your turn. Nothing else may be sounding into the microphone (a narration still reading).
+        voice.stop()
         Voice.configureSession()
         let cap = TakeCapture(config: Self.config(target: r.target, model: r.model))
         let stream: AsyncStream<CaptureEvent>
@@ -196,6 +212,9 @@ final class SpeakingTurn {
 
         phase = .analysing
         let url = r.takeURL
+        // From here on only the epoch matters: a page turn (`cancel`) lets the analysis land on
+        // its exercise by id; a restore (`invalidate`) means the folder is no longer this notebook.
+        guard epoch == era else { return }
         do {
             _ = try await Task.detached(priority: .userInitiated) { try cap.write(ending, to: url) }.value
         } catch { end(r.key, .failed); return }
@@ -203,15 +222,32 @@ final class SpeakingTurn {
         let recognise: @Sendable (URL, String) async -> String? = { u, hint in
             speech ? await SpeakingTurn.transcribe(u, hint: hint, timedOut: flag) : nil
         }
-        let fallback = WordLevelAnalyzer(transcribe: recognise)
-        var report: PronunciationReport?
-        if let primary = analyzer { report = try? await primary.analyze(take: url, target: r.target, model: r.model) }
-        if report == nil { report = try? await fallback.analyze(take: url, target: r.target, model: r.model) }
+        let (report, heard) = await Self.analyse(take: url, target: r.target, model: r.model, primary: analyzer, recognise: recognise)
+        guard epoch == era else { return }
         if let report { remember(report, for: url) }
         lastTimedOut = flag.isSet
         let superseded = session != mine
         if !superseded { end(r.key, nil) }
-        onTake(Take(file: url, report: report, heard: report?.transcript, recognitionAllowed: speech, timedOut: flag.isSet))
+        onTake(Take(file: url, report: report, heard: heard, recognitionAllowed: speech, timedOut: flag.isSet))
+    }
+
+    /// How it sounded and what words it was, side by side: the phone-level analyzer (when the app
+    /// has one) judges the sounds, and word recognition says whether the right words were said,
+    /// which is what finishes the exercise. A phone-level report carries no transcript of its
+    /// own, so the words are never read off it; the word-level analyzer (the fallback) is handed
+    /// the words already heard rather than recognising twice. A report with no transcript gets
+    /// the heard words, so the sidecar beside the take says both.
+    nonisolated static func analyse(take url: URL, target: String, model: URL?, primary: (any PronunciationAnalyzer)?,
+                                    recognise: @escaping @Sendable (URL, String) async -> String?) async -> (report: PronunciationReport?, heard: String?) {
+        async let words = recognise(url, RussianText.unstressed(target))
+        var report: PronunciationReport?
+        if let primary { report = try? await primary.analyze(take: url, target: target, model: model) }
+        let heard = await words
+        if report == nil {
+            report = try? await WordLevelAnalyzer(transcribe: { _, _ in heard }).analyze(take: url, target: target, model: model)
+        }
+        if report?.transcript == nil { report?.transcript = heard }
+        return (report, heard)
     }
 
     /// Endpointing for this target: room for a long sentence, never less than six seconds.

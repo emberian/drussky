@@ -101,7 +101,7 @@ struct ContentsView: View {
                         }
                         Spacer()
                         if page.isFinished {
-                            Text("\(GradeStamp.grade(for: page))").font(Theme.cursive(30)).foregroundStyle(Theme.redPen)
+                            Text(GradeStamp.mark(for: page)).font(Theme.cursive(30)).foregroundStyle(Theme.redPen)
                         } else {
                             Text("\(page.completedCount)/\(page.exercises.count)")
                                 .font(.system(size: 14, design: .rounded)).foregroundStyle(Theme.muted)
