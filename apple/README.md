@@ -18,7 +18,7 @@ what you wrote.
 | dictation | hear it, write it — no model |
 | translate | see English, write the Russian from memory |
 | fill | write the missing word in a sentence |
-| read aloud | one tap: hear the model, a soft cue, then just say it (it stops when you do); every take is kept, compared with the model syllable by syllable, with a tip or two; *Skip for now* (ungraded) is always there |
+| read aloud | tap: hear the model (the microphone stays closed), then *Your turn: tap to say it*; on that tap a soft cue, then just say it (it stops when you do); every take is kept, compared with the model syllable by syllable, with a tip or two; *Skip for now* (ungraded) is always there |
 | what does it mean | read Russian, choose its meaning |
 | diary (Дневник) | write a few words of *your own* Russian about a prompt, on ruled lines (or type); confirm or fix the recognizer's transcript, then the tutor marks it like homework — wrong spans underlined, the right form in red above, the corrected line, a word of praise, the pattern behind the biggest slip. Your ink stays. Every edit becomes evidence (own-writing modality, a confusion edge, the pattern), and corrected forms join your words for review. From unit 3 every page ends with one; ＋ → *Write in my diary* adds one now; *Not today* skips it |
 | read along | a library text read by a human (LibriVox volunteers, Commons readers): the word being said lights up, tap a word to hear from there, ¾ speed, or listen first with the text appearing as it is read; then write one of its sentences from the reader's voice and say one after the reader |
@@ -67,8 +67,10 @@ the recognizer read it; a sentence said aloud records words a minute from its sy
 sentence written from the reader's voice records whether you caught it at 1× or ¾×. Small sparklines
 on the word's history and one line inside the cover ("You read about 20% faster than last week").
 
-Saying something aloud is hands-free (`Speaking/`): the model plays (Settings: 0–3 times,
-tap to skip), a soft tone says it's your turn, and the microphone (AVAudioEngine) measures the
+Saying something aloud is hands-free once you have said you are ready (`Speaking/`): the model
+plays with the microphone closed (Settings: 0–3 times, tap to skip), the page waits for your tap
+(`SpeakingTurn.Phase.ready`; with no model to play, the tap that started the turn is that tap), then
+a soft tone says it's your turn, and the microphone (AVAudioEngine) measures the
 room for a quarter second, starts the take at your first sound and ends it after 0.7 s of quiet
 (6 s at most, longer for long sentences); a tap stops it early. A voice is confirmed only by
 periodic sound, so a knock or a breath never starts a take, but a leading с is kept. The take is

@@ -196,6 +196,7 @@
 		CE0962614E3A1E25D1F56824 /* ReadAloudExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2FDD765391AFEB7850A75 /* ReadAloudExercise.swift */; };
 		CEB3E29D37241A243EC59462 /* TalkExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427A95DA04839CFD0B068CD0 /* TalkExercise.swift */; };
 		CED827D0DC9C12C6D918F382 /* GoalAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BEA4318EE4E5F5804F716C /* GoalAnalysis.swift */; };
+		CFC180AD4A6A69673B4A3BFF /* SpeakingScreensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7632EF70DC5AD903AF5C25D /* SpeakingScreensUITests.swift */; };
 		D1AA7E1AB37F8557A6B66B01 /* library.json in Resources */ = {isa = PBXBuildFile; fileRef = F66C50789A2CD8461AE31E6F /* library.json */; };
 		D3A0E99EAF001AFDB22943D0 /* SpeechCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCEB38221C0D7CECA8F5018 /* SpeechCheck.swift */; };
 		D4A02A05BF8367847B61BB7E /* Caveat-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C369CE322886839D6BE3D09 /* Caveat-Variable.ttf */; };
@@ -490,6 +491,7 @@
 		D53173F4BB8F180AF3A5DCD9 /* WordFallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordFallback.swift; sourceTree = "<group>"; };
 		D5BF549E6E6DDAEC172CF7EC /* DrusskyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrusskyApp.swift; sourceTree = "<group>"; };
 		D67A2ECEB1AD2E643AE2042C /* DevicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesTests.swift; sourceTree = "<group>"; };
+		D7632EF70DC5AD903AF5C25D /* SpeakingScreensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingScreensUITests.swift; sourceTree = "<group>"; };
 		D8E4E37208424FF9587E8B84 /* RotateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateUITests.swift; sourceTree = "<group>"; };
 		DB91D25E1B7A1CB3C067D321 /* RussianDomain+Grammar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RussianDomain+Grammar.swift"; sourceTree = "<group>"; };
 		DC2183BBBE99C1790444D983 /* QA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QA.swift; sourceTree = "<group>"; };
@@ -591,6 +593,7 @@
 				F9C0D4D988AD6A66017C6D34 /* PhoneLayoutUITests.swift */,
 				D8E4E37208424FF9587E8B84 /* RotateUITests.swift */,
 				50738AFA47D87DDF551CCCAA /* ScreensUITests.swift */,
+				D7632EF70DC5AD903AF5C25D /* SpeakingScreensUITests.swift */,
 				7DC7E2413C536E90442237A8 /* TalkScreensUITests.swift */,
 			);
 			path = DrusskyUITests;
@@ -1325,6 +1328,7 @@
 				FAF2EEA71694EA3B3DF2B5EF /* PhoneLayoutUITests.swift in Sources */,
 				73D3F382466910D515ED39F2 /* RotateUITests.swift in Sources */,
 				994826F3FE5E536C3DB865D6 /* ScreensUITests.swift in Sources */,
+				CFC180AD4A6A69673B4A3BFF /* SpeakingScreensUITests.swift in Sources */,
 				084B99ED9B1B41C1CBD36575 /* TalkScreensUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
