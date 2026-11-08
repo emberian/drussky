@@ -288,6 +288,65 @@ final class CursiveTests: XCTestCase {
         XCTAssertTrue(book.page!.isFinished, "QA completes a handwriting page")
     }
 
+    // MARK: Reviews
+
+    /// Read-cursive reviews: none before the cursive unit's first page is finished; then never-read
+    /// words come after everything due, two at a time, picked among look-alikes until read twice,
+    /// printed back after; once answered, FSRS schedules them like any modality.
+    func testReadCursiveReviewsEnterTheWeaveAfterTheUnitOpens() throws {
+        let book = Book(course: try course(), store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        XCTAssertFalse(book.cursiveUnlocked)
+        var guardCount = 0
+        while book.page?.sourceID != "\(Book.cursiveUnitID)-p1" && guardCount < 300 {
+            QA.complete(book, page: book.currentPage, upTo: .max); book.turnForward(); guardCount += 1
+        }
+        XCTAssertEqual(book.page?.sourceID, "u31-p1")
+        XCTAssertFalse(book.cursiveUnlocked, "the first cursive page is open, not finished")
+        XCTAssertTrue(book.dueReviews().allSatisfy { $0.modality != .readCursive })
+        XCTAssertFalse(book.reviewModalities(for: "word:мама").contains(.readCursive))
+
+        // The cursive pages' traces and copies are there to show the hand: fading never touches them.
+        var ctr = Exercise(kind: .trace); ctr.text = "сок"; ctr.cursive = true
+        var ccp = Exercise(kind: .copy); ccp.text = "сестра́"; ccp.times = 1; ccp.cursive = true
+        var plain = Exercise(kind: .trace); plain.text = "сок"
+        XCTAssertEqual(book.faded(ctr), ctr)
+        XCTAssertEqual(book.faded(ccp), ccp)
+        XCTAssertEqual(book.faded(plain).kind, .copy, "a secure word's print trace still fades")
+
+        QA.complete(book, page: book.currentPage, upTo: .max)
+        XCTAssertTrue(book.cursiveUnlocked)
+        XCTAssertTrue(book.reviewModalities(for: "word:мама").contains(.readCursive))
+        XCTAssertFalse(book.reviewModalities(for: "word:у меня есть").contains(.readCursive), "single words only")
+        let due = book.dueReviews()
+        let seeds = due.filter { $0.modality == .readCursive }
+        XCTAssertEqual(seeds.count, Book.cursiveSeedsPerWeave)
+        XCTAssertEqual(due.suffix(seeds.count).map(\.id), seeds.map(\.id), "after everything that is due")
+        XCTAssertTrue(seeds.allSatisfy { s in !due.contains { d in d.id == s.id && d.modality != .readCursive } }, "not a word already due another way")
+        let first = seeds[0]
+        var ex = book.reviewExercise(for: first.id, modality: .readCursive, variant: 3)
+        XCTAssertEqual(ex.kind, .readHandwriting)
+        XCTAssertEqual(ex.reviewKey, first.id)
+        XCTAssertEqual(ex.options?.count, 3, "picked among look-alikes first")
+        XCTAssertNotNil(ex.seed)
+        XCTAssertEqual(book.reviewExercise(for: first.id, modality: .readCursive, variant: 3), ex, "a page re-opens unchanged")
+
+        // Two readings later it is printed back, and the word is no longer a seed: FSRS has it.
+        book.turnForward()
+        let page = book.currentPage
+        let woven = try XCTUnwrap(book.pages[page].exercises.firstIndex { $0.reviewKey == first.id && $0.kind == .readHandwriting }, "seed woven into the next page")
+        book.record(page: page, exercise: woven) { $0.chosen = book.pages[page].exercises[woven].options?.firstIndex { RussianText.key($0) == RussianText.key(ex.text!) }; $0.attempts = 1; $0.status = .correct }
+        XCTAssertEqual(book.cursiveReadings(of: first.id), 1)
+        XCTAssertFalse(book.dueReviews().contains { $0.id == first.id && $0.modality == .readCursive && $0.priority < 0.2 }, "no longer seeded")
+        let second = book.reviewExercise(for: first.id, modality: .readCursive, variant: 4)
+        XCTAssertNotNil(second.options, "one reading: still picking")
+        book.insertWrittenPage(title: "again", intro: nil, unitTitle: "test", exercises: [second], newWords: [])
+        book.record(page: book.currentPage, exercise: 0) { $0.chosen = second.options?.firstIndex { RussianText.key($0) == RussianText.key(second.text!) }; $0.attempts = 1; $0.status = .correct }
+        XCTAssertEqual(book.cursiveReadings(of: first.id), 2)
+        ex = book.reviewExercise(for: first.id, modality: .readCursive, variant: 5)
+        XCTAssertNil(ex.options, "read twice: now print it back")
+        XCTAssertEqual(ex.kind, .readHandwriting)
+    }
+
     // MARK: Fonts
 
     func testFontManifestAndLicences() throws {
