@@ -186,6 +186,7 @@ def decline(spec):
             st = stem if cell == "nom-sg" else (stem_obl if num == "sg" else stem_pl)
             stressed = ending_stressed(pattern, cell)
             soft = klass in ("1s", "1i", "2s", "2j", "2e", "2i", "3")
+            ending_vowels = []
             if ending.startswith("~"):
                 st0 = st
                 st = spec.get("stem_genpl", insert_vowel(st, False))
@@ -203,7 +204,13 @@ def decline(spec):
                     body = body[:-2] + "ё" + body[-1]
             if i is None and "ё" not in body:
                 # stem stress: where the lemma had it, else (lemma stressed on the ending) the stem's last vowel
-                i = idx if idx is not None and idx < len(st) and body[idx] in VOWELS else last_vowel(st)
+                if idx is not None and idx < len(st) and body[idx] in VOWELS:
+                    i = idx
+                elif idx is not None and idx == len(st) and idx < len(plain) - 1 and ending_vowels:
+                    # the lemma's stressed vowel is the и the -ия/-ие classes count as ending (Росси́я → Росси́и, Росси́ю)
+                    i = ending_vowels[0]
+                else:
+                    i = last_vowel(st)
             forms[cell] = mark(body, None if "ё" in body else i)
     forms.update(spec.get("over", {}))
     if spec.get("number") == "sg":
@@ -384,7 +391,8 @@ VERBS = [
     V("зна'чить", "to mean", 2, "зна'чу зна'чишь зна'чит зна'чим зна'чите зна'чат"),
     V("хоте'ть", "to want", "irr", "хочу' хо'чешь хо'чет хоти'м хоти'те хотя'т", note="first conjugation in the singular (with т → ч), second in the plural"),
     V("есть", "to eat", "irr", "ем ешь ест еди'м еди'те едя'т", past="ел е'ла е'ло е'ли", imp="ешь е'шьте", note="one of four athematic verbs; есть also means 'there is'"),
-    V("дать", "to give", "irr", "дам дашь даст дади'м дади'те даду'т", past="дал дала' да'ло да'ли", imp="дай да'йте", aspect="pf"),
+    V("дать", "to give", "irr", "дам дашь даст дади'м дади'те даду'т", past="дал дала' дало' да'ли", imp="дай да'йте", aspect="pf",
+      note="the neuter past is дало́ in careful speech; stem stress, as in да́ли, is also heard"),
     V("переда'ть", "to pass", "irr", "переда'м переда'шь переда'ст передади'м передади'те передаду'т", past="переда'л передала' переда'ло переда'ли",
       imp="переда'й переда'йте", aspect="pf", note="declines as дать"),
     V("мочь", "to be able", "irr", "могу' мо'жешь мо'жет мо'жем мо'жете мо'гут", past="мог могла' могло' могли'", note="г → ж except before у; no imperative"),

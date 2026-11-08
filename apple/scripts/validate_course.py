@@ -105,12 +105,20 @@ def letters_in(s):
     return {c for c in s.replace(ACUTE, "").upper() if CYR.match(c)}
 
 
-def check_stress(where, s):
-    for m in re.finditer("[Ѐ-ӿ́]+(?:-[Ѐ-ӿ́]+)*", s):
-        tok = m.group(0)
-        # A morpheme written with a hyphen on one side (пере-, -ние) is a fragment, not a word.
+STRESSED_WORD = re.compile("[Ѐ-ӿ́]+(?:-[Ѐ-ӿ́]+)*")
+
+
+def stressed_words(s):
+    """The Cyrillic words of a string, as written. A morpheme written with a hyphen on one side
+    (пере-, -ние) is a fragment, not a word, and is left out."""
+    for m in STRESSED_WORD.finditer(s):
         if (m.start() > 0 and s[m.start() - 1] == "-") or (m.end() < len(s) and s[m.end()] == "-"):
             continue
+        yield m.group(0)
+
+
+def check_stress(where, s):
+    for tok in stressed_words(s):
         low = tok.lower()
         for i, c in enumerate(low):
             if c == ACUTE and (i == 0 or low[i - 1] not in VOWELS):
@@ -127,6 +135,62 @@ def check_stress(where, s):
             err(where, f"{vowels}-syllable word needs exactly one stress mark: {tok!r}")
         elif vowels <= 1 and marks:
             err(where, f"monosyllable must not be marked: {tok!r}")
+
+
+def _st(text):
+    """Apostrophe stress → U+0301 (the authoring convention), for the lists below."""
+    return re.sub(r"([аеиоуыэюяАЕИОУЫЭЮЯ])'", lambda m: m.group(1) + ACUTE, text)
+
+
+# The same letters legitimately carry two stresses when they are two words or two cells of one word
+# (за́мок castle / замо́к lock; го́рода of the city / города́ cities; лю́бите you love / люби́те love!).
+# Any other word written with two stresses across course.json, morphology.json and paradigms.json
+# is a mistake, and check_stress_variants names it. Add here only after checking both contexts.
+STRESS_HOMOGRAPHS = {}
+for _pair in """
+    за'мок замо'к | бо'льшая больша'я | у'же уже' | сто'ит стои'т | сне'гу снегу'
+    ве'чера вечера' | во'ды воды' | го'рода города' | до'ма дома' | зе'мли земли' | ми'ры миры'
+    о'кна окна' | пи'сьма письма' | сло'ва слова' | у'тра утра' | учи'теля учителя' | чи'сла числа'
+    лю'бите люби'те | смо'трите смотри'те | у'чите учи'те | хо'дите ходи'те
+""".replace("\n", "|").split("|"):
+    _forms = {_st(w) for w in _pair.split()}
+    if _forms:
+        STRESS_HOMOGRAPHS[next(iter(_forms)).replace(ACUTE, "")] = _forms
+
+
+def stress_variants(*docs):
+    """bare lowercase word → the stressed spellings it has across the documents' Russian strings.
+    Morpheme pieces (prefixes, suffixes, a lemma's morphemes: ку́да in от|ку́да carries the word's
+    stress, not its own) and hyphen fragments are not words and are left out."""
+    forms = {}
+
+    def walk(x):
+        if isinstance(x, str):
+            if ACUTE in x:
+                for tok in stressed_words(x):
+                    if ACUTE in tok:
+                        low = tok.lower()
+                        forms.setdefault(low.replace(ACUTE, ""), set()).add(low)
+        elif isinstance(x, dict):
+            for k, v in x.items():
+                if k not in ("prefixes", "suffixes", "morphemes"):
+                    walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+
+    for d in docs:
+        walk(d)
+    return forms
+
+
+def check_stress_variants(*docs):
+    """A word form written with two different stresses is one mistake and one right form, unless
+    it is listed in STRESS_HOMOGRAPHS; every offender is reported with all its spellings."""
+    for bare, variants in sorted(stress_variants(*docs).items()):
+        if len(variants) > 1 and not variants <= STRESS_HOMOGRAPHS.get(bare, set()):
+            err("stress", f"{bare!r} is written {' and '.join(sorted(variants))}: one stress is wrong "
+                          f"(or list the homograph in STRESS_HOMOGRAPHS)")
 
 
 def check_tile(where, tile):
@@ -658,6 +722,8 @@ def main():
 
     if sorted(met) != sorted(ALPHABET) or len(met) != 33:
         err("meet", f"letters met {len(met)}; missing {sorted(set(ALPHABET) - set(met))}")
+
+    check_stress_variants(course, morphology, paradigms)
 
     if "--audio" in sys.argv:
         audio = path.parent / "Audio"

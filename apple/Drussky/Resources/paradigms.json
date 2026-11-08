@@ -6747,12 +6747,12 @@
    "gender": "f",
    "animate": false,
    "forms": {
-    "nom-sg": "Ро́ссия",
-    "gen-sg": "Ро́ссии",
-    "dat-sg": "Ро́ссии",
-    "acc-sg": "Ро́ссию",
-    "instr-sg": "Ро́ссией",
-    "prep-sg": "Ро́ссии"
+    "nom-sg": "Росси́я",
+    "gen-sg": "Росси́и",
+    "dat-sg": "Росси́и",
+    "acc-sg": "Росси́ю",
+    "instr-sg": "Росси́ей",
+    "prep-sg": "Росси́и"
    },
    "number": "sg"
   },
@@ -9656,11 +9656,12 @@
     "3pl": "даду́т",
     "past-m": "дал",
     "past-f": "дала́",
-    "past-n": "да́ло",
+    "past-n": "дало́",
     "past-pl": "да́ли",
     "imp-sg": "дай",
     "imp-pl": "да́йте"
-   }
+   },
+   "note": "the neuter past is дало́ in careful speech; stem stress, as in да́ли, is also heard"
   },
   "передать": {
    "ru": "переда́ть",

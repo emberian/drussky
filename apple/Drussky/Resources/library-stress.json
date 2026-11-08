@@ -1,46 +1,5 @@
 {
- "disagreements": [
-  {
-   "course": [
-    "лу́ка"
-   ],
-   "index": 3,
-   "text": "chekhov-kashtanka",
-   "word": "Лука́"
-  },
-  {
-   "course": [
-    "лу́ка"
-   ],
-   "index": 15,
-   "text": "chekhov-kashtanka",
-   "word": "Лука́"
-  },
-  {
-   "course": [
-    "да́ло"
-   ],
-   "index": 10,
-   "text": "chekhov-pismo-k-uchenomu-sosedu",
-   "word": "дало́"
-  },
-  {
-   "course": [
-    "ро́ссии"
-   ],
-   "index": 8,
-   "text": "odoevsky-4338-god",
-   "word": "Росси́и"
-  },
-  {
-   "course": [
-    "снегу́"
-   ],
-   "index": 26,
-   "text": "pushkin-zimnee-utro",
-   "word": "сне́гу"
-  }
- ],
+ "disagreements": [],
  "homographs": [
   {
    "alternatives": [
@@ -260,12 +219,30 @@
   },
   {
    "alternatives": [
+    "лу́ка"
+   ],
+   "index": 3,
+   "reason": "The name Лука́ (столя́р Лука́ Алекса́ндрыч), not the genitive of лук (onion), which the course has.",
+   "text": "chekhov-kashtanka",
+   "word": "Лука"
+  },
+  {
+   "alternatives": [
     "лу́ки"
    ],
    "index": 6,
    "reason": "Genitive of the name Лука (Луки Александрыча), not the plural of лук.",
    "text": "chekhov-kashtanka",
    "word": "Луки́"
+  },
+  {
+   "alternatives": [
+    "лу́ка"
+   ],
+   "index": 15,
+   "reason": "The name Лука́ (Лука́ Алекса́ндрыч), not the genitive of лук (onion), which the course has.",
+   "text": "chekhov-kashtanka",
+   "word": "Лука"
   },
   {
    "alternatives": [
@@ -1303,6 +1280,15 @@
    "reason": "Genitive singular object of подставить (his own head), not nominative plural.",
    "text": "pushkin-vystrel",
    "word": "головы́"
+  },
+  {
+   "alternatives": [
+    "снегу́"
+   ],
+   "index": 26,
+   "reason": "Dative after по (по у́треннему сне́гу, rhyming with бе́гу), not the locative в/на снегу́ the course has.",
+   "text": "pushkin-zimnee-utro",
+   "word": "снегу"
   },
   {
    "alternatives": [
