@@ -7714,6 +7714,54 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-a-u-menya-est-vot-pozhaluysta-742f95.m4a": {
+  "key": "а у меня есть вот пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "А у мен+я +есть. В+от, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-a-u-menya-est-vot-pozhaluysta-742f95-8862f6.wav",
+  "orig_sha1": "5bdb98305a9dc0ec0f1da0c087a8f50d7170a9ce",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-a-vot-ona-na-stole-d7ad24.m4a": {
+  "key": "а вот она на столе",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "А в+от он+а, на стол+е.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-a-vot-ona-na-stole-d7ad24-f21628.wav",
+  "orig_sha1": "aaa113d167d236c7bb55a88ed84ed261b0ced246",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-a-ya-ne-soglasna-staryy-stol-eshchyo-kho-72854b.m4a": {
+  "key": "а я не согласна старый стол ещё хороший",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "А +я не согл+асна. Ст+арый ст+ол ещ+ё хор+оший.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-a-ya-ne-soglasna-staryy-stol-eshchyo-kho-72854b-9af1a8.wav",
+  "orig_sha1": "7b44988f0958e3d816fb9e6454c41ab2550177fc",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-a-ya-znayu-idyom-3de5d1.m4a": {
+  "key": "а я знаю идём",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "А +я зн+аю. Ид+ём!",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-a-ya-znayu-idyom-3de5d1-13a962.wav",
+  "orig_sha1": "a02ec4a56f551cbccbf034036795b8cf38c2d152",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-da-trudnaya-no-ya-khochu-chitat-etu-ona-e17f81.m4a": {
   "key": "да трудная но я хочу читать эту она интереснее",
   "kind": "ai_generated_speech",
@@ -7738,6 +7786,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-da-ya-tozhe-khochu-a81417.m4a": {
+  "key": "да я тоже хочу",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Д+а, +я т+оже хоч+у.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-da-ya-tozhe-khochu-a81417-00d3a1.wav",
+  "orig_sha1": "f6fc699651c02ad562b1486c802ea55c38ef722d",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-day-dve-chashki-net-tri-chashki-pozhaluy-e6ba77.m4a": {
   "key": "дай две чашки нет три чашки пожалуйста",
   "kind": "ai_generated_speech",
@@ -7750,6 +7810,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-day-dve-chashki-oy-net-tri-pozhaluysta-3461bc.m4a": {
+  "key": "дай две чашки ой нет три пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Д+ай дв+е ч+ашки. +Ой, н+ет — тр+и, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-day-dve-chashki-oy-net-tri-pozhaluysta-3461bc-5fb00c.wav",
+  "orig_sha1": "b641c2a7b29cbbd7fdd6255e6b04c8f82b064eb5",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-day-knigu-bratu-net-sestre-pozhaluysta-1be230.m4a": {
   "key": "дай книгу брату нет сестре пожалуйста",
   "kind": "ai_generated_speech",
@@ -7759,6 +7831,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-day-knigu-bratu-net-sestre-pozhaluysta-1be230-578383.wav",
   "orig_sha1": "f759798aedf297c35a4d0742577e820ad1a1676f",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-day-knigu-bratu-oy-net-sestre-pozhaluyst-9d6d64.m4a": {
+  "key": "дай книгу брату ой нет сестре пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Д+ай кн+игу бр+ату. +Ой, н+ет — сестр+е, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-day-knigu-bratu-oy-net-sestre-pozhaluyst-9d6d64-e76886.wav",
+  "orig_sha1": "e61347c362e842b5b56bd077d1c03f700de8be3c",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -7834,6 +7918,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-i-u-menya-tozhe-net-fd301b.m4a": {
+  "key": "и у меня тоже нет",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "И у мен+я т+оже н+ет.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-i-u-menya-tozhe-net-fd301b-3c8fe9.wav",
+  "orig_sha1": "1e08084e80f657996b4e18bf346c365e1d16a325",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-i-ya-tozhe-eshchyo-raz-pozhaluysta-9e2906.m4a": {
+  "key": "и я тоже ещё раз пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "И +я т+оже. Ещ+ё р+аз, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-i-ya-tozhe-eshchyo-raz-pozhaluysta-9e2906-a461a4.wav",
+  "orig_sha1": "a7ac3073cfd344e172ca026d97bc8f7f6bd13ad4",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-itak-zavtra-idyom-v-gorod-d84f29.m4a": {
   "key": "итак завтра идём в город",
   "kind": "ai_generated_speech",
@@ -7882,6 +7990,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-kniga-na-stole-a-ya-na-kukhne-chitayu-pi-58101f.m4a": {
+  "key": "книга на столе а я на кухне читаю письмо",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Кн+ига на стол+е. А +я на к+ухне, чит+аю письм+о.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-kniga-na-stole-a-ya-na-kukhne-chitayu-pi-58101f-c600f6.wav",
+  "orig_sha1": "726feaf8d7ef613acd28d818c270d80e74e6bfd3",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-kniga-na-stole-ya-na-kukhne-ya-chitayu-p-cd2419.m4a": {
   "key": "книга на столе я на кухне я читаю письмо",
   "kind": "ai_generated_speech",
@@ -7906,6 +8026,42 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-kupi-tri-knigi-oy-net-dve-odna-u-menya-u-4e1765.m4a": {
+  "key": "купи три книги ой нет две одна у меня уже есть",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Куп+и тр+и кн+иги. +Ой, н+ет, дв+е: одн+а у мен+я уж+е +есть.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-kupi-tri-knigi-oy-net-dve-odna-u-menya-u-4e1765-3cdc96.wav",
+  "orig_sha1": "7461af804f2eb8d0416acc22878b3729c0438261",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-ladno-pogovorim-zavtra-13a03a.m4a": {
+  "key": "ладно поговорим завтра",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Л+адно, поговор+им з+автра.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ladno-pogovorim-zavtra-13a03a-e3b0af.wav",
+  "orig_sha1": "83816d3873f14cd094f8c373cd212317eb46c0f8",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-mama-chitaet-na-kukhne-a-ya-ne-chitayu-y-50d671.m4a": {
+  "key": "мама читает на кухне а я не читаю я думаю и кот на стуле",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "М+ама чит+ает на к+ухне. А +я не чит+аю, +я д+умаю. И к+от на ст+уле.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-mama-chitaet-na-kukhne-a-ya-ne-chitayu-y-50d671-99bba3.wav",
+  "orig_sha1": "1418e0ecc0ff951b542d971157b3842f7a9bd4e9",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-mama-chitaet-na-kukhne-ya-ne-chitayu-ya-74f897.m4a": {
   "key": "мама читает на кухне я не читаю я думаю кот на стуле",
   "kind": "ai_generated_speech",
@@ -7915,6 +8071,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-mama-chitaet-na-kukhne-ya-ne-chitayu-ya-74f897-017e53.wav",
   "orig_sha1": "356fe9921e46f70af4e8b89a37802efbe977eeec",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-mama-doma-i-ya-tozhe-doma-uzhin-gotov-pe-71ec5e.m4a": {
+  "key": "мама дома и я тоже дома ужин готов передай мне соль пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "М+ама д+ома, и +я т+оже д+ома. +Ужин гот+ов. Перед+ай мн+е с+оль, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-mama-doma-i-ya-tozhe-doma-uzhin-gotov-pe-71ec5e-533436.wav",
+  "orig_sha1": "be07fe897cac73cec81868b8404860060d9e010f",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -7966,6 +8134,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-mne-ochen-nravitsya-kniga-kotoruyu-ty-ch-c03b68.m4a": {
+  "key": "мне очень нравится книга которую ты читаешь но сегодня мне нужно работать давай поговорим о ней завтра",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Мн+е +очень нр+авится кн+ига, кот+орую т+ы чит+аешь. Но сег+одня мн+е н+ужно раб+отать. Дав+ай поговор+им о н+ей з+автра.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-mne-ochen-nravitsya-kniga-kotoruyu-ty-ch-c03b68-b55b43.wav",
+  "orig_sha1": "092e2278226967eab2c94cb2e7ad5a77be00ed98",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-my-budem-govorit-o-rabote-v-sem-net-v-vo-dba0f6.m4a": {
   "key": "мы будем говорить о работе в семь нет в восемь в семь я ещё буду в городе",
   "kind": "ai_generated_speech",
@@ -7975,6 +8155,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-my-budem-govorit-o-rabote-v-sem-net-v-vo-dba0f6-daae4b.wav",
   "orig_sha1": "29747340326096f6abab137aa8a82184c21da702",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-my-budem-govorit-o-rabote-v-sem-oy-net-v-0149e9.m4a": {
+  "key": "мы будем говорить о работе в семь ой нет в восемь в семь я ещё буду в городе",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "М+ы б+удем говор+ить о раб+оте в с+емь. +Ой, н+ет — в в+осемь. В с+емь +я ещ+ё б+уду в г+ороде.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-my-budem-govorit-o-rabote-v-sem-oy-net-v-0149e9-2ecfea.wav",
+  "orig_sha1": "a24681cea559ca5295ceaf76c686bec8505bfe3a",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8019,10 +8211,10 @@
   "kind": "ai_generated_speech",
   "set": "listening",
   "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
-  "input": "М+ы говор+или о н+овой кн+иге. Бр+ат х+очет е+ё куп+ить, а +я хоч+у сн+ачала прочит+ать кн+игу, кот+орая у н+ас уж+е +есть. М+ы ещ+ё не реш+или, чт+о д+елать.",
+  "input": "М+ы говор+или о н+овой кн+иге. Бр+ат х+очет е+ё куп+ить, а +я хоч+у снач+ала прочит+ать кн+игу, кот+орая у н+ас уж+е +есть. М+ы ещ+ё не реш+или, чт+о д+елать.",
   "voice": "aidar",
-  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-my-govorili-o-novoy-knige-brat-khochet-e-aab856-1ae0b6.wav",
-  "orig_sha1": "50c60d98a1b1eadb952d0aa57261ca001dde0107",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-my-govorili-o-novoy-knige-brat-khochet-e-aab856-830f35.wav",
+  "orig_sha1": "d96dc6c21acb9c0969001eec065a12e10d564aaa",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8047,6 +8239,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-my-vchera-uzhinali-doma-sup-byl-ochen-vk-e24da9-10cd32.wav",
   "orig_sha1": "45396a2bb8d1f04a51cad0ae7d082c4e64210f01",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-napishi-bratu-net-luchshe-skazhi-emu-kog-a68459.m4a": {
+  "key": "напиши брату нет лучше скажи ему когда будешь дома",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Напиш+и бр+ату. Н+ет, л+учше скаж+и ем+у, когд+а б+удешь д+ома.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-napishi-bratu-net-luchshe-skazhi-emu-kog-a68459-6fde1b.wav",
+  "orig_sha1": "e3b755c930d69d25dd2b8fee8bbe5cb4dd9061b7",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8098,6 +8302,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-ne-sol-a-sakhar-pereday-pozhaluysta-d961f9.m4a": {
+  "key": "не соль а сахар передай пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Не с+оль, а с+ахар перед+ай, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ne-sol-a-sakhar-pereday-pozhaluysta-d961f9-664a27.wav",
+  "orig_sha1": "3f4bb10f297a55a2ea26cce1b953dab00125ecd1",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-net-chaya-net-day-mne-chay-pozhaluysta-2636d5.m4a": {
+  "key": "нет чая нет дай мне чай пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, ч+ая н+ет. Д+ай мн+е ч+ай, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-net-chaya-net-day-mne-chay-pozhaluysta-2636d5-05a2f2.wav",
+  "orig_sha1": "ed7a631d8fc98b826bdab67e7eee270ec6b18a7e",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-net-day-mne-chay-pozhaluysta-3d1da7.m4a": {
   "key": "нет дай мне чай пожалуйста",
   "kind": "ai_generated_speech",
@@ -8119,6 +8347,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-net-kofe-s-molokom-pozhaluysta-dc3e2f-07a5a2.wav",
   "orig_sha1": "3e889afee7a8e1ce27250ced8267dbf93f0d9528",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-net-mne-kofe-s-molokom-pozhaluysta-f720d5.m4a": {
+  "key": "нет мне кофе с молоком пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, мн+е к+офе с молок+ом, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-net-mne-kofe-s-molokom-pozhaluysta-f720d5-a5540d.wav",
+  "orig_sha1": "21c961a2435666b8837f537971702b45ac3f1b07",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8155,6 +8395,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-net-ya-khochu-byt-doma-0abb39-9556b0.wav",
   "orig_sha1": "c90c981aef39c6592383ce462e45f26c2ca66513",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-net-ya-khochu-pobyt-doma-4ecee8.m4a": {
+  "key": "нет я хочу побыть дома",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, +я хоч+у поб+ыть д+ома.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-net-ya-khochu-pobyt-doma-4ecee8-975e5f.wav",
+  "orig_sha1": "50a4f308981707f3a618d3791d48fb520f973051",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8203,6 +8455,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-pereday-khleb-pozhaluysta-73a63d-59edc8.wav",
   "orig_sha1": "5c84c4b3221093964958fc88b3743a6704cf7f2c",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-pereday-knigu-sestre-ona-khochet-eyo-pro-5c9f39.m4a": {
+  "key": "передай книгу сестре она хочет её прочитать а мне она нужна только в понедельник",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Перед+ай кн+игу сестр+е. Он+а х+очет е+ё прочит+ать. А мн+е он+а нужн+а т+олько в понед+ельник.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-pereday-knigu-sestre-ona-khochet-eyo-pro-5c9f39-deb0bc.wav",
+  "orig_sha1": "abc446a478eff61e41dc0a0fc738036978d335e3",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8283,10 +8547,34 @@
   "kind": "ai_generated_speech",
   "set": "listening",
   "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
-  "input": "Поним+аю, но +я д+умаю ин+аче: сн+ачала н+ужно прочит+ать вс+ё письм+о.",
+  "input": "Поним+аю, но +я д+умаю ин+аче: снач+ала н+ужно прочит+ать вс+ё письм+о.",
   "voice": "aidar",
-  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ponimayu-no-ya-dumayu-inache-snachala-nu-903878-3256fa.wav",
-  "orig_sha1": "e7cd2d8a7195be15904706e4b3c11d46bed7d757",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ponimayu-no-ya-dumayu-inache-snachala-nu-903878-3b43de.wav",
+  "orig_sha1": "0a146847d116a2cb881c4d3927cb4e9f869c27ea",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-postav-tort-na-stol-814c3b.m4a": {
+  "key": "поставь торт на стол",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Пост+авь т+орт на ст+ол.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-postav-tort-na-stol-814c3b-5d6037.wav",
+  "orig_sha1": "9f2ffc12d9f144f864f8de17b9d1292a73a59bed",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-privet-sup-gotov-ya-khochu-eshchyo-khleb-2df004.m4a": {
+  "key": "привет суп готов я хочу ещё хлеб передай пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Прив+ет. С+уп гот+ов. +Я хоч+у ещ+ё хл+еб, перед+ай, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-privet-sup-gotov-ya-khochu-eshchyo-khleb-2df004-f27d7f.wav",
+  "orig_sha1": "415b00b042d2f4c693673dc1d09c68e39ae95696",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8314,15 +8602,39 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-slushay-ne-pokupay-etu-knigu-ona-u-menya-365f1a.m4a": {
+  "key": "слушай не покупай эту книгу она у меня есть завтра дам её тебе",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Сл+ушай, не покуп+ай +эту кн+игу. Он+а у мен+я +есть. З+автра д+ам е+ё теб+е.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-slushay-ne-pokupay-etu-knigu-ona-u-menya-365f1a-8479d4.wav",
+  "orig_sha1": "f326c35277788359927d7e0b6ef07d24b55b68c9",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-tort-tut-a-day-mne-syr-pozhaluysta-1e0624.m4a": {
+  "key": "торт тут а дай мне сыр пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Т+орт т+ут, а д+ай мн+е с+ыр, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-tort-tut-a-day-mne-syr-pozhaluysta-1e0624-5ce14a.wav",
+  "orig_sha1": "a5bb2e473d55a78e12360437420f3c66384c5af8",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-ty-prava-eta-rabota-vazhnaya-tem-ne-mene-6b0a31.m4a": {
   "key": "ты права эта работа важная тем не менее я не хочу начинать сегодня сначала нужно решить кто нам поможет",
   "kind": "ai_generated_speech",
   "set": "listening",
   "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
-  "input": "Т+ы прав+а, +эта раб+ота в+ажная. Т+ем не м+енее +я не хоч+у начин+ать сег+одня. Сн+ачала н+ужно реш+ить, кт+о н+ам пом+ожет.",
+  "input": "Т+ы прав+а, +эта раб+ота в+ажная. Т+ем не м+енее +я не хоч+у начин+ать сег+одня. Снач+ала н+ужно реш+ить, кт+о н+ам пом+ожет.",
   "voice": "aidar",
-  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ty-prava-eta-rabota-vazhnaya-tem-ne-mene-6b0a31-475ee7.wav",
-  "orig_sha1": "2aba38bfcb2f6c06cd37af8ab398ba58bff5562b",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ty-prava-eta-rabota-vazhnaya-tem-ne-mene-6b0a31-0e5134.wav",
+  "orig_sha1": "92c954ccf131877d14ff2e579315682029d4b8fb",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8367,10 +8679,10 @@
   "kind": "ai_generated_speech",
   "set": "listening",
   "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
-  "input": "+Утром прочит+ай письм+о. Пот+ом напиш+и отв+ет. Т+олько не пиш+и сейч+ас, сн+ачала н+ужно вс+ё пон+ять.",
+  "input": "+Утром прочит+ай письм+о. Пот+ом напиш+и отв+ет. Т+олько не пиш+и сейч+ас, снач+ала н+ужно вс+ё пон+ять.",
   "voice": "aidar",
-  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-utrom-prochitay-pismo-potom-napishi-otve-ff2266-32872d.wav",
-  "orig_sha1": "9ca3189aae354271e01d728a6b19ef345e72b89e",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-utrom-prochitay-pismo-potom-napishi-otve-ff2266-8dcc62.wav",
+  "orig_sha1": "75a4eacb798a401c4765ab7421d365967c7c3146",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8383,6 +8695,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-utrom-ya-govorila-s-bratom-on-budet-rabo-059724-a57866.wav",
   "orig_sha1": "b680f44e87c1f05cb7f47a359fd02f62819c66a5",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-utrom-ya-govorila-s-bratom-on-budet-rabo-598962.m4a": {
+  "key": "утром я говорила с братом он будет работать завтра а сегодня он дома",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+Утром +я говор+ила с бр+атом. +Он б+удет раб+отать з+автра. А сег+одня +он д+ома.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-utrom-ya-govorila-s-bratom-on-budet-rabo-598962-e58c64.wav",
+  "orig_sha1": "b6d5b60a445848e630f1deed469b41fc11eb11db",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8446,6 +8770,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-vot-on-369b5f.m4a": {
+  "key": "вот он",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "В+от +он.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-vot-on-369b5f-da7afe.wav",
+  "orig_sha1": "45d6f0eb02d80a7b27225fb98a96ba22784fff8b",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-vot-pozhaluysta-ef77af.m4a": {
+  "key": "вот пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "В+от, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-vot-pozhaluysta-ef77af-629f99.wav",
+  "orig_sha1": "850d36c8c81bf3c011ccb428bda9283388200374",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-vot-sol-38b923.m4a": {
   "key": "вот соль",
   "kind": "ai_generated_speech",
@@ -8482,6 +8830,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-ya-chital-knigu-no-eshchyo-ne-prochital-b5d44f.m4a": {
+  "key": "я читал книгу но ещё не прочитал она очень интересная завтра буду читать ещё",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+Я чит+ал кн+игу, но ещ+ё не прочит+ал. Он+а +очень интер+есная. З+автра б+уду чит+ать ещ+ё.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ya-chital-knigu-no-eshchyo-ne-prochital-b5d44f-cfd299.wav",
+  "orig_sha1": "e66a90e4f02cf7868647dc52d0adea57a038d330",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-ya-chital-no-ne-prochital-knigu-ona-oche-4aef27.m4a": {
   "key": "я читал но не прочитал книгу она очень интересная завтра буду читать ещё",
   "kind": "ai_generated_speech",
@@ -8515,6 +8875,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ya-govorila-s-bratom-o-sestre-ona-budet-c282cc-bd4625.wav",
   "orig_sha1": "a1f81e507e8e819fce8f0914721b48cd59dc570b",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-ya-khochu-chay-s-molokom-khleb-ne-khochu-c88545.m4a": {
+  "key": "я хочу чай с молоком хлеб не хочу а мне сыр пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+Я хоч+у ч+ай с молок+ом. Хл+еб не хоч+у. А мн+е с+ыр, пож+алуйста.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ya-khochu-chay-s-molokom-khleb-ne-khochu-c88545-26f8ec.wav",
+  "orig_sha1": "155858e84a50b03884d05a37edbd7ac111ba30c8",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8590,6 +8962,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-ya-ne-znayu-gde-sol-a-ty-znaesh-a4edac.m4a": {
+  "key": "я не знаю где соль а ты знаешь?",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+Я не зн+аю, гд+е с+оль. А т+ы зн+аешь?",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ya-ne-znayu-gde-sol-a-ty-znaesh-a4edac-1dec50.wav",
+  "orig_sha1": "c4fe72ac66eecfc1afe6376f8c893d8b0feb8b72",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-ya-skazala-chto-ne-khochu-ekhat-s-vami-e-b6237b.m4a": {
+  "key": "я сказала что не хочу ехать с вами это не так я хочу но не могу в субботу если вы поедете в воскресенье я тоже поеду",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+Я сказ+ала, чт+о не хоч+у +ехать с в+ами. +Это не т+ак: +я хоч+у, но не мог+у в субб+оту. +Если в+ы по+едете в воскрес+енье, +я т+оже по+еду.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ya-skazala-chto-ne-khochu-ekhat-s-vami-e-b6237b-f91412.wav",
+  "orig_sha1": "644705a4a6e157a39d4b738346c0b9f1e907ebe2",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-ya-skazala-chto-ne-khochu-ekhat-s-vami-n-657826.m4a": {
   "key": "я сказала что не хочу ехать с вами не так я хочу но не могу в субботу если вы поедете в воскресенье я поеду тоже",
   "kind": "ai_generated_speech",
@@ -8611,6 +9007,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ya-soglasen-chto-nam-nuzhno-govorit-no-n-2b49ec-e92579.wav",
   "orig_sha1": "bcc8c86be97206a645b0864f813d6601571d6083",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-ya-soglasen-chto-nam-nuzhno-pogovorit-no-30d5d4.m4a": {
+  "key": "я согласен что нам нужно поговорить но не сейчас я ещё не прочитал письмо поговорим после работы",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+Я согл+асен, чт+о н+ам н+ужно поговор+ить. Но не сейч+ас: +я ещ+ё не прочит+ал письм+о. Поговор+им п+осле раб+оты.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ya-soglasen-chto-nam-nuzhno-pogovorit-no-30d5d4-641403.wav",
+  "orig_sha1": "9bc1c185daab041c5ee1535beec06234e9da89a3",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8650,6 +9058,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-ya-tozhe-ne-ponimayu-ochen-trudno-585538.m4a": {
+  "key": "я тоже не понимаю очень трудно",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "+Я т+оже не поним+аю, +очень тр+удно.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ya-tozhe-ne-ponimayu-ochen-trudno-585538-e0f04a.wav",
+  "orig_sha1": "570c714da965f7bce9ae350f3ad2c5cdb729acbf",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-ya-znayu-idyom-5e588e.m4a": {
   "key": "я знаю идём",
   "kind": "ai_generated_speech",
@@ -8659,6 +9079,18 @@
   "voice": "aidar",
   "orig": ".local/drussky-audio/morphology/wav/listening-aidar-ya-znayu-idyom-5e588e-a94cfb.wav",
   "orig_sha1": "a3ef915b04d4c198b8cbb01f3e019f43a9163c21",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-zavtra-my-edem-v-gorod-sestra-edet-s-nam-badea3.m4a": {
+  "key": "завтра мы едем в город сестра едет с нами а брат будет дома",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "З+автра м+ы +едем в г+ород. Сестр+а +едет с н+ами, а бр+ат б+удет д+ома.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-zavtra-my-edem-v-gorod-sestra-edet-s-nam-badea3-beb266.wav",
+  "orig_sha1": "9e8d3d4e070156f3e4ac8c981ea63fa5c3dbce52",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8674,6 +9106,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-zavtra-utrom-ya-budu-doma-dnyom-rabotayu-415e7a.m4a": {
+  "key": "завтра утром я буду дома днём работаю а вечером поговорим",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "З+автра +утром +я б+уду д+ома. Дн+ём раб+отаю. А в+ечером поговор+им.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-zavtra-utrom-ya-budu-doma-dnyom-rabotayu-415e7a-1b1dcf.wav",
+  "orig_sha1": "84c3d01a850d5e35ddb55be8adccf9334bdcd5a3",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-aidar-zavtra-ya-budu-chitat-doma-a-vecherom-bu-2d46a2.m4a": {
+  "key": "завтра я буду читать дома а вечером будем говорить по русски ты тоже будешь дома?",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "З+автра +я б+уду чит+ать д+ома. А в+ечером б+удем говор+ить пор+усски. Т+ы т+оже б+удешь д+ома?",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-zavtra-ya-budu-chitat-doma-a-vecherom-bu-2d46a2-e4d259.wav",
+  "orig_sha1": "ea29124693ce556348f8284d5b09f08678137f8a",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-aidar-zavtra-ya-budu-chitat-doma-vecherom-bude-9a41af.m4a": {
   "key": "завтра я буду читать дома вечером будем говорить по русски ты тоже будешь дома?",
   "kind": "ai_generated_speech",
@@ -8686,6 +9142,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-aidar-znachit-zavtra-idyom-v-gorod-236133.m4a": {
+  "key": "значит завтра идём в город",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice aidar (CC BY-NC-SA 4.0)",
+  "input": "Зн+ачит, з+автра ид+ём в г+ород.",
+  "voice": "aidar",
+  "orig": ".local/drussky-audio/morphology/wav/listening-aidar-znachit-zavtra-idyom-v-gorod-236133-2d22ee.wav",
+  "orig_sha1": "a38d58c6a6405a6f3da20f98cc80e4232b983e25",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-baya-a-ya-ponimayu-on-khochet-chay-8af290.m4a": {
+  "key": "а я понимаю он хочет чай",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "А +я поним+аю. +Он х+очет ч+ай.",
+  "voice": "baya",
+  "orig": ".local/drussky-audio/morphology/wav/listening-baya-a-ya-ponimayu-on-khochet-chay-8af290-fc0b59.wav",
+  "orig_sha1": "14c8ab9d5db75ac73c27637d207e2b5a7985563a",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-baya-da-zavtra-pogovorim-073bb3.m4a": {
   "key": "да завтра поговорим",
   "kind": "ai_generated_speech",
@@ -8695,6 +9175,30 @@
   "voice": "baya",
   "orig": ".local/drussky-audio/morphology/wav/listening-baya-da-zavtra-pogovorim-073bb3-21a98a.wav",
   "orig_sha1": "b56d9c22fc0cf16fb6ffd26ff1710bb4620cb17a",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-baya-i-mne-tozhe-syr-pozhaluysta-23f8db.m4a": {
+  "key": "и мне тоже сыр пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "И мн+е т+оже с+ыр, пож+алуйста.",
+  "voice": "baya",
+  "orig": ".local/drussky-audio/morphology/wav/listening-baya-i-mne-tozhe-syr-pozhaluysta-23f8db-31bc34.wav",
+  "orig_sha1": "984f61ddafbb143b0afd6c3c34548030122c8474",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-baya-i-ya-tozhe-ne-ponimayu-382f47.m4a": {
+  "key": "и я тоже не понимаю",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "И +я т+оже не поним+аю.",
+  "voice": "baya",
+  "orig": ".local/drussky-audio/morphology/wav/listening-baya-i-ya-tozhe-ne-ponimayu-382f47-36a246.wav",
+  "orig_sha1": "37da3578e9292f827982f4dd72d7135bf2c6bd75",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8746,6 +9250,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-baya-podozhdi-ya-eshchyo-ne-soglasna-mne-nuzh-bc9338.m4a": {
+  "key": "подожди я ещё не согласна мне нужно подумать",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "Подожд+и, +я ещ+ё не согл+асна. Мн+е н+ужно под+умать.",
+  "voice": "baya",
+  "orig": ".local/drussky-audio/morphology/wav/listening-baya-podozhdi-ya-eshchyo-ne-soglasna-mne-nuzh-bc9338-8384c2.wav",
+  "orig_sha1": "024e508bede8cfd8764dba468eef924143387929",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-baya-vot-pozhaluysta-a-mne-pereday-sol-46b781.m4a": {
+  "key": "вот пожалуйста а мне передай соль",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice baya (CC BY-NC-SA 4.0)",
+  "input": "В+от, пож+алуйста. А мн+е перед+ай с+оль.",
+  "voice": "baya",
+  "orig": ".local/drussky-audio/morphology/wav/listening-baya-vot-pozhaluysta-a-mne-pereday-sol-46b781-e85c24.wav",
+  "orig_sha1": "757257d56241b9141dae7b836ace319c7ebb19da",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-baya-ya-ponimayu-on-khochet-chay-7b9957.m4a": {
   "key": "я понимаю он хочет чай",
   "kind": "ai_generated_speech",
@@ -8770,6 +9298,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-a-gde-khleb-day-65e425.m4a": {
+  "key": "а где хлеб дай",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "А гд+е хл+еб? Д+ай.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-a-gde-khleb-day-65e425-7ed575.wav",
+  "orig_sha1": "6348328d2555faca94544f1a84d5bd23bd09d317",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-a-gde-khleb-day-pozhaluysta-79d92e.m4a": {
+  "key": "а где хлеб дай пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "А гд+е хл+еб? Д+ай, пож+алуйста.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-a-gde-khleb-day-pozhaluysta-79d92e-8eada3.wav",
+  "orig_sha1": "fb6a8469a0cc66e4d3e0108840ac78c58fab6b5b",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-a-gde-ona-budet-cc2dc6.m4a": {
   "key": "а где она будет",
   "kind": "ai_generated_speech",
@@ -8779,6 +9331,30 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-a-gde-ona-budet-cc2dc6-1275c3.wav",
   "orig_sha1": "c9745c1942a6c3e92e66e813d78c3f2a14818542",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-a-khleb-polozhi-na-stul-df2b67.m4a": {
+  "key": "а хлеб положи на стул",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "а хл+еб полож+и на ст+ул.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-a-khleb-polozhi-na-stul-df2b67-f162de.wav",
+  "orig_sha1": "c9c459c3cb5924e7d76dbd59ad74cbd2afd0aec4",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-a-mne-day-sok-232976.m4a": {
+  "key": "а мне дай сок",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "А мн+е д+ай с+ок.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-a-mne-day-sok-232976-d2d798.wav",
+  "orig_sha1": "47e09eadfaecb77c8256b8b001470585d6ff7393",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8803,6 +9379,42 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-a-ne-syr-89430f-bc0d14.wav",
   "orig_sha1": "a20aba55470b5c8b53f34a9fc4e30f777b32a3f4",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-a-vecherom-budem-govorit-po-russki-f1718d.m4a": {
+  "key": "а вечером будем говорить по русски",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "А в+ечером б+удем говор+ить пор+усски.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-a-vecherom-budem-govorit-po-russki-f1718d-e2ff86.wav",
+  "orig_sha1": "c968cb86b5feef13e5d8f168f47788bf1f207cf4",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-a-vecherom-pogovorim-f5d764.m4a": {
+  "key": "а вечером поговорим",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "А в+ечером поговор+им.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-a-vecherom-pogovorim-f5d764-4b818e.wav",
+  "orig_sha1": "7d66c526e3bd00e860d9e91bc66170ff7d504e0a",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-a-zavtra-budem-gulyat-aea5ea.m4a": {
+  "key": "а завтра будем гулять",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "А з+автра б+удем гул+ять.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-a-zavtra-budem-gulyat-aea5ea-6abeff.wav",
+  "orig_sha1": "ffa648b5de620fb1dce14c8733c2bcffee88c6ef",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8835,10 +9447,10 @@
   "kind": "ai_generated_speech",
   "set": "listening",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "Б+удем чит+ать +утром. Н+ет, сн+ачала нап+ишем письм+о, а пот+ом б+удем чит+ать.",
+  "input": "Б+удем чит+ать +утром. Н+ет, снач+ала нап+ишем письм+о, а пот+ом б+удем чит+ать.",
   "voice": "xenia",
-  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-budem-chitat-utrom-net-snachala-napishem-740e02-88aa1c.wav",
-  "orig_sha1": "3b66fcaf78102b2dc36b9f76530cdbfb14138294",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-budem-chitat-utrom-net-snachala-napishem-740e02-88204b.wav",
+  "orig_sha1": "d46b684f750b28520136c28a29350a6e664f5b72",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8863,6 +9475,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-budu-chitat-eshchyo-f302f9-dcebd6.wav",
   "orig_sha1": "3f35895f90e2b81aa242f77764d938ef25f16b0b",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-chashka-i-tarelka-est-a-day-mne-lozhku-p-b80f8a.m4a": {
+  "key": "чашка и тарелка есть а дай мне ложку пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Ч+ашка и тар+елка +есть, а д+ай мн+е л+ожку, пож+алуйста.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-chashka-i-tarelka-est-a-day-mne-lozhku-p-b80f8a-b618ed.wav",
+  "orig_sha1": "fbf4fb3d12341f509bcfe381a3bb0d7b14386820",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -8938,6 +9562,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-davay-pogovorim-o-ney-zavtra-cc75a8.m4a": {
+  "key": "давай поговорим о ней завтра",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Дав+ай поговор+им о н+ей з+автра.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-davay-pogovorim-o-ney-zavtra-cc75a8-f3ed60.wav",
+  "orig_sha1": "6f5969d5fe1fcc9ea37ffdc13efd7b2bae506b37",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-davay-posle-raboty-poydyom-v-gorod-e74b8c.m4a": {
   "key": "давай после работы пойдём в город",
   "kind": "ai_generated_speech",
@@ -8998,6 +9634,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-day-khleb-884fdc.m4a": {
+  "key": "дай хлеб",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+ай хл+еб.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-day-khleb-884fdc-24623c.wav",
+  "orig_sha1": "aa3ec7f89093c89b50e7a5c42eabd155c53c7a8c",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-day-khleb-pozhaluysta-949f4a.m4a": {
+  "key": "дай хлеб пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+ай хл+еб, пож+алуйста.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-day-khleb-pozhaluysta-949f4a-e1b856.wav",
+  "orig_sha1": "85d79a36e6b638f413b353edc99903c52374ea6a",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-day-mne-chay-2c06d0.m4a": {
   "key": "дай мне чай",
   "kind": "ai_generated_speech",
@@ -9019,6 +9679,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-day-mne-khleb-ae78a2-32a7d1.wav",
   "orig_sha1": "aa18e0910c3975de207be4af3dc2be427c35306f",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-day-mne-lozhku-0817da.m4a": {
+  "key": "дай мне ложку",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+ай мн+е л+ожку.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-day-mne-lozhku-0817da-1f4bf5.wav",
+  "orig_sha1": "c7450d395d02cf77b5567155e03bca0349099aa1",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -9046,6 +9718,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-day-mne-syr-2f5476.m4a": {
+  "key": "дай мне сыр",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "д+ай мн+е с+ыр.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-day-mne-syr-2f5476-c1ca46.wav",
+  "orig_sha1": "9c2775ff6c9980c0f17546900604cd71b29a736f",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-day-pozhaluysta-syr-09bc2c.m4a": {
+  "key": "дай пожалуйста сыр",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+ай, пож+алуйста, с+ыр.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-day-pozhaluysta-syr-09bc2c-4e1f61.wav",
+  "orig_sha1": "54ab01c6bd166745e0fd80ced800d630ba45b167",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-day-sok-a-ne-syr-5384db.m4a": {
   "key": "дай сок а не сыр",
   "kind": "ai_generated_speech",
@@ -9055,6 +9751,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-day-sok-a-ne-syr-5384db-43e6e1.wav",
   "orig_sha1": "c33711f644591acadf5f9d6dd30d5162fc14c28f",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-day-sol-pozhaluysta-a-ne-khleb-613fd6.m4a": {
+  "key": "дай соль пожалуйста а не хлеб",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Д+ай с+оль, пож+алуйста, а не хл+еб.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-day-sol-pozhaluysta-a-ne-khleb-613fd6-76d3dc.wav",
+  "orig_sha1": "609d76ed15dfa40f13d0b24655c8c2b15852d709",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -9154,6 +9862,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-i-ya-tozhe-0b3a27.m4a": {
+  "key": "и я тоже",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "И +я т+оже.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-i-ya-tozhe-0b3a27-b7c76a.wav",
+  "orig_sha1": "fa048594aacde52505b74d2fda32668d6a2a8f86",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-khleb-na-stol-4984c3.m4a": {
   "key": "хлеб на стол",
   "kind": "ai_generated_speech",
@@ -9163,6 +9883,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-khleb-na-stol-4984c3-9fe7eb.wav",
   "orig_sha1": "b17671a6d8cb1784b4ed5186aa268c70a5143227",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-khleb-ne-khochu-a-mne-syr-pozhaluysta-6346b8.m4a": {
+  "key": "хлеб не хочу а мне сыр пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Хл+еб не хоч+у. А мн+е с+ыр, пож+алуйста.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-khleb-ne-khochu-a-mne-syr-pozhaluysta-6346b8-9287d9.wav",
+  "orig_sha1": "e860a0979c36ea6855d4cea58ea1ed2180f73196",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -9214,6 +9946,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-khochu-chay-oy-net-kofe-pozhaluysta-e37acd.m4a": {
+  "key": "хочу чай ой нет кофе пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Хоч+у ч+ай. +Ой, н+ет — к+офе, пож+алуйста.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-khochu-chay-oy-net-kofe-pozhaluysta-e37acd-5f0ab5.wav",
+  "orig_sha1": "f6b4655dfeeb9d225a78f6e58c850f1f608f8df6",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-khochu-eshchyo-sup-14c543.m4a": {
   "key": "хочу ещё суп",
   "kind": "ai_generated_speech",
@@ -9226,6 +9970,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-khochu-eshchyo-supa-60f2eb.m4a": {
+  "key": "хочу ещё супа",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "хоч+у ещ+ё с+упа.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-khochu-eshchyo-supa-60f2eb-19e243.wav",
+  "orig_sha1": "d55802476d6615f281ca3ff8f4913a15dd63f25f",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-kniga-na-stole-net-na-stule-59cb00.m4a": {
   "key": "книга на столе нет на стуле",
   "kind": "ai_generated_speech",
@@ -9235,6 +9991,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-kniga-na-stole-net-na-stule-59cb00-2e4967.wav",
   "orig_sha1": "0ef803de6531575689e1492178a4204004a72d70",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-kniga-na-stole-oy-net-na-stule-31d531.m4a": {
+  "key": "книга на столе ой нет на стуле",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Кн+ига на стол+е. +Ой, н+ет — на ст+уле.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-kniga-na-stole-oy-net-na-stule-31d531-f94a01.wav",
+  "orig_sha1": "f8ec4d2bf8feaffcd93e746ebd63eec0fec04e99",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -9271,6 +10039,30 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-knigu-polozhi-na-stol-a-ne-na-stul-f38f20-a46935.wav",
   "orig_sha1": "c924a8d66fb6580477a3c23d236984287ec96b1f",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-kofe-eshchyo-est-caa966.m4a": {
+  "key": "кофе ещё есть?",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "К+офе ещ+ё +есть?",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-kofe-eshchyo-est-caa966-a5dc69.wav",
+  "orig_sha1": "c63d54d2b55de88b3535baf75c5c11e9604dd486",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-kofe-eshchyo-est-dda773.m4a": {
+  "key": "кофе ещё есть",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "К+офе ещ+ё +есть.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-kofe-eshchyo-est-dda773-8ef283.wav",
+  "orig_sha1": "9adfa141652feadfb599698474cb622a3650b76a",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -9418,6 +10210,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-mne-chay-e40274.m4a": {
+  "key": "мне чай",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Мн+е ч+ай.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-mne-chay-e40274-aa8d3c.wav",
+  "orig_sha1": "9162cbbbb3852ab0163e03aeb118a73c10ae4ef6",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-mne-kofe-a9773e.m4a": {
   "key": "мне кофе",
   "kind": "ai_generated_speech",
@@ -9454,6 +10258,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-mne-nuzhna-kniga-a-bratu-nuzhen-stul-dfd964.m4a": {
+  "key": "мне нужна книга а брату нужен стул",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Мн+е нужн+а кн+ига, а бр+ату н+ужен ст+ул.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-mne-nuzhna-kniga-a-bratu-nuzhen-stul-dfd964-89a56f.wav",
+  "orig_sha1": "16cafb8e4f1cb48581049493b85a27d82407e8e8",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-mne-nuzhno-prochitat-eto-pismo-no-ya-ne-bafe80.m4a": {
   "key": "мне нужно прочитать это письмо но я не понимаю",
   "kind": "ai_generated_speech",
@@ -9466,6 +10282,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-mne-nuzhno-prochitat-eto-pismo-no-ya-nic-b1d155.m4a": {
+  "key": "мне нужно прочитать это письмо но я ничего не понимаю",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Мн+е н+ужно прочит+ать +это письм+о, но +я ничег+о не поним+аю.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-mne-nuzhno-prochitat-eto-pismo-no-ya-nic-b1d155-4b49dd.wav",
+  "orig_sha1": "5fbdb2fdd32e0ccbaaa52afb4c4e640581c0a37e",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-mne-nuzhno-rabotat-cad5b5.m4a": {
   "key": "мне нужно работать",
   "kind": "ai_generated_speech",
@@ -9475,6 +10303,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-mne-nuzhno-rabotat-cad5b5-993b6e.wav",
   "orig_sha1": "1dc8a788e06c9e127206b94f567d62796a529b32",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-mne-tort-pozhaluysta-5bde73.m4a": {
+  "key": "мне торт пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Мн+е т+орт, пож+алуйста.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-mne-tort-pozhaluysta-5bde73-7b3ab4.wav",
+  "orig_sha1": "90a5bc12a406087d1ade8476999b12ab2318b8a7",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -9502,6 +10342,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-mozhno-pogovorit-s-ney-utrom-974edf.m4a": {
+  "key": "можно поговорить с ней утром",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ожно поговор+ить с н+ей +утром.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-mozhno-pogovorit-s-ney-utrom-974edf-1d3931.wav",
+  "orig_sha1": "3b975e0badd56f063c98e7cbc7bfae53ce62400e",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-my-edem-v-gorod-net-ya-edu-a-ty-budesh-d-456ccf.m4a": {
   "key": "мы едем в город нет я еду а ты будешь дома",
   "kind": "ai_generated_speech",
@@ -9511,6 +10363,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-my-edem-v-gorod-net-ya-edu-a-ty-budesh-d-456ccf-5cf9c9.wav",
   "orig_sha1": "79d871a6243ba3503542ece67e03a7eb2dc14268",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-my-edem-v-gorod-to-est-net-ya-edu-a-ty-b-227435.m4a": {
+  "key": "мы едем в город то есть нет я еду а ты будешь дома",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "М+ы +едем в г+ород. То +есть н+ет: +я +еду, а т+ы б+удешь д+ома.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-my-edem-v-gorod-to-est-net-ya-edu-a-ty-b-227435-3e72f1.wav",
+  "orig_sha1": "38097b76fa7ad0a799f0cb112766777e7423ad8a",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -9610,6 +10474,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-ne-sol-a-sakhar-7ef77e.m4a": {
+  "key": "не соль а сахар",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Не с+оль, а с+ахар.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ne-sol-a-sakhar-7ef77e-d16a31.wav",
+  "orig_sha1": "d0e665a0cd0cef53d7b0876e619626e497294162",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-ne-syr-day-sok-35b26f.m4a": {
+  "key": "не сыр дай сок",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "не с+ыр — д+ай с+ок.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ne-syr-day-sok-35b26f-c49397.wav",
+  "orig_sha1": "4277d9ce2b839a596ba1cf3017b93bc3503290d1",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-nemnogo-govoryu-po-russki-780287.m4a": {
   "key": "немного говорю по русски",
   "kind": "ai_generated_speech",
@@ -9655,6 +10543,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-net-na-stule-e45f3d-e0b85c.wav",
   "orig_sha1": "c5f6c1a6e1b4f06a3c4ee5d282bd29eb55a437ee",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-net-ne-syr-day-sok-01b002.m4a": {
+  "key": "нет не сыр дай сок",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Н+ет, не с+ыр — д+ай с+ок.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-net-ne-syr-day-sok-01b002-e35fcb.wav",
+  "orig_sha1": "154f2a7a383e61fb2de0b8fe192d6d189fac2fac",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -9727,6 +10627,30 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-net-vecherom-b73134-f833bf.wav",
   "orig_sha1": "effc91d7ce5e27a1f953a7004431927750699a74",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-no-eshchyo-ne-prochital-61a5bf.m4a": {
+  "key": "но ещё не прочитал",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "но ещ+ё не прочит+ал.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-no-eshchyo-ne-prochital-61a5bf-ef4b70.wav",
+  "orig_sha1": "4507bf0caebb818e1042a3125848459232b44469",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-no-eshchyo-ne-prochitala-08f911.m4a": {
+  "key": "но ещё не прочитала",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "но ещ+ё не прочит+ала.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-no-eshchyo-ne-prochitala-08f911-b8da13.wav",
+  "orig_sha1": "efda404c4587c917bb136552ab83f69d56c79f84",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -9874,6 +10798,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-ona-u-menya-est-zavtra-dam-eyo-tebe-15de4e.m4a": {
+  "key": "она у меня есть завтра дам её тебе",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Он+а у мен+я +есть. З+автра д+ам е+ё теб+е.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ona-u-menya-est-zavtra-dam-eyo-tebe-15de4e-6da437.wav",
+  "orig_sha1": "ed949cb4dfeb57ef7c4dd83536c0f3ad9587fdbc",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-oni-tam-1fbb88.m4a": {
   "key": "они там?",
   "kind": "ai_generated_speech",
@@ -9883,6 +10819,114 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-oni-tam-1fbb88-5eae35.wav",
   "orig_sha1": "d7df5a468bf627d5fd8cf1096ba1219f5b31dbd3",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-oy-net-dve-5d8d33.m4a": {
+  "key": "ой нет две",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Ой, н+ет, дв+е.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-oy-net-dve-5d8d33-008936.wav",
+  "orig_sha1": "6b1420e7693b70027999764c97c7822f8e137088",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-oy-net-kofe-9fbc6f.m4a": {
+  "key": "ой нет кофе",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Ой, н+ет — к+офе.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-oy-net-kofe-9fbc6f-fdc691.wav",
+  "orig_sha1": "b2cbb47bcd490a20ac59869ffdab3bb87dfa980e",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-oy-net-na-stule-b2f282.m4a": {
+  "key": "ой нет на стуле",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Ой, н+ет — на ст+уле.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-oy-net-na-stule-b2f282-c04d0a.wav",
+  "orig_sha1": "937e3199d1330f8e33e235b6d4bd87b697659d7f",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-oy-net-ne-utrom-vecherom-2abca7.m4a": {
+  "key": "ой нет не утром вечером",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Ой, н+ет, не +утром — в+ечером.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-oy-net-ne-utrom-vecherom-2abca7-575312.wav",
+  "orig_sha1": "41515b2d97848a5b27944077321175ab90681d18",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-oy-net-ne-v-sem-v-vosem-400c92.m4a": {
+  "key": "ой нет не в семь в восемь",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Ой, н+ет, не в с+емь — в в+осемь.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-oy-net-ne-v-sem-v-vosem-400c92-9fc465.wav",
+  "orig_sha1": "d6605e6800d0c8f5b744a3fce05ce2b0aa66f6f9",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-oy-net-s-sestroy-526df8.m4a": {
+  "key": "ой нет с сестрой",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Ой, н+ет — с сестр+ой.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-oy-net-s-sestroy-526df8-81d908.wav",
+  "orig_sha1": "9b9ab9b0dd291f92e015e29cf6c9095591867f95",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-oy-net-sestre-a3537f.m4a": {
+  "key": "ой нет сестре",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Ой, н+ет — сестр+е.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-oy-net-sestre-a3537f-4ebc27.wav",
+  "orig_sha1": "5b343a60ef8aa8cf56ef9a5c04411772147b5e88",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-oy-net-tri-ed03df.m4a": {
+  "key": "ой нет три",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Ой, н+ет — тр+и.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-oy-net-tri-ed03df-2c53e7.wav",
+  "orig_sha1": "c97781d0167f71b9baa416f01e513c3d43b2915a",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-oy-net-v-vosem-5f9500.m4a": {
+  "key": "ой нет в восемь",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Ой, н+ет — в в+осемь.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-oy-net-v-vosem-5f9500-13e6c9.wav",
+  "orig_sha1": "2512800933498db2a972e0bbc85e651968b1c989",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -9970,6 +11014,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-polozhi-knigu-na-stol-a-khleb-polozhi-na-5a42ba.m4a": {
+  "key": "положи книгу на стол а хлеб положи на стул",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Полож+и кн+игу на ст+ол, а хл+еб полож+и на ст+ул.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-polozhi-knigu-na-stol-a-khleb-polozhi-na-5a42ba-4a94cb.wav",
+  "orig_sha1": "b2f905dda274382ddcb36b88838e90c3ce46af29",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-polozhi-knigu-na-stol-khleb-polozhi-na-s-2a027a.m4a": {
   "key": "положи книгу на стол хлеб положи на стул",
   "kind": "ai_generated_speech",
@@ -10018,6 +11074,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-privet-segodnya-ya-rabotayu-doma-a-zavtr-84b27c.m4a": {
+  "key": "привет сегодня я работаю дома а завтра будем гулять",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Прив+ет. Сег+одня +я раб+отаю д+ома. А з+автра б+удем гул+ять.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-privet-segodnya-ya-rabotayu-doma-a-zavtr-84b27c-7e57f6.wav",
+  "orig_sha1": "ae60c35affef4374b0e0ea2deff565f0293fd046",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-privet-segodnya-ya-rabotayu-doma-zavtra-c51011.m4a": {
   "key": "привет сегодня я работаю дома завтра будем гулять",
   "kind": "ai_generated_speech",
@@ -10027,6 +11095,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-privet-segodnya-ya-rabotayu-doma-zavtra-c51011-19a419.wav",
   "orig_sha1": "50ff486174dae302bd9ff22dc110bb6f9fd224bc",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-privet-ya-budu-doma-v-sem-kupi-khleb-poz-d214ea.m4a": {
+  "key": "привет я буду дома в семь купи хлеб пожалуйста ой нет хлеб же уже есть купи только молоко",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Прив+ет, +я б+уду д+ома в с+емь. Куп+и хл+еб, пож+алуйста. +Ой, н+ет, хл+еб же уж+е +есть — куп+и т+олько молок+о.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-privet-ya-budu-doma-v-sem-kupi-khleb-poz-d214ea-4eb4d2.wav",
+  "orig_sha1": "25ad1446d7a9dafc09f1340ce39bde2a7bd27dc7",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -10051,6 +11131,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-privet-ya-doma-na-kukhne-chay-na-stole-911486-7142ef.wav",
   "orig_sha1": "e7cbbe8ae6de0940910bfffe3bcade003fddf140",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-privet-ya-uzhe-doma-na-kukhne-chay-na-st-4dd1ba.m4a": {
+  "key": "привет я уже дома на кухне чай на столе",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Прив+ет. +Я уж+е д+ома, на к+ухне. Ч+ай на стол+е.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-privet-ya-uzhe-doma-na-kukhne-chay-na-st-4dd1ba-4bb99c.wav",
+  "orig_sha1": "f4e2a9b9a43302fabc4626344d3010e56b4ffa38",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -10150,6 +11242,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-segodnya-ya-rabotayu-doma-a-zavtra-budem-e6164c.m4a": {
+  "key": "сегодня я работаю дома а завтра будем гулять",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Сег+одня +я раб+отаю д+ома. А з+автра б+удем гул+ять.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-segodnya-ya-rabotayu-doma-a-zavtra-budem-e6164c-7403fd.wav",
+  "orig_sha1": "10e2df6e68307f562594df997f48f6565450a397",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-segodnya-ya-rabotayu-doma-zavtra-budem-g-395d0f.m4a": {
   "key": "сегодня я работаю дома завтра будем гулять",
   "kind": "ai_generated_speech",
@@ -10186,15 +11290,75 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-slushay-sup-gotov-ya-uzhe-uzhinala-a-khl-4b7d0c.m4a": {
+  "key": "слушай суп готов я уже ужинала а хлеб на столе",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Сл+ушай, с+уп гот+ов. +Я уж+е +ужинала, а хл+еб на стол+е.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-slushay-sup-gotov-ya-uzhe-uzhinala-a-khl-4b7d0c-dab2fc.wav",
+  "orig_sha1": "e9e5c16fb281b743ff8ea1976b840739b9d56a23",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-slushay-ya-budu-doma-v-sem-oy-net-ne-v-s-d8ef15.m4a": {
+  "key": "слушай я буду дома в семь ой нет не в семь в восемь",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Сл+ушай, +я б+уду д+ома в с+емь. +Ой, н+ет, не в с+емь — в в+осемь.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-slushay-ya-budu-doma-v-sem-oy-net-ne-v-s-d8ef15-423f25.wav",
+  "orig_sha1": "6d94e86314c6df474fa9a23dab9297020f84a63e",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-slushay-ya-idu-domoy-khleb-uzhe-est-a-mo-2b7c2b.m4a": {
+  "key": "слушай я иду домой хлеб уже есть а молока нет купи молоко пожалуйста",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Сл+ушай, +я ид+у дом+ой. Хл+еб уж+е +есть, а молок+а н+ет — куп+и молок+о, пож+алуйста.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-slushay-ya-idu-domoy-khleb-uzhe-est-a-mo-2b7c2b-86c42b.wav",
+  "orig_sha1": "f3b1e88906f6449fd80805312f5bbe0f77be44db",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-slushay-ya-seychas-idu-v-magazin-doma-ne-16ac2d.m4a": {
+  "key": "слушай я сейчас иду в магазин дома нет хлеба после магазина буду дома",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Сл+ушай, +я сейч+ас ид+у в магаз+ин. Д+ома н+ет хл+еба. П+осле магаз+ина б+уду д+ома.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-slushay-ya-seychas-idu-v-magazin-doma-ne-16ac2d-9cd32a.wav",
+  "orig_sha1": "7f733c470ea1deb8af7e83490beb439ea6f10841",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-slushay-ya-tut-chitayu-knigu-a-mama-na-k-7cd11c.m4a": {
+  "key": "слушай я тут читаю книгу а мама на кухне она хочет чай",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Сл+ушай, +я т+ут чит+аю кн+игу, а м+ама на к+ухне. Он+а х+очет ч+ай.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-slushay-ya-tut-chitayu-knigu-a-mama-na-k-7cd11c-a9643c.wav",
+  "orig_sha1": "b3a7ccf3a17a5fb37943e3464716ec809bc4b275",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-snachala-napishem-pismo-c1524f.m4a": {
   "key": "сначала напишем письмо",
   "kind": "ai_generated_speech",
   "set": "listening",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "сн+ачала нап+ишем письм+о.",
+  "input": "снач+ала нап+ишем письм+о.",
   "voice": "xenia",
-  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-snachala-napishem-pismo-c1524f-b8706b.wav",
-  "orig_sha1": "a94771ddeb8bc3e50579dac4c6d9fd9511bf5785",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-snachala-napishem-pismo-c1524f-6f507c.wav",
+  "orig_sha1": "739f4af1f74c2b14adde1ac75d9988137bdcb2e4",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -10203,10 +11367,10 @@
   "kind": "ai_generated_speech",
   "set": "listening",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "сн+ачала н+ужно прочит+ать вс+ё письм+о.",
+  "input": "снач+ала н+ужно прочит+ать вс+ё письм+о.",
   "voice": "xenia",
-  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-snachala-nuzhno-prochitat-vsyo-pismo-549c22-8a07f4.wav",
-  "orig_sha1": "24493c744bf34f8ced8e501154a95dab78d4415f",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-snachala-nuzhno-prochitat-vsyo-pismo-549c22-4182bc.wav",
+  "orig_sha1": "d9e786e5be6764385620fcb143cb46459602b836",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -10215,10 +11379,10 @@
   "kind": "ai_generated_speech",
   "set": "listening",
   "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
-  "input": "сн+ачала н+ужно вс+ё пон+ять.",
+  "input": "снач+ала н+ужно вс+ё пон+ять.",
   "voice": "xenia",
-  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-snachala-nuzhno-vsyo-ponyat-693b7f-653ccd.wav",
-  "orig_sha1": "750452d196a2ae571c85dd4149d371f13750d1a8",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-snachala-nuzhno-vsyo-ponyat-693b7f-71b9ed.wav",
+  "orig_sha1": "c0f34e36bb1a82cac9a6f6a82b382a57b5e3e1db",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -10243,6 +11407,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-sol-a-ne-khleb-pozhaluysta-d5074c-d14607.wav",
   "orig_sha1": "14401ae2ea8cbc51f329ad8b4d35264ee1858929",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-sol-pozhaluysta-a-ne-khleb-58c0ad.m4a": {
+  "key": "соль пожалуйста а не хлеб",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "с+оль, пож+алуйста, а не хл+еб.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-sol-pozhaluysta-a-ne-khleb-58c0ad-71d87a.wav",
+  "orig_sha1": "bb4b50ce5a915019c273166c8a19ad9566c59e62",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -10474,6 +11650,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-ty-uzhe-prochital-knigu-cbfc6d.m4a": {
+  "key": "ты уже прочитал книгу?",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Т+ы уж+е прочит+ал кн+игу?",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ty-uzhe-prochital-knigu-cbfc6d-696da9.wav",
+  "orig_sha1": "3336eedcc5f288e8d0b1d9ce06800d28eae46acc",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-ty-uzhe-prochital-knigu-d9d1ea.m4a": {
+  "key": "ты уже прочитал книгу",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Т+ы уж+е прочит+ал кн+игу.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ty-uzhe-prochital-knigu-d9d1ea-8a4c5e.wav",
+  "orig_sha1": "d54c447f27ed3411af75ff2e92fbdc55bb358ab2",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-u-menya-est-eta-kniga-zavtra-dam-eyo-teb-528d78.m4a": {
   "key": "у меня есть эта книга завтра дам её тебе",
   "kind": "ai_generated_speech",
@@ -10606,6 +11806,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-vchera-my-gulyali-oy-net-vchera-my-rabot-76352b.m4a": {
+  "key": "вчера мы гуляли ой нет вчера мы работали а гуляли сегодня",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Вчер+а м+ы гул+яли. +Ой, н+ет, вчер+а м+ы раб+отали, а гул+яли сег+одня.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-vchera-my-gulyali-oy-net-vchera-my-rabot-76352b-61e665.wav",
+  "orig_sha1": "246537b4716401cd3bf76ba13e3f89a4817de4db",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-vchera-my-rabotali-d92720.m4a": {
   "key": "вчера мы работали",
   "kind": "ai_generated_speech",
@@ -10639,6 +11851,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-vchera-ya-chitala-knigu-ne-prochitala-se-8a9ed3-88b4d6.wav",
   "orig_sha1": "947bc90381baa8ef175cbb010b4d00a7b3658659",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-vchera-ya-chitala-knigu-no-eshchyo-ne-pr-092e90.m4a": {
+  "key": "вчера я читала книгу но ещё не прочитала сегодня буду читать ещё",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "Вчер+а +я чит+ала кн+игу, но ещ+ё не прочит+ала. Сег+одня б+уду чит+ать ещ+ё.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-vchera-ya-chitala-knigu-no-eshchyo-ne-pr-092e90-dc53e0.wav",
+  "orig_sha1": "bef20f3b5fc0f3ea5974664c44b307e263725dd4",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -10810,6 +12034,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-ya-govoril-s-bratom-o-knige-oy-net-s-ses-70ce90.m4a": {
+  "key": "я говорил с братом о книге ой нет с сестрой",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я говор+ил с бр+атом о кн+иге. +Ой, н+ет — с сестр+ой.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-govoril-s-bratom-o-knige-oy-net-s-ses-70ce90-78cca1.wav",
+  "orig_sha1": "b6ea4e0363042b5e00d692684b5e12870485b339",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-ya-govoril-s-mamoy-ey-nuzhen-chay-670c26.m4a": {
   "key": "я говорил с мамой ей нужен чай",
   "kind": "ai_generated_speech",
@@ -10831,6 +12067,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-govorila-s-sestroy-o-rabote-zavtra-on-640041-60e802.wav",
   "orig_sha1": "3ff9cbf3ca1e7c3784a9eb6bf177f3f5ae808022",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-ya-govorila-s-sestroy-o-rabote-zavtra-on-abc21d.m4a": {
+  "key": "я говорила с сестрой о работе завтра она будет дома можно поговорить с ней утром",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я говор+ила с сестр+ой о раб+оте. З+автра он+а б+удет д+ома. М+ожно поговор+ить с н+ей +утром.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-govorila-s-sestroy-o-rabote-zavtra-on-abc21d-135acb.wav",
+  "orig_sha1": "e0a09eedfa238f8bfdda1330adce4c95b0ef0f8b",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -10894,6 +12142,18 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-ya-khochu-eshchyo-khleb-690cc9.m4a": {
+  "key": "я хочу ещё хлеб",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я хоч+у ещ+ё хл+еб.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-khochu-eshchyo-khleb-690cc9-d9b288.wav",
+  "orig_sha1": "0e273728976325d57565ed2482a608360b4630ab",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-ya-khochu-eshchyo-sup-a-ty-f946a8.m4a": {
   "key": "я хочу ещё суп а ты?",
   "kind": "ai_generated_speech",
@@ -10903,6 +12163,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-khochu-eshchyo-sup-a-ty-f946a8-e10ab0.wav",
   "orig_sha1": "a245196bf3a7adaf0c7c08f1859e690f6dd41cf1",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-ya-khochu-eshchyo-supa-a-ty-468d0a.m4a": {
+  "key": "я хочу ещё супа а ты?",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я хоч+у ещ+ё с+упа. А т+ы?",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-khochu-eshchyo-supa-a-ty-468d0a-1212d4.wav",
+  "orig_sha1": "46fdf4883f434869f8a1dd29590b104e2e2a6613",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -10927,6 +12199,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-khochu-no-ne-mogu-v-subbotu-8ae7b6-147b8c.wav",
   "orig_sha1": "80986a15050d397800afe229c10756bc24c5c1a8",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-ya-khochu-pobyt-doma-b37b9b.m4a": {
+  "key": "я хочу побыть дома",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+я хоч+у поб+ыть д+ома.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-khochu-pobyt-doma-b37b9b-37704b.wav",
+  "orig_sha1": "33d7fff67e6cbd002bd47deaf4a7e71ce2974939",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -11050,6 +12334,30 @@
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
+ "listening-xenia-ya-skazal-chto-vstrecha-v-sem-eto-oshibk-7fd67e.m4a": {
+  "key": "я сказал что встреча в семь это ошибка она начинается в восемь а я буду там в семь чтобы всё прочитать",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я сказ+ал, чт+о встр+еча в с+емь. +Это ош+ибка: он+а начин+ается в в+осемь. А +я б+уду т+ам в с+емь, чт+обы вс+ё прочит+ать.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-skazal-chto-vstrecha-v-sem-eto-oshibk-7fd67e-a77c04.wav",
+  "orig_sha1": "9cf9925cebde4d3573cf72870ba0bc78fcf299c4",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-ya-tozhe-khochu-832c02.m4a": {
+  "key": "я тоже хочу",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+я т+оже хоч+у.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-tozhe-khochu-832c02-80c881.wav",
+  "orig_sha1": "90f15e1a509cc15275cf39b757258d732f5b2a01",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
  "listening-xenia-ya-tozhe-ne-znayu-f23e11.m4a": {
   "key": "я тоже не знаю",
   "kind": "ai_generated_speech",
@@ -11059,6 +12367,30 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-tozhe-ne-znayu-f23e11-541f75.wav",
   "orig_sha1": "c7b534d70d76e06dd657b49798b99d9c650909e5",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-ya-tut-chitayu-knigu-28d19b.m4a": {
+  "key": "я тут читаю книгу",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+я т+ут чит+аю кн+игу.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-tut-chitayu-knigu-28d19b-67a5ec.wav",
+  "orig_sha1": "4dbd635bd704cadb2ba7aad3140daca1b9b471a6",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-ya-uzhe-doma-c45de2.m4a": {
+  "key": "я уже дома",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "+Я уж+е д+ома.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-ya-uzhe-doma-c45de2-b2996f.wav",
+  "orig_sha1": "09f47eca5e60256c8ca81972e488b523ef3ddaa3",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
@@ -11131,6 +12463,18 @@
   "voice": "xenia",
   "orig": ".local/drussky-audio/morphology/wav/listening-xenia-zavtra-utrom-budu-doma-net-vecherom-e2567e-b8faa2.wav",
   "orig_sha1": "169485ac5b7434fd806e8e0a7d79ada81fcae06f",
+  "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+  "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+ },
+ "listening-xenia-zavtra-utrom-budu-doma-oy-net-ne-utrom-v-0b3967.m4a": {
+  "key": "завтра утром буду дома ой нет не утром вечером",
+  "kind": "ai_generated_speech",
+  "set": "listening",
+  "provider": "Silero v5_6_ru, voice xenia (CC BY-NC-SA 4.0)",
+  "input": "З+автра +утром б+уду д+ома. +Ой, н+ет, не +утром — в+ечером.",
+  "voice": "xenia",
+  "orig": ".local/drussky-audio/morphology/wav/listening-xenia-zavtra-utrom-budu-doma-oy-net-ne-utrom-v-0b3967-54b716.wav",
+  "orig_sha1": "44f7147d6964bcf2871eb33e6cffdbb658b965dc",
   "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
   "pipeline": "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
  },
