@@ -15,18 +15,13 @@ enum Tips {
             return String(chars[a..<b]).lowercased()
         }
         var candidates: [(Float, PronunciationTip)] = []
-        // Stress first when it moved: it changes the word (за́мок / замо́к).
-        for f in stress {
-            let syl = expected.syllables
-            let said = syl[f.heard].text, should = syl[f.expected].text
-            let msg = "In «\(word(f.word))» the stress fell on «\(plain(said))». Put it on «\(should)»: make that vowel longer and louder, and let the others shrink."
-            candidates.append((10 + f.strength, PronunciationTip(message: msg, contrast: "stress", letterRange: syl[f.expected].letters)))
-        }
+        // Prosody differences have no calibrated confidence: keep them for playback,
+        // without telling the learner they stressed the wrong syllable.
         var e = 0
         for j in sounds {
             guard let exp = j.expected else { continue }
             defer { e += 1 }
-            guard e < expected.sounds.count, e < mistakes.count else { continue }
+            guard e < expected.sounds.count, e < mistakes.count, j.supportsCorrection else { continue }
             let s = expected.sounds[e]
             let (mistake, margin) = mistakes[e]
             let l = text(s.letters), w = word(s.word)
@@ -35,18 +30,18 @@ enum Tips {
                 // Advice only for a clear call: a full nat past the verdict threshold.
                 guard let m = mistake, margin < -1 else { continue }
                 candidates.append((-margin + weight(m.kind) + (s.isVowel ? 0.5 : 0), PronunciationTip(message: message(m, letters: l, word: w, expected: exp.ipa, sound: s),
-                                                                              contrast: m.contrast, letterRange: s.letters)))
+                                                                              contrast: m.contrast, letterRange: s.letters, confidence: j.correctionConfidence)))
             case .missing where margin < -6:
-                candidates.append((-margin * 0.7, PronunciationTip(message: "I couldn’t hear the «\(l)» in «\(w)». Make sure it’s there, even if it’s short.",
-                                                                   contrast: nil, letterRange: s.letters)))
+                candidates.append((-margin * 0.7, PronunciationTip(message: "Try listening for the «\(l)» in «\(w)». Compare that part of your take with the model.",
+                                                                   contrast: nil, letterRange: s.letters, confidence: j.correctionConfidence)))
             default:
                 break
             }
         }
         for j in sounds where j.verdict == .extra {
-            guard let h = j.heard else { continue }
-            candidates.append((1, PronunciationTip(message: "There was an extra vowel ([\(h.ipa)]) in there. Run the consonants together without a vowel between them.",
-                                                   contrast: nil, letterRange: j.letterRange)))
+            guard j.supportsCorrection, let h = j.heard else { continue }
+            candidates.append((1, PronunciationTip(message: "Listen for a possible extra vowel ([\(h.ipa)]) in there. Run the consonants together without a vowel between them.",
+                                                   contrast: nil, letterRange: j.letterRange, confidence: j.correctionConfidence)))
         }
         var out: [PronunciationTip] = []
         var seen = Set<String>()
@@ -59,8 +54,6 @@ enum Tips {
         }
         return out
     }
-
-    private static func plain(_ s: String) -> String { String(s.unicodeScalars.filter { $0 != RussianG2P.acute }) }
 
     /// Contrasts English speakers find hardest count for a little more.
     static func weight(_ k: Mistake.Kind) -> Float {

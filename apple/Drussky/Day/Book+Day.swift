@@ -208,8 +208,9 @@ extension Book {
                 day.probes.probes.removeAll { $0.id == p.id }   // no longer something to recall this way
                 continue
             }
+            guard p.candidate != ConstructionChoice.key || !freshConstructionChoices.isEmpty else { continue }
             guard onPage.insert(p.candidate).inserted else { continue }
-            out.append(reviewExercise(for: p.candidate, modality: p.modality, variant: exercises.count + out.count))
+            out.append(reviewExercise(for: p.candidate, modality: p.modality, variant: exercises.count + out.count, forProbe: true))
             day.probes.place(p.id, on: "\(pageID)#\(exercises.count + out.count - 1)")
         }
         return out
@@ -223,7 +224,7 @@ extension Book {
 
     private func drawProbesIfDue() {
         guard day.probes.isDrawDue(at: now(), policy: probePolicy) else { return }
-        let drawn = knowledge.model.drawProbes(reviewCandidates(), at: now(), policy: probePolicy,
+        let drawn = knowledge.model.drawProbes(reviewCandidates().filter { $0.id != ConstructionChoice.key }, at: now(), policy: probePolicy,
                                                seed: UInt64(max(0, now().timeIntervalSince1970)))
         guard !drawn.isEmpty else { return }
         day.probes.add(drawn, at: now())
@@ -259,7 +260,7 @@ extension Book {
     /// and the session is read for fatigue. Tired: this page shortens. Sharp: the next page may
     /// bring one more new word.
     func deskObserved(_ ref: ExerciseRef, exercise: Exercise, result: ExerciseResult) {
-        guard result.status.isComplete else { return }
+        guard result.status.isComplete, exercise.baseline == nil else { return }
         if day.probes.probes.contains(where: { $0.item == ref.item && $0.answered == nil }) {
             let grade = RussianDomain.grade(exercise, result)
             var predicted: Double?
@@ -268,11 +269,32 @@ extension Book {
                 predicted = knowledge.domain.reviewComponents(forTarget: key)
                     .compactMap { knowledge.model.trace($0, m)?.reviews.last?.recallBefore }.min()
             }
-            day.probes.observe(item: ref.item, predicted: predicted, observed: grade.map(\.isSuccess), at: now())
+            let components = Set(exercise.reviewKey.map { knowledge.domain.reviewComponents(forTarget: $0) } ?? [])
+            let lastExposure = knowledge.model.events.last { event in
+                event.item != ref.item && !components.isDisjoint(with: event.components)
+            }?.t
+            var assistance: [String] = []
+            if result.assisted == true { assistance.append("answer previously shown") }
+            if result.readerAgreed == false { assistance.append("reader disagreement") }
+            if knowledge.model.events.contains(where: { $0.item == ref.item && $0.type == .help }) { assistance.append("tutor") }
+            day.probes.observe(item: ref.item, predicted: predicted, observed: grade.map(\.isSuccess), at: now(),
+                               lastExposure: lastExposure,
+                               firstAttempt: result.attempts <= 1 && result.roundNumber == 0 && (result.failedChecks ?? 0) == 0,
+                               assistance: assistance, context: exercise.word ?? exercise.text)
             nudgeParameters()
         }
         guard let p = index(ofPage: ref.pageID) else { return }
         let pageID = pages[p].id
+        if probePolicy.enabled, exercise.kind == .constructionChoice, pages[p].sourceID == ConstructionChoice.key,
+           !day.probes.probes.contains(where: { $0.id.hasPrefix("construction-transfer:") }),
+           pages[p].exercises.indices.filter({ pages[p].exercises[$0].kind == .constructionChoice })
+               .allSatisfy({ pages[p].results[$0].status.isComplete }) {
+            let drawn = now()
+            day.probes.probes += [7, 30].map { days in
+                Probe(id: "construction-transfer:\(days)", candidate: ConstructionChoice.key,
+                      modality: .constructionChoice, drawn: drawn, due: drawn.addingTimeInterval(Double(days) * 86_400))
+            }
+        }
         let started = knowledge.model.events.first { $0.item.hasPrefix(pageID + "#") }?.t
         let estimate = Fatigue.estimate(events: knowledge.model.events, now: now(), pageStarted: started)
         day.fatigue = estimate
@@ -306,8 +328,7 @@ extension Book {
         }
         if page.finished == nil && page.results.allSatisfy({ $0.status.isComplete }) { page.finished = now() }
         replace(page: page, at: p)
-        var line = "Shorter page today — you've been at it a while."
-        if let why = estimate.reasons.first { line += " (\(why.prefix(1).capitalized + String(why.dropFirst())).)" }
+        let line = "Some reviews are left for a later page."
         day.shortened = (day.shortened ?? [:]).merging([page.id: line]) { _, new in new }
         day.lastShortened = now()
     }
@@ -320,7 +341,7 @@ extension Book {
 
     /// One line inside the cover about today, or nothing.
     var coverLine: String? {
-        if isToday(day.lastShortened) { return "Shorter page today — you've been at it a while." }
+        if isToday(day.lastShortened) { return "Some reviews were left for a later page." }
         if isToday(day.lastOpening) {
             let waiting = day.deferredAtOpening ?? 0
             if day.lastOpeningKind == "welcome-back" {
@@ -331,7 +352,7 @@ extension Book {
         let hour = Calendar.current.component(.hour, from: now())
         let pref = HourlyPreference(events: knowledge.model.events)
         if let best = pref.standout(knowledge.domain.modalities.filter { $0 != .copy }, hour: hour) {
-            return "\(HourlyPreference.bandNames[HourlyPreference.band(ofHour: hour)].capitalized)s suit your \(best.title) — it goes first on a new day's page."
+            return "Past answers in this time band favored \(best.title). Tasks and conditions differed; this is a scheduling estimate."
         }
         return nil
     }

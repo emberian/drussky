@@ -119,7 +119,7 @@ extension Book {
         return ex
     }
 
-    /// When the first page is readable (≥ 0.9 known in each of its sentences) and hasn't opened
+    /// When the first page is readable (≥ 0.98 production-backed form coverage in each of its sentences) and hasn't opened
     /// yet, opens it as a page right after the current one. With `force`, opens it regardless
     /// (QA). Returns whether a page was inserted.
     @discardableResult
@@ -128,7 +128,7 @@ extension Book {
         let d = distance(for: goal)
         guard force || d.firstPageReady else { return false }
         let ex = firstPageExercise(for: goal)
-        insertWrittenPage(title: goal.title, intro: "You can read the first page of your book. Take it slowly; tap any word you want to check.",
+        insertWrittenPage(title: goal.title, intro: "Try the first page of your book. Take it slowly; tap any word you want to check.",
                           unitTitle: "Your book · \(goal.author ?? "")".trimmingCharacters(in: CharacterSet(charactersIn: " ·")),
                           exercises: [ex], newWords: [], sourceID: "goal-first:\(goal.id)")
         goal.firstPageOpened = now()

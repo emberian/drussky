@@ -35,6 +35,7 @@ enum QA {
     }
 
     static func apply(to book: Book) {
+        if has("-qa-baseline") { _ = book.openBaseline(); return }
         if has("-qa-finger") { book.settings.fingerDrawing = true }  // XCUITest can only touch, not Pencil
         guard has("-qa-reset") else { return }
         let pages = value("-qa-complete") ?? 0
@@ -103,7 +104,7 @@ enum QA {
                 r.attempts += 1
                 switch ex.kind {
                 case .listenPick: r.chosen = ex.options?.firstIndex(of: ex.say ?? ""); r.status = .correct
-                case .readMeaning, .familyGuess: r.chosen = ex.answerIndex; r.status = .correct
+                case .readMeaning, .familyGuess, .constructionChoice: r.chosen = ex.answerIndex; r.status = .correct
                 case .buildWord: r.recognized = BuildWordCheck.assemble(ex.parts ?? []); r.status = .correct
                 case .readAloud: r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct
                 case .dictation, .translate, .fill: r.status = i % 5 == 3 ? .missed : .correct

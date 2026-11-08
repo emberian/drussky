@@ -18,9 +18,9 @@ extension RussianDomain {
         var confusions: [Confusion] = []
         func note(_ c: String?) { if let c, !contrasts.contains(c) { contrasts.append(c) } }
         for s in report.sounds where s.verdict == .substituted || s.verdict == .missing {
-            guard let want = WordLevelAnalyzer.letter(of: s, in: target) else { continue }
+            guard s.supportsCorrection, let want = WordLevelAnalyzer.letter(of: s, in: target) else { continue }
             let got = WordLevelAnalyzer.heardLetter(s)
-            let tipContrast = report.tips.first { t in t.letterRange.map { r in s.letterRange.map(r.overlaps) ?? false } ?? false }?.contrast
+            let tipContrast = report.actionableTips.first { t in t.letterRange.map { r in s.letterRange.map(r.overlaps) ?? false } ?? false }?.contrast
             note(tipContrast.flatMap(SoundContrasts.id(for:)) ?? SoundContrasts.id(expected: want, heard: got))
             let wantID = ComponentID(.letter, String(want).uppercased())
             if !letters.contains(wantID) { letters.append(wantID) }
@@ -28,7 +28,7 @@ extension RussianDomain {
                 confusions.append(Confusion(target: wantID, produced: ComponentID(.letter, String(got).uppercased()), channel: .speech))
             }
         }
-        for tip in report.tips { note(tip.contrast.flatMap(SoundContrasts.id(for:))) }
+        for tip in report.actionableTips { note(tip.contrast.flatMap(SoundContrasts.id(for:))) }
         guard !contrasts.isEmpty || !confusions.isEmpty else { return nil }
         let components = contrasts.map { ComponentID(.sound, $0) } + letters
         return LearningEvent(id: "speech:\(take)", t: t, type: .attempt, item: "\(page.id)#\(index)", activity: ex.kind.rawValue,

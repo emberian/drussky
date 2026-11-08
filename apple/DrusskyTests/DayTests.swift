@@ -208,8 +208,8 @@ final class DayTests: XCTestCase {
         XCTAssertEqual(estimate.level, .tired, "\(estimate)")
         let page = book.pages[p]
         let line = try XCTUnwrap(book.deskLine(for: p))
-        XCTAssertTrue(line.hasPrefix("Shorter page today"), line)
-        XCTAssertEqual(book.coverLine, "Shorter page today — you've been at it a while.")
+        XCTAssertTrue(line == "Some reviews are left for a later page.", line)
+        XCTAssertEqual(book.coverLine, "Some reviews were left for a later page.")
         // Two of the remaining reviews became recognition; the rest were left for later, never graded.
         let remaining = Array(9..<14)
         XCTAssertEqual(remaining.filter { page.exercises[$0].kind == .listenPick || page.exercises[$0].kind == .readMeaning }, [9, 10])

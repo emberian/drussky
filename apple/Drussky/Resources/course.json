@@ -13129,7 +13129,7 @@
     {
      "id": "u28-p2",
      "title": "Verbs dressed as adjectives",
-     "intro": "Participles and gerunds: recognize them, and written Russian opens up. You never need to produce one.",
+     "intro": "Participles and gerunds: read who did what, and when. Leave production for later.",
      "exercises": [
       {
        "kind": "explain",
@@ -13180,47 +13180,81 @@
        "answer": 0
       },
       {
-       "kind": "translate",
-       "en": "while reading",
-       "answer": "чита́я"
+       "kind": "read_meaning",
+       "text": "чита́ющий челове́к",
+       "options": [
+        "a person who is reading",
+        "a person who has finished reading",
+        "a person who will read"
+       ],
+       "answer": 0
       },
       {
-       "kind": "translate",
-       "en": "having read (to the end)",
-       "answer": "прочита́в"
+       "kind": "read_meaning",
+       "text": "прочита́вший кни́гу",
+       "options": [
+        "someone who is still reading the book",
+        "someone who has not read the book",
+        "someone who has finished the book"
+       ],
+       "answer": 2
       },
       {
-       "kind": "fill",
-       "before": "Ро́бот, ",
-       "after": " на ста́нции, ви́дит Зе́млю.",
-       "hint": "The robot living on the station sees the Earth.",
-       "answer": "живу́щий"
+       "kind": "read_meaning",
+       "text": "Ро́бот, живу́щий на ста́нции, ви́дит Зе́млю.",
+       "options": [
+        "The station lives on Earth and sees the robot.",
+        "The robot sees a station on Earth.",
+        "The robot lives on the station and sees Earth."
+       ],
+       "answer": 2
       },
       {
-       "kind": "fill",
-       "before": "Окно́ ",
-       "after": ".",
-       "hint": "The window is open.",
-       "answer": "откры́то"
+       "kind": "read_meaning",
+       "text": "Окно́ откры́то.",
+       "options": [
+        "Someone will open the window.",
+        "The window is open.",
+        "The window is opening something."
+       ],
+       "answer": 1
       },
       {
-       "kind": "dictation",
-       "text": "Прочита́в кни́гу, я поду́мала."
+       "kind": "read_meaning",
+       "text": "Прочита́в кни́гу, я поду́мала.",
+       "options": [
+        "I thought before reading the book.",
+        "I thought after finishing the book.",
+        "I thought while still reading the book."
+       ],
+       "answer": 1
       },
       {
-       "kind": "read_aloud",
-       "text": "Чита́ющий, прочита́вший, напи́санный, откры́тый. Чита́я, она́ молча́ла."
+       "kind": "read_meaning",
+       "text": "Чита́я письмо́, она́ молча́ла.",
+       "options": [
+        "She was silent after she finished reading.",
+        "She was silent while reading.",
+        "She said she would read."
+       ],
+       "answer": 1
       },
       {
-       "kind": "copy",
+       "kind": "read_meaning",
        "text": "напи́санное письмо́, откры́тое окно́",
-       "times": 1
+       "options": [
+        "a letter that writes and a window that opens something",
+        "a letter to write and a window to close",
+        "a written letter and an open window"
+       ],
+       "answer": 2
       },
       {
        "kind": "diary",
-       "prompt": "Describe something you see using one participle you recognize (a written letter, an open window)."
+       "prompt": "What did you read today? Write a few words of your own; simple sentences are enough."
       }
-     ]
+     ],
+     "purpose": "reading"
     },
     {
      "id": "u28-p3",

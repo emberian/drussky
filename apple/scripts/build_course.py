@@ -797,7 +797,10 @@ def build():
             else:
                 n += 1
                 pid, (ptitle, intro, exercises) = f"{uid}-p{n}", page
-            unit["pages"].append({"id": pid, "title": ptitle, "intro": intro, "exercises": exercises})
+            authored = {"id": pid, "title": ptitle, "intro": intro, "exercises": exercises}
+            if pid == "u28-p2":
+                authored["purpose"] = "reading"
+            unit["pages"].append(authored)
         units[uid] = unit
     assert sorted(UNIT_ORDER) == sorted(units), set(UNIT_ORDER) ^ set(units)
     for pid, into, before in PAGE_MOVES:

@@ -5,11 +5,11 @@ import Foundation
 /// own sentences, and when its first page becomes readable the book opens it.
 ///
 /// Policies (all thresholds live here):
-/// - A word is *known* when LearningCore's strength for its form or lemma is ≥ 0.5.
-/// - A sentence is *readable* at ≥ 0.8 of its words known; a pull page's passage is 2–4
+/// - A word is counted only with successful production of its exact form and R ≥ 0.85.
+/// - A sentence is a supported reading candidate at ≥ 0.95; a pull page's passage is 2–4
 ///   consecutive readable sentences (if none, the page teaches the words through phrases).
 /// - The *first page* is the first `firstPageSentences` sentences; it opens as a special page
-///   once every one of them is ≥ 0.9 known, once.
+///   once every one of them is ≥ 0.98 covered, once. This is not a comprehension guarantee.
 /// - The ladder values an unknown lemma by its occurrences in the text, plus
 ///   `firstPageBonus` per occurrence on the first page, so the first page comes sooner.
 /// - Automatic pull (`Book.goalPullDue`): on reaching a brand-new course page that teaches no
@@ -41,9 +41,9 @@ struct Goal: Codable, Sendable, Hashable, Identifiable {
     /// Sentence indices that have already been a pulled page's passage.
     var usedSentences: [Int]? = nil
 
-    static let knownThreshold = 0.5
-    static let readableThreshold = 0.8
-    static let firstPageThreshold = 0.9
+    static let knownThreshold = ReadingEvidence.recallThreshold
+    static let readableThreshold = ReadingEvidence.supportedThreshold
+    static let firstPageThreshold = ReadingEvidence.comfortableThreshold
     static let firstPageSentences = 5
     static let firstPageBonus = 2.0
     static let passageSentences = 2...4

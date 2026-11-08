@@ -37,6 +37,33 @@ struct PronunciationTip: Codable, Sendable, Hashable {
     var message: String
     var contrast: String?
     var letterRange: Range<Int>?
+    /// Nil in older reports and in analyses without sound-level confidence.
+    var confidence: Double? = nil
+}
+
+/// This floor is a conservative display policy, not a calibrated probability of correctness.
+/// Raw reports remain available for evaluation; uncertain claims never become corrections.
+enum SpeakingFeedback {
+    static let confidenceFloor = 0.95
+    static func permits(_ confidence: Double?) -> Bool {
+        guard let confidence, confidence.isFinite else { return false }
+        return confidence >= confidenceFloor && confidence <= 1
+    }
+}
+
+extension PhoneJudgement {
+    var correctionConfidence: Double? {
+        switch verdict {
+        case .substituted, .extra: heard?.confidence
+        case .missing: expected?.confidence.map { 1 - $0 }
+        default: nil
+        }
+    }
+    var supportsCorrection: Bool { SpeakingFeedback.permits(correctionConfidence) }
+}
+
+extension PronunciationReport {
+    var actionableTips: [PronunciationTip] { tips.filter { SpeakingFeedback.permits($0.confidence) } }
 }
 
 struct PronunciationReport: Codable, Sendable {

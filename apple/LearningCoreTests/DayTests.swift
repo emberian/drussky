@@ -289,3 +289,21 @@ final class DayTests: XCTestCase {
         XCTAssertEqual(HourlyPreference.band(ofHour: 23), 3)
     }
 }
+
+extension DayTests {
+    func testProbeProvenanceAndLegacyDecoding() throws {
+        var ledger = ProbeLedger(probes: [Probe(id: "p", candidate: "x", modality: write, drawn: day(0), due: day(7))])
+        ledger.place("p", on: "page#0")
+        ledger.observe(item: "page#0", predicted: 0.8, observed: false, at: day(9), lastExposure: day(8),
+                       firstAttempt: true, assistance: [], context: "new context")
+        let p = try XCTUnwrap(ledger.probes.first)
+        XCTAssertEqual(p.lastExposure, day(8), "scheduled seven days does not mean seven days without practice")
+        XCTAssertEqual(p.context, "new context")
+        XCTAssertEqual(p.firstAttempt, true)
+        XCTAssertEqual(try JSONDecoder().decode(Probe.self, from: JSONEncoder().encode(p)), p)
+        let old = Probe(id: "old", candidate: "x", modality: write, drawn: day(0), due: day(7))
+        let decoded = try JSONDecoder().decode(Probe.self, from: JSONEncoder().encode(old))
+        XCTAssertNil(decoded.lastExposure)
+        XCTAssertNil(decoded.firstAttempt)
+    }
+}

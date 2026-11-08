@@ -12,9 +12,9 @@ extension Book {
     /// Each target as LearningCore sees it: the components its review exercises and the
     /// modalities it can be reviewed in.
     func reviewCandidates() -> [ReviewCandidate] {
-        if let cached = candidateCache { return cached }
+        if let cached = candidateCache, targets[ConstructionChoice.key] == nil { return cached }
         let domain = knowledge.domain
-        let out = targets.values.sorted { $0.key < $1.key }.compactMap { t -> ReviewCandidate? in
+        let out = targets.values.filter { $0.key != ConstructionChoice.key || !freshConstructionChoices.isEmpty }.sorted { $0.key < $1.key }.compactMap { t -> ReviewCandidate? in
             let components = domain.reviewComponents(forTarget: t.key)
             let modalities = reviewModalities(for: t.key)
             guard !components.isEmpty, !modalities.isEmpty else { return nil }
@@ -33,6 +33,7 @@ extension Book {
         })
         return knowledge.model.dueReviews(reviewCandidates(), at: now(), policy: reviewPolicy)
             .filter { !waiting.contains($0.id) }
+            .filter { $0.id != ConstructionChoice.key || freshConstructionChoices.contains { !ConstructionChoice.reservedForProbe($0) } }
     }
 
     var dueCount: Int { dueReviews().count }
@@ -67,6 +68,7 @@ extension Book {
 
     /// The modalities a target's review exercises can actually test.
     func reviewModalities(for key: String) -> Set<Modality> {
+        if key == ConstructionChoice.key { return [.constructionChoice] }
         let (kind, value) = split(key)
         if kind == "letter" {
             guard let letter = course.letter(value) else { return [] }
@@ -81,7 +83,23 @@ extension Book {
     }
 
     /// A review exercise for a target in a modality (nil: a first recall, varied by `variant`).
-    func reviewExercise(for key: String, modality: Modality?, variant: Int) -> Exercise {
+    func reviewExercise(for key: String, modality: Modality?, variant: Int, forProbe: Bool = false) -> Exercise {
+        if key == ConstructionChoice.key {
+            let fresh = freshConstructionChoices.filter { forProbe || !ConstructionChoice.reservedForProbe($0) }
+            guard !fresh.isEmpty else {
+                var note = Exercise(kind: .explain)
+                note.text = "These sentence choices are all in your notebook. Return to their examples."
+                return note
+            }
+            var choice = fresh[abs(variant % fresh.count)]
+            // Rotate the answers too: their position cannot identify the case.
+            let options = choice.options ?? []
+            let offset = abs(variant % max(1, options.count))
+            choice.options = Array(options.dropFirst(offset) + options.prefix(offset))
+            choice.answerIndex = ((choice.answerIndex ?? 0) - offset + options.count) % options.count
+            choice.reviewKey = key
+            return choice
+        }
         let (kind, value) = split(key)
         var ex: Exercise
         if kind == "letter", let letter = course.letter(value) {

@@ -264,9 +264,7 @@ final class SpeakingTests: XCTestCase {
         XCTAssertEqual(sub.letterRange, 1..<2)
         XCTAssertEqual(sub.expected?.ipa, "ɨ")
         XCTAssertEqual(sub.heard?.ipa, "i")
-        let tip = try XCTUnwrap(r.tips.first)
-        XCTAssertEqual(tip.contrast, "y-i")
-        XCTAssertTrue(tip.message.hasPrefix("«ы» came out as «и»."), tip.message)
+        XCTAssertTrue(r.tips.isEmpty, "word alignment is retained without a pronunciation claim")
         XCTAssertEqual(r.accuracy, 2.0 / 3.0, accuracy: 1e-9)
     }
 
@@ -276,8 +274,7 @@ final class SpeakingTests: XCTestCase {
         let wrong = try XCTUnwrap(voices.pairVoices("за́мок", exactStress: true).first)
         let miss = try await analyse(target: "замо́к", take: wrong, model: right, heard: "замок")
         XCTAssertEqual(miss.stressedSyllable, 0)
-        let tip = try XCTUnwrap(miss.tips.first { $0.contrast == "stress" }, "\(miss.tips)")
-        XCTAssertTrue(tip.message.contains("«мо́к»"), tip.message)
+        XCTAssertTrue(miss.tips.isEmpty, "uncalibrated prosody remains a playback comparison")
         let hit = try await analyse(target: "за́мок", take: wrong, model: wrong, heard: "замок")
         XCTAssertEqual(hit.stressedSyllable, 0)
         XCTAssertFalse(hit.tips.contains { $0.contrast == "stress" })
@@ -309,7 +306,13 @@ final class SpeakingTests: XCTestCase {
         ex.text = "был"
         book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [ex], newWords: [])
         let page = try XCTUnwrap(book.page)
-        let report = WordLevelAnalyzer.report(target: "был", transcript: "бил", comparison: nil)
+        var report = WordLevelAnalyzer.report(target: "был", transcript: "бил", comparison: nil)
+        // Word-only evidence is deliberately silent; sound confidence must come from an analyzer.
+        book.knowledge.heard(page: page, index: 0, take: "uncertain.m4a", report: report, attempt: 1)
+        XCTAssertFalse(book.knowledge.model.events.contains { $0.id == "speech:uncertain.m4a" })
+        for i in report.sounds.indices where report.sounds[i].verdict == .substituted {
+            report.sounds[i].heard?.confidence = 0.99
+        }
         book.knowledge.heard(page: page, index: 0, take: "take-1.m4a", report: report, attempt: 1)
         book.knowledge.heard(page: page, index: 0, take: "take-1.m4a", report: report, attempt: 1)
         let events = book.knowledge.model.events.filter { $0.id == "speech:take-1.m4a" }

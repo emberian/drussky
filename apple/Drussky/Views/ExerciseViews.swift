@@ -48,8 +48,13 @@ struct ExerciseRow: View {
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             VStack(spacing: 6) {
-                MarginMark(number: slot.index + 1, status: slot.result.status, isActive: isActive, isReview: slot.exercise.reviewKey != nil)
-                if slot.exercise.kind != .explain || isActive {
+                if slot.exercise.baseline != nil && slot.result.status.isComplete {
+                    Image(systemName: "bookmark").foregroundStyle(Theme.muted).frame(width: 34, height: 34)
+                        .accessibilityLabel("Sample kept")
+                } else {
+                    MarginMark(number: slot.index + 1, status: slot.result.status, isActive: isActive, isReview: slot.exercise.reviewKey != nil)
+                }
+                if slot.exercise.baseline == nil && (slot.exercise.kind != .explain || isActive) {
                     Button(action: onAsk) {
                         Image(systemName: "questionmark.bubble")
                             .font(.system(size: 17))
@@ -84,6 +89,9 @@ struct ExerciseRow: View {
     }
 
     @ViewBuilder private var content: some View {
+        if let task = slot.exercise.baseline {
+            BaselineExercise(slot: slot, task: task).id(slot.ref)
+        } else {
         switch slot.exercise.kind {
         case .meet: MeetExercise(slot: slot, isActive: isActive)
         case .explain: ExplainExercise(slot: slot)
@@ -92,11 +100,13 @@ struct ExerciseRow: View {
         case .listenPick: ListenPickExercise(slot: slot, isActive: isActive)
         case .readAloud: ReadAloudExercise(slot: slot, isActive: isActive)
         case .readMeaning: ReadMeaningExercise(slot: slot, isActive: isActive)
+        case .constructionChoice: ConstructionChoiceExercise(slot: slot)
         case .passage: PassageExercise(slot: slot)
         case .soundPair: SoundPairExercise(slot: slot, isActive: isActive)
         case .diary: DiaryExercise(slot: slot, isActive: isActive)
         case .buildWord: BuildWordExercise(slot: slot, isActive: isActive)
         case .familyGuess: FamilyGuessExercise(slot: slot, isActive: isActive)
+        }
         }
     }
 }

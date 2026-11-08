@@ -63,10 +63,12 @@ struct GoalSection: View {
                 .accessibilityLabel("Book options")
             }
             HStack(alignment: .top, spacing: 28) {
-                stat("\(Int((d.coverage * 100).rounded()))%", "of its words you know")
-                stat("\(d.firstPageUnknown)", d.firstPageUnknown == 1 ? "new word before the first page" : "new words before the first page")
-                stat("\(d.readableSentences) of \(a.sentences.count)", "sentences you could read now")
+                stat("\(Int((d.coverage * 100).rounded()))%", "of its forms practiced from memory")
+                stat("\(d.firstPageUnknown)", d.firstPageUnknown == 1 ? "word still to practice on the first page" : "words still to practice on the first page")
+                stat("\(d.readableSentences) of \(a.sentences.count)", "sentences with 95%+ form coverage")
             }
+            Text("Vocabulary coverage comes from writing from memory or saying these forms. Understanding the passage is a separate task.")
+                .font(.system(size: 13)).foregroundStyle(Theme.muted)
             firstPage(goal, d)
             if !d.ladder.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
@@ -115,8 +117,8 @@ struct GoalSection: View {
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("toward-my-book")
                 Text(d.passageWindow(avoiding: Set(goal.usedSentences ?? [])) == nil
-                     ? "No stretch reads easily yet; a page teaches its words in their own sentences."
-                     : "A page from its own sentences: a readable passage, then its new words.")
+                     ? "Start with its words in short supported sentences."
+                     : "A supported passage from the book, then practice with its new words.")
                     .font(.system(size: 13)).foregroundStyle(Theme.muted).fixedSize(horizontal: false, vertical: true)
             }
         }
@@ -138,17 +140,17 @@ struct GoalSection: View {
         if let opened = goal.firstPageOpened {
             HStack(spacing: 10) {
                 Image(systemName: "seal.fill").foregroundStyle(Theme.redPen)
-                Text("You read its first page on \(PageView.russianDate(opened)).").font(.system(size: 15)).foregroundStyle(Theme.text)
+                Text("You opened its first page on \(PageView.russianDate(opened)).").font(.system(size: 15)).foregroundStyle(Theme.text)
             }
         } else if d.firstPageReady {
             Button { book.openFirstPageIfReady() } label: {
-                Label("The first page is readable — open it", systemImage: "book.pages")
+                Label("Try the first page · 98%+ form coverage", systemImage: "book.pages")
                     .font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.redPen)
             }
             .buttonStyle(.plain)
         } else {
             ProgressView(value: min(1, d.firstPageCoverage / Goal.firstPageThreshold)) {
-                Text("First page: \(Int((d.firstPageCoverage * 100).rounded()))% of its hardest sentence known (opens at \(Int(Goal.firstPageThreshold * 100))%)")
+                Text("First page: \(Int((d.firstPageCoverage * 100).rounded()))% of its least-covered sentence practiced (opens at \(Int(Goal.firstPageThreshold * 100))%)")
                     .font(.system(size: 13)).foregroundStyle(Theme.muted)
             }
             .tint(Theme.redPen)
@@ -333,14 +335,14 @@ struct GoalPullHeader: View {
         VStack(alignment: .leading, spacing: 10) {
             Text(goal.title).font(Theme.russian(28, weight: .semibold)).foregroundStyle(Theme.text)
             if let author = goal.author { Text(author).font(.system(size: 15)).foregroundStyle(Theme.muted) }
-            Text("\(Int((d.coverage * 100).rounded()))% of its words known · \(d.readableSentences) of \(d.analysis.sentences.count) sentences readable")
+            Text("\(Int((d.coverage * 100).rounded()))% of its forms practiced · \(d.readableSentences) of \(d.analysis.sentences.count) sentences at 95%+ coverage")
                 .font(.system(size: 15)).foregroundStyle(Theme.muted)
             if let window {
                 Text(d.analysis.sentenceText(window))
                     .font(Theme.russian(19)).foregroundStyle(Theme.text.opacity(0.85))
                     .padding(14).frame(maxWidth: .infinity, alignment: .leading)
                     .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
-                Text("This stretch reads at ≥80% now: it opens the page. Then its new words, in their own sentences.")
+                Text("This stretch has at least 95% form coverage. Try it with support, then practice its new words.")
                     .font(.system(size: 15)).foregroundStyle(Theme.text)
             } else {
                 Text("No stretch of the text reads easily yet. The page teaches its most valuable words through the sentences they come from — nothing on it is invented.")

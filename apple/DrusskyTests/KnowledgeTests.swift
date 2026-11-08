@@ -142,8 +142,8 @@ final class KnowledgeTests: XCTestCase {
         book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [ex], newWords: [])
         XCTAssertEqual(book.knowledge.readability(of: "Я читаю книгу."), 0)
         book.record(page: book.currentPage, exercise: 0) { $0.attempts = 1; $0.status = .correct }
-        // я, читаю (form), книгу (form) known; книге reached through its lemma; стол not.
+        // Only the actual forms produced are covered; neither книга nor столе was produced.
         XCTAssertEqual(book.knowledge.readability(of: "Я читаю книгу."), 1)
-        XCTAssertEqual(book.knowledge.readability(of: "Я читаю книгу. Книга на столе."), 4.0 / 6.0, accuracy: 1e-9)
+        XCTAssertEqual(book.knowledge.readability(of: "Я читаю книгу. Книга на столе."), 3.0 / 6.0, accuracy: 1e-9)
     }
 }

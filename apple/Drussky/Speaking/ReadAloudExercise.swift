@@ -263,15 +263,19 @@ struct TurnStatus: View {
 enum SpokenText {
     static let close = Color(Theme.dynamic(0xB26A00, 0xF2B45A))
 
-    /// The target with the stressed vowel in blue (as everywhere) and each sound's verdict on
-    /// its letters: came out as another or not at all in red, close in amber, right in green.
-    /// A word-level report only marks the letters it heard as others: it cannot vouch for the rest.
+    /// Stress stays blue. Only sound verdicts above the confidence floor can add colour;
+    /// uncertain sounds and transcript-only alignments leave the target unmarked.
     static func marked(_ text: String, report: PronunciationReport?, showStress: Bool) -> AttributedString {
         var verdicts: [Int: PhoneJudgement.Verdict] = [:]
         if let report {
             let rank: [PhoneJudgement.Verdict: Int] = [.good: 0, .close: 1, .extra: 1, .substituted: 2, .missing: 2]
             for s in report.sounds {
                 guard let r = s.letterRange else { continue }
+                if s.verdict == .substituted || s.verdict == .missing || s.verdict == .extra {
+                    guard s.supportsCorrection else { continue }
+                } else {
+                    guard SpeakingFeedback.permits(s.expected?.confidence) else { continue }
+                }
                 for i in r {
                     if let current = verdicts[i], rank[current, default: 0] > rank[s.verdict, default: 0] { continue }
                     verdicts[i] = s.verdict
