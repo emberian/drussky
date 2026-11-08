@@ -91,3 +91,33 @@ Evidence/diffs are local review artifacts, not suggested committed binary assets
 3. **I would want an achievable sentence before an invitation to improvise.** “Write about your room” sounds simple in English and can be impossible with today's Russian. A few taught forms, a visible example, and permission to describe an imagined scene make personal writing possible without turning it into a test of untaught vocabulary.
 
 Next integration step: build and run the iOS tests in a session that can access CoreSimulator, then complete the saved screenshot matrix as an actual learner walkthrough. Root should review the source fixes independently of this missing visual sign-off.
+
+## Integration and walkthrough — 2026-11-08 (Claude, branch `deputy-codex-qa`)
+
+The source fixes above were merged with `main` (Talk ×2, devices, grammar, cursive, latency, the
+seam-fix lane), built warning-free for the iOS 26.2 simulator, and walked through on an iPad Pro
+13" (both orientations) and an iPhone 17 Pro. Screenshots: `research/artifacts/qa-walkthrough/`
+(`ipad/<state>-portrait.png`, `ipad/<state>-landscape.png`, `iphone/<state>-portrait.png`), 21 states:
+the matrix above plus `tired` (the desk line) and `diary-bottom` (the u3-p2 diary exercise itself).
+
+Kept from the deputy: no completion path calls `requestAdvance` (only the sound-pair **Next**);
+Talk waits for the microphone tap and replay never records itself; **Try again** resumes failed and
+unavailable Talk pages (re-checking the reason first, so a still-missing key stays an honest note
+rather than a request); the diary opens its editor only on **Read my writing** and offers **Keep as
+written**; gauges, fatigue judgement and the hourly-preference claim are gone; meanings sit below
+Russian; 44-pt controls; stress on corrections, headings, month names and praise; narration
+highlights without reflow and hidden words stay hidden; the u3-p2 diary prompt names taught nouns.
+Changed: one flag, `-qa-nokey` (main's name, the deputy's Keychain-level mechanism), replaces
+`-qa-no-key` and `-qa-talk empty` is main's `-qa-talk fresh`; the missing-key Talk test asserts the
+merged `.unavailable` semantics; the readiness test gives itself a placeholder key and restores the
+learner's. Added from the walkthrough: stress on the cover's word chips and the goal's rungs
+(`Book.stressedLabel`); long Talk scene titles wrap and `FlowRow` measures children at the row's
+width so wrapped cards no longer collide with the row below; the `-qa-diary` fixture and the PDF
+label use «Дневни́к»; `RotateUITests` turns the simulator for shell-driven landscape captures
+(Xcode 27 ships no Simulator.app menu and `simctl` has no orientation command).
+
+Still open, seen on the walkthrough: library words in the goal rungs and goal-pull options
+(«добро», «сделаю») and narration passages carry no stress (no source data); the inside cover
+remains statistics-first; read-aloud still hands the microphone over after the model plays;
+`testEverySpokenStringHasARecording` is red on `main` too (23 grammar-lane sentences whose clips
+and index entries are being generated in the main checkout, uncommitted).

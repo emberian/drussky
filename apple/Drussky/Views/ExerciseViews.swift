@@ -826,11 +826,17 @@ struct ChoiceGrid: View {
 struct FlowRow: Layout {
     var spacing: CGFloat = 10
 
+    /// Each child is offered the row's width, never more: a child that would wrap (a scene card
+    /// with a long title) reports the height it will really take, so rows below do not overlap it.
+    private func fit(_ s: LayoutSubview, in width: CGFloat) -> CGSize {
+        s.sizeThatFits(ProposedViewSize(width: width.isFinite ? width : nil, height: nil))
+    }
+
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let maxW = proposal.width ?? .infinity
         var x: CGFloat = 0, y: CGFloat = 0, rowH: CGFloat = 0, widest: CGFloat = 0
         for s in subviews {
-            let size = s.sizeThatFits(.unspecified)
+            let size = fit(s, in: maxW)
             if x > 0 && x + size.width > maxW { x = 0; y += rowH + spacing; rowH = 0 }
             x += size.width + spacing
             rowH = max(rowH, size.height)
@@ -842,7 +848,7 @@ struct FlowRow: Layout {
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         var x = bounds.minX, y = bounds.minY, rowH: CGFloat = 0
         for s in subviews {
-            let size = s.sizeThatFits(.unspecified)
+            let size = fit(s, in: bounds.width)
             if x > bounds.minX && x + size.width > bounds.maxX { x = bounds.minX; y += rowH + spacing; rowH = 0 }
             s.place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(size))
             x += size.width + spacing
