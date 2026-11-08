@@ -332,6 +332,9 @@ struct TalkExercise: View {
     @ViewBuilder private func talkTurnStatus(_ s: TalkSession) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             switch s.mic.phase {
+            case .ready:
+                Text("Your turn").scaledFont(17, weight: .semibold).foregroundStyle(Theme.redPen)
+                Text("Tap to say it.").scaledFont(13).foregroundStyle(Theme.muted)
             case .cue, .waiting:
                 Text("Your turn").scaledFont(17, weight: .semibold).foregroundStyle(Theme.redPen)
                 Text("Take your time. Tap when you've finished.").scaledFont(13).foregroundStyle(Theme.muted)
