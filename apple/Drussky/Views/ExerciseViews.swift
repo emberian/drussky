@@ -318,6 +318,10 @@ struct WritingExercise: View {
     @State private var lastReading: String?
     @State private var idleTask: Task<Void, Never>?
     @State private var width: CGFloat = 640
+    /// Judging myself (Judgement/): Check was tapped; the reader's silent opinion of the ink.
+    @State private var checked: Bool
+    @State private var opinion: SelfJudgement.ReaderOpinion?
+    @State private var readingSilently = false
 
     init(slot: ExerciseSlot, isActive: Bool, ghostOverride: String? = nil, instructionOverride: String? = nil, coach: LetterCoach? = nil) {
         self.coach = coach
@@ -326,12 +330,16 @@ struct WritingExercise: View {
         self.ghostOverride = ghostOverride
         self.instructionOverride = instructionOverride
         _pad = StateObject(wrappedValue: PadController(fileURL: slot.inkURL, writer: slot.book.store.ink))
+        _checked = State(initialValue: QA.has("-qa-judge") && [.dictation, .translate, .fill].contains(slot.exercise.kind))
     }
 
     private var ex: Exercise { slot.exercise }
     private var result: ExerciseResult { slot.result }
     private var target: String { ex.target ?? "" }
     private var isRecall: Bool { [.dictation, .translate, .fill].contains(ex.kind) }
+    /// Recall judged by the learner after Check, the reader hinting (Judgement/SelfJudgement.swift).
+    private var selfJudged: Bool { isRecall && book.settings.writingJudge == .myself }
+    private var judging: Bool { selfJudged && checked && !pad.isEmpty && !result.status.isComplete }
 
     private var ghost: String? {
         if let ghostOverride { return ghostOverride }
@@ -357,9 +365,10 @@ struct WritingExercise: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             prompt
+            if isRecall { HookLine(word: target) }  // Hooks/: a fading mnemonic before the recall
             ZStack(alignment: .topTrailing) {
                 WritingStrip(controller: pad, height: stripHeight, ghost: ghost, ghostTimes: ghostTimes,
-                             cursive: book.settings.cursiveModels, fingerDrawing: book.settings.fingerDrawing)
+                             cursive: book.settings.cursiveModels, fingerDrawing: book.settings.fingerDrawing, locked: judging)
                     .frame(height: stripHeight)
                     .accessibilityIdentifier("strip-\(slot.index)")
                     .background(GeometryReader { g in Color.clear.onAppear { width = g.size.width }
@@ -381,6 +390,15 @@ struct WritingExercise: View {
                     .padding(.bottom, 2)
                 }
             }
+            if judging {
+                SelfJudgementPanel(target: target, reader: opinion?.revision == pad.revision ? opinion : nil, reading: readingSilently) { verdict in
+                    idleTask?.cancel()
+                    let reader = opinion?.revision == pad.revision ? opinion : nil
+                    noteWritingFluency(matched: reader?.matched ?? false, reading: reader?.reading, confidence: nil)
+                    SelfJudgement.record(verdict, on: slot, reader: reader)
+                    if verdict == .notQuite, let s = ex.spoken { voice.play(s) }
+                }
+            }
             if (result.inkAttempts ?? 0) > 0 {
                 EarlierAttempts(urls: (1...(result.inkAttempts ?? 0)).map { slot.book.inkAttemptURL(slot.ref, attempt: $0) },
                                 height: stripHeight * 0.4)
@@ -393,6 +411,7 @@ struct WritingExercise: View {
             controls
         }
         .onAppear { pad.onChange = { _ in scheduleIdleCheck() } }
+        .onChange(of: pad.isEmpty) { _, empty in if checked && !empty { readSilently() } }  // ink already on the strip when Check stands
         .onChange(of: book.advanceSignal) { _, _ in
             guard isActive, slot.isAdvanceTarget, ex.kind == .dictation else { return }
             if ex.narration != nil { NarrationPlayer.shared.play(exercise: ex, owner: "\(slot.page.id)-\(slot.index)") }
@@ -449,8 +468,11 @@ struct WritingExercise: View {
 
     @ViewBuilder private var controls: some View {
         HStack(spacing: 10) {
-            if !result.status.isComplete && !pad.isEmpty {
-                if isRecall {
+            if !result.status.isComplete && !pad.isEmpty && !judging {
+                if selfJudged {
+                    PillButton(title: "Check", systemImage: "checkmark", prominent: true) { checked = true; readSilently() }
+                        .accessibilityIdentifier("check-\(slot.index)")
+                } else if isRecall {
                     PillButton(title: checking ? "Reading…" : "Check", systemImage: "checkmark", prominent: true) { check(manual: true) }
                         .disabled(checking)
                 } else {
@@ -468,6 +490,9 @@ struct WritingExercise: View {
         }    }
 
     private var feedbackLine: AnyView? {
+        if let line = SelfJudgement.feedback(result) {
+            return AnyView(Text(line).font(Theme.label(14)).foregroundStyle(Theme.good))
+        }
         if result.status == .correct, isRecall {
             return AnyView(Text(result.isRightFirstTime ? "Right first time." : result.assisted == true ? "Written again after seeing it."
                                 : result.selfAssessed == true ? "Marked right by you." : "Got it.")
@@ -505,8 +530,32 @@ struct WritingExercise: View {
         idleTask = Task {
             try? await Task.sleep(for: .milliseconds(isRecall ? 1400 : 1100))
             guard !Task.isCancelled else { return }
-            check(manual: false)
+            if selfJudged { readSilently() } else { check(manual: false) }
         }
+    }
+
+    /// Judging myself: the reader looks at the ink and keeps its opinion for the panel's hint and
+    /// the evidence log; it never changes the result. Re-reads when the ink changed meanwhile.
+    private func readSilently() {
+        guard selfJudged, !result.status.isComplete, !pad.isEmpty, !readingSilently else { return }
+        let drawing = pad.drawing, revision = pad.revision, target = self.target, subjectDrop = ex.kind == .translate
+        guard opinion?.revision != revision else { return }
+        readingSilently = true
+        Task {
+            let r = await InkReader.read(drawing, target: target, subjectDrop: subjectDrop)
+            readingSilently = false
+            opinion = SelfJudgement.ReaderOpinion(reading: r?.best, matched: r?.matches, revision: revision)
+            lastConfidence = r?.confidence
+            if pad.revision != revision { readSilently() }
+        }
+    }
+
+    @State private var lastConfidence: Double?
+
+    /// Fluency/: strokes a second and legibility of a word written from memory.
+    private func noteWritingFluency(matched: Bool, reading: String?, confidence: Double?) {
+        slot.book.fluency.noteWriting(exercise: ex, drawing: pad.drawing, matched: matched, reading: reading, confidence: confidence ?? lastConfidence,
+                                      component: slot.book.knowledge.domain.utteranceID(target))
     }
 
     /// Reads the ink. Silent checks only ever confirm success; a manual check also reports misses.
@@ -534,6 +583,7 @@ struct WritingExercise: View {
             let ok = reading.map { practice ? ($0.matches || RussianText.isRepetition($0.best, of: target)) : $0.matches } ?? false
             let slot = ExerciseSlot(book: book, ref: ref)
             if ok {
+                if !practice { noteWritingFluency(matched: true, reading: reading?.best, confidence: reading?.confidence) }
                 let apply: ((inout ExerciseResult) -> Void) -> Void = manual ? slot.finish : slot.record
                 apply { r in
                     r.attempts += manual ? 1 : 0
@@ -780,6 +830,7 @@ struct PassageExercise: View {
     let slot: ExerciseSlot
     @State private var selected: String?
     @State private var showTranslation = false
+    @State private var pass = ReadingPass()  // Fluency/: a finger-follow reading pass, words a minute
 
     private var text: String { slot.exercise.text ?? "" }
 
@@ -819,6 +870,8 @@ struct PassageExercise: View {
             }
             .padding(18)
             .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
+            .overlay { ReadingPassOverlay(pass: pass, text: text) }
+            ReadingPassBar(pass: pass, text: text)
             }
             if let selected {
                 HStack(spacing: 12) {

@@ -67,11 +67,20 @@ public struct LearningEvent: Codable, Sendable, Hashable, Identifiable {
     public var confusions: [Confusion]?
     /// The item was scheduled review rather than new material.
     public var review: Bool?
+    /// Who decided the outcome was right or wrong: "self" (the learner, after seeing the model
+    /// answer) or "reader" (a recognizer). Absent on outcomes the domain judged by comparison.
+    public var judge: String?
+    /// How sure the record is of the grade, 0–1: a self-verdict the reader agreed with is 1,
+    /// one the reader could not confirm less, one it contradicted least.
+    public var confidence: Double?
 
     public init(id: String = UUID().uuidString, t: Date, type: Kind, source: String = "live", item: String,
                 activity: String? = nil, modality: Modality? = nil, components: [ComponentID], grade: Grade? = nil,
                 correct: Bool? = nil, attempt: Int? = nil, expected: String? = nil, response: String? = nil,
-                latency: Double? = nil, help: [String]? = nil, confusions: [Confusion]? = nil, review: Bool? = nil) {
+                latency: Double? = nil, help: [String]? = nil, confusions: [Confusion]? = nil, review: Bool? = nil,
+                judge: String? = nil, confidence: Double? = nil) {
+        self.judge = judge
+        self.confidence = confidence
         self.id = id
         self.t = t
         self.type = type

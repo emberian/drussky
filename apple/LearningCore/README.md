@@ -94,6 +94,42 @@ components, the core shapes the day.
   orders the morning page's reviews by the hour's preference, shortens a page when tired (two
   remaining reviews become recognition, the rest wait, ungraded), and allows one frontier word when sharp.
 
+## Judging one's own writing
+
+For recall written with a pen (write what you hear, write the Russian for this, fill the gap) the
+learner is the judge and the recognizer is a witness. After writing, Check shows the model answer
+beside the ink and the learner says *right* or *not quite*; the recognizer reads silently, hints at
+the likely verdict, and its reading goes into the log beside the verdict. Why:
+
+- **The generation effect and self-assessment** are both well supported: producing the answer from
+  memory and then comparing it with the model is the learning event, and the comparison is itself
+  retrieval practice. A recognizer that rules first short-circuits the comparison.
+- **A misreading erodes trust in the instrument.** When the reader rules "wrong" over a right
+  answer the learner has to argue with the book ("I wrote it right"); when it rules first and ticks
+  a wrong answer, the error passes unexamined. Either way the learner stops reading the model.
+- **Self-verdicts are honest enough when they are checked.** The reader's reading is kept as
+  evidence, so a learner who marks "right" over something the reader read as something else gets
+  a *worth another look* note on the word, never an accusation.
+
+In the evidence, `judge` says who decided ("self" or "reader") and `confidence` how sure the
+record is. The verdict decides success; the reader only modulates: right and the reader agrees →
+*good* (first time) or *hard*, confidence 1; right with no reading → the same, confidence 0.7;
+right while the reader read otherwise → *hard* (one notch of doubt), confidence 0.4, a
+disagreement; *not quite* → *again* whatever the reader saw (confidence 0.6 when it had agreed).
+Tracing and copying stay ticked by the reader: there is nothing to recall. The learner can hand
+the chair back to the reader in Settings ("Judge my writing"); the domain's `grade` reads either
+kind of result (`Drussky/Judgement/`).
+
+## Metrics
+
+`Metrics.swift` is a time series per (component, metric name): `MetricStore` appends samples,
+answers `samples`, `latest`, `mean` over a window, and `change` (median of the last window against
+the median of the one before, nil until each side has two), and `MetricLog` keeps them as JSON
+lines (`metrics.jsonl`), append-only like the events. The core does not know what a metric means;
+Drussky's fluency instruments (words a minute read with a finger or said aloud, strokes a second
+and legibility of a word written from memory, narrated sentences caught at 1× and ¾×) name theirs
+in `Drussky/Fluency/`.
+
 ## Contract: `events.jsonl`
 
 One JSON object per line, UTF-8, ISO-8601 dates. Fields are only ever added, never renamed
@@ -106,8 +142,10 @@ or given a new meaning. A line that fails to decode is skipped, and stays in the
  "grade":1, "correct":false, "attempt":2, "expected":"кот", "response":"кат",
  "latency":8.4, "help":["revealed"],
  "confusions":[{"target":"letter:О","produced":"letter:А","channel":"writing"}],
- "review":true}
+ "review":true, "judge":"self", "confidence":0.4}
 ```
+
+`judge` and `confidence` appear on finished recall writing (see "Judging one's own writing").
 
 Only `v`, `id`, `t`, `type`, `source`, `item` and `components` are always present. Outcomes
 carry `grade` when the domain judges them evidence of recall; an outcome without `grade` records

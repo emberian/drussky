@@ -8,6 +8,8 @@ enum InkReader {
         var best: String
         var candidates: [String]
         var matches: Bool
+        /// The recognizer's own confidence (0–1) in the pass that produced `best`, when it gave one.
+        var confidence: Double? = nil
     }
 
     /// One way of showing the ink to the recognizer.
@@ -31,20 +33,22 @@ enum InkReader {
             : [Pass(correction: RussianText.comparable(target).count > 3), Pass(height: 260, correction: true),
                Pass(height: 260), Pass(accurate: false)]
         var all: [String] = []
+        var firstConfidence: Double?
         for pass in passes {
             let source = pass.tiles > 1 ? tiled(drawing, times: pass.tiles) : drawing
             let image = await MainActor.run { render(source, height: pass.height) }
             guard let cg = image?.cgImage else { continue }
             let hint = RussianText.unstressed(pass.tiles > 1 ? String(repeating: target, count: pass.tiles) : target)
-            let candidates = await recognize(cg, hint: hint, accurate: pass.accurate, correction: pass.correction)
+            let (candidates, confidence) = await recognize(cg, hint: hint, accurate: pass.accurate, correction: pass.correction)
+            if firstConfidence == nil, !candidates.isEmpty { firstConfidence = confidence }
             all += candidates.filter { !all.contains($0) }
             if let hit = candidates.first(where: { single ? (pass.tiles > 1 ? majority($0, of: target) : RussianText.matches($0, target))
                                                           : RussianText.answerMatches($0, target, subjectDrop: subjectDrop) }) {
-                return Reading(best: single ? String(hit.prefix(1)) : hit, candidates: all, matches: true)
+                return Reading(best: single ? String(hit.prefix(1)) : hit, candidates: all, matches: true, confidence: confidence)
             }
         }
         let best = all.first ?? ""
-        return Reading(best: single ? String(best.prefix(1)) : best, candidates: all, matches: false)
+        return Reading(best: single ? String(best.prefix(1)) : best, candidates: all, matches: false, confidence: firstConfidence)
     }
 
     /// For tiled single letters: most of what was read is the target letter.
@@ -90,8 +94,9 @@ enum InkReader {
         }
     }
 
-    private static func recognize(_ image: CGImage, hint: String, accurate: Bool, correction: Bool) async -> [String] {
-        await withCheckedContinuation { (continuation: CheckedContinuation<[String], Never>) in
+    /// The candidate strings and the recognizer's mean confidence in its top reading (nil when none).
+    private static func recognize(_ image: CGImage, hint: String, accurate: Bool, correction: Bool) async -> ([String], Double?) {
+        await withCheckedContinuation { (continuation: CheckedContinuation<([String], Double?), Never>) in
             let once = Once()
             let request = VNRecognizeTextRequest { request, _ in
                 guard once.claim() else { return }
@@ -99,13 +104,15 @@ enum InkReader {
                 // Join lines left-to-right; keep alternatives from the top line.
                 let sorted = observations.sorted { $0.boundingBox.minX < $1.boundingBox.minX }
                 var lines: [String] = []
-                let joined = sorted.compactMap { $0.topCandidates(1).first?.string }.joined(separator: " ")
+                let tops = sorted.compactMap { $0.topCandidates(1).first }
+                let joined = tops.map(\.string).joined(separator: " ")
                 if !joined.isEmpty { lines.append(joined) }
                 if sorted.count == 1 {
                     lines += sorted[0].topCandidates(5).map(\.string)
                 }
                 var seen = Set<String>()
-                continuation.resume(returning: lines.filter { seen.insert($0).inserted })
+                let confidence = tops.isEmpty ? nil : Double(tops.map(\.confidence).reduce(0, +)) / Double(tops.count)
+                continuation.resume(returning: (lines.filter { seen.insert($0).inserted }, confidence))
             }
             request.recognitionLevel = accurate ? .accurate : .fast
             request.recognitionLanguages = ["ru-RU"]
@@ -114,7 +121,7 @@ enum InkReader {
             request.minimumTextHeight = 0.1
             let handler = VNImageRequestHandler(cgImage: image)
             DispatchQueue.global(qos: .userInitiated).async {
-                do { try handler.perform([request]) } catch { if once.claim() { continuation.resume(returning: []) } }
+                do { try handler.perform([request]) } catch { if once.claim() { continuation.resume(returning: ([], nil)) } }
             }
         }
     }

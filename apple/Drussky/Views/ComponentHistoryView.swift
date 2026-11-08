@@ -16,7 +16,10 @@ struct ComponentHistoryView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 header(c, k)
+                if [.lexeme, .form, .phrase].contains(id.kind) { HookCard(id: id) }  // Hooks/
+                SecondLookNote(id: id)  // Judgement/
                 modalities(k, t)
+                FluencySection(id: id)  // Fluency/
                 if !history.isEmpty { timeline(history) }
                 confusions(k, t)
                 connections(k)

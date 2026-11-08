@@ -23,10 +23,29 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
 | guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
 
-Writing is read on-device by Apple's handwriting recognizer. It confirms a right answer by
-itself after a short pause; **Check** asks it explicitly. When it misreads you, *I wrote it
-right* overrides it — the recognizer is a helper, not the judge. *Show me* writes the
-answer in red above your line and brings the item back soon.
+Writing is read on-device by Apple's handwriting recognizer. For tracing and copying it ticks
+the line by itself after a short pause. For recall (dictation, translate, fill) **you are the
+judge** by default (Settings → *Judge my writing*): **Check** writes the model answer beside
+your line and you say *Right* or *Not quite*; the recognizer reads silently, pre-selects the
+likely verdict with one small hint ("The reader saw «кат». You decide."), and its reading goes
+into the answer log beside your verdict — a right you gave over a reading it disputed is marked
+*worth another look* on the word's history, never overruled. With *The reader* as judge it
+confirms a right answer itself, *I wrote it right* overrides it, and *Show me* writes the answer
+in red above your line and brings the item back soon. (`LearningCore/README.md`, "Judging one's
+own writing".)
+
+**Hooks** (`Hooks/`): on a word's history card, *Give me a hook* asks the tutor for a one-line
+keyword mnemonic (мы́ло → "MEAL-o — wash your hands before the meal" 🧼); keep it, reword it or
+write your own. It is shown faintly above the line before the next few recalls of that word, fainter
+each time, then not at all. Once a day, with a key on the device, the tutor writes hooks for the
+~60 words you miss most in one call; *Export hooks* gives them as Markdown.
+
+**Fluency** (`Fluency/`, `metrics.jsonl`): a passage has *Read it with a finger* — follow the lines
+as you read, lift at the end; nothing ticks while you read, and afterwards one line gives words a
+minute against last time. Every word written from memory records strokes a second and how legibly
+the recognizer read it; a sentence said aloud records words a minute from its syllable onsets; a
+sentence written from the reader's voice records whether you caught it at 1× or ¾×. Small sparklines
+on the word's history and one line inside the cover ("You read about 20% faster than last week").
 
 Saying something aloud is hands-free (`Speaking/`): the model plays (Settings: 0–3 times,
 tap to skip), a soft tone says it's your turn, and the microphone (AVAudioEngine) measures the
@@ -176,7 +195,10 @@ string the app or its reviews can speak), handwriting recognition on synthetic p
 ink and on 156 single-line pen-stroke samples with hand-like slant and wobble (on the iPad
 Pro M4: pen 155/156, cursive 12/12, print 12/13), scheduling and persistence, notebook-recovery and redo
 regressions, speech recognition on recorded Russian (runs once speech recognition is
-allowed), and one live tutor answer (runs when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
+allowed), self-judgement evidence (verdict × reader → grade and confidence), hooks (parsing,
+storage, fading) and fluency (words a minute from onsets, strokes a second from ink, the metric
+log, the cover line), and live tutor calls — one answer, one diary correction, one hook and a
+small hook batch (run when `TEST_RUNNER_DRUSSKY_TUTOR_KEY` is set).
 `DrusskyUITests` writes on the paper with real touch strokes, completes the exercise, and
 checks it survives a relaunch.
 
@@ -188,7 +210,10 @@ needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian);
 turned: a morning or welcome-back page), `-qa-probes` (a synthetic answered probe set for the cover
 chart), `-qa-tired` (the current page marked shortened);
 `-qa-settings`, `-qa-goal <library id>` (make that text the learner's book), `-qa-goal-pull` (an
-offline page toward it), `-qa-goal-first` (open its first page now).
+offline page toward it), `-qa-goal-first` (open its first page now); `-qa-judge` (ink on the first
+open recall exercise with Check tapped: the self-judgement panel), `-qa-hooks` (canned hooks on a few
+words; `-qa-contents -qa-node lex:кот` opens one), `-qa-fluency` (three weeks of synthetic fluency
+samples for the cover line and sparklines).
 
 ## Content
 

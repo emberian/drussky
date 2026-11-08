@@ -120,6 +120,7 @@ struct ReadAloudExercise: View {
             if let r = take.report, let page = book.page(id: ref.pageID) {
                 book.knowledge.heard(page: page, index: ref.index, take: take.file.lastPathComponent, report: r,
                                      attempt: book.result(ref)?.attempts ?? 0)
+                book.fluency.noteTake(target: target, report: r, component: book.knowledge.domain.utteranceID(target))  // Fluency/
             }
         }
     }
