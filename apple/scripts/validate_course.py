@@ -32,6 +32,7 @@ KINDS = {
     "fill": ({"before", "after", "hint", "answer"}, set()),
     "read_meaning": ({"text", "options", "answer"}, set()),
     "passage": ({"text", "en"}, {"glosses"}),
+    "diary": ({"prompt"}, set()),
 }
 BANNED = re.compile(r"\b(optional|optionally|recording|recordings|recorded|accuracy|accurate|the app|this app|model voice|disclaimer|friend|friends|coach|tutor|might not|may not be)\b", re.I)
 
@@ -291,12 +292,18 @@ def main():
                     for f in ("say", "example"):
                         if row.get(f):
                             check_letters(f"letter {row['upper']}.{f} (by end of {pw})", row[f], page_known)
-            if not 6 <= len(exs) <= 10:
-                err(pw, f"{len(exs)} exercises (need 6-10)")
-            kinds = [e.get("kind") for e in exs]
+            # The diary line is an appendix to the page: at most one, always last, not counted
+            # in the page's size or its writing share.
+            diaries = [i for i, e in enumerate(exs) if e.get("kind") == "diary"]
+            if len(diaries) > 1 or (diaries and diaries[0] != len(exs) - 1):
+                err(pw, "one diary line at most, and it must be the last exercise")
+            body = [e for e in exs if e.get("kind") != "diary"]
+            if not 6 <= len(body) <= 10:
+                err(pw, f"{len(body)} exercises (need 6-10)")
+            kinds = [e.get("kind") for e in body]
             writing = sum(k in WRITING for k in kinds)
-            if writing * 2 <= len(exs):
-                err(pw, f"writing is {writing}/{len(exs)}, not a majority")
+            if writing * 2 <= len(body):
+                err(pw, f"writing is {writing}/{len(body)}, not a majority")
             if not {"listen_pick", "dictation"} & set(kinds):
                 err(pw, "no hearing exercise")
             if "read_aloud" not in kinds:
@@ -355,6 +362,14 @@ def main():
                     missing = sorted(x for x in words if x not in gkeys and x not in lex_keys)
                     if missing:
                         err(w, f"words with no gloss or lexicon entry: {missing}")
+                if k == "diary":
+                    if not e["prompt"].strip():
+                        err(w, "empty prompt")
+                    if BANNED.search(e["prompt"]):
+                        err(w, f"voice: {BANNED.search(e['prompt']).group(0)!r}")
+                    # Russian in the prompt obeys the same rules as any shown Russian.
+                    check_stress(f"{w}.prompt", e["prompt"])
+                    check_letters(f"{w}.prompt", e["prompt"], known)
                 if k == "copy" and e["times"] not in (1, 2, 3):
                     err(w, "times must be 1-3")
                 if k == "listen_pick":

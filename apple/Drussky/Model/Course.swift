@@ -69,6 +69,8 @@ enum ExerciseKind: String, Codable, Sendable {
     case passage
     /// Generated minimal-pair listening (SoundPairs.swift); never authored in course.json.
     case soundPair = "sound_pair"
+    /// Free writing in the learner's own Russian, corrected by the tutor in red pen (Diary/).
+    case diary
 
     /// Exercises answered with the pencil on ruled paper.
     var isWriting: Bool {
@@ -101,9 +103,11 @@ struct Exercise: Codable, Sendable, Hashable {
     /// Grammar patterns the exercise practises (lemmas.json construction ids); when absent the
     /// knowledge model tags it from its words.
     var skills: [String]? = nil
+    /// Diary: what to write about, in English or Russian.
+    var prompt: String? = nil
 
     enum CodingKeys: String, CodingKey {
-        case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills
+        case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills, prompt
     }
 
     init(kind: ExerciseKind) { self.kind = kind }
@@ -124,6 +128,7 @@ struct Exercise: Codable, Sendable, Hashable {
         reviewKey = try c.decodeIfPresent(String.self, forKey: .reviewKey)
         glosses = try c.decodeIfPresent([String: String].self, forKey: .glosses)
         skills = try c.decodeIfPresent([String].self, forKey: .skills)
+        prompt = try c.decodeIfPresent(String.self, forKey: .prompt)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -147,6 +152,7 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(reviewKey, forKey: .reviewKey)
         try c.encodeIfPresent(glosses, forKey: .glosses)
         try c.encodeIfPresent(skills, forKey: .skills)
+        try c.encodeIfPresent(prompt, forKey: .prompt)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }

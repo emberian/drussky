@@ -117,7 +117,7 @@ final class PadController: ObservableObject {
         await writer.submit(fileURL, revision: revision, data: nil)
     }
 
-    fileprivate func changed(_ drawing: PKDrawing) {
+    func changed(_ drawing: PKDrawing) {
         isEmpty = drawing.strokes.isEmpty
         strokeCount = drawing.strokes.count
         revision = InkRevision.next()
@@ -127,7 +127,7 @@ final class PadController: ObservableObject {
         Task { await writer.submit(url, revision: revision, data: data) }
     }
 
-    fileprivate func attach(_ canvas: PKCanvasView) {
+    func attach(_ canvas: PKCanvasView) {
         self.canvas = canvas
         let d = storedDrawing()
         canvas.drawing = d

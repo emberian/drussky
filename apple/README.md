@@ -18,6 +18,7 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | read aloud | say it; every take is kept, played back, and its rhythm and pitch drawn against the model's; *Skip for now* (ungraded) is always there |
 | what does it mean | read Russian, choose its meaning |
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound |
+| diary (Дневник) | write a few words of *your own* Russian about a prompt, on ruled lines (or type); confirm or fix the recognizer's transcript, then the tutor marks it like homework — wrong spans underlined, the right form in red above, the corrected line, a word of praise, the pattern behind the biggest slip. Your ink stays. Every edit becomes evidence (own-writing modality, a confusion edge, the pattern), and corrected forms join your words for review. From unit 3 every page ends with one; ＋ → *Write in my diary* adds one now; *Not today* skips it |
 
 Writing is read on-device by Apple's handwriting recognizer. It confirms a right answer by
 itself after a short pause; **Check** asks it explicitly. When it misreads you, *I wrote it
@@ -68,7 +69,9 @@ voices.
 ## Inside the cover
 
 The book icon (top left) opens your alphabet — each letter in **your own handwriting** once
-you've met it — and every page so far with its mark. Settings: finger drawing, cursive
+you've met it — and every page so far with its mark. **My Russian** collects every diary line
+you have ever written, newest first, with its red pen, and what the pen keeps finding this
+week; it exports as Markdown. Settings: finger drawing, cursive
 models, stress marks, notebook export (pages, ink, recordings as a zip), credits.
 
 ## Audio
@@ -117,7 +120,8 @@ checks it survives a relaunch.
 
 QA launch arguments (simulator): `-qa-reset`, `-qa-complete N` (work through N pages with
 synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-contents`,
-`-qa-settings`.
+`-qa-settings`, `-qa-diary` (three diary pages with canned red-pen corrections, no key
+needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian).
 
 ## Content
 

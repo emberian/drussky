@@ -54,6 +54,7 @@ def ps(text, en, glosses=None):
     if glosses:
         e["glosses"] = glosses
     return e
+def dy(prompt): return {"kind": "diary", "prompt": prompt}
 
 
 # --- letters (alphabet order) ----------------------------------------------
@@ -676,6 +677,104 @@ PAGE_MOVES = [
     ("u22-p2", "u12", None),
 ]
 
+# --- the diary line -----------------------------------------------------------
+# From the third unit on, every page ends with a Дневник line: a prompt in English, on a topic
+# whose words the page (or an earlier one) has taught, and ruled lines for the learner's own
+# Russian, which the tutor corrects in red. The prompt is never spoken, so it needs no audio.
+DIARY_FROM_UNIT = 2  # index into UNIT_ORDER
+DIARY_PROMPTS = {
+    "u3-p1": "What is this, and what is it not? Point at two things: Э'то… Э'то не…",
+    "u3-p2": "Name three things in the room with э'то.",
+    "u3-p3": "Who is this? Introduce two people or animals.",
+    "u4-p1": "Who is at home right now, and who is not?",
+    "u4-p2": "Ask where two things are, and answer.",
+    "u4-p3": "What is here and what is there? Three short sentences.",
+    "u4-p4": "A tiny dialogue: who is there, where is the cat?",
+    "u5-p1": "Who is in your family? Name them.",
+    "u5-p2": "Three things that are yours, with мой, моя' or моё.",
+    "u5-p3": "What do you love? Two or three things.",
+    "u6-p1": "What is this? Ask and answer about two things, and say what you are reading.",
+    "u6-p2": "What is on the table at home? Use наш and то'же.",
+    "u6-p3": "How are things? Answer, and say what there is more of.",
+    "u7-p1": "Who is in your family, and what do you know?",
+    "u7-p2": "Coffee, a street, a fact: three sentences with the new words.",
+    "u7-p3": "Say hi to someone, ask how they are, say bye.",
+    "u7-p4": "Your favourite word so far, and why you like it (in Russian as far as you can).",
+    "u7-p5": "Write about bread, cheese and tea on a table.",
+    "u13-p1": "Good morning: what you say when you wake up, and what you say at night.",
+    "u13-p2": "Dinner is on the table. What do you say, and is it good?",
+    "u13-p3": "Ask for more of something, politely, and say thank you.",
+    "c1-p1": "You didn't understand. Write what you would say.",
+    "u14-p1": "What is for breakfast today? And for dinner?",
+    "u14-p2": "What do you want right now? Two sentences with хочу'.",
+    "u14-p3": "A whole little meal: from good morning to thank you.",
+    "u14-p4": "Order coffee or tea the way you like it.",
+    "u14-p5": "What did you eat today?",
+    "u8-p1": "Three things around you: is each он, она' or оно'? Say where each is.",
+    "u8-p2": "What is on your table? Each thing with мой, моя' or моё.",
+    "u8-p3": "Describe the room: this is…, this is not…",
+    "u8-p4": "Count what you see: cups, spoons, books, windows.",
+    "u8-p5": "Describe three things as new or old.",
+    "u15-p1": "How many of what is on your table? Count to five.",
+    "u15-p2": "Count the things in your room, up to ten.",
+    "u15-p3": "Three small sums, written out in words.",
+    "u15-p4": "How old are the people and pets at home? Numbers to twenty.",
+    "u9-p1": "Ask three questions with кто and что.",
+    "u9-p2": "Ask someone how they are and where something is; answer both.",
+    "u9-p3": "Two yes/no questions and their answers.",
+    "u9-p4": "When is breakfast, and how many cups are there? Ask and answer.",
+    "u10-p1": "Whose things are these? Yours and mine.",
+    "u10-p2": "Describe your home with наш and на'ша.",
+    "u10-p3": "What do you have at home? Three sentences with у меня' есть.",
+    "u10-p4": "What is there none of today? Use у меня' нет.",
+    "u11-p1": "What are you reading today? Who else is reading?",
+    "u11-p2": "What do we read, and what do they think?",
+    "u11-p3": "What do you know, and what don't you know?",
+    "u11-p4": "Three people, three verbs: who reads, who thinks, who knows.",
+    "u18-p1": "Where is everything? In the house, on the table.",
+    "u18-p2": "Where are you right now? In the city, at home, in space?",
+    "u18-p3": "What do you see from where you sit?",
+    "u18-p4": "A robot looks out of a window. What does it see?",
+    "u12-p1": "Who speaks in your home, and what do they say?",
+    "u12-p2": "Which languages do you speak and understand, and how well?",
+    "u12-p3": "Three things that are not so: не and нет.",
+    "u22-p1": "What do you think? Two sentences with я ду'маю, что…",
+    "u22-p2": "Why do you learn Russian? Answer with потому' что.",
+    "u16-p1": "A robot and a rocket: a two-sentence story.",
+    "u16-p2": "A fact about numbers, in Russian.",
+    "u16-p3": "A thought you had today, in one sentence.",
+    "u16-p4": "The night sky, in two or three sentences.",
+    "u19-p1": "Your day: morning, afternoon, evening. What happens when?",
+    "u17-p1": "Where were you yesterday? Who was with you?",
+    "u17-p2": "What did you do yesterday? Three sentences in the past.",
+    "u17-p2a": "One thing you finished yesterday, and one you only did for a while.",
+    "u17-p3": "A tiny story about yesterday, in three sentences.",
+    "u17-p4": "What did you do today? Ask the same of someone.",
+    "u17-p5": "What will you do tomorrow, and what will you get done?",
+    "u19-p2": "Where are you going right now, and where is someone else going?",
+    "u19-p3": "Where do you go every day, and how do you get there?",
+    "u19-p4": "Where did you go today, and how?",
+    "u20-p1": "Describe a station in space in three sentences.",
+    "u20-p2": "You hear numbers in the noise. Write what they are and what you think.",
+    "u20-p3": "Write a short message to send into space.",
+    "u20-p4": "A month later: what happened? Two or three sentences.",
+    "u21-p1": "Three numbers over twenty, written out, with a sum.",
+    "u21-p2": "An even number, an odd number, and an if-then sentence.",
+    "u21-p3": "One sentence with для любо'го and one with существу'ет.",
+    "u21-p3a": "State a tiny mathematical claim in one clause.",
+    "u21-p4": "Your own two-line proof of something simple.",
+    "u22-p3": "A question that is not simple, and a first attempt at an answer.",
+    "u22-p4": "Something you know, and something you don't, in your own words.",
+}
+
+
+def add_diary_lines(units):
+    for uid in UNIT_ORDER[DIARY_FROM_UNIT:]:
+        for page in units[uid]["pages"]:
+            if any(e["kind"] == "diary" for e in page["exercises"]):
+                continue
+            page["exercises"].append(dy(DIARY_PROMPTS.get(page["id"], "Two sentences of your own, with words from this page.")))
+
 
 def build():
     units = {}
@@ -697,6 +796,7 @@ def build():
         src["pages"].remove(page)
         dest = units[into]["pages"]
         dest.insert(next(i for i, pg in enumerate(dest) if pg["id"] == before) if before else len(dest), page)
+    add_diary_lines(units)
     return deep({"version": 1, "letters": LETTERS, "lexicon": LEXICON, "units": [units[u] for u in UNIT_ORDER]})
 
 

@@ -53,6 +53,7 @@ final class KnowledgeTracker {
     func observe(page: BookPage, index: Int, before: ExerciseResult, after: ExerciseResult) {
         let t = now()
         let latency = lastActivity[page.id].map { t.timeIntervalSince($0) }.flatMap { $0 >= 0 && $0 < 600 ? $0 : nil }
+        if page.exercises[safe: index]?.kind == .diary { record(diaryEvidence(page: page, index: index, before: before, after: after, at: t)); return }
         guard let event = domain.evidence(for: RussianAttempt(page: page, index: index, before: before, after: after,
                                                              at: t, latency: latency)) else { return }
         lastActivity[page.id] = t
@@ -111,7 +112,8 @@ final class KnowledgeTracker {
                 let at = r.updated ?? page.finished ?? page.created
                 var before = ExerciseResult()
                 before.attempts = 0
-                if let e = domain.evidence(for: RussianAttempt(page: page, index: i, before: before, after: r, at: at, backfill: true)) {
+                if page.exercises[i].kind == .diary { events += diaryEvidence(page: page, index: i, before: before, after: r, at: at, backfill: true) }
+                else if let e = domain.evidence(for: RussianAttempt(page: page, index: i, before: before, after: r, at: at, backfill: true)) {
                     events.append(e)
                 }
             }
