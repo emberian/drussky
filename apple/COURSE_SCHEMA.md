@@ -325,6 +325,41 @@ The `structure` exercise is generated from it (never authored): `{"kind":"struct
 written>","skills":["anaphora"|"participle"]}` — the learner taps the head; right first time is a
 read-pick `good` on the construction (and the pronoun), right after a wrong tap `again`.
 
+# Stress — `Drussky/Resources/library-stress.json`
+
+Stress marks for the Russian that came from outside the course: every sentence of every library text and
+every Tatoeba sentence (the pseudo-text `sentences`, one entry per sentence in file order), written
+offline by `scripts/library_stress.py` (Claude, `claude-opus-5-5`, structured JSON, 14 sentences a
+request, resumable) and checked by `scripts/validate_stress.py`. The authored shelves (math.json,
+series.json, kitchen.json) are scanned too and appear only where a sentence lacked a mark (none do).
+
+```json
+{
+  "version": 1, "model": "claude-opus-5-5",
+  "texts": { "tolstoy-lev-i-mysh": { "sentences": [
+      { "index": 1, "text": "Мышь пробежала ему по телу.", "stressed": "Мышь пробежа́ла ему́ по те́лу." } ] } },
+  "homographs": [{ "text": "tolstoy-filipok", "index": 13, "word": "больша́я", "alternatives": ["бо́льшая"], "reason": "…" }],
+  "disagreements": [{ "text": "pushkin-zimnee-utro", "index": 26, "word": "сне́гу", "course": ["снегу́"] }]
+}
+```
+
+`text` is the exact source sentence (an edited text invalidates its entry visibly); `stressed` is the same
+sentence with U+0301 after the stressed vowel of every word of two or more syllables and nothing else
+changed. The rule both scripts and the app (`RussianStress.problems`) enforce: removing the marks gives
+the source back exactly (a mark the source already carries stays); one mark per Cyrillic word of two or
+more syllables, after a vowel; none on a one-syllable word or a word with ё; in a hyphenated compound each
+part follows the rule, except that a compound of one-syllable parts may take one mark in all (кто́-то).
+Homographs are the one place the model's judgement decides, listed for review. Every stressed word is
+compared with the course's own spellings (course.json, morphology.json, paradigms.json); a word the course
+marks differently is kept as the model wrote it and listed under `disagreements`
+(`library_stress.py --recheck` recomputes that list when the course changes).
+
+The app (`Model/LibraryStress.swift`) finds a sentence by its unstressed text and shows the stressed form
+through `Theme.stressed` — the coloured, underlined vowel, with a faded underline in passages — only
+while «Show stress» is on; ink, audio and gloss keys keep the bare text. A goal text (the learner's own
+book) gets the same pass at runtime from the tutor (`Goal/GoalStress.swift`, `claude-sonnet-5-5`), each
+form checked by the same rule and cached in the notebook as `goals/<id>.stress.json`; offline it reads bare.
+
 # Sound pairs — `Drussky/Resources/pairs.json`
 
 Minimal pairs for listening (＋ → Sound pairs). `contrasts: [{id, name, note}]`,
