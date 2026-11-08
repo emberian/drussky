@@ -168,12 +168,30 @@ struct RussianLine: View {
     @Environment(Book.self) private var book
     var text: String
     var size: CGFloat = 34
+    /// Show the meaning beside the word: first contact with a word is an introduction.
+    var gloss: Bool = false
     var body: some View {
         HStack(alignment: .center, spacing: 14) {
             Text(Theme.stressed(text, show: book.settings.showStress))
                 .russianFont(size, weight: .medium)
                 .foregroundStyle(Theme.text)
             HearButton(text: text, size: 40)
+            if gloss { MeaningTag(text: text) }
+        }
+    }
+}
+
+/// "· cat 🐈" — the meaning of a course word (or a kept word), wherever it is presented.
+struct MeaningTag: View {
+    @Environment(Book.self) private var book
+    var text: String
+    var body: some View {
+        if let w = book.word(text) ?? book.word(RussianText.unstressed(text)) {
+            HStack(spacing: 6) {
+                Text(w.en).font(.system(size: 17, weight: .medium)).foregroundStyle(Theme.muted)
+                if let e = w.emoji { Text(e).font(.system(size: 20)) }
+            }
+            .accessibilityLabel("means \(w.en)")
         }
     }
 }
@@ -216,7 +234,7 @@ struct MeetExercise: View {
                     if let example = letter.example, RussianText.letters(in: example).isSubset(of: knownLetters(adding: letter.upper)) {
                         HStack(spacing: 8) {
                             Text("as in").scaledFont(15).foregroundStyle(Theme.muted)
-                            RussianLine(text: example, size: 22)
+                            RussianLine(text: example, size: 22, gloss: true)
                         }
                     }
                 }
@@ -386,11 +404,12 @@ struct WritingExercise: View {
             HStack(spacing: 14) {
                 Instruction(text: "Trace, saying it as you write.")
                 HearButton(text: target, size: 36)
+                MeaningTag(text: target)
             }
         case .copy:
             VStack(alignment: .leading, spacing: 6) {
                 Instruction(text: (ex.times ?? 1) > 1 ? "Copy it \(ex.times!) times." : "Copy it.")
-                RussianLine(text: target, size: 36)
+                RussianLine(text: target, size: 36, gloss: true)
             }
         case .dictation:
             HStack(spacing: 14) {
@@ -581,6 +600,12 @@ struct ListenPickExercise: View {
                        russian: true, showStress: book.settings.showStress, locked: slot.result.status.isComplete) { i in
                 choose(i, options: options)
             }
+            if slot.result.status.isComplete, let say = ex.say, slot.result.status != .missed {
+                HStack(spacing: 8) {
+                    Text(Theme.stressed(say, show: book.settings.showStress)).russianFont(22, weight: .medium)
+                    MeaningTag(text: say)
+                }
+            }
             if slot.result.status == .missed, let say = ex.say {
                 ChoiceCorrection(slot: slot) {
                     HStack(spacing: 10) {
@@ -718,9 +743,12 @@ struct ReadAloudExercise: View {
         let mine = speech.activeKey == key
         VStack(alignment: .leading, spacing: 12) {
             Instruction(text: slot.result.status.isComplete ? "Read it aloud." : "Read it aloud, then listen to check.")
-            Text(Theme.stressed(target, show: book.settings.showStress))
-                .russianFont(40, weight: .medium)
-                .foregroundStyle(Theme.text)
+            HStack(alignment: .firstTextBaseline, spacing: 14) {
+                Text(Theme.stressed(target, show: book.settings.showStress))
+                    .russianFont(40, weight: .medium)
+                    .foregroundStyle(Theme.text)
+                MeaningTag(text: target)
+            }
             HStack(spacing: 14) {
                 Button { Task { await toggle() } } label: {
                     ZStack {
