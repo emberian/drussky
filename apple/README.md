@@ -24,6 +24,7 @@ what you wrote.
 | read along | a library text read by a human (LibriVox volunteers, Commons readers): the word being said lights up, tap a word to hear from there, ¾ speed, or listen first with the text appearing as it is read; then write one of its sentences from the reader's voice and say one after the reader |
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние) |
 | build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
+| talk (Разгово́р) | a spoken conversation with the tutor: pick one of three scenes made from your words, then 6–10 turns — the tutor speaks (short Russian, stress-marked, at most two new words a turn, a gentle «Вы хоте́ли сказа́ть…?» when you slip), you answer out loud hands-free, an eye icon whispers the English; afterwards every line of yours gets the red pen and at most one pronunciation tip. ＋ → *Talk* |
 | guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
 
 Writing is read on-device by Apple's handwriting recognizer. For tracing and copying it ticks
@@ -122,6 +123,34 @@ checked before it goes in. The tutor's answers mark Russian as tappable phrases 
 double-tap the Pencil to erase). Speakers with a small number cycle through several human
 voices.
 
+## Talk
+
+＋ → *Talk* (`Drussky/Talk/`) is a spoken conversation with the tutor on the page. The tutor
+proposes three scenes built from the words you know; then it speaks (one or two short sentences,
+stress-marked, within your vocabulary plus at most two new words, usually ending in a question),
+the soft tone says it is your turn, and the same hands-free microphone as *read aloud* takes your
+answer (no model to play, no target to compare: `TalkSession` runs its own `SpeakingTurn`). Speech
+recognition transcribes it, the tutor answers what was understood and repairs gently («Вы хоте́ли
+сказа́ть …?»). It stays in Russian; the eye beside each line whispers the English and the new words
+(each keepable). After 6–10 turns the tutor says goodbye and the whole transcript is marked like a
+diary line: your lines as heard with the red pen over them (`DiaryTutor`'s JSON contract per line,
+lenient about what the recognizer could have misheard), one word of praise, the pattern behind the
+biggest slip, and, where the phone-level analyzer is bundled, one pronunciation tip per take. Every
+turn the tutor understood is `good` on the words you said (modality `own-speech`); each edit is
+`again` with a speech confusion; new words and corrected forms join your words. Conversations are
+saved inside the exercise's result and listed under *My Russian*. Typing a line is always there
+(no microphone, a noisy room).
+
+The tutor's reply is a line-based format (`RU:` / `EN:` / `NEW:` / `END`) rather than JSON so the
+voice can start on the first sentence while the rest is still arriving: measured on the simulator,
+scenes in ~1.7 s, first spoken sentence ~1.1–4 s after sending a turn (`TalkLatency` is kept on
+each tutor line). The lines are spoken by `TutorVoice`: the system voice is the first
+implementation (`SystemTutorVoice`, the best installed Russian voice — Premium over Enhanced over
+default; Settings → Talk says which one and how to download a better one in iOS Settings →
+Accessibility → Spoken Content); a narrator engine slots in behind the same three calls. Offline,
+or without a key, the page says so in one line. A page turn cancels whatever is live; the lines
+said so far are already saved and the page offers to continue.
+
 ## Your book
 
 The inside cover asks for one text you want to read for real — from the Library, pasted or
@@ -212,6 +241,8 @@ QA launch arguments (simulator): `-qa-reset`, `-qa-complete N` (work through N p
 synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-contents`,
 `-qa-settings`, `-qa-diary` (three diary pages with canned red-pen corrections, no key
 needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian);
+`-qa-talk scene|mid|marked` (a Talk page posed from a canned conversation: the scene choice, the
+middle of a dialogue, the marked transcript);
 `-qa-settings`; `-qa-day N` / `-qa-away D` (the pages were done N or D days ago, then the page is
 turned: a morning or welcome-back page), `-qa-probes` (a synthetic answered probe set for the cover
 chart), `-qa-tired` (the current page marked shortened);

@@ -74,6 +74,8 @@ enum ExerciseKind: String, Codable, Sendable {
     /// Word building from morpheme tiles and guessing a new family member (Morphology/).
     case buildWord = "build_word"
     case familyGuess = "family_guess"
+    /// A spoken conversation with the tutor (Talk/).
+    case talk
 
     /// Exercises answered with the pencil on ruled paper.
     var isWriting: Bool {

@@ -47,6 +47,7 @@ struct BookView: View {
             if QA.has("-qa-intonation") { QA.intonationPage(book) }
             if let state = QA.string("-qa-speak") { QA.speakingPage(book, turn: speech, voice: voice, state: state) }
             if QA.has("-qa-diary") { QA.diaryPages(book) }
+            if let state = QA.string("-qa-talk") { QA.talkPage(book, state: state) }
             if QA.has("-qa-families") { show("Word families", MorphologyPages.addFamilies(book)) }
             if QA.has("-qa-cognates") { show("Cognates", MorphologyPages.addCognates(book)) }
         }
@@ -133,6 +134,7 @@ struct BookView: View {
                 Button { makeEarTraining() } label: { Label("Ear training", systemImage: "ear") }
                 Button { makeSoundPairs() } label: { Label("Sound pairs", systemImage: "ear.badge.waveform") }
                 Button { book.insertDiaryPage() } label: { Label("Write in my diary", systemImage: "pencil.line") }
+                Button { book.insertTalkPage() } label: { Label("Talk", systemImage: "bubble.left.and.bubble.right") }
                 Button { show("Word families", MorphologyPages.addFamilies(book)) } label: { Label("Word families", systemImage: "tree") }
                 Button { show("Cognates", MorphologyPages.addCognates(book)) } label: { Label("Cognates", systemImage: "character.book.closed") }
             } label: {

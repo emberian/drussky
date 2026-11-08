@@ -59,6 +59,8 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var readerAgreed: Bool? = nil
     /// Diary: what the learner wrote and the tutor's red-pen correction (Diary/DiaryEntry.swift).
     var diary: DiaryEntry? = nil
+    /// Talk: the spoken conversation with the tutor (Talk/TalkTypes.swift).
+    var talk: TalkConversation? = nil
 
     var roundNumber: Int { round ?? 0 }
 
@@ -538,6 +540,7 @@ final class Book {
                                       ?? "Comparing minimal pairs: \((ex.examples ?? []).map(\.ru).joined(separator: ", ")).")
         case .diary: lines.append(DiaryEntry.describe(ex, r))
         case .buildWord: lines.append("Building «\(ex.answerText ?? "")» (“\(ex.en ?? "")”) from the tiles \((ex.options ?? ex.parts ?? []).joined(separator: " ")).")
+        case .talk: lines.append(TalkConversation.describe(ex, r))
         case .familyGuess: lines.append("Guessing what «\(ex.word ?? "")» means in «\(ex.text ?? "")» from its root \(ex.root ?? ""), choosing among: \((ex.options ?? []).joined(separator: " / ")).")
         }
         switch r.status {

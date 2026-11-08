@@ -56,6 +56,7 @@ final class KnowledgeTracker {
         let t = now()
         let latency = lastActivity[page.id].map { t.timeIntervalSince($0) }.flatMap { $0 >= 0 && $0 < 600 ? $0 : nil }
         if page.exercises[safe: index]?.kind == .diary { record(diaryEvidence(page: page, index: index, before: before, after: after, at: t)); return }
+        if page.exercises[safe: index]?.kind == .talk { record(talkEvidence(page: page, index: index, before: before, after: after, at: t)); return }
         guard let event = domain.evidence(for: RussianAttempt(page: page, index: index, before: before, after: after,
                                                              at: t, latency: latency)) else { return }
         lastActivity[page.id] = t
@@ -84,7 +85,7 @@ final class KnowledgeTracker {
     /// is dropped rather than written into the restored notebook.
     func close() { isClosed = true }
 
-    private func record(_ events: [LearningEvent]) {
+    func record(_ events: [LearningEvent]) {
         guard !isClosed else { return }
         append(events)
         for e in events { model.apply(e) }
@@ -126,7 +127,7 @@ final class KnowledgeTracker {
         let logged = model.items
         let ids = Set(model.events.map(\.id))
         var legacyOutcomes: [String: Int] = [:]
-        for e in model.events where e.type == .outcome && !e.id.hasPrefix("out:") && !e.id.hasPrefix("diary:") {
+        for e in model.events where e.type == .outcome && !e.id.hasPrefix("out:") && !e.id.hasPrefix("diary:") && !e.id.hasPrefix("talk:") {
             legacyOutcomes[e.item, default: 0] += 1
         }
         var events: [LearningEvent] = []
@@ -139,6 +140,7 @@ final class KnowledgeTracker {
                     before.attempts = 0
                     let expected: [LearningEvent]
                     if page.exercises[i].kind == .diary { expected = diaryEvidence(page: page, index: i, before: before, after: r, at: at, backfill: true) }
+                    else if page.exercises[i].kind == .talk { expected = talkEvidence(page: page, index: i, before: before, after: r, at: at, backfill: true) }
                     else { expected = [domain.evidence(for: RussianAttempt(page: page, index: i, before: before, after: r, at: at, backfill: true))].compactMap { $0 } }
                     events += expected.filter { !ids.contains($0.id) }
                 }
