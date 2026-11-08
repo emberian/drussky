@@ -25,7 +25,7 @@ final class KnowledgeTracker {
     /// The memory groups drawn as growth series.
     static let growthGroups: [(title: String, modalities: Set<Modality>)] = [
         ("hear → write", [.hearWrite]), ("English → write", [.meaningWrite]), ("see → say", [.say]),
-        ("recognize", [.hearPick, .readPick]),
+        ("recognize", [.hearPick, .readPick, .readCursive]),
     ]
 
     init(course: Course, root: URL, customWords: [Course.Word], now: @escaping () -> Date) {

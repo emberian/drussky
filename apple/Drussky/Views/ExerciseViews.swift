@@ -97,6 +97,7 @@ struct ExerciseRow: View {
         case .diary: DiaryExercise(slot: slot, isActive: isActive)
         case .buildWord: BuildWordExercise(slot: slot, isActive: isActive)
         case .familyGuess: FamilyGuessExercise(slot: slot, isActive: isActive)
+        case .readHandwriting: ReadHandwritingExercise(slot: slot, isActive: isActive)
         }
     }
 }
@@ -227,7 +228,7 @@ struct MeetExercise: View {
                         .foregroundStyle(Theme.ink)
                         .accessibilityLabel("handwritten \(letter.upper)")
                     HearButton(text: letter.say, size: 52 * k)
-                    WatchStrokesButton(demo: demo)
+                    WatchStrokesButton(demo: demo, cursive: cursive)
                 }
                 let about = VStack(alignment: .leading, spacing: 4) {
                     (Text(letter.sound).font(.system(size: 18, weight: .semibold))
@@ -252,13 +253,16 @@ struct MeetExercise: View {
                 }
                 WritingExercise(slot: slot, isActive: isActive, ghostOverride: "\(letter.upper) \(letter.lower)",
                                 instructionOverride: "Trace it, then write it a few more times on your own.",
-                                coach: LetterCoach(letter: letter, demo: demo))
+                                coach: LetterCoach(letter: letter, demo: demo, cursive: cursive))
             }
             .onChange(of: book.advanceSignal) { _, _ in
                 if isActive && slot.isAdvanceTarget { voice.play(letter.say) }
             }
         }
     }
+
+    /// The cursive setting, or a page that asks for cursive on its own (Cursive/).
+    private var cursive: Bool { book.settings.cursiveModels || slot.exercise.cursive == true }
 
     private func knownLetters(adding upper: String) -> Set<String> {
         Set(book.targets.keys.filter { $0.hasPrefix("letter:") }.map { String($0.dropFirst(7)) }).union([upper])
@@ -331,7 +335,9 @@ struct WritingExercise: View {
     private var ex: Exercise { slot.exercise }
     private var result: ExerciseResult { slot.result }
     private var target: String { ex.target ?? "" }
-    private var isRecall: Bool { [.dictation, .translate, .fill].contains(ex.kind) }
+    private var isRecall: Bool { [.dictation, .translate, .fill, .readHandwriting].contains(ex.kind) }
+    /// The cursive setting, or an exercise that asks for cursive on its own (Cursive/).
+    private var cursive: Bool { book.settings.cursiveModels || ex.cursive == true }
 
     private var ghost: String? {
         if let ghostOverride { return ghostOverride }
@@ -348,7 +354,7 @@ struct WritingExercise: View {
         let sizing = ghost ?? target
         let times = ghost != nil ? ghostTimes : (ex.kind == .copy ? max(ex.times ?? 1, 1) : 1)
         let preferred: CGFloat = horizontalCompact ? 96 : 112
-        return StripMetrics.fitting(sizing, times: times, width: width, cursive: book.settings.cursiveModels, preferred: preferred)
+        return StripMetrics.fitting(sizing, times: times, width: width, cursive: cursive, preferred: preferred)
     }
 
     @Environment(\.horizontalSizeClass) private var sizeClass
@@ -359,7 +365,7 @@ struct WritingExercise: View {
             prompt
             ZStack(alignment: .topTrailing) {
                 WritingStrip(controller: pad, height: stripHeight, ghost: ghost, ghostTimes: ghostTimes,
-                             cursive: book.settings.cursiveModels, fingerDrawing: book.settings.fingerDrawing)
+                             cursive: cursive, fingerDrawing: book.settings.fingerDrawing)
                     .frame(height: stripHeight)
                     .accessibilityIdentifier("strip-\(slot.index)")
                     .background(GeometryReader { g in Color.clear.onAppear { width = g.size.width }
@@ -385,9 +391,9 @@ struct WritingExercise: View {
                 EarlierAttempts(urls: (1...(result.inkAttempts ?? 0)).map { slot.book.inkAttemptURL(slot.ref, attempt: $0) },
                                 height: stripHeight * 0.4)
             }
-            // Formation hints compare with the print stroke models: never against cursive guides.
-            if let coach, !book.settings.cursiveModels {  // tucked into the strip's empty bottom margin, clear of "Write it again"
-                FormationHintLine(pad: pad, letter: coach.letter, lift: stripHeight * 0.08,
+            // Formation hints compare with the stroke models of the hand shown: print or cursive.
+            if let coach {  // tucked into the strip's empty bottom margin, clear of "Write it again"
+                FormationHintLine(pad: pad, letter: coach.letter, cursive: cursive, lift: stripHeight * 0.08,
                                   clearTrailing: result.status.isComplete ? 130 : 0)
             }
             controls

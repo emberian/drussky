@@ -5923,6 +5923,545 @@
    ]
   },
   {
+   "id": "u24",
+   "title": "Cursive",
+   "subtitle": "про́писи · how Russians write by hand",
+   "pages": [
+    {
+     "id": "u24-p1",
+     "title": "Joined up: о а с е",
+     "intro": "Russians write by hand in a joined, slanted cursive that looks nothing like print. Start with the round letters: each begins at the top, and the red joins between letters are part of the word.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Cursive о is one oval, round anticlockwise from the top. а is the same oval with a stem down its right side; с and е leave at the bottom right, ready for the next letter.",
+       "examples": [
+        {
+         "ru": "окно́",
+         "en": "window"
+        },
+        {
+         "ru": "сок",
+         "en": "juice"
+        },
+        {
+         "ru": "сестра́",
+         "en": "sister"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "сок",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "окно́",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "сестра́",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "сок",
+       "seed": 111051343,
+       "options": [
+        "сак",
+        "сок",
+        "сов"
+       ]
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "окно́",
+       "seed": 168228551
+      },
+      {
+       "kind": "dictation",
+       "text": "окно́"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "сок",
+       "options": [
+        "сок",
+        "кот",
+        "сыр"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "сестра́"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Three round words, written in cursive if you can."
+      }
+     ]
+    },
+    {
+     "id": "u24-p2",
+     "title": "The zigzag letters: и ш л м",
+     "intro": "In a quick hand и, ш, л and м all turn into one zigzag. The school hand keeps them apart: и and ш start at the top with cups, л and м start with a hook on the line.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "и: down, cup, up, down, cup; ш is the same with three cups. л and м begin with a little hook on the baseline and climb, and that hook is what tells лиши́шься apart.",
+       "examples": [
+        {
+         "ru": "мир",
+         "en": "world, peace"
+        },
+        {
+         "ru": "ма́ма",
+         "en": "mum"
+        },
+        {
+         "ru": "мы",
+         "en": "we"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "ма́ма",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "мы",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "мир",
+       "times": 2,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "ма́ма",
+       "seed": 17487040,
+       "options": [
+        "ма́ма",
+        "ла́ма",
+        "ма́ша"
+       ]
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "мир",
+       "seed": 143584604
+      },
+      {
+       "kind": "dictation",
+       "text": "мне"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "мир",
+       "options": [
+        "мир",
+        "мы",
+        "мне"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "ма́ма"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Write ма́ма and мир in your own hand; add one more word with л or м."
+      }
+     ]
+    },
+    {
+     "id": "u24-p3",
+     "title": "Humps and tails: т п н ц щ",
+     "intro": "т in cursive is three humps, like a Latin m, while ш is three cups. п has one hump, н a tiny loop in the middle; ц and щ end with a tail below the line.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Humps are rounded at the top, cups at the bottom: that is the whole difference between т and ш. н goes down, back up to the middle, a tiny loop, then across. ц and щ finish with a small tail under the line.",
+       "examples": [
+        {
+         "ru": "тут",
+         "en": "here"
+        },
+        {
+         "ru": "стол",
+         "en": "table"
+        },
+        {
+         "ru": "цирк",
+         "en": "circus"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "тут",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "нос",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "стол",
+       "times": 2,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "тут",
+       "seed": 152510669,
+       "options": [
+        "тут",
+        "шут",
+        "пут"
+       ]
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "цирк",
+       "seed": 79497847
+      },
+      {
+       "kind": "dictation",
+       "text": "там"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "стол",
+       "options": [
+        "стол",
+        "стул",
+        "столы́"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "торт"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Where is the table, and what is on it? Two sentences, joined up."
+      }
+     ]
+    },
+    {
+     "id": "u24-p4",
+     "title": "Loops below the line: д у з р ф",
+     "intro": "Several letters drop below the line in cursive. д is an oval with a loop under it, like a g; у and з loop under too; р and ф send a long stem down.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Cursive д has no feet: it is an oval whose stem drops below the line and loops back. у does the same after its cup, з curls into a loop, and р and ф put a long stem under the line.",
+       "examples": [
+        {
+         "ru": "дом",
+         "en": "house"
+        },
+        {
+         "ru": "вода́",
+         "en": "water"
+        },
+        {
+         "ru": "у́тро",
+         "en": "morning"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "дом",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "у́тро",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "вода́",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "вода́",
+       "seed": 31700161,
+       "options": [
+        "бода́",
+        "вода́",
+        "вола́"
+       ]
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "раке́та",
+       "seed": 165099795
+      },
+      {
+       "kind": "dictation",
+       "text": "да"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "дом",
+       "options": [
+        "дом",
+        "до́ма",
+        "да"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "ко́фе"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Your morning in two short sentences, in cursive."
+      }
+     ]
+    },
+    {
+     "id": "u24-p5",
+     "title": "Above the line: б в к",
+     "intro": "б climbs above the small letters and flags to the right; в loops above the line and closes its bowl at the top. к stays small, with an arm and a leg.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "б: an oval, then its stem rises and flags right. в starts at the middle, loops above the line, comes down and closes its bowl at the top of the small letters. к: down, back up to the middle, a short arm, then the leg.",
+       "examples": [
+        {
+         "ru": "брат",
+         "en": "brother"
+        },
+        {
+         "ru": "вот",
+         "en": "here is"
+        },
+        {
+         "ru": "кни́га",
+         "en": "book"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "брат",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "мать",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "кни́га",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "люблю́",
+       "seed": 225138200,
+       "options": [
+        "моблю́",
+        "люблю́",
+        "лювлю́"
+       ]
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "сыр",
+       "seed": 70724738
+      },
+      {
+       "kind": "dictation",
+       "text": "вот"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "мать",
+       "options": [
+        "мать",
+        "ма́ма",
+        "мы"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "объе́кт"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Who is your brother or sister, and what do they love?"
+      }
+     ]
+    },
+    {
+     "id": "u24-p6",
+     "title": "Capitals and names",
+     "intro": "Capital letters in cursive are the big school shapes: an А with a hook, a Т with a wavy roof, a Д that loops at its foot. Sentences start with them.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "А starts with a hook on the line like л, climbs, comes down, and gets its bar last. Т takes its roof first, then the stem. Э, З, С and О are the rounds you know, taller.",
+       "examples": [
+        {
+         "ru": "Э́то кот.",
+         "en": "This is a cat."
+        },
+        {
+         "ru": "Приве́т!",
+         "en": "Hi!"
+        }
+       ]
+      },
+      {
+       "kind": "trace",
+       "text": "Э́то кот.",
+       "cursive": true
+      },
+      {
+       "kind": "trace",
+       "text": "Приве́т!",
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "Вот она́.",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "Э́то кот.",
+       "seed": 228248168
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "Вот она́.",
+       "seed": 180022583,
+       "options": [
+        "Вот оно́.",
+        "Вот они́.",
+        "Вот она́."
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "мы там"
+      },
+      {
+       "kind": "listen_pick",
+       "say": "спаси́бо",
+       "options": [
+        "спаси́бо",
+        "пожа́луйста",
+        "приве́т"
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Приве́т!"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Two sentences that start with a capital letter: Э́то… Вот…"
+      }
+     ]
+    },
+    {
+     "id": "u24-p7",
+     "title": "A note on the table",
+     "intro": "A note someone left: short, joined, slanted. Read it, copy it in cursive, and write one back.",
+     "exercises": [
+      {
+       "kind": "explain",
+       "text": "Notes are written fast: letters lean, joins stretch, the pen barely lifts. Look for the hooks of л and м, the humps of т, the loops under д and у.",
+       "examples": [
+        {
+         "ru": "Ма́ма до́ма.",
+         "en": "Mum is at home."
+        },
+        {
+         "ru": "Кот до́ма.",
+         "en": "The cat is at home."
+        }
+       ]
+      },
+      {
+       "kind": "copy",
+       "text": "Ма́ма до́ма.",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "copy",
+       "text": "Кот до́ма.",
+       "times": 1,
+       "cursive": true
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "Кот до́ма.",
+       "seed": 185353957
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "Мы там.",
+       "seed": 239714158
+      },
+      {
+       "kind": "read_handwriting",
+       "text": "Где кот?",
+       "seed": 252246227,
+       "options": [
+        "Где ко́фе?",
+        "Где кот?",
+        "Где чай?"
+       ]
+      },
+      {
+       "kind": "dictation",
+       "text": "Ма́ма до́ма."
+      },
+      {
+       "kind": "listen_pick",
+       "say": "Кот до́ма.",
+       "options": [
+        "Кот до́ма.",
+        "Ма́ма до́ма.",
+        "Кот там."
+       ]
+      },
+      {
+       "kind": "read_aloud",
+       "text": "Где кот?"
+      },
+      {
+       "kind": "diary",
+       "prompt": "Leave a note on the table for someone at home."
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "u11",
    "title": "Doing things",
    "subtitle": "чита́ть, ду́мать, знать",

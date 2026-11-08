@@ -65,6 +65,7 @@ memorable line in the tutor's voice.
 | `passage` | `text`, `en`, optional `glosses:{word: meaning}` | Reads a short text (2–8 sentences); taps any word to see its meaning and hear it; can play the whole text and reveal `en`. Words missing from `glosses` fall back to the lexicon. Gloss keys are the word as written, lowercase, without stress. |
 | `build_word` | `en`, `answer`, `parts:[tile…]`, optional `options:[tile…]`, `alternatives:[ru…]` | Sees the English, taps morpheme tiles into order (`пере-`, `пис`, `-а́ть`), checks. `parts` spell `answer` in order (hyphens and stress dropped); `options` is every tile offered, in display order (defaults to `parts`); `alternatives` are other words the tiles may spell that also count. `answer` must be in the lexicon and be a lemma or cognate of `morphology.json`. Right at the first check is recall; two misses show the word. |
 | `family_guess` | `text`, `word`, `root`, `options:[en…]`, `answer` (index), `en` | Reads a sentence with one new word (`word`, a `morphology.json` lemma built on `root`, a root the learner knows), guesses its meaning before being told (the pretesting effect), then sees the word taken apart. Every other word of `text` must be in the lexicon. |
+| `read_handwriting` | `text`, optional `options:[ru…]`, optional `seed` | Reads `text` (a word or short line) rendered in somebody's handwriting — one of the bundled OFL handwriting fonts or the cursive stroke models written through, slanted, sized and inked by `seed` (a non-negative integer; absent, one is derived from the text). Without `options` the learner prints the word on the ruled line (recognized, counts as writing); with `options` (2+, `text` among them, the others look-alikes such as ма́ша for ма́ма) they pick it. Knowledge modality `read-cursive`. Pages from ＋ → *Read handwriting* are built locally from known words. |
 | `diary` | `prompt` | Дневник: writes a few words of their *own* Russian on ruled lines about `prompt` (English, or Russian obeying rules 1–2). The recognizer proposes a transcript they confirm or fix; the tutor returns a red-pen correction (corrected text, edits with a category and a reason, one line of praise, 0–2 patterns to teach), drawn over their ink, which stays. The prompt is never spoken. At most one per page, always last, and not counted in rule 5. From unit 3 on, `build_course.py` adds one to every page (`DIARY_PROMPTS`). |
 
 A `passage` may carry a human reading: `narration` (an `Audio/` clip) and `words` (its word-timing
@@ -79,6 +80,11 @@ stretch (chunk dictation, shadowing). These exercises are made locally from a na
 text whose bare form (outer punctuation and stress marks off) contains a letter; digits, `***` and
 dashes have no entry. `scripts/narration.py` writes and checks it; `Narration.swift` applies the
 same rule.
+
+A `trace` or `copy` may carry `cursive: true`: its ghost is then the cursive stroke model
+(`Resources/strokes-cursive.json`, built by `scripts/build_strokes_cursive.py`, joined up letter to
+letter) whatever the learner's cursive setting, and the one-hint coach compares with the cursive
+models. The cursive unit (`scripts/course_cursive.py`) is made of these; it introduces no words.
 
 Any exercise may also carry an optional `skills: ["past", "negation"]`: the grammar patterns
 it practises, by construction id from `Resources/lemmas.json` (`gram:` prefix optional). When it is

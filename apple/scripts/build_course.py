@@ -658,12 +658,14 @@ U.append(("u16", "First readings", "ро́бот, число́, мысль, зв
 ]))
 
 
+import course_cursive  # noqa: E402
 import course_families  # noqa: E402
 import course_reading  # noqa: E402
 U += course_reading.units(dict(meet=meet, ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm, ps=ps))
 LEXICON += course_reading.LEXICON
 U += course_families.units(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm))
 LEXICON += course_families.LEXICON
+U += course_cursive.units(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra))  # no words of its own: cursive teaches the hand, not vocabulary
 
 
 # Course order. Page ids are written into learners' notebooks (sourceID), and the app walks
@@ -672,7 +674,7 @@ LEXICON += course_families.LEXICON
 # a page or a unit happens here rather than by editing its position in U. Never insert or move
 # anything before the earliest page a learner may not have reached yet.
 UNIT_ORDER = ["u1", "u2", "u3", "u4", "u5", "u6", "u7", "u13", "c1", "u14", "u8", "u15", "u9", "u10",
-              "u11", "u18", "u12", "u16", "u17", "u19", "u20", "u21", "u22", "u23"]
+              "u24", "u11", "u18", "u12", "u16", "u17", "u19", "u20", "u21", "u22", "u23"]
 # (page id, into unit, before page id or None for the end)
 PAGE_MOVES = [
     ("u19-p1", "u17", "u17-p1"),  # today/yesterday/tomorrow before the past tense
@@ -768,6 +770,7 @@ DIARY_PROMPTS = {
     "u21-p4": "Your own two-line proof of something simple.",
     "u22-p3": "A question that is not simple, and a first attempt at an answer.",
     "u22-p4": "Something you know, and something you don't, in your own words.",
+    **course_cursive.DIARY_PROMPTS,
 }
 
 

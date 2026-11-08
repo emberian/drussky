@@ -22,6 +22,16 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние) |
 | build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
 | guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
+| read handwriting | a word or line in somebody's hand (one of four bundled OFL handwriting fonts, or the school cursive models written through with a different slant, size and ink each time): print it on the line, or pick it among look-alikes (ма́ма / ла́ма / ма́ша). ＋ → *Read handwriting* makes a page of them from words you know |
+
+**Cursive** (`Cursive/`): with *Handwritten (cursive) models* on — or on the cursive unit's own pages —
+the ghost on the ruled line is the school cursive (прописи) stroke model written through, letter
+joined to letter (`Resources/strokes-cursive.json`, 66 forms with their entries, exits and join
+models, from `scripts/build_strokes_cursive.py --proof sheet.png`), *Watch it written* plays it
+stroke by stroke, and the one formation hint speaks cursive ("м starts with the hook on the
+baseline", "т is three humps in one stroke"). The cursive unit sits after unit 10: letter families
+by shape, then words, then a note to copy. Reading handwriting is its own memory modality
+(*read-cursive*); a word taken for a look-alike is logged as a shape confusion.
 
 Writing is read on-device by Apple's handwriting recognizer. It confirms a right answer by
 itself after a short pause; **Check** asks it explicitly. When it misreads you, *I wrote it

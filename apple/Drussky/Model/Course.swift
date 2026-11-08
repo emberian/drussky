@@ -74,6 +74,9 @@ enum ExerciseKind: String, Codable, Sendable {
     /// Word building from morpheme tiles and guessing a new family member (Morphology/).
     case buildWord = "build_word"
     case familyGuess = "family_guess"
+    /// Reading a word or line in someone's handwriting, then printing it or picking it among
+    /// look-alikes (Cursive/).
+    case readHandwriting = "read_handwriting"
 
     /// Exercises answered with the pencil on ruled paper.
     var isWriting: Bool {
@@ -123,11 +126,16 @@ struct Exercise: Codable, Sendable, Hashable {
     /// family_guess: the new family member inside `text`, and the root it shares with known words.
     var word: String? = nil
     var root: String? = nil
+    /// trace/copy/meet: drawn with the cursive models whatever the setting (the cursive unit).
+    var cursive: Bool? = nil
+    /// read_handwriting: fixes how the sample is rendered (hand, slant, paper); absent, one is derived.
+    var seed: Int? = nil
 
     enum CodingKeys: String, CodingKey {
         case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills, prompt
         case narration, words, span
         case parts, alternatives, word, root
+        case cursive, seed
     }
 
     init(kind: ExerciseKind) { self.kind = kind }
@@ -156,6 +164,8 @@ struct Exercise: Codable, Sendable, Hashable {
         alternatives = try c.decodeIfPresent([String].self, forKey: .alternatives)
         word = try c.decodeIfPresent(String.self, forKey: .word)
         root = try c.decodeIfPresent(String.self, forKey: .root)
+        cursive = try c.decodeIfPresent(Bool.self, forKey: .cursive)
+        seed = try c.decodeIfPresent(Int.self, forKey: .seed)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -187,6 +197,8 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(alternatives, forKey: .alternatives)
         try c.encodeIfPresent(word, forKey: .word)
         try c.encodeIfPresent(root, forKey: .root)
+        try c.encodeIfPresent(cursive, forKey: .cursive)
+        try c.encodeIfPresent(seed, forKey: .seed)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }
@@ -195,7 +207,7 @@ struct Exercise: Codable, Sendable, Hashable {
     var target: String? {
         switch kind {
         case .meet: letter
-        case .trace, .copy, .dictation, .readAloud: text
+        case .trace, .copy, .dictation, .readAloud, .readHandwriting: text
         case .translate, .fill, .buildWord: answerText
         case .listenPick: say
         default: nil
@@ -207,7 +219,7 @@ struct Exercise: Codable, Sendable, Hashable {
         switch kind {
         case .listenPick: say
         case .dictation: say ?? text
-        case .readAloud, .trace, .copy, .readMeaning, .passage, .familyGuess: text
+        case .readAloud, .trace, .copy, .readMeaning, .passage, .familyGuess, .readHandwriting: text
         case .fill: [before, answerText, after].compactMap { $0 }.joined()
         case .translate, .buildWord: answerText
         default: nil

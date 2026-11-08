@@ -16,7 +16,13 @@ enum InkReader {
         var height: CGFloat = 160
         var accurate = true
         var correction = false
+        /// Shear the ink upright before rendering (a slanted cursive hand), by this much per point of height.
+        var shear: CGFloat = 0
     }
+
+    /// Adds an upright-sheared pass for slanted cursive. Measured on synthetic cursive by
+    /// CursiveTests.testInkReaderOnCursiveHands; see the numbers there before turning it on.
+    nonisolated(unsafe) static var cursivePass = false
 
     /// Recognizes the drawing and compares it to `target`. Returns nil for an empty drawing.
     /// Recognizers differ between devices and OS versions, so several presentations are tried
@@ -25,14 +31,19 @@ enum InkReader {
     static func read(_ drawing: PKDrawing, target: String, subjectDrop: Bool = false) async -> Reading? {
         guard !drawing.strokes.isEmpty else { return nil }
         let single = RussianText.comparable(target).count == 1
-        let passes: [Pass] = single
+        var passes: [Pass] = single
             ? [Pass(tiles: 3), Pass(tiles: 4, height: 260, correction: true), Pass(tiles: 1, height: 260),
                Pass(tiles: 3, accurate: false), Pass(tiles: 6, height: 200)]
             : [Pass(correction: RussianText.comparable(target).count > 3), Pass(height: 260, correction: true),
                Pass(height: 260), Pass(accurate: false)]
+        if cursivePass { passes.append(single ? Pass(tiles: 3, shear: 0.3) : Pass(height: 260, correction: true, shear: 0.3)) }
         var all: [String] = []
         for pass in passes {
-            let source = pass.tiles > 1 ? tiled(drawing, times: pass.tiles) : drawing
+            var source = pass.tiles > 1 ? tiled(drawing, times: pass.tiles) : drawing
+            if pass.shear != 0 {  // x' = x - shear × (height below the top): a right-leaning hand stood upright
+                let b = source.bounds
+                source = source.transformed(using: CGAffineTransform(a: 1, b: 0, c: pass.shear, d: 1, tx: -pass.shear * b.maxY, ty: 0))
+            }
             let image = await MainActor.run { render(source, height: pass.height) }
             guard let cg = image?.cgImage else { continue }
             let hint = RussianText.unstressed(pass.tiles > 1 ? String(repeating: target, count: pass.tiles) : target)

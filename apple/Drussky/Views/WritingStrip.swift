@@ -12,9 +12,12 @@ struct StripMetrics {
     var baselineY: CGFloat { height * 0.70 }
     var descenderY: CGFloat { height * 0.90 }
 
-    /// The dashed line: the model font's own x-height above the baseline, so small letters
-    /// fill exactly the space between the two.
-    func xHeightY(cursive: Bool) -> CGFloat { baselineY - font(cursive: cursive).xHeight }
+    /// The dashed line: the model's own x-height above the baseline, so small letters fill
+    /// exactly the space between the two (the cursive stroke models' x-line when they are the ghost).
+    func xHeightY(cursive: Bool) -> CGFloat {
+        if cursive, let x = CursiveGhost.xHeight(height: height) { return baselineY - x }
+        return baselineY - font(cursive: cursive).xHeight
+    }
 
     func font(cursive: Bool) -> UIFont {
         let probe = Theme.modelFont(size: 100, cursive: cursive)
@@ -24,6 +27,7 @@ struct StripMetrics {
 
     /// Height at which `text` (repeated `times`) fits `width` in the model font.
     static func fitting(_ text: String, times: Int = 1, width: CGFloat, cursive: Bool, preferred: CGFloat) -> CGFloat {
+        if cursive, let h = CursiveGhost.fitting(text, times: times, width: width, preferred: preferred) { return h }
         let probe = StripMetrics(height: 100)
         let font = probe.font(cursive: cursive)
         let one = (RussianText.unstressed(text) as NSString).size(withAttributes: [.font: font]).width
@@ -266,6 +270,10 @@ final class PaperStripView: UIView, UIPencilInteractionDelegate {
         line(metrics.descenderY, width: 0.6, alpha: 0.35)
 
         guard let ghost, !ghost.isEmpty else { return }
+        if cursive, CursiveModels.shared != nil {  // the cursive ghost is the stroke model written through, not a font
+            CursiveGhost.draw(ghost, times: ghostTimes, in: ctx, metrics: metrics, width: w, color: Theme.ghostUI.resolvedColor(with: traitCollection))
+            return
+        }
         let font = metrics.font(cursive: cursive)
         let attrs: [NSAttributedString.Key: Any] = [
             .font: font, .foregroundColor: Theme.ghostUI.resolvedColor(with: traitCollection),

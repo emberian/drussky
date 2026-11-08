@@ -23,8 +23,9 @@ WRITING = {"meet", "trace", "copy", "dictation", "translate", "fill"}
 KINDS = {
     "meet": ({"letter"}, set()),
     "explain": ({"text"}, {"examples"}),
-    "trace": ({"text"}, set()),
-    "copy": ({"text", "times"}, set()),
+    # `cursive`: the ghost is the cursive stroke model whatever the setting (the cursive unit).
+    "trace": ({"text"}, {"cursive"}),
+    "copy": ({"text", "times"}, {"cursive"}),
     "listen_pick": ({"say", "options"}, set()),
     "dictation": ({"text"}, set()),
     "read_aloud": ({"text"}, set()),
@@ -36,6 +37,9 @@ KINDS = {
     # Morphology/ (see COURSE_SCHEMA.md): tiles → word, and a new word on a known root.
     "build_word": ({"en", "answer", "parts"}, {"options", "alternatives"}),
     "family_guess": ({"text", "word", "root", "options", "answer", "en"}, set()),
+    # Cursive/ (see COURSE_SCHEMA.md): a word or line in someone's handwriting, printed back
+    # (no options: counts as writing) or picked among look-alikes.
+    "read_handwriting": ({"text"}, {"options", "seed"}),
 }
 BANNED = re.compile(r"\b(optional|optionally|recording|recordings|recorded|accuracy|accurate|the app|this app|model voice|disclaimer|friend|friends|coach|tutor|might not|may not be)\b", re.I)
 
@@ -153,6 +157,9 @@ def russian_fields(e):
         out.append(("answer", e["answer"]))
     if k == "family_guess":
         out += [("text", e["text"]), ("word", e["word"])]
+    if k == "read_handwriting":
+        out.append(("text", e["text"]))
+        out += [("options", o) for o in e.get("options", [])]
     return out
 
 
@@ -180,6 +187,8 @@ def spoken_strings(course):
                     out.append(e["answer"])
                 if k == "family_guess":
                     out += [e["text"], e["word"]]
+                if k == "read_handwriting":
+                    out.append(e["text"])
     return [s for s in out if s and CYR.search(s)]
 
 
@@ -244,7 +253,7 @@ def check_meaning_before_recall(course, lex_keys):
                     shown_tokens.add(key(e["word"]))
                 elif k in ("translate", "fill"):
                     recall = [e["answer"]]
-                elif k in ("dictation", "read_meaning"):
+                elif k in ("dictation", "read_meaning", "read_handwriting"):
                     recall = [e["text"]]
                 for r in recall:
                     gap = missing(r)
@@ -338,7 +347,7 @@ def main():
             if not 6 <= len(body) <= 10:
                 err(pw, f"{len(body)} exercises (need 6-10)")
             kinds = [e.get("kind") for e in body]
-            writing = sum(k in WRITING for k in kinds)
+            writing = sum(k in WRITING for k in kinds) + sum(1 for e in body if e.get("kind") == "read_handwriting" and "options" not in e)
             if writing * 2 <= len(body):
                 err(pw, f"writing is {writing}/{len(body)}, not a majority")
             if not {"listen_pick", "dictation"} & set(kinds):
@@ -482,8 +491,19 @@ def main():
                     missing = [x for x in toks if x != wk and x not in lex_tokens]
                     if missing:
                         err(w, f"words around the new one not in lexicon: {missing}")
-                if k in ("dictation", "translate", "fill", "read_meaning"):
-                    s = e["text"] if k in ("dictation", "read_meaning") else (e["before"] + e["answer"] + e["after"] if k == "fill" else e["answer"])
+                if k in ("trace", "copy") and "cursive" in e and e["cursive"] is not True:
+                    err(w, "cursive must be true when present")
+                if k == "read_handwriting":
+                    if "seed" in e and (not isinstance(e["seed"], int) or isinstance(e["seed"], bool) or e["seed"] < 0):
+                        err(w, f"seed {e['seed']!r} must be a non-negative integer")
+                    if "options" in e:
+                        okeys = [key(o) for o in e["options"]]
+                        if len(okeys) < 2 or len(set(okeys)) != len(okeys):
+                            err(w, f"options must be 2+ and distinct: {okeys}")
+                        if key(e["text"]) not in okeys:
+                            err(w, "text not among options")
+                if k in ("dictation", "translate", "fill", "read_meaning", "read_handwriting"):
+                    s = e["text"] if k in ("dictation", "read_meaning", "read_handwriting") else (e["before"] + e["answer"] + e["after"] if k == "fill" else e["answer"])
                     missing = [t for t in key(s).split() if t not in lex_tokens]
                     if missing:
                         err(w, f"words not in lexicon: {missing}")

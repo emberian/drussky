@@ -494,6 +494,7 @@ final class Book {
         case .diary: lines.append(DiaryEntry.describe(ex, r))
         case .buildWord: lines.append("Building «\(ex.answerText ?? "")» (“\(ex.en ?? "")”) from the tiles \((ex.options ?? ex.parts ?? []).joined(separator: " ")).")
         case .familyGuess: lines.append("Guessing what «\(ex.word ?? "")» means in «\(ex.text ?? "")» from its root \(ex.root ?? ""), choosing among: \((ex.options ?? []).joined(separator: " / ")).")
+        case .readHandwriting: lines.append("Reading «\(ex.text ?? "")» in someone's handwriting" + (ex.options.map { " and choosing among: \($0.joined(separator: " / "))." } ?? " and printing it."))
         }
         switch r.status {
         case .open: lines.append(r.attempts > 0 ? "Not finished yet; \(r.attempts) attempt(s)." : "Not attempted yet.")

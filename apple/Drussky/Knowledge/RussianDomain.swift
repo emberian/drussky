@@ -38,6 +38,7 @@ extension Modality {
         case .hearPick: "hear → pick"
         case .readPick: "read → pick"
         case .build: "English → build"
+        case .readCursive: "read handwriting"
         default: rawValue
         }
     }
@@ -91,7 +92,7 @@ struct RussianAttempt {
 /// Russian, as Drussky teaches it, in LearningCore's terms.
 struct RussianDomain: KnowledgeDomain {
     let name = "drussky-ru"
-    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build]
+    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .readCursive]
     let graph: KnowledgeGraph
     let lemmas: Lemmas
     /// Roots, affixes and segmentations (Morphology/).
@@ -336,6 +337,7 @@ struct RussianDomain: KnowledgeDomain {
         case .listenPick, .soundPair: .hearPick
         case .readMeaning, .familyGuess: .readPick
         case .buildWord: .build
+        case .readHandwriting: .readCursive
         case .explain, .passage: nil
         case .diary: nil  // its evidence is built from the correction (DiaryKnowledge.swift)
         }
@@ -362,7 +364,7 @@ struct RussianDomain: KnowledgeDomain {
         case .done:
             switch ex.kind {
             case .meet, .trace, .copy: return .good
-            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord: return r.assisted == true ? nil : .again
+            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord, .readHandwriting: return r.assisted == true ? nil : .again
             case .explain, .passage: return nil
             default: return r.assisted == true ? nil : .hard  // finished, but not verified right first time
             }
@@ -395,6 +397,8 @@ struct RussianDomain: KnowledgeDomain {
             guard let target = ex.target, !RussianText.answerMatches(response, target, subjectDrop: ex.kind == .translate) else { return [] }
             let words = wordSubstitutions(target, response, channel: .writing)
             return words.isEmpty ? letterSubstitutions(target, response) : words
+        case .readHandwriting:
+            return cursiveConfusions(ex, response: response)
         default:
             return []
         }
