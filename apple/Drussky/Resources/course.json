@@ -1171,7 +1171,7 @@
    "emoji": "🌌"
   },
   {
-   "ru": "пла́нета",
+   "ru": "плане́та",
    "en": "planet",
    "emoji": "🪐"
   },
@@ -1409,7 +1409,7 @@
    "en": "in space"
   },
   {
-   "ru": "на пла́нете",
+   "ru": "на плане́те",
    "en": "on the planet"
   },
   {
@@ -1790,7 +1790,7 @@
    "en": "proof"
   },
   {
-   "ru": "тео́рема",
+   "ru": "теоре́ма",
    "en": "theorem"
   },
   {
@@ -3019,7 +3019,7 @@
    "en": "five (genitive)"
   },
   {
-   "ru": "зна́чение",
+   "ru": "значе́ние",
    "en": "value; meaning"
   },
   {
@@ -3027,7 +3027,7 @@
    "en": "of the function"
   },
   {
-   "ru": "зна́чение фу́нкции",
+   "ru": "значе́ние фу́нкции",
    "en": "the value of the function"
   },
   {
@@ -3079,7 +3079,7 @@
    "en": "essence"
   },
   {
-   "ru": "де́йствительность",
+   "ru": "действи́тельность",
    "en": "reality, actuality"
   },
   {
@@ -3163,7 +3163,7 @@
    "en": "nevertheless"
   },
   {
-   "ru": "де́йствительно",
+   "ru": "действи́тельно",
    "en": "indeed, really"
   },
   {
@@ -7588,7 +7588,7 @@
         },
         {
          "ru": "ма́ма",
-         "en": "mum"
+         "en": "mom"
         },
         {
          "ru": "мы",
@@ -8042,7 +8042,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Drop -ть from чита́ть and add the ending for who is doing it: я -ю, ты -ешь, он and она́ -ет.",
+       "text": "Drop -ть from чита́ть and add the ending for who is doing it: я -ю, ты -ешь, он and она́ -ет. Notice that кни́га becomes кни́гу when it is the thing being read.",
        "examples": [
         {
          "ru": "чита́ть",
@@ -8498,11 +8498,11 @@
     {
      "id": "u18-p2",
      "title": "In the city, in space",
-     "intro": "Feminine and masculine alike take -е: в го́роде, на пла́нете, в ко́смосе.",
+     "intro": "Feminine and masculine alike take -е: в го́роде, на плане́те, в ко́смосе.",
      "exercises": [
       {
        "kind": "explain",
-       "text": "Nearly every noun takes -е after в or на for where: в го́роде, в ко́смосе, на пла́нете, в кни́ге. Nouns like ста́нция swap the final я for и: на ста́нции.",
+       "text": "Nearly every noun takes -е after в or на for where: в го́роде, в ко́смосе, на плане́те, в кни́ге. Nouns like ста́нция swap the final я for и: на ста́нции.",
        "examples": [
         {
          "ru": "в го́роде",
@@ -8513,7 +8513,7 @@
          "en": "in space"
         },
         {
-         "ru": "на пла́нете",
+         "ru": "на плане́те",
          "en": "on the planet"
         },
         {
@@ -8557,7 +8557,7 @@
        "before": "Ро́бот на ",
        "after": ".",
        "hint": "The robot is on the planet.",
-       "answer": "пла́нете"
+       "answer": "плане́те"
       },
       {
        "kind": "dictation",
@@ -8595,7 +8595,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "For the object, -а becomes -у and -я becomes -ю; masculine and neuter things stay as they are: я ви́жу стол, я ви́жу окно́, я ви́жу кни́гу. People and animals change too: я ви́жу бра́та.",
+       "text": "For the object, -а becomes -у and -я becomes -ю; inanimate masculine and neuter nouns stay as they are: я ви́жу стол, я ви́жу окно́, я ви́жу кни́гу. Living masculine nouns take -а instead: брат, я ви́жу бра́та.",
        "examples": [
         {
          "ru": "Я ви́жу звезду́.",
@@ -8656,7 +8656,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Я ви́жу звезду́ и пла́нету."
+       "text": "Я ви́жу звезду́ и плане́ту."
       },
       {
        "kind": "translate",
@@ -8685,6 +8685,20 @@
      "intro": "A short reading: a robot, a station, the Earth in the window.",
      "exercises": [
       {
+       "kind": "explain",
+       "text": "As the object, Земля́ becomes Зе́млю (note the stress shift) and Луна́ becomes Луну́.",
+       "examples": [
+        {
+         "ru": "Земля́",
+         "en": "the Earth"
+        },
+        {
+         "ru": "Луна́",
+         "en": "the Moon"
+        }
+       ]
+      },
+      {
        "kind": "passage",
        "text": "Ста́нция в ко́смосе. На ста́нции живёт ро́бот. Он ви́дит Зе́млю в окне́. Ещё он ви́дит звёзды и Луну́. Ро́бот лю́бит Зе́млю.",
        "en": "A station in space. A robot lives on the station. It sees the Earth in the window. It also sees the stars and the Moon. The robot loves the Earth.",
@@ -8707,20 +8721,6 @@
         "The station is inside a robot."
        ],
        "answer": 0
-      },
-      {
-       "kind": "explain",
-       "text": "As the object, Земля́ becomes Зе́млю and Луна́ becomes Луну́.",
-       "examples": [
-        {
-         "ru": "Земля́",
-         "en": "the Earth"
-        },
-        {
-         "ru": "Луна́",
-         "en": "the Moon"
-        }
-       ]
       },
       {
        "kind": "translate",
@@ -8993,7 +8993,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Понима́ть, to understand, goes like чита́ть: я понима́ю, ты понима́ешь. По-ру́сски and по-англи́йски name the language.",
+       "text": "You already know я не понима́ю; the full verb понима́ть (to understand) goes like чита́ть: я понима́ю, ты понима́ешь. По-ру́сски and по-англи́йски name the language.",
        "examples": [
         {
          "ru": "Я говорю́ по-ру́сски.",
@@ -9454,7 +9454,7 @@
          "en": "space"
         },
         {
-         "ru": "пла́нета",
+         "ru": "плане́та",
          "en": "planet"
         },
         {
@@ -9488,9 +9488,9 @@
       },
       {
        "kind": "listen_pick",
-       "say": "пла́нета",
+       "say": "плане́та",
        "options": [
-        "пла́нета",
+        "плане́та",
         "раке́та",
         "звезда́"
        ]
@@ -9505,7 +9505,7 @@
       {
        "kind": "translate",
        "en": "planet",
-       "answer": "пла́нета"
+       "answer": "плане́та"
       },
       {
        "kind": "copy",
@@ -11628,7 +11628,7 @@
      "exercises": [
       {
        "kind": "passage",
-       "text": "Тео́рема: су́мма двух чётных чи́сел — чётное число́. Доказа́тельство. Чётное число́ — э́то число́, кото́рое де́лится на два. Возьмём два чётных числа́. Ка́ждое из них — два, умно́женное на це́лое число́. Их су́мма — два, умно́женное на су́мму э́тих це́лых чи́сел. Зна́чит, су́мма то́же де́лится на два, то есть она́ чётная. Что и тре́бовалось доказа́ть.",
+       "text": "Теоре́ма: су́мма двух чётных чи́сел — чётное число́. Доказа́тельство. Чётное число́ — э́то число́, кото́рое де́лится на два. Возьмём два чётных числа́. Ка́ждое из них — два, умно́женное на це́лое число́. Их су́мма — два, умно́женное на су́мму э́тих це́лых чи́сел. Зна́чит, су́мма то́же де́лится на два, то есть она́ чётная. Что и тре́бовалось доказа́ть.",
        "en": "Theorem: the sum of two even numbers is an even number. Proof. An even number is a number that is divisible by two. Take two even numbers. Each of them is two multiplied by a whole number. Their sum is two multiplied by the sum of those whole numbers. So the sum is also divisible by two, that is, it is even. Which was to be proved.",
        "glosses": {
         "двух": "two (of two)",
@@ -11680,7 +11680,7 @@
       {
        "kind": "translate",
        "en": "theorem",
-       "answer": "тео́рема"
+       "answer": "теоре́ма"
       },
       {
        "kind": "fill",
@@ -11857,7 +11857,7 @@
      "exercises": [
       {
        "kind": "passage",
-       "text": "— Что тако́е справедли́вость? — спра́шивает Сокра́т.\n— Э́то когда́ ка́ждый получа́ет то, чего́ заслу́живает, — отвеча́ет учени́к.\n— А кто зна́ет, чего́ заслу́живает ка́ждый?\n— Наве́рное, му́дрый челове́к.\n— Зна́чит, что́бы быть справедли́вым, ну́жно быть му́дрым?\n— Да, ка́жется, так.\n— Тогда́ сна́чала ну́жно узна́ть, что тако́е му́дрость.",
+       "text": "— Что тако́е справедли́вость? — спра́шивает Сокра́т.\n— Э́то когда́ ка́ждый получа́ет то, чего́ заслу́живает, — отвеча́ет учени́к.\n— А кто зна́ет, чего́ заслу́живает ка́ждый?\n— Наве́рное, му́дрый челове́к.\n— Зна́чит, что́бы быть справедли́вым, ну́жно быть му́дрым?\n— Да, ка́жется, так.\n— Тогда́ снача́ла ну́жно узна́ть, что тако́е му́дрость.",
        "en": "“What is justice?” asks Socrates. “It's when everyone gets what they deserve,” answers the student. “And who knows what everyone deserves?” “A wise person, probably.” “So to be just, one has to be wise?” “Yes, it seems so.” “Then first we need to find out what wisdom is.”",
        "glosses": {
         "спрашивает": "asks",
@@ -13064,7 +13064,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "The six cases have names: имени́тельный (кто? что?), роди́тельный (кого́? чего́?), да́тельный (кому́?), вини́тельный (кого́? что?, the object), твори́тельный (кем? чем?), предло́жный (о ком? о чём?, где?). A grammar table lists them in this order.",
+       "text": "The six cases have names: имени́тельный (кто? что?), роди́тельный (кого́? чего́?), да́тельный (кому́?), вини́тельный (кого́? что?, the object — like роди́тельный for living masculine nouns), твори́тельный (кем? чем?), предло́жный (о ком? о чём?, где?). A grammar table lists them in this order.",
        "examples": [
         {
          "ru": "паде́ж",
@@ -14740,7 +14740,7 @@
     {
      "id": "u28-p2",
      "title": "Verbs dressed as adjectives",
-     "intro": "Participles and gerunds: recognize them, and written Russian opens up. You never need to produce one.",
+     "intro": "Participles and gerunds: read who did what, and when. Leave production for later.",
      "exercises": [
       {
        "kind": "explain",
@@ -14781,6 +14781,36 @@
        ]
       },
       {
+       "kind": "read_meaning",
+       "text": "Э́то письмо́, напи́санное бра́том.",
+       "options": [
+        "This is a letter written by my brother.",
+        "This is a letter my brother is writing.",
+        "This is a letter to my brother."
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "read_meaning",
+       "text": "чита́ющий челове́к",
+       "options": [
+        "a person who is reading",
+        "a person who has finished reading",
+        "a person who will read"
+       ],
+       "answer": 0
+      },
+      {
+       "kind": "read_meaning",
+       "text": "прочита́вший кни́гу",
+       "options": [
+        "someone who is still reading the book",
+        "someone who has not read the book",
+        "someone who has finished the book"
+       ],
+       "answer": 2
+      },
+      {
        "kind": "listen_pick",
        "say": "чита́я",
        "options": [
@@ -14788,6 +14818,26 @@
         "чита́ющий",
         "прочита́в"
        ]
+      },
+      {
+       "kind": "read_meaning",
+       "text": "напи́санное письмо́, откры́тое окно́",
+       "options": [
+        "a letter that writes and a window that opens something",
+        "a letter to write and a window to close",
+        "a written letter and an open window"
+       ],
+       "answer": 2
+      },
+      {
+       "kind": "read_meaning",
+       "text": "Окно́ откры́то.",
+       "options": [
+        "Someone will open the window.",
+        "The window is open.",
+        "The window is opening something."
+       ],
+       "answer": 1
       },
       {
        "kind": "read_meaning",
@@ -14800,42 +14850,25 @@
        "answer": 1
       },
       {
-       "kind": "fill",
-       "before": "Окно́ ",
-       "after": ".",
-       "hint": "The window is open.",
-       "answer": "откры́то"
-      },
-      {
-       "kind": "fill",
-       "before": "Э́то письмо́, напи́санное ",
-       "after": ".",
-       "hint": "This is a letter written by my brother.",
-       "answer": "бра́том"
-      },
-      {
-       "kind": "dictation",
-       "text": "Э́то письмо́ написа́л брат."
+       "kind": "read_meaning",
+       "text": "Прочита́в кни́гу, я поду́мала.",
+       "options": [
+        "Before reading the book, I thought.",
+        "Having finished the book, I thought.",
+        "While still reading the book, I thought."
+       ],
+       "answer": 1
       },
       {
        "kind": "read_aloud",
        "text": "Чита́ющий, прочита́вший, живу́щий. Напи́санный, откры́тый. Чита́я, она́ молча́ла. Прочита́в, она́ поду́мала."
       },
       {
-       "kind": "copy",
-       "text": "напи́санное письмо́, откры́тое окно́",
-       "times": 1
-      },
-      {
-       "kind": "copy",
-       "text": "чита́ющий, прочита́вший, чита́я, прочита́в",
-       "times": 1
-      },
-      {
        "kind": "diary",
-       "prompt": "Describe something you see using one participle you recognize (a written letter, an open window)."
+       "prompt": "What did you read today? Write a few words of your own; simple sentences are enough."
       }
-     ]
+     ],
+     "purpose": "reading"
     },
     {
      "id": "u28-p3",
@@ -15365,7 +15398,7 @@
       },
       {
        "kind": "copy",
-       "text": "тео́рема, ле́мма, сле́дствие, доказа́тельство",
+       "text": "теоре́ма, ле́мма, сле́дствие, доказа́тельство",
        "times": 1
       },
       {
@@ -15381,7 +15414,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Для всех and для любо́го say for all; существу́ет says there exists; еди́нственный is unique. Равно́ is equals, бо́льше and ме́ньше are greater than and less than (with the genitive), and зна́чение фу́нкции в то́чке is the value of the function at a point.",
+       "text": "Для всех and для любо́го say for all; существу́ет says there exists; еди́нственный is unique. Равно́ is equals, бо́льше and ме́ньше are greater than and less than (with the genitive), and значе́ние фу́нкции в то́чке is the value of the function at a point.",
        "examples": [
         {
          "ru": "для всех",
@@ -15420,7 +15453,7 @@
          "en": "Three is less than five."
         },
         {
-         "ru": "зна́чение фу́нкции в то́чке два",
+         "ru": "значе́ние фу́нкции в то́чке два",
          "en": "the value of the function at the point two"
         },
         {
@@ -15472,22 +15505,22 @@
       },
       {
        "kind": "read_meaning",
-       "text": "Зна́чение фу́нкции в то́чке два равно́ четырём.",
+       "text": "Значе́ние фу́нкции в то́чке два равно́ четырём.",
        "options": [
         "The function has two values: two and four.",
-        "The value of the function at the point two equals four.",
-        "The function is greater than four at two."
+        "The function is greater than four at two.",
+        "The value of the function at the point two equals four."
        ],
-       "answer": 1
+       "answer": 2
       },
       {
        "kind": "copy",
-       "text": "зна́чение фу́нкции в то́чке",
+       "text": "значе́ние фу́нкции в то́чке",
        "times": 1
       },
       {
        "kind": "diary",
-       "prompt": "Three true statements with бо́льше, ме́ньше and ра́вно."
+       "prompt": "Three true statements with бо́льше, ме́ньше and равно́."
       }
      ]
     },
@@ -15498,7 +15531,7 @@
      "exercises": [
       {
        "kind": "passage",
-       "text": "Тео́рема: просты́х чи́сел бесконе́чно мно́го.\nДоказа́тельство: предполо́жим, что их коне́чное число́. Рассмо́трим число́: произведе́ние всех просты́х чи́сел плюс оди́н. Тогда́ оно́ не де́лится ни на одно́ из них. Зна́чит, оно́ само́ просто́е и́ли де́лится на просто́е число́, кото́рого нет среди́ них. Получа́ем противоре́чие. Что и тре́бовалось доказа́ть.",
+       "text": "Теоре́ма: просты́х чи́сел бесконе́чно мно́го.\nДоказа́тельство: предполо́жим, что их коне́чное число́. Рассмо́трим число́: произведе́ние всех просты́х чи́сел плюс оди́н. Тогда́ оно́ не де́лится ни на одно́ из них. Зна́чит, оно́ само́ просто́е и́ли де́лится на просто́е число́, кото́рого нет среди́ них. Получа́ем противоре́чие. Что и тре́бовалось доказа́ть.",
        "en": "Theorem: there are infinitely many primes.\nProof: suppose there are finitely many of them. Consider the number: the product of all the primes plus one. Then it is not divisible by any one of them. So it is itself prime, or divisible by a prime that is not among them. We obtain a contradiction. Which was to be proved.",
        "glosses": {
         "простых": "prime (простых чисел: of prime numbers)",
@@ -15578,7 +15611,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "Philosophy's nouns are built with three suffixes: -ость turns an adjective into a quality (де́йствительный, де́йствительность), -ние and -ие turn a verb into an act or a state (мы́слить, мышле́ние; знать, зна́ние; быть, бытие́). И́стина is truth as a philosopher means it; пра́вда is truth as a person tells it.",
+       "text": "Philosophy's nouns are built with three suffixes: -ость turns an adjective into a quality (действи́тельный, действи́тельность), -ние and -ие turn a verb into an act or a state (мы́слить, мышле́ние; знать, зна́ние; быть, бытие́). И́стина is truth as a philosopher means it; пра́вда is truth as a person tells it.",
        "examples": [
         {
          "ru": "и́стина",
@@ -15605,7 +15638,7 @@
          "en": "essence"
         },
         {
-         "ru": "де́йствительность",
+         "ru": "действи́тельность",
          "en": "reality, actuality"
         },
         {
@@ -15669,17 +15702,17 @@
       },
       {
        "kind": "read_aloud",
-       "text": "И́стина, свобо́да, созна́ние, бытие́, мышле́ние, су́щность, де́йствительность, возмо́жность, необходи́мость, ра́зум."
+       "text": "И́стина, свобо́да, созна́ние, бытие́, мышле́ние, су́щность, действи́тельность, возмо́жность, необходи́мость, ра́зум."
       },
       {
        "kind": "read_meaning",
-       "text": "Возмо́жность — ещё не де́йствительность.",
+       "text": "Возмо́жность — ещё не действи́тельность.",
        "options": [
         "Reality is only a possibility.",
-        "A possibility is not yet a reality.",
-        "Possibility and reality are the same."
+        "Possibility and reality are the same.",
+        "A possibility is not yet a reality."
        ],
-       "answer": 1
+       "answer": 2
       },
       {
        "kind": "copy",
@@ -15808,7 +15841,7 @@
      "exercises": [
       {
        "kind": "explain",
-       "text": "An argument is held together by connectives: во-пе́рвых, во-вторы́х (first, second); одна́ко (however); поэ́тому (therefore, so); с одно́й стороны́… с друго́й стороны́ (on the one hand… on the other); наприме́р (for example); ита́к (thus); тем не ме́нее (nevertheless); де́йствительно (indeed).",
+       "text": "An argument is held together by connectives: во-пе́рвых, во-вторы́х (first, second); одна́ко (however); поэ́тому (therefore, so); с одно́й стороны́… с друго́й стороны́ (on the one hand… on the other); наприме́р (for example); ита́к (thus); тем не ме́нее (nevertheless); действи́тельно (indeed).",
        "examples": [
         {
          "ru": "Во-пе́рвых, э́то пра́вда. Во-вторы́х, э́то ва́жно.",
@@ -15843,7 +15876,7 @@
          "en": "otherwise, differently"
         },
         {
-         "ru": "Де́йствительно, э́то так.",
+         "ru": "Действи́тельно, э́то так.",
          "en": "Indeed, that is so."
         }
        ]
@@ -15883,7 +15916,7 @@
       },
       {
        "kind": "dictation",
-       "text": "Де́йствительно, э́то так. Одна́ко э́то тру́дно."
+       "text": "Действи́тельно, э́то так. Одна́ко э́то тру́дно."
       },
       {
        "kind": "read_aloud",

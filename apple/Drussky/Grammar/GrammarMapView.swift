@@ -1,14 +1,16 @@
 import LearningCore
 import SwiftUI
 
-/// "Grammar" on the inside cover: the paradigm tables, empty at first, filling in cell by cell
-/// as the learner meets and produces each form. A cell's fill is the recall of its pattern; a
-/// dot marks a cell the learner has produced, not only recognized. Tap a cell for its examples,
-/// with audio and history; tap a title for the whole table.
+/// "Grammar" on the inside cover: one calm entry — a row of chips, one per paradigm table, each
+/// showing how many of its cells have been met and glowing by the mean recall of its patterns.
+/// A chip opens its table; "All tables" opens every table at once. The tables themselves fill in
+/// cell by cell as the learner meets and produces each form: a cell's fill is the recall of its
+/// pattern, a dot marks a cell the learner has produced, not only recognized.
 struct GrammarSection: View {
     @Environment(Book.self) private var book
     @State private var openCell: CellRef?
     @State private var openTable: TableKey?
+    @State private var openAll = false
 
     struct CellRef: Identifiable, Hashable {
         var table: String
@@ -19,20 +21,36 @@ struct GrammarSection: View {
 
     var body: some View {
         let p = book.knowledge.domain.paradigms
+        let k = book.knowledge
         if !p.isEmpty {
+            let summaries = p.tables.map { ($0, CellStrength.summary($0, k)) }
+            let met = summaries.reduce(0) { $0 + $1.1.filled }, total = summaries.reduce(0) { $0 + $1.1.total }
             VStack(alignment: .leading, spacing: 10) {
-                Text("Grammar").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
-                Text("The system behind the words. Each table fills in as you meet and produce its forms: a cell glows by how surely you'd recall the pattern, a dot means you have written it yourself. Tap a cell for its examples; tap a title for the whole table.")
-                    .font(.system(size: 15)).foregroundStyle(Theme.muted)
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 12, alignment: .top)], alignment: .leading, spacing: 12) {
-                    ForEach(p.tables.filter { $0.kind != "use" }) { table in
-                        ParadigmTableCard(table: table, compact: true, onCell: { openCell = CellRef(table: table.id, cell: $0.id) },
-                                          onTitle: { openTable = TableKey(id: table.id) })
+                HStack(alignment: .firstTextBaseline, spacing: 12) {
+                    Text("Grammar").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
+                    Text("\(met) of \(total) cells met").font(Theme.label(13)).foregroundStyle(Theme.muted).monospacedDigit()
+                    Spacer(minLength: 0)
+                    Button { openAll = true } label: {
+                        Label("All tables", systemImage: "tablecells").font(Theme.label(14))
                     }
+                    .buttonStyle(.plain).foregroundStyle(Theme.accent)
                 }
-                if let uses = p.table("uses") {
-                    ParadigmTableCard(table: uses, compact: true, onCell: { openCell = CellRef(table: uses.id, cell: $0.id) },
-                                      onTitle: { openTable = TableKey(id: uses.id) })
+                Text("The system behind the words: declensions, conjugations, what each case does. A table fills in as you meet and produce its forms; tap one to see it.")
+                    .font(.system(size: 15)).foregroundStyle(Theme.muted)
+                FlowRow(spacing: 8) {
+                    ForEach(summaries, id: \.0.id) { table, s in
+                        Button { openTable = TableKey(id: table.id) } label: {
+                            HStack(spacing: 6) {
+                                Text(Theme.stressed(table.title, show: true)).font(.system(size: 14, weight: .medium)).foregroundStyle(s.filled == 0 ? Theme.muted : Theme.text).lineLimit(1)
+                                Text("\(s.filled)/\(s.total)").font(Theme.label(11)).foregroundStyle(Theme.muted).monospacedDigit()
+                            }
+                            .padding(.horizontal, 10).padding(.vertical, 6)
+                            .background(Capsule().fill(s.filled == 0 ? Color.clear : Theme.accent.opacity(0.08 + 0.4 * s.mean)))
+                            .overlay(Capsule().strokeBorder(s.filled == 0 ? Theme.muted.opacity(0.3) : Theme.accent.opacity(0.25 + 0.5 * s.mean), lineWidth: 1))
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("\(table.title): \(s.filled) of \(s.total) cells met")
+                    }
                 }
             }
             .sheet(item: $openCell) { ref in
@@ -41,14 +59,59 @@ struct GrammarSection: View {
             .sheet(item: $openTable) { key in
                 NavigationStack { TableSheet(tableID: key.id) }.environment(book).presentationSizing(.page)
             }
+            .sheet(isPresented: $openAll) {
+                NavigationStack { GrammarTablesSheet() }.environment(book).presentationSizing(.page)
+            }
             .onAppear {
-                // QA: -qa-grammar-table decl1 opens that table; -qa-grammar-cell decl1/gen-sg opens that cell.
+                // QA: -qa-grammar-table decl1 opens that table; -qa-grammar-cell decl1/gen-sg opens that cell; -qa-grammar-all opens every table.
                 if let t = QA.string("-qa-grammar-table") { openTable = TableKey(id: t) }
                 if let c = QA.string("-qa-grammar-cell") {
                     let parts = c.split(separator: "/").map(String.init)
                     if parts.count == 2 { openCell = CellRef(table: parts[0], cell: parts[1]) }
                 }
+                if QA.has("-qa-grammar-all") { openAll = true }
             }
+        }
+    }
+}
+
+/// Every table at once, small, cells coloured by recall. Tap a cell for its examples, a title for the table.
+struct GrammarTablesSheet: View {
+    @Environment(Book.self) private var book
+    @Environment(\.dismiss) private var dismiss
+    @State private var openCell: GrammarSection.CellRef?
+    @State private var openTable: GrammarSection.TableKey?
+
+    var body: some View {
+        let p = book.knowledge.domain.paradigms
+        ScrollView {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Each table fills in as you meet and produce its forms: a cell glows by how surely you'd recall the pattern, a dot means you have written it yourself. Tap a cell for its examples; tap a title for the whole table.")
+                    .font(.system(size: 15)).foregroundStyle(Theme.muted)
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 12, alignment: .top)], alignment: .leading, spacing: 12) {
+                    ForEach(p.tables.filter { $0.kind != "use" }) { table in
+                        ParadigmTableCard(table: table, compact: true, onCell: { openCell = GrammarSection.CellRef(table: table.id, cell: $0.id) },
+                                          onTitle: { openTable = GrammarSection.TableKey(id: table.id) })
+                    }
+                }
+                if let uses = p.table("uses") {
+                    ParadigmTableCard(table: uses, compact: true, onCell: { openCell = GrammarSection.CellRef(table: uses.id, cell: $0.id) },
+                                      onTitle: { openTable = GrammarSection.TableKey(id: uses.id) })
+                }
+            }
+            .padding(24)
+            .frame(maxWidth: 900, alignment: .leading)
+            .frame(maxWidth: .infinity)
+        }
+        .background(GridPaper(marginX: nil))
+        .navigationTitle("Grammar")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
+        .sheet(item: $openCell) { ref in
+            NavigationStack { CellSheet(tableID: ref.table, cellID: ref.cell) }.environment(book).presentationSizing(.page)
+        }
+        .sheet(item: $openTable) { key in
+            NavigationStack { TableSheet(tableID: key.id) }.environment(book).presentationSizing(.page)
         }
     }
 }

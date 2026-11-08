@@ -38,7 +38,10 @@ models, from `scripts/build_strokes_cursive.py --proof sheet.png`), *Watch it wr
 stroke by stroke, and the one formation hint speaks cursive ("м starts with the hook on the
 baseline", "т is three humps in one stroke"). The cursive unit sits after unit 10: letter families
 by shape, then words, then a note to copy. Reading handwriting is its own memory modality
-(*read-cursive*); a word taken for a look-alike is logged as a shape confusion.
+(*read-cursive*); a word taken for a look-alike is logged as a shape confusion. Once the unit's
+first page is finished, words never yet read in another hand come back as read-handwriting
+reviews after everything due (two per page at most) — picked among look-alikes until read twice,
+then printed back — and from then on FSRS schedules that memory like any other.
 
 Writing is read on-device by Apple's handwriting recognizer. For tracing and copying it ticks
 the line by itself after a short pause. For recall (dictation, translate, fill) **you are the
@@ -106,8 +109,8 @@ urgent first), then the next course page. After a week or more away, the first p
 sample of what you knew rather than everything. When several things the next page leans on have
 gone weak, a short *Getting ready* page brings them back first; when much is due but the next
 page's material is ready, the course goes on with reviews woven in. Now and then a few things the
-book believes you know are slipped onto pages one, seven and thirty days later; inside the cover,
-*How well the book knows you* sets its predictions against what you actually recalled, and the
+book expects you to recall are slipped onto pages one, seven and thirty days later. The back page,
+*Practice evidence and estimates*, compares review predictions with observed answers, and the
 memory model's intervals move a little, slowly, towards the evidence. When answers slow and misses
 pile up late in a long page, the page shortens (two remaining reviews become listening or reading
 choices, the rest wait) and says so in one line. Settings: retention aim (80–95%), reviews per day,
@@ -188,31 +191,32 @@ page offers to continue.
 The inside cover asks for one text you want to read for real — from the Library, pasted or
 scanned, or a ru.wikisource link (fetched through the MediaWiki parse API and cleaned to its
 paragraphs). It becomes *your book*, kept in the notebook (several allowed; one current), and
-the cover keeps **Your book** beside a ladder
-of the next twenty words to practise (occurrences in the text, weighted toward the first
+the cover keeps **Your book** with a ladder
+of the next twenty words worth knowing (occurrences in the text, weighted toward the first
 page) and the grammar patterns it leans on. The text's words are lemmatized by the course's
 tables, then by the tutor (`claude-sonnet-5-5`, 300 forms per call, cached in the goal with a
 short gloss), with a rule-based stemmer standing in until that arrives.
 
 **Toward my book** (＋, or the panel) has the tutor write a page from the goal's own sentences:
-a passage of 2–4 consecutive sentences that are now ≥80% known (glossed), then exercises on the
+a passage of 2–4 consecutive sentences that are at ≥95% production-backed form coverage (glossed), then exercises on the
 most valuable unknown words taken from the text. Every Russian string on the page must be a
 contiguous stretch of the text; anything invented is dropped. Without a key, an offline page
 teaches the words through their own sentences. The book also writes one by itself when a
 brand-new course page would teach nothing toward the goal while a readable stretch waits (at
-most one in three pages). When the first five sentences are each ≥90% known, the book opens
-them as a page of their own — *The first page of your book* — with tap-to-gloss
+most one in three pages). When the first five sentences are each at ≥98% form coverage, the book opens
+them as a page of their own — *Try the first page of your book* — with tap-to-gloss
 and a red «Пе́рвая страни́ца» stamp. Policies and thresholds: `Drussky/Goal/Goal.swift`;
 the distance arithmetic is LearningCore's `Target`.
 
 ## Inside the cover
 
 The book icon (top left) opens your alphabet — each letter in **your own handwriting** once
-you've met it — and every page so far with its mark. **Grammar** draws the system behind the
-words: the three noun declensions, adjectives, pronouns, the two conjugations and the irregular
-verbs, past and imperative, and what each case does — tables that start empty and fill in as you
-meet and produce each cell (a cell glows by the recall of its pattern, a dot marks one you have
-written yourself); tap a cell for its examples with audio and history, a title for the whole table. **My Russian** collects every diary line
+you've met it — and every page so far with its mark. **Grammar** is one row of chips, one per
+table of the system behind the words (the three noun declensions, adjectives, pronouns, the two
+conjugations and the irregular verbs, past and imperative, what each case does), each counting
+the cells you have met; a chip opens its table, *All tables* opens them all. The tables start
+empty and fill in as you meet and produce each cell (a cell glows by the recall of its pattern, a
+dot marks one you have written yourself); tap a cell for its examples with audio and history. **My Russian** collects every diary line
 you have ever written, newest first, with its red pen, and what the pen keeps finding this
 week; it exports as Markdown. Settings: finger drawing, cursive
 models, stress marks, notebook export (pages, ink, recordings as a zip), the notebook as a PDF, credits.
@@ -315,9 +319,10 @@ chart), `-qa-tired` (the current page marked shortened);
 offline page toward it), `-qa-goal-first` (open its first page now); `-qa-judge` (ink on the first
 open recall exercise with Check tapped: the self-judgement panel), `-qa-hooks` (canned hooks on a few
 words; `-qa-contents -qa-node lex:кот` opens one), `-qa-fluency` (three weeks of synthetic fluency
-samples for the cover line and sparklines); `-qa-grammar` (a grammar
-page from the tables), `-qa-grammar-table decl1` / `-qa-grammar-cell decl1/gen-sg` (with
-`-qa-contents`: open that table or cell of the Grammar section).
+samples for the cover line and sparklines); `-qa-grammar` (a grammar page from the tables;
+`-qa-grammar-partial K` works through its first K exercises), `-qa-grammar-table decl1` /
+`-qa-grammar-cell decl1/gen-sg` / `-qa-grammar-all` (with `-qa-contents`: open that table, that
+cell, or every table of the Grammar section).
 
 ## Content
 
@@ -333,3 +338,32 @@ string the app can speak, including generated reviews, has a recording — a uni
 enforces it. `scripts/make_audio.py` (local Silero) generates missing ones.
 
 Learner data lives in Application Support/Drussky (`book.json`, `ink/`, `voice/`).
+
+## Weekly samples and reading evidence
+
+The inside cover's **What I could do this week** opens a dated sample page: one new beginner
+scene with gist/detail/inference questions, five existing human recordings from five speakers,
+an unscripted spoken task, and an uncorrected paragraph. Responses can be written or typed;
+the spoken task keeps its first recording. Saving locks the first response and reveals comparison
+notes, with a separate reflection field. Help, previous familiarity, replay starts and rough weekly
+exposure remain with the sample. These tasks do not grade vocabulary or change recall traces.
+`-qa-baseline` opens the flow in the QA notebook; `-qa-contents -qa-evidence` opens the estimates back page. There are currently two parallel reading sets;
+after those, the app asks for new material rather than presenting a repeat as unseen. Listening
+material is absent from the authored course, but may have been heard in the library; familiarity
+is self-reported, not inferred.
+
+Goal and library vocabulary coverage require successful production of the **actual written form**
+in hear→write, English→write or see→say, with current predicted recall at least 0.85. Copying,
+recognition, inferred lemma credit and root credit do not count. Supported-passage selection uses
+95% coverage and the first-page invitation uses 98%. Neither estimates comprehension; text remains
+available to study below those thresholds. Percentages count running forms; the first-page bonus
+only affects the vocabulary teaching ladder.
+
+After the accusative and genitive have been encountered, **Which ending fits?** offers a short
+concentrated introduction followed by decisions in new sentences. `construction-choice` has its
+own scheduling trace and no production credit. The finite bank never recycles a sentence as new;
+two kinds of context are reserved from ordinary review for checks scheduled at 7 and 30 days.
+Probe records retain the first-attempt flag, help/disputes, context and last logged exposure, so the
+scheduled delay is distinguishable from elapsed time without logged practice. Weekly pages show
+these later examples in prose. The knowledge map, root estimates, hourly observations and
+calibration chart are under **Practice evidence and estimates**, at the back of the inside cover.

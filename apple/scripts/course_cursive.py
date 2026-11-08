@@ -45,7 +45,7 @@ def units(h):
         ]),
         ("The zigzag letters: и ш л м", "In a quick hand и, ш, л and м all turn into one zigzag. The school hand keeps them apart: и and ш start at the top with cups, л and м start with a hook on the line.", [
             ex("и: down, cup, up, down, cup; ш is the same with three cups. л and м begin with a little hook on the baseline and climb, and that hook is what tells лиши'шься apart.",
-               [("мир", "world, peace"), ("ма'ма", "mum"), ("мы", "we")]),
+               [("мир", "world, peace"), ("ма'ма", "mom"), ("мы", "we")]),
             ctr("ма'ма"), ctr("мы"), ccp("мир", 2),
             rh("ма'ма", ["ма'ма", "ла'ма", "ма'ша"]),
             rh("мир"),

@@ -87,7 +87,10 @@ same rule.
 A `trace` or `copy` may carry `cursive: true`: its ghost is then the cursive stroke model
 (`Resources/strokes-cursive.json`, built by `scripts/build_strokes_cursive.py`, joined up letter to
 letter) whatever the learner's cursive setting, and the one-hint coach compares with the cursive
-models. The cursive unit (`scripts/course_cursive.py`) is made of these; it introduces no words.
+models. A cursive `copy` shows the hand once on the line (the print word above it) and leaves room
+to copy; neither fades (trace → copy → dictation) however secure the word, since they teach the
+hand, not the word. The cursive unit (`scripts/course_cursive.py`) is made of these; it introduces
+no words.
 
 Any exercise may also carry an optional `skills: ["past", "negation"]`: the grammar patterns
 it practises, by construction id from `Resources/lemmas.json` (`gram:` prefix optional). When it is
@@ -110,7 +113,11 @@ rules), so authoring it is only needed where the tagger would be wrong.
    most; exercise kinds already say what to do. No hedging, no disclaimers, no "optional",
    no talk about recordings, models, accuracy or the app itself. No mention of friends or coaches.
 5. **Size.** A page is 6–10 exercises, ~8–12 minutes. Writing (trace/copy/dictation/translate/fill)
-   should be the majority of exercises; every page mixes in hearing and speaking.
+   is the majority on a `purpose: "writing"` page (the default for old pages), which also
+   mixes in hearing and speaking. A `purpose: "reading"` page has a majority of
+   passage/read_meaning/family_guess tasks and need not demand production. A `purpose: "oral"`
+   page has mostly read_aloud/listen_pick tasks with at least one spoken response.
+   Diary lines remain last, outside these counts. Lexicon entries may be receptive vocabulary.
 
 # Library — `Drussky/Resources/library.json` (and `PrivatePack/library.json`)
 
@@ -196,10 +203,13 @@ kinds against the same file.
 In the knowledge model, every inflected token fills its cell; `transform` and `paradigm_fill`
 name their cells outright (modality `cue-write`, or `cue-pick` for tiles and `cue_sort`), and a
 phrase put in the wrong bucket is a confusion between two uses. The inside cover's *Grammar*
-section draws every table, cells coloured by the recall of their pattern, a dot for cells the
-learner has produced; ＋ → *Grammar page* builds a page from the weakest cells of the tables
-whose words the learner knows, cases interleaved. `scripts/course_grammar.py` adds one authored
-page at the end of each unit that introduces a system (g1–g8).
+entry is a chip per table (cells met, tinted by mean recall) opening the table, cells coloured by
+the recall of their pattern, a dot for cells the learner has produced; ＋ → *Grammar page* builds
+a page from the weakest cells, cases interleaved, asking only words the learner has produced (the
+headword, or two of its forms) and only cells whose pattern they have met (the cell, or the same
+case in another table of the kind) — unmet rows are left for the course to introduce.
+`scripts/course_grammar.py` adds one authored page at the end of each unit that introduces a
+system (g1–g8).
 
 # Morphology — `Drussky/Resources/morphology.json`
 
@@ -245,3 +255,17 @@ unstressed) to `[lemma, construction…]`, so `"книгу": ["книга", "acc
 the grammar patterns (`{id, name, note, requires?}`). `requires` gives the prerequisite edges, and
 from those the map's "ready next". Add a form here when the course or library introduces one;
 words absent from the map are their own lemma.
+
+# Local sample and construction pages
+
+These are prepared in code, outside generated `course.json`. `construction_choice` has `text`
+(a sentence with a gap), `options` (plausible Russian forms), integer `answer`, `hint` (feedback
+shown afterward), and `word` (the complete sentence identity). It finishes on the first choice,
+uses the separate `construction-choice` modality, and credits only its construction decision.
+It deliberately has no spoken string.
+
+A local `explain` exercise may have an optional `baseline` task; the view routes this to weekly
+sample capture instead of an explanation. `ExerciseResult.baseline` is optional too. The original
+response, help/familiarity flags and timestamps are kept alongside the normal ink/voice files.
+A sealed response cannot be reopened; reflection is a separate field. These are ungraded samples,
+not evidence of lexical recall. Old pages and results decode without either field.

@@ -38,9 +38,9 @@ struct DayState: Codable, Sendable, Equatable {
 /// many reviews a day asks for, when the course is left for what is ready or what is weak, which
 /// exercises are retention probes, and what the desk does when the learner tires.
 extension Book {
-    static let morningUnit = "Новый день · New day"
-    static let welcomeBackUnit = "С возвращением · Welcome back"
-    static let remediationUnit = "Подготовка · Getting ready"
+    static let morningUnit = "Но́вый день · New day"
+    static let welcomeBackUnit = "С возвраще́нием · Welcome back"
+    static let remediationUnit = "Подгото́вка · Getting ready"
 
     var dayPolicy: DayPolicy { DayPolicy(reviewCap: settings.dailyReviewCap ?? 25) }
     var probePolicy: ProbePolicy { ProbePolicy(enabled: settings.probes ?? true) }
@@ -276,8 +276,9 @@ extension Book {
                 day.probes.probes.removeAll { $0.id == p.id }   // no longer something to recall this way
                 continue
             }
+            guard p.candidate != ConstructionChoice.key || !freshConstructionChoices.isEmpty else { continue }
             guard onPage.insert(p.candidate).inserted else { continue }
-            out.append(reviewExercise(for: p.candidate, modality: p.modality, variant: exercises.count + out.count))
+            out.append(reviewExercise(for: p.candidate, modality: p.modality, variant: exercises.count + out.count, forProbe: true))
             day.probes.place(p.id, on: "\(pageID)#\(exercises.count + out.count - 1)")
         }
         return out
@@ -291,7 +292,7 @@ extension Book {
 
     private func drawProbesIfDue() {
         guard day.probes.isDrawDue(at: now(), policy: probePolicy) else { return }
-        let drawn = knowledge.model.drawProbes(reviewCandidates(), at: now(), policy: probePolicy,
+        let drawn = knowledge.model.drawProbes(reviewCandidates().filter { $0.id != ConstructionChoice.key }, at: now(), policy: probePolicy,
                                                seed: UInt64(max(0, now().timeIntervalSince1970)))
         guard !drawn.isEmpty else { return }
         day.probes.add(drawn, at: now())
@@ -326,15 +327,27 @@ extension Book {
     /// A finished exercise that was a probe: its outcome is recorded against what was predicted
     /// (retrievability just before it, read before the outcome is folded in). Called by `record`
     /// before the result is saved, so the result and its observation reach the notebook in one
-    /// write. True when a probe was observed.
+    /// write. True when a probe was observed. A weekly sample is never a probe.
     func observeProbe(_ ref: ExerciseRef, exercise: Exercise, result: ExerciseResult) -> Bool {
-        guard result.status.isComplete, day.probes.probes.contains(where: { $0.item == ref.item && $0.answered == nil }) else { return false }
+        guard result.status.isComplete, exercise.baseline == nil,
+              day.probes.probes.contains(where: { $0.item == ref.item && $0.answered == nil }) else { return false }
         let grade = RussianDomain.grade(exercise, result)
         var predicted: Double?
         if grade != nil, let key = exercise.reviewKey, let m = RussianDomain.modality(for: exercise.kind) {
             predicted = knowledge.domain.reviewComponents(forTarget: key).compactMap { knowledge.model.retrievability($0, m, at: now()) }.min()
         }
-        day.probes.observe(item: ref.item, predicted: predicted, observed: grade.map(\.isSuccess), at: now())
+        // Provenance: the scheduled delay is not the time since the last logged practice, and a
+        // first unaided attempt is not a retry with help.
+        let components = Set(exercise.reviewKey.map { knowledge.domain.reviewComponents(forTarget: $0) } ?? [])
+        let lastExposure = knowledge.model.events.last { $0.item != ref.item && !components.isDisjoint(with: $0.components) }?.t
+        var assistance: [String] = []
+        if result.assisted == true { assistance.append("answer previously shown") }
+        if result.readerAgreed == false { assistance.append("reader disagreement") }
+        if knowledge.model.events.contains(where: { $0.item == ref.item && $0.type == .help }) { assistance.append("tutor") }
+        day.probes.observe(item: ref.item, predicted: predicted, observed: grade.map(\.isSuccess), at: now(),
+                           lastExposure: lastExposure,
+                           firstAttempt: result.attempts <= 1 && result.roundNumber == 0 && (result.failedChecks ?? 0) == 0,
+                           assistance: assistance, context: exercise.word ?? exercise.text)
         return true
     }
 
@@ -369,8 +382,20 @@ extension Book {
     /// next page may bring one more new word. A probe just observed may nudge the memory model.
     func deskObserved(_ ref: ExerciseRef, probed: Bool) {
         if probed { nudgeParameters() }
-        guard let p = index(ofPage: ref.pageID), pages[p].results[safe: ref.index]?.status.isComplete == true else { return }
+        guard let p = index(ofPage: ref.pageID), pages[p].results[safe: ref.index]?.status.isComplete == true,
+              let exercise = pages[p].exercises[safe: ref.index], exercise.baseline == nil else { return }
         let pageID = pages[p].id
+        // The construction page done: two delayed checks in reserved new sentences, at 7 and 30 days.
+        if probePolicy.enabled, exercise.kind == .constructionChoice, pages[p].sourceID == ConstructionChoice.key,
+           !day.probes.probes.contains(where: { $0.id.hasPrefix("construction-transfer:") }),
+           pages[p].exercises.indices.filter({ pages[p].exercises[$0].kind == .constructionChoice })
+               .allSatisfy({ pages[p].results[$0].status.isComplete }) {
+            let drawn = now()
+            day.probes.probes += [7, 30].map { days in
+                Probe(id: "construction-transfer:\(days)", candidate: ConstructionChoice.key,
+                      modality: .constructionChoice, drawn: drawn, due: drawn.addingTimeInterval(Double(days) * 86_400))
+            }
+        }
         let started = knowledge.model.events.first { $0.item.hasPrefix(pageID + "#") }?.t
         let estimate = Fatigue.estimate(events: knowledge.model.events, now: now(), pageStarted: started)
         day.fatigue = estimate
@@ -430,7 +455,7 @@ extension Book {
 
     /// One line inside the cover about today, or nothing.
     var coverLine: String? {
-        if isToday(day.lastShortened) { return "Some reviews were shortened or left for later today." }
+        if isToday(day.lastShortened) { return "Some reviews were left for a later page." }
         if isToday(day.lastOpening) {
             let waiting = day.deferredAtOpening ?? 0
             if day.lastOpeningKind == "welcome-back" {
@@ -438,6 +463,8 @@ extension Book {
             }
             if waiting > 0 { return "\(waiting) reviews wait for tomorrow — today keeps to \(dayPolicy.reviewCap)." }
         }
+        // The hour-of-day preference still orders a new day's page (Day.swift); it confounds
+        // task, choice and time, so it is not announced on the cover.
         return nil
     }
 }

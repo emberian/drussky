@@ -37,6 +37,8 @@ struct Course: Codable, Sendable {
         var title: String
         var intro: String?
         var exercises: [Exercise]
+        /// Absent in older courses: traditional writing practice.
+        var purpose: String? = nil
     }
 
     struct Example: Codable, Sendable, Hashable {
@@ -66,6 +68,7 @@ enum ExerciseKind: String, Codable, Sendable {
     case readAloud = "read_aloud"
     case translate, fill
     case readMeaning = "read_meaning"
+    case constructionChoice = "construction_choice"
     case passage
     /// Generated minimal-pair listening (SoundPairs.swift); never authored in course.json.
     case soundPair = "sound_pair"
@@ -145,11 +148,13 @@ struct Exercise: Codable, Sendable, Hashable {
     var cursive: Bool? = nil
     /// read_handwriting: fixes how the sample is rendered (hand, slant, paper); absent, one is derived.
     var seed: Int? = nil
+    /// A first-attempt weekly sample, kept without an automated grade.
+    var baseline: BaselineTask? = nil
 
     enum CodingKeys: String, CodingKey {
         case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills, prompt
         case narration, words, span
-        case parts, alternatives, word, root
+        case parts, alternatives, word, root, baseline
         case paradigm, cue, cells, forms, items
         case cursive, seed
     }
@@ -187,6 +192,7 @@ struct Exercise: Codable, Sendable, Hashable {
         items = try c.decodeIfPresent([SortItem].self, forKey: .items)
         cursive = try c.decodeIfPresent(Bool.self, forKey: .cursive)
         seed = try c.decodeIfPresent(Int.self, forKey: .seed)
+        baseline = try c.decodeIfPresent(BaselineTask.self, forKey: .baseline)
         if let i = try? c.decodeIfPresent(Int.self, forKey: .answer) {
             answerIndex = i
         } else {
@@ -225,6 +231,7 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(items, forKey: .items)
         try c.encodeIfPresent(cursive, forKey: .cursive)
         try c.encodeIfPresent(seed, forKey: .seed)
+        try c.encodeIfPresent(baseline, forKey: .baseline)
         if let answerIndex { try c.encode(answerIndex, forKey: .answer) }
         else { try c.encodeIfPresent(answerText, forKey: .answer) }
     }

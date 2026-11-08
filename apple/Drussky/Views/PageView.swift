@@ -113,7 +113,11 @@ struct PageView: View {
     @ViewBuilder private func footer(_ page: BookPage) -> some View {
         VStack(alignment: .leading, spacing: 18) {
             DeskLine(pageIndex: pageIndex)
-            if page.isFinished {
+            if page.isBaseline { BaselineRecallNotes() }
+            if page.isFinished && page.isBaseline {
+                Text("This week’s examples are kept above. Return to them beside a later sample to see what changed.")
+                    .scaledFont(18).foregroundStyle(Theme.text)
+            } else if page.isFinished {
                 HStack(alignment: .center, spacing: 18) {
                     GradeStamp(page: page)
                     VStack(alignment: .leading, spacing: 4) {

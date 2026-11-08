@@ -271,6 +271,8 @@ final class SpeakingTests: XCTestCase {
         XCTAssertTrue(tip.message.contains("may have misheard"), tip.message)
         XCTAssertEqual(r.provenance, .words)
         XCTAssertTrue(r.isWordLevel)
+        // A hypothesis carries no sound confidence, so it is kept in the report but never shown as a correction.
+        XCTAssertTrue(r.actionableTips.isEmpty, "word alignment is retained without a pronunciation claim")
         XCTAssertEqual(r.accuracy, 2.0 / 3.0, accuracy: 1e-9)
     }
 
@@ -280,8 +282,9 @@ final class SpeakingTests: XCTestCase {
         let wrong = try XCTUnwrap(voices.pairVoices("за́мок", exactStress: true).first)
         let miss = try await analyse(target: "замо́к", take: wrong, model: right, heard: "замок")
         XCTAssertEqual(miss.stressedSyllable, 0)
-        let tip = try XCTUnwrap(miss.tips.first { $0.contrast == "stress" }, "\(miss.tips)")
-        XCTAssertTrue(tip.message.contains("«мо́к»"), tip.message)
+        // The word-level stress hypothesis may sit in the raw report; uncalibrated prosody is shown
+        // only as a playback comparison, never as a correction.
+        XCTAssertTrue(miss.actionableTips.isEmpty, "uncalibrated prosody remains a playback comparison")
         let hit = try await analyse(target: "за́мок", take: wrong, model: wrong, heard: "замок")
         XCTAssertEqual(hit.stressedSyllable, 0)
         XCTAssertFalse(hit.tips.contains { $0.contrast == "stress" })
@@ -319,7 +322,13 @@ final class SpeakingTests: XCTestCase {
         XCTAssertTrue(words.isWordLevel)
         book.knowledge.heard(page: page, index: 0, take: "take-0.m4a", report: words, attempt: 1)
         XCTAssertFalse(book.knowledge.model.events.contains { $0.id == "speech:take-0.m4a" }, "a hypothesis about spelling is not sound evidence")
-        let sub = PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "i"), verdict: .substituted, letterRange: 1..<2)
+        // Phone-level, but the ы's verdict is below the confidence floor: still no evidence.
+        let unsure = PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "i", confidence: 0.6), verdict: .substituted, letterRange: 1..<2)
+        let uncertain = PronunciationReport(target: "был", transcript: "бил", expected: [], heard: [Phone(ipa: "b"), Phone(ipa: "i"), Phone(ipa: "l")],
+                                            sounds: [unsure], syllables: [], stressedSyllable: nil, accuracy: 0.6, tips: [], provenance: .phones)
+        book.knowledge.heard(page: page, index: 0, take: "uncertain.m4a", report: uncertain, attempt: 1)
+        XCTAssertFalse(book.knowledge.model.events.contains { $0.id == "speech:uncertain.m4a" }, "an uncertain sound is not evidence")
+        let sub = PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "i", confidence: 0.99), verdict: .substituted, letterRange: 1..<2)
         let report = PronunciationReport(target: "был", transcript: "бил", expected: [], heard: [Phone(ipa: "b"), Phone(ipa: "i"), Phone(ipa: "l")],
                                          sounds: [sub], syllables: [], stressedSyllable: nil, accuracy: 0.6, tips: [], provenance: .phones)
         XCTAssertFalse(report.isWordLevel)
@@ -417,7 +426,8 @@ final class SpeakingTests: XCTestCase {
         let ref = ExerciseRef(pageID: book.page!.id, index: 0)
         let take = book.newTakeURL(ref)
         try Data("voice".utf8).write(to: take)
-        let sub = PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "i"), verdict: .substituted, letterRange: 1..<2)
+        // A confident substitution (above the display floor): the kind of sound verdict that leaves evidence.
+        let sub = PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "i", confidence: 0.99), verdict: .substituted, letterRange: 1..<2)
         let report = PronunciationReport(target: "был", transcript: "бил", expected: [], heard: [Phone(ipa: "b"), Phone(ipa: "i"), Phone(ipa: "l")],
                                          sounds: [sub], syllables: [], stressedSyllable: nil, accuracy: 0.6, tips: [])
         try JSONEncoder().encode(report).write(to: SpeakingTurn.reportURL(for: take))

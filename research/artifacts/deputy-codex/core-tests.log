@@ -1,0 +1,68 @@
+Test Suite 'LearningCore native checks' started at 2026-11-08 01:51:38.551.
+Test Suite 'DayTests' started at 2026-11-08 01:51:38.553.
+Test Case '-[CoreTests.DayTests testCalibrationMathAndNudge]' started.
+Test Case '-[CoreTests.DayTests testCalibrationMathAndNudge]' passed (0.007 seconds).
+Test Case '-[CoreTests.DayTests testDayBoundaryAndAbsence]' started.
+Test Case '-[CoreTests.DayTests testDayBoundaryAndAbsence]' passed (0.000 seconds).
+Test Case '-[CoreTests.DayTests testFatigueFromSyntheticSessions]' started.
+Test Case '-[CoreTests.DayTests testFatigueFromSyntheticSessions]' passed (0.001 seconds).
+Test Case '-[CoreTests.DayTests testFrontierPrefersTheCoursePageWhenItsPrerequisitesAreStrong]' started.
+Test Case '-[CoreTests.DayTests testFrontierPrefersTheCoursePageWhenItsPrerequisitesAreStrong]' passed (0.001 seconds).
+Test Case '-[CoreTests.DayTests testFrontierRemediatesWeakPrerequisites]' started.
+Test Case '-[CoreTests.DayTests testFrontierRemediatesWeakPrerequisites]' passed (0.001 seconds).
+Test Case '-[CoreTests.DayTests testHourlyPreference]' started.
+Test Case '-[CoreTests.DayTests testHourlyPreference]' passed (0.000 seconds).
+Test Case '-[CoreTests.DayTests testMorningCompositionCapAndOverflowOrder]' started.
+Test Case '-[CoreTests.DayTests testMorningCompositionCapAndOverflowOrder]' passed (0.000 seconds).
+Test Case '-[CoreTests.DayTests testProbeProvenanceAndLegacyDecoding]' started.
+Test Case '-[CoreTests.DayTests testProbeProvenanceAndLegacyDecoding]' passed (0.000 seconds).
+Test Case '-[CoreTests.DayTests testProbesAreDrawnStratifiedAndDeterministic]' started.
+Test Case '-[CoreTests.DayTests testProbesAreDrawnStratifiedAndDeterministic]' passed (0.001 seconds).
+Test Case '-[CoreTests.DayTests testWelcomeBackSamplesAcrossUrgency]' started.
+Test Case '-[CoreTests.DayTests testWelcomeBackSamplesAcrossUrgency]' passed (0.000 seconds).
+Test Suite 'DayTests' passed at 2026-11-08 01:51:38.566.
+	 Executed 10 tests, with 0 failures (0 unexpected) in 0.012 (0.013) seconds
+Test Suite 'LearningCoreTests' started at 2026-11-08 01:51:38.566.
+Test Case '-[CoreTests.LearningCoreTests testALapseComesBackAfterTheRelearningStep]' started.
+Test Case '-[CoreTests.LearningCoreTests testALapseComesBackAfterTheRelearningStep]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testComponentIDAndExport]' started.
+Test Case '-[CoreTests.LearningCoreTests testComponentIDAndExport]' passed (0.001 seconds).
+Test Case '-[CoreTests.LearningCoreTests testConfusionEdgesFromEvidence]' started.
+Test Case '-[CoreTests.LearningCoreTests testConfusionEdgesFromEvidence]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testDistanceToTarget]' started.
+Test Case '-[CoreTests.LearningCoreTests testDistanceToTarget]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testDueReviewsFirstRecallAndUrgency]' started.
+Test Case '-[CoreTests.LearningCoreTests testDueReviewsFirstRecallAndUrgency]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testEventLogAppendsAndSurvivesABadLine]' started.
+Test Case '-[CoreTests.LearningCoreTests testEventLogAppendsAndSurvivesABadLine]' passed (0.007 seconds).
+Test Case '-[CoreTests.LearningCoreTests testEventsReplayInTimeOrderAndDedupe]' started.
+Test Case '-[CoreTests.LearningCoreTests testEventsReplayInTimeOrderAndDedupe]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testFrontierNeedsStrongPrerequisites]' started.
+Test Case '-[CoreTests.LearningCoreTests testFrontierNeedsStrongPrerequisites]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testFSRSFormulas]' started.
+Test Case '-[CoreTests.LearningCoreTests testFSRSFormulas]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testGrowthAndCoverage]' started.
+Test Case '-[CoreTests.LearningCoreTests testGrowthAndCoverage]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testHelpCapsTheNextOutcome]' started.
+Test Case '-[CoreTests.LearningCoreTests testHelpCapsTheNextOutcome]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testMemoryIsPerModality]' started.
+Test Case '-[CoreTests.LearningCoreTests testMemoryIsPerModality]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testSecureMeansStrongNowNotNeverWrong]' started.
+Test Case '-[CoreTests.LearningCoreTests testSecureMeansStrongNowNotNeverWrong]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testTargetAcceptsDomainKnowledgePolicy]' started.
+Test Case '-[CoreTests.LearningCoreTests testTargetAcceptsDomainKnowledgePolicy]' passed (0.000 seconds).
+Test Case '-[CoreTests.LearningCoreTests testTransferAndEstimates]' started.
+Test Case '-[CoreTests.LearningCoreTests testTransferAndEstimates]' passed (0.000 seconds).
+Test Suite 'LearningCoreTests' passed at 2026-11-08 01:51:38.578.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.010 (0.011) seconds
+Test Suite 'MetricsTests' started at 2026-11-08 01:51:38.578.
+Test Case '-[CoreTests.MetricsTests testAppendAndQuery]' started.
+Test Case '-[CoreTests.MetricsTests testAppendAndQuery]' passed (0.000 seconds).
+Test Case '-[CoreTests.MetricsTests testChangeComparesMediansOfTwoWindows]' started.
+Test Case '-[CoreTests.MetricsTests testChangeComparesMediansOfTwoWindows]' passed (0.000 seconds).
+Test Case '-[CoreTests.MetricsTests testLogRoundTripAndTolerance]' started.
+Test Case '-[CoreTests.MetricsTests testLogRoundTripAndTolerance]' passed (0.002 seconds).
+Test Suite 'MetricsTests' passed at 2026-11-08 01:51:38.581.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'LearningCore native checks' passed at 2026-11-08 01:51:38.581.
+	 Executed 28 tests, with 0 failures (0 unexpected) in 0.025 (0.030) seconds

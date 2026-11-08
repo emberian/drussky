@@ -178,7 +178,7 @@ LEXICON = [
     W("де'сять", "ten"), W("плюс", "plus"), W("двена'дцать", "twelve"), W("четы'рнадцать", "fourteen"),
     W("шестна'дцать", "sixteen"), W("семна'дцать", "seventeen"), W("восемна'дцать", "eighteen"), W("девятна'дцать", "nineteen"),
     # unit 16
-    W("ко'смос", "space (outer space)", "🌌"), W("пла'нета", "planet", "🪐"), W("лети'т", "flies (it)"),
+    W("ко'смос", "space (outer space)", "🌌"), W("плане'та", "planet", "🪐"), W("лети'т", "flies (it)"),
     W("в", "in, into"), W("число'", "number", "🔢"), W("зада'ча", "problem, task"), W("пра'вда", "truth; true"), W("непра'вда", "not true, a lie"),
     W("мысль", "thought", "💭"), W("ничего'", "nothing", None, "said nichevo"), W("мы'слю", "I think, I reason (as in Descartes)"),
     W("сле'довательно", "therefore"), W("существу'ю", "I exist"), W("ночь", "night", "🌙"),
@@ -459,7 +459,7 @@ U.append(("u10", "Mine and yours", "мой, твой, наш, ваш · у ме�
 
 U.append(("u11", "Doing things", "чита́ть, ду́мать, знать", [
     ("Reading: я чита́ю", "One verb, six endings. Learn them on чита́ть, to read, and they work for hundreds of verbs.", [
-        ex("Drop -ть from чита'ть and add the ending for who is doing it: я -ю, ты -ешь, он and она' -ет.", [("чита'ть", "to read"), ("я чита'ю", "I read"), ("ты чита'ешь", "you read"), ("она' чита'ет", "she reads"), ("чита'ю кни'гу", "I read a book")]),
+        ex("Drop -ть from чита'ть and add the ending for who is doing it: я -ю, ты -ешь, он and она' -ет. Notice that кни'га becomes кни'гу when it is the thing being read.", [("чита'ть", "to read"), ("я чита'ю", "I read"), ("ты чита'ешь", "you read"), ("она' чита'ет", "she reads"), ("чита'ю кни'гу", "I read a book")]),
         tr("я чита'ю"), lp("ты чита'ешь", ["я чита'ю", "ты чита'ешь", "он чита'ет"]), cp("он чита'ет", 1),
         tl("I read", "я чита'ю"), tl("to read", "чита'ть"), fl("Ма'ма ", "чита'ет", ".", "Mom is reading."), dc("Ты чита'ешь."),
         ra("Я чита'ю кни'гу."),
@@ -496,7 +496,7 @@ U.append(("u12", "Speaking and understanding", "говори́ть, понима
         ra("Ты говори'шь, а я ду'маю."), rm("Кто говори'т?", ["Who is speaking?", "Who is reading?", "Who knows?"]),
     ]),
     ("In Russian: по-ру́сски", "По-ру́сски means in Russian. Now you can say what you speak and what you understand.", [
-        ex("Понима'ть, to understand, goes like чита'ть: я понима'ю, ты понима'ешь. По-ру'сски and по-англи'йски name the language.", [("Я говорю' по-ру'сски.", "I speak Russian."), ("Я понима'ю.", "I understand."), ("Я не понима'ю.", "I don't understand."), ("понима'ть", "to understand"), ("ты понима'ешь", "you understand"), ("по-англи'йски", "in English")]),
+        ex("You already know я не понима'ю; the full verb понима'ть (to understand) goes like чита'ть: я понима'ю, ты понима'ешь. По-ру'сски and по-англи'йски name the language.", [("Я говорю' по-ру'сски.", "I speak Russian."), ("Я понима'ю.", "I understand."), ("Я не понима'ю.", "I don't understand."), ("понима'ть", "to understand"), ("ты понима'ешь", "you understand"), ("по-англи'йски", "in English")]),
         lp("Я не понима'ю.", ["Я понима'ю.", "Я не понима'ю.", "Я не зна'ю."]), tl("I understand", "я понима'ю"),
         tl("in Russian", "по-ру'сски"), tl("to understand", "понима'ть"), fl("Я говорю' ", "по-англи'йски", ".", "I speak English."), dc("Ты понима'ешь?"),
         ra("Я немно'го говорю' по-ру'сски."), cp("по-ру'сски"),
@@ -626,11 +626,11 @@ U.append(("c1", "Keeping up", "я не понима́ю · ещё раз · ка
 
 U.append(("u16", "First readings", "ро́бот, число́, мысль, звезда́", [
     ("Robots and rockets", "Tiny readings from here on. Read each one for its meaning first; then say it and write it.", [
-        ex("Science fiction is kind to beginners: many of its words are already familiar.", [("ко'смос", "space"), ("пла'нета", "planet"), ("раке'та", "rocket")]),
+        ex("Science fiction is kind to beginners: many of its words are already familiar.", [("ко'смос", "space"), ("плане'та", "planet"), ("раке'та", "rocket")]),
         rm("Ро'бот ду'мает.", ["The robot is thinking.", "The robot is reading.", "The robot knows."]),
         tl("space (outer space)", "ко'смос"), ra("Э'то ро'бот. Он ду'мает и говори'т."), dc("Ро'бот зна'ет, где раке'та."),
-        lp("пла'нета", ["пла'нета", "раке'та", "звезда'"]),
-        fl("Раке'та лети'т в ", "ко'смос", ".", "The rocket is flying into space."), tl("planet", "пла'нета"),
+        lp("плане'та", ["плане'та", "раке'та", "звезда'"]),
+        fl("Раке'та лети'т в ", "ко'смос", ".", "The rocket is flying into space."), tl("planet", "плане'та"),
         cp("Раке'та лети'т.", 1),
     ]),
     ("Numbers and facts", "Mathematics in Russian is short and exact.", [
@@ -806,7 +806,10 @@ def build():
             else:
                 n += 1
                 pid, (ptitle, intro, exercises) = f"{uid}-p{n}", page
-            unit["pages"].append({"id": pid, "title": ptitle, "intro": intro, "exercises": exercises})
+            authored = {"id": pid, "title": ptitle, "intro": intro, "exercises": exercises}
+            if pid == "u28-p2":
+                authored["purpose"] = "reading"
+            unit["pages"].append(authored)
         units[uid] = unit
     assert sorted(UNIT_ORDER) == sorted(units), set(UNIT_ORDER) ^ set(units)
     for pid, into, before in PAGE_MOVES:

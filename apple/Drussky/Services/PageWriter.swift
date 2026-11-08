@@ -76,8 +76,9 @@ enum PageWriter {
     Rules: mark stress with U+0301 on every Russian word of 2+ syllables (never on ё, never on one-syllable \
     words). Writing exercises (trace, copy, dictation, translate, fill) should be the majority except on reading \
     pages. Never use letters the learner hasn't met. English prompts must be unambiguous (say "you (one person)" \
-    etc.). One-line instructions only; no talk about apps, recordings or accuracy. Russian must be correct and \
-    natural. new_words lists every new word or phrase the page teaches that the learner should remember.
+    etc.). One-line instructions only; no talk about apps, recordings or accuracy. Russian must be correct, \
+    idiomatic and natural (never calqued from English word order, and never mixing ты and вы within a dialogue). \
+    new_words lists every new word or phrase the page teaches that the learner should remember.
     """
 
     static func prompt(for request: Request, book: Book) -> String {
@@ -173,6 +174,7 @@ enum PageWriter {
         func readable(_ s: String?) -> Bool { readingAnyLetters || lettersOK(s) }
         func nonEmpty(_ s: String?) -> Bool { !(s ?? "").trimmingCharacters(in: .whitespaces).isEmpty }
         switch ex.kind {
+        case .constructionChoice: return nil  // prepared locally, never supplied by the tutor
         case .meet: return nil  // letters are introduced only by the course
         case .explain:
             guard nonEmpty(ex.text), readable(ex.text) else { return nil }

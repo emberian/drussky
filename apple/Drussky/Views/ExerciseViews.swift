@@ -46,8 +46,13 @@ struct ExerciseRow: View {
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             VStack(spacing: 6) {
-                MarginMark(number: slot.index + 1, status: slot.result.status, isActive: isActive, isReview: slot.exercise.reviewKey != nil)
-                if slot.exercise.kind != .explain || isActive {
+                if slot.exercise.baseline != nil && slot.result.status.isComplete {
+                    Image(systemName: "bookmark").foregroundStyle(Theme.muted).frame(width: 34, height: 34)
+                        .accessibilityLabel("Sample kept")
+                } else {
+                    MarginMark(number: slot.index + 1, status: slot.result.status, isActive: isActive, isReview: slot.exercise.reviewKey != nil)
+                }
+                if slot.exercise.baseline == nil && (slot.exercise.kind != .explain || isActive) {
                     Button(action: onAsk) {
                         Image(systemName: "questionmark.bubble")
                             .font(.system(size: 17))
@@ -82,6 +87,9 @@ struct ExerciseRow: View {
     }
 
     @ViewBuilder private var content: some View {
+        if let task = slot.exercise.baseline {
+            BaselineExercise(slot: slot, task: task).id(slot.ref)
+        } else {
         switch slot.exercise.kind {
         case .meet: MeetExercise(slot: slot, isActive: isActive)
         case .explain: ExplainExercise(slot: slot)
@@ -90,6 +98,7 @@ struct ExerciseRow: View {
         case .listenPick: ListenPickExercise(slot: slot, isActive: isActive)
         case .readAloud: ReadAloudExercise(slot: slot, isActive: isActive)
         case .readMeaning: ReadMeaningExercise(slot: slot, isActive: isActive)
+        case .constructionChoice: ConstructionChoiceExercise(slot: slot)
         case .passage: PassageExercise(slot: slot)
         case .soundPair: SoundPairExercise(slot: slot, isActive: isActive)
         case .diary: DiaryExercise(slot: slot, isActive: isActive)
@@ -100,6 +109,7 @@ struct ExerciseRow: View {
         case .transform: WritingExercise(slot: slot, isActive: isActive)  // Grammar/: a form from a cue, on the strip
         case .paradigmFill: ParadigmFillExercise(slot: slot, isActive: isActive)
         case .cueSort: CueSortExercise(slot: slot, isActive: isActive)
+        }
         }
     }
 }
@@ -289,6 +299,7 @@ struct ExplainExercise: View {
                     ForEach(examples, id: \.self) { ex in
                         VStack(alignment: .leading, spacing: 4) {
                             RussianLine(text: ex.ru, size: 24)
+                                .fixedSize()  // a word, never "м…": the flow row gives each example its own width
                             Text(ex.en).scaledFont(15).foregroundStyle(Theme.muted)
                         }
                     }
@@ -349,20 +360,23 @@ struct WritingExercise: View {
     private var selfJudged: Bool { isRecall && book.settings.writingJudge == .myself }
     private var judging: Bool { selfJudged && checked && !pad.isEmpty && !result.status.isComplete }
 
+    /// A cursive copy shows the hand once on the line (the print word is above), then room to copy.
+    private var cursiveCopy: Bool { ex.kind == .copy && ex.cursive == true }
+
     private var ghost: String? {
         if let ghostOverride { return ghostOverride }
-        return ex.kind == .trace ? target : nil
+        return ex.kind == .trace || cursiveCopy ? target : nil
     }
 
     private var ghostTimes: Int {
-        if ghostOverride != nil { return 1 }  // meet: one model, then free paper
+        if ghostOverride != nil || cursiveCopy { return 1 }  // meet and cursive copy: one model, then free paper
         let len = RussianText.unstressed(ghost ?? "").count
         return len <= 3 ? 3 : len <= 6 ? 2 : 1
     }
 
     private var stripHeight: CGFloat {
         let sizing = ghost ?? target
-        let times = ghost != nil ? ghostTimes : (ex.kind == .copy ? max(ex.times ?? 1, 1) : 1)
+        let times = ghost != nil ? ghostTimes + (cursiveCopy ? max(ex.times ?? 1, 1) : 0) : (ex.kind == .copy ? max(ex.times ?? 1, 1) : 1)
         let preferred: CGFloat = horizontalCompact ? 96 : 112
         return StripMetrics.fitting(sizing, times: times, width: width, cursive: cursive, preferred: preferred)
     }

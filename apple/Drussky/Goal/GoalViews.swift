@@ -110,8 +110,8 @@ struct GoalSection: View {
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("toward-my-book")
                 Text(d.passageWindow(avoiding: Set(goal.usedSentences ?? [])) == nil
-                     ? "No stretch reads easily yet; a page teaches its words in their own sentences."
-                     : "A page from its own sentences: a readable passage, then its new words.")
+                     ? "Start with its words in short supported sentences."
+                     : "A supported passage from the book, then practice with its new words.")
                     .font(.system(size: 13)).foregroundStyle(Theme.muted).fixedSize(horizontal: false, vertical: true)
             }
         }
@@ -133,14 +133,18 @@ struct GoalSection: View {
         if let opened = goal.firstPageOpened {
             HStack(spacing: 10) {
                 Image(systemName: "seal.fill").foregroundStyle(Theme.redPen)
-                Text("First page opened \(opened.formatted(date: .abbreviated, time: .omitted)).").font(.system(size: 15)).foregroundStyle(Theme.text)
+                Text("You opened its first page on \(PageView.russianDate(opened)).").font(.system(size: 15)).foregroundStyle(Theme.text)
             }
         } else if d.firstPageReady {
             Button { book.openFirstPageIfReady() } label: {
-                Label("Open the first page with word help", systemImage: "book.pages")
+                Label("Try the first page", systemImage: "book.pages")
                     .font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.redPen)
             }
             .buttonStyle(.plain)
+        } else {
+            // No bar: one honest word about the first page's forms (ReadingEvidence), nothing to fill.
+            Text("First page: \(ReadingEvidence.label(for: d.firstPageCoverage)).")
+                .font(.system(size: 13)).foregroundStyle(Theme.muted)
         }
     }
 }
@@ -222,7 +226,7 @@ struct GoalPicker: View {
                     .padding(10).frame(minHeight: 260)
                     .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
                     .overlay(alignment: .topLeading) {
-                        if text.isEmpty { Text("Вставьте текст…").font(Theme.russian(19)).foregroundStyle(Theme.muted).padding(18).allowsHitTesting(false) }
+                        if text.isEmpty { Text("Вста́вьте текст…").font(Theme.russian(19)).foregroundStyle(Theme.muted).padding(18).allowsHitTesting(false) }
                     }
                 makeButton(enabled: RussianText.letters(in: text).count >= 5) {
                     Goal(title: title.isEmpty ? String(text.prefix(40)).trimmingCharacters(in: .whitespacesAndNewlines) : title,
@@ -319,7 +323,7 @@ struct GoalPullHeader: View {
                     .font(Theme.russian(19)).foregroundStyle(Theme.text.opacity(0.85))
                     .padding(14).frame(maxWidth: .infinity, alignment: .leading)
                     .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
-                Text("The page opens with this passage, then practises its new words in context.")
+                Text("This stretch has at least 95% form coverage. Try it with support, then practice its new words.")
                     .font(.system(size: 15)).foregroundStyle(Theme.text)
             } else {
                 Text("The page introduces words from the text, using the sentences they come from.")

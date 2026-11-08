@@ -66,8 +66,7 @@ struct GoalAnalysis: Sendable {
                     else if glosses[lemma] == nil, let g = domain.graph[ComponentID(.lexeme, lemma)]?.gloss { glosses[lemma] = g }
                     tokens.append(Token(text: RussianText.unstressed(word), key: key, lemma: lemma, guessed: guessed, sentence: si))
                     let lexID = ComponentID(.lexeme, lemma)
-                    var candidates = [lexID]
-                    if lemma != key { candidates += [ComponentID(.form, key), ComponentID(.lexeme, key)] }
+                    let candidates = lemma == key ? [lexID] : [ComponentID(.form, key), ComponentID(.lexeme, key)]
                     let bonus = si < Goal.firstPageSentences ? Goal.firstPageBonus : 0
                     units.append(Target.Unit(key: lexID, candidates: candidates, weight: 1 + bonus))
                     for tag in lemmas.tags(key) { patterns[tag, default: 0] += 1 }
@@ -193,10 +192,18 @@ struct GoalDistance: Sendable {
 
     init(analysis: GoalAnalysis, model: KnowledgeModel, at date: Date) {
         self.analysis = analysis
-        let d = model.distance(to: analysis.target, at: date, threshold: Goal.knownThreshold, ladder: 20)
+        var known: [Target.Unit: Bool] = [:]
+        func knows(_ unit: Target.Unit) -> Bool {
+            if let cached = known[unit] { return cached }
+            let value = ReadingEvidence.knows(unit, model: model, at: date)
+            known[unit] = value
+            return value
+        }
+        let d = model.distance(to: analysis.target, ladder: 20, knows: knows)
         core = d
+        coverage = analysis.target.units.isEmpty ? 0 : Double(analysis.target.units.filter(knows).count) / Double(analysis.target.units.count)
         var unknownAll = Set<String>()
-        for (i, u) in analysis.target.units.enumerated() where !model.knows(u, at: date, threshold: Goal.knownThreshold) {
+        for (i, u) in analysis.target.units.enumerated() where !knows(u) {
             unknownAll.insert(analysis.tokens[i].lemma)
         }
         unknownLemmas = unknownAll
@@ -213,7 +220,7 @@ struct GoalDistance: Sendable {
         firstPageCoverage = firstCoverage
         var unknown = Set<String>()
         for s in first {
-            for i in analysis.sentences[s].tokens where !model.knows(analysis.target.units[i], at: date, threshold: Goal.knownThreshold) {
+            for i in analysis.sentences[s].tokens where !knows(analysis.target.units[i]) {
                 unknown.insert(analysis.tokens[i].lemma)
             }
         }
@@ -221,7 +228,8 @@ struct GoalDistance: Sendable {
         firstPageReady = !first.isEmpty && firstCoverage >= Goal.firstPageThreshold
     }
 
-    var coverage: Double { core.coverage }
+    /// Unweighted running forms; the first-page bonus is only for the teaching ladder.
+    let coverage: Double
     var unknownWords: Int { core.unknownKeys }
     var totalWords: Int { core.keys }
 

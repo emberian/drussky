@@ -136,6 +136,16 @@ enum NotebookPDF {
 
         add(text(prompt(ex), font: rounded(9.5, .semibold), color: .muted))
         switch ex.kind {
+        case .explain where ex.baseline != nil:
+            // A weekly sample: the task, its passage, its questions, and the first response as kept.
+            let task = ex.baseline!
+            add(text(task.prompt, font: serif(10.5), color: .text), after: 3)
+            if let passage = task.passage { add(text(passage, font: serif(12.5), color: .text), after: 4) }
+            for (n, q) in task.questions.enumerated() { add(text("\(n + 1). \(q)", font: serif(10), color: .text)) }
+            if let response = r.baseline {
+                if !response.text.isEmpty { add(text(response.text, font: serif(12), color: .ink), after: 3) }
+                if let reflection = response.reflection, !reflection.isEmpty { add(text(reflection, font: serif(10, .regular, italic: true), color: .muted)) }
+            }
         case .explain:
             add(text(ex.text ?? "", font: serif(10.5), color: .text), after: 4)
         case .passage, .familyGuess:
@@ -158,6 +168,10 @@ enum NotebookPDF {
         case .readMeaning:
             add(text(ex.text ?? "", font: serif(15, .medium), color: .text))
             add(choices(ex.options ?? [], chosen: r.chosen, correct: ex.answerIndex, russian: false))
+        case .constructionChoice:
+            add(text(ex.text ?? "", font: serif(15, .medium), color: .text))
+            if let en = ex.en { add(text(en, font: serif(10, .regular, italic: true), color: .muted)) }
+            add(choices(ex.options ?? [], chosen: r.chosen, correct: ex.answerIndex, russian: true))
         case .readAloud:
             add(text(ex.text ?? "", font: serif(15, .medium), color: .text))
             if let heard = r.recognized, !heard.isEmpty { add(text("heard: «\(heard)»", font: rounded(9), color: .muted)) }
@@ -372,7 +386,7 @@ enum NotebookPDF {
     static func prompt(_ ex: Exercise) -> String {
         switch ex.kind {
         case .meet: "Meet the letter \(ex.letter ?? ""): trace it, then write it"
-        case .explain: "A note"
+        case .explain: ex.baseline.map { "Weekly sample · \($0.kind.rawValue)" } ?? "A note"
         case .trace: "Trace"
         case .copy: (ex.times ?? 1) > 1 ? "Copy it \(ex.times!) times" : "Copy"
         case .listenPick: "Listen and pick · «\(ex.say ?? "")»"
@@ -381,6 +395,7 @@ enum NotebookPDF {
         case .translate: "Write it in Russian"
         case .fill: "Write the missing word"
         case .readMeaning: "What does it mean?"
+        case .constructionChoice: "Which ending fits?"
         case .passage: "Read"
         case .soundPair: ex.say != nil ? "Sound pair · «\(ex.say ?? "")»" : "Sound pair"
         case .diary: "Дневни́к"

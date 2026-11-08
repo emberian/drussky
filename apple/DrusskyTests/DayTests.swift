@@ -276,7 +276,7 @@ final class DayTests: XCTestCase {
         let page = book.pages[p]
         let line = try XCTUnwrap(book.deskLine(for: p))
         XCTAssertEqual(line, "2 reviews now use choices. 3 reviews wait for later.")
-        XCTAssertEqual(book.coverLine, "Some reviews were shortened or left for later today.")
+        XCTAssertEqual(book.coverLine, "Some reviews were left for a later page.")
         // Two of the remaining reviews became recognition; the rest were left for later, never graded.
         let remaining = Array(9..<14)
         XCTAssertEqual(remaining.filter { page.exercises[$0].kind == .listenPick || page.exercises[$0].kind == .readMeaning }, [9, 10])

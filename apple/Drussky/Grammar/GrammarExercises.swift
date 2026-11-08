@@ -67,14 +67,16 @@ struct ParadigmRowHintView: View {
     let hint: ParadigmRowHint
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 8) {
-                Text(hint.table.title).font(Theme.label(12)).foregroundStyle(Theme.muted)
-                Text("·").foregroundStyle(Theme.muted)
-                Text(hint.rowLabel).font(Theme.label(12)).foregroundStyle(Theme.accent)
+        // One row: the table and case as a leading chip, then the row's cells — compact, so it
+        // stays in view above the next exercise when the page moves on.
+        FlowRow(spacing: 8) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(hint.rowLabel).font(Theme.label(13)).foregroundStyle(Theme.accent)
+                Text(hint.table.title).font(Theme.label(11)).foregroundStyle(Theme.muted).lineLimit(1)
             }
-            FlowRow(spacing: 8) {
-                ForEach(hint.cells, id: \.cell.id) { c, form in
+            .padding(.horizontal, 10).padding(.vertical, 6)
+            .frame(minHeight: 58, alignment: .leading)
+            ForEach(hint.cells, id: \.cell.id) { c, form in
                     let hit = c.id == hint.tableCellID
                     VStack(alignment: .leading, spacing: 2) {
                         Text(hint.table.cols.first { $0.id == c.col }?.label ?? c.col).font(Theme.label(11)).foregroundStyle(Theme.muted)
@@ -87,7 +89,6 @@ struct ParadigmRowHintView: View {
                     .padding(.horizontal, 10).padding(.vertical, 6)
                     .background(RoundedRectangle(cornerRadius: 10).fill(hit ? Theme.redPen.opacity(0.08) : Theme.card))
                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(hit ? Theme.redPen : Theme.rule.opacity(0.4), lineWidth: hit ? 1.5 : 1))
-                }
             }
         }
         .accessibilityElement(children: .combine)

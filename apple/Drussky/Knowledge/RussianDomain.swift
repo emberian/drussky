@@ -38,6 +38,7 @@ extension Modality {
         case .hearPick: "hear → pick"
         case .readPick: "read → pick"
         case .build: "English → build"
+        case .constructionChoice: "choose a construction"
         case .readCursive: "read handwriting"
         case .type: "typed"
         case .transform: "cue → write"
@@ -95,7 +96,7 @@ struct RussianAttempt {
 /// Russian, as Drussky teaches it, in LearningCore's terms.
 struct RussianDomain: KnowledgeDomain {
     let name = "drussky-ru"
-    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .speak, .type, .transform, .classify, .readCursive]
+    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .speak, .type, .transform, .classify, .readCursive, .constructionChoice]
     let graph: KnowledgeGraph
     let lemmas: Lemmas
     /// Roots, affixes and segmentations (Morphology/).
@@ -141,8 +142,12 @@ struct RussianDomain: KnowledgeDomain {
             }
         }
 
-        var comps: [Component] = []
-        var edges: [Edge] = []
+        var comps: [Component] = [Component(id: ConstructionChoice.component, label: "Choosing -а / -у / -и (-ы)",
+                                           gloss: "Subject, direct object, or absence after нет")]
+
+        var edges: [Edge] = ["acc-u", "genitive"].map {
+            Edge(ComponentID(.construction, $0), ConstructionChoice.component, .prerequisite)
+        }
         func letterIDs(_ s: String) -> [ComponentID] { RussianText.letters(in: s).sorted().map { ComponentID(.letter, $0) } }
         for l in course.letters {
             comps.append(Component(id: ComponentID(.letter, l.upper), label: "\(l.upper)\(l.lower)", gloss: l.sound,
@@ -271,6 +276,7 @@ struct RussianDomain: KnowledgeDomain {
 
     /// Which components an exercise exercises.
     func components(for ex: Exercise) -> [ComponentID] {
+        if ex.kind == .constructionChoice { return [ConstructionChoice.component] }
         if ex.kind == .meet, let l = ex.letter { return [ComponentID(.letter, l)] }
         if let key = ex.reviewKey, key.hasPrefix("letter:"), let id = ComponentID(key) { return [id] }
         var out: [ComponentID] = []
@@ -328,6 +334,7 @@ struct RussianDomain: KnowledgeDomain {
     func reviewComponents(forTarget key: String) -> [ComponentID] {
         let parts = key.split(separator: ":", maxSplits: 1).map(String.init)
         guard parts.count == 2, !parts[1].isEmpty else { return [] }
+        if key == ConstructionChoice.key { return [ConstructionChoice.component] }
         if parts[0] == "letter" { return [ComponentID(.letter, parts[1])] }
         var ex = Exercise(kind: .dictation)
         ex.text = parts[1]
@@ -347,6 +354,7 @@ struct RussianDomain: KnowledgeDomain {
         case .listenPick, .soundPair: .hearPick
         case .readMeaning, .familyGuess: .readPick
         case .buildWord: .build
+        case .constructionChoice: .constructionChoice
         case .transform: .transform
         case .paradigmFill: .transform  // tiles report .classify through evidence(for:)
         case .cueSort: .classify
@@ -379,7 +387,7 @@ struct RussianDomain: KnowledgeDomain {
         case .done:
             switch ex.kind {
             case .meet, .trace, .copy: return .good
-            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord, .readHandwriting: return r.assisted == true ? nil : .again
+            case .listenPick, .readMeaning, .soundPair, .familyGuess, .buildWord, .readHandwriting, .constructionChoice: return r.assisted == true ? nil : .again
             case .explain, .passage: return nil
             default: return r.assisted == true ? nil : .hard  // finished, but not verified right first time
             }
@@ -473,6 +481,7 @@ struct RussianDomain: KnowledgeDomain {
     // MARK: KnowledgeDomain
 
     func evidence(for a: RussianAttempt) -> LearningEvent? {
+        guard a.page.exercises[safe: a.index]?.baseline == nil else { return nil }
         guard a.page.exercises.indices.contains(a.index) else { return nil }
         let ex = a.page.exercises[a.index]
         guard var modality = a.after.typed == true ? Modality.type : Self.modality(for: ex.kind), !(ex.kind == .soundPair && ex.say == nil) else { return nil }
@@ -515,7 +524,7 @@ struct RussianDomain: KnowledgeDomain {
             .filter { !RussianText.letters(in: $0).isEmpty }
             .map { t in
                 guard let l = lemma(of: t) else { return [ComponentID(.lexeme, t)] }
-                return l == t ? [ComponentID(.lexeme, l)] : [ComponentID(.form, t), ComponentID(.lexeme, l)]
+                return l == t ? [ComponentID(.lexeme, t)] : [ComponentID(.form, t), ComponentID(.lexeme, t)]
             }
     }
 }

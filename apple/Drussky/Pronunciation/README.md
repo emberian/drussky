@@ -130,3 +130,17 @@ are stress-marked.
   the learner's own takes, with an English accent and room noise, are the real test.
 - Extra sounds are reported only for confident inserted vowels.
 - The comparison recording (`model:` argument) is not used yet.
+
+## Conservative feedback policy (2026-11-08)
+
+The raw sound report remains intact for analysis. Visible corrections, tips and durable sound
+confusions now require sound-specific confidence at least 0.95 (`SpeakingFeedback`). This is a
+conservative engineering floor on the existing scores, **not** a calibrated probability of human
+agreement. Missing/NaN/out-of-range confidence fails closed. Older tips without confidence are
+not displayed. Transcript-only alignments cannot establish sound errors, and neither those
+fallbacks nor uncalibrated prosody produce correction tips. The prosody comparison remains
+playable without red stress rings. No-tip copy invites listening for whether the message comes
+through instead of certifying that stress and rhythm were correct.
+
+The earlier evaluation tables above describe the raw engine and earlier tip policy. They do not
+validate this new policy on held-out learner speech. That validation is still needed.
