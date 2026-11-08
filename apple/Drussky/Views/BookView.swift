@@ -54,9 +54,6 @@ struct BookView: View {
             if QA.has("-qa-cognates") { show("Cognates", MorphologyPages.addCognates(book)) }
             if QA.has("-qa-pocket") { show("Pocket", PocketPage.insert(book: book, voice: voice)) }  // Devices
             showTyping = QA.has("-qa-typing")
-            if QA.has("-qa-landscape"), let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {  // screenshots
-                scene.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeLeft))
-            }
         }
         .onChange(of: book.currentPage) { _, _ in
             // The goal (Goal/): its first page opens when readable; a brand-new course page that

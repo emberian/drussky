@@ -186,8 +186,7 @@ with what each is ready after, every one openable ahead of time), from ＋ → *
 N* (the next episode), and from one row per shelf inside the cover. Nothing on the shelves is
 voiced yet; the speaker falls back to the synthetic voice as it does for any unrecorded string.
 
-QA: `-qa-series N` / `-qa-math N` open episode N / rung N as a page; `-qa-landscape` turns the
-simulator's window to landscape for screenshots.
+QA: `-qa-series N` / `-qa-math N` open episode N / rung N as a page.
 
 ## Your book
 
