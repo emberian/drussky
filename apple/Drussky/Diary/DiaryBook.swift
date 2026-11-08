@@ -61,7 +61,7 @@ extension Book {
     func insertDiaryPage() {
         var ex = Exercise(kind: .diary)
         ex.prompt = DiaryPrompts.pick(for: self)
-        insertWrittenPage(title: "Дневник · Diary", intro: "A few words of your own Russian. Write what you can; your tutor marks it in red.",
+        insertWrittenPage(title: "Дневни́к · Diary", intro: "A few words of your own Russian. Write what you can; your tutor marks it in red.",
                           unitTitle: "My Russian", exercises: [ex], newWords: [])
     }
 

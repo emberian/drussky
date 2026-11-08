@@ -220,7 +220,7 @@ ROOTS = [
     R("сред", "сред серед", "middle", "среда' Wednesday (the middle day), середи'на the middle, сре'дний average, среди' among."),
     R("втор", "втор", "second", "второ'й second, вто'рник Tuesday (the second day), повтори'ть to repeat."),
     R("крес", "крес", "rise, kindle", "воскресе'нье Sunday (the day of resurrection), воскре'снуть to rise again."),
-    R("дей", "дей дея", "do, act", "де'йствие an action, де'йствительность reality (what acts), де'йствительно indeed."),
+    R("дей", "дей дея", "do, act", "де'йствие an action, действи'тельность reality (what acts), действи'тельно indeed."),
     R("свобод", "свобод", "free"),
     R("вис", "вис вес", "hang; weigh", "висе'ть to hang, вес weight, зави'сеть to depend (hang on), незави'симо independently."),
     R("яв", "яв явл", "appear, show", "явля'ться to be (formally: to appear as), явле'ние a phenomenon, я'вно obviously."),
@@ -251,7 +251,7 @@ PREFIXES = [
     P("за", "за", "begin; behind, beyond", "за'втра зада'ча зако'н"),
     P("из", "из ис", "out of", "изме'рить иссле'дование"),
     P("на", "на", "onto; done (perfective)", "написа'ть нача'ть наконе'ц"),
-    P("над", "над", "above, over", "надпи'сь"),
+    P("над", "над", "above, over", "на'дпись"),
     P("не", "не", "not", "неде'ля непра'вда нечётный"),
     P("о", "о об обо объ", "around, about", "о'коло обе'д о'браз объе'кт"),
     P("от", "от ото", "away from; back", "отве'т отвеча'ть отде'л"),
@@ -287,7 +287,7 @@ SUFFIXES = [
     S("ик", "ик чик", "a small one", "noun", "до'мик ко'тик ма'льчик"),
     S("ист", "ист", "a practitioner (-ist)", "noun", "артиллери'ст реали'ст"),
     S("изм", "изм", "a doctrine (-ism)", "noun", "реали'зм механи'зм"),
-    S("ец", "ец", "a person or thing; an end", "noun", "коне'ц учени'ец"),
+    S("ец", "ец", "a person or thing; an end", "noun", "коне'ц мудре'ц"),
     S("н", "н", "makes an adjective", "adj", "чётный стра'нный вку'сный"),
     S("ск", "ск", "relating to (-ish, -ic)", "adj", "ру'сский де'тский"),
     S("тельн", "тельн", "makes an adjective from -тель", "adj", "сле'довательно"),
@@ -365,7 +365,7 @@ M("по'дле", "prep", "beside", note="From длина, length: along.")
 
 # verbs
 M("[зна]|ть", "verb", "to know", example=("Я зна'ю, что э'то факт.", "I know that this is a fact."))
-M("у|[зна']|ть", "verb", "to find out", base="знать", example=("Сна'чала ну'жно узна'ть, что тако'е му'дрость.", "First one must find out what wisdom is."))
+M("у|[зна']|ть", "verb", "to find out", base="знать", example=("Снача'ла ну'жно узна'ть, что тако'е му'дрость.", "First one must find out what wisdom is."))
 M("[зна'ч]|и|ть", "verb", "to mean", base="знак", example=("Что зна'чит э'то сло'во?", "What does this word mean?"))
 M("[знак]", "noun", "sign", base="знать", example=("Плюс — э'то знак.", "Plus is a sign."))
 M("[знач]|е'|ние", "noun", "meaning", base="значить", example=("Ка'ждое сло'во име'ет значе'ние.", "Every word has a meaning."))
@@ -418,7 +418,7 @@ M("не|[чёт]|н|ый", "adj", "odd (number)", base="чётный")
 M("[чис]|л|о'", "noun", "number", base="считать", family="чит")
 M("[пис]|а'|ть", "verb", "to write")
 M("на|[пис]|а'|ть", "verb", "to write (and finish)", base="писать", example=("Она' написа'ла письмо'.", "She wrote a letter."))
-M("пере|[пис]|а'|ть", "verb", "to rewrite, to copy out", base="писать", example=("Переписа'й э'то сло'во.", "Copy out this word."))
+M("пере|[пис]|а'|ть", "verb", "to rewrite, to copy out", base="писать", example=("Перепиши' э'то сло'во.", "Copy out this word."))
 M("за|[пис]|а'|ть", "verb", "to write down, to record", base="писать", example=("Запиши' мой отве'т.", "Write down my answer."))
 M("[пис]|а'|тель", "noun", "writer", base="писать", example=("Толсто'й — писа'тель.", "Tolstoy is a writer."))
 M("[пис]|ьм|о'", "noun", "a letter (mail)", base="писать", example=("Э'то письмо' от бра'та.", "This is a letter from my brother."))
@@ -436,7 +436,7 @@ M("при|[ме'р]", "noun", "example", base="мера", example=("Вот пр�
 M("[сле'д]|ова|тельн|о", "adv", "therefore", base="следовать")
 M("[сле'д]|ова|ть", "verb", "to follow", example=("Из э'того сле'дует, что два — чётное число'.", "From this it follows that two is even."))
 M("[сле'д]|ующ|ий", "adj", "next, following", base="следовать", example=("Сле'дующий вопро'с!", "Next question!"))
-M("[след]", "noun", "a track, a trace", example=("На снегу' след ко'та.", "On the snow, a cat's track."))
+M("[след]", "noun", "a track, a trace", example=("На снегу' след кота'.", "On the snow, a cat's track."))
 M("по|н|[им]|а'|ть", "verb", "to understand (be understanding)")
 M("по|[ня']|ть", "verb", "to understand, to grasp", base="понимать")
 M("[им]|е'|ть", "verb", "to have", example=("Ка'ждое число' име'ет знак.", "Every number has a sign."))
@@ -597,13 +597,13 @@ M("[кон]|е'ц", "noun", "end"); M("на|[кон]|е'ц", "adv", "at last", b
 M("бес|[кон]|е'ч|н|ый", "adj", "infinite", base="конечный", example=("Просты'х чи'сел бесконе'чно мно'го.", "There are infinitely many primes."))
 M("за|[ко'н]", "noun", "law", base="конец", example=("Э'то зако'н приро'ды.", "This is a law of nature."))
 M("на|[за'д]", "adv", "back, ago")
-M("[круг]", "noun", "circle"); M("во|[кру'г]", "prep", "around", base="круг"); M("о|[кру'ж]|н|ость", "noun", "circumference", base="круг", example=("Дли'на окру'жности.", "The length of the circumference."))
+M("[круг]", "noun", "circle"); M("во|[кру'г]", "prep", "around", base="круг"); M("о|[кру'ж]|н|ость", "noun", "circumference", base="круг", example=("Длина' окру'жности.", "The length of the circumference."))
 M("[у'гол]", "noun", "corner, angle"); M("тре|[уго'л]|ьник", "noun", "triangle", base="угол", example=("У треуго'льника три угла'.", "A triangle has three angles."))
 M("[верх]", "noun", "top"); M("[верш]|и'н|а", "noun", "summit; vertex", base="верх", example=("У треуго'льника три верши'ны.", "A triangle has three vertices."))
 M("[част]|ь", "noun", "part"); M("[част]|и'ц|а", "noun", "particle", base="часть", example=("Электро'н — части'ца.", "The electron is a particle."))
 M("с|[ча'ст]|ье", "noun", "happiness", base="часть", note="A good share.")
 M("[ряд]", "noun", "row; series"); M("по|[ря'д]|ок", "noun", "order", base="ряд", example=("Всё в поря'дке.", "Everything is in order."))
-M("[ра'вн]|о", "adv", "equals; equally"); M("[ра'вн]|ый", "adj", "equal", base="равно"); M("у|[равн]|е'|ние", "noun", "equation", base="равный", example=("Реши' уравне'ние.", "Solve the equation."))
+M("[равн]|о'", "adv", "equals; equally"); M("[ра'вн]|ый", "adj", "equal", base="равно"); M("у|[равн]|е'|ние", "noun", "equation", base="равный", example=("Реши' уравне'ние.", "Solve the equation."))
 M("[мно'г]|о", "adv", "many, much"); M("не|[мно'г]|о", "adv", "a little", base="много")
 M("[мно'ж]|еств|о", "noun", "a set; a multitude", base="много", example=("Мно'жество чётных чи'сел.", "The set of even numbers."))
 M("у|[мно'ж]|и|ть", "verb", "to multiply", base="много", example=("Умно'жим два на три.", "Let's multiply two by three."))
@@ -649,7 +649,7 @@ for seg, pos, en, loan in [
     ("ко'смос", "noun", "space, cosmos", "Greek κόσμος kósmos, order, world"), ("плане'та", "noun", "planet", "Greek πλανήτης planḕtēs, wanderer"),
     ("раке'та", "noun", "rocket", "Italian rocchetta via German Rakete"), ("ста'нция", "noun", "station", "Latin statio via Polish stacja"),
     ("сигна'л", "noun", "signal", "Latin signale via German"), ("факт", "noun", "fact", "Latin factum, a thing done"),
-    ("объе'кт", "noun", "object", "Latin objectum, thrown before"), ("тео'рема", "noun", "theorem", "Greek θεώρημα theṑrēma, a thing looked at"),
+    ("объе'кт", "noun", "object", "Latin objectum, thrown before"), ("теоре'ма", "noun", "theorem", "Greek θεώρημα theṑrēma, a thing looked at"),
     ("су'мма", "noun", "sum", "Latin summa, the highest (line)"), ("плюс", "noun", "plus", "Latin plus, more"),
     ("цирк", "noun", "circus", "Latin circus, a ring"), ("норма'льно", "adv", "fine, normally", "Latin norma, a carpenter's square"),
     ("аппети'т", "noun", "appetite", "Latin appetitus"), ("ко'фе", "noun", "coffee", "Arabic qahwa via Dutch koffie"),
@@ -706,11 +706,11 @@ for lemma, forms in [
     ("мой", "моей мои моя"), ("свой", "своей свою свое своего"), ("сам", "самого самое"), ("что", "чего чем"), ("тот", "того тому том тех"),
     ("вода'", "воду воды водой воде"), ("мо'ре", "моря"), ("дом", "доме дома домой"), ("друг", "друга"), ("сторона'", "стороны сторону"),
     ("соба'ка", "собаки собак"), ("соба'чка", "собачку"), ("ры'бка", "рыбку"), ("глаз", "глаза"), ("жизнь", "жизни"), ("движе'ние", "движения"),
-    ("год", "лет года"), ("ко'шка", "кошки"), ("пора'", "пор"), ("де'вочка", "девочка"), ("шко'ла", "школу"), ("у'читель", "учитель"), ("воду", "воду"),
+    ("год", "лет года"), ("ко'шка", "кошки"), ("пора'", "пор"), ("де'вочка", "девочка"), ("шко'ла", "школу"), ("учи'тель", "учитель"), ("воду", "воду"),
     ("согре'ться", "согреется"), ("червя'к", "червяков"), ("де'ти", "дети"), ("доро'га", "дорогу"), ("побежа'ть", "побежала"), ("вре'мя", "время"),
     ("земля'", "землю земле земли"), ("ста'ло", "стало"), ("ко'мната", "комнаты"), ("си'ла", "силы"), ("о'браз", "образом"), ("госуда'рство", "государства"),
     ("еди'ный", "единого"),     ("ста'рый", "старик старуха"), ("ещё", "еще"), ("в", "во"), ("с", "со"), ("лёд", "лед"), ("ничто'", "ничего"),
-    ("стра'нный", "странно"), ("си'ний", "синее"), ("до'лжен", "должны"), ("ча'сто", "часто"), ("мальчи'к", "мальчик"), ("оте'ц", "отцу"), ("сын", "сын"), ("голова'", "голову"),
+    ("стра'нный", "странно"), ("си'ний", "синее"), ("до'лжен", "должны"), ("ча'сто", "часто"), ("ма'льчик", "мальчик"), ("оте'ц", "отцу"), ("сын", "сын"), ("голова'", "голову"),
     ("взять", "взял"), ("рука'", "руки руку"), ("коне'ц", "конца"), ("конь", "коня"), ("челове'к", "человека человеку людей"),
     ("лицо'", "лицо"), ("же'нщина", "женщина"), ("стол", "столяр"), ("упа'сть", "упал"), ("ша'пка", "шапку"), ("мину'та", "минуту"),
     ("два", "две"), ("найти'", "нашел"), ("уви'деть", "увидали"), ("сло'во", "слово"), ("корабль", "корабль"),
@@ -721,9 +721,9 @@ for lemma, forms in [
     ("просто'й", "простые простое"), ("большо'й", "большее"), ("ка'ждый", "каждое"), ("любо'й", "любого"), ("це'лый", "целое целых"),
     ("существова'ть", "существует существую"), ("тре'боваться", "требовалось"), ("доказа'ть", "доказать"), ("дели'ться", "делится"),
     ("Земля'", "землю"), ("звезда'", "звёзды звезду"), ("раке'та", "ракету"), ("люби'ть", "люблю любит"), ("ста'нция", "станции"),
-    ("пла'нета", "планете"), ("ко'смос", "космосе"), ("ку'хня", "кухне"), ("го'род", "городе город"), ("мысль", "мыслю"),
+    ("плане'та", "планете планету"), ("ко'смос", "космосе"), ("ку'хня", "кухне"), ("го'род", "городе город"), ("мысль", "мыслю"),
     ("сле'довательно", "следовательно"), ("спать", "спал"), ("у'жинать", "ужинали"), ("де'лать", "делал делали"), ("рабо'тать", "работал работала работаю работает"),
-    ("гуля'ть", "гулял гуляли"), ("чита'ть", "читал читала читаю читает читаешь читаем читаете читают"), ("пи'сать", "пишет"), ("ждать", "ждёт"),
+    ("гуля'ть", "гулял гуляли"), ("чита'ть", "читал читала читаю читает читаешь читаем читаете читают"), ("писа'ть", "пишет"), ("ждать", "ждёт"),
     ("молча'ть", "молчит"), ("слы'шать", "слышит"), ("слу'шать", "слушает"), ("рабо'та", "работу"), ("сигна'л", "сигнале"), ("у'тро", "утром"),
     ("ве'чер", "вечером"), ("день", "днём"), ("ночь", "ночью"), ("ходи'ть", "хожу ходит ходила"), ("е'хать", "еду едем едешь ехала"),
     ("парк", "парке"), ("зна'чить", "значит"), ("отве'т", "ответ"), ("неде'ля", "неделя"), ("но'вый", "новый"), ("ста'ть", "стать"),
@@ -745,8 +745,8 @@ M("при|над|[леж]|а'|ть", "verb", "to belong", example=("Число' 
 M("пред|по|[лож]|и'|ть", "verb", "to suppose", example=("Предполо'жим, что э'то непра'вда.", "Suppose this is not true."))
 M("о|пре|[дел]|я'|ть", "verb", "to determine, to define", base="определение", family="дели", example=("Бытие' определя'ет созна'ние.", "Being determines consciousness."))
 M("у|[ро'к]", "noun", "lesson", family="реч", example=("Уро'к начина'ется в де'вять.", "The lesson begins at nine."))
-M("проти'во|[реч]|и|е", "noun", "contradiction", example=("Получа'ем противоре'чие.", "We obtain a contradiction."))
-M("[сле'д]|ств|ие", "noun", "corollary, consequence", base="следовать", example=("Сле'дствие тео'ремы.", "A corollary of the theorem."))
+M("противо|[ре'ч]|и|е", "noun", "contradiction", example=("Получа'ем противоре'чие.", "We obtain a contradiction."))
+M("[сле'д]|ств|ие", "noun", "corollary, consequence", base="следовать", example=("Сле'дствие теоре'мы.", "A corollary of the theorem."))
 M("про|из|[вед]|е'|ние", "noun", "product (of multiplication); a work", example=("Произведе'ние двух чётных чи'сел чётное.", "The product of two even numbers is even."))
 M("[един]|и'ц|а", "noun", "one (the number); a unit", base="единый", family="один", example=("Едини'ца — не просто'е число'.", "One is not a prime number."))
 M("[еди'н]|ственн|ый", "adj", "the only, unique", base="единый", family="один", example=("Два — еди'нственное чётное просто'е число'.", "Two is the only even prime."))
@@ -769,7 +769,7 @@ M("[уч]|и'|ть|ся", "verb", "to study, to learn", base="учить", examp
 M("[явл]|я'|ть|ся", "verb", "to be (formal: to appear as)", example=("Челове'к явля'ется мы'слящим существо'м.", "A human being is a thinking creature."))
 M("[реш]|а'|ть", "verb", "to decide; to solve", example=("Кто реша'ет, что ну'жно?", "Who decides what is needed?"))
 M("[вар]|и'|ть", "verb", "to boil, to cook", example=("Вари'те де'сять мину'т.", "Cook for ten minutes."))
-M("от|[кры']|ть", "verb", "to open (uncover)", example=("Откры'й окно'.", "Open the window."))
+M("от|[кры']|ть", "verb", "to open (uncover)", example=("Откро'й окно'.", "Open the window."))
 M("от|[кры']|т|ый", "adj", "open, opened", base="открыть", example=("Откры'тое окно'.", "An open window."))
 M("[сто']|и|ть", "verb", "to cost", base="стоять", family="ста", example=("Ско'лько э'то сто'ит?", "How much does this cost?"))
 M("подо|[жд]|а'|ть", "verb", "to wait a bit", base="ждать", example=("Подожди' меня'!", "Wait for me!"))
@@ -795,8 +795,8 @@ M("[свобо'д]|а", "noun", "freedom")
 M("[крас]|от|а'", "noun", "beauty", base="красивый", example=("Мир спасёт красота'.", "Beauty will save the world."))
 M("воз|[мо'ж]|н|ость", "noun", "possibility", base="можно", family="мог")
 M("не|об|[ход]|и'м|ость", "noun", "necessity", base="ходить", note="What cannot be gone around.")
-M("[де'й]|ств|и|тельн|ость", "noun", "reality, actuality")
-M("[де'й]|ств|и|тельн|о", "adv", "indeed, really", base="действительность")
+M("[дей]|ств|и'|тельн|ость", "noun", "reality, actuality")
+M("[дей]|ств|и'|тельн|о", "adv", "indeed, really", base="действительность")
 M("не|за|[ви'с]|им|о", "adv", "independently", note="Not hanging on anything.")
 M("[стекл]|о'", "noun", "glass", example=("Го'род из стекла'.", "A city of glass."))
 M("[войн]|а'", "noun", "war")
@@ -856,15 +856,15 @@ COGNATES = [
     C("тео'рия", "theory", "Greek θεωρία theōría, a looking at", "th-t ia-iya y-i", [("тео'р-", "look at, behold (θεωρ-)"), ("-ия", "-y: an activity or field (-ία)")]),
     C("теоре'ма", "theorem", "Greek θεώρημα theṑrēma, a thing looked at", "th-t ma-ma", [("теор-", "look at, behold (θεωρ-)"), ("-е'ма", "-em: a result (-ημα)")]),
     C("филосо'фия", "philosophy", "Greek φιλοσοφία philosophía, love of wisdom", "ph-f ia-iya", [("фило-", "love (φιλο-)"), ("-со'фия", "wisdom (σοφία)")]),
-    C("фило'соф", "philosopher", "Greek φιλόσοφος", "ph-f os-drop", [("фило-", "love (φιλο-)"), ("-со'ф", "wise (σοφός)")]),
+    C("фило'соф", "philosopher", "Greek φιλόσοφος", "ph-f os-drop", [("фило'-", "love (φιλο-)"), ("-соф", "wise (σοφός)")]),
     C("ло'гика", "logic", "Greek λογική logikḕ, from λόγος, word, reason", "ics-ika", [("ло'г-", "word, reason (λόγος)"), ("-ика", "-ics: a science (-ική)")]),
     C("логи'ческий", "logical", "Greek λογικός", "ic-icheskiy", [("лог-", "word, reason (λόγος)"), ("-и'ческий", "-ical (-ικός + -ский)")]),
     C("систе'ма", "system", "Greek σύστημα sýstēma, a standing together", "y-i ma-ma", [("си-", "together (σύν-)"), ("-сте'ма", "standing (ἵστημι)")]),
     C("пробле'ма", "problem", "Greek πρόβλημα próblēma, a thing thrown forward", "ma-ma", [("про-", "forward (προ-)"), ("-бле'ма", "a throw (βλῆμα)")]),
-    C("ана'лиз", "analysis", "Greek ἀνάλυσις análysis, a loosening up", "y-i is-drop", [("ана-", "up, apart (ἀνά-)"), ("-лиз", "loosen (λύσις)")]),
-    C("си'нтез", "synthesis", "Greek σύνθεσις sýnthesis, a putting together", "y-i th-t is-drop", [("син-", "together (σύν-)"), ("-тез", "a placing (θέσις)")]),
-    C("ме'тод", "method", "Greek μέθοδος méthodos, a way after", "th-t os-drop", [("мет-", "after (μετά-)"), ("-од", "way (ὁδός)")]),
-    C("гипо'теза", "hypothesis", "Greek ὑπόθεσις hypóthesis, a placing under", "h-g y-i th-t", [("гипо-", "under (ὑπο-)"), ("-те'за", "a placing (θέσις)")]),
+    C("ана'лиз", "analysis", "Greek ἀνάλυσις análysis, a loosening up", "y-i is-drop", [("ана'-", "up, apart (ἀνά-)"), ("-лиз", "loosen (λύσις)")]),
+    C("си'нтез", "synthesis", "Greek σύνθεσις sýnthesis, a putting together", "y-i th-t is-drop", [("си'н-", "together (σύν-)"), ("-тез", "a placing (θέσις)")]),
+    C("ме'тод", "method", "Greek μέθοδος méthodos, a way after", "th-t os-drop", [("ме'т-", "after (μετά-)"), ("-од", "way (ὁδός)")]),
+    C("гипо'теза", "hypothesis", "Greek ὑπόθεσις hypóthesis, a placing under", "h-g y-i th-t", [("гипо'-", "under (ὑπο-)"), ("-теза", "a placing (θέσις)")]),
     C("аксио'ма", "axiom", "Greek ἀξίωμα axíōma, what is thought worthy", "x-ks ma-ma", [("акси-", "worthy (ἄξιος)"), ("-о'ма", "-om: a result (-ωμα)")]),
     C("иде'я", "idea", "Greek ἰδέα idéa, a form seen", "ia-iya"),
     C("матема'тика", "mathematics", "Greek μαθηματικά mathēmatiká, things learned", "th-t ics-ika", [("матема'т-", "learning (μάθημα)"), ("-ика", "-ics: a science (-ική)")]),
@@ -874,7 +874,7 @@ COGNATES = [
     C("а'лгебра", "algebra", "Arabic al-jabr, the restoring, via Latin", "none"),
     C("фи'зика", "physics", "Greek φυσική physikḕ, of nature", "ph-f y-i ics-ika", [("фи'з-", "nature (φύσις)"), ("-ика", "-ics: a science (-ική)")]),
     C("эне'ргия", "energy", "Greek ἐνέργεια enérgeia, at work", "e-e ia-iya", [("эн-", "in, at (ἐν-)"), ("-е'ргия", "work (ἔργον)")]),
-    C("а'том", "atom", "Greek ἄτομος átomos, uncuttable", "os-drop", [("а-", "not (ἀ-)"), ("-том", "cut (τόμος)")]),
+    C("а'том", "atom", "Greek ἄτομος átomos, uncuttable", "os-drop", [("а'-", "not (ἀ-)"), ("-том", "cut (τόμος)")]),
     C("микроско'п", "microscope", "Greek μικρός small + σκοπέω look", "os-drop", [("микро-", "small (μικρός)"), ("-ско'п", "look (σκοπέω)")]),
     C("телефо'н", "telephone", "Greek τῆλε far + φωνή voice", "ph-f", [("теле-", "far (τῆλε)"), ("-фо'н", "voice, sound (φωνή)")]),
     C("автома'т", "automaton", "Greek αὐτόματος autómatos, self-moving", "au-av", [("авто-", "self (αὐτός)"), ("-ма'т", "moving, thinking (-ματος)")]),
@@ -883,8 +883,8 @@ COGNATES = [
     C("тополо'гия", "topology", "Greek τόπος place + λόγος", "ia-iya", [("топо-", "place (τόπος)"), ("-ло'гия", "-logy: study (λογία)")]),
     C("катего'рия", "category", "Greek κατηγορία katēgoría, a statement", "ia-iya h-g", [("кате-", "against, down (κατά-)"), ("-го'рия", "speaking in assembly (ἀγορά)")]),
     C("парадо'кс", "paradox", "Greek παράδοξος parádoxos, against expectation", "x-ks", [("пара-", "beside, against (παρά-)"), ("-до'кс", "opinion (δόξα)")]),
-    C("пара'метр", "parameter", "Greek παρά beside + μέτρον measure", "os-drop", [("пара-", "beside (παρά-)"), ("-ме'тр", "measure (μέτρον)")]),
-    C("хао'с", "chaos", "Greek χάος kháos", "ch-kh"),
+    C("пара'метр", "parameter", "Greek παρά beside + μέτρον measure", "os-drop", [("пара'-", "beside (παρά-)"), ("-метр", "measure (μέτρον)")]),
+    C("ха'ос", "chaos", "Greek χάος kháos", "ch-kh"),
     C("хара'ктер", "character", "Greek χαρακτήρ kharaktḕr, an engraved mark", "ch-kh"),
     C("те'хника", "technique, technology", "Greek τεχνικός tekhnikós, from τέχνη, craft", "ch-kh ics-ika"),
     C("механи'зм", "mechanism", "Greek μηχανή mēkhanḕ, device, + -ism", "ch-kh ism-izm", [("механ-", "device (μηχανή)"), ("-и'зм", "-ism (-ισμός)")]),
@@ -923,7 +923,7 @@ COGNATES = [
     C("ко'нус", "cone", "Greek κῶνος via Latin conus", "us-kept", None, "A few keep the Latin -us: ко'нус, ра'диус, фо'кус."),
     C("ра'диус", "radius", "Latin radius, a rod, a ray", "us-kept"),
     C("мо'дуль", "module, modulus", "Latin modulus, a small measure", "us-drop"),
-    C("ска'ляр", "scalar", "Latin scalaris, of a ladder", "n-adj"),
+    C("скаля'р", "scalar", "Latin scalaris, of a ladder", "n-adj"),
     C("лине'йный", "linear", "Latin linea, a line, + Russian -н-ый", "n-adj", [("лине'й-", "line (linea)"), ("-ный", "makes an adjective")]),
     C("рациона'льный", "rational", "Latin rationalis, of reason", "al-alnyi", [("рацион-", "reckoning, reason (ratio)"), ("-а'льный", "-al (-alis + -н-ый)")]),
     C("реа'льный", "real", "Latin realis, of things", "al-alnyi", [("реа'-", "a thing (res)"), ("-льный", "-al (-alis + -н-ый)")]),
@@ -952,7 +952,7 @@ COGNATES = [
     C("конста'нта", "constant", "Latin constans, standing firm", "a-a"),
     C("спектр", "spectrum", "Latin spectrum, an appearance", "um-drop"),
     C("квант", "quantum", "Latin quantum, how much", "qu-kv um-drop"),
-    C("ква'драт", "square (quadrate)", "Latin quadratus", "qu-kv us-drop"),
+    C("квадра'т", "square (quadrate)", "Latin quadratus", "qu-kv us-drop"),
     C("эквивале'нт", "equivalent", "Latin aequivalens", "qu-kv e-e ent-ent"),
     C("криста'лл", "crystal", "Greek κρύσταλλος krýstallos, ice", "y-i os-drop"),
     C("програ'мма", "programme", "Greek πρόγραμμα prógramma, a public notice", "ma-ma", [("про-", "forward, public (προ-)"), ("-гра'мма", "a writing (γράμμα)")]),
@@ -961,7 +961,7 @@ COGNATES = [
     C("конте'кст", "context", "Latin contextus, woven together", "x-ks us-drop", [("кон-", "together (con-)"), ("-те'кст", "woven (textus)")]),
     C("диало'г", "dialogue", "Greek διάλογος diálogos", "os-drop", [("диа-", "through, between (διά-)"), ("-ло'г", "word, speech (λόγος)")]),
     C("анало'гия", "analogy", "Greek ἀναλογία analogía, proportion", "ia-iya", [("ана-", "according to (ἀνά-)"), ("-ло'гия", "ratio, reasoning (λογία)")]),
-    C("мета'фора", "metaphor", "Greek μεταφορά metaphorá, a carrying over", "ph-f a-a", [("мета-", "over, across (μετά-)"), ("-фо'ра", "a carrying (φορά)")]),
+    C("мета'фора", "metaphor", "Greek μεταφορά metaphorá, a carrying over", "ph-f a-a", [("мета'-", "over, across (μετά-)"), ("-фора", "a carrying (φορά)")]),
     C("метафи'зика", "metaphysics", "Greek τὰ μετὰ τὰ φυσικά, the books after the Physics", "ph-f y-i ics-ika", [("мета-", "after (μετά-)"), ("-фи'зика", "physics (φυσικά)")]),
     C("э'тика", "ethics", "Greek ἠθικά ēthiká, of character", "th-t ics-ika e-e"),
     C("эсте'тика", "aesthetics", "Greek αἰσθητικός, of perception", "th-t ics-ika e-e"),
@@ -983,7 +983,7 @@ COGNATES = [
     C("фено'мен", "phenomenon", "Greek φαινόμενον phainómenon, a thing appearing", "ph-f on-drop"),
     C("крите'рий", "criterion", "Greek κριτήριον kritḕrion, a means of judging", "on-iy"),
     C("анти|те'зис", "antithesis", "Greek ἀντίθεσις antíthesis", "th-t", [("анти-", "against (ἀντί-)"), ("-те'зис", "a placing (θέσις)")]),
-    C("пери'од", "period", "Greek περίοδος períodos, a way round", "os-drop", [("пери-", "around (περί-)"), ("-о'д", "way (ὁδός)")]),
+    C("пери'од", "period", "Greek περίοδος períodos, a way round", "os-drop", [("пери'-", "around (περί-)"), ("-од", "way (ὁδός)")]),
     C("сфе'ра", "sphere", "Greek σφαῖρα sphaîra, a ball", "ph-f a-a"),
     C("цили'ндр", "cylinder", "Greek κύλινδρος kýlindros, a roller", "c-ts y-i os-drop"),
     C("диагона'ль", "diagonal", "Greek διαγώνιος diagṑnios, from angle to angle", "al-al", [("диа-", "through, across (διά-)"), ("-гона'ль", "angle (γωνία)")]),
@@ -1001,14 +1001,14 @@ RULES = [
     RULE("th-t", "th → т", "Greek θ is т in borrowings that came through Western Europe.", "тео'рия теоре'ма ме'тод гипо'теза ритм э'тика"),
     RULE("th-f", "th → ф", "Greek θ is ф in the older borrowings that came through Byzantium and the Church.", "арифме'тика миф Фёдор Афи'ны"),
     RULE("ph-f", "ph → ф", "Greek φ is always ф.", "филосо'фия фи'зика телефо'н мета'фора"),
-    RULE("ch-kh", "ch → х", "Greek χ is х.", "хао'с хара'ктер те'хника механи'зм"),
+    RULE("ch-kh", "ch → х", "Greek χ is х.", "ха'ос хара'ктер те'хника механи'зм"),
     RULE("h-g", "h → г", "Greek and Latin h usually becomes г.", "гипо'теза гармо'ния гомоморфи'зм нигили'зм"),
     RULE("h-drop", "h → (nothing)", "Sometimes the h is simply dropped.", "исто'рия иера'рхия"),
     RULE("y-i", "y → и", "Greek υ (Latin y) is и.", "систе'ма фи'зика ана'лиз си'нтез цикл"),
     RULE("x-ks", "x → кс", "Latin x is spelled out as кс.", "парадо'кс текст ко'мплексный аксио'ма"),
     RULE("x-ts", "x → ц (in -ix)", "Latin -ix, stem -ic-, gives -ица.", "ма'трица"),
     RULE("c-ts", "c → ц before e, i, y", "Latin c before a front vowel is ц; before a, o, u it is к.", "центр цикл при'нцип проце'сс катего'рия культу'ра"),
-    RULE("qu-kv", "qu → кв", "Latin qu is кв.", "квант ква'драт эквивале'нт"),
+    RULE("qu-kv", "qu → кв", "Latin qu is кв.", "квант квадра'т эквивале'нт"),
     RULE("au-av", "au → ав", "Greek αυ is ав.", "автома'т а'втор"),
     RULE("e-e", "e- → э-", "An initial e is spelled э, keeping it from being read as ye.", "эне'ргия э'тика экспериме'нт элеме'нт"),
     RULE("ps-ps", "ps → пс", "Greek ψ keeps both sounds.", "психоло'гия"),

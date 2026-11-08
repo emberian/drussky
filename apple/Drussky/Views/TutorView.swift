@@ -201,7 +201,7 @@ struct PageNotesView: View {
         let notes = book.notes(page: pageIndex)
         if !notes.isEmpty {
             VStack(alignment: .leading, spacing: 14) {
-                Text("Вопросы").font(Theme.cursive(30)).foregroundStyle(Theme.ink)
+                Text("Вопро́сы").font(Theme.cursive(30)).foregroundStyle(Theme.ink)
                 ForEach(notes) { note in
                     Button { onOpen(note.exercise) } label: {
                         VStack(alignment: .leading, spacing: 6) {

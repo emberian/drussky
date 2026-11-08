@@ -70,7 +70,7 @@ struct DiaryExercise: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 10) {
-                Text("Дневник").font(Theme.cursive(compact ? 24 : 28)).foregroundStyle(Theme.ink)
+                Text("Дневни́к").font(Theme.cursive(compact ? 24 : 28)).foregroundStyle(Theme.ink)
                 Instruction(text: "Write a few words of your own Russian.")
             }
             // Never spoken (no recording exists for a prompt); Russian in it shows its stress.

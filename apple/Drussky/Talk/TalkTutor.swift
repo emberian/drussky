@@ -44,8 +44,8 @@ enum TalkTutor {
     conversation with them in Russian. Propose THREE small everyday scenes they could hold a 6–10 turn \
     conversation in using ONLY the words they know (plus a word or two you would teach). Reply with ONE JSON \
     object and nothing else: {"scenes":[{"title":"At breakfast","ru":"За за́втраком"}, ...]}. Titles in plain \
-    English, 2–5 words; `ru` the same in Russian with stress marks (U+0301) on words of 2+ syllables, never on ё. \
-    Vary them: a place, a situation, a topic (e.g. "about a book you read"). No preamble.
+    English, 2–5 words; `ru` the same in Russian with stress marks (U+0301) on words of 2+ syllables, never on ё \
+    or one-syllable words. Vary them: a place, a situation, a topic (e.g. "about a book you read"). No preamble.
     """
 
     static func proposeScenes(book: Book) async throws -> [TalkScene] {
@@ -88,7 +88,8 @@ enum TalkTutor {
         Rules for every turn:
         - RU: what you say — Russian only, 1–2 short natural sentences, at most 12 words in all, built from the words \
         they know plus AT MOST TWO new words (list those in NEW). Usually end with a question they can answer with \
-        words they have. Stress marks (U+0301) on every word of 2+ syllables, never on ё. Use вы.
+        words they have. Stress marks (U+0301) on every word of 2+ syllables, never on ё or one-syllable words. \
+        Address the learner consistently as вы (as their Russian tutor; never mix ты and вы).
         - If their reply is close to a sensible answer, respond to its meaning. If a word is wrong or unclear, \
         repair gently inside RU with «Вы хоте́ли сказа́ть …?» and the right form, then carry on. Never explain in \
         English inside RU. If nothing was heard, ask again more simply.
@@ -320,9 +321,10 @@ enum TalkTutor {
     the transcript: your lines, and their lines as SPEECH RECOGNITION heard them. Now mark their lines the way a \
     kind, exact teacher marks homework in red pen, keeping in mind that it was spoken: be lenient about anything \
     the recognizer could have misheard (a homophone, an unstressed vowel, a dropped soft sign); mark what they \
-    clearly said wrong (a wrong ending, agreement, word choice, word order), and praise what was right.
+    clearly said wrong (a wrong ending, agreement, word choice, word order), accept natural spoken Russian word \
+    order and omitted subject pronouns, and praise what was right.
     Reply with ONE JSON object and nothing else:
-    {"lines": [{"n": 1, "corrected": "their line, corrected, with stress marks (U+0301) on words of 2+ syllables, never on ё",
+    {"lines": [{"n": 1, "corrected": "their line, corrected, with stress marks (U+0301) on words of 2+ syllables, never on ё or one-syllable words",
                 "edits": [{"span": "their words exactly as heard", "replacement": "the right form, stress-marked ('' to delete)",
                            "category": "spelling|ending|agreement|word-choice|word-order|stress|punctuation|other",
                            "why": "one line in English saying what differs and why", "en": "English meaning of the replacement",
