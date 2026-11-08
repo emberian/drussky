@@ -172,6 +172,7 @@
   "orig": ".local/drussky-librivox/orig/И._А._Тургенев._Русский_язык_(чит._А._П._Ленский).ogg",
   "orig_sha1": "5f95b67ea20d1101823db68b705ce5d294885781",
   "orig_url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/%D0%98._%D0%90._%D0%A2%D1%83%D1%80%D0%B3%D0%B5%D0%BD%D0%B5%D0%B2._%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B7%D1%8B%D0%BA_%28%D1%87%D0%B8%D1%82._%D0%90._%D0%9F._%D0%9B%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%29.ogg",
-  "pipeline": "audio_store.cut (ffmpeg, recorded offsets) -> audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000"
+  "pipeline": "audio_store.cut (ffmpeg, recorded offsets) -> audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afconvert -f m4af -d aac -b 64000",
+  "license_note": "Public domain per the Commons template (recording made 1894; reader d. 1908). The US rule for sound recordings first published before 1923 has not been verified for this recording; this is a claim, not a clearance."
  }
 }

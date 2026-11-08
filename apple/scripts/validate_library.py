@@ -21,12 +21,16 @@ TOPICS = {"classic", "scifi", "math", "science", "philosophy", "everyday"}
 MAX_TEXT = 3000
 MAX_WORDS = 10
 TEXT_FIELDS = {"id": str, "title": str, "author": str, "level": str, "topic": str, "text": str, "license": str, "source": str}
-OPTIONAL_TEXT = {"title_en": str, "year": int, "summary_en": str, "narration": str, "words": str, "reader": str}
+OPTIONAL_TEXT = {"title_en": str, "year": int, "summary_en": str, "narration": str, "words": str, "reader": str,
+                 # Edition facts behind the licence claim, and the narration's own rights basis (credits.json).
+                 "publication": str, "narration_license": str}
 # Optional authored-reading support, checked in detail by validate_math.py.
 OPTIONAL_TEXT.update({"rung": int, "after_page": str, "en": str, "glosses": dict,
                       "questions": list, "how_read": list, "notation": list, "references": list})
 SENTENCE_FIELDS = {"ru": str, "en": str}
-OPTIONAL_SENTENCE = {"audio": str, "speaker": str, "license": str, "source": str}
+OPTIONAL_SENTENCE = {"audio": str, "speaker": str, "license": str, "source": str,
+                     # Tatoeba's own record of who wrote each half and under what licence (scripts/fetch_provenance.py).
+                     "ru_author": str, "en_author": str, "ru_license": str, "en_license": str, "en_source": str}
 # A license string is redistributable when it names one of these and none of the restrictions.
 FREE = re.compile(r"^public domain|\bCC0\b|\bCC BY(-SA)? \d", re.I)
 NOT_FREE = re.compile(r"\bNC\b|\bND\b|-NC|-ND|non-?commercial|no ?deriv|personal|all rights reserved|copyright", re.I)
