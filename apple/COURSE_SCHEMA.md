@@ -284,6 +284,47 @@ an episode. A result keeps one choice in `chosen`, or a message's choices in `re
 five messages as `BaselineTask`s (kind `listening`, the new Optional `text` played by text in the
 voice `speaker` names).
 
+# Structure — `Drussky/Resources/library-structure.json`
+
+The skeleton of every library sentence, written offline by `scripts/library_structure.py` (Claude,
+`claude-opus-5-5`, structured JSON, one paragraph-sized request at a time, resumable) and checked by
+`scripts/validate_structure.py`. The app lays it over any passage made from a library text — as written,
+read along, the goal's first page — by the sentence's text alone (`Structure.swift`), and the
+«Структу́ра» toggle on the page draws it as a teacher's pencil marks (`StructureViews.swift`).
+
+```json
+{
+  "version": 1, "model": "claude-opus-5-5",
+  "roles": { "subject": { "ru": "подлежа́щее", "en": "subject", "tier": "member" }, "participial_clause": { "…": "…", "tier": "clause" } },
+  "texts": {
+    "tolstoy-lev-i-mysh": { "sentences": [
+      { "index": 1, "text": "Мышь пробежала ему по телу.", "words": [[0, 4], [5, 14], [15, 18], [19, 21], [22, 26]],
+        "chunks": [{ "words": [0, 0], "span": [0, 4], "role": "subject" }, { "words": [3, 4], "span": [19, 26], "role": "prepositional_phrase" }],
+        "referents": [{ "word": 2, "head": 0, "headSentence": 0, "kind": "pronoun" }],
+        "desugar": [{ "words": [3, 7], "span": [19, 50], "kind": "participle", "ru": "лев, кото́рый спал", "en": "the lion that was sleeping" }],
+        "roots": [{ "word": 1, "prefix": "про", "root": "беж", "suffix": "а", "inflection": "ла", "rootID": "бег", "gloss": "run",
+                    "relatives": ["бе́гать", "побежа́ть"], "source": "morphology" }],
+        "governance": [{ "head": 3, "dependents": [4], "frame": "по + Dat", "case": "dat" }] } ] } }
+}
+```
+
+`index` is the sentence's position in the text (paragraphs split on `\n`, sentences by
+`GoalAnalysis.splitSentences`, which the script ports); `text` is the exact source sentence, so an edited
+text invalidates its entry visibly. `words` are the sentence's words as `[start, end)` Unicode-scalar
+offsets — runs of letters, digits and stress marks, hyphenated compounds as one word (`Structure.words(in:)`
+is the same rule) — and every other index refers to them. Member chunks (tier `member`: subject, predicate,
+object, attribute, adverbial, prepositional_phrase, …) cover the words without overlapping; clause chunks
+(subordinate, relative, participial, gerund, coordinate, direct speech, parenthetical) nest. A referent's
+head may be in an earlier sentence of the same text (`headSentence`). Paraphrases and frames carry stress
+marks on polysyllables and none on ё. An x-ray's four pieces spell the word as written; when
+`morphology.json` knows the word, its root, gloss and taught relatives come from there (`source:
+"morphology"`), otherwise from the model, relatives restricted to words the course teaches.
+
+The `structure` exercise is generated from it (never authored): `{"kind":"structure","text":"<sentence>",
+"probe":<word index of the pronoun or participle>,"answer":<word index of its head>,"word":"<probe as
+written>","skills":["anaphora"|"participle"]}` — the learner taps the head; right first time is a
+read-pick `good` on the construction (and the pronoun), right after a wrong tap `again`.
+
 # Sound pairs — `Drussky/Resources/pairs.json`
 
 Minimal pairs for listening (＋ → Sound pairs). `contrasts: [{id, name, note}]`,

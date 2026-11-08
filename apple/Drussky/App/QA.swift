@@ -82,6 +82,7 @@ enum QA {
         if let partial = value("-qa-partial") { complete(book, page: book.currentPage, upTo: partial) }
         applyGoal(to: book)
         applyInstruments(to: book)  // -qa-judge, -qa-hooks, -qa-fluency (Fluency/QA+Instruments.swift)
+        applyStructure(to: book)  // -qa-structure ID (Structure/QA+Structure.swift)
         // -qa-narration ID: the read-along page of that library text, right after the current page
         // (-qa-narration-at MS shows it paused at that moment of the reading).
         if let id = string("-qa-narration"), let text = Library.load().texts.first(where: { $0.id == id }) {
@@ -125,7 +126,7 @@ enum QA {
                 r.attempts += 1
                 switch ex.kind {
                 case .listenPick: r.chosen = ex.options?.firstIndex(of: ex.say ?? ""); r.status = .correct
-                case .readMeaning, .familyGuess, .constructionChoice: r.chosen = ex.answerIndex; r.status = .correct
+                case .readMeaning, .familyGuess, .constructionChoice, .structure: r.chosen = ex.answerIndex; r.status = .correct
                 case .readHandwriting:
                     r.chosen = ex.options?.firstIndex { RussianText.key($0) == RussianText.key(ex.text ?? "") }
                     r.recognized = ex.text.map(RussianText.unstressed); r.status = .correct

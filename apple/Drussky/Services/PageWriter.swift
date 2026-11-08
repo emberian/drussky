@@ -198,7 +198,7 @@ enum PageWriter {
             guard nonEmpty(ex.text), readable(ex.text), let options = ex.options, let i = ex.answerIndex,
                   options.indices.contains(i), options.count >= 2 else { return nil }
             return ex
-        case .soundPair, .buildWord, .familyGuess, .talk, .paradigmFill, .transform, .cueSort, .listening: return nil  // generated locally (pairs, morphology, paradigms, listening.json) only
+        case .soundPair, .buildWord, .familyGuess, .talk, .paradigmFill, .transform, .cueSort, .listening, .structure: return nil  // generated locally (pairs, morphology, paradigms, listening.json, library-structure) only
         case .readHandwriting:
             guard nonEmpty(ex.text), readable(ex.text) else { return nil }
             if let options = ex.options {

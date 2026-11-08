@@ -206,6 +206,12 @@ enum NotebookPDF {
                     add(choices(item.options(i), chosen: picks[safe: i] ?? nil, correct: item.answer(i), russian: item.kind == .pickObject))
                 }
             }
+        case .structure:  // the sentence with the word asked about and its head, as chosen
+            add(text(ex.text ?? "", font: serif(12.5), color: .text), after: 3)
+            if let p = Structure.probe(of: ex) {
+                let chosen = r.chosen.flatMap { Structure.wordStrings(in: ex.text ?? "")[safe: $0] }
+                add(text("«\(p.probe)» → «\(p.head)»" + (chosen.map { $0 == p.head ? "" : "  (tapped «\($0)»)" } ?? ""), font: rounded(9.5), color: r.status == .missed ? .redPen : .muted))
+            }
         case .meet, .dictation:
             break
         }
@@ -418,6 +424,7 @@ enum NotebookPDF {
         case .cueSort: "Sort by pattern"
         case .readHandwriting: ex.options != nil ? "Read the handwriting and pick the word" : "Read the handwriting and print it"
         case .listening: "На слух · \(ex.listening?.question ?? ex.listening?.questions?.first?.prompt ?? "Listen")"
+        case .structure: "Who is meant · «\(ex.word ?? "")»"
         }
     }
 

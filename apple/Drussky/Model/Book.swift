@@ -113,6 +113,8 @@ struct Settings: Codable, Sendable, Equatable {
     var modelRepeats: Int = 1
     /// Who judges recall writing: "myself" (default) or "reader" (`Settings.writingJudge`, Judgement/).
     var judge: String? = nil
+    /// The «Структу́ра» layer on reading pages, as last left (Structure/).
+    var showStructure: Bool? = nil
 
     init() {}
 
@@ -127,6 +129,7 @@ struct Settings: Codable, Sendable, Equatable {
         dailyReviewCap = try c.decodeIfPresent(Int.self, forKey: .dailyReviewCap)
         probes = try c.decodeIfPresent(Bool.self, forKey: .probes)
         judge = try c.decodeIfPresent(String.self, forKey: .judge)
+        showStructure = try c.decodeIfPresent(Bool.self, forKey: .showStructure)
     }
 }
 
@@ -469,7 +472,7 @@ final class Book {
         case .constructionChoice: return ConstructionChoice.key
         case .meet: return exercise.letter.map { "letter:\($0)" }
         // Only what the learner produced becomes something to recall later.
-        case .explain, .readMeaning, .passage, .soundPair, .listening: return nil
+        case .explain, .readMeaning, .passage, .soundPair, .listening, .structure: return nil
         default:
             guard let target = exercise.target ?? exercise.text else { return nil }
             guard let word = word(target) else {
@@ -589,6 +592,9 @@ final class Book {
         case .buildWord: lines.append("Building «\(ex.answerText ?? "")» (“\(ex.en ?? "")”) from the tiles \((ex.options ?? ex.parts ?? []).joined(separator: " ")).")
         case .talk: lines.append(TalkConversation.describe(ex, r))
         case .familyGuess: lines.append("Guessing what «\(ex.word ?? "")» means in «\(ex.text ?? "")» from its root \(ex.root ?? ""), choosing among: \((ex.options ?? []).joined(separator: " / ")).")
+        case .structure:
+            let p = Structure.probe(of: ex)
+            lines.append("Reading «\(ex.text ?? "")» and tapping the word that «\(p?.probe ?? ex.word ?? "")» refers to or agrees with (answer «\(p?.head ?? "")»).")
         case .paradigmFill: lines.append("Filling the \(ex.paradigm ?? "") table of «\(ex.word ?? "")»: cells \((ex.cells ?? []).joined(separator: ", ")) (answers \((ex.cells ?? []).compactMap { ex.forms?[$0] }.joined(separator: ", "))).")
         case .transform: lines.append("Writing «\(ex.word ?? "")» in the \(ex.cue ?? "") cell (answer «\(ex.answerText ?? "")»)" + (ex.before != nil ? " in \(ex.before ?? "")___\(ex.after ?? "")." : "."))
         case .cueSort: lines.append("Sorting \((ex.items ?? []).map { "«\($0.text)»" }.joined(separator: ", ")) into: \((ex.options ?? []).joined(separator: " / ")).")

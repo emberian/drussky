@@ -155,8 +155,10 @@ struct WritePageContent: View {
                 case .goal: "Toward your book"
                 }
             }()
+            // A library text read as written also asks who is meant (Structure/), from its own sentences.
+            let questions: [Exercise] = if case .library(let t) = source, case .text = request { Structure.shared.exercises(for: t.id) } else { [] }
             book.insertWrittenPage(title: page.title, intro: page.intro, unitTitle: unit,
-                                   exercises: exercises, newWords: page.new_words ?? [])
+                                   exercises: exercises + questions, newWords: page.new_words ?? [])
             onDone()
         } catch {
             self.error = error.localizedDescription

@@ -82,6 +82,9 @@ enum ExerciseKind: String, Codable, Sendable {
     case readHandwriting = "read_handwriting"
     /// A spoken conversation with the tutor (Talk/).
     case talk
+    /// Referent resolution on a library sentence: tap the head a pronoun or participle belongs to
+    /// (Structure/); generated locally from library-structure.json, never authored.
+    case structure
     /// Grammar as a system (Grammar/): a table with cells to fill, one form from a cue, phrases
     /// sorted by the case or pattern they show.
     case paradigmFill = "paradigm_fill"
@@ -139,6 +142,9 @@ struct Exercise: Codable, Sendable, Hashable {
     /// family_guess: the new family member inside `text`, and the root it shares with known words.
     var word: String? = nil
     var root: String? = nil
+    /// structure: the word asked about (index into `Structure.words(in: text)`); `answer` is its head's index
+    /// and `word` the probe as written.
+    var probe: Int? = nil
     /// Passage: how its phrases and notation are read, listed quietly under the text (a shelf
     /// reading's `how_read` and `notation`, Model/Shelves.swift).
     var frames: [Frame]? = nil
@@ -172,7 +178,7 @@ struct Exercise: Codable, Sendable, Hashable {
     enum CodingKeys: String, CodingKey {
         case kind, letter, text, examples, times, say, options, en, before, after, hint, answer, reviewKey, glosses, skills, prompt
         case narration, words, span
-        case parts, alternatives, word, root, frames, notice, baseline, listening
+        case parts, alternatives, word, root, probe, frames, notice, baseline, listening
         case paradigm, cue, cells, forms, items
         case cursive, seed
     }
@@ -203,6 +209,7 @@ struct Exercise: Codable, Sendable, Hashable {
         alternatives = try c.decodeIfPresent([String].self, forKey: .alternatives)
         word = try c.decodeIfPresent(String.self, forKey: .word)
         root = try c.decodeIfPresent(String.self, forKey: .root)
+        probe = try c.decodeIfPresent(Int.self, forKey: .probe)
         frames = try c.decodeIfPresent([Frame].self, forKey: .frames)
         notice = try c.decodeIfPresent([String].self, forKey: .notice)
         paradigm = try c.decodeIfPresent(String.self, forKey: .paradigm)
@@ -245,6 +252,7 @@ struct Exercise: Codable, Sendable, Hashable {
         try c.encodeIfPresent(alternatives, forKey: .alternatives)
         try c.encodeIfPresent(word, forKey: .word)
         try c.encodeIfPresent(root, forKey: .root)
+        try c.encodeIfPresent(probe, forKey: .probe)
         try c.encodeIfPresent(frames, forKey: .frames)
         try c.encodeIfPresent(notice, forKey: .notice)
         try c.encodeIfPresent(paradigm, forKey: .paradigm)
@@ -276,7 +284,7 @@ struct Exercise: Codable, Sendable, Hashable {
         switch kind {
         case .listenPick: say
         case .dictation: say ?? text
-        case .readAloud, .trace, .copy, .readMeaning, .passage, .familyGuess, .readHandwriting: text
+        case .readAloud, .trace, .copy, .readMeaning, .passage, .familyGuess, .readHandwriting, .structure: text
         case .fill: [before, answerText, after].compactMap { $0 }.joined()
         case .translate, .buildWord, .transform: answerText
         default: nil
