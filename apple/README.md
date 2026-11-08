@@ -207,11 +207,12 @@ the distance arithmetic is LearningCore's `Target`.
 ## Inside the cover
 
 The book icon (top left) opens your alphabet — each letter in **your own handwriting** once
-you've met it — and every page so far with its mark. **Grammar** draws the system behind the
-words: the three noun declensions, adjectives, pronouns, the two conjugations and the irregular
-verbs, past and imperative, and what each case does — tables that start empty and fill in as you
-meet and produce each cell (a cell glows by the recall of its pattern, a dot marks one you have
-written yourself); tap a cell for its examples with audio and history, a title for the whole table. **My Russian** collects every diary line
+you've met it — and every page so far with its mark. **Grammar** is one row of chips, one per
+table of the system behind the words (the three noun declensions, adjectives, pronouns, the two
+conjugations and the irregular verbs, past and imperative, what each case does), each counting
+the cells you have met; a chip opens its table, *All tables* opens them all. The tables start
+empty and fill in as you meet and produce each cell (a cell glows by the recall of its pattern, a
+dot marks one you have written yourself); tap a cell for its examples with audio and history. **My Russian** collects every diary line
 you have ever written, newest first, with its red pen, and what the pen keeps finding this
 week; it exports as Markdown. Settings: finger drawing, cursive
 models, stress marks, notebook export (pages, ink, recordings as a zip), the notebook as a PDF, credits.
@@ -314,9 +315,10 @@ chart), `-qa-tired` (the current page marked shortened);
 offline page toward it), `-qa-goal-first` (open its first page now); `-qa-judge` (ink on the first
 open recall exercise with Check tapped: the self-judgement panel), `-qa-hooks` (canned hooks on a few
 words; `-qa-contents -qa-node lex:кот` opens one), `-qa-fluency` (three weeks of synthetic fluency
-samples for the cover line and sparklines); `-qa-grammar` (a grammar
-page from the tables), `-qa-grammar-table decl1` / `-qa-grammar-cell decl1/gen-sg` (with
-`-qa-contents`: open that table or cell of the Grammar section).
+samples for the cover line and sparklines); `-qa-grammar` (a grammar page from the tables;
+`-qa-grammar-partial K` works through its first K exercises), `-qa-grammar-table decl1` /
+`-qa-grammar-cell decl1/gen-sg` / `-qa-grammar-all` (with `-qa-contents`: open that table, that
+cell, or every table of the Grammar section).
 
 ## Content
 
