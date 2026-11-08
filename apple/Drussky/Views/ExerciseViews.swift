@@ -844,6 +844,7 @@ struct ChoiceGrid: View {
                                 style: StrokeStyle(lineWidth: isChosen || revealed ? 2.5 : 1, dash: revealed ? [6, 4] : [])))
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier("choice-\(i)")
                 .allowsHitTesting(!finished)  // not .disabled: the marked answers stay full strength
                 .sensoryFeedback(judged ? (isRight ? .success : .error) : .selection, trigger: isChosen)
                 .accessibilityValue(isChosen ? (judged ? (isRight ? "your choice, right" : "your choice, wrong") : "your choice") : revealed ? "the right answer" : "")

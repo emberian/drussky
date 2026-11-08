@@ -161,13 +161,13 @@ struct ListeningExercise: View {
         let outcome = done ? item.answer.flatMap { item.outcomes?[safe: $0] } : nil
         return VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .top, spacing: 14) {
-                Text("ON THE TRAY").font(Theme.label(11)).tracking(1.4).foregroundStyle(Theme.muted).frame(width: 84, alignment: .leading).padding(.top, 10)
+                Text("TRAY").font(Theme.label(11)).tracking(1.4).foregroundStyle(Theme.muted).frame(width: 64, alignment: .leading).padding(.top, 10)
                 FlowRow(spacing: 8) {
                     ForEach(objects) { chip($0, marked: outcome?.object == $0.id, moved: outcome?.object == $0.id && outcome?.place != nil) }
                 }
             }
             HStack(alignment: .top, spacing: 14) {
-                Text("PLACES").font(Theme.label(11)).tracking(1.4).foregroundStyle(Theme.muted).frame(width: 84, alignment: .leading).padding(.top, 10)
+                Text("PLACES").font(Theme.label(11)).tracking(1.4).foregroundStyle(Theme.muted).frame(width: 64, alignment: .leading).padding(.top, 10)
                 FlowRow(spacing: 8) {
                     ForEach(places) { chip($0, marked: outcome?.place == $0.id, moved: false) }
                 }

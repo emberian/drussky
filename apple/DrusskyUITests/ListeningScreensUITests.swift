@@ -23,12 +23,10 @@ final class ListeningScreensUITests: XCTestCase {
         XCTAssertTrue(play.waitForExistence(timeout: 5), "the first card's Play")
         play.tap()
         sleep(3)
-        // The choices are there before and after playing; pick the first one (right or wrong, the words appear).
-        let choice = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] 'your choice' OR identifier == ''")).firstMatch
-        _ = choice
-        let grid = app.descendants(matching: .button).allElementsBoundByIndex.filter { $0.frame.minY > play.frame.maxY && $0.frame.minY < play.frame.maxY + 220 && $0.isHittable }
-        XCTAssertFalse(grid.isEmpty, "choices under the first card")
-        grid[0].tap()
+        // The choices are there before and after playing; pick the first card's first one (right or wrong, the words appear).
+        let choice = app.buttons["choice-0"].firstMatch
+        XCTAssertTrue(choice.waitForExistence(timeout: 3), "choices under the first card")
+        choice.tap()
         sleep(1)
         attach(app, "listening-2-answered")
         XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'Right first time' OR label CONTAINS 'Not this one'")).firstMatch.waitForExistence(timeout: 3),
@@ -57,7 +55,7 @@ final class ListeningScreensUITests: XCTestCase {
         let app = launch(["-qa-listening", "3", "-qa-partial", "8", "-qa-top"])
         sleep(2)
         attach(app, "listening-3-done-top")
-        XCTAssertTrue(app.staticTexts["ON THE TRAY"].firstMatch.waitForExistence(timeout: 5), "the scene's tray")
+        XCTAssertTrue(app.staticTexts["TRAY"].firstMatch.waitForExistence(timeout: 5), "the scene's tray")
         XCTAssertTrue(app.staticTexts["PLACES"].firstMatch.exists)
         app.swipeUp(); sleep(1)
         attach(app, "listening-3-done-mid")
