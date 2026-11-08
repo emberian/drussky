@@ -35,6 +35,8 @@ final class SpeakingTurn {
         var takeURL: URL
         var model: URL?
         var repeats: Int
+        /// Endpointing for this take; nil takes the target's own (`config(target:model:)`).
+        var config: VoiceActivity.Config? = nil
     }
     struct Take {
         var file: URL
@@ -189,7 +191,7 @@ final class SpeakingTurn {
         // Your turn. Nothing else may be sounding into the microphone (a narration still reading).
         voice.stop()
         Voice.configureSession()
-        let cap = TakeCapture(config: Self.config(target: r.target, model: r.model))
+        let cap = TakeCapture(config: r.config ?? Self.config(target: r.target, model: r.model))
         let stream: AsyncStream<CaptureEvent>
         do { stream = try cap.start() } catch { end(r.key, .failed); return }
         capture = cap

@@ -95,13 +95,23 @@ struct TalkExercise: View {
             FlowRow(spacing: 10) {
                 ForEach(s.conversation.proposed ?? []) { scene in
                     Button { s.choose(scene) } label: {
-                        VStack(alignment: .leading, spacing: 3) {
+                        VStack(alignment: .leading, spacing: 6) {
                             Text(Theme.stressed(scene.ru.isEmpty ? scene.title : scene.ru, show: book.settings.showStress))
                                 .russianFont(22, weight: .medium).foregroundStyle(Theme.text)
                             if !scene.ru.isEmpty { Text(scene.title).scaledFont(14).foregroundStyle(Theme.muted) }
+                            if let goal = scene.goal {
+                                Label(goal, systemImage: "target").scaledFont(14, weight: .medium).foregroundStyle(Theme.text)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                            ForEach(scene.frames ?? [], id: \.ru) { f in
+                                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                                    Text(Theme.stressed(f.ru, show: book.settings.showStress)).russianFont(16).foregroundStyle(Theme.accent)
+                                    if !f.en.isEmpty { Text(f.en).scaledFont(12).foregroundStyle(Theme.muted) }
+                                }
+                            }
                         }
                         .padding(.horizontal, 16).padding(.vertical, 12)
-                        .frame(minWidth: 160, alignment: .leading)
+                        .frame(minWidth: 200, maxWidth: 320, alignment: .leading)
                         .background(RoundedRectangle(cornerRadius: 14).fill(Theme.card))
                         .overlay(RoundedRectangle(cornerRadius: 14).stroke(Theme.accent.opacity(0.35)))
                     }
@@ -120,6 +130,9 @@ struct TalkExercise: View {
 
     private func transcript(_ s: TalkSession) -> some View {
         VStack(alignment: .leading, spacing: 10) {
+            if let scene = s.conversation.scene, scene.goal != nil || !(scene.frames ?? []).isEmpty {
+                goalStrip(scene, over: s.conversation.isEnded)
+            }
             ForEach(Array(s.conversation.lines.enumerated()), id: \.element.id) { _, line in
                 switch line.role {
                 case .tutor: tutorLine(line, s)
@@ -132,6 +145,38 @@ struct TalkExercise: View {
         }
         .frame(maxWidth: 680, alignment: .leading)
         .animation(.easeOut(duration: 0.2), value: s.conversation.lines.count)
+    }
+
+    /// Your goal in English and the frames you may need (tap one to hear it); once the talk is
+    /// over, what your partner knew all along.
+    private func goalStrip(_ scene: TalkScene, over: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            if let goal = scene.goal {
+                Label(goal, systemImage: "target").scaledFont(15, weight: .semibold).foregroundStyle(Theme.text)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityLabel("Your goal: \(goal)")
+            }
+            if let frames = scene.frames, !frames.isEmpty {
+                FlowRow(spacing: 8) {
+                    ForEach(frames, id: \.ru) { f in
+                        HStack(spacing: 6) {
+                            HearButton(text: f.ru, size: 26)
+                            Text(Theme.stressed(f.ru, show: book.settings.showStress)).russianFont(17, weight: .medium).foregroundStyle(Theme.text)
+                            if !f.en.isEmpty { Text(f.en).scaledFont(12).foregroundStyle(Theme.muted) }
+                        }
+                        .padding(.trailing, 8).padding(.vertical, 2)
+                        .background(Capsule().fill(Theme.accent.opacity(0.08)))
+                    }
+                }
+            }
+            if over, let secret = scene.secret {
+                Text("Your partner knew: \(secret)").scaledFont(13).italic().foregroundStyle(Theme.muted)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(12)
+        .frame(maxWidth: 680, alignment: .leading)
+        .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
     }
 
     /// The tutor's line: Russian as written, the speaker to hear it again, and the whisper
@@ -229,7 +274,7 @@ struct TalkExercise: View {
         case .yourTurn:
             HStack(alignment: .center, spacing: 16) {
                 TurnButton(phase: s.mic.phase, level: s.mic.level) { s.tap() }
-                TurnStatus(phase: s.mic.phase, problem: s.mic.problem(for: s.key), hasTake: false, repeats: 0) { s.tap() }
+                talkTurnStatus(s)
             }
             HStack(spacing: 10) {
                 PillButton(title: "Type instead", systemImage: "keyboard") { s.mic.cancel(); typing = true; focused = true }
@@ -270,6 +315,32 @@ struct TalkExercise: View {
         }
     }
 
+    /// Beside the button while it is your turn: take your time; a tap ends the turn.
+    @ViewBuilder private func talkTurnStatus(_ s: TalkSession) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            switch s.mic.phase {
+            case .cue, .waiting:
+                Text("Your turn").scaledFont(17, weight: .semibold).foregroundStyle(Theme.redPen)
+                Text("Take your time. Tap when you've finished.").scaledFont(13).foregroundStyle(Theme.muted)
+            case .hearing:
+                Text("Still listening…").scaledFont(17, weight: .semibold).foregroundStyle(Theme.redPen)
+                Text("A pause is fine. Tap when you've finished.").scaledFont(13).foregroundStyle(Theme.muted)
+            case .analysing:
+                Text("Hearing it back…").scaledFont(17, weight: .semibold).foregroundStyle(Theme.muted)
+            case .preparing, .model:
+                Text(" ").scaledFont(17)
+            case .idle:
+                switch s.mic.problem(for: s.key) {
+                case .micDenied?: Text("Talking needs the microphone: Settings → Drussky → Microphone.").scaledFont(14).foregroundStyle(Theme.redPen)
+                case .interrupted?: Text("Interrupted — tap to go again.").scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
+                case .failed?: Text("The microphone didn't start — tap to try again.").scaledFont(15, weight: .medium).foregroundStyle(Theme.text)
+                default: Text("Tap, then answer.").scaledFont(15, weight: .medium).foregroundStyle(Theme.muted)
+                }
+            }
+        }
+        .animation(.easeOut(duration: 0.15), value: s.mic.phase)
+    }
+
     private func typedField(_ s: TalkSession) -> some View {
         @Bindable var s = s
         return HStack(spacing: 10) {
@@ -290,6 +361,22 @@ struct TalkExercise: View {
     /// After the pen: a word of praise for the whole, the pattern behind the biggest slip.
     @ViewBuilder private func afterwards(_ s: TalkSession) -> some View {
         let c = s.conversation
+        if let o = c.outcome {
+            VStack(alignment: .leading, spacing: 4) {
+                Label(o.reached == true ? "You got there." : o.reached == false ? "Not quite there." : "What came across",
+                      systemImage: o.reached == true ? "checkmark.seal" : "flag")
+                    .scaledFont(16, weight: .semibold).foregroundStyle(o.reached == true ? Theme.good : Theme.text)
+                if !o.conveyed.isEmpty { Text(o.conveyed).scaledFont(15).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true) }
+                if let cl = o.clarified, !cl.isEmpty {
+                    Text("Your partner had to ask: \(cl)").scaledFont(13).foregroundStyle(Theme.muted).fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .padding(12)
+            .frame(maxWidth: 640, alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: 12).fill(Theme.card))
+            .overlay(alignment: .leading) { Rectangle().fill((o.reached == true ? Theme.good : Theme.redPen).opacity(0.6)).frame(width: 3).padding(.vertical, 10) }
+            .accessibilityElement(children: .combine)
+        }
         if let praise = c.praise, !praise.isEmpty {
             Text(praise).font(Theme.cursive(compact ? 20 : 24)).foregroundStyle(Theme.redPen).fixedSize(horizontal: false, vertical: true)
         }

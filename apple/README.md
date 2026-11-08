@@ -125,31 +125,46 @@ voices.
 
 ## Talk
 
-＋ → *Talk* (`Drussky/Talk/`) is a spoken conversation with the tutor on the page. The tutor
-proposes three scenes built from the words you know; then it speaks (one or two short sentences,
-stress-marked, within your vocabulary plus at most two new words, usually ending in a question),
-the soft tone says it is your turn, and the same hands-free microphone as *read aloud* takes your
-answer (no model to play, no target to compare: `TalkSession` runs its own `SpeakingTurn`). Speech
-recognition transcribes it, the tutor answers what was understood and repairs gently («Вы хоте́ли
-сказа́ть …?»). It stays in Russian; the eye beside each line whispers the English and the new words
-(each keepable). After 6–10 turns the tutor says goodbye and the whole transcript is marked like a
-diary line: your lines as heard with the red pen over them (`DiaryTutor`'s JSON contract per line,
-lenient about what the recognizer could have misheard), one word of praise, the pattern behind the
-biggest slip, and, where the phone-level analyzer is bundled, one pronunciation tip per take. Every
-turn the tutor understood is `good` on the words you said (modality `own-speech`); each edit is
-`again` with a speech confusion; new words and corrected forms join your words. Conversations are
-saved inside the exercise's result and listed under *My Russian*. Typing a line is always there
-(no microphone, a noisy room).
+＋ → *Talk* (`Drussky/Talk/`) is a spoken conversation with the tutor on the page, and every
+conversation has something to accomplish. The tutor proposes three scenes built from the words
+you know; each is an information gap: the partner holds facts you don't (where the keys are, what
+the shop has, which film they prefer) and you have a goal, told to you in English on the scene
+card with two or three phrase frames you may need (from your own words first). The partner
+answers the meaning you actually express from its facts, asks you to clarify when a line is
+unclear, says no when its facts say no, and is not obliged to agree. It speaks one or two short
+stress-marked sentences within your vocabulary plus at most two new words; the soft tone says it
+is your turn and the same hands-free microphone as *read aloud* takes your answer with a
+conversation profile (`TalkSession.endpointing`: a pause of 1.5 s ends the turn rather than 0.7 s,
+up to 12 s of speech, 10 s to start; "Still listening… a pause is fine; tap when you've finished";
+nothing is captured while the tutor speaks, and replaying a line closes the microphone first).
+Speech recognition transcribes it, the eye beside each line whispers the English and the new
+words (each keepable); typing a line is always there. After 6–10 turns the tutor says goodbye and
+the transcript is marked: first whether you reached your goal and what came across, judged from
+your words alone (the marker is told the goal, never the partner's facts, which are then shown to
+you), then your lines as heard with the red pen over them (`DiaryTutor`'s JSON contract per line,
+lenient about what the recognizer could have misheard), one word of praise, the pattern behind
+the biggest slip, and, where the phone-level analyzer is bundled, one pronunciation tip per take.
+Every turn the tutor understood is `good` on the words you said (modality `own-speech`); each
+edit is `again` with a speech confusion; new words and corrected forms join your words.
+Conversations are saved inside the exercise's result and listed under *My Russian*.
 
 The tutor's reply is a line-based format (`RU:` / `EN:` / `NEW:` / `END`) rather than JSON so the
-voice can start on the first sentence while the rest is still arriving: measured on the simulator,
-scenes in ~1.7 s, first spoken sentence ~1.1–4 s after sending a turn (`TalkLatency` is kept on
-each tutor line). The lines are spoken by `TutorVoice`: the system voice is the first
-implementation (`SystemTutorVoice`, the best installed Russian voice — Premium over Enhanced over
-default; Settings → Talk says which one and how to download a better one in iOS Settings →
-Accessibility → Spoken Content); a narrator engine slots in behind the same three calls. Offline,
-or without a key, the page says so in one line. A page turn cancels whatever is live; the lines
-said so far are already saved and the page offers to continue.
+voice can start on the first sentence while the rest is still arriving (`TalkLatency` is kept on
+each tutor line). Models, measured 2026-11-08 from this machine with the app's own prompts: the
+scenes call is `claude-sonnet-5-5` (first token 0.63–0.81 s against 8.7–12.7 s for Opus 5.5, with
+the full state prompt or the words-only one — the prompt's size made no difference, so it sends
+only the words); turns are Sonnet too: on ten sample turns (an opener, a clean order, a garbled
+«С молоко и сахар», noise words, silence, an English line, a last turn) both models were 0/10
+flagged on format, length (≤ 12 words), Latin letters and `END`; Sonnet missed one stress mark
+in 30 multi-syllable words, Opus none; mean first token Sonnet 1.9 s, Opus 2.9 s (in-app Opus
+turns ranged 1.9–9.4 s). The marking stays on Opus 5.5. The system prompt carries a prompt-cache
+breakpoint. The lines are spoken by `TutorVoice`: the system voice is the first implementation
+(`SystemTutorVoice`, the best installed Russian voice — Premium over Enhanced over default;
+Settings → Talk says which one and how to download a better one in iOS Settings → Accessibility →
+Spoken Content); a narrator engine slots in behind the same three calls. Offline, or without a
+key, the page says so in one line and can be left (*Not today*, or turn the page); nothing is
+started. A page turn cancels whatever is live; the lines said so far are already saved and the
+page offers to continue.
 
 ## Your book
 
@@ -271,8 +286,8 @@ QA launch arguments (simulator): `-qa-reset`, `-qa-complete N` (work through N p
 synthetic ink), `-qa-partial K`, `-qa-age D`, `-qa-top`, `-qa-bottom`, `-qa-contents`,
 `-qa-settings`, `-qa-diary` (three diary pages with canned red-pen corrections, no key
 needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian);
-`-qa-talk scene|mid|marked` (a Talk page posed from a canned conversation: the scene choice, the
-middle of a dialogue, the marked transcript);
+`-qa-talk fresh|scene|mid|marked` (a Talk page: untouched, the scene choice, the middle of a dialogue, the
+marked transcript; `-qa-nokey` / `-qa-offline` pose the unavailable note);
 `-qa-settings`; `-qa-day N` / `-qa-away D` (the pages were done N or D days ago, then the page is
 turned: a morning or welcome-back page), `-qa-probes` (a synthetic answered probe set for the cover
 chart), `-qa-tired` (the current page marked shortened);
