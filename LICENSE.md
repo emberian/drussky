@@ -2,10 +2,13 @@
 
 ## Source code
 
-The source code of this repository (the Swift, Rust, Python and Lean sources, the project files,
-and the course, exercise and lesson data the project wrote) is © ember (https://ember.software).
-All rights reserved until a licence is chosen. Being able to read this repository is not a licence
-to copy, modify or redistribute it.
+The source code of this repository (the Swift, Python, Rust and Lean sources, the project files,
+the scripts, and the course, exercise and lesson data the project wrote) is © ember
+(https://ember.software) and is licensed under the GNU Affero General Public License, version 3 or
+any later version (AGPL-3.0-or-later). The full licence text is in `LICENSE`. Model-drafted content
+that the project edited (the serials, the mathematics shelf, the listening curriculum, the home-talk
+pages) is part of the project's own work and carries the same licence; third-party material below
+does not.
 
 ## Third-party content
 
