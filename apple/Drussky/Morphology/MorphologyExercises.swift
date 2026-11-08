@@ -10,6 +10,8 @@ struct BuildWordExercise: View {
     let isActive: Bool
     @State private var placed: [Int] = []
     @State private var lastTry: String?
+    /// When the exercise came up (response latency runs from here to Check).
+    @State private var shownAt: Date?
 
     private var ex: Exercise { slot.exercise }
     private var result: ExerciseResult { slot.result }
@@ -41,6 +43,7 @@ struct BuildWordExercise: View {
             feedback
         }
         .animation(.easeOut(duration: 0.2), value: placed)
+        .onChange(of: isActive, initial: true) { _, active in if active, shownAt == nil { shownAt = Date() } }
     }
 
     /// The row the tiles land in; a placed tile taps back out. After the exercise, the word built.
@@ -109,11 +112,14 @@ struct BuildWordExercise: View {
         let right = BuildWordCheck.matches(chosen, answer: answer, alternatives: ex.alternatives)
         if right { voice.play(answer) }
         let missedNow = !right && result.attempts + 1 >= 2
+        let took = shownAt.map { Int(Date().timeIntervalSince($0) * 1000) }
+        shownAt = Date()  // a second try is timed from the first
         slot.finish { r in
             r.attempts += 1
             r.recognized = built
             r.status = right ? (r.attempts == 1 ? .correct : .done) : (missedNow ? .missed : .open)
             if missedNow { r.revealed = true }
+            r.responseMs = took
         }
         if !right {
             lastTry = built
@@ -130,6 +136,8 @@ struct FamilyGuessExercise: View {
     @Environment(Voice.self) private var voice
     let slot: ExerciseSlot
     let isActive: Bool
+    /// When the exercise came up (response latency runs from here to the tap).
+    @State private var shownAt: Date?
 
     private var ex: Exercise { slot.exercise }
     private var result: ExerciseResult { slot.result }
@@ -161,10 +169,13 @@ struct FamilyGuessExercise: View {
                        russian: false, showStress: true, locked: result.status.isComplete) { i in
                 let right = i == ex.answerIndex
                 if right || result.attempts + 1 >= 2 { voice.play(word) }
+                let took = shownAt.map { Int(Date().timeIntervalSince($0) * 1000) }
+                shownAt = Date()
                 slot.finish { r in
                     r.chosen = i
                     r.attempts += 1
                     r.status = right ? (r.attempts == 1 ? .correct : .done) : (r.attempts >= 2 ? .missed : .open)
+                    r.responseMs = took
                 }
             }
             if result.status == .missed, let answer = ex.answerIndex.flatMap({ ex.options?[safe: $0] }) {
@@ -180,6 +191,7 @@ struct FamilyGuessExercise: View {
                 if let en = ex.en { Text(en).scaledFont(16).italic().foregroundStyle(Theme.text.opacity(0.85)) }
             }
         }
+        .onChange(of: isActive, initial: true) { _, active in if active, shownAt == nil { shownAt = Date() } }
     }
 
     /// The sentence, the new word set off from it.

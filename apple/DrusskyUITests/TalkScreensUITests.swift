@@ -23,6 +23,29 @@ final class TalkScreensUITests: XCTestCase {
         }
     }
 
+    /// Ember's first Talk with no key, and offline: one honest line, and the page can be left.
+    func testTalkUnavailableIsOneLineAndLeavable() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-qa-reset", "-qa-complete", "3", "-qa-talk", "fresh", "-qa-offline"]
+        app.launch()
+        XCTAssertTrue(app.staticTexts["Разгово́р"].firstMatch.waitForExistence(timeout: 20))
+        XCTAssertTrue(app.staticTexts["Talk needs the internet — the tutor is on the other end of it."].firstMatch.waitForExistence(timeout: 5))
+        attach(app, "talk-offline")
+        let notToday = app.buttons["Not today"].firstMatch
+        XCTAssertTrue(notToday.exists)
+        notToday.tap()
+        XCTAssertTrue(app.staticTexts["Not today — nothing said here."].firstMatch.waitForExistence(timeout: 5), "skipped, the page finishes")
+        XCTAssertTrue(app.buttons["Turn the page"].firstMatch.waitForExistence(timeout: 5))
+        app.terminate()
+
+        app.launchArguments = ["-qa-reset", "-qa-complete", "3", "-qa-talk", "fresh", "-qa-nokey"]
+        app.launch()
+        XCTAssertTrue(app.staticTexts["Разгово́р"].firstMatch.waitForExistence(timeout: 20))
+        XCTAssertTrue(app.staticTexts["Talk needs your tutor: add your Anthropic API key in Settings."].firstMatch.waitForExistence(timeout: 5))
+        attach(app, "talk-nokey")
+        XCTAssertTrue(app.buttons["Skip to the next page"].firstMatch.exists, "the page is leavable without touching Talk")
+    }
+
     private func attach(_ app: XCUIApplication, _ name: String) {
         let shot = XCTAttachment(screenshot: app.screenshot())
         shot.name = name

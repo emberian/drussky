@@ -15,10 +15,13 @@ final class StrokeDemo {
 struct LetterCoach {
     var letter: Course.Letter
     var demo: StrokeDemo
+    /// Cursive models and their joined-up layout instead of the print ones (Cursive/).
+    var cursive = false
 
     /// The models laid out as the meet ghost draws them ("Б б"), in strip design coordinates.
     @MainActor
     func placed(ghost: String) -> [(StrokeModels.Letter, CGFloat)] {
+        if cursive, let m = CursiveModels.shared { return CursiveLayout.placedLetters(ghost, in: m, x0: 16) }
         guard let models = StrokeModels.shared else { return [] }
         let font = StripMetrics(height: StripMetrics.designHeight).font(cursive: false)
         let line = CTLineCreateWithAttributedString(NSAttributedString(string: ghost, attributes: [.font: font]))
@@ -137,6 +140,8 @@ struct StrokeDemoOverlay: View {
 struct FormationHintLine: View {
     @ObservedObject var pad: PadController
     let letter: Course.Letter
+    /// Compare with the cursive models, in cursive's words (Cursive/CursiveCoach.swift).
+    var cursive = false
     /// How far to rise into the strip's empty bottom margin, and room to leave on the right.
     var lift: CGFloat = 0
     var clearTrailing: CGFloat = 0
@@ -145,7 +150,7 @@ struct FormationHintLine: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {  // a real container, so .task runs with no hint showing
             if let hint {
-                let good = hint.hasSuffix("formed like the model.")
+                let good = hint.hasSuffix("like the model.")
                 Label(hint, systemImage: good ? "checkmark.circle" : "pencil.tip")
                     .font(.system(size: 15, weight: .medium))
                     .foregroundStyle(good ? Theme.good : Theme.accent)
@@ -159,21 +164,27 @@ struct FormationHintLine: View {
         .task(id: pad.strokeCount) {
             if pad.strokeCount == 0 { hint = nil; return }
             try? await Task.sleep(for: .milliseconds(900))
-            guard !Task.isCancelled, let models = StrokeModels.shared else { return }
-            hint = FormationCoach.hint(for: FormationCoach.polylines(pad.drawing), upper: letter.upper, lower: letter.lower, models: models)
+            guard !Task.isCancelled else { return }
+            let ink = FormationCoach.polylines(pad.drawing)
+            if cursive, let models = CursiveModels.shared {
+                hint = CursiveCoach.hint(for: ink, upper: letter.upper, lower: letter.lower, models: models)
+            } else if let models = StrokeModels.shared {
+                hint = FormationCoach.hint(for: ink, upper: letter.upper, lower: letter.lower, models: models)
+            }
         }
     }
 }
 
-/// "Watch it printed": plays (or replays) the stroke demo on the letter's line. The stroke
-/// models are hand-printed letters, so the button says so; there are no cursive models yet.
+/// "Watch it printed" / "Watch it written": plays (or replays) the stroke demo on the letter's
+/// line, from the print models or the cursive ones.
 struct WatchStrokesButton: View {
     let demo: StrokeDemo
+    var cursive = false
 
     var body: some View {
         let playing = demo.startedAt != nil
         Button { demo.play() } label: {
-            Label(playing ? "Again" : "Watch it printed", systemImage: playing ? "arrow.counterclockwise" : "pencil.and.scribble")
+            Label(playing ? "Again" : cursive ? "Watch it written" : "Watch it printed", systemImage: playing ? "arrow.counterclockwise" : "pencil.and.scribble")
                 .font(Theme.label(14))
                 .padding(.horizontal, 12).padding(.vertical, 8)
                 .foregroundStyle(Theme.redPen)
@@ -182,6 +193,6 @@ struct WatchStrokesButton: View {
         .buttonStyle(.plain)
         .fixedSize()
         .accessibilityIdentifier("watch-strokes")
-        .accessibilityHint("Shows how the printed letter is formed, stroke by stroke")
+        .accessibilityHint(cursive ? "Shows how the letter is written in cursive, stroke by stroke" : "Shows how the printed letter is formed, stroke by stroke")
     }
 }

@@ -35,6 +35,8 @@ final class SpeakingTurn {
         var takeURL: URL
         var model: URL?
         var repeats: Int
+        /// Endpointing for this take; nil takes the target's own (`config(target:model:)`).
+        var config: VoiceActivity.Config? = nil
     }
     struct Take {
         var file: URL
@@ -42,6 +44,9 @@ final class SpeakingTurn {
         var heard: String?
         var recognitionAllowed: Bool
         var timedOut: Bool
+        /// From the microphone opening after the cue to the voice's onset, in milliseconds: how
+        /// long the words took to come. nil when the take was stopped by a tap before any voice.
+        var onsetMs: Int?
     }
 
     private(set) var phase: Phase = .idle
@@ -189,19 +194,25 @@ final class SpeakingTurn {
         // Your turn. Nothing else may be sounding into the microphone (a narration still reading).
         voice.stop()
         Voice.configureSession()
-        let cap = TakeCapture(config: Self.config(target: r.target, model: r.model))
+        let cap = TakeCapture(config: r.config ?? Self.config(target: r.target, model: r.model))
         let stream: AsyncStream<CaptureEvent>
         do { stream = try cap.start() } catch { end(r.key, .failed); return }
         capture = cap
         phase = .cue
         cap.cueThenListen()
         var ending: VoiceActivity.Ending?
+        var listeningSince: Date?
+        var onsetMs: Int?
         listening: for await e in stream {
             guard session == mine else { break }
             switch e {
-            case .listening: if phase == .cue { phase = .waiting }
+            case .listening:
+                if phase == .cue { phase = .waiting }
+                listeningSince = listeningSince ?? Date()
             case .level(let l): level = l
-            case .voice: phase = .hearing
+            case .voice:
+                phase = .hearing
+                if onsetMs == nil, let since = listeningSince { onsetMs = Int(Date().timeIntervalSince(since) * 1000) }
             case .ended(let e): ending = e; break listening
             }
         }
@@ -228,7 +239,7 @@ final class SpeakingTurn {
         lastTimedOut = flag.isSet
         let superseded = session != mine
         if !superseded { end(r.key, nil) }
-        onTake(Take(file: url, report: report, heard: heard, recognitionAllowed: speech, timedOut: flag.isSet))
+        onTake(Take(file: url, report: report, heard: heard, recognitionAllowed: speech, timedOut: flag.isSet, onsetMs: onsetMs))
     }
 
     /// How it sounded and what words it was, side by side: the phone-level analyzer (when the app

@@ -76,9 +76,14 @@ struct ComponentHistoryView: View {
                 let percent = Text(est.map { "\(Int(($0.value * 100).rounded()))%" } ?? "–")
                     .scaledFont(14, weight: .semibold, design: .rounded).monospacedDigit()
                     .foregroundStyle(est?.estimated == true ? Theme.muted : Theme.text)
+                // The margin note: whether it comes without thinking yet, when the answers were timed.
+                let quickness: String = {
+                    guard let trace, trace.hasLatencyEvidence(k.compilation) else { return "" }
+                    return trace.isCompiled(k.compilation, modality: m) ? " · comes without thinking" : " · right, but slow yet"
+                }()
                 let detail = Group {
                     if let trace, let s = trace.state {
-                        Text("holds \(Self.days(s.stability)) · \(trace.reviews.count)× · \(trace.lapses) lapse\(trace.lapses == 1 ? "" : "s")")
+                        Text("holds \(Self.days(s.stability)) · \(trace.reviews.count)× · \(trace.lapses) lapse\(trace.lapses == 1 ? "" : "s")\(quickness)")
                     } else {
                         Text("estimated from other ways")
                     }

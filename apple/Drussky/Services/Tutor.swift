@@ -145,7 +145,7 @@ enum Keychain {
         get {
             #if DEBUG
             // Exercise no-key UI without deleting or replacing a simulator's saved credential.
-            if ProcessInfo.processInfo.arguments.contains("-qa-no-key") { return nil }
+            if ProcessInfo.processInfo.arguments.contains("-qa-nokey") { return nil }
             #endif
             let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service,
                                         kSecAttrAccount as String: account, kSecReturnData as String: true]

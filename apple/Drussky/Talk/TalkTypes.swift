@@ -14,6 +14,8 @@ struct TalkConversation: Codable, Sendable, Hashable {
     var ended: Date? = nil
     /// When the red pen went over it.
     var marked: Date? = nil
+    /// Did they get there, and what came across: the first thing the marking says.
+    var outcome: TalkOutcome? = nil
     /// One warm sentence about the whole conversation.
     var praise: String? = nil
     /// The pattern behind the biggest slip of the conversation.
@@ -31,6 +33,8 @@ struct TalkConversation: Codable, Sendable, Hashable {
         guard let t = r.talk else { return "Talk: a spoken conversation with the tutor, not started yet." }
         var s = "Talk: a spoken conversation" + (t.scene.map { " (\($0.title))" } ?? "") + " of \(t.learnerTurns) turn(s)."
         if let last = t.learnerLines.last, !last.ru.isEmpty { s += " Their last line, as heard: «\(last.ru)»." }
+        if let g = t.scene?.goal { s += " Their goal: \(g)." }
+        if let o = t.outcome { s += (o.reached == true ? " Goal reached: " : " Goal not reached: ") + o.conveyed }
         if t.isMarked {
             let edits = t.learnerLines.reduce(0) { $0 + ($1.correction?.edits.count ?? 0) }
             s += edits == 0 ? " Marked: nothing to correct." : " Marked: \(edits) correction(s)."
@@ -39,13 +43,36 @@ struct TalkConversation: Codable, Sendable, Hashable {
     }
 }
 
-/// Where the conversation happens: the tutor proposes three from the learner's words.
+/// Where the conversation happens: the tutor proposes three from the learner's words. Each is
+/// an information gap: the tutor holds facts the learner lacks and the learner has something to
+/// find out or get done, so there is a reason to listen and answer.
 struct TalkScene: Codable, Sendable, Hashable, Identifiable {
     /// English title ("At breakfast").
     var title: String
     /// The same in Russian, stress-marked («За за́втраком»).
     var ru: String
+    /// The learner's communicative goal, in English ("Find out when the shop closes").
+    var goal: String? = nil
+    /// Two or three phrase frames they may need, from their own words first.
+    var frames: [TalkFrame]? = nil
+    /// What the tutor knows and the learner does not (English). Shown only once the talk is over.
+    var secret: String? = nil
     var id: String { title }
+}
+
+/// A phrase frame on the scene card: Russian with a gap, and its English.
+struct TalkFrame: Codable, Sendable, Hashable {
+    var ru: String
+    var en: String
+}
+
+/// Whether the conversation did what it set out to do, judged from the learner's words alone.
+struct TalkOutcome: Codable, Sendable, Hashable {
+    var reached: Bool?
+    /// What the learner managed to convey, in English (1–2 sentences).
+    var conveyed: String
+    /// What the partner had to ask them to clarify, if anything.
+    var clarified: String? = nil
 }
 
 /// One line of the dialogue: the tutor's (spoken by the app) or the learner's (as heard).

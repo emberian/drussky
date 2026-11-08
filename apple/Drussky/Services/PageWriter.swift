@@ -196,7 +196,13 @@ enum PageWriter {
             guard nonEmpty(ex.text), readable(ex.text), let options = ex.options, let i = ex.answerIndex,
                   options.indices.contains(i), options.count >= 2 else { return nil }
             return ex
-        case .soundPair, .buildWord, .familyGuess, .talk: return nil  // generated locally (pairs.json, morphology.json) only
+        case .soundPair, .buildWord, .familyGuess, .talk, .paradigmFill, .transform, .cueSort: return nil  // generated locally (pairs, morphology, paradigms) only
+        case .readHandwriting:
+            guard nonEmpty(ex.text), readable(ex.text) else { return nil }
+            if let options = ex.options {
+                guard options.count >= 2, options.allSatisfy(readable), options.contains(where: { RussianText.key($0) == RussianText.key(ex.text ?? "") }) else { return nil }
+            }
+            return ex
         case .diary: return nonEmpty(ex.prompt) ? ex : nil
         case .passage:
             guard nonEmpty(ex.text), passageAnyLetters || lettersOK(ex.text) else { return nil }

@@ -67,8 +67,37 @@ extension Book {
         switch pendingShape() ?? DayShape.shape(lastActivity: lastActivity, now: now(), policy: dayPolicy) {
         case .welcomeBack(let days): return appendWelcomeBack(days: days)
         case .morning: return appendMorningPage()
-        case .ordinary: return appendRemediationIfNeeded()
+        case .ordinary: return appendRemediationIfNeeded() || appendConsolidationIfNeeded()
         }
+    }
+
+    static let consolidationUnit = "Закрепление · Settling in"
+
+    /// A heavy day: much due, or the learner tiring (Fatigue). New material stacked on knowledge
+    /// that is right but still slow costs most on such a day.
+    var dayIsHeavy: Bool { dueReviews().count >= dayPolicy.reviewPageThreshold || day.fatigue?.level == .tired }
+
+    /// The next course page leans on things the learner knows but has not yet made quick
+    /// (`CompilationPolicy`: right, timed, still over the floor). On a heavy day they come back
+    /// first, within the day's allowance, instead of the new page being stacked on them. Never
+    /// twice in a row, never on a light day, nothing when no latency was ever measured.
+    func appendConsolidationIfNeeded() -> Bool {
+        guard dayIsHeavy, let (_, source) = nextCoursePage, pages.last?.unitTitle != Self.consolidationUnit else { return false }
+        let slow = knowledge.model.uncompiledPrerequisites(of: pageComponents(of: source), in: knowledge.graph, at: now(),
+                                                            policy: knowledge.compilation)
+        let keys = Array(slow.compactMap(targetKey).prefix(min(6, reviewAllowance())))
+        guard !keys.isEmpty else { return false }
+        let exercises = keys.enumerated().map { reviewExercise(for: $1, modality: nil, variant: pages.count + $0) }
+        appendPage(sourceID: nil, unitTitle: Self.consolidationUnit, title: "Make these quick",
+                   intro: "You know these, and the next page leans on them. One pass so they come without thinking; then on.",
+                   isReview: true, exercises: exercises)
+        return true
+    }
+
+    /// The components a course page introduces or exercises, each once.
+    func pageComponents(of source: Course.Page) -> [ComponentID] {
+        var seen = Set<ComponentID>()
+        return source.exercises.flatMap { knowledge.domain.components(for: $0) }.filter { seen.insert($0).inserted }
     }
 
     /// At the start of a session (launch, back to the foreground): what the next new page owes
@@ -189,10 +218,8 @@ extension Book {
     }
 
     private func frontierDecision(for source: Course.Page) -> FrontierDecision {
-        var seen = Set<ComponentID>()
-        let components = source.exercises.flatMap { knowledge.domain.components(for: $0) }.filter { seen.insert($0).inserted }
-        return knowledge.model.frontierDecision(pageComponents: components, in: knowledge.graph, dueCount: dueReviews().count,
-                                                at: now(), day: dayPolicy)
+        knowledge.model.frontierDecision(pageComponents: pageComponents(of: source), in: knowledge.graph, dueCount: dueReviews().count,
+                                         at: now(), day: dayPolicy)
     }
 
     /// The review target a component is recalled through, if the learner has met it.
