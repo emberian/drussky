@@ -139,4 +139,41 @@ final class SchedulingTests: XCTestCase {
             XCTAssertEqual(RussianDomain.modality(for: ex.kind), m, "a review of \(m) is graded in \(m)")
         }
     }
+
+    /// Prepositions, conjunctions and particles are met inside phrases. Known on their own, they
+    /// are only ever recognised by meaning: no "write it in Russian: about", no dictation of «о»,
+    /// no "say it: с"; phrases that contain them keep every modality.
+    func testFunctionWordsAreNeverRecallItemsOnTheirOwn() throws {
+        for w in ["о", "с", "в", "у", "и", "а", "не", "же", "бы", "на", "Об", "к", "ни", "ли", "я"] { XCTAssertTrue(RussianText.isFunctionWord(w), w) }
+        for w in ["да", "нет", "кот", "до за́втра", "А у тебя́?", ""] { XCTAssertFalse(RussianText.isFunctionWord(w), w) }
+        let book = newBook()
+        let words = ["о", "с", "в", "у", "и", "а", "не", "же", "бы", "на"]
+        for w in words { book.keep(w, en: "") }   // all in the lexicon: their glosses come from there
+        book.keep("до за́втра", en: "see you tomorrow")
+        for w in words {
+            let key = "word:\(w)"
+            XCTAssertEqual(book.reviewModalities(for: key), [.readPick], w)
+            for v in 0..<3 {
+                let ex = book.reviewExercise(for: key, modality: nil, variant: v)
+                XCTAssertEqual(ex.kind, .readMeaning, "\(w), first recall \(v)")
+                XCTAssertEqual(ex.answerIndex.flatMap { ex.options?[$0] }, book.word(w)?.en)
+            }
+        }
+        let phrase = book.reviewModalities(for: "word:до завтра")
+        XCTAssertTrue(phrase.isSuperset(of: [.hearWrite, .say]), "a phrase with a preposition stays a full recall item: \(phrase)")
+        // Due as first recalls two days on: every one of them comes back as recognition.
+        book.advanceClock(byDays: 2)
+        let due = book.dueReviews().filter { words.contains(String($0.id.dropFirst(5))) }
+        XCTAssertEqual(due.count, words.count, "\(due.map(\.id))")
+        for d in due {
+            XCTAssertEqual(book.reviewExercise(for: d.id, modality: d.modality, variant: 0).kind, .readMeaning, d.id)
+        }
+        for c in book.reviewCandidates() where words.contains(String(c.id.dropFirst(5))) {
+            XCTAssertEqual(c.modalities, [.readPick], c.id)
+        }
+        // A kept function word with no gloss anywhere is nothing to review at all.
+        book.keep("ж", en: "")
+        XCTAssertEqual(book.reviewModalities(for: "word:ж"), [])
+        XCTAssertFalse(book.reviewCandidates().contains { $0.id == "word:ж" })
+    }
 }

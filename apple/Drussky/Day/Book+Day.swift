@@ -222,7 +222,8 @@ extension Book {
                                          at: now(), day: dayPolicy)
     }
 
-    /// The review target a component is recalled through, if the learner has met it.
+    /// The review target a component is recalled through, if the learner has met it and there is
+    /// a way to review it (a function word alone has none).
     private func targetKey(_ id: ComponentID) -> String? {
         let key: String
         switch id.kind {
@@ -230,7 +231,7 @@ extension Book {
         case .lexeme, .form, .phrase: key = "word:\(id.key)"
         default: return nil
         }
-        return targets[key] != nil ? key : nil
+        return targets[key] != nil && !reviewModalities(for: key).isEmpty ? key : nil
     }
 
     private func noteOpening(_ kind: String, deferred: Int) {
@@ -241,12 +242,13 @@ extension Book {
     }
 
     /// While the learner is sharp (Fatigue, within the last 20 minutes): one word from the
-    /// frontier — ready, not yet met — copied once, so it joins their words.
+    /// frontier — ready, not yet met — copied once, so it joins their words. Never a function
+    /// word: those come inside phrases.
     func extraNewItem(excluding taught: Set<String>) -> [Exercise] {
         guard let at = day.sharpAt, now().timeIntervalSince(at) < 20 * 60, now() >= at else { return [] }
         for id in knowledge.model.frontier(knowledge.graph, at: now(), kinds: [.lexeme], limit: 12) {
             let key = "word:\(id.key)"
-            guard targets[key] == nil, !taught.contains(key), let w = word(id.key) else { continue }
+            guard targets[key] == nil, !taught.contains(key), let w = word(id.key), !RussianText.isFunctionWord(w.ru) else { continue }
             var e = Exercise(kind: .copy)
             e.text = w.ru
             e.times = 1
