@@ -101,7 +101,8 @@ final class NotebookSafetyTests: XCTestCase {
         let backup = try XCTUnwrap(files(store.root).first { $0.hasPrefix("book-before-repair") && $0.hasSuffix(".json") })
         XCTAssertEqual(try Data(contentsOf: store.root.appendingPathComponent(backup)), original)
         // A malformed key never reaches review generation, and review generation can't trap on one.
-        _ = book.reviewExercise(for: Memory(key: "letter", stability: 1, due: .now, seen: .now), variant: 0)
+        _ = book.reviewExercise(for: "letter", modality: nil, variant: 0)
+        XCTAssertNil(book.targets["letter"])
         _ = ExerciseSlot(book: book, pageIndex: 0, index: 4).result
     }
 

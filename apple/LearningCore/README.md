@@ -27,8 +27,17 @@ Knowing a word by ear is not knowing how to write it, so each modality has its o
   (R ≥ 0.7) in A, against first tries on components with no evidence anywhere. It sets the
   estimate for a modality never practised.
 - **Confusions**: each observation weighs 1 and halves every 30 days.
-- **Review order**: due memories ranked by (1 − R) plus confusion pressure. Each one's
-  strongest confusion partner comes right after it, so the pair is told apart side by side.
+- **Scheduling** (`Scheduling.swift`, the one scheduler): the domain names *review candidates*
+  (a thing to recall, the components its review exercises, the modalities it can be reviewed
+  in, when it was introduced). A candidate is due in a modality when the weakest of its traces
+  there reaches the desired retention (0.9); after a lapse (`again`) it comes back after a short
+  relearning step (10 minutes) whatever its stability; one never reviewed in any of its
+  modalities gets a first recall after a delay. Urgency: relearning, then (1 − R), then
+  confusion pressure. Only outcomes move a trace, so skipping an item never postpones it.
+- **Secure** (for fading scaffolds): present recall ≥ 0.85 and stability ≥ 2 days in one of the
+  given modalities, with no unrecovered lapse — present memory, not lifetime counts.
+- **Review order** (`reviewOrder`): due memories ranked by (1 − R) plus confusion pressure, each
+  one's strongest confusion partner right after it.
 - **Frontier**: components not yet known (strength < 0.5) whose prerequisites are all at
   R ≥ 0.8. These are ready to learn next.
 - **Growth**: on each day, the sum over components of the best R within a modality group,
@@ -51,7 +60,9 @@ or given a new meaning. A line that fails to decode is skipped, and stays in the
 ```
 
 Only `v`, `id`, `t`, `type`, `source`, `item` and `components` are always present. Outcomes
-carry `grade` and attempts carry `correct: false`. `latency` is the number of seconds since
+carry `grade` when the domain judges them evidence of recall; an outcome without `grade` records
+that the item was finished (e.g. rewritten after the answer was shown) and moves no memory.
+Attempts carry `correct: false`. `latency` is the number of seconds since
 the previous recorded activity in the same context (a page), when known.
 
 ## Contract: graph export

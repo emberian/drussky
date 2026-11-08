@@ -1,4 +1,5 @@
 import Foundation
+import LearningCore
 import Observation
 
 /// One page of the learner's workbook. Pages are instantiated from the course (plus
@@ -49,6 +50,11 @@ struct ExerciseResult: Codable, Sendable, Hashable {
     var inkAttempts: Int? = nil
 
     var roundNumber: Int { round ?? 0 }
+
+    /// Right on the first try, by the checker, never having been shown the answer.
+    var isRightFirstTime: Bool {
+        status == .correct && attempts <= 1 && (failedChecks ?? 0) == 0 && assisted != true && !revealed
+    }
 }
 
 /// A stable address for one exercise: page ids never change, and a page's exercises are frozen,
@@ -59,7 +65,8 @@ struct ExerciseRef: Hashable, Sendable {
     var item: String { "\(pageID)#\(index)" }
 }
 
-/// Spaced-retrieval memory for one item ("letter:Ж", "word:кот").
+/// The scheduler before format 2 (its own stability and due date per item). Kept only to
+/// read older notebooks: their items become `ReviewTarget`s and LearningCore schedules them.
 struct Memory: Codable, Sendable {
     var key: String
     var stability: Double   // days until the next review
@@ -80,7 +87,12 @@ struct Settings: Codable, Sendable, Equatable {
 final class Book {
     let course: Course
     private(set) var pages: [BookPage] = []
-    private(set) var memories: [String: Memory] = [:]
+    /// Everything the learner should be able to recall ("letter:Ж", "word:кот") and when they
+    /// met it. When each comes back is LearningCore's FSRS over the evidence log, nothing here.
+    private(set) var targets: [String: ReviewTarget] = [:] { didSet { candidateCache = nil } }
+    /// The pre-format-2 memories, written back unchanged (never used for scheduling).
+    private var legacyMemories: [Memory] = []
+    @ObservationIgnored var candidateCache: [ReviewCandidate]?
     /// Index into course.pageSequence of the next authored page to instantiate.
     private(set) var courseCursor: Int = 0
     var currentPage: Int = 0 { didSet { scheduleSave() } }
@@ -129,7 +141,8 @@ final class Book {
         knowledge = KnowledgeTracker(course: course, root: store.root, customWords: saved?.customWords ?? [], now: Date.init)
         if let saved {
             pages = saved.pages
-            memories = Dictionary(saved.memories.map { ($0.key, $0) }, uniquingKeysWith: { a, _ in a })
+            legacyMemories = saved.memories
+            targets = Dictionary((saved.targets ?? []).map { ($0.key, $0) }, uniquingKeysWith: { a, _ in a })
             courseCursor = saved.courseCursor
             currentPage = min(saved.currentPage, max(0, saved.pages.count - 1))
             settings = saved.settings
@@ -184,11 +197,11 @@ final class Book {
     /// Appends either a review page (when much is due) or the next course page with a few
     /// due reviews woven in. Returns false at the end of the course with nothing due.
     private func appendNextPage() -> Bool {
-        let due = dueMemories()
+        let due = dueReviews()
         let lastWasReview = pages.last?.isReview ?? true
         if (due.count >= 10 && !lastWasReview) || (courseFinished && !due.isEmpty) {
             let items = Array(due.prefix(8))
-            let exercises = items.enumerated().map { reviewExercise(for: $1, variant: $0) }
+            let exercises = items.enumerated().map { reviewExercise(for: $1.id, modality: $1.modality, variant: $0) }
             appendPage(sourceID: nil, unitTitle: "Повторение · Review", title: "Bring it back",
                        intro: "Everything here is something you've met before. Reach for it before you check.",
                        isReview: true, exercises: exercises)
@@ -199,12 +212,13 @@ final class Book {
         courseCursor += 1
         var exercises = source.exercises.map(faded)
         let taughtHere = Set(source.exercises.compactMap { memoryKey(for: $0) })
-        let reviews = due.filter { !taughtHere.contains($0.key) }.prefix(3)
+        let reviews = due.filter { !taughtHere.contains($0.id) }.prefix(3)
         // Spread reviews through the page: after the opening, in the middle, near the end.
         // Insert from the last slot backwards so earlier slot indices stay valid.
         let slots = [min(2, exercises.count), exercises.count / 2 + 1, max(exercises.count - 1, 0)]
-        for (i, memory) in reviews.enumerated().reversed() {
-            exercises.insert(reviewExercise(for: memory, variant: memory.reps + i), at: min(slots[i], exercises.count))
+        for (i, item) in reviews.enumerated().reversed() {
+            exercises.insert(reviewExercise(for: item.id, modality: item.modality, variant: pages.count + i),
+                             at: min(slots[i], exercises.count))
         }
         appendPage(sourceID: source.id, unitTitle: unit.title, title: source.title, intro: source.intro,
                    isReview: false, exercises: exercises)
@@ -215,7 +229,7 @@ final class Book {
     /// write what you hear, and pick which of three similar sentences was said. Different
     /// speakers each time (high-variability listening).
     func earTraining(from sentences: [Library.Sentence], hasAudio: (String) -> Bool) -> [Exercise] {
-        let known = Set(memories.keys.filter { $0.hasPrefix("word:") }.map { String($0.dropFirst(5)) })
+        let known = Set(targets.keys.filter { $0.hasPrefix("word:") }.map { String($0.dropFirst(5)) })
             .union(customWords.map { RussianText.key($0.ru) })
         func coverage(_ s: Library.Sentence) -> Double {
             let words = RussianText.key(s.ru).split(separator: " ").map(String.init)
@@ -240,17 +254,6 @@ final class Book {
             }
         }
         return out
-    }
-
-    /// Expertise reversal: scaffolds that help a novice get in the way once an item is secure.
-    /// A word recalled right at least twice without a miss loses its support on later pages:
-    /// trace → copy, copy → write it from hearing.
-    func faded(_ ex: Exercise) -> Exercise {
-        guard [.trace, .copy].contains(ex.kind), let key = memoryKey(for: ex), let m = memories[key],
-              m.lapses == 0, m.reps >= 2 else { return ex }
-        var e = ex
-        if ex.kind == .trace { e.kind = .copy; e.times = 1 } else { e.kind = .dictation; e.times = nil }
-        return e
     }
 
     private func appendPage(sourceID: String?, unitTitle: String, title: String, intro: String?,
@@ -281,6 +284,7 @@ final class Book {
         reindexPages()
         currentPage = at
         knowledge.refresh(customWords: customWords)
+        candidateCache = nil
         scheduleSave()
     }
 
@@ -302,11 +306,13 @@ final class Book {
         update(&after)
         after.updated = now()
         let finishing = !before.status.isComplete && after.status.isComplete
-        if finishing && after.learned != true {
+        if finishing {
             let exercise = pages[p].exercises[ref.index]
-            learn(from: exercise, result: after.status)
-            noteSoundPair(exercise, status: after.status)
-            after.learned = true
+            introduce(exercise)
+            if after.learned != true {
+                noteSoundPair(exercise, status: after.status)
+                after.learned = true
+            }
         }
         var page = pages[p]
         page.results[ref.index] = after
@@ -362,78 +368,6 @@ final class Book {
         }
     }
 
-    private func learn(from exercise: Exercise, result: ExerciseResult.Status) {
-        guard let key = memoryKey(for: exercise) else { return }
-        let today = now()
-        var m = memories[key] ?? Memory(key: key, stability: 0.6, due: today.addingTimeInterval(0.6 * 86_400), seen: today)
-        switch result {
-        case .correct:
-            // Only reviews that were actually due grow the interval much; same-day repeats grow it a little.
-            let wasDue = m.due <= today
-            m.stability = min(180, m.stability * (wasDue ? 2.5 : 1.15) + (wasDue ? 0.5 : 0))
-            m.reps += 1
-        case .missed:
-            m.stability = max(0.3, m.stability * 0.4)
-            m.lapses += 1
-        case .done, .open:
-            break
-        }
-        m.due = today.addingTimeInterval(m.stability * 86_400)
-        memories[key] = m
-    }
-
-    func dueMemories() -> [Memory] {
-        let today = now()
-        return memories.values.filter { $0.due <= today }
-            .sorted { ($0.due.timeIntervalSince(today) / $0.stability) < ($1.due.timeIntervalSince(today) / $1.stability) }
-    }
-
-    var dueCount: Int { dueMemories().count }
-
-    /// English glosses shared by more than one entry can't be asked as "write it in Russian".
-    private var ambiguousGlosses: Set<String> {
-        var seen: [String: Int] = [:]
-        for w in course.lexicon { seen[w.en.lowercased(), default: 0] += 1 }
-        return Set(seen.filter { $0.value > 1 }.keys)
-    }
-
-    /// A review exercise for a remembered item, varying the modality across repetitions.
-    func reviewExercise(for memory: Memory, variant: Int) -> Exercise {
-        let parts = memory.key.split(separator: ":", maxSplits: 1).map(String.init)
-        var ex: Exercise
-        let value = parts.count > 1 ? parts[1] : ""
-        if parts.first == "letter", let letter = course.letter(value) {
-            // Dictate the letter only when its spoken form begins with it (а, ра); signs and
-            // letters voiced inside a word (ы in "ты") are recalled by choosing what was heard.
-            let sayable = RussianText.key(letter.say).hasPrefix(letter.lower)
-            if variant % 2 == 0 && sayable {
-                // Hear the letter's sound, write the letter.
-                ex = Exercise(kind: .dictation)
-                ex.text = letter.lower
-                ex.say = letter.say
-            } else {
-                ex = Exercise(kind: .listenPick)
-                ex.say = letter.say
-                let others = course.letters.filter { $0.upper != letter.upper && letterKnown($0.upper) }
-                    .shuffled().prefix(2).map(\.say)
-                ex.options = ([letter.say] + others).shuffled()
-            }
-        } else if let word = word(parts.count > 1 ? parts[1] : "") {
-            let askable = !word.en.isEmpty && !ambiguousGlosses.contains(word.en.lowercased())
-            switch variant % 3 {
-            case 0 where askable: ex = Exercise(kind: .translate); ex.en = word.en; ex.answerText = word.ru
-            case 0, 1: ex = Exercise(kind: .dictation); ex.text = word.ru
-            default: ex = Exercise(kind: .readAloud); ex.text = word.ru
-            }
-        } else {
-            // A word no longer in the course lexicon: still recall it by ear.
-            ex = Exercise(kind: .dictation)
-            ex.text = parts.count > 1 ? parts[1] : ""
-        }
-        ex.reviewKey = memory.key
-        return ex
-    }
-
     /// A word from the course or one the learner kept.
     func word(_ ru: String) -> Course.Word? {
         if let w = course.word(ru) { return w }
@@ -441,7 +375,7 @@ final class Book {
         return customWords.first { RussianText.key($0.ru) == key }
     }
 
-    func isKept(_ ru: String) -> Bool { word(ru) != nil && memories["word:\(RussianText.key(ru))"] != nil }
+    func isKept(_ ru: String) -> Bool { word(ru) != nil && targets["word:\(RussianText.key(ru))"] != nil }
 
     /// Keeps a word or phrase from a tutor answer: it joins the learner's words and is
     /// reviewed like anything else they produced, starting tomorrow.
@@ -450,16 +384,22 @@ final class Book {
         guard !key.isEmpty else { return }
         if course.word(ru) == nil && !customWords.contains(where: { RussianText.key($0.ru) == key }) {
             customWords.append(Course.Word(ru: ru, en: en, emoji: nil, note: "kept from your tutor"))
+            candidateCache = nil
         }
-        let today = now()
-        if memories["word:\(key)"] == nil {
-            memories["word:\(key)"] = Memory(key: "word:\(key)", stability: 1, due: today.addingTimeInterval(86_400), seen: today)
+        if targets["word:\(key)"] == nil {
+            targets["word:\(key)"] = ReviewTarget(key: "word:\(key)", introduced: now(), kept: true)
         }
         knowledge.refresh(customWords: customWords)
         scheduleSave()
     }
 
-    func letterKnown(_ upper: String) -> Bool { memories["letter:\(upper)"] != nil }
+    func letterKnown(_ upper: String) -> Bool { targets["letter:\(upper)"] != nil }
+
+    /// Something the learner produced becomes a thing to recall (first time only).
+    func introduce(_ exercise: Exercise) {
+        guard let key = memoryKey(for: exercise), targets[key] == nil else { return }
+        targets[key] = ReviewTarget(key: key, introduced: now())
+    }
 
     // MARK: Tutor notes
 
@@ -598,9 +538,10 @@ final class Book {
         guard problem == nil, !closed else { return }
         saveTask?.cancel()
         do {
-            try store.saveState(.init(pages: pages, memories: Array(memories.values), courseCursor: courseCursor,
+            try store.saveState(.init(pages: pages, memories: legacyMemories, courseCursor: courseCursor,
                                       currentPage: currentPage, settings: settings, customWords: customWords,
-                                      soundStats: soundStats.isEmpty ? nil : soundStats))
+                                      soundStats: soundStats.isEmpty ? nil : soundStats,
+                                      targets: targets.values.sorted { $0.key < $1.key }))
             if persistenceError?.hasPrefix("notebook") == true { persistenceError = nil }
         } catch {
             persistenceError = "notebook: \((error as NSError).localizedDescription)"
@@ -608,17 +549,20 @@ final class Book {
     }
 
     #if DEBUG
-    /// Test hook: pretend time has passed.
-    func shiftMemories(byDays days: Double) {
-        for key in memories.keys { memories[key]!.due.addTimeInterval(-days * 86_400) }
+    /// Test hook: from now on the book's clock runs `days` ahead.
+    func advanceClock(byDays days: Double) {
+        let base = now
+        now = { base().addingTimeInterval(days * 86_400) }
     }
     #endif
 }
 
 struct BookState: Codable {
-    static let currentVersion = 1
+    /// 2: review timing moved to LearningCore; `targets` replaces `memories` (kept, unused).
+    static let currentVersion = 2
     var version = BookState.currentVersion
     var pages: [BookPage]
+    /// Format 1's scheduler state; read to migrate, then written back unchanged.
     var memories: [Memory]
     var courseCursor: Int
     var currentPage: Int
@@ -627,6 +571,16 @@ struct BookState: Codable {
     var customWords: [Course.Word]? = nil
     /// Sound-pair accuracy per contrast (optional: older notebooks lack it).
     var soundStats: [String: ContrastStat]? = nil
+    /// What to recall and since when (format 2; migrated from `memories`).
+    var targets: [ReviewTarget]? = nil
+}
+
+/// Something the learner should be able to recall, and when they met it.
+struct ReviewTarget: Codable, Sendable, Hashable {
+    var key: String
+    var introduced: Date
+    /// Kept from a tutor answer (first recall the next day).
+    var kept: Bool? = nil
 }
 
 /// Files under Application Support/Drussky: book.json, ink/, voice/, events.jsonl.

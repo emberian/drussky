@@ -157,6 +157,17 @@ extension BookStore {
 /// Format migrations, dispatched on the version the file was written with.
 enum BookMigration {
     static func migrate(_ state: inout BookState, from version: Int) {
+        if version < 2 && state.targets == nil {
+            // Format 1 scheduled with its own stabilities; keep only what was met and when.
+            // LearningCore's traces (folded from events.jsonl, backfilled from the pages) say when
+            // each comes back.
+            var seen: [String: ReviewTarget] = [:]
+            for m in state.memories where NotebookValidation.isWellFormedKey(m.key) {
+                if let t = seen[m.key], t.introduced <= m.seen { continue }
+                seen[m.key] = ReviewTarget(key: m.key, introduced: m.seen)
+            }
+            state.targets = seen.values.sorted { $0.key < $1.key }
+        }
         state.version = BookState.currentVersion
     }
 }
@@ -202,6 +213,17 @@ enum NotebookValidation {
                 repairs.append("page \(page.id): dropped \(page.results.count - page.exercises.count) result(s) with no exercise")
                 state.pages[i].results = Array(page.results.prefix(page.exercises.count))
             }
+        }
+        if let targets = state.targets {
+            var keep: [String: ReviewTarget] = [:]
+            for t in targets {
+                guard isWellFormedKey(t.key) else { repairs.append("dropped malformed review key \"\(t.key)\""); continue }
+                if let existing = keep[t.key] {
+                    repairs.append("merged duplicate review key \"\(t.key)\"")
+                    if t.introduced < existing.introduced { keep[t.key] = t }
+                } else { keep[t.key] = t }
+            }
+            if keep.count != targets.count { state.targets = keep.values.sorted { $0.key < $1.key } }
         }
         if state.courseCursor < 0 { state.courseCursor = 0; repairs.append("reset a negative course cursor") }
         let lastPage = max(0, state.pages.count - 1)

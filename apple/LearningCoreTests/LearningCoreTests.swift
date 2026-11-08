@@ -157,4 +157,48 @@ final class LearningCoreTests: XCTestCase {
         let node = (json["nodes"] as! [[String: Any]]).first { $0["id"] as? String == "word:ab" }!
         XCTAssertNotNil((node["modalities"] as! [String: Any])["say"])
     }
+
+    // MARK: Scheduling
+
+    func testALapseComesBackAfterTheRelearningStep() {
+        var events: [LearningEvent] = []
+        var t = t0
+        for gap in [0.0, 3, 11, 35, 100, 250] { t = t.addingTimeInterval(gap * 86_400); events.append(outcome([ab], write, .good, at: t)) }
+        let lapse = t.addingTimeInterval(400 * 86_400)
+        events.append(outcome([ab], write, .again, at: lapse))
+        let m = KnowledgeModel(events: events)
+        let policy = ReviewPolicy(relearningStep: 600)
+        let c = ReviewCandidate(id: "ab", components: [ab], modalities: [write, say], introduced: t0)
+        XCTAssertTrue(m.dueReviews([c], at: lapse.addingTimeInterval(300), policy: policy).isEmpty)
+        let due = m.dueReviews([c], at: lapse.addingTimeInterval(700), policy: policy)
+        XCTAssertEqual(due.map(\.id), ["ab"])
+        XCTAssertEqual(due.first?.modality, write)
+        XCTAssertEqual(due.first?.relearning, true)
+        XCTAssertTrue(m.trace(ab, write)!.isRelearning)
+    }
+
+    func testDueReviewsFirstRecallAndUrgency() {
+        let m = KnowledgeModel(events: [outcome([a], write, .good, at: t0), outcome([b], write, .again, at: t0)])
+        let ca = ReviewCandidate(id: "a", components: [a], modalities: [write], introduced: t0)
+        let cb = ReviewCandidate(id: "b", components: [b], modalities: [write], introduced: t0)
+        let fresh = ReviewCandidate(id: "ab", components: [ab], modalities: [write], introduced: t0)
+        XCTAssertEqual(m.dueReviews([ca, cb, fresh], at: t0.addingTimeInterval(3600)).map(\.id), ["b"])
+        let later = m.dueReviews([ca, cb, fresh], at: day(5))
+        XCTAssertEqual(later.first?.id, "b", "relearning first")
+        XCTAssertEqual(Set(later.map(\.id)), ["a", "b", "ab"])
+        XCTAssertNil(later.first { $0.id == "ab" }?.modality, "never reviewed: a first recall")
+        // Evidence only in a modality the candidate isn't reviewed in doesn't schedule it.
+        let other = ReviewCandidate(id: "a-say", components: [a], modalities: [say], introduced: day(4))
+        XCTAssertTrue(m.dueReviews([other], at: day(4.5)).isEmpty)
+    }
+
+    func testSecureMeansStrongNowNotNeverWrong() {
+        let m = KnowledgeModel(events: [outcome([a], write, .again, at: t0), outcome([a], write, .good, at: day(0.01)),
+                                        outcome([a], write, .good, at: day(2)), outcome([a], write, .good, at: day(8))])
+        XCTAssertTrue(m.isSecure([a], in: [write], at: day(8.5)))
+        XCTAssertFalse(m.isSecure([a], in: [say], at: day(8.5)))
+        XCTAssertFalse(m.isSecure([a], in: [write], at: day(300)))
+        let lapsed = KnowledgeModel(events: m.events + [outcome([a], write, .again, at: day(9))])
+        XCTAssertFalse(lapsed.isSecure([a], in: [write], at: day(9.1)))
+    }
 }

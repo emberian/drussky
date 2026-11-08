@@ -225,7 +225,7 @@ struct MeetExercise: View {
     }
 
     private func knownLetters(adding upper: String) -> Set<String> {
-        Set(book.memories.keys.filter { $0.hasPrefix("letter:") }.map { String($0.dropFirst(7)) }).union([upper])
+        Set(book.targets.keys.filter { $0.hasPrefix("letter:") }.map { String($0.dropFirst(7)) }).union([upper])
     }
 }
 
@@ -425,7 +425,7 @@ struct WritingExercise: View {
 
     private var feedbackLine: AnyView? {
         if result.status == .correct, isRecall {
-            return AnyView(Text(result.attempts > 1 ? "Got it." : "Right first time.")
+            return AnyView(Text(result.isRightFirstTime ? "Right first time." : result.assisted == true ? "Written again after seeing it." : "Got it.")
                 .font(Theme.label(14)).foregroundStyle(Theme.good))
         }
         if result.status == .missed {

@@ -1,3 +1,4 @@
+import LearningCore
 import PencilKit
 import Speech
 import XCTest
@@ -54,13 +55,15 @@ final class DrusskyTests: XCTestCase {
         }
         // Generated reviews speak too.
         let book = Book(course: course, store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
-        for (i, letter) in course.letters.enumerated() {
-            let m = Memory(key: "letter:\(letter.upper)", stability: 1, due: .now, seen: .now)
-            spoken += [book.reviewExercise(for: m, variant: i).spoken].compactMap { $0 }
+        for letter in course.letters {
+            let key = "letter:\(letter.upper)"
+            for v in 0..<2 { spoken += [book.reviewExercise(for: key, modality: nil, variant: v).spoken].compactMap { $0 } }
+            for m in book.reviewModalities(for: key) { spoken += [book.reviewExercise(for: key, modality: m, variant: 0).spoken].compactMap { $0 } }
         }
         for word in course.lexicon {
-            let m = Memory(key: "word:\(RussianText.key(word.ru))", stability: 1, due: .now, seen: .now)
-            for v in 0..<3 { spoken += [book.reviewExercise(for: m, variant: v).spoken].compactMap { $0 } }
+            let key = "word:\(RussianText.key(word.ru))"
+            for v in 0..<3 { spoken += [book.reviewExercise(for: key, modality: nil, variant: v).spoken].compactMap { $0 } }
+            for m in book.reviewModalities(for: key) { spoken += [book.reviewExercise(for: key, modality: m, variant: 0).spoken].compactMap { $0 } }
         }
         for s in Set(spoken) where !voice.hasRecording(s) { missing.append(s) }
         XCTAssertTrue(missing.isEmpty, "no recording for: \(missing.sorted())")
@@ -103,8 +106,8 @@ final class DrusskyTests: XCTestCase {
             XCTAssertTrue(book.pages[p].isFinished)
             book.turnForward()
         }
-        XCTAssertFalse(book.memories.isEmpty)
-        book.shiftMemories(byDays: 3)
+        XCTAssertFalse(book.targets.isEmpty)
+        book.advanceClock(byDays: 5)
         XCTAssertGreaterThan(book.dueCount, 0)
         book.turnForward()
         let page = book.pages.last!
@@ -138,13 +141,17 @@ final class DrusskyTests: XCTestCase {
         let key = try XCTUnwrap(book.memoryKey(for: book.pages[0].exercises[i]))
         for j in book.pages[0].exercises.indices { book.record(page: 0, exercise: j) { $0.status = j == i ? .missed : .done; $0.revealed = j == i } }
         XCTAssertTrue(book.pages[0].isFinished)
-        let lapses = book.memories[key]?.lapses
+        let components = book.knowledge.domain.reviewComponents(forTarget: key)
+        let modality = try XCTUnwrap(RussianDomain.modality(for: book.pages[0].exercises[i].kind))
+        func reviews() -> [Grade] { components.flatMap { book.knowledge.model.trace($0, modality)?.reviews.map(\.grade) ?? [] } }
+        XCTAssertTrue(reviews().allSatisfy { $0 == .again } && !reviews().isEmpty)
+        let before = reviews()
         book.reopen(page: 0, exercise: i)
         XCTAssertFalse(book.pages[0].results[i].revealed)
         XCTAssertFalse(book.pages[0].isFinished, "an open exercise un-finishes the page")
         book.record(page: 0, exercise: i) { $0.status = .correct }
-        XCTAssertEqual(book.memories[key]?.lapses, lapses)
-        XCTAssertEqual(book.memories[key]?.reps, 0, "a redo after being shown the answer is not a recall")
+        XCTAssertEqual(reviews(), before, "a redo after being shown the answer is not a recall")
+        XCTAssertFalse(book.pages[0].results[i].isRightFirstTime)
     }
 
     /// The speech path, end to end, on recorded Russian: the same transcription call the
@@ -234,8 +241,10 @@ final class DrusskyTests: XCTestCase {
         book.keep("до свида́ния", en: "goodbye")
         XCTAssertTrue(book.isKept("до свидания"))
         XCTAssertEqual(book.word("до свидания")?.en, "goodbye")
-        book.shiftMemories(byDays: 2)
-        let review = book.reviewExercise(for: try XCTUnwrap(book.memories["word:до свидания"]), variant: 0)
+        XCTAssertFalse(book.dueReviews().contains { $0.id == "word:до свидания" }, "kept words come back tomorrow")
+        book.advanceClock(byDays: 2)
+        let due = try XCTUnwrap(book.dueReviews().first { $0.id == "word:до свидания" })
+        let review = book.reviewExercise(for: due.id, modality: due.modality, variant: 0)
         XCTAssertEqual(review.kind, .translate)
         XCTAssertEqual(review.answerText, "до свида́ния")
     }
@@ -271,7 +280,7 @@ final class DrusskyTests: XCTestCase {
         let key = try XCTUnwrap(book.memoryKey(for: copy))
         book.keep("ма́ма", en: "mom")
         for _ in 0..<2 {
-            book.shiftMemories(byDays: 5)
+            book.advanceClock(byDays: 5)
             var d = Exercise(kind: .dictation); d.text = "ма́ма"; d.reviewKey = key
             book.insertWrittenPage(title: "t", intro: nil, unitTitle: "u", exercises: [d], newWords: [])
             book.record(page: book.currentPage, exercise: 0) { $0.status = .correct }
@@ -317,8 +326,8 @@ final class DrusskyTests: XCTestCase {
         var fill = Exercise(kind: .fill); fill.before = "Мы "; fill.after = " книгу."; fill.hint = "We are reading a book."; fill.answerText = "чита́ем"
         let key = try XCTUnwrap(book.memoryKey(for: fill))
         XCTAssertEqual(key, "word:читаем")
-        let m = Memory(key: key, stability: 1, due: .now, seen: .now)
-        for v in 0..<3 { XCTAssertEqual(book.reviewExercise(for: m, variant: v).kind, .dictation) }
+        for v in 0..<3 { XCTAssertEqual(book.reviewExercise(for: key, modality: nil, variant: v).kind, .dictation) }
+        XCTAssertEqual(book.reviewModalities(for: key), [.hearWrite])
         var trace = Exercise(kind: .trace); trace.text = "ма"
         XCTAssertNil(book.memoryKey(for: trace), "tracing syllables doesn't create reviews")
     }

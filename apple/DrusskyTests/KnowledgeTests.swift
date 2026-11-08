@@ -81,7 +81,8 @@ final class KnowledgeTests: XCTestCase {
         XCTAssertEqual(edges.first { $0.from == ComponentID(.lexeme, "оно") }?.weight ?? 0, 1, accuracy: 0.01,
                        "the reveal after a failed check does not count the same misreading twice")
         XCTAssertEqual(m.trace(ComponentID(.lexeme, "оно"), .hearWrite)?.reviews.first?.grade, .again)
-        XCTAssertEqual(m.trace(ComponentID(.lexeme, "кот"), .hearPick)?.reviews.first?.grade, .hard)
+        XCTAssertEqual(m.trace(ComponentID(.lexeme, "кот"), .hearPick)?.reviews.first?.grade, .again,
+                       "a right pick after a wrong one is not recall")
         // The log on disk says the same thing.
         let reread = KnowledgeModel(events: EventLog(url: book.knowledge.logURL).load())
         XCTAssertEqual(reread.confusionEdges(at: Date()).count, edges.count)
@@ -112,7 +113,7 @@ final class KnowledgeTests: XCTestCase {
         let book = Book(course: course, store: store)
         XCTAssertEqual(book.pages.count, 1, "the old notebook was read, not moved aside")
         XCTAssertNil(try FileManager.default.contentsOfDirectory(atPath: store.root.path).first { $0.hasPrefix("book-unreadable") })
-        XCTAssertEqual(book.memories["word:кот"]?.reps, 1)
+        XCTAssertNotNil(book.targets["word:кот"], "format-1 memories become review targets")
         let events = EventLog(url: book.knowledge.logURL).load()
         // meet, dictation, listen_pick finished and graded; explain is ungraded; translate open.
         XCTAssertEqual(events.map(\.item), ["p0001-abc123#0", "p0001-abc123#1", "p0001-abc123#2"])

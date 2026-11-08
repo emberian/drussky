@@ -36,6 +36,8 @@ enum QA {
         guard has("-qa-reset") else { return }
         let pages = value("-qa-complete") ?? 0
         let history = value("-qa-history").map { Double($0) * 86_400 }
+        // -qa-age D: the pages were done D days ago, so their reviews are due now.
+        if let days = value("-qa-age") { book.now = { Date().addingTimeInterval(-Double(days) * 86_400) } }
         for n in 0..<pages {
             if let history {
                 var tick = 0.0
@@ -43,9 +45,6 @@ enum QA {
                 book.now = { tick += 40; return start.addingTimeInterval(tick) }
             }
             complete(book, page: book.currentPage, upTo: Int.max)
-            #if DEBUG
-            if let days = value("-qa-age") { book.shiftMemories(byDays: Double(days)) }
-            #endif
             book.turnForward()
         }
         if let i = ProcessInfo.processInfo.arguments.firstIndex(of: "-qa-until"), i + 1 < ProcessInfo.processInfo.arguments.count {

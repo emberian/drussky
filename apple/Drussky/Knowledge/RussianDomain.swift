@@ -283,9 +283,31 @@ struct RussianDomain: KnowledgeDomain {
         if let skills = ex.skills {
             tags = Set(skills.map { $0.hasPrefix("gram:") ? String($0.dropFirst(5)) : $0 })
         }
+        // A review of a word the course can't analyse still has a memory of its own, so its
+        // outcome lands where the scheduler looks.
+        if let key = ex.reviewKey, key.hasPrefix("word:"), key.count > 5,
+           !out.contains(where: { [.lexeme, .form, .phrase].contains($0.kind) }) {
+            out.insert(ComponentID(.lexeme, String(key.dropFirst(5))), at: 0)
+        }
         out += tags.sorted().map { ComponentID(.construction, $0) }
         var seen = Set<ComponentID>()
         return out.filter { seen.insert($0).inserted }
+    }
+
+    /// The components whose traces schedule a review target ("letter:Ж", "word:читаю"): the ones
+    /// a review exercise of it is tagged with, word-level only (a phrase if it is one; a form
+    /// rather than its lemma).
+    func reviewComponents(forTarget key: String) -> [ComponentID] {
+        let parts = key.split(separator: ":", maxSplits: 1).map(String.init)
+        guard parts.count == 2, !parts[1].isEmpty else { return [] }
+        if parts[0] == "letter" { return [ComponentID(.letter, parts[1])] }
+        var ex = Exercise(kind: .dictation)
+        ex.text = parts[1]
+        ex.reviewKey = key
+        let all = components(for: ex)
+        if let phrase = all.first(where: { $0.kind == .phrase }) { return [phrase] }
+        let lemmasOfForms = Set(all.filter { $0.kind == .form }.compactMap { lemmas.lemma($0.key) })
+        return all.filter { $0.kind == .form || ($0.kind == .lexeme && !lemmasOfForms.contains($0.key)) }
     }
 
     static func modality(for kind: ExerciseKind) -> Modality? {
@@ -300,16 +322,27 @@ struct RussianDomain: KnowledgeDomain {
         }
     }
 
+    /// The FSRS grade an outcome earns, or nil when it isn't evidence of recall:
+    ///   shown the answer and missed                     again
+    ///   chose wrong, then right (choices)               again (the second pick was helped by the first)
+    ///   right after the answer was shown, then reopened nil (corrected or copied, not retrieved)
+    ///   right with no failed check and one attempt      good ("right first time")
+    ///   right after a failed check or extra attempt     hard
+    ///   finished by the learner's own judgement         hard (not verified)
+    ///   copying and tracing done                        good (in the copy modality only)
     static func grade(_ ex: Exercise, _ r: ExerciseResult) -> Grade? {
         if r.revealed || r.status == .missed { return .again }
         switch r.status {
-        case .open: return nil
-        case .missed: return .again
-        case .correct: return r.attempts > 1 ? .hard : .good
+        case .open, .missed: return r.status == .missed ? .again : nil
+        case .correct:
+            if r.assisted == true { return nil }
+            return r.isRightFirstTime ? .good : .hard
         case .done:
             switch ex.kind {
             case .meet, .trace, .copy: return .good
-            default: return .hard  // finished, but not right first time
+            case .listenPick, .readMeaning, .soundPair: return r.assisted == true ? nil : .again
+            case .explain, .passage: return nil
+            default: return r.assisted == true ? nil : .hard  // finished, but not verified right first time
             }
         }
     }
@@ -418,7 +451,8 @@ struct RussianDomain: KnowledgeDomain {
             components: components(for: ex), grade: finished ? Self.grade(ex, a.after) : nil,
             correct: finished ? nil : false, attempt: a.after.attempts, expected: ex.kind == .readMeaning
                 ? ex.answerIndex.flatMap { ex.options?[safe: $0] } : (ex.kind == .soundPair ? ex.say : ex.target),
-            response: response, latency: a.latency, help: a.after.revealed ? ["revealed"] : nil,
+            response: response, latency: a.latency,
+            help: a.after.revealed ? ["revealed"] : (a.after.assisted == true ? ["assisted"] : nil),
             confusions: confusions.isEmpty ? nil : confusions, review: ex.reviewKey != nil ? true : nil)
     }
 

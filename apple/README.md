@@ -30,10 +30,17 @@ model and for you: stressed syllables are the long, loud ones.
 
 ## Remembering
 
-Everything you produce — letters you met, words you wrote or said — becomes a memory with a
-due date. Right answers on due items push the next review out (×2.5); misses pull it in.
-New pages weave up to three due items in; when ten or more are due the next page is a
-review page (Повторение). Review switches modality: hear→write, English→write, see→say.
+Everything you produce — letters you met, words you wrote or said — becomes something to recall.
+When it comes back is decided by one model: LearningCore's FSRS memory per item *and modality*
+(hearing → writing, English → writing, reading aloud, choosing by ear or meaning), folded from
+the answer log (`events.jsonl`). A miss brings the item back within minutes (relearning), not on
+its old interval; skipping or leaving an item unanswered never postpones it. Grades are honest:
+*right first time* (good) only when the checker confirmed it with no earlier failed check;
+right after a failed check, or by your own judgement, is hard; a wrong pick then the right one,
+or being shown the answer, is again; rewriting an answer after it was shown is practice and
+isn't graded. New pages weave up to three due items in; when ten or more are due the next page
+is a review page (Повторение). Scaffolds fade (trace → copy → write from hearing) while recall
+of a word is strong now, and come back if it decays.
 
 ## The tutor
 

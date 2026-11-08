@@ -76,11 +76,10 @@ enum PageWriter {
 
     static func prompt(for request: Request, book: Book) -> String {
         let met = book.course.letters.filter { book.letterKnown($0.upper) }.map(\.upper).joined(separator: " ")
-        let known = book.memories.keys.filter { $0.hasPrefix("word:") }.compactMap { book.word(String($0.dropFirst(5))) }
+        let known = book.targets.keys.sorted().filter { $0.hasPrefix("word:") }.compactMap { book.word(String($0.dropFirst(5))) }
             .prefix(160).map { "\($0.ru) = \($0.en)" }.joined(separator: "; ")
-        let struggles = book.memories.values.filter { $0.lapses > 0 || $0.stability < 1 }
-            .sorted { ($0.lapses, -$0.stability) > ($1.lapses, -$1.stability) }
-            .prefix(15).map { $0.key.replacingOccurrences(of: "word:", with: "").replacingOccurrences(of: "letter:", with: "letter ") }
+        let struggles = book.dueReviews().filter(\.relearning).prefix(15)
+            .map { $0.id.replacingOccurrences(of: "word:", with: "").replacingOccurrences(of: "letter:", with: "letter ") }
             .joined(separator: ", ")
         var recentMisses: [String] = []
         for page in book.pages.suffix(6) {
