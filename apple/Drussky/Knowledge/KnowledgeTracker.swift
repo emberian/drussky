@@ -59,6 +59,13 @@ final class KnowledgeTracker {
         record([event])
     }
 
+    /// An analysed take: the sounds it got wrong, keyed by contrast (`RussianDomain.speechEvidence`).
+    func heard(page: BookPage, index: Int, take: String, report: PronunciationReport, attempt: Int) {
+        guard let event = domain.speechEvidence(page: page, index: index, take: take, report: report, attempt: attempt, at: now()),
+              !model.events.contains(where: { $0.id == event.id }) else { return }
+        record([event])
+    }
+
     func askedTutor(page: BookPage, exercise index: Int?) {
         guard let index, page.exercises.indices.contains(index) else { return }
         let ex = page.exercises[index]

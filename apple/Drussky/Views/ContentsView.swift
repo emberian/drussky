@@ -175,6 +175,15 @@ struct SettingsView: View {
                     Text("The stressed vowel is underlined in blue. Russian books leave stress unmarked; learners' books mark it.")
                 }
                 Section {
+                    Stepper(value: $book.settings.modelRepeats, in: 0...3) {
+                        Text(book.settings.modelRepeats == 0 ? "Hear the model first: off" : "Hear the model first: \(book.settings.modelRepeats)×")
+                    }
+                } header: {
+                    Text("Speaking")
+                } footer: {
+                    Text("Before your turn to say something aloud. You can always skip it with a tap.")
+                }
+                Section {
                     SecureField("Anthropic API key", text: $apiKey)
                         .textContentType(.password)
                         .autocorrectionDisabled()

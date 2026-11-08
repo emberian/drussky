@@ -129,6 +129,55 @@ final class Voice: NSObject, AVAudioPlayerDelegate, AVSpeechSynthesizerDelegate 
         return true
     }
 
+    /// Plays `text` and returns once it has finished, been stopped, or been replaced.
+    func playToEnd(_ text: String) async {
+        play(text)
+        await untilDone(sequence)
+    }
+
+    /// Plays `url` and returns once it has finished, been stopped, or been replaced; false if
+    /// it was stopped or replaced (so a sequence knows to end).
+    @discardableResult
+    func playFileToEnd(_ url: URL, key: String) async -> Bool {
+        let token = playFile(url, key: key)
+        await untilDone(token)
+        return sequence == token
+    }
+
+    private func untilDone(_ token: Int) async {
+        while speakingKey != nil && sequence == token {
+            await withCheckedContinuation { (c: CheckedContinuation<Void, Never>) in
+                withObservationTracking { _ = self.speakingKey; _ = self.sequence } onChange: { c.resume() }
+            }
+        }
+    }
+
+    /// Plays `from…to` seconds of `url`: one syllable of the model or of a take.
+    func playSegment(_ url: URL, key: String, from: Double, to: Double) {
+        stop()
+        speakingKey = key
+        let token = sequence
+        let length = max(0.06, to - from)
+        audioQueue.async { [weak self] in
+            guard let self else { return }
+            self.deck.player?.stop()
+            guard let p = try? AVAudioPlayer(contentsOf: url) else {
+                Task { @MainActor in self.speakingKey = nil }
+                return
+            }
+            p.delegate = self
+            self.deck.player = p
+            p.currentTime = max(0, from)
+            p.play()
+            let mine = ObjectIdentifier(p)
+            self.audioQueue.asyncAfter(deadline: .now() + length) {
+                guard let current = self.deck.player, ObjectIdentifier(current) == mine else { return }
+                current.stop()
+                Task { @MainActor in if self.sequence == token { self.speakingKey = nil } }
+            }
+        }
+    }
+
     private func start(_ url: URL) {
         audioQueue.async { [weak self] in
             guard let self else { return }

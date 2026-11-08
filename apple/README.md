@@ -15,7 +15,7 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | dictation | hear it, write it — no model |
 | translate | see English, write the Russian from memory |
 | fill | write the missing word in a sentence |
-| read aloud | say it; every take is kept, played back, and its rhythm and pitch drawn against the model's; *Skip for now* (ungraded) is always there |
+| read aloud | one tap: hear the model, a soft cue, then just say it (it stops when you do); every take is kept, compared with the model syllable by syllable, with a tip or two; *Skip for now* (ungraded) is always there |
 | what does it mean | read Russian, choose its meaning |
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound |
 
@@ -24,12 +24,24 @@ itself after a short pause; **Check** asks it explicitly. When it misreads you, 
 right* overrides it — the recognizer is a helper, not the judge. *Show me* writes the
 answer in red above your line and brings the item back soon.
 
-Speech is transcribed by Apple's Russian recognizer (on-device where supported). It tells you
-what it heard; it does not grade an accent. The rhythm strip shows loudness over time for the
-model and for you: stressed syllables are the long, loud ones. The pitch line reports what it
-measures (the biggest climb and where it peaks) without judging whether you asked a question.
-If recognition can't confirm a take you can mark it *Sounded right to me* (counted, as unverified)
-or skip it (not counted).
+Saying something aloud is hands-free (`Speaking/`): the model plays (Settings: 0–3 times,
+tap to skip), a soft tone says it's your turn, and the microphone (AVAudioEngine) measures the
+room for a quarter second, starts the take at your first sound and ends it after 0.7 s of quiet
+(6 s at most, longer for long sentences); a tap stops it early. A voice is confirmed only by
+periodic sound, so a knock or a breath never starts a take, but a leading с is kept. The take is
+trimmed (0.12 s before, 0.18 s after) and kept on the page.
+
+Each take is analysed by a `PronunciationAnalyzer` (Pronunciation/PronunciationTypes.swift). Until
+phone-level analysis is wired in (`SpeakingTurn.analyzer`), the word-level analyzer stands in: the
+recognizer's words aligned letter by letter with the target (a letter heard as another is marked
+red and named, with the contrast's advice and a *Practise* link that opens a Sound pairs page for
+it), and the model's syllables found from its loudness dips and spectral changes, carried onto
+your take through a time warp (DTW on cepstra) so rhythm, loudness and melody compare syllable by
+syllable. Stress is judged against the model, so a voice's own habits cancel. Tap any syllable to
+hear just that part of the model or of you. Letters a word-level report couldn't hear aren't
+marked right. If recognition can't confirm a take you can mark it *Sounded right to me* (counted,
+as unverified) or skip it (not counted). Letters heard as others are logged as speech confusions
+on their sound contrast.
 
 ## Remembering
 

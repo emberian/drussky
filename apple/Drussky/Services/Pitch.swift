@@ -1,11 +1,11 @@
 import Accelerate
 import AVFoundation
 
-/// Fundamental frequency (F0) over time with YIN (de Cheveigné & Kawahara 2002), one frame per
-/// envelope bin so the contour lines up with the loudness strip in `RhythmView`.
+/// Fundamental frequency (F0) over time with YIN (de Cheveigné & Kawahara 2002), 40 display
+/// bins a second (`track`) or 100 analysis frames a second (`analyse`, as `Acoustics` uses).
 enum Pitch {
     static let sampleRate = 16_000.0
-    static let framesPerSecond = Envelope.binsPerSecond
+    static let framesPerSecond = 40.0
     static let minHz = 65.0
     static let maxHz = 500.0
 
@@ -143,7 +143,7 @@ enum Pitch {
 }
 
 /// A speaker's melody: semitones relative to their own median F0, so a low and a high voice
-/// draw on the same scale. Trimmed like `Envelope` (loudness above 8% of the peak).
+/// draw on the same scale. Trimmed to where loudness is above 8% of the peak.
 struct Contour: Sendable, Equatable {
     var semitones: [Float?]
     var medianHz: Float

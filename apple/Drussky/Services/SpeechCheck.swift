@@ -1,147 +1,22 @@
 import AVFoundation
-import Observation
 import Speech
 
-/// Records the learner saying something and transcribes it with Russian speech recognition
-/// (on-device when the device supports it).
-///
-/// Every start claims a new session before anything is awaited (permission prompts included),
-/// so a second tap, a page turn or `cancel()` during the wait supersedes it and a late answer
-/// is dropped. Each take is recorded to its own new file: nothing earlier is touched until the
-/// caller commits the take. Recognition runs as a retained task that a timeout or cancel stops.
-@MainActor
-@Observable
-final class SpeechCheck {
-    enum Phase: Equatable { case idle, requesting, recording, listening, finished }
-    enum Start: Equatable {
-        case recording
-        /// No microphone permission: nothing can be recorded.
-        case micDenied
-        /// Superseded by another start or a cancel while permission was being asked.
-        case superseded
-        case failed
-    }
-    /// One finished take: the new file, and what the recognizer heard (nil when it heard nothing
-    /// or wasn't available).
-    struct Take {
-        var file: URL
-        var heard: String?
-        var timedOut: Bool
-        var recognitionAllowed: Bool
-    }
-
-    private(set) var phase: Phase = .idle
-    private(set) var level: Float = 0
-    private(set) var activeKey: String?
-    private var recorder: AVAudioRecorder?
-    private var meter: Timer?
-    private var session = 0
-    private var recognition: Task<String?, Never>?
-    private var recognitionAllowed = false
-
-    var isRecording: Bool { phase == .recording }
-    var isBusy: Bool { phase == .requesting || phase == .listening }
-    /// True when the last check gave up waiting because the recognizer was still loading.
-    private(set) var lastTimedOut = false
-    /// Speech recognition is not allowed; recordings are kept and compared by ear.
-    private(set) var recognitionDenied = false
-    private static var warmed = false
-    private static var warmTask: Task<Void, Never>?
+/// Russian speech recognition (on-device when the device supports it) and the permissions a
+/// spoken take needs. Recording itself is `TakeCapture`; the turn around it is `SpeakingTurn`.
+enum SpeechCheck {
+    @MainActor private static var warmed = false
+    @MainActor private static var warmTask: Task<Void, Never>?
 
     /// The first on-device Russian transcription loads a model and can take minutes; later ones
     /// take a fraction of a second. Run one silently on a bundled clip as soon as we're allowed.
-    static func warmUp(with url: URL?) {
+    @MainActor static func warmUp(with url: URL?) {
         guard !warmed, let url, SFSpeechRecognizer.authorizationStatus() == .authorized else { return }
         warmed = true
         warmTask = Task.detached(priority: .utility) { _ = await transcribe(url, hint: "") }
     }
 
-    /// Starts recording a new take into `url` (a file that doesn't exist yet).
-    func start(to url: URL, key: String) async -> Start {
-        guard !isBusy else { return .superseded }
-        cancel()
-        session += 1
-        let mine = session
-        phase = .requesting
-        activeKey = key
-        let (mic, speech) = await Self.permissions()
-        guard session == mine else { return .superseded }
-        recognitionAllowed = speech
-        recognitionDenied = !speech
-        guard mic else { reset(); return .micDenied }
-        stopMeter()
-        Voice.configureSession()
-        let settings: [String: Any] = [
-            AVFormatIDKey: kAudioFormatMPEG4AAC, AVSampleRateKey: 44_100,
-            AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue,
-        ]
-        guard let r = try? AVAudioRecorder(url: url, settings: settings) else { reset(); return .failed }
-        r.isMeteringEnabled = true
-        guard r.record() else { try? FileManager.default.removeItem(at: url); reset(); return .failed }
-        recorder = r
-        phase = .recording
-        meter = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
-            Task { @MainActor in
-                guard let self, let r = self.recorder else { return }
-                r.updateMeters()
-                self.level = max(0, min(1, (r.averagePower(forChannel: 0) + 50) / 50))
-            }
-        }
-        return .recording
-    }
-
-    /// Stops recording and listens. nil when the take was cancelled or superseded meanwhile.
-    func finish(target: String) async -> Take? {
-        guard let r = recorder, phase == .recording else { return nil }
-        let url = r.url
-        r.stop()
-        recorder = nil
-        stopMeter()
-        phase = .listening
-        let mine = session
-        var heard: String?
-        var timedOut = false
-        if recognitionAllowed {
-            Self.warmTask?.cancel()
-            let hint = RussianText.unstressed(target)
-            let job = Task.detached(priority: .userInitiated) { await Self.transcribe(url, hint: hint) }
-            recognition = job
-            // Never keep the learner waiting on a recognizer that is still loading: ten seconds,
-            // then the job itself is cancelled, not just abandoned.
-            let timeout = Task { try? await Task.sleep(for: .seconds(10)); job.cancel() }
-            heard = await job.value
-            timedOut = timeout.isCancelled == false && job.isCancelled
-            timeout.cancel()
-            if recognition == job { recognition = nil }
-        }
-        guard session == mine else { return nil }
-        lastTimedOut = timedOut
-        phase = .finished
-        activeKey = nil
-        return Take(file: url, heard: heard, timedOut: timedOut, recognitionAllowed: recognitionAllowed)
-    }
-
-    /// Stops whatever is happening. A take still being recorded is discarded (its new file is
-    /// deleted; nothing committed earlier is touched).
-    func cancel() {
-        session += 1
-        if let r = recorder {
-            r.stop()
-            r.deleteRecording()
-        }
-        recorder = nil
-        recognition?.cancel()
-        recognition = nil
-        reset()
-    }
-
-    private func reset() {
-        stopMeter()
-        phase = .idle
-        activeKey = nil
-    }
-
-    private func stopMeter() { meter?.invalidate(); meter = nil; level = 0 }
+    /// A real check is about to run: the silent warm-up gives way.
+    @MainActor static func cancelWarmUp() { warmTask?.cancel() }
 
     /// Microphone and speech recognition, asked separately: recording works without recognition.
     /// Nonisolated on purpose: the system answers permission requests on a background queue,

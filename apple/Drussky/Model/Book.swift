@@ -85,6 +85,19 @@ struct Settings: Codable, Sendable, Equatable {
     var fingerDrawing: Bool = false
     var cursiveModels: Bool = false
     var showStress: Bool = true
+    /// Times the model plays before the learner's turn to speak (0: straight to their turn).
+    var modelRepeats: Int = 1
+
+    init() {}
+
+    // Every field optional on reading, so notebooks from before a setting existed still open.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        fingerDrawing = try c.decodeIfPresent(Bool.self, forKey: .fingerDrawing) ?? false
+        cursiveModels = try c.decodeIfPresent(Bool.self, forKey: .cursiveModels) ?? false
+        showStress = try c.decodeIfPresent(Bool.self, forKey: .showStress) ?? true
+        modelRepeats = try c.decodeIfPresent(Int.self, forKey: .modelRepeats) ?? 1
+    }
 }
 
 @MainActor

@@ -8,7 +8,7 @@ import UIKit
 @Observable
 final class AppState {
     enum Phase {
-        case ready(Book, Voice, SpeechCheck)
+        case ready(Book, Voice, SpeakingTurn)
         case recovery(NotebookProblem)
         case failed(String)
     }
@@ -18,7 +18,7 @@ final class AppState {
     var notice: String?
     private var course: Course?
     private var voice: Voice?
-    private var speech: SpeechCheck?
+    private var speech: SpeakingTurn?
     private let root: URL
     private var launched = false
 
@@ -53,7 +53,7 @@ final class AppState {
             case .success(let book):
                 if first { QA.apply(to: book) }
                 let voice = self.voice ?? Voice()
-                let speech = self.speech ?? SpeechCheck()
+                let speech = self.speech ?? SpeakingTurn()
                 self.voice = voice
                 self.speech = speech
                 SpeechCheck.warmUp(with: voice.recordingURL(for: "спаси́бо"))
