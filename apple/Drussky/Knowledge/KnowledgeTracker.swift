@@ -77,12 +77,21 @@ final class KnowledgeTracker {
                               help: ["tutor"])])
     }
 
+    /// Set by `close()`: the folder the log lives in is about to belong to another notebook.
+    private(set) var isClosed = false
+
+    /// Stops the log for good (before a restore replaces the folder); evidence that arrives late
+    /// is dropped rather than written into the restored notebook.
+    func close() { isClosed = true }
+
     private func record(_ events: [LearningEvent]) {
+        guard !isClosed else { return }
         append(events)
         for e in events { model.apply(e) }
     }
 
     private func append(_ events: [LearningEvent]) {
+        guard !isClosed else { return }
         let batch = unwritten + events
         if log.append(batch) {
             unwritten = []
@@ -102,28 +111,44 @@ final class KnowledgeTracker {
     /// The id of the outcome a completed result's round yields, live or reconstructed.
     nonisolated static func outcomeID(item: String, round: Int) -> String { "out:\(item)#\(round)" }
 
-    /// Reconstructs the outcome of every finished result whose round has none in the log:
-    /// notebooks from before the log existed, a completion whose append failed after earlier
-    /// attempts were logged, or a crash between saving the result and logging it. Attempts never
-    /// stand in for an outcome. Idempotent: reconstructed ids are the live ones.
+    /// Reconstructs the evidence a saved result should have left but the log lacks: the outcome of
+    /// a finished round (notebooks from before the log existed, a completion whose append failed
+    /// after earlier attempts were logged, a crash between saving the result and logging it), any
+    /// of a diary line's per-edit outcomes a write stopped short of, and the speech evidence of a
+    /// take whose report was saved but whose event was not (`takeReport` reads the sidecar beside
+    /// a take and says when it was made). Every reconstructed event has the deterministic id the
+    /// live one would have had, so each missing id is appended on its own and nothing doubles.
+    /// Attempts never stand in for an outcome. Logs from before deterministic ids are read by
+    /// counting their (random-id) outcomes: one per finished round.
     @discardableResult
-    func backfill(pages: [BookPage]) -> Int {
+    func backfill(pages: [BookPage], takeReport: (String) -> (report: PronunciationReport, at: Date)? = { _ in nil }) -> Int {
+        guard !isClosed else { return 0 }
         let logged = model.items
         let ids = Set(model.events.map(\.id))
-        var outcomes: [String: Int] = [:]
-        for e in model.events where e.type == .outcome { outcomes[e.item, default: 0] += 1 }
+        var legacyOutcomes: [String: Int] = [:]
+        for e in model.events where e.type == .outcome && !e.id.hasPrefix("out:") && !e.id.hasPrefix("diary:") {
+            legacyOutcomes[e.item, default: 0] += 1
+        }
         var events: [LearningEvent] = []
         for page in pages {
-            for (i, r) in page.results.enumerated() where r.status.isComplete {
+            for (i, r) in page.results.enumerated() {
                 let item = "\(page.id)#\(i)"
-                // Older logs used random ids: count their outcomes instead (one per finished round).
-                if ids.contains(Self.outcomeID(item: item, round: r.roundNumber)) || outcomes[item, default: 0] > r.roundNumber { continue }
-                let at = r.updated ?? page.finished ?? page.created
-                var before = ExerciseResult()
-                before.attempts = 0
-                if page.exercises[i].kind == .diary { events += diaryEvidence(page: page, index: i, before: before, after: r, at: at, backfill: true) }
-                else if let e = domain.evidence(for: RussianAttempt(page: page, index: i, before: before, after: r, at: at, backfill: true)) {
-                    events.append(e)
+                if r.status.isComplete, legacyOutcomes[item, default: 0] <= r.roundNumber {
+                    let at = r.updated ?? page.finished ?? page.created
+                    var before = ExerciseResult()
+                    before.attempts = 0
+                    let expected: [LearningEvent]
+                    if page.exercises[i].kind == .diary { expected = diaryEvidence(page: page, index: i, before: before, after: r, at: at, backfill: true) }
+                    else { expected = [domain.evidence(for: RussianAttempt(page: page, index: i, before: before, after: r, at: at, backfill: true))].compactMap { $0 } }
+                    events += expected.filter { !ids.contains($0.id) }
+                }
+                // Takes analysed and kept, whose sounds never reached the log.
+                if page.exercises[i].kind == .readAloud {
+                    for (n, take) in ((r.takes ?? []) + [r.recording].compactMap { $0 }).enumerated() where !ids.contains("speech:\(take)") {
+                        guard let (report, at) = takeReport(take),
+                              let e = domain.speechEvidence(page: page, index: i, take: take, report: report, attempt: n + 1, at: at, source: "backfill") else { continue }
+                        events.append(e)
+                    }
                 }
             }
             for note in page.notes ?? [] {

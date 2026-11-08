@@ -271,6 +271,34 @@ final class NotebookSafetyTests: XCTestCase {
         XCTAssertEqual(book.result(ref)?.takes, ["late.m4a"])
     }
 
+    /// A take analysed across a restore: the old book is closed, and whatever lands on it late
+    /// (the take's result, its sound evidence) must not reach the folder, which by then holds the
+    /// restored notebook.
+    func testAClosedNotebookRefusesLateTakesAndEvidence() async throws {
+        let store = BookStore(root: tempRoot())
+        let book = Book(course: course, store: store)
+        var ex = Exercise(kind: .readAloud); ex.text = "был"
+        book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [ex], newWords: [])
+        let page = try XCTUnwrap(book.page)
+        let ref = ExerciseRef(pageID: page.id, index: 0)
+        await book.close()
+        let state = try Data(contentsOf: store.stateURL)
+        let log = try? Data(contentsOf: book.knowledge.logURL)
+        XCTAssertEqual(book.commitTake(ref, round: 0, file: "late.m4a", heard: "был", target: "был", recognitionAllowed: true, timedOut: false), .closed)
+        XCTAssertEqual(book.result(ref)?.status, .open)
+        XCTAssertNil(book.result(ref)?.recording)
+        let sub = PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "i"), verdict: .substituted, letterRange: 1..<2)
+        let report = PronunciationReport(target: "был", transcript: "бил", expected: [], heard: [Phone(ipa: "b"), Phone(ipa: "i"), Phone(ipa: "l")],
+                                         sounds: [sub], syllables: [], stressedSyllable: nil, accuracy: 0.6, tips: [])
+        book.knowledge.heard(page: page, index: 0, take: "late.m4a", report: report, attempt: 1)
+        XCTAssertFalse(book.knowledge.model.events.contains { $0.id == "speech:late.m4a" })
+        book.record(ref) { $0.status = .done }
+        XCTAssertEqual(book.result(ref)?.status, .open, "nothing is recorded in a closed book")
+        book.saveNow()
+        XCTAssertEqual(try Data(contentsOf: store.stateURL), state)
+        XCTAssertEqual(try? Data(contentsOf: book.knowledge.logURL), log)
+    }
+
     // MARK: Restore
 
     func testExportRestoresIntoAnotherFolderWithEverything() async throws {

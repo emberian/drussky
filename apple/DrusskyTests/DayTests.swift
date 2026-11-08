@@ -168,6 +168,73 @@ final class DayTests: XCTestCase {
         XCTAssertTrue(again.day.probes.probes.filter { $0.item?.hasPrefix(again.pages.last!.id) ?? false }.isEmpty)
     }
 
+    /// A book on a page with probes placed, and the first probe's index on that page.
+    private func withPlacedProbe(store: BookStore) throws -> (book: Book, probe: Probe, index: Int) {
+        let book = studied(4, store: store)
+        book.advanceClock(byDays: 1.1)
+        book.turnForward()
+        let page = try XCTUnwrap(book.pages.last)
+        let probe = try XCTUnwrap(book.day.probes.probes.first { $0.item?.hasPrefix(page.id + "#") ?? false })
+        return (book, probe, Int(probe.item!.split(separator: "#")[1])!)
+    }
+
+    private func answerRight(_ book: Book, _ index: Int) {
+        let page = book.pages[book.pages.count - 1]
+        let ex = page.exercises[index]
+        book.record(page: book.pages.count - 1, exercise: index) { r in
+            r.attempts = 1
+            switch ex.kind {
+            case .listenPick: r.chosen = ex.options?.firstIndex(of: ex.say ?? "")
+            case .readMeaning: r.chosen = ex.answerIndex
+            case .readAloud: r.recognized = ex.text
+            default: r.recognized = ex.target
+            }
+            r.status = .correct
+        }
+    }
+
+    /// The result's save (synchronous when an exercise finishes) carries the probe's observation:
+    /// a crash right after it cannot leave a finished exercise with an unanswered probe.
+    func testAProbeObservationIsSavedWithItsResult() throws {
+        let store = tempStore()
+        let (book, probe, index) = try withPlacedProbe(store: store)
+        answerRight(book, index)
+        // Straight from disk, before any debounced save could run.
+        let saved = try BookStore.decoder().decode(BookState.self, from: Data(contentsOf: store.stateURL))
+        let onDisk = try XCTUnwrap(saved.day?.probes.probes.first { $0.id == probe.id })
+        XCTAssertNotNil(onDisk.answered)
+        XCTAssertEqual(onDisk.observed, true)
+        let predicted = try XCTUnwrap(onDisk.predicted)
+        XCTAssertTrue(predicted > 0 && predicted < 1, "\(predicted)")
+        XCTAssertEqual(saved.pages.last?.results[index].status, .correct)
+    }
+
+    /// A notebook from before that: the exercise finished and its outcome logged, the probe still
+    /// placed and unanswered. Opening reconciles it from the saved result and the trace.
+    func testAStrandedProbeIsReconciledOnOpening() throws {
+        let store = tempStore()
+        let (book, probe, index) = try withPlacedProbe(store: store)
+        answerRight(book, index)
+        let live = try XCTUnwrap(book.day.probes.probes.first { $0.id == probe.id })
+        var state = try BookStore.decoder().decode(BookState.self, from: Data(contentsOf: store.stateURL))
+        var day = try XCTUnwrap(state.day)
+        let k = try XCTUnwrap(day.probes.probes.firstIndex { $0.id == probe.id })
+        day.probes.probes[k].answered = nil
+        day.probes.probes[k].observed = nil
+        day.probes.probes[k].predicted = nil
+        state.day = day
+        try BookStore.encoder().encode(state).write(to: store.stateURL)
+        let again = Book(course: course, store: store)
+        let fixed = try XCTUnwrap(again.day.probes.probes.first { $0.id == probe.id })
+        XCTAssertNotNil(fixed.answered)
+        XCTAssertEqual(fixed.observed, true)
+        XCTAssertEqual(try XCTUnwrap(fixed.predicted), try XCTUnwrap(live.predicted), accuracy: 1e-6, "the retrievability just before that review")
+        XCTAssertEqual(again.calibration.overall?.count, book.calibration.overall?.count)
+        // Written back, so the next opening has nothing to do.
+        let saved = try BookStore.decoder().decode(BookState.self, from: Data(contentsOf: store.stateURL))
+        XCTAssertNotNil(saved.day?.probes.probes.first { $0.id == probe.id }?.answered)
+    }
+
     func testLearnedParametersSurviveReopening() throws {
         let store = tempStore()
         let book = Book(course: course, store: store)

@@ -139,6 +139,39 @@ final class DiaryTests: XCTestCase {
         XCTAssertFalse(EventLog(url: again.knowledge.logURL).load().contains { $0.item == "\(clean.pageID)#1" })
     }
 
+    /// A diary line's evidence is several lines of the log (one per edit, then the main outcome).
+    /// A write that stopped after the first edit is completed edit by edit on the next opening:
+    /// the lines already there are not written again, the missing ones are, and only once.
+    func testAPartlyWrittenDiaryIsRepairedEditByEdit() throws {
+        let store = tempStore()
+        let book = Book(course: try course(), store: store)
+        var ex = Exercise(kind: .diary); ex.prompt = "What is on the table?"
+        book.insertWrittenPage(title: "Дневник", intro: nil, unitTitle: "My Russian", exercises: [ex], newWords: [])
+        let ref = ExerciseRef(pageID: book.pages[book.currentPage].id, index: 0)
+        book.submitDiary(ref, entry: DiaryEntry(prompt: ex.prompt!, text: "На стол книга и чашка.", submitted: book.now()))
+        let correction = DiaryCorrection(corrected: "На столе́ кни́га и ча́шка.",
+                                         edits: [DiaryEdit(span: "стол", replacement: "столе́", category: .ending, why: "location", en: "on the table"),
+                                                 DiaryEdit(span: "чашка", replacement: "ча́шка", category: .stress, why: "stress", en: "cup")],
+                                         praise: "Good.", teach: [], at: book.now())
+        book.finishDiary(ref, correction: correction)
+        book.saveNow()
+        let log = EventLog(url: book.knowledge.logURL)
+        let all = log.load()
+        let mine = all.filter { $0.item == ref.item }.map(\.id)
+        XCTAssertEqual(mine, ["diary:\(ref.item)#0:0", "diary:\(ref.item)#0:1", "out:\(ref.item)#0"])
+        // The write stopped after the first edit.
+        let kept = all.filter { $0.item != ref.item || $0.id == "diary:\(ref.item)#0:0" }
+        try FileManager.default.removeItem(at: log.url)
+        XCTAssertTrue(log.append(kept))
+        let again = Book(course: try course(), store: store)
+        let repaired = EventLog(url: again.knowledge.logURL).load().filter { $0.item == ref.item }
+        XCTAssertEqual(repaired.map(\.id).sorted(), mine.sorted(), "\(repaired.map(\.id))")
+        XCTAssertEqual(repaired.filter { $0.id == "diary:\(ref.item)#0:0" }.first?.source, "live", "what was there stays as it was")
+        XCTAssertEqual(repaired.filter { $0.id == "out:\(ref.item)#0" }.first?.source, "backfill")
+        XCTAssertEqual(repaired.filter { $0.type == .outcome && $0.grade == .again }.count, 2, "both edits count against their forms")
+        XCTAssertEqual(Book(course: try course(), store: store).knowledge.backfill(pages: again.pages), 0, "nothing left to repair")
+    }
+
     /// A result from before the diary existed decodes, and so does one that a diary was crashed
     /// out of (the entry saved, the outcome never logged): the next launch logs it once.
     func testOldAndInterruptedNotebooksDecode() throws {

@@ -9,7 +9,7 @@ extension RussianDomain {
     /// none wrong: an analysed take is not a recall grade, the exercise's outcome is.
     /// The id is the take's file, so a take is never counted twice.
     func speechEvidence(page: BookPage, index: Int, take: String, report: PronunciationReport,
-                        attempt: Int, at t: Date) -> LearningEvent? {
+                        attempt: Int, at t: Date, source: String = "live") -> LearningEvent? {
         guard page.exercises.indices.contains(index) else { return nil }
         let ex = page.exercises[index]
         let target = report.target
@@ -31,7 +31,7 @@ extension RussianDomain {
         for tip in report.tips { note(tip.contrast.flatMap(SoundContrasts.id(for:))) }
         guard !contrasts.isEmpty || !confusions.isEmpty else { return nil }
         let components = contrasts.map { ComponentID(.sound, $0) } + letters
-        return LearningEvent(id: "speech:\(take)", t: t, type: .attempt, item: "\(page.id)#\(index)", activity: ex.kind.rawValue,
+        return LearningEvent(id: "speech:\(take)", t: t, type: .attempt, source: source, item: "\(page.id)#\(index)", activity: ex.kind.rawValue,
                              modality: .say, components: components, correct: false, attempt: attempt, expected: target,
                              response: report.transcript, confusions: confusions.isEmpty ? nil : confusions,
                              review: ex.reviewKey != nil ? true : nil)

@@ -325,6 +325,94 @@ final class SpeakingTests: XCTestCase {
         XCTAssertFalse(book.knowledge.model.events.contains { $0.id == "speech:take-2.m4a" })
     }
 
+    // MARK: Finishing the exercise
+
+    /// A phone-level report says how it sounded, never which words were said: with the phone
+    /// model installed, word recognition still runs and still finishes the exercise.
+    func testAPhoneLevelReportStillChecksTheWords() async throws {
+        struct Phones: PronunciationAnalyzer {
+            func analyze(take: URL, target: String, model: URL?) async throws -> PronunciationReport {
+                PronunciationReport(target: target, transcript: nil, expected: [Phone(ipa: "b")], heard: [Phone(ipa: "b")],
+                                    sounds: [PhoneJudgement(expected: Phone(ipa: "b"), heard: Phone(ipa: "b"), verdict: .good, letterRange: 0..<1)],
+                                    syllables: [], stressedSyllable: nil, accuracy: 1, tips: [])
+            }
+        }
+        let take = try clipURL("byl-8826ed")
+        let (report, heard) = await SpeakingTurn.analyse(take: take, target: "был", model: nil, primary: Phones(), recognise: { _, _ in "был" })
+        XCTAssertEqual(heard, "был")
+        XCTAssertEqual(report?.transcript, "был", "the words heard travel with the report")
+        XCTAssertFalse(report?.isWordLevel ?? true)
+        // Without a phone analyzer, the words heard are recognised once and handed to the fallback.
+        let counting = Counter()
+        let (fallback, words) = await SpeakingTurn.analyse(take: take, target: "был", model: nil, primary: nil,
+                                                           recognise: { _, _ in counting.bump(); return "бил" })
+        XCTAssertEqual(counting.count, 1)
+        XCTAssertEqual(words, "бил")
+        XCTAssertEqual(fallback?.transcript, "бил")
+        XCTAssertTrue(fallback?.isWordLevel ?? false)
+
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "course", withExtension: "json"))
+        let course = try JSONDecoder().decode(Course.self, from: Data(contentsOf: url))
+        let book = Book(course: course, store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        var ex = Exercise(kind: .readAloud); ex.text = "был"
+        book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [ex], newWords: [])
+        let ref = ExerciseRef(pageID: book.page!.id, index: 0)
+        XCTAssertEqual(book.commitTake(ref, round: 0, file: "t1.m4a", heard: heard, target: "был", recognitionAllowed: true, timedOut: false), .finished)
+        XCTAssertEqual(book.result(ref)?.status, .correct)
+    }
+
+    private final class Counter: @unchecked Sendable {
+        private let lock = NSLock()
+        private var n = 0
+        var count: Int { lock.withLock { n } }
+        func bump() { lock.withLock { n += 1 } }
+    }
+
+    /// The recognizer hearing nothing is its failure, not a failed check against the learner.
+    func testNoTranscriptIsNotAFailedCheck() throws {
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "course", withExtension: "json"))
+        let course = try JSONDecoder().decode(Course.self, from: Data(contentsOf: url))
+        let book = Book(course: course, store: BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)))
+        var ex = Exercise(kind: .readAloud); ex.text = "был"
+        book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [ex], newWords: [])
+        let ref = ExerciseRef(pageID: book.page!.id, index: 0)
+        XCTAssertEqual(book.commitTake(ref, round: 0, file: "t1.m4a", heard: nil, target: "был", recognitionAllowed: true, timedOut: false), .recorded)
+        XCTAssertEqual(book.result(ref)?.attempts, 1)
+        XCTAssertNil(book.result(ref)?.failedChecks)
+        XCTAssertEqual(book.commitTake(ref, round: 0, file: "t2.m4a", heard: "бил", target: "был", recognitionAllowed: true, timedOut: false), .recorded)
+        XCTAssertEqual(book.result(ref)?.failedChecks, 1, "words heard and wrong are a failed check")
+        XCTAssertEqual(book.commitTake(ref, round: 0, file: "t3.m4a", heard: "был", target: "был", recognitionAllowed: true, timedOut: false), .finished)
+        XCTAssertEqual(book.result(ref)?.status, .done, "right after a failed check")
+    }
+
+    /// A take whose report was saved beside it but whose sound evidence never reached the log (the
+    /// app died between the two writes) is reconstructed on the next opening, once.
+    func testASavedReportWithoutItsEventIsBackfilled() throws {
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "course", withExtension: "json"))
+        let course = try JSONDecoder().decode(Course.self, from: Data(contentsOf: url))
+        let store = BookStore(root: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString))
+        let book = Book(course: course, store: store)
+        var ex = Exercise(kind: .readAloud); ex.text = "был"
+        book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [ex], newWords: [])
+        let ref = ExerciseRef(pageID: book.page!.id, index: 0)
+        let take = book.newTakeURL(ref)
+        try Data("voice".utf8).write(to: take)
+        let sub = PhoneJudgement(expected: Phone(ipa: "ɨ"), heard: Phone(ipa: "i"), verdict: .substituted, letterRange: 1..<2)
+        let report = PronunciationReport(target: "был", transcript: "бил", expected: [], heard: [Phone(ipa: "b"), Phone(ipa: "i"), Phone(ipa: "l")],
+                                         sounds: [sub], syllables: [], stressedSyllable: nil, accuracy: 0.6, tips: [])
+        try JSONEncoder().encode(report).write(to: SpeakingTurn.reportURL(for: take))
+        book.commitTake(ref, round: 0, file: take.lastPathComponent, heard: "бил", target: "был", recognitionAllowed: true, timedOut: false)
+        // …and the app dies before `knowledge.heard`.
+        let id = "speech:\(take.lastPathComponent)"
+        XCTAssertFalse(book.knowledge.model.events.contains { $0.id == id })
+        let again = Book(course: course, store: store)
+        let events = again.knowledge.model.events.filter { $0.id == id }
+        XCTAssertEqual(events.count, 1)
+        XCTAssertEqual(events.first?.source, "backfill")
+        XCTAssertEqual(events.first?.confusions, [Confusion(target: ComponentID(.letter, "Ы"), produced: ComponentID(.letter, "И"), channel: .speech)])
+        XCTAssertEqual(Book(course: course, store: store).knowledge.model.events.filter { $0.id == id }.count, 1, "never doubled")
+    }
+
     func testSettingsFromBeforeSpeakingOpen() throws {
         let old = #"{"fingerDrawing":true,"cursiveModels":false,"showStress":false}"#
         let s = try JSONDecoder().decode(Settings.self, from: Data(old.utf8))

@@ -255,23 +255,53 @@ extension Book {
 
     // MARK: The desk
 
-    /// After every finished exercise: a probe's outcome is recorded against what was predicted,
-    /// and the session is read for fatigue. Tired: this page shortens. Sharp: the next page may
-    /// bring one more new word.
-    func deskObserved(_ ref: ExerciseRef, exercise: Exercise, result: ExerciseResult) {
-        guard result.status.isComplete else { return }
-        if day.probes.probes.contains(where: { $0.item == ref.item && $0.answered == nil }) {
-            let grade = RussianDomain.grade(exercise, result)
-            var predicted: Double?
-            if grade != nil, let key = exercise.reviewKey, let m = RussianDomain.modality(for: exercise.kind) {
-                // Retrievability just before this very review, as the trace recorded it.
-                predicted = knowledge.domain.reviewComponents(forTarget: key)
-                    .compactMap { knowledge.model.trace($0, m)?.reviews.last?.recallBefore }.min()
-            }
-            day.probes.observe(item: ref.item, predicted: predicted, observed: grade.map(\.isSuccess), at: now())
-            nudgeParameters()
+    /// A finished exercise that was a probe: its outcome is recorded against what was predicted
+    /// (retrievability just before it, read before the outcome is folded in). Called by `record`
+    /// before the result is saved, so the result and its observation reach the notebook in one
+    /// write. True when a probe was observed.
+    func observeProbe(_ ref: ExerciseRef, exercise: Exercise, result: ExerciseResult) -> Bool {
+        guard result.status.isComplete, day.probes.probes.contains(where: { $0.item == ref.item && $0.answered == nil }) else { return false }
+        let grade = RussianDomain.grade(exercise, result)
+        var predicted: Double?
+        if grade != nil, let key = exercise.reviewKey, let m = RussianDomain.modality(for: exercise.kind) {
+            predicted = knowledge.domain.reviewComponents(forTarget: key).compactMap { knowledge.model.retrievability($0, m, at: now()) }.min()
         }
-        guard let p = index(ofPage: ref.pageID) else { return }
+        day.probes.observe(item: ref.item, predicted: predicted, observed: grade.map(\.isSuccess), at: now())
+        return true
+    }
+
+    /// Probes placed on an exercise that finished without their observation being saved (a crash
+    /// between the result's save and the day's, in notebooks from before the two were one write):
+    /// observed now from the saved result and the trace's retrievability just before its outcome.
+    /// Without this they would stay placed and unanswered for ever, counting for nothing.
+    func reconcileProbes() {
+        var changed = false
+        for probe in day.probes.probes where probe.item != nil && probe.answered == nil {
+            let parts = probe.item!.split(separator: "#", maxSplits: 1).map(String.init)
+            guard parts.count == 2, let i = Int(parts[1]), let page = page(id: parts[0]),
+                  page.exercises.indices.contains(i), page.results[i].status.isComplete else { continue }
+            let ex = page.exercises[i], r = page.results[i]
+            let at = r.updated ?? page.finished ?? page.created
+            let grade = RussianDomain.grade(ex, r)
+            var predicted: Double?
+            if grade != nil, let key = ex.reviewKey, let m = RussianDomain.modality(for: ex.kind) {
+                // The review the outcome made, found by its time (the log's clock runs a hair after the result's).
+                predicted = knowledge.domain.reviewComponents(forTarget: key).compactMap { c -> Double? in
+                    guard let review = knowledge.model.trace(c, m)?.review(at: at.addingTimeInterval(1)), review.t >= at.addingTimeInterval(-1) else { return nil }
+                    return review.recallBefore
+                }.min()
+            }
+            day.probes.observe(item: probe.item!, predicted: predicted, observed: grade.map(\.isSuccess), at: at)
+            changed = true
+        }
+        if changed { saveNow() }
+    }
+
+    /// After every result: the session is read for fatigue. Tired: this page shortens. Sharp: the
+    /// next page may bring one more new word. A probe just observed may nudge the memory model.
+    func deskObserved(_ ref: ExerciseRef, probed: Bool) {
+        if probed { nudgeParameters() }
+        guard let p = index(ofPage: ref.pageID), pages[p].results[safe: ref.index]?.status.isComplete == true else { return }
         let pageID = pages[p].id
         let started = knowledge.model.events.first { $0.item.hasPrefix(pageID + "#") }?.t
         let estimate = Fatigue.estimate(events: knowledge.model.events, now: now(), pageStarted: started)
