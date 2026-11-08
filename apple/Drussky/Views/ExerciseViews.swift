@@ -98,6 +98,9 @@ struct ExerciseRow: View {
         case .buildWord: BuildWordExercise(slot: slot, isActive: isActive)
         case .familyGuess: FamilyGuessExercise(slot: slot, isActive: isActive)
         case .talk: TalkExercise(slot: slot, isActive: isActive)
+        case .transform: WritingExercise(slot: slot, isActive: isActive)  // Grammar/: a form from a cue, on the strip
+        case .paradigmFill: ParadigmFillExercise(slot: slot, isActive: isActive)
+        case .cueSort: CueSortExercise(slot: slot, isActive: isActive)
         }
     }
 }
@@ -338,7 +341,7 @@ struct WritingExercise: View {
     private var ex: Exercise { slot.exercise }
     private var result: ExerciseResult { slot.result }
     private var target: String { ex.target ?? "" }
-    private var isRecall: Bool { [.dictation, .translate, .fill].contains(ex.kind) }
+    private var isRecall: Bool { [.dictation, .translate, .fill, .transform].contains(ex.kind) }
     /// Recall judged by the learner after Check, the reader hinting (Judgement/SelfJudgement.swift).
     private var selfJudged: Bool { isRecall && book.settings.writingJudge == .myself }
     private var judging: Bool { selfJudged && checked && !pad.isEmpty && !result.status.isComplete }
@@ -464,6 +467,8 @@ struct WritingExercise: View {
                     .foregroundStyle(Theme.text)
                 Text(ex.hint ?? "").scaledFont(16).italic().foregroundStyle(Theme.muted)
             }
+        case .transform:
+            TransformPrompt(exercise: ex)
         default:
             EmptyView()
         }
@@ -502,10 +507,13 @@ struct WritingExercise: View {
                 .font(Theme.label(14)).foregroundStyle(Theme.good))
         }
         if result.status == .missed {
-            return AnyView(HStack(spacing: 10) {
-                Text("Copy the red version once, beside yours. It will come back soon.")
-                    .scaledFont(15).foregroundStyle(Theme.redPen)
-                if let s = ex.spoken { HearButton(text: s, size: 32) }
+            return AnyView(VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 10) {
+                    Text("Copy the red version once, beside yours. It will come back soon.")
+                        .scaledFont(15).foregroundStyle(Theme.redPen)
+                    if let s = ex.spoken { HearButton(text: s, size: 32) }
+                }
+                GrammarRowHint(exercise: ex)  // Grammar/: the paradigm row of a missed form, its cell marked
             })
         }
         if let reading = lastReading, !result.status.isComplete {

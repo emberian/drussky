@@ -39,6 +39,8 @@ extension Modality {
         case .readPick: "read → pick"
         case .build: "English → build"
         case .type: "typed"
+        case .transform: "cue → write"
+        case .classify: "cue → pick"
         default: rawValue
         }
     }
@@ -92,11 +94,13 @@ struct RussianAttempt {
 /// Russian, as Drussky teaches it, in LearningCore's terms.
 struct RussianDomain: KnowledgeDomain {
     let name = "drussky-ru"
-    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .speak, .type]
+    let modalities: [Modality] = [.copy, .hearWrite, .meaningWrite, .say, .hearPick, .readPick, .produce, .build, .speak, .type, .transform, .classify]
     let graph: KnowledgeGraph
     let lemmas: Lemmas
     /// Roots, affixes and segmentations (Morphology/).
     let morphology: Morphology
+    /// Declension and conjugation tables (Grammar/).
+    let paradigms: Paradigms
     /// Every single word the graph knows as a word (lexicon tokens, lemma-map forms, pair words, kept words, morphology lemmas).
     let words: Set<String>
     /// Lexicon key → its component (phrase or word).
@@ -105,9 +109,10 @@ struct RussianDomain: KnowledgeDomain {
     private let byGloss: [String: [String]]
     private let letterSays: [String: String]
 
-    init(course: Course, lemmas: Lemmas, pairs: SoundPairs, customWords: [Course.Word] = [], morphology: Morphology = .empty) {
+    init(course: Course, lemmas: Lemmas, pairs: SoundPairs, customWords: [Course.Word] = [], morphology: Morphology = .empty, paradigms: Paradigms = .empty) {
         self.lemmas = lemmas
         self.morphology = morphology
+        self.paradigms = paradigms
         let lexicon = course.lexicon + customWords
         var words = Set<String>()
         for w in lexicon { for t in RussianText.key(w.ru).split(separator: " ") { words.insert(String(t)) } }
@@ -198,7 +203,8 @@ struct RussianDomain: KnowledgeDomain {
         entryIDs = entries
         // Roots, affixes and word families: a word's component is its lexeme (or the lexicon phrase it is).
         let (mc, me) = Self.morphologyGraph(morphology) { entries[$0] ?? ComponentID(.lexeme, $0) }
-        graph = KnowledgeGraph(components: comps + mc, edges: edges + me)
+        let (pc, pe) = Self.paradigmGraph(paradigms)
+        graph = KnowledgeGraph(components: comps + mc + pc, edges: edges + me + pe)
     }
 
     // MARK: Words
@@ -268,6 +274,7 @@ struct RussianDomain: KnowledgeDomain {
         if let key = ex.reviewKey, key.hasPrefix("letter:"), let id = ComponentID(key) { return [id] }
         var out: [ComponentID] = []
         if ex.kind == .soundPair, let contrast = ex.hint { out.append(ComponentID(.sound, contrast)) }
+        if [.paradigmFill, .cueSort].contains(ex.kind) { return grammarComponents(for: ex) }  // Grammar/: the word, its cells, their patterns
         let target: String? = switch ex.kind {
         case .readMeaning: ex.text
         case .soundPair: ex.say
@@ -296,6 +303,8 @@ struct RussianDomain: KnowledgeDomain {
         if let skills = ex.skills {
             tags = Set(skills.map { $0.hasPrefix("gram:") ? String($0.dropFirst(5)) : $0 })
         }
+        // Grammar cells: every inflected token fills a cell of its table; a transform names its cell outright.
+        out += ex.kind == .transform ? grammarComponents(for: ex) : tokens.flatMap(paradigmComponents(token:))
         // A review of a word the course can't analyse still has a memory of its own, so its
         // outcome lands where the scheduler looks.
         if let key = ex.reviewKey, key.hasPrefix("word:"), key.count > 5,
@@ -337,6 +346,9 @@ struct RussianDomain: KnowledgeDomain {
         case .listenPick, .soundPair: .hearPick
         case .readMeaning, .familyGuess: .readPick
         case .buildWord: .build
+        case .transform: .transform
+        case .paradigmFill: .transform  // tiles report .classify through evidence(for:)
+        case .cueSort: .classify
         case .explain, .passage: nil
         case .diary: nil  // its evidence is built from the correction (DiaryKnowledge.swift)
         case .talk: nil  // its evidence is built per turn and from the marking (Talk/TalkKnowledge.swift)
@@ -394,10 +406,12 @@ struct RussianDomain: KnowledgeDomain {
         case .readAloud:
             guard let target = ex.text else { return [] }
             return wordSubstitutions(target, response, channel: .speech)
-        case .dictation, .translate, .fill, .copy, .trace:
+        case .dictation, .translate, .fill, .copy, .trace, .transform:
             guard let target = ex.target, !RussianText.answerMatches(response, target, subjectDrop: ex.kind == .translate) else { return [] }
             let words = wordSubstitutions(target, response, channel: .writing)
             return words.isEmpty ? letterSubstitutions(target, response) : words
+        case .cueSort:
+            return sortConfusions(ex, response: response)
         default:
             return []
         }
@@ -457,7 +471,8 @@ struct RussianDomain: KnowledgeDomain {
     func evidence(for a: RussianAttempt) -> LearningEvent? {
         guard a.page.exercises.indices.contains(a.index) else { return nil }
         let ex = a.page.exercises[a.index]
-        guard let modality = a.after.typed == true ? Modality.type : Self.modality(for: ex.kind), !(ex.kind == .soundPair && ex.say == nil) else { return nil }
+        guard var modality = a.after.typed == true ? Modality.type : Self.modality(for: ex.kind), !(ex.kind == .soundPair && ex.say == nil) else { return nil }
+        if ex.kind == .paradigmFill, ex.options != nil { modality = .classify }  // tapped tiles, not written
         let finished = !a.before.status.isComplete && a.after.status.isComplete
         let tried = a.after.attempts > a.before.attempts
         guard finished || tried else { return nil }

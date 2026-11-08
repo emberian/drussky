@@ -668,6 +668,12 @@ LEXICON += course_families.LEXICON
 U += course_read.units(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm, ps=ps))
 LEXICON += course_read.LEXICON
 
+# Grammar pages (Resources/paradigms.json): one at the end of each unit that introduces a system.
+import course_grammar  # noqa: E402
+for _uid, _page in course_grammar.pages(dict(ex=ex, tr=tr, cp=cp, lp=lp, dc=dc, ra=ra, tl=tl, fl=fl, rm=rm)):
+    next(u for u in U if u[0] == _uid)[3].append(_page)
+LEXICON += course_grammar.LEXICON
+
 
 # Course order. Page ids are written into learners' notebooks (sourceID), and the app walks
 # pages by index, so: ids come from where a page was first authored (uN-pK, counting only

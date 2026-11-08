@@ -16,6 +16,7 @@ struct KnowledgeSection: View {
             KnowledgeMap(tracker: k, selected: $selected)
             nextUp(k)
             WordFamiliesSection()
+            GrammarSection()
             GrowthChart(tracker: k)
         }
         .onAppear {
@@ -133,7 +134,7 @@ struct MapLayout {
         y += 14
 
         band("Patterns & sounds")
-        let patterns = graph.components(of: .construction) + graph.components(of: .sound)
+        let patterns = graph.components(of: .construction).filter { $0.unit != "Grammar" } + graph.components(of: .sound)  // table cells are drawn by GrammarSection
         flow(patterns.map { ($0.id, $0.label) }, font: Self.patternFont, height: 26, width: width, y: &y, add: add)
         height = y + 4
     }
