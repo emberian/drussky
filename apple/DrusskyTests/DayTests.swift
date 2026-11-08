@@ -32,6 +32,42 @@ final class DayTests: XCTestCase {
     func probes(_ page: BookPage, _ book: Book) -> [Int] { page.exercises.indices.filter { book.isProbe(page: page, index: $0) } }
     func reviewCount(_ page: BookPage, _ book: Book) -> Int { reviews(page, book).count }
 
+    /// The one order every page keeps (Book.PageOrder): at most one diary line, and it is last;
+    /// probes come after everything that is not a probe or the diary.
+    func assertOrdered(_ page: BookPage, _ book: Book, file: StaticString = #filePath, line: UInt = #line) {
+        let diaries = page.exercises.indices.filter { page.exercises[$0].kind == .diary }
+        XCTAssertLessThanOrEqual(diaries.count, 1, "\(page.title): one diary line at most", file: file, line: line)
+        if let d = diaries.first { XCTAssertEqual(d, page.exercises.indices.last, "\(page.title): the diary line is last", file: file, line: line) }
+        let probeIdx = probes(page, book)
+        let work = page.exercises.indices.filter { !probeIdx.contains($0) && !diaries.contains($0) }
+        if let lastWork = work.last {
+            XCTAssertTrue(probeIdx.allSatisfy { $0 > lastWork }, "\(page.title): probes come after the work", file: file, line: line)
+        }
+    }
+
+    /// Whoever composes a page — the ordinary flow with the sharp-hour word, the first page of a
+    /// day, the welcome-back page, a tutor-written page handed in with its diary line in the
+    /// middle — the book keeps one order.
+    func testEveryComposedPageKeepsOneOrder() throws {
+        let book = studied(10)  // into unit 3: course pages carry their own prompted diary line
+        book.day.sharpAt = book.now()
+        XCTAssertTrue(book.turnForward())
+        let ordinary = try XCTUnwrap(book.pages.last)
+        XCTAssertTrue(ordinary.exercises.contains { $0.kind == .copy && $0.times == 1 }, "the sharp hour adds one word to copy")
+        XCTAssertEqual(ordinary.exercises.last?.kind, .diary, "and the page still ends with its diary line")
+        book.advanceClock(byDays: 1)
+        XCTAssertTrue(book.turnForward())
+        book.advanceClock(byDays: 12)
+        XCTAssertTrue(book.turnForward())
+        var diary = Exercise(kind: .diary)
+        diary.prompt = "mid-page"
+        var copy = Exercise(kind: .copy)
+        copy.text = "мама"
+        book.insertWrittenPage(title: "written", intro: nil, unitTitle: "t", exercises: [copy, diary, copy], newWords: [])
+        XCTAssertEqual(book.pages[book.currentPage].exercises.map(\.kind), [.copy, .copy, .diary], "a written page's diary line moves to the end")
+        for page in book.pages { assertOrdered(page, book) }
+    }
+
     func testMorningPageOpensANewDay() throws {
         let book = studied(3)
         let sameDay = book.pages.count
@@ -50,11 +86,8 @@ final class DayTests: XCTestCase {
         let course = page.exercises.indices.filter { page.exercises[$0].reviewKey == nil }
         XCTAssertFalse(course.isEmpty)
         XCTAssertTrue(course.allSatisfy { $0 >= n })
-        let diaries = page.exercises.indices.filter { page.exercises[$0].kind == .diary }
-        XCTAssertEqual(diaries.count, 1, "one diary line closes the page, never two")
-        XCTAssertEqual(diaries.last, page.exercises.indices.last, "the diary line is the last thing on the page")
-        let work = course.filter { !diaries.contains($0) }
-        XCTAssertTrue(probes(page, book).allSatisfy { $0 > work.last! && $0 < diaries.last! }, "probes, if any, come after the work and before the diary")
+        XCTAssertEqual(page.exercises.filter { $0.kind == .diary }.count, 1, "the first page of a day closes with a diary line")
+        assertOrdered(page, book)
         XCTAssertTrue(page.intro?.hasPrefix("A new day.") ?? false, page.intro ?? "")
         let keys = page.exercises.compactMap(\.reviewKey)
         XCTAssertEqual(Set(keys).count, keys.count, "no item twice, probes included")

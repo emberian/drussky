@@ -47,6 +47,9 @@ enum Theme {
         .system(size: size, weight: weight, design: .serif)
     }
     static func cursive(_ size: CGFloat) -> Font { .custom("MarckScript-Regular", size: size) }
+    /// The type size of a passage's words: book-sized on an iPad, a reader's size on a phone,
+    /// where 28 pt serif holds three words a line.
+    static func passageSize(compact: Bool) -> CGFloat { compact ? 22 : 28 }
     static func label(_ size: CGFloat = 13) -> Font { .system(size: size, weight: .semibold, design: .rounded) }
 
     /// The font used for writing models on ruled paper.

@@ -311,11 +311,8 @@ final class Book {
             exercises.insert(reviewExercise(for: item.id, modality: item.modality, variant: pages.count + i),
                              at: min(slots[i], exercises.count))
         }
-        // One more new word while the learner is sharp — before the page's closing diary line, when it has one.
-        let diaryAt = exercises.last?.kind == .diary ? exercises.count - 1 : exercises.count
-        exercises.insert(contentsOf: extraNewItem(excluding: taughtHere), at: diaryAt)
         appendPage(sourceID: source.id, unitTitle: unit.title, title: source.title, intro: source.intro,
-                   isReview: false, exercises: exercises)
+                   isReview: false, exercises: exercises, extras: extraNewItem(excluding: taughtHere))  // one more new word while sharp
         return true
     }
 
@@ -350,16 +347,43 @@ final class Book {
         return out
     }
 
+    /// The one order every page in the book keeps, whoever composes it: the work (the page's own
+    /// exercises, with reviews woven in or leading), then what the day adds (the sharp-hour word,
+    /// then the retention probes due now), then — last — the diary line(s): a composed page has one,
+    /// a diary page is nothing but. Shelf offers are the page's footer card, not exercises, so
+    /// they always follow it.
+    struct PageOrder {
+        var work: [Exercise]
+        var extras: [Exercise] = []
+        var closesWithDiary = false
+
+        /// Everything but the diary lines, in order.
+        var body: [Exercise] { work.filter { $0.kind != .diary } + extras }
+        /// The diary lines the page ends with: the work's own, in their order; or a free one when
+        /// the page is to close with one and has none; or none.
+        var diary: [Exercise] {
+            let own = work.filter { $0.kind == .diary }
+            return own.isEmpty && closesWithDiary ? [Exercise(kind: .diary)] : own
+        }
+        /// The page's exercises, with whatever `placed` adds after the body (probes are made
+        /// against the body's indices, so they are asked for here).
+        func exercises(placing placed: ([Exercise]) -> [Exercise]) -> [Exercise] {
+            let b = body
+            return b + placed(b) + diary
+        }
+    }
+
+    /// Appends a composed page. `exercises` is the page's work (reviews already woven in or
+    /// leading), `extras` what the day adds after it (the sharp-hour word); `PageOrder` places
+    /// the retention probes due now and keeps the diary line single and last. `closesWithDiary`
+    /// gives a page without its own diary line one (the first page of a day).
     func appendPage(sourceID: String?, unitTitle: String, title: String, intro: String?,
-                    isReview: Bool, exercises: [Exercise]) {
+                    isReview: Bool, exercises work: [Exercise], extras: [Exercise] = [], closesWithDiary: Bool = false) {
         let number = pages.count + 1
         // A random suffix keeps ink/voice file names unique even if the notebook is ever restarted.
         let id = String(format: "p%04d-", number) + UUID().uuidString.prefix(6).lowercased()
-        // Retention probes due now go after the page's work but before its closing diary line, so
-        // the free line stays the last thing on the page.
-        let diaryTail = exercises.last?.kind == .diary ? Array(exercises.suffix(1)) : []
-        let body = Array(exercises.dropLast(diaryTail.count))
-        let exercises = body + probeExercises(pageID: id, among: body) + diaryTail
+        let order = PageOrder(work: work, extras: extras, closesWithDiary: closesWithDiary)
+        let exercises = order.exercises { body in probeExercises(pageID: id, among: body) }
         let offers = shelfOffers()  // an episode or reading the course has reached (Model/Shelves.swift)
         pages.append(BookPage(id: id, number: number, sourceID: sourceID,
                               unitTitle: unitTitle, title: title, intro: intro, isReview: isReview,
@@ -382,6 +406,7 @@ final class Book {
         let untouched = page?.results.allSatisfy { $0.status == .open && $0.attempts == 0 && $0.recognized == nil } ?? false
         let at = beforeCurrentIfUntouched && untouched ? currentPage : min(currentPage + 1, pages.count)
         let id = "w" + UUID().uuidString.prefix(8).lowercased()
+        let exercises = PageOrder(work: exercises).exercises { _ in [] }  // the same order as any page: one diary line, last
         pages.insert(BookPage(id: id, number: 0, sourceID: sourceID, unitTitle: unitTitle, title: title, intro: intro,
                               isReview: false, exercises: exercises, results: exercises.map { _ in ExerciseResult() },
                               created: now(), finished: nil), at: at)

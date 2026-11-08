@@ -249,9 +249,10 @@ struct Structure: Sendable {
         passage.text = text.text
         let questions = exercises(for: text.id, limit: 2)
         // A text the layer has not reached yet reads plainly; the toggle is not offered for it.
-        let intro = sentences(of: text.id).isEmpty ? "Read it as written. Tap any word you want to check."
-            : questions.isEmpty ? "Read it as written. Tap any word you want to check; «Структу́ра» shows the skeleton of each sentence."
-            : "Read it as written; «Структу́ра» shows the skeleton of each sentence. Then say who is meant: tap the word a pronoun points at."
+        // One line; the exercises carry their own instructions.
+        let intro = sentences(of: text.id).isEmpty ? "Read it as written."
+            : questions.isEmpty ? "Read it as written; «Структу́ра» shows the skeleton of each sentence."
+            : "Read it as written; «Структу́ра» shows the skeleton of each sentence, then say who is meant."
         return (text.title, intro, [passage] + questions)
     }
 }

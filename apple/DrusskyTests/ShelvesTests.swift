@@ -63,7 +63,21 @@ final class ShelvesTests: XCTestCase {
         XCTAssertEqual(page.unitTitle, "Ку́хня · диало́г 1")
         XCTAssertEqual(page.exercises.map(\.kind), [.passage, .readMeaning, .readMeaning, .readMeaning, .diary])
         XCTAssertEqual(page.exercises[0].notice, ep.notice)
-        XCTAssertTrue(page.intro.hasPrefix("Cheese and Tima. Read it"), page.intro)
+        XCTAssertTrue(page.intro.hasPrefix("Cheese and Tima. Tap any word"), "the first dialogue carries the how-to once: \(page.intro)")
+        // Every later item's intro is one line: the English title and nothing else.
+        for serial in Shelves.serials {
+            for later in serial.episodes.dropFirst() {
+                XCTAssertEqual(Shelves.page(for: later, in: serial).intro, Shelves.lead(later.title_en).trimmingCharacters(in: .whitespaces), later.id)
+            }
+        }
+        for shelf in Shelves.library.shelves ?? [] {
+            for text in Shelves.library.texts(onShelf: shelf.id) where (text.rung ?? 0) > 1 {
+                XCTAssertEqual(Shelves.page(for: text, on: shelf).intro, Shelves.lead(text.title_en).trimmingCharacters(in: .whitespaces), text.id)
+            }
+        }
+        for (i, set) in Shelves.listening.sets.enumerated() where i > 0 {
+            XCTAssertEqual(Listening.page(for: set, number: i + 1).intro, Shelves.lead(set.title_en).trimmingCharacters(in: .whitespaces), set.id)
+        }
         XCTAssertEqual(Shelves.lead("The Milk Boiled Over!"), "The Milk Boiled Over! ")
         XCTAssertEqual(Shelves.lead(nil), "")
         let data = try JSONEncoder().encode(page.exercises[0])

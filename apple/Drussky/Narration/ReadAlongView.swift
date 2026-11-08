@@ -7,6 +7,7 @@ import SwiftUI
 struct ReadAlongView: View {
     @Environment(Book.self) private var book
     @Environment(Voice.self) private var voice
+    @Environment(\.horizontalSizeClass) private var sizeClass
     let exercise: Exercise
     let owner: String
     /// The word the learner tapped (gloss shown by the passage view).
@@ -114,7 +115,7 @@ struct ReadAlongView: View {
                           in: structure!, roles: Structure.shared.roles) : .none
         Button { tap(word, timing: timing, token: tok) } label: {
             Text(Theme.stressed(token, show: book.settings.showStress))
-                .russianFont(28)
+                .russianFont(Theme.passageSize(compact: sizeClass == .compact))
                 .foregroundStyle(isNow ? Theme.accent : Theme.text)
                 .opacity(hidden ? 0 : 1)
                 .padding(.vertical, 2).padding(.horizontal, 3)

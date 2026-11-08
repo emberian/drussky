@@ -267,7 +267,7 @@ enum GrammarPages {
         }
         // Table titles carry their own middle dots («Verbs II · -ишь»), so the list is joined with commas.
         let titles = tables.compactMap { p.table($0)?.title }.joined(separator: ", ")
-        book.insertWrittenPage(title: "Grammar page", intro: "The tables behind the words: \(titles). Each cell is a pattern; fill the weak ones and the system fills in on the inside cover.",
+        book.insertWrittenPage(title: "Grammar page", intro: "The tables behind the words: \(titles).",
                                unitTitle: "Grammar", exercises: exercises, newWords: [])
         return nil
     }

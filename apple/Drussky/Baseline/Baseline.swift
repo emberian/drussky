@@ -64,7 +64,7 @@ extension Book {
             ex.baseline = task
             return ex
         }
-        insertWrittenPage(title: "What I could do this week", intro: "Try each task once before looking at the notes. Your first words, ink and voice stay here. Use the margin to note time spent reading, listening and talking this week.",
+        insertWrittenPage(title: "What I could do this week", intro: "Try each task once before looking at the notes; your first words, ink and voice stay here.",
                           unitTitle: "Weekly sample", exercises: exercises, newWords: [], sourceID: "baseline:\(reading.id)")
         return true
     }
@@ -87,12 +87,12 @@ enum BaselineBank {
     static let readings: [BaselineTask] = [
         BaselineTask(id: "station-book-a", kind: .reading,
             prompt: "Read this new scene. Answer in English or Russian, using the passage.",
-            questions: ["Gist: what problem does Anna solve?", "Detail: where is the book?", "Detail: when will Anna read?", "Inference: why does Anna go to the kitchen?"],
+            questions: ["What problem does Anna solve?", "Where is the book?", "When will Anna read?", "Why does Anna go to the kitchen?"],
             reference: ["She finds the book she wants to read.", "On the kitchen table.", "In the evening, after work.", "Pavel tells her the book is there; she goes to get it."],
             passage: "А́нна живёт на ста́нции. У́тром она́ хо́чет чита́ть, но кни́ги нет в ко́мнате. Она́ идёт к Па́влу. «Где моя́ кни́га?» — спра́шивает она́. Па́вел говори́т: «Кни́га на столе́, на ку́хне. Я чита́л её вчера́». А́нна идёт на ку́хню. Там она́ ви́дит кни́гу и письмо́. Письмо́ от бра́та. Он пи́шет, что за́втра бу́дет на ста́нции. А́нна берёт кни́гу, но сейча́с уже́ пора́ рабо́тать. Она́ бу́дет чита́ть ве́чером, по́сле рабо́ты."),
         BaselineTask(id: "station-letter-b", kind: .reading,
             prompt: "Read this new scene. Answer in English or Russian, using the passage.",
-            questions: ["Gist: what problem does Pavel solve?", "Detail: where is the letter?", "Detail: when will Pavel write?", "Inference: why does Pavel go to the kitchen?"],
+            questions: ["What problem does Pavel solve?", "Where is the letter?", "When will Pavel write?", "Why does Pavel go to the kitchen?"],
             reference: ["He finds the letter he wants to read.", "On the kitchen table, under a book.", "In the morning, before work.", "Anna tells him the letter is there; he goes to get it."],
             passage: "Па́вел живёт на ста́нции. Ве́чером он хо́чет чита́ть письмо́, но письма́ нет в ко́мнате. Он идёт к А́нне. «Где моё письмо́?» — спра́шивает он. А́нна говори́т: «Письмо́ на столе́, на ку́хне, под кни́гой». Па́вел идёт на ку́хню. Там он ви́дит кни́гу и письмо́. Письмо́ от сестры́. Она́ пи́шет, что за́втра бу́дет на ста́нции. Па́вел чита́ет письмо́. Он хо́чет писа́ть сестре́, но сейча́с уже́ пора́ спать. Он бу́дет писа́ть у́тром, до рабо́ты.")
     ]

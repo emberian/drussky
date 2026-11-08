@@ -44,11 +44,17 @@ struct ListeningExercise: View {
 
     // MARK: Prompt and playback
 
+    @ViewBuilder private func kindLine(_ item: ListeningItem) -> some View {
+        Text(kindLabel(item.kind)).font(Theme.label(12)).tracking(1.2).foregroundStyle(Theme.accent).fixedSize()
+        if item.voice_hint == "unfamiliar" { Text("· a voice you may not know").font(Theme.label(12)).foregroundStyle(Theme.muted).fixedSize() }
+    }
+
     private func prompt(_ item: ListeningItem) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            HStack(spacing: 8) {
-                Text(kindLabel(item.kind)).font(Theme.label(12)).tracking(1.2).foregroundStyle(Theme.accent)
-                if item.voice_hint == "unfamiliar" { Text("· a voice you may not know").font(Theme.label(12)).foregroundStyle(Theme.muted) }
+            // The kind and the voice hint on one line where they fit; the hint under the kind on a phone.
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 8) { kindLine(item) }
+                VStack(alignment: .leading, spacing: 2) { kindLine(item) }
             }
             if item.kind != .message, let q = item.question {
                 Text(q).scaledFont(18, weight: .medium).foregroundStyle(Theme.text).fixedSize(horizontal: false, vertical: true)

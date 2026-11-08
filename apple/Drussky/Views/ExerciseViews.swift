@@ -905,6 +905,7 @@ extension Array {
 struct PassageExercise: View {
     @Environment(Book.self) private var book
     @Environment(Voice.self) private var voice
+    @Environment(\.horizontalSizeClass) private var sizeClass
     let slot: ExerciseSlot
     @State private var selected: String?
     @State private var showTranslation = false
@@ -957,7 +958,7 @@ struct PassageExercise: View {
                         ? layer.mark(for: tok, previous: passage?.token(line: li, index: ti - 1), next: passage?.token(line: li, index: ti + 1),
                                      in: passage!, roles: Structure.shared.roles) : .none
                     let shown = Text(Theme.stressed(token, show: book.settings.showStress))
-                        .russianFont(28)
+                        .russianFont(Theme.passageSize(compact: sizeClass == .compact))
                         .foregroundStyle(Theme.text)
                         .padding(.vertical, 2).padding(.horizontal, 3)
                     if word.isEmpty {

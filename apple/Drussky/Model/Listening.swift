@@ -185,9 +185,10 @@ extension Listening {
             e.glosses = item.glosses.isEmpty ? nil : item.glosses
             return e
         }
-        let about = Shelves.lead(set.title_en)
+        // One line: the English title. The how-to is said once, on the first set, never again.
+        let howTo = number == 1 ? "Each card is something said once: nothing plays until you tap Play, and the words appear after you answer." : ""
         return Shelves.Page(title: set.title,
-                            intro: "\(about)Each card is something said once. Tap Play when you are ready, answer, and only then the words appear. Replay and a slower pace are always there.",
+                            intro: Shelves.intro(set.title_en, howTo),
                             unitTitle: place(number),
                             exercises: exercises,
                             sourceID: sourceID(set))

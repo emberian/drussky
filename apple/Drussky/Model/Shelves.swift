@@ -67,6 +67,12 @@ enum Shelves {
         return t.last.map { ".!?…".contains($0) } == true ? "\(t) " : "\(t). "
     }
 
+    /// A shelf page's intro: the English title as one line, plus the shelf's how-to only where
+    /// the caller says it is first said (`howTo` empty elsewhere).
+    static func intro(_ titleEn: String?, _ howTo: String) -> String {
+        (lead(titleEn) + howTo.trimmingCharacters(in: .whitespaces)).trimmingCharacters(in: .whitespaces)
+    }
+
     struct Page {
         var title: String
         var intro: String
@@ -84,10 +90,11 @@ enum Shelves {
         passage.notice = (ep.notice?.isEmpty ?? true) ? nil : ep.notice
         var diary = Exercise(kind: .diary)
         diary.prompt = ep.prompt
-        let about = lead(ep.title_en)
-        let hear = passage.notice == nil ? "" : " Once you have read it, what to hear in it is listed under the text."
+        // One line: the English title. The how-to is said once, on the shelf's first item, never again.
+        let hear = passage.notice == nil ? "" : "; what to hear in it waits under the text until you have read it"
+        let howTo = ep.number == 1 ? " Tap any word to check it\(hear). Three questions follow, then a line of your own." : ""
         return Page(title: ep.title,
-                    intro: "\(about)Read it; tap any word you want to check.\(hear) Then three questions about what it said, and a line of your own about what comes next.",
+                    intro: intro(ep.title_en, howTo),
                     unitTitle: serial.place(of: ep),
                     exercises: [passage] + ep.questions.map { var q = $0; q.kind = .readMeaning; return q } + [diary],
                     sourceID: sourceID(episode: ep))
@@ -110,10 +117,10 @@ enum Shelves {
             e.hint = q.explanation
             return e
         }
-        let about = lead(text.title_en)
-        let frameNote = frames.isEmpty ? "" : " How its phrases are read is listed under the text."
+        let frameNote = frames.isEmpty ? "" : "; how its phrases are read is listed under the text"
+        let howTo = (text.rung ?? 0) <= 1 ? " Tap any word to check it\(frameNote). Three questions follow." : ""
         return Page(title: text.title,
-                    intro: "\(about)Read it; tap any word you want to check.\(frameNote) Then three questions about what it says.",
+                    intro: intro(text.title_en, howTo),
                     unitTitle: "\(shelf.title) · ступе́нь \(text.rung ?? 0)",
                     exercises: [passage] + questions,
                     sourceID: sourceID(reading: text))
