@@ -22,6 +22,9 @@ by ear, or aloud. Finished exercises get a red tick; a finished page gets a red 
 | passage | read a short text (story, proof, dialogue, poem); tap any word for its meaning and sound; a word you don't know yet on a root you do is shown taken apart first (root зна- (know) + -ние) |
 | build a word | see the English, tap morpheme tiles (пере- · пис · -а́ть) into order |
 | guess from the root | a sentence with one new word on a root you know: guess its meaning, then see how it is built |
+| fill the table | a declension or conjugation table with some cells given; write the missing forms in small ruled cells (or tap tiles into them); a miss shows the row with the right cell marked |
+| the form | «кни́га» → genitive singular, or a sentence with a gap that forces the case: write the form |
+| sort by case | phrases sorted into the job their case is doing (у меня́ есть · в до́ме · чита́ю кни́гу) |
 
 Writing is read on-device by Apple's handwriting recognizer. It confirms a right answer by
 itself after a short pause; **Check** asks it explicitly. When it misreads you, *I wrote it
@@ -87,8 +90,10 @@ and the next launch imports it and deletes the file.
 
 The **＋** in the top bar asks the tutor for a new page, placed right after the current one:
 *Word families* (roots you already have two words of, with their other members to guess and
-build; `Resources/morphology.json`, see COURSE_SCHEMA.md) and *Cognates* (the Greek and Latin of
-mathematics and philosophy, read as Russian) are built on the device without the tutor. The tutor
+build; `Resources/morphology.json`, see COURSE_SCHEMA.md), *Cognates* (the Greek and Latin of
+mathematics and philosophy, read as Russian) and *Grammar page* (the weakest cells of the
+declension and conjugation tables whose words you know, cases interleaved; `Resources/paradigms.json`)
+are built on the device without the tutor. The tutor
 writes *A page from my mistakes* (built from what you've missed and find hardest) or *Read my own
 text…* (paste or Scan Text any Russian; it becomes a glossed passage with questions, and its
 new words join your reviews). Pages arrive in the course's own format and every exercise is
@@ -123,7 +128,11 @@ the distance arithmetic is LearningCore's `Target`.
 ## Inside the cover
 
 The book icon (top left) opens your alphabet — each letter in **your own handwriting** once
-you've met it — and every page so far with its mark. **My Russian** collects every diary line
+you've met it — and every page so far with its mark. **Grammar** draws the system behind the
+words: the three noun declensions, adjectives, pronouns, the two conjugations and the irregular
+verbs, past and imperative, and what each case does — tables that start empty and fill in as you
+meet and produce each cell (a cell glows by the recall of its pattern, a dot marks one you have
+written yourself); tap a cell for its examples with audio and history, a title for the whole table. **My Russian** collects every diary line
 you have ever written, newest first, with its red pen, and what the pen keeps finding this
 week; it exports as Markdown. Settings: finger drawing, cursive
 models, stress marks, notebook export (pages, ink, recordings as a zip), credits.
@@ -188,7 +197,9 @@ needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian);
 turned: a morning or welcome-back page), `-qa-probes` (a synthetic answered probe set for the cover
 chart), `-qa-tired` (the current page marked shortened);
 `-qa-settings`, `-qa-goal <library id>` (make that text the learner's book), `-qa-goal-pull` (an
-offline page toward it), `-qa-goal-first` (open its first page now).
+offline page toward it), `-qa-goal-first` (open its first page now); `-qa-grammar` (a grammar
+page from the tables), `-qa-grammar-table decl1` / `-qa-grammar-cell decl1/gen-sg` (with
+`-qa-contents`: open that table or cell of the Grammar section).
 
 ## Content
 

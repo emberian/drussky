@@ -49,6 +49,7 @@ struct BookView: View {
             if QA.has("-qa-diary") { QA.diaryPages(book) }
             if QA.has("-qa-families") { show("Word families", MorphologyPages.addFamilies(book)) }
             if QA.has("-qa-cognates") { show("Cognates", MorphologyPages.addCognates(book)) }
+            if QA.has("-qa-grammar") { show("Grammar page", GrammarPages.addGrammar(book)) }
         }
         .onChange(of: book.currentPage) { _, _ in
             // The goal (Goal/): its first page opens when readable; a brand-new course page that
@@ -135,6 +136,7 @@ struct BookView: View {
                 Button { book.insertDiaryPage() } label: { Label("Write in my diary", systemImage: "pencil.line") }
                 Button { show("Word families", MorphologyPages.addFamilies(book)) } label: { Label("Word families", systemImage: "tree") }
                 Button { show("Cognates", MorphologyPages.addCognates(book)) } label: { Label("Cognates", systemImage: "character.book.closed") }
+                Button { show("Grammar page", GrammarPages.addGrammar(book)) } label: { Label("Grammar page", systemImage: "tablecells") }
             } label: {
                 Image(systemName: "plus.square.on.square").font(.system(size: 18, weight: .medium)).frame(width: 44, height: 44)
             }
