@@ -1,0 +1,26 @@
+{
+ "model": "mlx-community/OmniVoice-bf16",
+ "runtime": "mlx-audio 0.6.4 / mlx 0.32.4",
+ "load_seconds": 4.95,
+ "id": "S05",
+ "mode": "reference cloning",
+ "reference": "research/artifacts/voice-2026/narrator/narrator-voxcpm2-1.wav",
+ "ref_text": "здравствуйте сегодня мы будем читать и слушать слушайте внимательно и повторяйте за мной сначала медленно потом быстрее",
+ "notation": "acute",
+ "input": "молчи́т.",
+ "source_text": "молч+ит.",
+ "expected": "молчит",
+ "generation_seconds": 3.657,
+ "audio_seconds": 1.4,
+ "sample_rate": 24000,
+ "peak_memory_gb": 2.981,
+ "settings": {
+  "language": "ru",
+  "num_steps": 32,
+  "guidance_scale": 2.0,
+  "ref_audio": "/Users/ember/dev/rufren/research/artifacts/voice-2026/narrator/narrator-voxcpm2-1.wav",
+  "ref_text": "здравствуйте сегодня мы будем читать и слушать слушайте внимательно и повторяйте за мной сначала медленно потом быстрее"
+ },
+ "seed": 42,
+ "peak_abs": 0.6445
+}

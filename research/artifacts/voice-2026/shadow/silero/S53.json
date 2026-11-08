@@ -1,0 +1,13 @@
+{
+ "model": "Silero v5_6_ru",
+ "voice": "xenia",
+ "id": "S53",
+ "input": "Дв+адцать, тр+идцать, с+орок, пятьдес+ят, шестьдес+ят, с+емьдесят, в+осемьдесят, девян+осто, ст+о.",
+ "source_text": "Дв+адцать, тр+идцать, с+орок, пятьдес+ят, шестьдес+ят, с+емьдесят, в+осемьдесят, девян+осто, ст+о.",
+ "expected": "двадцать тридцать сорок пятьдесят шестьдесят семьдесят восемьдесят девяносто сто",
+ "notation": "plus",
+ "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+ "generation_seconds": 1.662,
+ "audio_seconds": 5.85,
+ "sample_rate": 24000
+}

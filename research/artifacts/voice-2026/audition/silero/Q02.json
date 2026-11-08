@@ -1,0 +1,13 @@
+{
+ "model": "Silero v5_6_ru",
+ "voice": "xenia",
+ "id": "Q02",
+ "input": "+Это ч+ай?",
+ "source_text": "+Это ч+ай?",
+ "expected": "это чай",
+ "notation": "plus",
+ "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+ "generation_seconds": 0.31,
+ "audio_seconds": 0.925,
+ "sample_rate": 24000
+}

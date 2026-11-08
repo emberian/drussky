@@ -1,0 +1,58 @@
+{
+ "P01": {
+  "heard": "Мил.",
+  "heard_norm": "мил",
+  "expected": "мыл мил",
+  "speech_seconds": 0.35,
+  "word_errors": 1,
+  "words": 2
+ },
+ "P02": {
+  "heard": "Мать.",
+  "heard_norm": "мать",
+  "expected": "мат мать",
+  "speech_seconds": 0.39,
+  "word_errors": 1,
+  "words": 2
+ },
+ "S01": {
+  "heard": "Г.",
+  "heard_norm": "г",
+  "expected": "га",
+  "speech_seconds": 0.28,
+  "word_errors": 1,
+  "words": 1
+ },
+ "W03": {
+  "heard": "мука.",
+  "heard_norm": "мука",
+  "expected": "мука",
+  "speech_seconds": 0.36,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W04": {
+  "heard": "мука.",
+  "heard_norm": "мука",
+  "expected": "мука",
+  "speech_seconds": 0.35,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W05": {
+  "heard": "Атлас.",
+  "heard_norm": "атлас",
+  "expected": "атлас",
+  "speech_seconds": 0.54,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W11": {
+  "heard": "Села.",
+  "heard_norm": "села",
+  "expected": "село",
+  "speech_seconds": 0.47,
+  "word_errors": 1,
+  "words": 1
+ }
+}

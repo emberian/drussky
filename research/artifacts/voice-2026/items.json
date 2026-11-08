@@ -1,0 +1,32 @@
+{
+ "notation": "Silero '+' before the stressed vowel (the corpus notation; see apple/scripts/audio_store.py stress helpers)",
+ "narrator_design": {
+  "instruct": "A warm, calm adult female voice, native Russian speaker, clear and unhurried articulation, neutral audiobook narrator, close studio microphone, no background noise.",
+  "text": "Здр+авствуйте. Сег+одня м+ы б+удем чит+ать и сл+ушать. Сл+ушайте вним+ательно и повтор+яйте за мн+ой: сн+ачала м+едленно, пот+ом быстр+ее."
+ },
+ "core": [
+  {"id": "V01", "group": "lone vowel", "text": "+У."},
+  {"id": "V02", "group": "lone vowel", "text": "+Е."},
+  {"id": "V03", "group": "lone vowel", "text": "+Ы."},
+  {"id": "S01", "group": "syllable", "text": "Г+а."},
+  {"id": "S02", "group": "syllable", "text": "Л+а."},
+  {"id": "P01", "group": "minimal pair", "text": "М+ыл. М+ил."},
+  {"id": "P02", "group": "minimal pair", "text": "М+ат. М+ать."},
+  {"id": "H01", "group": "stress pair", "text": "+Это з+амок."},
+  {"id": "H02", "group": "stress pair", "text": "+Это зам+ок."},
+  {"id": "Q01", "group": "statement", "text": "+Это ч+ай."},
+  {"id": "Q02", "group": "question", "text": "+Это ч+ай?"},
+  {"id": "L01", "group": "25-word sentence", "text": "Вчер+а в+ечером м+ы д+олго сид+ели на к+ухне, п+или ч+ай с лим+оном и говор+или о т+ом, как т+ихо и б+ыстро прох+одит л+ето в +этом м+аленьком г+ороде."},
+  {"id": "N01", "group": "numbers", "text": "У мен+я сег+одня дв+а вопр+оса, п+ять ид+ей и дв+адцать одн+а своб+одная мин+ута."}
+ ],
+ "stress_words": [
+  {"id": "W01", "text": "з+амок.", "stressed_syllable": 1}, {"id": "W02", "text": "зам+ок.", "stressed_syllable": 2},
+  {"id": "W03", "text": "м+ука.", "stressed_syllable": 1}, {"id": "W04", "text": "мук+а.", "stressed_syllable": 2},
+  {"id": "W05", "text": "+атлас.", "stressed_syllable": 1}, {"id": "W06", "text": "атл+ас.", "stressed_syllable": 2},
+  {"id": "W07", "text": "+орган.", "stressed_syllable": 1}, {"id": "W08", "text": "орг+ан.", "stressed_syllable": 2},
+  {"id": "W09", "text": "п+или.", "stressed_syllable": 1}, {"id": "W10", "text": "пил+и.", "stressed_syllable": 2},
+  {"id": "W11", "text": "с+ело.", "stressed_syllable": 1}, {"id": "W12", "text": "сел+о.", "stressed_syllable": 2},
+  {"id": "W13", "text": "п+олки.", "stressed_syllable": 1}, {"id": "W14", "text": "полк+и.", "stressed_syllable": 2},
+  {"id": "W15", "text": "хл+опок.", "stressed_syllable": 1}, {"id": "W16", "text": "хлоп+ок.", "stressed_syllable": 2}
+ ]
+}

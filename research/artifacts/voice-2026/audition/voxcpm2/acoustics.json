@@ -1,0 +1,666 @@
+{
+ "H01": {
+  "duration_s": 1.12,
+  "trimmed_s": 0.811,
+  "peak_dbfs": -0.4,
+  "rms_dbfs": -12.8,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.35,
+    "end_s": 0.595,
+    "duration_ms": 245,
+    "peak_band_db": 37.2,
+    "median_f0": 160.0
+   },
+   "v2": {
+    "start_s": 0.71,
+    "end_s": 0.755,
+    "duration_ms": 45,
+    "peak_band_db": 20.2,
+    "median_f0": null
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": true
+  }
+ },
+ "H02": {
+  "duration_s": 1.12,
+  "trimmed_s": 0.811,
+  "peak_dbfs": -0.4,
+  "rms_dbfs": -12.7,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.345,
+    "end_s": 0.61,
+    "duration_ms": 265,
+    "peak_band_db": 32.8,
+    "median_f0": 159.1
+   },
+   "v2": {
+    "start_s": 0.71,
+    "end_s": 0.755,
+    "duration_ms": 45,
+    "peak_band_db": 21.6,
+    "median_f0": null
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": false
+  }
+ },
+ "L01": {
+  "duration_s": 9.12,
+  "trimmed_s": 9.078,
+  "peak_dbfs": -0.0,
+  "rms_dbfs": -12.3
+ },
+ "N01": {
+  "duration_s": 4.8,
+  "trimmed_s": 4.715,
+  "peak_dbfs": -0.1,
+  "rms_dbfs": -12.5
+ },
+ "P01": {
+  "duration_s": 1.44,
+  "trimmed_s": 1.259,
+  "peak_dbfs": -0.3,
+  "rms_dbfs": -12.4
+ },
+ "P02": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.448,
+  "peak_dbfs": -0.9,
+  "rms_dbfs": -13.0
+ },
+ "Q01": {
+  "duration_s": 1.12,
+  "trimmed_s": 0.811,
+  "peak_dbfs": -0.6,
+  "rms_dbfs": -14.3,
+  "pitch": {
+   "f0_min": 153.7,
+   "f0_max": 198.1,
+   "f0_range_semitones": 4.4,
+   "peak_position": 0.06,
+   "final_third_mean": 159.6,
+   "contour": [
+    null,
+    null,
+    null,
+    194.7,
+    192.5,
+    190.3,
+    180.6,
+    185.9,
+    176.5,
+    null,
+    null,
+    181.7,
+    173.5,
+    163.7,
+    165.6,
+    166.6,
+    168.5,
+    null,
+    null,
+    null,
+    null,
+    null,
+    181.7,
+    180.6,
+    171.5,
+    164.7,
+    160.9,
+    160.0,
+    160.0,
+    160.0,
+    159.1,
+    159.1,
+    160.0,
+    160.0,
+    160.0,
+    160.9,
+    157.3,
+    155.4,
+    160.9,
+    null,
+    null
+   ]
+  }
+ },
+ "Q02": {
+  "duration_s": 1.12,
+  "trimmed_s": 0.789,
+  "peak_dbfs": -0.9,
+  "rms_dbfs": -13.8,
+  "pitch": {
+   "f0_min": 160.9,
+   "f0_max": 201.6,
+   "f0_range_semitones": 3.9,
+   "peak_position": 0.06,
+   "final_third_mean": 185.0,
+   "contour": [
+    null,
+    null,
+    null,
+    195.8,
+    192.5,
+    190.3,
+    181.7,
+    185.9,
+    176.5,
+    null,
+    null,
+    181.7,
+    173.5,
+    163.7,
+    165.6,
+    165.6,
+    168.5,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    178.6,
+    171.5,
+    163.7,
+    162.8,
+    167.6,
+    173.5,
+    181.7,
+    189.2,
+    197.0,
+    198.1,
+    193.6,
+    189.2,
+    175.5,
+    null,
+    null,
+    null,
+    null
+   ]
+  }
+ },
+ "S01": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.853,
+  "peak_dbfs": -5.1,
+  "rms_dbfs": -19.0
+ },
+ "S02": {
+  "duration_s": 0.8,
+  "trimmed_s": 0.427,
+  "peak_dbfs": -1.5,
+  "rms_dbfs": -14.1
+ },
+ "V01": {
+  "duration_s": 0.8,
+  "trimmed_s": 0.469,
+  "peak_dbfs": -3.5,
+  "rms_dbfs": -16.2
+ },
+ "V02": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.576,
+  "peak_dbfs": -1.9,
+  "rms_dbfs": -12.9
+ },
+ "V03": {
+  "duration_s": 0.8,
+  "trimmed_s": 0.597,
+  "peak_dbfs": -1.9,
+  "rms_dbfs": -17.1
+ },
+ "W01": {
+  "duration_s": 0.8,
+  "trimmed_s": 0.512,
+  "peak_dbfs": -0.9,
+  "rms_dbfs": -14.8,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.11,
+    "end_s": 0.315,
+    "duration_ms": 205,
+    "peak_band_db": 36.2,
+    "median_f0": 163.7
+   },
+   "v2": {
+    "start_s": 0.415,
+    "end_s": 0.485,
+    "duration_ms": 70,
+    "peak_band_db": 14.2,
+    "median_f0": null
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": true
+  }
+ },
+ "W02": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.512,
+  "peak_dbfs": -0.4,
+  "rms_dbfs": -14.3,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.11,
+    "end_s": 0.315,
+    "duration_ms": 205,
+    "peak_band_db": 37.1,
+    "median_f0": 163.7
+   },
+   "v2": {
+    "start_s": 0.435,
+    "end_s": 0.49,
+    "duration_ms": 55,
+    "peak_band_db": 13.3,
+    "median_f0": null
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": false
+  }
+ },
+ "W03": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.491,
+  "peak_dbfs": -0.4,
+  "rms_dbfs": -13.0,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.04,
+    "end_s": 0.155,
+    "duration_ms": 115,
+    "peak_band_db": 36.8,
+    "median_f0": 175.5
+   },
+   "v2": {
+    "start_s": 0.29,
+    "end_s": 0.4,
+    "duration_ms": 110,
+    "peak_band_db": 34.0,
+    "median_f0": 154.5
+   },
+   "cue": "energy (durations within 15 ms)",
+   "heard_stress": 1,
+   "correct": true
+  }
+ },
+ "W04": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.533,
+  "peak_dbfs": -2.4,
+  "rms_dbfs": -15.2,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.04,
+    "end_s": 0.145,
+    "duration_ms": 105,
+    "peak_band_db": 33.6,
+    "median_f0": 175.5
+   },
+   "v2": {
+    "start_s": 0.29,
+    "end_s": 0.445,
+    "duration_ms": 155,
+    "peak_band_db": 33.3,
+    "median_f0": 157.3
+   },
+   "cue": "duration",
+   "heard_stress": 2,
+   "correct": true
+  }
+ },
+ "W05": {
+  "duration_s": 1.12,
+  "trimmed_s": 0.939,
+  "peak_dbfs": -2.5,
+  "rms_dbfs": -17.4,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.195,
+    "end_s": 0.26,
+    "duration_ms": 65,
+    "peak_band_db": 35.8,
+    "median_f0": 192.5
+   },
+   "v2": {
+    "start_s": 0.39,
+    "end_s": 0.565,
+    "duration_ms": 175,
+    "peak_band_db": 37.8,
+    "median_f0": 164.7
+   },
+   "cue": "duration",
+   "heard_stress": 2,
+   "correct": false
+  }
+ },
+ "W06": {
+  "duration_s": 1.12,
+  "trimmed_s": 0.853,
+  "peak_dbfs": -0.8,
+  "rms_dbfs": -15.6,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.11,
+    "end_s": 0.17,
+    "duration_ms": 60,
+    "peak_band_db": 38.3,
+    "median_f0": 193.6
+   },
+   "v2": {
+    "start_s": 0.305,
+    "end_s": 0.49,
+    "duration_ms": 185,
+    "peak_band_db": 38.8,
+    "median_f0": 164.7
+   },
+   "cue": "duration",
+   "heard_stress": 2,
+   "correct": true
+  }
+ },
+ "W07": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.64,
+  "peak_dbfs": -0.3,
+  "rms_dbfs": -14.0,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.045,
+    "end_s": 0.125,
+    "duration_ms": 80,
+    "peak_band_db": 42.2,
+    "median_f0": 184.9
+   },
+   "v2": {
+    "start_s": 0.255,
+    "end_s": 0.39,
+    "duration_ms": 135,
+    "peak_band_db": 34.3,
+    "median_f0": 150.2
+   },
+   "cue": "duration",
+   "heard_stress": 2,
+   "correct": false
+  }
+ },
+ "W08": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.555,
+  "peak_dbfs": -0.0,
+  "rms_dbfs": -13.2,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.045,
+    "end_s": 0.125,
+    "duration_ms": 80,
+    "peak_band_db": 42.5,
+    "median_f0": 185.4
+   },
+   "v2": {
+    "start_s": 0.26,
+    "end_s": 0.395,
+    "duration_ms": 135,
+    "peak_band_db": 34.0,
+    "median_f0": 148.4
+   },
+   "cue": "duration",
+   "heard_stress": 2,
+   "correct": true
+  }
+ },
+ "W09": {
+  "duration_s": 0.8,
+  "trimmed_s": 0.619,
+  "peak_dbfs": -0.7,
+  "rms_dbfs": -15.9,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.15,
+    "end_s": 0.22,
+    "duration_ms": 70,
+    "peak_band_db": 40.5,
+    "median_f0": 184.9
+   },
+   "v2": {
+    "start_s": 0.27,
+    "end_s": 0.39,
+    "duration_ms": 120,
+    "peak_band_db": 31.5,
+    "median_f0": 154.5
+   },
+   "cue": "duration",
+   "heard_stress": 2,
+   "correct": false
+  }
+ },
+ "W10": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.533,
+  "peak_dbfs": -0.2,
+  "rms_dbfs": -10.6,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.09,
+    "end_s": 0.245,
+    "duration_ms": 155,
+    "peak_band_db": 42.7,
+    "median_f0": 192.5
+   },
+   "v2": {
+    "start_s": 0.305,
+    "end_s": 0.45,
+    "duration_ms": 145,
+    "peak_band_db": 35.7,
+    "median_f0": 156.3
+   },
+   "cue": "energy (durations within 15 ms)",
+   "heard_stress": 1,
+   "correct": false
+  }
+ },
+ "W11": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.789,
+  "peak_dbfs": -2.3,
+  "rms_dbfs": -17.6,
+  "stress": {
+   "stress_measurable": false
+  }
+ },
+ "W12": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.576,
+  "peak_dbfs": -0.3,
+  "rms_dbfs": -13.9,
+  "stress": {
+   "stress_measurable": false
+  }
+ },
+ "W13": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.768,
+  "peak_dbfs": -2.0,
+  "rms_dbfs": -18.2,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.15,
+    "end_s": 0.265,
+    "duration_ms": 115,
+    "peak_band_db": 39.8,
+    "median_f0": 160.0
+   },
+   "v2": {
+    "start_s": 0.48,
+    "end_s": 0.55,
+    "duration_ms": 70,
+    "peak_band_db": 27.2,
+    "median_f0": 172.0
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": true
+  }
+ },
+ "W14": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.64,
+  "peak_dbfs": -0.3,
+  "rms_dbfs": -13.5,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.09,
+    "end_s": 0.23,
+    "duration_ms": 140,
+    "peak_band_db": 42.6,
+    "median_f0": 192.5
+   },
+   "v2": {
+    "start_s": 0.455,
+    "end_s": 0.545,
+    "duration_ms": 90,
+    "peak_band_db": 33.6,
+    "median_f0": 167.6
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": false
+  }
+ },
+ "W15": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.619,
+  "peak_dbfs": -0.3,
+  "rms_dbfs": -13.4,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.13,
+    "end_s": 0.255,
+    "duration_ms": 125,
+    "peak_band_db": 43.0,
+    "median_f0": 200.4
+   },
+   "v2": {
+    "start_s": 0.38,
+    "end_s": 0.425,
+    "duration_ms": 45,
+    "peak_band_db": 35.4,
+    "median_f0": 172.5
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": true
+  }
+ },
+ "W16": {
+  "duration_s": 0.96,
+  "trimmed_s": 0.683,
+  "peak_dbfs": -0.4,
+  "rms_dbfs": -15.3,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.13,
+    "end_s": 0.235,
+    "duration_ms": 105,
+    "peak_band_db": 42.6,
+    "median_f0": 198.1
+   },
+   "v2": {
+    "start_s": 0.385,
+    "end_s": 0.43,
+    "duration_ms": 45,
+    "peak_band_db": 33.1,
+    "median_f0": null
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": false
+  }
+ },
+ "_summary": {
+  "stress_items": 18,
+  "stress_measurable": 16,
+  "stress_correct": 8,
+  "pairs_measurable": 8,
+  "pairs_controlled": 2,
+  "pairs": {
+   "W01/W02": {
+    "ratio_syll1_stressed": 2.93,
+    "ratio_syll2_stressed": 3.73,
+    "controlled": false
+   },
+   "W03/W04": {
+    "ratio_syll1_stressed": 1.05,
+    "ratio_syll2_stressed": 0.68,
+    "controlled": true
+   },
+   "W05/W06": {
+    "ratio_syll1_stressed": 0.37,
+    "ratio_syll2_stressed": 0.32,
+    "controlled": false
+   },
+   "W07/W08": {
+    "ratio_syll1_stressed": 0.59,
+    "ratio_syll2_stressed": 0.59,
+    "controlled": false
+   },
+   "W09/W10": {
+    "ratio_syll1_stressed": 0.58,
+    "ratio_syll2_stressed": 1.07,
+    "controlled": false
+   },
+   "W13/W14": {
+    "ratio_syll1_stressed": 1.64,
+    "ratio_syll2_stressed": 1.56,
+    "controlled": false
+   },
+   "W15/W16": {
+    "ratio_syll1_stressed": 2.78,
+    "ratio_syll2_stressed": 2.33,
+    "controlled": true
+   },
+   "H01/H02": {
+    "ratio_syll1_stressed": 5.44,
+    "ratio_syll2_stressed": 5.89,
+    "controlled": false
+   }
+  }
+ }
+}

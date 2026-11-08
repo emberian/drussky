@@ -1,0 +1,422 @@
+[
+ {
+  "id": "S01",
+  "file": "bil-cdd458.m4a",
+  "key": "бил",
+  "text": "б+ил.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S02",
+  "file": "chital-6f1d77.m4a",
+  "key": "читал",
+  "text": "чит+ал.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S03",
+  "file": "edem-ba3134.m4a",
+  "key": "едем",
+  "text": "+едем.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S04",
+  "file": "khleba-71824d.m4a",
+  "key": "хлеба",
+  "text": "хл+еба.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S05",
+  "file": "molchit-ab91f0.m4a",
+  "key": "молчит",
+  "text": "молч+ит.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S06",
+  "file": "planete-9019ad.m4a",
+  "key": "планете",
+  "text": "пл+анете.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S07",
+  "file": "sel-a952c0.m4a",
+  "key": "съел",
+  "text": "съ+ел.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S08",
+  "file": "umom-0770da.m4a",
+  "key": "умом",
+  "text": "ум+ом.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S09",
+  "file": "a-on-gulyal-87683a.m4a",
+  "key": "а он гулял",
+  "text": "А +он гул+ял.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S10",
+  "file": "chto-vy-delali-08c70a.m4a",
+  "key": "что вы делали",
+  "text": "Чт+о в+ы д+елали?",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S11",
+  "file": "eshchyo-raz-pozhaluysta-5af159.m4a",
+  "key": "ещё раз пожалуйста",
+  "text": "Ещ+ё р+аз, пож+алуйста.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S12",
+  "file": "eto-novyy-signal-a6c6b4.m4a",
+  "key": "это новый сигнал",
+  "text": "+Это н+овый сигн+ал.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S13",
+  "file": "gde-ty-byl-49cf72.m4a",
+  "key": "где ты был",
+  "text": "Гд+е т+ы б+ыл?",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S14",
+  "file": "kofe-s-molokom-34cf55.m4a",
+  "key": "кофе с молоком",
+  "text": "к+офе с молок+ом.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S15",
+  "file": "mama-prochitala-knigu-7f3cbf.m4a",
+  "key": "мама прочитала книгу",
+  "text": "М+ама прочит+ала кн+игу.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S16",
+  "file": "mozhno-eshchyo-b3a7e4.m4a",
+  "key": "можно ещё?",
+  "text": "М+ожно ещ+ё?",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S17",
+  "file": "my-zhivyom-24dbdf.m4a",
+  "key": "мы живём",
+  "text": "м+ы жив+ём.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S18",
+  "file": "net-eto-kofe-bdb8d2.m4a",
+  "key": "нет это кофе",
+  "text": "Н+ет, +это к+офе.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S19",
+  "file": "on-lyubit-chay-ae60c8.m4a",
+  "key": "он любит чай",
+  "text": "+Он л+юбит ч+ай.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S20",
+  "file": "oni-govorili-0b75db.m4a",
+  "key": "они говорили",
+  "text": "Он+и говор+или.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S21",
+  "file": "raketa-letit-9695db.m4a",
+  "key": "ракета летит",
+  "text": "Рак+ета лет+ит.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S22",
+  "file": "strannyy-signal-cd553e.m4a",
+  "key": "странный сигнал",
+  "text": "стр+анный сигн+ал.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S23",
+  "file": "ty-ponimaesh-996f26.m4a",
+  "key": "ты понимаешь",
+  "text": "т+ы поним+аешь.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S24",
+  "file": "v-okne-916fd2.m4a",
+  "key": "в окне",
+  "text": "в окн+е.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S25",
+  "file": "ya-budu-64dc66.m4a",
+  "key": "я буду",
+  "text": "+я б+уду.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S26",
+  "file": "ya-khochu-kofe-0d7b20.m4a",
+  "key": "я хочу кофе",
+  "text": "+Я хоч+у к+офе.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S27",
+  "file": "a-gde-kot-kot-tut-45308a.m4a",
+  "key": "а где кот кот тут",
+  "text": "А гд+е к+от? К+от т+ут.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S28",
+  "file": "chto-ty-budesh-delat-f5d6a2.m4a",
+  "key": "что ты будешь делать",
+  "text": "Чт+о т+ы б+удешь д+елать?",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S29",
+  "file": "desyat-plyus-pyat-pyatnadtsat-e9e882.m4a",
+  "key": "десять плюс пять пятнадцать",
+  "text": "Д+есять пл+юс п+ять — пятн+адцать.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S30",
+  "file": "dva-plyus-tri-pyat-b34ef4.m4a",
+  "key": "два плюс три пять",
+  "text": "Дв+а пл+юс тр+и — п+ять.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S31",
+  "file": "eto-ne-stol-eto-stul-71b41f.m4a",
+  "key": "это не стол это стул",
+  "text": "+Это не ст+ол, +это ст+ул.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S32",
+  "file": "gde-khleb-on-tut-663dae.m4a",
+  "key": "где хлеб он тут",
+  "text": "Гд+е хл+еб? +Он т+ут.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S33",
+  "file": "gde-voda-voda-tut-a65187.m4a",
+  "key": "где вода вода тут",
+  "text": "Гд+е вод+а? Вод+а т+ут.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S34",
+  "file": "kot-spal-na-stole-da1100.m4a",
+  "key": "кот спал на столе",
+  "text": "К+от сп+ал на стол+е.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S35",
+  "file": "mama-lyubit-kofe-i-chay-31df10.m4a",
+  "key": "мама любит кофе и чай",
+  "text": "М+ама л+юбит к+офе и ч+ай.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S36",
+  "file": "my-zhivyom-v-gorode-8032e8.m4a",
+  "key": "мы живём в городе",
+  "text": "М+ы жив+ём в г+ороде.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S37",
+  "file": "no-teper-ona-znaet-my-ne-odni-54e76c.m4a",
+  "key": "но теперь она знает мы не одни",
+  "text": "Но теп+ерь он+а зн+ает: м+ы не одн+и.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S38",
+  "file": "on-khodit-v-park-kazhdyy-den-81367b.m4a",
+  "key": "он ходит в парк каждый день",
+  "text": "+Он х+одит в п+арк к+аждый д+ень.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S39",
+  "file": "potomu-chto-eto-pravda-aeabd6.m4a",
+  "key": "потому что это правда",
+  "text": "Потом+у чт+о +это пр+авда.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S40",
+  "file": "robot-eto-obekt-b2e164.m4a",
+  "key": "робот это объект",
+  "text": "Р+обот — +это объ+ект.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S41",
+  "file": "shest-eto-chislo-cea39b.m4a",
+  "key": "шесть это число",
+  "text": "Ш+есть — +это числ+о.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S42",
+  "file": "summa-tozhe-delitsya-na-dva-2ee9ba.m4a",
+  "key": "сумма тоже делится на два",
+  "text": "С+умма т+оже д+елится на дв+а.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S43",
+  "file": "ty-znaesh-net-ne-znayu-d1c2db.m4a",
+  "key": "ты знаешь нет не знаю",
+  "text": "Т+ы зн+аешь? Н+ет, не зн+аю.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S44",
+  "file": "u-menya-net-syra-837c15.m4a",
+  "key": "у меня нет сыра",
+  "text": "У мен+я н+ет с+ыра.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S45",
+  "file": "umom-rossiyu-ne-ponyat-62181d.m4a",
+  "key": "умом россию не понять",
+  "text": "Ум+ом Росс+ию не пон+ять.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S46",
+  "file": "vchera-ya-khodila-v-park-6a5433.m4a",
+  "key": "вчера я ходила в парк",
+  "text": "Вчер+а +я ход+ила в п+арк.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S47",
+  "file": "ya-dumayu-chto-eto-nepravda-b5ad5a.m4a",
+  "key": "я думаю что это неправда",
+  "text": "+Я д+умаю, чт+о +это непр+авда.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S48",
+  "file": "ya-ne-chitayu-ya-dumayu-021f7b.m4a",
+  "key": "я не читаю я думаю",
+  "text": "+Я не чит+аю, +я д+умаю.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S49",
+  "file": "chto-ty-delala-vchera-ya-rabotala-a-poto-70fe41.m4a",
+  "key": "что ты делала вчера я работала а потом читала",
+  "text": "Чт+о т+ы д+елала вчер+а? +Я раб+отала, а пот+ом чит+ала.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S50",
+  "file": "chyotnoe-chislo-eto-chislo-kotoroe-delit-af2814.m4a",
+  "key": "чётное число это число которое делится на два",
+  "text": "Ч+ётное числ+о — +это числ+о, кот+орое д+елится на дв+а.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S51",
+  "file": "desyat-devyat-vosem-sem-shest-pyat-chety-b4f1b2.m4a",
+  "key": "десять девять восемь семь шесть пять четыре три два один",
+  "text": "Д+есять, д+евять, в+осемь, с+емь, ш+есть, п+ять, чет+ыре, тр+и, дв+а, од+ин!",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S52",
+  "file": "devyat-nechyotnoe-chislo-potomu-chto-ono-12a554.m4a",
+  "key": "девять нечётное число потому что оно не делится на два",
+  "text": "Д+евять — неч+ётное числ+о, потом+у чт+о он+о не д+елится на дв+а.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S53",
+  "file": "dvadtsat-tridtsat-sorok-pyatdesyat-shest-0c7e7a.m4a",
+  "key": "двадцать тридцать сорок пятьдесят шестьдесят семьдесят восемьдесят девяносто сто",
+  "text": "Дв+адцать, тр+идцать, с+орок, пятьдес+ят, шестьдес+ят, с+емьдесят, в+осемьдесят, девян+осто, ст+о.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S54",
+  "file": "kto-tam-eto-mama-mama-doma-a-gde-kot-kot-326b11.m4a",
+  "key": "кто там это мама мама дома а где кот кот тут",
+  "text": "Кт+о т+ам? +Это м+ама. М+ама д+ома. А гд+е к+от? К+от т+ут.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S55",
+  "file": "odinnadtsat-dvenadtsat-trinadtsat-chetyr-38c570.m4a",
+  "key": "одиннадцать двенадцать тринадцать четырнадцать пятнадцать шестнадцать семнадцать восемнадцать девятнадцать двадцать",
+  "text": "Од+иннадцать, двен+адцать, трин+адцать, чет+ырнадцать, пятн+адцать, шестн+адцать, семн+адцать, восемн+адцать, девятн+адцать, дв+адцать.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S56",
+  "file": "cherez-mesyats-prikhodit-novyy-signal-v-533337.m4a",
+  "key": "через месяц приходит новый сигнал в нём одно слово привет мира не знает кто это но теперь она знает мы не одни",
+  "text": "Ч+ерез м+есяц прих+одит н+овый сигн+ал. В н+ём одн+о сл+ово: «Прив+ет». М+ира не зн+ает, кт+о +это. Но теп+ерь он+а зн+ает: м+ы не одн+и.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S57",
+  "file": "chto-takoe-spravedlivost-sprashivaet-sok-d179a4.m4a",
+  "key": "что такое справедливость спрашивает сократ это когда каждый получает то чего заслуживает отвечает ученик а кто знает чего заслуживает каждый наверное мудрый человек значит чтобы быть справедливым нужно быть мудрым да кажется так тогда сначала нужно узнать что такое мудрость",
+  "text": "— Чт+о так+ое справедл+ивость? — спр+ашивает Сокр+ат. — +Это когд+а к+аждый получ+ает то, чег+о засл+уживает, — отвеч+ает учен+ик. — А кт+о зн+ает, чег+о засл+уживает к+аждый? — Нав+ерное, м+удрый челов+ек. — Зн+ачит, чт+обы б+ыть справедл+ивым, н+ужно б+ыть м+удрым? — Д+а, к+ажется, т+ак. — Тогд+а сн+ачала н+ужно узн+ать, чт+о так+ое м+удрость.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S58",
+  "file": "eto-stikhi-fyodora-tyutcheva-umom-rossiy-dcb3de.m4a",
+  "key": "это стихи фёдора тютчева умом россию не понять аршином общим не измерить у ней особенная стать в россию можно только верить",
+  "text": "+Это стих+и Ф+ёдора Т+ютчева. Ум+ом Росс+ию не пон+ять, Арш+ином +общим не изм+ерить: У н+ей ос+обенная ст+ать — В Росс+ию м+ожно т+олько в+ерить.",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S59",
+  "file": "mira-slushaet-signal-eto-ne-shum-v-signa-c017c2.m4a",
+  "key": "мира слушает сигнал это не шум в сигнале есть числа два три пять семь одиннадцать мира думает это простые числа значит там кто то есть",
+  "text": "М+ира сл+ушает сигн+ал. +Это не ш+ум: в сигн+але +есть ч+исла. Дв+а, тр+и, п+ять, с+емь, од+иннадцать… М+ира д+умает: «+Это прост+ые ч+исла. Зн+ачит, т+ам кт+ото +есть».",
+  "kind": "ai_generated_speech"
+ },
+ {
+  "id": "S60",
+  "file": "stantsiya-zvezda-letit-vokrug-zemli-na-s-27e63a.m4a",
+  "key": "станция звезда летит вокруг земли на станции работает мира мира робот каждое утро она смотрит на звёзды сегодня она слышит странный сигнал",
+  "text": "Ст+анция «Звезд+а» лет+ит вокр+уг Земл+и. На ст+анции раб+отает М+ира. М+ира — р+обот. К+аждое +утро он+а см+отрит на зв+ёзды. Сег+одня он+а сл+ышит стр+анный сигн+ал.",
+  "kind": "ai_generated_speech"
+ }
+]

@@ -1,0 +1,13 @@
+{
+ "model": "Silero v5_6_ru",
+ "voice": "xenia",
+ "id": "S54",
+ "input": "Кт+о т+ам? +Это м+ама. М+ама д+ома. А гд+е к+от? К+от т+ут.",
+ "source_text": "Кт+о т+ам? +Это м+ама. М+ама д+ома. А гд+е к+от? К+от т+ут.",
+ "expected": "кто там это мама мама дома а где кот кот тут",
+ "notation": "plus",
+ "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+ "generation_seconds": 0.777,
+ "audio_seconds": 4.9,
+ "sample_rate": 24000
+}

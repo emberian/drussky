@@ -5,13 +5,16 @@
   .local/silero-tts/venv/bin/python apple/scripts/audio.py restore [--dry-run] [--offline] [--only F ...]
   python3 apple/scripts/audio.py verify             # every referenced clip exists, decodes, has provenance
   python3 apple/scripts/audio.py annotate           # backfill restore fields into sources*.json (append-only)
+  python3 apple/scripts/audio.py revoice [--engine voxcpm2|espeech] [--dest DIR] [--list L.json] [--only F ...]
+                                                     # re-render the authored clips with the 2026 narrator (research/VOICE_2026.md)
 
 Referenced clips are every file named in Audio/index*.json and Audio/variants*.json. Each has a
 sources*.json entry (see audio_store.py for the restore fields). `restore` rebuilds each missing clip
 from the first source that works:
   1. the original in the local cache (`orig`, checked against `orig_sha1`)
   2. a download of `orig_url` (Wikimedia Commons / Tatoeba), saved into the cache, SHA-1 checked
-  3. re-synthesis of `input` with the recorded voice (Silero; macOS `say` for one clip)
+  3. re-synthesis of `input` with the recorded voice (Silero; a 2026 narrator engine in its own venv,
+     via audio_store.Narrator, when `synth` names one; macOS `say` for one clip)
 then trims, levels and encodes it exactly as the generators did (audio_store.encode). Downloaded and
 human clips come out with identical audio; re-synthesized ones say the same thing but need not match
 byte for byte. Files are written under the names the manifests reference.
@@ -103,7 +106,7 @@ def cmd_restore(args):
     todo = todo[: args.limit] if args.limit else todo
     done, failed = Counter(), []
     fetches = synths = 0
-    silero = None
+    silero, narrators = None, {}
     with tempfile.TemporaryDirectory(prefix="drussky-level-") as level_dir:
         for n, f in enumerate(todo, 1):
             if f not in src:
@@ -129,9 +132,14 @@ def cmd_restore(args):
                     src_path = p
                 elif how == "synth":
                     synths += 1
+                    engine = store.narrator_engine(entry["synth"])
                     if entry["synth"] == store.MACOS_SETTINGS:
                         src_path = Path(level_dir) / (Path(f).stem + ".aiff")
                         store.macos_say(entry["input"], entry["voice"], src_path)
+                    elif engine:
+                        narrators[engine] = narrators.get(engine) or store.Narrator(engine)
+                        narrators[engine].wav(entry["input"], p)
+                        src_path = p
                     else:
                         silero = silero or store.Silero(threads=4)
                         data, _ = silero.wav(entry["input"], entry["voice"])
@@ -144,10 +152,76 @@ def cmd_restore(args):
             except Exception as e:  # noqa: BLE001 -- report every clip, keep going
                 done[how] -= 1
                 failed.append((f, f"{how}: {e}"))
+    for n in narrators.values():
+        n.close()
     verb = "would restore" if args.dry_run else "restored"
     print(f"{verb} {sum(done.values())} of {len(todo)}: " + ", ".join(f"{k} {v}" for k, v in sorted(done.items())))
     for f, why in failed:
         print("  cannot restore", f, "-", why)
+    return 1 if failed else 0
+
+
+def cmd_revoice(args):
+    """Re-render the authored (Silero xenia / narrator) clips with a 2026 narrator engine.
+
+    Without --dest the clips in the audio dir are replaced and their sources*.json entries rewritten
+    (provider/voice/synth/orig/orig_sha1), so `restore` regenerates them with the same engine. With
+    --dest DIR nothing in the audio dir or the manifests changes: the levelled .m4a files and a
+    sources-revoice.json go to DIR (a shadow set to judge by ear). Originals (48/24 kHz WAV) are kept
+    under .local/tts-2026/originals/<engine>/.
+    """
+    audio = args.audio_dir
+    src = sources(audio)
+    todo = sorted(args.only) if args.only else sorted(f for f, (_, e) in src.items()
+                                                      if "input" in e and e.get("voice") in ("xenia", store.NARRATOR_VOICE))
+    if args.list:
+        wanted = {x["file"] for x in json.loads(Path(args.list).read_text())}
+        todo = [f for f in todo if f in wanted]
+    todo = todo[: args.limit] if args.limit else todo
+    dest = args.dest.resolve() if args.dest else None
+    if dest:
+        dest.mkdir(parents=True, exist_ok=True)
+    originals = args.cache_root / "tts-2026/originals" / args.engine
+    narrator = store.Narrator(args.engine)
+    changed, failed, out_entries = Counter(), [], {}
+    with tempfile.TemporaryDirectory(prefix="drussky-level-") as level_dir:
+        for n, f in enumerate(todo, 1):
+            name, entry = src[f]
+            text = entry["input"]
+            wav = originals / f"{Path(f).stem}-{hashlib.sha1(text.encode()).hexdigest()[:6]}.wav"
+            print(f"[{n}/{len(todo)}] {args.engine:8} {f}  {text[:70]}", flush=True)
+            if args.dry_run:
+                continue
+            try:
+                if not wav.exists():
+                    narrator.wav(text, wav)
+                store.encode(wav, (dest or audio) / f, level_dir)
+            except Exception as e:  # noqa: BLE001
+                failed.append((f, str(e)))
+                continue
+            new = {**entry, "provider": store.NARRATOR_PROVIDER[args.engine]}
+            for k in ("orig", "orig_sha1", "voice", "synth", "input", "pipeline"):
+                new.pop(k, None)
+            new.update(store.restore_fields(wav, synth=store.narrator_fields(text, args.engine)))
+            if dest:
+                out_entries[f] = new
+            else:
+                src[f] = (name, new)
+                changed[name] += 1
+    narrator.close()
+    if args.dry_run:
+        print(f"would re-voice {len(todo)} clips with {args.engine}")
+        return 0
+    if dest:
+        (dest / "sources-revoice.json").write_text(json.dumps(out_entries, ensure_ascii=False, indent=1) + "\n")
+        print(f"wrote {len(out_entries)} shadow clips to {dest}")
+    else:
+        for name in changed:
+            d = {f: e for f, (nm, e) in src.items() if nm == name}
+            (audio / name).write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n")
+        print(f"re-voiced {sum(changed.values())} clips with {args.engine}: " + ", ".join(f"{k} {v}" for k, v in changed.items()))
+    for f, why in failed:
+        print("  failed", f, "-", why)
     return 1 if failed else 0
 
 
@@ -234,7 +308,10 @@ def cmd_annotate(args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("command", choices=["status", "restore", "verify", "annotate"])
+    ap.add_argument("command", choices=["status", "restore", "verify", "annotate", "revoice"])
+    ap.add_argument("--engine", choices=sorted(store.NARRATOR_SETTINGS), default="voxcpm2", help="revoice: narrator engine")
+    ap.add_argument("--dest", type=Path, help="revoice: write a shadow set here instead of the audio dir")
+    ap.add_argument("--list", help="revoice: JSON list of {file: ...} restricting the clips (e.g. the shadow set)")
     ap.add_argument("--audio-dir", type=Path, default=DEFAULT_AUDIO)
     ap.add_argument("--cache-root", type=Path, default=REPO / ".local")
     ap.add_argument("--plan", action="store_true")
@@ -247,7 +324,7 @@ def main():
     ap.add_argument("--only", nargs="+")
     args = ap.parse_args()
     args.audio_dir, args.cache_root = args.audio_dir.resolve(), args.cache_root.resolve()
-    return {"status": cmd_status, "restore": cmd_restore, "verify": cmd_verify, "annotate": cmd_annotate}[args.command](args)
+    return {"status": cmd_status, "restore": cmd_restore, "verify": cmd_verify, "annotate": cmd_annotate, "revoice": cmd_revoice}[args.command](args)
 
 
 if __name__ == "__main__":

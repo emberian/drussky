@@ -1,0 +1,13 @@
+{
+ "model": "Silero v5_6_ru",
+ "voice": "xenia",
+ "id": "W13",
+ "input": "п+олки.",
+ "source_text": "п+олки.",
+ "expected": "полки",
+ "notation": "plus",
+ "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+ "generation_seconds": 0.134,
+ "audio_seconds": 0.787,
+ "sample_rate": 24000
+}

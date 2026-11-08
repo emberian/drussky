@@ -1,0 +1,13 @@
+{
+ "model": "Silero v5_6_ru",
+ "voice": "xenia",
+ "id": "S58",
+ "input": "+Это стих+и Ф+ёдора Т+ютчева. Ум+ом Росс+ию не пон+ять, Арш+ином +общим не изм+ерить: У н+ей ос+обенная ст+ать — В Росс+ию м+ожно т+олько в+ерить.",
+ "source_text": "+Это стих+и Ф+ёдора Т+ютчева. Ум+ом Росс+ию не пон+ять, Арш+ином +общим не изм+ерить: У н+ей ос+обенная ст+ать — В Росс+ию м+ожно т+олько в+ерить.",
+ "expected": "это стихи федора тютчева умом россию не понять аршином общим не измерить у ней особенная стать в россию можно только верить",
+ "notation": "plus",
+ "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+ "generation_seconds": 4.318,
+ "audio_seconds": 7.75,
+ "sample_rate": 24000
+}

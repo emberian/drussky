@@ -9,7 +9,7 @@ the original back (`restore_fields`):
               synthesis output, which are not in git)
   orig_sha1   SHA-1 of that file's bytes
   orig_url    where to download it again (human recordings)
-  input/voice/synth   exact Silero (or macOS `say`) input and settings (synthetic speech)
+  input/voice/synth   exact Silero (or 2026 narrator engine, or macOS `say`) input and settings (synthetic speech)
   pipeline    PIPELINE
 """
 import hashlib
@@ -30,6 +30,23 @@ PIPELINE = "audio_level.level (trim, -20 dB voiced RMS, -1 dB peak cap) -> afcon
 SILERO_SETTINGS = ("Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); "
                    "inputs over 160 chars split after .!?…» with 0.35 s silence between parts")
 MACOS_SETTINGS = "macOS `say -v Milena -o <aiff> <input>`"
+
+# The 2026 narrator: one designed voice (VoxCPM2 voice design, research/VOICE_2026.md) cloned by whichever
+# engine renders a clip. The reference clip and its '+'-marked transcript are part of the recipe.
+NARRATOR_VOICE = "narrator-2026-1"
+NARRATOR_REF = REPO / "research/artifacts/voice-2026/narrator/narrator-voxcpm2-1.wav"
+NARRATOR_REF_TEXT = ("Здр+авствуйте. Сег+одня м+ы б+удем чит+ать и сл+ушать. Сл+ушайте вним+ательно и повтор+яйте за мн+ой: "
+                     "сн+ачала м+едленно, пот+ом быстр+ее.")
+_SPLIT = "inputs over 160 chars split after .!?…» with 0.35 s silence between parts"
+NARRATOR_SETTINGS = {
+    "voxcpm2": ("VoxCPM2 (mlx-community/VoxCPM2-bf16, mlx-audio 0.6.4), 48 kHz, cloned from research/artifacts/voice-2026/narrator/"
+                f"narrator-voxcpm2-1.wav, mx.random.seed(42) per part, 24 diffusion steps, cfg 2.0, '+' stress passed as U+0301; {_SPLIT}"),
+    "espeech": ("ESpeech-TTS-1 RL-V2 (F5-TTS DiT, f5-tts 1.1.22, torch MPS, Vocos 24 kHz), cloned from research/artifacts/voice-2026/"
+                f"narrator/narrator-voxcpm2-1.wav with its '+'-marked transcript, seed 42 per part, 48 NFE steps, cfg 2.0, speed 1.0 "
+                f"(0.7 for inputs under 12 letters), native '+' stress; {_SPLIT}"),
+}
+NARRATOR_PROVIDER = {"voxcpm2": "VoxCPM2 2B (Apache-2.0), designed narrator voice", "espeech": "ESpeech-TTS-1 RL-V2 (Apache-2.0), designed narrator voice"}
+NARRATOR_PYTHON = {"voxcpm2": REPO / ".local/tts-2026/mlx/venv/bin/python", "espeech": REPO / ".local/tts-2026/espeech/venv/bin/python"}
 UA = {"User-Agent": "DrusskyAudioRestore/1.0 (https://ember.software; personal language-learning app) python-urllib"}
 
 
@@ -70,6 +87,15 @@ def restore_fields(orig, url=None, synth=None):
 
 def silero_fields(text, voice):
     return {"input": text, "voice": voice, "synth": SILERO_SETTINGS}
+
+
+def narrator_fields(text, engine):
+    return {"input": text, "voice": NARRATOR_VOICE, "synth": NARRATOR_SETTINGS[engine]}
+
+
+def narrator_engine(synth):
+    """Which narrator engine a sources entry's `synth` string names, or None (Silero / macOS)."""
+    return next((e for e, s in NARRATOR_SETTINGS.items() if s == synth), None)
 
 
 def encode(src, m4a, level_dir):
@@ -130,6 +156,48 @@ class Silero:
         data, frames, signals = self.encode_wav(samples)
         assert signals["clipped_samples"] == 0, (text, signals)
         return data, frames
+
+
+class Narrator:
+    """A narrator engine in its own venv (apple/scripts/narrator_worker.py), started on first use."""
+
+    def __init__(self, engine):
+        if engine not in NARRATOR_SETTINGS:
+            raise ValueError(f"unknown narrator engine {engine!r}")
+        self.engine, self.proc = engine, None
+
+    def start(self):
+        import json
+        python = NARRATOR_PYTHON[self.engine]
+        if not python.exists():
+            raise RuntimeError(f"{self.engine} venv missing: {python} (see research/VOICE_2026.md, section 4)")
+        if not NARRATOR_REF.exists():
+            raise RuntimeError(f"narrator reference missing: {NARRATOR_REF}")
+        self.proc = subprocess.Popen([str(python), str(APPLE / "scripts/narrator_worker.py"), self.engine, str(NARRATOR_REF), NARRATOR_REF_TEXT],
+                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, bufsize=1)
+        ready = json.loads(self.proc.stdout.readline() or "{}")
+        if not ready.get("ready"):
+            raise RuntimeError(f"{self.engine} worker did not start")
+        self.load_seconds = ready["load_seconds"]
+
+    def wav(self, text, dest):
+        """Synthesize `text` (corpus '+' notation) to the WAV file `dest`; returns the worker's timing dict."""
+        import json
+        if self.proc is None:
+            self.start()
+        Path(dest).parent.mkdir(parents=True, exist_ok=True)
+        self.proc.stdin.write(json.dumps({"text": text, "out": str(dest)}, ensure_ascii=False) + "\n")
+        self.proc.stdin.flush()
+        reply = json.loads(self.proc.stdout.readline() or '{"ok": false, "error": "worker exited"}')
+        if not reply.get("ok"):
+            raise RuntimeError(f"{self.engine}: {reply.get('error')}")
+        return reply
+
+    def close(self):
+        if self.proc is not None:
+            self.proc.stdin.close()
+            self.proc.wait(timeout=60)
+            self.proc = None
 
 
 def macos_say(text, voice, dest):

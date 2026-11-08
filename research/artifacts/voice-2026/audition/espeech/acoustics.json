@@ -1,0 +1,570 @@
+{
+ "H01": {
+  "duration_s": 0.853,
+  "trimmed_s": 0.683,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -12.0,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.33,
+    "end_s": 0.505,
+    "duration_ms": 175,
+    "peak_band_db": 39.8,
+    "median_f0": 167.6
+   },
+   "v2": {
+    "start_s": 0.65,
+    "end_s": 0.685,
+    "duration_ms": 35,
+    "peak_band_db": 12.2,
+    "median_f0": null
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": true
+  }
+ },
+ "H02": {
+  "duration_s": 0.853,
+  "trimmed_s": 0.683,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -12.5,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.33,
+    "end_s": 0.575,
+    "duration_ms": 245,
+    "peak_band_db": 39.2,
+    "median_f0": 161.9
+   },
+   "v2": {
+    "start_s": 0.65,
+    "end_s": 0.685,
+    "duration_ms": 35,
+    "peak_band_db": 13.5,
+    "median_f0": null
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": false
+  }
+ },
+ "L01": {
+  "duration_s": 11.125,
+  "trimmed_s": 10.421,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -13.9
+ },
+ "N01": {
+  "duration_s": 6.016,
+  "trimmed_s": 5.376,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -13.8
+ },
+ "P01": {
+  "duration_s": 0.725,
+  "trimmed_s": 0.363,
+  "peak_dbfs": -2.7,
+  "rms_dbfs": -13.2
+ },
+ "P02": {
+  "duration_s": 0.811,
+  "trimmed_s": 0.405,
+  "peak_dbfs": -2.1,
+  "rms_dbfs": -14.4
+ },
+ "Q01": {
+  "duration_s": 0.683,
+  "trimmed_s": 0.533,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -13.7,
+  "pitch": {
+   "f0_min": 155.4,
+   "f0_max": 203.9,
+   "f0_range_semitones": 4.7,
+   "peak_position": 0.06,
+   "final_third_mean": 164.4,
+   "contour": [
+    null,
+    null,
+    192.5,
+    187.0,
+    183.8,
+    180.6,
+    180.6,
+    179.6,
+    null,
+    null,
+    177.5,
+    173.5,
+    168.5,
+    169.5,
+    175.5,
+    null,
+    null,
+    null,
+    null,
+    null,
+    181.7,
+    174.5,
+    167.6,
+    160.0,
+    158.2,
+    156.3,
+    155.4
+   ]
+  }
+ },
+ "Q02": {
+  "duration_s": 0.683,
+  "trimmed_s": 0.533,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -13.6,
+  "pitch": {
+   "f0_min": 155.4,
+   "f0_max": 193.6,
+   "f0_range_semitones": 3.8,
+   "peak_position": 0.07,
+   "final_third_mean": 164.5,
+   "contour": [
+    null,
+    null,
+    188.1,
+    184.9,
+    181.7,
+    179.6,
+    179.6,
+    178.6,
+    null,
+    null,
+    178.6,
+    172.5,
+    166.6,
+    171.5,
+    175.5,
+    null,
+    null,
+    null,
+    null,
+    null,
+    181.7,
+    174.5,
+    167.6,
+    160.0,
+    158.2,
+    156.3,
+    155.4
+   ]
+  }
+ },
+ "S01": {
+  "duration_s": 0.853,
+  "trimmed_s": 0.363,
+  "peak_dbfs": -0.3,
+  "rms_dbfs": -14.8
+ },
+ "S02": {
+  "duration_s": 0.853,
+  "trimmed_s": 0.341,
+  "peak_dbfs": -2.8,
+  "rms_dbfs": -14.0
+ },
+ "V01": {
+  "duration_s": 0.565,
+  "trimmed_s": 0.245,
+  "peak_dbfs": -1.0,
+  "rms_dbfs": -11.6
+ },
+ "V02": {
+  "duration_s": 0.565,
+  "trimmed_s": 0.245,
+  "peak_dbfs": -5.0,
+  "rms_dbfs": -15.3
+ },
+ "V03": {
+  "duration_s": 0.565,
+  "trimmed_s": 0.235,
+  "peak_dbfs": -1.5,
+  "rms_dbfs": -14.0
+ },
+ "W01": {
+  "duration_s": 0.501,
+  "trimmed_s": 0.395,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -11.2,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.035,
+    "end_s": 0.095,
+    "duration_ms": 60,
+    "peak_band_db": 29.3,
+    "median_f0": 181.2
+   },
+   "v2": {
+    "start_s": 0.12,
+    "end_s": 0.34,
+    "duration_ms": 220,
+    "peak_band_db": 41.1,
+    "median_f0": 166.1
+   },
+   "cue": "duration",
+   "heard_stress": 2,
+   "correct": false
+  }
+ },
+ "W02": {
+  "duration_s": 0.501,
+  "trimmed_s": 0.395,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -11.0,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.1,
+    "end_s": 0.2,
+    "duration_ms": 100,
+    "peak_band_db": 41.0,
+    "median_f0": 181.2
+   },
+   "v2": {
+    "start_s": 0.2,
+    "end_s": 0.34,
+    "duration_ms": 140,
+    "peak_band_db": 38.8,
+    "median_f0": 167.1
+   },
+   "cue": "duration",
+   "heard_stress": 2,
+   "correct": true
+  }
+ },
+ "W03": {
+  "duration_s": 0.416,
+  "trimmed_s": 0.203,
+  "peak_dbfs": -4.1,
+  "rms_dbfs": -13.1,
+  "stress": {
+   "stress_measurable": false
+  }
+ },
+ "W04": {
+  "duration_s": 0.416,
+  "trimmed_s": 0.181,
+  "peak_dbfs": -3.2,
+  "rms_dbfs": -12.0,
+  "stress": {
+   "stress_measurable": false
+  }
+ },
+ "W05": {
+  "duration_s": 0.501,
+  "trimmed_s": 0.245,
+  "peak_dbfs": -1.1,
+  "rms_dbfs": -14.3,
+  "stress": {
+   "stress_measurable": false
+  }
+ },
+ "W06": {
+  "duration_s": 0.501,
+  "trimmed_s": 0.395,
+  "peak_dbfs": -0.6,
+  "rms_dbfs": -13.8,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.055,
+    "end_s": 0.1,
+    "duration_ms": 45,
+    "peak_band_db": 36.6,
+    "median_f0": 188.1
+   },
+   "v2": {
+    "start_s": 0.22,
+    "end_s": 0.325,
+    "duration_ms": 105,
+    "peak_band_db": 39.9,
+    "median_f0": 166.6
+   },
+   "cue": "duration",
+   "heard_stress": 2,
+   "correct": true
+  }
+ },
+ "W07": {
+  "duration_s": 0.501,
+  "trimmed_s": 0.395,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -11.3,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.035,
+    "end_s": 0.185,
+    "duration_ms": 150,
+    "peak_band_db": 40.9,
+    "median_f0": 181.7
+   },
+   "v2": {
+    "start_s": 0.265,
+    "end_s": 0.37,
+    "duration_ms": 105,
+    "peak_band_db": 38.7,
+    "median_f0": 160.0
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": true
+  }
+ },
+ "W08": {
+  "duration_s": 0.501,
+  "trimmed_s": 0.395,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -11.3,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.05,
+    "end_s": 0.165,
+    "duration_ms": 115,
+    "peak_band_db": 40.7,
+    "median_f0": 182.7
+   },
+   "v2": {
+    "start_s": 0.235,
+    "end_s": 0.365,
+    "duration_ms": 130,
+    "peak_band_db": 41.6,
+    "median_f0": 164.2
+   },
+   "cue": "energy (durations within 15 ms)",
+   "heard_stress": 2,
+   "correct": true
+  }
+ },
+ "W09": {
+  "duration_s": 0.416,
+  "trimmed_s": 0.331,
+  "peak_dbfs": -1.5,
+  "rms_dbfs": -12.3,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.065,
+    "end_s": 0.225,
+    "duration_ms": 160,
+    "peak_band_db": 37.1,
+    "median_f0": 177.0
+   },
+   "v2": {
+    "start_s": 0.225,
+    "end_s": 0.305,
+    "duration_ms": 80,
+    "peak_band_db": 38.5,
+    "median_f0": 160.9
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": true
+  }
+ },
+ "W10": {
+  "duration_s": 0.416,
+  "trimmed_s": 0.331,
+  "peak_dbfs": -1.3,
+  "rms_dbfs": -12.3,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.065,
+    "end_s": 0.195,
+    "duration_ms": 130,
+    "peak_band_db": 39.3,
+    "median_f0": 179.6
+   },
+   "v2": {
+    "start_s": 0.195,
+    "end_s": 0.305,
+    "duration_ms": 110,
+    "peak_band_db": 37.6,
+    "median_f0": 160.5
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": false
+  }
+ },
+ "W11": {
+  "duration_s": 0.416,
+  "trimmed_s": 0.309,
+  "peak_dbfs": -0.1,
+  "rms_dbfs": -11.8,
+  "stress": {
+   "stress_measurable": false
+  }
+ },
+ "W12": {
+  "duration_s": 0.416,
+  "trimmed_s": 0.309,
+  "peak_dbfs": -1.5,
+  "rms_dbfs": -12.0,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.14,
+    "end_s": 0.195,
+    "duration_ms": 55,
+    "peak_band_db": 39.9,
+    "median_f0": 181.7
+   },
+   "v2": {
+    "start_s": 0.195,
+    "end_s": 0.29,
+    "duration_ms": 95,
+    "peak_band_db": 40.4,
+    "median_f0": 169.5
+   },
+   "cue": "duration",
+   "heard_stress": 2,
+   "correct": true
+  }
+ },
+ "W13": {
+  "duration_s": 0.501,
+  "trimmed_s": 0.331,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -13.2,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.065,
+    "end_s": 0.2,
+    "duration_ms": 135,
+    "peak_band_db": 41.4,
+    "median_f0": 164.7
+   },
+   "v2": {
+    "start_s": 0.3,
+    "end_s": 0.335,
+    "duration_ms": 35,
+    "peak_band_db": 13.8,
+    "median_f0": null
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": true
+  }
+ },
+ "W14": {
+  "duration_s": 0.501,
+  "trimmed_s": 0.309,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -13.2,
+  "stress": {
+   "stress_measurable": false
+  }
+ },
+ "W15": {
+  "duration_s": 0.587,
+  "trimmed_s": 0.459,
+  "peak_dbfs": -0.3,
+  "rms_dbfs": -13.3,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 1,
+   "v1": {
+    "start_s": 0.135,
+    "end_s": 0.27,
+    "duration_ms": 135,
+    "peak_band_db": 41.2,
+    "median_f0": 172.5
+   },
+   "v2": {
+    "start_s": 0.37,
+    "end_s": 0.415,
+    "duration_ms": 45,
+    "peak_band_db": 34.4,
+    "median_f0": 172.5
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": true
+  }
+ },
+ "W16": {
+  "duration_s": 0.587,
+  "trimmed_s": 0.459,
+  "peak_dbfs": 0.0,
+  "rms_dbfs": -13.0,
+  "stress": {
+   "stress_measurable": true,
+   "wanted": 2,
+   "v1": {
+    "start_s": 0.125,
+    "end_s": 0.215,
+    "duration_ms": 90,
+    "peak_band_db": 40.7,
+    "median_f0": 179.1
+   },
+   "v2": {
+    "start_s": 0.35,
+    "end_s": 0.405,
+    "duration_ms": 55,
+    "peak_band_db": 42.1,
+    "median_f0": 176.5
+   },
+   "cue": "duration",
+   "heard_stress": 1,
+   "correct": false
+  }
+ },
+ "_summary": {
+  "stress_items": 18,
+  "stress_measurable": 13,
+  "stress_correct": 9,
+  "pairs_measurable": 5,
+  "pairs_controlled": 3,
+  "pairs": {
+   "W01/W02": {
+    "ratio_syll1_stressed": 0.27,
+    "ratio_syll2_stressed": 0.71,
+    "controlled": false
+   },
+   "W07/W08": {
+    "ratio_syll1_stressed": 1.43,
+    "ratio_syll2_stressed": 0.88,
+    "controlled": true
+   },
+   "W09/W10": {
+    "ratio_syll1_stressed": 2.0,
+    "ratio_syll2_stressed": 1.18,
+    "controlled": true
+   },
+   "W15/W16": {
+    "ratio_syll1_stressed": 3.0,
+    "ratio_syll2_stressed": 1.64,
+    "controlled": true
+   },
+   "H01/H02": {
+    "ratio_syll1_stressed": 5.0,
+    "ratio_syll2_stressed": 7.0,
+    "controlled": false
+   }
+  }
+ }
+}

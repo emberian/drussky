@@ -1,0 +1,13 @@
+{
+ "model": "Silero v5_6_ru",
+ "voice": "xenia",
+ "id": "S43",
+ "input": "Т+ы зн+аешь? Н+ет, не зн+аю.",
+ "source_text": "Т+ы зн+аешь? Н+ет, не зн+аю.",
+ "expected": "ты знаешь нет не знаю",
+ "notation": "plus",
+ "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+ "generation_seconds": 2.061,
+ "audio_seconds": 2.275,
+ "sample_rate": 24000
+}

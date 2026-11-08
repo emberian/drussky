@@ -1,0 +1,33 @@
+{
+ "model": "ESpeech/ESpeech-TTS-1_RL-V2@f582b6e5897fe8a5835059405a8439d13bdf7684",
+ "runtime": "f5-tts 1.1.22 / torch 2.15.0 mps",
+ "load_seconds": 2.43,
+ "reference": "research/artifacts/voice-2026/narrator/narrator-voxcpm2-1.wav",
+ "ref_text": "Здр+авствуйте. Сег+одня м+ы б+удем чит+ать и сл+ушать. Сл+ушайте вним+ательно и повтор+яйте за мн+ой: сн+ачала м+едленно, пот+ом быстр+ее. ",
+ "notation": "plus",
+ "model_cfg": {
+  "dim": 1024,
+  "depth": 22,
+  "heads": 16,
+  "ff_mult": 2,
+  "text_dim": 512,
+  "conv_layers": 4
+ },
+ "id": "W05",
+ "mode": "reference cloning",
+ "input": "+атлас.",
+ "source_text": "+атлас.",
+ "expected": "атлас",
+ "generation_seconds": 13.588,
+ "audio_seconds": 0.501,
+ "sample_rate": 24000,
+ "settings": {
+  "nfe_step": 48,
+  "cfg_strength": 2.0,
+  "speed": 1.0,
+  "sway_sampling_coef": -1.0,
+  "cross_fade_duration": 0.15
+ },
+ "seed": 42,
+ "peak_abs": 0.8837
+}

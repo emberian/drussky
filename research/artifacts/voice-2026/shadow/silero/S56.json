@@ -1,0 +1,13 @@
+{
+ "model": "Silero v5_6_ru",
+ "voice": "xenia",
+ "id": "S56",
+ "input": "Ч+ерез м+есяц прих+одит н+овый сигн+ал. В н+ём одн+о сл+ово: «Прив+ет». М+ира не зн+ает, кт+о +это. Но теп+ерь он+а зн+ает: м+ы не одн+и.",
+ "source_text": "Ч+ерез м+есяц прих+одит н+овый сигн+ал. В н+ём одн+о сл+ово: «Прив+ет». М+ира не зн+ает, кт+о +это. Но теп+ерь он+а зн+ает: м+ы не одн+и.",
+ "expected": "через месяц приходит новый сигнал в нем одно слово привет мира не знает кто это но теперь она знает мы не одни",
+ "notation": "plus",
+ "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+ "generation_seconds": 0.804,
+ "audio_seconds": 7.975,
+ "sample_rate": 24000
+}

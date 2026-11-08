@@ -1,0 +1,13 @@
+{
+ "model": "Silero v5_6_ru",
+ "voice": "xenia",
+ "id": "N01",
+ "input": "У мен+я сег+одня дв+а вопр+оса, п+ять ид+ей и дв+адцать одн+а своб+одная мин+ута.",
+ "source_text": "У мен+я сег+одня дв+а вопр+оса, п+ять ид+ей и дв+адцать одн+а своб+одная мин+ута.",
+ "expected": "у меня сегодня два вопроса пять идей и двадцать одна свободная минута",
+ "notation": "plus",
+ "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+ "generation_seconds": 0.246,
+ "audio_seconds": 3.987,
+ "sample_rate": 24000
+}

@@ -1,0 +1,13 @@
+{
+ "model": "Silero v5_6_ru",
+ "voice": "xenia",
+ "id": "S52",
+ "input": "Д+евять — неч+ётное числ+о, потом+у чт+о он+о не д+елится на дв+а.",
+ "source_text": "Д+евять — неч+ётное числ+о, потом+у чт+о он+о не д+елится на дв+а.",
+ "expected": "девять нечетное число потому что оно не делится на два",
+ "notation": "plus",
+ "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+ "generation_seconds": 1.253,
+ "audio_seconds": 3.5,
+ "sample_rate": 24000
+}

@@ -1,0 +1,234 @@
+{
+ "H01": {
+  "heard": "Это замок.",
+  "heard_norm": "это замок",
+  "expected": "это замок",
+  "speech_seconds": 0.67,
+  "word_errors": 0,
+  "words": 2
+ },
+ "H02": {
+  "heard": "Это замок.",
+  "heard_norm": "это замок",
+  "expected": "это замок",
+  "speech_seconds": 0.67,
+  "word_errors": 0,
+  "words": 2
+ },
+ "L01": {
+  "heard": "Вчера вечером мы долго сидели на кухне, пили чай с лимоном и говорили о том, как тихо и быстро проходит лето в этом маленьком городе.",
+  "heard_norm": "вчера вечером мы долго сидели на кухне пили чай с лимоном и говорили о том как тихо и быстро проходит лето в этом маленьком городе",
+  "expected": "вчера вечером мы долго сидели на кухне пили чай с лимоном и говорили о том как тихо и быстро проходит лето в этом маленьком городе",
+  "speech_seconds": 7.13,
+  "word_errors": 0,
+  "words": 25
+ },
+ "N01": {
+  "heard": "У меня сегодня два вопроса, пять идей и двадцать одна свободная минута.",
+  "heard_norm": "у меня сегодня два вопроса пять идей и двадцать одна свободная минута",
+  "expected": "у меня сегодня два вопроса пять идей и двадцать одна свободная минута",
+  "speech_seconds": 3.68,
+  "word_errors": 0,
+  "words": 12
+ },
+ "P01": {
+  "heard": "Мил, мил.",
+  "heard_norm": "мил мил",
+  "expected": "мыл мил",
+  "speech_seconds": 1.14,
+  "word_errors": 1,
+  "words": 2
+ },
+ "P02": {
+  "heard": "Мат, мать.",
+  "heard_norm": "мат мать",
+  "expected": "мат мать",
+  "speech_seconds": 1.16,
+  "word_errors": 0,
+  "words": 2
+ },
+ "Q01": {
+  "heard": "Это чай.",
+  "heard_norm": "это чай",
+  "expected": "это чай",
+  "speech_seconds": 0.6,
+  "word_errors": 0,
+  "words": 2
+ },
+ "Q02": {
+  "heard": "Это чай.",
+  "heard_norm": "это чай",
+  "expected": "это чай",
+  "speech_seconds": 0.65,
+  "word_errors": 0,
+  "words": 2
+ },
+ "S01": {
+  "heard": "да.",
+  "heard_norm": "да",
+  "expected": "га",
+  "speech_seconds": 0.25,
+  "word_errors": 1,
+  "words": 1
+ },
+ "S02": {
+  "heard": "Пла.",
+  "heard_norm": "пла",
+  "expected": "ла",
+  "speech_seconds": 0.26,
+  "word_errors": 1,
+  "words": 1
+ },
+ "V01": {
+  "heard": "О.",
+  "heard_norm": "о",
+  "expected": "у",
+  "speech_seconds": 0.17,
+  "word_errors": 1,
+  "words": 1
+ },
+ "V02": {
+  "heard": "Я.",
+  "heard_norm": "я",
+  "expected": "е",
+  "speech_seconds": 0.22,
+  "word_errors": 1,
+  "words": 1
+ },
+ "V03": {
+  "heard": "эй",
+  "heard_norm": "эй",
+  "expected": "ы",
+  "speech_seconds": 0.19,
+  "word_errors": 1,
+  "words": 1
+ },
+ "W01": {
+  "heard": "замок.",
+  "heard_norm": "замок",
+  "expected": "замок",
+  "speech_seconds": 0.53,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W02": {
+  "heard": "замок.",
+  "heard_norm": "замок",
+  "expected": "замок",
+  "speech_seconds": 0.52,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W03": {
+  "heard": "мука.",
+  "heard_norm": "мука",
+  "expected": "мука",
+  "speech_seconds": 0.41,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W04": {
+  "heard": "мука.",
+  "heard_norm": "мука",
+  "expected": "мука",
+  "speech_seconds": 0.38,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W05": {
+  "heard": "Атлас.",
+  "heard_norm": "атлас",
+  "expected": "атлас",
+  "speech_seconds": 0.53,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W06": {
+  "heard": "Атлас.",
+  "heard_norm": "атлас",
+  "expected": "атлас",
+  "speech_seconds": 0.54,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W07": {
+  "heard": "Орган.",
+  "heard_norm": "орган",
+  "expected": "орган",
+  "speech_seconds": 0.46,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W08": {
+  "heard": "Арган.",
+  "heard_norm": "арган",
+  "expected": "орган",
+  "speech_seconds": 0.48,
+  "word_errors": 1,
+  "words": 1
+ },
+ "W09": {
+  "heard": "Пили.",
+  "heard_norm": "пили",
+  "expected": "пили",
+  "speech_seconds": 0.35,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W10": {
+  "heard": "Пили.",
+  "heard_norm": "пили",
+  "expected": "пили",
+  "speech_seconds": 0.33,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W11": {
+  "heard": "Села.",
+  "heard_norm": "села",
+  "expected": "село",
+  "speech_seconds": 0.49,
+  "word_errors": 1,
+  "words": 1
+ },
+ "W12": {
+  "heard": "Село.",
+  "heard_norm": "село",
+  "expected": "село",
+  "speech_seconds": 0.39,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W13": {
+  "heard": "полки.",
+  "heard_norm": "полки",
+  "expected": "полки",
+  "speech_seconds": 0.48,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W14": {
+  "heard": "палки.",
+  "heard_norm": "палки",
+  "expected": "полки",
+  "speech_seconds": 0.45,
+  "word_errors": 1,
+  "words": 1
+ },
+ "W15": {
+  "heard": "Хлопок.",
+  "heard_norm": "хлопок",
+  "expected": "хлопок",
+  "speech_seconds": 0.54,
+  "word_errors": 0,
+  "words": 1
+ },
+ "W16": {
+  "heard": "Хлопок.",
+  "heard_norm": "хлопок",
+  "expected": "хлопок",
+  "speech_seconds": 0.56,
+  "word_errors": 0,
+  "words": 1
+ }
+}

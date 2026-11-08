@@ -1,0 +1,13 @@
+{
+ "model": "Silero v5_6_ru",
+ "voice": "xenia",
+ "id": "S27",
+ "input": "А гд+е к+от? К+от т+ут.",
+ "source_text": "А гд+е к+от? К+от т+ут.",
+ "expected": "а где кот кот тут",
+ "notation": "plus",
+ "synth": "Silero v5_6_ru, 24 kHz, torch.manual_seed(42) per part, explicit-stress flags (put_accent etc. off); inputs over 160 chars split after .!?…» with 0.35 s silence between parts",
+ "generation_seconds": 0.792,
+ "audio_seconds": 1.95,
+ "sample_rate": 24000
+}
