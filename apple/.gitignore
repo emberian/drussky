@@ -4,3 +4,6 @@
 PrivatePack/
 # Bundled audio is rebuilt from the tracked manifests: python3 scripts/audio.py restore
 Drussky/Resources/Audio/*.m4a
+# The phone recognizer is downloaded and converted: python3 scripts/models.py fetch
+Drussky/Resources/Models/*
+!Drussky/Resources/Models/.gitkeep
