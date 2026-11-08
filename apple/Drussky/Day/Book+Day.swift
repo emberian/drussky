@@ -2,7 +2,7 @@ import Foundation
 import LearningCore
 
 /// What the book keeps about the shape of its days: probes and their outcomes, the parameters
-/// they taught it, the pages the desk shortened. Saved inside book.json (optional field `day`).
+/// they taught it, the pages the learner had lightened. Saved inside book.json (optional field `day`).
 struct DayState: Codable, Sendable, Equatable {
     var probes = ProbeLedger()
     /// FSRS stability scale learned from probes (ParameterNudge); nil: the published defaults.
@@ -13,7 +13,7 @@ struct DayState: Codable, Sendable, Equatable {
     var lastOpeningKind: String? = nil
     /// Due reviews left waiting when that page was composed.
     var deferredAtOpening: Int? = nil
-    /// Pages the desk shortened (page id → the line shown on the page), and when it last did.
+    /// Pages the learner had lightened (page id → the line saying what changed), and when last.
     var shortened: [String: String]? = nil
     var lastShortened: Date? = nil
     /// The opening the next new page owes this day ("morning" / "welcome-back", with the days
@@ -25,6 +25,8 @@ struct DayState: Codable, Sendable, Equatable {
     /// In-session only.
     var fatigue: FatigueEstimate? = nil
     var sharpAt: Date? = nil
+    /// The page on which the offer to lighten the rest stands (`Book.lighterOffer(for:)`).
+    var lighterOffer: String? = nil
 
     enum CodingKeys: String, CodingKey {
         case probes, stabilityScale, lastNudge, lastOpening, lastOpeningKind, deferredAtOpening, shortened, lastShortened
@@ -36,7 +38,7 @@ struct DayState: Codable, Sendable, Equatable {
 
 /// The day's shape, in Drussky's terms: when a page is composed for a new day or a return, how
 /// many reviews a day asks for, when the course is left for what is ready or what is weak, which
-/// exercises are retention probes, and what the desk does when the learner tires.
+/// exercises are retention probes, and what the desk offers when the learner tires.
 extension Book {
     static let morningUnit = "Но́вый день · New day"
     static let welcomeBackUnit = "С возвраще́нием · Welcome back"
@@ -374,8 +376,9 @@ extension Book {
         if changed { saveNow() }
     }
 
-    /// After every result: the session is read for fatigue. Tired: this page shortens. Sharp: the
-    /// next page may bring one more new word. A probe just observed may nudge the memory model.
+    /// After every result: the session is read for fatigue. Tired: the page offers to make the
+    /// rest lighter, once, and changes nothing until the learner takes the offer. Sharp: the next
+    /// page may bring one more new word. A probe just observed may nudge the memory model.
     func deskObserved(_ ref: ExerciseRef, probed: Bool) {
         if probed { nudgeParameters() }
         guard let p = index(ofPage: ref.pageID), pages[p].results[safe: ref.index]?.status.isComplete == true,
@@ -396,19 +399,34 @@ extension Book {
         let estimate = Fatigue.estimate(events: knowledge.model.events, now: now(), pageStarted: started)
         day.fatigue = estimate
         switch estimate.level {
-        case .tired where p == currentPage && day.shortened?[pageID] == nil: shorten(page: p)
+        case .tired where p == currentPage && pages[p].lightened == nil && day.shortened?[pageID] == nil && !lightening(of: pages[p]).isEmpty:
+            day.lighterOffer = pageID
         case .sharp: day.sharpAt = now()
         default: break
         }
     }
 
-    /// The page shortens: of the reviews not yet begun, two stay as recognition (hear or read and
-    /// pick) instead of recall, the rest are left for a fresher hour (skipped, never graded).
-    /// Begun means any mark at all: an attempt or check, a take, or ink on the strip (the writing
-    /// may still be under the recognizer). A replaced exercise starts a new round, so a check or
-    /// take that began on the old one lands nowhere (`record` and `commitTake` compare rounds).
-    private func shorten(page p: Int) {
-        var page = pages[p]
+    /// What lightening a page would do: of the reviews not yet begun, two stay as recognition
+    /// (hear or read and pick) instead of recall, the rest are left for a fresher hour (skipped,
+    /// never graded). Begun means any mark at all: an attempt or check, a take, or ink on the strip
+    /// (the writing may still be under the recognizer).
+    struct Lightening {
+        /// Exercise index → the recognition exercise that replaces it.
+        var choices: [(index: Int, exercise: Exercise)] = []
+        /// Exercise indices left for later.
+        var deferred: [Int] = []
+        var isEmpty: Bool { choices.isEmpty && deferred.isEmpty }
+
+        /// What changed, in one line.
+        var line: String {
+            var changes: [String] = []
+            if !choices.isEmpty { changes.append("\(choices.count) review\(choices.count == 1 ? " now uses" : "s now use") choices.") }
+            if !deferred.isEmpty { changes.append("\(deferred.count) review\(deferred.count == 1 ? " waits" : "s wait") for later.") }
+            return changes.joined(separator: " ")
+        }
+    }
+
+    func lightening(of page: BookPage) -> Lightening {
         let probeItems = Set(day.probes.probes.compactMap(\.item))
         let untouched = page.exercises.indices.filter { i in
             let r = page.results[i]
@@ -416,34 +434,63 @@ extension Book {
                 && r.recognized == nil && r.recording == nil && !probeItems.contains("\(page.id)#\(i)")
                 && !FileManager.default.fileExists(atPath: store.inkURL(pageID: page.id, index: i).path)
         }
-        var choices = 0
-        var deferred = 0
+        var plan = Lightening()
         for i in untouched.prefix(2) {
             let ex = page.exercises[i]
             guard let key = ex.reviewKey, [.dictation, .translate, .fill, .readAloud].contains(ex.kind) else { continue }
             let can = reviewModalities(for: key)
             guard let m = [Modality.hearPick, .readPick].first(where: { can.contains($0) }) else { continue }
-            page.exercises[i] = reviewExercise(for: key, modality: m, variant: i)
-            page.results[i].round = page.results[i].roundNumber + 1
-            choices += 1
+            plan.choices.append((i, reviewExercise(for: key, modality: m, variant: i)))
         }
-        for i in untouched.dropFirst(2) {
+        plan.deferred = Array(untouched.dropFirst(2))
+        return plan
+    }
+
+    /// Whether the page shows the one-line offer to make the rest lighter: the desk read the
+    /// session as tired while this page was open, the learner has not yet answered the offer, and
+    /// there is still something it would change.
+    func lighterOffer(for pageIndex: Int) -> Bool {
+        guard pages.indices.contains(pageIndex), let offered = day.lighterOffer, pages[pageIndex].id == offered,
+              pages[pageIndex].lightened == nil else { return false }
+        return !lightening(of: pages[pageIndex]).isEmpty
+    }
+
+    /// The learner took the offer: the lightening is applied, exactly as planned, and the choice
+    /// is kept on the page. A replaced exercise starts a new round, so a check or take that began
+    /// on the old one lands nowhere (`record` and `commitTake` compare rounds).
+    func lighten(page p: Int) {
+        guard pages.indices.contains(p) else { return }
+        var page = pages[p]
+        let plan = lightening(of: page)
+        page.lightened = true
+        day.lighterOffer = nil
+        guard !plan.isEmpty else { replace(page: page, at: p); return }
+        for (i, exercise) in plan.choices {
+            page.exercises[i] = exercise
+            page.results[i].round = page.results[i].roundNumber + 1
+        }
+        for i in plan.deferred {
             page.results[i].status = .skipped
             page.results[i].updated = now()
-            deferred += 1
         }
-        guard choices + deferred > 0 else { return }
         if page.finished == nil && page.results.allSatisfy({ $0.status.isComplete }) { page.finished = now() }
         replace(page: page, at: p)
-        var changes: [String] = []
-        if choices > 0 { changes.append("\(choices) review\(choices == 1 ? " now uses" : "s now use") choices.") }
-        if deferred > 0 { changes.append("\(deferred) review\(deferred == 1 ? " waits" : "s wait") for later.") }
-        let line = changes.joined(separator: " ")
-        day.shortened = (day.shortened ?? [:]).merging([page.id: line]) { _, new in new }
+        day.shortened = (day.shortened ?? [:]).merging([page.id: plan.line]) { _, new in new }
         day.lastShortened = now()
     }
 
-    /// One calm line for a page's footer, when the desk changed it.
+    /// The current page changed (Book.currentPage): an offer standing on another page is declined
+    /// — the page stays as it was, and is not asked again.
+    func deskPageChanged() {
+        guard let offered = day.lighterOffer, pages[safe: currentPage]?.id != offered else { return }
+        day.lighterOffer = nil
+        guard let p = index(ofPage: offered), pages[p].lightened == nil else { return }
+        var page = pages[p]
+        page.lightened = false
+        replace(page: page, at: p)
+    }
+
+    /// One calm line at the page's current position, when the learner had it lightened.
     func deskLine(for pageIndex: Int) -> String? {
         guard pages.indices.contains(pageIndex) else { return nil }
         return day.shortened?[pages[pageIndex].id]

@@ -161,9 +161,13 @@ struct ListeningItem: Codable, Sendable, Hashable, Identifiable {
         return (crucial_span, why)
     }
 
-    /// Which voice says a turn. `any` keeps the course voice (xenia); `unfamiliar` moves to aidar.
-    /// An exchange always has two voices so A and B are audibly two people: xenia/aidar, or
-    /// aidar/baya when the item asks for unfamiliar ones. Mirrored by scripts/make_listening_audio.py.
+    /// Which voice says a turn. `any` keeps the course voice (xenia) for everything the item plays —
+    /// the turn, both intonation forms, the span and choices revealed after the answer — so a page
+    /// of such items is one voice, not whichever clip the course happened to have; `unfamiliar`
+    /// moves to aidar. An exchange always has two voices so A and B are audibly two people:
+    /// xenia/aidar, or aidar/baya when the item asks for unfamiliar ones. Mirrored by
+    /// scripts/make_listening_audio.py, which makes sure each assigned voice has its clip
+    /// (`Voice.recordingURL(for:voice:)`).
     func voice(forLine i: Int = 0) -> String {
         let unfamiliar = voice_hint == "unfamiliar"
         guard kind.isExchange else { return unfamiliar ? "aidar" : "xenia" }

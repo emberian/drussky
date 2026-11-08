@@ -2,13 +2,22 @@ import Charts
 import LearningCore
 import SwiftUI
 
-/// One calm line at the foot of a page the desk shortened.
+/// One calm line at the page's current position: the offer to make the rest lighter while it
+/// stands (a single button; nothing happens until it is tapped), or, once taken, what changed.
 struct DeskLine: View {
     @Environment(Book.self) private var book
     let pageIndex: Int
 
     var body: some View {
-        if let line = book.deskLine(for: pageIndex) {
+        if book.lighterOffer(for: pageIndex) {
+            Button("Make the rest of this page lighter") {
+                withAnimation(.easeInOut(duration: 0.3)) { book.lighten(page: pageIndex) }
+            }
+            .buttonStyle(.plain)
+            .scaledFont(15, weight: .medium)
+            .foregroundStyle(Theme.accent)
+            .accessibilityHint("Two of the remaining reviews become choices; the rest wait for a later page.")
+        } else if let line = book.deskLine(for: pageIndex) {
             Text(line)
                 .scaledFont(15)
                 .foregroundStyle(Theme.muted)
