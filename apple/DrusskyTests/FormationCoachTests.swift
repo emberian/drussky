@@ -89,6 +89,8 @@ final class FormationCoachTests: XCTestCase {
         var o = ink("о")
         o[0].reverse()  // clockwise
         XCTAssertEqual(hint(o, "О"), "Go round о anticlockwise, starting at the top.")
+        // A left hand rounds о the other way; with direction left alone the clockwise о is simply well formed.
+        XCTAssertEqual(FormationCoach.hint(for: o, upper: "О", lower: "о", models: models, directionMatters: false), "That о is formed like the model.")
 
         var h = ink("Н")
         h[2].reverse()

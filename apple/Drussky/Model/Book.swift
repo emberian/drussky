@@ -115,6 +115,9 @@ struct Settings: Codable, Sendable, Equatable {
     var judge: String? = nil
     /// The «Структу́ра» layer on reading pages, as last left (Structure/).
     var showStructure: Bool? = nil
+    /// Writes with the left hand: the formation coach leaves stroke direction alone (a left hand
+    /// rounds о the other way and draws bars right to left); shape, start, size still count.
+    var leftHanded: Bool? = nil
 
     init() {}
 
@@ -130,6 +133,7 @@ struct Settings: Codable, Sendable, Equatable {
         probes = try c.decodeIfPresent(Bool.self, forKey: .probes)
         judge = try c.decodeIfPresent(String.self, forKey: .judge)
         showStructure = try c.decodeIfPresent(Bool.self, forKey: .showStructure)
+        leftHanded = try c.decodeIfPresent(Bool.self, forKey: .leftHanded)
     }
 }
 

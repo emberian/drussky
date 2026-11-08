@@ -59,7 +59,8 @@ enum FormationCoach {
 
     /// Assesses one written letter against the candidate models (capital and small). Returns nil
     /// when the ink does not clearly look like any of them; then nothing should be said.
-    static func assess(_ ink: [[CGPoint]], candidates: [StrokeModels.Letter], lines: StrokeModels.Lines) -> Assessment? {
+    /// `directionMatters` false (a left-handed learner): a stroke drawn the other way round is not an issue.
+    static func assess(_ ink: [[CGPoint]], candidates: [StrokeModels.Letter], lines: StrokeModels.Lines, directionMatters: Bool = true) -> Assessment? {
         let ink = ink.filter { !$0.isEmpty }
         guard !ink.isEmpty, let box = bounds(ink.flatMap { $0 }), max(box.width, box.height) > 6 else { return nil }
         let inkCloud = cloud(ink)
@@ -91,7 +92,7 @@ enum FormationCoach {
                costs[0][0].cost > costs[0][first].cost + 0.04 {
                 issues.append(.firstStroke(found: first))
             }
-            if let i = mine.indices.first(where: { costs[$0][pairing[$0]].reversed && costs[$0][pairing[$0]].cost < 0.2 }) {
+            if directionMatters, let i = mine.indices.first(where: { costs[$0][pairing[$0]].reversed && costs[$0][pairing[$0]].cost < 0.2 }) {
                 issues.append(.reversed(stroke: pairing[i]))
             }
             if ink.count >= model.strokes.count + 2 { issues.append(.extraStrokes) }
@@ -124,14 +125,14 @@ enum FormationCoach {
 
     /// One hint for the letter written most recently in `ink`, or nil when there is nothing
     /// confident to say. `letter` is the capital; both cases are candidates.
-    static func hint(for ink: [[CGPoint]], upper: String, lower: String, models: StrokeModels) -> String? {
+    static func hint(for ink: [[CGPoint]], upper: String, lower: String, models: StrokeModels, directionMatters: Bool = true) -> String? {
         let candidates = [upper, lower].compactMap { models.letter($0) }
         guard !candidates.isEmpty, !ink.isEmpty else { return nil }
         let joinGap = max(4, candidates.map(\.internalGap).max()! + 5)
         let maxWidth = candidates.map(\.bounds.width).max()! * 1.4 + 6
         let groups = segment(ink, joinGap: joinGap, maxWidth: maxWidth)
         guard let latest = groups.max(by: { $0.max()! < $1.max()! }),
-              let a = assess(latest.map { ink[$0] }, candidates: candidates, lines: models.lines),
+              let a = assess(latest.map { ink[$0] }, candidates: candidates, lines: models.lines, directionMatters: directionMatters),
               let model = models.letter(a.glyph) else { return nil }
         guard let issue = a.issues.first else { return a.wellMatched ? "That \(a.glyph) is formed like the model." : nil }
         return phrase(issue, model: model)
