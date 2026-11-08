@@ -136,9 +136,11 @@ page's material is ready, the course goes on with reviews woven in. Now and then
 book expects you to recall are slipped onto pages one, seven and thirty days later. The back page,
 *Practice evidence and estimates*, compares review predictions with observed answers, and the
 memory model's intervals move a little, slowly, towards the evidence. When answers slow and misses
-pile up late in a long page, the page shortens (two remaining reviews become listening or reading
-choices, the rest wait) and says so in one line. Settings: retention aim (80–95%), reviews per day,
-probes on or off. (`LearningCore/README.md`, "Time and the learner".)
+pile up late in a long page, one line appears where you are — *Make the rest of this page lighter* —
+and nothing changes unless you tap it: then two remaining reviews become listening or reading
+choices, the rest wait for a later page, and the line says what changed. Turning the page leaves it
+as it was; the page is asked once. The page never shortens itself. Settings: retention aim
+(80–95%), reviews per day, probes on or off. (`LearningCore/README.md`, "Time and the learner".)
 
 ## The tutor
 
@@ -413,7 +415,7 @@ needed), `-qa-myrussian` (with `-qa-contents`: opens My Russian);
 marked transcript; `-qa-nokey` hides the tutor key for the launch without touching the Keychain, `-qa-offline` poses the offline note);
 `-qa-settings`; `-qa-day N` / `-qa-away D` (the pages were done N or D days ago, then the page is
 turned: a morning or welcome-back page), `-qa-probes` (a synthetic answered probe set for the cover
-chart), `-qa-tired` (the current page marked shortened);
+chart), `-qa-tired` (the offer to make the rest of the page lighter, standing on the current page);
 `-qa-settings`, `-qa-goal <library id>` (make that text the learner's book), `-qa-goal-pull` (an
 offline page toward it), `-qa-goal-first` (open its first page now); `-qa-judge` (ink on the first
 open recall exercise with Check tapped: the self-judgement panel), `-qa-hooks` (canned hooks on a few

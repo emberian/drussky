@@ -29,6 +29,12 @@ struct PageView: View {
                                 .padding(.leading, marginWidth + 18)
                                 .padding(.bottom, 12)
                             ForEach(page.exercises.indices, id: \.self) { i in
+                                if active == i {
+                                    // The desk's one line (the offer to lighten, or what changed) sits where the learner is.
+                                    DeskLine(pageIndex: pageIndex)
+                                        .padding(.leading, marginWidth + 18)
+                                        .padding(.top, 14).padding(.bottom, 2)
+                                }
                                 ExerciseRow(slot: ExerciseSlot(book: book, pageIndex: pageIndex, index: i),
                                             isActive: active == i, marginWidth: marginWidth,
                                             onAsk: { asking = AskTarget(exercise: i) })
@@ -112,7 +118,7 @@ struct PageView: View {
 
     @ViewBuilder private func footer(_ page: BookPage) -> some View {
         VStack(alignment: .leading, spacing: 18) {
-            DeskLine(pageIndex: pageIndex)
+            if page.firstOpenIndex == nil { DeskLine(pageIndex: pageIndex) }  // nothing open: the current position is the foot
             if page.isBaseline { BaselineRecallNotes() }
             if page.isFinished && page.isBaseline {
                 Text("This week’s examples are kept above. Return to them beside a later sample to see what changed.")

@@ -21,6 +21,10 @@ struct BookPage: Codable, Identifiable, Sendable {
     /// Shelf items (Model/Shelves.swift source ids) this page's footer offers: what the course had
     /// reached when the page was composed. Written once, here; the learner opens them or not.
     var offers: [String]? = nil
+    /// The learner's answer to the desk's offer to make the rest of the page lighter (Book+Day):
+    /// true, taken; false, the page was turned with the offer standing; nil, never offered or not
+    /// yet answered. Absent in notebooks from before the offer existed.
+    var lightened: Bool? = nil
 
     var isFinished: Bool { finished != nil }
     var firstOpenIndex: Int? { results.firstIndex { !$0.status.isComplete } }
@@ -148,7 +152,12 @@ final class Book {
     @ObservationIgnored private var phraseIndex: [String: String]?
     /// Index into course.pageSequence of the next authored page to instantiate.
     var courseCursor: Int = 0
-    var currentPage: Int = 0 { didSet { scheduleSave() } }
+    var currentPage: Int = 0 {
+        didSet {
+            scheduleSave()
+            if oldValue != currentPage { deskPageChanged() }  // an offer to lighten left standing is declined (Book+Day)
+        }
+    }
     var settings = Settings() { didSet { scheduleSave() } }
     /// The day's shape, probes and what the desk noticed (Day/Book+Day.swift).
     var day = DayState() { didSet { scheduleSave() } }
@@ -459,7 +468,7 @@ final class Book {
         fluency.observe(page.exercises[ref.index], before: before, after: after, rate: NarrationPlayer.shared.rate)  // listening (Fluency/)
     }
 
-    /// Replaces a page as a whole (the desk shortening one, Book+Day); its id never changes.
+    /// Replaces a page as a whole (the learner lightening one, Book+Day); its id never changes.
     func replace(page: BookPage, at index: Int) {
         guard pages.indices.contains(index), pages[index].id == page.id else { return }
         pages[index] = page
