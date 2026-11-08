@@ -311,7 +311,9 @@ final class Book {
             exercises.insert(reviewExercise(for: item.id, modality: item.modality, variant: pages.count + i),
                              at: min(slots[i], exercises.count))
         }
-        exercises += extraNewItem(excluding: taughtHere)  // one more new word while the learner is sharp
+        // One more new word while the learner is sharp — before the page's closing diary line, when it has one.
+        let diaryAt = exercises.last?.kind == .diary ? exercises.count - 1 : exercises.count
+        exercises.insert(contentsOf: extraNewItem(excluding: taughtHere), at: diaryAt)
         appendPage(sourceID: source.id, unitTitle: unit.title, title: source.title, intro: source.intro,
                    isReview: false, exercises: exercises)
         return true
@@ -353,7 +355,11 @@ final class Book {
         let number = pages.count + 1
         // A random suffix keeps ink/voice file names unique even if the notebook is ever restarted.
         let id = String(format: "p%04d-", number) + UUID().uuidString.prefix(6).lowercased()
-        let exercises = exercises + probeExercises(pageID: id, among: exercises)  // retention probes due now
+        // Retention probes due now go after the page's work but before its closing diary line, so
+        // the free line stays the last thing on the page.
+        let diaryTail = exercises.last?.kind == .diary ? Array(exercises.suffix(1)) : []
+        let body = Array(exercises.dropLast(diaryTail.count))
+        let exercises = body + probeExercises(pageID: id, among: body) + diaryTail
         let offers = shelfOffers()  // an episode or reading the course has reached (Model/Shelves.swift)
         pages.append(BookPage(id: id, number: number, sourceID: sourceID,
                               unitTitle: unitTitle, title: title, intro: intro, isReview: isReview,

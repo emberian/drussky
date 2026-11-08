@@ -265,7 +265,8 @@ enum GrammarPages {
         guard exercises.count >= 4 else {
             return "A grammar page needs a few words you can already write. The tables open up once nouns and verbs have started changing their endings."
         }
-        let titles = tables.compactMap { p.table($0)?.title }.joined(separator: " · ")
+        // Table titles carry their own middle dots («Verbs II · -ишь»), so the list is joined with commas.
+        let titles = tables.compactMap { p.table($0)?.title }.joined(separator: ", ")
         book.insertWrittenPage(title: "Grammar page", intro: "The tables behind the words: \(titles). Each cell is a pattern; fill the weak ones and the system fills in on the inside cover.",
                                unitTitle: "Grammar", exercises: exercises, newWords: [])
         return nil

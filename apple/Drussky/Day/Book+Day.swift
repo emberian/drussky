@@ -172,7 +172,7 @@ extension Book {
             title = source.title
             intro = [intro, source.intro].compactMap { $0 }.joined(separator: "\n\n")
         }
-        exercises += diaryLine()
+        exercises += diaryLine(after: exercises)
         appendPage(sourceID: sourceID, unitTitle: unitTitle, title: title, intro: intro, isReview: sourceID == nil, exercises: exercises)
         noteOpening("morning", deferred: comp.deferred.count)
         return true
@@ -191,7 +191,7 @@ extension Book {
             + (waiting > 0 ? "; the rest come back over the next days, not all at once." : ".")
             + " Missing one costs nothing — it just comes back sooner."
         appendPage(sourceID: nil, unitTitle: Self.welcomeBackUnit, title: "Good to see you", intro: intro, isReview: true,
-                   exercises: exercises + diaryLine())
+                   exercises: exercises + diaryLine(after: exercises))
         noteOpening("welcome-back", deferred: waiting)
         return true
     }
@@ -233,10 +233,10 @@ extension Book {
         return targets[key] != nil ? key : nil
     }
 
-    /// A free line at the end of a composed page, when the course knows the `diary` exercise kind.
-    private func diaryLine() -> [Exercise] {
-        guard let kind = ExerciseKind(rawValue: "diary") else { return [] }
-        return [Exercise(kind: kind)]
+    /// A free line at the end of a composed page — unless the page already carries one (a course
+    /// page from unit 3 on ends with its own prompted diary line; two in a row is a slip).
+    private func diaryLine(after exercises: [Exercise]) -> [Exercise] {
+        exercises.contains { $0.kind == .diary } ? [] : [Exercise(kind: .diary)]
     }
 
     private func noteOpening(_ kind: String, deferred: Int) {

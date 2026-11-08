@@ -68,9 +68,10 @@ extension Book {
         guard force || (canOpenConstructionPractice && freshConstructionChoices.count >= 3) else { return false }
         var intro = Exercise(kind: .explain)
         intro.text = "First follow one noun through three roles. Then choose an ending in new sentences: who or what, the direct object, or what is absent."
-        // These explanations are text-only: no new spoken strings are requested.
+        // These explanations are text-only (no new spoken strings are requested), so the three
+        // sentences are lines of one note: each Russian line with its English under it, never mixed.
         var examples = Exercise(kind: .explain)
-        examples.text = "Кни́га здесь. — The book is here. Я чита́ю кни́гу. — I am reading the book. Здесь нет кни́ги. — There is no book here."
+        examples.text = "Кни́га здесь.\nThe book is here.\n\nЯ чита́ю кни́гу.\nI am reading the book.\n\nЗдесь нет кни́ги.\nThere is no book here."
         let pool = force && freshConstructionChoices.count < 3 ? ConstructionChoice.bank : freshConstructionChoices
         let choices = Array(pool.filter { !ConstructionChoice.reservedForProbe($0) }.prefix(3))
         var diary = Exercise(kind: .diary)

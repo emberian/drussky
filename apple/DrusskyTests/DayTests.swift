@@ -50,7 +50,11 @@ final class DayTests: XCTestCase {
         let course = page.exercises.indices.filter { page.exercises[$0].reviewKey == nil }
         XCTAssertFalse(course.isEmpty)
         XCTAssertTrue(course.allSatisfy { $0 >= n })
-        XCTAssertTrue(probes(page, book).allSatisfy { $0 > course.last! }, "probes, if any, come last")
+        let diaries = page.exercises.indices.filter { page.exercises[$0].kind == .diary }
+        XCTAssertEqual(diaries.count, 1, "one diary line closes the page, never two")
+        XCTAssertEqual(diaries.last, page.exercises.indices.last, "the diary line is the last thing on the page")
+        let work = course.filter { !diaries.contains($0) }
+        XCTAssertTrue(probes(page, book).allSatisfy { $0 > work.last! && $0 < diaries.last! }, "probes, if any, come after the work and before the diary")
         XCTAssertTrue(page.intro?.hasPrefix("A new day.") ?? false, page.intro ?? "")
         let keys = page.exercises.compactMap(\.reviewKey)
         XCTAssertEqual(Set(keys).count, keys.count, "no item twice, probes included")

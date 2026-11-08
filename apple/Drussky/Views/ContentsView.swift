@@ -8,6 +8,7 @@ struct ContentsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var baselineExhausted = false
     @State private var showEvidence = false
+    @State private var earlierPagesShown = false
 
     var body: some View {
         NavigationStack {
@@ -46,7 +47,7 @@ struct ContentsView: View {
                 .frame(maxWidth: .infinity)
             }
             .background(GridPaper(marginX: nil))
-            .navigationTitle("Алфави́т")
+            .navigationTitle("Contents")
             .navigationDestination(isPresented: $showEvidence) {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 24) {
@@ -112,43 +113,62 @@ struct ContentsView: View {
         }
     }
 
+    /// How many of the newest pages the cover lists before folding the rest: a week or so of
+    /// work, so the alphabet and the rest of the cover stay within reach after months of pages.
+    static let recentPages = 8
+
     private var pages: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        let all = Array(book.pages.indices.reversed())
+        let recent = all.prefix(Self.recentPages), earlier = all.dropFirst(Self.recentPages)
+        return VStack(alignment: .leading, spacing: 4) {
             Text("Pages").font(.system(size: 22, weight: .bold, design: .serif)).foregroundStyle(Theme.text)
                 .padding(.bottom, 6)
-            ForEach(book.pages.indices.reversed(), id: \.self) { i in
-                let page = book.pages[i]
-                Button {
-                    book.goTo(i)
-                    dismiss()
+            ForEach(recent, id: \.self) { pageRow($0) }
+            if !earlier.isEmpty {
+                DisclosureGroup(isExpanded: $earlierPagesShown) {
+                    ForEach(earlier, id: \.self) { pageRow($0) }
                 } label: {
-                    HStack(spacing: 14) {
-                        Text("\(page.number)").font(.system(size: 15, weight: .bold, design: .rounded))
-                            .monospacedDigit().foregroundStyle(Theme.muted).frame(width: 34, alignment: .trailing)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(page.title).font(.system(size: 17, weight: .semibold)).foregroundStyle(Theme.text)
-                            Text(page.unitTitle).font(.system(size: 13)).foregroundStyle(Theme.muted)
-                        }
-                        Spacer()
-                        if page.isFinished && page.isBaseline {
-                            Text("Sample kept").font(Theme.label(12)).foregroundStyle(Theme.muted)
-                        } else if page.isFinished {
-                            Text(GradeStamp.mark(for: page)).font(Theme.cursive(30)).foregroundStyle(Theme.redPen)
-                        } else {
-                            Text("\(page.completedCount)/\(page.exercises.count)")
-                                .font(.system(size: 14, design: .rounded)).foregroundStyle(Theme.muted)
-                        }
-                        if i == book.currentPage {
-                            Image(systemName: "bookmark.fill").foregroundStyle(Theme.redPen)
-                        }
-                    }
-                    .padding(.vertical, 10).padding(.horizontal, 12)
-                    .background(RoundedRectangle(cornerRadius: 12).fill(i == book.currentPage ? Theme.card : .clear))
-                    .contentShape(Rectangle())
+                    Text("Earlier pages · \(earlier.count)").font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.muted)
                 }
-                .buttonStyle(.plain)
+                .tint(Theme.muted)
+                .padding(.horizontal, 12).padding(.top, 6)
+                .accessibilityIdentifier("earlier-pages")
             }
         }
+        .onAppear { if earlier.contains(book.currentPage) { earlierPagesShown = true } }
+    }
+
+    private func pageRow(_ i: Int) -> some View {
+        let page = book.pages[i]
+        return Button {
+            book.goTo(i)
+            dismiss()
+        } label: {
+            HStack(spacing: 14) {
+                Text("\(page.number)").font(.system(size: 15, weight: .bold, design: .rounded))
+                    .monospacedDigit().foregroundStyle(Theme.muted).frame(width: 34, alignment: .trailing)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(page.title).font(.system(size: 17, weight: .semibold)).foregroundStyle(Theme.text)
+                    Text(page.unitTitle).font(.system(size: 13)).foregroundStyle(Theme.muted)
+                }
+                Spacer()
+                if page.isFinished && page.isBaseline {
+                    Text("Sample kept").font(Theme.label(12)).foregroundStyle(Theme.muted)
+                } else if page.isFinished {
+                    Text(GradeStamp.mark(for: page)).font(Theme.cursive(30)).foregroundStyle(Theme.redPen)
+                } else {
+                    Text("\(page.completedCount)/\(page.exercises.count)")
+                        .font(.system(size: 14, design: .rounded)).foregroundStyle(Theme.muted)
+                }
+                if i == book.currentPage {
+                    Image(systemName: "bookmark.fill").foregroundStyle(Theme.redPen)
+                }
+            }
+            .padding(.vertical, 10).padding(.horizontal, 12)
+            .background(RoundedRectangle(cornerRadius: 12).fill(i == book.currentPage ? Theme.card : .clear))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 }
 

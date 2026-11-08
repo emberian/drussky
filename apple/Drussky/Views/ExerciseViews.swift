@@ -301,7 +301,9 @@ struct ExplainExercise: View {
                     ForEach(examples, id: \.self) { ex in
                         VStack(alignment: .leading, spacing: 4) {
                             RussianLine(text: ex.ru, size: 24)
-                                .fixedSize()  // a word, never "м…": the flow row gives each example its own width
+                                // A word takes its own width in the flow row, never "м…"; a sentence wider
+                                // than the page (a dialogue line on a phone) wraps instead of being clipped.
+                                .fixedSize(horizontal: false, vertical: true)
                             Text(ex.en).scaledFont(15).foregroundStyle(Theme.muted)
                         }
                     }
