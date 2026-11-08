@@ -1171,7 +1171,7 @@
    "emoji": "🌌"
   },
   {
-   "ru": "пла́нета",
+   "ru": "плане́та",
    "en": "planet",
    "emoji": "🪐"
   },
@@ -1409,7 +1409,7 @@
    "en": "in space"
   },
   {
-   "ru": "на пла́нете",
+   "ru": "на плане́те",
    "en": "on the planet"
   },
   {
@@ -3624,7 +3624,7 @@
     {
      "id": "u3-p1",
      "title": "Э and Е",
-     "intro": "Э says e as in bet and starts the most useful word in Russian, э́то. Е says ye and gives you no.",
+     "intro": "Э says e as in bet and starts the most useful word in Russian, э́то. Е says ye at the start of a word, and softens the consonant before it in не and нет.",
      "exercises": [
       {
        "kind": "meet",
@@ -3936,6 +3936,10 @@
          "en": "The cat is at home."
         },
         {
+         "ru": "кни́га",
+         "en": "book"
+        },
+        {
          "ru": "го́род",
          "en": "city, town"
         }
@@ -3950,7 +3954,7 @@
        "say": "кни́га",
        "options": [
         "кни́га",
-        "нога́",
+        "вода́",
         "го́род"
        ]
       },
@@ -3985,7 +3989,7 @@
        "options": [
         "Where is the book?",
         "The book is there.",
-        "The leg is there."
+        "The water is there."
        ],
        "answer": 1
       },
@@ -4220,7 +4224,7 @@
       },
       {
        "kind": "explain",
-       "text": "My follows the thing it owns: мой for a consonant ending, моя́ for -а, моё for -о.",
+       "text": "Мой, моя́, моё agree with the noun they describe: мой for a consonant ending (and male people like па́па), моя́ for -а, моё for -о.",
        "examples": [
         {
          "ru": "мой дом",
@@ -4308,6 +4312,10 @@
         {
          "ru": "люблю́",
          "en": "I love"
+        },
+        {
+         "ru": "лю́ди",
+         "en": "people"
         }
        ]
       },
@@ -4472,7 +4480,7 @@
       },
       {
        "kind": "explain",
-       "text": "То́же means too or also, and наш means our.",
+       "text": "То́же means too or also (doing the same thing as someone else), and наш means our.",
        "examples": [
         {
          "ru": "Я то́же.",
@@ -7594,11 +7602,11 @@
     {
      "id": "u18-p2",
      "title": "In the city, in space",
-     "intro": "Feminine and masculine alike take -е: в го́роде, на пла́нете, в ко́смосе.",
+     "intro": "Feminine and masculine alike take -е: в го́роде, на плане́те, в ко́смосе.",
      "exercises": [
       {
        "kind": "explain",
-       "text": "Nearly every noun takes -е after в or на for where: в го́роде, в ко́смосе, на пла́нете, в кни́ге. Nouns like ста́нция swap the final я for и: на ста́нции.",
+       "text": "Nearly every noun takes -е after в or на for where: в го́роде, в ко́смосе, на плане́те, в кни́ге. Nouns like ста́нция swap the final я for и: на ста́нции.",
        "examples": [
         {
          "ru": "в го́роде",
@@ -7609,7 +7617,7 @@
          "en": "in space"
         },
         {
-         "ru": "на пла́нете",
+         "ru": "на плане́те",
          "en": "on the planet"
         },
         {
@@ -7653,7 +7661,7 @@
        "before": "Ро́бот на ",
        "after": ".",
        "hint": "The robot is on the planet.",
-       "answer": "пла́нете"
+       "answer": "плане́те"
       },
       {
        "kind": "dictation",
@@ -7752,7 +7760,7 @@
       },
       {
        "kind": "read_aloud",
-       "text": "Я ви́жу звезду́ и пла́нету."
+       "text": "Я ви́жу звезду́ и плане́ту."
       },
       {
        "kind": "translate",
@@ -8312,7 +8320,7 @@
          "en": "space"
         },
         {
-         "ru": "пла́нета",
+         "ru": "плане́та",
          "en": "planet"
         },
         {
@@ -8346,9 +8354,9 @@
       },
       {
        "kind": "listen_pick",
-       "say": "пла́нета",
+       "say": "плане́та",
        "options": [
-        "пла́нета",
+        "плане́та",
         "раке́та",
         "звезда́"
        ]
@@ -8363,7 +8371,7 @@
       {
        "kind": "translate",
        "en": "planet",
-       "answer": "пла́нета"
+       "answer": "плане́та"
       },
       {
        "kind": "copy",

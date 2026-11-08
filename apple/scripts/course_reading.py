@@ -83,11 +83,11 @@ def units(h):
             dc("Кот в до'ме."), ra("Где чай? Чай на столе'."), tl("outside, in the street", "на у'лице"),
             rm("Ро'бот на у'лице.", ["The robot is outside.", "The robot is in the house.", "The robot is on the table."]),
         ]),
-        ("In the city, in space", "Feminine and masculine alike take -е: в го́роде, на пла́нете, в ко́смосе.", [
-            ex("Nearly every noun takes -е after в or на for where: в го'роде, в ко'смосе, на пла'нете, в кни'ге. Nouns like ста'нция swap the final я for и: на ста'нции.",
-               [("в го'роде", "in the city"), ("в ко'смосе", "in space"), ("на пла'нете", "on the planet"), ("в кни'ге", "in the book"), ("Я живу' в го'роде.", "I live in a city.")]),
+        ("In the city, in space", "Feminine and masculine alike take -е: в го́роде, на плане́те, в ко́смосе.", [
+            ex("Nearly every noun takes -е after в or на for where: в го'роде, в ко'смосе, на плане'те, в кни'ге. Nouns like ста'нция swap the final я for и: на ста'нции.",
+               [("в го'роде", "in the city"), ("в ко'смосе", "in space"), ("на плане'те", "on the planet"), ("в кни'ге", "in the book"), ("Я живу' в го'роде.", "I live in a city.")]),
             lp("в ко'смосе", ["в ко'смосе", "в го'роде", "в кни'ге"]), tl("in space", "в ко'смосе"), tl("in the city", "в го'роде"),
-            fl("Мы живём в ", "го'роде", ".", "We live in a city."), fl("Ро'бот на ", "пла'нете", ".", "The robot is on the planet."),
+            fl("Мы живём в ", "го'роде", ".", "We live in a city."), fl("Ро'бот на ", "плане'те", ".", "The robot is on the planet."),
             dc("Что в кни'ге?"), ra("В ко'смосе ти'хо."), tl("I live", "я живу'"),
             rm("Я живу' в го'роде.", ["I live in a city.", "I work in a city.", "I live in a house."]),
         ]),
@@ -96,7 +96,7 @@ def units(h):
                [("Я ви'жу звезду'.", "I see a star."), ("Я ви'жу дом.", "I see a house."), ("Ты ви'дишь раке'ту?", "Do you see the rocket?"), ("Он лю'бит чай.", "He loves tea.")]),
             lp("звезду'", ["звезда'", "звезду'", "звёзды"]), tl("I see", "я ви'жу"),
             fl("Я ви'жу ", "звезду'", ".", "I see a star."), fl("Ты ви'дишь ", "раке'ту", "?", "Do you see the rocket?"),
-            fl("Она' чита'ет ", "кни'гу", ".", "She is reading a book."), dc("Я ви'жу дом."), ra("Я ви'жу звезду' и пла'нету."),
+            fl("Она' чита'ет ", "кни'гу", ".", "She is reading a book."), dc("Я ви'жу дом."), ra("Я ви'жу звезду' и плане'ту."),
             tl("you (one person) see", "ты ви'дишь"),
             rm("Ма'ма лю'бит ко'фе и чай.", ["Mom loves coffee and tea.", "Mom drinks coffee and tea.", "Mom loves tea and porridge."]),
         ]),
@@ -324,7 +324,7 @@ LEXICON = [
     W("прочита'ю", "I will read (to the end)"), W("гуля'ть", "to go for a walk"),
     # u18
     W("в до'ме", "in the house"), W("на ку'хне", "in the kitchen"), W("на у'лице", "outside, in the street"),
-    W("в го'роде", "in the city"), W("в ко'смосе", "in space"), W("на пла'нете", "on the planet"), W("в кни'ге", "in the book"),
+    W("в го'роде", "in the city"), W("в ко'смосе", "in space"), W("на плане'те", "on the planet"), W("в кни'ге", "in the book"),
     W("мы живём", "we live"), W("я живу'", "I live"), W("ти'хо", "quiet, quietly"), W("я ви'жу", "I see"),
     W("ты ви'дишь", "you (one person) see"), W("ви'дит", "sees (he, she)"), W("звезду'", "star (as the object)"),
     W("раке'ту", "rocket (as the object)"), W("лю'бит", "loves (he, she)"),
