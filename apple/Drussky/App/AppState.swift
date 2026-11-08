@@ -56,6 +56,15 @@ final class AppState {
                 let speech = self.speech ?? SpeakingTurn()
                 self.voice = voice
                 self.speech = speech
+                if speech.analyzer == nil {
+                    // Phone-level pronunciation analysis when the model is bundled; the
+                    // word-level analyzer stands in when it isn't (or when this one fails).
+                    Task.detached(priority: .utility) {
+                        let analyzer = PhoneticAnalyzer(transcribe: { url, hint in await SpeechCheck.transcribe(url, hint: hint) })
+                        guard analyzer.isPhonetic else { return }
+                        await MainActor.run { speech.analyzer = analyzer }
+                    }
+                }
                 SpeechCheck.warmUp(with: voice.recordingURL(for: "спаси́бо"))
                 phase = .ready(book, voice, speech)
             }
