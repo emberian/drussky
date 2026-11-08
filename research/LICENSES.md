@@ -552,3 +552,40 @@ queue, the Zamyatin edition, the copied-data licence boundary and the release ex
 Milena. Preserve original source-page metadata/licence snapshots at acquisition. Future public
 audio distribution should have an explicit allowlist, rather than treating `kind: human_recording`
 or “non-commercial” as sufficient permission.
+
+## Integration status, 2026-11-08 (credits lane, after the audit)
+
+What the audit asked for and what the app now does; `python3 apple/scripts/build_credits.py --check`
+is the freshness gate, the Swift test `CreditsTests` the bundle gate (every bundled clip credited
+exactly once; Tatoeba credits follow `library.json`).
+
+- **Sources page.** `Views/CreditsView.swift` renders `credits.json` (entry «Исто́чники · Sources»
+  in Settings): contributors with clips, licences as recorded, source links, processing notes;
+  narrations with cuts; Tatoeba sentences with author and translator; Silero and conditional ZIPA;
+  all five fonts in their own faces with the full OFL text; Wiktionary entries with history links;
+  the model-authored-content statement; open items in red. The old `sources.json` reader is gone.
+- **Tatoeba contributors.** `scripts/fetch_provenance.py tatoeba` fetched the owner and licence of all
+  242 Russian sentences and their 230 English translations from the Tatoeba API (≤2 req/s, cached
+  under `apple/.build/tatoeba/`) into `library.json` (`ru_author`, `en_author`, `ru_license`,
+  `en_license`, `en_source`): 42 Russian authors, 37 translators, 0 missing. Three halves are
+  CC0 1.0 rather than CC BY 2.0 FR; their composite licence strings say so.
+- **Commons placeholders.** `fetch_provenance.py commons` read the file-page text of all 36 human
+  clips with a missing or "not stated" author: 33 carry "Audio sample provided by The Shtooka
+  Project" (credited as the other Shtooka takes are), люк is 1640max, ё is Pogrebnoj-Alexandroff,
+  ю is Cherus. `author_evidence` on each entry records where the name came from. 0 remain.
+- **Milena.** `e-bea15c.m4a` («е») was regenerated with Silero; no macOS speech is bundled, and
+  `make_audio.py` no longer has a macOS take path. It now records author, licence and source page
+  for every human recording and refuses to build one it cannot credit.
+- **Editions.** Zamyatin cites the 1927 Prague first publication (US PD since 2023-01-01), the 1952
+  first complete edition and the 2003 text Wikisource transcribes; all 26 excerpt sentences were
+  checked verbatim against Wikisource's «Запись 1-ая». Odoevsky notes the 1835/1840 fragments and
+  the 1926 complete text, with which carried the first letter unverified. Ushinsky «Слепая лошадь»
+  is marked edition unverified. The Lensky narration keeps its PD claim as a claim
+  (`narration_license` in `library.json`, `license_note` in `sources-narration.json`).
+- **Project licence.** Top-level `LICENSE.md`: code all rights reserved until ember chooses a
+  licence; third-party, NC-SA model and model-authored scope.
+
+Still open (decisions, not fetches): the code licence; whether a public pack should carry Silero
+(CC BY-NC-SA) output at all; the Wiktionary copied-expression boundary and revision pins (item 7
+above); cursive/Hershey fixture provenance (item 8); dated scans for Ushinsky and the Odoevsky
+first letter; US first-publication evidence for the 1894 Lensky recording.
