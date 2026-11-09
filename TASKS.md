@@ -1,5 +1,9 @@
 # Rufren work tracker
 
+## Native Apple review — 2026-11-08
+
+Codex addressed all ten findings in [the native review and resolution record](research/APPLE_REVIEW_2026-11-08.md): failed-save gating for export/restore; owned/drained notebook activities and closed sidecars; trustworthy diary/Talk assessment with typed-vs-spoken evidence; consistent delayed-event replay; prefix-bound snapshots; checked log appends; typed restore validation; bounded/checksummed ZIP extraction; and fluency flush/close. Historical tutor evidence is re-evaluated from saved results without rewriting the raw log. The fast simulator suite passed (337 tests reported, 8 skipped, zero failures), including 15 new regressions. The final focused notebook/knowledge/Talk run also passed (58 tests reported, 2 skipped, zero failures). Physical-device installation/evaluation remains outside this change.
+
 Updated 2026-11-06 after physical iPad installation and Ember’s first-lesson review. Owner: Codex with Ember. The [completion contract](COMPLETENESS.md) still targets a sophisticated, complete, robust personal Russian learning environment: all four skills, native-like pronunciation and independent literary/scientific reading. The AI teacher carries teaching and feedback; conversations with the friend over meals are optional, with no assigned grading, recording or approval work.
 
 ## Current delivery: continuous listening, writing and recall installed

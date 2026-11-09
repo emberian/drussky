@@ -142,17 +142,19 @@ public struct KnowledgeModel: Codable, Sendable, Equatable {
     struct ModalityPair: Codable, Hashable, Sendable { var from: Modality; var to: Modality }
 
     public struct Snapshot: Codable, Sendable, Equatable {
-        public static let currentVersion = 1
+        public static let currentVersion = 2
         public var version: Int = Snapshot.currentVersion
         public var fsrs: FSRS
+        public var prefixDigest: String?
         public var byteOffset: UInt64
         public var lastEventID: String?
         public var model: KnowledgeModel
 
         public init(version: Int = Snapshot.currentVersion, fsrs: FSRS? = nil, byteOffset: UInt64,
-                    lastEventID: String? = nil, model: KnowledgeModel) {
+                    lastEventID: String? = nil, prefixDigest: String? = nil, model: KnowledgeModel) {
             self.version = version
             self.fsrs = fsrs ?? model.fsrs
+            self.prefixDigest = prefixDigest
             self.byteOffset = byteOffset
             self.lastEventID = lastEventID ?? model.events.last?.id
             self.model = model
@@ -167,9 +169,15 @@ public struct KnowledgeModel: Codable, Sendable, Equatable {
 
     public var items: Set<String> { Set(events.map(\.item)) }
 
-    /// Folds one event in. Events must arrive in time order; a repeated id is ignored.
+    /// Folds by event time, preserving arrival order for ties. Late evidence refolds all derived
+    /// state, including help and transfer accounting; duplicate ids remain idempotent.
     public mutating func apply(_ e: LearningEvent) {
-        guard seenIDs.insert(e.id).inserted else { return }
+        guard !seenIDs.contains(e.id) else { return }
+        if let last = events.last, e.t < last.t {
+            self = KnowledgeModel(events: events + [e], fsrs: fsrs)
+            return
+        }
+        seenIDs.insert(e.id)
         let index = events.count
         if let last = events.last, e.t < last.t { eventsAreTimeOrdered = false }
         events.append(e)

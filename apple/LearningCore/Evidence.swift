@@ -1,4 +1,5 @@
 import Foundation
+import CryptoKit
 
 /// FSRS's four ratings.
 public enum Grade: Int, Codable, Sendable, Comparable, CaseIterable {
@@ -41,6 +42,8 @@ public struct LearningEvent: Codable, Sendable, Hashable, Identifiable {
     public static let schemaVersion = 1
 
     public var v: Int = LearningEvent.schemaVersion
+    /// Domain assessment policy used for this evidence; absent on historical records.
+    public var assessmentVersion: Int? = nil
     public var id: String
     public var t: Date
     public var type: Kind
@@ -169,35 +172,64 @@ public struct EventLog: Sendable {
         }
     }
 
+    /// Hashes exactly the snapshot's source prefix without decoding its events.
+    public func prefixDigest(byteCount: UInt64) throws -> String {
+        var hash = SHA256()
+        if byteCount > 0 {
+            let handle = try FileHandle(forReadingFrom: url)
+            defer { try? handle.close() }
+            var remaining = byteCount
+            while remaining > 0 {
+                let chunk = try handle.read(upToCount: Int(min(remaining, 64 * 1024))) ?? Data()
+                guard !chunk.isEmpty else { throw CocoaError(.fileReadCorruptFile) }
+                hash.update(data: chunk)
+                remaining -= UInt64(chunk.count)
+            }
+        }
+        return hash.finalize().map { String(format: "%02x", $0) }.joined()
+    }
+
+    /// Encoding and I/O errors reach callers; no event is silently omitted from a batch.
+    public func appendChecked(_ events: [LearningEvent]) throws {
+        try JSONLineWriter.append(events, to: url)
+    }
+
     @discardableResult
     public func append(_ events: [LearningEvent]) -> Bool {
-        guard !events.isEmpty else { return true }
-        let encoder = Self.encoder()
+        do { try appendChecked(events); return true } catch { return false }
+    }
+}
+
+/// Shared append transaction for evidence and metrics. Encode before opening the file, and
+/// roll back a partial write before returning an I/O failure so a retry cannot duplicate it.
+enum JSONLineWriter {
+    static func append<T: Encodable>(_ records: [T], to url: URL) throws {
+        guard !records.isEmpty else { return }
+        let encoder = EventLog.encoder()
         var blob = Data()
-        for e in events {
-            guard let line = try? encoder.encode(e) else { continue }
-            blob.append(line)
-            blob.append(UInt8(ascii: "\n"))
+        for record in records {
+            blob.append(try encoder.encode(record))
+            blob.append(10)
         }
         let fm = FileManager.default
         if !fm.fileExists(atPath: url.path) {
-            try? fm.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-            return fm.createFile(atPath: url.path, contents: blob)
+            try fm.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try blob.write(to: url, options: .atomic)
+            return
         }
-        guard let handle = try? FileHandle(forUpdating: url) else { return false }
+        let handle = try FileHandle(forUpdating: url)
         defer { try? handle.close() }
+        let end = try handle.seekToEnd()
+        if end > 0 {
+            try handle.seek(toOffset: end - 1)
+            if try handle.read(upToCount: 1) != Data([10]) { blob.insert(10, at: 0) }
+            try handle.seekToEnd()
+        }
         do {
-            let end = try handle.seekToEnd()
-            // A previous write cut short mid-line: start on a fresh line.
-            if end > 0 {
-                try handle.seek(toOffset: end - 1)
-                if try handle.read(upToCount: 1) != Data([UInt8(ascii: "\n")]) { blob.insert(UInt8(ascii: "\n"), at: 0) }
-                try handle.seekToEnd()
-            }
             try handle.write(contentsOf: blob)
-            return true
         } catch {
-            return false
+            try handle.truncate(atOffset: end)
+            throw error
         }
     }
 }

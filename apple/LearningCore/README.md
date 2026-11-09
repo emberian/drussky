@@ -206,3 +206,22 @@ Drussky filters to direct production of each written form, excluding inferred le
 `Probe` also has optional `lastExposure`, `firstAttempt`, `assistance` and `context` provenance.
 These preserve old notebook decoding and distinguish a scheduled delay from time since the last
 logged practice; they do not imply that every real-world exposure was observed.
+
+
+## Persistence and assessment policy (2026-11-08)
+
+`KnowledgeModel.apply` accepts delayed events and refolds in event-time order; ties preserve
+arrival order and repeated IDs remain idempotent. Snapshot format 2 binds the model to a SHA-256
+digest of the exact event-log prefix. Loading still hashes that prefix (bounded buffers), but
+avoids decoding/folding it; mismatches fall back to a full replay. Imported snapshots are discarded.
+
+`EventLog.appendChecked` and `MetricLog.appendChecked` encode a complete batch before opening the
+log and propagate encoding/I/O failures. The Boolean append APIs remain convenience wrappers.
+The app retains failed batches and includes both logs in notebook flush/close.
+
+Tutor evidence carries optional `assessmentVersion` (currently 2). On notebook load, historical
+Talk/diary evidence is re-evaluated against surviving saved results. Typed Talk belongs to
+`own-writing`; unmarked or inconsistent corrections provide no correctness grade. When the old
+round's transcript no longer exists, its response remains ungraded history. This changes the
+derived model and its snapshot, preserving the original log bytes. Previously kept vocabulary
+is retained; the app does not delete learner words during this reassessment.

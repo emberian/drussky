@@ -179,6 +179,7 @@ final class Book {
     var currentGoalID: String? { didSet { scheduleSave() } }
     /// Each goal's stress table (Goal/GoalStress.swift), read from goals/<id>.stress.json on first use; not in book.json.
     var goalStress: [String: GoalStress.Table] = [:]
+    @ObservationIgnored var goalStressTasks: [String: Task<Void, Never>] = [:]
     /// Keyword mnemonics per word (Hooks/).
     var hooks = HookShelf() { didSet { scheduleSave() } }
     /// Fluency measurements: reading, writing and listening over weeks (Fluency/, metrics.jsonl).
@@ -205,9 +206,18 @@ final class Book {
     /// The last failure writing the notebook or its ink; shown until a later write succeeds.
     private(set) var persistenceError: String?
     private var closed = false
+    private var closing = false
+    private struct ActivityReference { weak var value: (any NotebookActivity)? }
+    @ObservationIgnored private var activities: [ActivityReference] = []
+
+    func registerActivity(_ activity: any NotebookActivity) {
+        guard !isClosed else { return }
+        activities.removeAll { $0.value == nil || $0.value === activity }
+        activities.append(ActivityReference(value: activity))
+    }
     /// Closed books (before a restore swaps the folder) take no results and log no evidence: the
     /// folder their paths name is no longer theirs.
-    var isClosed: Bool { closed }
+    var isClosed: Bool { closed || closing }
     private var pageIndexByID: [String: Int] = [:]
 
     /// Opens the notebook in `store`, or reports why it can't be opened without touching it.
@@ -255,6 +265,7 @@ final class Book {
         let ink = store.ink
         Task { await ink.setFailureHandler(writerErrors) }
         guard problem == nil else { return }
+        knowledge.reconcileTutorAssessments(pages: pages)
         knowledge.backfill(pages: pages, takeReport: { [store] file in Book.savedReport(of: file, in: store) })
         reconcileProbes()
         noteSessionStart()
@@ -455,7 +466,7 @@ final class Book {
     /// A probe's observation is part of that same save: the result and what it measured are
     /// never split by a crash. Nothing is recorded in a closed book.
     func record(_ ref: ExerciseRef, _ update: (inout ExerciseResult) -> Void) {
-        guard !closed, let p = pageIndexByID[ref.pageID], pages[p].results.indices.contains(ref.index) else { return }
+        guard !isClosed, let p = pageIndexByID[ref.pageID], pages[p].results.indices.contains(ref.index) else { return }
         let before = pages[p].results[ref.index]
         var after = before
         update(&after)
@@ -719,33 +730,59 @@ final class Book {
 
     func report(_ message: String) { persistenceError = message }
 
-    /// Writes everything still pending: the notebook, ink, and any events the log couldn't take.
-    func flush() async {
-        saveNow()
+    /// Flush every notebook writer. Failures remain pending and must block export/restore.
+    @discardableResult
+    func flush() async -> [String] {
+        guard !closed else { return ["This notebook is closed."] }
         await PadController.submitAll()
-        let failures = await store.ink.flush()
-        if let f = failures.first { persistenceError = f }
-        knowledge.retryPendingEvents()
-        knowledge.saveSnapshotIfDirty()
+        var failures = await store.ink.flush()
+        failures += flushSynchronousWriters()
+        persistenceError = failures.isEmpty ? nil : failures.joined(separator: "\n")
+        return failures
     }
 
-    /// Zips the notebook folder (state, ink, recordings, events) for sharing, after flushing.
+    private func flushSynchronousWriters() -> [String] {
+        var failures: [String] = []
+        if let failure = saveNow() { failures.append(failure) }
+        knowledge.retryPendingEvents()
+        if let failure = knowledge.logProblem { failures.append(failure) }
+        if let failure = fluency.flush() { failures.append(failure) }
+        knowledge.saveSnapshotIfDirty()
+        return failures
+    }
+
     func exportArchive() async -> URL? {
-        await flush()
+        guard !isClosed, await flush().isEmpty else { return nil }
         return NotebookArchive.export(root: store.root)
     }
 
-    /// Stops all writing (before the folder is replaced by a restore): the notebook, the ink, and
-    /// the evidence log. Anything that lands afterwards (a late take, a late check) is refused.
-    func close() async {
-        await flush()
-        await store.ink.close()
+    /// A failed close leaves the same book and its pending data usable for another attempt.
+    func close() async throws {
+        guard !isClosed else { throw NotebookError(message: "This notebook is already closing.") }
+        closing = true
+        defer { closing = false }
+        for activity in activities.compactMap(\.value) { await activity.invalidateNotebook() }
+        var failures = await flush()
+        if failures.isEmpty {
+            failures += await store.ink.close()
+            // Other main-actor producers may have finished during the ink await.
+            failures += flushSynchronousWriters()
+        }
+        guard failures.isEmpty else {
+            await store.ink.resume()
+            persistenceError = failures.joined(separator: "\n")
+            throw NotebookError(message: "Couldn't save the current notebook. " + failures.joined(separator: " "))
+        }
         saveTask?.cancel()
         closed = true
         knowledge.close()
+        fluency.close()
+        goalStressTasks.values.forEach { $0.cancel() }
+        goalStressTasks.removeAll()
     }
 
     private func scheduleSave() {
+        guard !isClosed else { return }
         saveTask?.cancel()
         saveTask = Task { [weak self] in
             try? await Task.sleep(for: .milliseconds(400))
@@ -768,10 +805,11 @@ final class Book {
         return try body()
     }
 
-    func saveNow() {
+    @discardableResult
+    func saveNow() -> String? {
         // A notebook that exists but couldn't be opened is never written over.
-        guard problem == nil, !closed else { return }
-        if deferringSaves { saveOwed = true; return }
+        guard problem == nil, !closed else { return "This notebook cannot be saved." }
+        if deferringSaves { saveOwed = true; return nil }
         saveTask?.cancel()
         do {
             try store.saveState(.init(pages: pages, memories: legacyMemories, courseCursor: courseCursor,
@@ -784,7 +822,9 @@ final class Book {
             knowledge.saveSnapshotIfDirty()
         } catch {
             persistenceError = "notebook: \((error as NSError).localizedDescription)"
+            return persistenceError
         }
+        return nil
     }
 
     #if DEBUG
@@ -794,6 +834,12 @@ final class Book {
         now = { base().addingTimeInterval(days * 86_400) }
     }
     #endif
+}
+
+/// Work that can still write notebook files after an await must drain before a folder swap.
+@MainActor
+protocol NotebookActivity: AnyObject {
+    func invalidateNotebook() async
 }
 
 struct BookState: Codable {

@@ -42,6 +42,9 @@ struct DiaryCorrection: Codable, Sendable, Hashable {
     /// before the check existed (read as consistent).
     var verified: Bool? = nil
 
+    /// Structural consistency alone does not establish a backend's competence to grade.
+    var canGrade: Bool { verified != false && model != OnDeviceBackend.modelName }
+
     /// Whether the marks account for the corrected line: every span is found in `text`, and the
     /// text with each span replaced reads as `corrected` (stress, case, punctuation and ё/е
     /// aside). With no edits, `corrected` must be the text itself. A reply with changed text but

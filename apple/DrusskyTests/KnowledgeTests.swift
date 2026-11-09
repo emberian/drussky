@@ -320,3 +320,42 @@ final class KnowledgeTests: XCTestCase {
         XCTAssertEqual(reopened.knowledge.model.fsrs, FSRS().scalingStability(by: 0.85))
     }
 }
+
+
+extension KnowledgeTests {
+    func testSnapshotRejectsSameLengthChangedPrefix() throws {
+        let store = tempStore()
+        let tracker = KnowledgeTracker(course: course, root: store.root, customWords: [], now: Date.init)
+        let event = LearningEvent(id: "a", t: Date(timeIntervalSince1970: 100), type: .outcome,
+                                  item: "a", modality: .hearWrite, components: [ComponentID(.lexeme, "кот")], grade: .good)
+        tracker.record([event])
+        tracker.saveSnapshot()
+        var changed = event
+        changed.grade = .hard
+        let data = try EventLog.encoder().encode(changed) + Data([10])
+        XCTAssertEqual(data.count, try Data(contentsOf: tracker.logURL).count)
+        try data.write(to: tracker.logURL, options: .atomic)
+        let loaded = KnowledgeTracker(course: course, root: store.root, customWords: [], now: Date.init)
+        XCTAssertFalse(loaded.loadedFromSnapshot)
+        XCTAssertEqual(loaded.model.events.first?.grade, .hard)
+    }
+
+    func testDelayedOutcomeAgreesAcrossLiveSnapshotAndFullReplay() throws {
+        let store = tempStore()
+        let tracker = KnowledgeTracker(course: course, root: store.root, customWords: [], now: Date.init)
+        let component = ComponentID(.lexeme, "кот")
+        func event(_ time: Double, _ grade: Grade) -> LearningEvent {
+            LearningEvent(id: "e-\(time)", t: Date(timeIntervalSince1970: time), type: .outcome,
+                          item: "e-\(time)", modality: .produce, components: [component], grade: grade)
+        }
+        tracker.record([event(100, .good), event(300, .again)])
+        tracker.saveSnapshot()
+        tracker.record([event(200, .hard)])
+        let warm = KnowledgeTracker(course: course, root: store.root, customWords: [], now: Date.init)
+        XCTAssertTrue(warm.loadedFromSnapshot)
+        XCTAssertEqual(warm.model, tracker.model)
+        try FileManager.default.removeItem(at: tracker.snapshotURL)
+        let cold = KnowledgeTracker(course: course, root: store.root, customWords: [], now: Date.init)
+        XCTAssertEqual(cold.model, tracker.model)
+    }
+}

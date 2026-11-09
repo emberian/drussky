@@ -55,6 +55,8 @@ final class KnowledgeTracker {
            snapshot.model.fsrs == fsrs,
            snapshot.model.events.last?.id == snapshot.lastEventID,
            snapshot.model.events.isEmpty == (snapshot.byteOffset == 0),
+           let digest = snapshot.prefixDigest,
+           (try? log.prefixDigest(byteCount: snapshot.byteOffset)) == digest,
            let tail = log.loadTail(fromByteOffset: snapshot.byteOffset) {
             var restored = snapshot.model
             for e in tail { restored.apply(e) }
@@ -123,6 +125,7 @@ final class KnowledgeTracker {
     private static func normalize(_ event: LearningEvent) -> LearningEvent {
         var copy = event
         copy.t = Date(timeIntervalSince1970: floor(event.t.timeIntervalSince1970))
+        if event.activity == "talk" || event.activity == "diary" { copy.assessmentVersion = 2 }
         return copy
     }
 
@@ -136,16 +139,17 @@ final class KnowledgeTracker {
     private func append(_ events: [LearningEvent]) {
         guard !isClosed else { return }
         let batch = unwritten + events
-        if log.append(batch) {
+        do {
+            try log.appendChecked(batch)
             unwritten = []
             logProblem = nil
             eventsSinceSnapshot += batch.count
             if eventsSinceSnapshot >= Self.snapshotInterval {
                 saveSnapshot()
             }
-        } else {
+        } catch {
             unwritten = batch
-            logProblem = "\(batch.count) answer(s) not yet written to events.jsonl"
+            logProblem = "\(batch.count) answer(s) not yet written to events.jsonl: \(error.localizedDescription)"
         }
     }
 
@@ -158,8 +162,9 @@ final class KnowledgeTracker {
     func saveSnapshot() {
         guard !isClosed, unwritten.isEmpty, let byteOffset = log.byteCount else { return }
         if !model.events.isEmpty && byteOffset == 0 { return }
+        guard let digest = try? log.prefixDigest(byteCount: byteOffset) else { return }
         let snapshot = KnowledgeModel.Snapshot(fsrs: model.fsrs, byteOffset: byteOffset,
-                                               lastEventID: model.events.last?.id, model: model)
+                                               lastEventID: model.events.last?.id, prefixDigest: digest, model: model)
         guard let data = try? EventLog.encoder().encode(snapshot) else { return }
         try? FileManager.default.createDirectory(at: snapshotURL.deletingLastPathComponent(), withIntermediateDirectories: true)
         if (try? data.write(to: snapshotURL, options: .atomic)) != nil {
@@ -190,7 +195,7 @@ final class KnowledgeTracker {
         let logged = model.items
         let ids = Set(model.events.map(\.id))
         var legacyOutcomes: [String: Int] = [:]
-        for e in model.events where e.type == .outcome && !e.id.hasPrefix("out:") && !e.id.hasPrefix("diary:") && !e.id.hasPrefix("talk:") {
+        for e in model.events where e.type == .outcome && !e.id.hasPrefix("out:") && !e.id.hasPrefix("diary:") && !e.id.hasPrefix("talk:") && !e.id.hasPrefix("legacy-unassessed:") {
             legacyOutcomes[e.item, default: 0] += 1
         }
         var events: [LearningEvent] = []
@@ -233,6 +238,47 @@ final class KnowledgeTracker {
         append(normalized)
         saveSnapshot()
         return normalized.count
+    }
+
+    /// Reassess legacy tutor evidence against the saved transcript. This is a projection:
+    /// the original log remains intact, and a cold replay repeats the same policy. Snapshots
+    /// cache the projected model. Older rounds with no surviving transcript retain their raw
+    /// response as ungraded history rather than an unsupported skill claim.
+    func reconcileTutorAssessments(pages: [BookPage]) {
+        let legacy = model.events.filter { ($0.activity == "talk" || $0.activity == "diary") && $0.assessmentVersion != 2 }
+        guard !legacy.isEmpty else { return }
+        var expected: [String: LearningEvent] = [:]
+        for page in pages {
+            for (index, result) in page.results.enumerated() where result.status.isComplete {
+                let events: [LearningEvent]
+                if page.exercises[index].kind == .talk {
+                    events = talkEvidence(page: page, index: index, before: ExerciseResult(), after: result,
+                                          at: result.updated ?? page.created, backfill: true, ignoringLogged: true)
+                } else if page.exercises[index].kind == .diary {
+                    events = diaryEvidence(page: page, index: index, before: ExerciseResult(), after: result,
+                                           at: result.updated ?? page.created, backfill: true)
+                } else { continue }
+                for event in events { expected[event.id] = Self.normalize(event) }
+            }
+        }
+        let projected = model.events.map { event -> LearningEvent in
+            guard (event.activity == "talk" || event.activity == "diary"), event.assessmentVersion != 2 else { return event }
+            if var corrected = expected[event.id] {
+                corrected.source = event.source
+                return corrected
+            }
+            var ungraded = event
+            ungraded.id = "legacy-unassessed:" + event.id
+            ungraded.assessmentVersion = 2
+            ungraded.grade = nil
+            ungraded.confusions = nil
+            ungraded.components = []
+            ungraded.modality = nil
+            return ungraded
+        }
+        model = KnowledgeModel(events: projected, fsrs: model.fsrs)
+        foldCount += 1
+        saveSnapshot()
     }
 
     // MARK: Questions

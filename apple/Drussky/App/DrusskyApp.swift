@@ -27,6 +27,7 @@ struct DrusskyApp: App {
                 }
             }
             .environment(app)
+            .disabled(app.isRestoring)
             .tint(Theme.accent)
         }
     }

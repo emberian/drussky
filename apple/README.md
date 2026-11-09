@@ -200,8 +200,9 @@ your words alone (the marker is told the goal, never the partner's facts, which 
 you), then your lines as heard with the red pen over them (`DiaryTutor`'s JSON contract per line,
 lenient about what the recognizer could have misheard), one word of praise, the pattern behind
 the biggest slip, and, where the phone-level analyzer is bundled, one pronunciation tip per take.
-Every turn the tutor understood is `good` on the words you said (modality `own-speech`); each
-edit is `again` with a speech confusion; new words and corrected forms join your words.
+The final correction credits the words left untouched and records each edit as `again`.
+Spoken turns use `own-speech`; typed turns use `own-writing`, including their confusion channel.
+Unmarked or inconsistent corrections award no correctness credit. New words and corrected forms join your words.
 Conversations are saved inside the exercise's result and listed under *My Russian*.
 
 The tutor's reply is a line-based format (`RU:` / `EN:` / `NEW:` / `END`) rather than JSON so the
@@ -492,3 +493,16 @@ Probe records retain the first-attempt flag, help/disputes, context and last log
 scheduled delay is distinguishable from elapsed time without logged practice. Weekly pages show
 these later examples in prose. The knowledge map, root estimates, hourly observations and
 calibration chart are under **Practice evidence and estimates**, at the back of the inside cover.
+
+
+### Notebook import limits and save failures
+
+Export and restore stop if pending notebook, ink, answer-log or fluency writes fail; the current
+notebook remains available to retry. Restore drains registered recording/conversation work before
+swapping folders, and keeps the previous folder. Validation/extraction runs off the main actor.
+
+Imports accept stored/deflated ZIP entries with checked sizes and CRCs: at most 256 MiB of archive
+input, 128 MiB per expanded file and 1 GiB expanded in total. Folder imports share the expanded
+limits and reject symbolic links. Unsupported event/metric schema versions and malformed records
+are reported with file/line information instead of silently dropped. Derived learning snapshots
+are rebuilt after import.

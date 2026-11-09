@@ -78,6 +78,7 @@ final class TalkSession {
         let saved = book.result(ref)?.talk ?? TalkConversation(turns: Int.random(in: TalkDialogue.turnRange))
         conversation = saved
         dialogue = TalkDialogue(resuming: saved)
+        book.registerActivity(self)
     }
 
     // MARK: Starting and resuming
@@ -185,11 +186,6 @@ final class TalkSession {
                     func ms(_ d: Date?) -> Int? { d.map { Int($0.timeIntervalSince(t0) * 1000) } }
                     line.latency = TalkLatency(firstToken: ms(firstTokenAt), firstSpeech: ms(firstSpeechAt), complete: ms(completeAt))
                 }
-                // The learner's previous line was understood: the tutor answered it.
-                if let last = conversation.lines.last, last.role == .learner, !last.ru.isEmpty, let page = book.page(id: ref.pageID) {
-                    book.knowledge.talkUnderstood(page: page, index: ref.index, round: book.result(ref)?.roundNumber ?? 0,
-                                                  turn: conversation.learnerTurns, heard: last.ru, at: book.now())
-                }
                 conversation.lines.append(line)
                 dialogue.tutorSpoke(goodbye: reply.ended)
                 streaming = ""
@@ -231,7 +227,7 @@ final class TalkSession {
 
     /// The last tutor line is the recognizer's hint (the reply usually reuses its words).
     private func startCapture() {
-        guard status == .yourTurn else { return }
+        guard !book.isClosed, status == .yourTurn else { return }
         speaker?.cancel()
         voice.stop()
         let mine = run
@@ -378,6 +374,7 @@ final class TalkSession {
     /// Starts a stage: `status` changes at once (the page shows it before any await), the
     /// previous stage is cancelled, and `body` gets the run token to check after each await.
     private func begin(_ initial: Status, _ body: @escaping @MainActor (Int) async -> Void) {
+        guard !book.isClosed else { return }
         task?.cancel()
         speaker?.cancel()
         run += 1
@@ -410,5 +407,13 @@ final class TalkSession {
         mic.cancel()
         streaming = ""
         if isLive || status == .notHeard { status = .paused }
+    }
+}
+
+
+extension TalkSession: NotebookActivity {
+    func invalidateNotebook() async {
+        cancel()
+        await mic.invalidate()
     }
 }

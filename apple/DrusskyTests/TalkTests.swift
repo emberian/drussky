@@ -467,6 +467,85 @@ final class TalkTests: XCTestCase {
         XCTAssertEqual(c.learnerLines.count, 2)
         XCTAssertTrue(c.learnerLines.allSatisfy { $0.correction != nil }, "every learner line is marked")
         XCTAssertTrue(book.result(ref)?.status.isComplete ?? false)
-        XCTAssertTrue(book.knowledge.model.events.contains { $0.activity == "talk" && $0.modality == .speak && $0.grade == .good })
+        XCTAssertTrue(book.knowledge.model.events.contains { $0.activity == "talk" && $0.modality == .produce && $0.grade == .good })
+    }
+}
+
+
+extension TalkTests {
+    func testTypedAndSpokenTurnsKeepTheirOwnModalitiesInLiveAndBackfill() throws {
+        let book = Book(course: try course(), store: tempStore())
+        book.insertTalkPage()
+        let page = try XCTUnwrap(book.page)
+        let ref = ExerciseRef(pageID: page.id, index: 0)
+        let date = Date(timeIntervalSince1970: 1000)
+        let fix = DiaryCorrection(corrected: "Я читаю книгу.",
+                                  edits: [DiaryEdit(span: "книга", replacement: "книгу", category: .ending, why: "", en: "book")],
+                                  praise: "", teach: [], at: date)
+        var conversation = TalkConversation()
+        conversation.lines = [TalkLine(role: .learner, ru: "Я читаю книга.", typed: true, correction: fix, at: date),
+                              TalkLine(role: .learner, ru: "Кот.", correction: DiaryCorrection(corrected: "Кот.", edits: [], praise: "", teach: [], at: date), at: date)]
+        conversation.marked = date
+        conversation.ended = date
+        book.finishTalk(ref, conversation)
+        let events = book.knowledge.model.events.filter { $0.activity == "talk" }
+        let typed = events.filter { $0.id.contains(":t1") }
+        XCTAssertFalse(typed.isEmpty)
+        XCTAssertTrue(typed.allSatisfy { $0.modality == .produce })
+        XCTAssertTrue(typed.flatMap { $0.confusions ?? [] }.allSatisfy { $0.channel != .speech })
+        XCTAssertFalse(typed.filter { $0.grade == .good }.flatMap(\.components).contains(ComponentID(.lexeme, "книга")))
+        XCTAssertEqual(events.first { $0.id.hasSuffix(":t2") }?.modality, .speak)
+        // Rebuild evidence from the saved result alone, into an empty tracker.
+        let other = KnowledgeTracker(course: try course(), root: tempStore().root, customWords: [], now: { date })
+        other.backfill(pages: book.pages)
+        XCTAssertEqual(other.model.traces, book.knowledge.model.traces)
+    }
+
+    func testUnmarkedConversationDoesNotAwardCorrectnessForReceivingAReply() throws {
+        let book = Book(course: try course(), store: tempStore())
+        book.insertTalkPage()
+        let ref = ExerciseRef(pageID: try XCTUnwrap(book.page).id, index: 0)
+        var conversation = TalkConversation()
+        conversation.lines = [TalkLine(role: .learner, ru: "Кот.", typed: true, at: Date()),
+                              TalkLine(role: .tutor, ru: "Что?", at: Date())]
+        book.saveTalk(ref, conversation)
+        book.keepTalkUnmarked(ref)
+        XCTAssertFalse(book.knowledge.model.events.contains { $0.item == ref.item && $0.grade != nil })
+    }
+}
+
+
+extension TalkTests {
+    func testLegacyTypedSpeechCreditIsReassessedWithoutRewritingTheLog() throws {
+        let store = tempStore()
+        let book = Book(course: try course(), store: store)
+        book.insertTalkPage()
+        let ref = ExerciseRef(pageID: try XCTUnwrap(book.page).id, index: 0)
+        let date = Date(timeIntervalSince1970: 1000)
+        var conversation = TalkConversation()
+        conversation.lines = [TalkLine(role: .learner, ru: "Кот.", typed: true,
+                                      correction: DiaryCorrection(corrected: "Кот.", edits: [], praise: "", teach: [], at: date), at: date)]
+        conversation.marked = date
+        conversation.ended = date
+        book.finishTalk(ref, conversation)
+        book.saveNow()
+        let legacy = book.knowledge.model.events.map { original -> LearningEvent in
+            var e = original
+            e.assessmentVersion = nil
+            if e.activity == "talk" { e.modality = .speak }
+            return e
+        }
+        var raw = Data()
+        for e in legacy { raw.append(try EventLog.encoder().encode(e)); raw.append(10) }
+        try raw.write(to: book.knowledge.logURL, options: .atomic)
+        let loaded = Book(course: try course(), store: store)
+        XCTAssertEqual(loaded.knowledge.model.events.first { $0.id.hasSuffix(":t1") }?.modality, .produce)
+        XCTAssertFalse(loaded.knowledge.model.traces.keys.contains { $0.modality == .speak })
+        XCTAssertEqual(try Data(contentsOf: book.knowledge.logURL), raw, "retain original observations")
+        let warm = Book(course: try course(), store: store)
+        XCTAssertEqual(warm.knowledge.model.traces, loaded.knowledge.model.traces)
+        try FileManager.default.removeItem(at: loaded.knowledge.snapshotURL)
+        let cold = Book(course: try course(), store: store)
+        XCTAssertEqual(cold.knowledge.model.traces, warm.knowledge.model.traces)
     }
 }

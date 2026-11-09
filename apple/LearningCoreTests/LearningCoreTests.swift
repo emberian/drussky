@@ -266,3 +266,34 @@ extension LearningCoreTests {
         XCTAssertFalse(m2.frontier(g, at: soon).contains(ab))
     }
 }
+
+
+extension LearningCoreTests {
+    func testLateEvidenceRefoldsHelpAndMemoryLikeFullReplay() {
+        let first = outcome([a], write, .good, at: day(0), item: "first")
+        let last = outcome([a], write, .easy, at: day(4), item: "last")
+        let late = LearningEvent(t: day(3), type: .help, item: "last", components: [a])
+        var live = KnowledgeModel(events: [first, last])
+        live.apply(late)
+        XCTAssertEqual(live, KnowledgeModel(events: [first, late, last]))
+        live.apply(late)
+        XCTAssertEqual(live.events.count, 3)
+    }
+
+    func testUnencodableEventBatchFailsWithoutWritingAnyOfIt() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let log = EventLog(url: root.appendingPathComponent("events.jsonl"))
+        let good = outcome([a], write, .good, at: day(0))
+        try log.appendChecked([good])
+        let before = try Data(contentsOf: log.url)
+        var invalid = outcome([a], write, .again, at: day(1))
+        invalid.latency = .nan
+        XCTAssertThrowsError(try log.appendChecked([good, invalid]))
+        XCTAssertFalse(log.append([invalid]))
+        XCTAssertEqual(try Data(contentsOf: log.url), before)
+        let metrics = MetricLog(url: root.appendingPathComponent("metrics.jsonl"))
+        XCTAssertThrowsError(try metrics.appendChecked([MetricRecord(component: a, metric: "x", t: day(0), value: .infinity)]))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: metrics.url.path))
+    }
+}

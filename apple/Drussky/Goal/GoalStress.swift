@@ -130,7 +130,7 @@ extension Book {
 
     /// Verified entries merged into the goal's table and written to the notebook.
     func mergeGoalStress(goalID: String, _ entries: [String: String]) {
-        guard !entries.isEmpty else { return }
+        guard !isClosed, !entries.isEmpty else { return }
         var table = goalStressTable(goalID) ?? GoalStress.Table()
         table.model = GoalStress.model
         table.sentences.merge(entries) { _, new in new }
@@ -140,10 +140,12 @@ extension Book {
 
     /// Starts the tutor's stress pass for a goal when something is left to mark; quiet otherwise.
     func ensureGoalStress(_ goal: Goal) {
+        guard !isClosed, goalStressTasks[goal.id] == nil else { return }
         let a = analysis(for: goal)
         let have = goalStressTable(goal.id)
         guard !GoalStress.missing(in: a, have: have).isEmpty else { return }
-        Task { @MainActor in
+        goalStressTasks[goal.id] = Task { @MainActor in
+            defer { goalStressTasks[goal.id] = nil }
             if let entries = try? await GoalStress.fill(goal, analysis: a, have: have) { mergeGoalStress(goalID: goal.id, entries) }
         }
     }

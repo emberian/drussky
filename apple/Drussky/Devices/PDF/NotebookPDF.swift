@@ -86,7 +86,7 @@ enum NotebookPDF {
 
     /// Writes the PDF next to the other exports and returns it for the share sheet.
     static func export(book: Book, pages: [BookPage]? = nil, paper: Paper = .local) async -> URL? {
-        await book.flush()
+        guard await book.flush().isEmpty else { return nil }
         let data = render(book: book, pages: pages, paper: paper)
         let name = pages.map { $0.count == 1 ? "Drussky page \($0[0].number).pdf" : "Drussky pages.pdf" } ?? "Drussky notebook.pdf"
         let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)

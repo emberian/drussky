@@ -68,6 +68,8 @@ final class SpeakingTurn {
     /// but writes no take or report and calls nothing back. Page turns bump `session` alone.
     private var epoch = 0
     private var task: Task<Void, Never>?
+    // Page cancellation permits an analysis to finish; retain it until hard invalidation can drain it.
+    private var inFlight: [UUID: Task<Void, Never>] = [:]
     private var capture: TakeCapture?
     private weak var voice: Voice?
     private var skipModel = false
@@ -111,7 +113,13 @@ final class SpeakingTurn {
         skipModel = false
         tapped = false
         phase = .preparing
-        task = Task { await run(request, voice: voice, mine: mine, era: era, onTake: onTake) }
+        let id = UUID()
+        let work = Task {
+            defer { inFlight[id] = nil }
+            await run(request, voice: voice, mine: mine, era: era, onTake: onTake)
+        }
+        inFlight[id] = work
+        task = work
     }
 
     /// The one button: skips the model while it plays, ends the take while listening.
@@ -162,9 +170,10 @@ final class SpeakingTurn {
     /// is being written while the folder is swapped. A page turn is `cancel`, never this.
     func invalidate() async {
         epoch += 1
-        let pending = task
+        let pending = Array(inFlight.values)
         cancel()
-        await pending?.value
+        for work in pending { work.cancel() }
+        for work in pending { await work.value }
     }
 
     private func interrupt() {
@@ -344,4 +353,9 @@ final class SpeakingTurn {
         activeKey = key
         self.level = level
     }
+}
+
+
+extension SpeakingTurn: NotebookActivity {
+    func invalidateNotebook() async { await invalidate() }
 }

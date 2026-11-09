@@ -35,7 +35,7 @@ extension Book {
     func finishDiary(_ ref: ExerciseRef, correction: DiaryCorrection) {
         guard let current = result(ref), let entry = current.diary else { return }
         var correction = correction
-        let verified = correction.isConsistent(with: entry.text)
+        let verified = correction.canGrade && correction.isConsistent(with: entry.text)
         correction.verified = verified
         if verified {
             for e in correction.edits where !RussianText.key(e.replacement).isEmpty && !RussianText.letters(in: e.replacement).isEmpty {

@@ -29,7 +29,7 @@ extension Book {
         goals.removeAll { $0.id == id }
         if currentGoalID == id { currentGoalID = goals.first?.id }
         goalStress[id] = nil
-        GoalStress.remove(goalID: id, root: store.root)
+        if !isClosed { GoalStress.remove(goalID: id, root: store.root) }
     }
 
     /// Changes the stored goal with this id in place. Work that spans an await (lemma filling, a

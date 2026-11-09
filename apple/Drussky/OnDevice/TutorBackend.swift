@@ -61,8 +61,8 @@ enum TutorRouter {
     /// Tasks the on-device model may answer when Claude is out of reach (offline, or no key).
     /// Glosses: 40/50 right on unknown passage words in 0.8 s, the misses on names and function
     /// words; a labelled meaning beats a dash, and Claude is one tap away when back online.
-    /// Diary corrections also fall back to the device when offline or without a key, tagged as on-device.
-    static let onDeviceFallback: Set<TutorTask> = [.gloss, .diaryCorrection]
+    /// Diary corrections wait for Claude: the measured false edits must not grade learner work.
+    static let onDeviceFallback: Set<TutorTask> = [.gloss]
 
     static func route(_ task: TutorTask, _ c: TutorConditions) -> TutorRoute {
         if onDeviceFirst.contains(task), c.onDeviceAvailable { return .onDevice }

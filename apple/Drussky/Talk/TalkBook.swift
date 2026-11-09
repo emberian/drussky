@@ -41,13 +41,18 @@ extension Book {
     /// The red pen landed: the exercise finishes, and every corrected form and new word the
     /// tutor used joins the learner's words.
     func finishTalk(_ ref: ExerciseRef, _ conversation: TalkConversation) {
+        guard !isClosed else { return }
         for line in conversation.lines {
             for w in line.newWords ?? [] where !w.en.isEmpty && !RussianText.letters(in: w.ru).isEmpty { keep(w.ru, en: w.en) }
-            for e in line.correction?.edits ?? [] where !RussianText.key(e.replacement).isEmpty && !RussianText.letters(in: e.replacement).isEmpty {
+            let correction = line.correction.flatMap { $0.canGrade && $0.isConsistent(with: line.ru) ? $0 : nil }
+            for e in correction?.edits ?? [] where !RussianText.key(e.replacement).isEmpty && !RussianText.letters(in: e.replacement).isEmpty {
                 keep(e.replacement, en: e.en ?? "")
             }
         }
-        let clean = conversation.learnerLines.allSatisfy { ($0.correction?.edits ?? []).isEmpty }
+        let clean = conversation.isMarked && !conversation.learnerLines.isEmpty && conversation.learnerLines.allSatisfy {
+            guard let c = $0.correction else { return false }
+            return c.canGrade && c.isConsistent(with: $0.ru) && c.edits.isEmpty
+        }
         record(ref) { r in
             r.talk = conversation
             r.status = clean ? .correct : .done

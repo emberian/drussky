@@ -286,3 +286,25 @@ final class DiaryTests: XCTestCase {
         XCTAssertFalse(c.unplaced(in: "Я читаю книга. Мой сестра тоже читает.").count == c.edits.count, "spans are verbatim")
     }
 }
+
+
+extension DiaryTests {
+    func testConsistentOnDeviceFalseCorrectionCannotGradeOrAddReviewWords() throws {
+        let book = Book(course: try course(), store: tempStore())
+        book.insertDiaryPage()
+        let page = try XCTUnwrap(book.page)
+        let ref = ExerciseRef(pageID: page.id, index: 0)
+        let date = Date()
+        book.submitDiary(ref, entry: DiaryEntry(prompt: "", text: "Папа дома.", submitted: date))
+        let correction = DiaryCorrection(corrected: "Мама дома.",
+            edits: [DiaryEdit(span: "Папа", replacement: "Мама", category: .wordChoice, why: "", en: "mother")],
+            praise: "", teach: [], model: OnDeviceBackend.modelName, at: date)
+        XCTAssertTrue(correction.isConsistent(with: "Папа дома."))
+        let targets = book.targets
+        book.finishDiary(ref, correction: correction)
+        XCTAssertEqual(book.targets, targets)
+        XCTAssertEqual(book.result(ref)?.status, .done)
+        XCTAssertFalse(book.knowledge.model.events.contains { $0.item == ref.item && $0.grade != nil })
+        XCTAssertNil(GradeStamp.grade(for: try XCTUnwrap(book.page)))
+    }
+}

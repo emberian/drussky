@@ -26,7 +26,7 @@ extension KnowledgeTracker {
             return [LearningEvent(id: mainID, t: at, type: .outcome, source: source, item: item, activity: "diary",
                                   modality: .produce, components: domain.productionComponents(entry.text), response: entry.text)]
         }
-        guard correction.verified != false else {
+        guard correction.canGrade && correction.isConsistent(with: entry.text) else {
             // The marks don't account for the corrected line: what was written is on record, but
             // nothing is graded and no replacement is credited as produced.
             return [LearningEvent(id: mainID, t: at, type: .outcome, source: source, item: item, activity: "diary",

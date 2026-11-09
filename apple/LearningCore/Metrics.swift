@@ -153,34 +153,12 @@ public struct MetricLog: Sendable {
         return data.split(separator: UInt8(ascii: "\n")).compactMap { try? decoder.decode(MetricRecord.self, from: Data($0)) }
     }
 
+    public func appendChecked(_ records: [MetricRecord]) throws {
+        try JSONLineWriter.append(records, to: url)
+    }
+
     @discardableResult
     public func append(_ records: [MetricRecord]) -> Bool {
-        guard !records.isEmpty else { return true }
-        let encoder = EventLog.encoder()
-        var blob = Data()
-        for r in records {
-            guard let line = try? encoder.encode(r) else { continue }
-            blob.append(line)
-            blob.append(UInt8(ascii: "\n"))
-        }
-        let fm = FileManager.default
-        if !fm.fileExists(atPath: url.path) {
-            try? fm.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-            return fm.createFile(atPath: url.path, contents: blob)
-        }
-        guard let handle = try? FileHandle(forUpdating: url) else { return false }
-        defer { try? handle.close() }
-        do {
-            let end = try handle.seekToEnd()
-            if end > 0 {
-                try handle.seek(toOffset: end - 1)
-                if try handle.read(upToCount: 1) != Data([UInt8(ascii: "\n")]) { blob.insert(UInt8(ascii: "\n"), at: 0) }
-                try handle.seekToEnd()
-            }
-            try handle.write(contentsOf: blob)
-            return true
-        } catch {
-            return false
-        }
+        do { try appendChecked(records); return true } catch { return false }
     }
 }

@@ -12,6 +12,23 @@ final class FluencyTracker {
     private(set) var store: MetricStore
     private let log: MetricLog
     private var unwritten: [MetricRecord] = []
+    private(set) var logProblem: String?
+    private(set) var isClosed = false
+
+    func close() { isClosed = true }
+
+    @discardableResult
+    func flush() -> String? {
+        guard !isClosed, !unwritten.isEmpty else { return logProblem }
+        do {
+            try log.appendChecked(unwritten)
+            unwritten = []
+            logProblem = nil
+        } catch {
+            logProblem = "metrics: \(error.localizedDescription)"
+        }
+        return logProblem
+    }
     var now: () -> Date = Date.init
 
     init(root: URL) {
@@ -22,9 +39,10 @@ final class FluencyTracker {
     var logURL: URL { log.url }
 
     func record(_ value: Double, metric: String, component: ComponentID, note: String? = nil, at t: Date? = nil) {
+        guard !isClosed else { return }
         let r = store.append(value, metric: metric, component: component, at: t ?? now(), note: note)
-        let batch = unwritten + [r]
-        unwritten = log.append(batch) ? [] : batch
+        unwritten.append(r)
+        flush()
     }
 
     // MARK: Moments

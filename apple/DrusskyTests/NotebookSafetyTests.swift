@@ -312,7 +312,7 @@ final class NotebookSafetyTests: XCTestCase {
         book.insertWrittenPage(title: "t", intro: nil, unitTitle: "t", exercises: [ex], newWords: [])
         let page = try XCTUnwrap(book.page)
         let ref = ExerciseRef(pageID: page.id, index: 0)
-        await book.close()
+        try await book.close()
         let state = try Data(contentsOf: store.stateURL)
         let log = try? Data(contentsOf: book.knowledge.logURL)
         XCTAssertEqual(book.commitTake(ref, round: 0, file: "late.m4a", heard: "был", target: "был", recognitionAllowed: true, timedOut: false), .closed)
@@ -378,5 +378,166 @@ final class NotebookSafetyTests: XCTestCase {
         let before = try Data(contentsOf: mine.store.stateURL)
         XCTAssertThrowsError(try NotebookArchive.candidate(from: zip, scratch: tempRoot()))
         XCTAssertEqual(try Data(contentsOf: mine.store.stateURL), before)
+    }
+}
+
+
+extension NotebookSafetyTests {
+    func testFailedStateSaveBlocksExportAndRestoreWithoutDiscardingLiveBook() async throws {
+        let root = tempRoot()
+        let app = AppState(root: root)
+        let book = try XCTUnwrap(app.book)
+        book.saveNow()
+        let incoming = Book(course: course, store: BookStore(root: tempRoot()))
+        incoming.saveNow()
+        let oldState = root.appendingPathComponent("original.json")
+        try FileManager.default.moveItem(at: book.store.stateURL, to: oldState)
+        try FileManager.default.createDirectory(at: book.store.stateURL, withIntermediateDirectories: true)
+        book.settings.showStress.toggle()
+        let exported = await book.exportArchive()
+        XCTAssertNil(exported)
+        do { _ = try await app.restore(from: incoming.store.root); XCTFail("restore must fail before replacing anything") }
+        catch { XCTAssertTrue(error.localizedDescription.contains("save")) }
+        XCTAssertTrue(app.book === book)
+        XCTAssertFalse(book.isClosed)
+        XCTAssertTrue(FileManager.default.fileExists(atPath: oldState.path))
+        try FileManager.default.removeItem(at: book.store.stateURL)
+        let failures = await book.flush()
+        XCTAssertTrue(failures.isEmpty)
+        let result = try BookStore.decoder().decode(BookState.self, from: Data(contentsOf: book.store.stateURL))
+        XCTAssertEqual(result.settings.showStress, book.settings.showStress)
+    }
+
+    func testFailedInkCloseRetainsPendingDrawingAndCanRetry() async throws {
+        let store = BookStore(root: tempRoot())
+        let book = Book(course: course, store: store)
+        let url = store.root.appendingPathComponent("ink/blocked.drawing")
+        try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        let data = Data("pending ink".utf8)
+        await store.ink.submit(url, revision: InkRevision.next(), data: data)
+        do { try await book.close(); XCTFail("must keep pending ink live") } catch {}
+        XCTAssertFalse(book.isClosed)
+        let pending = await store.ink.hasPending
+        XCTAssertTrue(pending)
+        try FileManager.default.removeItem(at: url)
+        try await book.close()
+        XCTAssertTrue(book.isClosed)
+        XCTAssertEqual(try Data(contentsOf: url), data)
+    }
+
+    func testMetricsRetryOnFlushAndClosedSidecarsCannotWriteIntoRestoredRoot() async throws {
+        let store = BookStore(root: tempRoot())
+        let book = Book(course: course, store: store)
+        let log = book.fluency.logURL
+        try FileManager.default.createDirectory(at: log, withIntermediateDirectories: true)
+        book.fluency.record(120, metric: "read-wpm", component: Fluency.reading)
+        XCTAssertNotNil(book.fluency.logProblem)
+        let failures = await book.flush()
+        XCTAssertFalse(failures.isEmpty)
+        try FileManager.default.removeItem(at: log)
+        let retried = await book.flush()
+        XCTAssertTrue(retried.isEmpty)
+        XCTAssertEqual(MetricLog(url: log).load().count, 1)
+        try await book.close()
+        let kept = store.root.appendingPathExtension("kept")
+        try FileManager.default.moveItem(at: store.root, to: kept)
+        try FileManager.default.createDirectory(at: store.root, withIntermediateDirectories: true)
+        // The completion of an old network request invokes exactly this merge.
+        book.mergeGoalStress(goalID: "old", ["Мама дома.": "Ма́ма до́ма."])
+        book.fluency.record(240, metric: "read-wpm", component: Fluency.reading)
+        XCTAssertEqual(files(store.root), [])
+    }
+
+    func testRestoreRejectsInvalidAndFutureLogRecordsAndDropsDerivedCache() throws {
+        let store = BookStore(root: tempRoot())
+        let book = Book(course: course, store: store)
+        book.saveNow()
+        let scratch = tempRoot()
+        let log = store.root.appendingPathComponent("events.jsonl")
+        try Data("{}\n".utf8).write(to: log)
+        XCTAssertThrowsError(try NotebookArchive.candidate(from: store.root, scratch: scratch)) { error in
+            XCTAssertTrue(error.localizedDescription.contains("events.jsonl, line 1"))
+        }
+        var event = LearningEvent(t: Date(), type: .attempt, item: "p", components: [])
+        event.v = 999
+        try (EventLog.encoder().encode(event) + Data([10])).write(to: log)
+        XCTAssertThrowsError(try NotebookArchive.candidate(from: store.root, scratch: scratch))
+        try Data().write(to: log)
+        let metricURL = store.root.appendingPathComponent("metrics.jsonl")
+        try Data("{}\n".utf8).write(to: metricURL)
+        XCTAssertThrowsError(try NotebookArchive.candidate(from: store.root, scratch: scratch))
+        var metric = MetricRecord(component: Fluency.reading, metric: "wpm", t: Date(), value: 120)
+        metric.v = 999
+        try (EventLog.encoder().encode(metric) + Data([10])).write(to: metricURL)
+        XCTAssertThrowsError(try NotebookArchive.candidate(from: store.root, scratch: scratch))
+        try Data().write(to: metricURL)
+        try Data("stale snapshot".utf8).write(to: book.knowledge.snapshotURL)
+        let candidate = try NotebookArchive.candidate(from: store.root, scratch: scratch)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: candidate.folder.appendingPathComponent("knowledge-snapshot.json").path))
+    }
+}
+
+
+extension NotebookSafetyTests {
+    /// Independently produced by Python zipfile; covers stored, multi-buffer deflate and empty deflate.
+    private var archiveFixture: Data { Data(base64Encoded: "UEsDBBQAAAAAAAO1aF2GphA2BQAAAAUAAAAKAAAAc3RvcmVkLnR4dGhlbGxvUEsDBBQAAAAIAAO1aF3WiWPQqgAAAKCGAQAMAAAAZGVmbGF0ZWQudHh07cShDQAACAOwZ5EkJJi9zxuIVjSzXZEkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZL0sQNQSwMEFAAAAAgAA7VoXQAAAAACAAAAAAAAAAkAAABlbXB0eS50eHQDAFBLAQIUAxQAAAAAAAO1aF2GphA2BQAAAAUAAAAKAAAAAAAAAAAAAACAAQAAAABzdG9yZWQudHh0UEsBAhQDFAAAAAgAA7VoXdaJY9CqAAAAoIYBAAwAAAAAAAAAAAAAAIABLQAAAGRlZmxhdGVkLnR4dFBLAQIUAxQAAAAIAAO1aF0AAAAAAgAAAAAAAAAJAAAAAAAAAAAAAACAAQEBAABlbXB0eS50eHRQSwUGAAAAAAMAAwCpAAAAKgEAAAAA")! }
+
+    func testZipChecksumsAndExpansionLimits() throws {
+        let root = tempRoot()
+        try ZipReader(data: archiveFixture).extract(to: root)
+        XCTAssertEqual(try String(contentsOf: root.appendingPathComponent("stored.txt"), encoding: .utf8), "hello")
+        XCTAssertEqual(try Data(contentsOf: root.appendingPathComponent("deflated.txt")).count, 100_000)
+        XCTAssertEqual(try Data(contentsOf: root.appendingPathComponent("empty.txt")).count, 0)
+        var corrupt = archiveFixture
+        // First local header is 30 bytes followed by stored.txt and its uncompressed body.
+        corrupt[30 + "stored.txt".utf8.count] ^= 1
+        XCTAssertThrowsError(try ZipReader(data: corrupt).extract(to: tempRoot())) { error in
+            XCTAssertTrue(error.localizedDescription.contains("checksum"))
+        }
+        var huge = archiveFixture
+        let central = try XCTUnwrap(huge.range(of: Data([0x50, 0x4b, 0x01, 0x02]))).lowerBound
+        // Advertise 2 GiB. Rejection must happen before writing any files or allocating the size.
+        huge.replaceSubrange((central + 24)..<(central + 28), with: [0, 0, 0, 0x80])
+        let destination = tempRoot()
+        XCTAssertThrowsError(try ZipReader(data: huge).extract(to: destination))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: destination.path))
+        XCTAssertThrowsError(try ZipReader(data: archiveFixture.dropLast(8)).entries())
+    }
+}
+
+
+extension NotebookSafetyTests {
+    private final class LateWriter: NotebookActivity {
+        let book: Book
+        var drained = false
+        init(_ book: Book) { self.book = book }
+        func invalidateNotebook() async {
+            await Task.yield()
+            book.fluency.record(77, metric: "last-measurement", component: Fluency.reading)
+            drained = true
+        }
+    }
+
+    func testCloseDrainsRegisteredWritersBeforeFinalFlush() async throws {
+        let book = Book(course: course, store: BookStore(root: tempRoot()))
+        let activity = LateWriter(book)
+        book.registerActivity(activity)
+        try await book.close()
+        XCTAssertTrue(activity.drained)
+        XCTAssertEqual(MetricLog(url: book.fluency.logURL).load().last?.value, 77)
+    }
+
+    func testDirectoryImportRefusesSymlinks() throws {
+        let store = BookStore(root: tempRoot())
+        let book = Book(course: course, store: store)
+        book.saveNow()
+        let outside = tempRoot()
+        try FileManager.default.createDirectory(at: outside, withIntermediateDirectories: true)
+        try FileManager.default.createSymbolicLink(at: store.root.appendingPathComponent("linked"), withDestinationURL: outside)
+        XCTAssertThrowsError(try NotebookArchive.candidate(from: store.root, scratch: tempRoot()))
+        XCTAssertEqual(files(outside), [])
+        let alias = tempRoot()
+        try FileManager.default.createSymbolicLink(at: alias, withDestinationURL: store.root)
+        XCTAssertThrowsError(try NotebookArchive.candidate(from: alias, scratch: tempRoot()))
     }
 }

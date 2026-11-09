@@ -55,14 +55,19 @@ actor InkWriter {
     var hasPending: Bool { !pending.isEmpty }
 
     /// Writes what is pending and refuses anything later (the folder is about to be replaced).
-    func close() {
-        _ = flush()
-        closed = true
+    func close() -> [String] {
+        let failures = flush()
+        if failures.isEmpty { closed = true }
+        return failures
     }
+
+    /// A notebook close failed in another writer; the live notebook still owns this folder.
+    func resume() { closed = false }
 
     /// Moves `url`'s ink (after writing anything pending for it) to `destination`, so a new
     /// attempt can start on a clean strip while the old one is kept.
     func archive(_ url: URL, to destination: URL) throws {
+        guard !closed else { throw NotebookError(message: "This notebook is closed.") }
         if pending[url] != nil {
             let failures = write(url)
             if let f = failures { throw NotebookError(message: f) }

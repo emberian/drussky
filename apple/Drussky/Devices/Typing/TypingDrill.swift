@@ -214,6 +214,7 @@ struct TypingDrillView: View {
     }
 
     private func finishLine() {
+        guard !book.isClosed else { return }
         guard let started else { newLine(); return }
         let score = TypingDrill.Score(characters: line.count, seconds: Date().timeIntervalSince(started), errors: errors)
         last = score

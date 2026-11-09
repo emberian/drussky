@@ -200,11 +200,12 @@ struct GradeStamp: View {
     static func grade(for page: BookPage) -> Int? {
         var graded = 0, missed = 0
         for (ex, r) in zip(page.exercises, page.results) {
+            if ex.kind == .diary, let c = r.diary?.correction, !c.canGrade { continue }
             switch r.status {
             case .correct: graded += 1
             case .missed: graded += 1; missed += 1
             case .done:
-                if ex.kind == .diary, let c = r.diary?.correction, c.verified != false {
+                if ex.kind == .diary, let c = r.diary?.correction, c.canGrade {
                     graded += 1
                     if c.edits.count >= 3 { missed += 1 }
                 }

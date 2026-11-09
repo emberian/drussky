@@ -21,6 +21,7 @@ final class AppState {
     private var speech: SpeakingTurn?
     private let root: URL
     private var launched = false
+    private(set) var isRestoring = false
 
     init(root: URL? = nil) {
         Theme.registerFonts()
@@ -56,6 +57,7 @@ final class AppState {
                 let speech = self.speech ?? SpeakingTurn()
                 self.voice = voice
                 self.speech = speech
+                book.registerActivity(speech)
                 if speech.analyzer == nil {
                     // Phone-level pronunciation analysis when the model is bundled; the
                     // word-level analyzer stands in when it isn't (or when this one fails).
@@ -83,15 +85,19 @@ final class AppState {
     /// Restores an exported notebook: validated in isolation first, then swapped in with the
     /// current notebook kept beside it. Returns a summary for the learner.
     func restore(from archive: URL) async throws -> String {
+        guard !isRestoring else { throw NotebookError(message: "A restore is already in progress.") }
+        isRestoring = true
+        defer { isRestoring = false }
         let scoped = archive.startAccessingSecurityScopedResource()
         defer { if scoped { archive.stopAccessingSecurityScopedResource() } }
         let scratch = FileManager.default.temporaryDirectory.appendingPathComponent("restore-\(UUID().uuidString)")
         defer { try? FileManager.default.removeItem(at: scratch) }
-        let candidate = try NotebookArchive.candidate(from: archive, scratch: scratch)
+        let candidate = try await Task.detached(priority: .userInitiated) {
+            try NotebookArchive.candidate(from: archive, scratch: scratch)
+        }.value
         // A take being analysed must neither land on the closing book nor write into the folder
         // once it is the restored notebook's: invalidated and drained before anything moves.
-        if let speech { await speech.invalidate() }
-        if let book { await book.close() }
+        if let book { try await book.close() }
         do {
             let kept = try NotebookArchive.install(candidate, at: root)
             load()
